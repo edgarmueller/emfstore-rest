@@ -82,8 +82,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	private WorkspaceManager workspaceManager;
 
 	/**
-	 * The default value of the '{@link #getUsername() <em>Username</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getUsername() <em>Username</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUsername()
 	 * @generated
@@ -92,8 +92,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected static final String USERNAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getUsername() <em>Username</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getUsername() <em>Username</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUsername()
 	 * @generated
@@ -102,8 +102,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected String username = USERNAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getPassword()
 	 * @generated
@@ -112,8 +112,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected static final String PASSWORD_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPassword() <em>Password</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getPassword() <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getPassword()
 	 * @generated
@@ -122,8 +122,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected String password = PASSWORD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSessionId() <em>Session Id</em>}' reference. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getSessionId() <em>Session Id</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSessionId()
 	 * @generated
@@ -132,8 +132,9 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected SessionId sessionId;
 
 	/**
-	 * The default value of the '{@link #getPersistentPassword() <em>Persistent Password</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getPersistentPassword() <em>Persistent Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getPersistentPassword()
 	 * @generated
@@ -142,8 +143,9 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected static final String PERSISTENT_PASSWORD_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPersistentPassword() <em>Persistent Password</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPersistentPassword() <em>Persistent Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getPersistentPassword()
 	 * @generated
@@ -152,8 +154,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected String persistentPassword = PERSISTENT_PASSWORD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getServerInfo() <em>Server Info</em>}' reference. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getServerInfo() <em>Server Info</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getServerInfo()
 	 * @generated
@@ -162,8 +164,9 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected ServerInfo serverInfo;
 
 	/**
-	 * The default value of the '{@link #isSavePassword() <em>Save Password</em>}' attribute. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #isSavePassword() <em>Save Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #isSavePassword()
 	 * @generated
@@ -172,8 +175,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected static final boolean SAVE_PASSWORD_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSavePassword() <em>Save Password</em>}' attribute. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #isSavePassword() <em>Save Password</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #isSavePassword()
 	 * @generated
@@ -182,8 +185,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected boolean savePassword = SAVE_PASSWORD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getACUser() <em>AC User</em>}' containment reference. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getACUser() <em>AC User</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getACUser()
 	 * @generated
@@ -192,8 +195,9 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected ACUser acUser;
 
 	/**
-	 * The cached value of the '{@link #getChangedProperties() <em>Changed Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getChangedProperties()
+	 * <em>Changed Properties</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getChangedProperties()
 	 * @generated
@@ -581,7 +585,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		}
 
 		// prepare serverInfo for send: copy and remove usersession
-		ServerInfo copy = EcoreUtil.copy(serverInfo);
+		ServerInfo copy = (ServerInfo) EcoreUtil.copy(serverInfo);
 		copy.setLastUsersession(null);
 		SessionId newSessionId = null;
 

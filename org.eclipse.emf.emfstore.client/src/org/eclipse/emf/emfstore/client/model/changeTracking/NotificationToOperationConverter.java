@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
  */
 public final class NotificationToOperationConverter {
 
-	private Project project;
+	private IdEObjectCollection project;
 
 	/**
 	 * Default constructor.
@@ -51,7 +51,7 @@ public final class NotificationToOperationConverter {
 	 * @param project
 	 *            project
 	 */
-	public NotificationToOperationConverter(Project project) {
+	public NotificationToOperationConverter(IdEObjectCollection project) {
 		this.project = project;
 	}
 

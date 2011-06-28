@@ -24,9 +24,10 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 
 /**
- * The main managing class on the client side for file transfers. Each project space has an associated
- * FileTransferManager. All file-related request from the project space are delegated to that manager. The manager
- * provides methods to add files, get files and retrieve additional information about files.
+ * The main managing class on the client side for file transfers. Each project
+ * space has an associated FileTransferManager. All file-related request from
+ * the project space are delegated to that manager. The manager provides methods
+ * to add files, get files and retrieve additional information about files.
  * 
  * @author jfinis
  */
@@ -43,10 +44,11 @@ public class FileTransferManager {
 	private ProjectSpaceImpl projectSpace;
 
 	/**
-	 * Constructor that creates a file transfer manager for a specific project space. Only to be called in the init of a
-	 * project space!
+	 * Constructor that creates a file transfer manager for a specific project
+	 * space. Only to be called in the init of a project space!
 	 * 
-	 * @param projectSpaceImpl the project space to which this transfer manager belongs
+	 * @param projectSpaceImpl
+	 *            the project space to which this transfer manager belongs
 	 */
 	public FileTransferManager(ProjectSpaceImpl projectSpaceImpl) {
 		cacheManager = new FileTransferCacheManager(projectSpaceImpl);
@@ -57,6 +59,13 @@ public class FileTransferManager {
 	 * {@inheritDoc}
 	 */
 	public FileIdentifier addFile(File file) throws FileTransferException {
+		return addFile(file, null);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public FileIdentifier addFile(File file, String id) throws FileTransferException {
 		if (file == null) {
 			throw new FileTransferException("File to be added is null!");
 		}
@@ -70,6 +79,9 @@ public class FileTransferManager {
 
 		// Create the file identifier
 		FileIdentifier identifier = ModelFactory.eINSTANCE.createFileIdentifier();
+		if (id != null) {
+			identifier.setIdentifier(id);
+		}
 
 		// Move file to cache
 		try {
@@ -109,9 +121,11 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * Uploads all files in the commit queue. Is called upon committing the project space.
+	 * Uploads all files in the commit queue. Is called upon committing the
+	 * project space.
 	 * 
-	 * @param progress progress monitor
+	 * @param progress
+	 *            progress monitor
 	 * @throws FileTransferException
 	 */
 	public void uploadQueuedFiles(IProgressMonitor progress) {
@@ -122,7 +136,8 @@ public class FileTransferManager {
 				final FileIdentifier fi = uploads.get(0);
 
 				// Is the file present in cache?
-				// (it should be, unless there is a severe bug or the user has manually deleted it)
+				// (it should be, unless there is a severe bug or the user has
+				// manually deleted it)
 				if (!cacheManager.hasCachedFile(fi)) {
 					WorkspaceUtil.logException("The file with the id " + fi.getIdentifier()
 						+ " was not found in cache. It was queued for upload but"
@@ -178,11 +193,13 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * Starts a download of a specific file. Returns a status object that can be queried to check how far the download
-	 * is.
+	 * Starts a download of a specific file. Returns a status object that can be
+	 * queried to check how far the download is.
 	 * 
-	 * @param fileIdentifier the file to be downloaded
-	 * @param monitor a progress monitor for the download
+	 * @param fileIdentifier
+	 *            the file to be downloaded
+	 * @param monitor
+	 *            a progress monitor for the download
 	 * @return the status
 	 */
 	private FileDownloadStatus startDownload(FileIdentifier fileIdentifier) {
@@ -203,9 +220,11 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * Gets the index of a waiting file upload in the upload queue or -1 if this upload is not in the queue.
+	 * Gets the index of a waiting file upload in the upload queue or -1 if this
+	 * upload is not in the queue.
 	 * 
-	 * @param fileId the index to be looked up in the queue
+	 * @param fileId
+	 *            the index to be looked up in the queue
 	 * @return the index in the queue or -1
 	 */
 	private int getWaitingUploadIndex(FileIdentifier fileId) {
@@ -215,8 +234,10 @@ public class FileTransferManager {
 
 		int i = 0;
 		/*
-		 * We need to loop over the pending uploads here. This is because we cannot use .remove(fileId) because remove
-		 * uses equals to check for the element. Equals is not well-defined for EObjects, so we cannot use it here.
+		 * We need to loop over the pending uploads here. This is because we
+		 * cannot use .remove(fileId) because remove uses equals to check for
+		 * the element. Equals is not well-defined for EObjects, so we cannot
+		 * use it here.
 		 */
 		for (FileIdentifier upload : projectSpace.getWaitingUploads()) {
 			// This is our equals: Compare the strings!
@@ -229,10 +250,13 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * Removes a waiting upload from the queue. Throws a file transfer exception if the fil is not in the list.
+	 * Removes a waiting upload from the queue. Throws a file transfer exception
+	 * if the fil is not in the list.
 	 * 
-	 * @param fileId the file to remove from the queue
-	 * @throws FileTransferException if the file is not in the queue
+	 * @param fileId
+	 *            the file to remove from the queue
+	 * @throws FileTransferException
+	 *             if the file is not in the queue
 	 */
 	void removeWaitingUpload(FileIdentifier fileId) throws FileTransferException {
 		int index = getWaitingUploadIndex(fileId);
@@ -250,7 +274,8 @@ public class FileTransferManager {
 	/**
 	 * Return if a specific file is in the pending upload queue.
 	 * 
-	 * @param fileIdentifier the file to be looked up
+	 * @param fileIdentifier
+	 *            the file to be looked up
 	 * @return true, iff the file is in the queue
 	 */
 	public boolean hasWaitingUpload(FileIdentifier fileIdentifier) {
@@ -258,11 +283,13 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * Cancels a pending upload. That means that the upload is removed from the queue and deleted from cache. If the
-	 * file is not in the queue, nothing is done. If it is in the queue but not in the cache, then it is only removed
+	 * Cancels a pending upload. That means that the upload is removed from the
+	 * queue and deleted from cache. If the file is not in the queue, nothing is
+	 * done. If it is in the queue but not in the cache, then it is only removed
 	 * from the queue.
 	 * 
-	 * @param fileIdentifier the file to be canceled
+	 * @param fileIdentifier
+	 *            the file to be canceled
 	 */
 	public void cancelPendingUpload(FileIdentifier fileIdentifier) {
 		// Remove from the waiting queue
@@ -279,7 +306,8 @@ public class FileTransferManager {
 	/**
 	 * returns a file information object for a specific file identifier.
 	 * 
-	 * @param fileIdentifier the identifier
+	 * @param fileIdentifier
+	 *            the identifier
 	 * @return the file information for that identifier
 	 */
 	public FileInformation getFileInfo(FileIdentifier fileIdentifier) {

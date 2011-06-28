@@ -39,8 +39,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.sharemedia.ui.sat.SATRunner;
-import org.sharemedia.ui.sat.movement.SinusVariation;
 
 /**
  * Class for the login dialog.
@@ -70,9 +68,12 @@ public class LoginDialog extends TitleAreaDialog implements SelectionListener {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param parentShell the parent shell
-	 * @param session the target usersession
-	 * @param server the target server
+	 * @param parentShell
+	 *            the parent shell
+	 * @param session
+	 *            the target usersession
+	 * @param server
+	 *            the target server
 	 */
 	public LoginDialog(Shell parentShell, Usersession session, ServerInfo server) {
 		super(parentShell);
@@ -209,8 +210,6 @@ public class LoginDialog extends TitleAreaDialog implements SelectionListener {
 	/**
 	 * {@inheritDoc}
 	 */
-	// regards the SAT animation code.
-	@SuppressWarnings("deprecation")
 	@Override
 	public void okPressed() {
 		if (!canFinish) {
@@ -241,8 +240,6 @@ public class LoginDialog extends TitleAreaDialog implements SelectionListener {
 			setReturnCode(OK);
 			close();
 		} catch (EmfStoreException e) {
-			new SATRunner().shake(this.getShell(), 300, new SinusVariation(10, 1), null, null);
-
 			setErrorMessage(getMessage(e));
 
 			txtPassword.setText("");

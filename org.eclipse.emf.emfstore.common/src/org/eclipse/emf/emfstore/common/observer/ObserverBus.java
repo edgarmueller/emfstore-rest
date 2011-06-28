@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a universal observer bus. Better documentation will follow... Example code:
@@ -179,18 +180,44 @@ public class ObserverBus {
 		}
 
 		// BEGIN SUPRESS CATCH EXCEPTION
+		// TODO: handle exception
+		// TODO: handle return values
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+			Object firstResult = null;
 			for (IObserver observer : observers) {
 				try {
-					method.invoke(observer, args);
+					if (firstResult == null) {
+						firstResult = method.invoke(observer, args);
+					} else {
+						method.invoke(observer, args);
+					}
 				} catch (Throwable e) {
-					// TODO: handle exception
 				}
 			}
-			// TODO: handle return values
-			return null;
+			if (method.getReturnType().isPrimitive()) {
+				return getDefaultValueForPrimitive(method.getReturnType());
+			}
+			
+			return firstResult;
 		}
 		// END SUPRESS CATCH EXCEPTION
+
+		private Object getDefaultValueForPrimitive(Class<?> returnType) {
+			String simpleName = returnType.getSimpleName();
+			return primitiveToObjectDefaultValueMap.get(simpleName);
+		}
+	
+	}
+	
+	private static final Map<String, Object> primitiveToObjectDefaultValueMap = new HashMap<String, Object>();
+	static {
+		primitiveToObjectDefaultValueMap.put("int", new Integer(0));
+		primitiveToObjectDefaultValueMap.put("boolean", new Boolean(false));
+		primitiveToObjectDefaultValueMap.put("long", new Long(0));
+		primitiveToObjectDefaultValueMap.put("float", new Float(0));
+		primitiveToObjectDefaultValueMap.put("double", new Double(0));
+		primitiveToObjectDefaultValueMap.put("byte", Byte.MIN_VALUE);
+		primitiveToObjectDefaultValueMap.put("short", Short.MIN_VALUE);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -13,7 +13,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.connection.rmi.SerializationUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -38,8 +39,8 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * If the user is logged in, the result of resolve user mustn't be null.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#resolveUser(org.unicase.emfstore.esmodel.SessionId,
-	 *      org.unicase.emfstore.esmodel.accesscontrol.ACOrgUnitId)
+	 * @see org.unicase.emfstore.EmfStore#resolveUser(org.eclipse.emf.emfstore.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId)
 	 * @throws EmfStoreException in case of failure
 	 */
 	@Test
@@ -74,9 +75,9 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a project on the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.unicase.emfstore.esmodel.SessionId, String, String,
-	 *      org.unicase.emfstore.esmodel.versioning.LogMessage)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.unicase.emfstore.esmodel.SessionId)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage)
+	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
 	@Test
@@ -92,9 +93,9 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a project, shares it with the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.unicase.emfstore.esmodel.SessionId, String, String,
-	 *      org.unicase.emfstore.esmodel.versioning.LogMessage, Project)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.unicase.emfstore.esmodel.SessionId)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
+	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
 	@Test
@@ -177,9 +178,10 @@ public class ServerInterfaceTest extends ServerTests {
 	 * Gets changes.
 	 * 
 	 * @throws EmfStoreException in case of failure
+	 * @throws SerializationException in case of failure
 	 */
 	@Test
-	public void getChangesTest() throws EmfStoreException {
+	public void getChangesTest() throws EmfStoreException, SerializationException {
 		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
 
 		AttributeOperation attributeOperation = OperationsFactory.eINSTANCE.createAttributeOperation();
@@ -201,8 +203,8 @@ public class ServerInterfaceTest extends ServerTests {
 		assertTrue(changes.size() == 1);
 		for (ChangePackage cp : changes) {
 			assertTrue(cp.getOperations().size() == 1);
-			assertTrue(SerializationUtil.eObjectToString(cp.getOperations().get(0)).equals(
-				SerializationUtil.eObjectToString(attributeOperation)));
+			assertTrue(ModelUtil.eObjectToString(cp.getOperations().get(0)).equals(
+				ModelUtil.eObjectToString(attributeOperation)));
 		}
 
 	}
