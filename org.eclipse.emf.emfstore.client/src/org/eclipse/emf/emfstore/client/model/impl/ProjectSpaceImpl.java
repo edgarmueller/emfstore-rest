@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -51,6 +52,8 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.CommitCanceledException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
@@ -1517,16 +1520,21 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements
 
 	}
 
+	public void update(VersionSpec version, UpdateCallback callback,
+			IProgressMonitor progress) {
+		new UpdateController(this).update(version, callback, progress);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
 	 * @throws EmfStoreException
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec)
 	 * @generated NOT
+	 * @deprecated
 	 */
 	public PrimaryVersionSpec update(final VersionSpec version,
 			final UpdateObserver observer) throws EmfStoreException {
-
 		final ConnectionManager connectionManager = WorkspaceManager
 				.getInstance().getConnectionManager();
 		final PrimaryVersionSpec resolvedVersion = resolveVersionSpec(version);

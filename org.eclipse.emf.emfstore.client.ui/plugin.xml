@@ -254,6 +254,12 @@
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ServerProperties"
            name="ServerProperties">
      </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.UpdateProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.updateProject2"
+           name="update2">
+     </command>
   </extension>
   <extension
         point="org.eclipse.ui.menus">
@@ -731,6 +737,32 @@
         <command
               commandId="org.eclipse.emf.emfstore.client.ui.projectProperties"
               label="Properties"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <and>
+                 <iterate
+                       ifEmpty="false"
+                       operator="and">
+                    <instanceof
+                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
+                    </instanceof>
+                    <test
+                          forcePluginActivation="true"
+                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
+                          value="true">
+                    </test>
+                 </iterate>
+                 <count
+                       value="1">
+                 </count>
+              </and>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.updateProject2"
+              icon="icons/arrow_up.png"
+              label="Update Project (NEW)"
               style="push">
            <visibleWhen
                  checkEnabled="false">
