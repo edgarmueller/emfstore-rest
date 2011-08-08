@@ -24,6 +24,7 @@ public class SessionManager {
 		} catch (SessionTimedOutException e) {
 			if (retry) {
 				// login & retry
+				executeCall(serverCall, usersession, false);
 			} else {
 				serverCall.handleException(e);
 			}
