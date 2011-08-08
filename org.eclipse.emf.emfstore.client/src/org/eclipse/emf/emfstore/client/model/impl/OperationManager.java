@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.observers.OperationListener;
-import org.eclipse.emf.emfstore.client.model.observers.PostCreationListener;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
@@ -16,7 +15,6 @@ public class OperationManager implements OperationRecorderListener {
 
 	private OperationRecorder operationRecorder;
 	private List<OperationListener> operationListeners;
-	private List<PostCreationListener> postCreationListeners;
 	// private CompositeOperation compositeOperation;
 	private ProjectSpace projectSpace;
 
@@ -25,7 +23,6 @@ public class OperationManager implements OperationRecorderListener {
 		this.operationRecorder = operationRecorder;
 		operationRecorder.addOperationRecorderListener(this);
 		operationListeners = new ArrayList<OperationListener>();
-		postCreationListeners = new ArrayList<PostCreationListener>();
 		this.projectSpace = projectSpace;
 	}
 
@@ -149,22 +146,11 @@ public class OperationManager implements OperationRecorderListener {
 		return operationRecorder.beginCompositeOperation();
 	}
 
-	// TODO: EM
-	// private void notifyPostCreationListeners(EObject modelElement) {
-	// // do not record changes since the creation listeners may only change
-	// // attributes
-	// boolean wasRecording = isRecording;
-	// if (isRecording) {
-	// stopChangeRecording();
-	// }
-	// for (PostCreationListener l : postCreationListeners) {
-	// l.onCreation(projectSpace, modelElement);
-	// }
-	// if (wasRecording) {
-	// startChangeRecording();
-	// }
-	// }
-
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.impl.OperationRecorderListener#operationRecorded(org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation)
+	 */
 	public void operationRecorded(AbstractOperation operation) {
 		projectSpace.addOperation(operation);
 	}
