@@ -1369,5 +1369,11 @@
             name="EMFStore">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.sessionprovider">
+      <sessionProvider
+            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.SessionProvider">
+      </sessionProvider>
+   </extension>
 
 </plugin>

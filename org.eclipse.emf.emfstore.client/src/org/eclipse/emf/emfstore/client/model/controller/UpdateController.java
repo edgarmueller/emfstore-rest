@@ -19,49 +19,49 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 public class UpdateController extends ServerCall {
 
-	public UpdateController(ProjectSpaceImpl projectSpace) {
+	private VersionSpec version;
+	private UpdateCallback callback;
+	private IProgressMonitor progress;
+
+	public UpdateController(ProjectSpaceImpl projectSpace, VersionSpec version, UpdateCallback callback,
+		IProgressMonitor progress) {
 		super(projectSpace);
+		/**
+		 * SANITY CHECKS
+		 */
+		if (version == null) {
+			version = VersionSpec.HEAD_VERSION;
+		}
+		if (callback == null) {
+			callback = UpdateCallback.NOCALLBACK;
+		}
+		if (progress == null) {
+			progress = new NullProgressMonitor();
+		}
+		this.version = version;
+		this.callback = callback;
+		this.progress = progress;
 	}
 
-	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
-		try {
-
-			/**
-			 * SANITY CHECKS
-			 */
-			if (version == null) {
-				version = VersionSpec.HEAD_VERSION;
-			}
-			if (callback == null) {
-				callback = UpdateCallback.NOCALLBACK;
-			}
-			if (progress == null) {
-				progress = new NullProgressMonitor();
-			}
-
-			progress.beginTask("Updating Project", 100);
-
-			doUpdate(version, callback, progress);
-		} catch (EmfStoreException e) {
-			callback.handleException(e);
-		}
+	@Override
+	protected void run() throws EmfStoreException {
+		doUpdate(version, callback, progress);
 	}
 
 	private void doUpdate(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
 		throws EmfStoreException {
-		progress.subTask("Resolving new version");
+		progress.beginTask("Updating Project", 100);
 		progress.worked(1);
+		progress.subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
-
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
+			// TODO ASYNC maybe we shouldn't throw an exception and create a method in the callback instead
 			callback.handleException(new NoChangesOnServerException());
 			return;
 		}
 		progress.worked(5);
-
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+		if (progress.isCanceled()) {
+			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
 		}
 
 		progress.subTask("Fetching changes from server");
@@ -70,10 +70,8 @@ public class UpdateController extends ServerCall {
 			getProjectSpace().getBaseVersion(), resolvedVersion);
 		ChangePackage localchanges = getProjectSpace().getLocalChangePackage(false);
 		progress.worked(65);
-
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+		if (progress.isCanceled()) {
+			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
 		}
 
 		progress.subTask("Checking for conflicts");
@@ -85,17 +83,14 @@ public class UpdateController extends ServerCall {
 			}
 		}
 		progress.worked(15);
+		if (progress.isCanceled()) {
+			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		}
 
 		if (callback.inspectChanges(getProjectSpace(), changes)) {
 			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
 		}
-
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
-
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		}
 
 		progress.subTask("Applying changes");
 		final List<ChangePackage> cps = changes;
@@ -120,11 +115,6 @@ public class UpdateController extends ServerCall {
 			// projectSpace.generateNotifications(changes);
 		}
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		}
-
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
 		updateDone(callback, progress, oldVersion, getProjectSpace().getBaseVersion());
 
@@ -134,9 +124,16 @@ public class UpdateController extends ServerCall {
 		// checkUpdatedFileAttachments(changes);
 	}
 
+	// TODO ASYNC introduce update canceled
+
 	private void updateDone(UpdateCallback callback, IProgressMonitor progress, PrimaryVersionSpec oldVersion,
 		PrimaryVersionSpec newVersion) {
 		callback.updateCompleted(getProjectSpace(), oldVersion, (newVersion == null) ? oldVersion : newVersion);
 		progress.done();
+	}
+
+	@Override
+	protected void handleException(Exception exception) {
+		callback.handleException(exception);
 	}
 }

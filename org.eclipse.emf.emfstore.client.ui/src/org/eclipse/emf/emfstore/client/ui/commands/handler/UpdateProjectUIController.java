@@ -30,6 +30,7 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 		projectSpace.update(version, this, progressDialog.getProgressMonitor());
 	}
 
+	@Override
 	public void handleException(Exception exception) {
 		if (exception instanceof NoChangesOnServerException) {
 			handleNoChangesException();

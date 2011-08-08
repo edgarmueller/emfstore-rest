@@ -146,7 +146,6 @@ public abstract class ServerRequestHandler extends AbstractHandler {
 		} catch (EmfStoreException e) {
 			DialogHandler.showExceptionDialog(e.getMessage(), e);
 		} catch (RuntimeException e) {
-
 			DialogHandler.showExceptionDialog(e);
 			WorkspaceUtil.logWarning("RuntimeException in " + ServerRequestHandler.class.getName(), e);
 		}
