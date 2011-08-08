@@ -61,8 +61,6 @@ public final class WorkspaceManager {
 	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
 
-	private ObserverBus observerBus;
-
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
 	 * workspace manager is present.
@@ -111,7 +109,7 @@ public final class WorkspaceManager {
 		this.connectionManager = initConnectionManager();
 		this.adminConnectionManager = initAdminConnectionManager();
 		this.currentWorkspace = initWorkSpace();
-		this.observerBus = new ObserverBus();
+		// this.observerBus = new ObserverBus();
 	}
 
 	private void notifyPostWorkspaceInitiators() {
@@ -580,6 +578,6 @@ public final class WorkspaceManager {
 	 * @return observer bus
 	 */
 	public static ObserverBus getObserverBus() {
-		return getInstance().observerBus;
+		return ObserverBus.getInstance();
 	}
 }
