@@ -14,7 +14,6 @@
    <extension-point id="org.eclipse.emf.emfstore.client.wrapperfactories" name="Wrapper factories" schema="schema/org.eclipse.emf.emfstore.client.wrapperfactories.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.workspaceLocationProvider" name="Workspace Location Provider" schema="schema/org.eclipse.emf.emfstore.client.workspaceLocationProvider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.defaultConfigurationProvider" name="Default Configuration Provider" schema="schema/org.eclipse.emf.emfstore.client.defaultConfigurationProvider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.client.notify.postcreationlistener" name="Post-Creation Listeners" schema="schema/org.eclipse.emf.emfstore.client.notify.postcreationlistener.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.notify.postinit" name="Workspace Initiated" schema="schema/org.eclipse.emf.emfstore.client.notify.workspace.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.editingDomainProvider" name="EditingDomain Provider" schema="schema/org.eclipse.emf.emfstore.client.editingDomainProvider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.persistence.options" name="Persistence Options" schema="schema/org.eclipse.emf.emfstore.client.persistence.options.exsd"/>
