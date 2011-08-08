@@ -41,7 +41,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCom
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
-import org.eclipse.emf.emfstore.client.model.observers.PostCreationListener;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
@@ -50,6 +49,7 @@ import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
+import org.eclipse.emf.emfstore.common.observer.PostCreationObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -124,7 +124,7 @@ public class OperationRecorder implements CommandObserver,
 						"org.eclipse.emf.emfstore.client.notify.postcreationlistener");
 		for (IConfigurationElement e : config) {
 			try {
-				PostCreationListener l = (PostCreationListener) e
+				PostCreationObserver l = (PostCreationObserver) e
 						.createExecutableExtension("class");
 				// postCreationListeners.add(l);
 			} catch (CoreException e1) {
