@@ -19,6 +19,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.emfstore.common.Activator;
+
 /**
  * This is a universal observer bus. Better documentation will follow... Example code:
  * 
@@ -64,13 +69,24 @@ import java.util.Map;
  */
 public class ObserverBus {
 
+	private static ObserverBus instance;
 	private HashMap<Class<? extends IObserver>, ProxyHandler> observerProxies;
+	
+
+	public static ObserverBus getInstance() {
+		if (instance == null) {
+			instance = new ObserverBus();
+		}
+		
+		return instance;
+	}
 
 	/**
 	 * Default constructor.
 	 */
 	public ObserverBus() {
 		observerProxies = new HashMap<Class<? extends IObserver>, ProxyHandler>();
+		collectionExtensionPoints();
 	}
 
 	/**
@@ -240,5 +256,25 @@ public class ObserverBus {
 			}
 		}
 		return false;
+	}
+	
+
+	public void collectionExtensionPoints() {
+		IConfigurationElement[] confs = Platform.getExtensionRegistry().getConfigurationElementsFor(
+				"org.eclipse.emf.emfstore.common.observer");
+		for (IConfigurationElement element : confs) {
+			try {
+				String extensionPointName = element.getAttribute("extensionPointName");
+				String observerAttributeName = element.getAttribute("observerAttributeName");
+				IConfigurationElement[] extensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
+						extensionPointName);
+				for (IConfigurationElement extension : extensions) {
+					IObserver o = (IObserver) extension.createExecutableExtension(observerAttributeName);
+					register(o);
+				}
+			} catch (CoreException e) {
+				Activator.getDefault().logException(e.getMessage(), e);
+			}
+		}
 	}
 }
