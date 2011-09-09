@@ -45,6 +45,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -83,21 +84,24 @@ public class OperationRecorder implements CommandObserver,
 	private NotificationRecorder notificationRecorder;
 	private boolean isRecording;
 
-	private IdEObjectCollection rootEObject;
+	private NotifiableIdEObjectCollection collection;
 
 	private CompositeOperation compositeOperation;
 	private List<OperationRecorderListener> operationRecordedListeners;
 
 	private EObjectChangeNotifier changeNotifier;
 
+	// TODO: provide ctor with 1 param
+
 	/**
 	 * Constructor.
 	 */
 	// TODO: add param descriptions
-	public OperationRecorder(IdEObjectCollection rootEObject,
+	public OperationRecorder(NotifiableIdEObjectCollection collection,
 			EObjectChangeNotifier changeNotifier) {
-		this.rootEObject = rootEObject;
+		this.collection = collection;
 		this.changeNotifier = changeNotifier;
+		this.collection.addEObjectChangeObserver(this);
 		this.notificationRecorder = new NotificationRecorder();
 		this.operations = new ArrayList<AbstractOperation>();
 		operationRecordedListeners = new ArrayList<OperationRecorderListener>();
@@ -115,7 +119,7 @@ public class OperationRecorder implements CommandObserver,
 		}
 
 		removedElements = new ArrayList<EObject>();
-		converter = new NotificationToOperationConverter(rootEObject);
+		converter = new NotificationToOperationConverter(collection);
 
 		// BEGIN SUPRESS CATCH EXCEPTION
 		IConfigurationElement[] config = Platform
@@ -147,7 +151,7 @@ public class OperationRecorder implements CommandObserver,
 	}
 
 	public IdEObjectCollection getRootEObject() {
-		return rootEObject;
+		return collection;
 	}
 
 	/**
@@ -369,14 +373,14 @@ public class OperationRecorder implements CommandObserver,
 			}
 
 			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = rootEObject.getModelElementId(child);
+			ModelElementId childId = collection.getModelElementId(child);
 
 			((CreateDeleteOperationImpl) createDeleteOperation)
 					.getEObjectToIdMap().put(copiedChild, childId);
 		}
 
 		createDeleteOperation.setModelElement(copiedElement);
-		createDeleteOperation.setModelElementId(rootEObject
+		createDeleteOperation.setModelElementId(collection
 				.getModelElementId(modelElement));
 
 		createDeleteOperation.setClientDate(new Date());
@@ -411,7 +415,7 @@ public class OperationRecorder implements CommandObserver,
 		List<EObject> deletedElements = new ArrayList<EObject>();
 		for (int i = removedElements.size() - 1; i >= 0; i--) {
 			EObject removedElement = removedElements.get(i);
-			if (!rootEObject.containsInstance(removedElement)) {
+			if (!collection.containsInstance(removedElement)) {
 				if (!deletedElements.contains(removedElement)) {
 					deletedElements.add(0, removedElement);
 				}
@@ -495,7 +499,7 @@ public class OperationRecorder implements CommandObserver,
 		allContainedModelElements.add(deletedElement);
 		EObject copiedElement = EcoreUtil.copy(deletedElement);
 		deleteOperation.setModelElement(copiedElement);
-		deleteOperation.setModelElementId(rootEObject
+		deleteOperation.setModelElementId(collection
 				.getDeletedModelElementId(deletedElement));
 		List<EObject> copiedAllContainedModelElements = ModelUtil
 				.getAllContainedModelElementsAsList(copiedElement, false);
@@ -504,8 +508,7 @@ public class OperationRecorder implements CommandObserver,
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
 			EObject child = allContainedModelElements.get(i);
 			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = rootEObject
-					.getDeletedModelElementId(child);
+			ModelElementId childId = collection.getDeletedModelElementId(child);
 			((CreateDeleteOperationImpl) deleteOperation).getEObjectToIdMap()
 					.put(copiedChild, childId);
 		}
@@ -544,11 +547,10 @@ public class OperationRecorder implements CommandObserver,
 		Set<ModelElementId> allDeletedElementsIds = new HashSet<ModelElementId>();
 		for (EObject child : ModelUtil.getAllContainedModelElements(
 				deletedElement, false)) {
-			ModelElementId childId = rootEObject
-					.getDeletedModelElementId(child);
+			ModelElementId childId = collection.getDeletedModelElementId(child);
 			allDeletedElementsIds.add(childId);
 		}
-		allDeletedElementsIds.add(rootEObject
+		allDeletedElementsIds.add(collection
 				.getDeletedModelElementId(deletedElement));
 
 		List<ReferenceOperation> referenceOperationsForDelete = new ArrayList<ReferenceOperation>();

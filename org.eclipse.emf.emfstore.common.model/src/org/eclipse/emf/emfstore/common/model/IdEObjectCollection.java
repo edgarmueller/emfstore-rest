@@ -5,8 +5,12 @@
  */
 package org.eclipse.emf.emfstore.common.model;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -20,36 +24,45 @@ import org.eclipse.emf.ecore.EObject;
 public interface IdEObjectCollection extends EObject {
 
 	/**
-	 * Adds the given {@link EObject} to the collection.
+	 * Adds the given model element to the collection.
 	 * 
-	 * @param eObject
-	 *            the {@link EObject} that should get added to the collection
+	 * @param modelElement
+	 *            the model element that should be added to the collection
 	 */
-	void addModelElement(EObject eObject);
+	void addModelElement(EObject modelElement);
 
 	/**
-	 * Adds the given {@link EObject} to the collection. An additional map can
-	 * be passed in, in order to assign the {@link EObject}(s) pre-defined
-	 * {@link ModelElementId}s.
+	 * Adds the given model element to the collection. An additional map may be
+	 * passed in, in order to assign the model element and any of its children
+	 * already determined {@link ModelElementId}s.
 	 * 
-	 * @param eObject
-	 *            the {@link EObject} that should get added to the collection
-	 * @param eObjectToIdMap
-	 *            A map containing {@link ModelElementId}s for the
-	 *            {@link EObject}s that should get added to the collection.
+	 * @param modelElement
+	 *            the model element that should get added to the collection
+	 * @param modelElementToIdMap
+	 *            A map containing {@link ModelElementId}s for the model element
+	 *            and its children
 	 */
-	void addModelElement(EObject eObject,
-			Map<EObject, ModelElementId> eObjectToIdMap);
+	void addModelElement(EObject modelElement,
+			Map<EObject, ModelElementId> modelElementToIdMap);
 
 	/**
+	 * Checks whether a given model element is contained in the collection.
 	 * 
-	 * @param eObject
-	 *            the {@link EObject} that should get checked, whether it is
-	 *            contained in the collection
-	 * @return true, if the {@link EObject} in question is contained in the
-	 *         collection
+	 * @param modelElement
+	 *            the model element to check for, whether it is contained in the
+	 *            collection
+	 * @return true, if the model element is contained in the collection, false
+	 *         otherwise
 	 */
-	boolean containsInstance(EObject eObject);
+	boolean containsInstance(EObject modelElement);
+
+	/**
+	 * Returns all directly contained model element of the collection, i.e. a
+	 * hierarchical representation of the model elements.
+	 * 
+	 * @return a collection of directly contained model elements
+	 */
+	Collection<EObject> getModelElements();
 
 	/**
 	 * Checks whether the {@link EObject} with the given {@link ModelElementId}
@@ -64,38 +77,125 @@ public interface IdEObjectCollection extends EObject {
 	boolean contains(ModelElementId eObjectId);
 
 	/**
-	 * Retrieve the {@link ModelElementId} of the deleted {@link EObject}.
+	 * Retrieve the {@link ModelElementId} of the deleted an already deleted
+	 * model element.
 	 * 
-	 * @param eObject
-	 *            the deleted {@link EObject}
-	 * @return the {@link ModelElementId} of the deleted {@link EObject}
+	 * @param deletedModelElement
+	 *            a deleted model element
+	 * @return the {@link ModelElementId} of the deleted model element
 	 */
-	ModelElementId getDeletedModelElementId(EObject eObject);
+	ModelElementId getDeletedModelElementId(EObject deletedModelElement);
 
 	/**
-	 * Retrieve the {@link ModelElementId} of the given {@link EObject}.
+	 * Retrieve the {@link ModelElementId} of the given model element.
 	 * 
-	 * @param eObject
-	 *            the {@link EObject}
-	 * @return the {@link ModelElementId} of the {@link EObject}
+	 * @param modelElement
+	 *            the model element
+	 * @return the {@link ModelElementId} of the given model element
 	 */
-	ModelElementId getModelElementId(EObject eObject);
+	ModelElementId getModelElementId(EObject modelElement);
 
 	/**
-	 * Returns the {@link EObject} with the given {@link ModelElementId}.
+	 * Returns the model element with the given {@link ModelElementId}.
 	 * 
 	 * @param modelElementId
-	 *            the ID of the {@link EObject}, that should get retrieved
-	 * @return the {@link EObject} that has the given {@link ModelElementId}
+	 *            the {@link ModelElementId} of the model element, that should
+	 *            get retrieved
+	 * @return the model element that has the given {@link ModelElementId}
 	 *         assigned
 	 */
 	EObject getModelElement(ModelElementId modelElementId);
 
 	/**
-	 * Deletes the given {@link EObject} from the collection.
+	 * Deletes the given model element from the collection.
 	 * 
-	 * @param eObject
-	 *            the {@link EObject} that should get deleted
+	 * @param modelElement
+	 *            the model element that should get deleted
 	 */
-	void deleteModelElement(EObject eObject);
+	void deleteModelElement(EObject modelElement);
+
+	/**
+	 * Returns a flat representation of all model elements in the collection.
+	 * 
+	 * @return a set of all model elements contained in the collection
+	 */
+	Set<EObject> getAllModelElements();
+
+	/**
+	 * Retrieve all {@link ModelElementId}s of the collection
+	 * 
+	 * @return a set of {@link ModelElementId}s
+	 */
+	Set<ModelElementId> getAllModelElementIds();
+
+	/**
+	 * Initializes the ID caches of the collection, i.e. the collection will
+	 * call {@link IdEObjectCollection#getModelElements()} and for each model
+	 * element the {@link ModelElementId} is fetched via
+	 * {@link IdEObjectCollection#getModelElementId(EObject)}. Then a mapping
+	 * between the model element and its {@link ModelElementId} is created
+	 * within the cache.
+	 */
+	void initCaches();
+
+	/**
+	 * Initializes the ID caches of the project with the given mappings.
+	 * 
+	 * @param eObjectToIdMap
+	 * 
+	 * @param idToEObjectMap
+	 */
+	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap,
+			Map<ModelElementId, EObject> idToEObjectMap);
+
+	/**
+	 * Retrieve a list of all model elements of a certain type in the
+	 * collection.
+	 * 
+	 * @param <T>
+	 *            a sub-type of model element
+	 * @param modelElementClass
+	 *            the {@link EClass}
+	 * @param list
+	 *            a list of model elements, can be empty, but must be of the
+	 *            same type as the <code>modelElementClass</code> indicates.
+	 * @param includeSubclasses
+	 *            whether to also include all subclasses of the given
+	 *            {@link EClass} in the list
+	 * @return a list of model elements of the given type
+	 */
+	<T extends EObject> EList<T> getAllModelElementsbyClass(
+			EClass modelElementClass, EList<T> list, Boolean includeSubclasses);
+
+	/**
+	 * Retrieve a list of all model elements of a certain type in the
+	 * collection.
+	 * 
+	 * @param <T>
+	 *            a sub-type of model element
+	 * @param modelElementClass
+	 *            the {@link EClass}
+	 * @param list
+	 *            a list of model elements, can be empty, but must be of the
+	 *            same type as the <code>modelElementClass</code> indicates.
+	 * @return a list of model elements of the given type
+	 */
+	<T extends EObject> EList<T> getAllModelElementsbyClass(
+			EClass modelElementClass, EList<T> list);
+
+	/**
+	 * Retrieve a list of model elements of a certain type in the collection
+	 * that are directly contained in the collection.
+	 * 
+	 * @param <T>
+	 *            a sub-type of model element
+	 * @param modelElementClass
+	 *            the {@link EClass}
+	 * @param list
+	 *            a list of model elements, can be empty, but must be of the
+	 *            same type as the <code>modelElementClass</code> indicates.
+	 * @return a list of model elements of the given type
+	 */
+	<T extends EObject> EList<T> getModelElementsByClass(
+			EClass modelElementClass, EList<T> list);
 }
