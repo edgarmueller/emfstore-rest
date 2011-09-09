@@ -33,7 +33,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenc
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 
@@ -80,13 +79,6 @@ public final class NotificationToOperationConverter {
 				return handleSetReference(n);
 			}
 
-		case Notification.UNSET:
-			if (n.isAttributeNotification()) {
-				return handleUnsetAttribute(n);
-			} else {
-				return handleUnsetReference(n);
-			}
-
 		case Notification.ADD:
 			if (n.isAttributeNotification()) {
 				return handleMultiAttribute(n);
@@ -124,100 +116,6 @@ public final class NotificationToOperationConverter {
 
 		default:
 			return null;
-		}
-	}
-
-	private AbstractOperation handleUnsetReference(NotificationInfo n) {
-
-		ModelElementId oldModelElementId = project.getModelElementId(n
-				.getOldModelElementValue());
-		ModelElementId newModelElementId = project.getModelElementId(n
-				.getNewModelElementValue());
-
-		if (oldModelElementId == null) {
-			oldModelElementId = ((ProjectImpl) project)
-					.getDeletedModelElementId(n.getOldModelElementValue());
-		}
-
-		if (newModelElementId == null) {
-			newModelElementId = ((ProjectImpl) project)
-					.getDeletedModelElementId(n.getNewModelElementValue());
-		}
-
-		if (!n.getReference().isMany()) {
-			SingleReferenceOperation op = OperationsFactory.eINSTANCE
-					.createSingleReferenceOperation();
-			setCommonValues(op, (EObject) n.getNotifier());
-			op.setFeatureName(n.getReference().getName());
-			setBidirectionalAndContainmentInfo(op, n.getReference());
-
-			if (n.getOldValue() != null) {
-				op.setOldValue(oldModelElementId);
-			}
-
-			// if (n.getNewValue() != null) {
-			op.eUnset(OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE);
-			op.setUnset(true);
-			// op.setNewValue(newModelElementId);
-			// }
-
-			return op;
-
-		} else {
-			MultiReferenceSetOperation setOperation = OperationsFactory.eINSTANCE
-					.createMultiReferenceSetOperation();
-			setCommonValues(setOperation, (EObject) n.getNotifier());
-			setOperation.setFeatureName(n.getReference().getName());
-			setBidirectionalAndContainmentInfo(setOperation, n.getReference());
-
-			setOperation.setIndex(n.getPosition());
-
-			if (n.getOldValue() != null) {
-				setOperation.setOldValue(oldModelElementId);
-			}
-
-			setOperation
-					.eUnset(OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE);
-			setOperation.setUnset(true);
-			// if (n.getNewValue() != null) {
-			// setOperation.setNewValue(newModelElementId);
-			// }
-
-			return setOperation;
-		}
-	}
-
-	private AbstractOperation handleUnsetAttribute(NotificationInfo n) {
-
-		if (!n.getAttribute().isMany()) {
-			AttributeOperation op = null;
-			// special handling for diagram layout changes
-			if (isDiagramLayoutAttribute(n.getAttribute(),
-					n.getNotifierModelElement())) {
-				op = OperationsFactory.eINSTANCE.createDiagramLayoutOperation();
-			} else {
-				op = OperationsFactory.eINSTANCE.createAttributeOperation();
-			}
-
-			setCommonValues(op, n.getNotifierModelElement());
-			op.setFeatureName(n.getAttribute().getName());
-			op.eUnset(OperationsPackage.Literals.ATTRIBUTE_OPERATION__NEW_VALUE);
-			op.setUnset(true);
-			op.setOldValue(n.getOldValue());
-			return op;
-		} else {
-
-			MultiAttributeSetOperation setOperation = OperationsFactory.eINSTANCE
-					.createMultiAttributeSetOperation();
-			setCommonValues(setOperation, n.getNotifierModelElement());
-			setOperation.setFeatureName(n.getAttribute().getName());
-			setOperation.setUnset(true);
-			setOperation
-					.eUnset(OperationsPackage.Literals.MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE);
-			setOperation.setOldValue(n.getOldValue());
-			setOperation.setIndex(n.getPosition());
-
-			return setOperation;
 		}
 	}
 
