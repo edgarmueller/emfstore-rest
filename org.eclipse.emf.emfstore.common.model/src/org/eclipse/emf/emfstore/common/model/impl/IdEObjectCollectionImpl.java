@@ -126,8 +126,11 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 
 		EList<EObject> contents = xmiResource.getContents();
 		setModelElements(contents);
-		// save, in order to write IDs back into resource
-		xmiResource.save(null);
+
+		if (!resourceHasIds) {
+			// save, in order to write IDs back into resource
+			xmiResource.save(null);
+		}
 	}
 
 	/**
