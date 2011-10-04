@@ -31,12 +31,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
+import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.FilterStack;
@@ -107,6 +112,17 @@ public class OperationRecorder implements CommandObserver,
 		operationRecordedListeners = new ArrayList<OperationRecorderListener>();
 
 		editingDomain = Configuration.getEditingDomain();
+		if (editingDomain == null) {
+			ResourceSet resourceSet = new ResourceSetImpl();
+			AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(
+					new ComposedAdapterFactory(
+							ComposedAdapterFactory.Descriptor.Registry.INSTANCE),
+					new EMFStoreBasicCommandStack(), resourceSet);
+			resourceSet.eAdapters().add(
+					new AdapterFactoryEditingDomain.EditingDomainProvider(
+							domain));
+			editingDomain = domain;
+		}
 
 		CommandStack commandStack = editingDomain.getCommandStack();
 
