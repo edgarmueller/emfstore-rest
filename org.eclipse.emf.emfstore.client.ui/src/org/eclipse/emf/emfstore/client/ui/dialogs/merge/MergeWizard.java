@@ -32,7 +32,8 @@ public class MergeWizard extends Wizard {
 	public MergeWizard(DecisionManager decisionManager) {
 		super();
 		setWindowTitle("Merge Wizard");
-		setDefaultPageImageDescriptor(DecisionUtil.getImageDescriptor("merge_wizard2.gif"));
+		setDefaultPageImageDescriptor(DecisionUtil
+				.getImageDescriptor("merge_wizard2.gif"));
 
 		this.decisionManager = decisionManager;
 	}
@@ -53,13 +54,13 @@ public class MergeWizard extends Wizard {
 	public boolean performFinish() {
 		if (decisionManager.isResolved()) {
 			decisionManager.calcResult();
-			decisionManager.getEventLogger().selectedOK();
 			return true;
 		}
-		decisionManager.getEventLogger().selectedOKButNotFinished();
-		MessageDialog.openInformation(getShell(), "Resolve all conflicts first",
-			"You have to resolve all conflicts in order to finish."
-				+ "\nTherefore choose an option for every conflict.");
+
+		MessageDialog.openInformation(getShell(),
+				"Resolve all conflicts first",
+				"You have to resolve all conflicts in order to finish."
+						+ "\nTherefore choose an option for every conflict.");
 		return false;
 	}
 }

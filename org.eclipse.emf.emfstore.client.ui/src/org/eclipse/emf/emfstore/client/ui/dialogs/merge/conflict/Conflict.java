@@ -26,8 +26,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 import org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation;
 
 /**
- * Main class representing a conflict. it offers all kind of convenience methods and organizes the conflicts
- * initialization. Read the constructor's description for further implemenation details (
+ * Main class representing a conflict. it offers all kind of convenience methods
+ * and organizes the conflicts initialization. Read the constructor's
+ * description for further implemenation details (
  * {@link #Conflict(List, List, DecisionManager)})
  * 
  * @author wesendon
@@ -50,17 +51,23 @@ public abstract class Conflict extends Observable {
 	private boolean leftIsMy;
 
 	/**
-	 * Default constructor for conflicts. Many conflicts only need one operation for my and their side. But in order to
-	 * use a suitable upper class for all conflicts, conflicts requires a list of operations. opsA ~ myOperations, opsB
-	 * ~ theirOperations, but again, to keep it general, it's called A and B. These fields are protected so the
-	 * implementing Conflict should create it's own getter method.
+	 * Default constructor for conflicts. Many conflicts only need one operation
+	 * for my and their side. But in order to use a suitable upper class for all
+	 * conflicts, conflicts requires a list of operations. opsA ~ myOperations,
+	 * opsB ~ theirOperations, but again, to keep it general, it's called A and
+	 * B. These fields are protected so the implementing Conflict should create
+	 * it's own getter method.
 	 * 
-	 * @param leftOperations first list of operations (often: myOperations)
-	 * @param rightOperations second list of operations (often: theirOperations)
-	 * @param decisionManager decision manager
+	 * @param leftOperations
+	 *            first list of operations (often: myOperations)
+	 * @param rightOperations
+	 *            second list of operations (often: theirOperations)
+	 * @param decisionManager
+	 *            decision manager
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager) {
+	public Conflict(List<AbstractOperation> leftOperations,
+			List<AbstractOperation> rightOperations,
+			DecisionManager decisionManager) {
 		this(leftOperations, rightOperations, decisionManager, true, true);
 	}
 
@@ -77,14 +84,21 @@ public abstract class Conflict extends Observable {
 	 * Additional constructor, which allows deactivating initialization.
 	 * 
 	 * @see #Conflict(List, List, DecisionManager)
-	 * @param leftOperations first list of operations (often: myOperations)
-	 * @param rightOperations second list of operations (often: theirOperations)
-	 * @param decisionManager decision manager
-	 * @param leftIsMy left operations are my changes
-	 * @param init allows to deactivate initialization, has to be done manually otherwise.
+	 * @param leftOperations
+	 *            first list of operations (often: myOperations)
+	 * @param rightOperations
+	 *            second list of operations (often: theirOperations)
+	 * @param decisionManager
+	 *            decision manager
+	 * @param leftIsMy
+	 *            left operations are my changes
+	 * @param init
+	 *            allows to deactivate initialization, has to be done manually
+	 *            otherwise.
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager, boolean leftIsMy, boolean init) {
+	public Conflict(List<AbstractOperation> leftOperations,
+			List<AbstractOperation> rightOperations,
+			DecisionManager decisionManager, boolean leftIsMy, boolean init) {
 		this.leftIsMy = leftIsMy;
 		this.leftOperations = leftOperations;
 		this.rightOperations = rightOperations;
@@ -105,12 +119,15 @@ public abstract class Conflict extends Observable {
 		initAdditionalConflictOptions(options);
 	}
 
-	private void initAdditionalConflictOptions(ArrayList<ConflictOption> options2) {
+	private void initAdditionalConflictOptions(
+			ArrayList<ConflictOption> options2) {
 		if (!allowOtherOptions()) {
 			return;
 		}
-		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.ui.merge.customoption");
+		IConfigurationElement[] config = Platform
+				.getExtensionRegistry()
+				.getConfigurationElementsFor(
+						"org.eclipse.emf.emfstore.client.ui.merge.customoption");
 
 		for (IConfigurationElement e : config) {
 			try {
@@ -119,7 +136,8 @@ public abstract class Conflict extends Observable {
 
 					CustomConflictOptionFactory factory = (CustomConflictOptionFactory) object;
 					if (factory.isApplicableConflict(this)) {
-						CustomConflictOption customConflictOption = factory.createCustomConflictOption(this);
+						CustomConflictOption customConflictOption = factory
+								.createCustomConflictOption(this);
 						if (customConflictOption != null) {
 							options.add(customConflictOption);
 						}
@@ -127,14 +145,16 @@ public abstract class Conflict extends Observable {
 
 				}
 			} catch (CoreException e1) {
-				WorkspaceUtil.logException("Couldn't load merge option extension point.", e1);
+				WorkspaceUtil.logException(
+						"Couldn't load merge option extension point.", e1);
 				// fail silently
 			}
 		}
 	}
 
 	/**
-	 * Defines whether other option should be allowed via extension. E.g. Issue option.
+	 * Defines whether other option should be allowed via extension. E.g. Issue
+	 * option.
 	 * 
 	 * @return true, if other options are allowed
 	 */
@@ -145,27 +165,32 @@ public abstract class Conflict extends Observable {
 	/**
 	 * Is called in order to init the options.
 	 * 
-	 * @param options list of options
+	 * @param options
+	 *            list of options
 	 */
 	protected abstract void initConflictOptions(List<ConflictOption> options);
 
 	/**
 	 * Init conflict description.
 	 * 
-	 * @param description pre initialized description
+	 * @param description
+	 *            pre initialized description
 	 * @return description
 	 */
-	protected abstract ConflictDescription initConflictDescription(ConflictDescription description);
+	protected abstract ConflictDescription initConflictDescription(
+			ConflictDescription description);
 
 	private ConflictDescription initConflictDescription() {
 		ConflictDescription description = new ConflictDescription("");
 		description.setImage("notset.gif");
-		EObject modelElement = getDecisionManager().getModelElement(getMyOperation().getModelElementId());
+		EObject modelElement = getDecisionManager().getModelElement(
+				getMyOperation().getModelElementId());
 		if (modelElement != null) {
 			description.add("modelelement", modelElement);
 		}
 		if (getMyOperation() instanceof FeatureOperation) {
-			description.add("feature", ((FeatureOperation) getMyOperation()).getFeatureName());
+			description.add("feature",
+					((FeatureOperation) getMyOperation()).getFeatureName());
 		}
 		description.setDecisionManager(getDecisionManager());
 		return initConflictDescription(description);
@@ -177,7 +202,8 @@ public abstract class Conflict extends Observable {
 	 * @return context.
 	 */
 	protected ConflictContext initConflictContext() {
-		return new ConflictContext(getDecisionManager(), getMyOperation(), getTheirOperation());
+		return new ConflictContext(getDecisionManager(), getMyOperation(),
+				getTheirOperation());
 	}
 
 	/**
@@ -233,13 +259,11 @@ public abstract class Conflict extends Observable {
 	/**
 	 * Sets an options as solution for this conflict.
 	 * 
-	 * @param conflictOption option
+	 * @param conflictOption
+	 *            option
 	 */
 	public void setSolution(ConflictOption conflictOption) {
 		solution = conflictOption;
-		if (solution != null) {
-			getDecisionManager().getEventLogger().optionSelected(this);
-		}
 		setChanged();
 		notifyObservers();
 	}
@@ -263,13 +287,15 @@ public abstract class Conflict extends Observable {
 	}
 
 	/**
-	 * This method is used by {@link DecisionManager} in order to create the resulting operations.
+	 * This method is used by {@link DecisionManager} in order to create the
+	 * resulting operations.
 	 * 
 	 * @return list of ops.
 	 */
 	public List<AbstractOperation> getRejectedTheirs() {
 		if (!isResolved()) {
-			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
+			throw new IllegalStateException(
+					"Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
 			return new ArrayList<AbstractOperation>();
@@ -285,13 +311,15 @@ public abstract class Conflict extends Observable {
 	}
 
 	/**
-	 * This method is used by {@link DecisionManager} in order to create the resulting operations.
+	 * This method is used by {@link DecisionManager} in order to create the
+	 * resulting operations.
 	 * 
 	 * @return list of ops
 	 */
 	public List<AbstractOperation> getAcceptedMine() {
 		if (!isResolved()) {
-			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
+			throw new IllegalStateException(
+					"Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
 			return new ArrayList<AbstractOperation>();
@@ -303,7 +331,8 @@ public abstract class Conflict extends Observable {
 	/**
 	 * Get an option by its type.
 	 * 
-	 * @param type type
+	 * @param type
+	 *            type
 	 * @return option or null
 	 */
 	public ConflictOption getOptionOfType(OptionType type) {
@@ -385,8 +414,10 @@ public abstract class Conflict extends Observable {
 	/**
 	 * Get my operation and cast.
 	 * 
-	 * @param <T> cast type
-	 * @param clazz {@link AbstractOperation} class to which will be casted
+	 * @param <T>
+	 *            cast type
+	 * @param clazz
+	 *            {@link AbstractOperation} class to which will be casted
 	 * @return operation
 	 */
 	@SuppressWarnings("unchecked")
@@ -397,8 +428,10 @@ public abstract class Conflict extends Observable {
 	/**
 	 * Get their operation and cast.
 	 * 
-	 * @param <T> cast type
-	 * @param clazz {@link AbstractOperation} class to which will be casted
+	 * @param <T>
+	 *            cast type
+	 * @param clazz
+	 *            {@link AbstractOperation} class to which will be casted
 	 * @return operation
 	 */
 	@SuppressWarnings("unchecked")

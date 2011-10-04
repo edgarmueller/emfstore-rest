@@ -39,7 +39,8 @@ public class MergeProjectHandler implements ConflictResolver {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param conflictException the ChangeConflictException
+	 * @param conflictException
+	 *            the ChangeConflictException
 	 */
 	public MergeProjectHandler(ChangeConflictException conflictException) {
 		acceptedMine = new ArrayList<AbstractOperation>();
@@ -69,21 +70,25 @@ public class MergeProjectHandler implements ConflictResolver {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.ConflictResolver#getAcceptedMine()
 	 */
-	public boolean resolveConflicts(Project project, List<ChangePackage> theirChangePackages,
-		ChangePackage myChangePackage, PrimaryVersionSpec base, PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project,
+			List<ChangePackage> theirChangePackages,
+			ChangePackage myChangePackage, PrimaryVersionSpec base,
+			PrimaryVersionSpec target) {
 
 		boolean caseStudy = false;
 
 		if (caseStudy) {
 			CaseStudySwitch studySwitch = new CaseStudySwitch();
-			studySwitch.flattenChangePackages(myChangePackage, theirChangePackages);
+			studySwitch.flattenChangePackages(myChangePackage,
+					theirChangePackages);
 		}
 
-		DecisionManager decisionManager = new DecisionManager(project, myChangePackage, theirChangePackages, base,
-			target);
+		DecisionManager decisionManager = new DecisionManager(project,
+				myChangePackage, theirChangePackages, base, target);
 
 		MergeWizard wizard = new MergeWizard(decisionManager);
-		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
+		WizardDialog dialog = new WizardDialog(Display.getCurrent()
+				.getActiveShell(), wizard);
 		dialog.setPageSize(1000, 500);
 		dialog.setBlockOnOpen(true);
 		dialog.create();
@@ -91,10 +96,6 @@ public class MergeProjectHandler implements ConflictResolver {
 		int open = dialog.open();
 		acceptedMine = decisionManager.getAcceptedMine();
 		rejectedTheirs = decisionManager.getRejectedTheirs();
-
-		if (open != Window.OK) {
-			decisionManager.getEventLogger().selectedCancel();
-		}
 
 		return (open == Window.OK);
 	}
