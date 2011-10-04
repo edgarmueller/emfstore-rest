@@ -20,6 +20,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -185,6 +187,16 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 						modelElement);
 			}
 		};
+
+		Resource resource = modelElement.eResource();
+
+		if (resource != null && resource instanceof ResourceImpl) {
+			ResourceImpl resourceImpl = (ResourceImpl) resource;
+			if (resourceImpl.isLoading()) {
+				return;
+			}
+		}
+
 		notifyEObjectChangeObservers(command);
 	}
 
