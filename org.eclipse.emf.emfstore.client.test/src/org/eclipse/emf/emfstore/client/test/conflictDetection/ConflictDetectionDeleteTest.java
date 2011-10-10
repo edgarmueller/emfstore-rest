@@ -12,21 +12,21 @@ import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.test.model.bug.BugFactory;
+import org.eclipse.emf.emfstore.client.test.model.bug.BugReport;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
+import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
+import org.eclipse.emf.emfstore.client.test.model.task.Milestone;
+import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
+import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.Test;
-import org.unicase.model.bug.BugFactory;
-import org.unicase.model.bug.BugReport;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.requirement.Actor;
-import org.unicase.model.requirement.RequirementFactory;
-import org.unicase.model.requirement.UseCase;
-import org.unicase.model.task.Milestone;
-import org.unicase.model.task.TaskFactory;
-import org.unicase.model.task.WorkPackage;
 
 /**
  * Tests conflict detection behaviour on attributes.

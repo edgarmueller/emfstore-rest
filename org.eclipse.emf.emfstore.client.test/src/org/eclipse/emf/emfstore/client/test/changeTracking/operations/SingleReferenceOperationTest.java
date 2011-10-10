@@ -18,6 +18,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Proposal;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
+import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
+import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -28,15 +37,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl;
 import org.junit.Test;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.rationale.Issue;
-import org.unicase.model.rationale.Proposal;
-import org.unicase.model.rationale.RationaleFactory;
-import org.unicase.model.rationale.RationalePackage;
-import org.unicase.model.requirement.Actor;
-import org.unicase.model.requirement.RequirementFactory;
-import org.unicase.model.requirement.UseCase;
 
 /**
  * Tests the SingleReferenceOperation.

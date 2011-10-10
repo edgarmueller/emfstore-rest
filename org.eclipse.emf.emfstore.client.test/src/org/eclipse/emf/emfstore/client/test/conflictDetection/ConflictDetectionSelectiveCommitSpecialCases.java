@@ -16,6 +16,12 @@ import java.util.Set;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
+import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
+import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
@@ -25,12 +31,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteO
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.requirement.Actor;
-import org.unicase.model.requirement.RequirementFactory;
-import org.unicase.model.task.ActionItem;
-import org.unicase.model.task.TaskFactory;
 
 /**
  * Test conflict detection behaviour during a selective commit.
