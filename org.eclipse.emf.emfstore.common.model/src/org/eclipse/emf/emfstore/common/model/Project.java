@@ -39,10 +39,9 @@ import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
  * 
  * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getProject()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface Project extends EObject, IAdaptable,
-		NotifiableIdEObjectCollection {
+public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment

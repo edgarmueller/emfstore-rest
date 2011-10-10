@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,12 +26,14 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -438,8 +441,6 @@ public class OperationRecorder implements CommandObserver,
 			}
 		}
 
-		removedElements.clear();
-
 		Set<EObject> newElementsOnClipboardAfterCommand = getModelElementsFromClipboard();
 		// newElementsOnClipboardAfterCommand.removeAll(currentClipboard);
 
@@ -481,6 +482,43 @@ public class OperationRecorder implements CommandObserver,
 		// delete all non containment cross references to other elments
 		for (EReference reference : modelElement.eClass().getEAllReferences()) {
 			EClassifier eType = reference.getEType();
+
+			// if the reference is a containment map feature and its referenced
+			// entries do have at least one
+			// non-containment reference (e.g. key or value)
+			// then delete the map entries
+			// instead of waiting for the referenced element to be cut of from
+			// the map entry
+			// in the children recursion
+			// since cutting of a key or value reference will render the map
+			// into an invalid state which can result in
+			// unresolved proxies.
+			if (Map.Entry.class.isAssignableFrom(eType.getInstanceClass())
+					&& reference.isContainment() && reference.isChangeable()
+					&& eType instanceof EClass) {
+				EClass mapEntryEClass = (EClass) eType;
+				if (hasOnlyContainmentReferences(mapEntryEClass)) {
+					modelElement.eUnset(reference);
+					continue;
+				}
+				@SuppressWarnings("unchecked")
+				List<EObject> mapEntriesEList = (List<EObject>) modelElement
+						.eGet(reference);
+				// copy list before clearing reference
+				// TODO is this really the underlying list
+				List<EObject> mapEntries = new ArrayList<EObject>(
+						mapEntriesEList);
+				Resource resource = this.editingDomain.getResourceSet()
+						.createResource(URI.createURI("AAA"));
+				resource.getContents().add(modelElement);
+				EcoreUtil.resolveAll(modelElement);
+				modelElement.eUnset(reference);
+				for (EObject mapEntry : mapEntries) {
+					handleElementDelete(mapEntry);
+				}
+				continue;
+			}
+
 			if (reference.isContainer() || reference.isContainment()
 					|| !reference.isChangeable()) {
 				continue;
@@ -490,6 +528,15 @@ public class OperationRecorder implements CommandObserver,
 				modelElement.eUnset(reference);
 			}
 		}
+	}
+
+	private boolean hasOnlyContainmentReferences(EClass mapEntryEClass) {
+		for (EReference mapEntryReference : mapEntryEClass.getEAllReferences()) {
+			if (!mapEntryReference.isContainment()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void handleElementDelete(EObject deletedElement) {

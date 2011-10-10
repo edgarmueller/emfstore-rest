@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.common.model.util;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -32,7 +33,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	private final NotifiableIdEObjectCollection collection;
 	private boolean isInitializing;
 	private Set<EObject> removedModelElements;
-	private Notification currentNotification;
+	private Stack<Notification> currentNotifications;
 	private int reentrantCallToAddAdapterCounter;
 	private boolean notificationDisabled;
 
@@ -73,11 +74,14 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		} finally {
 			reentrantCallToAddAdapterCounter -= 1;
 		}
-		if (reentrantCallToAddAdapterCounter > 0) {
+		if (reentrantCallToAddAdapterCounter > 0
+				|| currentNotifications.isEmpty()) {
 			// any other than the first call in re-entrant calls to addAdapter
 			// are going to call the project
 			return;
 		}
+
+		Notification currentNotification = currentNotifications.peek();
 
 		if (currentNotification != null && !currentNotification.isTouch()
 				&& !isInitializing && notifier instanceof EObject
@@ -97,9 +101,12 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 */
 	@Override
 	protected void removeAdapter(Notifier notifier) {
-		if (isInitializing) {
+		if (isInitializing || currentNotifications.isEmpty()) {
 			return;
 		}
+
+		Notification currentNotification = currentNotifications.peek();
+
 		if (currentNotification != null && currentNotification.isTouch()) {
 			return;
 		}
@@ -161,7 +168,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
-		currentNotification = notification;
+		currentNotifications.push(notification);
 		Object feature = notification.getFeature();
 		Object notifier = notification.getNotifier();
 
@@ -179,6 +186,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		}
 
 		super.notifyChanged(notification);
+		currentNotifications.pop();
 
 		// collection itself is not a valid model element
 		if (!notification.isTouch() && notifier instanceof EObject

@@ -210,7 +210,7 @@ public class ObserverBus {
 				} catch (Throwable e) {
 				}
 			}
-			if (method.getReturnType().isPrimitive()) {
+			if (firstResult==null && method.getReturnType().isPrimitive()) {
 				return getDefaultValueForPrimitive(method.getReturnType());
 			}
 			

@@ -43,6 +43,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.observer.IObserver;
 import org.eclipse.emf.emfstore.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
@@ -61,6 +62,8 @@ public final class WorkspaceManager {
 	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
 
+	private ObserverBus observerBus;
+
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
 	 * workspace manager is present.
@@ -72,6 +75,7 @@ public final class WorkspaceManager {
 		if (instance == null) {
 			try {
 				instance = new WorkspaceManager();
+				instance.initialize();
 				// BEGIN SUPRESS CATCH EXCEPTION
 			} catch (RuntimeException e) {
 				// END SURPRESS CATCH EXCEPTION
@@ -106,10 +110,29 @@ public final class WorkspaceManager {
 	 * @generated NOT
 	 */
 	private WorkspaceManager() {
+	}
+
+	private void initialize() {
+		initializeObserverBus();
 		this.connectionManager = initConnectionManager();
 		this.adminConnectionManager = initAdminConnectionManager();
 		this.currentWorkspace = initWorkSpace();
-		// this.observerBus = new ObserverBus();
+	}
+
+	private void initializeObserverBus() {
+		this.observerBus = new ObserverBus();
+		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(
+						"org.eclipse.emf.emfstore.client.observers");
+		for (IConfigurationElement extension : rawExtensions) {
+			try {
+				IObserver observer = (IObserver) extension
+						.createExecutableExtension("ObserverClass");
+				observerBus.register(observer);
+			} catch (CoreException e) {
+				WorkspaceUtil.logException(e.getMessage(), e);
+			}
+		}
 	}
 
 	private void notifyPostWorkspaceInitiators() {
@@ -161,7 +184,7 @@ public final class WorkspaceManager {
 	 */
 	private Workspace initWorkSpace() {
 		ResourceSet resourceSet = new ResourceSetImpl();
-
+		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		// register an editing domain on the ressource
 		Configuration.setEditingDomain(createEditingDomain(resourceSet));
 
@@ -578,6 +601,6 @@ public final class WorkspaceManager {
 	 * @return observer bus
 	 */
 	public static ObserverBus getObserverBus() {
-		return ObserverBus.getInstance();
+		return getInstance().observerBus;
 	}
 }

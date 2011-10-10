@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -140,23 +141,25 @@ public final class ModelUtil {
 	public static String eObjectToString(EObject object)
 			throws SerializationException {
 
-		boolean containment = false;
-		boolean href = false;
-		boolean proxy = false;
+		boolean containmentCheckEnabled = false;
+		boolean hrefCheckEnabled = false;
+		boolean proxyCheckEnabled = false;
 
 		IConfigurationElement[] elements = Platform
 				.getExtensionRegistry()
 				.getConfigurationElementsFor(
 						"org.eclipse.emf.emfstore.common.model.serializationoptions");
 		if (elements != null && elements.length > 0) {
-			href = Boolean.parseBoolean(elements[0].getAttribute("HrefCheck"));
-			proxy = Boolean
-					.parseBoolean(elements[0].getAttribute("ProxyCheck"));
-			containment = Boolean.parseBoolean(elements[0]
+			hrefCheckEnabled = Boolean.parseBoolean(elements[0]
+					.getAttribute("HrefCheck"));
+			proxyCheckEnabled = Boolean.parseBoolean(elements[0]
+					.getAttribute("ProxyCheck"));
+			containmentCheckEnabled = Boolean.parseBoolean(elements[0]
 					.getAttribute("SelfContainmentCheck"));
 		}
 
-		return eObjectToString(object, containment, href, proxy);
+		return eObjectToString(object, !containmentCheckEnabled,
+				!hrefCheckEnabled, !proxyCheckEnabled);
 	}
 
 	/**
@@ -185,12 +188,7 @@ public final class ModelUtil {
 		XMIResource res = (XMIResource) (new ResourceSetImpl())
 				.createResource(VIRTUAL_URI);
 
-		if (!overrideContainmentCheck && !(object instanceof EClass)) {
-			if (!CommonUtil.isSelfContained(object)) {
-				throw new SerializationException(object);
-			}
-		}
-
+		EObject copy;
 		if (object instanceof Project) {
 			Project project = (Project) object;
 			Project copiedProject = (Project) clone(object);
@@ -204,9 +202,17 @@ public final class ModelUtil {
 						modelElementId.getId());
 			}
 			res.getContents().add(copiedProject);
+			copy = copiedProject;
 		} else {
-			EObject copy = EcoreUtil.copy(object);
+			copy = EcoreUtil.copy(object);
 			res.getContents().add(copy);
+		}
+
+		if (!overrideContainmentCheck && !(copy instanceof EClass)) {
+			if (!CommonUtil.isSelfContained(copy)
+					|| !CommonUtil.isContainedInResource(copy, res)) {
+				throw new SerializationException(copy);
+			}
 		}
 
 		int step = 200;
@@ -1002,8 +1008,11 @@ public final class ModelUtil {
 					&& allModelElements.contains(otherModelElement)) {
 				continue;
 			}
-			for (EObject otherElementOpposite : otherModelElement
-					.eCrossReferences()) {
+
+			List<EObject> crossReferences = new ArrayList<EObject>(
+					otherModelElement.eCrossReferences());
+
+			for (EObject otherElementOpposite : crossReferences) {
 				// check if the element references any of the target objects
 				if (allModelElements.contains(otherElementOpposite)) {
 					EList<EReference> references = otherModelElement.eClass()
@@ -1218,5 +1227,71 @@ public final class ModelUtil {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Checks whether any element within the given {@link Project} has any
+	 * cross-references to the given {@link EObject} .
+	 * 
+	 * @param element
+	 *            a {@link EObject}
+	 * @param project
+	 *            a {@link Project}
+	 * @param cutOffReferences
+	 *            whether cross-references should get cut off
+	 * @return true, if there are any cross-references to the {@link EObject}
+	 *         within the given {@link Project}
+	 */
+	public static boolean handleIncomingCrossReferences(EObject element,
+			Project project, boolean cutOffReferences) {
+		Set<EObject> projectContents = project.getAllModelElements();
+		Set<EObject> elementEObjects = getAllContainedModelElements(element,
+				false);
+		elementEObjects.add(element);
+
+		for (EObject eObject : projectContents) {
+
+			@SuppressWarnings("rawtypes")
+			EContentsEList.FeatureIterator featureIterator = (EContentsEList.FeatureIterator) eObject
+					.eCrossReferences().iterator();
+
+			while (featureIterator.hasNext()) {
+				EObject referencedObject = (EObject) featureIterator.next();
+
+				if (elementEObjects.contains(referencedObject)) {
+					ModelElementId referencedObjectId = project
+							.getModelElementId(referencedObject) == null ? project
+							.getDeletedModelElementId(referencedObject)
+							: project.getModelElementId(referencedObject);
+					ModelElementId elementId = project
+							.getModelElementId(element) == null ? project
+							.getDeletedModelElementId(element) : project
+							.getModelElementId(element);
+					if (cutOffReferences) {
+						EReference eReference = (EReference) featureIterator
+								.feature();
+						if (eReference.isMany()) {
+							@SuppressWarnings("unchecked")
+							List<EObject> eObjects = (List<EObject>) eObject
+									.eGet(eReference);
+							eObjects.remove(referencedObject);
+							logInfo("Cross-reference " + referencedObjectId
+									+ " removed from many reference "
+									+ eReference + ".");
+						} else {
+							eObject.eUnset(eReference);
+							logInfo("Cross-reference " + referencedObject
+									+ " removed from " + eReference + ".");
+						}
+					} else {
+						throw new IllegalStateException("Cross-reference from "
+								+ referencedObject + " to " + elementId
+								+ " detected.");
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }

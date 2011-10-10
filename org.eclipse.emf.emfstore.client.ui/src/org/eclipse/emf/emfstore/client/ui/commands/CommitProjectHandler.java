@@ -169,7 +169,7 @@ public class CommitProjectHandler extends ServerRequestCommandHandler implements
 			UpdateProjectHandler projectHandler = new UpdateProjectHandler();
 			projectHandler.setShell(getShell());
 			projectHandler.update(projectSpace);
-			return projectSpace.prepareCommit(CommitProjectHandler.this);
+			return handlePrepareCommit(projectSpace);
 		}
 		throw new CommitCanceledException(
 				"Changes have been canceled by the user.");

@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TouchFilter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TransientFilter;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
@@ -208,22 +209,37 @@ public class StatePersister implements CommandObserver, ProjectChangeObserver {
 			EObject modelElement) {
 		ModelElementId modelElementId = collection
 				.getModelElementId(modelElement);
+
 		if (modelElementId == null) {
 			modelElementId = collection.getDeletedModelElementId(modelElement);
 		}
-		String modelElementIdString = modelElementId.getId();
 
+		String modelElementIdString = modelElementId.getId();
 		resource.setID(modelElement, modelElementIdString);
 
 		TreeIterator<EObject> it = modelElement.eAllContents();
 		while (it.hasNext()) {
 			EObject child = it.next();
-			ModelElementId childId = collection.getModelElementId(child);
+			ModelElementId childId = getIDForEObject(child);
 			if (childId == null) {
-				childId = collection.getDeletedModelElementId(modelElement);
+				childId = collection.getDeletedModelElementId(child);
 			}
 			resource.setID(child, childId.getId());
 		}
+	}
+
+	private ModelElementId getIDForEObject(EObject modelElement) {
+		ModelElementId modelElementId = collection
+				.getModelElementId(modelElement);
+		if (modelElementId == null) {
+			modelElementId = collection.getDeletedModelElementId(modelElement);
+		}
+
+		if (modelElementId == null) {
+			WorkspaceUtil.handleException(new IllegalStateException(
+					"No ID for model element" + modelElement));
+		}
+		return modelElementId;
 	}
 
 	/**

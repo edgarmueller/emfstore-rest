@@ -48,6 +48,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 	private Set<EObjectChangeObserver> exceptionThrowingObservers;
 	private Set<EObjectChangeObserver> observersToRemove;
 	private Set<EObjectChangeObserver> undetachableObservers;
+	private Set<EObjectChangeObserver> observersToAttach;
 
 	private EObjectChangeNotifier changeNotifier;
 
@@ -89,6 +90,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 		observersToRemove = new HashSet<EObjectChangeObserver>();
 		exceptionThrowingObservers = new HashSet<EObjectChangeObserver>();
 		undetachableObservers = new HashSet<EObjectChangeObserver>();
+		observersToAttach = new HashSet<EObjectChangeObserver>();
 	}
 
 	/**
@@ -109,7 +111,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 		notifyEObjectChangeObservers(command);
 	}
 
-	protected void notifyEObjectChangeObservers(
+	protected synchronized void notifyEObjectChangeObservers(
 			EObjectChangeObserverNotificationCommand command) {
 		isNotifiying = true;
 		for (EObjectChangeObserver projectChangeObserver : this.observers) {
@@ -148,6 +150,11 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 		for (EObjectChangeObserver observer : this.observersToRemove) {
 			removeEObjectChangeObserver(observer);
 		}
+
+		for (EObjectChangeObserver observer : this.observersToAttach) {
+			addEObjectChangeObserver(observer);
+		}
+
 		this.observersToRemove.clear();
 	}
 
@@ -205,9 +212,15 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.Project#addProjectChangeObserver(org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver)
 	 */
-	public void addEObjectChangeObserver(
+	public synchronized void addEObjectChangeObserver(
 			EObjectChangeObserver eObjectChangeObserver) {
 		initCaches();
+
+		if (isNotifiying) {
+			observersToAttach.add(eObjectChangeObserver);
+			return;
+		}
+
 		this.observers.add(eObjectChangeObserver);
 	}
 
@@ -216,7 +229,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.Project#removeProjectChangeObserver(org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver)
 	 */
-	public void removeEObjectChangeObserver(
+	public synchronized void removeEObjectChangeObserver(
 			EObjectChangeObserver projectChangeObserver) {
 		if (isNotifiying) {
 			observersToRemove.add(projectChangeObserver);
