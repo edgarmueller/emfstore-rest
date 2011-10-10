@@ -351,7 +351,7 @@ public final class Configuration {
 
 	public static boolean isResourceSplittingEnabled() {
 		if (resourceSplitting != null) {
-			return true;
+			return resourceSplitting;
 		}
 		resourceSplitting = new Boolean(false);
 		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry()
