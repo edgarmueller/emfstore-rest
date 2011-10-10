@@ -67,17 +67,26 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.events.PluginStartEvent;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Workspace</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getActiveProjectSpace <em>Active Project Space</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces
+ * <em>Project Spaces</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos
+ * <em>Server Infos</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions
+ * <em>Usersessions</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getActiveProjectSpace
+ * <em>Active Project Space</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
@@ -88,9 +97,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	private ResourceSet workspaceResourceSet;
 
 	/**
-	 * The cached value of the '{@link #getProjectSpaces() <em>Project Spaces</em>}' containment reference list.
-	 * <!-- begin-user-doc
+	 * The cached value of the '{@link #getProjectSpaces()
+	 * <em>Project Spaces</em>}' containment reference list. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectSpaces()
 	 * @generated
 	 * @ordered
@@ -98,8 +108,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EList<ProjectSpace> projectSpaces;
 
 	/**
-	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getServerInfos()
 	 * @generated
 	 * @ordered
@@ -107,8 +118,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EList<ServerInfo> serverInfos;
 
 	/**
-	 * The cached value of the '{@link #getUsersessions() <em>Usersessions</em>} ' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc
+	 * The cached value of the '{@link #getUsersessions() <em>Usersessions</em>}
+	 * ' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @see #getUsersessions()
@@ -118,9 +129,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EList<Usersession> usersessions;
 
 	/**
-	 * The cached value of the '{@link #getActiveProjectSpace() <em>Active Project Space</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getActiveProjectSpace()
+	 * <em>Active Project Space</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getActiveProjectSpace()
 	 * @generated
 	 * @ordered
@@ -141,6 +153,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -149,6 +162,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,6 +172,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ProjectSpace> getProjectSpaces() {
@@ -171,6 +186,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ServerInfo> getServerInfos() {
@@ -184,6 +200,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Usersession> getUsersessions() {
@@ -197,6 +214,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectSpace getActiveProjectSpace() {
@@ -215,6 +233,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectSpace basicGetActiveProjectSpace() {
@@ -223,6 +242,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setActiveProjectSpace(ProjectSpace newActiveProjectSpace) {
@@ -253,7 +273,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		// MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
-		ProjectInfo projectInfoCopy = (ProjectInfo) EcoreUtil.copy(projectInfo);
+		ProjectInfo projectInfoCopy = EcoreUtil.copy(projectInfo);
 		projectInfoCopy.setVersion(targetSpec);
 
 		// get Project from server
@@ -348,6 +368,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	// end of custom code
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -369,6 +390,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -390,6 +412,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -420,6 +443,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -443,6 +467,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -600,8 +625,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public void exportProjectSpace(ProjectSpace projectSpace,
 			String absoluteFileName) throws IOException {
 
-		ProjectSpace copiedProjectSpace = (ProjectSpace) EcoreUtil
-				.copy(projectSpace);
+		ProjectSpace copiedProjectSpace = EcoreUtil.copy(projectSpace);
 		copiedProjectSpace.setUsersession(null);
 
 		Project clonedProject = ModelUtil.clone(projectSpace.getProject());
@@ -642,7 +666,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public void exportProject(ProjectSpace projectSpace, String absoluteFileName)
 			throws IOException {
 
-		Project project = (Project) EcoreUtil.copy(projectSpace.getProject());
+		Project project = EcoreUtil.copy(projectSpace.getProject());
 		ResourceHelper.putElementIntoNewResource(absoluteFileName, project);
 	}
 

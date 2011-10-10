@@ -828,7 +828,7 @@ public class OperationRecorder implements CommandObserver,
 						// set the last operation as the main one for natural
 						// composites
 						op.setMainOperation(ops.get(ops.size() - 1));
-						op.setModelElementId((ModelElementId) EcoreUtil.copy(op
+						op.setModelElementId(EcoreUtil.copy(op
 								.getMainOperation().getModelElementId()));
 						if (commandIsRunning) {
 							operations.add(op);

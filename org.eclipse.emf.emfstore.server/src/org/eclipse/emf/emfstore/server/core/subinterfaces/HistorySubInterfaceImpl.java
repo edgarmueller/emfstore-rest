@@ -30,10 +30,8 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
@@ -42,7 +40,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * This subinterfaces implements all history related functionality for the EmfStoreImpl interface.
+ * This subinterfaces implements all history related functionality for the
+ * EmfStoreImpl interface.
  * 
  * @author wesendon
  */
@@ -51,26 +50,35 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param parentInterface parent interface
-	 * @throws FatalEmfStoreException in case of failure
+	 * @param parentInterface
+	 *            parent interface
+	 * @throws FatalEmfStoreException
+	 *             in case of failure
 	 */
-	public HistorySubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public HistorySubInterfaceImpl(AbstractEmfstoreInterface parentInterface)
+			throws FatalEmfStoreException {
 		super(parentInterface);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws EmfStoreException {
+	public List<HistoryInfo> getHistoryInfo(ProjectId projectId,
+			HistoryQuery historyQuery) throws EmfStoreException {
 		synchronized (getMonitor()) {
-			// if modelelements are added to the query, only history infos which are related to these modelelements will
+			// if modelelements are added to the query, only history infos which
+			// are related to these modelelements will
 			// be returned.
 			if (historyQuery.getModelElements().size() > 0) {
-				return getHistoryInfo(projectId, historyQuery.getModelElements(), historyQuery.isIncludeChangePackage());
+				return getHistoryInfo(projectId,
+						historyQuery.getModelElements(),
+						historyQuery.isIncludeChangePackage());
 			} else {
-				List<HistoryInfo> result = getHistoryInfo(projectId, historyQuery.getSource(),
-					historyQuery.getTarget(), historyQuery.isIncludeChangePackage());
-				if (historyQuery.getSource().compareTo(historyQuery.getTarget()) < 0) {
+				List<HistoryInfo> result = getHistoryInfo(projectId,
+						historyQuery.getSource(), historyQuery.getTarget(),
+						historyQuery.isIncludeChangePackage());
+				if (historyQuery.getSource()
+						.compareTo(historyQuery.getTarget()) < 0) {
 					Collections.reverse(result);
 				}
 				return result;
@@ -81,10 +89,11 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec,
+			TagVersionSpec tag) throws EmfStoreException {
 		synchronized (getMonitor()) {
-			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
+			Version version = getSubInterface(VersionSubInterfaceImpl.class)
+					.getVersion(projectId, versionSpec);
 			version.getTagSpecs().add(tag);
 			try {
 				save(version);
@@ -97,11 +106,13 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec,
+			TagVersionSpec tag) throws EmfStoreException {
 		synchronized (getMonitor()) {
-			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
-			Iterator<TagVersionSpec> iterator = version.getTagSpecs().iterator();
+			Version version = getSubInterface(VersionSubInterfaceImpl.class)
+					.getVersion(projectId, versionSpec);
+			Iterator<TagVersionSpec> iterator = version.getTagSpecs()
+					.iterator();
 			while (iterator.hasNext()) {
 				if (iterator.next().getName().equals(tag.getName())) {
 					iterator.remove();
@@ -115,20 +126,24 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	private List<HistoryInfo> getHistoryInfo(ProjectId projectId, List<ModelElementId> moList,
-		boolean includeChangePackage) throws EmfStoreException {
-		HistoryCache historyCache = EmfStoreController.getInstance().getHistoryCache();
+	private List<HistoryInfo> getHistoryInfo(ProjectId projectId,
+			List<ModelElementId> moList, boolean includeChangePackage)
+			throws EmfStoreException {
+		HistoryCache historyCache = EmfStoreController.getInstance()
+				.getHistoryCache();
 		// TODO only the first modelelement is included in the request.
 		ModelElementId modelElementId = moList.get(0);
-		TreeSet<Version> elements = historyCache.getChangesForModelElement(projectId, modelElementId);
+		TreeSet<Version> elements = historyCache.getChangesForModelElement(
+				projectId, modelElementId);
 		ArrayList<Version> versions = new ArrayList<Version>(elements);
 		if (versions.size() == 0) {
 			return new ArrayList<HistoryInfo>();
 		}
 		// only the last 20 or less versions are considered
 		int historyCount = Math.min(versions.size(), 20);
-		List<HistoryInfo> historyInfos = getHistoryInfo(versions.subList(0, historyCount), projectId,
-			includeChangePackage);
+		List<HistoryInfo> historyInfos = getHistoryInfo(
+				versions.subList(0, historyCount), projectId,
+				includeChangePackage);
 		// filter operations to selected model element
 
 		for (HistoryInfo historyInfo : historyInfos) {
@@ -137,62 +152,76 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return historyInfos;
 	}
 
-	private void filterOperationsForSelectedME(ModelElementId modelElementId, HistoryInfo historyInfo) {
-		if (historyInfo.getChangePackage() == null || historyInfo.getChangePackage().getOperations() == null) {
+	private void filterOperationsForSelectedME(ModelElementId modelElementId,
+			HistoryInfo historyInfo) {
+		if (historyInfo.getChangePackage() == null
+				|| historyInfo.getChangePackage().getOperations() == null) {
 			return;
 		}
 		Set<AbstractOperation> operationsToRemove = new HashSet<AbstractOperation>();
-		EList<AbstractOperation> operations = historyInfo.getChangePackage().getOperations();
+		EList<AbstractOperation> operations = historyInfo.getChangePackage()
+				.getOperations();
 		for (AbstractOperation operation : operations) {
-			if (!operation.getAllInvolvedModelElements().contains(modelElementId)) {
+			if (!operation.getAllInvolvedModelElements().contains(
+					modelElementId)) {
 				operationsToRemove.add(operation);
 			}
 		}
 		operations.removeAll(operationsToRemove);
 	}
 
-	private List<HistoryInfo> getHistoryInfo(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target,
-		boolean includeChangePackage) throws EmfStoreException {
+	private List<HistoryInfo> getHistoryInfo(ProjectId projectId,
+			PrimaryVersionSpec source, PrimaryVersionSpec target,
+			boolean includeChangePackage) throws EmfStoreException {
 		if (source == null || target == null) {
 			throw new InvalidInputException();
 		}
-		return getHistoryInfo(getSubInterface(VersionSubInterfaceImpl.class).getVersions(projectId, source, target),
-			projectId, includeChangePackage);
+		return getHistoryInfo(getSubInterface(VersionSubInterfaceImpl.class)
+				.getVersions(projectId, source, target), projectId,
+				includeChangePackage);
 	}
 
-	private List<HistoryInfo> getHistoryInfo(List<Version> versions, ProjectId projectId, boolean includeChangePackage)
-		throws EmfStoreException {
+	private List<HistoryInfo> getHistoryInfo(List<Version> versions,
+			ProjectId projectId, boolean includeChangePackage)
+			throws EmfStoreException {
 		List<HistoryInfo> result = new ArrayList<HistoryInfo>();
-		PrimaryVersionSpec headRevision = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId)
-			.getLastVersion().getPrimarySpec();
+		PrimaryVersionSpec headRevision = getSubInterface(
+				ProjectSubInterfaceImpl.class).getProject(projectId)
+				.getLastVersion().getPrimarySpec();
 		for (Version version : versions) {
-			HistoryInfo history = createHistoryInfo(headRevision, version, includeChangePackage);
+			HistoryInfo history = createHistoryInfo(headRevision, version,
+					includeChangePackage);
 			result.add(history);
 		}
 		return result;
 	}
 
 	/**
-	 * Generates a history info from a version. If needed also adds the HEAD tag, which isn't persistent.
+	 * Generates a history info from a version. If needed also adds the HEAD
+	 * tag, which isn't persistent.
 	 * 
-	 * @param headRevision head revision
-	 * @param version version
+	 * @param headRevision
+	 *            head revision
+	 * @param version
+	 *            version
 	 * @param includeChangePackage
 	 * @return history info
 	 */
-	private HistoryInfo createHistoryInfo(PrimaryVersionSpec headRevision, Version version, boolean includeChangePackage) {
+	private HistoryInfo createHistoryInfo(PrimaryVersionSpec headRevision,
+			Version version, boolean includeChangePackage) {
 		HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
 		if (includeChangePackage && version.getChanges() != null) {
-			history.setChangePackage((ChangePackage) EcoreUtil.copy(version.getChanges()));
+			history.setChangePackage(EcoreUtil.copy(version.getChanges()));
 		}
-		history.setLogMessage((LogMessage) EcoreUtil.copy(version.getLogMessage()));
-		history.setPrimerySpec((PrimaryVersionSpec) EcoreUtil.copy(version.getPrimarySpec()));
+		history.setLogMessage(EcoreUtil.copy(version.getLogMessage()));
+		history.setPrimerySpec(EcoreUtil.copy(version.getPrimarySpec()));
 		for (TagVersionSpec tagSpec : version.getTagSpecs()) {
-			history.getTagSpecs().add((TagVersionSpec) EcoreUtil.copy(tagSpec));
+			history.getTagSpecs().add(EcoreUtil.copy(tagSpec));
 		}
 		// add HEAD tag to history info
 		if (version.getPrimarySpec().equals(headRevision)) {
-			TagVersionSpec spec = VersioningFactory.eINSTANCE.createTagVersionSpec();
+			TagVersionSpec spec = VersioningFactory.eINSTANCE
+					.createTagVersionSpec();
 			spec.setName(VersionSpec.HEAD);
 			history.getTagSpecs().add(spec);
 		}

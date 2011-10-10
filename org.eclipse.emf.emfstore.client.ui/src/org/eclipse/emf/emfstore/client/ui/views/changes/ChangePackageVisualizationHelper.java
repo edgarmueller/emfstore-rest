@@ -52,7 +52,6 @@ import org.eclipse.swt.graphics.Image;
 public class ChangePackageVisualizationHelper {
 
 	private static final int MAX_NAME_SIZE = 30;
-	private Project project;
 	private Map<ModelElementId, EObject> modelElementMap;
 	private static final String UNKOWN_ELEMENT = "(Unkown Element)";
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
@@ -139,7 +138,6 @@ public class ChangePackageVisualizationHelper {
 			overlay = "icons/modify_overlay.png";
 		}
 
-		// TODO: ChainSaw
 		ImageDescriptor overlayDescriptor = Activator
 				.getImageDescriptor(overlay);
 		return overlayDescriptor;
