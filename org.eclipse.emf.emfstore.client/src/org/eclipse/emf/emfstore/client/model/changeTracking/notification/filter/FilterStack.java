@@ -25,28 +25,22 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.Notific
  */
 public final class FilterStack implements NotificationFilter {
 
-	private static final NotificationFilter[] DEFAULT_STACK = {
-			//
-			new TouchFilter(),
-			//
-			new TransientFilter(),
-			//
-			new EmptyRemovalsFilter(),
-			//
-			new IgnoreDatatypeFilter(), // ,
-
-			new IgnoreOutsideProjectReferencesFilter(),
-
-			new IgnoreNullFeatureNotificationsFilter() };
+	private static final NotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
+		new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(), new IgnoreOutsideProjectReferencesFilter(),
+		new IgnoreNullFeatureNotificationsFilter() };
 
 	/**
 	 * The default filter stack.
 	 */
-	public static final NotificationFilter DEFAULT = new FilterStack(
-			DEFAULT_STACK);
+	public static final NotificationFilter DEFAULT = new FilterStack(DEFAULT_STACK);
 
 	private List<NotificationFilter> filterList;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param filters the filter the filter stack should consists of.
+	 */
 	public FilterStack(NotificationFilter[] filters) {
 		filterList = new LinkedList<NotificationFilter>();
 		Collections.addAll(filterList, filters);

@@ -23,6 +23,11 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.Notific
  */
 public class IgnoreNullFeatureNotificationsFilter implements NotificationFilter {
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
+	 */
 	public boolean check(NotificationInfo notificationInfo) {
 		return (notificationInfo.getFeature() == null);
 	}

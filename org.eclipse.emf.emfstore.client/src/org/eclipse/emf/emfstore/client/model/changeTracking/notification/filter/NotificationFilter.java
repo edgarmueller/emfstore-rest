@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.Notific
  * @author koegel
  */
 public interface NotificationFilter {
+
 	/**
 	 * Check a notification if it should be ignored.
 	 * 
