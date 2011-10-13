@@ -38,8 +38,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	private boolean notificationDisabled;
 
 	/**
-	 * Constructor. Attaches an {@link Adapter} to the given {@link Notifier}
-	 * and forwards notifications to the given
+	 * Constructor. Attaches an {@link Adapter} to the given {@link Notifier} and forwards notifications to the given
 	 * {@link NotifiableIdEObjectCollection}, that reacts appropriately.
 	 * 
 	 * @param notifiableCollection
@@ -47,10 +46,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 * @param notifier
 	 *            the {@link Notifier} to listen to
 	 */
-	public EObjectChangeNotifier(NotifiableIdEObjectCollection collection,
-			Notifier notifier) {
-		this.collection = collection;
+	public EObjectChangeNotifier(NotifiableIdEObjectCollection notifiableCollection, Notifier notifier) {
+		this.collection = notifiableCollection;
 		isInitializing = true;
+		currentNotifications = new Stack<Notification>();
 		notifier.eAdapters().add(this);
 		isInitializing = false;
 		reentrantCallToAddAdapterCounter = 0;
@@ -74,8 +73,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		} finally {
 			reentrantCallToAddAdapterCounter -= 1;
 		}
-		if (reentrantCallToAddAdapterCounter > 0
-				|| currentNotifications.isEmpty()) {
+		if (reentrantCallToAddAdapterCounter > 0 || currentNotifications.isEmpty()) {
 			// any other than the first call in re-entrant calls to addAdapter
 			// are going to call the project
 			return;
@@ -83,12 +81,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		Notification currentNotification = currentNotifications.peek();
 
-		if (currentNotification != null && !currentNotification.isTouch()
-				&& !isInitializing && notifier instanceof EObject
-				&& !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
+		if (currentNotification != null && !currentNotification.isTouch() && !isInitializing
+			&& notifier instanceof EObject && !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
 			EObject modelElement = (EObject) notifier;
-			if (!collection.containsInstance(modelElement)
-					&& isInCollection(modelElement)) {
+			if (!collection.containsInstance(modelElement) && isInCollection(modelElement)) {
 				collection.modelElementAdded(collection, modelElement);
 			}
 		}
@@ -111,20 +107,17 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
-		if (currentNotification != null
-				&& currentNotification.getFeature() instanceof EReference) {
-			EReference eReference = (EReference) currentNotification
-					.getFeature();
+		if (currentNotification != null && currentNotification.getFeature() instanceof EReference) {
+			EReference eReference = (EReference) currentNotification.getFeature();
 			if (eReference.isContainment() && eReference.getEOpposite() != null
-					&& !eReference.getEOpposite().isTransient()) {
+				&& !eReference.getEOpposite().isTransient()) {
 				return;
 			}
 		}
 
 		if (notifier instanceof EObject) {
 			EObject modelElement = (EObject) notifier;
-			if (!isInCollection(modelElement)
-					&& collection.containsInstance(modelElement)) {
+			if (!isInCollection(modelElement) && collection.containsInstance(modelElement)) {
 				removedModelElements.add(modelElement);
 			}
 		}
@@ -190,7 +183,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		// collection itself is not a valid model element
 		if (!notification.isTouch() && notifier instanceof EObject
-				&& !(notifier instanceof NotifiableIdEObjectCollection)) {
+			&& !(notifier instanceof NotifiableIdEObjectCollection)) {
 			collection.notify(notification, collection, (EObject) notifier);
 		}
 		for (EObject removedModelElement : removedModelElements) {
@@ -202,8 +195,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	/**
 	 * @param notification
 	 */
-	private void handleContainer(Notification notification,
-			EReference eReference) {
+	private void handleContainer(Notification notification, EReference eReference) {
 		if (notification.getEventType() == Notification.SET) {
 			Object newValue = notification.getNewValue();
 			Object oldValue = notification.getOldValue();
