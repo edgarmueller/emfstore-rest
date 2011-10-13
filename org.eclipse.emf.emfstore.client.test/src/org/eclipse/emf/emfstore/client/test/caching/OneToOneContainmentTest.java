@@ -8,6 +8,9 @@ package org.eclipse.emf.emfstore.client.test.caching;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.junit.Test;
 
