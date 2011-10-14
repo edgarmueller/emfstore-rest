@@ -19,9 +19,11 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -29,13 +31,11 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
- * Implementation of a storage for mapping {@link EObject}s onto a
- * {@link ModelElementId}.
+ * Implementation of a storage for mapping {@link EObject}s onto a {@link ModelElementId}.
  * 
  * @author emueller
  */
-public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
-		IdEObjectCollection {
+public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection {
 
 	// Caches
 	private Set<EObject> eObjectsCache;
@@ -52,14 +52,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	private Set<EObject> containedModelElements;
 
 	/**
-	 * Will be used to maintain the {@link ModelElementId}s of deleted
-	 * {@link EObject}s
+	 * Will be used to maintain the {@link ModelElementId}s of deleted {@link EObject}s
 	 */
 	private Map<EObject, ModelElementId> deletedEObjectToIdMap;
 
 	/**
-	 * Will be used to assign specific {@link ModelElementId}s to newly created
-	 * {@link EObject}s
+	 * Will be used to assign specific {@link ModelElementId}s to newly created {@link EObject}s
 	 */
 	private Map<EObject, ModelElementId> newEObjectToIdMap;
 
@@ -79,8 +77,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 * Constructor. Adds the contents of the given {@link XMIResource} as model
 	 * elements to the collection. If the {@link XMIResource} also has XMI IDs
 	 * assigned to the {@link EObject}s it contains, they will be used for
-	 * creating the {@link ModelElementId}s within the project, if not, the
-	 * {@link ModelElementId}s will get created on the fly.
+	 * creating the {@link ModelElementId}s within the project, if not, the {@link ModelElementId}s will get created on
+	 * the fly.
 	 * 
 	 * @param xmiResource
 	 *            a {@link XMIResource}
@@ -93,9 +91,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 		try {
 			xmiResource.load(null);
 		} catch (IOException e) {
-			ModelUtil.logException(
-					String.format("XMIResource %s could not be loaded.",
-							xmiResource.getURI()), e);
+			ModelUtil.logException(String.format("XMIResource %s could not be loaded.", xmiResource.getURI()), e);
 			throw e;
 		}
 		TreeIterator<EObject> it = xmiResource.getAllContents();
@@ -107,8 +103,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 			}
 
 			String id = xmiResource.getID(eObject);
-			ModelElementId eObjectId = ModelFactory.eINSTANCE
-					.createModelElementId();
+			ModelElementId eObjectId = ModelFactory.eINSTANCE.createModelElementId();
 
 			if (id != null) {
 				eObjectId.setId(id);
@@ -162,17 +157,14 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#addModelElement(org.eclipse.emf.ecore.EObject,
 	 *      java.util.Map)
 	 */
-	public void addModelElement(EObject newModelElement,
-			Map<EObject, ModelElementId> map) {
+	public void addModelElement(EObject newModelElement, Map<EObject, ModelElementId> map) {
 
 		// since id is contained in map, all IDs should be cloned
-		ModelElementId newModelElementId = ModelUtil.clone(map
-				.get(newModelElement));
+		ModelElementId newModelElementId = ModelUtil.clone(map.get(newModelElement));
 
 		// check whether the model element is already contained in the project
 		if (contains(newModelElementId)) {
-			throw new IllegalStateException("Model element ID "
-					+ newModelElementId + " already contained in project.");
+			throw new IllegalStateException("Model element ID " + newModelElementId + " already contained in project.");
 		}
 
 		for (Map.Entry<EObject, ModelElementId> entry : map.entrySet()) {
@@ -204,8 +196,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 
 		ModelElementId id = deletedEObjectToIdMap.get(deletedModelElement);
 
-		return id != null ? ModelUtil.clone(id) : ModelUtil
-				.getSingletonModelElementId(deletedModelElement);
+		return id != null ? ModelUtil.clone(id) : ModelUtil.getSingletonModelElementId(deletedModelElement);
 	}
 
 	/**
@@ -216,8 +207,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 * @return the deleted model element or null if it is not in the project
 	 */
 	public EObject getDeletedModelElement(ModelElementId modelElementId) {
-		for (Map.Entry<EObject, ModelElementId> entry : deletedEObjectToIdMap
-				.entrySet()) {
+		for (Map.Entry<EObject, ModelElementId> entry : deletedEObjectToIdMap.entrySet()) {
 			if (entry.getValue().equals(modelElementId)) {
 				return entry.getKey();
 			}
@@ -237,8 +227,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 		if (!eObjectToIdCache.containsKey(eObject) && !isCacheInitialized()) {
 
 			if (containedModelElements == null) {
-				containedModelElements = ModelUtil
-						.getAllContainedModelElements(this, false);
+				containedModelElements = ModelUtil.getAllContainedModelElements(this, false);
 			}
 
 			if (!containedModelElements.contains(eObject)) {
@@ -256,8 +245,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 
 				XMIResource xmiResource = (XMIResource) resource;
 				xmiResource.load(null);
-				ModelElementId modelElementId = ModelFactory.eINSTANCE
-						.createModelElementId();
+				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 
 				String id = xmiResource.getID(eObject);
 				if (id != null) {
@@ -272,15 +260,13 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 				return ModelUtil.clone(modelElementId);
 
 			} catch (IOException e) {
-				throw new RuntimeException(
-						"Couldn't load resource for model element " + eObject);
+				throw new RuntimeException("Couldn't load resource for model element " + eObject);
 			}
 		}
 
 		ModelElementId id = eObjectToIdCache.get(eObject);
 
-		return id != null ? ModelUtil.clone(id) : ModelUtil
-				.getSingletonModelElementId(eObject);
+		return id != null ? ModelUtil.clone(id) : ModelUtil.getSingletonModelElementId(eObject);
 	}
 
 	/**
@@ -297,8 +283,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 
 		EObject eObject = getIdToEObjectCache().get(modelElementId);
 
-		return eObject != null ? eObject : ModelUtil
-				.getSingleton(modelElementId);
+		return eObject != null ? eObject : ModelUtil.getSingleton(modelElementId);
 	}
 
 	/**
@@ -309,18 +294,16 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 */
 	public void deleteModelElement(final EObject modelElement) {
 		if (!this.containsInstance(modelElement)) {
-			throw new IllegalArgumentException(
-					"Cannot delete a model element that is not contained in this project.");
+			throw new IllegalArgumentException("Cannot delete a model element that is not contained in this project.");
 		}
 
 		// remove cross references
 		ModelUtil.deleteOutgoingCrossReferences(modelElement, true, false);
-		ModelUtil.deleteIncomingCrossReferencesFromParent(modelElement, this,
-				true, false);
+		Collection<Setting> crossReferences = UsageCrossReferencer.find(modelElement, this);
+		ModelUtil.deleteIncomingCrossReferencesFromParent(crossReferences, modelElement);
 
 		// remove containment
-		EObject containerModelElement = ModelUtil
-				.getContainerModelElement(modelElement);
+		EObject containerModelElement = ModelUtil.getContainerModelElement(modelElement);
 		if (containerModelElement == null) {
 			// removeModelElementAndChildrenFromCache(modelElement);
 			// getEobjectsIdMap().remove(modelElement);
@@ -329,14 +312,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 			XMIResource res = (XMIResource) modelElement.eResource();
 			EReference containmentFeature = modelElement.eContainmentFeature();
 			if (containmentFeature.isMany()) {
-				EList<?> containmentList = (EList<?>) containerModelElement
-						.eGet(containmentFeature);
+				EList<?> containmentList = (EList<?>) containerModelElement.eGet(containmentFeature);
 				containmentList.remove(modelElement);
 			} else {
 				containerModelElement.eSet(containmentFeature, null);
 			}
-			ModelUtil.removeModelElementAndChildrenFromResource(res,
-					modelElement);
+			ModelUtil.removeModelElementAndChildrenFromResource(res, modelElement);
 		}
 	}
 
@@ -358,13 +339,11 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 			try {
 				xmiResource.load(null);
 			} catch (IOException e) {
-				throw new RuntimeException("Resource of model element "
-						+ modelElement + " couldn't be loaded");
+				throw new RuntimeException("Resource of model element " + modelElement + " couldn't be loaded");
 			}
 			String id = xmiResource.getID(modelElement);
 			if (id != null) {
-				ModelElementId objId = ModelFactory.eINSTANCE
-						.createModelElementId();
+				ModelElementId objId = ModelFactory.eINSTANCE.createModelElementId();
 				objId.setId(id);
 				return objId;
 			}
@@ -395,8 +374,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsbyClass(org.eclipse.emf.ecore.EClass,
 	 *      org.eclipse.emf.common.util.EList)
 	 */
-	public <T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list) {
+	public <T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list) {
 		return getAllModelElementsbyClass(modelElementClass, list, true);
 	}
 
@@ -408,8 +386,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 */
 	// cast below is guarded by sanity check
 	@SuppressWarnings("unchecked")
-	public <T extends EObject> EList<T> getModelElementsByClass(
-			EClass modelElementClass, EList<T> list) {
+	public <T extends EObject> EList<T> getModelElementsByClass(EClass modelElementClass, EList<T> list) {
 
 		for (EObject modelElement : this.getModelElements()) {
 			if (modelElementClass.isInstance(modelElement)) {
@@ -428,8 +405,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 */
 	// two casts below are guarded by initial sanity check and if statement
 	@SuppressWarnings("unchecked")
-	public <T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list, Boolean subclasses) {
+	public <T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list,
+		Boolean subclasses) {
 
 		if (subclasses) {
 			for (ModelElementId modelElementId : getIdToEObjectCache().keySet()) {
@@ -566,8 +543,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 			putIntoCaches(modelElement, id);
 		}
 
-		for (EObject child : ModelUtil.getAllContainedModelElements(
-				modelElement, false)) {
+		for (EObject child : ModelUtil.getAllContainedModelElements(modelElement, false)) {
 			// first check whether ID should be reassigned
 			ModelElementId childId = newEObjectToIdMap.get(child);
 
@@ -591,11 +567,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#initCaches(java.util.Map,
-	 *      java.util.Map)
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#initCaches(java.util.Map, java.util.Map)
 	 */
-	public void initCaches(Map<EObject, ModelElementId> eObjectToIdMap,
-			Map<ModelElementId, EObject> idToEObjectMap) {
+	public void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap) {
 		cachesInitialized = true;
 		eObjectToIdCache = eObjectToIdMap;
 		idToEObjectCache = idToEObjectMap;
@@ -603,16 +577,14 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 	}
 
 	/**
-	 * Creates a mapping for the given model element and the given
-	 * {@link ModelElementId} within the cache.
+	 * Creates a mapping for the given model element and the given {@link ModelElementId} within the cache.
 	 * 
 	 * @param modelElement
 	 *            a model element
 	 * @param modelElementId
 	 *            a {@link ModelElementId}
 	 */
-	protected void putIntoCaches(EObject modelElement,
-			ModelElementId modelElementId) {
+	protected void putIntoCaches(EObject modelElement, ModelElementId modelElementId) {
 		eObjectToIdCache.put(modelElement, modelElementId);
 		idToEObjectCache.put(modelElementId, modelElement);
 		if (!eObjectsCache.contains(modelElement)) {
@@ -651,8 +623,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements
 		removeFromCaches(modelElement);
 		eObjectToIdCache.remove(modelElement);
 
-		for (EObject child : ModelUtil.getAllContainedModelElements(
-				modelElement, false)) {
+		for (EObject child : ModelUtil.getAllContainedModelElements(modelElement, false)) {
 			ModelElementId childId = getModelElementId(child);
 			deletedEObjectToIdMap.put(child, childId);
 			newEObjectToIdMap.put(child, childId);
