@@ -1663,8 +1663,8 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		statePersister = new StatePersister(operationRecorder.getChangeNotifier(),
 			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()), this.getProject());
 		// TODO: initialization order important
-		this.getProject().addProjectChangeObserver(this.operationRecorder);
-		this.getProject().addProjectChangeObserver(statePersister);
+		// this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
+		this.getProject().addIdEObjectCollectionChangeObserver(statePersister);
 
 		if (project instanceof ProjectImpl) {
 			((ProjectImpl) this.getProject()).setUndetachable(operationRecorder);

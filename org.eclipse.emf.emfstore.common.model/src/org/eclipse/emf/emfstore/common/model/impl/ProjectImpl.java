@@ -24,8 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeObserver;
-import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
+import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 
 /**
  * @author koegel,
@@ -34,8 +33,7 @@ import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
  * 
  * @generated NOT
  */
-public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements
-		Project {
+public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Project {
 
 	/**
 	 * 
@@ -100,8 +98,8 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements
 	@Override
 	public EList<EObject> getModelElements() {
 		if (modelElements == null) {
-			modelElements = new EObjectContainmentEList.Resolving<EObject>(
-					EObject.class, this, ModelPackage.PROJECT__MODEL_ELEMENTS);
+			modelElements = new EObjectContainmentEList.Resolving<EObject>(EObject.class, this,
+				ModelPackage.PROJECT__MODEL_ELEMENTS);
 		}
 		return modelElements;
 	}
@@ -113,8 +111,8 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements
 	 */
 	public EList<EObject> getCutElements() {
 		if (cutElements == null) {
-			cutElements = new EObjectContainmentEList.Resolving<EObject>(
-					EObject.class, this, ModelPackage.PROJECT__CUT_ELEMENTS);
+			cutElements = new EObjectContainmentEList.Resolving<EObject>(EObject.class, this,
+				ModelPackage.PROJECT__CUT_ELEMENTS);
 		}
 		return cutElements;
 	}
@@ -125,15 +123,12 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.PROJECT__MODEL_ELEMENTS:
-			return ((InternalEList<?>) getModelElements()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getModelElements()).basicRemove(otherEnd, msgs);
 		case ModelPackage.PROJECT__CUT_ELEMENTS:
-			return ((InternalEList<?>) getCutElements()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getCutElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -232,43 +227,12 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements
 	public void delete() {
 		final Project project = this;
 		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
-			public void run(EObjectChangeObserver projectChangeObserver) {
-				ProjectChangeObserver observer = (ProjectChangeObserver) projectChangeObserver;
-				observer.projectDeleted(project);
+			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
+				IdEObjectCollectionChangeObserver observer = projectChangeObserver;
+				observer.collectionDeleted(project);
 			}
 		};
-		notifyEObjectChangeObservers(command);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#projectDeleted(org.eclipse.emf.emfstore.common.model.Project)
-	 */
-	public void projectDeleted(Project project) {
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.Project#addProjectChangeObserver(org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver)
-	 */
-	public void addProjectChangeObserver(
-			ProjectChangeObserver projectChangeObserver) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.Project#removeProjectChangeObserver(org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver)
-	 */
-	public void removeProjectChangeObserver(
-			ProjectChangeObserver projectChangeObserver) {
-		// TODO Auto-generated method stub
-
+		notifyIdEObjectCollectionChangeObservers(command);
 	}
 
 	/**

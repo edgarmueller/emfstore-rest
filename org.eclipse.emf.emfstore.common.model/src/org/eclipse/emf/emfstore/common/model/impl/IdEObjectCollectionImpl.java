@@ -1,8 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.io.IOException;
@@ -41,7 +46,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	private Set<EObject> eObjectsCache;
 	private Map<EObject, ModelElementId> eObjectToIdCache;
 	private Map<ModelElementId, EObject> idToEObjectCache;
-	protected boolean cachesInitialized;
+	private boolean cachesInitialized;
 
 	/**
 	 * Will be used to cache all model elements of a project in order to avoid
@@ -52,12 +57,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	private Set<EObject> containedModelElements;
 
 	/**
-	 * Will be used to maintain the {@link ModelElementId}s of deleted {@link EObject}s
+	 * Will be used to maintain the {@link ModelElementId}s of deleted {@link EObject}s.
 	 */
 	private Map<EObject, ModelElementId> deletedEObjectToIdMap;
 
 	/**
-	 * Will be used to assign specific {@link ModelElementId}s to newly created {@link EObject}s
+	 * Will be used to assign specific {@link ModelElementId}s to newly created {@link EObject}s.
 	 */
 	private Map<EObject, ModelElementId> newEObjectToIdMap;
 
@@ -138,6 +143,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 	/**
 	 * Sets the model elements of this collection.
+	 * 
+	 * @param modelElements
+	 *            the new list of model elements the collection should hold
 	 */
 	protected abstract void setModelElements(EList<EObject> modelElements);
 

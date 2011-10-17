@@ -57,9 +57,8 @@ import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeObserver;
+import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
 import org.eclipse.emf.emfstore.common.observer.PostCreationObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -77,7 +76,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * @author koegel
  * @author emueller
  */
-public class OperationRecorder implements CommandObserver, EObjectChangeObserver, ProjectChangeObserver {
+public class OperationRecorder implements CommandObserver, IdEObjectCollectionChangeObserver {
 
 	private EMFStoreCommandStack emfStoreCommandStack;
 	private int currentOperationListSize;
@@ -109,7 +108,7 @@ public class OperationRecorder implements CommandObserver, EObjectChangeObserver
 	public OperationRecorder(NotifiableIdEObjectCollection collection, EObjectChangeNotifier changeNotifier) {
 		this.collection = collection;
 		this.changeNotifier = changeNotifier;
-		this.collection.addEObjectChangeObserver(this);
+		this.collection.addIdEObjectCollectionChangeObserver(this);
 		this.notificationRecorder = new NotificationRecorder();
 		this.operations = new ArrayList<AbstractOperation>();
 		operationRecordedListeners = new ArrayList<OperationRecorderListener>();
@@ -785,8 +784,13 @@ public class OperationRecorder implements CommandObserver, EObjectChangeObserver
 		}
 	}
 
-	public void projectDeleted(IdEObjectCollection project) {
-		// TODO Auto-generated method stub
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)
+	 */
+	public void collectionDeleted(IdEObjectCollection collection) {
 
 	}
 }
