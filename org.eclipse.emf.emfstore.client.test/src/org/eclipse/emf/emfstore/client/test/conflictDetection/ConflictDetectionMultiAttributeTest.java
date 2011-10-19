@@ -8,6 +8,8 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithParameter;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation;
@@ -35,22 +37,44 @@ public class ConflictDetectionMultiAttributeTest extends ConflictDetectionTest {
 	 */
 	@Test
 	public void multiAttRemoveVsAdd() {
-		new EMFStoreCommand() {
+
+		TestElement testElement = new EMFStoreCommandWithResult<TestElement>() {
 			@Override
-			protected void doRun() {
+			protected TestElement doRun() {
 				TestElement testElement = getFilledTestElement(3);
 				clearOperations();
-
 				testElement.getStrings().remove(0);
-				AbstractOperation removeOp = checkAndGetOperation(MultiAttributeOperation.class);
-
-				testElement.getStrings().add(1, "inserted");
-				AbstractOperation addOp = checkAndGetOperation(MultiAttributeOperation.class);
-
-				assertEquals(true, doConflict(removeOp, addOp));
-				assertEquals(true, doConflict(addOp, removeOp));
+				return testElement;
 			}
 		}.run(false);
+
+		AbstractOperation removeOp = new EMFStoreCommandWithResult<AbstractOperation>() {
+
+			@Override
+			protected AbstractOperation doRun() {
+				AbstractOperation removeOp = checkAndGetOperation(MultiAttributeOperation.class);
+				return removeOp;
+			}
+		}.run(false);
+
+		new EMFStoreCommandWithParameter<TestElement>() {
+			@Override
+			public void doRun(TestElement testElement) {
+				testElement.getStrings().add(1, "inserted");
+			}
+		}.run(testElement, false);
+
+		AbstractOperation addOp = new EMFStoreCommandWithResult<AbstractOperation>() {
+
+			@Override
+			protected AbstractOperation doRun() {
+				AbstractOperation addOp = checkAndGetOperation(MultiAttributeOperation.class);
+				return addOp;
+			}
+		}.run(false);
+
+		assertEquals(true, doConflict(removeOp, addOp));
+		assertEquals(true, doConflict(addOp, removeOp));
 	}
 
 	/**
