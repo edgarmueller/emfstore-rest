@@ -354,6 +354,16 @@ public interface ProjectSpace extends IdentifiableElement {
 	boolean isDirty();
 
 	/**
+	 * Determines whether the project is up to date, that is, whether the base revision and the head revision are equal.
+	 * 
+	 * @return true, if the project is up to date, false otherwise
+	 * @throws EmfStoreException if the head revision can not be resolved
+	 * 
+	 * @generated NOT
+	 */
+	boolean isUpdated() throws EmfStoreException;
+
+	/**
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em>Dirty</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

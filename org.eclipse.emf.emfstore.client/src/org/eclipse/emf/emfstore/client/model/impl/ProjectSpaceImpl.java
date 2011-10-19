@@ -896,6 +896,17 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	}
 
 	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isUpdated()
+	 */
+	public boolean isUpdated() throws EmfStoreException {
+		PrimaryVersionSpec headVersion = resolveVersionSpec(VersionSpec.HEAD_VERSION);
+		return getBaseVersion().equals(headVersion);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
