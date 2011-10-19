@@ -431,6 +431,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			operationRecorded(op);
 		}
 
+		removedElements.clear();
 		operations.clear();
 
 		commandIsRunning = false;
