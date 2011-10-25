@@ -119,8 +119,8 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 			@Override
 			protected void doRun() {
 				assertTrue("Not allowed operations in ps2", ps2.getLocalOperations().getOperations().isEmpty());
-				ModelElementId leafSection2Id = project2.getModelElementId(leafSection2);
-				ModelElementId aiId = project2.getModelElementId(ai);
+				ModelElementId leafSection2Id = getProject().getModelElementId(leafSection2);
+				ModelElementId aiId = getProject().getModelElementId(ai);
 				LeafSection tmpLSection2 = (LeafSection) project2.getModelElement(leafSection2Id);
 				ActionItem tmpAi = (ActionItem) project2.getModelElement(aiId);
 				tmpLSection2.getModelElements().add(tmpAi);
