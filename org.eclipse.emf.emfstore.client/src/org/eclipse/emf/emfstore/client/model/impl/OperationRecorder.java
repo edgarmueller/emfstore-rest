@@ -98,6 +98,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private List<OperationRecorderListener> operationRecordedListeners;
 
 	private EObjectChangeNotifier changeNotifier;
+	private boolean emitOperationsImmediatley;
 
 	// TODO: provide ctor with 1 param
 
@@ -241,7 +242,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			if (this.compositeOperation != null) {
 				compositeOperation.getSubOperations().add(createDeleteOperation);
 			} else {
-				if (commandIsRunning) {
+				if (commandIsRunning && !emitOperationsImmediatley) {
 					operations.add(createDeleteOperation);
 				} else {
 					operationRecorded(createDeleteOperation);
@@ -767,13 +768,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 						// composites
 						op.setMainOperation(ops.get(ops.size() - 1));
 						op.setModelElementId(EcoreUtil.copy(op.getMainOperation().getModelElementId()));
-						if (commandIsRunning) {
+						if (commandIsRunning && !emitOperationsImmediatley) {
 							operations.add(op);
 						} else {
 							operationRecorded(op);
 						}
 					} else if (ops.size() == 1) {
-						if (commandIsRunning) {
+						if (commandIsRunning && !emitOperationsImmediatley) {
 							operations.add(ops.get(0));
 						} else {
 							operationRecorded(ops.get(0));
@@ -793,5 +794,24 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void collectionDeleted(IdEObjectCollection collection) {
 
+	}
+
+	/**
+	 * Determines whether operations should be emitted immediately instead of
+	 * waiting until {@link OperationRecorder#commandCompleted(Command)} gets called.
+	 * 
+	 * @param emitOperationsImmediatley whether to emit operations emitted
+	 */
+	public void setEmitOperationsImmediatley(boolean emitOperationsImmediatley) {
+		this.emitOperationsImmediatley = emitOperationsImmediatley;
+	}
+
+	/**
+	 * Whether operations are emitted immediately.
+	 * 
+	 * @return true, if operations are emitted immediately, false otherwise
+	 */
+	public boolean isEmitOperationsImmediatleyEnabled() {
+		return emitOperationsImmediatley;
 	}
 }
