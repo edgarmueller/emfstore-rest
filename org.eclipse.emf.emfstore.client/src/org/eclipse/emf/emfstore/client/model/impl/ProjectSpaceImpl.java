@@ -1473,7 +1473,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 *      org.eclipse.emf.emfstore.client.model.controller.UpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
-		new UpdateController(this).update(version, callback, progress);
+		new UpdateController(this, version, callback, progress).execute();
 	}
 
 	/**
