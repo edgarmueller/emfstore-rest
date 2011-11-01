@@ -4,3 +4,17 @@
 *.DS_Store
 *.swp
 *.out
+
+/org.eclipse.emf.emfstore.server.model.edit/bin
+/org.eclipse.emf.emfstore.server.model/bin
+/org.eclipse.emf.emfstore.server/bin
+/org.eclipse.emf.emfstore.migration.cope/bin
+/org.eclipse.emf.emfstore.migration/bin
+/org.eclipse.emf.emfstore.ecore/bin
+/org.eclipse.emf.emfstore.common.model.edit/bin
+/org.eclipse.emf.emfstore.common.model/bin
+/org.eclipse.emf.emfstore.common/bin
+/org.eclipse.emf.emfstore.client.ui/bin
+/org.eclipse.emf.emfstore.client.test/bin
+/org.eclipse.emf.emfstore.client.model.edit/bin
+/org.eclipse.emf.emfstore.client/bin
