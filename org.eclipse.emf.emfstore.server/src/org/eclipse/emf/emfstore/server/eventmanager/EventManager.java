@@ -20,9 +20,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEven
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent;
 
 /**
- * EventManager accepts events and distributes them to the listeners. EventManger runs in it's own thread. -TODO: Enable
- * listener to listen to specified events only. - TODO: Don't allow listeners to block eventmanager (e.g. connection
- * timeout)
+ * EventManager accepts events and distributes them to the listeners.
+ * EventManger runs in it's own thread. -TODO: Enable listener to listen to
+ * specified events only. - TODO: Don't allow listeners to block eventmanager
+ * (e.g. connection timeout)
  * 
  * @author wesendon
  */
@@ -63,7 +64,8 @@ public final class EventManager extends Thread {
 				if (event != null) {
 					synchronized (this) {
 						for (ListenerContainer e : listeners) {
-							boolean successful = e.handleEvent((ServerEvent) EcoreUtil.copy(event));
+							boolean successful = e.handleEvent(EcoreUtil
+									.copy(event));
 							if (!successful) {
 								tmp.add(e);
 							}
@@ -78,13 +80,18 @@ public final class EventManager extends Thread {
 	}
 
 	/**
-	 * Register a listener. Listen to specific type of event isn't implemented yet.
+	 * Register a listener. Listen to specific type of event isn't implemented
+	 * yet.
 	 * 
-	 * @param listener the listener
-	 * @param projectId project id, can be null
-	 * @param clazz not implemented yet
+	 * @param listener
+	 *            the listener
+	 * @param projectId
+	 *            project id, can be null
+	 * @param clazz
+	 *            not implemented yet
 	 */
-	public void registerListener(EMFStoreEventListener listener, ProjectId projectId, EClass clazz) {
+	public void registerListener(EMFStoreEventListener listener,
+			ProjectId projectId, EClass clazz) {
 		if (listener == null) {
 			return;
 		}
@@ -96,7 +103,8 @@ public final class EventManager extends Thread {
 	/**
 	 * Removes a listener.
 	 * 
-	 * @param listener a listener
+	 * @param listener
+	 *            a listener
 	 */
 	public void unregisterListener(EMFStoreEventListener listener) {
 		if (listener == null) {
@@ -110,7 +118,8 @@ public final class EventManager extends Thread {
 	/**
 	 * Use this method to distribute your event.
 	 * 
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	public void sendEvent(ServerEvent event) {
 		if (event != null) {
@@ -135,7 +144,8 @@ public final class EventManager extends Thread {
 		@SuppressWarnings("unused")
 		private final EClass clazz;
 
-		public ListenerContainer(EMFStoreEventListener listener, ProjectId projectId, EClass clazz) {
+		public ListenerContainer(EMFStoreEventListener listener,
+				ProjectId projectId, EClass clazz) {
 			this.listener = listener;
 			this.projectId = projectId;
 			this.clazz = clazz;
@@ -143,7 +153,8 @@ public final class EventManager extends Thread {
 
 		public boolean handleEvent(ServerEvent event) {
 			if (projectId != null && event instanceof ServerProjectEvent) {
-				if (!projectId.equals(((ServerProjectEvent) event).getProjectId())) {
+				if (!projectId.equals(((ServerProjectEvent) event)
+						.getProjectId())) {
 					return true;
 				}
 			}

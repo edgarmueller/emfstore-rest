@@ -15,6 +15,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
+import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
+import org.eclipse.emf.emfstore.client.test.model.bug.BugFactory;
+import org.eclipse.emf.emfstore.client.test.model.bug.BugReport;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
+import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
+import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
+import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
+import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -23,19 +36,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
-import org.unicase.model.UnicaseModelElement;
-import org.unicase.model.bug.BugFactory;
-import org.unicase.model.bug.BugReport;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.rationale.Issue;
-import org.unicase.model.rationale.RationaleFactory;
-import org.unicase.model.rationale.Solution;
-import org.unicase.model.requirement.Actor;
-import org.unicase.model.requirement.RequirementFactory;
-import org.unicase.model.requirement.UseCase;
-import org.unicase.model.task.TaskFactory;
-import org.unicase.model.task.WorkPackage;
 
 /**
  * Tests operations in 1:n topologies.

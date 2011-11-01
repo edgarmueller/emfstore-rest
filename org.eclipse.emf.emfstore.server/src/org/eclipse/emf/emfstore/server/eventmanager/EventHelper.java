@@ -32,14 +32,18 @@ public final class EventHelper {
 	/**
 	 * Creates a project updated event.
 	 * 
-	 * @param projectId project id.
-	 * @param newVersion new version
+	 * @param projectId
+	 *            project id.
+	 * @param newVersion
+	 *            new version
 	 * @return event
 	 */
-	public static ServerEvent createUpdatedProjectEvent(ProjectId projectId, PrimaryVersionSpec newVersion) {
-		ProjectUpdatedEvent projectUpdatedEvent = ServerFactory.eINSTANCE.createProjectUpdatedEvent();
-		projectUpdatedEvent.setProjectId((ProjectId) EcoreUtil.copy(projectId));
-		projectUpdatedEvent.setNewVersion((PrimaryVersionSpec) EcoreUtil.copy(newVersion));
+	public static ServerEvent createUpdatedProjectEvent(ProjectId projectId,
+			PrimaryVersionSpec newVersion) {
+		ProjectUpdatedEvent projectUpdatedEvent = ServerFactory.eINSTANCE
+				.createProjectUpdatedEvent();
+		projectUpdatedEvent.setProjectId(EcoreUtil.copy(projectId));
+		projectUpdatedEvent.setNewVersion(EcoreUtil.copy(newVersion));
 		projectUpdatedEvent.setTimestamp(new Date());
 		return projectUpdatedEvent;
 	}

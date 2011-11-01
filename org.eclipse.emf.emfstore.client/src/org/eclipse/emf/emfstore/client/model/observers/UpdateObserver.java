@@ -24,7 +24,7 @@ public interface UpdateObserver extends IObserver {
 	/**
 	 * Called to notify the observer about the changes that will be merged into the project space.
 	 * 
-	 * @param projectSpace the project ppace that should be updated
+	 * @param projectSpace the project space that should be updated
 	 * @param changePackages a list of change packages
 	 * @return false if the observer wants to cancel the update
 	 */

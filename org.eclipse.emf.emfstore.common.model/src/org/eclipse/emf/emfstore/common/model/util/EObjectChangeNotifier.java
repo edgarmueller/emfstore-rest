@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.common.model.util;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -32,13 +33,12 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	private final NotifiableIdEObjectCollection collection;
 	private boolean isInitializing;
 	private Set<EObject> removedModelElements;
-	private Notification currentNotification;
+	private Stack<Notification> currentNotifications;
 	private int reentrantCallToAddAdapterCounter;
 	private boolean notificationDisabled;
 
 	/**
-	 * Constructor. Attaches an {@link Adapter} to the given {@link Notifier}
-	 * and forwards notifications to the given
+	 * Constructor. Attaches an {@link Adapter} to the given {@link Notifier} and forwards notifications to the given
 	 * {@link NotifiableIdEObjectCollection}, that reacts appropriately.
 	 * 
 	 * @param notifiableCollection
@@ -46,10 +46,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 * @param notifier
 	 *            the {@link Notifier} to listen to
 	 */
-	public EObjectChangeNotifier(NotifiableIdEObjectCollection collection,
-			Notifier notifier) {
-		this.collection = collection;
+	public EObjectChangeNotifier(NotifiableIdEObjectCollection notifiableCollection, Notifier notifier) {
+		this.collection = notifiableCollection;
 		isInitializing = true;
+		currentNotifications = new Stack<Notification>();
 		notifier.eAdapters().add(this);
 		isInitializing = false;
 		reentrantCallToAddAdapterCounter = 0;
@@ -73,18 +73,18 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		} finally {
 			reentrantCallToAddAdapterCounter -= 1;
 		}
-		if (reentrantCallToAddAdapterCounter > 0) {
+		if (reentrantCallToAddAdapterCounter > 0 || currentNotifications.isEmpty()) {
 			// any other than the first call in re-entrant calls to addAdapter
 			// are going to call the project
 			return;
 		}
 
-		if (currentNotification != null && !currentNotification.isTouch()
-				&& !isInitializing && notifier instanceof EObject
-				&& !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
+		Notification currentNotification = currentNotifications.peek();
+
+		if (currentNotification != null && !currentNotification.isTouch() && !isInitializing
+			&& notifier instanceof EObject && !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
 			EObject modelElement = (EObject) notifier;
-			if (!collection.containsInstance(modelElement)
-					&& isInCollection(modelElement)) {
+			if (!collection.containsInstance(modelElement) && isInCollection(modelElement)) {
 				collection.modelElementAdded(collection, modelElement);
 			}
 		}
@@ -97,27 +97,27 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 */
 	@Override
 	protected void removeAdapter(Notifier notifier) {
-		if (isInitializing) {
+		if (isInitializing || currentNotifications.isEmpty()) {
 			return;
 		}
+
+		Notification currentNotification = currentNotifications.peek();
+
 		if (currentNotification != null && currentNotification.isTouch()) {
 			return;
 		}
 
-		if (currentNotification != null
-				&& currentNotification.getFeature() instanceof EReference) {
-			EReference eReference = (EReference) currentNotification
-					.getFeature();
+		if (currentNotification != null && currentNotification.getFeature() instanceof EReference) {
+			EReference eReference = (EReference) currentNotification.getFeature();
 			if (eReference.isContainment() && eReference.getEOpposite() != null
-					&& !eReference.getEOpposite().isTransient()) {
+				&& !eReference.getEOpposite().isTransient()) {
 				return;
 			}
 		}
 
 		if (notifier instanceof EObject) {
 			EObject modelElement = (EObject) notifier;
-			if (!isInCollection(modelElement)
-					&& collection.containsInstance(modelElement)) {
+			if (!isInCollection(modelElement) && collection.containsInstance(modelElement)) {
 				removedModelElements.add(modelElement);
 			}
 		}
@@ -161,7 +161,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
-		currentNotification = notification;
+		currentNotifications.push(notification);
 		Object feature = notification.getFeature();
 		Object notifier = notification.getNotifier();
 
@@ -179,10 +179,11 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		}
 
 		super.notifyChanged(notification);
+		currentNotifications.pop();
 
 		// collection itself is not a valid model element
 		if (!notification.isTouch() && notifier instanceof EObject
-				&& !(notifier instanceof NotifiableIdEObjectCollection)) {
+			&& !(notifier instanceof NotifiableIdEObjectCollection)) {
 			collection.notify(notification, collection, (EObject) notifier);
 		}
 		for (EObject removedModelElement : removedModelElements) {
@@ -194,8 +195,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	/**
 	 * @param notification
 	 */
-	private void handleContainer(Notification notification,
-			EReference eReference) {
+	private void handleContainer(Notification notification, EReference eReference) {
 		if (notification.getEventType() == Notification.SET) {
 			Object newValue = notification.getNewValue();
 			Object oldValue = notification.getOldValue();

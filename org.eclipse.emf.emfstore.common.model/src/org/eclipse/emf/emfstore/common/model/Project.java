@@ -17,11 +17,10 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
+import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Project</b></em>'.
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
  * 
@@ -39,18 +38,16 @@ import org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver;
  * 
  * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getProject()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface Project extends EObject, IAdaptable,
-		NotifiableIdEObjectCollection {
+public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.ecore.EObject}. <!-- begin-user-doc -->
+	 * reference list. The list contents are of type {@link org.eclipse.emf.ecore.EObject}. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Elements</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Model Elements</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -70,16 +67,14 @@ public interface Project extends EObject, IAdaptable,
 	/**
 	 * Initializes the ID caches of the project with the given mappings.
 	 */
-	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap,
-			Map<ModelElementId, EObject> idToEObjectMap);
+	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap);
 
 	/**
 	 * Returns the value of the '<em><b>Cut Elements</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.ecore.EObject}. <!-- begin-user-doc -->
+	 * reference list. The list contents are of type {@link org.eclipse.emf.ecore.EObject}. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Cut Elements</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Cut Elements</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -107,8 +102,7 @@ public interface Project extends EObject, IAdaptable,
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list, Boolean subclasses);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list, Boolean subclasses);
 
 	/**
 	 * Retrieve a list of ALL model elements of a certain type in project.
@@ -123,8 +117,7 @@ public interface Project extends EObject, IAdaptable,
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Retrieve a list of model elements of a certain type in project that are
@@ -140,8 +133,7 @@ public interface Project extends EObject, IAdaptable,
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getModelElementsByClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getModelElementsByClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Returns whether the project contains the exact same instance of the model
@@ -163,21 +155,20 @@ public interface Project extends EObject, IAdaptable,
 	EObject getModelElement(ModelElementId modelElementId);
 
 	/**
-	 * Add an observer to the project. Will be notified on project changes. See
-	 * {@link ProjectChangeObserver}.
+	 * Add an observer to the project. Will be notified on project changes. See {@link ProjectChangeObserver}.
 	 * 
-	 * @param projectChangeObserver
+	 * @param observer
 	 *            the change observer
 	 */
-	void addProjectChangeObserver(ProjectChangeObserver projectChangeObserver);
+	void addIdEObjectCollectionChangeObserver(IdEObjectCollectionChangeObserver observer);
 
 	/**
 	 * Remove an observer to the project. See {@link ProjectChangeObserver}.
 	 * 
-	 * @param projectChangeObserver
+	 * @param observer
 	 *            the change observer
 	 */
-	void removeProjectChangeObserver(ProjectChangeObserver projectChangeObserver);
+	void removeIdEObjectCollectionChangeObserver(IdEObjectCollectionChangeObserver observer);
 
 	/**
 	 * Delete an element from the Project including all its containments and
@@ -206,8 +197,7 @@ public interface Project extends EObject, IAdaptable,
 	 * @param idMap
 	 *            a map containing the ID of the model element and its children
 	 */
-	void addModelElement(EObject newModelElement,
-			Map<EObject, ModelElementId> idMap);
+	void addModelElement(EObject newModelElement, Map<EObject, ModelElementId> idMap);
 
 	/**
 	 * Returns whether the project contains a model element with the same id.

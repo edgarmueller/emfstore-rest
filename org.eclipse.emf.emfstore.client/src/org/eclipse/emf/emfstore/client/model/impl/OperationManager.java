@@ -3,11 +3,9 @@ package org.eclipse.emf.emfstore.client.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.observers.OperationListener;
-import org.eclipse.emf.emfstore.client.model.observers.PostCreationListener;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
@@ -16,16 +14,14 @@ public class OperationManager implements OperationRecorderListener {
 
 	private OperationRecorder operationRecorder;
 	private List<OperationListener> operationListeners;
-	private List<PostCreationListener> postCreationListeners;
+
 	// private CompositeOperation compositeOperation;
 	private ProjectSpace projectSpace;
 
-	public OperationManager(OperationRecorder operationRecorder,
-			ProjectSpace projectSpace) {
+	public OperationManager(OperationRecorder operationRecorder, ProjectSpace projectSpace) {
 		this.operationRecorder = operationRecorder;
 		operationRecorder.addOperationRecorderListener(this);
 		operationListeners = new ArrayList<OperationListener>();
-		postCreationListeners = new ArrayList<PostCreationListener>();
 		this.projectSpace = projectSpace;
 	}
 
@@ -35,12 +31,10 @@ public class OperationManager implements OperationRecorderListener {
 	public void undoLastOperation() {
 		if (!projectSpace.getOperations().isEmpty()) {
 			List<AbstractOperation> operations = projectSpace.getOperations();
-			AbstractOperation lastOperation = operations
-					.get(operations.size() - 1);
+			AbstractOperation lastOperation = operations.get(operations.size() - 1);
 			operationRecorder.stopChangeRecording();
 			try {
-				lastOperation.reverse().apply(
-						operationRecorder.getRootEObject());
+				lastOperation.reverse().apply(operationRecorder.getRootEObject());
 				notifyOperationUndone(lastOperation);
 			} finally {
 				operationRecorder.startChangeRecording();
@@ -49,10 +43,6 @@ public class OperationManager implements OperationRecorderListener {
 		}
 		// TODO: EM, update dirty state
 		// updateDirtyState();
-	}
-
-	public List<EObject> getRemovedElements() {
-		return operationRecorder.getRemovedElements();
 	}
 
 	/**
@@ -137,8 +127,7 @@ public class OperationManager implements OperationRecorderListener {
 	 * @param semanticCompositeOperation
 	 *            the semantic operation that replaces the composite operation
 	 */
-	public void endCompositeOperation(
-			SemanticCompositeOperation semanticCompositeOperation) {
+	public void endCompositeOperation(SemanticCompositeOperation semanticCompositeOperation) {
 		List<AbstractOperation> operations = projectSpace.getOperations();
 		operations.remove(operations.size() - 1);
 		operations.add(semanticCompositeOperation);

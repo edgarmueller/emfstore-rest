@@ -12,12 +12,12 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy;
 import org.eclipse.emf.emfstore.server.conflictDetection.FineGrainedConflictDetectionStrategy;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
 import org.junit.Test;
-import org.unicase.model.requirement.RequirementFactory;
 
 /**
  * Test conflict detection for attributes.

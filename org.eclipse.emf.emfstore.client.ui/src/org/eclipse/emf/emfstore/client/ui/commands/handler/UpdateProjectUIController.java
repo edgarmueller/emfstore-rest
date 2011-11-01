@@ -19,7 +19,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-public class UpdateProjectUIController extends AbstractEMFStoreUIController implements UpdateCallback {
+public class UpdateProjectUIController extends AbstractEMFStoreUIController
+		implements UpdateCallback {
 
 	public UpdateProjectUIController(Shell shell) {
 		this.setShell(shell);
@@ -44,37 +45,46 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 	protected void handleNoChangesException() {
 		closeProgress();
 		MessageDialog.openInformation(getShell(), "No need to update",
-			"Your project is up to date, you do not need to update.");
+				"Your project is up to date, you do not need to update.");
 	}
 
-	protected void handleChangeConflictException(ChangeConflictException conflictException) {
+	protected void handleChangeConflictException(
+			ChangeConflictException conflictException) {
 		closeProgress();
 		ProjectSpace projectSpace = conflictException.getProjectSpace();
 		try {
-			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
-			projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+			PrimaryVersionSpec targetVersion = projectSpace
+					.resolveVersionSpec(VersionSpec.HEAD_VERSION);
+			projectSpace.merge(targetVersion, new MergeProjectHandler(
+					conflictException));
 		} catch (EmfStoreException e) {
-			WorkspaceUtil.logException("Exception when merging the project!", e);
+			WorkspaceUtil
+					.logException("Exception when merging the project!", e);
 		}
 	}
 
-	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
-		UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages);
+	public boolean inspectChanges(ProjectSpace projectSpace,
+			List<ChangePackage> changePackages) {
+		UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace,
+				changePackages);
 		if (updateDialog.open() == Window.OK) {
 			return true;
 		}
 		return false;
 	}
 
-	public void updateCompleted(ProjectSpace projectSpace, PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
+	public void updateCompleted(ProjectSpace projectSpace,
+			PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
 		WorkspaceUtil.logUpdate(projectSpace, oldVersion, newVersion);
 		// explicitly refresh the decorator since no simple attribute has
 		// been changed
 		// (as opposed to committing where the dirty property is being set)
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				PlatformUI.getWorkbench().getDecoratorManager()
-					.update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
+				PlatformUI
+						.getWorkbench()
+						.getDecoratorManager()
+						.update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
 			}
 		});
 		closeProgress();

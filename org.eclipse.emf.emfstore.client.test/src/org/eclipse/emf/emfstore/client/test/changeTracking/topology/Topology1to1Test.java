@@ -15,6 +15,11 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -22,11 +27,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.rationale.Issue;
-import org.unicase.model.rationale.RationaleFactory;
-import org.unicase.model.rationale.Solution;
 
 /**
  * Tests operations in 1:1 topologies.
@@ -250,7 +250,7 @@ public class Topology1to1Test extends TopologyTest {
 		// OldSolution: SET issue from issue to null
 		// Issue: SET solution from oldSolution to newSolution
 		// NewSolution: SET issue from null to issue
-		// 
+		//
 		// Since we are operating on newSolution we expect an operation :
 		// solutionNew: got new Issue
 		//

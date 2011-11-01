@@ -29,6 +29,23 @@ import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationE
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.client.test.model.document.CompositeSection;
+import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
+import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
+import org.eclipse.emf.emfstore.client.test.model.meeting.CompositeMeetingSection;
+import org.eclipse.emf.emfstore.client.test.model.meeting.IssueMeetingSection;
+import org.eclipse.emf.emfstore.client.test.model.meeting.Meeting;
+import org.eclipse.emf.emfstore.client.test.model.meeting.MeetingFactory;
+import org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
+import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
+import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
+import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
+import org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement;
+import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
+import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
+import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
+import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
@@ -39,23 +56,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenc
 import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
-import org.unicase.model.document.CompositeSection;
-import org.unicase.model.document.DocumentFactory;
-import org.unicase.model.document.LeafSection;
-import org.unicase.model.meeting.CompositeMeetingSection;
-import org.unicase.model.meeting.IssueMeetingSection;
-import org.unicase.model.meeting.Meeting;
-import org.unicase.model.meeting.MeetingFactory;
-import org.unicase.model.meeting.WorkItemMeetingSection;
-import org.unicase.model.rationale.Issue;
-import org.unicase.model.rationale.RationaleFactory;
-import org.unicase.model.rationale.Solution;
-import org.unicase.model.requirement.Actor;
-import org.unicase.model.requirement.FunctionalRequirement;
-import org.unicase.model.requirement.RequirementFactory;
-import org.unicase.model.requirement.UseCase;
-import org.unicase.model.task.ActionItem;
-import org.unicase.model.task.TaskFactory;
 
 /**
  * Test creating an deleting elements.

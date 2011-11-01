@@ -49,7 +49,6 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.conflicts.Multi
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.conflicts.ReferenceConflict;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionUtil;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.EventLogger;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -65,8 +64,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttribut
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 
 /**
- * DecisionManager is the controller for the merge dialog and therefore it's main component. It calculates the conflicts
- * from incoming changes and can execute resolved conflicts.
+ * DecisionManager is the controller for the merge dialog and therefore it's
+ * main component. It calculates the conflicts from incoming changes and can
+ * execute resolved conflicts.
  * 
  * @author wesendon
  */
@@ -84,19 +84,24 @@ public class DecisionManager {
 	private final PrimaryVersionSpec baseVersion;
 	private final PrimaryVersionSpec targetVersion;
 	private ChangePackageVisualizationHelper visualizationHelper;
-	private EventLogger eventLogger;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param project the related project
-	 * @param myChangePackage my changes
-	 * @param theirChangePackages incoming changes
-	 * @param baseVersion baseversion
-	 * @param targetVersion new target version
+	 * @param project
+	 *            the related project
+	 * @param myChangePackage
+	 *            my changes
+	 * @param theirChangePackages
+	 *            incoming changes
+	 * @param baseVersion
+	 *            baseversion
+	 * @param targetVersion
+	 *            new target version
 	 */
-	public DecisionManager(Project project, ChangePackage myChangePackage, List<ChangePackage> theirChangePackages,
-		PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
+	public DecisionManager(Project project, ChangePackage myChangePackage,
+			List<ChangePackage> theirChangePackages,
+			PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
 		this.project = project;
 		this.myChangePackage = myChangePackage;
 		this.theirChangePackages = theirChangePackages;
@@ -104,8 +109,6 @@ public class DecisionManager {
 		this.targetVersion = targetVersion;
 		conflictDetector = new ConflictDetector();
 		init();
-		getEventLogger()
-			.createMergeEvent(baseVersion, targetVersion, conflicts.size(), myChangePackage.getOperations());
 	}
 
 	private void init() {
@@ -124,11 +127,13 @@ public class DecisionManager {
 		ArrayList<Conflicting> conflicting = new ArrayList<Conflicting>();
 
 		// Collect all conflicting
-		ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
+		ListIterator<AbstractOperation> myIterator = myOperations
+				.listIterator(myOperations.size());
 		while (myIterator.hasPrevious()) {
 			AbstractOperation myOperation = myIterator.previous();
 			boolean involved = false;
-			ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
+			ListIterator<AbstractOperation> theirIterator = theirOperations
+					.listIterator(theirOperations.size());
 			while (theirIterator.hasPrevious()) {
 				AbstractOperation theirOperation = theirIterator.previous();
 				if (conflictDetector.doConflict(myOperation, theirOperation)) {
@@ -153,7 +158,8 @@ public class DecisionManager {
 						}
 					}
 					if (!conflictingYet) {
-						conflicting.add(new Conflicting(myOperation, theirOperation));
+						conflicting.add(new Conflicting(myOperation,
+								theirOperation));
 					}
 				}
 			}
@@ -196,7 +202,8 @@ public class DecisionManager {
 				addConflict(createMultiMultiConflict(conf));
 				continue;
 
-			} else if ((isMultiRef(my) && isSingleRef(their)) || (isMultiRef(their) && isSingleRef(my))) {
+			} else if ((isMultiRef(my) && isSingleRef(their))
+					|| (isMultiRef(their) && isSingleRef(my))) {
 
 				addConflict(createMultiSingle(conf));
 				continue;
@@ -207,12 +214,13 @@ public class DecisionManager {
 				continue;
 
 			} else if ((isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their)))
-				|| ((isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their))) {
+					|| ((isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their))) {
 
 				addConflict(createReferenceCompVSSingleMulti(conf));
 				continue;
 
-			} else if ((isMultiRef(my) && isMultiRefSet(their)) || (isMultiRef(their) && isMultiRefSet(my))) {
+			} else if ((isMultiRef(my) && isMultiRefSet(their))
+					|| (isMultiRef(their) && isMultiRefSet(my))) {
 
 				addConflict(createMultiRefMultiSet(conf));
 				continue;
@@ -222,7 +230,8 @@ public class DecisionManager {
 				addConflict(createMultiRefSetSet(conf));
 				continue;
 
-			} else if ((isMultiRefSet(my) && isSingleRef(their)) || (isMultiRefSet(their) && isSingleRef(my))) {
+			} else if ((isMultiRefSet(my) && isSingleRef(their))
+					|| (isMultiRefSet(their) && isSingleRef(my))) {
 
 				addConflict(createMultiSetSingle(conf));
 				continue;
@@ -232,17 +241,20 @@ public class DecisionManager {
 				addConflict(createMultiAtt(conf));
 				continue;
 
-			} else if ((isMultiAtt(my) && isMultiAttSet(their)) || (isMultiAtt(their) && isMultiAttSet(my))) {
+			} else if ((isMultiAtt(my) && isMultiAttSet(their))
+					|| (isMultiAtt(their) && isMultiAttSet(my))) {
 
 				addConflict(createMultiAttSet(conf));
 				continue;
 
-			} else if ((isMultiAtt(my) && isMultiAttMove(their)) || (isMultiAtt(their) && isMultiAttMove(my))) {
+			} else if ((isMultiAtt(my) && isMultiAttMove(their))
+					|| (isMultiAtt(their) && isMultiAttMove(my))) {
 
 				addConflict(createMultiAttMove(conf));
 				continue;
 
-			} else if ((isMultiAttSet(my) && isMultiAttMove(their)) || (isMultiAttSet(their) && isMultiAttMove(my))) {
+			} else if ((isMultiAttSet(my) && isMultiAttMove(their))
+					|| (isMultiAttSet(their) && isMultiAttMove(my))) {
 
 				addConflict(createMultiAttMoveSet(conf));
 				continue;
@@ -275,101 +287,127 @@ public class DecisionManager {
 	// END COMPLEX CODE
 	private Conflict createMultiRefMultiSet(Conflicting conf) {
 		if (isMultiRef(conf.getMyOperation())) {
-			return new MultiReferenceSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSetConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiReferenceSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSetConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
 	private Conflict createMultiSetSingle(Conflicting conf) {
 		if (isMultiRefSet(conf.getMyOperation())) {
-			return new MultiReferenceSetSingleConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSetSingleConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiReferenceSetSingleConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSetSingleConflict(
+					conf.getTheirOperations(), conf.getMyOperations(), this,
+					false);
 		}
 	}
 
 	private Conflict createMultiSingle(Conflicting conf) {
 		if (isMultiRef(conf.getMyOperation())) {
-			return new MultiReferenceSingleConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSingleConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiReferenceSingleConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSingleConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
 	private Conflict createMultiRefSetSet(Conflicting conf) {
-		return new MultiReferenceSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this);
+		return new MultiReferenceSetSetConflict(conf.getMyOperations(),
+				conf.getTheirOperations(), this);
 	}
 
 	private Conflict createMultiAttSetSet(Conflicting conf) {
-		return new MultiAttributeSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this);
+		return new MultiAttributeSetSetConflict(conf.getMyOperations(),
+				conf.getTheirOperations(), this);
 	}
 
 	private Conflict createMultiAtt(Conflicting conf) {
 		if (((MultiAttributeOperation) conf.getMyOperation()).isAdd()) {
-			return new MultiAttributeConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiAttributeConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 
 		}
 	}
 
 	private Conflict createMultiAttSet(Conflicting conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
-			return new MultiAttributeSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeSetConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiAttributeSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeSetConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
 	private Conflict createMultiAttMove(Conflicting conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
-			return new MultiAttributeMoveConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeMoveConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiAttributeMoveConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeMoveConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
 	private Conflict createMultiAttMoveSet(Conflicting conf) {
 		if (isMultiAttSet(conf.getMyOperation())) {
-			return new MultiAttributeMoveSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeMoveSetConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiAttributeMoveSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeMoveSetConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
 	private Conflict createReferenceCompVSSingleMulti(Conflicting conf) {
 		if (isCompositeRef(conf.getMyOperation())) {
-			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
-				Arrays.asList(conf.getTheirOperation()));
+			return createRefFromSub(conf,
+					((CompositeOperation) conf.getMyOperation())
+							.getSubOperations(), Arrays.asList(conf
+							.getTheirOperation()));
 		} else {
 			return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
-				((CompositeOperation) conf.getTheirOperation()).getSubOperations());
+					((CompositeOperation) conf.getTheirOperation())
+							.getSubOperations());
 		}
 	}
 
 	private Conflict createReferenceConflict(Conflicting conf) {
-		EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
-		EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation()).getSubOperations();
+		EList<AbstractOperation> myOperations = ((CompositeOperation) conf
+				.getMyOperation()).getSubOperations();
+		EList<AbstractOperation> theirOperations = ((CompositeOperation) conf
+				.getTheirOperation()).getSubOperations();
 
 		return createRefFromSub(conf, myOperations, theirOperations);
 	}
 
-	private Conflict createRefFromSub(Conflicting conf, List<AbstractOperation> myOperations,
-		List<AbstractOperation> theirOperations) {
+	private Conflict createRefFromSub(Conflicting conf,
+			List<AbstractOperation> myOperations,
+			List<AbstractOperation> theirOperations) {
 
 		for (AbstractOperation myOp : myOperations) {
 			for (AbstractOperation theirOp : theirOperations) {
 				if (conflictDetector.doConflict(myOp, theirOp)) {
 					if (isSingleRef(myOp)) {
 
-						return new ReferenceConflict(createSingleSingleConflict(myOp, theirOp), conf.getMyOperations(),
-							conf.getTheirOperations());
+						return new ReferenceConflict(
+								createSingleSingleConflict(myOp, theirOp),
+								conf.getMyOperations(),
+								conf.getTheirOperations());
 
 					} else if (isMultiRef(myOp)) {
 
-						return new ReferenceConflict(createMultiMultiConflict(myOp, theirOp), conf.getMyOperations(),
-							conf.getTheirOperations());
+						return new ReferenceConflict(createMultiMultiConflict(
+								myOp, theirOp), conf.getMyOperations(),
+								conf.getTheirOperations());
 
 					} else {
 						return null;
@@ -381,50 +419,64 @@ public class DecisionManager {
 	}
 
 	private Conflict createAttributeAttributeDecision(Conflicting conflicting) {
-		return new AttributeConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+		return new AttributeConflict(conflicting.getMyOperations(),
+				conflicting.getTheirOperations(), this);
 	}
 
 	private Conflict createDiagramLayoutDecision(Conflicting conflicting) {
-		return new DiagramLayoutConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+		return new DiagramLayoutConflict(conflicting.getMyOperations(),
+				conflicting.getTheirOperations(), this);
 	}
 
 	private Conflict createSingleSingleConflict(Conflicting conflicting) {
-		return new SingleReferenceConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+		return new SingleReferenceConflict(conflicting.getMyOperations(),
+				conflicting.getTheirOperations(), this);
 	}
 
-	private Conflict createSingleSingleConflict(AbstractOperation my, AbstractOperation their) {
-		return new SingleReferenceConflict(Arrays.asList(my), Arrays.asList(their), this);
+	private Conflict createSingleSingleConflict(AbstractOperation my,
+			AbstractOperation their) {
+		return new SingleReferenceConflict(Arrays.asList(my),
+				Arrays.asList(their), this);
 	}
 
 	private Conflict createMultiMultiConflict(Conflicting conf) {
 		if (((MultiReferenceOperation) conf.getMyOperation()).isAdd()) {
-			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), this, false);
+			return new MultiReferenceConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, false);
 		}
 	}
 
-	private Conflict createMultiMultiConflict(AbstractOperation my, AbstractOperation their) {
+	private Conflict createMultiMultiConflict(AbstractOperation my,
+			AbstractOperation their) {
 		if (((MultiReferenceOperation) my).isAdd()) {
-			return new MultiReferenceConflict(Arrays.asList(my), Arrays.asList(their), this, true);
+			return new MultiReferenceConflict(Arrays.asList(my),
+					Arrays.asList(their), this, true);
 		} else {
-			return new MultiReferenceConflict(Arrays.asList(their), Arrays.asList(my), this, false);
+			return new MultiReferenceConflict(Arrays.asList(their),
+					Arrays.asList(my), this, false);
 		}
 	}
 
 	private Conflict createDeleteOtherConflict(Conflicting conf) {
 		if (isDelete(conf.getMyOperation())) {
-			return new DeletionConflict(conf.getMyOperations(), conf.getTheirOperations(), true, this);
+			return new DeletionConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), true, this);
 		} else {
-			return new DeletionConflict(conf.getTheirOperations(), conf.getMyOperations(), false, this);
+			return new DeletionConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), false, this);
 		}
 	}
 
 	private Conflict createCompositeConflict(Conflicting conf) {
 		if (isComposite(conf.getMyOperation())) {
-			return new CompositeConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new CompositeConflict(conf.getMyOperations(),
+					conf.getTheirOperations(), this, true);
 		} else {
-			return new CompositeConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new CompositeConflict(conf.getTheirOperations(),
+					conf.getMyOperations(), this, false);
 		}
 	}
 
@@ -455,7 +507,8 @@ public class DecisionManager {
 	}
 
 	/**
-	 * Get "my" accepted operations. This list will be empty, if {@link #calcResult()} hasn't been called before.
+	 * Get "my" accepted operations. This list will be empty, if
+	 * {@link #calcResult()} hasn't been called before.
 	 * 
 	 * @return list of operations
 	 */
@@ -464,7 +517,8 @@ public class DecisionManager {
 	}
 
 	/**
-	 * Get "their" accepted operations. This list will be empty, if {@link #calcResult()} hasn't been called before.
+	 * Get "their" accepted operations. This list will be empty, if
+	 * {@link #calcResult()} hasn't been called before.
 	 * 
 	 * @return list of operations
 	 */
@@ -473,8 +527,9 @@ public class DecisionManager {
 	}
 
 	/**
-	 * If all conflicts are resolved this method will generate the resulting operations from the conflicts. Then call
-	 * {@link #getAcceptedMine()} and {@link #getRejectedTheirs()}.
+	 * If all conflicts are resolved this method will generate the resulting
+	 * operations from the conflicts. Then call {@link #getAcceptedMine()} and
+	 * {@link #getRejectedTheirs()}.
 	 */
 	public void calcResult() {
 		if (!isResolved()) {
@@ -525,7 +580,8 @@ public class DecisionManager {
 	/**
 	 * Get the Name of an model element by modelelement id.
 	 * 
-	 * @param modelElementId id of element
+	 * @param modelElementId
+	 *            id of element
 	 * @return name as string
 	 */
 	public String getModelElementName(ModelElementId modelElementId) {
@@ -535,27 +591,33 @@ public class DecisionManager {
 	/**
 	 * Get the Name of an model element.
 	 * 
-	 * @param modelElement element
+	 * @param modelElement
+	 *            element
 	 * @return name as string
 	 */
 	public String getModelElementName(EObject modelElement) {
-		AdapterFactoryLabelProvider adapterFactory = DecisionUtil.getAdapterFactory();
+		AdapterFactoryLabelProvider adapterFactory = DecisionUtil
+				.getAdapterFactory();
 		return adapterFactory.getText(modelElement);
 	}
 
 	/**
-	 * Returns the modelelement. Therefore the project as well as creation and deletion operations are searched.
+	 * Returns the modelelement. Therefore the project as well as creation and
+	 * deletion operations are searched.
 	 * 
-	 * @param modelElementId id of element.
+	 * @param modelElementId
+	 *            id of element.
 	 * @return modelelement
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
 		EObject modelElement = project.getModelElement(modelElementId);
 		if (modelElement == null) {
-			modelElement = searchForCreatedME(modelElementId, myChangePackage.getOperations());
+			modelElement = searchForCreatedME(modelElementId,
+					myChangePackage.getOperations());
 			if (modelElement == null) {
 				for (ChangePackage cp : theirChangePackages) {
-					modelElement = searchForCreatedME(modelElementId, cp.getOperations());
+					modelElement = searchForCreatedME(modelElementId,
+							cp.getOperations());
 					if (modelElement != null) {
 						break;
 					}
@@ -565,14 +627,17 @@ public class DecisionManager {
 		return modelElement;
 	}
 
-	private EObject searchForCreatedME(ModelElementId modelElementId, List<AbstractOperation> operations) {
+	private EObject searchForCreatedME(ModelElementId modelElementId,
+			List<AbstractOperation> operations) {
 		for (AbstractOperation operation : operations) {
 			EObject result = null;
 			if (operation instanceof CreateDeleteOperation) {
-				result = searchCreateAndDelete((CreateDeleteOperation) operation, modelElementId);
+				result = searchCreateAndDelete(
+						(CreateDeleteOperation) operation, modelElementId);
 
 			} else if (operation instanceof CompositeOperation) {
-				EList<AbstractOperation> subOperations = ((CompositeOperation) operation).getSubOperations();
+				EList<AbstractOperation> subOperations = ((CompositeOperation) operation)
+						.getSubOperations();
 				result = searchForCreatedME(modelElementId, subOperations);
 			} else {
 				continue;
@@ -584,16 +649,19 @@ public class DecisionManager {
 		return null;
 	}
 
-	private EObject searchCreateAndDelete(CreateDeleteOperation cdo, ModelElementId modelElementId) {
+	private EObject searchCreateAndDelete(CreateDeleteOperation cdo,
+			ModelElementId modelElementId) {
 		EObject modelElement = cdo.getModelElement();
 		if (modelElement == null) {
 			return null;
 		}
-		Set<EObject> containedModelElements = ModelUtil.getAllContainedModelElements(modelElement, false);
+		Set<EObject> containedModelElements = ModelUtil
+				.getAllContainedModelElements(modelElement, false);
 		containedModelElements.add(modelElement);
 
 		for (EObject child : containedModelElements) {
-			ModelElementId childId = ModelUtil.clone(cdo.getEObjectToIdMap().get(child));
+			ModelElementId childId = ModelUtil.clone(cdo.getEObjectToIdMap()
+					.get(child));
 			if (childId != null && childId.equals(modelElementId)) {
 				return child;
 			}
@@ -602,9 +670,11 @@ public class DecisionManager {
 	}
 
 	/**
-	 * Returns the name of the author for a operation in list of their operations.
+	 * Returns the name of the author for a operation in list of their
+	 * operations.
 	 * 
-	 * @param theirOperation operation
+	 * @param theirOperation
+	 *            operation
 	 * @return name as string or ""
 	 */
 	public String getAuthorForOperation(AbstractOperation theirOperation) {
@@ -651,21 +721,10 @@ public class DecisionManager {
 			ArrayList<ChangePackage> list = new ArrayList<ChangePackage>();
 			list.add(myChangePackage);
 			list.addAll(theirChangePackages);
-			visualizationHelper = new ChangePackageVisualizationHelper(list, project);
+			visualizationHelper = new ChangePackageVisualizationHelper(list,
+					project);
 		}
 		return visualizationHelper;
-	}
-
-	/**
-	 * Return the Eventlogger.
-	 * 
-	 * @return logger
-	 */
-	public EventLogger getEventLogger() {
-		if (eventLogger == null) {
-			eventLogger = new EventLogger(project);
-		}
-		return eventLogger;
 	}
 
 	/**

@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -22,9 +23,12 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -32,7 +36,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreBas
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -44,6 +47,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.observer.IObserver;
 import org.eclipse.emf.emfstore.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
@@ -61,9 +65,11 @@ public final class WorkspaceManager {
 	private Workspace currentWorkspace;
 	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
-	private SessionManager sessionManager;
 
 	private ObserverBus observerBus;
+
+	private ECrossReferenceAdapter crossReferenceAdapter;
+	private ResourceSet resourceSet;
 
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
@@ -76,6 +82,7 @@ public final class WorkspaceManager {
 		if (instance == null) {
 			try {
 				instance = new WorkspaceManager();
+				instance.initialize();
 				// BEGIN SUPRESS CATCH EXCEPTION
 			} catch (RuntimeException e) {
 				// END SURPRESS CATCH EXCEPTION
@@ -109,11 +116,27 @@ public final class WorkspaceManager {
 	 * @generated NOT
 	 */
 	private WorkspaceManager() {
+	}
+
+	private void initialize() {
+		initializeObserverBus();
 		this.connectionManager = initConnectionManager();
 		this.adminConnectionManager = initAdminConnectionManager();
 		this.currentWorkspace = initWorkSpace();
-		this.sessionManager = initSessionManager();
+	}
+
+	private void initializeObserverBus() {
 		this.observerBus = new ObserverBus();
+		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.client.observers");
+		for (IConfigurationElement extension : rawExtensions) {
+			try {
+				IObserver observer = (IObserver) extension.createExecutableExtension("ObserverClass");
+				observerBus.register(observer);
+			} catch (CoreException e) {
+				WorkspaceUtil.logException(e.getMessage(), e);
+			}
+		}
 	}
 
 	private void notifyPostWorkspaceInitiators() {
@@ -155,10 +178,6 @@ public final class WorkspaceManager {
 		return new XmlRpcAdminConnectionManager();
 	}
 
-	private SessionManager initSessionManager() {
-		return new SessionManager();
-	}
-
 	/**
 	 * Initialize the workspace. Loads workspace from persistent storage if
 	 * present. There is always one current Workspace.
@@ -167,9 +186,22 @@ public final class WorkspaceManager {
 	 * @generated NOT
 	 */
 	private Workspace initWorkSpace() {
-		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet = new ResourceSetImpl();
+		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
-		// register an editing domain on the ressource
+		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.client.inverseCrossReferenceCache");
+		if (elements != null && elements.length > 0) {
+			for (IConfigurationElement element : elements) {
+				boolean useCrossReferenceAdapter = Boolean.parseBoolean(element.getAttribute("activated"));
+				if (useCrossReferenceAdapter) {
+					crossReferenceAdapter = new ECrossReferenceAdapter();
+					resourceSet.eAdapters().add(crossReferenceAdapter);
+				}
+			}
+		}
+
+		// register an editing domain on the resource
 		Configuration.setEditingDomain(createEditingDomain(resourceSet));
 
 		URI fileURI = URI.createFileURI(Configuration.getWorkspacePath());
@@ -438,7 +470,19 @@ public final class WorkspaceManager {
 			modelVersion.setReleaseNumber(4);
 			return modelVersion;
 		}
+	}
 
+	/**
+	 * Returns the {@link ECrossReferenceAdapter}, if available.
+	 * 
+	 * @return the {@link ECrossReferenceAdapter}
+	 */
+	public Collection<Setting> findInverseCrossReferences(EObject modelElement) {
+		if (crossReferenceAdapter != null) {
+			return crossReferenceAdapter.getInverseReferences(modelElement, true);
+		}
+
+		return UsageCrossReferencer.find(modelElement, resourceSet);
 	}
 
 	/**
@@ -467,15 +511,6 @@ public final class WorkspaceManager {
 	 */
 	public Workspace getCurrentWorkspace() {
 		return currentWorkspace;
-	}
-
-	/**
-	 * Returns the sessionmanager.
-	 * 
-	 * @return sessionManager
-	 */
-	public SessionManager getSessionManager() {
-		return sessionManager;
 	}
 
 	/**

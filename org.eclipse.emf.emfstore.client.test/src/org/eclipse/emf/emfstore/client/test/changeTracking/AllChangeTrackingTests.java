@@ -5,7 +5,6 @@
  */
 package org.eclipse.emf.emfstore.client.test.changeTracking;
 
-import org.eclipse.emf.emfstore.client.test.caching.AllCachingTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.canonization.AllCanonizationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.commands.AllCommandTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.notification.recording.AllNotificationTests;
@@ -20,8 +19,8 @@ import org.junit.runners.Suite;
  * @author chodnick
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllNotificationTests.class, AllOperationTests.class, AllTopologyTests.class,
-	AllCanonizationTests.class, AllCachingTests.class, AllCommandTests.class })
+@Suite.SuiteClasses({ AllNotificationTests.class, AllOperationTests.class, AllTopologyTests.class,
+	AllCanonizationTests.class, AllCommandTests.class })
 public class AllChangeTrackingTests {
 
 }

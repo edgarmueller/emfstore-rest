@@ -39,7 +39,8 @@ public class MergeProjectHandler implements ConflictResolver {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param conflictException the ChangeConflictException
+	 * @param conflictException
+	 *            the ChangeConflictException
 	 */
 	public MergeProjectHandler(ChangeConflictException conflictException) {
 		acceptedMine = new ArrayList<AbstractOperation>();
@@ -82,6 +83,11 @@ public class MergeProjectHandler implements ConflictResolver {
 		DecisionManager decisionManager = new DecisionManager(project, myChangePackage, theirChangePackages, base,
 			target);
 
+		if (decisionManager.getConflicts().size() == 0) {
+			// conflict has been resolved automatically
+			return true;
+		}
+
 		MergeWizard wizard = new MergeWizard(decisionManager);
 		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
 		dialog.setPageSize(1000, 500);
@@ -91,10 +97,6 @@ public class MergeProjectHandler implements ConflictResolver {
 		int open = dialog.open();
 		acceptedMine = decisionManager.getAcceptedMine();
 		rejectedTheirs = decisionManager.getRejectedTheirs();
-
-		if (open != Window.OK) {
-			decisionManager.getEventLogger().selectedCancel();
-		}
 
 		return (open == Window.OK);
 	}

@@ -16,28 +16,33 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
- * This abstract class reacts to the changes of individual model elements. It implements the ProjectChangeObserver
- * interface, so you have to register it with the project. You can inherit this class for further filtering of the
+ * This abstract class reacts to the changes of individual model elements. It implements the
+ * {@link IdEObjectCollectionChangeObserver} interface, so you have to register it with the project.
+ * You can inherit this class for further filtering of the
  * events, but of course you cannot override the classes own filtering methods.
  * 
  * @author andy
  */
-public abstract class ModelElementChangeObserver implements ProjectChangeObserver {
+public abstract class ModelElementChangeObserver implements IdEObjectCollectionChangeObserver {
 
 	/**
-	 * Notify all model elements listener because a project delete is also deleting all contained model elements.
+	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#projectDeleted(org.eclipse.emf.emfstore.common.model.Project)
-	 * @param project the deleted project
+	 * Notifies all model elements listeners since the deletion of a collection is also deleting all contained model
+	 * elements.
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(IdEObjectCollection)
+	 * @param collection the deleted {@link IdEObjectCollection}
 	 */
-	public final void projectDeleted(Project project) {
+	public final void collectionDeleted(IdEObjectCollection collection) {
 
 		List<EObject> elements = new ArrayList<EObject>(observedElements);
 		for (EObject modelElement : elements) {
-			this.modelElementRemoved(project, modelElement);
+			this.modelElementRemoved(collection, modelElement);
 		}
 
 	}

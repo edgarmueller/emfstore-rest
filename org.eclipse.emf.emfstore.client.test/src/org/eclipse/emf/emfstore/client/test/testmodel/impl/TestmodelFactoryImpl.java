@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.emfstore.client.test.testmodel.*;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
@@ -26,7 +27,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 */
 	public static TestmodelFactory init() {
 		try {
-			TestmodelFactory theTestmodelFactory = (TestmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://unicase.org/workspace/test/testmodel"); 
+			TestmodelFactory theTestmodelFactory = (TestmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/emf/emfstore/client/test/testmodel"); 
 			if (theTestmodelFactory != null) {
 				return theTestmodelFactory;
 			}
