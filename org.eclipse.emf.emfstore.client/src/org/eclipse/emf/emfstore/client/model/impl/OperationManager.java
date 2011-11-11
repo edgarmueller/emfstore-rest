@@ -34,7 +34,7 @@ public class OperationManager implements OperationRecorderListener {
 			AbstractOperation lastOperation = operations.get(operations.size() - 1);
 			operationRecorder.stopChangeRecording();
 			try {
-				lastOperation.reverse().apply(operationRecorder.getRootEObject());
+				lastOperation.reverse().apply(operationRecorder.getCollection());
 				notifyOperationUndone(lastOperation);
 			} finally {
 				operationRecorder.startChangeRecording();
