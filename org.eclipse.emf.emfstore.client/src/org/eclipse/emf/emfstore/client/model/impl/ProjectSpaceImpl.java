@@ -433,8 +433,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 
 	private AutoSplitAndSaveResourceContainmentList<ESNotification> notificationList;
 
-	private ArrayList<ShareObserver> shareObservers;
-
 	private FileTransferManager fileTransferManager;
 
 	private OperationRecorder operationRecorder;
@@ -453,13 +451,11 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		super();
 		// TODO remove observer/listeners and use observerbus
 		this.commitObservers = new ArrayList<CommitObserver>();
-		this.shareObservers = new ArrayList<ShareObserver>();
 		this.propertyMap = new HashMap<String, OrgUnitProperty>();
 		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
 
 		this.addCommitObserver(modifiedModelElementsCache);
-		shareObservers.add(modifiedModelElementsCache);
-
+		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
 	}
 
 	// end of custom code
@@ -2173,14 +2169,12 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	}
 
 	private void notifyShareObservers() {
-		for (ShareObserver shareObserver : shareObservers) {
-			try {
-				shareObserver.shareDone(this);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
-				// END SUPRESS CATCH EXCEPTION
-				WorkspaceUtil.logException("ShareObserver failed with exception", e);
-			}
+		try {
+			WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(this);
+			// BEGIN SUPRESS CATCH EXCEPTION
+		} catch (RuntimeException e) {
+			// END SUPRESS CATCH EXCEPTION
+			WorkspaceUtil.logException("ShareObserver failed with exception", e);
 		}
 	}
 
