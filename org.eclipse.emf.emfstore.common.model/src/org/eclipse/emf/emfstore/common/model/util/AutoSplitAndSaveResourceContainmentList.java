@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.common.model.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,6 +20,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
@@ -359,14 +363,38 @@ public class AutoSplitAndSaveResourceContainmentList<T extends EObject> implemen
 	}
 
 	private void saveDirtyResources() {
-		for (Resource resource : dirtyResourceSet) {
-			try {
-				resource.save(null);
-			} catch (IOException e) {
-				String message = "Saving to resource failed!";
-				ModelUtil.log(message, e, IStatus.ERROR);
-				throw new IllegalStateException(message, e);
-			}
+
+		int threads = Runtime.getRuntime().availableProcessors();
+		ExecutorService es = Executors.newFixedThreadPool(threads);
+
+		int resourcesPerThread = (dirtyResourceSet.size() + threads - 1) / threads;
+		final ArrayList<Resource> resources = new ArrayList<Resource>(dirtyResourceSet);
+
+		for (int i = 0; i < resources.size(); i += resourcesPerThread) {
+			final int min = i;
+			final int max = Math.min(min + resourcesPerThread, resources.size());
+			es.submit(new Runnable() {
+				public void run() {
+					for (int j = min; j <= max; j++) {
+						try {
+							resources.get(j).save(null);
+						} catch (IOException e) {
+							String message = "Saving to resource failed!";
+							ModelUtil.log(message, e, IStatus.ERROR);
+							throw new IllegalStateException(message, e);
+						}
+					}
+				}
+			});
+		}
+
+		es.shutdown();
+		try {
+			// 10 minutes
+			es.awaitTermination(600000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e1) {
+			String message = "Saving to resource failed!";
+			throw new IllegalStateException(message, e1);
 		}
 
 		dirtyResourceSet.clear();
