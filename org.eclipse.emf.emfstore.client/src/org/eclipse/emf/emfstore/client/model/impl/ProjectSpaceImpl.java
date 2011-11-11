@@ -1365,20 +1365,12 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 */
 	public ChangePackage getLocalChangePackage(boolean canonize) {
 		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
-		// copy operations from projectspace
+		// copy operations from ProjectSpace
 		for (AbstractOperation abstractOperation : getOperations()) {
 			AbstractOperation copy = EcoreUtil.copy(abstractOperation);
 			changePackage.getOperations().add(copy);
 		}
-		// copy events from projectspace
-		for (Event event : getEventsFromComposite()) {
-			Event copy = EcoreUtil.copy(event);
-			changePackage.getEvents().add(copy);
-		}
 
-		if (canonize) {
-			changePackage.cannonize();
-		}
 		return changePackage;
 	}
 
