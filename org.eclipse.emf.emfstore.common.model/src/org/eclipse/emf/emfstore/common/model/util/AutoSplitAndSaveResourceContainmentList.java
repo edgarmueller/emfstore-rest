@@ -365,7 +365,7 @@ public class AutoSplitAndSaveResourceContainmentList<T extends EObject> implemen
 	private void saveDirtyResources() {
 
 		int threads = Runtime.getRuntime().availableProcessors();
-		ExecutorService es = Executors.newFixedThreadPool(threads);
+		ExecutorService execService = Executors.newFixedThreadPool(threads);
 
 		int resourcesPerThread = (dirtyResourceSet.size() + threads - 1) / threads;
 		final ArrayList<Resource> resources = new ArrayList<Resource>(dirtyResourceSet);
@@ -373,7 +373,7 @@ public class AutoSplitAndSaveResourceContainmentList<T extends EObject> implemen
 		for (int i = 0; i < resources.size(); i += resourcesPerThread) {
 			final int min = i;
 			final int max = Math.min(min + resourcesPerThread, resources.size());
-			es.submit(new Runnable() {
+			execService.submit(new Runnable() {
 				public void run() {
 					for (int j = min; j <= max; j++) {
 						try {
@@ -388,10 +388,13 @@ public class AutoSplitAndSaveResourceContainmentList<T extends EObject> implemen
 			});
 		}
 
-		es.shutdown();
+		execService.shutdown();
 		try {
-			// 10 minutes
-			es.awaitTermination(600000, TimeUnit.MILLISECONDS);
+			// wait for 30 minutes to finish save
+			boolean terminated = execService.awaitTermination(1800000, TimeUnit.MILLISECONDS);
+			if (!terminated) {
+				throw new IllegalStateException("FAIL: Save did not complete within time limit.");
+			}
 		} catch (InterruptedException e1) {
 			String message = "Saving to resource failed!";
 			throw new IllegalStateException(message, e1);

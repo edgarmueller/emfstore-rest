@@ -1637,14 +1637,14 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		this.operationRecorder = new OperationRecorder(this.getProject(),
 			((ProjectImpl) this.getProject()).getChangeNotifier());
 		if (Configuration.isTesting()) {
-			this.operationRecorder.setEmitOperationsImmediatley(true);
+			// this.operationRecorder.setEmitOperationsImmediatley(true);
 		}
 		this.operationManager = new OperationManager(operationRecorder, this);
 		this.operationManager.addOperationListener(modifiedModelElementsCache);
 		statePersister = new StatePersister(((ProjectImpl) this.getProject()).getChangeNotifier(),
 			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()), this.getProject());
 		// TODO: initialization order important
-		// this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
+		this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
 		this.getProject().addIdEObjectCollectionChangeObserver(statePersister);
 
 		if (project instanceof ProjectImpl) {
@@ -2444,25 +2444,21 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	// }
 	// }
 
-	/**
-	 * Add operation to the project spaces local operations.
-	 * 
-	 * @param operation
-	 *            the operation
-	 */
-	public void addOperation(AbstractOperation operation) {
-		this.getOperations().add(operation);
+	public void addOperations(List<? extends AbstractOperation> operations) {
+		getOperations().addAll(operations);
 		updateDirtyState();
 
-		// do not notify on composite start, wait until completion
-		if (operation instanceof CompositeOperation) {
-			// check of automatic composite if yes then continue
-			if (((CompositeOperation) operation).getMainOperation() == null) {
-				return;
+		for (AbstractOperation op : operations) {
+			// do not notify on composite start, wait until completion
+			if (op instanceof CompositeOperation) {
+				// check of automatic composite if yes then continue
+				if (((CompositeOperation) op).getMainOperation() == null) {
+					return;
+				}
 			}
+
+			operationManager.notifyOperationExecuted(op);
 		}
-		operationManager.notifyOperationExecuted(operation);
-		// this.notifyOperationExecuted(operation);
 	}
 
 	/**
@@ -2512,10 +2508,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 				} catch (RuntimeException e) {
 					WorkspaceUtil.handleException(e);
 				}
+			}
 
-				if (addOperation) {
-					addOperation(operation);
-				}
+			if (addOperation) {
+				addOperations(operations);
 			}
 		} finally {
 			startChangeRecording();

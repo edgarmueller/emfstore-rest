@@ -154,8 +154,8 @@ public class OperationManager implements OperationRecorderListener {
 	// }
 	// }
 
-	public void operationRecorded(AbstractOperation operation) {
-		projectSpace.addOperation(operation);
+	public void operationsRecorded(List<? extends AbstractOperation> operations) {
+		projectSpace.addOperations(operations);
 	}
 
 	public void clearOperations() {

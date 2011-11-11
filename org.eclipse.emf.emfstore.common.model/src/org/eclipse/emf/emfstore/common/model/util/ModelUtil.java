@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -592,6 +593,7 @@ public final class ModelUtil {
 			resource = resourceSet.getResource(resourceURI, true);
 		}
 
+		resource.load(getResourceLoadOptions());
 		EList<EObject> contents = resource.getContents();
 
 		if (checkConstraints) {
@@ -920,16 +922,6 @@ public final class ModelUtil {
 	 * 
 	 * @param modelElement
 	 *            the model element
-	 * @param parent
-	 *            the project
-	 * @param includeChildren
-	 *            set to true, if incoming cross references to any children of
-	 *            the given element should also be deleted
-	 * @param includeCrossReferencesFromChildren
-	 *            set to true, if incoming cross references to children from
-	 *            other children including the given element should also be
-	 *            removed. These are cross references within the containment
-	 *            tree of the given element)
 	 */
 	public static void deleteIncomingCrossReferencesFromParent(Collection<Setting> inverseReferences,
 		EObject modelElement) {
@@ -978,23 +970,32 @@ public final class ModelUtil {
 	 * 
 	 * @param modelElement
 	 *            the model element
-	 * @param includeChildren
-	 *            set to true, if outgoing cross references of any children of
-	 *            the given element should also be deleted
-	 * @param includeCrossReferencesToChildren
-	 *            set to true, if outgoing cross references to children (that is
-	 *            within the containment tree of the given element) should also
-	 *            be removed.
 	 */
-	public static void deleteOutgoingCrossReferences(EObject modelElement, boolean includeChildren,
-		boolean includeCrossReferencesToChildren) {
+	public static void deleteOutgoingCrossReferences(IdEObjectCollection collection, EObject modelElement) {
 		Set<EObject> allModelElements = new HashSet<EObject>();
 		allModelElements.add(modelElement);
-		if (includeChildren) {
-			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+
+		List<SettingWithReferencedElement> crossReferences = collectOutgoingCrossReferences(collection,
+			allModelElements);
+		for (SettingWithReferencedElement settingWithReferencedElement : crossReferences) {
+			Setting setting = settingWithReferencedElement.getSetting();
+			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
+				setting.getEObject().eUnset(setting.getEStructuralFeature());
+			} else {
+				List<EObject> references = (List<EObject>) setting.getEObject().eGet(setting.getEStructuralFeature());
+				references.remove(settingWithReferencedElement.getReferencedElement());
+			}
 		}
+	}
+
+	public static List<SettingWithReferencedElement> collectOutgoingCrossReferences(IdEObjectCollection collection,
+		Set<EObject> allModelElements) {
+		// result object
+		List<SettingWithReferencedElement> settings = new ArrayList<SettingWithReferencedElement>();
+
 		for (EObject currentElement : allModelElements) {
-			// delete all non containment cross references to other elments
+
 			for (EReference reference : currentElement.eClass().getEAllReferences()) {
 				EClassifier eType = reference.getEType();
 				// sanity checks
@@ -1002,38 +1003,42 @@ public final class ModelUtil {
 					|| (!(eType instanceof EClass))) {
 					continue;
 				}
-				// single references
-				if (!reference.isMany()) {
-					EObject referencedElement = (EObject) currentElement.eGet(reference);
-					if (shouldBeDeleted(includeCrossReferencesToChildren, allModelElements, referencedElement)) {
-						currentElement.eUnset(reference);
-					}
-				}
+
+				Setting setting = ((InternalEObject) currentElement).eSetting(reference);
+
 				// multi references
-				else {
+				if (reference.isMany()) {
 					@SuppressWarnings("unchecked")
 					List<EObject> referencedElements = (List<EObject>) currentElement.eGet(reference);
-					Set<EObject> referencedElementsToRemove = new HashSet<EObject>();
 					for (EObject referencedElement : referencedElements) {
-						if (shouldBeDeleted(includeCrossReferencesToChildren, allModelElements, referencedElement)) {
-							referencedElementsToRemove.add(referencedElement);
+						if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+							settings.add(new SettingWithReferencedElement(setting, referencedElement));
 						}
 					}
-					referencedElements.removeAll(referencedElementsToRemove);
+				} else {
+					// single references
+
+					EObject referencedElement = (EObject) currentElement.eGet(reference);
+					if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+						settings.add(new SettingWithReferencedElement(setting, referencedElement));
+					}
+
 				}
 			}
 		}
+
+		return settings;
 	}
 
-	private static boolean shouldBeDeleted(boolean includeCrossReferencesToChildren, Set<EObject> allModelElements,
+	public static boolean shouldBeCollected(IdEObjectCollection collection, Set<EObject> allModelElements,
 		EObject referencedElement) {
 
-		if (referencedElement == null) {
+		if (referencedElement == null || !collection.containsInstance(referencedElement)) {
 			return false;
 		}
 
-		return (!ModelUtil.isSingleton(referencedElement) && !ModelUtil.isIgnoredDatatype(referencedElement))
-			&& (includeCrossReferencesToChildren || !allModelElements.contains(referencedElement));
+		return !ModelUtil.isSingleton(referencedElement) && !ModelUtil.isIgnoredDatatype(referencedElement)
+			&& !allModelElements.contains(referencedElement);
 	}
 
 	/**
@@ -1127,60 +1132,53 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Checks whether an element within the given {@link IdEObjectCollection} has any
-	 * incoming cross-references.
+	 * Checks whether any element within the given {@link Project} has any cross-references to the given {@link EObject}
+	 * .
 	 * 
-	 * @param element
-	 *            an {@link EObject}
-	 * @param collection
-	 *            an {@link IdEObjectCollection}
-	 * @param cutOffReferences
-	 *            whether cross-references should get cut off
-	 * @throws IllegalStateException if <code>cutOffReferences</code> is false and
-	 *             incoming cross-references have been found
+	 * @param element a {@link EObject}
+	 * @param project a {@link Project}
+	 * @param cutOffReferences whether cross-references should get cut off
+	 * @return true, if there are any cross-references to the {@link EObject} within the given {@link Project}
 	 */
-	public static void handleIncomingCrossReferences(EObject element, IdEObjectCollection collection,
-		boolean cutOffReferences) throws IllegalStateException {
+	public static boolean handleIncomingCrossReferences(EObject element, Project project, boolean cutOffReferences) {
+		Set<EObject> projectContents = project.getAllModelElements();
+		Set<EObject> elementEObjects = getAllContainedModelElements(element, false);
+		elementEObjects.add(element);
 
-		Set<EObject> children = getAllContainedModelElements(element, false);
-		children.add(element);
-
-		for (EObject modelElement : collection.getAllModelElements()) {
+		for (EObject eObject : projectContents) {
 
 			@SuppressWarnings("rawtypes")
-			EContentsEList.FeatureIterator featureIterator = (EContentsEList.FeatureIterator) modelElement
+			EContentsEList.FeatureIterator featureIterator = (EContentsEList.FeatureIterator) eObject
 				.eCrossReferences().iterator();
 
 			while (featureIterator.hasNext()) {
 				EObject referencedObject = (EObject) featureIterator.next();
 
-				if (!children.contains(referencedObject)) {
-					continue;
-				}
-
-				ModelElementId referencedObjectId = collection.getModelElementId(referencedObject) == null ? collection
-					.getDeletedModelElementId(referencedObject) : collection.getModelElementId(referencedObject);
-
-				ModelElementId elementId = collection.getModelElementId(element) == null ? collection
-					.getDeletedModelElementId(element) : collection.getModelElementId(element);
-
-				if (cutOffReferences) {
-					EReference eReference = (EReference) featureIterator.feature();
-					if (eReference.isMany()) {
-						@SuppressWarnings("unchecked")
-						List<EObject> eObjects = (List<EObject>) modelElement.eGet(eReference);
-						eObjects.remove(referencedObject);
-						logInfo("Cross-reference " + referencedObjectId + " removed from many reference " + eReference
-							+ ".");
+				if (elementEObjects.contains(referencedObject)) {
+					ModelElementId referencedObjectId = project.getModelElementId(referencedObject) == null ? project
+						.getDeletedModelElementId(referencedObject) : project.getModelElementId(referencedObject);
+					ModelElementId elementId = project.getModelElementId(element) == null ? project
+						.getDeletedModelElementId(element) : project.getModelElementId(element);
+					if (cutOffReferences) {
+						EReference eReference = (EReference) featureIterator.feature();
+						if (eReference.isMany()) {
+							@SuppressWarnings("unchecked")
+							List<EObject> eObjects = (List<EObject>) eObject.eGet(eReference);
+							eObjects.remove(referencedObject);
+							logInfo("Cross-reference " + referencedObjectId + " removed from many reference "
+								+ eReference + ".");
+						} else {
+							eObject.eUnset(eReference);
+							logInfo("Cross-reference " + referencedObject + " removed from " + eReference + ".");
+						}
 					} else {
-						modelElement.eUnset(eReference);
-						logInfo("Cross-reference " + referencedObject + " removed from " + eReference + ".");
+						throw new IllegalStateException("Cross-reference from " + referencedObject + " to " + elementId
+							+ " detected.");
 					}
-				} else {
-					throw new IllegalStateException("Cross-reference from " + referencedObject + " to " + elementId
-						+ " detected.");
 				}
 			}
 		}
+
+		return false;
 	}
 }
