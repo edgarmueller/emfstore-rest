@@ -67,7 +67,6 @@ import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundExceptio
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
-import org.eclipse.emf.emfstore.client.model.notification.NotificationGenerator;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -1530,12 +1529,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		setBaseVersion(resolvedVersion);
 		saveProjectSpaceOnly();
 
-		// create notifications only if the project is updated to a newer
-		// version
-		if (resolvedVersion.compareTo(baseVersion) == 1) {
-			generateNotifications(changes);
-		}
-
 		// TODO Chainsaw. Do we need this anymore?
 		if (observer != null) {
 			observer.updateCompleted(this);
@@ -1599,20 +1592,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	// }
 	// }
 
-	private void generateNotifications(List<ChangePackage> changes) {
-		// generate notifications from change packages, ignore all exception if
-		// any
-		try {
-			List<ESNotification> newNotifications = NotificationGenerator.getInstance(this).generateNotifications(
-				changes, this.getUsersession().getUsername());
-			this.getNotificationsFromComposite().addAll(newNotifications);
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil.logException("Creating notifications failed!", e);
-		}
-	}
-
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -1674,7 +1653,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		}
 		this.operationManager = new OperationManager(operationRecorder, this);
 		this.operationManager.addOperationListener(modifiedModelElementsCache);
-		statePersister = new StatePersister(operationRecorder.getChangeNotifier(),
+		statePersister = new StatePersister(((ProjectImpl) this.getProject()).getChangeNotifier(),
 			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()), this.getProject());
 		// TODO: initialization order important
 		// this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
@@ -1768,8 +1747,9 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		if (Configuration.isResourceSplittingEnabled()) {
 			splitResources(resourceSet, projectFragementsFileNamePrefix, resources, this.getProject());
 		} else {
-			for (EObject modelElement : project.getAllModelElements())
+			for (EObject modelElement : project.getAllModelElements()) {
 				((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
+			}
 		}
 
 		Resource operationCompositeResource = resourceSet.createResource(operationCompositeURI);
@@ -2203,7 +2183,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	private void notifyShareObservers() {
 		for (ShareObserver shareObserver : shareObservers) {
 			try {
-				shareObserver.shareDone();
+				shareObserver.shareDone(this);
 				// BEGIN SUPRESS CATCH EXCEPTION
 			} catch (RuntimeException e) {
 				// END SUPRESS CATCH EXCEPTION
