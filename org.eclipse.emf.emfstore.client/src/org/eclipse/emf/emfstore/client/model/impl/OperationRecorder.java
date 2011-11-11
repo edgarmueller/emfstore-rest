@@ -98,7 +98,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private List<OperationRecorderListener> operationRecordedListeners;
 
 	private EObjectChangeNotifier changeNotifier;
+
 	private boolean emitOperationsImmediatley;
+
+	private boolean checkForIncomingCrossReferences;
+	private boolean cutOffIncomingCrossReferences;
 
 	// TODO: provide ctor with 1 param
 
@@ -109,12 +113,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public OperationRecorder(NotifiableIdEObjectCollection collection, EObjectChangeNotifier changeNotifier) {
 		this.collection = collection;
 		this.changeNotifier = changeNotifier;
-		this.collection.addIdEObjectCollectionChangeObserver(this);
-		this.notificationRecorder = new NotificationRecorder();
-		this.operations = new ArrayList<AbstractOperation>();
+		checkForIncomingCrossReferences = false;
+		notificationRecorder = new NotificationRecorder();
+		operations = new ArrayList<AbstractOperation>();
 		operationRecordedListeners = new ArrayList<OperationRecorderListener>();
-
+		removedElements = new ArrayList<EObject>();
+		converter = new NotificationToOperationConverter(collection);
 		editingDomain = Configuration.getEditingDomain();
+
 		if (editingDomain == null) {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(new ComposedAdapterFactory(
@@ -124,6 +130,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		}
 
 		CommandStack commandStack = editingDomain.getCommandStack();
+		collection.addIdEObjectCollectionChangeObserver(this);
 
 		if (commandStack instanceof EMFStoreCommandStack) {
 			emfStoreCommandStack = (EMFStoreCommandStack) commandStack;
@@ -132,10 +139,21 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			throw new IllegalStateException("Setup of ResourceSet is invalid, there is no EMFStoreCommandStack!");
 		}
 
-		removedElements = new ArrayList<EObject>();
-		converter = new NotificationToOperationConverter(collection);
+		// explicitly disable checks for cross-references
+		checkForIncomingCrossReferences = false;
+		cutOffIncomingCrossReferences = false;
+
+		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.client.recording.options");
+		if (elements != null && elements.length > 0) {
+			checkForIncomingCrossReferences = Boolean.parseBoolean(elements[0]
+				.getAttribute("checkForIncomingCrossReferences"));
+			cutOffIncomingCrossReferences = Boolean.parseBoolean(elements[0]
+				.getAttribute("cutOffIncomingCrossReferences"));
+		}
 
 		// BEGIN SUPRESS CATCH EXCEPTION
+		// TODO: fix extension point usage
 		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
 			"org.eclipse.emf.emfstore.client.notify.postcreationlistener");
 		for (IConfigurationElement e : config) {
@@ -155,12 +173,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operations.clear();
 	}
 
-	// TODO: EM, remove method
-	public EObjectChangeNotifier getChangeNotifier() {
-		return changeNotifier;
-	}
-
-	public IdEObjectCollection getRootEObject() {
+	public IdEObjectCollection getCollection() {
 		return collection;
 	}
 
@@ -510,7 +523,17 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (!CommonUtil.isSelfContained(deletedElement, true)) {
 			throw new IllegalStateException(
 				"Element was removed from containment of project but still has cross references!: "
-					+ ModelUtil.getProject(deletedElement).getModelElementId(deletedElement).getId());
+					+ collection.getDeletedModelElementId(deletedElement).getId());
+		} else if (checkForIncomingCrossReferences) {
+
+			if (cutOffIncomingCrossReferences) {
+				// delete incoming cross references
+				Collection<Setting> inverseReferences = WorkspaceManager.getInstance().findInverseCrossReferences(
+					deletedElement);
+				ModelUtil.deleteIncomingCrossReferencesFromParent(inverseReferences, deletedElement);
+			} else {
+				ModelUtil.handleIncomingCrossReferences(deletedElement, collection, false);
+			}
 		}
 
 		if (!isRecording) {
@@ -717,7 +740,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 			stopChangeRecording();
 			try {
-				lastOp.reverse().apply(getRootEObject());
+				lastOp.reverse().apply(getCollection());
 				operations.remove(operations.size() - 1);
 			} finally {
 				startChangeRecording();
@@ -800,18 +823,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * Determines whether operations should be emitted immediately instead of
 	 * waiting until {@link OperationRecorder#commandCompleted(Command)} gets called.
 	 * 
-	 * @param emitOperationsImmediatley whether to emit operations emitted
-	 */
-	public void setEmitOperationsImmediatley(boolean emitOperationsImmediatley) {
-		this.emitOperationsImmediatley = emitOperationsImmediatley;
-	}
-
-	/**
-	 * Whether operations are emitted immediately.
-	 * 
 	 * @return true, if operations are emitted immediately, false otherwise
 	 */
 	public boolean isEmitOperationsImmediatleyEnabled() {
 		return emitOperationsImmediatley;
+	}
+
+	public void setEmitOperationsImmediatley(boolean shouldEmitOperationsImmediately) {
+		emitOperationsImmediatley = shouldEmitOperationsImmediately;
 	}
 }
