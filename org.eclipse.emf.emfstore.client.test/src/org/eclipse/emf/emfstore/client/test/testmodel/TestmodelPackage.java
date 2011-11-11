@@ -63,6 +63,15 @@ public interface TestmodelPackage extends EPackage {
 	int TEST_ELEMENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT__NAME = EcorePackage.EOBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -76,7 +85,7 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_ELEMENT__STRINGS = EcorePackage.EOBJECT_FEATURE_COUNT + 0;
+	int TEST_ELEMENT__STRINGS = EcorePackage.EOBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' reference list.
@@ -84,7 +93,7 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_ELEMENT__REFERENCES = EcorePackage.EOBJECT_FEATURE_COUNT + 1;
+	int TEST_ELEMENT__REFERENCES = EcorePackage.EOBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Contained Elements</b></em>' containment reference list.
@@ -93,7 +102,7 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_ELEMENT__CONTAINED_ELEMENTS = EcorePackage.EOBJECT_FEATURE_COUNT + 2;
+	int TEST_ELEMENT__CONTAINED_ELEMENTS = EcorePackage.EOBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Test Element</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
@@ -102,7 +111,7 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_ELEMENT_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 3;
+	int TEST_ELEMENT_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement <em>Test Element</em>}'.
@@ -112,6 +121,17 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTestElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getName()
+	 * @see #getTestElement()
+	 * @generated
+	 */
+	EAttribute getTestElement_Name();
 
 	/**
 	 * Returns the meta object for the attribute list '
@@ -175,6 +195,14 @@ public interface TestmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TEST_ELEMENT = eINSTANCE.getTestElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_ELEMENT__NAME = eINSTANCE.getTestElement_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature.
