@@ -482,7 +482,7 @@ public final class WorkspaceManager {
 	 */
 	public Collection<Setting> findInverseCrossReferences(EObject modelElement) {
 		if (crossReferenceAdapter != null) {
-			return crossReferenceAdapter.getInverseReferences(modelElement, true);
+			return crossReferenceAdapter.getInverseReferences(modelElement);
 		}
 
 		return UsageCrossReferencer.find(modelElement, resourceSet);
