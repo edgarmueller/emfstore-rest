@@ -191,14 +191,17 @@ public final class WorkspaceManager {
 
 		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
 			"org.eclipse.emf.emfstore.client.inverseCrossReferenceCache");
+		boolean useCrossReferenceAdapter = false;
+
 		if (elements != null && elements.length > 0) {
 			for (IConfigurationElement element : elements) {
-				boolean useCrossReferenceAdapter = Boolean.parseBoolean(element.getAttribute("activated"));
-				if (useCrossReferenceAdapter) {
-					crossReferenceAdapter = new ECrossReferenceAdapter();
-					resourceSet.eAdapters().add(crossReferenceAdapter);
-				}
+				useCrossReferenceAdapter |= Boolean.parseBoolean(element.getAttribute("activated"));
 			}
+		}
+
+		if (useCrossReferenceAdapter) {
+			crossReferenceAdapter = new ECrossReferenceAdapter();
+			resourceSet.eAdapters().add(crossReferenceAdapter);
 		}
 
 		// register an editing domain on the resource
