@@ -1637,7 +1637,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		this.operationRecorder = new OperationRecorder(this.getProject(),
 			((ProjectImpl) this.getProject()).getChangeNotifier());
 		if (Configuration.isTesting()) {
-			// this.operationRecorder.setEmitOperationsImmediatley(true);
+			this.operationRecorder.setEmitOperationsImmediately(true);
 		}
 		this.operationManager = new OperationManager(operationRecorder, this);
 		this.operationManager.addOperationListener(modifiedModelElementsCache);

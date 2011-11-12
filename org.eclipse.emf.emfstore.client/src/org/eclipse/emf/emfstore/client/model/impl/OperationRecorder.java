@@ -103,6 +103,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private EObjectChangeNotifier changeNotifier;
 	private boolean checkForIncomingCrossReferences;
 	private boolean cutOffIncomingCrossReferences;
+	private boolean emitOperationsImmediately;
 
 	/**
 	 * Constructor.
@@ -214,13 +215,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			if (this.compositeOperation != null) {
 				compositeOperation.getSubOperations().add(createDeleteOperation);
 			} else {
-				// TODO: EM
-				if (commandIsRunning) {
+				if (commandIsRunning && !emitOperationsImmediately) {
 					operations.add(createDeleteOperation);
 				} else {
 					operationRecorded(createDeleteOperation);
 				}
-				// projectSpace.addOperation(createDeleteOperation);
 			}
 		}
 	}
@@ -824,13 +823,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 						// composites
 						op.setMainOperation(ops.get(ops.size() - 1));
 						op.setModelElementId((ModelElementId) EcoreUtil.copy(op.getMainOperation().getModelElementId()));
-						if (commandIsRunning) {
+						if (commandIsRunning && !emitOperationsImmediately) {
 							operations.add(op);
 						} else {
 							operationRecorded(op);
 						}
 					} else if (ops.size() == 1) {
-						if (commandIsRunning) {
+						if (commandIsRunning && !emitOperationsImmediately) {
 							operations.add(ops.get(0));
 						} else {
 							operationRecorded(ops.get(0));
@@ -849,13 +848,17 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operationsRecorded(Arrays.asList(op));
 	}
 
-	public void projectDeleted(IdEObjectCollection project) {
-		// TODO Auto-generated method stub
-
-	}
-
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)
+	 */
 	public void collectionDeleted(IdEObjectCollection collection) {
-		// TODO Auto-generated method stub
-
+		// do nothing
 	}
+
+	public void setEmitOperationsImmediately(boolean emitOperationsImmediately) {
+		this.emitOperationsImmediately = emitOperationsImmediately;
+	}
+
 }
