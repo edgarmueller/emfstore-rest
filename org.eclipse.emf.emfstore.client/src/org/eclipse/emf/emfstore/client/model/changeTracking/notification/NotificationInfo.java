@@ -518,6 +518,11 @@ public class NotificationInfo implements Notification {
 
 	}
 
+	/**
+	 * Returns the type of the {@link Notification}.
+	 * 
+	 * @return a {@link Notification} type
+	 */
 	public Class<? extends Notification> getNotificationType() {
 		return notification.getClass();
 	}
