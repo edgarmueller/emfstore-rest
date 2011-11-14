@@ -891,6 +891,65 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	}
 
 	@Test
+	public void checkPersistentModelElementDeletion() throws IOException {
+		final EClass clazz = EcoreFactory.eINSTANCE.createEClass();
+		clazz.setName("clazz");
+		final EStructuralFeature attribute = EcoreFactory.eINSTANCE.createEAttribute();
+		final EStructuralFeature attribute2 = EcoreFactory.eINSTANCE.createEAttribute();
+		attribute.setName("attribute1");
+		attribute2.setName("attribute2");
+
+		clazz.getEStructuralFeatures().add(attribute2);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(attribute);
+				getProject().addModelElement(clazz);
+			}
+		}.run(false);
+
+		assertEquals(2, getProject().getModelElements().size()); // clazz, attribute
+		assertEquals(attribute, getProject().getModelElements().get(0));
+		assertEquals(clazz, getProject().getModelElements().get(1));
+		assertEquals(3, getProject().getAllModelElements().size()); // clazz, attribute, attribute2
+		clearOperations();
+
+		// delete one ModelElement
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				EcoreUtil.delete(attribute);
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+		assertEquals(1, operations.size()); // one delete operation
+		assertEquals(true, operations.get(0) instanceof CreateDeleteOperation);
+		CreateDeleteOperation operation = (CreateDeleteOperation) operations.get(0);
+		assertEquals(true, operation.isDelete());
+		assertEquals(getProject().getDeletedModelElementId(attribute), operation.getModelElementId());
+
+		assertEquals(1, getProject().getModelElements().size()); // clazz
+		assertEquals(clazz, getProject().getModelElements().get(0));
+		assertEquals(2, getProject().getAllModelElements().size()); // clazz, attribute2
+
+		// load ProjectSpace from Resource and initialize
+		((ProjectSpaceImpl) getProjectSpace()).saveProjectSpaceOnly();
+		ProjectSpace loadedProjectSpace = ModelUtil.loadEObjectFromResource(ModelPackage.eINSTANCE.getProjectSpace(),
+			getProjectSpace().eResource().getURI(), false);
+		loadedProjectSpace.init();
+
+		// perform asserts with loaded project space
+		assertTrue(ModelUtil.areEqual(getProjectSpace(), loadedProjectSpace));
+		Project loadedProject = loadedProjectSpace.getProject();
+		assertEquals(1, loadedProject.getModelElements().size()); // clazz
+		assertEquals(getProject().getModelElementId(clazz),
+			loadedProject.getModelElementId(loadedProject.getModelElements().get(0)));
+		assertEquals(2, loadedProject.getAllModelElements().size()); // clazz, attribute2
+	}
+
+	@Test
 	public void testECoreUtilCopyWithMeetings() {
 		// create a meeting with composite and subsections including intra - cross references
 		CompositeMeetingSection compMeetingSection = MeetingFactory.eINSTANCE.createCompositeMeetingSection();
