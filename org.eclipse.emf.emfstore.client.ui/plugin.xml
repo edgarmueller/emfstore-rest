@@ -1340,8 +1340,7 @@
    <extension
          point="org.eclipse.emf.emfstore.client.sessionprovider">
       <sessionProvider
-            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.SessionProvider">
+            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginController">
       </sessionProvider>
    </extension>
-
 </plugin>

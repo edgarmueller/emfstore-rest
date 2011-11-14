@@ -16,6 +16,10 @@ public abstract class ServerCall {
 		this.projectSpace = projectSpace;
 	}
 
+	public void setUsersession(Usersession usersession) {
+		this.usersession = usersession;
+	}
+
 	public Usersession getUsersession() {
 		return usersession;
 	}

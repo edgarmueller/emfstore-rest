@@ -73,4 +73,12 @@ public interface ConnectionManager extends EmfStore {
 	 * @throws EmfStoreException in case of failure on server
 	 */
 	void logout(SessionId sessionId) throws EmfStoreException;
+
+	/**
+	 * Checks whether session id is logged in.
+	 * 
+	 * @param id session id
+	 * @return true, if logged in
+	 */
+	boolean isLoggedIn(SessionId id);
 }

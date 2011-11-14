@@ -226,4 +226,14 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 		return getConnectionProxy(sessionId).callWithListResult("getEMFProperties", EMFStoreProperty.class, sessionId,
 			projectId);
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager#isLoggedIn(org.eclipse.emf.emfstore.server.model.SessionId)
+	 */
+	public boolean isLoggedIn(SessionId id) {
+		return hasConnectionProxy(id);
+	}
 }

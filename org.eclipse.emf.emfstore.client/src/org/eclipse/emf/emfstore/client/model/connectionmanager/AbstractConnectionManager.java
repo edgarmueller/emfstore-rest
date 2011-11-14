@@ -76,4 +76,14 @@ public abstract class AbstractConnectionManager<T> {
 	protected Map<SessionId, T> getConnectionProxyMap() {
 		return map;
 	}
+
+	/**
+	 * Checks whether there is a connection proxy.
+	 * 
+	 * @param session id
+	 * @return true if id has a connection proxy
+	 */
+	public boolean hasConnectionProxy(SessionId id) {
+		return map.get(id) != null;
+	}
 }
