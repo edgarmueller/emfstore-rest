@@ -19,9 +19,11 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.EMFStorePropertyType;
 import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
@@ -29,7 +31,8 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
  * project space.
  * 
  * @author haunolder
- * **/
+ * 
+ **/
 public final class PropertyManager {
 
 	private final ProjectSpace projectSpace;
@@ -39,11 +42,11 @@ public final class PropertyManager {
 	/**
 	 * PropertyManager constructor.
 	 * 
-	 * @param pS
+	 * @param projectSpace
 	 *            projectSpace for this PropertyManager ProjectSpace
-	 * **/
-	public PropertyManager(ProjectSpace pS) {
-		this.projectSpace = pS;
+	 **/
+	public PropertyManager(ProjectSpace projectSpace) {
+		this.projectSpace = projectSpace;
 	}
 
 	/**
@@ -53,7 +56,7 @@ public final class PropertyManager {
 	 *            of the local property as String
 	 * @param value
 	 *            of the local property as EObject
-	 * **/
+	 **/
 	public void setLocalProperty(String key, EObject value) {
 		EMFStoreProperty prop = createProperty(key, value);
 		prop.setType(EMFStorePropertyType.LOCAL);
@@ -73,7 +76,7 @@ public final class PropertyManager {
 	 * @param key
 	 *            of the local property
 	 * @return EObject the local property
-	 * **/
+	 **/
 	public EObject getLocalProperty(String key) {
 		if (this.localProperties == null) {
 			this.localProperties = new HashMap<String, EObject>();
@@ -90,7 +93,7 @@ public final class PropertyManager {
 	 *            of the local property
 	 * @param value
 	 *            of the local property
-	 * */
+	 **/
 	public void setLocalStringProperty(String key, String value) {
 		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
@@ -105,7 +108,7 @@ public final class PropertyManager {
 	 *            of the local property
 	 * @return property value as String
 	 * 
-	 * **/
+	 **/
 	public String getLocalStringProperty(String key) {
 		PropertyStringValue propertyValue = (PropertyStringValue) getLocalProperty(key);
 		if (propertyValue != null) {
@@ -124,7 +127,7 @@ public final class PropertyManager {
 	 * @param value
 	 *            of the shared property as String
 	 * 
-	 * **/
+	 **/
 	public void setSharedStringProperty(String key, String value) {
 		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
@@ -138,7 +141,7 @@ public final class PropertyManager {
 	 * @param key
 	 *            of the shared property as String
 	 * @return value of the shared property as String
-	 * **/
+	 **/
 	public String getSharedStringProperty(String key) {
 		if (key != null) {
 			PropertyStringValue propertyValue = (PropertyStringValue) getSharedProperty(key);
@@ -156,7 +159,7 @@ public final class PropertyManager {
 	 *            of the shared property as String
 	 * @param value
 	 *            of the shared property as EObject
-	 * **/
+	 **/
 	public void setSharedProperty(String key, EObject value) {
 		EMFStoreProperty prop = createProperty(key, value);
 		prop.setType(EMFStorePropertyType.SHARED);
@@ -177,7 +180,7 @@ public final class PropertyManager {
 	 * @param key
 	 *            of the shared property as String
 	 * @return value of the shared property as EObject
-	 * */
+	 **/
 	public EObject getSharedProperty(String key) {
 		if (this.sharedProperties == null) {
 			this.sharedProperties = new HashMap<String, EObject>();
@@ -193,8 +196,16 @@ public final class PropertyManager {
 	 * 
 	 * @throws EmfStoreException
 	 *             if any error occurs in the EmfStore
-	 * */
+	 **/
 	public void transmit() throws EmfStoreException {
+
+		try {
+			new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
+		} catch (AccessControlException e) {
+			// do not transmit properties if user is a reader
+			return;
+		}
+
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>();
 
 		for (EMFStoreProperty prop : this.projectSpace.getChangedSharedProperties().values()) {

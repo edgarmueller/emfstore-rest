@@ -233,7 +233,7 @@ public class ModifiedModelElementsCache implements OperationListener,
 	public void commitCompleted(ProjectSpace projectSpace,
 			PrimaryVersionSpec newRevision) {
 		// do the same as when project has been shared
-		shareDone();
+		shareDone(projectSpace);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class ModifiedModelElementsCache implements OperationListener,
 	/**
 	 * {@inheritDoc}
 	 */
-	public void shareDone() {
+	public void shareDone(ProjectSpace projectSpace) {
 		modifiedModelElementParents.clear();
 		modifiedModelElements.clear();
 	}

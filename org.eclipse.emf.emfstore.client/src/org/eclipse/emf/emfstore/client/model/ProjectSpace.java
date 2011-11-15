@@ -864,6 +864,8 @@ public interface ProjectSpace extends IdentifiableElement {
 	 */
 	void addCommitObserver(CommitObserver observer);
 
+	void addOperations(List<? extends AbstractOperation> operations);
+
 	/**
 	 * Remove a commit observer from the project space.
 	 * 
@@ -896,8 +898,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	 *            operation listener
 	 */
 	// void addOperationListener(OperationListener operationListener);
-
-	void addOperation(AbstractOperation operation);
 
 	/**
 	 * @param name

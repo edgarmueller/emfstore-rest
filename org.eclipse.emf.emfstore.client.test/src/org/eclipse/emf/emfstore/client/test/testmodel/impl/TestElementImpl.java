@@ -7,10 +7,12 @@ package org.eclipse.emf.emfstore.client.test.testmodel.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -24,6 +26,7 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStrings <em>Strings</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElements <em>Contained Elements</em>}</li>
@@ -33,6 +36,26 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * @generated
  */
 public class TestElementImpl extends EObjectImpl implements TestElement {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getStrings() <em>Strings</em>}' attribute list.
 	 * <!-- begin-user-doc --> <!--
@@ -77,6 +100,27 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	@Override
 	protected EClass eStaticClass() {
 		return TestmodelPackage.Literals.TEST_ELEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -132,6 +176,8 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TestmodelPackage.TEST_ELEMENT__NAME:
+				return getName();
 			case TestmodelPackage.TEST_ELEMENT__STRINGS:
 				return getStrings();
 			case TestmodelPackage.TEST_ELEMENT__REFERENCES:
@@ -150,6 +196,9 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TestmodelPackage.TEST_ELEMENT__NAME:
+				setName((String)newValue);
+				return;
 			case TestmodelPackage.TEST_ELEMENT__STRINGS:
 				getStrings().clear();
 				getStrings().addAll((Collection<? extends String>)newValue);
@@ -173,6 +222,9 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TestmodelPackage.TEST_ELEMENT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case TestmodelPackage.TEST_ELEMENT__STRINGS:
 				getStrings().clear();
 				return;
@@ -193,6 +245,8 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TestmodelPackage.TEST_ELEMENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TestmodelPackage.TEST_ELEMENT__STRINGS:
 				return strings != null && !strings.isEmpty();
 			case TestmodelPackage.TEST_ELEMENT__REFERENCES:
@@ -212,7 +266,9 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (strings: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", strings: ");
 		result.append(strings);
 		result.append(')');
 		return result.toString();

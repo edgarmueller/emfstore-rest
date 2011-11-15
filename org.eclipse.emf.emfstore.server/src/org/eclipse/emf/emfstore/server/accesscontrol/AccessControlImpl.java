@@ -46,8 +46,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin;
  * @author koegel
  * @author wesendonk
  */
-public class AccessControlImpl implements AuthenticationControl,
-		AuthorizationControl {
+public class AccessControlImpl implements AuthenticationControl, AuthorizationControl {
 
 	private Map<SessionId, ACUserContainer> sessionUserMap;
 	private ServerSpace serverSpace;
@@ -61,20 +60,16 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @throws FatalEmfStoreException
 	 *             an exception
 	 */
-	public AccessControlImpl(ServerSpace serverSpace)
-			throws FatalEmfStoreException {
+	public AccessControlImpl(ServerSpace serverSpace) throws FatalEmfStoreException {
 		this.sessionUserMap = new HashMap<SessionId, ACUserContainer>();
 		this.serverSpace = serverSpace;
 
-		authenticationControl = getAuthenticationFactory()
-				.createAuthenticationControl();
+		authenticationControl = getAuthenticationFactory().createAuthenticationControl();
 	}
 
 	private AuthenticationControlFactory getAuthenticationFactory() {
-		IConfigurationElement[] config = Platform
-				.getExtensionRegistry()
-				.getConfigurationElementsFor(
-						"org.eclipse.emf.emfstore.server.authenticationfactory");
+		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.server.authenticationfactory");
 
 		// get all providers from the extension points
 		for (IConfigurationElement e : config) {
@@ -99,13 +94,11 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl#logIn(java.lang.String,
 	 *      java.lang.String)
 	 */
-	public SessionId logIn(String username, String password,
-			ClientVersionInfo clientVersionInfo) throws AccessControlException {
-		synchronized (MonitorProvider.getInstance()
-				.getMonitor("authentication")) {
+	public SessionId logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+		throws AccessControlException {
+		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
 			ACUser user = resolveUser(username);
-			SessionId sessionId = authenticationControl.logIn(user.getName(),
-					password, clientVersionInfo);
+			SessionId sessionId = authenticationControl.logIn(user.getName(), password, clientVersionInfo);
 			sessionUserMap.put(sessionId, new ACUserContainer(user));
 			return sessionId;
 		}
@@ -117,8 +110,7 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl#logout(org.eclipse.emf.emfstore.server.model.SessionId)
 	 */
 	public void logout(SessionId sessionId) throws AccessControlException {
-		synchronized (MonitorProvider.getInstance()
-				.getMonitor("authentication")) {
+		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
 			if (sessionId == null) {
 				throw new AccessControlException("SessionId is null.");
 			}
@@ -162,8 +154,8 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkWriteAccess(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId, java.util.Set)
 	 */
-	public void checkWriteAccess(SessionId sessionId, ProjectId projectId,
-			Set<EObject> modelElements) throws AccessControlException {
+	public void checkWriteAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
+		throws AccessControlException {
 		checkSession(sessionId);
 		ACUser user = getUser(sessionId);
 		List<Role> roles = new ArrayList<Role>();
@@ -192,12 +184,10 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @return true if one of the roles can write
 	 * @throws AccessControlException
 	 */
-	private boolean canWrite(List<Role> roles, ProjectId projectId,
-			EObject modelElement) throws AccessControlException {
+	private boolean canWrite(List<Role> roles, ProjectId projectId, EObject modelElement) throws AccessControlException {
 		for (Role role : roles) {
-			if (role.canModify(projectId, modelElement)
-					|| role.canCreate(projectId, modelElement)
-					|| role.canDelete(projectId, modelElement)) {
+			if (role.canModify(projectId, modelElement) || role.canCreate(projectId, modelElement)
+				|| role.canDelete(projectId, modelElement)) {
 				return true;
 			}
 		}
@@ -217,8 +207,7 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @return true if one of the roles can read
 	 * @throws AccessControlException
 	 */
-	private boolean canRead(List<Role> roles, ProjectId projectId,
-			EObject modelElement) throws AccessControlException {
+	private boolean canRead(List<Role> roles, ProjectId projectId, EObject modelElement) throws AccessControlException {
 		for (Role role : roles) {
 			if (role.canRead(projectId, modelElement)) {
 				return true;
@@ -241,7 +230,12 @@ public class AccessControlImpl implements AuthenticationControl,
 			for (ACGroup group : serverSpace.getGroups()) {
 				if (group.getMembers().contains(orgUnit)) {
 					groups.add(group);
-					groups.addAll(getGroups(group));
+					for (ACGroup g : getGroups(group)) {
+						if (groups.contains(g)) {
+							continue;
+						}
+						groups.add(g);
+					}
 				}
 			}
 			return groups;
@@ -265,8 +259,8 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkReadAccess(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId, java.util.Set)
 	 */
-	public void checkReadAccess(SessionId sessionId, ProjectId projectId,
-			Set<EObject> modelElements) throws AccessControlException {
+	public void checkReadAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
+		throws AccessControlException {
 		checkSession(sessionId);
 		ACUser user = getUser(sessionId);
 		List<Role> roles = new ArrayList<Role>();
@@ -288,8 +282,7 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
-	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId)
-			throws AccessControlException {
+	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId) throws AccessControlException {
 		checkSession(sessionId);
 		ACUser user = getUser(sessionId);
 		List<Role> roles = new ArrayList<Role>();
@@ -308,8 +301,7 @@ public class AccessControlImpl implements AuthenticationControl,
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkServerAdminAccess(org.eclipse.emf.emfstore.server.model.SessionId)
 	 */
-	public void checkServerAdminAccess(SessionId sessionId)
-			throws AccessControlException {
+	public void checkServerAdminAccess(SessionId sessionId) throws AccessControlException {
 		checkSession(sessionId);
 		ACUser user = getUser(sessionId);
 		List<Role> roles = new ArrayList<Role>();
@@ -327,15 +319,10 @@ public class AccessControlImpl implements AuthenticationControl,
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACUser resolveUser(SessionId sessionId)
-			throws AccessControlException {
+	public ACUser resolveUser(SessionId sessionId) throws AccessControlException {
 		checkSession(sessionId);
 		ACUser tmpUser = sessionUserMap.get(sessionId).getRawUser();
-		ACUser user = EcoreUtil.copy(tmpUser);
-		for (Role role : getRolesFromGroups(tmpUser)) {
-			user.getRoles().add(EcoreUtil.copy(role));
-		}
-		return user;
+		return copyAndResolveUser(tmpUser);
 	}
 
 	/**
@@ -343,10 +330,22 @@ public class AccessControlImpl implements AuthenticationControl,
 	 */
 	public ACUser resolveUser(ACOrgUnitId id) throws AccessControlException {
 		ACUser tmpUser = getUser(id);
+		return copyAndResolveUser(tmpUser);
+	}
+
+	private ACUser copyAndResolveUser(ACUser tmpUser) {
 		ACUser user = EcoreUtil.copy(tmpUser);
 		for (Role role : getRolesFromGroups(tmpUser)) {
 			user.getRoles().add(EcoreUtil.copy(role));
 		}
+
+		for (ACGroup group : getGroups(tmpUser)) {
+			if (user.getEffectiveGroups().contains(group)) {
+				continue;
+			}
+			user.getEffectiveGroups().add(EcoreUtil.copy(group));
+		}
+
 		return user;
 	}
 
@@ -393,11 +392,9 @@ public class AccessControlImpl implements AuthenticationControl,
 
 		public void checkLastActive() throws AccessControlException {
 			// OW finish implementing this method
-			String property = ServerConfiguration.getProperties().getProperty(
-					ServerConfiguration.SESSION_TIMEOUT,
-					ServerConfiguration.SESSION_TIMEOUT_DEFAULT);
-			if (System.currentTimeMillis() - lastActive > Integer
-					.parseInt(property)
+			String property = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SESSION_TIMEOUT,
+				ServerConfiguration.SESSION_TIMEOUT_DEFAULT);
+			if (System.currentTimeMillis() - lastActive > Integer.parseInt(property)
 			/*
 			 * || System.currentTimeMillis() - firstActive >
 			 * Integer.parseInt(property)

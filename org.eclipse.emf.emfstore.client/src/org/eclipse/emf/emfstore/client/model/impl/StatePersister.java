@@ -195,6 +195,11 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	}
 
 	private void setModelElementIdAndChildrenIdOnResource(XMIResource resource, EObject modelElement) {
+
+		if (modelElement instanceof IdEObjectCollection) {
+			return;
+		}
+
 		ModelElementId modelElementId = collection.getModelElementId(modelElement);
 
 		if (modelElementId == null) {

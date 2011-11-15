@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 
 /**
- * @author koegel,
+ * @author koegel
  * @author naughton
  * @author emueller
  * 
