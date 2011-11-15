@@ -19,4 +19,8 @@ public class LoginController implements SessionProvider {
 		dialog.open();
 	}
 
+	public Object getServerInfoInput() {
+		return null;
+	}
+
 }

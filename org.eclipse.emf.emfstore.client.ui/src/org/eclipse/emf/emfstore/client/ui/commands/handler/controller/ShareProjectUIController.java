@@ -1,8 +1,9 @@
-package org.eclipse.emf.emfstore.client.ui.commands.handler;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.ShareCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 

@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.client.ui.commands.handler;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.commands.MergeProjectHandler;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;

@@ -1,6 +1,8 @@
-package org.eclipse.emf.emfstore.client.ui.commands.handler;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.handler;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UpdateProjectUIController;
 
 public class UpdateProjectHandler extends AbstractEMFStoreHandler {
 
