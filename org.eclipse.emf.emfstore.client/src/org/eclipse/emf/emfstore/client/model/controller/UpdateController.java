@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.client.model.exceptions.NoChangesOnServerException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
@@ -17,11 +15,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
-public class UpdateController extends ServerCall {
+public class UpdateController extends ServerCall<UpdateCallback> {
 
 	private VersionSpec version;
-	private UpdateCallback callback;
-	private IProgressMonitor progress;
 
 	public UpdateController(ProjectSpaceImpl projectSpace, VersionSpec version, UpdateCallback callback,
 		IProgressMonitor progress) {
@@ -35,64 +31,60 @@ public class UpdateController extends ServerCall {
 		if (callback == null) {
 			callback = UpdateCallback.NOCALLBACK;
 		}
-		if (progress == null) {
-			progress = new NullProgressMonitor();
-		}
 		this.version = version;
-		this.callback = callback;
-		this.progress = progress;
+		setCallback(callback);
+		setProgressMonitor(progress);
 	}
 
 	@Override
 	protected void run() throws EmfStoreException {
-		doUpdate(version, callback, progress);
+		doUpdate(version);
 	}
 
-	private void doUpdate(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
-		throws EmfStoreException {
-		progress.beginTask("Updating Project", 100);
-		progress.worked(1);
-		progress.subTask("Resolving new version");
+	private void doUpdate(VersionSpec version) throws EmfStoreException {
+		getProgressMonitor().beginTask("Updating Project", 100);
+		getProgressMonitor().worked(1);
+		getProgressMonitor().subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
-			// TODO ASYNC maybe we shouldn't throw an exception and create a method in the callback instead
-			callback.handleException(new NoChangesOnServerException());
+			getCallBack().noChangesOnServer();
 			return;
 		}
-		progress.worked(5);
-		if (progress.isCanceled()) {
-			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		getProgressMonitor().worked(5);
+		if (getProgressMonitor().isCanceled()) {
+			updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 
-		progress.subTask("Fetching changes from server");
+		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new ArrayList<ChangePackage>();
 		changes = getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
 			getProjectSpace().getBaseVersion(), resolvedVersion);
 		ChangePackage localchanges = getProjectSpace().getLocalChangePackage(false);
-		progress.worked(65);
-		if (progress.isCanceled()) {
-			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		getProgressMonitor().worked(65);
+		if (getProgressMonitor().isCanceled()) {
+			updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 
-		progress.subTask("Checking for conflicts");
+		getProgressMonitor().subTask("Checking for conflicts");
 		ConflictDetector conflictDetector = new ConflictDetector();
 		for (ChangePackage change : changes) {
 			if (conflictDetector.doConflict(change, localchanges)) {
-				callback.handleException(new ChangeConflictException(changes, getProjectSpace(), conflictDetector));
+				getCallBack().conflictOccurred(
+					new ChangeConflictException(changes, getProjectSpace(), conflictDetector));
 				return;
 			}
 		}
-		progress.worked(15);
-		if (progress.isCanceled()) {
-			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		getProgressMonitor().worked(15);
+		if (getProgressMonitor().isCanceled()) {
+			updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 
-		if (callback.inspectChanges(getProjectSpace(), changes)) {
-			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		if (getCallBack().inspectChanges(getProjectSpace(), changes)) {
+			updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
 
-		progress.subTask("Applying changes");
+		getProgressMonitor().subTask("Applying changes");
 		final List<ChangePackage> cps = changes;
 		// revert
 		getProjectSpace().revert();
@@ -116,7 +108,7 @@ public class UpdateController extends ServerCall {
 		}
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
-		updateDone(callback, progress, oldVersion, getProjectSpace().getBaseVersion());
+		updateDone(oldVersion, getProjectSpace().getBaseVersion());
 
 		// check for operations on file attachments: if version has been
 		// increased and file is required offline, add to
@@ -126,14 +118,8 @@ public class UpdateController extends ServerCall {
 
 	// TODO ASYNC introduce update canceled
 
-	private void updateDone(UpdateCallback callback, IProgressMonitor progress, PrimaryVersionSpec oldVersion,
-		PrimaryVersionSpec newVersion) {
-		callback.updateCompleted(getProjectSpace(), oldVersion, (newVersion == null) ? oldVersion : newVersion);
-		progress.done();
-	}
-
-	@Override
-	protected void handleException(Exception exception) {
-		callback.handleException(exception);
+	private void updateDone(PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
+		getCallBack().updateCompleted(getProjectSpace(), oldVersion, (newVersion == null) ? oldVersion : newVersion);
+		getProgressMonitor().done();
 	}
 }

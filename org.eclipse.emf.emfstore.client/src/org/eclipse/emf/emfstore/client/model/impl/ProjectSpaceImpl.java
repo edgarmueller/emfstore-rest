@@ -55,6 +55,8 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.controller.ShareCallback;
+import org.eclipse.emf.emfstore.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
@@ -2161,21 +2163,15 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		// If any files have already been added, upload them.
 		fileTransferManager.uploadQueuedFiles(new NullProgressMonitor());
 
-		notifyShareObservers();
+		WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(this);
 		getOperations().clear();
 		usersession.updateProjectInfos();
 		updateDirtyState();
 
 	}
 
-	private void notifyShareObservers() {
-		try {
-			WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(this);
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil.logException("ShareObserver failed with exception", e);
-		}
+	public void shareProject(Usersession session, ShareCallback callback, IProgressMonitor monitor) {
+		new ShareController(this, session, callback, monitor).execute();
 	}
 
 	/**
@@ -2724,6 +2720,15 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		}
 
 		return this.propertyManager;
+	}
+
+	/**
+	 * Retruns the statePersister
+	 * 
+	 * @return persister
+	 */
+	public StatePersister getStatePersister() {
+		return statePersister;
 	}
 
 } // ProjectContainerImpl

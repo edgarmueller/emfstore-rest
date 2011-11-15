@@ -94,7 +94,7 @@ public class NewLoginDialog extends TitleAreaDialog {
 		new Label(loginContainer, SWT.NONE);
 
 		initData();
-		loadUsersession(controller.getUsersession());
+		loadUsersession(controller.provideUsersession());
 		return area;
 	}
 

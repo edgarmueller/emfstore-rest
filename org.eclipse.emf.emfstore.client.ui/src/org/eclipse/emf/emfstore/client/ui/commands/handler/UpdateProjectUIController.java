@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.client.model.exceptions.NoChangesOnServerException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.commands.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
@@ -26,25 +25,20 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 	}
 
 	public void update(ProjectSpace projectSpace, VersionSpec version) {
-
 		// TODO sanity check projectspace (is null, is shared)
-
 		progressDialog = getProgressMonitorDialog();
 		projectSpace.update(version, this, progressDialog.getProgressMonitor());
 	}
 
-	@Override
-	public void handleException(Exception exception) {
-		if (exception instanceof NoChangesOnServerException) {
-			handleNoChangesException();
-		} else if (exception instanceof ChangeConflictException) {
-			handleChangeConflictException((ChangeConflictException) exception);
-		} else {
-			super.handleException(exception);
-		}
+	public void noChangesOnServer() {
+		handleNoChanges();
 	}
 
-	protected void handleNoChangesException() {
+	public void conflictOccurred(ChangeConflictException exception) {
+		handleChangeConflictException(exception);
+	}
+
+	protected void handleNoChanges() {
 		closeProgress();
 		MessageDialog.openInformation(getShell(), "No need to update",
 			"Your project is up to date, you do not need to update.");

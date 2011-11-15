@@ -6,7 +6,7 @@ public interface SessionProvider {
 
 	final String ID = "org.eclipse.emf.emfstore.client.sessionprovider";
 
-	Usersession getUsersession();
+	Usersession provideUsersession();
 
 	void loginSession(Usersession usersession);
 

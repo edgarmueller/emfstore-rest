@@ -2,11 +2,14 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 
 public class LoginController implements SessionProvider {
 
-	public Usersession getUsersession() {
+	public Usersession provideUsersession() {
+		MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "NOT IMPLEMENTED",
+			"THIS DIALOG SHOULD ALLOW YOU TO CHOOSE YOUR USERSESSION.");
 		return null;
 	}
 

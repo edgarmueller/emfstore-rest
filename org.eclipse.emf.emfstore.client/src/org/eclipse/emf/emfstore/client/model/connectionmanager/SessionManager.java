@@ -79,8 +79,9 @@ public class SessionManager {
 
 		if (usersession == null) {
 			SessionProvider sessionProvider = getSessionProvider();
-			usersession = sessionProvider.getUsersession();
+			usersession = sessionProvider.provideUsersession();
 		}
+		serverCall.setUsersession(usersession);
 		return usersession;
 	}
 

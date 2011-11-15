@@ -130,6 +130,12 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.ShareProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
+           name="shareNEW">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.importProject"
            name="import">
@@ -341,32 +347,6 @@
                           forcePluginActivation="true"
                           property="org.eclipse.emf.emfstore.client.ui.commands.isAdmin"
                           value="true">
-                    </test>
-                 </iterate>
-                 <count
-                       value="1">
-                 </count>
-              </and>
-           </visibleWhen>
-        </command>
-        <command
-              commandId="org.eclipse.emf.emfstore.client.ui.shareProject"
-              icon="icons/arrow_out.png"
-              label="Share  Project"
-              style="push">
-           <visibleWhen
-                 checkEnabled="false">
-              <and>
-                 <iterate
-                       ifEmpty="false"
-                       operator="and">
-                    <instanceof
-                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
-                    </instanceof>
-                    <test
-                          forcePluginActivation="true"
-                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
-                          value="false">
                     </test>
                  </iterate>
                  <count
@@ -777,6 +757,32 @@
                           forcePluginActivation="true"
                           property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
                           value="true">
+                    </test>
+                 </iterate>
+                 <count
+                       value="1">
+                 </count>
+              </and>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
+              icon="icons/arrow_out.png"
+              label="NEW Share  Project"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <and>
+                 <iterate
+                       ifEmpty="false"
+                       operator="and">
+                    <instanceof
+                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
+                    </instanceof>
+                    <test
+                          forcePluginActivation="true"
+                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
+                          value="false">
                     </test>
                  </iterate>
                  <count

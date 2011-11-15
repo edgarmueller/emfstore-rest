@@ -10,7 +10,7 @@ public abstract class AbstractEMFStoreUIController {
 	protected ProgressMonitorDialog progressDialog;
 
 	protected ProgressMonitorDialog getProgressMonitorDialog() {
-		ProgressMonitorDialog progressDialog = new ProgressMonitorDialog(getShell());
+		progressDialog = new ProgressMonitorDialog(getShell());
 		progressDialog.open();
 		progressDialog.setCancelable(true);
 		return progressDialog;
