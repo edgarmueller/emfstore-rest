@@ -118,6 +118,12 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.UpdateProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.updateProjectNEW"
+           name="NEWupdate">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShareProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.shareProject"
            name="share">
@@ -731,6 +737,32 @@
         <command
               commandId="org.eclipse.emf.emfstore.client.ui.projectProperties"
               label="Properties"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <and>
+                 <iterate
+                       ifEmpty="false"
+                       operator="and">
+                    <instanceof
+                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
+                    </instanceof>
+                    <test
+                          forcePluginActivation="true"
+                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
+                          value="true">
+                    </test>
+                 </iterate>
+                 <count
+                       value="1">
+                 </count>
+              </and>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.updateProjectNEW"
+              icon="icons/arrow_up.png"
+              label="NEW Update Project"
               style="push">
            <visibleWhen
                  checkEnabled="false">
