@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -48,6 +49,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.AssociationClassElement;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -591,6 +593,7 @@ public final class ModelUtil {
 			resource = resourceSet.getResource(resourceURI, true);
 		}
 
+		resource.load(getResourceLoadOptions());
 		EList<EObject> contents = resource.getContents();
 
 		if (checkConstraints) {
@@ -919,16 +922,6 @@ public final class ModelUtil {
 	 * 
 	 * @param modelElement
 	 *            the model element
-	 * @param parent
-	 *            the project
-	 * @param includeChildren
-	 *            set to true, if incoming cross references to any children of
-	 *            the given element should also be deleted
-	 * @param includeCrossReferencesFromChildren
-	 *            set to true, if incoming cross references to children from
-	 *            other children including the given element should also be
-	 *            removed. These are cross references within the containment
-	 *            tree of the given element)
 	 */
 	public static void deleteIncomingCrossReferencesFromParent(Collection<Setting> inverseReferences,
 		EObject modelElement) {
@@ -977,23 +970,32 @@ public final class ModelUtil {
 	 * 
 	 * @param modelElement
 	 *            the model element
-	 * @param includeChildren
-	 *            set to true, if outgoing cross references of any children of
-	 *            the given element should also be deleted
-	 * @param includeCrossReferencesToChildren
-	 *            set to true, if outgoing cross references to children (that is
-	 *            within the containment tree of the given element) should also
-	 *            be removed.
 	 */
-	public static void deleteOutgoingCrossReferences(EObject modelElement, boolean includeChildren,
-		boolean includeCrossReferencesToChildren) {
+	public static void deleteOutgoingCrossReferences(IdEObjectCollection collection, EObject modelElement) {
 		Set<EObject> allModelElements = new HashSet<EObject>();
 		allModelElements.add(modelElement);
-		if (includeChildren) {
-			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+
+		List<SettingWithReferencedElement> crossReferences = collectOutgoingCrossReferences(collection,
+			allModelElements);
+		for (SettingWithReferencedElement settingWithReferencedElement : crossReferences) {
+			Setting setting = settingWithReferencedElement.getSetting();
+			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
+				setting.getEObject().eUnset(setting.getEStructuralFeature());
+			} else {
+				List<EObject> references = (List<EObject>) setting.getEObject().eGet(setting.getEStructuralFeature());
+				references.remove(settingWithReferencedElement.getReferencedElement());
+			}
 		}
+	}
+
+	public static List<SettingWithReferencedElement> collectOutgoingCrossReferences(IdEObjectCollection collection,
+		Set<EObject> allModelElements) {
+		// result object
+		List<SettingWithReferencedElement> settings = new ArrayList<SettingWithReferencedElement>();
+
 		for (EObject currentElement : allModelElements) {
-			// delete all non containment cross references to other elments
+
 			for (EReference reference : currentElement.eClass().getEAllReferences()) {
 				EClassifier eType = reference.getEType();
 				// sanity checks
@@ -1001,38 +1003,42 @@ public final class ModelUtil {
 					|| (!(eType instanceof EClass))) {
 					continue;
 				}
-				// single references
-				if (!reference.isMany()) {
-					EObject referencedElement = (EObject) currentElement.eGet(reference);
-					if (shouldBeDeleted(includeCrossReferencesToChildren, allModelElements, referencedElement)) {
-						currentElement.eUnset(reference);
-					}
-				}
+
+				Setting setting = ((InternalEObject) currentElement).eSetting(reference);
+
 				// multi references
-				else {
+				if (reference.isMany()) {
 					@SuppressWarnings("unchecked")
 					List<EObject> referencedElements = (List<EObject>) currentElement.eGet(reference);
-					Set<EObject> referencedElementsToRemove = new HashSet<EObject>();
 					for (EObject referencedElement : referencedElements) {
-						if (shouldBeDeleted(includeCrossReferencesToChildren, allModelElements, referencedElement)) {
-							referencedElementsToRemove.add(referencedElement);
+						if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+							settings.add(new SettingWithReferencedElement(setting, referencedElement));
 						}
 					}
-					referencedElements.removeAll(referencedElementsToRemove);
+				} else {
+					// single references
+
+					EObject referencedElement = (EObject) currentElement.eGet(reference);
+					if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+						settings.add(new SettingWithReferencedElement(setting, referencedElement));
+					}
+
 				}
 			}
 		}
+
+		return settings;
 	}
 
-	private static boolean shouldBeDeleted(boolean includeCrossReferencesToChildren, Set<EObject> allModelElements,
+	public static boolean shouldBeCollected(IdEObjectCollection collection, Set<EObject> allModelElements,
 		EObject referencedElement) {
 
-		if (referencedElement == null) {
+		if (referencedElement == null || !collection.containsInstance(referencedElement)) {
 			return false;
 		}
 
-		return (!ModelUtil.isSingleton(referencedElement) && !ModelUtil.isIgnoredDatatype(referencedElement))
-			&& (includeCrossReferencesToChildren || !allModelElements.contains(referencedElement));
+		return !ModelUtil.isSingleton(referencedElement) && !ModelUtil.isIgnoredDatatype(referencedElement)
+			&& !allModelElements.contains(referencedElement);
 	}
 
 	/**
@@ -1126,15 +1132,12 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Checks whether any element within the given {@link Project} has any
-	 * cross-references to the given {@link EObject} .
+	 * Checks whether any element within the given {@link Project} has any cross-references to the given {@link EObject}
+	 * .
 	 * 
-	 * @param element
-	 *            a {@link EObject}
-	 * @param project
-	 *            a {@link Project}
-	 * @param cutOffReferences
-	 *            whether cross-references should get cut off
+	 * @param element a {@link EObject}
+	 * @param project a {@link Project}
+	 * @param cutOffReferences whether cross-references should get cut off
 	 * @return true, if there are any cross-references to the {@link EObject} within the given {@link Project}
 	 */
 	public static boolean handleIncomingCrossReferences(EObject element, Project project, boolean cutOffReferences) {

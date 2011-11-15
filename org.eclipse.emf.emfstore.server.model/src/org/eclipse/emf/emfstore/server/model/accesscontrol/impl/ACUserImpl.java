@@ -10,9 +10,16 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.accesscontrol.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
@@ -23,6 +30,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  * <ul>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups <em>Effective Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +76,16 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @ordered
 	 */
 	protected String lastName = LAST_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEffectiveGroups() <em>Effective Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEffectiveGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ACGroup> effectiveGroups;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -125,6 +143,32 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ACGroup> getEffectiveGroups() {
+		if (effectiveGroups == null) {
+			effectiveGroups = new EObjectContainmentEList.Resolving<ACGroup>(ACGroup.class, this, AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS);
+		}
+		return effectiveGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
+				return ((InternalEList<?>)getEffectiveGroups()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -135,6 +179,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 				return getFirstName();
 			case AccesscontrolPackage.AC_USER__LAST_NAME:
 				return getLastName();
+			case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
+				return getEffectiveGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,6 +189,7 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -151,6 +198,10 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 				return;
 			case AccesscontrolPackage.AC_USER__LAST_NAME:
 				setLastName((String)newValue);
+				return;
+			case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
+				getEffectiveGroups().clear();
+				getEffectiveGroups().addAll((Collection<? extends ACGroup>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -169,6 +220,9 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 			case AccesscontrolPackage.AC_USER__LAST_NAME:
 				setLastName(LAST_NAME_EDEFAULT);
 				return;
+			case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
+				getEffectiveGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -184,6 +238,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 				return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
 			case AccesscontrolPackage.AC_USER__LAST_NAME:
 				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
+			case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
+				return effectiveGroups != null && !effectiveGroups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -20,18 +20,17 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Helperclass for file system operations.
+ * Helper class for file system operations.
  * 
  * @author wesendonk
  */
-// TODO: ChainSaw Move this to util package
 public final class FileUtil {
 
 	/**
 	 * Private constructor.
 	 */
 	private FileUtil() {
-		// for my beloved checkstyle
+
 	}
 
 	/**

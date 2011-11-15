@@ -217,9 +217,11 @@ public abstract class ServerRequestHandler extends AbstractHandler {
 	}
 
 	/**
-	 * @return the active shell.
+	 * Sets the active shell.
+	 * 
+	 * @param shell the shell to be set
 	 */
-	protected void setShell(Shell parent) {
-		shell = parent;
+	protected void setShell(Shell shell) {
+		this.shell = shell;
 	}
 }

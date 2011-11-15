@@ -46,6 +46,8 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
@@ -889,6 +891,65 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	}
 
 	@Test
+	public void checkPersistentModelElementDeletion() throws IOException {
+		final EClass clazz = EcoreFactory.eINSTANCE.createEClass();
+		clazz.setName("clazz");
+		final EStructuralFeature attribute = EcoreFactory.eINSTANCE.createEAttribute();
+		final EStructuralFeature attribute2 = EcoreFactory.eINSTANCE.createEAttribute();
+		attribute.setName("attribute1");
+		attribute2.setName("attribute2");
+
+		clazz.getEStructuralFeatures().add(attribute2);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(attribute);
+				getProject().addModelElement(clazz);
+			}
+		}.run(false);
+
+		assertEquals(2, getProject().getModelElements().size()); // clazz, attribute
+		assertEquals(attribute, getProject().getModelElements().get(0));
+		assertEquals(clazz, getProject().getModelElements().get(1));
+		assertEquals(3, getProject().getAllModelElements().size()); // clazz, attribute, attribute2
+		clearOperations();
+
+		// delete one ModelElement
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				EcoreUtil.delete(attribute);
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+		assertEquals(1, operations.size()); // one delete operation
+		assertEquals(true, operations.get(0) instanceof CreateDeleteOperation);
+		CreateDeleteOperation operation = (CreateDeleteOperation) operations.get(0);
+		assertEquals(true, operation.isDelete());
+		assertEquals(getProject().getDeletedModelElementId(attribute), operation.getModelElementId());
+
+		assertEquals(1, getProject().getModelElements().size()); // clazz
+		assertEquals(clazz, getProject().getModelElements().get(0));
+		assertEquals(2, getProject().getAllModelElements().size()); // clazz, attribute2
+
+		// load ProjectSpace from Resource and initialize
+		((ProjectSpaceImpl) getProjectSpace()).saveProjectSpaceOnly();
+		ProjectSpace loadedProjectSpace = ModelUtil.loadEObjectFromResource(ModelPackage.eINSTANCE.getProjectSpace(),
+			getProjectSpace().eResource().getURI(), false);
+		loadedProjectSpace.init();
+
+		// perform asserts with loaded project space
+		assertTrue(ModelUtil.areEqual(getProjectSpace(), loadedProjectSpace));
+		Project loadedProject = loadedProjectSpace.getProject();
+		assertEquals(1, loadedProject.getModelElements().size()); // clazz
+		assertEquals(getProject().getModelElementId(clazz),
+			loadedProject.getModelElementId(loadedProject.getModelElements().get(0)));
+		assertEquals(2, loadedProject.getAllModelElements().size()); // clazz, attribute2
+	}
+
+	@Test
 	public void testECoreUtilCopyWithMeetings() {
 		// create a meeting with composite and subsections including intra - cross references
 		CompositeMeetingSection compMeetingSection = MeetingFactory.eINSTANCE.createCompositeMeetingSection();
@@ -997,9 +1058,214 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertTrue(leafResource.getContents().size() == 0);
 	}
 
-	/**
-	 * Test creating an element in a non project containment.
-	 */
+	@Test
+	public void testCreateWithOneIngoingReference() {
+
+		final TestElement parentTestElement = getTestElement("parent");
+		final TestElement testElement = getTestElement("test1");
+		final TestElement testElement2 = getTestElement("test2");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(parentTestElement);
+				testElement.getReferences().add(testElement2);
+				parentTestElement.getContainedElements().add(testElement);
+			}
+		}.run(false);
+
+		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
+		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(getProject(), ModelUtil.getProject(testElement));
+		assertEquals(testElement, parentTestElement.getContainedElements().get(0));
+		assertEquals(testElement2, testElement.getReferences().get(0));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				clearOperations();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				parentTestElement.getContainedElements().add(testElement2);
+			}
+		}.run(false);
+
+		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
+		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(getProject(), ModelUtil.getProject(testElement));
+		assertEquals(testElement, parentTestElement.getContainedElements().get(0));
+		assertEquals(testElement2, testElement.getReferences().get(0));
+
+		assertEquals(true, getProject().containsInstance(testElement2));
+		assertEquals(getProject(), ModelUtil.getProject(testElement2));
+		assertEquals(testElement2, parentTestElement.getContainedElements().get(1));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+		assertEquals(2, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+
+		// ModelElementId testElementId = ModelUtil.getProject(testElement).getModelElementId(testElement);
+		ModelElementId testElement2Id = ModelUtil.getProject(testElement2).getModelElementId(testElement2);
+		// ModelElementId parentTestElementId = ModelUtil.getProject(parentTestElement).getModelElementId(
+		// parentTestElement);
+
+		assertEquals(testElement2Id, createDeleteOperation.getModelElementId());
+		assertEquals(1, createDeleteOperation.getSubOperations().size());
+		assertEquals(false, createDeleteOperation.isDelete());
+		assertTrue(CommonUtil.isSelfContained(createDeleteOperation, true));
+
+		MultiReferenceOperation subOperation1 = (MultiReferenceOperation) createDeleteOperation.getSubOperations().get(
+			0);
+
+		assertEquals(testElement, getProject().getModelElement(subOperation1.getModelElementId()));
+		assertEquals(testElement2, getProject().getModelElement(subOperation1.getReferencedModelElements().get(0)));
+
+		MultiReferenceOperation operation2 = (MultiReferenceOperation) operations.get(1);
+
+		assertEquals(parentTestElement, getProject().getModelElement(operation2.getModelElementId()));
+		assertEquals(testElement2, getProject().getModelElement(operation2.getReferencedModelElements().get(0)));
+	}
+
+	@Test
+	public void testCreateWithReferencesAndChildrenComplex() {
+
+		final TestElement parentTestElement = getTestElement("parentTestElement");
+		final TestElement testElement = getTestElement("testElement");
+		final TestElement newTestElement = getTestElement("newTestElement");
+		final TestElement newChildElement1 = getTestElement("newChildElement1");
+		final TestElement newChildElement2 = getTestElement("newChildElement2");
+		final TestElement newChildElement3 = getTestElement("newChildElement3");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(parentTestElement);
+				parentTestElement.getContainedElements().add(testElement);
+				newTestElement.getContainedElements().add(newChildElement1);
+				newTestElement.getContainedElements().add(newChildElement2);
+				newTestElement.getContainedElements().add(newChildElement3);
+				newChildElement1.getReferences().add(newTestElement);
+				newChildElement2.getReferences().add(newChildElement1);
+				newChildElement2.getReferences().add(testElement);
+				testElement.getReferences().add(newChildElement3);
+			}
+		}.run(false);
+
+		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
+		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(getProject(), ModelUtil.getProject(testElement));
+		assertEquals(false, getProject().containsInstance(newTestElement));
+		assertEquals(false, getProject().containsInstance(newChildElement1));
+		assertEquals(false, getProject().containsInstance(newChildElement2));
+		assertEquals(false, getProject().containsInstance(newChildElement3));
+
+		assertEquals(3, newTestElement.getContainedElements().size());
+		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
+		assertEquals(newChildElement2, newTestElement.getContainedElements().get(1));
+		assertEquals(newChildElement3, newTestElement.getContainedElements().get(2));
+
+		assertEquals(newTestElement, newChildElement1.getReferences().get(0));
+		assertEquals(newChildElement1, newChildElement2.getReferences().get(0));
+		assertEquals(testElement, newChildElement2.getReferences().get(1));
+		assertEquals(newChildElement3, testElement.getReferences().get(0));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				clearOperations();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				parentTestElement.getContainedElements().add(newTestElement);
+			}
+		}.run(false);
+
+		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
+		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(getProject(), ModelUtil.getProject(testElement));
+		assertEquals(true, getProject().containsInstance(newTestElement));
+		assertEquals(true, getProject().containsInstance(newChildElement1));
+		assertEquals(true, getProject().containsInstance(newChildElement2));
+		assertEquals(true, getProject().containsInstance(newChildElement3));
+
+		assertEquals(3, newTestElement.getContainedElements().size());
+		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
+		assertEquals(newChildElement2, newTestElement.getContainedElements().get(1));
+		assertEquals(newChildElement3, newTestElement.getContainedElements().get(2));
+
+		assertEquals(newTestElement, newChildElement1.getReferences().get(0));
+		assertEquals(newChildElement1, newChildElement2.getReferences().get(0));
+		assertEquals(testElement, newChildElement2.getReferences().get(1));
+		assertEquals(newChildElement3, testElement.getReferences().get(0));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+		assertEquals(2, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+
+		ModelElementId newTestElementId = ModelUtil.getProject(newTestElement).getModelElementId(newTestElement);
+		TestElement copiedNewTestElement = (TestElement) createDeleteOperation.getModelElement();
+		TestElement copiedNewChildElement1 = copiedNewTestElement.getContainedElements().get(0);
+		TestElement copiedNewChildElement2 = copiedNewTestElement.getContainedElements().get(1);
+		TestElement copiedNewChildElement3 = copiedNewTestElement.getContainedElements().get(2);
+
+		assertEquals(3, copiedNewTestElement.getContainedElements().size());
+		assertEquals(copiedNewTestElement, copiedNewChildElement1.getReferences().get(0));
+		assertEquals(copiedNewChildElement1, copiedNewChildElement2.getReferences().get(0));
+		assertEquals(1, copiedNewChildElement2.getReferences().size());
+
+		assertEquals(newTestElementId, createDeleteOperation.getModelElementId());
+		assertEquals(2, createDeleteOperation.getSubOperations().size());
+		assertEquals(false, createDeleteOperation.isDelete());
+		assertTrue(CommonUtil.isSelfContained(createDeleteOperation, true));
+
+		// check sub-operations of 1st operation
+		MultiReferenceOperation subOperation1 = (MultiReferenceOperation) createDeleteOperation.getSubOperations().get(
+			0);
+
+		// sub-operation 1
+		assertEquals(newChildElement2, getProject().getModelElement(subOperation1.getModelElementId()));
+		assertEquals("references", subOperation1.getFeatureName());
+		assertEquals(testElement, getProject().getModelElement(subOperation1.getReferencedModelElements().get(0)));
+
+		MultiReferenceOperation subOperation2 = (MultiReferenceOperation) createDeleteOperation.getSubOperations().get(
+			1);
+
+		// sub-operation 2
+		assertEquals(testElement, getProject().getModelElement(subOperation2.getModelElementId()));
+		assertEquals("references", subOperation2.getFeatureName());
+		assertEquals(newChildElement3, getProject().getModelElement(subOperation2.getReferencedModelElements().get(0)));
+
+		// check 2nd operation
+		MultiReferenceOperation operation2 = (MultiReferenceOperation) operations.get(1);
+
+		assertEquals(parentTestElement, getProject().getModelElement(operation2.getModelElementId()));
+		assertEquals(newTestElement, getProject().getModelElement(operation2.getReferencedModelElements().get(0)));
+
+		assertEquals(true, operations.get(1) instanceof MultiReferenceOperation);
+		MultiReferenceOperation multiRefOp = (MultiReferenceOperation) operations.get(1);
+
+		assertEquals(parentTestElement, getProject().getModelElement(multiRefOp.getModelElementId()));
+		assertEquals("containedElements", multiRefOp.getFeatureName());
+		assertEquals(newTestElement, getProject().getModelElement(multiRefOp.getReferencedModelElements().get(0)));
+		assertEquals(true, multiRefOp.isAdd());
+	}
+
 	// commenting out, too exotic to happen
 	/*
 	 * @Test public void createTreeAndAddNonRootToProject() { WorkPackage root =

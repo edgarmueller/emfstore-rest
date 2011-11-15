@@ -105,7 +105,13 @@ public class ObserverBus {
 	}
 
 	private List<IObserver> getObserver(Class<? extends IObserver> clazz, boolean force) {
-		return getProxyHandler(clazz, force).getObservers();
+		ProxyHandler proxyHandler = getProxyHandler(clazz, force);
+		
+		if (proxyHandler != null) {
+			return proxyHandler.getObservers();
+		}
+		
+		return null;
 	}
 
 	/**

@@ -67,7 +67,7 @@ public class UpdateDialog extends TitleAreaDialog {
 		}
 
 		// show number of changes on dialog title
-		setTitle("Changes from repository");
+		setTitle("Changes from server");
 		return contents;
 
 	}

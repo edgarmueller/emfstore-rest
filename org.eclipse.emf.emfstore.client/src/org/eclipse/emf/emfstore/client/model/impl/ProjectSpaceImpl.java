@@ -67,7 +67,6 @@ import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundExceptio
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
-import org.eclipse.emf.emfstore.client.model.notification.NotificationGenerator;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -434,8 +433,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 
 	private AutoSplitAndSaveResourceContainmentList<ESNotification> notificationList;
 
-	private ArrayList<ShareObserver> shareObservers;
-
 	private FileTransferManager fileTransferManager;
 
 	private OperationRecorder operationRecorder;
@@ -454,13 +451,11 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		super();
 		// TODO remove observer/listeners and use observerbus
 		this.commitObservers = new ArrayList<CommitObserver>();
-		this.shareObservers = new ArrayList<ShareObserver>();
 		this.propertyMap = new HashMap<String, OrgUnitProperty>();
 		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
 
 		this.addCommitObserver(modifiedModelElementsCache);
-		shareObservers.add(modifiedModelElementsCache);
-
+		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
 	}
 
 	// end of custom code
@@ -1366,20 +1361,12 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 */
 	public ChangePackage getLocalChangePackage(boolean canonize) {
 		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
-		// copy operations from projectspace
+		// copy operations from ProjectSpace
 		for (AbstractOperation abstractOperation : getOperations()) {
 			AbstractOperation copy = EcoreUtil.copy(abstractOperation);
 			changePackage.getOperations().add(copy);
 		}
-		// copy events from projectspace
-		for (Event event : getEventsFromComposite()) {
-			Event copy = EcoreUtil.copy(event);
-			changePackage.getEvents().add(copy);
-		}
 
-		if (canonize) {
-			changePackage.cannonize();
-		}
 		return changePackage;
 	}
 
@@ -1530,12 +1517,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		setBaseVersion(resolvedVersion);
 		saveProjectSpaceOnly();
 
-		// create notifications only if the project is updated to a newer
-		// version
-		if (resolvedVersion.compareTo(baseVersion) == 1) {
-			generateNotifications(changes);
-		}
-
 		// TODO Chainsaw. Do we need this anymore?
 		if (observer != null) {
 			observer.updateCompleted(this);
@@ -1599,20 +1580,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	// }
 	// }
 
-	private void generateNotifications(List<ChangePackage> changes) {
-		// generate notifications from change packages, ignore all exception if
-		// any
-		try {
-			List<ESNotification> newNotifications = NotificationGenerator.getInstance(this).generateNotifications(
-				changes, this.getUsersession().getUsername());
-			this.getNotificationsFromComposite().addAll(newNotifications);
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil.logException("Creating notifications failed!", e);
-		}
-	}
-
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -1670,14 +1637,14 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		this.operationRecorder = new OperationRecorder(this.getProject(),
 			((ProjectImpl) this.getProject()).getChangeNotifier());
 		if (Configuration.isTesting()) {
-			this.operationRecorder.setEmitOperationsImmediatley(true);
+			this.operationRecorder.setEmitOperationsImmediately(true);
 		}
 		this.operationManager = new OperationManager(operationRecorder, this);
 		this.operationManager.addOperationListener(modifiedModelElementsCache);
-		statePersister = new StatePersister(operationRecorder.getChangeNotifier(),
+		statePersister = new StatePersister(((ProjectImpl) this.getProject()).getChangeNotifier(),
 			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()), this.getProject());
 		// TODO: initialization order important
-		// this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
+		this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
 		this.getProject().addIdEObjectCollectionChangeObserver(statePersister);
 
 		if (project instanceof ProjectImpl) {
@@ -1768,8 +1735,9 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		if (Configuration.isResourceSplittingEnabled()) {
 			splitResources(resourceSet, projectFragementsFileNamePrefix, resources, this.getProject());
 		} else {
-			for (EObject modelElement : project.getAllModelElements())
+			for (EObject modelElement : project.getAllModelElements()) {
 				((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
+			}
 		}
 
 		Resource operationCompositeResource = resourceSet.createResource(operationCompositeURI);
@@ -2201,14 +2169,12 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	}
 
 	private void notifyShareObservers() {
-		for (ShareObserver shareObserver : shareObservers) {
-			try {
-				shareObserver.shareDone();
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
-				// END SUPRESS CATCH EXCEPTION
-				WorkspaceUtil.logException("ShareObserver failed with exception", e);
-			}
+		try {
+			WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(this);
+			// BEGIN SUPRESS CATCH EXCEPTION
+		} catch (RuntimeException e) {
+			// END SUPRESS CATCH EXCEPTION
+			WorkspaceUtil.logException("ShareObserver failed with exception", e);
 		}
 	}
 
@@ -2478,25 +2444,21 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	// }
 	// }
 
-	/**
-	 * Add operation to the project spaces local operations.
-	 * 
-	 * @param operation
-	 *            the operation
-	 */
-	public void addOperation(AbstractOperation operation) {
-		this.getOperations().add(operation);
+	public void addOperations(List<? extends AbstractOperation> operations) {
+		getOperations().addAll(operations);
 		updateDirtyState();
 
-		// do not notify on composite start, wait until completion
-		if (operation instanceof CompositeOperation) {
-			// check of automatic composite if yes then continue
-			if (((CompositeOperation) operation).getMainOperation() == null) {
-				return;
+		for (AbstractOperation op : operations) {
+			// do not notify on composite start, wait until completion
+			if (op instanceof CompositeOperation) {
+				// check of automatic composite if yes then continue
+				if (((CompositeOperation) op).getMainOperation() == null) {
+					return;
+				}
 			}
+
+			operationManager.notifyOperationExecuted(op);
 		}
-		operationManager.notifyOperationExecuted(operation);
-		// this.notifyOperationExecuted(operation);
 	}
 
 	/**
@@ -2546,10 +2508,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 				} catch (RuntimeException e) {
 					WorkspaceUtil.handleException(e);
 				}
+			}
 
-				if (addOperation) {
-					addOperation(operation);
-				}
+			if (addOperation) {
+				addOperations(operations);
 			}
 		} finally {
 			startChangeRecording();

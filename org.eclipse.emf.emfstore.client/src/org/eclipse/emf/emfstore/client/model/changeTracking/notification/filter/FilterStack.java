@@ -14,7 +14,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 
 /**
  * This class filters a notification recording according to predefined stacks of
@@ -27,7 +31,7 @@ public final class FilterStack implements NotificationFilter {
 
 	private static final NotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
 		new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(), new IgnoreOutsideProjectReferencesFilter(),
-		new IgnoreNullFeatureNotificationsFilter() };
+		new IgnoreNullFeatureNotificationsFilter(), new NotifiableIdEObjectCollectionFilter() };
 
 	/**
 	 * The default filter stack.
@@ -44,6 +48,21 @@ public final class FilterStack implements NotificationFilter {
 	public FilterStack(NotificationFilter[] filters) {
 		filterList = new LinkedList<NotificationFilter>();
 		Collections.addAll(filterList, filters);
+		collectExtensionPoints();
+
+	}
+
+	private void collectExtensionPoints() {
+		IConfigurationElement[] configElems = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.client.notificationFilter");
+		for (IConfigurationElement elem : configElems) {
+			try {
+				NotificationFilter filter = (NotificationFilter) elem.createExecutableExtension("class");
+				filterList.add(filter);
+			} catch (CoreException e) {
+				WorkspaceUtil.logException(e.getMessage(), e);
+			}
+		}
 	}
 
 	/**

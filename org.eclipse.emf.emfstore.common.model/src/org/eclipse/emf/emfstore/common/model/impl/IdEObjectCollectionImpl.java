@@ -306,7 +306,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		}
 
 		// remove cross references
-		ModelUtil.deleteOutgoingCrossReferences(modelElement, true, false);
+		ModelUtil.deleteOutgoingCrossReferences(this, modelElement);
 		Collection<Setting> crossReferences = UsageCrossReferencer.find(modelElement, this);
 		ModelUtil.deleteIncomingCrossReferencesFromParent(crossReferences, modelElement);
 

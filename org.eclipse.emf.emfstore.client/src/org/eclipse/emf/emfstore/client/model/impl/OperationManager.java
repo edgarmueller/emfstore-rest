@@ -34,7 +34,7 @@ public class OperationManager implements OperationRecorderListener {
 			AbstractOperation lastOperation = operations.get(operations.size() - 1);
 			operationRecorder.stopChangeRecording();
 			try {
-				lastOperation.reverse().apply(operationRecorder.getRootEObject());
+				lastOperation.reverse().apply(operationRecorder.getCollection());
 				notifyOperationUndone(lastOperation);
 			} finally {
 				operationRecorder.startChangeRecording();
@@ -154,8 +154,8 @@ public class OperationManager implements OperationRecorderListener {
 	// }
 	// }
 
-	public void operationRecorded(AbstractOperation operation) {
-		projectSpace.addOperation(operation);
+	public void operationsRecorded(List<? extends AbstractOperation> operations) {
+		projectSpace.addOperations(operations);
 	}
 
 	public void clearOperations() {

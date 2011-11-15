@@ -92,10 +92,11 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestElement_Strings() {
+	public EAttribute getTestElement_Name() {
 		return (EAttribute)testElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -103,8 +104,16 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTestElement_Strings() {
+		return (EAttribute)testElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getTestElement_References() {
-		return (EReference)testElementEClass.getEStructuralFeatures().get(1);
+		return (EReference)testElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -112,7 +121,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * @generated
 	 */
 	public EReference getTestElement_ContainedElements() {
-		return (EReference)testElementEClass.getEStructuralFeatures().get(2);
+		return (EReference)testElementEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -141,6 +150,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 
 		// Create classes and their features
 		testElementEClass = createEClass(TEST_ELEMENT);
+		createEAttribute(testElementEClass, TEST_ELEMENT__NAME);
 		createEAttribute(testElementEClass, TEST_ELEMENT__STRINGS);
 		createEReference(testElementEClass, TEST_ELEMENT__REFERENCES);
 		createEReference(testElementEClass, TEST_ELEMENT__CONTAINED_ELEMENTS);
@@ -176,6 +186,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(testElementEClass, TestElement.class, "TestElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTestElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTestElement_Strings(), ecorePackage.getEString(), "strings", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTestElement_References(), this.getTestElement(), null, "references", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTestElement_ContainedElements(), this.getTestElement(), null, "containedElements", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
