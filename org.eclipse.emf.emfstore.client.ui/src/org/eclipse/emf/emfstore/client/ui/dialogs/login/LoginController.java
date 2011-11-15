@@ -2,6 +2,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider;
+import org.eclipse.swt.widgets.Display;
 
 public class LoginController implements SessionProvider {
 
@@ -10,7 +11,9 @@ public class LoginController implements SessionProvider {
 	}
 
 	public void loginSession(Usersession usersession) {
-
+		NewLoginDialog dialog = new NewLoginDialog(Display.getCurrent().getActiveShell(), this);
+		dialog.setBlockOnOpen(true);
+		dialog.open();
 	}
 
 }

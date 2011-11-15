@@ -1,9 +1,14 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
+import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -22,14 +27,16 @@ public class NewLoginDialog extends TitleAreaDialog {
 	private Text passwordField;
 	private Button savePassword;
 	private ComboViewer usernameCombo;
+	private final LoginController controller;
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
 	 */
-	public NewLoginDialog(Shell parentShell) {
+	public NewLoginDialog(Shell parentShell, LoginController controller) {
 		super(parentShell);
+		this.controller = controller;
 	}
 
 	/**
@@ -60,6 +67,7 @@ public class NewLoginDialog extends TitleAreaDialog {
 		usernameLabel.setText("Username");
 
 		usernameCombo = new ComboViewer(loginContainer, SWT.NONE);
+		usernameCombo.addSelectionChangedListener(new ComboListener());
 		Combo combo = usernameCombo.getCombo();
 		GridData gd_usernameCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_usernameCombo.widthHint = 235;
@@ -86,7 +94,7 @@ public class NewLoginDialog extends TitleAreaDialog {
 		new Label(loginContainer, SWT.NONE);
 
 		initData();
-
+		loadUsersession(controller.getUsersession());
 		return area;
 	}
 
@@ -117,5 +125,25 @@ public class NewLoginDialog extends TitleAreaDialog {
 	@Override
 	protected Point getInitialSize() {
 		return new Point(400, 250);
+	}
+
+	private void loadUsersession(Usersession usersession) {
+		String password = usersession.getPassword();
+		if (password != null) {
+			passwordField.setText(password);
+		}
+		savePassword.setSelection(usersession.isSavePassword());
+	}
+
+	private final class ComboListener implements ISelectionChangedListener {
+		public void selectionChanged(SelectionChangedEvent event) {
+			ISelection selection = event.getSelection();
+			if (selection instanceof StructuredSelection) {
+				Object firstElement = ((StructuredSelection) selection).getFirstElement();
+				if (firstElement instanceof Usersession) {
+					loadUsersession((Usersession) firstElement);
+				}
+			}
+		}
 	}
 }
