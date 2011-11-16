@@ -71,7 +71,8 @@ public class ChangePackageVisualizationHelper {
 		}
 
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
-		this.customLabelProviderManager = new CustomOperationLabelProviderManager();
+		defaultOperationLabelProvider.setModelElementMap(modelElementMap);
+		this.customLabelProviderManager = new CustomOperationLabelProviderManager(modelElementMap);
 	}
 
 	private void initModelElementMap(ChangePackage changePackage) {
@@ -228,7 +229,7 @@ public class ChangePackageVisualizationHelper {
 			if (i % 2 == 1) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
-				stringBuilder.append(labelProvider.getModelElementName(modelElementMap, modelElementId));
+				stringBuilder.append(labelProvider.getModelElementName(modelElementId));
 			} else {
 				stringBuilder.append(strings[i]);
 			}
