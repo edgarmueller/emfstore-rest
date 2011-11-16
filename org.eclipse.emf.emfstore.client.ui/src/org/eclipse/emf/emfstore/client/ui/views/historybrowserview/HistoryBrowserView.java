@@ -109,60 +109,66 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		@Override
 		public ISelection getSelection() {
 			Control control = getControl();
+
 			if (control == null || control.isDisposed()) {
 				return super.getSelection();
 			}
-			Widget[] items = getSelection(getControl());
 
+			Widget[] items = getSelection(getControl());
 			if (items.length != 1) {
 				return super.getSelection();
 			}
+
 			Widget item = items[0];
 			Object data = item.getData();
 			if (data == null || !(data instanceof TreeNode)) {
 				return super.getSelection();
 			}
+
 			TreeNode node = (TreeNode) data;
 			if (node.getValue() == null) {
 				return super.getSelection();
 			}
+
 			// now we know that one tree node is selected with a non null value
 			Object element = node.getValue();
 			EObject selectedModelElement = null;
 
 			if (element instanceof CompositeOperation) {
-				CompositeOperation comop = (CompositeOperation) element;
-				AbstractOperation mainOperation = comop.getMainOperation();
-				if (mainOperation != null) {
-					ModelElementId modelElementId = mainOperation.getModelElementId();
-					selectedModelElement = projectSpace.getProject().getModelElement(modelElementId);
-					return new StructuredSelection(selectedModelElement);
-				}
+				selectedModelElement = handleCompositeOperation((CompositeOperation) element);
 			} else if (element instanceof AbstractOperation) {
-				ModelElementId modelElementId = ((AbstractOperation) element).getModelElementId();
-				selectedModelElement = projectSpace.getProject().getModelElement(modelElementId);
-				if (selectedModelElement != null) {
-					return new StructuredSelection(selectedModelElement);
-				}
-				return new StructuredSelection(selectedModelElement);
-			} else if (element instanceof EObject) {
-				if (element instanceof ProjectSpace) {
-					selectedModelElement = ((ProjectSpace) element).getProject();
-				} else if (element instanceof ModelElementId
-					&& projectSpace.getProject().contains((ModelElementId) element)) {
-					selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
-				} else if (projectSpace.getProject().containsInstance((EObject) element)) {
-					selectedModelElement = (EObject) element;
-				} else {
-					// TODO: PlainEObjectMode, what happens with deleted
-					// elements and stuff like the HistoryInfo node?
-					return super.getSelection();
-				}
+				selectedModelElement = handleAbstractOperation((AbstractOperation) element);
+			} else if (element instanceof ProjectSpace) {
+				selectedModelElement = ((ProjectSpace) element).getProject();
+			} else if (element instanceof ModelElementId
+				&& projectSpace.getProject().contains((ModelElementId) element)) {
+				selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
+			} else if (projectSpace.getProject().containsInstance((EObject) element)) {
+				selectedModelElement = (EObject) element;
+			}
 
+			if (selectedModelElement != null) {
 				return new StructuredSelection(selectedModelElement);
 			}
 
 			return super.getSelection();
+		}
+
+		private EObject handleCompositeOperation(CompositeOperation op) {
+			AbstractOperation mainOperation = op.getMainOperation();
+			if (mainOperation != null) {
+				ModelElementId modelElementId = mainOperation.getModelElementId();
+				EObject modelElement = projectSpace.getProject().getModelElement(modelElementId);
+				return modelElement;
+			}
+
+			return null;
+		}
+
+		private EObject handleAbstractOperation(AbstractOperation op) {
+			ModelElementId modelElementId = op.getModelElementId();
+			EObject modelElement = projectSpace.getProject().getModelElement(modelElementId);
+			return modelElement;
 		}
 	}
 
