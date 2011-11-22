@@ -16,17 +16,20 @@ import static org.eclipse.emf.emfstore.client.model.Configuration.isTesting;
 
 import org.eclipse.emf.emfstore.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.server.LocationProvider;
+import org.eclipse.emf.emfstore.server.ServerConfiguration;
 
 /**
- * This is the default workspace location provider. If no other location provider is registered, this provider is used.
- * The default location provider offers profiles, which allows to have multiple workspaces within one root folder.
- * Allowing this isn't mandatory. It is encouraged to subclass this class when implementing an own location provider,
- * since it offers convenience methods. By convention, every path should end with an folder separator char.
+ * This is the default workspace location provider. If no other location
+ * provider is registered, this provider is used. The default location provider
+ * offers profiles, which allows to have multiple workspaces within one root
+ * folder. Allowing this isn't mandatory. It is encouraged to subclass this
+ * class when implementing an own location provider, since it offers convenience
+ * methods. By convention, every path should end with an folder separator char.
  * 
  * @author wesendon
  */
-public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLocationProvider implements
-	LocationProvider {
+public class DefaultWorkspaceLocationProvider extends
+		DefaultServerWorkspaceLocationProvider implements LocationProvider {
 
 	/**
 	 * {@inheritDoc}
@@ -35,7 +38,13 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 	 */
 	@Override
 	protected String getRootDirectory() {
-		return addFolders(getUserHome(), ".emfstore", "client");
+		String parameter = getStartParameter(ServerConfiguration.EMFSTORE_HOME);
+		if (parameter == null) {
+			return addFolders(getUserHome(), ".emfstore", "client");
+		} else {
+			return parameter;
+		}
+
 	}
 
 	/**
