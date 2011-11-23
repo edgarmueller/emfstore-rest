@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.client.ui.commands.handler;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.commands.MergeProjectHandler;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -26,8 +27,8 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 
 	public void update(ProjectSpace projectSpace, VersionSpec version) {
 		// TODO sanity check projectspace (is null, is shared)
-		progressDialog = getProgressMonitorDialog();
-		projectSpace.update(version, this, progressDialog.getProgressMonitor());
+		getProgressMonitorDialog();
+		projectSpace.update(version, this, getProgressMonitor());
 	}
 
 	public void noChangesOnServer() {
@@ -45,7 +46,6 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 	}
 
 	protected void handleChangeConflictException(ChangeConflictException conflictException) {
-		closeProgress();
 		ProjectSpace projectSpace = conflictException.getProjectSpace();
 		try {
 			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
@@ -53,6 +53,7 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException("Exception when merging the project!", e);
 		}
+		closeProgress();
 	}
 
 	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
@@ -68,6 +69,7 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 		// explicitly refresh the decorator since no simple attribute has
 		// been changed
 		// (as opposed to committing where the dirty property is being set)
+		// TODO replace by Observerbus or listener mechanism
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				PlatformUI.getWorkbench().getDecoratorManager()

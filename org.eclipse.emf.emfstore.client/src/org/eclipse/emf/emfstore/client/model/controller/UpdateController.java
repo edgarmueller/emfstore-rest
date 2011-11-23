@@ -75,6 +75,7 @@ public class UpdateController extends ServerCall<UpdateCallback> {
 			}
 		}
 		getProgressMonitor().worked(15);
+		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled()) {
 			updateDone(getProjectSpace().getBaseVersion(), null);
 		}

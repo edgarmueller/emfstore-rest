@@ -11,15 +11,20 @@ import org.eclipse.swt.widgets.Shell;
 public abstract class AbstractEMFStoreHandler extends AbstractHandler {
 
 	private ProjectSpace projectSpace;
+	private ExecutionEvent event;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		setProjectSpace(UiUtil
-				.getEventElementByClass(event, ProjectSpace.class));
+		this.event = event;
+		setProjectSpace(UiUtil.getEventElementByClass(getEvent(), ProjectSpace.class));
 		doExecute();
 		return null;
 	}
 
 	public abstract Object doExecute();
+
+	protected ExecutionEvent getEvent() {
+		return event;
+	}
 
 	public ProjectSpace getProjectSpace() {
 		return projectSpace;

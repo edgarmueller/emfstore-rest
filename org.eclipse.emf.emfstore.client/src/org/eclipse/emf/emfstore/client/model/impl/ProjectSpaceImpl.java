@@ -2170,6 +2170,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 
 	}
 
+	public void shareProject() {
+		shareProject(null, null, null);
+	}
+
 	public void shareProject(Usersession session, ShareCallback callback, IProgressMonitor monitor) {
 		new ShareController(this, session, callback, monitor).execute();
 	}
