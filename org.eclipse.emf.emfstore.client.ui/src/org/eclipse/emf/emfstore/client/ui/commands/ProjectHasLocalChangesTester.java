@@ -34,7 +34,7 @@ public class ProjectHasLocalChangesTester extends PropertyTester {
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
-					Boolean hasLocalChanges = new Boolean(projectSpace.isDirty());
+					Boolean hasLocalChanges = new Boolean(!projectSpace.getLocalOperations().getOperations().isEmpty());
 					return hasLocalChanges.equals(expectedValue);
 				}
 			};
