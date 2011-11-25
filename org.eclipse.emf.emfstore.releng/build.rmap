@@ -12,14 +12,14 @@
   <rm:locator searchPathRef="p2"/>
   <rm:searchPath name="git">
     <rm:provider componentTypes="osgi.bundle" readerType="git">
-      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfstore/org.eclipse.emf.emfstore.core.git"/>
+      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
       <rm:uri format="{0}/{1}">
         <bc:propertyRef key="git.clone"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature" readerType="git">
-      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfstore/org.eclipse.emf.emfstore.releng.git"/>
+      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
       <rm:uri format="{0}/{1}">
         <bc:propertyRef key="git.clone.releng"/>
         <bc:propertyRef key="buckminster.component"/>
