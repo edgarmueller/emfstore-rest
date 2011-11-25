@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+  <rm:property key="platform.version" value="3.8"/>
+  <rm:property key="emf.version" value="2.8"/>
+  <rm:property key="orbit.version" value="S20110907174232"/>
+  <rm:property key="git.clone" value="C:\Users\Jonas\workspaces\EMFCP20\repositories"/>
+  <rm:property key="eclipse.downloads" value="http://download.eclipse.org"/>
+  <rm:property key="resolve.target.platform" value="true"/>
+  <rm:property key="build.type" value="N"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.ecp(?:\..+)?$" searchPathRef="git"/>
+  <rm:locator searchPathRef="p2"/>
+  <rm:searchPath name="git">
+    <rm:provider componentTypes="osgi.bundle" readerType="git">
+      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.other.git"/>
+      <rm:uri format="{0},ECP2/{1}">
+        <bc:propertyRef key="git.clone"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.other.git"/>
+      <rm:uri format="{0},ECP2/{1}-feature">
+        <bc:propertyRef key="git.clone"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="p2">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/emf/updates/{1}milestones">
+        <bc:propertyRef key="eclipse.downloads"/>
+        <bc:propertyRef key="emf.version"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/emf-store">
+        <bc:propertyRef key="eclipse.downloads"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/cdo/drops/S20110927-0522">
+        <bc:propertyRef key="eclipse.downloads"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/mdt/ocl/updates/milestones/3.2.0">
+        <bc:propertyRef key="eclipse.downloads"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/tools/orbit/downloads/drops/{1}/repository">
+        <bc:propertyRef key="eclipse.downloads"/>
+        <bc:propertyRef key="orbit.version"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/eclipse/updates/{1}milestones">
+        <bc:propertyRef key="eclipse.downloads"/>
+        <bc:propertyRef key="platform.version"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+</rm:rmap>
