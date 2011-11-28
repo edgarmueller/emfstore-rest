@@ -118,12 +118,6 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShareProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.shareProject"
-           name="share">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.importProject"
            name="import">

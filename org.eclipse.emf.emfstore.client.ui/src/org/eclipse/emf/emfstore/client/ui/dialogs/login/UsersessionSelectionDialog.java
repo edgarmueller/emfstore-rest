@@ -139,6 +139,7 @@ public class UsersessionSelectionDialog extends Dialog {
 
 		public boolean hasChildren(Object element) {
 			return element instanceof ServerInfo;
+
 		}
 	}
 

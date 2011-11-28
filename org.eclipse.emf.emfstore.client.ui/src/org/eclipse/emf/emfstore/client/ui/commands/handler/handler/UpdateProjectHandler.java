@@ -11,9 +11,7 @@ public class UpdateProjectHandler extends AbstractEMFStoreHandler {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-
 				new UIUpdateProjectController(getShell()).update(getProjectSpace(), null);
-
 			}
 		}.run(true);
 		return null;
