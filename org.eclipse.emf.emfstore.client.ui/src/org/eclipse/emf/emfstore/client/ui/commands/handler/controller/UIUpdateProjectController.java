@@ -26,10 +26,23 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 		this.setShell(shell);
 	}
 
+	public void update(ProjectSpace projectSpace) {
+		update(projectSpace, null);
+	}
+
 	public void update(ProjectSpace projectSpace, VersionSpec version) {
 		// TODO sanity check projectspace (is null, is shared)
 		getProgressMonitorDialog();
 		projectSpace.update(version, this, getProgressMonitor());
+	}
+
+	public void askForVersionAndUpdate(ProjectSpace projectSpace) {
+		update(projectSpace, openVersionDialog(projectSpace));
+	}
+
+	protected VersionSpec openVersionDialog(ProjectSpace projectSpace) {
+		// TODO implement
+		return null;
 	}
 
 	public void noChangesOnServer() {

@@ -28,6 +28,7 @@ public abstract class AbstractEMFStoreUIController implements GenericCallback {
 	}
 
 	public void callCompleted(Map<Object, Object> values, boolean successful) {
+		closeProgress();
 	}
 
 	protected ProgressMonitorDialog getProgressMonitorDialog() {
