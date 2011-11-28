@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
@@ -25,6 +26,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -42,7 +44,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	private Text name;
 	private Text url;
 	private Spinner port;
-	private Text cert;
+	private Combo cert;
 
 	/**
 	 * Default constructor.
@@ -61,10 +63,10 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 		ServerInfo serverInfo = wizard.getServerInfo();
 
 		GridData gd;
-		Composite composite = new Composite(parent, SWT.NULL);
+		Composite composite = new Composite(parent, SWT.NONE);
 
 		GridLayout gl = new GridLayout();
-		int ncol = 2;
+		int ncol = 3;
 		gl.numColumns = ncol;
 		composite.setLayout(gl);
 
@@ -74,13 +76,6 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = ncol - 1;
 		name.setLayoutData(gd);
-		// name.addModifyListener(new ModifyListener() {
-		// public void modifyText(ModifyEvent e) {
-		// if (name.getText().equalsIgnoreCase("sysiphus")) {
-		// new NewRepositoryWizardPageTwentyThree(getShell());
-		// }
-		// }
-		// });
 
 		// Server URL
 		new Label(composite, SWT.NONE).setText("URL:");
@@ -100,38 +95,58 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 
 		// Certificate
 		new Label(composite, SWT.NONE).setText("Certificate:");
-		cert = new Text(composite, SWT.BORDER);
+		cert = new Combo(composite, SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = ncol - 1;
+		gd.horizontalSpan = ncol - 2;
 		cert.setLayoutData(gd);
-		cert.setEditable(false);
 		cert.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		initCombo();
 
 		// Choose Certificate, Opens Dialogue
-		new Label(composite, SWT.NONE).setText("");
 		Button button = new Button(composite, SWT.NONE);
-		button.setText("Select certificate...");
+		button.setText("Edit");
 		button.addSelectionListener(new SelectionDialogListener());
 
-		gd = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
-		gd.horizontalSpan = ncol - 1;
+		gd = new GridData(GridData.HORIZONTAL_ALIGN_END);
+		gd.horizontalSpan = 1;
 		button.setLayoutData(gd);
 
 		if (serverInfo.getUrl() != null) {
 			name.setText(serverInfo.getName());
 			url.setText(serverInfo.getUrl());
 			port.setSelection(serverInfo.getPort());
-			if (serverInfo.getCertificateAlias() != null) {
-				try {
-					if (KeyStoreManager.getInstance().contains(serverInfo.getCertificateAlias())) {
-						cert.setText(serverInfo.getCertificateAlias());
-					} else {
-						cert.setText("");
+			if (serverInfo.getCertificateAlias() == null) {
+				return;
+			}
+
+			try {
+				if (KeyStoreManager.getInstance().contains(serverInfo.getCertificateAlias())) {
+					for (int i = 0; i < cert.getItemCount(); i++) {
+						if (!cert.getItem(i).equals(serverInfo.getCertificateAlias())) {
+							cert.select(i);
+							break;
+						}
 					}
-				} catch (CertificateStoreException e1) {
+				} else {
 					cert.setText("");
 				}
+			} catch (CertificateStoreException e1) {
+				cert.setText("");
 			}
+		}
+	}
+
+	private void initCombo() {
+		try {
+			ArrayList<String> certificates = KeyStoreManager.getInstance().getCertificates();
+			String[] aliases = new String[certificates.size()];
+			for (int i = 0; i < certificates.size(); i++) {
+				aliases[i] = certificates.get(i);
+			}
+			cert.setItems(aliases);
+
+		} catch (CertificateStoreException e) {
+			WorkspaceUtil.logException(e.getMessage(), e);
 		}
 	}
 
@@ -143,7 +158,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 		if (getErrorMessage() != null) {
 			return false;
 		}
-		if (isTextNonEmpty(name) && isTextNonEmpty(url) && isTextNonEmpty(cert)) {
+		if (isTextNonEmpty(name.getText()) && isTextNonEmpty(url.getText()) && isComboNotEmpty()) {
 			saveDataToModel();
 			return true;
 		}
@@ -174,18 +189,22 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	 * @param t
 	 * @return boolean
 	 */
-	private static boolean isTextNonEmpty(Text t) {
-		String s = t.getText();
+	private static boolean isTextNonEmpty(String s) {
 		if ((s != null) && (s.trim().length() > 0)) {
 			return true;
 		}
 		return false;
 	}
 
+	private boolean isComboNotEmpty() {
+		String s = cert.getItem(cert.getSelectionIndex());
+		return isTextNonEmpty(s);
+	}
+
 	/**
 	 * Listener for the selection dialog.
 	 * 
-	 * @author Carl Pfeiffer
+	 * @author pfeifferc
 	 */
 	class SelectionDialogListener implements SelectionListener {
 
@@ -223,10 +242,17 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 				csd.setErrorMessage(e1.getMessage());
 			}
 			csd.setBlockOnOpen(true);
-			csd.setTitle("Certificate Selection Dialogue");
+			csd.setTitle("Certificate Selection Dialog");
 			csd.open();
 			if (csd.getReturnCode() == Window.OK) {
-				cert.setText(csd.getCertificateAlias());
+				initCombo();
+				for (int i = 0; i < cert.getItemCount(); i++) {
+					String item = cert.getItem(i);
+					if (item.equals(csd.getCertificateAlias())) {
+						cert.select(i);
+						break;
+					}
+				}
 			}
 		}
 	}

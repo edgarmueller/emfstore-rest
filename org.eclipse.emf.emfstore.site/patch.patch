@@ -1,0 +1,374 @@
+From 8aedb36317e70c387175ebb83ba6c9f0d46c0515 Mon Sep 17 00:00:00 2001
+From: jonas <jonas.helming@googlemail.com>
+Date: Sat, 5 Nov 2011 18:32:12 +0100
+Subject: [PATCH] Added model element opener to open elements on double click
+
+---
+ ECP2/org.eclipse.emf.ecp.ui/META-INF/MANIFEST.MF   |    1 +
+ ECP2/org.eclipse.emf.ecp.ui/plugin.xml             |    1 +
+ .../schema/modelelementopener.exsd                 |  101 ++++++++++++++++++
+ .../org/eclipse/emf/ecp/ui/util/ActionHelper.java  |  109 ++++++++++++++++++++
+ .../emf/ecp/ui/util/ModelElementOpener.java        |   38 +++++++
+ .../emf/ecp/ui/views/ModelExplorerView.java        |   30 ++++++
+ 6 files changed, 280 insertions(+), 0 deletions(-)
+ create mode 100644 ECP2/org.eclipse.emf.ecp.ui/schema/modelelementopener.exsd
+ create mode 100644 ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ActionHelper.java
+ create mode 100644 ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ModelElementOpener.java
+
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/META-INF/MANIFEST.MF b/ECP2/org.eclipse.emf.ecp.ui/META-INF/MANIFEST.MF
+index beb3afc..2032531 100644
+--- a/ECP2/org.eclipse.emf.ecp.ui/META-INF/MANIFEST.MF
++++ b/ECP2/org.eclipse.emf.ecp.ui/META-INF/MANIFEST.MF
+@@ -17,6 +17,7 @@ Export-Package: org.eclipse.emf.ecp.internal.ui;version="1.0.0";x-internal:=true
+  org.eclipse.emf.ecp.ui.actions;version="1.0.0",
+  org.eclipse.emf.ecp.ui.dialogs;version="1.0.0",
+  org.eclipse.emf.ecp.ui.model;version="1.0.0",
++ org.eclipse.emf.ecp.ui.util;version="1.0.0",
+  org.eclipse.emf.ecp.ui.views;version="1.0.0",
+  org.eclipse.emf.ecp.ui.widgets;version="1.0.0",
+  org.eclipse.wb.swt;version="1.0.0";x-internal:=true
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/plugin.xml b/ECP2/org.eclipse.emf.ecp.ui/plugin.xml
+index 871f106..d3aff94 100644
+--- a/ECP2/org.eclipse.emf.ecp.ui/plugin.xml
++++ b/ECP2/org.eclipse.emf.ecp.ui/plugin.xml
+@@ -3,6 +3,7 @@
+ <plugin>
+ 
+    <extension-point id="uiProviders" name="ECP UI Providers" schema="schema/uiProviders.exsd"/>
++   <extension-point id="modelelementOpener" name="Modelelement Opener" schema="schema/modelelementopener.exsd"/>
+ 
+    <extension
+          point="org.eclipse.ui.views">
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/schema/modelelementopener.exsd b/ECP2/org.eclipse.emf.ecp.ui/schema/modelelementopener.exsd
+new file mode 100644
+index 0000000..4002274
+--- /dev/null
++++ b/ECP2/org.eclipse.emf.ecp.ui/schema/modelelementopener.exsd
+@@ -0,0 +1,101 @@
++<?xml version='1.0' encoding='UTF-8'?>
++<!-- Schema file written by PDE -->
++<schema targetNamespace="org.eclipse.emf.ecp.common" xmlns="http://www.w3.org/2001/XMLSchema">
++<annotation>
++      <appInfo>
++         <meta.schema plugin="org.eclipse.emf.ecp.common" id="org.eclipse.emf.ecp.common.modelelementopener" name="Open Handler for Modelelements"/>
++      </appInfo>
++      <documentation>
++         A model element opener is responsible to handle the double click action in the navigator on a model element.
++      </documentation>
++   </annotation>
++
++   <element name="extension">
++      <annotation>
++         <appInfo>
++            <meta.element />
++         </appInfo>
++      </annotation>
++      <complexType>
++         <sequence minOccurs="1" maxOccurs="unbounded">
++            <element ref="ModelElementOpener"/>
++         </sequence>
++         <attribute name="point" type="string" use="required">
++            <annotation>
++               <documentation>
++                  
++               </documentation>
++            </annotation>
++         </attribute>
++         <attribute name="id" type="string">
++            <annotation>
++               <documentation>
++                  
++               </documentation>
++            </annotation>
++         </attribute>
++         <attribute name="name" type="string">
++            <annotation>
++               <documentation>
++                  
++               </documentation>
++               <appInfo>
++                  <meta.attribute translatable="true"/>
++               </appInfo>
++            </annotation>
++         </attribute>
++      </complexType>
++   </element>
++
++   <element name="ModelElementOpener">
++      <complexType>
++         <attribute name="name" type="string" use="required">
++            <annotation>
++               <documentation>
++                  
++               </documentation>
++            </annotation>
++         </attribute>
++         <attribute name="class" type="string" use="required">
++            <annotation>
++               <documentation>
++                  
++               </documentation>
++               <appInfo>
++                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecp.ui.util.ModelElementOpener"/>
++               </appInfo>
++            </annotation>
++         </attribute>
++      </complexType>
++   </element>
++
++   <annotation>
++      <appInfo>
++         <meta.section type="since"/>
++      </appInfo>
++      <documentation>
++         0.4
++      </documentation>
++   </annotation>
++
++
++   <annotation>
++      <appInfo>
++         <meta.section type="apiinfo"/>
++      </appInfo>
++      <documentation>
++         [Enter API information here.]
++      </documentation>
++   </annotation>
++
++   <annotation>
++      <appInfo>
++         <meta.section type="implementation"/>
++      </appInfo>
++      <documentation>
++         [Enter information about supplied implementation of this extension point.]
++      </documentation>
++   </annotation>
++
++
++</schema>
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ActionHelper.java b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ActionHelper.java
+new file mode 100644
+index 0000000..1860af3
+--- /dev/null
++++ b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ActionHelper.java
+@@ -0,0 +1,109 @@
++/*******************************************************************************
++ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
++ * Technische Universitaet Muenchen.
++ * All rights reserved. This program and the accompanying materials
++ * are made available under the terms of the Eclipse Public License v1.0
++ * which accompanies this distribution, and is available at
++ * http://www.eclipse.org/legal/epl-v10.html
++ * 
++ * Contributors:
++ ******************************************************************************/
++package org.eclipse.emf.ecp.ui.util;
++
++import org.eclipse.emf.ecore.EObject;
++import org.eclipse.emf.ecp.internal.ui.Activator;
++
++import org.eclipse.core.runtime.CoreException;
++import org.eclipse.core.runtime.IConfigurationElement;
++import org.eclipse.core.runtime.Platform;
++import org.eclipse.jface.dialogs.MessageDialog;
++import org.eclipse.swt.widgets.Display;
++
++/**
++ * @author helming
++ */
++public final class ActionHelper
++{
++  // TODO: move constants
++  /**
++   * The ID of the meeditor.
++   */
++  public static final String MEEDITOR_ID = "org.eclipse.emf.ecp.editor";
++
++  /**
++   * Constant for the open model element command.
++   */
++  public static final String MEEDITOR_OPENMODELELEMENT_COMMAND_ID = "org.eclipse.emf.ecp.editor.openModelElement";
++
++  /**
++   * Constant for the modelelement context.
++   */
++  public static final String MECONTEXT_EVALUATIONCONTEXT_VARIABLE = "meContext";
++
++  /**
++   * Constant for the modelelement to be opened.
++   */
++  public static final String ME_TO_OPEN_EVALUATIONCONTEXT_VARIABLE = "meToOpen";
++
++  private ActionHelper()
++  {
++
++  }
++
++  /**
++   * This opens the model element.
++   * 
++   * @param me
++   *          ModelElement to open
++   * @param sourceView
++   *          the view that requested the open model element
++   */
++  public static void openModelElement(final EObject me, final String sourceView)
++  {
++    if (me == null)
++    {
++      MessageDialog.openError(Display.getCurrent().getActiveShell(), "The element was deleted",
++          "The model element you are trying to open was deleted!");
++      return;
++    }
++    IConfigurationElement[] modelelementopener = Platform.getExtensionRegistry().getConfigurationElementsFor(
++        "org.eclipse.emf.ecp.common.modelelementopener");
++    ModelElementOpener bestCandidate = null;
++    int bestValue = -1;
++    String name = "";
++    for (IConfigurationElement element : modelelementopener)
++    {
++      modelelementopener = null;
++      try
++      {
++        ModelElementOpener modelelementOpener = (ModelElementOpener)element.createExecutableExtension("class");
++        int value = modelelementOpener.canOpen(me);
++        if (value > bestValue)
++        {
++          bestCandidate = modelelementOpener;
++          bestValue = value;
++          name = element.getAttribute("name");
++        }
++      }
++      catch (CoreException e)
++      {
++
++        Activator.log(e);
++      }
++    }
++    // TODO: find solution
++    // ECPWorkspaceManager.getObserverBus().notify(ModelElementOpenObserver.class).onOpen(me, sourceView, name);
++    // BEGIN SUPRESS CATCH EXCEPTION
++    try
++    {
++      bestCandidate.openModelElement(me);
++    }
++    catch (RuntimeException e)
++    {
++      Activator.log(e);
++    }
++    // END SUPRESS CATCH EXCEPTION
++
++  }
++
++}
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ModelElementOpener.java b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ModelElementOpener.java
+new file mode 100644
+index 0000000..6a2220d
+--- /dev/null
++++ b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/util/ModelElementOpener.java
+@@ -0,0 +1,38 @@
++/**
++ * 
++ */
++package org.eclipse.emf.ecp.ui.util;
++
++import org.eclipse.emf.ecore.EObject;
++
++/**
++ * Modelelement opener offer the functionality to open a specific model element. Standard opener is the model element
++ * editor. Example for specific opener are the diagrams.
++ * 
++ * @author helming
++ */
++public interface ModelElementOpener
++{
++  /**
++   * Constant to return if the opener should not open the modelelement.
++   */
++  int DONOTOPEN = -1;
++
++  /**
++   * Checks whether the model element should be opened by this opener, depending on the priority. The model element will
++   * be opened with the registered opener with the highest priority.
++   * 
++   * @param modelElement
++   *          the model element to check
++   * @return a priority indicating how well the opener can open the element
++   */
++  int canOpen(EObject modelElement);
++
++  /**
++   * The action to open the model element.
++   * 
++   * @param modelElement
++   *          the model element to open
++   */
++  void openModelElement(EObject modelElement);
++}
+diff --git a/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/views/ModelExplorerView.java b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/views/ModelExplorerView.java
+index 109f4ee..a1e53af 100644
+--- a/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/views/ModelExplorerView.java
++++ b/ECP2/org.eclipse.emf.ecp.ui/src/org/eclipse/emf/ecp/ui/views/ModelExplorerView.java
+@@ -10,6 +10,7 @@
+  */
+ package org.eclipse.emf.ecp.ui.views;
+ 
++import org.eclipse.emf.ecore.EObject;
+ import org.eclipse.emf.ecp.core.ECPProjectManager;
+ import org.eclipse.emf.ecp.core.util.ECPModelContext;
+ import org.eclipse.emf.ecp.core.util.ECPUtil;
+@@ -17,8 +18,12 @@ import org.eclipse.emf.ecp.spi.ui.UIProvider;
+ import org.eclipse.emf.ecp.spi.ui.UIProviderRegistry;
+ import org.eclipse.emf.ecp.ui.model.ModelContentProvider;
+ import org.eclipse.emf.ecp.ui.model.ModelLabelProvider;
++import org.eclipse.emf.ecp.ui.util.ActionHelper;
+ 
+ import org.eclipse.jface.action.IMenuManager;
++import org.eclipse.jface.viewers.DoubleClickEvent;
++import org.eclipse.jface.viewers.IDoubleClickListener;
++import org.eclipse.jface.viewers.IStructuredSelection;
+ import org.eclipse.jface.viewers.TreeViewer;
+ import org.eclipse.jface.viewers.ViewerSorter;
+ 
+@@ -27,6 +32,30 @@ import org.eclipse.jface.viewers.ViewerSorter;
+  */
+ public class ModelExplorerView extends TreeView
+ {
++  /**
++   * @author Jonas
++   */
++  public class DoubleClickListener implements IDoubleClickListener
++  {
++
++    /**
++     * Opens an EObject using the ActionHelper
++     */
++    public void doubleClick(DoubleClickEvent event)
++    {
++      if (event.getSelection() instanceof IStructuredSelection)
++      {
++        IStructuredSelection structuredSelection = (IStructuredSelection)event.getSelection();
++        Object firstElement = structuredSelection.getFirstElement();
++        if (firstElement instanceof EObject)
++        {
++          ActionHelper.openModelElement((EObject)firstElement, "modelexplorer");
++        }
++      }
++
++    }
++  }
++
+   public static final String ID = "org.eclipse.emf.ecp.ui.ModelExplorerView";
+ 
+   private ModelContentProvider contentProvider = new ModelContentProvider();
+@@ -43,6 +72,7 @@ public class ModelExplorerView extends TreeView
+     viewer.setLabelProvider(new ModelLabelProvider(contentProvider));
+     viewer.setSorter(new ViewerSorter());
+     viewer.setInput(ECPProjectManager.INSTANCE);
++    viewer.addDoubleClickListener(new DoubleClickListener());
+   }
+ 
+   @Override
+-- 
+1.7.6.msysgit.0
+

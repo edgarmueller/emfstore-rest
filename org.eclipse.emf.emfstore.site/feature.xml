@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<feature
+      id="org.eclipse.emf.emfstore.site"
+      label="EMF Store Site"
+      version="1.0.0.qualifier"
+      provider-name="EMFT"
+      image="eclipse_update_120.jpg"
+      license-feature="org.eclipse.emf.ecp.license"
+      license-feature-version="2.0.0.qualifier">
+
+   <description>
+      %description
+   </description>
+
+   <copyright url="%copyrightURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+
+
+</feature>

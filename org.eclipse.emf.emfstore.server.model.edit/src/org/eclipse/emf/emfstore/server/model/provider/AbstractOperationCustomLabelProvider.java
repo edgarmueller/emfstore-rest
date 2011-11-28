@@ -27,10 +27,14 @@ public abstract class AbstractOperationCustomLabelProvider {
 	/**
 	 * Constant for render priority meaning this provider does not want to render the given element.
 	 */
-	static int CANNOT_RENDER = 0;
+	protected static final int CANNOT_RENDER = 0;
 
-	public AbstractOperationCustomLabelProvider() {
-	}
+	/**
+	 * Default constant for a rendered that is able to render the given element.
+	 */
+	protected static final int CAN_RENDER_DEFAULT = 1;
+
+	private Map<ModelElementId, EObject> modelElementMap;
 
 	/**
 	 * Returns the description of an operation.
@@ -58,11 +62,41 @@ public abstract class AbstractOperationCustomLabelProvider {
 	public abstract int canRender(AbstractOperation operation);
 
 	/**
+	 * Returns the name of the given model element.
+	 * 
+	 * @param modelElement a model element whose name should be returned
+	 * @return the name of the model element
+	 */
+	protected abstract String getModelElementName(EObject modelElement);
+
+	/**
 	 * Returns the name of the {@link EObject} with the given {@link ModelElementId}.
 	 * 
 	 * @param modelElementId a {@link ModelElementId}
 	 * @return the name of the {@link EObject}
 	 */
-	public abstract String getModelElementName(Map<ModelElementId, EObject> modelElementMap,
-		ModelElementId modelElementId);
+	public String getModelElementName(ModelElementId modelElementId) {
+		return getModelElementName(modelElementMap.get(modelElementId));
+	}
+
+	/**
+	 * Returns the model element/ID mapping. The map contains all the
+	 * model elements and their IDs that are involved with this operation.
+	 * 
+	 * @return the model element/ID mapping
+	 */
+	protected Map<ModelElementId, EObject> getModelElementMap() {
+		return modelElementMap;
+	}
+
+	/**
+	 * Sets the model element/ID mapping. The <code>modelElementMap</code> must
+	 * contain all the model elements and their IDs that are involved with this operation.
+	 * 
+	 * @param modelElementMap the model element/ID mapping to be used
+	 */
+	public void setModelElementMap(Map<ModelElementId, EObject> modelElementMap) {
+		this.modelElementMap = modelElementMap;
+	}
+
 }

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client UI  (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.ui;singleton:=true
-Bundle-Version: 0.8.9.M3
+Bundle-Version: 0.8.9.M906
 Bundle-Activator: org.eclipse.emf.emfstore.client.ui.Activator
 Require-Bundle: org.eclipse.emf.emfstore.client.model.edit;visibility:=reexport,
  org.eclipse.emf.ecp.common.util
@@ -24,6 +24,7 @@ Export-Package: diff.match.patch,
    org.eclipse.swt.widgets,
    org.eclipse.emf.emfstore.server.model.versioning,
    org.eclipse.emf.emfstore.client.model",
+ org.eclipse.emf.emfstore.client.ui.commands.handler,
  org.eclipse.emf.emfstore.client.ui.decorators;uses:="org.eclipse.emf.common.notify.impl,org.eclipse.jface.viewers,org.eclipse.emf.common.notify",
  org.eclipse.emf.emfstore.client.ui.dialogs;
   uses:="org.eclipse.swt.events,
