@@ -35,7 +35,6 @@ public class NewLocalProjectHandler extends AbstractHandler {
 
 		CreateProjectDialog dialog = new CreateProjectDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
 			null);
-
 		dialog.open();
 
 		return null;

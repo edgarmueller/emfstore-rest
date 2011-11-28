@@ -1377,5 +1377,11 @@
            id="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
            name="NEWshare">
      </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.DeleteProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.deleteProjectNEW"
+           name="NEWdeleteProject">
+     </command>
    </extension>
 </plugin>
