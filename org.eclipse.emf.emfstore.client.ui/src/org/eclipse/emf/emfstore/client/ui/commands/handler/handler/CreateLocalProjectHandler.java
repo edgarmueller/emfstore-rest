@@ -13,20 +13,11 @@ package org.eclipse.emf.emfstore.client.ui.commands.handler.handler;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UICreateProjectController;
 
-/**
- * This is a handler for new local project command. It shows new project dialog
- * and the user can create a new project with out being logged in to server.
- * 
- * @author hodaie
- * 
- */
 public class CreateLocalProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public Object doExecute() {
+	public void handle() {
 		new UICreateProjectController(getShell()).createLocalProject();
-
-		return null;
 	}
 
 }
