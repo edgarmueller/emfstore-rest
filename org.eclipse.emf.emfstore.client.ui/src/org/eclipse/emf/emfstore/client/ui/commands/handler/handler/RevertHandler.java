@@ -7,9 +7,8 @@ import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UIRevertCo
 public class RevertHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public Object doExecute() {
+	public void handle() {
 		new UIRevertController(getShell()).revert(requireSelection(ProjectSpace.class));
-		return null;
 	}
 
 }
