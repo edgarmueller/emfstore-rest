@@ -8,19 +8,18 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 
 /**
- * Property tester to test if a project is Shared with a server already.
+ * Property tester to test if a project space has local changes.
  * 
  * @author koegel
  */
-public class ProjectIsSharedTester extends PropertyTester {
+public class ProjectHasLocalChangesTester extends PropertyTester {
 
 	/**
 	 * {@inheritDoc}
@@ -31,14 +30,15 @@ public class ProjectIsSharedTester extends PropertyTester {
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
 		if (receiver instanceof ProjectSpace && expectedValue instanceof Boolean) {
 			final ProjectSpace projectSpace = (ProjectSpace) receiver;
+
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
-					Usersession usersession = projectSpace.getUsersession();
-					Boolean isShared = new Boolean(usersession != null);
-					return isShared.equals(expectedValue);
+					Boolean hasLocalChanges = new Boolean(projectSpace.isDirty());
+					return hasLocalChanges.equals(expectedValue);
 				}
 			};
+
 			return command.run(false);
 		}
 		return false;

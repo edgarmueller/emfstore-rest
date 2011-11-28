@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.ui.commands.IsAdminTester;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.tester.IsAdminTester;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMTreeNode;
 
 /**

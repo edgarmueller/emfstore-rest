@@ -8,21 +8,20 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.jface.viewers.TreeNode;
 
 /**
- * This property tester checks if current user is ACUser.
+ * Property tester to test if the server info has been logged in.
  * 
- * @author weiglt
+ * @author shterev
  */
-public class IsACUserTester extends PropertyTester {
+public class ServerInfoIsLoggedInTester extends PropertyTester {
 
 	/**
 	 * {@inheritDoc}
@@ -31,28 +30,19 @@ public class IsACUserTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
-
-		if (receiver instanceof ProjectSpace && expectedValue instanceof Boolean) {
-			final ProjectSpace projectSpace = (ProjectSpace) receiver;
+		if (receiver instanceof TreeNode && ((TreeNode) receiver).getValue() instanceof ServerInfo
+			&& expectedValue instanceof Boolean) {
+			final ServerInfo serverInfo = (ServerInfo) ((TreeNode) receiver).getValue();
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
-					Usersession usersession = projectSpace.getUsersession();
-					boolean isACUser = false;
-					if (usersession != null) {
-						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
-						try {
-							accessControlHelper.checkWriteAccess(projectSpace.getProjectId());
-							isACUser = true;
-						} catch (AccessControlException e) {
-							isACUser = false;
-						}
-					}
-
-					return new Boolean(isACUser).equals(expectedValue);
+					Usersession usersession = serverInfo.getLastUsersession();
+					Boolean ret = new Boolean(usersession != null && usersession.isLoggedIn());
+					return ret.equals(expectedValue);
 				}
 			};
-			return command.run(false);
+			Boolean result = command.run(false);
+			return result;
 		}
 		return false;
 	}

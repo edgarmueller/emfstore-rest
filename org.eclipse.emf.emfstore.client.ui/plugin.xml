@@ -1218,21 +1218,21 @@
      <extension
            point="org.eclipse.core.expressions.propertyTesters">
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ProjectIsSharedTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.ProjectIsSharedTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.projectIsSharedTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="projectIsShared"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ProjectHasLocalChangesTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.ProjectHasLocalChangesTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.projectHasLocalChangesTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="projectHasLocalChanges"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsAdminTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.IsAdminTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isAdminTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isAdmin"
@@ -1246,28 +1246,28 @@
               type="org.eclipse.emf.emfstore.client.ui.views.scm.SCMTreeNode">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsACUserTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.IsACUserTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isACUserTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isACUser"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsServerAdminTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.IsServerAdminTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isServerAdminTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isServerAdmin"
               type="org.eclipse.jface.viewers.TreeNode">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedInTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.ServerInfoIsLoggedInTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="ServerInfoIsLoggedIn"
               type="org.eclipse.jface.viewers.TreeNode">
         </propertyTester>
               <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.TreeNodeClassTester"
+              class="org.eclipse.emf.emfstore.client.ui.commands.handler.tester.TreeNodeClassTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="treeNodeClassTester"

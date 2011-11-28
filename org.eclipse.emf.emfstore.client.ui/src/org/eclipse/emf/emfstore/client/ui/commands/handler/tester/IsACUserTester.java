@@ -8,18 +8,21 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 
 /**
- * Property tester to test if a project space has local changes.
+ * This property tester checks if current user is ACUser.
  * 
- * @author koegel
+ * @author weiglt
  */
-public class ProjectHasLocalChangesTester extends PropertyTester {
+public class IsACUserTester extends PropertyTester {
 
 	/**
 	 * {@inheritDoc}
@@ -28,17 +31,27 @@ public class ProjectHasLocalChangesTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
+
 		if (receiver instanceof ProjectSpace && expectedValue instanceof Boolean) {
 			final ProjectSpace projectSpace = (ProjectSpace) receiver;
-
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
-					Boolean hasLocalChanges = new Boolean(projectSpace.isDirty());
-					return hasLocalChanges.equals(expectedValue);
+					Usersession usersession = projectSpace.getUsersession();
+					boolean isACUser = false;
+					if (usersession != null) {
+						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
+						try {
+							accessControlHelper.checkWriteAccess(projectSpace.getProjectId());
+							isACUser = true;
+						} catch (AccessControlException e) {
+							isACUser = false;
+						}
+					}
+
+					return new Boolean(isACUser).equals(expectedValue);
 				}
 			};
-
 			return command.run(false);
 		}
 		return false;

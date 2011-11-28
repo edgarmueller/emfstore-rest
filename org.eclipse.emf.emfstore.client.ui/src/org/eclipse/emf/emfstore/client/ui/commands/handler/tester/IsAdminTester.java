@@ -8,20 +8,22 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.jface.viewers.TreeNode;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 
 /**
- * Property tester to test if the server info has been logged in.
+ * This property tester checks if current user has administrative rights upon a project. If true, then some
+ * corresponding commands can be shown.
  * 
- * @author shterev
+ * @author Hodaie
  */
-public class ServerInfoIsLoggedInTester extends PropertyTester {
+public class IsAdminTester extends PropertyTester {
 
 	/**
 	 * {@inheritDoc}
@@ -30,19 +32,28 @@ public class ServerInfoIsLoggedInTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
-		if (receiver instanceof TreeNode && ((TreeNode) receiver).getValue() instanceof ServerInfo
-			&& expectedValue instanceof Boolean) {
-			final ServerInfo serverInfo = (ServerInfo) ((TreeNode) receiver).getValue();
+		if (receiver instanceof ProjectSpace && expectedValue instanceof Boolean) {
+			final ProjectSpace projectSpace = (ProjectSpace) receiver;
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
-					Usersession usersession = serverInfo.getLastUsersession();
-					Boolean ret = new Boolean(usersession != null && usersession.isLoggedIn());
-					return ret.equals(expectedValue);
+					Usersession usersession = projectSpace.getUsersession();
+					boolean isAdmin = false;
+					if (usersession != null && usersession.getACUser() != null) {
+
+						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
+						try {
+							accessControlHelper.checkProjectAdminAccess(projectSpace.getProjectId());
+							isAdmin = true;
+						} catch (AccessControlException e) {
+							isAdmin = false;
+						}
+					}
+
+					return new Boolean(isAdmin).equals(expectedValue);
 				}
 			};
-			Boolean result = command.run(false);
-			return result;
+			return command.run(false);
 		}
 		return false;
 	}

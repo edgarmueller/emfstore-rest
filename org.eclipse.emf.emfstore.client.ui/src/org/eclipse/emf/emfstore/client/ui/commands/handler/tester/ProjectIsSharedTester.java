@@ -8,22 +8,19 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 
 /**
- * This property tester checks if current user has administrative rights upon a project. If true, then some
- * corresponding commands can be shown.
+ * Property tester to test if a project is Shared with a server already.
  * 
- * @author Hodaie
+ * @author koegel
  */
-public class IsAdminTester extends PropertyTester {
+public class ProjectIsSharedTester extends PropertyTester {
 
 	/**
 	 * {@inheritDoc}
@@ -38,19 +35,8 @@ public class IsAdminTester extends PropertyTester {
 				@Override
 				protected Boolean doRun() {
 					Usersession usersession = projectSpace.getUsersession();
-					boolean isAdmin = false;
-					if (usersession != null && usersession.getACUser() != null) {
-
-						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
-						try {
-							accessControlHelper.checkProjectAdminAccess(projectSpace.getProjectId());
-							isAdmin = true;
-						} catch (AccessControlException e) {
-							isAdmin = false;
-						}
-					}
-
-					return new Boolean(isAdmin).equals(expectedValue);
+					Boolean isShared = new Boolean(usersession != null);
+					return isShared.equals(expectedValue);
 				}
 			};
 			return command.run(false);
