@@ -6,7 +6,7 @@
   <extension
         point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.emf.emfstore.client.ui.commands.RevertHandler"
+            class="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.RevertHandler"
             commandId="org.eclipse.emf.emfstore.client.ui.revert">
          <enabledWhen>
             <and>

@@ -23,7 +23,7 @@ import org.eclipse.ui.PlatformUI;
 public class UIUpdateProjectController extends AbstractEMFStoreUIController implements UpdateCallback {
 
 	public UIUpdateProjectController(Shell shell) {
-		this.setShell(shell);
+		super(shell);
 	}
 
 	public void update(ProjectSpace projectSpace) {
@@ -32,7 +32,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 
 	public void update(ProjectSpace projectSpace, VersionSpec version) {
 		// TODO sanity check projectspace (is null, is shared)
-		getProgressMonitorDialog();
+		openProgress();
 		projectSpace.update(version, this, getProgressMonitor());
 	}
 

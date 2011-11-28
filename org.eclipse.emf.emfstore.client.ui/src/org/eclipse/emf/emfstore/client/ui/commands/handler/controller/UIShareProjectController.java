@@ -7,17 +7,18 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallbac
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
 public class UIShareProjectController extends AbstractEMFStoreUIController implements GenericCallback {
 
 	public UIShareProjectController(Shell shell) {
-		setShell(shell);
+		super(shell);
 	}
 
 	public void share(ProjectSpace projectSpace) {
-		getProgressMonitorDialog();
-		((ProjectSpaceImpl) projectSpace).shareProject(null, this, getProgressMonitor());
+		ProgressMonitorDialog progressDialog = openProgress();
+		((ProjectSpaceImpl) projectSpace).shareProject(null, this, progressDialog.getProgressMonitor());
 	}
 
 	public void shareCompleted(ProjectSpace projectSpace, boolean successful) {
