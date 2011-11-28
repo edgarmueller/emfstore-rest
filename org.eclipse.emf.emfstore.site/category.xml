@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.emf.ecp_2.0.0.qualifier.jar" id="org.eclipse.emf.ecp" version="2.0.0.qualifier">
+      <category name="org.eclipse.emf.ecp.category"/>
+   </feature>
+   <feature url="features/org.eclipse.emf.ecp.cdo_2.0.0.qualifier.jar" id="org.eclipse.emf.ecp.cdo" version="2.0.0.qualifier">
+      <category name="org.eclipse.emf.ecp.provider.category"/>
+   </feature>
+   <feature url="features/org.eclipse.emf.ecp.workspace_2.0.0.qualifier.jar" id="org.eclipse.emf.ecp.workspace" version="2.0.0.qualifier">
+      <category name="org.eclipse.emf.ecp.provider.category"/>
+   </feature>
+   <category-def name="org.eclipse.emf.ecp.category" label="EMF Client Platform"/>
+   <category-def name="org.eclipse.emf.ecp.provider.category" label="EMF Client Platform Providers (optional)"/>
+</site>
