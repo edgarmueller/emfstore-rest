@@ -8,13 +8,10 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.handler;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UICreateProjectController;
 
 /**
  * This is a handler for new local project command. It shows new project dialog
@@ -23,19 +20,11 @@ import org.eclipse.ui.PlatformUI;
  * @author hodaie
  * 
  */
-public class NewLocalProjectHandler extends AbstractHandler {
+public class CreateLocalProjectHandler extends AbstractEMFStoreHandler {
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
-	 */
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-
-		CreateProjectDialog dialog = new CreateProjectDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-			null);
-		dialog.open();
+	@Override
+	public Object doExecute() {
+		new UICreateProjectController(getShell()).createLocalProject();
 
 		return null;
 	}

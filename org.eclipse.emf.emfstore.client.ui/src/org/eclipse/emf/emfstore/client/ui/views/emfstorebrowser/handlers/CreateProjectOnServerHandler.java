@@ -14,10 +14,11 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UICreateProjectController;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeNode;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
@@ -26,6 +27,8 @@ import org.eclipse.ui.PlatformUI;
  * 
  * @author Shterev
  */
+
+// TODO convert into new handler
 public class CreateProjectOnServerHandler extends AbstractHandler {
 
 	/**
@@ -42,9 +45,8 @@ public class CreateProjectOnServerHandler extends AbstractHandler {
 		TreeNode node = (TreeNode) obj;
 		ServerInfo serverInfo = ((ServerInfo) node.getValue());
 		if (serverInfo.getLastUsersession().isLoggedIn()) {
-			CreateProjectDialog dialog = new CreateProjectDialog(PlatformUI.getWorkbench().getDisplay()
-				.getActiveShell(), serverInfo.getLastUsersession());
-			dialog.open();
+			new UICreateProjectController(Display.getCurrent().getActiveShell()).createRemoteProject(serverInfo
+				.getLastUsersession());
 		}
 		return null;
 	}

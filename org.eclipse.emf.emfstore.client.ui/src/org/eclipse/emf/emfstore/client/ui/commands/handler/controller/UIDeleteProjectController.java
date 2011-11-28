@@ -13,12 +13,11 @@ import org.eclipse.swt.widgets.Shell;
 public class UIDeleteProjectController extends AbstractEMFStoreUIController {
 
 	public UIDeleteProjectController(Shell shell) {
-		setShell(shell);
+		super(shell);
 	}
 
 	public void deleteProject(ProjectSpace projectSpace) {
 		try {
-
 			if (!confirmation(projectSpace)) {
 				return;
 			}

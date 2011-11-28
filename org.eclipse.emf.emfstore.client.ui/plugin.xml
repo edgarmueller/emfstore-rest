@@ -178,12 +178,6 @@
            name="properties">
      </command>
      <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.NewLocalProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
-           name="NewLocalProject">
-     </command>
-     <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.commands.ShowHistory"
            name="Show History">
@@ -1382,6 +1376,12 @@
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.DeleteProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.deleteProjectNEW"
            name="NEWdeleteProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.CreateLocalProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
+           name="NewLocalProject">
      </command>
    </extension>
 </plugin>
