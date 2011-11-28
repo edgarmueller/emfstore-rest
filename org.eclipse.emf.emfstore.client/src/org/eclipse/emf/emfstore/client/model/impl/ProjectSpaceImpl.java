@@ -55,8 +55,10 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
@@ -1356,6 +1358,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		return newBaseVersion;
 	}
 
+	public void commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor) {
+		new CommitController(this, logMessage, callback, monitor).execute();
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -1459,7 +1465,8 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
 		new UpdateController(this, version, callback, progress).execute();
