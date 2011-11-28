@@ -12,7 +12,11 @@ import org.eclipse.swt.widgets.Shell;
 public abstract class AbstractEMFStoreUIController implements GenericCallback {
 
 	protected Shell shell;
-	protected ProgressMonitorDialog progressDialog;
+	private ProgressMonitorDialog progressDialog;
+
+	public AbstractEMFStoreUIController(Shell shell) {
+		setShell(shell);
+	}
 
 	public Shell getShell() {
 		return shell;
@@ -31,7 +35,7 @@ public abstract class AbstractEMFStoreUIController implements GenericCallback {
 		closeProgress();
 	}
 
-	protected ProgressMonitorDialog getProgressMonitorDialog() {
+	protected ProgressMonitorDialog openProgress() {
 		progressDialog = new ProgressMonitorDialog(getShell());
 		progressDialog.open();
 		progressDialog.setCancelable(true);

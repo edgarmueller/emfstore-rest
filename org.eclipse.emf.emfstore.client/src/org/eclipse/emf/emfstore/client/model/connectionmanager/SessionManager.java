@@ -27,7 +27,8 @@ public class SessionManager {
 			throw new RuntimeException("Ouch.");
 		}
 		if (!isLoggedIn(usersession) || force) {
-			if (!usersession.getUsername().isEmpty() && usersession.getPassword() != null) {
+			if (!(usersession.getUsername() == null || usersession.getUsername().equals(""))
+				&& usersession.getPassword() != null) {
 				try {
 					// if login fails, let the session provider handle the rest
 					usersession.logIn();
