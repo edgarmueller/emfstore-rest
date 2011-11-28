@@ -1,9 +1,10 @@
 package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.commands.MergeProjectHandler;
@@ -19,9 +20,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-public class UpdateProjectUIController extends AbstractEMFStoreUIController implements UpdateCallback {
+public class UIUpdateProjectController extends AbstractEMFStoreUIController implements UpdateCallback {
 
-	public UpdateProjectUIController(Shell shell) {
+	public UIUpdateProjectController(Shell shell) {
 		this.setShell(shell);
 	}
 
@@ -32,20 +33,12 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 	}
 
 	public void noChangesOnServer() {
-		handleNoChanges();
-	}
-
-	public void conflictOccurred(ChangeConflictException exception) {
-		handleChangeConflictException(exception);
-	}
-
-	protected void handleNoChanges() {
 		closeProgress();
 		MessageDialog.openInformation(getShell(), "No need to update",
 			"Your project is up to date, you do not need to update.");
 	}
 
-	protected void handleChangeConflictException(ChangeConflictException conflictException) {
+	public void conflictOccurred(ChangeConflictException conflictException) {
 		ProjectSpace projectSpace = conflictException.getProjectSpace();
 		try {
 			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
@@ -77,6 +70,13 @@ public class UpdateProjectUIController extends AbstractEMFStoreUIController impl
 			}
 		});
 		closeProgress();
+	}
+
+	@Override
+	public void callCompleted(Map<Object, Object> values, boolean successful) {
+		updateCompleted((ProjectSpace) values.get(UpdateCallback.PROJECTSPACE),
+			(PrimaryVersionSpec) values.get(UpdateCallback.OLDVERSION),
+			(PrimaryVersionSpec) values.get(UpdateCallback.NEWVERSION));
 	}
 
 }

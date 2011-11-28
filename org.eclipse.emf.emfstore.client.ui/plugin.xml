@@ -118,21 +118,9 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.UpdateProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.updateProjectNEW"
-           name="NEWupdate">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShareProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.shareProject"
            name="share">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.ShareProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
-           name="shareNEW">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
@@ -1380,5 +1368,20 @@
       <sessionProvider
             class="org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginController">
       </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.UpdateProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.updateProjectNEW"
+           name="NEWupdate">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.ShareProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
+           name="NEWshare">
+     </command>
    </extension>
 </plugin>

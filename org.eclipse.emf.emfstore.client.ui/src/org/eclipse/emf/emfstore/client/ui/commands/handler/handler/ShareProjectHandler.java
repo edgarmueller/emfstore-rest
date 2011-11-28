@@ -3,7 +3,7 @@ package org.eclipse.emf.emfstore.client.ui.commands.handler.handler;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.ShareProjectUIController;
+import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UIShareProjectController;
 
 public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHandler {
 
@@ -12,7 +12,7 @@ public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHan
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				new ShareProjectUIController(getShell()).share(getProjectSpace());
+				new UIShareProjectController(getShell()).share(getProjectSpace());
 			}
 		}.run(false);
 		return null;

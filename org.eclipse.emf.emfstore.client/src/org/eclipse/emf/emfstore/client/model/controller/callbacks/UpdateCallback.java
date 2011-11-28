@@ -1,21 +1,19 @@
-package org.eclipse.emf.emfstore.client.model.controller;
+package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
-public interface UpdateCallback extends CallbackInterface {
+public interface UpdateCallback extends GenericCallback {
 
 	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes);
 
 	public void noChangesOnServer();
 
 	public void conflictOccurred(ChangeConflictException changeConflictException);
-
-	public void updateCompleted(ProjectSpace projectSpace, PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion);
 
 	public final UpdateCallback NOCALLBACK = new UpdateCallback() {
 		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes) {
@@ -25,14 +23,21 @@ public interface UpdateCallback extends CallbackInterface {
 		public void handleException(Exception exception) {
 		}
 
-		public void updateCompleted(ProjectSpace projectSpace, PrimaryVersionSpec baseVersion,
-			PrimaryVersionSpec newVersion) {
-		}
-
 		public void noChangesOnServer() {
 		}
 
 		public void conflictOccurred(ChangeConflictException changeConflictException) {
 		}
+
+		public void callCompleted(Map<Object, Object> values, boolean successful) {
+		}
 	};
+
+	/**
+	 * Return constants
+	 */
+
+	public static final String PROJECTSPACE = "projectspace";
+	public static final String NEWVERSION = "newversion";
+	public static final String OLDVERSION = "oldversion";
 }

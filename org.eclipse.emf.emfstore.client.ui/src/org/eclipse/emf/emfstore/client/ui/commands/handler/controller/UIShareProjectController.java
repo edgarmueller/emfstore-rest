@@ -1,15 +1,17 @@
 package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
+import java.util.Map;
+
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.ShareCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
-public class ShareProjectUIController extends AbstractEMFStoreUIController implements ShareCallback {
+public class UIShareProjectController extends AbstractEMFStoreUIController implements GenericCallback {
 
-	public ShareProjectUIController(Shell shell) {
+	public UIShareProjectController(Shell shell) {
 		setShell(shell);
 	}
 
@@ -18,11 +20,15 @@ public class ShareProjectUIController extends AbstractEMFStoreUIController imple
 		((ProjectSpaceImpl) projectSpace).shareProject(null, this, getProgressMonitor());
 	}
 
-	public void shareCompleted(ProjectSpace projectSpace, boolean canceled) {
+	public void shareCompleted(ProjectSpace projectSpace, boolean successful) {
 		closeProgress();
-		if (!canceled) {
+		if (successful) {
 			MessageDialog.openInformation(getShell(), "Share completed", "The project was successfully shared.");
 		}
 	}
 
+	@Override
+	public void callCompleted(Map<Object, Object> values, boolean successful) {
+		shareCompleted((ProjectSpace) values.get(ProjectSpace.class), successful);
+	}
 }

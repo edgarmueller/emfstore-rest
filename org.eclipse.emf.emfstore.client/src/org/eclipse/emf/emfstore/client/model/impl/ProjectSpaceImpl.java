@@ -55,10 +55,10 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
-import org.eclipse.emf.emfstore.client.model.controller.ShareCallback;
 import org.eclipse.emf.emfstore.client.model.controller.ShareController;
-import org.eclipse.emf.emfstore.client.model.controller.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.CommitCanceledException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
@@ -1459,7 +1459,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.client.model.controller.UpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
 		new UpdateController(this, version, callback, progress).execute();
@@ -2174,7 +2174,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		shareProject(null, null, null);
 	}
 
-	public void shareProject(Usersession session, ShareCallback callback, IProgressMonitor monitor) {
+	public void shareProject(Usersession session, GenericCallback callback, IProgressMonitor monitor) {
 		new ShareController(this, session, callback, monitor).execute();
 	}
 

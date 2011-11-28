@@ -1,11 +1,13 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
@@ -120,7 +122,10 @@ public class UpdateController extends ServerCall<UpdateCallback> {
 	// TODO ASYNC introduce update canceled
 
 	private void updateDone(PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
-		getCallBack().updateCompleted(getProjectSpace(), oldVersion, (newVersion == null) ? oldVersion : newVersion);
-		getProgressMonitor().done();
+		HashMap<Object, Object> values = new HashMap<Object, Object>();
+		values.put(UpdateCallback.PROJECTSPACE, getProjectSpace());
+		values.put(UpdateCallback.OLDVERSION, oldVersion);
+		values.put(UpdateCallback.NEWVERSION, (newVersion == null) ? oldVersion : newVersion);
+		getCallBack().callCompleted(values, newVersion != null);
 	}
 }

@@ -4,12 +4,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.CallbackInterface;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
-public abstract class ServerCall<T extends CallbackInterface> {
+public abstract class ServerCall<T extends GenericCallback> {
 
 	private ProjectSpaceImpl projectSpace;
 	private Usersession usersession;
