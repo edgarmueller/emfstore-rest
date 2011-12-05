@@ -8,15 +8,13 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands;
+package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.DecisionManager;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeWizard;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.CaseStudySwitch;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
