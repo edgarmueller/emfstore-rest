@@ -281,8 +281,7 @@ public interface Usersession extends EObject {
 	 * @throws EmfStoreException if creation fails
 	 * @generated NOT
 	 */
-	ProjectInfo createProject(String name, String description)
-			throws AccessControlException, EmfStoreException;
+	ProjectInfo createProject(String name, String description) throws AccessControlException, EmfStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
@@ -294,8 +293,7 @@ public interface Usersession extends EObject {
 	 * @model
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec,
-			ProjectId projectId) throws EmfStoreException;
+	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec, ProjectId projectId) throws EmfStoreException;
 
 	/**
 	 * Gets a list of history infos.
@@ -306,8 +304,7 @@ public interface Usersession extends EObject {
 	 * @throws EmfStoreException if server throws an exception
 	 * @generated NOT
 	 */
-	List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery query)
-			throws EmfStoreException;
+	List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery query) throws EmfStoreException;
 
 	/**
 	 * Returns a {@link AdminBroker} related to the user session.
@@ -317,8 +314,7 @@ public interface Usersession extends EObject {
 	 * @throws AccessControlException if access is denied
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker() throws EmfStoreException,
-			AccessControlException;
+	AdminBroker getAdminBroker() throws EmfStoreException, AccessControlException;
 
 	/**
 	 * Check if the user session is currently logged into a server.
@@ -334,8 +330,7 @@ public interface Usersession extends EObject {
 	 * @param deleteFiles deletes files too
 	 * @throws EmfStoreException in case of failure
 	 */
-	void deleteProject(ProjectId projectId, boolean deleteFiles)
-			throws EmfStoreException;
+	void deleteProject(ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
 
 	/**
 	 * Updates the ACUser and it roles.

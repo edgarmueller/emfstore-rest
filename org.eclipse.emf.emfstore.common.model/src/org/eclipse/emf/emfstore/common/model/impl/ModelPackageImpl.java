@@ -99,13 +99,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass propertyMapEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass propertyStringValueEClass = null;
 
 	/**
@@ -154,13 +147,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public static ModelPackage init() {
 		if (isInited)
-			return (ModelPackage) EPackage.Registry.INSTANCE
-					.getEPackage(ModelPackage.eNS_URI);
+			return (ModelPackage) EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new ModelPackageImpl());
+		ModelPackageImpl theModelPackage = (ModelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+			.get(eNS_URI) : new ModelPackageImpl());
 
 		isInited = true;
 
@@ -220,8 +211,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getUniqueIdentifier_Id() {
-		return (EAttribute) uniqueIdentifierEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) uniqueIdentifierEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -239,8 +229,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getIdentifiableElement_Identifier() {
-		return (EAttribute) identifiableElementEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) identifiableElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -303,8 +292,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getEMFStoreProperty_Key() {
-		return (EAttribute) emfStorePropertyEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) emfStorePropertyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -313,8 +301,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getEMFStoreProperty_Value() {
-		return (EReference) emfStorePropertyEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) emfStorePropertyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -323,37 +310,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getEMFStoreProperty_Type() {
-		return (EAttribute) emfStorePropertyEClass.getEStructuralFeatures()
-				.get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPropertyMapEntry() {
-		return propertyMapEntryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPropertyMapEntry_Key() {
-		return (EAttribute) propertyMapEntryEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPropertyMapEntry_Value() {
-		return (EReference) propertyMapEntryEClass.getEStructuralFeatures()
-				.get(1);
+		return (EAttribute) emfStorePropertyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -371,8 +328,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getPropertyStringValue_Value() {
-		return (EAttribute) propertyStringValueEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) propertyStringValueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -421,8 +377,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(uniqueIdentifierEClass, UNIQUE_IDENTIFIER__ID);
 
 		identifiableElementEClass = createEClass(IDENTIFIABLE_ELEMENT);
-		createEAttribute(identifiableElementEClass,
-				IDENTIFIABLE_ELEMENT__IDENTIFIER);
+		createEAttribute(identifiableElementEClass, IDENTIFIABLE_ELEMENT__IDENTIFIER);
 
 		modelElementIdEClass = createEClass(MODEL_ELEMENT_ID);
 
@@ -438,13 +393,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(emfStorePropertyEClass, EMF_STORE_PROPERTY__VALUE);
 		createEAttribute(emfStorePropertyEClass, EMF_STORE_PROPERTY__TYPE);
 
-		propertyMapEntryEClass = createEClass(PROPERTY_MAP_ENTRY);
-		createEAttribute(propertyMapEntryEClass, PROPERTY_MAP_ENTRY__KEY);
-		createEReference(propertyMapEntryEClass, PROPERTY_MAP_ENTRY__VALUE);
-
 		propertyStringValueEClass = createEClass(PROPERTY_STRING_VALUE);
-		createEAttribute(propertyStringValueEClass,
-				PROPERTY_STRING_VALUE__VALUE);
+		createEAttribute(propertyStringValueEClass, PROPERTY_STRING_VALUE__VALUE);
 
 		// Create enums
 		emfStorePropertyTypeEEnum = createEEnum(EMF_STORE_PROPERTY_TYPE);
@@ -480,99 +430,63 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Add supertypes to classes
 		modelElementIdEClass.getESuperTypes().add(this.getUniqueIdentifier());
-		propertyStringValueEClass.getESuperTypes().add(
-				ecorePackage.getEObject());
+		propertyStringValueEClass.getESuperTypes().add(ecorePackage.getEObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProject_ModelElements(), ecorePackage.getEObject(),
-				null, "modelElements", null, 0, -1, Project.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				!IS_ORDERED);
-		initEReference(getProject_CutElements(), ecorePackage.getEObject(),
-				null, "cutElements", null, 0, -1, Project.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProject_ModelElements(), ecorePackage.getEObject(), null, "modelElements", null, 0, -1,
+			Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getProject_CutElements(), ecorePackage.getEObject(), null, "cutElements", null, 0, -1,
+			Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(uniqueIdentifierEClass, UniqueIdentifier.class,
-				"UniqueIdentifier", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUniqueIdentifier_Id(), ecorePackage.getEString(),
-				"id", "Default Value Literal\t", 1, 1, UniqueIdentifier.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(uniqueIdentifierEClass, UniqueIdentifier.class, "UniqueIdentifier", IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUniqueIdentifier_Id(), ecorePackage.getEString(), "id", "Default Value Literal\t", 1, 1,
+			UniqueIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
-		initEClass(identifiableElementEClass, IdentifiableElement.class,
-				"IdentifiableElement", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIdentifiableElement_Identifier(),
-				ecorePackage.getEString(), "identifier", null, 1, 1,
-				IdentifiableElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(identifiableElementEClass, IdentifiableElement.class, "IdentifiableElement", IS_ABSTRACT,
+			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIdentifiableElement_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1,
+			IdentifiableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelElementIdEClass, ModelElementId.class,
-				"ModelElementId", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(modelElementIdEClass, ModelElementId.class, "ModelElementId", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(modelVersionEClass, ModelVersion.class, "ModelVersion",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModelVersion_ReleaseNumber(), ecorePackage.getEInt(),
-				"releaseNumber", null, 0, 1, ModelVersion.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(modelVersionEClass, ModelVersion.class, "ModelVersion", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModelVersion_ReleaseNumber(), ecorePackage.getEInt(), "releaseNumber", null, 0, 1,
+			ModelVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
-		initEClass(nonDomainElementEClass, NonDomainElement.class,
-				"NonDomainElement", IS_ABSTRACT, IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(nonDomainElementEClass, NonDomainElement.class, "NonDomainElement", IS_ABSTRACT, IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(associationClassElementEClass,
-				AssociationClassElement.class, "AssociationClassElement",
-				IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(associationClassElementEClass, AssociationClassElement.class, "AssociationClassElement",
+			IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(emfStorePropertyEClass, EMFStoreProperty.class,
-				"EMFStoreProperty", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEMFStoreProperty_Key(), ecorePackage.getEString(),
-				"key", null, 0, 1, EMFStoreProperty.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getEMFStoreProperty_Value(), ecorePackage.getEObject(),
-				null, "value", null, 0, 1, EMFStoreProperty.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEMFStoreProperty_Type(),
-				this.getEMFStorePropertyType(), "type", null, 0, 1,
-				EMFStoreProperty.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(emfStorePropertyEClass, EMFStoreProperty.class, "EMFStoreProperty", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEMFStoreProperty_Key(), ecorePackage.getEString(), "key", null, 0, 1, EMFStoreProperty.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFStoreProperty_Value(), ecorePackage.getEObject(), null, "value", null, 0, 1,
+			EMFStoreProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEMFStoreProperty_Type(), this.getEMFStorePropertyType(), "type", null, 0, 1,
+			EMFStoreProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
-		initEClass(propertyMapEntryEClass, Map.Entry.class, "PropertyMapEntry",
-				!IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPropertyMapEntry_Key(), ecorePackage.getEString(),
-				"key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyMapEntry_Value(), this.getEMFStoreProperty(),
-				null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(propertyStringValueEClass, PropertyStringValue.class,
-				"PropertyStringValue", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPropertyStringValue_Value(),
-				ecorePackage.getEString(), "value", null, 0, 1,
-				PropertyStringValue.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(propertyStringValueEClass, PropertyStringValue.class, "PropertyStringValue", !IS_ABSTRACT,
+			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropertyStringValue_Value(), ecorePackage.getEString(), "value", null, 0, 1,
+			PropertyStringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(emfStorePropertyTypeEEnum, EMFStorePropertyType.class,
-				"EMFStorePropertyType");
+		initEEnum(emfStorePropertyTypeEEnum, EMFStorePropertyType.class, "EMFStorePropertyType");
 		addEEnumLiteral(emfStorePropertyTypeEEnum, EMFStorePropertyType.SHARED);
 		addEEnumLiteral(emfStorePropertyTypeEEnum, EMFStorePropertyType.LOCAL);
 

@@ -37,9 +37,8 @@ import org.eclipse.emf.emfstore.common.model.Project;
  * 
  * @generated
  */
-public class ProjectItemProvider extends RootElementItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectItemProvider extends RootElementItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -73,8 +72,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS);
@@ -109,8 +107,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 		switch (notification.getFeatureID(Project.class)) {
 		case ModelPackage.PROJECT__MODEL_ELEMENTS:
 		case ModelPackage.PROJECT__CUT_ELEMENTS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -124,59 +121,38 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createProject()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createProject()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelElementId()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createModelVersion()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelVersion()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createEMFStoreProperty()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE
-						.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createPropertyStringValue()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createPropertyStringValue()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.createProject()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE.createProject()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelElementId()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelVersion()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE.createModelVersion()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE.createEMFStoreProperty()));
-
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE
-						.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
-				ModelFactory.eINSTANCE.createPropertyStringValue()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.createPropertyStringValue()));
 	}
 
 	/**
@@ -186,18 +162,16 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
 		boolean qualify = childFeature == ModelPackage.Literals.PROJECT__MODEL_ELEMENTS
-				|| childFeature == ModelPackage.Literals.PROJECT__CUT_ELEMENTS;
+			|| childFeature == ModelPackage.Literals.PROJECT__CUT_ELEMENTS;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
+				getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
@@ -220,8 +194,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/project.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/project.png"));
 	}
 
 	/**
@@ -235,8 +208,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 		if (object instanceof Project) {
 			Project project = (Project) object;
 			boolean isInProjectSpace = project.eContainer() != null
-					&& project.eContainer().eClass().getName()
-							.equals("ProjectSpace");
+				&& project.eContainer().eClass().getName().equals("ProjectSpace");
 			if (isInProjectSpace) {
 				return "Orphans";
 			}
@@ -260,14 +232,13 @@ public class ProjectItemProvider extends RootElementItemProvider implements
 			// FIXME: ugly workarounds to avoid dependencies to workspace and
 			// model
 			boolean isInProjectSpace = project.eContainer() != null
-					&& project.eContainer().eClass().getName()
-							.equals("ProjectSpace");
+				&& project.eContainer().eClass().getName().equals("ProjectSpace");
 			for (EObject temp : allmes) {
 				econtainer = temp.eContainer();
-				if ((!isInProjectSpace && (econtainer instanceof Project) && (temp
-						.eClass().getName().equals("CompositeSection")))
-						|| (isInProjectSpace && (econtainer instanceof Project) && !(temp
-								.eClass().getName().equals("CompositeSection")))) {
+				if ((!isInProjectSpace && (econtainer instanceof Project) && (temp.eClass().getName()
+					.equals("CompositeSection")))
+					|| (isInProjectSpace && (econtainer instanceof Project) && !(temp.eClass().getName()
+						.equals("CompositeSection")))) {
 					ret.add(temp);
 				}
 			}

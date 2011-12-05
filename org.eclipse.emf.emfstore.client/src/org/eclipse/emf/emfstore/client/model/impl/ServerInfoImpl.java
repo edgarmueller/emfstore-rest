@@ -175,8 +175,7 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.SERVER_INFO__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SERVER_INFO__NAME, oldName, name));
 	}
 
 	/**
@@ -195,8 +194,7 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		String oldUrl = url;
 		url = newUrl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.SERVER_INFO__URL, oldUrl, url));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SERVER_INFO__URL, oldUrl, url));
 	}
 
 	/**
@@ -215,8 +213,7 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		int oldPort = port;
 		port = newPort;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.SERVER_INFO__PORT, oldPort, port));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SERVER_INFO__PORT, oldPort, port));
 	}
 
 	/**
@@ -225,9 +222,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 */
 	public EList<ProjectInfo> getProjectInfos() {
 		if (projectInfos == null) {
-			projectInfos = new EObjectContainmentEList.Resolving<ProjectInfo>(
-					ProjectInfo.class, this,
-					ModelPackage.SERVER_INFO__PROJECT_INFOS);
+			projectInfos = new EObjectContainmentEList.Resolving<ProjectInfo>(ProjectInfo.class, this,
+				ModelPackage.SERVER_INFO__PROJECT_INFOS);
 		}
 		return projectInfos;
 	}
@@ -243,8 +239,7 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 			if (lastUsersession != oldLastUsersession) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ModelPackage.SERVER_INFO__LAST_USERSESSION,
-							oldLastUsersession, lastUsersession));
+						ModelPackage.SERVER_INFO__LAST_USERSESSION, oldLastUsersession, lastUsersession));
 			}
 		}
 		return lastUsersession;
@@ -266,9 +261,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		Usersession oldLastUsersession = lastUsersession;
 		lastUsersession = newLastUsersession;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.SERVER_INFO__LAST_USERSESSION,
-					oldLastUsersession, lastUsersession));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SERVER_INFO__LAST_USERSESSION,
+				oldLastUsersession, lastUsersession));
 	}
 
 	/**
@@ -287,9 +281,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		String oldCertificateAlias = certificateAlias;
 		certificateAlias = newCertificateAlias;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.SERVER_INFO__CERTIFICATE_ALIAS,
-					oldCertificateAlias, certificateAlias));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SERVER_INFO__CERTIFICATE_ALIAS,
+				oldCertificateAlias, certificateAlias));
 	}
 
 	/**
@@ -297,12 +290,10 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.SERVER_INFO__PROJECT_INFOS:
-			return ((InternalEList<?>) getProjectInfos()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getProjectInfos()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -351,8 +342,7 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 			return;
 		case ModelPackage.SERVER_INFO__PROJECT_INFOS:
 			getProjectInfos().clear();
-			getProjectInfos().addAll(
-					(Collection<? extends ProjectInfo>) newValue);
+			getProjectInfos().addAll((Collection<? extends ProjectInfo>) newValue);
 			return;
 		case ModelPackage.SERVER_INFO__LAST_USERSESSION:
 			setLastUsersession((Usersession) newValue);
@@ -401,11 +391,9 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ModelPackage.SERVER_INFO__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ModelPackage.SERVER_INFO__URL:
-			return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT
-					.equals(url);
+			return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 		case ModelPackage.SERVER_INFO__PORT:
 			return port != PORT_EDEFAULT;
 		case ModelPackage.SERVER_INFO__PROJECT_INFOS:
@@ -413,8 +401,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 		case ModelPackage.SERVER_INFO__LAST_USERSESSION:
 			return lastUsersession != null;
 		case ModelPackage.SERVER_INFO__CERTIFICATE_ALIAS:
-			return CERTIFICATE_ALIAS_EDEFAULT == null ? certificateAlias != null
-					: !CERTIFICATE_ALIAS_EDEFAULT.equals(certificateAlias);
+			return CERTIFICATE_ALIAS_EDEFAULT == null ? certificateAlias != null : !CERTIFICATE_ALIAS_EDEFAULT
+				.equals(certificateAlias);
 		}
 		return super.eIsSet(featureID);
 	}

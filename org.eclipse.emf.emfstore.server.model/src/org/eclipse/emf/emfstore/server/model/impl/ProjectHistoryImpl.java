@@ -15,17 +15,13 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
-import org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -109,14 +105,14 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected String projectDescription = PROJECT_DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSharedProperties() <em>Shared Properties</em>}' map.
+	 * The cached value of the '{@link #getSharedProperties() <em>Shared Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSharedProperties()
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<String, EMFStoreProperty> sharedProperties;
+	protected EList<EMFStoreProperty> sharedProperties;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -264,9 +260,9 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EMap<String, EMFStoreProperty> getSharedProperties() {
+	public EList<EMFStoreProperty> getSharedProperties() {
 		if (sharedProperties == null) {
-			sharedProperties = new EcoreEMap<String,EMFStoreProperty>(org.eclipse.emf.emfstore.common.model.ModelPackage.Literals.PROPERTY_MAP_ENTRY, PropertyMapEntryImpl.class, this, ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES);
+			sharedProperties = new EObjectContainmentEList.Resolving<EMFStoreProperty>(EMFStoreProperty.class, this, ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES);
 		}
 		return sharedProperties;
 	}
@@ -305,8 +301,7 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 			case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
 				return getProjectDescription();
 			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-				if (coreType) return getSharedProperties();
-				else return getSharedProperties().map();
+				return getSharedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -333,7 +328,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 				setProjectDescription((String)newValue);
 				return;
 			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-				((EStructuralFeature.Setting)getSharedProperties()).set(newValue);
+				getSharedProperties().clear();
+				getSharedProperties().addAll((Collection<? extends EMFStoreProperty>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

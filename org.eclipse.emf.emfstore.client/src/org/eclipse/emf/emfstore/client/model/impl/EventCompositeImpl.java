@@ -69,8 +69,8 @@ public class EventCompositeImpl extends EObjectImpl implements EventComposite {
 	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList.Resolving<Event>(Event.class,
-					this, ModelPackage.EVENT_COMPOSITE__EVENTS);
+			events = new EObjectContainmentEList.Resolving<Event>(Event.class, this,
+				ModelPackage.EVENT_COMPOSITE__EVENTS);
 		}
 		return events;
 	}
@@ -80,8 +80,7 @@ public class EventCompositeImpl extends EObjectImpl implements EventComposite {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.EVENT_COMPOSITE__EVENTS:
 			return ((InternalEList<?>) getEvents()).basicRemove(otherEnd, msgs);

@@ -132,8 +132,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo)
-			throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
 
 	/**
 	 * Set the workspace connection manager.
@@ -192,8 +191,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param absoluteFileName the file name
 	 * @throws IOException if file access fails
 	 */
-	void exportProject(ProjectSpace projectSpace, String absoluteFileName)
-			throws IOException;
+	void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
 
 	/**
 	 * Export a project space to a file.
@@ -202,8 +200,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param absoluteFileName the file name
 	 * @throws IOException if file access fails
 	 */
-	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName)
-			throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
 
 	/**
 	 * Export the current workspace to a file.
@@ -235,8 +232,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @return a set of matching project spaces
 	 * @throws ProjectUrlResolutionException if project cannot be found in workspace
 	 */
-	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment)
-			throws ProjectUrlResolutionException;
+	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException;
 
 	/**
 	 * Resolves a server url to a set server infos if multiple serverInfos match the url.
@@ -245,8 +241,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @return the server info
 	 * @throws ServerUrlResolutionException if no matching server info can be found
 	 */
-	Set<ServerInfo> resolve(ServerUrl serverUrl)
-			throws ServerUrlResolutionException;
+	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -259,8 +254,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo,
-			PrimaryVersionSpec targetSpec) throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec)
+		throws EmfStoreException;
 
 	/**
 	 * Get the project space for the given project.
@@ -286,7 +281,6 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param projectDescription the project description
 	 * @return the project space that the new project resides in
 	 */
-	ProjectSpace createLocalProject(String projectName,
-			String projectDescription);
+	ProjectSpace createLocalProject(String projectName, String projectDescription);
 
 } // Workspace

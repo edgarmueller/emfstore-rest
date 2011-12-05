@@ -81,7 +81,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> .<!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -106,7 +105,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<EObject> getCutElements() {
@@ -119,7 +117,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -135,7 +132,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -151,7 +147,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -172,7 +167,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -190,7 +184,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

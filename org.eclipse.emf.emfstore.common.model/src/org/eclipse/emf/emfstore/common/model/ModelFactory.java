@@ -27,8 +27,7 @@ public interface ModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.common.model.impl.ModelFactoryImpl
-			.init();
+	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.common.model.impl.ModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Project</em>'.

@@ -24,8 +24,7 @@ public interface ModelFactory extends EFactory {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.client.model.impl.ModelFactoryImpl
-			.init();
+	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.client.model.impl.ModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Workspace</em>'.

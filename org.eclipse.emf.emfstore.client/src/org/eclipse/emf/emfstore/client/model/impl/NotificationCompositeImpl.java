@@ -35,8 +35,7 @@ import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
  *
  * @generated
  */
-public class NotificationCompositeImpl extends EObjectImpl implements
-		NotificationComposite {
+public class NotificationCompositeImpl extends EObjectImpl implements NotificationComposite {
 	/**
 	 * The cached value of the '{@link #getNotifications() <em>Notifications</em>}' containment reference list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -70,9 +69,8 @@ public class NotificationCompositeImpl extends EObjectImpl implements
 	 */
 	public EList<ESNotification> getNotifications() {
 		if (notifications == null) {
-			notifications = new EObjectContainmentEList.Resolving<ESNotification>(
-					ESNotification.class, this,
-					ModelPackage.NOTIFICATION_COMPOSITE__NOTIFICATIONS);
+			notifications = new EObjectContainmentEList.Resolving<ESNotification>(ESNotification.class, this,
+				ModelPackage.NOTIFICATION_COMPOSITE__NOTIFICATIONS);
 		}
 		return notifications;
 	}
@@ -82,12 +80,10 @@ public class NotificationCompositeImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.NOTIFICATION_COMPOSITE__NOTIFICATIONS:
-			return ((InternalEList<?>) getNotifications()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getNotifications()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,8 +111,7 @@ public class NotificationCompositeImpl extends EObjectImpl implements
 		switch (featureID) {
 		case ModelPackage.NOTIFICATION_COMPOSITE__NOTIFICATIONS:
 			getNotifications().clear();
-			getNotifications().addAll(
-					(Collection<? extends ESNotification>) newValue);
+			getNotifications().addAll((Collection<? extends ESNotification>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

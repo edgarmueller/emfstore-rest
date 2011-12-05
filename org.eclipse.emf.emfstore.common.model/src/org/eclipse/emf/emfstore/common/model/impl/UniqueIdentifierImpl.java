@@ -30,8 +30,7 @@ import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
  * 
  * @generated
  */
-public abstract class UniqueIdentifierImpl extends EObjectImpl implements
-		UniqueIdentifier {
+public abstract class UniqueIdentifierImpl extends EObjectImpl implements UniqueIdentifier {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -88,8 +87,7 @@ public abstract class UniqueIdentifierImpl extends EObjectImpl implements
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.UNIQUE_IDENTIFIER__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.UNIQUE_IDENTIFIER__ID, oldId, id));
 	}
 
 	/**

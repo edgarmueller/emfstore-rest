@@ -58,7 +58,7 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 		for (EMFStoreProperty prop : properties) {
 			for (ProjectHistory currentHistory : serverProjects) {
 				if (currentHistory.getProjectId().equals(projectId)) {
-					currentHistory.getSharedProperties().put(prop.getKey(), prop);
+					currentHistory.getSharedProperties().add(prop);
 					save();
 					return;
 				}
@@ -98,7 +98,7 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 
 		if (currentHistory != null) {
 			List<EMFStoreProperty> temp = new ArrayList<EMFStoreProperty>();
-			for (EMFStoreProperty prop : currentHistory.getSharedProperties().values()) {
+			for (EMFStoreProperty prop : currentHistory.getSharedProperties()) {
 				temp.add(prop);
 			}
 			return temp;

@@ -210,7 +210,7 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES,
-				 org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.create(org.eclipse.emf.emfstore.common.model.ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
+				 org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
 	}
 
 	/**

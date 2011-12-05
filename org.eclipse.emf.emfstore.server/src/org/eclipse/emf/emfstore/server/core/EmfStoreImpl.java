@@ -80,6 +80,7 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements EmfStore 
 		addSubInterface(new VersionSubInterfaceImpl(this));
 		addSubInterface(new FileTransferSubInterfaceImpl(this));
 		addSubInterface(new ProjectPropertiesSubInterfaceImpl(this));
+		addSubInterface(new EMFStorePropertiesSubInterfaceImpl(this));
 	}
 
 	/**

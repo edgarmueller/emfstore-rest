@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  *
  * @generated
  */
-public class ModelElementIdImpl extends UniqueIdentifierImpl implements
-		ModelElementId {
+public class ModelElementIdImpl extends UniqueIdentifierImpl implements ModelElementId {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated

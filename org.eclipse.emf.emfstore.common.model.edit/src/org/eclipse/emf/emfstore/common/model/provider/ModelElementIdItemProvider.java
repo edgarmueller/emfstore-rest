@@ -29,9 +29,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelElementIdItemProvider extends UniqueIdentifierItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ModelElementIdItemProvider extends UniqueIdentifierItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -62,8 +61,7 @@ public class ModelElementIdItemProvider extends UniqueIdentifierItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ModelElementId"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelElementId"));
 	}
 
 	/**
@@ -75,7 +73,7 @@ public class ModelElementIdItemProvider extends UniqueIdentifierItemProvider
 	public String getText(Object object) {
 		String label = ((ModelElementId) object).getId();
 		return label == null || label.length() == 0 ? getString("_UI_ModelElementId_type")
-				: getString("_UI_ModelElementId_type") + " " + label;
+			: getString("_UI_ModelElementId_type") + " " + label;
 	}
 
 	/**
@@ -98,8 +96,7 @@ public class ModelElementIdItemProvider extends UniqueIdentifierItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -134,20 +134,19 @@ public interface ProjectHistory extends EObject {
 	void setProjectDescription(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Shared Properties</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty},
+	 * Returns the value of the '<em><b>Shared Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Shared Properties</em>' map isn't clear, there really should be more of a description
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Shared Properties</em>' map.
+	 * @return the value of the '<em>Shared Properties</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getProjectHistory_SharedProperties()
-	 * @model mapType="org.eclipse.emf.emfstore.common.model.PropertyMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.common.model.EMFStoreProperty>"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EMap<String, EMFStoreProperty> getSharedProperties();
+	EList<EMFStoreProperty> getSharedProperties();
 
 } // ProjectHistory

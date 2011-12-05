@@ -82,9 +82,8 @@ public class ModelVersionImpl extends EObjectImpl implements ModelVersion {
 		int oldReleaseNumber = releaseNumber;
 		releaseNumber = newReleaseNumber;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.MODEL_VERSION__RELEASE_NUMBER,
-					oldReleaseNumber, releaseNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MODEL_VERSION__RELEASE_NUMBER,
+				oldReleaseNumber, releaseNumber));
 	}
 
 	/**

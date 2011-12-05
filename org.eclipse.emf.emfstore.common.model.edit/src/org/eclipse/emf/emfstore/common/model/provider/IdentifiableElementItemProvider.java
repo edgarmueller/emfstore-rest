@@ -34,9 +34,8 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  * --> <!-- end-user-doc -->
  * @generated
  */
-public class IdentifiableElementItemProvider extends RootElementItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class IdentifiableElementItemProvider extends RootElementItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -68,16 +67,12 @@ public class IdentifiableElementItemProvider extends RootElementItemProvider
 	 */
 	protected void addIdentifierPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_IdentifiableElement_identifier_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_IdentifiableElement_identifier_feature",
-						"_UI_IdentifiableElement_type"),
-				ModelPackage.Literals.IDENTIFIABLE_ELEMENT__IDENTIFIER, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_IdentifiableElement_identifier_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_IdentifiableElement_identifier_feature",
+				"_UI_IdentifiableElement_type"), ModelPackage.Literals.IDENTIFIABLE_ELEMENT__IDENTIFIER, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -89,7 +84,7 @@ public class IdentifiableElementItemProvider extends RootElementItemProvider
 	public String getText(Object object) {
 		String label = ((IdentifiableElement) object).getIdentifier();
 		return label == null || label.length() == 0 ? getString("_UI_IdentifiableElement_type")
-				: getString("_UI_IdentifiableElement_type") + " " + label;
+			: getString("_UI_IdentifiableElement_type") + " " + label;
 	}
 
 	/**
@@ -105,8 +100,7 @@ public class IdentifiableElementItemProvider extends RootElementItemProvider
 
 		switch (notification.getFeatureID(IdentifiableElement.class)) {
 		case ModelPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -119,8 +113,7 @@ public class IdentifiableElementItemProvider extends RootElementItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
