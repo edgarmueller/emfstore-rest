@@ -1383,5 +1383,15 @@
            id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
            name="NewLocalProject">
      </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.ProjectPropertiesHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectPropertiesNEW"
+           name="NEWProjectProperties">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.UndoLastOperationHandler"
+           id="org.eclipse.emf.emfstore.client.ui.undoLastOperationNEW"
+           name="NEWundoLastOperation">
+     </command>
    </extension>
 </plugin>

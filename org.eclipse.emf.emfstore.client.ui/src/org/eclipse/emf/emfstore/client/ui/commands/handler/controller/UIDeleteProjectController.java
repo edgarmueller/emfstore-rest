@@ -6,8 +6,6 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 public class UIDeleteProjectController extends AbstractEMFStoreUIController {
@@ -37,9 +35,6 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController {
 		}
 		message += " ?";
 
-		MessageDialog dialog = new MessageDialog(null, "Confirmation", null, message, MessageDialog.QUESTION,
-			new String[] { "Yes", "No" }, 0);
-
-		return dialog.open() == Dialog.OK;
+		return confirmationDialog(message);
 	}
 }

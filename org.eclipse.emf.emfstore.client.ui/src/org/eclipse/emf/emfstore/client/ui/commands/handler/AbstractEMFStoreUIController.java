@@ -6,6 +6,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -53,6 +55,13 @@ public abstract class AbstractEMFStoreUIController implements GenericCallback {
 			return progressDialog.getProgressMonitor();
 		}
 		return new NullProgressMonitor();
+	}
+
+	protected boolean confirmationDialog(String message) {
+		MessageDialog dialog = new MessageDialog(null, "Confirmation", null, message, MessageDialog.QUESTION,
+			new String[] { "Yes", "No" }, 0);
+
+		return dialog.open() == Dialog.OK;
 	}
 
 }
