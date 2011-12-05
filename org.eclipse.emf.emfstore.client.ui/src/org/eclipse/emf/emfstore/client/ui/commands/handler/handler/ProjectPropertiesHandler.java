@@ -10,6 +10,7 @@ public class ProjectPropertiesHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		// TODO: Active Project good?
+		// TODO: Controller?
 		PreferenceDialog propertyDialog = PreferencesUtil.createPropertyDialogOn(getShell(), WorkspaceManager
 			.getInstance().getCurrentWorkspace().getActiveProjectSpace().getProject(), null, null, null);
 		if (propertyDialog != null) {
