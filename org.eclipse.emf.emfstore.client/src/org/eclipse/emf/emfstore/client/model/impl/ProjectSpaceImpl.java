@@ -1390,7 +1390,8 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		}
 	}
 
-	private void notifyPreCommitObservers(ChangePackage changePackage) {
+	@Deprecated
+	public void notifyPreCommitObservers(ChangePackage changePackage) {
 		for (CommitObserver observer : commitObservers) {
 			try {
 				observer.inspectChanges(this, changePackage);
@@ -1677,7 +1678,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 
 	}
 
-	private void cleanCutElements() {
+	public void cleanCutElements() {
 		for (EObject cutElement : getProject().getCutElements()) {
 			project.deleteModelElement(cutElement);
 		}

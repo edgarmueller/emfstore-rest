@@ -58,6 +58,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 			projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException("Exception when merging the project!", e);
+			handleException(e);
 		}
 		closeProgress();
 	}

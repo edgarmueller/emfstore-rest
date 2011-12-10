@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
  */
 public class SessionManager {
 
-	public void execute(ServerCall serverCall) {
+	public void execute(ServerCall<?> serverCall) {
 		Usersession usersession = prepareUsersession(serverCall);
 		loginUsersession(usersession, false);
 		executeCall(serverCall, usersession, true);
@@ -46,7 +46,7 @@ public class SessionManager {
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 
-	private void executeCall(ServerCall serverCall, Usersession usersession, boolean retry) {
+	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) {
 		try {
 			serverCall.run(usersession.getSessionId());
 		} catch (SessionTimedOutException e) {
@@ -72,7 +72,7 @@ public class SessionManager {
 		}
 	}
 
-	private Usersession prepareUsersession(ServerCall serverCall) {
+	private Usersession prepareUsersession(ServerCall<?> serverCall) {
 		Usersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
 			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());

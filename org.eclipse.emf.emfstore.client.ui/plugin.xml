@@ -66,7 +66,7 @@
         </enabledWhen>
      </handler>
      <handler
-           class="org.eclipse.emf.emfstore.client.ui.commands.CommitProjectHandler"
+           class="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.CommitProjectHandler"
            commandId="org.eclipse.emf.emfstore.client.ui.commitProject">
         <enabledWhen>
            <and>
@@ -92,11 +92,6 @@
            id="org.eclipse.emf.emfstore.client.ui.project"
            name="ECP">
      </category>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           id="org.eclipse.emf.emfstore.client.ui.commitProject"
-           name="commit">
-     </command>
      <command
            id="org.eclipse.emf.emfstore.client.ui.importChanges"
            name="importChanges">
@@ -1322,6 +1317,11 @@
    </extension>
    <extension
          point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+            id="org.eclipse.emf.emfstore.client.ui.commitProject"
+            name="commit">
+      </command>
          <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.UpdateProjectHandler"
