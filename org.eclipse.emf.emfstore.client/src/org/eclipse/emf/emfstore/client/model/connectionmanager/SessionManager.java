@@ -21,7 +21,8 @@ public class SessionManager {
 		executeCall(serverCall, usersession, true);
 	}
 
-	private void loginUsersession(Usersession usersession, boolean force) {
+	private void loginUsersession(Usersession usersession, boolean force) throws AccessControlException,
+		EmfStoreException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");

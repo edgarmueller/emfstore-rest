@@ -7,21 +7,39 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
 public class LoginController implements SessionProvider {
 
+	private Usersession session;
+
 	public Usersession provideUsersession() {
+		if (session != null) {
+			return session;
+		}
+
 		UsersessionSelectionDialog dialog = new UsersessionSelectionDialog(Display.getCurrent().getActiveShell(), this);
-		int open = dialog.open();
-		return open == Dialog.OK ? dialog.getResult() : null;
+		if (dialog.open() == Dialog.OK) {
+			session = dialog.getResult();
+		}
+
+		return session;
 	}
 
-	public void loginSession(Usersession usersession) {
-		NewLoginDialog dialog = new NewLoginDialog(Display.getCurrent().getActiveShell(), this);
-		dialog.setBlockOnOpen(true);
-		dialog.open();
+	public void loginSession(Usersession usersession) throws AccessControlException, EmfStoreException {
+		if (usersession != null && !usersession.isLoggedIn()) {
+			NewLoginDialog dialog = new NewLoginDialog(Display.getCurrent().getActiveShell(), usersession);
+			dialog.setBlockOnOpen(true);
+			if (dialog.open() == Window.OK) {
+				usersession.logIn();
+			}
+		} else if (usersession == null) {
+			provideUsersession();
+		}
 	}
 
 	public Object[] getServerInfoInput() {
@@ -38,6 +56,10 @@ public class LoginController implements SessionProvider {
 		}
 		set.add("<< create new session >>");
 		return set.toArray();
+	}
+
+	public Usersession getUsersession() {
+		return session;
 	}
 
 }

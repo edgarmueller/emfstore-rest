@@ -700,7 +700,7 @@
            </visibleWhen>
         </command>
         <command
-              commandId="org.eclipse.emf.emfstore.client.ui.shareProjectNEW"
+              commandId="org.eclipse.emf.emfstore.client.ui.shareProject"
               icon="icons/arrow_out.png"
               label="NEW Share  Project"
               style="push">
