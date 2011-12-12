@@ -36,11 +36,14 @@ public class UICommitProjectController extends AbstractEMFStoreUIController impl
 		String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
 		if (confirmationDialog(message)) {
 			// TODO results?
-			new UIUpdateProjectController(getShell()).update(projectSpace);
-			return true;
+			try {
+				new UIUpdateProjectController(getShell()).update(projectSpace);
+			} catch (EmfStoreException e) {
+				handleException(e);
+			}
 		}
 		closeProgress();
-		return false;
+		return true;
 	}
 
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
