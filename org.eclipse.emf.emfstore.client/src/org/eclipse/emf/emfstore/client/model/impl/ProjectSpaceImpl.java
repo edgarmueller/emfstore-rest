@@ -61,7 +61,6 @@ import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.client.model.exceptions.CommitCanceledException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.NoChangesOnServerException;
@@ -1256,33 +1255,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @generated NOT
-	 */
-	public PrimaryVersionSpec commit(final LogMessage logMessage) throws EmfStoreException {
-		return commit(logMessage, null);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
-	 *      org.eclipse.emf.emfstore.client.model.observers.CommitObserver)
-	 * @generated NOT
-	 */
-	public PrimaryVersionSpec commit(LogMessage logMessage, CommitObserver commitObserver) throws EmfStoreException {
-		ChangePackage changePackage;
-		try {
-			changePackage = prepareCommit(commitObserver);
-			return finalizeCommit(changePackage, logMessage, commitObserver);
-
-		} catch (CommitCanceledException e) {
-			return this.getBaseVersion();
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#finalizeCommit(org.eclipse.emf.emfstore.server.model.versioning.ChangePackage,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
 	 *      org.eclipse.emf.emfstore.client.model.observers.CommitObserver)
@@ -2337,7 +2309,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	/**
 	 * {@inheritDoc}
 	 */
-	public void merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
+	public boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
 		// merge the conflicts
 		ChangePackage myCp = this.getLocalChangePackage(true);
 		List<ChangePackage> theirCps = this.getChanges(getBaseVersion(), target);
@@ -2364,6 +2336,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 			this.setBaseVersion(target);
 
 			saveProjectSpaceOnly();
+			return true;
+		} else {
+			// merge could not proceed
+			return false;
 		}
 	}
 
@@ -2620,23 +2596,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 */
 	public boolean isTransient() {
 		return isTransient;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit()
-	 */
-	public PrimaryVersionSpec commit() throws EmfStoreException {
-		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
-		String commiter = "UNKOWN";
-		if (this.getUsersession().getACUser() != null && this.getUsersession().getACUser().getName() != null) {
-			commiter = this.getUsersession().getACUser().getName();
-		}
-		logMessage.setAuthor(commiter);
-		logMessage.setClientDate(new Date());
-		logMessage.setMessage("");
-		return commit(logMessage);
 	}
 
 	/**

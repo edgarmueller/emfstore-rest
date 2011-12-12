@@ -36,7 +36,6 @@ import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
@@ -553,48 +552,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	EMap<String, EMFStoreProperty> getChangedSharedProperties();
 
 	/**
-	 * <!-- begin-user-doc --> Commit the all pending changes of the project.
-	 * 
-	 * @return new base version
-	 * @throws EmfStoreException
-	 *             if commit fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec commit() throws EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Commit the all pending changes of the project.
-	 * 
-	 * @return new base version
-	 * @throws EmfStoreException
-	 *             if commit fails <!-- end-user-doc -->
-	 * @model
-	 * @param logMessage
-	 *            the {@link LogMessage} for this commit.
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec commit(LogMessage logMessage) throws EmfStoreException;
-
-	/**
-	 * Commit local changes to the server.
-	 * 
-	 * @param logMessage
-	 *            the log message
-	 * @param commitObserver
-	 *            an observer that is notified about the changes being send to
-	 *            the server
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if the commit fails
-	 * @throws BaseVersionOutdatedException
-	 *             if the project space is not up to date, that is its base
-	 *             version is lower then the projects head revision
-	 */
-	PrimaryVersionSpec commit(LogMessage logMessage, CommitObserver commitObserver) throws EmfStoreException,
-		BaseVersionOutdatedException;
-
-	/**
 	 * TODO
 	 * 
 	 * @param logMessage
@@ -956,7 +913,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @throws EmfStoreException
 	 *             if the conncection to the server fails
 	 */
-	void merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
+	boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
 
 	/**
 	 * Shows whether projectSpace is transient.
