@@ -17,6 +17,7 @@ import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.viewers.ISelection;
@@ -48,7 +49,7 @@ public class ManageOrgUnitsHandler extends AbstractHandler {
 			TreeNode node = (TreeNode) obj;
 			ServerInfo serverInfo = (ServerInfo) node.getValue();
 			Usersession session = serverInfo.getLastUsersession();
-			AdminBroker adminBroker = session.getAdminBroker();
+			AdminBroker adminBroker = WorkspaceManager.getInstance().getCurrentWorkspace().getAdminBroker(session);
 			dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), adminBroker);
 			dialog.create();
 			dialog.open();

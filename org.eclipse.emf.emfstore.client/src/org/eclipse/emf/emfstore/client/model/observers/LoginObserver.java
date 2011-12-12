@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.observers;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.common.observer.IObserver;
 
 /**
  * Observer interface for logging in.
@@ -18,8 +19,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
  * @author pfeifferc
  * @author shterev
  */
-// TODO Chain use ObserverBus and extends IObserver
-public interface LoginObserver {
+public interface LoginObserver extends IObserver {
 
 	/**
 	 * To be called when login is completed.

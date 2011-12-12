@@ -51,6 +51,7 @@ import org.eclipse.emf.emfstore.client.model.NotificationComposite;
 import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
@@ -71,7 +72,6 @@ import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.preferences.PropertyKey;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
@@ -96,6 +96,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
@@ -1569,6 +1571,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#init()
 	 * @generated NOT
 	 */
+	@SuppressWarnings("unchecked")
 	public void init() {
 		initCompleted = true;
 
@@ -1595,7 +1598,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 			((ProjectImpl) this.getProject()).setUndetachable(statePersister);
 		}
 		if (getUsersession() != null) {
-			getUsersession().addLoginObserver(this);
+			WorkspaceManager.getObserverBus().register(this, LoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
 			if (acUser != null) {
 				for (OrgUnitProperty p : acUser.getProperties()) {
@@ -2060,57 +2063,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		return result.toString();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws EmfStoreException
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.client.model.Usersession)
-	 * @generated NOT
-	 */
-	public void shareProject(Usersession usersession) throws EmfStoreException {
-		this.setUsersession(usersession);
-		usersession.addLoginObserver(this);
-		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
-		logMessage.setAuthor(usersession.getUsername());
-		logMessage.setClientDate(new Date());
-		logMessage.setMessage("Initial commit");
-		ProjectInfo createdProject;
-
-		stopChangeRecording();
-		statePersister.setAutoSave(false);
-
-		// TODO: PlainEObjectMode: Set user as creator when sharing a project
-		// for (EObject me : this.getProject().getAllModelElements()) {
-		// if (me.getCreator() == null || me.getCreator().equals("")
-		// || me.getCreator().equals(ProjectChangeTracker.UNKOWN_CREATOR)) {
-		// me.setCreator(usersession.getUsername());
-		// changeTracker.save(me);
-		// }
-		// }
-
-		createdProject = WorkspaceManager
-			.getInstance()
-			.getConnectionManager()
-			.createProject(usersession.getSessionId(), this.getProjectName(), this.getProjectDescription(), logMessage,
-				this.getProject());
-		statePersister.setAutoSave(true);
-		statePersister.saveDirtyResources();
-		startChangeRecording();
-		this.setBaseVersion(createdProject.getVersion());
-		this.setLastUpdated(new Date());
-		this.setProjectId(createdProject.getProjectId());
-		this.saveProjectSpaceOnly();
-
-		// If any files have already been added, upload them.
-		fileTransferManager.uploadQueuedFiles(new NullProgressMonitor());
-
-		WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(this);
-		getOperations().clear();
-		usersession.updateProjectInfos();
-		updateDirtyState();
-
-	}
-
 	public void shareProject() throws EmfStoreException {
 		shareProject(null, null);
 	}
@@ -2297,6 +2249,10 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 * {@inheritDoc}
 	 */
 	public void loginCompleted(Usersession session) {
+		// TODO Implement possibility in observerbus to register only for certain notifier
+		if (getUsersession() == null || !getUsersession().equals(session)) {
+			return;
+		}
 		try {
 			transmitProperties();
 			// BEGIN SUPRESS CATCH EXCEPTION
@@ -2661,6 +2617,11 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 */
 	public StatePersister getStatePersister() {
 		return statePersister;
+	}
+
+	public List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException {
+		((Workspace) eContainer()).getHistoryInfo(getUsersession(), getProjectId(), query);
+		return null;
 	}
 
 } // ProjectContainerImpl

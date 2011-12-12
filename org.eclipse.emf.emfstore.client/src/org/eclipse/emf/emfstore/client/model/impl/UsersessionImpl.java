@@ -11,9 +11,6 @@
 package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -28,10 +25,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -42,21 +37,12 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Usersession</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Usersession</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -90,11 +76,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  * @generated
  */
 public class UsersessionImpl extends EObjectImpl implements Usersession {
-
-	/**
-	 * @generated NOT
-	 */
-	private WorkspaceManager workspaceManager;
 
 	/**
 	 * The default value of the '{@link #getUsername() <em>Username</em>}'
@@ -190,8 +171,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	protected static final boolean SAVE_PASSWORD_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSavePassword() <em>Save Password</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #isSavePassword() <em>Save Password</em>} ' attribute. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #isSavePassword()
 	 * @generated
@@ -219,8 +200,6 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @ordered
 	 */
 	protected EList<OrgUnitProperty> changedProperties;
-
-	private HashSet<LoginObserver> loginObservers;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -259,8 +238,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		String oldUsername = username;
 		username = newUsername;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__USERNAME, oldUsername, username));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__USERNAME, oldUsername,
+				username));
 	}
 
 	/**
@@ -299,8 +278,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		String oldPassword = password;
 		password = newPassword;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__PASSWORD, oldPassword, password));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__PASSWORD, oldPassword,
+				password));
 	}
 
 	// begin of custom code
@@ -312,15 +291,13 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 */
 	public void setPassword(String newPassword) {
 		if (newPassword != null) {
-			setPasswordGen(KeyStoreManager.getInstance().encrypt(newPassword,
-					getServerInfo()));
+			setPasswordGen(KeyStoreManager.getInstance().encrypt(newPassword, getServerInfo()));
 		} else {
 			setPasswordGen(null);
 		}
 		if (isSavePassword()) {
 			if (!(newPassword.equals(persistentPassword))) {
-				setPersistentPassword(KeyStoreManager.getInstance().encrypt(
-						newPassword, getServerInfo()));
+				setPersistentPassword(KeyStoreManager.getInstance().encrypt(newPassword, getServerInfo()));
 			}
 		}
 	}
@@ -338,9 +315,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			sessionId = (SessionId) eResolveProxy(oldSessionId);
 			if (sessionId != oldSessionId) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ModelPackage.USERSESSION__SESSION_ID, oldSessionId,
-							sessionId));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__SESSION_ID,
+						oldSessionId, sessionId));
 			}
 		}
 		return sessionId;
@@ -364,9 +340,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		SessionId oldSessionId = sessionId;
 		sessionId = newSessionId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__SESSION_ID, oldSessionId,
-					sessionId));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SESSION_ID, oldSessionId,
+				sessionId));
 	}
 
 	/**
@@ -387,9 +362,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		String oldPersistentPassword = persistentPassword;
 		persistentPassword = newPersistentPassword;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__PERSISTENT_PASSWORD,
-					oldPersistentPassword, persistentPassword));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__PERSISTENT_PASSWORD,
+				oldPersistentPassword, persistentPassword));
 	}
 
 	/**
@@ -415,9 +389,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			serverInfo = (ServerInfo) eResolveProxy(oldServerInfo);
 			if (serverInfo != oldServerInfo) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ModelPackage.USERSESSION__SERVER_INFO,
-							oldServerInfo, serverInfo));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__SERVER_INFO,
+						oldServerInfo, serverInfo));
 			}
 		}
 		return serverInfo;
@@ -441,9 +414,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ServerInfo oldServerInfo = serverInfo;
 		serverInfo = newServerInfo;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__SERVER_INFO, oldServerInfo,
-					serverInfo));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SERVER_INFO, oldServerInfo,
+				serverInfo));
 	}
 
 	/**
@@ -464,9 +436,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		boolean oldSavePassword = savePassword;
 		savePassword = newSavePassword;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__SAVE_PASSWORD, oldSavePassword,
-					savePassword));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SAVE_PASSWORD,
+				oldSavePassword, savePassword));
 	}
 
 	// begin of custom code
@@ -497,19 +468,17 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			acUser = (ACUser) eResolveProxy(oldACUser);
 			if (acUser != oldACUser) {
 				InternalEObject newACUser = (InternalEObject) acUser;
-				NotificationChain msgs = oldACUser
-						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- ModelPackage.USERSESSION__AC_USER, null, null);
+				NotificationChain msgs = oldACUser.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.USERSESSION__AC_USER, null, null);
 				if (newACUser.eInternalContainer() == null) {
-					msgs = newACUser.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-							- ModelPackage.USERSESSION__AC_USER, null, msgs);
+					msgs = newACUser.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.USERSESSION__AC_USER,
+						null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ModelPackage.USERSESSION__AC_USER, oldACUser,
-							acUser));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__AC_USER,
+						oldACUser, acUser));
 			}
 		}
 		return acUser;
@@ -529,14 +498,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetACUser(ACUser newACUser,
-			NotificationChain msgs) {
+	public NotificationChain basicSetACUser(ACUser newACUser, NotificationChain msgs) {
 		ACUser oldACUser = acUser;
 		acUser = newACUser;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ModelPackage.USERSESSION__AC_USER,
-					oldACUser, newACUser);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				ModelPackage.USERSESSION__AC_USER, oldACUser, newACUser);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -554,19 +521,17 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		if (newACUser != acUser) {
 			NotificationChain msgs = null;
 			if (acUser != null)
-				msgs = ((InternalEObject) acUser)
-						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- ModelPackage.USERSESSION__AC_USER, null, msgs);
+				msgs = ((InternalEObject) acUser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.USERSESSION__AC_USER, null, msgs);
 			if (newACUser != null)
-				msgs = ((InternalEObject) newACUser)
-						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-								- ModelPackage.USERSESSION__AC_USER, null, msgs);
+				msgs = ((InternalEObject) newACUser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.USERSESSION__AC_USER, null, msgs);
 			msgs = basicSetACUser(newACUser, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.USERSESSION__AC_USER, newACUser, newACUser));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__AC_USER, newACUser,
+				newACUser));
 	}
 
 	/**
@@ -576,9 +541,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 */
 	public EList<OrgUnitProperty> getChangedProperties() {
 		if (changedProperties == null) {
-			changedProperties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(
-					OrgUnitProperty.class, this,
-					ModelPackage.USERSESSION__CHANGED_PROPERTIES);
+			changedProperties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(OrgUnitProperty.class, this,
+				ModelPackage.USERSESSION__CHANGED_PROPERTIES);
 		}
 		return changedProperties;
 	}
@@ -601,8 +565,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated NOT
 	 */
 	public void logIn() throws EmfStoreException, AccessControlException {
-		ConnectionManager connectionManager = this.getWorkspaceManager()
-				.getConnectionManager();
+		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
 			throw new AccessControlException("Username or Password not set!");
@@ -620,22 +583,15 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		copy.setLastUsersession(null);
 		SessionId newSessionId = null;
 
-		newSessionId = connectionManager.logIn(username, getPassword(), copy,
-				Configuration.getClientVersion());
+		newSessionId = connectionManager.logIn(username, getPassword(), copy, Configuration.getClientVersion());
 
 		this.setSessionId(newSessionId);
-		updateACUser();
-		updateProjectInfos();
-		if (loginObservers != null) {
-			for (LoginObserver observer : loginObservers) {
-				observer.loginCompleted(this);
-			}
-		}
+		WorkspaceManager.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
 
+		// TODO replace with observerbus
 		// BEGIN SUPRESS CATCH EXCEPTION
-		IConfigurationElement[] config = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(
-						"org.eclipse.emf.emfstore.client.notify.login");
+		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
+			"org.eclipse.emf.emfstore.client.notify.login");
 		for (IConfigurationElement e : config) {
 			try {
 				Object o = e.createExecutableExtension("class");
@@ -655,58 +611,11 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateProjectInfos() {
-		// BEGIN SUPRESS CATCH EXCEPTION
-		try {
-			getServerInfo().getProjectInfos().clear();
-			// TODO MK: is this correct?
-			if (isLoggedIn()) {
-				getServerInfo().getProjectInfos()
-						.addAll(getRemoteProjectList());
-			}
-			getWorkspaceManager().getCurrentWorkspace().save();
-		} catch (EmfStoreException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		} catch (RuntimeException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		}
-		// END SUPRESS CATCH EXCEPTION
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void updateACUser() throws EmfStoreException {
-		ConnectionManager connectionManager = this.getWorkspaceManager()
-				.getConnectionManager();
-		setACUser(connectionManager.resolveUser(getSessionId(), null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public void logout() throws EmfStoreException {
-		ConnectionManager connectionManager = this.getWorkspaceManager()
-				.getConnectionManager();
+		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		updateProjectInfos();
 	}
-
-	// begin of custom code
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Usersession#checkout(org.eclipse.emf.emfstore.server.model.ProjectIfo)
-	 * @generated NOT
-	 */
-	public ProjectSpace checkout(ProjectInfo projectInfo)
-			throws EmfStoreException {
-		return this.getWorkspaceManager().getCurrentWorkspace()
-				.checkout(this, projectInfo);
-	}
-
-	// end of custom code
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -714,27 +623,14 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.USERSESSION__AC_USER:
 			return basicSetACUser(null, msgs);
 		case ModelPackage.USERSESSION__CHANGED_PROPERTIES:
-			return ((InternalEList<?>) getChangedProperties()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getChangedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * @return
-	 * @generated NOT
-	 */
-	private WorkspaceManager getWorkspaceManager() {
-		if (this.workspaceManager == null) {
-			this.workspaceManager = WorkspaceManager.getInstance();
-		}
-		return this.workspaceManager;
 	}
 
 	// end of custom code
@@ -804,8 +700,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			return;
 		case ModelPackage.USERSESSION__CHANGED_PROPERTIES:
 			getChangedProperties().clear();
-			getChangedProperties().addAll(
-					(Collection<? extends OrgUnitProperty>) newValue);
+			getChangedProperties().addAll((Collection<? extends OrgUnitProperty>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -856,16 +751,14 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ModelPackage.USERSESSION__USERNAME:
-			return USERNAME_EDEFAULT == null ? username != null
-					: !USERNAME_EDEFAULT.equals(username);
+			return USERNAME_EDEFAULT == null ? username != null : !USERNAME_EDEFAULT.equals(username);
 		case ModelPackage.USERSESSION__PASSWORD:
-			return PASSWORD_EDEFAULT == null ? password != null
-					: !PASSWORD_EDEFAULT.equals(password);
+			return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 		case ModelPackage.USERSESSION__SESSION_ID:
 			return sessionId != null;
 		case ModelPackage.USERSESSION__PERSISTENT_PASSWORD:
-			return PERSISTENT_PASSWORD_EDEFAULT == null ? persistentPassword != null
-					: !PERSISTENT_PASSWORD_EDEFAULT.equals(persistentPassword);
+			return PERSISTENT_PASSWORD_EDEFAULT == null ? persistentPassword != null : !PERSISTENT_PASSWORD_EDEFAULT
+				.equals(persistentPassword);
 		case ModelPackage.USERSESSION__SERVER_INFO:
 			return serverInfo != null;
 		case ModelPackage.USERSESSION__SAVE_PASSWORD:
@@ -899,112 +792,10 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Usersession#getRemoteProjectList()
-	 */
-	public List<ProjectInfo> getRemoteProjectList() throws EmfStoreException {
-		// MK sanity checks for usersession state
-		return getWorkspaceManager().getConnectionManager().getProjectList(
-				sessionId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Usersession#createProject(java.lang.String,
-	 *      java.lang.String)
-	 * @generated NOT
-	 */
-	public ProjectInfo createProject(String name, String description)
-			throws AccessControlException, EmfStoreException {
-		ConnectionManager connectionManager = this.getWorkspaceManager()
-				.getConnectionManager();
-		LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
-		log.setMessage("Creating project '" + name + "'");
-		log.setAuthor(this.getUsername());
-		log.setClientDate(new Date());
-		ProjectInfo emptyProject = connectionManager.createEmptyProject(
-				this.getSessionId(), name, description, log);
-		updateProjectInfos();
-		return emptyProject;
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Usersession#deleteProject(org.eclipse.emf.emfstore.server.model.ProjectId,
-	 *      boolean)
-	 */
-	public void deleteProject(ProjectId projectId, boolean deleteFiles)
-			throws EmfStoreException {
-		ConnectionManager connectionManager = getWorkspaceManager()
-				.getConnectionManager();
-		connectionManager.deleteProject(getSessionId(), projectId, deleteFiles);
-		updateProjectInfos();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Usersession#getSessionId()
 	 */
 	public SessionId getSessionId() {
 		return getSessionIdGen();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @generated NOT
-	 */
-	public AdminBroker getAdminBroker() throws ConnectionException {
-		// OW: cache admin broker??
-		return new AdminBrokerImpl(getServerInfo(), getSessionId());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @generated NOT
-	 */
-	public PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec,
-			ProjectId projectId) throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance()
-				.getConnectionManager();
-		return connectionManager.resolveVersionSpec(getSessionId(), projectId,
-				versionSpec);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @generated NOT
-	 */
-	public List<HistoryInfo> getHistoryInfo(ProjectId projectId,
-			HistoryQuery query) throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance()
-				.getConnectionManager();
-		return connectionManager.getHistoryInfo(getSessionId(), projectId,
-				query);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addLoginObserver(LoginObserver observer) {
-		if (loginObservers == null) {
-			loginObservers = new HashSet<LoginObserver>();
-		}
-		loginObservers.add(observer);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void removeLoginObserver(LoginObserver observer) {
-		if (loginObservers != null) {
-			loginObservers.remove(observer);
-		}
 	}
 
 } // UsersessionImpl

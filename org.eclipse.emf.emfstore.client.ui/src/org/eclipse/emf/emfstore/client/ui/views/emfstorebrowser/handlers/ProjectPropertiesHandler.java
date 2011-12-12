@@ -16,6 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -46,8 +47,11 @@ public class ProjectPropertiesHandler extends AbstractHandler {
 		Usersession session = serverInfo.getLastUsersession();
 		int revision;
 		try {
-			revision = session.resolveVersionSpec(VersioningFactory.eINSTANCE.createHeadVersionSpec(),
-				projectInfo.getProjectId()).getIdentifier();
+			revision = WorkspaceManager
+				.getInstance()
+				.getCurrentWorkspace()
+				.resolveVersionSpec(session, VersioningFactory.eINSTANCE.createHeadVersionSpec(),
+					projectInfo.getProjectId()).getIdentifier();
 			MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Project information",
 				"Current revision: " + revision + "\nProjectId: " + projectInfo.getProjectId().getId());
 		} catch (EmfStoreException e) {

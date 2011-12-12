@@ -45,6 +45,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
@@ -656,16 +658,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	void initResources(ResourceSet resourceSet);
 
 	/**
-	 * Share the project of the project space with a given usersession.
-	 * 
-	 * @param usersession
-	 *            the usersession
-	 * @throws EmfStoreException
-	 *             if sharing fails
-	 */
-	void shareProject(Usersession usersession) throws EmfStoreException;
-
-	/**
 	 * Export a project to a file with the given name.
 	 * 
 	 * @param fileName
@@ -987,4 +979,14 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @generated NOT
 	 */
 	OperationManager getOperationManager();
+
+	/**
+	 * Gets a list of history infos.
+	 * 
+	 * @see Workspace
+	 * @return a list of history infos
+	 * @throws EmfStoreException if server throws an exception
+	 * @generated NOT
+	 */
+	List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException;
 } // ProjectContainer

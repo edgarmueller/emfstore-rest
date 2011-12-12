@@ -124,7 +124,7 @@ public abstract class ServerRequestHandler extends AbstractHandler {
 		Object ret = null;
 
 		try {
-			loginHandler.getUsersession().updateACUser();
+			// loginHandler.getUsersession().updateACUser();
 			try {
 				ret = run();
 			} catch (ClientVersionOutOfDateException e) {

@@ -26,5 +26,11 @@
        class = "org.eclipse.emf.emfstore.client.model.ModelPackage"
        genModel = "model/client.genmodel" /> 
   </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.client.notify.postinit">
+     <initiator
+           class="org.eclipse.emf.emfstore.client.model.util.ProjectListUpdater">
+     </initiator>
+  </extension>
 
 </plugin>

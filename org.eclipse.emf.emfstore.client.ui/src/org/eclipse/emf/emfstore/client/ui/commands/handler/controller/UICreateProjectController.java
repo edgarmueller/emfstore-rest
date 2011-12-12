@@ -5,7 +5,6 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.dialogs.Dialog;
@@ -29,7 +28,11 @@ public class UICreateProjectController extends AbstractEMFStoreUIController {
 		return WorkspaceManager.getInstance().getCurrentWorkspace().createLocalProject(name, description);
 	}
 
-	public ProjectInfo createRemoteProject(Usersession usersession) {
+	public ProjectInfo createRemoteProject() throws EmfStoreException {
+		return createRemoteProject(null);
+	}
+
+	public ProjectInfo createRemoteProject(Usersession usersession) throws EmfStoreException {
 		CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 		if (dialog.open() == Dialog.OK) {
 			return createRemoteProject(usersession, dialog.getName(), dialog.getDescription());
@@ -37,20 +40,9 @@ public class UICreateProjectController extends AbstractEMFStoreUIController {
 		return null;
 	}
 
-	protected ProjectInfo createRemoteProject(Usersession usersession, String name, String description) {
-		// TODO REMOVE API CALLS FROM USERSESSION AND REFACTOR THIS CODE
-		try {
-			if (usersession == null) {
-				return null;
-			}
-
-			return usersession.createProject(name, description);
-		} catch (AccessControlException e) {
-			handleException(e);
-		} catch (EmfStoreException e) {
-			handleException(e);
-		}
-		return null;
+	protected ProjectInfo createRemoteProject(Usersession usersession, String name, String description)
+		throws EmfStoreException {
+		return WorkspaceManager.getInstance().getCurrentWorkspace().createRemoteProject(name, description, usersession);
 	}
 
 }

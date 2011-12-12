@@ -16,6 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -58,7 +59,8 @@ public class DeleteProjectOnServerHandler extends AbstractHandler {
 				@Override
 				protected void doRun() {
 					try {
-						session.deleteProject(projectInfo.getProjectId(), dialog.getToggleState());
+						WorkspaceManager.getInstance().getCurrentWorkspace()
+							.deleteRemoteProject(session, projectInfo.getProjectId(), dialog.getToggleState());
 					} catch (EmfStoreException e) {
 						DialogHandler.showExceptionDialog(e);
 					}

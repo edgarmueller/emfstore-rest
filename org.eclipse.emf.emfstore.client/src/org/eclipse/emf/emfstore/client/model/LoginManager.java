@@ -67,24 +67,4 @@ public final class LoginManager {
 			}
 		}
 	}
-
-	/**
-	 * Updates the project info cache.
-	 * 
-	 * @see Usersession#updateProjectInfos()
-	 * @param session the usersession
-	 */
-	public static void updateProjectInfos(Usersession session) {
-		session.updateProjectInfos();
-	}
-
-	/**
-	 * @see Usersession#updateACUser()
-	 * @param session the usersession
-	 * @throws EmfStoreException if thrown
-	 */
-	public static void updateACUser(Usersession session) throws EmfStoreException {
-		session.updateACUser();
-	}
-
 }

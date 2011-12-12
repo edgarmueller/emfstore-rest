@@ -58,7 +58,8 @@ public class ProjectCheckoutHandler extends AbstractHandler {
 			try {
 				progressDialog.open();
 				progressDialog.getProgressMonitor().beginTask("Checkout project...", IProgressMonitor.UNKNOWN);
-				ProjectSpace projectSpace = serverInfo.getLastUsersession().checkout(projectInfo);
+				ProjectSpace projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+					.checkout(null, projectInfo);
 				WorkspaceUtil.logCheckout(projectSpace, projectSpace.getBaseVersion());
 				WorkspaceManager.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
 			} catch (EmfStoreException e) {

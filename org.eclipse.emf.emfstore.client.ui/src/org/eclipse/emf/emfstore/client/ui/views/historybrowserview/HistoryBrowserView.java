@@ -485,8 +485,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			return;
 		}
 		HistoryQuery query = getQuery(end);
-		List<HistoryInfo> historyInfo = projectSpace.getUsersession()
-			.getHistoryInfo(projectSpace.getProjectId(), query);
+		List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
 
 		// Event logging
 		ShowHistoryEvent historyEvent = EventsFactory.eINSTANCE.createShowHistoryEvent();

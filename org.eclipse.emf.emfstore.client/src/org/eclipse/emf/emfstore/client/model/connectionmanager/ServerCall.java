@@ -16,6 +16,13 @@ public abstract class ServerCall<U> {
 	private IProgressMonitor monitor;
 	private U ret;
 
+	public ServerCall() {
+	}
+
+	public ServerCall(Usersession usersession) {
+		this.usersession = usersession;
+	}
+
 	public ServerCall(ProjectSpaceImpl projectSpace) {
 		this.projectSpace = projectSpace;
 	}

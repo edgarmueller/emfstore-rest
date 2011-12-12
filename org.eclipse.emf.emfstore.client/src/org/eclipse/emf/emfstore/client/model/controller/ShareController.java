@@ -7,6 +7,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -29,6 +30,7 @@ public class ShareController extends ServerCall<Void> {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void doRun() throws EmfStoreException {
 
 		getProgressMonitor().beginTask("Sharing Project", 100);
@@ -64,7 +66,7 @@ public class ShareController extends ServerCall<Void> {
 
 		// set attributes after server call
 		this.setUsersession(getUsersession());
-		getUsersession().addLoginObserver(getProjectSpace());
+		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
 
 		getProjectSpace().getStatePersister().setAutoSave(true);
 		getProjectSpace().getStatePersister().saveDirtyResources();
@@ -79,7 +81,6 @@ public class ShareController extends ServerCall<Void> {
 		// fileTransferManager.uploadQueuedFiles(new NullProgressMonitor());
 
 		getProjectSpace().getOperations().clear();
-		getUsersession().updateProjectInfos();
 		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();

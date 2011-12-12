@@ -73,15 +73,6 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 				serverInfo.eAdapters().remove(serverInfoAdapterMap.get(serverInfo));
 				viewer.refresh();
 			}
-			if (msg.getFeature() != null && msg.getFeature().equals(ModelPackage.eINSTANCE.getWorkspace_Usersessions())) {
-				if (msg.getEventType() == Notification.ADD) {
-					Usersession session = (Usersession) msg.getNewValue();
-					session.addLoginObserver(ESBrowserView.this);
-				} else if (msg.getEventType() == Notification.REMOVE) {
-					Usersession session = (Usersession) msg.getOldValue();
-					session.removeLoginObserver(ESBrowserView.this);
-				}
-			}
 			super.notifyChanged(msg);
 		}
 	}
@@ -132,9 +123,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	 */
 	public ESBrowserView() {
 		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		for (Usersession u : currentWorkspace.getUsersessions()) {
-			u.addLoginObserver(this);
-		}
+		WorkspaceManager.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
 			serverInfo.eAdapters().add(serverInfoAdapter);
@@ -244,9 +233,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		super.dispose();
 		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
-		for (Usersession u : currentWorkspace.getUsersessions()) {
-			u.removeLoginObserver(this);
-		}
+		WorkspaceManager.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {
 			s.eAdapters().remove(serverInfoAdapterMap.get(s));
 		}
