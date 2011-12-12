@@ -1,11 +1,9 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
@@ -45,17 +43,18 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		return doUpdate(version);
 	}
 
-	private ProjectSpace doUpdate(VersionSpec version) throws EmfStoreException {
+	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EmfStoreException {
 		getProgressMonitor().beginTask("Updating Project", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
-			return;
+			return resolvedVersion;
 		}
 		getProgressMonitor().worked(5);
+
 		if (getProgressMonitor().isCanceled()) {
-			updateDone(getProjectSpace().getBaseVersion(), null);
+			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Fetching changes from server");
@@ -64,28 +63,30 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			getProjectSpace().getBaseVersion(), resolvedVersion);
 		ChangePackage localchanges = getProjectSpace().getLocalChangePackage(false);
 		getProgressMonitor().worked(65);
+
 		if (getProgressMonitor().isCanceled()) {
-			updateDone(getProjectSpace().getBaseVersion(), null);
+			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Checking for conflicts");
 		ConflictDetector conflictDetector = new ConflictDetector();
 		for (ChangePackage change : changes) {
 			if (conflictDetector.doConflict(change, localchanges)) {
-				getCallBack().conflictOccurred(
-					new ChangeConflictException(changes, getProjectSpace(), conflictDetector));
-				return;
+				if (callback
+					.conflictOccurred(new ChangeConflictException(changes, getProjectSpace(), conflictDetector))) {
+					return getProjectSpace().getBaseVersion();
+				} else {
+					throw new ChangeConflictException(changes, getProjectSpace(), conflictDetector);
+				}
 			}
 		}
 		getProgressMonitor().worked(15);
 		// TODO ASYNC review this cancel
-		if (getProgressMonitor().isCanceled()) {
-			updateDone(getProjectSpace().getBaseVersion(), null);
+		if (getProgressMonitor().isCanceled() || callback.inspectChanges(getProjectSpace(), changes)) {
+			return resolvedVersion;
+			// updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 
-		if (getCallBack().inspectChanges(getProjectSpace(), changes)) {
-			updateDone(getProjectSpace().getBaseVersion(), null);
-		}
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
 
 		getProgressMonitor().subTask("Applying changes");
@@ -112,21 +113,10 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
-		updateDone(oldVersion, getProjectSpace().getBaseVersion());
-
 		// check for operations on file attachments: if version has been
 		// increased and file is required offline, add to
 		// pending file transfers
 		// checkUpdatedFileAttachments(changes);
-	}
-
-	// TODO ASYNC introduce update canceled
-
-	private void updateDone(PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
-		HashMap<Object, Object> values = new HashMap<Object, Object>();
-		values.put(UpdateCallback.PROJECTSPACE, getProjectSpace());
-		values.put(UpdateCallback.OLDVERSION, oldVersion);
-		values.put(UpdateCallback.NEWVERSION, (newVersion == null) ? oldVersion : newVersion);
-		getCallBack().callCompleted(values, newVersion != null);
+		return getProjectSpace().getBaseVersion();
 	}
 }

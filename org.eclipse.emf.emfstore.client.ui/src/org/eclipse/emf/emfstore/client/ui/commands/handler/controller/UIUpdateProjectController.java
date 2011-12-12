@@ -50,16 +50,18 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 			"Your project is up to date, you do not need to update.");
 	}
 
-	public void conflictOccurred(ChangeConflictException conflictException) {
+	public boolean conflictOccurred(ChangeConflictException conflictException) {
 		ProjectSpace projectSpace = conflictException.getProjectSpace();
+		boolean mergeSuccessful = false;
 		try {
 			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
-			projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+			mergeSuccessful = projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException("Exception when merging the project!", e);
 			handleException(e);
 		}
 		closeProgress();
+		return mergeSuccessful;
 	}
 
 	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {

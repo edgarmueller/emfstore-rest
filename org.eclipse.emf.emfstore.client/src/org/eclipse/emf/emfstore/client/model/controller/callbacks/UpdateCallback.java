@@ -12,7 +12,7 @@ public interface UpdateCallback {
 
 	public void noChangesOnServer();
 
-	public void conflictOccurred(ChangeConflictException changeConflictException);
+	public boolean conflictOccurred(ChangeConflictException changeConflictException);
 
 	public final UpdateCallback NOCALLBACK = new UpdateCallback() {
 		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes) {
@@ -22,7 +22,8 @@ public interface UpdateCallback {
 		public void noChangesOnServer() {
 		}
 
-		public void conflictOccurred(ChangeConflictException changeConflictException) {
+		public boolean conflictOccurred(ChangeConflictException changeConflictException) {
+			return false;
 		}
 	};
 
