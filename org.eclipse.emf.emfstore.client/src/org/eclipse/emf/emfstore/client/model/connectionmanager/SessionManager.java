@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
  */
 public class SessionManager {
 
-	public void execute(ServerCall<?> serverCall) {
+	public void execute(ServerCall<?> serverCall) throws EmfStoreException {
 		Usersession usersession = prepareUsersession(serverCall);
 		loginUsersession(usersession, false);
 		executeCall(serverCall, usersession, true);
@@ -46,29 +46,17 @@ public class SessionManager {
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 
-	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) {
+	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) throws EmfStoreException {
 		try {
 			serverCall.run(usersession.getSessionId());
-		} catch (SessionTimedOutException e) {
-			if (retry) {
+		} catch (EmfStoreException e) {
+			if (retry && (e instanceof SessionTimedOutException || e instanceof UnknownSessionException)) {
 				// login & retry
 				loginUsersession(usersession, true);
 				executeCall(serverCall, usersession, false);
 			} else {
-				serverCall.handleException(e);
+				throw e;
 			}
-
-		} catch (UnknownSessionException e) {
-			if (retry) {
-				// login & retry
-				loginUsersession(usersession, true);
-				executeCall(serverCall, usersession, false);
-			} else {
-				serverCall.handleException(e);
-			}
-
-		} catch (Exception e) {
-			serverCall.handleException(e);
 		}
 	}
 

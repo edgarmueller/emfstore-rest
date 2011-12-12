@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
@@ -17,9 +18,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
-public class UpdateController extends ServerCall<UpdateCallback> {
+public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 	private VersionSpec version;
+	private UpdateCallback callback;
 
 	public UpdateController(ProjectSpaceImpl projectSpace, VersionSpec version, UpdateCallback callback,
 		IProgressMonitor progress) {
@@ -34,22 +36,21 @@ public class UpdateController extends ServerCall<UpdateCallback> {
 			callback = UpdateCallback.NOCALLBACK;
 		}
 		this.version = version;
-		setCallback(callback);
+		this.callback = callback;
 		setProgressMonitor(progress);
 	}
 
 	@Override
-	protected void run() throws EmfStoreException {
-		doUpdate(version);
+	protected PrimaryVersionSpec run() throws EmfStoreException {
+		return doUpdate(version);
 	}
 
-	private void doUpdate(VersionSpec version) throws EmfStoreException {
+	private ProjectSpace doUpdate(VersionSpec version) throws EmfStoreException {
 		getProgressMonitor().beginTask("Updating Project", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
-			getCallBack().noChangesOnServer();
 			return;
 		}
 		getProgressMonitor().worked(5);

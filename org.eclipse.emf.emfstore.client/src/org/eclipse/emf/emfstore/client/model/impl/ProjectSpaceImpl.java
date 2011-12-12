@@ -59,14 +59,12 @@ import org.eclipse.emf.emfstore.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.CommitCanceledException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.NoChangesOnServerException;
-import org.eclipse.emf.emfstore.client.model.exceptions.NoLocalChangesException;
 import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
@@ -89,7 +87,6 @@ import org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl;
 import org.eclipse.emf.emfstore.common.model.util.AutoSplitAndSaveResourceContainmentList;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
@@ -1286,46 +1283,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#prepareCommit(org.eclipse.emf.emfstore.client.model.observers.CommitObserver)
-	 * @generated NOT
-	 */
-	public ChangePackage prepareCommit(CommitObserver commitObserver) throws EmfStoreException {
-
-		// check if there are any changes
-		if (!this.isDirty()) {
-			throw new NoLocalChangesException();
-		}
-
-		cleanCutElements();
-
-		// check if we need to update first
-		PrimaryVersionSpec resolvedVersion = resolveVersionSpec(VersionSpec.HEAD_VERSION);
-		if ((!getBaseVersion().equals(resolvedVersion))) {
-			throw new BaseVersionOutdatedException();
-		}
-
-		ChangePackage changePackage = getLocalChangePackage(true);
-		if (changePackage.getOperations().isEmpty()) {
-			for (AbstractOperation operation : getOperations()) {
-				operationManager.notifyOperationUndone(operation);
-			}
-			getOperations().clear();
-			updateDirtyState();
-			throw new NoLocalChangesException();
-		}
-
-		notifyPreCommitObservers(changePackage);
-
-		if (commitObserver != null && !commitObserver.inspectChanges(this, changePackage)) {
-			throw new CommitCanceledException("Changes have been canceld by the user.");
-		}
-
-		return changePackage;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#finalizeCommit(org.eclipse.emf.emfstore.server.model.versioning.ChangePackage,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
 	 *      org.eclipse.emf.emfstore.client.model.observers.CommitObserver)
@@ -1358,8 +1315,9 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 		return newBaseVersion;
 	}
 
-	public void commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor) {
-		new CommitController(this, logMessage, callback, monitor).execute();
+	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
+		throws EmfStoreException {
+		return new CommitController(this, logMessage, callback, monitor).execute();
 	}
 
 	/**
@@ -1465,11 +1423,14 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * @throws EmfStoreException
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
 	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
+	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
+		throws EmfStoreException {
 		new UpdateController(this, version, callback, progress).execute();
 	}
 
@@ -2178,12 +2139,12 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 
 	}
 
-	public void shareProject() {
-		shareProject(null, null, null);
+	public void shareProject() throws EmfStoreException {
+		shareProject(null, null);
 	}
 
-	public void shareProject(Usersession session, GenericCallback callback, IProgressMonitor monitor) {
-		new ShareController(this, session, callback, monitor).execute();
+	public void shareProject(Usersession session, IProgressMonitor monitor) throws EmfStoreException {
+		new ShareController(this, session, monitor).execute();
 	}
 
 	/**

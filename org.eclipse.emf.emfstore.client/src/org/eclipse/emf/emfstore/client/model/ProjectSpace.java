@@ -601,21 +601,8 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @param callback
 	 * @param monitor
 	 */
-	public void commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor);
-
-	/**
-	 * Preparation phase of the commit. The user has to deal with eventual
-	 * conflicts, that the user has to solve. The result is the conflict solved
-	 * change package.
-	 * 
-	 * @param commitObserver
-	 *            an observer that is notified about the changes being send to
-	 *            the server
-	 * @return a conflict solved change package
-	 * @throws EmfStoreException
-	 *             if the commit fails
-	 */
-	ChangePackage prepareCommit(CommitObserver commitObserver) throws EmfStoreException;
+	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
+		throws EmfStoreException;
 
 	/**
 	 * A change package will be finally send to the server and a new revision
@@ -688,7 +675,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
 	 * @generated NOT
 	 */
-	void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress);
+	void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) throws EmfStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.

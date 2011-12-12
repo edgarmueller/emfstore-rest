@@ -1,7 +1,6 @@
 package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
@@ -26,17 +25,17 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 		super(shell);
 	}
 
-	public void update(ProjectSpace projectSpace) {
+	public void update(ProjectSpace projectSpace) throws EmfStoreException {
 		update(projectSpace, null);
 	}
 
-	public void update(ProjectSpace projectSpace, VersionSpec version) {
+	public void update(ProjectSpace projectSpace, VersionSpec version) throws EmfStoreException {
 		// TODO sanity check projectspace (is null, is shared)
 		openProgress();
 		projectSpace.update(version, this, getProgressMonitor());
 	}
 
-	public void askForVersionAndUpdate(ProjectSpace projectSpace) {
+	public void askForVersionAndUpdate(ProjectSpace projectSpace) throws EmfStoreException {
 		update(projectSpace, openVersionDialog(projectSpace));
 	}
 
@@ -84,13 +83,6 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 			}
 		});
 		closeProgress();
-	}
-
-	@Override
-	public void callCompleted(Map<Object, Object> values, boolean successful) {
-		updateCompleted((ProjectSpace) values.get(UpdateCallback.PROJECTSPACE),
-			(PrimaryVersionSpec) values.get(UpdateCallback.OLDVERSION),
-			(PrimaryVersionSpec) values.get(UpdateCallback.NEWVERSION));
 	}
 
 }

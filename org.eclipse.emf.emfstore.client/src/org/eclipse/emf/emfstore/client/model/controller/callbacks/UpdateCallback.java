@@ -1,13 +1,12 @@
 package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
-public interface UpdateCallback extends GenericCallback {
+public interface UpdateCallback {
 
 	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes);
 
@@ -20,16 +19,10 @@ public interface UpdateCallback extends GenericCallback {
 			return true;
 		}
 
-		public void handleException(Exception exception) {
-		}
-
 		public void noChangesOnServer() {
 		}
 
 		public void conflictOccurred(ChangeConflictException changeConflictException) {
-		}
-
-		public void callCompleted(Map<Object, Object> values, boolean successful) {
 		}
 	};
 

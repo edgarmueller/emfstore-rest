@@ -1,14 +1,11 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.GenericCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -16,23 +13,20 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
-public class ShareController extends ServerCall<GenericCallback> {
+public class ShareController extends ServerCall<Void> {
 
-	public ShareController(ProjectSpaceImpl projectSpaceImpl, Usersession session, GenericCallback callback,
-		IProgressMonitor monitor) {
+	public ShareController(ProjectSpaceImpl projectSpaceImpl, Usersession session, IProgressMonitor monitor) {
 		super(projectSpaceImpl);
 
 		// if session is null, session will be injected by sessionmanager
 		setUsersession(session);
-
-		setCallback((callback != null) ? callback : GenericCallback.NOCALLBACK);
-
 		setProgressMonitor(monitor);
 	}
 
 	@Override
-	protected void run() throws EmfStoreException {
+	protected Void run() throws EmfStoreException {
 		doRun();
+		return null;
 	}
 
 	private void doRun() throws EmfStoreException {
@@ -56,7 +50,6 @@ public class ShareController extends ServerCall<GenericCallback> {
 			getProjectSpace().getStatePersister().saveDirtyResources();
 			getProjectSpace().startChangeRecording();
 			getProgressMonitor().done();
-			shareCompleted(getProjectSpace(), true);
 		}
 		getProgressMonitor().subTask("Sharing project with server");
 
@@ -90,13 +83,7 @@ public class ShareController extends ServerCall<GenericCallback> {
 		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();
-		shareCompleted(getProjectSpace(), false);
 		WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(getProjectSpace());
 	}
 
-	private void shareCompleted(ProjectSpaceImpl projectSpace, boolean canceled) {
-		HashMap<Object, Object> values = new HashMap<Object, Object>();
-		values.put(ProjectSpace.class, projectSpace);
-		getCallBack().callCompleted(values, !canceled);
-	}
 }

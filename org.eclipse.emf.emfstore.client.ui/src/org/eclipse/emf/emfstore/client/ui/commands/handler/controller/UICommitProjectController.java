@@ -4,8 +4,10 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CommitDialog;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -16,13 +18,13 @@ public class UICommitProjectController extends AbstractEMFStoreUIController impl
 		super(shell);
 	}
 
-	public void commit(ProjectSpace projectSpace) {
-		commit(projectSpace, null);
+	public PrimaryVersionSpec commit(ProjectSpace projectSpace) throws EmfStoreException {
+		return commit(projectSpace, null);
 	}
 
-	public void commit(ProjectSpace projectSpace, LogMessage logMessage) {
+	public PrimaryVersionSpec commit(ProjectSpace projectSpace, LogMessage logMessage) throws EmfStoreException {
 		openProgress();
-		projectSpace.commit(logMessage, this, getProgressMonitor());
+		return projectSpace.commit(logMessage, this, getProgressMonitor());
 	}
 
 	public void noLocalChanges(ProjectSpace projectSpace) {
@@ -48,6 +50,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController impl
 			return false;
 		}
 		CommitDialog commitDialog = new CommitDialog(getShell(), changePackage, projectSpace);
+		// TODO add getLogMessage to callback
 		// if (predefinedCommitMessage != null) {
 		// if (changePackage.getLogMessage() == null) {
 		// changePackage.setLogMessage(logMessage);

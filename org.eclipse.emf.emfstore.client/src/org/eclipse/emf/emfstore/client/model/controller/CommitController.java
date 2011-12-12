@@ -1,12 +1,12 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
@@ -15,32 +15,32 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
-public class CommitController extends ServerCall<CommitCallback> {
+public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private LogMessage logMessage;
+	private CommitCallback callback;
 
 	public CommitController(ProjectSpaceImpl projectSpace, LogMessage logMessage, CommitCallback callback,
 		IProgressMonitor monitor) {
 		super(projectSpace);
 		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;
-		setCallback(callback == null ? CommitCallback.NOCALLBACK : callback);
+		this.callback = callback == null ? CommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
 
 	@Override
-	protected void run() throws EmfStoreException {
-		commit(this.logMessage);
+	protected PrimaryVersionSpec run() throws EmfStoreException {
+		return commit(this.logMessage);
 	}
 
-	private void commit(LogMessage logMessage) throws EmfStoreException {
+	private PrimaryVersionSpec commit(LogMessage logMessage) throws EmfStoreException {
 		getProgressMonitor().beginTask("Commiting Changes", 100);
 		getProgressMonitor().worked(1);
 
 		getProgressMonitor().subTask("Checking changes");
 		// check if there are any changes
 		if (!getProjectSpace().isDirty()) {
-			getCallBack().noLocalChanges(getProjectSpace());
-			commitFinished(null);
+			return getProjectSpace().getBaseVersion();
 		}
 		getProjectSpace().cleanCutElements();
 
@@ -48,11 +48,10 @@ public class CommitController extends ServerCall<CommitCallback> {
 
 		// check if we need to update first
 		PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(VersionSpec.HEAD_VERSION);
-		while (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
-			if (getCallBack().baseVersionOutOfDate(getProjectSpace()) || getProgressMonitor().isCanceled()) {
-				commitFinished(null);
+		if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
+			if (!callback.baseVersionOutOfDate(getProjectSpace())) {
+				throw new BaseVersionOutdatedException();
 			}
-			resolvedVersion = getProjectSpace().resolveVersionSpec(VersionSpec.HEAD_VERSION);
 		}
 
 		getProgressMonitor().worked(10);
@@ -65,8 +64,6 @@ public class CommitController extends ServerCall<CommitCallback> {
 			getProjectSpace().getOperations().clear();
 			getProjectSpace().updateDirtyState();
 			// finally, no local changes
-			getCallBack().noLocalChanges(getProjectSpace());
-			commitFinished(null);
 		}
 
 		// TODO remove and replace by observerbus
@@ -77,8 +74,8 @@ public class CommitController extends ServerCall<CommitCallback> {
 		// }
 
 		getProgressMonitor().subTask("Presenting Changes");
-		if (getCallBack().inspectChanges(getProjectSpace(), changePackage) || getProgressMonitor().isCanceled()) {
-			commitFinished(null);
+		if (!callback.inspectChanges(getProjectSpace(), changePackage) || getProgressMonitor().isCanceled()) {
+			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Sending changes to server");
@@ -98,17 +95,7 @@ public class CommitController extends ServerCall<CommitCallback> {
 		// notifyPostCommitObservers(newBaseVersion);
 
 		getProjectSpace().updateDirtyState();
-		commitFinished(newBaseVersion);
-	}
-
-	private void commitFinished(PrimaryVersionSpec newBaseVersion) {
-		if (newBaseVersion != null) {
-			HashMap<Object, Object> results = new HashMap<Object, Object>();
-			results.put(CommitCallback.NEWVERSION, newBaseVersion);
-			getCallBack().callCompleted(results, true);
-		} else {
-			getCallBack().callCompleted(null, false);
-		}
+		return newBaseVersion;
 	}
 
 	private LogMessage createLogMessage() {
