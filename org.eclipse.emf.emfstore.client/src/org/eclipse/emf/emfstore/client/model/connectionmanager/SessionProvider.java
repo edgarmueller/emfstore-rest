@@ -1,6 +1,8 @@
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 public interface SessionProvider {
 
@@ -8,6 +10,6 @@ public interface SessionProvider {
 
 	Usersession provideUsersession();
 
-	void loginSession(Usersession usersession);
+	void loginSession(Usersession usersession) throws AccessControlException, EmfStoreException;
 
 }

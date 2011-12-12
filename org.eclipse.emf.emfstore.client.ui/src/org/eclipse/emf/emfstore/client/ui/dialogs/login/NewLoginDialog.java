@@ -27,16 +27,16 @@ public class NewLoginDialog extends TitleAreaDialog {
 	private Text passwordField;
 	private Button savePassword;
 	private ComboViewer usernameCombo;
-	private final LoginController controller;
+	private final Usersession usersession;
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
 	 */
-	public NewLoginDialog(Shell parentShell, LoginController controller) {
+	public NewLoginDialog(Shell parentShell, Usersession usersession) {
 		super(parentShell);
-		this.controller = controller;
+		this.usersession = usersession;
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class NewLoginDialog extends TitleAreaDialog {
 		new Label(loginContainer, SWT.NONE);
 
 		initData();
-		loadUsersession(controller.provideUsersession());
+		loadUsersession(usersession);
 		return area;
 	}
 
@@ -105,6 +105,8 @@ public class NewLoginDialog extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
+		usersession.setUsername(usernameCombo.getCombo().getText());
+		usersession.setPassword(passwordField.getText());
 		super.okPressed();
 	}
 
