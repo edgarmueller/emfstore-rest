@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
@@ -41,6 +43,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
@@ -50,12 +53,17 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -716,6 +724,71 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		this.save();
 
 		return projectSpace;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getRemoteProjectList(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
+	public List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException {
+		return new ServerCall<List<ProjectInfo>>(usersession) {
+			@Override
+			protected List<ProjectInfo> run() throws EmfStoreException {
+				return getConnectionManager().getProjectList(getSessionId());
+			}
+		}.execute();
+	}
+
+	public PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec, ProjectId projectId) throws EmfStoreException {
+		return null;
+	}
+
+	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery query) throws EmfStoreException {
+		return null;
+	}
+
+	public AdminBroker getAdminBroker() throws EmfStoreException, AccessControlException {
+		return null;
+	}
+
+	public void updateACUser() throws EmfStoreException {
+		// hm?
+	}
+
+	public void updateProjectInfos() {
+		// hm?
+	}
+
+	public void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
+		throws EmfStoreException {
+		new ServerCall<Void>(usersession) {
+
+			@Override
+			protected Void run() throws EmfStoreException {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}.execute();
+	}
+
+	public ProjectInfo createRemoteProject(final String projectName, final String projectDescription,
+		Usersession usersession) throws EmfStoreException {
+		return new ServerCall<ProjectInfo>(usersession) {
+			@Override
+			protected ProjectInfo run() throws EmfStoreException {
+				ConnectionManager connectionManager = getConnectionManager();
+				LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
+				log.setMessage("Creating project '" + projectName + "'");
+				log.setAuthor(getUsersession().getUsername());
+				log.setClientDate(new Date());
+				ProjectInfo emptyProject = connectionManager.createEmptyProject(this.getSessionId(), projectName,
+					projectDescription, log);
+				updateProjectInfos();
+				return emptyProject;
+			}
+		}.execute();
 	}
 
 } // WorkspaceImpl

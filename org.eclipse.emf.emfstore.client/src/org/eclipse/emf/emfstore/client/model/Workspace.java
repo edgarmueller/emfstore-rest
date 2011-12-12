@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -19,31 +20,38 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getActiveProjectSpace <em>Active Project Space</em>}</li>
- * </ul>
- * </p>
- *
+ * 
+ *             <p>
+ *             The following features are supported:
+ *             <ul>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getActiveProjectSpace <em>Active Project Space
+ *             </em>}</li>
+ *             </ul>
+ *             </p>
+ * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
@@ -58,6 +66,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
 	 * @model containment="true" resolveProxies="true" keys="identifier"
@@ -74,6 +83,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
@@ -90,6 +100,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
@@ -105,6 +116,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Active Project Space</em>' reference.
 	 * @see #setActiveProjectSpace(ProjectSpace)
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ActiveProjectSpace()
@@ -114,8 +126,10 @@ public interface Workspace extends EObject, IAdaptable {
 	ProjectSpace getActiveProjectSpace();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.Workspace#getActiveProjectSpace <em>Active Project Space</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.Workspace#getActiveProjectSpace
+	 * <em>Active Project Space</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Active Project Space</em>' reference.
 	 * @see #getActiveProjectSpace()
 	 * @generated
@@ -132,8 +146,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo)
-			throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
 
 	/**
 	 * Set the workspace connection manager.
@@ -192,8 +205,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param absoluteFileName the file name
 	 * @throws IOException if file access fails
 	 */
-	void exportProject(ProjectSpace projectSpace, String absoluteFileName)
-			throws IOException;
+	void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
 
 	/**
 	 * Export a project space to a file.
@@ -202,8 +214,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param absoluteFileName the file name
 	 * @throws IOException if file access fails
 	 */
-	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName)
-			throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
 
 	/**
 	 * Export the current workspace to a file.
@@ -235,8 +246,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @return a set of matching project spaces
 	 * @throws ProjectUrlResolutionException if project cannot be found in workspace
 	 */
-	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment)
-			throws ProjectUrlResolutionException;
+	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException;
 
 	/**
 	 * Resolves a server url to a set server infos if multiple serverInfos match the url.
@@ -245,8 +255,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @return the server info
 	 * @throws ServerUrlResolutionException if no matching server info can be found
 	 */
-	Set<ServerInfo> resolve(ServerUrl serverUrl)
-			throws ServerUrlResolutionException;
+	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -259,8 +268,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo,
-			PrimaryVersionSpec targetSpec) throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec)
+		throws EmfStoreException;
 
 	/**
 	 * Get the project space for the given project.
@@ -286,7 +295,84 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @param projectDescription the project description
 	 * @return the project space that the new project resides in
 	 */
-	ProjectSpace createLocalProject(String projectName,
-			String projectDescription);
+	ProjectSpace createLocalProject(String projectName, String projectDescription);
+
+	/**
+	 * Creates an empty project on the server
+	 * 
+	 * @param projectName name
+	 * @param projectDescription description
+	 * @param usersession session. if null, {@link SessionManager} will search for session
+	 * @return
+	 * @throws EmfStoreException
+	 */
+	ProjectInfo createRemoteProject(String projectName, String projectDescription, Usersession usersession)
+		throws EmfStoreException;
+
+	/**
+	 * Get the list of remotely available projects.
+	 * 
+	 * @param get remote list for given usersession. if null, {@link SessionManager} will search for session.
+	 * @return a list of project infos
+	 * @throws EmfStoreException if retrieval fails
+	 * @generated NOT
+	 */
+	List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException;
+
+	/**
+	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
+	 * 
+	 * @param versionSpec the spec to resolve
+	 * @param projectId the project id
+	 * @return the primary version spec <!-- end-user-doc -->
+	 * @throws EmfStoreException if resolving fails
+	 * @model
+	 * @generated NOT
+	 */
+	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec, ProjectId projectId) throws EmfStoreException;
+
+	/**
+	 * Gets a list of history infos.
+	 * 
+	 * @param projectId a project id
+	 * @param query a history query
+	 * @return a list of history infos
+	 * @throws EmfStoreException if server throws an exception
+	 * @generated NOT
+	 */
+	List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery query) throws EmfStoreException;
+
+	/**
+	 * Returns a {@link AdminBroker} related to the user session.
+	 * 
+	 * @return {@link AdminBroker}
+	 * @throws EmfStoreException if no connection can be established
+	 * @throws AccessControlException if access is denied
+	 * @generated NOT
+	 */
+	AdminBroker getAdminBroker() throws EmfStoreException, AccessControlException;
+
+	/**
+	 * Deletes a project on the server.
+	 * 
+	 * @param usersession session. if null, {@link SessionManager} will search for session
+	 * @param projectId projectId
+	 * @param deleteFiles deletes files too
+	 * @throws EmfStoreException in case of failure
+	 */
+	void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
+		throws EmfStoreException;
+
+	/**
+	 * Updates the ACUser and it roles.
+	 * 
+	 * @throws EmfStoreException forwards any exception.
+	 */
+	void updateACUser() throws EmfStoreException;
+
+	/**
+	 * Updates the ProjectInfos for the current ServerInfo.
+	 */
+	void updateProjectInfos();
 
 } // Workspace
