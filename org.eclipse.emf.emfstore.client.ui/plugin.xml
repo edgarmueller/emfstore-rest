@@ -730,26 +730,6 @@
               icon="icons/arrow_out.png"
               label="NEW Commit  Project"
               style="push">
-           <visibleWhen
-                 checkEnabled="false">
-              <and>
-                 <iterate
-                       ifEmpty="false"
-                       operator="and">
-                    <instanceof
-                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
-                    </instanceof>
-                    <test
-                          forcePluginActivation="true"
-                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
-                          value="false">
-                    </test>
-                 </iterate>
-                 <count
-                       value="1">
-                 </count>
-              </and>
-           </visibleWhen>
         </command>
      </menuContribution>
      <menuContribution
