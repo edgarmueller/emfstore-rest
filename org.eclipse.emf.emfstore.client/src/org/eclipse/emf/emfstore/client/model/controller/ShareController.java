@@ -74,6 +74,7 @@ public class ShareController extends ServerCall<Void> {
 		getProjectSpace().setBaseVersion(createdProject.getVersion());
 		getProjectSpace().setLastUpdated(new Date());
 		getProjectSpace().setProjectId(createdProject.getProjectId());
+		getProjectSpace().setUsersession(getUsersession());
 		getProjectSpace().saveProjectSpaceOnly();
 
 		// TODO ASYNC implement File Upload with observer
