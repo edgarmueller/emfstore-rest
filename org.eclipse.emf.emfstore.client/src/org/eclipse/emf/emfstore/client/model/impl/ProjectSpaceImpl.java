@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -346,7 +347,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	protected EList<EMFStoreProperty> properties;
 
 	/**
-	 * The cached value of the '{@link #getChangedSharedProperties() <em>Changed Shared Properties</em>}' containment reference list.
+	 * The cached value of the '{@link #getChangedSharedProperties() <em>Changed Shared Properties</em>}' reference list.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @see #getChangedSharedProperties()
@@ -1140,8 +1141,8 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	 */
 	public EList<EMFStoreProperty> getChangedSharedProperties() {
 		if (changedSharedProperties == null) {
-			changedSharedProperties = new EObjectContainmentEList.Resolving<EMFStoreProperty>(EMFStoreProperty.class,
-				this, ModelPackage.PROJECT_SPACE__CHANGED_SHARED_PROPERTIES);
+			changedSharedProperties = new EObjectResolvingEList<EMFStoreProperty>(EMFStoreProperty.class, this,
+				ModelPackage.PROJECT_SPACE__CHANGED_SHARED_PROPERTIES);
 		}
 		return changedSharedProperties;
 	}
@@ -1724,8 +1725,6 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 			return ((InternalEList<?>) getWaitingUploads()).basicRemove(otherEnd, msgs);
 		case ModelPackage.PROJECT_SPACE__PROPERTIES:
 			return ((InternalEList<?>) getProperties()).basicRemove(otherEnd, msgs);
-		case ModelPackage.PROJECT_SPACE__CHANGED_SHARED_PROPERTIES:
-			return ((InternalEList<?>) getChangedSharedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
