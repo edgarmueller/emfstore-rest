@@ -54,25 +54,26 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	 */
 	public void setProperties(List<EMFStoreProperty> properties, ProjectId projectId) throws EmfStoreException {
 		EList<ProjectHistory> serverProjects = getServerSpace().getProjects();
+		boolean projectFound = false;
 
-		for (EMFStoreProperty prop : properties) {
-			for (ProjectHistory currentHistory : serverProjects) {
-				if (currentHistory.getProjectId().equals(projectId)) {
+		for (ProjectHistory currentHistory : serverProjects) {
+			if (currentHistory.getProjectId().equals(projectId)) {
+				projectFound = true;
+				for (EMFStoreProperty prop : properties) {
 					currentHistory.getSharedProperties().add(prop);
-					save();
-					return;
 				}
+				break;
 			}
 		}
-		throw new EmfStoreException("The Project does not exist on the server. Cannot set the properties.");
 
-	}
-
-	private void save() throws EmfStoreException {
-		try {
-			getServerSpace().save();
-		} catch (IOException e) {
-			throw new EmfStoreException("Cannot set the properties on the server.");
+		if (projectFound) {
+			try {
+				getServerSpace().save();
+			} catch (IOException e) {
+				throw new EmfStoreException("Cannot set the properties on the server.");
+			}
+		} else {
+			throw new EmfStoreException("The Project does not exist on the server. Cannot set the properties.");
 		}
 	}
 
