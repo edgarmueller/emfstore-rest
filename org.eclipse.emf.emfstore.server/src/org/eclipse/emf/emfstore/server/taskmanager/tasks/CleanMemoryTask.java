@@ -21,7 +21,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.taskmanager.Task;
@@ -35,18 +34,23 @@ public class CleanMemoryTask extends Task {
 
 	private static final long PERIOD = 60 * 1000;
 
-	private static final boolean LOGUNLOADING = false;
+	private static final boolean LOG_UNLOADING = false;
 
-	private final ServerSpace serverSpace;
+	// private final ServerSpace serverSpace;
+
+	private final ResourceSet resourceSet;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param serverSpace serverSpace
+	 * @param serverSpace
+	 *            serverSpace
 	 */
-	public CleanMemoryTask(ServerSpace serverSpace) {
+	public CleanMemoryTask(ResourceSet resourceSet) {// ServerSpace serverSpace)
+														// {
 		super(new Date(System.currentTimeMillis() + PERIOD), PERIOD);
-		this.serverSpace = serverSpace;
+		// this.serverSpace = serverSpace;
+		this.resourceSet = resourceSet;
 	}
 
 	/**
@@ -57,7 +61,8 @@ public class CleanMemoryTask extends Task {
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
 			boolean unloadedSomething = false;
 			// LOGGER.info("checking whether projectstates have to be unloaded.");
-			ResourceSet resourceSet = serverSpace.eResource().getResourceSet();
+			// ResourceSet resourceSet =
+			// serverSpace.eResource().getResourceSet();
 			EList<Resource> resources = resourceSet.getResources();
 			for (int i = 0; i < resources.size(); i++) {
 				Resource res = resources.get(i);
@@ -79,9 +84,12 @@ public class CleanMemoryTask extends Task {
 					ChangePackage cp = getElement(res, ChangePackage.class);
 					if (cp != null) {
 						Version version = getParent(cp, Version.class);
-						ProjectHistory history = getParent(version, ProjectHistory.class);
-						if (version != null && history != null
-							&& version.getPrimarySpec().getIdentifier() > (history.getVersions().size() - keep)) {
+						ProjectHistory history = getParent(version,
+								ProjectHistory.class);
+						if (version != null
+								&& history != null
+								&& version.getPrimarySpec().getIdentifier() > (history
+										.getVersions().size() - keep)) {
 							log("unloading: " + cp);
 							unload(res);
 							unloadedSomething = true;
@@ -96,14 +104,15 @@ public class CleanMemoryTask extends Task {
 	}
 
 	private void log(String str) {
-		if (LOGUNLOADING) {
+		if (LOG_UNLOADING) {
 			ModelUtil.logInfo(str);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private <T> T getElement(Resource res, Class<T> clazz) {
-		if (res.getContents().size() == 1 && clazz.isInstance(res.getContents().get(0))) {
+		if (res.getContents().size() == 1
+				&& clazz.isInstance(res.getContents().get(0))) {
 			return (T) res.getContents().get(0);
 		}
 		return null;
@@ -111,14 +120,16 @@ public class CleanMemoryTask extends Task {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getParent(EObject obj, Class<T> clazz) {
-		if (obj != null && obj.eContainer() != null && clazz.isInstance(obj.eContainer())) {
+		if (obj != null && obj.eContainer() != null
+				&& clazz.isInstance(obj.eContainer())) {
 			return (T) obj.eContainer();
 		}
 		return null;
 	}
 
 	private void unload(Resource res) {
-		// sanity check: this check is specific to our 1 element per resource structure for projects and changepackages
+		// sanity check: this check is specific to our 1 element per resource
+		// structure for projects and changepackages
 		if (res.getContents().size() != 1) {
 			return;
 		}
