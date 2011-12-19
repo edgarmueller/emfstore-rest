@@ -21,16 +21,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public interface IExportController {
 
 	/**
-	 * These filter names are used to filter which files are displayed.
-	 */
-	String[] FILTER_NAMES = { "EMFStore change package (*.ecc)", "All Files (*.*)" };
-
-	/**
-	 * These filter extensions are used to filter which files are displayed.
-	 */
-	String[] FILTER_EXTS = { "*.ecc", "*.*" };
-
-	/**
 	 * The label that should be shown while exporting.
 	 * 
 	 * @return the label that best describes which entity is being exported

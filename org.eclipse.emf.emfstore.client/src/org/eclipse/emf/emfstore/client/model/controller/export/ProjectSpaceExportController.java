@@ -22,6 +22,11 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
  */
 public class ProjectSpaceExportController extends ProjectSpaceBasedExportController {
 
+	private static final String FILE_EXTENSION = "*.esp";
+	private static final String[] FILTERED_EXTENSIONS = { FILE_EXTENSION, "*.*" };
+	private static final String[] FILTERED_NAMES = { "EMFStore project space (" + FILE_EXTENSION + ")",
+		"All Files (*.*)" };
+
 	/**
 	 * Constructor.
 	 * 
@@ -38,7 +43,7 @@ public class ProjectSpaceExportController extends ProjectSpaceBasedExportControl
 	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return FILTER_EXTS;
+		return FILTERED_NAMES;
 	}
 
 	/**
@@ -48,7 +53,7 @@ public class ProjectSpaceExportController extends ProjectSpaceBasedExportControl
 	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return FILTER_EXTS;
+		return FILTERED_EXTENSIONS;
 	}
 
 	/**
