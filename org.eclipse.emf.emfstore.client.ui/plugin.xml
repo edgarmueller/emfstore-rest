@@ -104,7 +104,7 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportProject"
            name="export">
      </command>
@@ -114,17 +114,17 @@
            name="showHistory">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportChangesHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportChangesHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportChanges"
            name="exportChanges">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportProjectSpaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportProjectSpaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportProjectSpace"
            name="exportProjectSpace">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportWorkSpaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportWorkspaceHandlerorg.eclipse.emf.emfstore.client.ui.commands.ExportWorkSpaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportWorkSpace"
            name="exportWorkSpace">
      </command>
