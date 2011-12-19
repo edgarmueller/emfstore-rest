@@ -124,7 +124,7 @@
            name="exportProjectSpace">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportWorkspaceHandlerorg.eclipse.emf.emfstore.client.ui.commands.ExportWorkSpaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportWorkspaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportWorkSpace"
            name="exportWorkSpace">
      </command>
@@ -134,12 +134,6 @@
            name="importProjectSpace">
      </command>
  
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ProjectPropertiesHandler"
-           id="org.eclipse.emf.emfstore.client.ui.projectProperties"
-           name="properties">
-     </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.commands.ShowHistory"
@@ -651,32 +645,6 @@
         <command
               commandId="org.eclipse.emf.emfstore.client.ui.projectProperties"
               label="Properties"
-              style="push">
-           <visibleWhen
-                 checkEnabled="false">
-              <and>
-                 <iterate
-                       ifEmpty="false"
-                       operator="and">
-                    <instanceof
-                          value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
-                    </instanceof>
-                    <test
-                          forcePluginActivation="true"
-                          property="org.eclipse.emf.emfstore.client.ui.commands.projectIsShared"
-                          value="true">
-                    </test>
-                 </iterate>
-                 <count
-                       value="1">
-                 </count>
-              </and>
-           </visibleWhen>
-        </command>
-        <command
-              commandId="org.eclipse.emf.emfstore.client.ui.updateProjectNEW"
-              icon="icons/arrow_up.png"
-              label="NEW Update Project"
               style="push">
            <visibleWhen
                  checkEnabled="false">
@@ -1348,7 +1316,7 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.DeleteProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.DeleteProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.deleteProject"
            name="NEWdeleteProject">
      </command>

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller.export;
 
 import java.io.File;
@@ -8,17 +18,17 @@ import org.eclipse.core.runtime.IProgressMonitor;
 /**
  * Export interface.
  */
-public interface IExport {
+public interface IExportController {
 
 	/**
 	 * These filter names are used to filter which files are displayed.
 	 */
-	static final String[] FILTER_NAMES = { "EMFStore change package (*.ecc)", "All Files (*.*)" };
+	String[] FILTER_NAMES = { "EMFStore change package (*.ecc)", "All Files (*.*)" };
 
 	/**
 	 * These filter extensions are used to filter which files are displayed.
 	 */
-	static final String[] FILTER_EXTS = { "*.ecc", "*.*" };
+	String[] FILTER_EXTS = { "*.ecc", "*.*" };
 
 	/**
 	 * The label that should be shown while exporting.

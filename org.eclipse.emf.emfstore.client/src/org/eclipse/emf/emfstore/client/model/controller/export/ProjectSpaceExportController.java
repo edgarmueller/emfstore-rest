@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller.export;
 
 import java.io.File;
@@ -10,14 +20,14 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 /**
  * Exports a {@link ProjectSpace}.
  */
-public class ProjectSpaceExport extends ProjectSpaceBasedExport {
+public class ProjectSpaceExportController extends ProjectSpaceBasedExportController {
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param projectSpace the {@link ProjectSpace} that should be exported
 	 */
-	public ProjectSpaceExport(ProjectSpace projectSpace) {
+	public ProjectSpaceExportController(ProjectSpace projectSpace) {
 		super(projectSpace);
 	}
 
@@ -25,7 +35,7 @@ public class ProjectSpaceExport extends ProjectSpaceBasedExport {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExport#getFilteredNames()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
 		return FILTER_EXTS;
@@ -35,7 +45,7 @@ public class ProjectSpaceExport extends ProjectSpaceBasedExport {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExport#getFilteredExtensions()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
 		return FILTER_EXTS;
@@ -45,7 +55,7 @@ public class ProjectSpaceExport extends ProjectSpaceBasedExport {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExport#export(java.io.File,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#export(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void export(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -57,7 +67,7 @@ public class ProjectSpaceExport extends ProjectSpaceBasedExport {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExport#getLabel()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.ExportController.IExportController#getLabel()
 	 */
 	public String getLabel() {
 		return "project space";
@@ -67,18 +77,18 @@ public class ProjectSpaceExport extends ProjectSpaceBasedExport {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.export.IExport#getFilename()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.export.IExportController#getFilename()
 	 */
 	public String getFilename() {
 		return "projectspace_" + getProjectSpace().getProjectName() + "@"
-			+ getProjectSpace().getBaseVersion().getIdentifier() + ".ucc";
+			+ getProjectSpace().getBaseVersion().getIdentifier();
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.export.IExport#getParentFolderPropertyKey()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.export.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
 		return "org.eclipse.emf.emfstore.client.ui.exportProjectSpacePath";

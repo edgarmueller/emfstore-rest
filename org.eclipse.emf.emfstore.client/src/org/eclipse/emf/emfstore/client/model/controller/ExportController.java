@@ -13,54 +13,65 @@ package org.eclipse.emf.emfstore.client.model.controller;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.controller.export.ChangeExport;
-import org.eclipse.emf.emfstore.client.model.controller.export.IExport;
-import org.eclipse.emf.emfstore.client.model.controller.export.ProjectExport;
-import org.eclipse.emf.emfstore.client.model.controller.export.ProjectSpaceExport;
-import org.eclipse.emf.emfstore.client.model.controller.export.WorkspaceExport;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.client.model.controller.export.ChangesExportController;
+import org.eclipse.emf.emfstore.client.model.controller.export.IExportController;
+import org.eclipse.emf.emfstore.client.model.controller.export.ProjectExportController;
+import org.eclipse.emf.emfstore.client.model.controller.export.ProjectSpaceExportController;
+import org.eclipse.emf.emfstore.client.model.controller.export.WorkspaceExportController;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 
-public class ExportController extends ServerCall<Void> {
+public class ExportController {
 
-	private IExport export;
+	private IExportController export;
 	private File file;
+	private final IProgressMonitor monitor;
+	private IOException exportError;
 
-	public ExportController(IExport export, File file) {
+	public ExportController(IExportController export, File file, IProgressMonitor monitor) {
 		this.export = export;
 		this.file = file;
+		this.monitor = monitor;
 	}
 
-	@Override
-	protected Void run() throws EmfStoreException {
-		getProgressMonitor().beginTask("Export " + export.getLabel() + "...", 100);
-		// TODO: let export controllers set worked state
-		getProgressMonitor().worked(10);
-		try {
-			export.export(file, getProgressMonitor());
-		} catch (IOException e) {
-			throw new EmfStoreException("An error occured while exporting.", e);
+	public void export() throws IOException {
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				monitor.beginTask("Export " + export.getLabel() + "...", 100);
+				// TODO: let export controllers set worked state
+				monitor.worked(10);
+				try {
+					export.export(file, monitor);
+				} catch (IOException e) {
+					exportError = e;
+				}
+				monitor.worked(30);
+				monitor.worked(60);
+				monitor.done();
+			}
+		}.run(false);
+
+		if (exportError != null) {
+			throw exportError;
 		}
-		getProgressMonitor().worked(30);
-		getProgressMonitor().worked(60);
-		getProgressMonitor().done();
-		return null;
 	}
 
-	public static ProjectExport getProjectExportController(ProjectSpace projectSpace) {
-		return new ProjectExport(projectSpace);
+	public static ProjectExportController getProjectExportController(ProjectSpace projectSpace) {
+		return new ProjectExportController(projectSpace);
 	}
 
-	public static ProjectSpaceExport getProjectSpaceExportController(ProjectSpace projectSpace) {
-		return new ProjectSpaceExport(projectSpace);
+	public static ProjectSpaceExportController getProjectSpaceExportController(ProjectSpace projectSpace) {
+		return new ProjectSpaceExportController(projectSpace);
 	}
 
-	public static ChangeExport getChangesExportController(ProjectSpace projectSpace) {
-		return new ChangeExport(projectSpace);
+	public static ChangesExportController getChangesExportController(ProjectSpace projectSpace) {
+		return new ChangesExportController(projectSpace);
 	}
 
-	public static WorkspaceExport getWorkspaceExportController() {
-		return new WorkspaceExport();
+	public static WorkspaceExportController getWorkspaceExportController() {
+		return new WorkspaceExportController();
 	}
 }
