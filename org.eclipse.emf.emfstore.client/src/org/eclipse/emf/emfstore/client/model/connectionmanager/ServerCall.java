@@ -28,10 +28,22 @@ public abstract class ServerCall<U> {
 
 	public ServerCall(Usersession usersession) {
 		this.usersession = usersession;
+		setProgressMonitor(null);
 	}
 
 	public ServerCall(ProjectSpaceImpl projectSpace) {
 		this.projectSpace = projectSpace;
+		setProgressMonitor(null);
+	}
+
+	public ServerCall(Usersession usersession, IProgressMonitor monitor) {
+		this.usersession = usersession;
+		setProgressMonitor(monitor);
+	}
+
+	public ServerCall(ProjectSpaceImpl projectSpace, IProgressMonitor monitor) {
+		this.projectSpace = projectSpace;
+		setProgressMonitor(monitor);
 	}
 
 	public void setUsersession(Usersession usersession) {
