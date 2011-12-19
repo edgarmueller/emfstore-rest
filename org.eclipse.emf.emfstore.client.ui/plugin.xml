@@ -1264,7 +1264,7 @@
             name="RemoveTag">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.RevertHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.RevertHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
             name="RevertRevision">
       </command>
