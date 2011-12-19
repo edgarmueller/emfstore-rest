@@ -1,12 +1,13 @@
 package org.eclipse.emf.emfstore.client.ui.commands.handler.controller.export;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.emf.ecp.common.util.PreferenceHelper;
 import org.eclipse.emf.emfstore.client.model.controller.ExportController;
-import org.eclipse.emf.emfstore.client.model.controller.export.IExport;
+import org.eclipse.emf.emfstore.client.model.controller.export.IExportController;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -18,7 +19,7 @@ public abstract class UIGenericExportController extends AbstractEMFStoreUIContro
 		super(shell);
 	}
 
-	protected Object execute(IExport export) {
+	protected Object execute(IExportController export) {
 		FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.SAVE);
 		dialog.setFilterNames(export.getFilteredNames());
 		dialog.setFilterExtensions(export.getFilteredExtensions());
@@ -45,9 +46,10 @@ public abstract class UIGenericExportController extends AbstractEMFStoreUIContro
 		PreferenceHelper.setPreference(export.getParentFolderPropertyKey(), file.getParent());
 
 		try {
-			new ExportController(export, file).execute();
-		} catch (EmfStoreException e) {
-			// TODO
+			new ExportController(export, file, getProgressMonitor()).export();
+		} catch (IOException e) {
+			MessageDialog.openError(getShell(), "Error", "An error occurred while exporting the " + export.getLabel()
+				+ e.getMessage());
 		}
 
 		return null;
