@@ -8,6 +8,13 @@ import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
+/**
+ * 
+ * @author wesendon
+ * @author emueller
+ * 
+ * @param <U> the return type
+ */
 public abstract class ServerCall<U> {
 
 	private ProjectSpaceImpl projectSpace;
