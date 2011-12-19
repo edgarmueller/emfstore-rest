@@ -109,7 +109,7 @@
            name="export">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.ShowHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.commands.showHistory"
            name="showHistory">
      </command>
