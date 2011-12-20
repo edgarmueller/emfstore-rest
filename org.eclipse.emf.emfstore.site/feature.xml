@@ -6,7 +6,6 @@
       version="1.0.0.qualifier"
       provider-name="EMFT"
       image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.emf.ecp.license"
       license-feature-version="2.0.0.qualifier">
 
    <description>
