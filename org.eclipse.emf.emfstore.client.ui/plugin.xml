@@ -46,7 +46,7 @@
          </enabledWhen>
       </handler>
      <handler
-           class="org.eclipse.emf.emfstore.client.ui.commands.ImportChangesHandler"
+           class="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ImportChangesHandler"
            commandId="org.eclipse.emf.emfstore.client.ui.importChanges">
         <enabledWhen>
            <and>
@@ -98,13 +98,13 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ImportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.importProject"
            name="import">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ExportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportProject"
            name="export">
      </command>
@@ -114,28 +114,28 @@
            name="showHistory">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportChangesHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ExportChangesHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportChanges"
            name="exportChanges">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportProjectSpaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ExportProjectSpaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportProjectSpace"
            name="exportProjectSpace">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.export.ExportWorkspaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ExportWorkspaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportWorkSpace"
            name="exportWorkSpace">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectSpaceHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.exportimport.ImportProjectSpaceHandler"
            id="org.eclipse.emf.emfstore.client.ui.importProjectSpace"
            name="importProjectSpace">
      </command>
  
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.ShowHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.commands.ShowHistory"
            name="Show History">
      </command>

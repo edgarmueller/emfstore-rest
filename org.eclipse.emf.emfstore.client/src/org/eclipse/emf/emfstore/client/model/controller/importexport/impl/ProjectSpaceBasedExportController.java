@@ -8,14 +8,17 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.export;
+package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
 
 /**
  * Abstract base class for {@link ProjectSpace} based exports.
+ * 
+ * @author emueller
  */
-public abstract class ProjectSpaceBasedExportController implements IExportController {
+public abstract class ProjectSpaceBasedExportController implements IExportImportController {
 
 	private ProjectSpace projectSpace;
 
