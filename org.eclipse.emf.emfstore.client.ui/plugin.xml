@@ -1254,7 +1254,7 @@
             name="CheckoutRevision">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.AddTagHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.AddTagHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
             name="AddTag">
       </command>
