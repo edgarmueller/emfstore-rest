@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Generic and UI-specific controller class that is meant to be sub-classed by
- * actual implementations of both, import and export classes.
+ * Generic and UI-specific controller class that is capable of executing
+ * both import and export controller classes.
  * 
  * @author emueller
  * 
