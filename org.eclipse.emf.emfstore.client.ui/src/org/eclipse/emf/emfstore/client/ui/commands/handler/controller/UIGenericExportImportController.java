@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.commands.handler.controller.importexport;
+package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,24 +32,27 @@ import org.eclipse.ui.PlatformUI;
  * @author emueller
  * 
  */
-public abstract class UIGenericExportImportController extends AbstractEMFStoreUIController {
+public class UIGenericExportImportController extends AbstractEMFStoreUIController {
+
+	private final IExportImportController controller;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param shell
 	 *            the parent {@link Shell}
+	 * @param controller
+	 *            the {@link IExportImportController} to be executed
 	 */
-	public UIGenericExportImportController(Shell shell) {
+	public UIGenericExportImportController(Shell shell, IExportImportController controller) {
 		super(shell);
+		this.controller = controller;
 	}
 
 	/**
 	 * Executes the controller.
 	 */
 	public void execute() {
-
-		final IExportImportController controller = getController();
 
 		FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 			controller.isExport() ? SWT.SAVE : SWT.OPEN);
@@ -94,11 +97,4 @@ public abstract class UIGenericExportImportController extends AbstractEMFStoreUI
 		// TODO: include confirmation dialog messages in interface
 		// MessageDialog.openInformation(null, "Import", "Imported changes from file " + file.getAbsolutePath());
 	}
-
-	/**
-	 * Returns the {@link IExportImportController} that should be executed.
-	 * 
-	 * @return the controller to be executed
-	 */
-	public abstract IExportImportController getController();
 }

@@ -16,6 +16,7 @@ import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
 
 /**
@@ -42,7 +43,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore Workspace Files (*" + DataUnits.Workspace.getExtension() + ")",
+		return new String[] { "EMFStore Workspace Files (*" + ExportImportDataUnits.Workspace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -53,7 +54,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + DataUnits.Workspace.getExtension() + ", *.*" };
+		return new String[] { "*" + ExportImportDataUnits.Workspace.getExtension() + ", *.*" };
 	}
 
 	/**

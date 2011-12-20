@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
 
 /**
  * Exports pending changes on a given {@link ProjectSpace}.
@@ -39,7 +40,8 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore change package (" + DataUnits.Change.getExtension() + ")", "All Files (*.*)" };
+		return new String[] { "EMFStore change package (" + ExportImportDataUnits.Change.getExtension() + ")",
+			"All Files (*.*)" };
 	}
 
 	/**
@@ -49,7 +51,7 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + DataUnits.Change.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.Change.getExtension(), "*.*" };
 	}
 
 	/**

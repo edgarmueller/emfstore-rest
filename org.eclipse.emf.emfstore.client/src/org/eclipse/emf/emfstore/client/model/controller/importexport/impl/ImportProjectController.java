@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
 
 /**
@@ -55,7 +56,8 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + DataUnits.Project.getExtension() + ")", "All Files (*.*)" };
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.Project.getExtension() + ")",
+			"All Files (*.*)" };
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + DataUnits.Project.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.Project.getExtension(), "*.*" };
 	}
 
 	/**

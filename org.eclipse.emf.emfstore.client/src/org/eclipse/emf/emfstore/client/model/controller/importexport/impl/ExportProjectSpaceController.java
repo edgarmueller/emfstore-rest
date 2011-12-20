@@ -16,6 +16,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -41,7 +42,7 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + DataUnits.ProjectSpace.getExtension() + ")",
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -52,7 +53,7 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + DataUnits.ProjectSpace.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
 	}
 
 	/**
@@ -74,7 +75,8 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	public String getFilename() {
 		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
 		return "projectspace_" + getProjectSpace().getProjectName() + "@"
-			+ (baseVersion == null ? 0 : baseVersion.getIdentifier()) + DataUnits.ProjectSpace.getExtension();
+			+ (baseVersion == null ? 0 : baseVersion.getIdentifier())
+			+ ExportImportDataUnits.ProjectSpace.getExtension();
 	}
 
 	/**
