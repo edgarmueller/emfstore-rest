@@ -1181,4 +1181,35 @@ public final class ModelUtil {
 
 		return false;
 	}
+
+	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
+
+		Map<EObject, ModelElementId> idMap = new HashMap<EObject, ModelElementId>();
+
+		Project project = getProject(originalObject);
+		if (project == null) {
+			throw new IllegalArgumentException("EObject is not contained in a project.");
+		}
+
+		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(originalObject, false);
+		allContainedModelElements.add(originalObject);
+		// EObject copiedElement = EcoreUtil.copy(originalObject);
+		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
+			false);
+		copiedAllContainedModelElements.add(copiedObject);
+
+		for (int i = 0; i < allContainedModelElements.size(); i++) {
+			EObject child = allContainedModelElements.get(i);
+			EObject copiedChild = copiedAllContainedModelElements.get(i);
+			ModelElementId childId = ModelUtil.clone(project.getModelElementId(child));
+
+			if (ModelUtil.isIgnoredDatatype(child)) {
+				continue;
+			}
+
+			idMap.put(copiedChild, childId);
+		}
+
+		return idMap;
+	}
 }
