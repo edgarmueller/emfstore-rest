@@ -2620,8 +2620,7 @@ public class ProjectSpaceImpl extends IdentifiableElementImpl implements Project
 	}
 
 	public List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException {
-		((Workspace) eContainer()).getHistoryInfo(getUsersession(), getProjectId(), query);
-		return null;
+		return ((Workspace) eContainer()).getHistoryInfo(getUsersession(), getProjectId(), query);
 	}
 
 } // ProjectContainerImpl

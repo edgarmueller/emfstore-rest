@@ -488,6 +488,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
 
 		// Event logging
+		// TODO: remove event
 		ShowHistoryEvent historyEvent = EventsFactory.eINSTANCE.createShowHistoryEvent();
 		historyEvent.setSourceVersion(query.getSource());
 		historyEvent.setTargetVersion(query.getTarget());

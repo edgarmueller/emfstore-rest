@@ -742,6 +742,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		}.execute();
 	}
 
+	// TODO
 	public PrimaryVersionSpec resolveVersionSpec(Usersession usersession, VersionSpec versionSpec, ProjectId projectId)
 		throws EmfStoreException {
 		return null;
@@ -749,19 +750,23 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	public List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
 		throws EmfStoreException {
-		return null;
+		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		return connectionManager.getHistoryInfo(usersession.getSessionId(), projectId, query);
 	}
 
+	// TODO
 	public AdminBroker getAdminBroker(Usersession usersession) throws EmfStoreException, AccessControlException {
 		return null;
 	}
 
+	// TODO
 	public void updateACUser(Usersession usersession) throws EmfStoreException {
 		// hm?
 		// ConnectionManager connectionManager = this.getWorkspaceManager().getConnectionManager();
 		// setACUser(connectionManager.resolveUser(getSessionId(), null));
 	}
 
+	// TODO
 	public void updateProjectInfos(Usersession usersession) {
 		// BEGIN SUPRESS CATCH EXCEPTION
 		// try {
@@ -780,6 +785,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		// hm?
 	}
 
+	// TODO
 	public void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
 		throws EmfStoreException {
 		new ServerCall<Void>(usersession) {
@@ -792,6 +798,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		}.execute();
 	}
 
+	// TODO
 	public ProjectInfo createRemoteProject(final String projectName, final String projectDescription,
 		Usersession usersession) throws EmfStoreException {
 		return new ServerCall<ProjectInfo>(usersession) {
