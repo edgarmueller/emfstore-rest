@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -106,7 +107,7 @@ public abstract class SCMContentProvider implements ITreeContentProvider {
 	private Object[] getChildrenOfChangePackage(ChangePackage changePackage) {
 		EList<AbstractOperation> operations = changePackage.getOperations();
 		if (isReverseNodes()) {
-			Collections.reverse(operations);
+			ECollections.reverse(operations);
 		}
 		return operations.toArray();
 	}
@@ -241,7 +242,7 @@ public abstract class SCMContentProvider implements ITreeContentProvider {
 		protected Object[] getChildren(ChangePackage changePackage) {
 			EList<AbstractOperation> operations = changePackage.getOperations();
 			if (isReverseNodes()) {
-				Collections.reverse(operations);
+				ECollections.reverse(operations);
 			}
 			return operations.toArray();
 		}
