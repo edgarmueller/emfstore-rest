@@ -526,7 +526,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		labelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 		logLabelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 		contentProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
-		contentProvider.setProjectSpace(projectSpace);
 	}
 
 	/**
