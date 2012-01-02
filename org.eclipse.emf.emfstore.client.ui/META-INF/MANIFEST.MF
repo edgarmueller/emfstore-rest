@@ -96,7 +96,6 @@ Export-Package: diff.match.patch,
    org.eclipse.emf.emfstore.client.model",
  org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport,
  org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard,
- org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers,
  org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
   uses:="org.eclipse.emf.edit.ui.provider,
    org.eclipse.jface.viewers,

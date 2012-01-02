@@ -77,5 +77,20 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		public String getExtension() {
 			return ".esw";
 		}
+	},
+
+	/**
+	 * A project history.
+	 */
+	History {
+		/**
+		 * 
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 */
+		public String getExtension() {
+			return ".esh";
+		}
 	}
 }

@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.viewers.TreeNode;
 
 /**
- * Handler for checking out a new project.
+ * CheckoutHandler for checking out a new project.
  * 
  * @author Shterev
  */

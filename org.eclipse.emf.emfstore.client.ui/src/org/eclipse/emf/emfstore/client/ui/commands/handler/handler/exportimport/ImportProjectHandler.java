@@ -22,7 +22,7 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Handler for importing a project.
+ * CheckoutHandler for importing a project.
  * 
  * @author emueller
  * 

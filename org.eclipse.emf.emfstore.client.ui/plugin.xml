@@ -140,12 +140,12 @@
            name="Show History">
      </command>
       <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.AddServerHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.AddServerHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.AddServer"
            name="AddServer">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ServerLoginHandler"
+           defaultHandler="org.eclipse.e mf.emfstore.client.ui.views.emfstorebrowser.handlers.ServerLoginHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Login"
            name="Login">
      </command>
@@ -155,7 +155,7 @@
            name="Logout">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.CreateProjectOnServerHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.handler.handler.CreateProjectOnServerHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.CreateProjectOnServer"
            name="CreateProjectOnServer">
      </command>

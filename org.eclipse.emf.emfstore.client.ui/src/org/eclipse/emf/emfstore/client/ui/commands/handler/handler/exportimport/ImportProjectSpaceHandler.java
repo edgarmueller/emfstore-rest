@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ui.commands.handler.RequiredSelectionExce
 import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UIGenericExportImportController;
 
 /**
- * Handler for import a project space.
+ * CheckoutHandler for import a project space.
  * 
  * @author emueller
  * 

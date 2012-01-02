@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.ui.commands.handler.RequiredSelectionExce
 import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UIGenericExportImportController;
 
 /**
- * Handler for exporting a {@link Project}.
+ * CheckoutHandler for exporting a {@link Project}.
  * 
  * @author emueller
  */

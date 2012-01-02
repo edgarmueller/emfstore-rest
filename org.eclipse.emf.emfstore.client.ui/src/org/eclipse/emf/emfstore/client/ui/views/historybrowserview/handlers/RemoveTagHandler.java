@@ -27,7 +27,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 /**
- * Handler for creating a new repository.
+ * CheckoutHandler for creating a new repository.
  * 
  * @author Shterev
  */

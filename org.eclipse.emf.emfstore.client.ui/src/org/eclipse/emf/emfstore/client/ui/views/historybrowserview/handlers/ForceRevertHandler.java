@@ -31,7 +31,7 @@ import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.window.Window;
 
 /**
- * Handler for forcing a revert operation.
+ * CheckoutHandler for forcing a revert operation.
  * 
  * @author Shterev
  */

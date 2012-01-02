@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.ui.commands.handler.RequiredSelectionExce
 import org.eclipse.emf.emfstore.client.ui.commands.handler.controller.UIGenericExportImportController;
 
 /**
- * Handler for exporting local changes upon a selected {@link ProjectSpace}.
+ * CheckoutHandler for exporting local changes upon a selected {@link ProjectSpace}.
  * 
  * @author emueller
  */
