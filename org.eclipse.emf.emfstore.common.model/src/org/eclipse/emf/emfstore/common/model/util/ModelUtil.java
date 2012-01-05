@@ -929,7 +929,7 @@ public final class ModelUtil {
 			EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
 			EReference reference = (EReference) eStructuralFeature;
 
-			if (reference.isContainer() || reference.isContainment() || reference.isChangeable()) {
+			if (reference.isContainer() || reference.isContainment() || !reference.isChangeable()) {
 				continue;
 			}
 
