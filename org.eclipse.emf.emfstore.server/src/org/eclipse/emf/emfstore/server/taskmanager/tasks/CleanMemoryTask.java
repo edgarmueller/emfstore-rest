@@ -43,11 +43,11 @@ public class CleanMemoryTask extends Task {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param serverSpace
-	 *            serverSpace
+	 * @param resourceSet
+	 *            the {@link ResourceSet} that should be considered for unloading
+	 * 
 	 */
-	public CleanMemoryTask(ResourceSet resourceSet) {// ServerSpace serverSpace)
-														// {
+	public CleanMemoryTask(ResourceSet resourceSet) {
 		super(new Date(System.currentTimeMillis() + PERIOD), PERIOD);
 		// this.serverSpace = serverSpace;
 		this.resourceSet = resourceSet;
@@ -84,12 +84,9 @@ public class CleanMemoryTask extends Task {
 					ChangePackage cp = getElement(res, ChangePackage.class);
 					if (cp != null) {
 						Version version = getParent(cp, Version.class);
-						ProjectHistory history = getParent(version,
-								ProjectHistory.class);
-						if (version != null
-								&& history != null
-								&& version.getPrimarySpec().getIdentifier() > (history
-										.getVersions().size() - keep)) {
+						ProjectHistory history = getParent(version, ProjectHistory.class);
+						if (version != null && history != null
+							&& version.getPrimarySpec().getIdentifier() > (history.getVersions().size() - keep)) {
 							log("unloading: " + cp);
 							unload(res);
 							unloadedSomething = true;
@@ -111,8 +108,7 @@ public class CleanMemoryTask extends Task {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getElement(Resource res, Class<T> clazz) {
-		if (res.getContents().size() == 1
-				&& clazz.isInstance(res.getContents().get(0))) {
+		if (res.getContents().size() == 1 && clazz.isInstance(res.getContents().get(0))) {
 			return (T) res.getContents().get(0);
 		}
 		return null;
@@ -120,8 +116,7 @@ public class CleanMemoryTask extends Task {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getParent(EObject obj, Class<T> clazz) {
-		if (obj != null && obj.eContainer() != null
-				&& clazz.isInstance(obj.eContainer())) {
+		if (obj != null && obj.eContainer() != null && clazz.isInstance(obj.eContainer())) {
 			return (T) obj.eContainer();
 		}
 		return null;

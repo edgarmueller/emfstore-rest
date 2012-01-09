@@ -45,8 +45,8 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	/**
 	 * Set the Shared Properties from client on server.
 	 * 
-	 * @param property
-	 *            Property to be set
+	 * @param properties
+	 *            properties to be set
 	 * @param projectId
 	 *            Project where the properties should be saved
 	 * @throws EmfStoreException
