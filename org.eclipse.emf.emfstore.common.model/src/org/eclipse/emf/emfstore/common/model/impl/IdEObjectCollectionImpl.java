@@ -304,7 +304,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			// getEobjectsIdMap().remove(modelElement);
 			this.getModelElements().remove(modelElement);
 		} else {
-			XMIResource res = (XMIResource) modelElement.eResource();
 			EReference containmentFeature = modelElement.eContainmentFeature();
 			if (containmentFeature.isMany()) {
 				EList<?> containmentList = (EList<?>) containerModelElement.eGet(containmentFeature);
