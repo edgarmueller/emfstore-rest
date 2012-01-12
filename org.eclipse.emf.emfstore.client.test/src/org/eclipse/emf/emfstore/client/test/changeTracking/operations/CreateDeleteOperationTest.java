@@ -1310,7 +1310,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	}
 
 	@Test
-	public void testDeleteContainmentInOneCommand() {
+	public void testClearContainmentTree() {
 		final TestElement parentTestElement = getTestElement("parentTestElement");
 		final TestElement testElement = getTestElement("testElement");
 		final TestElement subTestElement = getTestElement("subTestElement");
@@ -1390,7 +1390,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	}
 
 	@Test
-	public void testDeleteContainmentInOneCommand2() {
+	public void testClearContainmentTreeReverse() {
 		final TestElement parentTestElement = getTestElement("parentTestElement");
 		final TestElement testElement = getTestElement("testElement");
 		final TestElement subTestElement = getTestElement("subTestElement");
