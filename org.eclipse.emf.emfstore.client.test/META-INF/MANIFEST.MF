@@ -4,8 +4,7 @@ Bundle-Name: EMFStore Client Tests  (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.test;singleton:=true
 Bundle-Version: 0.8.9.M912
 Bundle-ClassPath: .,
- lib/org.apache.commons.io_1.4.0.v20081110-1000.jar,
- lib/guava-11.0.jar
+ lib/org.apache.commons.io_1.4.0.v20081110-1000.jar
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
