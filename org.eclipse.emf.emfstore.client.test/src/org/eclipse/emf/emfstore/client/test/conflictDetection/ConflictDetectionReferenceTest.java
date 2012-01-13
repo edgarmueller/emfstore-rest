@@ -859,28 +859,35 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 	 */
 	@Test
 	public void noConflictMultiReferenceAddVsSet() {
+
+		final TestElement testElement = createTestElement();
+		final TestElement first = createTestElement();
+		final TestElement second = createTestElement();
+		final TestElement inserted = createTestElement();
+		final TestElement added = createTestElement();
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement first = getTestElement();
-				TestElement second = getTestElement();
-				TestElement inserted = getTestElement();
-				TestElement added = getTestElement();
-
 				testElement.getReferences().addAll(Arrays.asList(first, second));
 				clearOperations();
-
 				testElement.getReferences().set(1, inserted);
-				AbstractOperation set = checkAndGetOperation(MultiReferenceSetOperation.class);
-
-				testElement.getReferences().add(added);
-				AbstractOperation add = checkAndGetOperation(MultiReferenceOperation.class);
-
-				assertEquals(false, doConflict(set, add));
-				assertEquals(false, doConflict(add, set));
 			}
 		}.run(false);
+
+		AbstractOperation set = myCheckAndGetOperation(MultiReferenceSetOperation.class);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.getReferences().add(added);
+			}
+		}.run(false);
+
+		AbstractOperation add = myCheckAndGetOperation(MultiReferenceOperation.class);
+
+		assertEquals(false, doConflict(set, add));
+		assertEquals(false, doConflict(add, set));
 	}
 
 	/**
@@ -888,27 +895,33 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 	 */
 	@Test
 	public void noConflictMultiReferenceRemoveVsSet() {
+		final TestElement testElement = createTestElement();
+		final TestElement first = createTestElement();
+		final TestElement second = createTestElement();
+		final TestElement inserted = createTestElement();
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement first = getTestElement();
-				TestElement second = getTestElement();
-				TestElement inserted = getTestElement();
-
 				testElement.getReferences().addAll(Arrays.asList(first, second));
 				clearOperations();
-
 				testElement.getReferences().remove(first);
-				AbstractOperation remove = checkAndGetOperation(MultiReferenceOperation.class);
-
-				testElement.getReferences().set(testElement.getReferences().indexOf(second), inserted);
-				AbstractOperation set = checkAndGetOperation(MultiReferenceSetOperation.class);
-
-				assertEquals(false, doConflict(set, remove));
-				assertEquals(false, doConflict(remove, set));
 			}
 		}.run(false);
+
+		AbstractOperation remove = myCheckAndGetOperation(MultiReferenceOperation.class);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.getReferences().set(testElement.getReferences().indexOf(second), inserted);
+			}
+		}.run(false);
+
+		AbstractOperation set = myCheckAndGetOperation(MultiReferenceSetOperation.class);
+
+		assertEquals(false, doConflict(set, remove));
+		assertEquals(false, doConflict(remove, set));
 	}
 
 	/**
@@ -916,30 +929,34 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 	 */
 	@Test
 	public void conflictMultiReferenceRemoveVsSet() {
+		final TestElement testElement = createTestElement();
+		final TestElement first = createTestElement();
+		final TestElement second = createTestElement();
+		final TestElement inserted = createTestElement();
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement first = getTestElement();
-				TestElement second = getTestElement();
-				TestElement inserted = getTestElement();
-
 				testElement.getReferences().addAll(Arrays.asList(first, second));
 				clearOperations();
-
 				testElement.getReferences().remove(second);
-				AbstractOperation remove = checkAndGetOperation(MultiReferenceOperation.class);
-
-				testElement.getReferences().add(second);
-				clearOperations();
-
-				testElement.getReferences().set(testElement.getReferences().indexOf(second), inserted);
-				AbstractOperation set = checkAndGetOperation(MultiReferenceSetOperation.class);
-
-				assertEquals(true, doConflict(set, remove));
-				assertEquals(true, doConflict(remove, set));
 			}
 		}.run(false);
-	}
 
+		AbstractOperation remove = myCheckAndGetOperation(MultiReferenceOperation.class);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.getReferences().add(second);
+				clearOperations();
+				testElement.getReferences().set(testElement.getReferences().indexOf(second), inserted);
+			}
+		}.run(false);
+
+		AbstractOperation set = myCheckAndGetOperation(MultiReferenceSetOperation.class);
+
+		assertEquals(true, doConflict(set, remove));
+		assertEquals(true, doConflict(remove, set));
+	}
 }

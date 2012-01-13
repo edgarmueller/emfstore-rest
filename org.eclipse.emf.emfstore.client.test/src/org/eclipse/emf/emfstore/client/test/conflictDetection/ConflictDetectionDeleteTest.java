@@ -245,7 +245,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 				getProject().addModelElement(pack);
 				getProject().addModelElement(br);
 				section.getModelElements().add(pack);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -297,8 +297,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 				getProject().addModelElement(useCase);
 				getProject().addModelElement(mileStone);
 				section.getModelElements().add(useCase);
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -367,9 +366,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 			@Override
 			protected void doRun() {
 				section.getModelElements().add(pack);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 

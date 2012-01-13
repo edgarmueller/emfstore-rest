@@ -99,11 +99,8 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(dummy);
-
 				getProject().addModelElement(actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1255,9 +1252,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 
 				actor.setLeafSection(section);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1446,7 +1441,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				actor.setLeafSection(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1473,8 +1468,8 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 			}
 		}.run(false);
 
-		List<AbstractOperation> ops1 = getProjectSpace().getLocalOperations().getOperations();
-		List<AbstractOperation> ops2 = ps2.getLocalOperations().getOperations();
+		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
+		List<AbstractOperation> ops2 = ps2.getOperations();
 
 		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
 		// no index conflict
@@ -1629,9 +1624,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				section.getModelElements().add(dummy);
 				getProject().addModelElement(actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1690,8 +1683,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
-
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1751,9 +1743,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
 				section.getModelElements().add(actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1813,9 +1803,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
 				section.getModelElements().add(actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1878,9 +1866,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
 				section.getModelElements().add(actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 
@@ -1950,9 +1936,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				section.getModelElements().add(actor);
 				assertEquals(section.getModelElements().get(2), actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 		ProjectSpace ps2 = cloneProjectSpace(getProjectSpace());
@@ -2018,9 +2002,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				section.getModelElements().add(actor);
 				assertEquals(section.getModelElements().get(2), actor);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 		ProjectSpace ps2 = cloneProjectSpace(getProjectSpace());
@@ -2084,9 +2066,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				useCase.getParticipatingActors().add(anotherDummy);
 				useCase.getParticipatingActors().add(otherDummy);
 				useCase.getParticipatingActors().add(dummy);
-
-				getProjectSpace().getOperations().clear();
-
+				clearOperations();
 			}
 		}.run(false);
 		ProjectSpace ps2 = cloneProjectSpace(getProjectSpace());
@@ -3067,7 +3047,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3133,7 +3113,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3199,7 +3179,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3267,7 +3247,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(otherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3336,7 +3316,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				useCase.getParticipatingActors().add(otherDummy);
 				useCase.getParticipatingActors().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3403,7 +3383,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3469,7 +3449,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3537,7 +3517,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3607,7 +3587,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3677,7 +3657,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 		ProjectSpace ps2 = cloneProjectSpace(getProjectSpace());
@@ -3745,7 +3725,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3814,7 +3794,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -3883,7 +3863,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(anotherDummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);

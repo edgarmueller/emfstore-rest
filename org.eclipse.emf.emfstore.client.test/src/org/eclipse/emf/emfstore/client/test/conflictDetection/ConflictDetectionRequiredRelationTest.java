@@ -1,8 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
 
 import static org.junit.Assert.assertEquals;
@@ -44,17 +49,15 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		final Actor actor = RequirementFactory.eINSTANCE.createActor();
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(section);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
-
 			}
 		}.run(false);
 
-		List<AbstractOperation> ops = getProjectSpace().getLocalOperations().getOperations();
+		List<AbstractOperation> ops = getProjectSpace().getOperations();
 
 		// ops are [Create actor], [add actor to section]
 		AbstractOperation createActor = ops.get(0);
@@ -84,14 +87,14 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(section);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				section.getModelElements().remove(actor);
 
 			}
 		}.run(false);
 
-		List<AbstractOperation> ops = getProjectSpace().getLocalOperations().getOperations();
+		List<AbstractOperation> ops = getProjectSpace().getOperations();
 
 		// ops are [Create actor], [add actor to section], [remove actor from section]
 		AbstractOperation createActor = ops.get(0);
@@ -129,14 +132,14 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(dummy);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				section.getModelElements().move(0, actor);
 
 			}
 		}.run(false);
 
-		List<AbstractOperation> ops = getProjectSpace().getLocalOperations().getOperations();
+		List<AbstractOperation> ops = getProjectSpace().getOperations();
 
 		// ops are [Create actor], [add actor to section], [move actor in section]
 		AbstractOperation createActor = ops.get(0);
@@ -174,7 +177,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(section);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				actor.setName("this is a new name");
 
@@ -219,7 +222,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			protected void doRun() {
 				getProject().addModelElement(section);
 				getProject().addModelElement(task);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				actor.setInitiatedUserTask(task);
 
@@ -264,7 +267,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			protected void doRun() {
 				getProject().addModelElement(section);
 				getProject().addModelElement(useCase);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				actor.getInitiatedUseCases().add(useCase);
 
@@ -311,14 +314,14 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(solution2);
 				// issue.setSolution(solution2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				getProject().addModelElement(solution1);
 				issue.setSolution(solution1);
 				issue.setSolution(solution2);
 
 			}
 		}.run(false);
-		List<AbstractOperation> ops = getProjectSpace().getLocalOperations().getOperations();
+		List<AbstractOperation> ops = getProjectSpace().getOperations();
 
 		// ops are [create solution1], [set solution 1], [set solution 2]
 		AbstractOperation createSolution1 = ops.get(0);
@@ -348,7 +351,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(section);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				section.getModelElements().add(actor);
 				actor.setName("name");
 				getProject().deleteModelElement(actor);
@@ -356,7 +359,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 			}
 		}.run(false);
 
-		List<AbstractOperation> ops = getProjectSpace().getLocalOperations().getOperations();
+		List<AbstractOperation> ops = getProjectSpace().getOperations();
 
 		// ops are [create actor], [addActor], [nameActor], [delete actor]
 		AbstractOperation createActor = ops.get(0);
@@ -452,7 +455,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				actor.setLeafSection(section);
 				section.getModelElements().move(0, actor);
@@ -494,7 +497,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				actor.setLeafSection(section);
 				section.getModelElements().remove(actor);
@@ -536,7 +539,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				actor.setLeafSection(section);
 				section2.getModelElements().add(actor);
@@ -578,7 +581,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				section.getModelElements().add(actor);
 				section2.getModelElements().add(actor);
@@ -618,7 +621,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				section.getModelElements().add(actor);
 				section.getModelElements().remove(actor);
@@ -659,7 +662,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				section.getModelElements().add(actor);
 				section.getModelElements().move(0, actor);
@@ -703,7 +706,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 				section.getModelElements().add(dummy);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				CompositeOperationHandle handle1 = getProjectSpace().beginCompositeOperation();
 				section.getModelElements().add(actor);
@@ -758,7 +761,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section);
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				CompositeOperationHandle handle1 = getProjectSpace().beginCompositeOperation();
 				section.getModelElements().add(actor);
@@ -815,7 +818,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 				getProject().addModelElement(actor2);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				CompositeOperationHandle handle1 = getProjectSpace().beginCompositeOperation();
 				section.getModelElements().add(actor);
@@ -871,7 +874,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 				getProject().addModelElement(actor);
 				getProject().addModelElement(actor2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				section.getModelElements().add(actor);
 				section2.getModelElements().add(actor2);
