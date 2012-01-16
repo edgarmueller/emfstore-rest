@@ -21,12 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -76,12 +74,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.PluginStartEvent;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
@@ -95,6 +93,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * The cached value of the '{@link #getProjectSpaces() <em>Project Spaces</em>}' containment reference list.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectSpaces()
 	 * @generated
 	 * @ordered
@@ -104,6 +103,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getServerInfos()
 	 * @generated
 	 * @ordered
@@ -135,6 +135,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -143,6 +144,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -152,6 +154,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ProjectSpace> getProjectSpaces() {
@@ -164,6 +167,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ServerInfo> getServerInfos() {
@@ -176,6 +180,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Usersession> getUsersessions() {
@@ -189,6 +194,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -247,7 +253,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		projectSpace.initResources(this.workspaceResourceSet);
 
-		// getRecentChanges and generate notifications
+		// getRecentChanges
 		try {
 			DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();
 			Calendar calendar = Calendar.getInstance();
@@ -263,16 +269,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 			projectSpace.eResource().save(null);
 		} catch (EmfStoreException e) {
-			projectSpace.getNotificationsFromComposite().clear();
-			WorkspaceUtil.logWarning("Creating notifications failed!", e);
+			WorkspaceUtil.logException(e.getMessage(), e);
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
-			projectSpace.getNotificationsFromComposite().clear();
-			WorkspaceUtil.logWarning("Creating notifications failed!", e);
+			WorkspaceUtil.logException(e.getMessage(), e);
 		} catch (IOException e) {
-			projectSpace.getNotificationsFromComposite().clear();
-			WorkspaceUtil.logWarning("Creating notifications failed!", e);
+			WorkspaceUtil.logException(e.getMessage(), e);
 		}
 
 		addProjectSpace(projectSpace);
@@ -299,6 +302,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	// end of custom code
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -316,6 +320,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -333,6 +338,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -357,6 +363,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -377,6 +384,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -427,7 +435,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			PluginStartEvent event = EventsFactory.eINSTANCE.createPluginStartEvent();
 			event.setPluginId("org.eclipse.emf.emfstore.client");
 			event.setTimestamp(new Date());
-			projectSpace.addEvent(event);
 		}
 	}
 
@@ -621,17 +628,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException {
 
+		assert (projectSpace != null);
+
 		// delete project to notify listeners
 		projectSpace.getProject().delete();
 
 		getProjectSpaces().remove(projectSpace);
-		if (getActiveProjectSpace() == projectSpace) {
-			setActiveProjectSpace(null);
-		}
 		save();
 		projectToProjectSpaceMap.remove(projectSpace.getProject());
 
-		// delete folder of projectSPace
+		// delete folder of project space
 		String pathToProject = Configuration.getWorkspaceDirectory() + "ps-" + projectSpace.getIdentifier();
 		FileUtil.deleteFolder(new File(pathToProject));
 

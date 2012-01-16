@@ -89,7 +89,6 @@ public final class WorkspaceUtil {
 		CheckoutEvent checkoutEvent = EventsFactory.eINSTANCE.createCheckoutEvent();
 		checkoutEvent.setBaseVersion(ModelUtil.clone(baseVersion));
 		checkoutEvent.setTimestamp(new Date());
-		projectSpace.addEvent(checkoutEvent);
 	}
 
 	/**
@@ -105,7 +104,6 @@ public final class WorkspaceUtil {
 		updateEvent.setBaseVersion(ModelUtil.clone(baseVersion));
 		updateEvent.setTargetVersion(ModelUtil.clone(targetVersion));
 		updateEvent.setTimestamp(new Date());
-		projectSpace.addEvent(updateEvent);
 	}
 
 	/**
