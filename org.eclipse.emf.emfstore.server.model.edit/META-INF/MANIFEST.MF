@@ -10,7 +10,6 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.emf.emfstore.server.model.accesscontrol.provider,
  org.eclipse.emf.emfstore.server.model.accesscontrol.roles.provider,
- org.eclipse.emf.emfstore.server.model.notification.provider,
  org.eclipse.emf.emfstore.server.model.provider,
  org.eclipse.emf.emfstore.server.model.url.provider,
  org.eclipse.emf.emfstore.server.model.versioning.events.provider,

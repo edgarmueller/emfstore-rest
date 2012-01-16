@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +19,6 @@ import java.util.Set;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.ecp.common.util.UiUtil;
@@ -29,7 +27,6 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.client.ui.Activator;
-import org.eclipse.emf.emfstore.client.ui.commands.ServerRequestCommandHandler;
 import org.eclipse.emf.emfstore.client.ui.util.ElementOpenerHelper;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
@@ -46,8 +43,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.ShowHistoryEvent;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
@@ -485,20 +480,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		}
 		HistoryQuery query = getQuery(end);
 		List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
-
-		// Event logging
-		// TODO: remove event
-		ShowHistoryEvent historyEvent = EventsFactory.eINSTANCE.createShowHistoryEvent();
-		historyEvent.setSourceVersion(query.getSource());
-		historyEvent.setTargetVersion(query.getTarget());
-		historyEvent.setTimestamp(new Date());
-		EList<ModelElementId> modelElements = query.getModelElements();
-		if (modelElements != null) {
-			for (ModelElementId modelElementId : modelElements) {
-				historyEvent.getModelElement().add(ModelUtil.clone(modelElementId));
-			}
-		}
-		projectSpace.addEvent(historyEvent);
 
 		if (historyInfo != null) {
 			for (HistoryInfo hi : historyInfo) {

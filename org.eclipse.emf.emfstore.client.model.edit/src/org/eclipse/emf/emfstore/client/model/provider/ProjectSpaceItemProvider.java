@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.client.model.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -37,14 +35,10 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.provider.IdentifiableElementItemProvider;
-import org.eclipse.emf.emfstore.server.model.notification.NotificationFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerFactory;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.model.ProjectSpace} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -202,6 +196,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -221,6 +216,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -271,8 +267,8 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	// end of custom code
 
 	/**
-	 * {@inheritDoc} This handles model notifications by calling
-	 * {@link #updateChildren} to update any cached children and by creating a
+	 * {@inheritDoc} This handles model notifications by calling {@link #updateChildren} to update any cached children
+	 * and by creating a
 	 * viewer notification, which it passes to {@link #fireNotifyChanged}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -358,6 +354,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
