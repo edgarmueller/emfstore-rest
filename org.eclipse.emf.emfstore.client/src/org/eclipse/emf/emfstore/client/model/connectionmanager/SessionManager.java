@@ -58,7 +58,7 @@ public class SessionManager {
 		}
 	}
 
-	private Usersession prepareUsersession(ServerCall<?> serverCall) {
+	private Usersession prepareUsersession(ServerCall<?> serverCall) throws EmfStoreException {
 		Usersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
 			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());
