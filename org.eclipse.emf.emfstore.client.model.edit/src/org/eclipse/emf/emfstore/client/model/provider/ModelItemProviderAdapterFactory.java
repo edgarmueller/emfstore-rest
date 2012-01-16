@@ -37,13 +37,12 @@ import org.eclipse.emf.emfstore.client.model.util.ModelAdapterFactory;
  * 
  * @generated
  */
-public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
-		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory,
+	IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ComposedAdapterFactory parentAdapterFactory;
@@ -52,7 +51,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
@@ -68,7 +66,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	/**
 	 * This constructs an instance.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ModelItemProviderAdapterFactory() {
@@ -80,10 +77,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.Workspace}
-	 * instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.Workspace} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected WorkspaceItemProvider workspaceItemProvider;
@@ -92,7 +87,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.Workspace}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -105,10 +99,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.ServerInfo}
-	 * instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.ServerInfo} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ServerInfoItemProvider serverInfoItemProvider;
@@ -117,7 +109,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.ServerInfo}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -130,10 +121,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.Usersession}
-	 * instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.Usersession} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected UsersessionItemProvider usersessionItemProvider;
@@ -142,7 +131,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.Usersession}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -155,10 +143,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}
-	 * instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.ProjectSpace} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ProjectSpaceItemProvider projectSpaceItemProvider;
@@ -167,7 +153,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -180,10 +165,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.OperationComposite}
-	 * instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.OperationComposite} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected OperationCompositeItemProvider operationCompositeItemProvider;
@@ -197,19 +180,16 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	@Override
 	public Adapter createOperationCompositeAdapter() {
 		if (operationCompositeItemProvider == null) {
-			operationCompositeItemProvider = new OperationCompositeItemProvider(
-					this);
+			operationCompositeItemProvider = new OperationCompositeItemProvider(this);
 		}
 
 		return operationCompositeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.model.PendingFileTransfer} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.PendingFileTransfer} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected PendingFileTransferItemProvider pendingFileTransferItemProvider;
@@ -223,89 +203,32 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	@Override
 	public Adapter createPendingFileTransferAdapter() {
 		if (pendingFileTransferItemProvider == null) {
-			pendingFileTransferItemProvider = new PendingFileTransferItemProvider(
-					this);
+			pendingFileTransferItemProvider = new PendingFileTransferItemProvider(this);
 		}
 
 		return pendingFileTransferItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.EventComposite}
-	 * instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected EventCompositeItemProvider eventCompositeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.EventComposite}.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventCompositeAdapter() {
-		if (eventCompositeItemProvider == null) {
-			eventCompositeItemProvider = new EventCompositeItemProvider(this);
-		}
-
-		return eventCompositeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.model.NotificationComposite} instances.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected NotificationCompositeItemProvider notificationCompositeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.NotificationComposite}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createNotificationCompositeAdapter() {
-		if (notificationCompositeItemProvider == null) {
-			notificationCompositeItemProvider = new NotificationCompositeItemProvider(
-					this);
-		}
-
-		return notificationCompositeItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
 	 * This sets the composed adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -317,7 +240,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This implementation substitutes the factory itself as the key for the adapter.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -327,15 +249,13 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -346,7 +266,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	/**
 	 * This adds a listener.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
@@ -356,7 +275,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	/**
 	 * This removes a listener.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
@@ -367,7 +285,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
@@ -379,9 +296,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory.
+	 * This disposes all of the item providers created by this factory. 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void dispose() {
@@ -397,10 +313,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 			operationCompositeItemProvider.dispose();
 		if (pendingFileTransferItemProvider != null)
 			pendingFileTransferItemProvider.dispose();
-		if (eventCompositeItemProvider != null)
-			eventCompositeItemProvider.dispose();
-		if (notificationCompositeItemProvider != null)
-			notificationCompositeItemProvider.dispose();
 	}
 
 }

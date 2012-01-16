@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -17,7 +18,7 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
  */
 public abstract class ServerCall<U> {
 
-	private ProjectSpaceImpl projectSpace;
+	private ProjectSpaceBase projectSpace;
 	private Usersession usersession;
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
@@ -31,7 +32,7 @@ public abstract class ServerCall<U> {
 		setProgressMonitor(null);
 	}
 
-	public ServerCall(ProjectSpaceImpl projectSpace) {
+	public ServerCall(ProjectSpaceBase projectSpace) {
 		this.projectSpace = projectSpace;
 		setProgressMonitor(null);
 	}
@@ -54,7 +55,7 @@ public abstract class ServerCall<U> {
 		return usersession;
 	}
 
-	protected ProjectSpaceImpl getProjectSpace() {
+	protected ProjectSpaceBase getProjectSpace() {
 		return projectSpace;
 	}
 

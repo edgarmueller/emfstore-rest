@@ -22,15 +22,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
-import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.impl.OperationManager;
-import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
-import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.preferences.PropertyKey;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
@@ -42,7 +39,6 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
@@ -51,7 +47,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -89,167 +84,215 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * @generated
  */
 public interface ProjectSpace extends IdentifiableElement {
-	/**
-	 * Returns the value of the '<em><b>Project</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project</em>' reference isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project</em>' containment reference.
-	 * @see #setProject(Project)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Project()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	Project getProject();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em>Project</em>}'
-	 * containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * Adds a file to this project space. The file will be uploaded to the
+	 * EMFStore upon a commit. As long as the file is not yet committed, it can
+	 * be removed by first retrieving the {@link FileInformation} via {@link #getFileInfo(FileIdentifier)} and then
+	 * remove it via {@link FileInformation#cancelPendingUpload()}.
 	 * 
-	 * @param value the new value of the '<em>Project</em>' containment reference.
-	 * @see #getProject()
-	 * @generated
+	 * @param file
+	 *            to be added to the project space
+	 * @return The file identifier the file was assigned to. This identifier can be
+	 *         used to retrieve the file later on
+	 * @throws FileTransferException
+	 *             if any error occurs
+	 * 
+	 * @generated NOT
 	 */
-	void setProject(Project value);
+	FileIdentifier addFile(File file) throws FileTransferException;
 
 	/**
-	 * Returns the value of the '<em><b>Project Id</b></em>' containment reference.
+	 * Adds a list of operations to this project space.
+	 * 
+	 * @param operations
+	 *            the list of operations to be added
+	 * 
+	 * @generated NOT
+	 */
+	void addOperations(List<? extends AbstractOperation> operations);
+
+	/**
+	 * Adds a tag to the specified version of this project.
+	 * 
+	 * @param versionSpec
+	 *            the versionSpec
+	 * @param tag
+	 *            the tag
+	 * @throws EmfStoreException
+	 *             if exception occurs on the server
+	 * 
+	 * @generated NOT
+	 */
+	void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
+
+	/**
+	 * Begin a composite operation on the projectSpace.
+	 * 
+	 * @return a handle to abort or complete the operation
+	 * 
+	 * @generated NOT
+	 */
+	CompositeOperationHandle beginCompositeOperation();
+
+	/**
+	 * TODO
+	 * 
+	 * @param logMessage
+	 * @param callback
+	 * @param monitor
+	 * 
+	 * @generated NOT
+	 */
+	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
+		throws EmfStoreException;
+
+	/**
+	 * Export all local changes to a file with the given name.
+	 * 
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             if writing to the given file fails
+	 * 
+	 * @generated NOT
+	 */
+	void exportLocalChanges(String fileName) throws IOException;
+
+	/**
+	 * Export a project to a file with the given name.
+	 * 
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             if writing to the given file fails
+	 * 
+	 * @generated NOT
+	 */
+	void exportProject(String fileName) throws IOException;
+
+	/**
+	 * Returns the value of the '<em><b>Base Version</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
+	 * If the meaning of the '<em>Base Version</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Id</em>' containment reference.
-	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectId()
+	 * @return the value of the '<em>Base Version</em>' containment reference.
+	 * @see #setBaseVersion(PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_BaseVersion()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
-	ProjectId getProjectId();
+	PrimaryVersionSpec getBaseVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
-	 * <em>Project Id</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Project Id</em>' containment reference.
-	 * @see #getProjectId()
-	 * @generated
-	 */
-	void setProjectId(ProjectId value);
-
-	/**
-	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Name</em>' attribute.
-	 * @see #setProjectName(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectName()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getProjectName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
-	 * <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Project Name</em>' attribute.
-	 * @see #getProjectName()
-	 * @generated
-	 */
-	void setProjectName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Project Description</b></em>' attribute.
+	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Description</em>' attribute isn't clear, there really should be more of a
+	 * If the meaning of the '<em>Changed Shared Properties</em>' map isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Description</em>' attribute.
-	 * @see #setProjectDescription(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectDescription()
-	 * @model required="true"
+	 * @return the value of the '<em>Changed Shared Properties</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
+	 * @model mapType="org.eclipse.emf.emfstore.common.model.PropertyMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.common.model.EMFStoreProperty>"
 	 * @generated
 	 */
-	String getProjectDescription();
+	EMap<String, EMFStoreProperty> getChangedSharedProperties();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
-	 * <em>Project Description</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Project Description</em>' attribute.
-	 * @see #getProjectDescription()
-	 * @generated
-	 */
-	void setProjectDescription(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
+	 * Returns the value of the '<em><b>Workspace</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear, there really should be more of a
+	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Events</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Events()
-	 * @model containment="true" resolveProxies="true"
+	 * @return the value of the '<em>Workspace</em>' container reference.
+	 * @see #setWorkspace(Workspace)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Workspace()
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
+	 * @model opposite="projectSpaces" transient="false"
 	 * @generated
 	 */
-	EList<Event> getEvents();
+	Workspace getWorkspace();
 
 	/**
-	 * Returns the value of the '<em><b>Usersession</b></em>' reference. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Usersession</em>' reference isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Usersession</em>' reference.
-	 * @see #setUsersession(Usersession)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Usersession()
-	 * @model
+	 * @param value the new value of the '<em>Workspace</em>' container reference.
+	 * @see #getWorkspace()
 	 * @generated
 	 */
-	Usersession getUsersession();
+	void setWorkspace(Workspace value);
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
-	 * <em>Usersession</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Usersession</em>' reference.
-	 * @see #getUsersession()
-	 * @generated
+	 * @return a list of the change packages between two PrimarySpecVersions.
+	 * @param sourceVersion
+	 *            the source version spec
+	 * @param targetVersion
+	 *            the target version spec
+	 * @throws EmfStoreException
+	 *             if any error in the EmfStore occurs
+	 * @generated NOT
 	 */
-	void setUsersession(Usersession value);
+	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws EmfStoreException;
+
+	/**
+	 * Gets a file with a specific identifier. If the file is not cached
+	 * locally, it is tried to download the file if a connection to the sever
+	 * exists. If the file cannot be found locally and not on the server (or the
+	 * server isn't reachable), a FileTransferException is thrown. Such an
+	 * exception is also thrown if other errors occur while trying to download
+	 * the file. The method returns not the file itself, because it does not
+	 * block in case of downloading the file. Instead, it returns a status
+	 * object which can be queried for the status of the download. Once the
+	 * download is finished ( status.isFinished() ), the file can be retrieved
+	 * from this status object by calling status.getTransferredFile().
+	 * 
+	 * @param fileIdentifier
+	 *            file identifier string.
+	 * @return a status object that can be used to retrieve various information
+	 *         about the file.
+	 * @throws FileTransferException
+	 *             if any error occurs retrieving the files
+	 * 
+	 * @generated NOT
+	 */
+	FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException;
+
+	/**
+	 * Gets the file information for a specific file identifier. This file
+	 * information can be used to access further details of a file (if it
+	 * exists, is cached, is a pending upload). It can also be used to alter the
+	 * file in limited ways (like removing a pending upload). The
+	 * FileInformation class is basically a facade to keep the interface in the
+	 * project space small (only getFileInfo) while still providing a rich
+	 * interface for files.
+	 * 
+	 * @param fileIdentifier
+	 *            the file identifier for which to get the information
+	 * @return the information for that identifier.
+	 * 
+	 * @generated NOT
+	 */
+	FileInformation getFileInfo(FileIdentifier fileIdentifier);
+
+	/**
+	 * Gets a list of history infos.
+	 * 
+	 * @see Workspace
+	 * @return a list of history infos
+	 * @throws EmfStoreException if server throws an exception
+	 * @generated NOT
+	 */
+	List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException;
 
 	/**
 	 * Returns the value of the '<em><b>Last Updated</b></em>' attribute. <!--
@@ -269,112 +312,39 @@ public interface ProjectSpace extends IdentifiableElement {
 	Date getLastUpdated();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
-	 * <em>Last Updated</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * Gathers all local operations and canonizes them.
 	 * 
-	 * @param value the new value of the '<em>Last Updated</em>' attribute.
-	 * @see #getLastUpdated()
-	 * @generated
-	 */
-	void setLastUpdated(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Base Version</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Base Version</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Base Version</em>' containment reference.
-	 * @see #setBaseVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_BaseVersion()
-	 * @model containment="true" resolveProxies="true" required="true"
-	 * @generated
-	 */
-	PrimaryVersionSpec getBaseVersion();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
-	 * <em>Base Version</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Base Version</em>' containment reference.
-	 * @see #getBaseVersion()
-	 * @generated
-	 */
-	void setBaseVersion(PrimaryVersionSpec value);
-
-	/**
-	 * Returns the value of the '<em><b>Resource Count</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Resource Count</em>' attribute isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Resource Count</em>' attribute.
-	 * @see #setResourceCount(int)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ResourceCount()
-	 * @model
-	 * @generated
-	 */
-	int getResourceCount();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
-	 * <em>Resource Count</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Resource Count</em>' attribute.
-	 * @see #getResourceCount()
-	 * @generated
-	 */
-	void setResourceCount(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Dirty</em>' attribute.
-	 * @see #setDirty(boolean)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Dirty()
-	 * @model
-	 * @generated
-	 */
-	boolean isDirty();
-
-	/**
-	 * Determines whether the project is up to date, that is, whether the base revision and the head revision are equal.
-	 * 
-	 * @return true, if the project is up to date, false otherwise
-	 * @throws EmfStoreException if the head revision can not be resolved
+	 * @param canonized
+	 *            true if the operations should be canonized
+	 * @return the list of operations
 	 * 
 	 * @generated NOT
 	 */
-	boolean isUpdated() throws EmfStoreException;
+	ChangePackage getLocalChangePackage(boolean canonized);
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em>Dirty</em>}'
-	 * attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Dirty</em>' attribute.
-	 * @see #isDirty()
+	 * Returns the value of the '<em><b>Local Operations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local Operations</em>' containment reference isn't clear, there really should be more
+	 * of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local Operations</em>' containment reference.
+	 * @see #setLocalOperations(OperationComposite)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LocalOperations()
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	void setDirty(boolean value);
+	OperationComposite getLocalOperations();
+
+	/**
+	 * @return modified model elements cache. This is class clients (e.g. dirty
+	 *         decorator) can ask to see if a model element has been modified.
+	 * 
+	 * @generated NOT
+	 */
+	ModifiedModelElementsCache getModifiedModelElementsCache();
 
 	/**
 	 * Returns the value of the '<em><b>Old Log Messages</b></em>' attribute
@@ -394,109 +364,146 @@ public interface ProjectSpace extends IdentifiableElement {
 	EList<String> getOldLogMessages();
 
 	/**
-	 * Returns the value of the '<em><b>Local Operations</b></em>' containment reference.
+	 * Get the {@link OperationManager} for this {@link ProjectSpace}.
+	 * 
+	 * @return the operation manager
+	 * @generated NOT
+	 */
+	OperationManager getOperationManager();
+
+	/**
+	 * Return the list of operations that have already been performed on the
+	 * project space.
+	 * 
+	 * @return a list of operations
+	 * @generated NOT
+	 */
+	List<AbstractOperation> getOperations();
+
+	/**
+	 * Returns the value of the '<em><b>Project</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Local Operations</em>' containment reference isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Project</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Local Operations</em>' containment reference.
-	 * @see #setLocalOperations(OperationComposite)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LocalOperations()
+	 * @return the value of the '<em>Project</em>' containment reference.
+	 * @see #setProject(Project)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Project()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	OperationComposite getLocalOperations();
+	Project getProject();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
-	 * <em>Local Operations</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Local Operations</em>' containment reference.
-	 * @see #getLocalOperations()
-	 * @generated
-	 */
-	void setLocalOperations(OperationComposite value);
-
-	/**
-	 * Returns the value of the '<em><b>Notifications</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.notification.ESNotification}.
+	 * Returns the value of the '<em><b>Project Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Notifications</em>' reference list isn't clear, there really should be more of a
+	 * If the meaning of the '<em>Project Description</em>' attribute isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Notifications</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Notifications()
-	 * @model containment="true" resolveProxies="true"
+	 * @return the value of the '<em>Project Description</em>' attribute.
+	 * @see #setProjectDescription(String)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectDescription()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<ESNotification> getNotifications();
+	String getProjectDescription();
 
 	/**
-	 * Returns the value of the '<em><b>Event Composite</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Project Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Event Composite</em>' containment reference isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Project Id</em>' containment reference.
+	 * @see #setProjectId(ProjectId)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectId()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 * @generated
+	 */
+	ProjectId getProjectId();
+
+	/**
+	 * Get a project info for the project space.
+	 * 
+	 * @return a project info
+	 * 
+	 * @generated NOT
+	 */
+	ProjectInfo getProjectInfo();
+
+	/**
+	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Event Composite</em>' containment reference.
-	 * @see #setEventComposite(EventComposite)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_EventComposite()
-	 * @model containment="true" resolveProxies="true"
+	 * @return the value of the '<em>Project Name</em>' attribute.
+	 * @see #setProjectName(String)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectName()
+	 * @model required="true"
 	 * @generated
 	 */
-	EventComposite getEventComposite();
+	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
-	 * <em>Event Composite</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Event Composite</em>' containment reference.
-	 * @see #getEventComposite()
-	 * @generated
-	 */
-	void setEventComposite(EventComposite value);
-
-	/**
-	 * Returns the value of the '<em><b>Notification Composite</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Properties</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Notification Composite</em>' containment reference isn't clear, there really should be
-	 * more of a description here...
+	 * If the meaning of the '<em>Properties</em>' map isn't clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Properties()
+	 * @model mapType="org.eclipse.emf.emfstore.common.model.PropertyMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.common.model.EMFStoreProperty>"
+	 * @generated
+	 */
+	EMap<String, EMFStoreProperty> getProperties();
+
+	/**
+	 * @param name
+	 *            the name of the property
+	 * @return the string value of the property or null if it doesn't exist
+	 * @throws PropertyNotFoundException
+	 *             if no property exists for this key
+	 * @generated NOT
+	 */
+	OrgUnitProperty getProperty(PropertyKey name) throws PropertyNotFoundException;
+
+	/**
+	 * Get the {@link PropertyManager} for this {@link ProjectSpace}.
+	 * 
+	 * @return the property manager
+	 * @generated NOT
+	 */
+	PropertyManager getPropertyManager();
+
+	/**
+	 * Returns the value of the '<em><b>Usersession</b></em>' reference. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Usersession</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Notification Composite</em>' containment reference.
-	 * @see #setNotificationComposite(NotificationComposite)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_NotificationComposite()
-	 * @model containment="true" resolveProxies="true"
+	 * @return the value of the '<em>Usersession</em>' reference.
+	 * @see #setUsersession(Usersession)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Usersession()
+	 * @model
 	 * @generated
 	 */
-	NotificationComposite getNotificationComposite();
-
-	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
-	 * <em>Notification Composite</em>}' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Notification Composite</em>'
-	 *            containment reference.
-	 * @see #getNotificationComposite()
-	 * @generated
-	 */
-	void setNotificationComposite(NotificationComposite value);
+	Usersession getUsersession();
 
 	/**
 	 * Returns the value of the '<em><b>Waiting Uploads</b></em>' containment
@@ -517,69 +524,307 @@ public interface ProjectSpace extends IdentifiableElement {
 	EList<FileIdentifier> getWaitingUploads();
 
 	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty},
-	 * <!-- begin-user-doc -->
+	 * @return if the the property is set.
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @generated NOT
+	 */
+	boolean hasProperty(PropertyKey key);
+
+	/**
+	 * Import changes from a file.
+	 * 
+	 * @param fileName
+	 *            the file name to import from
+	 * @throws IOException
+	 *             if file access fails
+	 * @generated NOT
+	 */
+	void importLocalChanges(String fileName) throws IOException;
+
+	/**
+	 * Initialize the project space and its resources.
+	 * 
+	 * @generated NOT
+	 */
+	void init();
+
+	/**
+	 * Initialize the resources of the project space.
+	 * 
+	 * @param resourceSet
+	 *            the resource set the project space should use
+	 * @generated NOT
+	 */
+	void initResources(ResourceSet resourceSet);
+
+	/**
+	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Properties</em>' map isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Properties</em>' map.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Properties()
-	 * @model mapType=
-	 *        "org.eclipse.emf.emfstore.common.model.PropertyMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.common.model.EMFStoreProperty>"
+	 * @return the value of the '<em>Dirty</em>' attribute.
+	 * @see #setDirty(boolean)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Dirty()
+	 * @model
 	 * @generated
 	 */
-	EMap<String, EMFStoreProperty> getProperties();
+	boolean isDirty();
 
 	/**
-	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty},
+	 * Shows whether projectSpace is transient.
+	 * 
+	 * @return true, if transient.
+	 * 
+	 * @generated NOT
+	 */
+	boolean isTransient();
+
+	/**
+	 * Determines whether the project is up to date, that is, whether the base revision and the head revision are equal.
+	 * 
+	 * @return true, if the project is up to date, false otherwise
+	 * @throws EmfStoreException if the head revision can not be resolved
+	 * 
+	 * @generated NOT
+	 */
+	boolean isUpdated() throws EmfStoreException;
+
+	/**
+	 * Will make the projectSpace transient, it will not make its content or
+	 * changes persistent. Can only be called before the resources or the
+	 * project space have been initialized.
+	 * 
+	 * @generated NOT
+	 */
+	void makeTransient();
+
+	/**
+	 * Merge the changes from current base version to given target version with
+	 * the local operations.
+	 * 
+	 * @param target
+	 *            target version
+	 * @param conflictResolver
+	 *            a conflict resolver that will actually perform the conflict
+	 *            resolution
+	 * @throws EmfStoreException
+	 *             if the conncection to the server fails
+	 * 
+	 * @generated NOT
+	 */
+	boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
+
+	/**
+	 * Removes a tag to the specified version of this project.
+	 * 
+	 * @param versionSpec
+	 *            the versionSpec
+	 * @param tag
+	 *            the tag
+	 * @throws EmfStoreException
+	 *             if exception occurs on the server
+	 * 
+	 * @generated NOT
+	 */
+	void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
+
+	/**
+	 * Resolve the url to a model element.
+	 * 
+	 * @param modelElementUrlFragment
+	 *            the url
+	 * @return the model element
+	 * @throws MEUrlResolutionException
+	 *             if model element does not exist in project.
+	 * @generated NOT
+	 */
+	EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException;
+
+	/**
+	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
+	 * 
+	 * @param versionSpec
+	 *            the spec to resolve
+	 * @return the primary version spec <!-- end-user-doc -->
+	 * @throws EmfStoreException
+	 *             if resolving fails
+	 * @model
+	 * @generated NOT
+	 */
+	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec) throws EmfStoreException;
+
+	/**
+	 * Revert all local changes in the project space. Returns the state of the
+	 * project to that of the project space base version.
+	 * 
+	 * @generated NOT
+	 */
+	void revert();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion <em>Base Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Base Version</em>' containment reference.
+	 * @see #getBaseVersion()
+	 * @generated
+	 */
+	void setBaseVersion(PrimaryVersionSpec value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource Count</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Changed Shared Properties</em>' map isn't clear, there really should be more of a
+	 * If the meaning of the '<em>Resource Count</em>' attribute isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Changed Shared Properties</em>' map.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
-	 * @model mapType=
-	 *        "org.eclipse.emf.emfstore.common.model.PropertyMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.common.model.EMFStoreProperty>"
+	 * @return the value of the '<em>Resource Count</em>' attribute.
+	 * @see #setResourceCount(int)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ResourceCount()
+	 * @model
 	 * @generated
 	 */
-	EMap<String, EMFStoreProperty> getChangedSharedProperties();
+	int getResourceCount();
 
 	/**
-	 * TODO
-	 * 
-	 * @param logMessage
-	 * @param callback
-	 * @param monitor
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount <em>Resource Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource Count</em>' attribute.
+	 * @see #getResourceCount()
+	 * @generated
 	 */
-	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
-		throws EmfStoreException;
+	void setResourceCount(int value);
 
 	/**
-	 * A change package will be finally send to the server and a new revision
-	 * will be created.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dirty</em>' attribute.
+	 * @see #isDirty()
+	 * @generated
+	 */
+	void setDirty(boolean value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated <em>Last Updated</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Last Updated</em>' attribute.
+	 * @see #getLastUpdated()
+	 * @generated
+	 */
+	void setLastUpdated(Date value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations <em>Local Operations</em>}' containment reference.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Local Operations</em>' containment reference.
+	 * @see #getLocalOperations()
+	 * @generated
+	 */
+	void setLocalOperations(OperationComposite value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em>Project</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Project</em>' containment reference.
+	 * @see #getProject()
+	 * @generated
+	 */
+	void setProject(Project value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription <em>Project Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Project Description</em>' attribute.
+	 * @see #getProjectDescription()
+	 * @generated
+	 */
+	void setProjectDescription(String value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Project Id</em>' containment reference.
+	 * @see #getProjectId()
+	 * @generated
+	 */
+	void setProjectId(ProjectId value);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Project Name</em>' attribute.
+	 * @see #getProjectName()
+	 * @generated
+	 */
+	void setProjectName(String value);
+
+	/**
+	 * Sets a new OrgUnitProperty for the current user.
 	 * 
-	 * @param changePackage
-	 *            the change package that should be committed
-	 * @param logMessage
-	 *            a log message that is associated with this commit
-	 * @param commitObserver
-	 *            an observer that is notified about the changes being send to
-	 *            the server
-	 * @return the new base version
+	 * @param property
+	 *            the new property
+	 * @generated NOT
+	 */
+	void setProperty(OrgUnitProperty property);
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession <em>Usersession</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Usersession</em>' reference.
+	 * @see #getUsersession()
+	 * @generated
+	 */
+	void setUsersession(Usersession value);
+
+	/**
+	 * Shares this project space.
+	 * 
 	 * @throws EmfStoreException
-	 *             if any error in the EmfStore occurs
+	 *             if an error occurs during the sharing of the project
 	 */
-	PrimaryVersionSpec finalizeCommit(ChangePackage changePackage, LogMessage logMessage, CommitObserver commitObserver)
-		throws EmfStoreException;
+	public void shareProject() throws EmfStoreException;
+
+	/**
+	 * Shares this project space.
+	 * 
+	 * @param session
+	 *            the {@link Usersession} that should be used for sharing the project
+	 * @param monitor
+	 *            an instance of an {@link IProgressMonitor}
+	 * 
+	 * @throws EmfStoreException
+	 *             if an error occurs during the sharing of the project
+	 */
+	public void shareProject(Usersession session, IProgressMonitor monitor) throws EmfStoreException;
+
+	/**
+	 * Transmit the OrgUnitproperties to the server.
+	 * 
+	 * @generated NOT
+	 */
+	void transmitProperties();
+
+	/**
+	 * Undo the last operation of the projectSpace.
+	 * 
+	 * @generated NOT
+	 */
+	void undoLastOperation();
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the head version.
@@ -609,24 +854,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * Update the workspace to the given revision.
 	 * 
 	 * @param version
-	 *            the version to update to
-	 * @param observer
-	 *            an observer that is notified of the changes performed by the
-	 *            update, maybe null
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if the update fails
-	 * @throws ChangeConflictException
-	 *             if a conflict with local changes is detected
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec update(VersionSpec version, UpdateObserver observer) throws EmfStoreException,
-		ChangeConflictException;
-
-	/**
-	 * Update the workspace to the given revision.
-	 * 
-	 * @param version
 	 *            the {@link VersionSpec} to update to
 	 * @param callback
 	 *            the {@link UpdateCallback} that will be called when the update has been performed
@@ -634,359 +861,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
 	 * @generated NOT
 	 */
-	void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) throws EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
-	 * 
-	 * @param versionSpec
-	 *            the spec to resolve
-	 * @return the primary version spec <!-- end-user-doc -->
-	 * @throws EmfStoreException
-	 *             if resolving fails
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec) throws EmfStoreException;
-
-	/**
-	 * Initialize the resources of the project space.
-	 * 
-	 * @param resourceSet
-	 *            the resource set the project space should use
-	 */
-	void initResources(ResourceSet resourceSet);
-
-	/**
-	 * Export a project to a file with the given name.
-	 * 
-	 * @param fileName
-	 *            the file name
-	 * @throws IOException
-	 *             if writing to the given file fails
-	 */
-	void exportProject(String fileName) throws IOException;
-
-	/**
-	 * Export all local changes to a file with the given name.
-	 * 
-	 * @param fileName
-	 *            the file name
-	 * @throws IOException
-	 *             if writing to the given file fails
-	 */
-	void exportLocalChanges(String fileName) throws IOException;
-
-	/**
-	 * Import changes from a file.
-	 * 
-	 * @param fileName
-	 *            the file name to import from
-	 * @throws IOException
-	 *             if file access fails
-	 */
-	void importLocalChanges(String fileName) throws IOException;
-
-	/**
-	 * Undo the last operation of the projectSpace.
-	 */
-	void undoLastOperation();
-
-	/**
-	 * Add an event to the project space. Will be transfered to server on next
-	 * commit.
-	 * 
-	 * @param event
-	 *            the event
-	 */
-	void addEvent(Event event);
-
-	/**
-	 * @return a list of the change packages between two PrimarySpecVersions.
-	 * @param sourceVersion
-	 *            the source version spec
-	 * @param targetVersion
-	 *            the target version spec
-	 * @throws EmfStoreException
-	 *             if any error in the EmfStore occurs
-	 * @generated NOT
-	 */
-	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws EmfStoreException;
-
-	/**
-	 * Adds a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 */
-	void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
-
-	/**
-	 * Removes a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 */
-	void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
-
-	/**
-	 * Return the list of operations that have already been performed on the
-	 * project space.
-	 * 
-	 * @return a list of operations
-	 * @generated NOT
-	 */
-	List<AbstractOperation> getOperations();
-
-	/**
-	 * Initialize the project space and its resources.
-	 */
-	void init();
-
-	/**
-	 * Revert all local changes in the project space. Returns the state of the
-	 * project to that of the project space base version.
-	 */
-	void revert();
-
-	/**
-	 * Resolve the url to a model element.
-	 * 
-	 * @param modelElementUrlFragment
-	 *            the url
-	 * @return the model element
-	 * @throws MEUrlResolutionException
-	 *             if model element does not exist in project.
-	 */
-	EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException;
-
-	/**
-	 * Get a project info for the project space.
-	 * 
-	 * @return a project info
-	 */
-	ProjectInfo getProjectInfo();
-
-	/**
-	 * Will make the projectSpace transient, it will not make its content or
-	 * changes persistent. Can only be called before the resources or the
-	 * project space have been initialized.
-	 */
-	void makeTransient();
-
-	/**
-	 * Apply the merge result to the project space. Will revert all previous
-	 * change and apply the given result.
-	 * 
-	 * @param mergeResult
-	 *            a list of operations resulting from a merge
-	 * @param mergeTargetSpec
-	 *            the target spec to merge to
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 */
-	void applyMergeResult(List<AbstractOperation> mergeResult, VersionSpec mergeTargetSpec) throws EmfStoreException;
-
-	/**
-	 * Begin a composite operation on the projectSpace.
-	 * 
-	 * @return a handle to abort or complete the operation
-	 */
-	CompositeOperationHandle beginCompositeOperation();
-
-	/**
-	 * Add a commit observer to the project space.
-	 * 
-	 * @param observer
-	 *            a project commit observer
-	 */
-	void addCommitObserver(CommitObserver observer);
-
-	void addOperations(List<? extends AbstractOperation> operations);
-
-	/**
-	 * Remove a commit observer from the project space.
-	 * 
-	 * @param observer
-	 *            a project commit observer
-	 */
-	void removeCommitObserver(CommitObserver observer);
-
-	/**
-	 * Gathers all local operations and canonizes them.
-	 * 
-	 * @param canonized
-	 *            true if the operations should be canonized
-	 * @return the list of operations
-	 */
-	ChangePackage getLocalChangePackage(boolean canonized);
-
-	/**
-	 * @return modified model elements cache. This is class clients (e.g. dirty
-	 *         decorator) can ask to see if a model element has been modified.
-	 */
-	ModifiedModelElementsCache getModifiedModelElementsCache();
-
-	/**
-	 * Adds an OperationListener to list of operation listeners.
-	 * OperationListeners are informed when ever an operation is executed or
-	 * undone.
-	 * 
-	 * @param operationListener
-	 *            operation listener
-	 */
-	// void addOperationListener(OperationListener operationListener);
-
-	/**
-	 * @param name
-	 *            the name of the property
-	 * @return the string value of the property or null if it doesn't exist
-	 * @throws PropertyNotFoundException
-	 *             if no property exists for this key
-	 * @generated NOT
-	 */
-	OrgUnitProperty getProperty(PropertyKey name) throws PropertyNotFoundException;
-
-	/**
-	 * Sets a new OrgUnitProperty for the current user.
-	 * 
-	 * @param property
-	 *            the new property
-	 * @generated NOT
-	 */
-	void setProperty(OrgUnitProperty property);
-
-	/**
-	 * @return if the the property is set.
-	 * @param key
-	 *            the property key.
-	 */
-	boolean hasProperty(PropertyKey key);
-
-	/**
-	 * Return all notifications that have been generated for this project space.
-	 * 
-	 * @return a list of notifications ordered by time
-	 */
-	List<ESNotification> getNotificationsFromComposite();
-
-	/**
-	 * Removes an operatoin listener.
-	 * 
-	 * @param operationListner
-	 *            operation listener
-	 */
-	// void removeOperationListener(OperationListener operationListner);
-
-	/**
-	 * Transmit the OrgUnitproperties to the server.
-	 * 
-	 * @generated NOT
-	 */
-	void transmitProperties();
-
-	/**
-	 * Merge the changes from current base version to given target version with
-	 * the local operations.
-	 * 
-	 * @param target
-	 *            target version
-	 * @param conflictResolver
-	 *            a conflict resolver that will actually perform the conflict
-	 *            resolution
-	 * @throws EmfStoreException
-	 *             if the conncection to the server fails
-	 */
-	boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
-
-	/**
-	 * Shows whether projectSpace is transient.
-	 * 
-	 * @return true, if transient.
-	 */
-	boolean isTransient();
-
-	/**
-	 * Adds a file to this project space. The file will be uploaded to the
-	 * EMFStore upon commiting. As long as the file is not committed yet, it can
-	 * be removed by calling .getFileInfo(id).removePendingUpload().
-	 * 
-	 * @param file
-	 *            to be added to the projectspace
-	 * @return file identifier the file was assigned. This identifier can be
-	 *         used to retrieve the file later
-	 * @throws FileTransferException
-	 *             if any error occurs
-	 */
-	FileIdentifier addFile(File file) throws FileTransferException;
-
-	/**
-	 * Gets a file with a specific identifier. If the file is not cached
-	 * locally, it is tried to download the file if a connection to the sever
-	 * exists. If the file cannot be found locally and not on the server (or the
-	 * server isn't reachable), a FileTransferException is thrown. Such an
-	 * exception is also thrown if other errors occur while trying to download
-	 * the file. The method returns not the file itself, because it does not
-	 * block in case of downloading the file. Instead, it returns a status
-	 * object which can be queried for the status of the download. Once the
-	 * download is finished ( status.isFinished() ), the file can be retrieved
-	 * from this status object by calling status.getTransferredFile().
-	 * 
-	 * @param fileIdentifier
-	 *            file identifier string.
-	 * @return a status object that can be used to retrieve various information
-	 *         about the file.
-	 * @throws FileTransferException
-	 *             if any error occurs retrieving the files
-	 */
-	FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException;
-
-	/**
-	 * Gets the file information for a specific file identifier. This file
-	 * information can be used to access further details of a file (if it
-	 * exists, is cached, is a pending upload). It can also be used to alter the
-	 * file in limited ways (like removing a pending upload). The
-	 * FileInformation class is basically a facade to keep the interface in the
-	 * project space small (only getFileInfo) while still providing a rich
-	 * interface for files.
-	 * 
-	 * @param fileIdentifier
-	 *            the file identifier for which to get the information
-	 * @return the information for that identifier.
-	 */
-	FileInformation getFileInfo(FileIdentifier fileIdentifier);
-
-	/**
-	 * Get the {@link PropertyManager} for this {@link ProjectSpace}.
-	 * 
-	 * @return the property manager
-	 * @generated NOT
-	 */
-	PropertyManager getPropertyManager();
-
-	/**
-	 * Get the {@link OperationManager} for this {@link ProjectSpace}.
-	 * 
-	 * @return the operation manager
-	 * @generated NOT
-	 */
-	OperationManager getOperationManager();
-
-	/**
-	 * Gets a list of history infos.
-	 * 
-	 * @see Workspace
-	 * @return a list of history infos
-	 * @throws EmfStoreException if server throws an exception
-	 * @generated NOT
-	 */
-	List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException;
+	PrimaryVersionSpec update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
+		throws EmfStoreException;
 } // ProjectContainer

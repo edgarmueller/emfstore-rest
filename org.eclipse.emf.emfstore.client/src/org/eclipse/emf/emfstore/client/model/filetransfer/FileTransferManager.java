@@ -16,7 +16,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
@@ -41,7 +41,7 @@ public class FileTransferManager {
 	/**
 	 * The associated project space.
 	 */
-	private ProjectSpaceImpl projectSpace;
+	private ProjectSpace projectSpace;
 
 	/**
 	 * Constructor that creates a file transfer manager for a specific project
@@ -50,7 +50,7 @@ public class FileTransferManager {
 	 * @param projectSpaceImpl
 	 *            the project space to which this transfer manager belongs
 	 */
-	public FileTransferManager(ProjectSpaceImpl projectSpaceImpl) {
+	public FileTransferManager(ProjectSpace projectSpaceImpl) {
 		cacheManager = new FileTransferCacheManager(projectSpaceImpl);
 		projectSpace = projectSpaceImpl;
 	}
@@ -318,7 +318,7 @@ public class FileTransferManager {
 	 * 
 	 * @return the project to which this file transfer manager belongs to
 	 */
-	ProjectSpaceImpl getProjectSpace() {
+	ProjectSpace getProjectSpace() {
 		return projectSpace;
 	}
 

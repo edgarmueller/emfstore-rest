@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -75,21 +76,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.PluginStartEvent;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces
- * <em>Project Spaces</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos
- * <em>Server Infos</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions
- * <em>Usersessions</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getActiveProjectSpace
- * <em>Active Project Space</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
@@ -100,10 +92,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	private ResourceSet workspaceResourceSet;
 
 	/**
-	 * The cached value of the '{@link #getProjectSpaces()
-	 * <em>Project Spaces</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getProjectSpaces() <em>Project Spaces</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getProjectSpaces()
 	 * @generated
 	 * @ordered
@@ -111,9 +102,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EList<ProjectSpace> projectSpaces;
 
 	/**
-	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getServerInfos()
 	 * @generated
 	 * @ordered
@@ -131,17 +121,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	protected EList<Usersession> usersessions;
 
-	/**
-	 * The cached value of the '{@link #getActiveProjectSpace()
-	 * <em>Active Project Space</em>}' reference. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @see #getActiveProjectSpace()
-	 * @generated
-	 * @ordered
-	 */
-	protected ProjectSpace activeProjectSpace;
-
 	// begin of custom code
 	/**
 	 * The current connection manager used to connect to the server(s).
@@ -156,7 +135,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -165,7 +143,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -175,20 +152,18 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<ProjectSpace> getProjectSpaces() {
 		if (projectSpaces == null) {
-			projectSpaces = new EObjectContainmentEList.Resolving<ProjectSpace>(ProjectSpace.class, this,
-				ModelPackage.WORKSPACE__PROJECT_SPACES);
+			projectSpaces = new EObjectContainmentWithInverseEList.Resolving<ProjectSpace>(ProjectSpace.class, this,
+				ModelPackage.WORKSPACE__PROJECT_SPACES, ModelPackage.PROJECT_SPACE__WORKSPACE);
 		}
 		return projectSpaces;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<ServerInfo> getServerInfos() {
@@ -201,7 +176,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Usersession> getUsersessions() {
@@ -213,43 +187,18 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ProjectSpace getActiveProjectSpace() {
-		if (activeProjectSpace != null && activeProjectSpace.eIsProxy()) {
-			InternalEObject oldActiveProjectSpace = (InternalEObject) activeProjectSpace;
-			activeProjectSpace = (ProjectSpace) eResolveProxy(oldActiveProjectSpace);
-			if (activeProjectSpace != oldActiveProjectSpace) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE, oldActiveProjectSpace, activeProjectSpace));
-			}
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ModelPackage.WORKSPACE__PROJECT_SPACES:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getProjectSpaces()).basicAdd(otherEnd, msgs);
 		}
-		return activeProjectSpace;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ProjectSpace basicGetActiveProjectSpace() {
-		return activeProjectSpace;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public void setActiveProjectSpace(ProjectSpace newActiveProjectSpace) {
-		ProjectSpace oldActiveProjectSpace = activeProjectSpace;
-		activeProjectSpace = newActiveProjectSpace;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE,
-				oldActiveProjectSpace, activeProjectSpace));
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo) throws EmfStoreException {
@@ -350,7 +299,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	// end of custom code
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -368,7 +316,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -380,17 +327,12 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return getServerInfos();
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return getUsersessions();
-		case ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE:
-			if (resolve)
-				return getActiveProjectSpace();
-			return basicGetActiveProjectSpace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -409,16 +351,12 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			getUsersessions().clear();
 			getUsersessions().addAll((Collection<? extends Usersession>) newValue);
 			return;
-		case ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE:
-			setActiveProjectSpace((ProjectSpace) newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -433,16 +371,12 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			getUsersessions().clear();
 			return;
-		case ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE:
-			setActiveProjectSpace((ProjectSpace) null);
-			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -454,8 +388,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return serverInfos != null && !serverInfos.isEmpty();
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return usersessions != null && !usersessions.isEmpty();
-		case ModelPackage.WORKSPACE__ACTIVE_PROJECT_SPACE:
-			return activeProjectSpace != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -742,63 +674,131 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		}.execute();
 	}
 
-	// TODO
-	public PrimaryVersionSpec resolveVersionSpec(Usersession usersession, VersionSpec versionSpec, ProjectId projectId)
-		throws EmfStoreException {
-		return null;
-	}
-
-	public List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
-		throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
-		return connectionManager.getHistoryInfo(usersession.getSessionId(), projectId, query);
-	}
-
-	// TODO
-	public AdminBroker getAdminBroker(Usersession usersession) throws EmfStoreException, AccessControlException {
-		return null;
-	}
-
-	// TODO
-	public void updateACUser(Usersession usersession) throws EmfStoreException {
-		// hm?
-		// ConnectionManager connectionManager = this.getWorkspaceManager().getConnectionManager();
-		// setACUser(connectionManager.resolveUser(getSessionId(), null));
-	}
-
-	// TODO
-	public void updateProjectInfos(Usersession usersession) {
-		// BEGIN SUPRESS CATCH EXCEPTION
-		// try {
-		// getServerInfo().getProjectInfos().clear();
-		// // TODO MK: is this correct?
-		// if (isLoggedIn()) {
-		// getServerInfo().getProjectInfos().addAll(getRemoteProjectList());
-		// }
-		// getWorkspaceManager().getCurrentWorkspace().save();
-		// } catch (EmfStoreException e) {
-		// WorkspaceUtil.logException(e.getMessage(), e);
-		// } catch (RuntimeException e) {
-		// WorkspaceUtil.logException(e.getMessage(), e);
-		// }
-		// // END SUPRESS CATCH EXCEPTION
-		// hm?
-	}
-
-	// TODO
-	public void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
-		throws EmfStoreException {
-		new ServerCall<Void>(usersession) {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#resolveVersionSpec(org.eclipse.emf.emfstore.client.model.Usersession,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
+	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
+	 */
+	public PrimaryVersionSpec resolveVersionSpec(final Usersession usersession, final VersionSpec versionSpec,
+		final ProjectId projectId) throws EmfStoreException {
+		return new ServerCall<PrimaryVersionSpec>() {
 
 			@Override
+			protected PrimaryVersionSpec run() throws EmfStoreException {
+				ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+				return connectionManager.resolveVersionSpec(usersession.getSessionId(), projectId, versionSpec);
+			}
+		}.execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getHistoryInfo(org.eclipse.emf.emfstore.client.model.Usersession,
+	 *      org.eclipse.emf.emfstore.server.model.ProjectId,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
+	 */
+	public List<HistoryInfo> getHistoryInfo(final Usersession usersession, final ProjectId projectId,
+		final HistoryQuery query) throws EmfStoreException {
+		return new ServerCall<List<HistoryInfo>>() {
+			@Override
+			protected List<HistoryInfo> run() throws EmfStoreException {
+				ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+				return connectionManager.getHistoryInfo(usersession.getSessionId(), projectId, query);
+			}
+		}.execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
+	public AdminBroker getAdminBroker(final Usersession usersession) throws EmfStoreException, AccessControlException {
+		return new ServerCall<AdminBroker>() {
+			@Override
+			protected AdminBroker run() throws EmfStoreException {
+				return new AdminBrokerImpl(usersession.getServerInfo(), usersession.getSessionId());
+			}
+		}.execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
+	public void updateACUser(Usersession usersession) throws EmfStoreException {
+		new ServerCall<Void>(usersession) {
+			@Override
 			protected Void run() throws EmfStoreException {
-				// TODO Auto-generated method stub
+				getUsersession().setACUser(getConnectionManager().resolveUser(getSessionId(), null));
 				return null;
 			}
 		}.execute();
 	}
 
-	// TODO
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateProjectInfos(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
+	public void updateProjectInfos(final Usersession usersession) throws EmfStoreException {
+		new ServerCall<Void>() {
+			@Override
+			protected Void run() throws EmfStoreException {
+				ServerInfo serverInfo = usersession.getServerInfo();
+				// BEGIN SUPRESS CATCH EXCEPTION
+				try {
+					serverInfo.getProjectInfos().clear();
+					if (getConnectionManager().isLoggedIn(usersession.getSessionId())) {
+						serverInfo.getProjectInfos().addAll(getRemoteProjectList(usersession));
+					}
+					WorkspaceManager.getInstance().getCurrentWorkspace().save();
+				} catch (EmfStoreException e) {
+					WorkspaceUtil.logException(e.getMessage(), e);
+				} catch (RuntimeException e) {
+					WorkspaceUtil.logException(e.getMessage(), e);
+				}
+				// END SUPRESS CATCH EXCEPTION
+				return null;
+			}
+		}.execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteRemoteProject(org.eclipse.emf.emfstore.client.model.Usersession,
+	 *      org.eclipse.emf.emfstore.server.model.ProjectId, boolean)
+	 */
+	public void deleteRemoteProject(final Usersession usersession, final ProjectId projectId, final boolean deleteFiles)
+		throws EmfStoreException {
+		new ServerCall<Void>(usersession) {
+			@Override
+			protected Void run() throws EmfStoreException {
+				getConnectionManager().deleteProject(getSessionId(), projectId, deleteFiles);
+				updateProjectInfos(getUsersession());
+				return null;
+			}
+		}.execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#createRemoteProject(java.lang.String, java.lang.String,
+	 *      org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
 	public ProjectInfo createRemoteProject(final String projectName, final String projectDescription,
 		Usersession usersession) throws EmfStoreException {
 		return new ServerCall<ProjectInfo>(usersession) {

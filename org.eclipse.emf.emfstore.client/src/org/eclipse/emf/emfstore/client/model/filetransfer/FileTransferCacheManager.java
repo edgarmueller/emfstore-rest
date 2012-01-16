@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
@@ -53,7 +52,7 @@ public class FileTransferCacheManager {
 	/**
 	 * The associated project space.
 	 */
-	private ProjectSpaceImpl projectSpace;
+	private ProjectSpace projectSpace;
 
 	/**
 	 * The cache folder, constructed from the identifier of the project space.
@@ -71,7 +70,7 @@ public class FileTransferCacheManager {
 	 * @param projectSpaceImpl
 	 *            the project space to which this cache belongs.
 	 */
-	public FileTransferCacheManager(ProjectSpaceImpl projectSpaceImpl) {
+	public FileTransferCacheManager(ProjectSpace projectSpaceImpl) {
 		this.projectSpace = projectSpaceImpl;
 		this.cacheFolder = new File(getCacheFolder(projectSpace));
 		this.tempCacheFolder = new File(cacheFolder, "temp");
