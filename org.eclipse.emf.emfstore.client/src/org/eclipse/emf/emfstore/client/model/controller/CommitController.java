@@ -5,7 +5,7 @@ import java.util.Date;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -20,7 +20,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	private LogMessage logMessage;
 	private CommitCallback callback;
 
-	public CommitController(ProjectSpaceImpl projectSpace, LogMessage logMessage, CommitCallback callback,
+	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, CommitCallback callback,
 		IProgressMonitor monitor) {
 		super(projectSpace);
 		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;

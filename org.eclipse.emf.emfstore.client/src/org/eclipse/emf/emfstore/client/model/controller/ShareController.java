@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 public class ShareController extends ServerCall<Void> {
 
-	public ShareController(ProjectSpaceImpl projectSpaceImpl, Usersession session, IProgressMonitor monitor) {
+	public ShareController(ProjectSpaceBase projectSpaceImpl, Usersession session, IProgressMonitor monitor) {
 		super(projectSpaceImpl);
 
 		// if session is null, session will be injected by sessionmanager

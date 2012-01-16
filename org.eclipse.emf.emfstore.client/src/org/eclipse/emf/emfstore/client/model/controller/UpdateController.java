@@ -8,7 +8,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -21,7 +21,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	private VersionSpec version;
 	private UpdateCallback callback;
 
-	public UpdateController(ProjectSpaceImpl projectSpace, VersionSpec version, UpdateCallback callback,
+	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, UpdateCallback callback,
 		IProgressMonitor progress) {
 		super(projectSpace);
 		/**

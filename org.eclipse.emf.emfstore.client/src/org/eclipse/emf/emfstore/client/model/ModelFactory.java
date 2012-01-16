@@ -24,8 +24,7 @@ public interface ModelFactory extends EFactory {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.client.model.impl.ModelFactoryImpl
-			.init();
+	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.client.model.impl.ModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Workspace</em>'.
@@ -74,22 +73,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	PendingFileTransfer createPendingFileTransfer();
-
-	/**
-	 * Returns a new object of class '<em>Event Composite</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Composite</em>'.
-	 * @generated
-	 */
-	EventComposite createEventComposite();
-
-	/**
-	 * Returns a new object of class '<em>Notification Composite</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return a new object of class '<em>Notification Composite</em>'.
-	 * @generated
-	 */
-	NotificationComposite createNotificationComposite();
 
 	/**
 	 * Returns the package supported by this factory.
