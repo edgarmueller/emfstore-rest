@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.observers;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.common.observer.IObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
@@ -19,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * 
  * @author shterev
  */
-// TODO Chain use ObserverBus and extends IObserver
-public interface CommitObserver {
+public interface CommitObserver extends IObserver {
 
 	/**
 	 * Called before the commit proceeds. A callback method to initiate the commit dialog and allow the user to confirm

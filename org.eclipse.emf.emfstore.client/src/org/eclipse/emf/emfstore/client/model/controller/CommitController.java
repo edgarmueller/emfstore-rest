@@ -3,9 +3,11 @@ package org.eclipse.emf.emfstore.client.model.controller;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -66,12 +68,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			// finally, no local changes
 		}
 
-		// TODO remove and replace by observerbus
-		getProjectSpace().notifyPreCommitObservers(changePackage);
-
-		// if (commitObserver != null && !commitObserver.inspectChanges(this, changePackage)) {
-		// throw new CommitCanceledException("Changes have been canceld by the user.");
-		// }
+		WorkspaceManager.getObserverBus().notify(CommitObserver.class).inspectChanges(getProjectSpace(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
 		if (!callback.inspectChanges(getProjectSpace(), changePackage) || getProgressMonitor().isCanceled()) {
@@ -86,7 +83,6 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Finalizing commit");
 		getProjectSpace().setBaseVersion(newBaseVersion);
 		getProjectSpace().getOperations().clear();
-		getProjectSpace().getEventsFromComposite().clear();
 
 		getProjectSpace().saveProjectSpaceOnly();
 
