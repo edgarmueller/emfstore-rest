@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
@@ -39,7 +39,7 @@ public abstract class FileTransferJob extends Job {
 	private SessionId sessionId;
 	private boolean canceled;
 
-	private final ProjectSpaceImpl projectSpace;
+	private final ProjectSpaceBase projectSpace;
 	private final FileTransferManager transferManager;
 	private final FileTransferCacheManager cache;
 	private final FileTransferInformation fileInformation;
@@ -181,7 +181,7 @@ public abstract class FileTransferJob extends Job {
 	 * 
 	 * @return the associated project space
 	 */
-	protected ProjectSpaceImpl getProjectSpace() {
+	protected ProjectSpaceBase getProjectSpace() {
 		return projectSpace;
 	}
 
