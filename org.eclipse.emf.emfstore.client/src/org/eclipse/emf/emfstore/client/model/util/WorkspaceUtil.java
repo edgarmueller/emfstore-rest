@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.model.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -21,16 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.model.Activator;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.events.CheckoutEvent;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.UpdateEvent;
 
 /**
  * Workspace utility class.
@@ -77,33 +70,6 @@ public final class WorkspaceUtil {
 		Activator activator = Activator.getDefault();
 		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), statusInt, message, exception);
 		activator.getLog().log(status);
-	}
-
-	/**
-	 * Log a checkout event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param baseVersion the base version that was checked out
-	 */
-	public static void logCheckout(ProjectSpace projectSpace, PrimaryVersionSpec baseVersion) {
-		CheckoutEvent checkoutEvent = EventsFactory.eINSTANCE.createCheckoutEvent();
-		checkoutEvent.setBaseVersion(ModelUtil.clone(baseVersion));
-		checkoutEvent.setTimestamp(new Date());
-	}
-
-	/**
-	 * Log a update event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param baseVersion the base version of the project space
-	 * @param targetVersion the target version to update to
-	 */
-	public static void logUpdate(ProjectSpace projectSpace, PrimaryVersionSpec baseVersion,
-		PrimaryVersionSpec targetVersion) {
-		UpdateEvent updateEvent = EventsFactory.eINSTANCE.createUpdateEvent();
-		updateEvent.setBaseVersion(ModelUtil.clone(baseVersion));
-		updateEvent.setTargetVersion(ModelUtil.clone(targetVersion));
-		updateEvent.setTimestamp(new Date());
 	}
 
 	/**
