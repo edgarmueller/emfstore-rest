@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.emfstore.server.model.versioning.events.*;
 import org.eclipse.emf.emfstore.server.model.versioning.events.AnnotationEvent;
 import org.eclipse.emf.emfstore.server.model.versioning.events.CheckoutEvent;
 import org.eclipse.emf.emfstore.server.model.versioning.events.DNDEvent;
