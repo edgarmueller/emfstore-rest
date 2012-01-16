@@ -240,22 +240,13 @@ public interface VersioningPackage extends EPackage {
 	int CHANGE_PACKAGE__LOG_MESSAGE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Notifications</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHANGE_PACKAGE__NOTIFICATIONS = 3;
-
-	/**
 	 * The feature id for the '<em><b>Version Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_PACKAGE__VERSION_PROPERTIES = 4;
+	int CHANGE_PACKAGE__VERSION_PROPERTIES = 3;
 
 	/**
 	 * The number of structural features of the '<em>Change Package</em>' class.
@@ -264,7 +255,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_PACKAGE_FEATURE_COUNT = 5;
+	int CHANGE_PACKAGE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl <em>History Info</em>}' class.
@@ -680,19 +671,6 @@ public interface VersioningPackage extends EPackage {
 	EReference getChangePackage_LogMessage();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getNotifications <em>Notifications</em>}'.
-	 * <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference list '<em>Notifications</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getNotifications()
-	 * @see #getChangePackage()
-	 * @generated
-	 */
-	EReference getChangePackage_Notifications();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getVersionProperties <em>Version Properties</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Version Properties</em>'.
@@ -1105,14 +1083,6 @@ public interface VersioningPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CHANGE_PACKAGE__LOG_MESSAGE = eINSTANCE.getChangePackage_LogMessage();
-
-		/**
-		 * The meta object literal for the '<em><b>Notifications</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CHANGE_PACKAGE__NOTIFICATIONS = eINSTANCE.getChangePackage_Notifications();
 
 		/**
 		 * The meta object literal for the '<em><b>Version Properties</b></em>' containment reference list feature. <!--

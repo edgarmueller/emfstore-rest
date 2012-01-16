@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionProperty;
@@ -47,7 +46,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.util.Operatio
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getLogMessage <em>Log Message</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getNotifications <em>Notifications</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getVersionProperties <em>Version Properties</em>}</li>
  * </ul>
  * </p>
@@ -81,16 +79,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * @ordered
 	 */
 	protected LogMessage logMessage;
-
-	/**
-	 * The cached value of the '{@link #getNotifications() <em>Notifications</em>}' containment reference list.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @see #getNotifications()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ESNotification> notifications;
 
 	/**
 	 * The cached value of the '{@link #getVersionProperties()
@@ -209,17 +197,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ESNotification> getNotifications() {
-		if (notifications == null) {
-			notifications = new EObjectContainmentEList.Resolving<ESNotification>(ESNotification.class, this, VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS);
-		}
-		return notifications;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<VersionProperty> getVersionProperties() {
 		if (versionProperties == null) {
 			versionProperties = new EObjectContainmentEList.Resolving<VersionProperty>(VersionProperty.class, this, VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES);
@@ -300,8 +277,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 				return basicSetLogMessage(null, msgs);
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
-				return ((InternalEList<?>)getNotifications()).basicRemove(otherEnd, msgs);
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				return ((InternalEList<?>)getVersionProperties()).basicRemove(otherEnd, msgs);
 		}
@@ -324,8 +299,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 				if (resolve) return getLogMessage();
 				return basicGetLogMessage();
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
-				return getNotifications();
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				return getVersionProperties();
 		}
@@ -351,10 +324,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 				setLogMessage((LogMessage)newValue);
 				return;
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
-				getNotifications().clear();
-				getNotifications().addAll((Collection<? extends ESNotification>)newValue);
-				return;
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				getVersionProperties().clear();
 				getVersionProperties().addAll((Collection<? extends VersionProperty>)newValue);
@@ -379,9 +348,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 				setLogMessage((LogMessage)null);
 				return;
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
-				getNotifications().clear();
-				return;
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				getVersionProperties().clear();
 				return;
@@ -402,8 +368,6 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 				return events != null && !events.isEmpty();
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 				return logMessage != null;
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
-				return notifications != null && !notifications.isEmpty();
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				return versionProperties != null && !versionProperties.isEmpty();
 		}

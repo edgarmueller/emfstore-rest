@@ -76,8 +76,6 @@
           eType="#//versioning/events/Event" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="logMessage" eType="#//versioning/LogMessage"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="notifications" upperBound="-1"
-          eType="#//notification/ESNotification" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="versionProperties" upperBound="-1"
           eType="#//versioning/VersionProperty" containment="true"/>
     </eClassifiers>
@@ -252,164 +250,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="Event">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ReadEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="readView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="MergeEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfConflicts"
-            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="localChanges" upperBound="-1"
-            eType="#//versioning/operations/AbstractOperation" containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="CheckoutEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ExceptionEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExceptionTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExceptionStackTrace"
-            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExceptionCauseTitle"
-            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExceptionCauseStackTrace"
-            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="PluginStartEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="pluginId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="UpdateEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="AnnotationEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="annotatedElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="RevertEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="revertedChangesCount"
-            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ShowHistoryEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" upperBound="-1"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="PerspectiveEvent" eSuperTypes="#//versioning/events/Event"/>
-      <eClassifiers xsi:type="ecore:EClass" name="DNDEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="dragSourceElement"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="dropTargetElement"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="LinkEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdNew" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TraceEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="NavigatorCreateEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="createdElement" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceSection" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="PluginFocusEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="pluginId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="PresentationSwitchEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="readView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="newPresentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="UndoEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//versioning/operations/AbstractOperation"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Validate" eSuperTypes="#//versioning/events/Event"/>
-      <eClassifiers xsi:type="ecore:EClass" name="ShowChangesEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="#//versioning/PrimaryVersionSpec"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="NotificationReadEvent" eSuperTypes="#//versioning/events/ReadEvent">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="notificationId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-            defaultValueLiteral=""/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="NotificationGenerationEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="notifications" upperBound="-1"
-            eType="#//notification/ESNotification" containment="true" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="NotificationIgnoreEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="notificationId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-            defaultValueLiteral=""/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="URLEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceModelElement"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceURL" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="MergeChoiceEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="myAcceptedChanges"
-            upperBound="-1" eType="#//versioning/operations/OperationId" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="theirRejectedChanges"
-            upperBound="-1" eType="#//versioning/operations/OperationId" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="contextModelElement"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-            containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="selection" eType="#//versioning/events/MergeChoiceSelection"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdIssueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="MergeChoiceSelection">
-        <eLiterals name="Mine"/>
-        <eLiterals name="Their" value="1"/>
-        <eLiterals name="Issue" value="2" literal="Issue"/>
-        <eLiterals name="MergedText" value="3" literal="MergedText"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="MergeGlobalChoiceEvent" eSuperTypes="#//versioning/events/Event">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="selection" eType="#//versioning/events/MergeGlobalChoiceSelection"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="MergeGlobalChoiceSelection">
-        <eLiterals name="AllMine" literal="AllMine"/>
-        <eLiterals name="AllTheir" value="1" literal="AllTheir"/>
-        <eLiterals name="Cancel" value="2"/>
-        <eLiterals name="OKNotFinished" value="3" literal="OKNotFinished"/>
-        <eLiterals name="OKFinished" value="4" literal="OKFinished"/>
-      </eClassifiers>
       <eSubpackages name="server" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/events/server/"
           nsPrefix="org.eclipse.emf.emfstore.server.model.versioning.events.server">
         <eClassifiers xsi:type="ecore:EClass" name="ServerEvent" abstract="true" eSuperTypes="#//versioning/events/Event"/>
@@ -484,26 +324,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="ProjectAdminRole" eSuperTypes="#//accesscontrol/roles/Role"/>
       <eClassifiers xsi:type="ecore:EClass" name="ServerAdmin" eSuperTypes="#//accesscontrol/roles/Role"/>
     </eSubpackages>
-  </eSubpackages>
-  <eSubpackages name="notification" nsURI="http://eclipse.org/emf/emfstore/server/model/notification"
-      nsPrefix="org.eclipse.emf.emfstore.server.model.notification">
-    <eClassifiers xsi:type="ecore:EClass" name="ESNotification" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="seen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sender" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="recipient" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//ProjectId"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedModelElements"
-          upperBound="-1" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedOperations" upperBound="-1"
-          eType="#//versioning/operations/OperationId" containment="true"/>
-    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="url" nsURI="http://eclipse.org/emf/emfstore/server/model/url"
       nsPrefix="org.eclipse.emf.emfstore.server.model.url">

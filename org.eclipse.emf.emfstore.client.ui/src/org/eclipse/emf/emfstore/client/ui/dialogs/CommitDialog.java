@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
-import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -59,7 +58,6 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	private String logMsg = "";
 	private ChangePackage changes;
 	private EList<String> oldLogMessages;
-	private HashMap<AbstractOperation, ArrayList<ESNotification>> operationsMap;
 	private ProjectSpace activeProjectSpace;
 	private HashMap<String, CommitDialogTray> trays;
 
@@ -172,10 +170,6 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		changesComposite.setInput(changePackages);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
 
-		operationsMap = new HashMap<AbstractOperation, ArrayList<ESNotification>>();
-		for (AbstractOperation op : changes.getOperations()) {
-			operationsMap.put(op, new ArrayList<ESNotification>());
-		}
 		return contents;
 
 	}
@@ -222,10 +216,6 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 
 		for (CommitDialogTray t : trays.values()) {
 			t.okPressed();
-		}
-		// add the newly created notifications to the change package
-		for (ArrayList<ESNotification> list : operationsMap.values()) {
-			changes.getNotifications().addAll(list);
 		}
 
 		super.okPressed();
