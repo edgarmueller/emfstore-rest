@@ -1328,14 +1328,5 @@
             name="ForceRevertRevision">
       </command>
    </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.eclipse.emf.emfstore.client.ui.EMFStorePerspective"
-            icon="icons/emfstore.png"
-            id="org.eclipse.emf.emfstore.client.ui.EMFStorePerspective"
-            name="EMFStore">
-      </perspective>
-   </extension>
 
 </plugin>
