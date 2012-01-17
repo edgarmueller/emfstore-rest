@@ -2,6 +2,7 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
@@ -23,6 +24,7 @@ public abstract class ServerCall<U> {
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
 	private U ret;
+	private ServerInfo serverInfo;
 
 	public ServerCall() {
 	}
@@ -37,6 +39,11 @@ public abstract class ServerCall<U> {
 		setProgressMonitor(null);
 	}
 
+	public ServerCall(ServerInfo serverInfo) {
+		this.serverInfo = serverInfo;
+		setProgressMonitor(null);
+	}
+
 	public ServerCall(Usersession usersession, IProgressMonitor monitor) {
 		this.usersession = usersession;
 		setProgressMonitor(monitor);
@@ -45,6 +52,19 @@ public abstract class ServerCall<U> {
 	public ServerCall(ProjectSpaceImpl projectSpace, IProgressMonitor monitor) {
 		this.projectSpace = projectSpace;
 		setProgressMonitor(monitor);
+	}
+
+	public ServerCall(ServerInfo serverInfo, IProgressMonitor monitor) {
+		this.serverInfo = serverInfo;
+		setProgressMonitor(monitor);
+	}
+
+	public ServerInfo getServerInfo() {
+		return serverInfo;
+	}
+
+	public void setServerInfo(ServerInfo serverInfo) {
+		this.serverInfo = serverInfo;
 	}
 
 	public void setUsersession(Usersession usersession) {

@@ -1286,7 +1286,7 @@
    <extension
          point="org.eclipse.emf.emfstore.client.sessionprovider">
       <sessionProvider
-            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginController">
+            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.DefaultSessionProvider">
       </sessionProvider>
    </extension>
    <extension

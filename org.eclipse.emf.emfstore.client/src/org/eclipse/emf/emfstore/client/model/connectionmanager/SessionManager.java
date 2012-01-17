@@ -4,7 +4,6 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.common.ExtensionPoint;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
@@ -21,8 +20,7 @@ public class SessionManager {
 		executeCall(serverCall, usersession, true);
 	}
 
-	private void loginUsersession(Usersession usersession, boolean force) throws AccessControlException,
-		EmfStoreException {
+	private void loginUsersession(Usersession usersession, boolean force) throws EmfStoreException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");
@@ -34,7 +32,6 @@ public class SessionManager {
 					// if login fails, let the session provider handle the rest
 					usersession.logIn();
 					return;
-				} catch (AccessControlException e) {
 				} catch (EmfStoreException e) {
 				}
 			}
@@ -61,7 +58,7 @@ public class SessionManager {
 		}
 	}
 
-	private Usersession prepareUsersession(ServerCall<?> serverCall) {
+	private Usersession prepareUsersession(ServerCall<?> serverCall) throws EmfStoreException {
 		Usersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
 			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());
@@ -69,7 +66,8 @@ public class SessionManager {
 
 		if (usersession == null) {
 			SessionProvider sessionProvider = getSessionProvider();
-			usersession = sessionProvider.provideUsersession();
+			// serverinfo hint
+			usersession = sessionProvider.provideUsersession(serverCall.getServerInfo());
 		}
 		serverCall.setUsersession(usersession);
 		return usersession;
