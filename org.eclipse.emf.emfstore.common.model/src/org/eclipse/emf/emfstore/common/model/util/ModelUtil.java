@@ -877,46 +877,6 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Removes the the given {@link EObject} and all its contained children from
-	 * their respective {@link XMIResource}s.
-	 * 
-	 * @param eObject
-	 *            the {@link EObject} to remove
-	 */
-	public static void removeModelElementAndChildrenFromResource(XMIResource res, EObject eObject) {
-		Set<EObject> children = getAllContainedModelElements(eObject, false);
-		for (EObject child : children) {
-			removeModelElementFromResource(res, child);
-		}
-		removeModelElementFromResource(res, eObject);
-	}
-
-	/**
-	 * Removes the the given {@link EObject} from its {@link XMIResource}.
-	 * 
-	 * @param xmiResource
-	 *            the {@link EObject}'s resource
-	 * @param eObject
-	 *            the {@link EObject} to remove
-	 */
-	private static void removeModelElementFromResource(XMIResource xmiResource, EObject eObject) {
-
-		if (xmiResource == null || xmiResource.getURI() == null) {
-			return;
-		}
-
-		EcoreUtil.delete(eObject);
-		xmiResource.setID(eObject, null);
-
-		try {
-			xmiResource.save(null);
-		} catch (IOException e) {
-			throw new RuntimeException("XMI Resource for model element " + eObject + " could not be saved. "
-				+ "Reason: " + e.getMessage());
-		}
-	}
-
-	/**
 	 * Delete all incoming cross references to the given model element from any
 	 * other model element in the given project.
 	 * 
@@ -929,7 +889,7 @@ public final class ModelUtil {
 			EStructuralFeature eStructuralFeature = setting.getEStructuralFeature();
 			EReference reference = (EReference) eStructuralFeature;
 
-			if (reference.isContainer() || reference.isContainment() || reference.isChangeable()) {
+			if (reference.isContainer() || reference.isContainment() || !reference.isChangeable()) {
 				continue;
 			}
 
@@ -1180,5 +1140,36 @@ public final class ModelUtil {
 		}
 
 		return false;
+	}
+
+	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
+
+		Map<EObject, ModelElementId> idMap = new HashMap<EObject, ModelElementId>();
+
+		Project project = getProject(originalObject);
+		if (project == null) {
+			throw new IllegalArgumentException("EObject is not contained in a project.");
+		}
+
+		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(originalObject, false);
+		allContainedModelElements.add(originalObject);
+		// EObject copiedElement = EcoreUtil.copy(originalObject);
+		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
+			false);
+		copiedAllContainedModelElements.add(copiedObject);
+
+		for (int i = 0; i < allContainedModelElements.size(); i++) {
+			EObject child = allContainedModelElements.get(i);
+			EObject copiedChild = copiedAllContainedModelElements.get(i);
+			ModelElementId childId = ModelUtil.clone(project.getModelElementId(child));
+
+			if (ModelUtil.isIgnoredDatatype(child)) {
+				continue;
+			}
+
+			idMap.put(copiedChild, childId);
+		}
+
+		return idMap;
 	}
 }

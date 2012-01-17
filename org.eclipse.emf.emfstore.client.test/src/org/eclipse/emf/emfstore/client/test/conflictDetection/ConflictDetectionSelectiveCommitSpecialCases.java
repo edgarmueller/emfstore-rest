@@ -61,7 +61,7 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 				project1.addModelElement(leafSection2);
 				project1.addModelElement(actor);
 
-				ps1.getOperations().clear();
+				clearOperations();
 
 			}
 
@@ -73,74 +73,73 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 
 		// 3. simulate create actionItem and a selective commit of the create operation
 		final List<AbstractOperation> commitedOperations = new ArrayList<AbstractOperation>();
+
 		new EMFStoreCommand() {
+
 			@Override
 			protected void doRun() {
 				leafSection1.getModelElements().add(ai);
+			}
+		}.run(false);
 
-				assertTrue("Create actionItem failed", ps1.getLocalOperations().getOperations().size() == 2);
-				assertTrue("Create actionItem has wrong operations",
-					ps1.getLocalOperations().getOperations().get(0) instanceof CreateDeleteOperation
-						|| ps1.getLocalOperations().getOperations().get(0) instanceof MultiReferenceOperation);
-				assertTrue("Create actionItem has wrong operations",
-					ps1.getLocalOperations().getOperations().get(1) instanceof CreateDeleteOperation
-						|| ps1.getLocalOperations().getOperations().get(1) instanceof MultiReferenceOperation);
+		assertTrue("Create actionItem failed", ps1.getOperations().size() == 2);
+		assertTrue("Create actionItem has wrong operations",
+			ps1.getOperations().get(0) instanceof CreateDeleteOperation
+				|| ps1.getOperations().get(0) instanceof MultiReferenceOperation);
+		assertTrue("Create actionItem has wrong operations",
+			ps1.getOperations().get(1) instanceof CreateDeleteOperation
+				|| ps1.getOperations().get(1) instanceof MultiReferenceOperation);
 
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
 				for (AbstractOperation op : ps1.getOperations()) {
 					if (op instanceof CreateDeleteOperation) {
 						commitedOperations.add(op);
 						ps1.getOperations().remove(op);
 					}
 				}
-				assertTrue("Commit actionItem failed", ps1.getLocalOperations().getOperations().size() == 1);
-				assertTrue("Commit actionItem has wrong operation",
-					ps1.getLocalOperations().getOperations().get(0) instanceof MultiReferenceOperation);
 			}
-
 		}.run(false);
+
+		assertTrue("Commit actionItem failed", ps1.getOperations().size() == 1);
+		assertTrue("Commit actionItem has wrong operation",
+			ps1.getOperations().get(0) instanceof MultiReferenceOperation);
 
 		assertTrue("Commit commitedOperations.size() is wrong", commitedOperations.size() == 1);
 		assertTrue("Commited operation is wrong", commitedOperations.get(0) instanceof CreateDeleteOperation);
 
 		// 4. simulate update of project 2
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
-
 				((ProjectSpaceImpl) ps2).applyOperations(commitedOperations, false);
-
 			}
-
 		}.run(false);
 
 		// 5. move actionItem in project 2 from "orphans" to section2
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				assertTrue("Not allowed operations in ps2", ps2.getLocalOperations().getOperations().isEmpty());
+				assertTrue("Not allowed operations in ps2", ps2.getOperations().isEmpty());
 				ModelElementId leafSection2Id = getProject().getModelElementId(leafSection2);
 				ModelElementId aiId = getProject().getModelElementId(ai);
 				LeafSection tmpLSection2 = (LeafSection) project2.getModelElement(leafSection2Id);
 				ActionItem tmpAi = (ActionItem) project2.getModelElement(aiId);
 				tmpLSection2.getModelElements().add(tmpAi);
-
-				assertTrue("Wrong number of operations in ps2 afer moving actionItem", ps2.getLocalOperations()
-					.getOperations().size() == 1);
-				assertTrue("Move actionItem has wrong operation",
-					ps2.getLocalOperations().getOperations().get(0) instanceof CompositeOperation);
-				CompositeOperation compOp = (CompositeOperation) ps2.getLocalOperations().getOperations().get(0);
-
-				assertTrue("CompositeOperation contains wrong operations",
-					compOp.getSubOperations().get(0) instanceof MultiReferenceOperation
-						|| compOp.getSubOperations().get(0) instanceof SingleReferenceOperation);
-				assertTrue("CompositeOperation contains wrong operations",
-					compOp.getSubOperations().get(1) instanceof MultiReferenceOperation
-						|| compOp.getSubOperations().get(1) instanceof SingleReferenceOperation);
-
 			}
-
 		}.run(false);
+
+		assertTrue("Wrong number of operations in ps2 afer moving actionItem", ps2.getOperations().size() == 1);
+		assertTrue("Move actionItem has wrong operation", ps2.getOperations().get(0) instanceof CompositeOperation);
+		CompositeOperation compOp = (CompositeOperation) ps2.getOperations().get(0);
+
+		assertTrue("CompositeOperation contains wrong operations",
+			compOp.getSubOperations().get(0) instanceof MultiReferenceOperation
+				|| compOp.getSubOperations().get(0) instanceof SingleReferenceOperation);
+		assertTrue("CompositeOperation contains wrong operations",
+			compOp.getSubOperations().get(1) instanceof MultiReferenceOperation
+				|| compOp.getSubOperations().get(1) instanceof SingleReferenceOperation);
 
 		// 6. commit the multireferenceoperation in ps1
 		// nothing to do here
@@ -154,7 +153,7 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 		assertTrue("endOps2.size() != 1", endOps2.size() == 1);
 		assertTrue("endOps2.get(0) !instanceof CompositeOp", endOps2.get(0) instanceof CompositeOperation);
 
-		CompositeOperation compOp = (CompositeOperation) endOps2.get(0);
+		compOp = (CompositeOperation) endOps2.get(0);
 
 		assertTrue("CompositeOperation contains wrong operations",
 			compOp.getSubOperations().get(0) instanceof MultiReferenceOperation

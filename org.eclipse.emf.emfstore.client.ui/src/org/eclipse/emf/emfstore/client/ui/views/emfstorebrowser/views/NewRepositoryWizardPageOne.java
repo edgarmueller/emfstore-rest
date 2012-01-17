@@ -122,7 +122,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			try {
 				if (KeyStoreManager.getInstance().contains(serverInfo.getCertificateAlias())) {
 					for (int i = 0; i < cert.getItemCount(); i++) {
-						if (!cert.getItem(i).equals(serverInfo.getCertificateAlias())) {
+						if (cert.getItem(i).equals(serverInfo.getCertificateAlias())) {
 							cert.select(i);
 							break;
 						}
@@ -144,7 +144,6 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 				aliases[i] = certificates.get(i);
 			}
 			cert.setItems(aliases);
-
 		} catch (CertificateStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}

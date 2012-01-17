@@ -21,7 +21,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.taskmanager.Task;
@@ -35,18 +34,23 @@ public class CleanMemoryTask extends Task {
 
 	private static final long PERIOD = 60 * 1000;
 
-	private static final boolean LOGUNLOADING = false;
+	private static final boolean LOG_UNLOADING = false;
 
-	private final ServerSpace serverSpace;
+	// private final ServerSpace serverSpace;
+
+	private final ResourceSet resourceSet;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param serverSpace serverSpace
+	 * @param resourceSet
+	 *            the {@link ResourceSet} that should be considered for unloading
+	 * 
 	 */
-	public CleanMemoryTask(ServerSpace serverSpace) {
+	public CleanMemoryTask(ResourceSet resourceSet) {
 		super(new Date(System.currentTimeMillis() + PERIOD), PERIOD);
-		this.serverSpace = serverSpace;
+		// this.serverSpace = serverSpace;
+		this.resourceSet = resourceSet;
 	}
 
 	/**
@@ -57,7 +61,8 @@ public class CleanMemoryTask extends Task {
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
 			boolean unloadedSomething = false;
 			// LOGGER.info("checking whether projectstates have to be unloaded.");
-			ResourceSet resourceSet = serverSpace.eResource().getResourceSet();
+			// ResourceSet resourceSet =
+			// serverSpace.eResource().getResourceSet();
 			EList<Resource> resources = resourceSet.getResources();
 			for (int i = 0; i < resources.size(); i++) {
 				Resource res = resources.get(i);
@@ -96,7 +101,7 @@ public class CleanMemoryTask extends Task {
 	}
 
 	private void log(String str) {
-		if (LOGUNLOADING) {
+		if (LOG_UNLOADING) {
 			ModelUtil.logInfo(str);
 		}
 	}
@@ -118,7 +123,8 @@ public class CleanMemoryTask extends Task {
 	}
 
 	private void unload(Resource res) {
-		// sanity check: this check is specific to our 1 element per resource structure for projects and changepackages
+		// sanity check: this check is specific to our 1 element per resource
+		// structure for projects and changepackages
 		if (res.getContents().size() != 1) {
 			return;
 		}

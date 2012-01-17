@@ -213,8 +213,14 @@ public final class ServerConfiguration {
 	 */
 	public static final String AUTHENTICATION_LDAP_URL = "url";
 
+	/**
+	 * LDAP user authentication key.
+	 */
 	public static final String AUTHENTICATION_LDAP_AUTHUSER = "authuser";
 
+	/**
+	 * LDAP password authentication key.
+	 */
 	public static final String AUTHENTICATION_LDAP_AUTHPASS = "authpass";
 
 	/**

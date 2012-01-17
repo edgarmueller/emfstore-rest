@@ -198,4 +198,17 @@ public interface IdEObjectCollection extends EObject {
 	 */
 	<T extends EObject> EList<T> getModelElementsByClass(
 			EClass modelElementClass, EList<T> list);
+
+	/**
+	 * Assigns all EObjects that are contained in the collection and as keys in
+	 * the given map the respective {@link ModelElementId}s.<br/>
+	 * <br/>
+	 * If the EObjects in the map are not yet contained in the collection the
+	 * IDs will be cached until the objects are eventually added.
+	 * 
+	 * @param eObjectToIdMap
+	 *            a map containing the model elements and the IDs
+	 */
+	void preAssignModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
+
 }

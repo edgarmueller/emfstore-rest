@@ -11,8 +11,10 @@ import static org.junit.Assert.assertTrue;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy;
@@ -80,4 +82,48 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	protected boolean doConflict(AbstractOperation opA, AbstractOperation opB) {
 		return getConflictDetectionStrategy().doConflict(opB, opA);
 	}
+
+	public TestElement createTestElement() {
+		return new EMFStoreCommandWithResult<TestElement>() {
+			@Override
+			protected TestElement doRun() {
+				return getTestElement();
+			}
+		}.run(false);
+	}
+
+	public <T extends AbstractOperation> AbstractOperation myCheckAndGetOperation(
+		final Class<? extends AbstractOperation> clazz) {
+		return new EMFStoreCommandWithResult<AbstractOperation>() {
+			@Override
+			protected AbstractOperation doRun() {
+				return checkAndGetOperation(clazz);
+			}
+		}.run(false);
+	}
+
+	public void myClearOperations() {
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				clearOperations();
+			}
+		}.run(false);
+	}
+
+	public TestElement createFilledTestElement(final int count) {
+		final TestElement testElement = createTestElement();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < count; i++) {
+					testElement.getStrings().add("value" + i);
+				}
+			}
+		}.run(false);
+
+		return testElement;
+	}
+
 }

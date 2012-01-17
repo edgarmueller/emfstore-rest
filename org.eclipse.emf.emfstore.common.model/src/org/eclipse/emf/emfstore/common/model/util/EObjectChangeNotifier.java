@@ -117,7 +117,8 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		if (notifier instanceof EObject) {
 			EObject modelElement = (EObject) notifier;
-			if (!isInCollection(modelElement) && collection.containsInstance(modelElement)) {
+			if (!isInCollection(modelElement)
+				&& (collection.containsInstance(modelElement) || collection.getDeletedModelElementId(modelElement) != null)) {
 				removedModelElements.add(modelElement);
 			}
 		}

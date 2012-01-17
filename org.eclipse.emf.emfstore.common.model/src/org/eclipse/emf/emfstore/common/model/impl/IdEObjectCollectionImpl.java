@@ -167,20 +167,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public void addModelElement(EObject newModelElement, Map<EObject, ModelElementId> map) {
 
-		// since id is contained in map, all IDs should be cloned
-		ModelElementId newModelElementId = ModelUtil.clone(map.get(newModelElement));
-
-		// check whether the model element is already contained in the project
-		if (contains(newModelElementId)) {
-			throw new IllegalStateException("Model element ID " + newModelElementId + " already contained in project.");
-		}
-
-		for (Map.Entry<EObject, ModelElementId> entry : map.entrySet()) {
-			EObject modelElement = entry.getKey();
-			ModelElementId modelElementId = entry.getValue();
-			newEObjectToIdMap.put(modelElement, modelElementId);
-		}
-
+		preAssignModelElementIds(map);
 		getModelElements().add(newModelElement);
 	}
 
@@ -317,7 +304,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			// getEobjectsIdMap().remove(modelElement);
 			this.getModelElements().remove(modelElement);
 		} else {
-			XMIResource res = (XMIResource) modelElement.eResource();
 			EReference containmentFeature = modelElement.eContainmentFeature();
 			if (containmentFeature.isMany()) {
 				EList<?> containmentList = (EList<?>) containerModelElement.eGet(containmentFeature);
@@ -325,7 +311,54 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			} else {
 				containerModelElement.eSet(containmentFeature, null);
 			}
-			ModelUtil.removeModelElementAndChildrenFromResource(res, modelElement);
+
+			removeModelElementAndChildrenFromResource(modelElement);
+		}
+	}
+
+	/**
+	 * Removes the the given {@link EObject} and all its contained children from
+	 * their respective {@link XMIResource}s.
+	 * 
+	 * @param eObject
+	 *            the {@link EObject} to remove
+	 */
+	public void removeModelElementAndChildrenFromResource(EObject eObject) {
+		Set<EObject> children = ModelUtil.getAllContainedModelElements(eObject, false);
+		for (EObject child : children) {
+			removeModelElementFromResource(child);
+		}
+		removeModelElementFromResource(eObject);
+
+	}
+
+	/**
+	 * Removes the the given {@link EObject} from its {@link XMIResource}.
+	 * 
+	 * @param xmiResource
+	 *            the {@link EObject}'s resource
+	 * @param eObject
+	 *            the {@link EObject} to remove
+	 */
+	private void removeModelElementFromResource(EObject eObject) {
+
+		if (!(eObject.eResource() instanceof XMIResource)) {
+			return;
+		}
+
+		XMIResource xmiResource = (XMIResource) eObject.eResource();
+
+		if (xmiResource.getURI() == null) {
+			return;
+		}
+
+		xmiResource.setID(eObject, null);
+
+		try {
+			xmiResource.save(null);
+		} catch (IOException e) {
+			throw new RuntimeException("XMI Resource for model element " + eObject + " could not be saved. "
+				+ "Reason: " + e.getMessage());
 		}
 	}
 
@@ -569,6 +602,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 		// remove all IDs that are in use now
 		newEObjectToIdMap.values().removeAll(removableIds);
+		deletedEObjectToIdMap.values().removeAll(removableIds);
 	}
 
 	/**
@@ -625,6 +659,11 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	protected void removeModelElementAndChildrenFromCache(EObject modelElement) {
 
 		ModelElementId id = getModelElementId(modelElement);
+
+		if (deletedEObjectToIdMap.containsKey(modelElement)) {
+			return;
+		}
+
 		deletedEObjectToIdMap.put(modelElement, id);
 		newEObjectToIdMap.put(modelElement, id);
 
@@ -651,6 +690,30 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			ModelElementId id = this.getModelElementId(modelElement);
 			getEObjectsCache().remove(modelElement);
 			getIdToEObjectCache().remove(id);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#preAssignModelElementIds(java.util.Map)
+	 */
+	public void preAssignModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap) {
+		for (Map.Entry<EObject, ModelElementId> entry : eObjectToIdMap.entrySet()) {
+			EObject modelElement = entry.getKey();
+			ModelElementId modelElementId = entry.getValue();
+
+			Boolean isAlreadyContained = getModelElement(modelElementId) != null;
+
+			if (isAlreadyContained) {
+				eObjectToIdCache.put(modelElement, modelElementId);
+				idToEObjectCache.put(modelElementId, modelElement);
+			}
+
+			// do this even if the model element is already contained;
+			// this is the case when a copied instance of the model element gets
+			// added again
+			newEObjectToIdMap.put(modelElement, modelElementId);
 		}
 	}
 }

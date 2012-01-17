@@ -157,8 +157,12 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			ProjectHistory projectHistory = null;
 			try {
 				logMessage.setDate(new Date());
-				projectHistory = createEmptyProject(name, description,
-						logMessage);
+				projectHistory = createEmptyProject(
+						name,
+						description,
+						logMessage,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createProject());
 			} catch (FatalEmfStoreException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
@@ -176,13 +180,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				logMessage.setDate(new Date());
 				projectHistory = createEmptyProject(name, description,
-						logMessage);
-				Version lastVersion = projectHistory.getLastVersion();
-				lastVersion.setProjectState(project);
-				getResourceHelper().createResourceForProject(project,
-						lastVersion.getPrimarySpec(),
-						projectHistory.getProjectId());
-				saveWithProject(lastVersion, project);// lastVersion.getProjectState());
+						logMessage, project);
 			} catch (FatalEmfStoreException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
@@ -297,7 +295,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private ProjectHistory createEmptyProject(String name, String description,
-			LogMessage logMessage) throws FatalEmfStoreException {
+			LogMessage logMessage, Project initialProjectState)
+			throws FatalEmfStoreException {
 
 		// create initial ProjectHistory
 		ProjectHistory projectHistory = ModelFactory.eINSTANCE
@@ -315,10 +314,11 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		firstVersion.setPrimarySpec(primary);
 
 		// create initial project
-		Project project = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-				.createProject();
-		firstVersion.setProjectState(project);
-		getResourceHelper().createResourceForProject(project,
+		// Project project =
+		// org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		// .createProject();
+		firstVersion.setProjectState(initialProjectState);
+		getResourceHelper().createResourceForProject(initialProjectState,
 				firstVersion.getPrimarySpec(), projectHistory.getProjectId());
 		projectHistory.getVersions().add(firstVersion);
 

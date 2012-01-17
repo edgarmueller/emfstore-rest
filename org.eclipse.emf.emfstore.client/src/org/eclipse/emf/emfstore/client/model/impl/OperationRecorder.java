@@ -103,7 +103,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private EObjectChangeNotifier changeNotifier;
 	private boolean checkForIncomingCrossReferences;
 	private boolean cutOffIncomingCrossReferences;
-	private boolean emitOperationsImmediately;
+	private boolean emitOperationsWhenCommandCompleted;
 
 	/**
 	 * Constructor.
@@ -146,6 +146,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			cutOffIncomingCrossReferences = Boolean.parseBoolean(elements[0]
 				.getAttribute("cutOffIncomingCrossReferences"));
 		}
+
+		emitOperationsWhenCommandCompleted = true;
 	}
 
 	public void clearOperations() {
@@ -215,7 +217,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			if (this.compositeOperation != null) {
 				compositeOperation.getSubOperations().add(createDeleteOperation);
 			} else {
-				if (commandIsRunning && !emitOperationsImmediately) {
+				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 					operations.add(createDeleteOperation);
 				} else {
 					operationRecorded(createDeleteOperation);
@@ -823,13 +825,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 						// composites
 						op.setMainOperation(ops.get(ops.size() - 1));
 						op.setModelElementId((ModelElementId) EcoreUtil.copy(op.getMainOperation().getModelElementId()));
-						if (commandIsRunning && !emitOperationsImmediately) {
+						if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 							operations.add(op);
 						} else {
 							operationRecorded(op);
 						}
 					} else if (ops.size() == 1) {
-						if (commandIsRunning && !emitOperationsImmediately) {
+						if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 							operations.add(ops.get(0));
 						} else {
 							operationRecorded(ops.get(0));
@@ -857,8 +859,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// do nothing
 	}
 
-	public void setEmitOperationsImmediately(boolean emitOperationsImmediately) {
-		this.emitOperationsImmediately = emitOperationsImmediately;
+	public void setEmitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
+		this.emitOperationsWhenCommandCompleted = emitOperationsImmediately;
 	}
 
 }

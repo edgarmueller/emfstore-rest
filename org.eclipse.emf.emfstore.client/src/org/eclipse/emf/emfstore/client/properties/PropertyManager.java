@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.EMFStorePropertyType;
 import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
@@ -68,7 +69,7 @@ public final class PropertyManager {
 		}
 
 		this.localProperties.put(key, value);
-
+		((ProjectSpaceImpl) projectSpace).saveProjectSpaceOnly();
 	}
 
 	/**
@@ -97,7 +98,7 @@ public final class PropertyManager {
 	 **/
 	public void setLocalStringProperty(String key, String value) {
 		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-			.createPropertyStringValue();
+				.createPropertyStringValue();
 		propertyValue.setValue(value);
 		setLocalProperty(key, propertyValue);
 	}
@@ -131,7 +132,7 @@ public final class PropertyManager {
 	 **/
 	public void setSharedStringProperty(String key, String value) {
 		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-			.createPropertyStringValue();
+				.createPropertyStringValue();
 		propertyValue.setValue(value);
 		setSharedProperty(key, propertyValue);
 	}
@@ -173,6 +174,7 @@ public final class PropertyManager {
 		}
 
 		this.sharedProperties.put(key, value);
+		((ProjectSpaceImpl) projectSpace).saveProjectSpaceOnly();
 	}
 
 	/**
@@ -201,7 +203,8 @@ public final class PropertyManager {
 	public void transmit() throws EmfStoreException {
 
 		try {
-			new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
+			new AccessControlHelper(projectSpace.getUsersession())
+					.checkWriteAccess(projectSpace.getProjectId());
 		} catch (AccessControlException e) {
 			// do not transmit properties if user is a reader
 			return;
@@ -209,20 +212,26 @@ public final class PropertyManager {
 
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>();
 
-		for (EMFStoreProperty prop : this.projectSpace.getChangedSharedProperties()) {
+		for (EMFStoreProperty prop : this.projectSpace
+				.getChangedSharedProperties()) {
 			changedProperties.add(prop);
 		}
 
 		WorkspaceManager
-			.getInstance()
-			.getConnectionManager()
-			.transmitEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
-				this.projectSpace.getProjectId());
+				.getInstance()
+				.getConnectionManager()
+				.transmitEMFProperties(
+						this.projectSpace.getUsersession().getSessionId(),
+						changedProperties, this.projectSpace.getProjectId());
 
 		this.projectSpace.getChangedSharedProperties().clear();
 
-		List<EMFStoreProperty> sharedProperties = WorkspaceManager.getInstance().getConnectionManager()
-			.getEMFProperties(this.projectSpace.getUsersession().getSessionId(), this.projectSpace.getProjectId());
+		List<EMFStoreProperty> sharedProperties = WorkspaceManager
+				.getInstance()
+				.getConnectionManager()
+				.getEMFProperties(
+						this.projectSpace.getUsersession().getSessionId(),
+						this.projectSpace.getProjectId());
 
 		for (EMFStoreProperty prop : sharedProperties) {
 			setUpdatedSharedProperty(prop.getKey(), prop.getValue());
@@ -230,14 +239,16 @@ public final class PropertyManager {
 	}
 
 	private EMFStoreProperty createProperty(String key, EObject value) {
-		EMFStoreProperty prop = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty();
+		EMFStoreProperty prop = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+				.createEMFStoreProperty();
 		prop.setKey(key);
 		prop.setValue(value);
 		return prop;
 	}
 
 	private void createMap(Map<String, EObject> map, EMFStorePropertyType type) {
-		EList<EMFStoreProperty> persistendProperties = this.projectSpace.getProperties();
+		EList<EMFStoreProperty> persistendProperties = this.projectSpace
+				.getProperties();
 		for (EMFStoreProperty prop : persistendProperties) {
 			if (prop.getType() == type) {
 				map.put(prop.getKey(), prop.getValue());

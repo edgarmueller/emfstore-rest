@@ -499,7 +499,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	EList<EMFStoreProperty> getProperties();
 
 	/**
-	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -507,9 +507,9 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Changed Shared Properties</em>' containment reference list.
+	 * @return the value of the '<em>Changed Shared Properties</em>' reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
-	 * @model containment="true" resolveProxies="true"
+	 * @model
 	 * @generated
 	 */
 	EList<EMFStoreProperty> getChangedSharedProperties();
