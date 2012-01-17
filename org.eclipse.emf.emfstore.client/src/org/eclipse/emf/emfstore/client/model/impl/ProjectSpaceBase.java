@@ -51,7 +51,6 @@ import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.preferences.PropertyKey;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
@@ -421,13 +420,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * {@inheritDoc}
-	 */
-	public OrgUnitProperty getProperty(PropertyKey name) throws PropertyNotFoundException {
-		return getProperty(name.toString());
-	}
-
-	/**
-	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getPropertyManager()
 	 */
@@ -460,16 +452,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public StatePersister getStatePersister() {
 		return statePersister;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasProperty(org.eclipse.emf.emfstore.client.model.preferences.PropertyKey)
-	 */
-	public boolean hasProperty(PropertyKey key) {
-		return propertyMap.containsKey(key.toString());
 	}
 
 	/**
