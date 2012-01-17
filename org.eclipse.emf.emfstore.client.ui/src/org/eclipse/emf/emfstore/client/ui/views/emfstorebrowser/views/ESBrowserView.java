@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialog;
+import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
@@ -158,7 +159,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 					if (value instanceof ServerInfo) {
 						ServerInfo serverInfo = (ServerInfo) value;
 						LoginDialog dialog = new LoginDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-							serverInfo);
+							new LoginDialogController());
 						if (dialog.open() == Window.OK && !event.getTreeViewer().isBusy()) {
 							event.getTreeViewer().refresh(value, true);
 						}

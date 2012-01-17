@@ -3,6 +3,7 @@ package org.eclipse.emf.emfstore.client.ui.commands.handler.controller;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.commands.handler.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialog;
+import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.swt.widgets.Shell;
 
 public class UIServerLoginController extends AbstractEMFStoreUIController {
@@ -15,8 +16,7 @@ public class UIServerLoginController extends AbstractEMFStoreUIController {
 	}
 
 	public void openLoginDialog() {
-		LoginDialog loginDialog = new LoginDialog(shell, serverInfo);
-		loginDialog.open(false);
+		LoginDialog loginDialog = new LoginDialog(shell, new LoginDialogController());
+		loginDialog.open();
 	}
-
 }

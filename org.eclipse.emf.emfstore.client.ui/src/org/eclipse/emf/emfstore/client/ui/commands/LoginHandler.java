@@ -16,6 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialog;
+import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
@@ -60,7 +61,7 @@ public class LoginHandler extends AbstractHandler {
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell parentShell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		LoginDialog loginDialog = new LoginDialog(parentShell, usersession);
+		LoginDialog loginDialog = new LoginDialog(parentShell, new LoginDialogController());
 		loginDialog.open();
 		return loginDialog.getReturnCode();
 	}

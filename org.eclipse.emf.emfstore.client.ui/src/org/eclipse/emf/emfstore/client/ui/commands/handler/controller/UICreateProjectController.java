@@ -42,7 +42,7 @@ public class UICreateProjectController extends AbstractEMFStoreUIController {
 
 	protected ProjectInfo createRemoteProject(Usersession usersession, String name, String description)
 		throws EmfStoreException {
-		return WorkspaceManager.getInstance().getCurrentWorkspace().createRemoteProject(name, description, usersession);
+		return WorkspaceManager.getInstance().getCurrentWorkspace().createRemoteProject(usersession, name, description);
 	}
 
 }
