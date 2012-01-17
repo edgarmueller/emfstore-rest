@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.provider.ModelItemProviderAdapterFactory;
-import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * Content provider for the tree view.
@@ -47,35 +46,23 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 	 */
 	@Override
 	public Object[] getChildren(Object object) {
-		if (object instanceof TreeNode) {
-			TreeNode node = (TreeNode) object;
-			Object value = node.getValue();
-			Object[] children;
-			if (value instanceof Workspace) {
-				children = ((Workspace) value).getServerInfos().toArray();
-			} else if (value instanceof ServerInfo) {
-				ServerInfo serverInfo = (ServerInfo) value;
-				children = getChildren(serverInfo);
-			} else {
-				children = super.getChildren(node.getValue());
-			}
-			return nodify(node, children);
+		Object value = object;
+		Object[] children;
+
+		if (value instanceof Workspace) {
+			children = ((Workspace) value).getServerInfos().toArray();
+		} else if (value instanceof ServerInfo) {
+			ServerInfo serverInfo = (ServerInfo) value;
+			children = getChildren(serverInfo);
+		} else {
+			children = super.getChildren(object);
 		}
-		return super.getChildren(object);
+
+		return children;
 	}
 
 	private Object[] getChildren(ServerInfo serverInfo) {
 		return serverInfo.getProjectInfos().toArray();
-	}
-
-	private TreeNode[] nodify(TreeNode parent, Object[] children) {
-		TreeNode[] ret = new TreeNode[children.length];
-		for (int i = 0; i < children.length; i++) {
-			TreeNode node = new TreeNode(children[i]);
-			node.setParent(parent);
-			ret[i] = node;
-		}
-		return ret;
 	}
 
 	/**
@@ -83,10 +70,8 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 	 */
 	@Override
 	public boolean hasChildren(Object parent) {
-		if (parent instanceof TreeNode) {
-			if (((TreeNode) parent).getValue() instanceof ServerInfo) {
-				return true;
-			}
+		if (parent instanceof ServerInfo) {
+			return true;
 		}
 		return false;
 	}
@@ -96,8 +81,7 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 	 */
 	@Override
 	public Object[] getElements(Object object) {
-		TreeNode node = new TreeNode(object);
-		return getChildren(node);
+		return getChildren(object);
 	}
 
 }

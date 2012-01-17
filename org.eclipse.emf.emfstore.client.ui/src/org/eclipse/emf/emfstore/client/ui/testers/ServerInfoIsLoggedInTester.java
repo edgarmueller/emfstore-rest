@@ -14,7 +14,6 @@ import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * Property tester to test if the server info has been logged in.
@@ -30,9 +29,8 @@ public class ServerInfoIsLoggedInTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
-		if (receiver instanceof TreeNode && ((TreeNode) receiver).getValue() instanceof ServerInfo
-			&& expectedValue instanceof Boolean) {
-			final ServerInfo serverInfo = (ServerInfo) ((TreeNode) receiver).getValue();
+		if (receiver instanceof ServerInfo && expectedValue instanceof Boolean) {
+			final ServerInfo serverInfo = (ServerInfo) receiver;
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {

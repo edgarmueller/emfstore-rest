@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialog;
-import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialogController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIServerLoginController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
@@ -34,9 +33,7 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeViewerListener;
 import org.eclipse.jface.viewers.TreeExpansionEvent;
-import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -95,11 +92,10 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 				&& msg.getFeature().equals(ModelPackage.eINSTANCE.getServerInfo_ProjectInfos())) {
 				Display.getCurrent().asyncExec(new Runnable() {
 					public void run() {
-						TreeNode element = new TreeNode(serverInfo);
 						if (msg.getEventType() == Notification.REMOVE_MANY || msg.getEventType() == Notification.REMOVE) {
-							viewer.collapseToLevel(element, 0);
+							viewer.collapseToLevel(serverInfo, 0);
 						}
-						viewer.refresh(element, true);
+						viewer.refresh(serverInfo, true);
 						// re-evaluate property tester
 						IEvaluationService service = (IEvaluationService) getSite()
 							.getService(IEvaluationService.class);
@@ -154,16 +150,14 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 			 * {@inheritDoc}
 			 */
 			public void treeExpanded(TreeExpansionEvent event) {
-				if (event.getElement() instanceof TreeNode) {
-					Object value = ((TreeNode) event.getElement()).getValue();
-					if (value instanceof ServerInfo) {
-						ServerInfo serverInfo = (ServerInfo) value;
-						LoginDialog dialog = new LoginDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-							new LoginDialogController());
-						if (dialog.open() == Window.OK && !event.getTreeViewer().isBusy()) {
-							event.getTreeViewer().refresh(value, true);
-						}
+				if (event.getElement() instanceof ServerInfo) {
+					ServerInfo value = (ServerInfo) event.getElement();
+					new UIServerLoginController(PlatformUI.getWorkbench().getDisplay().getActiveShell(), value)
+						.openLoginDialog();
 
+					// TODO: refresh is always performed
+					if (!event.getTreeViewer().isBusy()) {
+						event.getTreeViewer().refresh(value, true);
 					}
 				}
 			}
@@ -215,11 +209,10 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void loginCompleted(Usersession session) {
-		final TreeNode node = new TreeNode(session.getServerInfo());
+	public void loginCompleted(final Usersession session) {
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				viewer.refresh(node, true);
+				viewer.refresh(session.getServerInfo(), true);
 			}
 		});
 	}

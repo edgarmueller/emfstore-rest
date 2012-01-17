@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
-import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * @see ILightweightLabelDecorator
@@ -28,20 +27,16 @@ public class ESBrowserLabelDecorator implements ILightweightLabelDecorator {
 	 */
 	public void decorate(Object element, IDecoration decoration) {
 
-		if (element instanceof TreeNode) {
-			TreeNode node = (TreeNode) element;
-			if (node.getValue() instanceof ServerInfo) {
-				ServerInfo server = (ServerInfo) node.getValue();
-				if (server.getLastUsersession() != null && server.getLastUsersession().isLoggedIn()) {
-					decoration.addOverlay(Activator.getImageDescriptor("icons/bullet_green.png"),
-						IDecoration.BOTTOM_RIGHT);
-				} else {
-					decoration.addOverlay(Activator.getImageDescriptor("icons/bullet_delete.png"),
-						IDecoration.BOTTOM_RIGHT);
-				}
+		if (element instanceof ServerInfo) {
+			ServerInfo server = (ServerInfo) element;
+
+			if (server.getLastUsersession() != null && server.getLastUsersession().isLoggedIn()) {
+				decoration.addOverlay(Activator.getImageDescriptor("icons/bullet_green.png"), IDecoration.BOTTOM_RIGHT);
+			} else {
+				decoration
+					.addOverlay(Activator.getImageDescriptor("icons/bullet_delete.png"), IDecoration.BOTTOM_RIGHT);
 			}
 		}
-
 	}
 
 	/**
