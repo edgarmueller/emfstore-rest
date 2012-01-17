@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -251,13 +252,6 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 			ProjectSpace projectSpace = (ProjectSpace) object;
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(projectSpace.getProjectName());
-			// if (projectSpace.getBaseVersion() != null) {
-			// stringBuilder.append("@");
-			// stringBuilder.append(projectSpace.getBaseVersion()
-			// .getIdentifier());
-			// } else {
-			// stringBuilder.append("(Not shared)");
-			// }
 			String string = stringBuilder.toString();
 			return string;
 		}
@@ -279,8 +273,8 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 		// in case the notification comes in from a project then issue a viewer
 		// update on the appropriate projectspace
 
-		if (notification != null && projectToProjectSpaceMap.get(notification.getNotifier()) != null) {
-			ProjectSpace projectSpace = projectToProjectSpaceMap.get(notification.getNotifier());
+		if (notification != null && getProjectToProjectSpaceMap().get(notification.getNotifier()) != null) {
+			ProjectSpace projectSpace = getProjectToProjectSpaceMap().get(notification.getNotifier());
 			fireNotifyChanged(new ViewerNotification(notification, projectSpace, true, true));
 			return;
 		}
@@ -392,14 +386,13 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	public void setTarget(Notifier target) {
 		super.setTarget(target);
 		// also register for notifications on the corresponding project to be
-		// able to trigger
-		// viewer updates accordingly, see method notifyChanged().
+		// able to trigger viewer updates accordingly, see method notifyChanged().
 		if (target instanceof ProjectSpace) {
 			ProjectSpace projectSpace = (ProjectSpace) target;
 			Project project = projectSpace.getProject();
 			project.eAdapters().add(this);
 			setTarget(project);
-			projectToProjectSpaceMap.put(project, projectSpace);
+			getProjectToProjectSpaceMap().put(project, projectSpace);
 		}
 	}
 
@@ -410,11 +403,19 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 			if (project == null) {
 				return Collections.EMPTY_LIST;
 			}
-			// TODO: Check for better way
+			// TODO: find a better way
 			return project.getModelElements();
 		}
 		return new ArrayList<Object>();
 
 	}
 
+	private Map<Project, ProjectSpace> getProjectToProjectSpaceMap() {
+
+		if (projectToProjectSpaceMap == null) {
+			projectToProjectSpaceMap = new HashMap<Project, ProjectSpace>();
+		}
+
+		return projectToProjectSpaceMap;
+	}
 }
