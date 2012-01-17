@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
 /**
- * Superclass for all connection manager which maps session ids to the relative connection simply by using a generic
- * map.
+ * Superclass for all connection managers which map {@link SessionId}s
+ * to the relative connection simply by using a generic map.
  * 
  * @param <T> type of connection client
  * @author wesendon
@@ -56,9 +56,11 @@ public abstract class AbstractConnectionManager<T> {
 	/**
 	 * Returns the connection proxy attached to the session id.
 	 * 
-	 * @param id sesseion id
-	 * @return connection proxy
-	 * @throws UnknownSessionException if id has no conneciton proxy attached
+	 * @param id
+	 *            the session ID
+	 * @return a connection proxy
+	 * @throws UnknownSessionException
+	 *             If the given session id has no connection proxy attached
 	 */
 	protected T getConnectionProxy(SessionId id) throws UnknownSessionException {
 		T connectionProxy = map.get(id);
@@ -78,10 +80,11 @@ public abstract class AbstractConnectionManager<T> {
 	}
 
 	/**
-	 * Checks whether there is a connection proxy.
+	 * Checks whether there is a connection proxy for the given {@link SessionId}.
 	 * 
-	 * @param session id
-	 * @return true if id has a connection proxy
+	 * @param id
+	 *            a session ID
+	 * @return true if there is a connection proxy available for the given ID, false otherwise
 	 */
 	public boolean hasConnectionProxy(SessionId id) {
 		return map.get(id) != null;
