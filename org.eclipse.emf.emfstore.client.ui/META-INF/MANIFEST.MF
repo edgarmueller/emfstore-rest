@@ -13,8 +13,7 @@ Export-Package: diff.match.patch,
   uses:="org.eclipse.jface.resource,
    org.eclipse.ui,
    org.eclipse.ui.plugin,
-   org.osgi.framework",
- org.eclipse.emf.emfstore.client.ui.commands;
+   org.osgi.framework";
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.emfstore.client.model.observers,
    org.eclipse.core.expressions,
@@ -24,7 +23,7 @@ Export-Package: diff.match.patch,
    org.eclipse.swt.widgets,
    org.eclipse.emf.emfstore.server.model.versioning,
    org.eclipse.emf.emfstore.client.model",
- org.eclipse.emf.emfstore.client.ui.commands.handler.controller, 
+ org.eclipse.emf.emfstore.client.ui.commands.controller,
  org.eclipse.emf.emfstore.client.ui.decorators;uses:="org.eclipse.emf.common.notify.impl,org.eclipse.jface.viewers,org.eclipse.emf.common.notify",
  org.eclipse.emf.emfstore.client.ui.dialogs;
   uses:="org.eclipse.swt.events,
