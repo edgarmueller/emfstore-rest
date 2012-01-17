@@ -24,7 +24,8 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 
 /**
- * This details widget shows other involved operations using default representation.
+ * This details widget shows other involved operations using default
+ * representation.
  * 
  * @author wesendon
  */
@@ -35,11 +36,15 @@ public class OtherInvolvedWidget extends Composite {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param parent parent
-	 * @param decisionManager decisionManager
-	 * @param option option
+	 * @param parent
+	 *            parent
+	 * @param decisionManager
+	 *            decisionManager
+	 * @param option
+	 *            option
 	 */
-	public OtherInvolvedWidget(Composite parent, DecisionManager decisionManager, ConflictOption option) {
+	public OtherInvolvedWidget(Composite parent,
+			DecisionManager decisionManager, ConflictOption option) {
 		super(parent, SWT.None);
 		TableWrapLayout wrapLayout = new TableWrapLayout();
 		wrapLayout.numColumns = COLUMNS;
@@ -54,10 +59,12 @@ public class OtherInvolvedWidget extends Composite {
 		wrapData.colspan = COLUMNS;
 		label.setLayoutData(wrapData);
 
-		ChangePackageVisualizationHelper visualizationHelper = decisionManager.getChangePackageVisualizationHelper();
+		ChangePackageVisualizationHelper visualizationHelper = decisionManager
+				.getChangePackageVisualizationHelper();
 
 		for (AbstractOperation ao : option.getOperations()) {
-			Image image = visualizationHelper.getImage(DecisionUtil.getAdapterFactory(), ao);
+			Image image = visualizationHelper.getImage(
+					DecisionUtil.getAdapterFactory(), ao);
 
 			CLabel meLabel = new CLabel(this, SWT.WRAP);
 			if (image != null) {
@@ -66,5 +73,6 @@ public class OtherInvolvedWidget extends Composite {
 			meLabel.setText(visualizationHelper.getDescription(ao));
 			meLabel.setBackground(parent.getBackground());
 		}
+		visualizationHelper.dispose();
 	}
 }

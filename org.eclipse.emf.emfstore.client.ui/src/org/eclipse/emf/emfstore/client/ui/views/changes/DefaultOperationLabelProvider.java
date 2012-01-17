@@ -24,7 +24,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
  * @author emueller
  * 
  */
-public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelProvider {
+public class DefaultOperationLabelProvider extends
+		AbstractOperationCustomLabelProvider {
 
 	/**
 	 * The label to be shown for unknown element.
@@ -37,13 +38,16 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	protected static final int MAX_NAME_LENGTH = 30;
 
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+	private ComposedAdapterFactory adapterFactory;
 
 	/**
 	 * Constructor.
 	 */
 	public DefaultOperationLabelProvider() {
-		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+		adapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
+				adapterFactory);
 	}
 
 	/**
@@ -117,5 +121,14 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 		}
 
 		return result;
+	}
+
+	public void dispose() {
+		if (adapterFactory != null) {
+			adapterFactory.dispose();
+		}
+		if (adapterFactoryLabelProvider != null) {
+			adapterFactoryLabelProvider.dispose();
+		}
 	}
 }

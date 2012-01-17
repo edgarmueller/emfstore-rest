@@ -28,18 +28,26 @@ public final class ValidationConstraintHelper {
 	}
 
 	/**
-	 * Returns the structural feature specified by the feature name belonging to the model element.
+	 * Returns the structural feature specified by the feature name belonging to
+	 * the model element.
 	 * 
-	 * @param modelElement the modelElement
-	 * @param featureName the featureName
+	 * @param modelElement
+	 *            the modelElement
+	 * @param featureName
+	 *            the featureName
 	 * @return the structuralFeature
 	 */
-	public static EStructuralFeature getErrorFeatureForModelElement(EObject modelElement, String featureName) {
+	public static EStructuralFeature getErrorFeatureForModelElement(
+			EObject modelElement, String featureName) {
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		AdapterFactoryItemDelegator adapterFactoryItemDelegator = new AdapterFactoryItemDelegator(
-			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
-		IItemPropertyDescriptor itemPropertyDescriptor = adapterFactoryItemDelegator.getPropertyDescriptor(
-			modelElement, featureName);
-		EStructuralFeature errorFeature = (EStructuralFeature) itemPropertyDescriptor.getFeature(modelElement);
+				adapterFactory);
+		IItemPropertyDescriptor itemPropertyDescriptor = adapterFactoryItemDelegator
+				.getPropertyDescriptor(modelElement, featureName);
+		EStructuralFeature errorFeature = (EStructuralFeature) itemPropertyDescriptor
+				.getFeature(modelElement);
+		adapterFactory.dispose();
 		return errorFeature;
 	}
 }

@@ -57,21 +57,27 @@ public final class URLHelper {
 	public static final int MAXLIMIT = 1000;
 
 	private static AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
-		new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+			new ComposedAdapterFactory(
+					ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	private URLHelper() {
 
 	}
 
 	/**
-	 * This method create a HTML link pointing to a model element for the message of Notifications.
+	 * This method create a HTML link pointing to a model element for the
+	 * message of Notifications.
 	 * 
-	 * @param meId The id of the model element
-	 * @param projectSpace the project space
-	 * @param style the string limit or @see {@link #DEFAULT} {@link #UNLTD}
+	 * @param meId
+	 *            The id of the model element
+	 * @param projectSpace
+	 *            the project space
+	 * @param style
+	 *            the string limit or @see {@link #DEFAULT} {@link #UNLTD}
 	 * @return a HTML link as string
 	 */
-	public static String getHTMLLinkForModelElement(ModelElementId meId, ProjectSpace projectSpace, int style) {
+	public static String getHTMLLinkForModelElement(ModelElementId meId,
+			ProjectSpace projectSpace, int style) {
 
 		EObject modelElement = projectSpace.getProject().getModelElement(meId);
 		if (modelElement != null) {
@@ -81,14 +87,19 @@ public final class URLHelper {
 	}
 
 	/**
-	 * This method create a HTML link pointing to a model element for the message of Notifications.
+	 * This method create a HTML link pointing to a model element for the
+	 * message of Notifications.
 	 * 
-	 * @param modelElement The model element
-	 * @param projectSpace the project space
-	 * @param style the string limit or @see {@link #DEFAULT} {@link #UNLTD}
+	 * @param modelElement
+	 *            The model element
+	 * @param projectSpace
+	 *            the project space
+	 * @param style
+	 *            the string limit or @see {@link #DEFAULT} {@link #UNLTD}
 	 * @return a HTML link as string
 	 */
-	public static String getHTMLLinkForModelElement(EObject modelElement, ProjectSpace projectSpace, int style) {
+	public static String getHTMLLinkForModelElement(EObject modelElement,
+			ProjectSpace projectSpace, int style) {
 		if (modelElement == null) {
 			return "";
 		}
@@ -102,9 +113,9 @@ public final class URLHelper {
 			ret.append(projectSpace.getProjectId().getId());
 		}
 		ret.append("/");
-		String name = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE)).getText(modelElement);
-		ModelElementId modelElementId = projectSpace.getProject().getModelElementId(modelElement);
+		String name = labelProvider.getText(modelElement);
+		ModelElementId modelElementId = projectSpace.getProject()
+				.getModelElementId(modelElement);
 
 		if (name != null) {
 			name = name.replaceAll("\"", "\\'");
@@ -132,17 +143,23 @@ public final class URLHelper {
 	/**
 	 * Returns a composite containing both the icon and the model element link.
 	 * 
-	 * @param parent the parent composite.
-	 * @param modelElementId the model element id
-	 * @param projectSpace the project space
-	 * @param style the string limit or @see {@link #DEFAULT} {@link #UNLTD}
+	 * @param parent
+	 *            the parent composite.
+	 * @param modelElementId
+	 *            the model element id
+	 * @param projectSpace
+	 *            the project space
+	 * @param style
+	 *            the string limit or @see {@link #DEFAULT} {@link #UNLTD}
 	 * @return the link composite
 	 */
-	public static Control getModelElementLink(Composite parent, ModelElementId modelElementId,
-		ProjectSpace projectSpace, int style) {
-		EObject modelElement = projectSpace.getProject().getModelElement(modelElementId);
+	public static Control getModelElementLink(Composite parent,
+			ModelElementId modelElementId, ProjectSpace projectSpace, int style) {
+		EObject modelElement = projectSpace.getProject().getModelElement(
+				modelElementId);
 		if (modelElement != null) {
-			return getModelElementLink(parent, modelElement, projectSpace, style);
+			return getModelElementLink(parent, modelElement, projectSpace,
+					style);
 		}
 		Label deleted = new Label(parent, SWT.WRAP);
 		deleted.setText("(deleted element)");
@@ -152,30 +169,38 @@ public final class URLHelper {
 	/**
 	 * Returns a composite containing both the icon and the model element link.
 	 * 
-	 * @param parent the parent composite.
-	 * @param modelElement the model element
-	 * @param projectSpace the project space
-	 * @param style the string limit or @see {@link #DEFAULT} {@link #UNLTD}
+	 * @param parent
+	 *            the parent composite.
+	 * @param modelElement
+	 *            the model element
+	 * @param projectSpace
+	 *            the project space
+	 * @param style
+	 *            the string limit or @see {@link #DEFAULT} {@link #UNLTD}
 	 * @return the link composite
 	 */
-	public static Control getModelElementLink(Composite parent, final EObject modelElement, ProjectSpace projectSpace,
-		int style) {
+	public static Control getModelElementLink(Composite parent,
+			final EObject modelElement, ProjectSpace projectSpace, int style) {
 		Composite c = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).spacing(3, 0).applyTo(c);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false)
+				.spacing(3, 0).applyTo(c);
 
 		final Composite icon = new Composite(c, SWT.NONE);
 		GridDataFactory.fillDefaults().hint(16, 16).applyTo(icon);
 		icon.addPaintListener(new PaintListener() {
 			public void paintControl(PaintEvent e) {
 				Rectangle area = icon.getClientArea();
-				e.gc.drawImage(labelProvider.getImage(modelElement), area.x, area.y);
+				e.gc.drawImage(labelProvider.getImage(modelElement), area.x,
+						area.y);
 			}
 		});
 
 		Link link = new Link(c, SWT.WRAP);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(link);
-		link.setText(getHTMLLinkForModelElement(modelElement, projectSpace, style));
-		link.addSelectionListener(URLSelectionListener.getInstance(projectSpace));
+		link.setText(getHTMLLinkForModelElement(modelElement, projectSpace,
+				style));
+		link.addSelectionListener(URLSelectionListener
+				.getInstance(projectSpace));
 		link.setData(modelElement);
 		ModelElementTooltip.enableFor(link);
 
