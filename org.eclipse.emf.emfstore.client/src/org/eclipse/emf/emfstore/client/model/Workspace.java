@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
@@ -120,7 +119,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param usersession
 	 *            The {@link Usersession} that should be used to create the remote project.<br/>
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @param projectName
 	 *            The name of the project.
 	 * @param projectDescription
@@ -162,7 +161,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param usersession
 	 *            The {@link Usersession} that should be used to delete the project.<br/>
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @param projectId
 	 *            The ID of the project.
 	 * @param deleteFiles
@@ -226,7 +225,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param session
 	 *            The user session that should be used to retrieve the admin broker.<br/>
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @return an {@link AdminBroker} related to the given user session.
 	 * @throws EmfStoreException
 	 *             If an error occurs while retrieving the admin broker
@@ -267,7 +266,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param usersession
 	 *            The {@link Usersession} that should be used to retrieve the history information.
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @param projectId
 	 *            The ID of a project
 	 * @param query
@@ -328,7 +327,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param usersession
 	 *            The {@link Usersession} that should be used to retrieve the remote project list.<br/>
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @return a list containing the information about each remote project
 	 * @throws EmfStoreException
 	 *             If an error occurs while retrieving the remote project list.
@@ -459,7 +458,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param session
 	 *            The {@link Usersession} that should be used to resolve the given {@link VersionSpec}.<br/>
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @param versionSpec
 	 *            The specification to resolve.
 	 * @param projectId
@@ -511,7 +510,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param session
 	 *            The {@link Usersession} that should be used to update the ACUser.
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @throws EmfStoreException
 	 *             if an error occurs while updating the ACUser
 	 */
@@ -532,7 +531,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * 
 	 * @param session
 	 *            The {@link Usersession} that should be used to update the project information.
-	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 *            If <code>null</code>, the session manager will search for a session.
 	 * @throws EmfStoreException
 	 *             if an error occurs while updating the project information
 	 */
