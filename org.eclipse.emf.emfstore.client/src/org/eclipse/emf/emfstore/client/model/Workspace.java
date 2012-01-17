@@ -40,31 +40,269 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
- * </ul>
- * </p>
- *
+ * 
+ *             <p>
+ *             The following features are supported:
+ *             <ul>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
+ *             </ul>
+ *             </p>
+ * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
  */
 public interface Workspace extends EObject, IAdaptable {
+
+	/**
+	 * Checkout a project to the workspace in a given version.
+	 * 
+	 * @param usersession
+	 *            The user session that should be used to checkout the project.
+	 * @param projectInfo
+	 *            An {@link ProjectInfo} instance describing the project and its version.
+	 * @throws EmfStoreException
+	 *             If an error occurs during the checkout.
+	 * @return the project space containing the project
+	 * @model
+	 * @generated NOT
+	 */
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
+
+	/**
+	 * Checkout a project to the workspace in a given version.
+	 * 
+	 * @param usersession
+	 *            The user session that should be used to checkout the project.
+	 * @param projectInfo
+	 *            An {@link ProjectInfo} instance describing the project and its version.
+	 * @param targetSpec
+	 *            The target version.
+	 * @throws EmfStoreException
+	 *             If an error occurs during the checkout.
+	 * @return the project space containing the project
+	 * @model
+	 * @generated NOT
+	 */
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec)
+		throws EmfStoreException;
+
+	/**
+	 * Creates a new local project that is not shared with the server yet.
+	 * 
+	 * @param projectName the project name
+	 * @param projectDescription the project description
+	 * @return the project space that the new project resides in
+	 */
+	ProjectSpace createLocalProject(String projectName, String projectDescription);
+
+	/**
+	 * Creates an empty project on the server.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that contains information about the server on which
+	 *            the project should be created.
+	 * @param projectName
+	 *            The name of the project.
+	 * @param projectDescription
+	 *            A description of the project to be created.
+	 * @return a {@link ProjectInfo} object containing information about the created project
+	 * @throws EmfStoreException
+	 *             If an error occurs while creating the remote project
+	 */
+	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName, String projectDescription)
+		throws EmfStoreException;
+
+	/**
+	 * Creates an empty project on the server.
+	 * 
+	 * @param usersession
+	 *            The {@link Usersession} that should be used to create the remote project.<br/>
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @param projectName
+	 *            The name of the project.
+	 * @param projectDescription
+	 *            A description of the project to be created.
+	 * @return a {@link ProjectInfo} object containing information about the created project
+	 * @throws EmfStoreException
+	 *             If an error occurs while creating the remote project
+	 */
+	ProjectInfo createRemoteProject(Usersession usersession, String projectName, String projectDescription)
+		throws EmfStoreException;
+
+	/**
+	 * Deletes the given project space.
+	 * 
+	 * @param projectSpace
+	 *            the project space to be deleted
+	 * @throws IOException
+	 *             If deleting the obsolete project space files fails
+	 */
+	void deleteProjectSpace(ProjectSpace projectSpace) throws IOException;
+
+	/**
+	 * Deletes a project on the server.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo}, that contains the information on which server the
+	 *            project is located on.
+	 * @param projectId
+	 *            The ID of the project.
+	 * @param deleteFiles
+	 *            Whether files should be deleted too
+	 * @throws EmfStoreException
+	 *             If an error occurs while deleting the project.
+	 */
+	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
+
+	/**
+	 * Deletes a project on the server.
+	 * 
+	 * @param usersession
+	 *            The {@link Usersession} that should be used to delete the project.<br/>
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @param projectId
+	 *            The ID of the project.
+	 * @param deleteFiles
+	 *            Whether files should be deleted too
+	 * @throws EmfStoreException
+	 *             If an error occurs while deleting the project.
+	 */
+	void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
+		throws EmfStoreException;
+
+	/**
+	 * Exports a project to a file.
+	 * 
+	 * @param projectSpace
+	 *            The project space that contains the project that should be exported
+	 * @param absoluteFileName
+	 *            The absolute path of the file to export to
+	 * @throws IOException
+	 *             If creating the export file fails
+	 */
+	void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
+
+	/**
+	 * Exports a project space to a file.
+	 * 
+	 * @param projectSpace
+	 *            The project space that should be exported
+	 * @param absoluteFileName
+	 *            The absolute path of the file to export to
+	 * @throws IOException
+	 *             If creating the export file fails
+	 */
+	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
+
+	/**
+	 * Exports the whole workspace.
+	 * 
+	 * @param absoluteFileName
+	 *            The absolute path of the file to export to
+	 * @throws IOException
+	 *             If creating the export file fails
+	 */
+	void exportWorkSpace(String absoluteFileName) throws IOException;
+
+	/**
+	 * Returns an {@link AdminBroker} related to the given {@link ServerInfo}.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that should be used to retrieve the admin broker.
+	 * @return an {@link AdminBroker} related to the given server info.
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the admin broker
+	 * @throws AccessControlException
+	 *             If access is denied
+	 * @generated NOT
+	 */
+	AdminBroker getAdminBroker(ServerInfo serverInfo) throws EmfStoreException, AccessControlException;
+
+	/**
+	 * Returns an {@link AdminBroker} related to the given {@link Usersession}.
+	 * 
+	 * @param session
+	 *            The user session that should be used to retrieve the admin broker.<br/>
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @return an {@link AdminBroker} related to the given user session.
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the admin broker
+	 * @throws AccessControlException
+	 *             If access is denied
+	 * @generated NOT
+	 */
+	AdminBroker getAdminBroker(Usersession session) throws EmfStoreException, AccessControlException;
+
+	/**
+	 * Return this editing domain belonging to this workspace.
+	 * 
+	 * @return the editing domain
+	 * @generated NOT
+	 */
+	EditingDomain getEditingDomain();
+
+	/**
+	 * Retrieves history information for a project.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that contains information about the server the
+	 *            project is located on
+	 * @param projectId
+	 *            The ID of a project
+	 * @param query
+	 *            A history query.
+	 * @return a list of {@link HistoryInfo} instances
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the history information
+	 * @generated NOT
+	 */
+	List<HistoryInfo> getHistoryInfo(ServerInfo serverInfo, ProjectId projectId, HistoryQuery query)
+		throws EmfStoreException;
+
+	/**
+	 * Retrieves history information for a project.
+	 * 
+	 * @param usersession
+	 *            The {@link Usersession} that should be used to retrieve the history information.
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @param projectId
+	 *            The ID of a project
+	 * @param query
+	 *            A history query.
+	 * @return a list of {@link HistoryInfo} instances
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the history information
+	 * @generated NOT
+	 */
+	List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
+		throws EmfStoreException;
+
+	/**
+	 * Retrieves the project space for the given project.
+	 * 
+	 * @param project
+	 *            The project for which to retrieve the project space.
+	 * @return the project space the given project is contained in
+	 * @throws UnkownProjectException
+	 *             If the project is not known to the workspace
+	 */
+	ProjectSpace getProjectSpace(Project project) throws UnkownProjectException;
+
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
+	 * <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
@@ -72,6 +310,31 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @generated
 	 */
 	EList<ProjectSpace> getProjectSpaces();
+
+	/**
+	 * Get the list of remotely available projects.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that should be used to retrieve the information about remote projects.<br/>
+	 * @return a list containing the information about each remote project
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the remote project list.
+	 * @generated NOT
+	 */
+	List<ProjectInfo> getRemoteProjectList(ServerInfo serverInfo) throws EmfStoreException;
+
+	/**
+	 * Get the list of remotely available projects.
+	 * 
+	 * @param usersession
+	 *            The {@link Usersession} that should be used to retrieve the remote project list.<br/>
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @return a list containing the information about each remote project
+	 * @throws EmfStoreException
+	 *             If an error occurs while retrieving the remote project list.
+	 * @generated NOT
+	 */
+	List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException;
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment reference list.
@@ -82,6 +345,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
@@ -98,6 +362,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
@@ -106,196 +371,102 @@ public interface Workspace extends EObject, IAdaptable {
 	EList<Usersession> getUsersessions();
 
 	/**
-	 * Checkout a project to the workspace in the current head revision.
+	 * Imports a project into a project space.
 	 * 
-	 * @param usersession the usersession
-	 * @param projectInfo the project info describing the project and version
-	 * @throws EmfStoreException if checkout fails
-	 * @return the project space containing the project
-	 * @model
-	 * @generated NOT
+	 * @param project
+	 *            The project to be imported
+	 * @param name
+	 *            The name that should be assigned to the project being imported.
+	 * @param description
+	 *            A description of the project being imported
+	 * @return the newly created project space in which the imported project is contained in
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
+	ProjectSpace importProject(Project project, String name, String description);
 
 	/**
-	 * Set the workspace connection manager.
+	 * Import an existing project from a given file. The project space containing
+	 * the project will be created upon execution.
 	 * 
-	 * @param connectionManager the connection manager
-	 * @generated NOT
+	 * @param absoluteFileName
+	 *            The absolute path to a file to import from.
+	 * @return the newly created project space in which the imported project is contained in
+	 * @throws IOException
+	 *             If importing the project fails
 	 */
-	void setConnectionManager(ConnectionManager connectionManager);
+	ProjectSpace importProject(String absoluteFileName) throws IOException;
 
 	/**
-	 * Set the workspace resource set.
+	 * Import an existing project space from a file.
 	 * 
-	 * @param resourceSet the resource set
-	 * @generated NOT
+	 * @param absoluteFileName
+	 *            The absolute path to a file to import from.
+	 * @return the imported project space
+	 * @throws IOException
+	 *             If accessing the file or importing fails
 	 */
-	void setWorkspaceResourceSet(ResourceSet resourceSet);
+	ProjectSpace importProjectSpace(String absoluteFileName) throws IOException;
 
 	/**
-	 * Init the workspace and its projectspaces.
+	 * Initializes the workspace and its project spaces.
 	 * 
 	 * @generated NOT
 	 */
 	void init();
 
 	/**
-	 * Return this workspace?s transactional editing domain.
+	 * Resolves a project URL fragment to the project space the project is in.<br/>
+	 * Since a project may have been checked out multiple times, a set of project spaces is returned.
 	 * 
-	 * @return the editing domain
-	 * @generated NOT
-	 */
-	EditingDomain getEditingDomain();
-
-	/**
-	 * Import a project from file.
-	 * 
-	 * @param absoluteFileName the file name to import from
-	 * @return a project space containing the imported project
-	 * @throws IOException if file access fails
-	 */
-	ProjectSpace importProject(String absoluteFileName) throws IOException;
-
-	/**
-	 * Imports a project into a projectSpace.
-	 * 
-	 * @param project project
-	 * @param name name
-	 * @param description description
-	 * @return projectspace
-	 */
-	ProjectSpace importProject(Project project, String name, String description);
-
-	/**
-	 * Export a project to a file.
-	 * 
-	 * @param projectSpace the projectSpace containing the project
-	 * @param absoluteFileName the file name
-	 * @throws IOException if file access fails
-	 */
-	void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
-
-	/**
-	 * Export a project space to a file.
-	 * 
-	 * @param projectSpace the project space
-	 * @param absoluteFileName the file name
-	 * @throws IOException if file access fails
-	 */
-	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
-
-	/**
-	 * Export the current workspace to a file.
-	 * 
-	 * @param absoluteFileName the file name
-	 * @throws IOException if file access fails
-	 */
-	void exportWorkSpace(String absoluteFileName) throws IOException;
-
-	/**
-	 * Import a project space from file.
-	 * 
-	 * @param absoluteFileName the file name to import from
-	 * @return the project space
-	 * @throws IOException if file access fails
-	 */
-	ProjectSpace importProjectSpace(String absoluteFileName) throws IOException;
-
-	/**
-	 * Make the current workspace state persistent.
-	 */
-	void save();
-
-	/**
-	 * Resolves a project url fragment to the project space the project is in. Since a project may have been checked out
-	 * multiple times, a set of project spaces is returned.
-	 * 
-	 * @param projectUrlFragment the project url fragment to resolve
+	 * @param projectUrlFragment
+	 *            the project URL fragment to resolve
 	 * @return a set of matching project spaces
-	 * @throws ProjectUrlResolutionException if project cannot be found in workspace
+	 * @throws ProjectUrlResolutionException
+	 *             if the project belonging to the given project URL fragment cannot be found in workspace
 	 */
 	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException;
 
 	/**
-	 * Resolves a server url to a set server infos if multiple serverInfos match the url.
+	 * Resolves a server URL to a server.
 	 * 
-	 * @param serverUrl the server url
-	 * @return the server info
-	 * @throws ServerUrlResolutionException if no matching server info can be found
+	 * @param serverUrl
+	 *            the server URL to be resolved
+	 * @return the resolved {@link ServerInfo}
+	 * @throws ServerUrlResolutionException
+	 *             if no matching server info can be found
 	 */
 	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
-	 * Checkout a project to the workspace in a given version.
+	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
 	 * 
-	 * @param usersession the usersession
-	 * @param projectInfo the project info describing the project and version
-	 * @param targetSpec the target version
-	 * @throws EmfStoreException if checkout fails
-	 * @return the project space containing the project
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that should be used to resolve the given version specification.
+	 * @param versionSpec
+	 *            The specification to resolve.
+	 * @param projectId
+	 *            The ID of a project.
+	 * @return the {@link PrimaryVersionSpec}
+	 * @throws EmfStoreException
+	 *             If an error occurs while resolving the {@link VersionSpec}
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec)
+	PrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, VersionSpec versionSpec, ProjectId projectId)
 		throws EmfStoreException;
 
 	/**
-	 * Get the project space for the given project.
+	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
 	 * 
-	 * @param project the project
-	 * @return the project space the project is stored in
-	 * @throws UnkownProjectException if the project is not known to the workspace
-	 */
-	ProjectSpace getProjectSpace(Project project) throws UnkownProjectException;
-
-	/**
-	 * Delete the given project space.
-	 * 
-	 * @param projectSpace the project space
-	 * @throws IOException if deleting the obsolete project space files fails
-	 */
-	void deleteProjectSpace(ProjectSpace projectSpace) throws IOException;
-
-	/**
-	 * Creates a new local project that is not shared with the server yet.
-	 * 
-	 * @param projectName the project name
-	 * @param projectDescription the project description
-	 * @return the project space that the new project resides in
-	 */
-	ProjectSpace createLocalProject(String projectName, String projectDescription);
-
-	/**
-	 * Creates an empty project on the server
-	 * 
-	 * @param projectName name
-	 * @param projectDescription description
-	 * @param usersession session. if null, {@link SessionManager} will search for session
-	 * @return
+	 * @param session
+	 *            The {@link Usersession} that should be used to resolve the given {@link VersionSpec}.<br/>
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @param versionSpec
+	 *            The specification to resolve.
+	 * @param projectId
+	 *            The ID of a project.
+	 * @return the {@link PrimaryVersionSpec}
 	 * @throws EmfStoreException
-	 */
-	ProjectInfo createRemoteProject(String projectName, String projectDescription, Usersession usersession)
-		throws EmfStoreException;
-
-	/**
-	 * Get the list of remotely available projects.
-	 * 
-	 * @param get remote list for given usersession. if null, {@link SessionManager} will search for session.
-	 * @return a list of project infos
-	 * @throws EmfStoreException if retrieval fails
-	 * @generated NOT
-	 */
-	List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
-	 * 
-	 * @param session session. if null, {@link SessionManager} will search for session
-	 * @param versionSpec the spec to resolve
-	 * @param projectId the project id
-	 * @return the primary version spec <!-- end-user-doc -->
-	 * @throws EmfStoreException if resolving fails
+	 *             If an error occurs while resolving the {@link VersionSpec}
 	 * @model
 	 * @generated NOT
 	 */
@@ -303,55 +474,67 @@ public interface Workspace extends EObject, IAdaptable {
 		throws EmfStoreException;
 
 	/**
-	 * Gets a list of history infos.
-	 * 
-	 * @param usersession session. if null, {@link SessionManager} will search for session
-	 * @param projectId a project id
-	 * @param query a history query
-	 * @return a list of history infos
-	 * @throws EmfStoreException if server throws an exception
-	 * @generated NOT
+	 * Make the current workspace state persistent.
 	 */
-	List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
-		throws EmfStoreException;
+	void save();
 
 	/**
-	 * Returns a {@link AdminBroker} related to the user session.
+	 * Set the workspace connection manager.
 	 * 
-	 * @param session session. if null, {@link SessionManager} will search for session
-	 * 
-	 * @return {@link AdminBroker}
-	 * @throws EmfStoreException if no connection can be established
-	 * @throws AccessControlException if access is denied
+	 * @param connectionManager
+	 *            The connection manager to be set.
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker(Usersession session) throws EmfStoreException, AccessControlException;
+	void setConnectionManager(ConnectionManager connectionManager);
 
 	/**
-	 * Deletes a project on the server.
+	 * Set the workspace resource set.
 	 * 
-	 * @param usersession session. if null, {@link SessionManager} will search for session
-	 * @param projectId projectId
-	 * @param deleteFiles deletes files too
-	 * @throws EmfStoreException in case of failure
+	 * @param resourceSet
+	 *            The resource set to be set.
+	 * @generated NOT
 	 */
-	void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
-		throws EmfStoreException;
+	void setWorkspaceResourceSet(ResourceSet resourceSet);
 
 	/**
 	 * Updates the ACUser and it roles.
 	 * 
-	 * @param session session. if null, {@link SessionManager} will search for session
+	 * @param serverInfo
+	 *            The {@link ServerInfo} that is used to update the ACUser.
+	 * @throws EmfStoreException
+	 *             if an error occurs while updating the ACUser
+	 */
+	void updateACUser(ServerInfo serverInfo) throws EmfStoreException;
+
+	/**
+	 * Updates the ACUser and it roles.
 	 * 
-	 * @throws EmfStoreException forwards any exception.
+	 * @param session
+	 *            The {@link Usersession} that should be used to update the ACUser.
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @throws EmfStoreException
+	 *             if an error occurs while updating the ACUser
 	 */
 	void updateACUser(Usersession session) throws EmfStoreException;
 
 	/**
+	 * Updates the ProjectInfos for the given {@link ServerInfo}.
+	 * 
+	 * @param serverInfo
+	 *            The {@link ServerInfo} whose project information should be updated.
+	 * @throws EmfStoreException
+	 *             if an error occurs while updating the project information
+	 */
+	void updateProjectInfos(ServerInfo serverInfo) throws EmfStoreException;
+
+	/**
 	 * Updates the ProjectInfos for the current ServerInfo.
 	 * 
-	 * @param session session. if null, {@link SessionManager} will search for session
+	 * @param session
+	 *            The {@link Usersession} that should be used to update the project information.
+	 *            If <code>null</code>, the {@link SessionManager} will search for a session.
+	 * @throws EmfStoreException
+	 *             if an error occurs while updating the project information
 	 */
 	void updateProjectInfos(Usersession session) throws EmfStoreException;
-
 } // Workspace

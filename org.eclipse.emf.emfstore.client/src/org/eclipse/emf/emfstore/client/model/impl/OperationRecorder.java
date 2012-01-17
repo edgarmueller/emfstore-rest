@@ -69,13 +69,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * @author koegel
  * @author emueller
  */
-// TODO: use to EObjectChangeObserver instead of ProjectChangeObserver
 public class OperationRecorder implements CommandObserver, IdEObjectCollectionChangeObserver {
-
-	// private final ProjectSpaceImpl projectSpace;
-	// private boolean isRecording;
-	// private NotificationRecorder notificationRecorder;
-	// private CompositeOperation compositeOperation;
 
 	/**
 	 * Name of unknown creator.

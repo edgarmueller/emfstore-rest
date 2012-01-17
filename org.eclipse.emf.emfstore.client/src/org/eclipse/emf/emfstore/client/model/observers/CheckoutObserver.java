@@ -23,7 +23,7 @@ public interface CheckoutObserver extends IObserver {
 	/**
 	 * Called on checkout.
 	 * 
-	 * @param projectSpace updated projectspace
+	 * @param projectSpace the checked out project space
 	 */
 	void checkoutDone(ProjectSpace projectSpace);
 
