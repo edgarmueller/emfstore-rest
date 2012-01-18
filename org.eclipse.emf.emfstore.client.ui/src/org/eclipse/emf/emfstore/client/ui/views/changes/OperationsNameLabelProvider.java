@@ -16,8 +16,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -35,10 +37,13 @@ public class OperationsNameLabelProvider extends ColumnLabelProvider {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param emfProvider the default label provider.
-	 * @param visualizationHelper the visualizationHelper
+	 * @param emfProvider
+	 *            the default label provider.
+	 * @param visualizationHelper
+	 *            the visualizationHelper
 	 */
-	public OperationsNameLabelProvider(ILabelProvider emfProvider, ChangePackageVisualizationHelper visualizationHelper) {
+	public OperationsNameLabelProvider(ILabelProvider emfProvider,
+			ChangePackageVisualizationHelper visualizationHelper) {
 		this.emfProvider = emfProvider;
 		this.visualizationHelper = visualizationHelper;
 	}
@@ -46,12 +51,16 @@ public class OperationsNameLabelProvider extends ColumnLabelProvider {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param emfProvider the default label provider.
-	 * @param visualizationHelper the visualizationHelper
-	 * @param opBackgroundLabelProvider the visualizationHelper
+	 * @param emfProvider
+	 *            the default label provider.
+	 * @param visualizationHelper
+	 *            the visualizationHelper
+	 * @param opBackgroundLabelProvider
+	 *            the visualizationHelper
 	 */
 	public OperationsNameLabelProvider(ILabelProvider emfProvider,
-		ChangePackageVisualizationHelper visualizationHelper, OperationColorLabelProvider opBackgroundLabelProvider) {
+			ChangePackageVisualizationHelper visualizationHelper,
+			OperationColorLabelProvider opBackgroundLabelProvider) {
 		this(emfProvider, visualizationHelper);
 		this.opBackgroundLabelProvider = opBackgroundLabelProvider;
 	}
@@ -73,8 +82,8 @@ public class OperationsNameLabelProvider extends ColumnLabelProvider {
 			Image image = visualizationHelper.getImage(emfProvider, op);
 			ImageDescriptor overlay = visualizationHelper.getOverlayImage(op);
 			if (image != null && overlay != null) {
-				OverlayImageDescriptor imageDescriptor = new OverlayImageDescriptor(image, overlay,
-					OverlayImageDescriptor.LOWER_RIGHT);
+				OverlayImageDescriptor imageDescriptor = new OverlayImageDescriptor(
+						image, overlay, OverlayImageDescriptor.LOWER_RIGHT);
 				cell.setImage(imageDescriptor.createImage());
 			}
 			if (opBackgroundLabelProvider != null) {
@@ -110,4 +119,13 @@ public class OperationsNameLabelProvider extends ColumnLabelProvider {
 		}
 		return "Change package";
 	}
+
+	@Override
+	public void dispose(ColumnViewer viewer, ViewerColumn column) {
+		if (visualizationHelper != null) {
+			visualizationHelper.dispose();
+		}
+		super.dispose(viewer, column);
+	}
+
 }

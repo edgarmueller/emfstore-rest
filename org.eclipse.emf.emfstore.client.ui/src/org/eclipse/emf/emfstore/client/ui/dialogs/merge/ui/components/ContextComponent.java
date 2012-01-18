@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.Conflict;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictContext;
@@ -29,6 +30,8 @@ import org.eclipse.swt.widgets.Label;
  * @author wesendon
  */
 public class ContextComponent extends Composite {
+
+	private ComposedAdapterFactory adapterFactory;
 
 	/**
 	 * Default constructor.
@@ -68,12 +71,17 @@ public class ContextComponent extends Composite {
 		oppTitle.setFont(fontRegistry.get("titleLabel"));
 		oppTitle.setBackground(getBackground());
 
-		AdapterFactoryLabelProvider provider = DecisionUtil.getLabelProvider();
+		adapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		AdapterFactoryLabelProvider provider = new AdapterFactoryLabelProvider(
+				adapterFactory);
 
 		CLabel meLabel = new CLabel(this, SWT.NONE);
 		meLabel.setImage(provider.getImage(context.getModelElement()));
-		meLabel.setText(DecisionUtil.cutString(provider.getText(context.getModelElement()), 40, true));
-		meLabel.setToolTipText(DecisionUtil.getClassAndName(context.getModelElement()));
+		meLabel.setText(DecisionUtil.cutString(
+				provider.getText(context.getModelElement()), 40, true));
+		meLabel.setToolTipText(DecisionUtil.getClassAndName(context
+				.getModelElement()));
 		meLabel.setFont(fontRegistry.get("content"));
 		meLabel.setBackground(getBackground());
 
@@ -86,6 +94,14 @@ public class ContextComponent extends Composite {
 		oppLable.setText(context.getOpponent());
 		oppLable.setFont(fontRegistry.get("content"));
 		oppLable.setBackground(getBackground());
+	}
+
+	@Override
+	public void dispose() {
+		if (adapterFactory != null) {
+			adapterFactory.dispose();
+		}
+		super.dispose();
 	}
 
 }

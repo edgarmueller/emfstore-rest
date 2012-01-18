@@ -32,6 +32,10 @@ import org.eclipse.swt.widgets.Display;
  */
 public final class DecisionUtil {
 
+	private static final AdapterFactoryLabelProvider ADAPTER_FACTORY_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
+			new ComposedAdapterFactory(
+					ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+
 	private DecisionUtil() {
 	}
 
@@ -40,7 +44,8 @@ public final class DecisionUtil {
 	/**
 	 * Fetches image by path.
 	 * 
-	 * @param path path
+	 * @param path
+	 *            path
 	 * @return image
 	 */
 	public static Image getImage(String path) {
@@ -50,12 +55,14 @@ public final class DecisionUtil {
 	/**
 	 * Fetches image descriptor by path.
 	 * 
-	 * @param path path
+	 * @param path
+	 *            path
 	 * @return {@link ImageDescriptor}
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		final String key = path;
-		ImageDescriptor regImage = JFaceResources.getImageRegistry().getDescriptor(key);
+		ImageDescriptor regImage = JFaceResources.getImageRegistry()
+				.getDescriptor(key);
 		if (regImage == null) {
 			regImage = Activator.getImageDescriptor("icons/merge/" + path);
 			JFaceResources.getImageRegistry().put(key, regImage);
@@ -66,9 +73,12 @@ public final class DecisionUtil {
 	/**
 	 * Cuts a text to certain length and adds "..." at the end if needed.
 	 * 
-	 * @param str text
-	 * @param length length
-	 * @param addPoints true, if ending dotts
+	 * @param str
+	 *            text
+	 * @param length
+	 *            length
+	 * @param addPoints
+	 *            true, if ending dotts
 	 * @return shortened string
 	 */
 	public static String cutString(String str, int length, boolean addPoints) {
@@ -89,7 +99,8 @@ public final class DecisionUtil {
 	/**
 	 * Strips line breaking characters from text.
 	 * 
-	 * @param text text
+	 * @param text
+	 *            text
 	 * @return linf of text
 	 */
 	public static String stripNewLine(String text) {
@@ -97,17 +108,6 @@ public final class DecisionUtil {
 			return "";
 		}
 		return text.replaceAll("\n\r|\r\n|\n \r|\r \n|\n|\r", " ");
-	}
-
-	/**
-	 * Returns label provider.
-	 * 
-	 * @return provider
-	 */
-	public static AdapterFactoryLabelProvider getLabelProvider() {
-		AdapterFactoryLabelProvider provider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
-		return provider;
 	}
 
 	/**
@@ -126,11 +126,14 @@ public final class DecisionUtil {
 	/**
 	 * Get Option by is type.
 	 * 
-	 * @param options list of options
-	 * @param type type
+	 * @param options
+	 *            list of options
+	 * @param type
+	 *            type
 	 * @return resulting option or null
 	 */
-	public static ConflictOption getConflictOptionByType(List<ConflictOption> options, OptionType type) {
+	public static ConflictOption getConflictOptionByType(
+			List<ConflictOption> options, OptionType type) {
 		for (ConflictOption option : options) {
 			if (option.getType().equals(type)) {
 				return option;
@@ -142,7 +145,8 @@ public final class DecisionUtil {
 	/**
 	 * Checks whether a conflict needs details.
 	 * 
-	 * @param conflict conflict
+	 * @param conflict
+	 *            conflict
 	 * @return true, if so
 	 */
 	public static boolean detailsNeeded(Conflict conflict) {
@@ -153,7 +157,8 @@ public final class DecisionUtil {
 			if (!option.isDetailsProvider()) {
 				continue;
 			}
-			if (option.getDetailProvider().startsWith(DecisionConfig.WIDGET_MULTILINE)) {
+			if (option.getDetailProvider().startsWith(
+					DecisionConfig.WIDGET_MULTILINE)) {
 				if (option.getOptionLabel().length() > DecisionConfig.OPTION_LENGTH) {
 					return true;
 				}
@@ -167,18 +172,22 @@ public final class DecisionUtil {
 	/**
 	 * Uses the object's toString method or returns unset string.
 	 * 
-	 * @param obj obj to string
-	 * @param unset unset string
+	 * @param obj
+	 *            obj to string
+	 * @param unset
+	 *            unset string
 	 * @return obj.toString or unset
 	 */
 	public static String getLabel(Object obj, String unset) {
-		return (obj != null && obj.toString().length() > 1) ? obj.toString() : unset;
+		return (obj != null && obj.toString().length() > 1) ? obj.toString()
+				: unset;
 	}
 
 	/**
 	 * Returns Class and Name of {@link EObject}.
 	 * 
-	 * @param modelElement modelelement
+	 * @param modelElement
+	 *            modelelement
 	 * @return string
 	 */
 	public static String getClassAndName(EObject modelElement) {
@@ -195,8 +204,7 @@ public final class DecisionUtil {
 	 * @return label proivder
 	 */
 	public static AdapterFactoryLabelProvider getAdapterFactory() {
-		AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+		AdapterFactoryLabelProvider adapterFactoryLabelProvider = ADAPTER_FACTORY_LABEL_PROVIDER;
 		return adapterFactoryLabelProvider;
 	}
 }
