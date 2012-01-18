@@ -1203,7 +1203,7 @@
            state="true">
         <enablement>
            <objectClass
-                 name="org.eclipse.jface.viewers.TreeNode">
+                 name="org.eclipse.emf.emfstore.client.model.ServerInfo">
            </objectClass>
         </enablement>
      </decorator>
