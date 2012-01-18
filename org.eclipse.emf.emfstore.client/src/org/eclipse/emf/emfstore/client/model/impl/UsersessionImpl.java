@@ -12,9 +12,6 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.Collection;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -33,7 +30,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -574,25 +571,6 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(newSessionId);
 		WorkspaceManager.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
-
-		// TODO replace with observerbus
-		// BEGIN SUPRESS CATCH EXCEPTION
-		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.notify.login");
-		for (IConfigurationElement e : config) {
-			try {
-				Object o = e.createExecutableExtension("class");
-				if (o instanceof LoginObserver) {
-					LoginObserver loginObserver = (LoginObserver) o;
-					loginObserver.loginCompleted(this);
-				}
-			} catch (CoreException e1) {
-				WorkspaceUtil.logException(e1.getMessage(), e1);
-			} catch (RuntimeException e1) {
-				WorkspaceUtil.logException(e1.getMessage(), e1);
-			}
-		}
-		// END SUPRESS CATCH EXCEPTION
 	}
 
 	/**
@@ -602,6 +580,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
+		WorkspaceManager.getObserverBus().notify(LogoutObserver.class).logoutCompleted(this);
 	}
 
 	/**
