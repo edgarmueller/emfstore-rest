@@ -135,15 +135,11 @@ public class LoginDialog extends TitleAreaDialog {
 		if (usersession == null || usersession.getUsername() == null || usersession.getUsername().equals("")) {
 			return;
 		}
-
 		selectedUsersession = usersession;
-
 		if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
 			// passwordField.setText(selectedUsersession.getPassword());
 		}
-
 		passwordField.setMessage("Otto is doof");
-
 		passwordModified = false;
 		savePassword.setSelection(selectedUsersession.isSavePassword());
 	}
@@ -157,11 +153,9 @@ public class LoginDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		try {
-
 			if (selectedUsersession == null) {
 				selectedUsersession = ModelFactory.eINSTANCE.createUsersession();
 			}
-
 			selectedUsersession.setUsername(usernameCombo.getCombo().getText());
 			selectedUsersession.setSavePassword(savePassword.getSelection());
 			selectedUsersession.setServerInfo(controller.getServerInfo());
@@ -169,22 +163,12 @@ public class LoginDialog extends TitleAreaDialog {
 			if (passwordModified) {
 				selectedUsersession.setPassword(passwordField.getText());
 			}
-
 			controller.validate(selectedUsersession);
 		} catch (EmfStoreException e) {
 			setErrorMessage(e.getMessage());
 			return;
 		}
 		super.okPressed();
-	}
-
-	/**
-	 * Returns the selected {@link Usersession}.
-	 * 
-	 * @return the user session selected by the user
-	 */
-	public Usersession getSelectedUsersession() {
-		return selectedUsersession;
 	}
 
 	/**

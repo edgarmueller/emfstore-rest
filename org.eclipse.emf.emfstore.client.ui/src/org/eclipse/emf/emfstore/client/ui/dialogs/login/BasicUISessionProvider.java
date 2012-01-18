@@ -24,7 +24,6 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 */
 	@Override
 	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
-
 		if (serverInfo == null) {
 			// try to retrieve a server info by showing a server info selection dialog
 			ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent().getActiveShell(),
@@ -33,7 +32,6 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 				serverInfo = dialog.getResult();
 			}
 		}
-
 		if (serverInfo == null) {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
@@ -42,13 +40,13 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 			return serverInfo.getLastUsersession();
 		}
 
-		return new LoginDialogController(serverInfo).login();
+		return new LoginDialogController().login(serverInfo);
 	}
 
 	@Override
 	public void login(Usersession usersession) throws EmfStoreException {
 		if (usersession != null) {
-			new LoginDialogController(usersession).login();
+			new LoginDialogController().login(usersession);
 		}
 	}
 }

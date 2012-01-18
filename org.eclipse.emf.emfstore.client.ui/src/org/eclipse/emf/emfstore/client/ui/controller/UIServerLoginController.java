@@ -17,10 +17,9 @@ public class UIServerLoginController extends AbstractEMFStoreUIController {
 
 	public void openLoginDialog() {
 		try {
-			LoginDialogController loginDialogController = new LoginDialogController(serverInfo);
-			loginDialogController.login();
+			LoginDialogController loginDialogController = new LoginDialogController();
+			loginDialogController.login(serverInfo);
 		} catch (EmfStoreException e) {
-			// TODO
 			e.printStackTrace();
 		}
 	}
