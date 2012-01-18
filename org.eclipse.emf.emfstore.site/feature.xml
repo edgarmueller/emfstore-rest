@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <feature
       id="org.eclipse.emf.emfstore.site"
       label="EMF Store Site"
@@ -20,6 +19,8 @@
       %license
    </license>
 
-
+   <includes
+         id="org.eclipse.emf.emfstore.common.feature"
+         version="0.0.0"/>
 
 </feature>

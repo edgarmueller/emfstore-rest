@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="platform.version" value="3.7"/>
-  <rm:property key="emf.version" value="2.7"/>
+  <rm:property key="emf.version" value="2.6"/>
   <rm:property key="orbit.version" value="S20110907174232"/>
   
   <rm:property key="git.clone.emfclient.core" value="${user.home}/buckminster/org.eclipse.emf.emfclient.core"/>
@@ -15,8 +15,12 @@
   <rm:property key="eclipse.downloads" value="http://download.eclipse.org"/>
   <rm:property key="resolve.target.platform" value="true"/>
   <rm:property key="build.type" value="N"/>
+  
   <rm:locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="git"/>
   <rm:locator pattern="^org\.eclipse\.emf\.ecp(?:\..+)?$" searchPathRef="git"/>
+<!--
+  <rm:locator pattern="^org\.eclipse\.emf(?:\..+)?$" searchPathRef="mySearchPath"/>
+-->
   <rm:locator searchPathRef="p2"/>
   
   <rm:searchPath name="git">
@@ -140,7 +144,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/emf/emf/updates">
+      <rm:uri format="{0}/modeling/emf/emf/updates/{1}">
         <bc:propertyRef key="eclipse.downloads"/>
         <bc:propertyRef key="emf.version"/>
       </rm:uri>
@@ -161,5 +165,18 @@
         <bc:propertyRef key="platform.version"/>
       </rm:uri>
     </rm:provider>
+    
   </rm:searchPath>
+  
+  <rm:searchPath name="mySearchPath">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/modeling/emf/updates/{1}">
+        <bc:propertyRef key="eclipse.downloads"/>
+        <bc:propertyRef key="emf.version"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+
 </rm:rmap>
