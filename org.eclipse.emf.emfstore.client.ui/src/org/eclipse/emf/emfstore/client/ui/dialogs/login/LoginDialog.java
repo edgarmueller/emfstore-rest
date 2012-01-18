@@ -30,7 +30,7 @@ public class LoginDialog extends TitleAreaDialog {
 	private Text passwordField;
 	private Button savePassword;
 	private ComboViewer usernameCombo;
-	private final LoginDialogControllerInterface controller;
+	private final ILoginDialogController controller;
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
 
@@ -39,7 +39,7 @@ public class LoginDialog extends TitleAreaDialog {
 	 * 
 	 * @param parentShell
 	 */
-	public LoginDialog(Shell parentShell, LoginDialogControllerInterface controller) {
+	public LoginDialog(Shell parentShell, ILoginDialogController controller) {
 		super(parentShell);
 		this.controller = controller;
 	}
@@ -76,6 +76,7 @@ public class LoginDialog extends TitleAreaDialog {
 		Combo combo = usernameCombo.getCombo();
 		if (controller.isUsersessionLocked()) {
 			combo.setEnabled(false);
+			combo.setText(controller.getUsersession().getUsername());
 		}
 		GridData gd_usernameCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_usernameCombo.widthHint = 235;
@@ -119,23 +120,47 @@ public class LoginDialog extends TitleAreaDialog {
 		}
 	}
 
+	/**
+	 * Fills the login dialog data according to the given {@link Usersession}.
+	 * 
+	 * @param usersession
+	 *            the user session to be loaded
+	 */
 	private void loadUsersession(Usersession usersession) {
+
+		// session may be null; this is the case when LoginDialogController#login
+		// has been called with a server info instead of an user session
+		// if (usersession == null || usersession.getUsername() == null || usersession.getUsername().equals("")) {
+		// return;
+		// }
+
 		selectedUsersession = usersession;
+
 		if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
-			passwordField.setText("password");
+			passwordField.setText(selectedUsersession.getPassword());
 		}
+
 		passwordModified = false;
 		savePassword.setSelection(selectedUsersession.isSavePassword());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
+	 */
 	@Override
 	protected void okPressed() {
 		try {
 			selectedUsersession.setUsername(usernameCombo.getCombo().getText());
 			selectedUsersession.setSavePassword(savePassword.getSelection());
+			selectedUsersession.setServerInfo(controller.getServerInfo());
+
 			if (passwordModified) {
 				selectedUsersession.setPassword(passwordField.getText());
 			}
+
 			controller.validate(selectedUsersession);
 		} catch (AccessControlException e) {
 			setErrorMessage(e.getMessage());
@@ -145,9 +170,19 @@ public class LoginDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * Create contents of the button bar.
+	 * Returns the selected {@link Usersession}.
 	 * 
-	 * @param parent
+	 * @return the user session selected by the user
+	 */
+	public Usersession getSelectedUsersession() {
+		return selectedUsersession;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.dialogs.Dialog#createButtonsForButtonBar(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -156,13 +191,19 @@ public class LoginDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * Return the initial size of the dialog.
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.dialogs.TitleAreaDialog#getInitialSize()
 	 */
 	@Override
 	protected Point getInitialSize() {
 		return new Point(400, 250);
 	}
 
+	/**
+	 * Clears the error message.
+	 */
 	private void flushErrorMessage() {
 		setErrorMessage(null);
 	}
@@ -180,16 +221,4 @@ public class LoginDialog extends TitleAreaDialog {
 		}
 	}
 
-	public interface LoginDialogControllerInterface {
-
-		public void validate(Usersession usersession) throws AccessControlException;
-
-		public boolean isUsersessionLocked();
-
-		public Usersession getUsersession();
-
-		public Usersession[] getKnownUsersessions();
-
-		public String getServerLabel();
-	}
 }
