@@ -7,7 +7,8 @@ public class ServerLoginHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIServerLoginController(getShell(), requireSelection(ServerInfo.class)).openLoginDialog();
+		ServerInfo serverInfo = requireSelection(ServerInfo.class);
+		new UIServerLoginController(getShell(), serverInfo).openLoginDialog();
 	}
 
 }
