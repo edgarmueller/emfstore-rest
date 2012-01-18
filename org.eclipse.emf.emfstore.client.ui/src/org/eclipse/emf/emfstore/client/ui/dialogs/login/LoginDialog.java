@@ -1,7 +1,8 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
+import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -33,6 +34,7 @@ public class LoginDialog extends TitleAreaDialog {
 	private final ILoginDialogController controller;
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
+	private Button okButton;
 
 	/**
 	 * Create the dialog.
@@ -90,7 +92,7 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordLabel.setText("Password");
 
 		passwordField = new Text(loginContainer, SWT.BORDER | SWT.PASSWORD);
-		passwordField.setText("password");
+		// passwordField.setText("password");
 		GridData gd_passwordField = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_passwordField.widthHint = 250;
 		passwordField.setLayoutData(gd_passwordField);
@@ -130,15 +132,17 @@ public class LoginDialog extends TitleAreaDialog {
 
 		// session may be null; this is the case when LoginDialogController#login
 		// has been called with a server info instead of an user session
-		// if (usersession == null || usersession.getUsername() == null || usersession.getUsername().equals("")) {
-		// return;
-		// }
+		if (usersession == null || usersession.getUsername() == null || usersession.getUsername().equals("")) {
+			return;
+		}
 
 		selectedUsersession = usersession;
 
 		if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
-			passwordField.setText(selectedUsersession.getPassword());
+			// passwordField.setText(selectedUsersession.getPassword());
 		}
+
+		passwordField.setMessage("Otto is doof");
 
 		passwordModified = false;
 		savePassword.setSelection(selectedUsersession.isSavePassword());
@@ -153,6 +157,11 @@ public class LoginDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		try {
+
+			if (selectedUsersession == null) {
+				selectedUsersession = ModelFactory.eINSTANCE.createUsersession();
+			}
+
 			selectedUsersession.setUsername(usernameCombo.getCombo().getText());
 			selectedUsersession.setSavePassword(savePassword.getSelection());
 			selectedUsersession.setServerInfo(controller.getServerInfo());
@@ -162,7 +171,7 @@ public class LoginDialog extends TitleAreaDialog {
 			}
 
 			controller.validate(selectedUsersession);
-		} catch (AccessControlException e) {
+		} catch (EmfStoreException e) {
 			setErrorMessage(e.getMessage());
 			return;
 		}

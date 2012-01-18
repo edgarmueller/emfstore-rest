@@ -2,6 +2,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.HashSet;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -52,17 +53,27 @@ public class LoginDialogController implements ILoginDialogController {
 		return getServerInfo().getName();
 	}
 
-	public void validate(Usersession usersession) throws AccessControlException {
+	public void validate(Usersession usersession) throws EmfStoreException {
+		usersession.logIn();
+		EList<Usersession> usersessions = WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions();
 		// TODO login code
-
+		if (!usersessions.contains(usersession)) {
+			usersessions.add(usersession);
+		}
 		// if login successfuly set usersesion to field fo
 	}
-	
 
-	private final Usersession usersession;
+	private Usersession usersession;
+	private ServerInfo serverInfo;
 
 	public LoginDialogController(Usersession usersession) {
 		this.usersession = usersession;
+		serverInfo = usersession.getServerInfo();
+	}
+
+	public LoginDialogController(ServerInfo serverInfo) {
+		this.serverInfo = serverInfo;
+		this.usersession = null;
 	}
 
 	public Usersession getUsersession() {

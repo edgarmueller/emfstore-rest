@@ -1,6 +1,5 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -42,9 +41,10 @@ public class DefaultSessionProvider implements SessionProvider {
 			return serverInfo.getLastUsersession();
 		}
 
-		Usersession createdUsersession = ModelFactory.eINSTANCE.createUsersession();
-		createdUsersession.setServerInfo(serverInfo);
-		return createdUsersession;
+		// Usersession createdUsersession = ModelFactory.eINSTANCE.createUsersession();
+		// createdUsersession.setServerInfo(serverInfo);
+		// return createdUsersession;
+		return new LoginDialogController(serverInfo).login();
 		// return new ServerInfoLoginDialogController(serverInfo).login();
 	}
 

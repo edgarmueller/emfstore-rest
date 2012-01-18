@@ -36,7 +36,7 @@ public class SessionManager {
 	public void execute(ServerCall<?> serverCall) throws EmfStoreException {
 		Usersession usersession = prepareUsersession(serverCall);
 		loginUsersession(usersession, false);
-		WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
+		// WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
 		executeCall(serverCall, usersession, true);
 	}
 
