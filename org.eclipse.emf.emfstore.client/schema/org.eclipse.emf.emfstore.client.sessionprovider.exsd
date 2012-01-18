@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider:"/>
                </appInfo>
             </annotation>
          </attribute>

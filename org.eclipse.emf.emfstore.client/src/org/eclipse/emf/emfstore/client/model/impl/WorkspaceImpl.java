@@ -973,7 +973,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateProjectInfos(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	public void updateProjectInfos(final Usersession usersession) throws EmfStoreException {
-		new ServerCall<Void>() {
+		new ServerCall<Void>(usersession) {
 			@Override
 			protected Void run() throws EmfStoreException {
 				return updateProjectInfos(usersession.getServerInfo(), usersession);

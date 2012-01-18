@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.common.ExtensionPoint;
@@ -25,6 +24,8 @@ import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
  */
 public class SessionManager {
 
+	private AbstractSessionProvider provider;
+
 	/**
 	 * Executes the given {@link ServerCall}.
 	 * 
@@ -34,9 +35,8 @@ public class SessionManager {
 	 *             If an error occurs during execution of the server call
 	 */
 	public void execute(ServerCall<?> serverCall) throws EmfStoreException {
-		Usersession usersession = prepareUsersession(serverCall);
+		Usersession usersession = getSessionProvider().provideUsersession(serverCall);
 		loginUsersession(usersession, false);
-		// WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
 		executeCall(serverCall, usersession, true);
 	}
 
@@ -71,7 +71,7 @@ public class SessionManager {
 					// ignore, session provider should try to login
 				}
 			}
-			getSessionProvider().loginSession(usersession);
+			getSessionProvider().login(usersession);
 		}
 	}
 
@@ -94,29 +94,16 @@ public class SessionManager {
 		}
 	}
 
-	private Usersession prepareUsersession(ServerCall<?> serverCall) throws EmfStoreException {
-		Usersession usersession = serverCall.getUsersession();
-		if (usersession == null) {
-			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());
+	private AbstractSessionProvider getSessionProvider() {
+
+		if (provider == null) {
+			provider = new ExtensionPoint(AbstractSessionProvider.ID).getClass("class", AbstractSessionProvider.class);
 		}
 
-		if (usersession == null) {
-			SessionProvider sessionProvider = getSessionProvider();
-			// serverinfo hint
-			usersession = sessionProvider.provideUsersession(serverCall.getServerInfo());
+		if (provider == null) {
+			provider = new BasicSessionProvider();
 		}
-		serverCall.setUsersession(usersession);
-		return usersession;
-	}
 
-	private Usersession getUsersessionFromProjectSpace(ProjectSpace projectSpace) {
-		if (projectSpace != null && projectSpace.getUsersession() != null) {
-			return projectSpace.getUsersession();
-		}
-		return null;
-	}
-
-	private SessionProvider getSessionProvider() {
-		return new ExtensionPoint(SessionProvider.ID).getClass("class", SessionProvider.class);
+		return provider;
 	}
 }

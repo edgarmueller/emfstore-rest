@@ -31,13 +31,13 @@ public class LoginDialogController implements ILoginDialogController {
 			throw new AccessControlException("Couldn't login.");
 		}
 
-		Usersession selectedUsersession = dialog.getSelectedUsersession();
-		try {
-			selectedUsersession.logIn();
-		} catch (EmfStoreException e) {
-			e.printStackTrace();
-		}
-		return selectedUsersession;
+		return dialog.getSelectedUsersession();
+		// try {
+		// selectedUsersession.logIn();
+		// } catch (EmfStoreException e) {
+		// e.printStackTrace();
+		// }
+		// return selectedUsersession;
 	}
 
 	public boolean isUsersessionLocked() {
@@ -81,6 +81,11 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	public ServerInfo getServerInfo() {
+
+		if (serverInfo != null) {
+			return serverInfo;
+		}
+
 		return usersession.getServerInfo();
 	}
 
