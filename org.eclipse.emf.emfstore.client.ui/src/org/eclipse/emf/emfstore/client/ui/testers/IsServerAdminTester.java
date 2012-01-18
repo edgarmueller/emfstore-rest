@@ -13,11 +13,11 @@ package org.eclipse.emf.emfstore.client.ui.testers;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * Checks if the user has admin access to the server.
@@ -33,15 +33,15 @@ public class IsServerAdminTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
-		if (receiver instanceof TreeNode && expectedValue instanceof Boolean) {
+		if ((receiver instanceof ServerInfo || receiver instanceof ProjectInfo) && expectedValue instanceof Boolean) {
 
-			TreeNode treeNode = (TreeNode) receiver;
 			ServerInfo serverInfo = null;
 
-			if (treeNode.getValue() instanceof ServerInfo) {
-				serverInfo = (ServerInfo) treeNode.getValue();
-			} else if (treeNode.getValue() instanceof ProjectInfo) {
-				serverInfo = (ServerInfo) treeNode.getParent().getValue();
+			if (receiver instanceof ServerInfo) {
+				serverInfo = (ServerInfo) receiver;
+			} else if (receiver instanceof ProjectInfo) {
+				ProjectInfo projectInfo = (ProjectInfo) receiver;
+				serverInfo = findServerInfo(projectInfo);
 			}
 
 			final ServerInfo finalServerInfo = serverInfo;
@@ -67,5 +67,15 @@ public class IsServerAdminTester extends PropertyTester {
 
 		}
 		return false;
+	}
+
+	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
+		for (ServerInfo serverInfo : WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos()) {
+			if (projectInfo.eContainer().equals(serverInfo)) {
+				return serverInfo;
+			}
+		}
+
+		return null;
 	}
 }
