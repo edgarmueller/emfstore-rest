@@ -21,7 +21,6 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.ui.controller.UIServerLoginController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
@@ -31,8 +30,6 @@ import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITreeViewerListener;
-import org.eclipse.jface.viewers.TreeExpansionEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -142,29 +139,29 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new ESBrowserLabelProvider(), decoratorManager
 			.getLabelDecorator()));
 		viewer.setSorter(new ESBrowserViewerSorter());
-
 		viewer.setInput(WorkspaceManager.getInstance().getCurrentWorkspace());
-		viewer.addTreeListener(new ITreeViewerListener() {
-
-			/**
-			 * {@inheritDoc}
-			 */
-			public void treeExpanded(TreeExpansionEvent event) {
-				if (event.getElement() instanceof ServerInfo) {
-					ServerInfo value = (ServerInfo) event.getElement();
-					new UIServerLoginController(PlatformUI.getWorkbench().getDisplay().getActiveShell(), value)
-						.openLoginDialog();
-
-					// TODO: refresh is always performed
-					if (!event.getTreeViewer().isBusy()) {
-						event.getTreeViewer().refresh(value, true);
-					}
-				}
-			}
-
-			public void treeCollapsed(TreeExpansionEvent event) {
-			}
-		});
+		// viewer.addTreeListener(new ITreeViewerListener() {
+		//
+		// /**
+		// * {@inheritDoc}
+		// */
+		// public void treeExpanded(TreeExpansionEvent event) {
+		// if (event.getElement() instanceof ServerInfo) {
+		//
+		// ServerInfo value = (ServerInfo) event.getElement();
+		// // new UIServerLoginController(PlatformUI.getWorkbench().getDisplay().getActiveShell(), value)
+		// // .openLoginDialog();
+		//
+		// // TODO: refresh is always performed
+		// if (!event.getTreeViewer().isBusy()) {
+		// event.getTreeViewer().refresh(value, true);
+		// }
+		// }
+		// }
+		//
+		// public void treeCollapsed(TreeExpansionEvent event) {
+		// }
+		// });
 
 		PlatformUI.getWorkbench().getHelpSystem()
 			.setHelp(viewer.getControl(), "org.eclipse.emf.emfstore.client.ui.views.RepositoryView");
