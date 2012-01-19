@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
@@ -492,7 +493,7 @@ public class SetupHelper {
 						usersession.logIn();
 					}
 
-					getTestProjectSpace().shareProject(usersession);
+					getTestProjectSpace().shareProject(usersession, new NullProgressMonitor());
 					LOGGER.log(Level.INFO, "project shared.");
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
@@ -515,10 +516,8 @@ public class SetupHelper {
 					.getChangePackage(getTestProjectSpace().getOperations(), true, false).getOperations().size()
 					+ " operations.");
 				try {
-					getTestProjectSpace().commit(logMessage);
+					getTestProjectSpace().commit(logMessage, null, new NullProgressMonitor());
 					System.out.println("commit successful!");
-				} catch (NoLocalChangesException e) {
-					// do nothing
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
 				}

@@ -8,6 +8,7 @@ import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -80,16 +81,17 @@ public class PropertiesTest extends ServerTests {
 
 			@Override
 			protected void doRun() {
-				WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos().add(severInfo);
-				WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession1);
-				WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession2);
-				WorkspaceManager.getInstance().getCurrentWorkspace().save();
+				Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+				workspace.getServerInfos().add(severInfo);
+				workspace.getUsersessions().add(usersession1);
+				workspace.getUsersessions().add(usersession2);
+				workspace.save();
 
 				try {
 					usersession1.logIn();
 					usersession2.logIn();
-					projectSpace1 = usersession1.checkout(getProjectInfo());
-					projectSpace2 = usersession2.checkout(getProjectInfo());
+					projectSpace1 = workspace.checkout(usersession1, getProjectInfo());
+					projectSpace2 = workspace.checkout(usersession2, getProjectInfo());
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
 				} catch (EmfStoreException e) {
