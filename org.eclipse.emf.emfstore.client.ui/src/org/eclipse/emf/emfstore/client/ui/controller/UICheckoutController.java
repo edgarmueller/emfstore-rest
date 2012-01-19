@@ -1,8 +1,8 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.controller.CheckoutController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.swt.widgets.Shell;
@@ -36,7 +36,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController {
 			try {
 				page.showView(viewId);
 			} catch (PartInitException e) {
-				DialogHandler.showExceptionDialog(e);
+				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		} catch (EmfStoreException e1) {
 			e1.printStackTrace();

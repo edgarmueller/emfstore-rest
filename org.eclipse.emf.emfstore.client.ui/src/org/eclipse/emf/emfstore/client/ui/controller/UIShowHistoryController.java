@@ -1,10 +1,10 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -43,7 +43,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController {
 		try {
 			historyBrowserView = (HistoryBrowserView) page.showView(viewId);
 		} catch (PartInitException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		if (historyBrowserView != null) {
 			historyBrowserView.setInput(projectSpace, modelElement);

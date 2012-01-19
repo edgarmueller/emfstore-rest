@@ -2,7 +2,7 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -26,7 +26,7 @@ public abstract class AbstractEMFStoreUIController {
 	}
 
 	public void handleException(Exception exception) {
-		DialogHandler.showExceptionDialog(exception);
+		EMFStoreMessageDialog.showExceptionDialog(exception);
 		closeProgress();
 	}
 
