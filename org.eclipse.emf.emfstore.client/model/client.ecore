@@ -5,13 +5,12 @@
     nsURI="http://eclipse.org/emf/emfstore/client/model" nsPrefix="org.eclipse.emfstore.client.model">
   <eClassifiers xsi:type="ecore:EClass" name="Workspace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="projectSpaces" upperBound="-1"
-        eType="#//ProjectSpace" containment="true" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
+        eType="#//ProjectSpace" containment="true" eOpposite="#//ProjectSpace/workspace"
+        eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="serverInfos" upperBound="-1"
         eType="#//ServerInfo" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usersessions" upperBound="-1"
         eType="#//Usersession" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="activeProjectSpace" eType="#//ProjectSpace"
-        eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServerInfo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -49,9 +48,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectDescription" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/events/Event"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usersession" eType="#//Usersession"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" lowerBound="1"
@@ -63,13 +59,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localOperations" eType="#//OperationComposite"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="notifications" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//notification/ESNotification"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventComposite" eType="#//EventComposite"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="notificationComposite"
-        eType="#//NotificationComposite" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="waitingUploads" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//FileIdentifier"
         containment="true"/>
@@ -78,6 +67,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="changedSharedProperties"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//EMFStoreProperty"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
+        eOpposite="#//Workspace/projectSpaces"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationComposite">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
@@ -92,15 +83,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upload" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="preliminaryFileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventComposite">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/events/Event"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NotificationComposite">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="notifications" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//notification/ESNotification"
-        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

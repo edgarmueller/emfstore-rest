@@ -75,22 +75,6 @@ public interface ModelFactory extends EFactory {
 	PendingFileTransfer createPendingFileTransfer();
 
 	/**
-	 * Returns a new object of class '<em>Event Composite</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Composite</em>'.
-	 * @generated
-	 */
-	EventComposite createEventComposite();
-
-	/**
-	 * Returns a new object of class '<em>Notification Composite</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return a new object of class '<em>Notification Composite</em>'.
-	 * @generated
-	 */
-	NotificationComposite createNotificationComposite();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the package supported by this factory.

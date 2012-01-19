@@ -10,22 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Usersession</b></em>'. <!-- end-user-doc -->
@@ -252,71 +243,6 @@ public interface Usersession extends EObject {
 	void logIn() throws AccessControlException, EmfStoreException;
 
 	/**
-	 * <!-- begin-user-doc --> Checkout a project to the local workspace.
-	 * 
-	 * @param projectInfo a project info describing the project and its version
-	 * @return a Project space containing the project
-	 * @throws EmfStoreException <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	ProjectSpace checkout(ProjectInfo projectInfo) throws EmfStoreException;
-
-	/**
-	 * Get the list of remotely available projects.
-	 * 
-	 * @return a list of project infos
-	 * @throws EmfStoreException if retrieval fails
-	 * @generated NOT
-	 */
-	List<ProjectInfo> getRemoteProjectList() throws EmfStoreException;
-
-	/**
-	 * Create a project on the server.
-	 * 
-	 * @param name the project name
-	 * @param description the project description
-	 * @return the ProjectInfo of the new Project
-	 * @throws AccessControlException if creating projects is not allowed
-	 * @throws EmfStoreException if creation fails
-	 * @generated NOT
-	 */
-	ProjectInfo createProject(String name, String description) throws AccessControlException, EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
-	 * 
-	 * @param versionSpec the spec to resolve
-	 * @param projectId the project id
-	 * @return the primary version spec <!-- end-user-doc -->
-	 * @throws EmfStoreException if resolving fails
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec, ProjectId projectId) throws EmfStoreException;
-
-	/**
-	 * Gets a list of history infos.
-	 * 
-	 * @param projectId a project id
-	 * @param query a history query
-	 * @return a list of history infos
-	 * @throws EmfStoreException if server throws an exception
-	 * @generated NOT
-	 */
-	List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery query) throws EmfStoreException;
-
-	/**
-	 * Returns a {@link AdminBroker} related to the user session.
-	 * 
-	 * @return {@link AdminBroker}
-	 * @throws EmfStoreException if no connection can be established
-	 * @throws AccessControlException if access is denied
-	 * @generated NOT
-	 */
-	AdminBroker getAdminBroker() throws EmfStoreException, AccessControlException;
-
-	/**
 	 * Check if the user session is currently logged into a server.
 	 * 
 	 * @return true if it is.
@@ -324,46 +250,10 @@ public interface Usersession extends EObject {
 	boolean isLoggedIn();
 
 	/**
-	 * Deletes a project on the server.
-	 * 
-	 * @param projectId projectId
-	 * @param deleteFiles deletes files too
-	 * @throws EmfStoreException in case of failure
-	 */
-	void deleteProject(ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
-
-	/**
-	 * Updates the ACUser and it roles.
-	 * 
-	 * @throws EmfStoreException forwards any exception.
-	 */
-	void updateACUser() throws EmfStoreException;
-
-	/**
-	 * Register a new login observer.
-	 * 
-	 * @param observer the login observer
-	 */
-	void addLoginObserver(LoginObserver observer);
-
-	/**
-	 * De-Register a new login observer.
-	 * 
-	 * @param observer the login observer
-	 */
-	void removeLoginObserver(LoginObserver observer);
-
-	/**
 	 * Sends a logout call to the server.
 	 * 
 	 * @throws EmfStoreException forwards any exception.
 	 */
 	void logout() throws EmfStoreException;
-
-	/**
-	 * Updates the ProjectInfos for the current ServerInfo.
-	 */
-	void updateProjectInfos();
-
 	// end of custom code
 } // Usersession

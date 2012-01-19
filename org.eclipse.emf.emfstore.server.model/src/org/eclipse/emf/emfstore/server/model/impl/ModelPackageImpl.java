@@ -29,8 +29,6 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.impl.AccesscontrolPackageImpl;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesPackageImpl;
-import org.eclipse.emf.emfstore.server.model.notification.NotificationPackage;
-import org.eclipse.emf.emfstore.server.model.notification.impl.NotificationPackageImpl;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 import org.eclipse.emf.emfstore.server.model.url.impl.UrlPackageImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
@@ -151,7 +149,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		ServerPackageImpl theServerPackage = (ServerPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
-		NotificationPackageImpl theNotificationPackage = (NotificationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NotificationPackage.eNS_URI) instanceof NotificationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NotificationPackage.eNS_URI) : NotificationPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
@@ -163,7 +160,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theServerPackage.createPackageContents();
 		theAccesscontrolPackage.createPackageContents();
 		theRolesPackage.createPackageContents();
-		theNotificationPackage.createPackageContents();
 		theUrlPackage.createPackageContents();
 
 		// Initialize created meta-data
@@ -175,7 +171,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		theServerPackage.initializePackageContents();
 		theAccesscontrolPackage.initializePackageContents();
 		theRolesPackage.initializePackageContents();
-		theNotificationPackage.initializePackageContents();
 		theUrlPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -462,14 +457,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Obtain other dependent packages
 		VersioningPackage theVersioningPackage = (VersioningPackage)EPackage.Registry.INSTANCE.getEPackage(VersioningPackage.eNS_URI);
 		AccesscontrolPackage theAccesscontrolPackage = (AccesscontrolPackage)EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI);
-		NotificationPackage theNotificationPackage = (NotificationPackage)EPackage.Registry.INSTANCE.getEPackage(NotificationPackage.eNS_URI);
 		UrlPackage theUrlPackage = (UrlPackage)EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI);
 		org.eclipse.emf.emfstore.common.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.common.model.ModelPackage)EPackage.Registry.INSTANCE.getEPackage(org.eclipse.emf.emfstore.common.model.ModelPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVersioningPackage);
 		getESubpackages().add(theAccesscontrolPackage);
-		getESubpackages().add(theNotificationPackage);
 		getESubpackages().add(theUrlPackage);
 
 		// Create type parameters

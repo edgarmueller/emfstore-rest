@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.client.model.exceptions.NoChangesOnServerException;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -17,87 +16,80 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
-public class UpdateController extends ServerCall {
+public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
-	public UpdateController(ProjectSpaceImpl projectSpace) {
+	private VersionSpec version;
+	private UpdateCallback callback;
+
+	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, UpdateCallback callback,
+		IProgressMonitor progress) {
 		super(projectSpace);
-	}
-
-	public void update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress) {
-		try {
-
-			/**
-			 * SANITY CHECKS
-			 */
-			if (version == null) {
-				version = VersionSpec.HEAD_VERSION;
-			}
-			if (callback == null) {
-				callback = UpdateCallback.NOCALLBACK;
-			}
-			if (progress == null) {
-				progress = new NullProgressMonitor();
-			}
-
-			progress.beginTask("Updating Project", 100);
-
-			doUpdate(version, callback, progress);
-		} catch (EmfStoreException e) {
-			callback.handleException(e);
+		/**
+		 * SANITY CHECKS
+		 */
+		if (version == null) {
+			version = VersionSpec.HEAD_VERSION;
 		}
+		if (callback == null) {
+			callback = UpdateCallback.NOCALLBACK;
+		}
+		this.version = version;
+		this.callback = callback;
+		setProgressMonitor(progress);
 	}
 
-	private void doUpdate(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
-		throws EmfStoreException {
-		progress.subTask("Resolving new version");
-		progress.worked(1);
+	@Override
+	protected PrimaryVersionSpec run() throws EmfStoreException {
+		return doUpdate(version);
+	}
+
+	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EmfStoreException {
+		getProgressMonitor().beginTask("Updating Project", 100);
+		getProgressMonitor().worked(1);
+		getProgressMonitor().subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
-
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
-			callback.handleException(new NoChangesOnServerException());
-			return;
+			return resolvedVersion;
 		}
-		progress.worked(5);
+		getProgressMonitor().worked(5);
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+		if (getProgressMonitor().isCanceled()) {
+			return getProjectSpace().getBaseVersion();
 		}
 
-		progress.subTask("Fetching changes from server");
+		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new ArrayList<ChangePackage>();
 		changes = getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
 			getProjectSpace().getBaseVersion(), resolvedVersion);
 		ChangePackage localchanges = getProjectSpace().getLocalChangePackage(false);
-		progress.worked(65);
+		getProgressMonitor().worked(65);
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+		if (getProgressMonitor().isCanceled()) {
+			return getProjectSpace().getBaseVersion();
 		}
 
-		progress.subTask("Checking for conflicts");
+		getProgressMonitor().subTask("Checking for conflicts");
 		ConflictDetector conflictDetector = new ConflictDetector();
 		for (ChangePackage change : changes) {
 			if (conflictDetector.doConflict(change, localchanges)) {
-				callback.handleException(new ChangeConflictException(changes, getProjectSpace(), conflictDetector));
-				return;
+				if (callback
+					.conflictOccurred(new ChangeConflictException(changes, getProjectSpace(), conflictDetector))) {
+					return getProjectSpace().getBaseVersion();
+				} else {
+					throw new ChangeConflictException(changes, getProjectSpace(), conflictDetector);
+				}
 			}
 		}
-		progress.worked(15);
-
-		if (callback.inspectChanges(getProjectSpace(), changes)) {
-			updateDone(callback, progress, getProjectSpace().getBaseVersion(), null);
+		getProgressMonitor().worked(15);
+		// TODO ASYNC review this cancel
+		if (getProgressMonitor().isCanceled() || callback.inspectChanges(getProjectSpace(), changes)) {
+			return resolvedVersion;
+			// updateDone(getProjectSpace().getBaseVersion(), null);
 		}
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		}
-
-		progress.subTask("Applying changes");
+		getProgressMonitor().subTask("Applying changes");
 		final List<ChangePackage> cps = changes;
 		// revert
 		getProjectSpace().revert();
@@ -120,23 +112,11 @@ public class UpdateController extends ServerCall {
 			// projectSpace.generateNotifications(changes);
 		}
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		}
-
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
-		updateDone(callback, progress, oldVersion, getProjectSpace().getBaseVersion());
-
 		// check for operations on file attachments: if version has been
 		// increased and file is required offline, add to
 		// pending file transfers
 		// checkUpdatedFileAttachments(changes);
-	}
-
-	private void updateDone(UpdateCallback callback, IProgressMonitor progress, PrimaryVersionSpec oldVersion,
-		PrimaryVersionSpec newVersion) {
-		callback.updateCompleted(getProjectSpace(), oldVersion, (newVersion == null) ? oldVersion : newVersion);
-		progress.done();
+		return getProjectSpace().getBaseVersion();
 	}
 }

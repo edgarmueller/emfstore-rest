@@ -11,20 +11,15 @@
 package org.eclipse.emf.emfstore.client.ui.util;
 
 import java.net.MalformedURLException;
-import java.util.Date;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrl;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.UrlFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.ReadEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
@@ -70,26 +65,10 @@ public final class URLSelectionListener implements SelectionListener {
 			} catch (MEUrlResolutionException e1) {
 			}
 			ElementOpenerHelper.openModelElement(modelElement, e.getSource().getClass().getName());
-			logEvent(modelElementUrlFragment.getModelElementId(), e.getSource().getClass().getName());
 		} catch (MalformedURLException ex) {
 			WorkspaceUtil.logException("Invalid EMFStore URL pattern", ex);
 		}
 
-	}
-
-	private void logEvent(ModelElementId modelElementId, String source) {
-		final ReadEvent readEvent = EventsFactory.eINSTANCE.createReadEvent();
-		readEvent.setModelElement(modelElementId);
-		readEvent.setReadView("org.eclipse.emf.ecp.editor");
-		readEvent.setSourceView(source);
-		readEvent.setTimestamp(new Date());
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				projectSpace.addEvent(readEvent);
-			}
-		}.run();
 	}
 
 	/**

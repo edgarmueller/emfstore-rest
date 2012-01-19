@@ -11,26 +11,21 @@
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.ecp.common.util.UiUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.Activator;
-import org.eclipse.emf.emfstore.client.ui.commands.ServerRequestCommandHandler;
 import org.eclipse.emf.emfstore.client.ui.util.ElementOpenerHelper;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
@@ -39,7 +34,6 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -47,8 +41,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.ShowHistoryEvent;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
@@ -504,29 +496,15 @@ public class HistoryBrowserView extends ViewPart implements
 	}
 
 	private void load(final int end) {
-		ServerRequestCommandHandler handler = new ServerRequestCommandHandler() {
-
-			@Override
-			protected Object run() throws EmfStoreException {
-				try {
-					loadContent(end);
-				} catch (InvalidVersionSpecException e) {
-					MessageDialog.openError(getShell(), "Invalid revision",
-							"The requested revision was invalid");
-					currentEnd = projectSpace.getBaseVersion().getIdentifier();
-					refresh();
-				}
-				return null;
-			}
-
-			@Override
-			public String getTaskTitle() {
-				return "Resolving project versions...";
-			}
-		};
 		try {
-			handler.execute(new ExecutionEvent());
-		} catch (ExecutionException e) {
+			new ServerCall<Void>() {
+				@Override
+				protected Void run() throws EmfStoreException {
+					loadContent(end);
+					return null;
+				}
+			}.execute();
+		} catch (EmfStoreException e) {
 			DialogHandler.showErrorDialog(e.getMessage());
 		}
 	}
@@ -537,23 +515,7 @@ public class HistoryBrowserView extends ViewPart implements
 			return;
 		}
 		HistoryQuery query = getQuery(end);
-		List<HistoryInfo> historyInfo = projectSpace.getUsersession()
-				.getHistoryInfo(projectSpace.getProjectId(), query);
-
-		// Event logging
-		ShowHistoryEvent historyEvent = EventsFactory.eINSTANCE
-				.createShowHistoryEvent();
-		historyEvent.setSourceVersion(query.getSource());
-		historyEvent.setTargetVersion(query.getTarget());
-		historyEvent.setTimestamp(new Date());
-		EList<ModelElementId> modelElements = query.getModelElements();
-		if (modelElements != null) {
-			for (ModelElementId modelElementId : modelElements) {
-				historyEvent.getModelElement().add(
-						ModelUtil.clone(modelElementId));
-			}
-		}
-		projectSpace.addEvent(historyEvent);
+		List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
 
 		if (historyInfo != null) {
 			for (HistoryInfo hi : historyInfo) {
@@ -588,7 +550,6 @@ public class HistoryBrowserView extends ViewPart implements
 				.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 		contentProvider
 				.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
-		contentProvider.setProjectSpace(projectSpace);
 	}
 
 	/**
@@ -736,8 +697,6 @@ public class HistoryBrowserView extends ViewPart implements
 	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
-		WorkspaceUtil
-				.logFocusEvent("org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView");
 	}
 
 	/**

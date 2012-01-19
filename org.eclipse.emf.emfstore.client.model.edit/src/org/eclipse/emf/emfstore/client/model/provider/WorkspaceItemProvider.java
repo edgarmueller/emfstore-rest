@@ -57,25 +57,8 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addActiveProjectSpacePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Active Project Space feature. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @generated
-	 */
-	protected void addActiveProjectSpacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_Workspace_activeProjectSpace_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Workspace_activeProjectSpace_feature",
-				"_UI_Workspace_type"), ModelPackage.Literals.WORKSPACE__ACTIVE_PROJECT_SPACE, true, false, true, null,
-			null, null));
 	}
 
 	/**

@@ -16,10 +16,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.emfstore.client.model.*;
-import org.eclipse.emf.emfstore.client.model.EventComposite;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.NotificationComposite;
 import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -81,10 +79,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			return createOperationComposite();
 		case ModelPackage.PENDING_FILE_TRANSFER:
 			return createPendingFileTransfer();
-		case ModelPackage.EVENT_COMPOSITE:
-			return createEventComposite();
-		case ModelPackage.NOTIFICATION_COMPOSITE:
-			return createNotificationComposite();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -142,24 +136,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public PendingFileTransfer createPendingFileTransfer() {
 		PendingFileTransferImpl pendingFileTransfer = new PendingFileTransferImpl();
 		return pendingFileTransfer;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventComposite createEventComposite() {
-		EventCompositeImpl eventComposite = new EventCompositeImpl();
-		return eventComposite;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationComposite createNotificationComposite() {
-		NotificationCompositeImpl notificationComposite = new NotificationCompositeImpl();
-		return notificationComposite;
 	}
 
 	/**

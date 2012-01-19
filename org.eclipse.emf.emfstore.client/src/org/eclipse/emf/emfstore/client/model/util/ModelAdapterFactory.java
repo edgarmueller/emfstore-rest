@@ -15,9 +15,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.*;
-import org.eclipse.emf.emfstore.client.model.EventComposite;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.NotificationComposite;
 import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -107,16 +105,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter casePendingFileTransfer(PendingFileTransfer object) {
 			return createPendingFileTransferAdapter();
-		}
-
-		@Override
-		public Adapter caseEventComposite(EventComposite object) {
-			return createEventCompositeAdapter();
-		}
-
-		@Override
-		public Adapter caseNotificationComposite(NotificationComposite object) {
-			return createNotificationCompositeAdapter();
 		}
 
 		@Override
@@ -226,34 +214,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPendingFileTransferAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.model.EventComposite <em>Event Composite</em>}'.
-	 * <!-- begin-user-doc --> This default
-	 * implementation returns null so that we can easily ignore cases; it's
-	 * useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.model.EventComposite
-	 * @generated
-	 */
-	public Adapter createEventCompositeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.model.NotificationComposite <em>Notification Composite</em>}'.
-	 * <!-- begin-user-doc --> This default
-	 * implementation returns null so that we can easily ignore cases; it's
-	 * useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.model.NotificationComposite
-	 * @generated
-	 */
-	public Adapter createNotificationCompositeAdapter() {
 		return null;
 	}
 

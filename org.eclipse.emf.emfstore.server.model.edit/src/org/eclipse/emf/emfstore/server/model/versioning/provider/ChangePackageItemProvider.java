@@ -25,7 +25,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.server.model.notification.NotificationFactory;
 import org.eclipse.emf.emfstore.server.model.provider.ServerEditPlugin;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -81,7 +80,6 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 			childrenFeatures.add(VersioningPackage.Literals.CHANGE_PACKAGE__OPERATIONS);
 			childrenFeatures.add(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS);
 			childrenFeatures.add(VersioningPackage.Literals.CHANGE_PACKAGE__LOG_MESSAGE);
-			childrenFeatures.add(VersioningPackage.Literals.CHANGE_PACKAGE__NOTIFICATIONS);
 			childrenFeatures.add(VersioningPackage.Literals.CHANGE_PACKAGE__VERSION_PROPERTIES);
 		}
 		return childrenFeatures;
@@ -137,7 +135,6 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
 			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
 			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-			case VersioningPackage.CHANGE_PACKAGE__NOTIFICATIONS:
 			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -218,142 +215,12 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 		newChildDescriptors.add
 			(createChildParameter
 				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createReadEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createMergeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createCheckoutEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createExceptionEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createPluginStartEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createUpdateEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createAnnotationEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createRevertEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createShowHistoryEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createPerspectiveEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createDNDEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createLinkEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createTraceEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createNavigatorCreateEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createPluginFocusEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createPresentationSwitchEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createUndoEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createValidate()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createShowChangesEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createNotificationReadEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createNotificationGenerationEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createNotificationIgnoreEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createURLEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createMergeChoiceEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
-				 EventsFactory.eINSTANCE.createMergeGlobalChoiceEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__EVENTS,
 				 ServerFactory.eINSTANCE.createProjectUpdatedEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(VersioningPackage.Literals.CHANGE_PACKAGE__LOG_MESSAGE,
 				 VersioningFactory.eINSTANCE.createLogMessage()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(VersioningPackage.Literals.CHANGE_PACKAGE__NOTIFICATIONS,
-				 NotificationFactory.eINSTANCE.createESNotification()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.model.notification.ESNotification;
 import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
@@ -30,7 +29,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents <em>Events</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage <em>Log Message</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getNotifications <em>Notifications</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getVersionProperties <em>Version Properties</em>}</li>
  * </ul>
  * </p>
@@ -93,22 +91,6 @@ public interface ChangePackage extends EObject {
 	 * @generated
 	 */
 	void setLogMessage(LogMessage value);
-
-	/**
-	 * Returns the value of the '<em><b>Notifications</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.notification.ESNotification}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Notifications</em>' containment reference list isn't clear, there really should be
-	 * more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Notifications</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getChangePackage_Notifications()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<ESNotification> getNotifications();
 
 	/**
 	 * Returns the value of the '<em><b>Version Properties</b></em>' containment reference list.

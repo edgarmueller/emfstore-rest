@@ -6,7 +6,7 @@
   <extension
         point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.emf.emfstore.client.ui.commands.RevertHandler"
+            class="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
             commandId="org.eclipse.emf.emfstore.client.ui.revert">
          <enabledWhen>
             <and>
@@ -26,7 +26,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="org.eclipse.emf.emfstore.client.ui.commands.UndoLastOperationHandler"
+            class="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
             commandId="org.eclipse.emf.emfstore.client.ui.undoLastOperation">
          <enabledWhen>
             <and>
@@ -46,7 +46,7 @@
          </enabledWhen>
       </handler>
      <handler
-           class="org.eclipse.emf.emfstore.client.ui.commands.ImportChangesHandler"
+           class="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportChangesHandler"
            commandId="org.eclipse.emf.emfstore.client.ui.importChanges">
         <enabledWhen>
            <and>
@@ -66,7 +66,7 @@
         </enabledWhen>
      </handler>
      <handler
-           class="org.eclipse.emf.emfstore.client.ui.commands.CommitProjectHandler"
+           class="org.eclipse.emf.emfstore.client.ui.handlers.CommitProjectHandler"
            commandId="org.eclipse.emf.emfstore.client.ui.commitProject">
         <enabledWhen>
            <and>
@@ -93,166 +93,107 @@
            name="ECP">
      </category>
      <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           id="org.eclipse.emf.emfstore.client.ui.commitProject"
-           name="commit">
-     </command>
-     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportChangesHandler"
            id="org.eclipse.emf.emfstore.client.ui.importChanges"
-           name="importChanges">
-     </command>
-     <command
-           id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
-           name="undoLastOperation">
+           name="Import Changes">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           id="org.eclipse.emf.emfstore.client.ui.revert"
-           name="Revert">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.UpdateProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.updateProject"
-           name="update">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShareProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.shareProject"
-           name="share">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.importProject"
-           name="import">
+           name="Import Project">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportProjectHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ExportProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.exportProject"
-           name="export">
+           name="Export Project">
      </command>
      <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.DeleteProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.deleteProject"
-           name="deleteProject">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ShowHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.commands.showHistory"
-           name="showHistory">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.CompareProjectsHandler"
-           id="org.eclipse.emf.emfstore.client.ui.compareProjects"
-           name="compareProjects">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportChangesHandler"
-           id="org.eclipse.emf.emfstore.client.ui.exportChanges"
-           name="exportChanges">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportProjectSpaceHandler"
-           id="org.eclipse.emf.emfstore.client.ui.exportProjectSpace"
-           name="exportProjectSpace">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ExportWorkSpaceHandler"
-           id="org.eclipse.emf.emfstore.client.ui.exportWorkSpace"
-           name="exportWorkSpace">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ImportProjectSpaceHandler"
-           id="org.eclipse.emf.emfstore.client.ui.importProjectSpace"
-           name="importProjectSpace">
-     </command>
- 
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.UpdateProjectVersionHandler"
-           id="org.eclipse.emf.emfstore.client.ui.updateProjectVersion"
-           name="updateToVersion">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ProjectPropertiesHandler"
-           id="org.eclipse.emf.emfstore.client.ui.projectProperties"
-           name="properties">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.NewLocalProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
-           name="NewLocalProject">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.commands.ShowHistoryHandler"
-           id="org.eclipse.emf.emfstore.client.ui.commands.ShowHistory"
            name="Show History">
      </command>
-      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.AddServerHandler"
-           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.AddServer"
-           name="AddServer">
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ExportChangesHandler"
+           id="org.eclipse.emf.emfstore.client.ui.exportChanges"
+           name="Export Changes">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ServerLoginHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ExportProjectSpaceHandler"
+           id="org.eclipse.emf.emfstore.client.ui.exportProjectSpace"
+           name="Export Projectspace">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ExportWorkspaceHandler"
+           id="org.eclipse.emf.emfstore.client.ui.exportWorkSpace"
+           name="Export Workspace">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportProjectSpaceHandler"
+           id="org.eclipse.emf.emfstore.client.ui.importProjectSpace"
+           name="Import Projectspace">
+     </command>
+ 
+      <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.AddServerHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.AddServer"
+           name="Add Server">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ServerLoginHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Login"
            name="Login">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ChangeSessionHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ChangeSessionHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Logout"
            name="Logout">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.CreateProjectOnServerHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CreateProjectOnServerHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.CreateProjectOnServer"
-           name="CreateProjectOnServer">
+           name="Create Project On Server">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.DeleteProjectOnServerHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.DeleteProjectOnServer"
-           name="DeleteProjectOnServer">
+           name="Delete Project On Server">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.DeleteServerInfoHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteServerHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RemoveServer"
-           name="RemoveServer">
+           name="Remove Server">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ExportProjectHistoryHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ExportProjectHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ExportProjectHistory"
-           name="ExportProjectHistory">
+           name="Export Project History">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ImportProjectHistoryHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportProjectHistoryHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ImportProjectHistory"
-           name="ImportProjectHistory">
+           name=" ImportProject History">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ManageOrgUnitsHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ManageOrgUnitsHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ManageOrgUnits"
-           name="ManageOrgUnits">
+           name="Manage OrgUnits">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ProjectCheckoutHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectCheckout"
-           name="ProjectCheckout">
+           name="Project Checkout">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ProjectPropertiesHandler"
-           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
-           name="ProjectProperties">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.handlers.ServerPropertiesHandler"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ServerPropertiesHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ServerProperties"
-           name="ServerProperties">
+           name="Server Properties">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectPropertiesHandler"
+           id="org.eclipse.emf.emfstore.client.ui.projectProperties"
+           name="Project Properties">
      </command>
   </extension>
   <extension
@@ -271,12 +212,7 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
                        value="false">
                  </test>
               </iterate>
@@ -294,12 +230,7 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
                        value="true">
                  </test>
               </iterate>
@@ -315,11 +246,9 @@
               <iterate
                     ifEmpty="false"
                     operator="and">
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
+                 <instanceof
                        value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
-                 </test>
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -335,19 +264,14 @@
 				<iterate
 	               ifEmpty="false"
 	               operator="and">
-	                <test
-	                    forcePluginActivation="true"
-                        property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                        value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                    </test>
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
+                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
                        value="true">
                  </test>
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
                        value="true">
                  </test>
                  </iterate>
@@ -365,17 +289,12 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
+                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
                        value="true">
                  </test>
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
                        value="true">
                  </test>
               </iterate>
@@ -393,14 +312,12 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
                        property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
                        value="true">
                  </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -416,14 +333,12 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
                        property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
                        value="true">
                  </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -440,14 +355,12 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
-                 </test>
-                 <test
-                       forcePluginActivation="true"
                        property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
                        value="true">
                  </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -461,11 +374,9 @@
               <iterate
                     ifEmpty="false"
                     operator="and">
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
+                 <instanceof
                        value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                 </test>
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -486,11 +397,9 @@
               <iterate
                     ifEmpty="false"
                     operator="and">
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
+                 <instanceof
                        value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
-                 </test>
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -504,11 +413,9 @@
               <iterate
                     ifEmpty="false"
                     operator="and">
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                       value="org.eclipse.emf.emfstore.client.model.ServerInfo">
-                 </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                 </instanceof>
               </iterate>
            </visibleWhen>
         </command>
@@ -664,21 +571,21 @@
      <extension
            point="org.eclipse.core.expressions.propertyTesters">
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ProjectIsSharedTester"
+              class="org.eclipse.emf.emfstore.client.ui.testers.ProjectIsSharedTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.projectIsSharedTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="projectIsShared"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ProjectHasLocalChangesTester"
+              class="org.eclipse.emf.emfstore.client.ui.testers.ProjectHasLocalChangesTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.projectHasLocalChangesTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="projectHasLocalChanges"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsAdminTester"
+              class="org.eclipse.emf.emfstore.client.ui.testers.IsAdminTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isAdminTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isAdmin"
@@ -689,42 +596,35 @@
               id="org.eclipse.emf.emfstore.client.ui.commands.historyBrowserAdminTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="historyBrowserAdminTester"
-              type="org.eclipse.emf.emfstore.client.ui.views.scm.SCMTreeNode">
+              type="org.eclipse.emf.emfstore.client.model.ServerInfo">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsACUserTester"
+              class="org.eclipse.emf.emfstore.client.ui.testers.IsACUserTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isACUserTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isACUser"
               type="org.eclipse.emf.emfstore.client.model.ProjectSpace">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.IsServerAdminTester"
+              class="org.eclipse.emf.emfstore.client.ui.testers.IsServerAdminTester"
               id="org.eclipse.emf.emfstore.client.ui.commands.isServerAdminTester"
               namespace="org.eclipse.emf.emfstore.client.ui.commands"
               properties="isServerAdmin"
               type="org.eclipse.jface.viewers.TreeNode">
         </propertyTester>
         <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedInTester"
-              id="org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn"
-              namespace="org.eclipse.emf.emfstore.client.ui.commands"
-              properties="ServerInfoIsLoggedIn"
-              type="org.eclipse.jface.viewers.TreeNode">
-        </propertyTester>
-              <propertyTester
-              class="org.eclipse.emf.emfstore.client.ui.commands.TreeNodeClassTester"
-              id="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-              namespace="org.eclipse.emf.emfstore.client.ui.commands"
-              properties="treeNodeClassTester"
-              type="org.eclipse.jface.viewers.TreeNode">
+              class="org.eclipse.emf.emfstore.client.ui.testers.ServerInfoIsLoggedInTester"
+              id="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
+              namespace="org.eclipse.emf.emfstore.client.ui.testers"
+              properties="serverInfoIsLoggedIn"
+              type="org.eclipse.emf.emfstore.client.model.ServerInfo">
         </propertyTester>
      </extension>
         
            <extension
          point="org.eclipse.ui.views">
       <view
-            name="EmfStore Browser"
+            name="EmfStore Browser" 
             icon="icons/serverDB.png"
             category="org.eclipse.emf.ecp"
             class="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.ESBrowserView"
@@ -757,7 +657,7 @@
            state="true">
         <enablement>
            <objectClass
-                 name="org.eclipse.jface.viewers.TreeNode">
+                 name="org.eclipse.emf.emfstore.client.model.ServerInfo">
            </objectClass>
         </enablement>
      </decorator>
@@ -765,30 +665,113 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.CheckoutProjectHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
             name="CheckoutRevision">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.AddTagHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.AddTagHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
             name="AddTag">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.RemoveTagHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RemoveTagHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.removetag"
             name="RemoveTag">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.RevertHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
             name="RevertRevision">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.handlers.ForceRevertHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
             name="ForceRevertRevision">
       </command>
    </extension>
-
+   <extension
+         point="org.eclipse.emf.emfstore.client.sessionprovider">
+      <sessionProvider
+            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.BasicUISessionProvider">
+      </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+            id="org.eclipse.emf.emfstore.client.ui.commitProject"
+            name="commit">
+      </command>
+         <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.updateProject"
+           name="NEWupdate">
+     </command>
+         <command
+               categoryId="org.eclipse.emf.emfstore.client.ui.project"
+               defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectVersionHandler"
+               id="org.eclipse.emf.emfstore.client.ui.updateProjectVersion"
+               name="NEWupdateToVersion">
+         </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ShareProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.shareProject"
+           name="NEWshare">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.deleteProject"
+           name="NEWdeleteProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CreateLocalProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
+           name="NEWNewLocalProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
+           id="org.eclipse.emf.emfstore.client.ui.revert"
+           name="NEWRevert">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
+           id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
+           name="NEWundoLastOperation">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectPropertiesHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
+           name="NEWProjectProperties">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CompareProjectsHandler"
+           id="org.eclipse.emf.emfstore.client.ui.compareProjects"
+           name="NEWcompareProjects">
+     </command>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.common.observer">
+      <observer
+            extensionPointName="org.eclipse.emf.emfstore.client.ui.observer1"
+            observerAttributeName="org.eclipse.emf.emfstore.client.ui.observer1">
+      </observer>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.loginObserver">
+      <observer
+            loginObserver="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelDecorator">
+      </observer>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.logoutObserver">
+      <observer
+            logoutObserver="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelDecorator">
+      </observer>
+   </extension>
 </plugin>

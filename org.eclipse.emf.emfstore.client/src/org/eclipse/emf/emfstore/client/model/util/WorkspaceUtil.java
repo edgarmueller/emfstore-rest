@@ -12,8 +12,6 @@ package org.eclipse.emf.emfstore.client.model.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -22,20 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.model.Activator;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.events.CheckoutEvent;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.events.PluginFocusEvent;
-import org.eclipse.emf.emfstore.server.model.versioning.events.ReadEvent;
-import org.eclipse.emf.emfstore.server.model.versioning.events.TraceEvent;
-import org.eclipse.emf.emfstore.server.model.versioning.events.UpdateEvent;
 
 /**
  * Workspace utility class.
@@ -82,98 +70,6 @@ public final class WorkspaceUtil {
 		Activator activator = Activator.getDefault();
 		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), statusInt, message, exception);
 		activator.getLog().log(status);
-	}
-
-	/**
-	 * Log a checkout event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param baseVersion the base version that was checked out
-	 */
-	public static void logCheckout(ProjectSpace projectSpace, PrimaryVersionSpec baseVersion) {
-		CheckoutEvent checkoutEvent = EventsFactory.eINSTANCE.createCheckoutEvent();
-		checkoutEvent.setBaseVersion(ModelUtil.clone(baseVersion));
-		checkoutEvent.setTimestamp(new Date());
-		projectSpace.addEvent(checkoutEvent);
-	}
-
-	/**
-	 * Log a update event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param baseVersion the base version of the project space
-	 * @param targetVersion the target version to update to
-	 */
-	public static void logUpdate(ProjectSpace projectSpace, PrimaryVersionSpec baseVersion,
-		PrimaryVersionSpec targetVersion) {
-		UpdateEvent updateEvent = EventsFactory.eINSTANCE.createUpdateEvent();
-		updateEvent.setBaseVersion(ModelUtil.clone(baseVersion));
-		updateEvent.setTargetVersion(ModelUtil.clone(targetVersion));
-		updateEvent.setTimestamp(new Date());
-		projectSpace.addEvent(updateEvent);
-	}
-
-	/**
-	 * Log a read event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param modelElement the model element that is read
-	 * @param sourceView the view the read originates
-	 * @param readView the view the model element is shown in
-	 */
-	public static void logReadEvent(ProjectSpace projectSpace, ModelElementId modelElement, String sourceView,
-		String readView) {
-		ReadEvent readEvent = EventsFactory.eINSTANCE.createReadEvent();
-		readEvent.setModelElement(modelElement);
-		readEvent.setReadView(readView);
-		readEvent.setSourceView(sourceView);
-		readEvent.setTimestamp(new Date());
-		if (projectSpace == null) {
-			logWarning("Read event could not be logged since given project space was null", new NullPointerException());
-			return;
-		}
-		projectSpace.addEvent(readEvent);
-	}
-
-	/**
-	 * Log a trace event to the given projectSpace.
-	 * 
-	 * @param projectSpace the project space
-	 * @param sourceElement the source element of the trace
-	 * @param targetElement the target event of the trace
-	 * @param featureName the feature reference which was traced.
-	 */
-	public static void logTraceEvent(ProjectSpace projectSpace, ModelElementId sourceElement,
-		ModelElementId targetElement, String featureName) {
-		TraceEvent traceEvent = EventsFactory.eINSTANCE.createTraceEvent();
-		traceEvent.setSourceElement(sourceElement);
-		traceEvent.setTargetElement(targetElement);
-		traceEvent.setTimestamp(new Date());
-		traceEvent.setFeatureName(featureName);
-		projectSpace.addEvent(traceEvent);
-	}
-
-	/**
-	 * Log a focus event for the view with the given ID.
-	 * 
-	 * @param viewId the ID of the view
-	 */
-	public static void logFocusEvent(String viewId) {
-		final PluginFocusEvent pluginFocusEvent = EventsFactory.eINSTANCE.createPluginFocusEvent();
-		pluginFocusEvent.setPluginId(viewId);
-		pluginFocusEvent.setStartDate(Calendar.getInstance().getTime());
-		final ProjectSpace activeProjectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.getActiveProjectSpace();
-		if (activeProjectSpace != null) {
-			// TODO: ChainSaw: check use of EMFStoreCommand here
-			new EMFStoreCommand() {
-
-				@Override
-				protected void doRun() {
-					activeProjectSpace.addEvent(pluginFocusEvent);
-				}
-			};
-		}
 	}
 
 	/**

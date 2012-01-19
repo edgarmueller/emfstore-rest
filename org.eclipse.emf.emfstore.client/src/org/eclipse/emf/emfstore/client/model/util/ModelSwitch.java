@@ -15,9 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.*;
-import org.eclipse.emf.emfstore.client.model.EventComposite;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.NotificationComposite;
 import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -140,20 +138,6 @@ public class ModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ModelPackage.EVENT_COMPOSITE: {
-			EventComposite eventComposite = (EventComposite) theEObject;
-			T result = caseEventComposite(eventComposite);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ModelPackage.NOTIFICATION_COMPOSITE: {
-			NotificationComposite notificationComposite = (NotificationComposite) theEObject;
-			T result = caseNotificationComposite(notificationComposite);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -246,36 +230,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T casePendingFileTransfer(PendingFileTransfer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event Composite</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event Composite</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEventComposite(EventComposite object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Notification Composite</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Notification Composite</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNotificationComposite(NotificationComposite object) {
 		return null;
 	}
 

@@ -15,10 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.emf.emfstore.client.model.EventComposite;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.NotificationComposite;
 import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -26,9 +24,7 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
-import org.eclipse.emf.emfstore.server.model.notification.NotificationPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 
 /**
@@ -79,20 +75,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass pendingFileTransferEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventCompositeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass notificationCompositeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -192,15 +174,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getWorkspace_Usersessions() {
 		return (EReference) workspaceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getWorkspace_ActiveProjectSpace() {
-		return (EReference) workspaceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -397,7 +370,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProjectSpace_Events() {
+	public EReference getProjectSpace_Usersession() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -406,17 +379,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProjectSpace_Usersession() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getProjectSpace_LastUpdated() {
-		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(6);
+		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -425,7 +389,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectSpace_BaseVersion() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(7);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -434,7 +398,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectSpace_ResourceCount() {
-		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -443,7 +407,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectSpace_Dirty() {
-		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -452,7 +416,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectSpace_OldLogMessages() {
-		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(10);
+		return (EAttribute) projectSpaceEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -461,34 +425,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectSpace_LocalOperations() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProjectSpace_Notifications() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProjectSpace_EventComposite() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProjectSpace_NotificationComposite() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(14);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -497,7 +434,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectSpace_WaitingUploads() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(15);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -506,7 +443,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectSpace_Properties() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(16);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -515,7 +452,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectSpace_ChangedSharedProperties() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(17);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProjectSpace_Workspace() {
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -604,42 +550,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEventComposite() {
-		return eventCompositeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventComposite_Events() {
-		return (EReference) eventCompositeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNotificationComposite() {
-		return notificationCompositeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNotificationComposite_Notifications() {
-		return (EReference) notificationCompositeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory) getEFactoryInstance();
 	}
@@ -668,7 +578,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(workspaceEClass, WORKSPACE__PROJECT_SPACES);
 		createEReference(workspaceEClass, WORKSPACE__SERVER_INFOS);
 		createEReference(workspaceEClass, WORKSPACE__USERSESSIONS);
-		createEReference(workspaceEClass, WORKSPACE__ACTIVE_PROJECT_SPACE);
 
 		serverInfoEClass = createEClass(SERVER_INFO);
 		createEAttribute(serverInfoEClass, SERVER_INFO__NAME);
@@ -693,7 +602,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(projectSpaceEClass, PROJECT_SPACE__PROJECT_ID);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__PROJECT_NAME);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__PROJECT_DESCRIPTION);
-		createEReference(projectSpaceEClass, PROJECT_SPACE__EVENTS);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__USERSESSION);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__LAST_UPDATED);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__BASE_VERSION);
@@ -701,12 +609,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__DIRTY);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__OLD_LOG_MESSAGES);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__LOCAL_OPERATIONS);
-		createEReference(projectSpaceEClass, PROJECT_SPACE__NOTIFICATIONS);
-		createEReference(projectSpaceEClass, PROJECT_SPACE__EVENT_COMPOSITE);
-		createEReference(projectSpaceEClass, PROJECT_SPACE__NOTIFICATION_COMPOSITE);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__WAITING_UPLOADS);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__PROPERTIES);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__CHANGED_SHARED_PROPERTIES);
+		createEReference(projectSpaceEClass, PROJECT_SPACE__WORKSPACE);
 
 		operationCompositeEClass = createEClass(OPERATION_COMPOSITE);
 		createEReference(operationCompositeEClass, OPERATION_COMPOSITE__OPERATIONS);
@@ -718,12 +624,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(pendingFileTransferEClass, PENDING_FILE_TRANSFER__UPLOAD);
 		createEAttribute(pendingFileTransferEClass, PENDING_FILE_TRANSFER__FILE_NAME);
 		createEAttribute(pendingFileTransferEClass, PENDING_FILE_TRANSFER__PRELIMINARY_FILE_NAME);
-
-		eventCompositeEClass = createEClass(EVENT_COMPOSITE);
-		createEReference(eventCompositeEClass, EVENT_COMPOSITE__EVENTS);
-
-		notificationCompositeEClass = createEClass(NOTIFICATION_COMPOSITE);
-		createEReference(notificationCompositeEClass, NOTIFICATION_COMPOSITE__NOTIFICATIONS);
 	}
 
 	/**
@@ -757,11 +657,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
 		AccesscontrolPackage theAccesscontrolPackage = (AccesscontrolPackage) EPackage.Registry.INSTANCE
 			.getEPackage(AccesscontrolPackage.eNS_URI);
-		EventsPackage theEventsPackage = (EventsPackage) EPackage.Registry.INSTANCE.getEPackage(EventsPackage.eNS_URI);
 		VersioningPackage theVersioningPackage = (VersioningPackage) EPackage.Registry.INSTANCE
 			.getEPackage(VersioningPackage.eNS_URI);
-		NotificationPackage theNotificationPackage = (NotificationPackage) EPackage.Registry.INSTANCE
-			.getEPackage(NotificationPackage.eNS_URI);
 		OperationsPackage theOperationsPackage = (OperationsPackage) EPackage.Registry.INSTANCE
 			.getEPackage(OperationsPackage.eNS_URI);
 
@@ -775,9 +672,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWorkspace_ProjectSpaces(), this.getProjectSpace(), null, "projectSpaces", null, 0, -1,
-			Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspace_ProjectSpaces(), this.getProjectSpace(), this.getProjectSpace_Workspace(),
+			"projectSpaces", null, 0, -1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getWorkspace_ProjectSpaces().getEKeys().add(theModelPackage_2.getIdentifiableElement_Identifier());
 		initEReference(getWorkspace_ServerInfos(), this.getServerInfo(), null, "serverInfos", null, 0, -1,
 			Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
@@ -785,10 +682,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getWorkspace_Usersessions(), this.getUsersession(), null, "usersessions", null, 0, -1,
 			Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWorkspace_ActiveProjectSpace(), this.getProjectSpace(), null, "activeProjectSpace", null, 0,
-			1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getWorkspace_ActiveProjectSpace().getEKeys().add(theModelPackage_2.getIdentifiableElement_Identifier());
 
 		initEClass(serverInfoEClass, ServerInfo.class, "ServerInfo", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
@@ -847,9 +740,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getProjectSpace_ProjectDescription(), ecorePackage.getEString(), "projectDescription", null, 1,
 			1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectSpace_Events(), theEventsPackage.getEvent(), null, "events", null, 0, -1,
-			ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProjectSpace_Usersession(), this.getUsersession(), null, "usersession", null, 0, 1,
 			ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -870,15 +760,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getProjectSpace_LocalOperations(), this.getOperationComposite(), null, "localOperations", null,
 			0, 1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectSpace_Notifications(), theNotificationPackage.getESNotification(), null,
-			"notifications", null, 0, -1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectSpace_EventComposite(), this.getEventComposite(), null, "eventComposite", null, 0, 1,
-			ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectSpace_NotificationComposite(), this.getNotificationComposite(), null,
-			"notificationComposite", null, 0, 1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProjectSpace_WaitingUploads(), theModelPackage_1.getFileIdentifier(), null, "waitingUploads",
 			null, 0, -1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -888,6 +769,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getProjectSpace_ChangedSharedProperties(), theModelPackage_2.getEMFStoreProperty(), null,
 			"changedSharedProperties", null, 0, -1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 			!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectSpace_Workspace(), this.getWorkspace(), this.getWorkspace_ProjectSpaces(),
+			"workspace", null, 0, 1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationCompositeEClass, OperationComposite.class, "OperationComposite", !IS_ABSTRACT,
 			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -915,18 +799,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getPendingFileTransfer_PreliminaryFileName(), ecorePackage.getEString(), "preliminaryFileName",
 			null, 0, 1, PendingFileTransfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
 			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventCompositeEClass, EventComposite.class, "EventComposite", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventComposite_Events(), theEventsPackage.getEvent(), null, "events", null, 0, -1,
-			EventComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(notificationCompositeEClass, NotificationComposite.class, "NotificationComposite", !IS_ABSTRACT,
-			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNotificationComposite_Notifications(), theNotificationPackage.getESNotification(), null,
-			"notifications", null, 0, -1, NotificationComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

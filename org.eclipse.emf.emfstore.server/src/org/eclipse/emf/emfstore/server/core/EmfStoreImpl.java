@@ -23,8 +23,6 @@ import org.eclipse.emf.emfstore.server.core.subinterfaces.ProjectPropertiesSubIn
 import org.eclipse.emf.emfstore.server.core.subinterfaces.ProjectSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.subinterfaces.UserSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.subinterfaces.VersionSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.eventmanager.EventHelper;
-import org.eclipse.emf.emfstore.server.eventmanager.EventManager;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -153,7 +151,6 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements EmfStore 
 		ACUser user = getAuthorizationControl().resolveUser(sessionId);
 		PrimaryVersionSpec newVersion = getSubInterface(VersionSubInterfaceImpl.class).createVersion(projectId,
 			baseVersionSpec, changePackage, logMessage, user);
-		EventManager.getInstance().sendEvent(EventHelper.createUpdatedProjectEvent(projectId, newVersion));
 		return newVersion;
 	}
 

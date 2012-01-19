@@ -10,7 +10,6 @@
 
 <plugin>
    <extension-point id="org.eclipse.emf.emfstore.client.notification.providers" name="Notification Providers" schema="schema/org.eclipse.emf.emfstore.client.notificationProviders.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.client.notify.login" name="org.eclipse.emf.emfstore.client.notify.login" schema="schema/org.eclipse.emf.emfstore.client.notify.login.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.wrapperfactories" name="Wrapper factories" schema="schema/org.eclipse.emf.emfstore.client.wrapperfactories.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.workspaceLocationProvider" name="Workspace Location Provider" schema="schema/org.eclipse.emf.emfstore.client.workspaceLocationProvider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.defaultConfigurationProvider" name="Default Configuration Provider" schema="schema/org.eclipse.emf.emfstore.client.defaultConfigurationProvider.exsd"/>
@@ -18,12 +17,35 @@
    <extension-point id="org.eclipse.emf.emfstore.client.editingDomainProvider" name="EditingDomain Provider" schema="schema/org.eclipse.emf.emfstore.client.editingDomainProvider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.persistence.options" name="Persistence Options" schema="schema/org.eclipse.emf.emfstore.client.persistence.options.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.inverseCrossReferenceCache" name="Inverse Cross Referene Cache" schema="schema/org.eclipse.emf.emfstore.client.inverseCrossReferenceCache.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.sessionprovider" name="SessionProvider" schema="schema/org.eclipse.emf.emfstore.client.sessionprovider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.notificationFilter" name="Notification Filter" schema="schema/org.eclipse.emf.emfstore.client.notificationFilter.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.loginObserver" name="Login Observer" schema="schema/org.eclipse.emf.emfstore.client.loginObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.client.logoutObserver.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
        class = "org.eclipse.emf.emfstore.client.model.ModelPackage"
        genModel = "model/client.genmodel" /> 
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.client.notify.postinit">
+     <initiator
+           class="org.eclipse.emf.emfstore.client.model.util.ProjectListUpdater">
+     </initiator>
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.loginObserver"
+           observerAttributeName="loginObserver">
+     </observer>
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.logoutObserver"
+           observerAttributeName="logoutObserver">
+     </observer>
   </extension>
 
 </plugin>

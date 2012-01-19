@@ -10,12 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.LayoutConstants;
@@ -39,6 +34,9 @@ public class CreateProjectDialog extends TitleAreaDialog {
 	private Text txtProjectDesc;
 	private Usersession session;
 
+	private String name;
+	private String description;
+
 	/**
 	 * Default constructor.
 	 * 
@@ -47,9 +45,10 @@ public class CreateProjectDialog extends TitleAreaDialog {
 	 * @param session
 	 *            the target usersession
 	 */
-	public CreateProjectDialog(Shell parent, Usersession session) {
+	public CreateProjectDialog(Shell parent) {
 		super(parent);
-		this.session = session;
+		name = "";
+		description = "";
 	}
 
 	/**
@@ -80,39 +79,18 @@ public class CreateProjectDialog extends TitleAreaDialog {
 		return contents;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public void okPressed() {
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				try {
-
-					if (session != null) {
-						session.createProject(txtProjectName.getText(), txtProjectDesc.getText());
-					} else {
-						WorkspaceManager.getInstance().getCurrentWorkspace()
-							.createLocalProject(txtProjectName.getText(), txtProjectDesc.getText());
-					}
-
-				} catch (AccessControlException e) {
-					DialogHandler.showExceptionDialog(e);
-				} catch (EmfStoreException e) {
-					DialogHandler.showExceptionDialog(e);
-				}
-			}
-
-		}.run();
-		close();
+	protected void okPressed() {
+		name = txtProjectName.getText();
+		description = txtProjectName.getText();
+		super.okPressed();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void cancelPressed() {
-		close();
+	public String getDescription() {
+		return description;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

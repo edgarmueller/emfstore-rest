@@ -26,7 +26,6 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
-import org.eclipse.emf.emfstore.client.model.exceptions.NoLocalChangesException;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;

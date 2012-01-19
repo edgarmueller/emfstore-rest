@@ -21,8 +21,6 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.impl.AccesscontrolPac
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesPackageImpl;
 import org.eclipse.emf.emfstore.server.model.impl.ModelPackageImpl;
-import org.eclipse.emf.emfstore.server.model.notification.NotificationPackage;
-import org.eclipse.emf.emfstore.server.model.notification.impl.NotificationPackageImpl;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrl;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
@@ -124,7 +122,6 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 		ServerPackageImpl theServerPackage = (ServerPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
-		NotificationPackageImpl theNotificationPackage = (NotificationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NotificationPackage.eNS_URI) instanceof NotificationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NotificationPackage.eNS_URI) : NotificationPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theUrlPackage.createPackageContents();
@@ -136,7 +133,6 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 		theServerPackage.createPackageContents();
 		theAccesscontrolPackage.createPackageContents();
 		theRolesPackage.createPackageContents();
-		theNotificationPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theUrlPackage.initializePackageContents();
@@ -148,7 +144,6 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 		theServerPackage.initializePackageContents();
 		theAccesscontrolPackage.initializePackageContents();
 		theRolesPackage.initializePackageContents();
-		theNotificationPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theUrlPackage.freeze();

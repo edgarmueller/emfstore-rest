@@ -210,51 +210,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.EventComposite} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EventCompositeItemProvider eventCompositeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.EventComposite}.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventCompositeAdapter() {
-		if (eventCompositeItemProvider == null) {
-			eventCompositeItemProvider = new EventCompositeItemProvider(this);
-		}
-
-		return eventCompositeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.model.NotificationComposite} instances.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @generated
-	 */
-	protected NotificationCompositeItemProvider notificationCompositeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.model.NotificationComposite}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createNotificationCompositeAdapter() {
-		if (notificationCompositeItemProvider == null) {
-			notificationCompositeItemProvider = new NotificationCompositeItemProvider(this);
-		}
-
-		return notificationCompositeItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -358,10 +313,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 			operationCompositeItemProvider.dispose();
 		if (pendingFileTransferItemProvider != null)
 			pendingFileTransferItemProvider.dispose();
-		if (eventCompositeItemProvider != null)
-			eventCompositeItemProvider.dispose();
-		if (notificationCompositeItemProvider != null)
-			notificationCompositeItemProvider.dispose();
 	}
 
 }
