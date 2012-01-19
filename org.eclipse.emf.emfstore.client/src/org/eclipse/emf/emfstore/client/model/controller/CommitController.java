@@ -89,6 +89,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		// fileTransferManager.uploadQueuedFiles(new NullProgressMonitor());
 		// notifyPostCommitObservers(newBaseVersion);
+		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+			.commitCompleted(getProjectSpace(), newBaseVersion);
 
 		getProjectSpace().updateDirtyState();
 		return newBaseVersion;
