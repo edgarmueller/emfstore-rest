@@ -10,20 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.util;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.model.Activator;
-import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * Workspace utility class.
@@ -73,116 +64,22 @@ public final class WorkspaceUtil {
 	}
 
 	/**
-	 * Clean a formatted text from the list formatting.
+	 * Handles the given exception by wrapping it in a {@link RuntimeException} and propagating it to all registered
+	 * exception handlers. If no exception handler did handle the exception
+	 * a the wrapped exception will be re-thrown.
 	 * 
-	 * @param text the text which shall be cleaned
-	 * @return a string only containing the plain text
+	 * @param errorMessage
+	 *            the error message that should be used for propagating the exception
+	 * @param exception
+	 *            the actual exception
 	 */
-	public static String cleanFormatedText(String text) {
-		if (text == null) {
-			return "";
-		}
-		text = text.replaceAll("\n", "\r\n");
-		text = text.replaceAll("<br>", "\r\n");
-		text = text.replaceAll("<br\\/>", "\r\n");
-		text = text.replaceAll("<li><P[^>]*>", "\r\n\u2022 ");
-		text = text.replaceAll("<P[^>]*>", "\r\n");
-		text = text.replaceAll("<[^<]*>", "");
-		text = text.replaceAll("\\&nbsp;", " ");
-		return text;
-	}
-
-	/**
-	 * Opens a file with the default program used on the current computer. This is just the same as Desktop.open() of
-	 * java 1.6. This should work with - Mac os X, - windows xp, - as well as the most linux distributions
-	 * 
-	 * @param fileUrl the url of the file which shall be opened
-	 */
-	public static void openFile(String fileUrl) {
-		String lcOSName = System.getProperty("os.name").toLowerCase();
-		String cmd = "";
-
-		if (lcOSName.startsWith("mac os x")) {
-			// fileUrl = "'" + fileUrl + "'";
-			cmd = "open";
-		} else if (lcOSName.startsWith("linux")) {
-			// fileUrl = "'" + fileUrl + "'";
-			// works for ubuntu and the most common linux systems
-			cmd = "xdg-open";
-		} else if (lcOSName.startsWith("windows")) {
-			cmd = "not empty";
-		} else {
-			// bad luck .. java 1.5 ;(
-			// fall through
-		}
-
-		if (!cmd.equals("")) {
-			try {
-				if (lcOSName.startsWith("windows")) {
-					cmd = "cmd.exe /c start \"\" \"" + fileUrl + "\"";
-					Runtime.getRuntime().exec(cmd);
-				} else {
-					Runtime.getRuntime().exec(new String[] { cmd, fileUrl });
-				}
-			} catch (IOException e) {
-				WorkspaceUtil
-					.log("could not open the file with the system dependant command: " + cmd, e, IStatus.ERROR);
-			}
-		}
-	}
-
-	/**
-	 * Returns a EObject by Uri.
-	 * 
-	 * @param uri reference on object
-	 * @return EObject or null
-	 */
-	public static EObject getEObjectByUri(URI uri) {
-		if (uri == null) {
-			return null;
-		}
-		// Should you test whether the referenced item is within the workspace?
-		ResourceSet resourceSet = WorkspaceManager.getInstance().getCurrentWorkspace().eResource().getResourceSet();
-		return resourceSet.getEObject(uri, false);
-	}
-
-	/**
-	 * Returns ModelElement by Uri.
-	 * 
-	 * @param uri reference on object
-	 * @return ModelElement or null
-	 */
-	public static EObject getModelElementByUri(URI uri) {
-		EObject objectByUri = getEObjectByUri(uri);
-		// if (objectByUri instanceof ModelElement) {
-		return objectByUri;
-		// }
-	}
-
-	/**
-	 * Delete the test workspace.
-	 * 
-	 * @throws IOException if deletion fails
-	 */
-	public static void deleteTestWorkspace() throws IOException {
-		boolean isTesting = Configuration.isTesting();
-		Configuration.setTesting(true);
-		String workspaceDirectory = Configuration.getWorkspaceDirectory();
-		FileUtil.deleteFolder(new File(workspaceDirectory));
-		Configuration.setTesting(isTesting);
-	}
-
-	public static void handleException(RuntimeException exception) {
+	public static void handleException(String errorMessage, Exception exception) {
+		RuntimeException runtimeException = new RuntimeException(exception);
 		Boolean errorHandeled = WorkspaceManager.getObserverBus().notify(ExceptionObserver.class)
-			.handleError(exception);
+			.handleError(runtimeException);
 		logException("An error occured.", exception);
 		if (!errorHandeled.booleanValue()) {
-			throw exception;
+			throw runtimeException;
 		}
-	}
-
-	public static void handleException(String string, EmfStoreException e) {
-		handleException(new RuntimeException(string, e));
-
 	}
 }
