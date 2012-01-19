@@ -21,6 +21,8 @@
    <extension-point id="org.eclipse.emf.emfstore.client.notificationFilter" name="Notification Filter" schema="schema/org.eclipse.emf.emfstore.client.notificationFilter.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.loginObserver" name="Login Observer" schema="schema/org.eclipse.emf.emfstore.client.loginObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.client.logoutObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.commitObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.commitObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.updateObserver" name="Update Observer" schema="schema/org.eclipse.emf.emfstore.client.updateObserver.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
@@ -45,6 +47,20 @@
      <observer
            extensionPointName="org.eclipse.emf.emfstore.client.logoutObserver"
            observerAttributeName="logoutObserver">
+     </observer>
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.updateObserver"
+           observerAttributeName="updateObserver">
+     </observer>
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.commitObserver"
+           observerAttributeName="commitObserver">
      </observer>
   </extension>
 

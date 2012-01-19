@@ -756,13 +756,6 @@
      </command>
    </extension>
    <extension
-         point="org.eclipse.emf.emfstore.common.observer">
-      <observer
-            extensionPointName="org.eclipse.emf.emfstore.client.ui.observer1"
-            observerAttributeName="org.eclipse.emf.emfstore.client.ui.observer1">
-      </observer>
-   </extension>
-   <extension
          point="org.eclipse.emf.emfstore.client.loginObserver">
       <observer
             loginObserver="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelDecorator">
