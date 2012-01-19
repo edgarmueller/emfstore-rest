@@ -23,4 +23,32 @@
          id="org.eclipse.emf.emfstore.common.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.emf.emfstore.server.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.sdk.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.client.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.client.ui.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.backchannel.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.backchannel.sdk.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.client.transaction.feature"
+         version="0.0.0"/>
+
 </feature>
