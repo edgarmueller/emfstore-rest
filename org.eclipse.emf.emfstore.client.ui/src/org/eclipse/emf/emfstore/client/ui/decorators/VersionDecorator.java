@@ -11,24 +11,37 @@
 package org.eclipse.emf.emfstore.client.ui.decorators;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
+import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * . The decorator to show version of a ProjectSpace
  * 
  * @author Helming
  */
-public class VersionDecorator extends AdapterImpl implements ILightweightLabelDecorator {
+public class VersionDecorator extends AdapterImpl implements ILightweightLabelDecorator, UpdateObserver, CommitObserver {
 
 	private ArrayList<ILabelProviderListener> listeners = new ArrayList<ILabelProviderListener>();
 	private ProjectSpace element;
+
+	public VersionDecorator() {
+		WorkspaceManager.getObserverBus().register(this, CommitObserver.class);
+		WorkspaceManager.getObserverBus().register(this, UpdateObserver.class);
+	}
 
 	/**
 	 * . {@inheritDoc}
@@ -98,6 +111,31 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	@Override
 	public void notifyChanged(Notification msg) {
 		decorationChanged();
+	}
+
+	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+		return false;
+	}
+
+	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
+		update();
+	}
+
+	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
+		return false;
+	}
+
+	public void updateCompleted(ProjectSpace projectSpace) {
+		update();
+	}
+
+	private void update() {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				PlatformUI.getWorkbench().getDecoratorManager()
+					.update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
+			}
+		});
 	}
 
 }

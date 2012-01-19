@@ -15,9 +15,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 public class UIUpdateProjectController extends AbstractEMFStoreUIController implements UpdateCallback {
 
@@ -84,12 +82,12 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 		// been changed
 		// (as opposed to committing where the dirty property is being set)
 		// TODO replace by Observerbus or listener mechanism
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				PlatformUI.getWorkbench().getDecoratorManager()
-					.update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
-			}
-		});
+		// Display.getDefault().asyncExec(new Runnable() {
+		// public void run() {
+		// PlatformUI.getWorkbench().getDecoratorManager()
+		// .update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
+		// }
+		// });
 		closeProgress();
 	}
 
