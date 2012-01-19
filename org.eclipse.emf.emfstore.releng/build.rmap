@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="platform.version" value="3.7"/>
-  <rm:property key="emf.version" value="2.6"/>
+  <rm:property key="emf.version" value="2.7"/>
   <rm:property key="orbit.version" value="S20110907174232"/>
 
   <rm:property key="git.clone.emfstore.core" value="${user.home}/buckminster/org.eclipse.emf.emfstore.core"/>
