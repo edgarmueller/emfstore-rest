@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver;
@@ -12,6 +13,8 @@ public class CheckoutController extends ServerCall<ProjectSpace> {
 	private final ProjectInfo projectInfo;
 
 	public CheckoutController(ProjectInfo projectInfo) {
+		// FIXME
+		super((ServerInfo) projectInfo.eContainer());
 		this.projectInfo = projectInfo;
 	}
 

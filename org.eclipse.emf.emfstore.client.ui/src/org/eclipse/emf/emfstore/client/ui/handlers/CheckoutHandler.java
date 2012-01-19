@@ -13,7 +13,7 @@ public class CheckoutHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UICheckoutController(getShell(), requireSelection(ProjectInfo.class));
+		new UICheckoutController(getShell(), requireSelection(ProjectInfo.class)).checkout();
 	}
 
 }

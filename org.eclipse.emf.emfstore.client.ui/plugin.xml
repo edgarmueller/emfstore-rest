@@ -786,11 +786,6 @@
                  <instanceof
                        value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
                  </instanceof>
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
-                       value="true">
-                 </test>
               </iterate>
            </visibleWhen>
         </command>
