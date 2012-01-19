@@ -36,9 +36,10 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
 
-		if (serverInfo.getLastUsersession() != null) {
-			return serverInfo.getLastUsersession();
-		}
+		// TODO Review this
+		// if (serverInfo.getLastUsersession() != null) {
+		// return serverInfo.getLastUsersession();
+		// }
 
 		return new LoginDialogController().login(serverInfo);
 	}
