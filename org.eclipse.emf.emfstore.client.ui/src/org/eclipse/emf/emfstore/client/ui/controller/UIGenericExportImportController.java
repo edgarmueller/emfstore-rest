@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
-import org.eclipse.emf.ecp.common.util.PreferenceHelper;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportImportController;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
@@ -61,7 +61,7 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 		dialog.setOverwrite(true);
 
 		if (controller.getParentFolderPropertyKey() != null) {
-			String initialPath = PreferenceHelper.getPreference(controller.getParentFolderPropertyKey(),
+			String initialPath = EMFStorePreferenceHelper.getPreference(controller.getParentFolderPropertyKey(),
 				System.getProperty("user.home"));
 			dialog.setFilterPath(initialPath);
 		}
@@ -73,7 +73,7 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 		}
 
 		final File file = new File(dialog.getFilterPath(), dialog.getFileName());
-		PreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
+		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
 		final ProgressMonitorDialog progress = openProgress();
 		new EMFStoreCommand() {
@@ -85,7 +85,7 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 					progress.getProgressMonitor().worked(10);
 					new ExportImportController(file, getProgressMonitor()).execute(controller);
 				} catch (IOException e) {
-					DialogHandler.showExceptionDialog(e);
+					EMFStoreMessageDialog.showExceptionDialog(e);
 				} finally {
 					progress.getProgressMonitor().done();
 					progress.close();
