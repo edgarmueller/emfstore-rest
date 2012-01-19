@@ -31,8 +31,15 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 
 	public void update(ProjectSpace projectSpace, VersionSpec version) throws EmfStoreException {
 		// TODO sanity check projectspace (is null, is shared)
-		openProgress();
-		projectSpace.update(version, this, getProgressMonitor());
+		try {
+			openProgress();
+			PrimaryVersionSpec updatedVersion = projectSpace.update(version, this, getProgressMonitor());
+			if (projectSpace.getBaseVersion().getIdentifier() == updatedVersion.getIdentifier()) {
+				noChangesOnServer();
+			}
+		} finally {
+			closeProgress();
+		}
 	}
 
 	public void askForVersionAndUpdate(ProjectSpace projectSpace) throws EmfStoreException {

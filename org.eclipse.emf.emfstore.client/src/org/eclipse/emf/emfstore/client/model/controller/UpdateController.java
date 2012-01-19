@@ -82,7 +82,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}
 		getProgressMonitor().worked(15);
 		// TODO ASYNC review this cancel
-		if (getProgressMonitor().isCanceled() || callback.inspectChanges(getProjectSpace(), changes)) {
+		if (getProgressMonitor().isCanceled() || !callback.inspectChanges(getProjectSpace(), changes)) {
 			return resolvedVersion;
 			// updateDone(getProjectSpace().getBaseVersion(), null);
 		}
