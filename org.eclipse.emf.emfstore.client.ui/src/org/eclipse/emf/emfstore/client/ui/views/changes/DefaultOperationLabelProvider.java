@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.UiUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.server.model.provider.AbstractOperationCustomLabelProvider;
@@ -24,8 +23,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
  * @author emueller
  * 
  */
-public class DefaultOperationLabelProvider extends
-		AbstractOperationCustomLabelProvider {
+public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelProvider {
 
 	/**
 	 * The label to be shown for unknown element.
@@ -44,10 +42,8 @@ public class DefaultOperationLabelProvider extends
 	 * Constructor.
 	 */
 	public DefaultOperationLabelProvider() {
-		adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-				adapterFactory);
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 	}
 
 	/**
@@ -68,7 +64,7 @@ public class DefaultOperationLabelProvider extends
 			}
 		}
 
-		return UiUtil.getNameForModelElement(operation);
+		return operation.getName();
 	}
 
 	/**
@@ -105,7 +101,8 @@ public class DefaultOperationLabelProvider extends
 			return UNKOWN_ELEMENT;
 		}
 
-		return " \"" + trim(UiUtil.getNameForModelElement(modelElement)) + "\"";
+		// TODO: provide sensible label for given model element
+		return " \"" + trim(modelElement.toString()) + "\"";
 	}
 
 	private String trim(Object object) {

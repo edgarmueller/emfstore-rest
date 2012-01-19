@@ -15,8 +15,8 @@ import java.util.Properties;
 import javax.naming.Context;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -111,7 +111,7 @@ public class LdapSourceDialog extends TitleAreaDialog {
 		} catch (CorruptedSourceException e) {
 			progressMonitorDialog.close();
 			this.isInitFinished = false;
-			DialogHandler.showExceptionDialog("An exception occured", e);
+			EMFStoreMessageDialog.showExceptionDialog("An exception occured", e);
 		}
 
 		this.isOkPressed = true;

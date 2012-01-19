@@ -18,15 +18,15 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
-import org.eclipse.emf.ecp.common.util.UiUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.observers.OpenModelElementObserver;
 import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.client.ui.Activator;
-import org.eclipse.emf.emfstore.client.ui.util.ElementOpenerHelper;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
@@ -59,7 +59,6 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.window.Window;
@@ -113,17 +112,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 			Widget item = items[0];
 			Object data = item.getData();
-			if (data == null || !(data instanceof TreeNode)) {
+			if (data == null) {
 				return super.getSelection();
 			}
 
-			TreeNode node = (TreeNode) data;
-			if (node.getValue() == null) {
-				return super.getSelection();
-			}
-
-			// now we know that one tree node is selected with a non null value
-			Object element = node.getValue();
+			// TODO: remove assignment
+			Object element = data;
 			EObject selectedModelElement = null;
 
 			if (element instanceof CompositeOperation) {
@@ -245,9 +239,11 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 			public void doubleClick(DoubleClickEvent event) {
 				if (event.getSelection() instanceof IStructuredSelection) {
-					TreeNode node = (TreeNode) ((IStructuredSelection) event.getSelection()).getFirstElement();
-					if (node.getValue() instanceof EObject) {
-						ElementOpenerHelper.openModelElement((EObject) node.getValue(), VIEW_ID);
+					Object element = ((IStructuredSelection) event.getSelection()).getFirstElement();
+					if (element instanceof EObject) {
+						WorkspaceManager.getObserverBus().notify(OpenModelElementObserver.class)
+							.openModelElement((EObject) element);
+						// ElementOpenerHelper.openModelElement((EObject) node.getValue(), VIEW_ID);
 					}
 				}
 
@@ -473,7 +469,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				}
 			}.execute();
 		} catch (EmfStoreException e) {
-			DialogHandler.showErrorDialog(e.getMessage());
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 	}
 
@@ -539,7 +535,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		String label = "History for ";
 		Project project = projectSpace.getProject();
 		if (me != null && project.containsInstance(me)) {
-			label += UiUtil.getNameForModelElement(me);
+			// TODO: sensible name for model element
+			label += me.toString();
 			groupByMe.setChecked(false);
 			showRoots.setChecked(false);
 			contentProvider = new SCMContentProvider.Detailed(viewer);

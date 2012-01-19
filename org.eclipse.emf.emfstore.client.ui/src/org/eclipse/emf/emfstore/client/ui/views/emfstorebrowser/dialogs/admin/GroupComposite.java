@@ -15,8 +15,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
@@ -70,7 +70,7 @@ public class GroupComposite extends PropertiesComposite {
 			getAdminBroker().removeMember(group.getId(), orgUnit.getId());
 
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
 	}
@@ -87,7 +87,7 @@ public class GroupComposite extends PropertiesComposite {
 					getAdminBroker().addMember(group.getId(), orgUnit.getId());
 
 				} catch (EmfStoreException e) {
-					DialogHandler.showExceptionDialog(e);
+					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 			}
 
@@ -107,7 +107,7 @@ public class GroupComposite extends PropertiesComposite {
 				getAdminBroker().addMember(group.getId(), ou.getId());
 
 			} catch (EmfStoreException e) {
-				DialogHandler.showExceptionDialog(e);
+				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
 
@@ -192,7 +192,7 @@ public class GroupComposite extends PropertiesComposite {
 				((Form) (this.getParent().getParent())).setText("Group: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
 			} catch (EmfStoreException e) {
-				DialogHandler.showExceptionDialog(e);
+				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
 

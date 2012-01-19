@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.UiUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -63,18 +62,14 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		this.project = project;
 		this.highlighted = new ArrayList<OperationId>();
 
-		baseRevision = Activator.getImageDescriptor(
-				"icons/HistoryInfo_base.png").createImage();
-		currentRevision = Activator.getImageDescriptor(
-				"icons/HistoryInfo_current.png").createImage();
-		headRevision = Activator.getImageDescriptor(
-				"icons/HistoryInfo_head.png").createImage();
+		baseRevision = Activator.getImageDescriptor("icons/HistoryInfo_base.png").createImage();
+		currentRevision = Activator.getImageDescriptor("icons/HistoryInfo_current.png").createImage();
+		headRevision = Activator.getImageDescriptor("icons/HistoryInfo_head.png").createImage();
 	}
 
 	private ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-	private AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-			adapterFactory);
+		ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+	private AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 	private ChangePackageVisualizationHelper changePackageVisualizationHelper;
 	private Image baseRevision;
 	private Image currentRevision;
@@ -95,7 +90,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		} else if (element instanceof ModelElementId && changePackageVisualizationHelper != null) {
 			EObject modelElement = changePackageVisualizationHelper.getModelElement((ModelElementId) element);
 			if (modelElement != null) {
-				ret = UiUtil.getNameForModelElement(modelElement);
+				ret = modelElement.toString();
 			} else {
 				return ELEMENT_NOT_FOUND;
 			}
@@ -103,7 +98,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			ChangePackage changePackage = (ChangePackage) element;
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
-			ret = UiUtil.getNameForModelElement(((EObject) element));
+			ret = element.toString();
 		} else {
 			ret = element.toString();
 		}
@@ -115,8 +110,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Change Package");
 		if (changePackage.getLogMessage() != null) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"yyyy-MM-dd, HH:mm");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 			LogMessage logMessage = changePackage.getLogMessage();
 			builder.append(" [");
 			builder.append(logMessage.getAuthor());
@@ -132,15 +126,14 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	}
 
 	private String getText(HistoryInfo historyInfo) {
-		if (historyInfo.getPrimerySpec() != null
-				&& historyInfo.getPrimerySpec().getIdentifier() == -1) {
+		if (historyInfo.getPrimerySpec() != null && historyInfo.getPrimerySpec().getIdentifier() == -1) {
 			return LOCAL_REVISION;
 		}
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager
-				.getProjectSpace(project).getBaseVersion().getIdentifier()) {
+		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project).getBaseVersion()
+			.getIdentifier()) {
 			baseVersion = "*";
 		}
 		StringBuilder builder = new StringBuilder();
@@ -161,8 +154,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		if (historyInfo.getLogMessage() != null) {
 			logMessage = historyInfo.getLogMessage();
-		} else if (historyInfo.getChangePackage() != null
-				&& historyInfo.getChangePackage().getLogMessage() != null) {
+		} else if (historyInfo.getChangePackage() != null && historyInfo.getChangePackage().getLogMessage() != null) {
 			logMessage = historyInfo.getChangePackage().getLogMessage();
 		}
 		if (logMessage != null) {
@@ -201,10 +193,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	@Override
 	public Font getFont(Object element) {
 
-		Font italic = JFaceResources.getFontRegistry().getItalic(
-				JFaceResources.DIALOG_FONT);
-		Font bold = JFaceResources.getFontRegistry().getBold(
-				JFaceResources.DIALOG_FONT);
+		Font italic = JFaceResources.getFontRegistry().getItalic(JFaceResources.DIALOG_FONT);
+		Font bold = JFaceResources.getFontRegistry().getBold(JFaceResources.DIALOG_FONT);
 
 		// if (getText(findTopParent((TreeNode)
 		// element)).equals(LOCAL_REVISION)) {
@@ -219,8 +209,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 				return italic;
 			}
 			HistoryInfo historyInfo = (HistoryInfo) element;
-			if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager
-					.getProjectSpace(project).getBaseVersion().getIdentifier()) {
+			if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project)
+				.getBaseVersion().getIdentifier()) {
 				return bold;
 			}
 		} else if (element instanceof ModelElementId) {
@@ -279,8 +269,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 * @param changePackageVisualizationHelper
 	 *            the changePackageVisualizationHelper to set
 	 */
-	public void setChangePackageVisualizationHelper(
-			ChangePackageVisualizationHelper changePackageVisualizationHelper) {
+	public void setChangePackageVisualizationHelper(ChangePackageVisualizationHelper changePackageVisualizationHelper) {
 		this.changePackageVisualizationHelper = changePackageVisualizationHelper;
 	}
 

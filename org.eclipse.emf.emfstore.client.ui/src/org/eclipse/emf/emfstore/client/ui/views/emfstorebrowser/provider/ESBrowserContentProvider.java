@@ -17,9 +17,10 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 
 /**
- * Content provider for the tree view.
+ * Content provider for the EMFStore Browser View.
  * 
- * @author shterev
+ * @author emueller
+ * @author ovonwesend
  */
 public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 

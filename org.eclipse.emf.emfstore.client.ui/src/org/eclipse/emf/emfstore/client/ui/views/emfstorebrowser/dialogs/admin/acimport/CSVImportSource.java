@@ -19,9 +19,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
-import org.eclipse.emf.ecp.common.util.PreferenceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
@@ -101,7 +101,8 @@ public class CSVImportSource extends ImportSource {
 
 		FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), SWT.OPEN);
 		dialog.setText("Choose import file");
-		String initialPath = PreferenceHelper.getPreference(CSV_IMPORT_SOURCE_PATH, System.getProperty("user.home"));
+		String initialPath = EMFStorePreferenceHelper.getPreference(CSV_IMPORT_SOURCE_PATH,
+			System.getProperty("user.home"));
 		dialog.setFilterPath(initialPath);
 		String fn = dialog.open();
 		if (fn == null) {
@@ -116,7 +117,7 @@ public class CSVImportSource extends ImportSource {
 
 		this.absFileName = filterPath + File.separatorChar + fileName;
 		final File file = new File(absFileName);
-		PreferenceHelper.setPreference(CSV_IMPORT_SOURCE_PATH, filterPath);
+		EMFStorePreferenceHelper.setPreference(CSV_IMPORT_SOURCE_PATH, filterPath);
 		BufferedReader bufferedReader = null;
 		InputStreamReader isr = null;
 
@@ -167,16 +168,17 @@ public class CSVImportSource extends ImportSource {
 			isr.close();
 
 		} catch (FileNotFoundException e) {
+			// TODO: sensible error messages
 			WorkspaceUtil.logWarning(e.getMessage(), e);
-			DialogHandler.showExceptionDialog("File not found", e);
+			EMFStoreMessageDialog.showExceptionDialog("File not found", e);
 			return false;
 		} catch (IOException e) {
 			WorkspaceUtil.logWarning(e.getMessage(), e);
-			DialogHandler.showExceptionDialog("An I/O-exception occured", e);
+			EMFStoreMessageDialog.showExceptionDialog("An I/O-exception occured", e);
 			return false;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			WorkspaceUtil.logWarning(e.getMessage(), e);
-			DialogHandler.showExceptionDialog("ArrayIndexOutOfBoundsException", e);
+			EMFStoreMessageDialog.showExceptionDialog("ArrayIndexOutOfBoundsException", e);
 			return false;
 		}
 
@@ -184,8 +186,10 @@ public class CSVImportSource extends ImportSource {
 	}
 
 	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getMessage()
-	 * @return a small message which indicates from which is getting imported
 	 */
 	@Override
 	public String getMessage() {
@@ -193,21 +197,21 @@ public class CSVImportSource extends ImportSource {
 	}
 
 	/**
-	 * Disposes any created resources.
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
 		// Nothing to dispose
 	}
 
 	/**
-	 * Called when the input changes.
 	 * 
-	 * @param arg0
-	 *            the viewer
-	 * @param arg1
-	 *            the old input
-	 * @param arg2
-	 *            the new input
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object,
+	 *      java.lang.Object)
 	 */
 	public void inputChanged(Viewer arg0, Object arg1, Object arg2) {
 		// Nothing to change

@@ -15,8 +15,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
@@ -81,7 +81,7 @@ public class ProjectComposite extends PropertiesComposite {
 		try {
 			getAdminBroker().removeParticipant(projectInfo.getProjectId(), orgUnit.getId());
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
 	}
@@ -96,7 +96,7 @@ public class ProjectComposite extends PropertiesComposite {
 				getAdminBroker().addParticipant(projectInfo.getProjectId(), participant.getId());
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
 	}
@@ -115,7 +115,7 @@ public class ProjectComposite extends PropertiesComposite {
 			}
 
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
 	}
@@ -144,7 +144,7 @@ public class ProjectComposite extends PropertiesComposite {
 				}
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return participants;
 
@@ -258,7 +258,7 @@ public class ProjectComposite extends PropertiesComposite {
 
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
 	}
@@ -322,7 +322,7 @@ public class ProjectComposite extends PropertiesComposite {
 				result = SERVER_ADMIN_ROLE;
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return result;
 	}

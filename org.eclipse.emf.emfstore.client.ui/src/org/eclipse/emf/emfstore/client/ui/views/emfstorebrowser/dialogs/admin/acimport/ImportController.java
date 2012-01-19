@@ -15,9 +15,9 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
@@ -71,7 +71,7 @@ public class ImportController {
 					}
 				} catch (EmfStoreException e) {
 					WorkspaceUtil.logWarning(e.getMessage(), e);
-					DialogHandler.showExceptionDialog(e);
+					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 			}
 		}
@@ -89,7 +89,7 @@ public class ImportController {
 					}
 				} catch (EmfStoreException e) {
 					WorkspaceUtil.logWarning(e.getMessage(), e);
-					DialogHandler.showExceptionDialog(e);
+					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 			}
 		}
@@ -108,7 +108,7 @@ public class ImportController {
 						adminBroker.addMember(existGroup, unitId);
 					} catch (EmfStoreException e) {
 						WorkspaceUtil.logWarning(e.getMessage(), e);
-						DialogHandler.showExceptionDialog(e);
+						EMFStoreMessageDialog.showExceptionDialog(e);
 					}
 				}
 			}
@@ -133,7 +133,7 @@ public class ImportController {
 				}
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return exist;
 	}
@@ -156,7 +156,7 @@ public class ImportController {
 				}
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return exist;
 	}

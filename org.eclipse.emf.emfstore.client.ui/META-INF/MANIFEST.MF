@@ -5,7 +5,10 @@ Bundle-SymbolicName: org.eclipse.emf.emfstore.client.ui;singleton:=true
 Bundle-Version: 0.8.9.M912
 Bundle-Activator: org.eclipse.emf.emfstore.client.ui.Activator
 Require-Bundle: org.eclipse.emf.emfstore.client.model.edit;visibility:=reexport,
- org.eclipse.emf.ecp.common.util
+ org.eclipse.jface,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.core.expressions;bundle-version="3.4.200",
+ org.eclipse.ui.forms;bundle-version="3.5.2"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project

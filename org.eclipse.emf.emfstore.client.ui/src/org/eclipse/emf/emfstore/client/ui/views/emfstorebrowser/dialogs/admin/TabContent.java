@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
@@ -324,7 +324,7 @@ public abstract class TabContent {
 				adminBroker.removeGroup(user.getId(), ((ACGroup) orgUnit).getId());
 			}
 		} catch (EmfStoreException e) {
-			DialogHandler.showExceptionDialog(e);
+			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 	}
 

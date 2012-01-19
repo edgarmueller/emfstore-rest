@@ -23,6 +23,7 @@
    <extension-point id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.client.logoutObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.commitObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.commitObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.updateObserver" name="Update Observer" schema="schema/org.eclipse.emf.emfstore.client.updateObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.openModelElementObserver" name="Open ModelElement Observer" schema="schema/org.eclipse.emf.emfstore.openModelElementObserver.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
@@ -61,6 +62,13 @@
      <observer
            extensionPointName="org.eclipse.emf.emfstore.client.commitObserver"
            observerAttributeName="commitObserver">
+     </observer>
+  </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.openModelElementObserver"
+           observerAttributeName="openModelElementObserver">
      </observer>
   </extension>
 

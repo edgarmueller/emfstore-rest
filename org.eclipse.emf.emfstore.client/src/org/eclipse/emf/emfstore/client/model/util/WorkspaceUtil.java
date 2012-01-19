@@ -74,7 +74,23 @@ public final class WorkspaceUtil {
 	 *            the actual exception
 	 */
 	public static void handleException(String errorMessage, Exception exception) {
-		RuntimeException runtimeException = new RuntimeException(exception);
+		wrapAndHandleException(errorMessage, exception);
+	}
+
+	/**
+	 * Handles the given exception by wrapping it in a {@link RuntimeException} and propagating it to all registered
+	 * exception handlers. If no exception handler did handle the exception
+	 * a the wrapped exception will be re-thrown.
+	 * 
+	 * @param exception
+	 *            the actual exception
+	 */
+	public static void handleException(Exception exception) {
+		wrapAndHandleException(exception.getMessage(), exception);
+	}
+
+	private static void wrapAndHandleException(String errorMessage, Exception exception) {
+		RuntimeException runtimeException = new RuntimeException(errorMessage, exception);
 		Boolean errorHandeled = WorkspaceManager.getObserverBus().notify(ExceptionObserver.class)
 			.handleError(runtimeException);
 		logException("An error occured.", exception);
@@ -82,4 +98,5 @@ public final class WorkspaceUtil {
 			throw runtimeException;
 		}
 	}
+
 }

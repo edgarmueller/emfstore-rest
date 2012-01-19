@@ -47,14 +47,20 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.BaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	@Override
 	public void addListener(ILabelProviderListener listener) {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 	 */
 	@Override
 	public void dispose() {
@@ -69,16 +75,31 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.BaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	@Override
 	public void removeListener(ILabelProviderListener listener) {
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
 	public void loginCompleted(Usersession session) {
 		update();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
 	public void logoutCompleted(Usersession session) {
 		update();
 	}

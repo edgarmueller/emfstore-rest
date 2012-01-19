@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecp.common.util.DialogHandler;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.action.Action;
@@ -99,7 +99,7 @@ public class ProjectTabContent extends TabContent {
 				try {
 					projectInfos.addAll(getAdminBroker().getProjectInfos());
 				} catch (EmfStoreException e) {
-					DialogHandler.showExceptionDialog(e);
+					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				return projectInfos.toArray(new ProjectInfo[projectInfos.size()]);
 			}
