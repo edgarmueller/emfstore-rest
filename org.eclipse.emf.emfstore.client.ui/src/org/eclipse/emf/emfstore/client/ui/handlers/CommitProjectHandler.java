@@ -7,16 +7,8 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 public class CommitProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		try {
-			new UICommitProjectController(getShell()).commit(requireSelection(ProjectSpace.class));
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		} catch (EmfStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void handle() throws EmfStoreException {
+		new UICommitProjectController(getShell()).commit(requireSelection(ProjectSpace.class));
 	}
 
 }

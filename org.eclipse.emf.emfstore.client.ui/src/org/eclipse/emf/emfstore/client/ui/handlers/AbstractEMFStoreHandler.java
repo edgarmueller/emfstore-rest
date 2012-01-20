@@ -9,6 +9,9 @@ public abstract class AbstractEMFStoreHandler extends AbstractEMFStoreHandlerWit
 	public Object handleWithResult() {
 		try {
 			handle();
+		} catch (RequiredSelectionException e) {
+			// Todo better message
+			handleException(e);
 		} catch (Exception e) {
 			handleException(e);
 		}
