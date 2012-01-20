@@ -982,6 +982,29 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 		}.execute();
 	}
+
 	// END OF CUSTOM CODE
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#addServerInfo(org.eclipse.emf.emfstore.client.model.ServerInfo)
+	 */
+	public void addServerInfo(ServerInfo serverInfo) {
+		getServerInfos().add(serverInfo);
+		save();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#removeServerInfo(org.eclipse.emf.emfstore.client.model.ServerInfo)
+	 */
+	public void removeServerInfo(ServerInfo serverInfo) {
+		getServerInfos().remove(serverInfo);
+		save();
+	}
 
 } // WorkspaceImpl
