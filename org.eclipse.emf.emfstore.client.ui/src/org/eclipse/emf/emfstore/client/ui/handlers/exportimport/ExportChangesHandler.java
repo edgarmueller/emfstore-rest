@@ -11,10 +11,10 @@
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportChangesController;
-import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
  * CheckoutHandler for exporting local changes upon a selected {@link ProjectSpace}.
@@ -25,8 +25,6 @@ public class ExportChangesHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIGenericExportImportController(getShell(), new ExportChangesController(
-			requireSelection(ProjectSpace.class))).execute();
+		new UIExportController(getShell()).exportProjectHistoryController(requireSelection(ProjectInfo.class));
 	}
-
 }

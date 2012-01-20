@@ -11,8 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportProjectSpaceController;
-import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
@@ -26,8 +25,7 @@ public class ExportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIGenericExportImportController(getShell(), new ExportProjectSpaceController(
-			requireSelection(ProjectSpace.class))).execute();
+		new UIExportController(getShell()).exportProjectSpaceController(requireSelection(ProjectSpace.class));
 	}
 
 }

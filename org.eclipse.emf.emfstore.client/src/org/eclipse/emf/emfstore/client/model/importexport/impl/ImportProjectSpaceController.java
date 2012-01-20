@@ -8,23 +8,24 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 
 /**
- * Exports the whole {@link Workspace}.
+ * Controller that is capable of import a project space.
  * 
  * @author emueller
+ * 
  */
-public class ExportWorkspaceController implements IExportImportController {
+public class ImportProjectSpaceController implements IExportImportController {
 
 	/**
 	 * 
@@ -33,7 +34,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "workspace";
+		return "project space";
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore Workspace Files (*" + ExportImportDataUnits.Workspace.getExtension() + ")",
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -54,27 +55,17 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Workspace.getExtension() + ", *.*" };
+		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getFilename()
-	 */
-	public String getFilename() {
-		return "Workspace_" + new Date();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.exportWorkSpacePath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectSpacePath";
 	}
 
 	/**
@@ -85,7 +76,18 @@ public class ExportWorkspaceController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		WorkspaceManager.getInstance().getCurrentWorkspace().exportWorkSpace(file.getAbsolutePath());
+		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		currentWorkspace.importProjectSpace(file.getAbsolutePath());
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilename()
+	 */
+	public String getFilename() {
+		return null;
 	}
 
 	/**
@@ -95,6 +97,6 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#isExport()
 	 */
 	public boolean isExport() {
-		return true;
+		return false;
 	}
 }

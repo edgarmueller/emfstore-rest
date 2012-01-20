@@ -12,8 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ImportProjectController;
-import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
@@ -35,7 +34,7 @@ public class ImportProjectHandler extends AbstractEMFStoreHandler {
 		if (projectName == null) {
 			return;
 		}
-		new UIGenericExportImportController(getShell(), new ImportProjectController(projectName)).execute();
+		new UIImportController(getShell()).importProjectController(projectName);
 	}
 
 	/**

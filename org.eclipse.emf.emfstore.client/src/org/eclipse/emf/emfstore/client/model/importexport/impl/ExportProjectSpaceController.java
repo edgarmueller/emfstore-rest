@@ -8,15 +8,18 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
+import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -97,8 +100,14 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		WorkspaceManager.getInstance().getCurrentWorkspace()
-			.exportProjectSpace(getProjectSpace(), file.getAbsolutePath());
+		ProjectSpace copiedProjectSpace = EcoreUtil.copy(getProjectSpace());
+		copiedProjectSpace.setUsersession(null);
+
+		Project clonedProject = ModelUtil.clone(getProjectSpace().getProject());
+		copiedProjectSpace.setProject(clonedProject);
+
+		ResourceHelper.putElementIntoNewResourceWithProject(file.getAbsolutePath(), copiedProjectSpace,
+			copiedProjectSpace.getProject());
 	}
 
 	/**

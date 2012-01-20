@@ -8,29 +8,29 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 
 /**
- * Exports a {@link Project}.
+ * Exports pending changes on a given {@link ProjectSpace}.
  * 
  * @author emueller
  */
-public class ExportProjectController extends ProjectSpaceBasedExportController {
+public class ExportChangesController extends ProjectSpaceBasedExportController {
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param projectSpace the {@link ProjectSpace} whose contained {@link Project} should be exported
+	 * @param projectSpace the {@link ProjectSpace} whose local changes should be exported
 	 */
-	public ExportProjectController(ProjectSpace projectSpace) {
+	public ExportChangesController(ProjectSpace projectSpace) {
 		super(projectSpace);
 	}
 
@@ -41,7 +41,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore Project Files (*" + ExportImportDataUnits.Project.getExtension() + ")",
+		return new String[] { "EMFStore change package (" + ExportImportDataUnits.Change.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -52,7 +52,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Project.getExtension() + ", *.*" };
+		return new String[] { "*" + ExportImportDataUnits.Change.getExtension(), "*.*" };
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "project";
+		return "changes";
 	}
 
 	/**
@@ -72,9 +72,8 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getFilename()
 	 */
 	public String getFilename() {
-		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
-		return getProjectSpace().getProjectName() + "@" + (baseVersion == null ? 0 : baseVersion.getIdentifier())
-			+ ExportImportDataUnits.Project.getExtension();
+		return "LocalChanges_" + getProjectSpace().getProjectName() + "@"
+			+ getProjectSpace().getBaseVersion().getIdentifier();
 	}
 
 	/**
@@ -84,17 +83,19 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.exportProjectPath";
+		return null;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		getProjectSpace().exportProject(file.getAbsolutePath());
+		ResourceHelper.putElementIntoNewResourceWithProject(file.getAbsolutePath(), getProjectSpace()
+			.getLocalChangePackage(false), getProjectSpace().getProject());
 	}
 
 	/**

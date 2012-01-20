@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportImportController;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
@@ -34,8 +34,6 @@ import org.eclipse.ui.PlatformUI;
  */
 public class UIGenericExportImportController extends AbstractEMFStoreUIController {
 
-	private final IExportImportController controller;
-
 	/**
 	 * Constructor.
 	 * 
@@ -44,15 +42,14 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	 * @param controller
 	 *            the {@link IExportImportController} to be executed
 	 */
-	public UIGenericExportImportController(Shell shell, IExportImportController controller) {
+	public UIGenericExportImportController(Shell shell) {
 		super(shell);
-		this.controller = controller;
 	}
 
 	/**
 	 * Executes the controller.
 	 */
-	public void execute() {
+	protected void execute(final IExportImportController controller) {
 
 		FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 			controller.isExport() ? SWT.SAVE : SWT.OPEN);
@@ -83,7 +80,7 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 					progress.open();
 					progress.getProgressMonitor().beginTask("Import " + controller.getLabel() + " ...", 100);
 					progress.getProgressMonitor().worked(10);
-					new ExportImportController(file, getProgressMonitor()).execute(controller);
+					new ExportImportControllerExecutor(file, getProgressMonitor()).execute(controller);
 				} catch (IOException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				} finally {

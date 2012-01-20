@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -49,9 +50,10 @@ import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundExceptio
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportChangesController;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -85,8 +87,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * @author emueller
  * 
  */
-public abstract class ProjectSpaceBase extends IdentifiableElementImpl
-		implements ProjectSpace, LoginObserver {
+public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver {
 
 	private FileTransferManager fileTransferManager;
 
@@ -156,12 +157,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec)
 	 */
-	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-			throws EmfStoreException {
-		final ConnectionManager cm = WorkspaceManager.getInstance()
-				.getConnectionManager();
-		cm.addTag(getUsersession().getSessionId(), getProjectId(), versionSpec,
-				tag);
+	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException {
+		final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+		cm.addTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
 	/**
@@ -187,8 +185,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @see #applyOperationsWithRecording(List, boolean)
 	 */
-	public void applyOperations(List<AbstractOperation> operations,
-			boolean addOperations) {
+	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
 		stopChangeRecording();
 
 		try {
@@ -211,20 +208,17 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	}
 
 	/**
-	 * Applies a list of operations to the project. This method is used by
-	 * {@link #importLocalChanges(String)}. This method redirects to
-	 * {@link #applyOperationsWithRecording(List, boolean, boolean)}, using
+	 * Applies a list of operations to the project. This method is used by {@link #importLocalChanges(String)}. This
+	 * method redirects to {@link #applyOperationsWithRecording(List, boolean, boolean)}, using
 	 * false for semantic apply.
 	 * 
 	 * @param operations
 	 *            the list of operations to be applied upon the project space
 	 * @param force
 	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)}
-	 *            fails
+	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
 	 */
-	public void applyOperationsWithRecording(
-			List<AbstractOperation> operations, boolean force) {
+	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force) {
 		applyOperationsWithRecording(operations, force, false);
 	}
 
@@ -237,21 +231,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 *            the list of operations to be applied upon the project space
 	 * @param force
 	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)}
-	 *            fails
+	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
 	 * @param semanticApply
-	 *            if true, performs a semanticApply, if possible (see
-	 *            {@link SemanticCompositeOperation})
+	 *            if true, performs a semanticApply, if possible (see {@link SemanticCompositeOperation})
 	 */
-	public void applyOperationsWithRecording(
-			List<AbstractOperation> operations, boolean force,
-			boolean semanticApply) {
+	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force, boolean semanticApply) {
 		for (AbstractOperation operation : operations) {
 			try {
-				if (semanticApply
-						&& operation instanceof SemanticCompositeOperation) {
-					((SemanticCompositeOperation) operation)
-							.semanticApply(getProject());
+				if (semanticApply && operation instanceof SemanticCompositeOperation) {
+					((SemanticCompositeOperation) operation).semanticApply(getProject());
 				} else {
 					operation.apply(getProject());
 				}
@@ -266,8 +254,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	private void assignElementToResource(Resource resource, EObject modelElement) {
 		resource.getContents().add(modelElement);
 		// FIXME: this is not nice!
-		((XMIResource) resource).setID(modelElement, getProject()
-				.getModelElementId(modelElement).getId());
+		((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
 	}
 
 	/**
@@ -285,31 +272,46 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		}
 	}
 
-	public PrimaryVersionSpec commit(LogMessage logMessage,
-			CommitCallback callback, IProgressMonitor monitor)
-			throws EmfStoreException {
-		return new CommitController(this, logMessage, callback, monitor)
-				.execute();
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
+	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
+		throws EmfStoreException {
+		return new CommitController(this, logMessage, callback, monitor).execute();
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.io.File,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void exportLocalChanges(String fileName) throws IOException {
-		ResourceHelper.putElementIntoNewResourceWithProject(fileName,
-				getLocalChangePackage(false), getProject());
+	public void exportLocalChanges(File file, IProgressMonitor progressMonitor) throws IOException {
+		new ExportChangesController(this).execute(file, progressMonitor);
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportProject(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.io.File)
 	 */
-	public void exportProject(String absoluteFileName) throws IOException {
-		WorkspaceManager.getInstance().getCurrentWorkspace()
-				.exportProject(this, absoluteFileName);
+	public void exportLocalChanges(File file) throws IOException {
+		new ExportChangesController(this).execute(file, new NullProgressMonitor());
+	}
+
+	public void exportProject(File file, IProgressMonitor progressMonitor) throws IOException {
+		new ExportProjectController(this).execute(file, progressMonitor);
+	}
+
+	public void exportProject(File file) throws IOException {
+		new ExportProjectController(this).execute(file, new NullProgressMonitor());
 	}
 
 	/**
@@ -317,14 +319,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @generated NOT
 	 */
-	public List<ChangePackage> getChanges(VersionSpec sourceVersion,
-			VersionSpec targetVersion) throws EmfStoreException {
-		final ConnectionManager connectionManager = WorkspaceManager
-				.getInstance().getConnectionManager();
+	public List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion)
+		throws EmfStoreException {
+		final ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 
-		List<ChangePackage> changes = connectionManager.getChanges(
-				getUsersession().getSessionId(), getProjectId(), sourceVersion,
-				targetVersion);
+		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
+			sourceVersion, targetVersion);
 		return changes;
 	}
 
@@ -334,8 +334,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.server.model.FileIdentifier,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public FileDownloadStatus getFile(FileIdentifier fileIdentifier)
-			throws FileTransferException {
+	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
 		return fileTransferManager.getFile(fileIdentifier);
 	}
 
@@ -354,10 +353,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getHistoryInfo(org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
 	 */
-	public List<HistoryInfo> getHistoryInfo(HistoryQuery query)
-			throws EmfStoreException {
-		return getWorkspace().getHistoryInfo(getUsersession(), getProjectId(),
-				query);
+	public List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException {
+		return getWorkspace().getHistoryInfo(getUsersession(), getProjectId(), query);
 	}
 
 	/**
@@ -366,8 +363,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalChangePackage()
 	 */
 	public ChangePackage getLocalChangePackage(boolean canonize) {
-		ChangePackage changePackage = VersioningFactory.eINSTANCE
-				.createChangePackage();
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
 		// copy operations from ProjectSpace
 		for (AbstractOperation abstractOperation : getOperations()) {
 			AbstractOperation copy = EcoreUtil.copy(abstractOperation);
@@ -414,20 +410,17 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		// check if operation composite exists
 		OperationComposite operationComposite = this.getLocalOperations();
 		if (operationComposite == null) {
-			this.setLocalOperations(ModelFactory.eINSTANCE
-					.createOperationComposite());
+			this.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 			operationComposite = getLocalOperations();
 		}
 		if (isTransient) {
 			return operationComposite.getOperations();
 		}
 		if (operationsList == null) {
-			operationsList = new AutoSplitAndSaveResourceContainmentList<AbstractOperation>(
-					operationComposite, operationComposite.getOperations(),
-					this.eResource().getResourceSet(),
-					Configuration.getWorkspaceDirectory() + "ps-"
-							+ getIdentifier() + File.separatorChar
-							+ "operations", ".off");
+			operationsList = new AutoSplitAndSaveResourceContainmentList<AbstractOperation>(operationComposite,
+				operationComposite.getOperations(), this.eResource().getResourceSet(),
+				Configuration.getWorkspaceDirectory() + "ps-" + getIdentifier() + File.separatorChar + "operations",
+				".off");
 		}
 		return operationsList;
 	}
@@ -439,8 +432,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @generated NOT
 	 */
 	public ProjectInfo getProjectInfo() {
-		ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
-				.createProjectInfo();
+		ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectInfo();
 		projectInfo.setProjectId(ModelUtil.clone(getProjectId()));
 		projectInfo.setName(getProjectName());
 		projectInfo.setDescription(getProjectDescription());
@@ -464,8 +456,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	/**
 	 * getter for a string argument - see {@link #setProperty(OrgUnitProperty)}.
 	 */
-	private OrgUnitProperty getProperty(String name)
-			throws PropertyNotFoundException {
+	private OrgUnitProperty getProperty(String name) throws PropertyNotFoundException {
 		// sanity checks
 		if (getUsersession() != null && getUsersession().getACUser() != null) {
 			OrgUnitProperty orgUnitProperty = propertyMap.get(name);
@@ -493,13 +484,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	public void importLocalChanges(String fileName) throws IOException {
 
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(
-				URI.createFileURI(fileName), true);
+		Resource resource = resourceSet.getResource(URI.createFileURI(fileName), true);
 		EList<EObject> directContents = resource.getContents();
 		// sanity check
 
-		if (directContents.size() != 1
-				&& (!(directContents.get(0) instanceof ChangePackage))) {
+		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ChangePackage))) {
 			throw new IOException("File is corrupt, does not contain Changes.");
 		}
 
@@ -523,31 +512,25 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		// EObjectChangeNotifier changeNotifier = new EObjectChangeNotifier(
 		// this.getProject());
 		this.operationRecorder = new OperationRecorder(this.getProject(),
-				((ProjectImpl) this.getProject()).getChangeNotifier());
+			((ProjectImpl) this.getProject()).getChangeNotifier());
 		this.operationManager = new OperationManager(operationRecorder, this);
 		this.operationManager.addOperationListener(modifiedModelElementsCache);
-		statePersister = new StatePersister(
-				((ProjectImpl) this.getProject()).getChangeNotifier(),
-				((EMFStoreCommandStack) Configuration.getEditingDomain()
-						.getCommandStack()), this.getProject());
+		statePersister = new StatePersister(((ProjectImpl) this.getProject()).getChangeNotifier(),
+			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()), this.getProject());
 		// TODO: initialization order important
-		this.getProject().addIdEObjectCollectionChangeObserver(
-				this.operationRecorder);
+		this.getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
 		this.getProject().addIdEObjectCollectionChangeObserver(statePersister);
 
 		if (getProject() instanceof ProjectImpl) {
-			((ProjectImpl) this.getProject())
-					.setUndetachable(operationRecorder);
+			((ProjectImpl) this.getProject()).setUndetachable(operationRecorder);
 			((ProjectImpl) this.getProject()).setUndetachable(statePersister);
 		}
 		if (getUsersession() != null) {
-			WorkspaceManager.getObserverBus().register(this,
-					LoginObserver.class);
+			WorkspaceManager.getObserverBus().register(this, LoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
 			if (acUser != null) {
 				for (OrgUnitProperty p : acUser.getProperties()) {
-					if (p.getProject() != null
-							&& p.getProject().equals(getProjectId())) {
+					if (p.getProject() != null && p.getProject().equals(getProjectId())) {
 						propertyMap.put(p.getName(), p);
 					}
 				}
@@ -570,25 +553,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 */
 	public void initResources(ResourceSet resourceSet) {
 		initCompleted = true;
-		String projectSpaceFileNamePrefix = Configuration
-				.getWorkspaceDirectory()
-				+ Configuration.getProjectSpaceDirectoryPrefix()
-				+ getIdentifier() + File.separatorChar;
-		String projectSpaceFileName = projectSpaceFileNamePrefix
-				+ this.getIdentifier()
-				+ Configuration.getProjectSpaceFileExtension();
-		String operationsCompositeFileName = projectSpaceFileNamePrefix
-				+ this.getIdentifier()
-				+ Configuration.getOperationCompositeFileExtension();
-		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix
-				+ Configuration.getProjectFolderName() + File.separatorChar;
+		String projectSpaceFileNamePrefix = Configuration.getWorkspaceDirectory()
+			+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
+		String projectSpaceFileName = projectSpaceFileNamePrefix + this.getIdentifier()
+			+ Configuration.getProjectSpaceFileExtension();
+		String operationsCompositeFileName = projectSpaceFileNamePrefix + this.getIdentifier()
+			+ Configuration.getOperationCompositeFileExtension();
+		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix + Configuration.getProjectFolderName()
+			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
-		URI operationCompositeURI = URI
-				.createFileURI(operationsCompositeFileName);
+		URI operationCompositeURI = URI.createFileURI(operationsCompositeFileName);
 
 		setResourceCount(0);
 		String fileName = projectFragementsFileNamePrefix + getResourceCount()
-				+ Configuration.getProjectFragmentFileExtension();
+			+ Configuration.getProjectFragmentFileExtension();
 		URI fileURI = URI.createFileURI(fileName);
 
 		List<Resource> resources = new ArrayList<Resource>();
@@ -599,26 +577,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		setResourceCount(getResourceCount() + 1);
 
 		if (Configuration.isResourceSplittingEnabled()) {
-			splitResources(resourceSet, projectFragementsFileNamePrefix,
-					resources, this.getProject());
+			splitResources(resourceSet, projectFragementsFileNamePrefix, resources, this.getProject());
 		} else {
 			for (EObject modelElement : getProject().getAllModelElements()) {
-				((XMIResource) resource).setID(modelElement, getProject()
-						.getModelElementId(modelElement).getId());
+				((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
 			}
 		}
 
-		Resource operationCompositeResource = resourceSet
-				.createResource(operationCompositeURI);
+		Resource operationCompositeResource = resourceSet.createResource(operationCompositeURI);
 		if (this.getLocalOperations() == null) {
-			this.setLocalOperations(ModelFactory.eINSTANCE
-					.createOperationComposite());
+			this.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		}
 		operationCompositeResource.getContents().add(this.getLocalOperations());
 		resources.add(operationCompositeResource);
 
-		Resource projectSpaceResource = resourceSet
-				.createResource(projectSpaceURI);
+		Resource projectSpaceResource = resourceSet.createResource(projectSpaceURI);
 		projectSpaceResource.getContents().add(this);
 		resources.add(projectSpaceResource);
 
@@ -627,8 +600,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 			try {
 				currentResource.save(Configuration.getResourceSaveOptions());
 			} catch (IOException e) {
-				WorkspaceUtil.logException(
-						"Project Space resource init failed!", e);
+				WorkspaceUtil.logException("Project Space resource init failed!", e);
 			}
 		}
 
@@ -670,10 +642,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil
-					.logException(
-							"Resuming file transfers or transmitting properties failed!",
-							e);
+			WorkspaceUtil.logException("Resuming file transfers or transmitting properties failed!", e);
 		}
 	}
 
@@ -684,8 +653,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 */
 	public void makeTransient() {
 		if (initCompleted) {
-			throw new IllegalAccessError(
-					"Project Space cannot be set to transient after init.");
+			throw new IllegalAccessError("Project Space cannot be set to transient after init.");
 		}
 		isTransient = true;
 	}
@@ -693,14 +661,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean merge(PrimaryVersionSpec target,
-			ConflictResolver conflictResolver) throws EmfStoreException {
+	public boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
 		// merge the conflicts
 		ChangePackage myCp = this.getLocalChangePackage(true);
-		List<ChangePackage> theirCps = this
-				.getChanges(getBaseVersion(), target);
-		if (conflictResolver.resolveConflicts(getProject(), theirCps, myCp,
-				getBaseVersion(), target)) {
+		List<ChangePackage> theirCps = this.getChanges(getBaseVersion(), target);
+		if (conflictResolver.resolveConflicts(getProject(), theirCps, myCp, getBaseVersion(), target)) {
 
 			// revert the local operations and apply all their operations
 			this.revert();
@@ -710,10 +675,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 			}
 
 			// generate merge result and apply to local workspace
-			List<AbstractOperation> acceptedMine = conflictResolver
-					.getAcceptedMine();
-			List<AbstractOperation> rejectedTheirs = conflictResolver
-					.getRejectedTheirs();
+			List<AbstractOperation> acceptedMine = conflictResolver.getAcceptedMine();
+			List<AbstractOperation> rejectedTheirs = conflictResolver.getRejectedTheirs();
 			List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();
 			for (AbstractOperation operationToReverse : rejectedTheirs) {
 				mergeResult.add(0, operationToReverse.reverse());
@@ -737,12 +700,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @generated NOT
 	 */
-	public void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-			throws EmfStoreException {
-		final ConnectionManager cm = WorkspaceManager.getInstance()
-				.getConnectionManager();
-		cm.removeTag(getUsersession().getSessionId(), getProjectId(),
-				versionSpec, tag);
+	public void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException {
+		final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+		cm.removeTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
 	/**
@@ -750,10 +710,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#resolve(org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment)
 	 */
-	public EObject resolve(ModelElementUrlFragment modelElementUrlFragment)
-			throws MEUrlResolutionException {
-		ModelElementId modelElementId = modelElementUrlFragment
-				.getModelElementId();
+	public EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException {
+		ModelElementId modelElementId = modelElementUrlFragment.getModelElementId();
 		EObject modelElement = getProject().getModelElement(modelElementId);
 		if (modelElement == null) {
 			throw new MEUrlResolutionException();
@@ -768,12 +726,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @throws EmfStoreException
 	 * @generated NOT
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec)
-			throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance()
-				.getConnectionManager();
-		return connectionManager.resolveVersionSpec(getUsersession()
-				.getSessionId(), getProjectId(), versionSpec);
+	public PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec) throws EmfStoreException {
+		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		return connectionManager.resolveVersionSpec(getUsersession().getSessionId(), getProjectId(), versionSpec);
 	}
 
 	/**
@@ -805,21 +760,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		try {
 			if (resource == null) {
 				if (!isTransient) {
-					WorkspaceUtil
-							.logException(
-									"Resources of project space are not properly initialized!",
-									new IllegalProjectSpaceStateException(
-											"Resource to save is null"));
+					WorkspaceUtil.logException("Resources of project space are not properly initialized!",
+						new IllegalProjectSpaceStateException("Resource to save is null"));
 				}
 				return;
 			}
 			resource.save(Configuration.getResourceSaveOptions());
 		} catch (IOException e) {
-			WorkspaceUtil
-					.logException(
-							"An error in the data was detected during save!"
-									+ " The safest way to deal with this problem is to delete this project and checkout again.",
-							e);
+			WorkspaceUtil.logException("An error in the data was detected during save!"
+				+ " The safest way to deal with this problem is to delete this project and checkout again.", e);
 		}
 	}
 
@@ -846,10 +795,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 			}
 			// the properties that have been altered are retained in a separate
 			// list
-			for (OrgUnitProperty changedProperty : getUsersession()
-					.getChangedProperties()) {
+			for (OrgUnitProperty changedProperty : getUsersession().getChangedProperties()) {
 				if (changedProperty.getName().equals(property.getName())
-						&& changedProperty.getProject().equals(getProjectId())) {
+					&& changedProperty.getProject().equals(getProjectId())) {
 					changedProperty.setValue(property.getValue());
 					WorkspaceManager.getInstance().getCurrentWorkspace().save();
 					return;
@@ -877,14 +825,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.client.model.Usersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor)
-			throws EmfStoreException {
+	public void shareProject(Usersession session, IProgressMonitor monitor) throws EmfStoreException {
 		new ShareController(this, session, monitor).execute();
 	}
 
-	private void splitResources(ResourceSet resourceSet,
-			String projectFragementsFileNamePrefix, List<Resource> resources,
-			Project project) {
+	private void splitResources(ResourceSet resourceSet, String projectFragementsFileNamePrefix,
+		List<Resource> resources, Project project) {
 		String fileName;
 		URI fileURI;
 
@@ -894,15 +840,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 
 			// never split maps
 			if (modelElement instanceof BasicEMap.Entry) {
-				((XMIResource) modelElement.eContainer().eResource()).setID(
-						modelElement,
-						getProject().getModelElementId(modelElement).getId());
+				((XMIResource) modelElement.eContainer().eResource()).setID(modelElement, getProject()
+					.getModelElementId(modelElement).getId());
 				continue;
 			}
 
 			if (counter > Configuration.getMaxMECountPerResource()) {
 				fileName = projectFragementsFileNamePrefix + getResourceCount()
-						+ Configuration.getProjectFragmentFileExtension();
+					+ Configuration.getProjectFragmentFileExtension();
 				fileURI = URI.createFileURI(fileName);
 				resource = resourceSet.createResource(fileURI);
 				setResourceCount(getResourceCount() + 1);
@@ -944,10 +889,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 */
 	public void transmitProperties() {
 		List<OrgUnitProperty> temp = new ArrayList<OrgUnitProperty>();
-		for (OrgUnitProperty changedProperty : getUsersession()
-				.getChangedProperties()) {
-			if (changedProperty.getProject() != null
-					&& changedProperty.getProject().equals(getProjectId())) {
+		for (OrgUnitProperty changedProperty : getUsersession().getChangedProperties()) {
+			if (changedProperty.getProject() != null && changedProperty.getProject().equals(getProjectId())) {
 				temp.add(changedProperty);
 			}
 		}
@@ -955,15 +898,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		while (iterator.hasNext()) {
 			try {
 				WorkspaceManager
-						.getInstance()
-						.getConnectionManager()
-						.transmitProperty(getUsersession().getSessionId(),
-								iterator.next(), getUsersession().getACUser(),
-								getProjectId());
+					.getInstance()
+					.getConnectionManager()
+					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
+						getProjectId());
 				iterator.remove();
 			} catch (EmfStoreException e) {
-				WorkspaceUtil.logException(
-						"Transmission of properties failed with exception", e);
+				WorkspaceUtil.logException("Transmission of properties failed with exception", e);
 			}
 		}
 	}
@@ -977,8 +918,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	public void undoLastOperation() {
 		if (!this.getOperations().isEmpty()) {
 			List<AbstractOperation> operations = this.getOperations();
-			AbstractOperation lastOperation = operations
-					.get(operations.size() - 1);
+			AbstractOperation lastOperation = operations.get(operations.size() - 1);
 			stopChangeRecording();
 			try {
 				lastOperation.reverse().apply(getProject());
@@ -1011,8 +951,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec)
 	 */
-	public PrimaryVersionSpec update(final VersionSpec version)
-			throws EmfStoreException {
+	public PrimaryVersionSpec update(final VersionSpec version) throws EmfStoreException {
 		return update(version, null, null);
 	}
 
@@ -1024,11 +963,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec update(VersionSpec version,
-			UpdateCallback callback, IProgressMonitor progress)
-			throws EmfStoreException {
-		return new UpdateController(this, version, callback, progress)
-				.execute();
+	public PrimaryVersionSpec update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
+		throws EmfStoreException {
+		return new UpdateController(this, version, callback, progress).execute();
 	}
 
 	/**

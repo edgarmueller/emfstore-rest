@@ -8,13 +8,14 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport;
 
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.ProgressMonitor;
+
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 
 /**
@@ -23,7 +24,7 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
  * 
  * @author emueller
  */
-public class ExportImportController {
+public class ExportImportControllerExecutor {
 
 	private File file;
 	private IProgressMonitor monitor;
@@ -37,7 +38,7 @@ public class ExportImportController {
 	 * @param monitor
 	 *            a {@link ProgressMonitor} to inform about the progress of the export/import process
 	 */
-	public ExportImportController(File file, IProgressMonitor monitor) {
+	public ExportImportControllerExecutor(File file, IProgressMonitor monitor) {
 		this.file = file;
 		this.monitor = monitor;
 	}
