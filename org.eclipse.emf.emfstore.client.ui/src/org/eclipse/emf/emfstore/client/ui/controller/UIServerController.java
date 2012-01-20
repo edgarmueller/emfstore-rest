@@ -46,6 +46,9 @@ public class UIServerController extends AbstractEMFStoreUIController {
 		dialog.open();
 	}
 
+	/**
+	 * TODO REFACTOR
+	 */
 	public void removeServer(final ServerInfo serverInfo) {
 		if (!MessageDialog.openQuestion(Display.getCurrent().getActiveShell(), "Confirm deletion",
 			"Are you sure you want to delete \'" + serverInfo.getName() + "\'")) {

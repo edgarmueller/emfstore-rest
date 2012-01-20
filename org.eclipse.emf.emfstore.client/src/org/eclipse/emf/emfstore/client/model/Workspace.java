@@ -552,4 +552,19 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             if an error occurs while updating the project information
 	 */
 	void updateProjectInfos(Usersession session) throws EmfStoreException;
+
+	/**
+	 * Adds an serverinfo and saves.
+	 * 
+	 * @param serverInfo server info
+	 */
+	public void addServerInfo(ServerInfo serverInfo);
+
+	/**
+	 * Removes an serverinfo and saves.
+	 * 
+	 * @param serverInfo server info
+	 */
+	public void removeServerInfo(ServerInfo serverInfo);
+
 } // Workspace

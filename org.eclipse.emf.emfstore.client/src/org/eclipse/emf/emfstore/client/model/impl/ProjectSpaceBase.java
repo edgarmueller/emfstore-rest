@@ -974,4 +974,5 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void updateDirtyState() {
 		setDirty(!getOperations().isEmpty());
 	}
+
 }
