@@ -8,7 +8,8 @@ public class ChangeSessionHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UISessionController(getShell(), requireSelection(ServerInfo.class)).changeSession();
+		// FIXME
+		new UISessionController(getShell()).logout(requireSelection(ServerInfo.class).getLastUsersession());
 	}
 
 }

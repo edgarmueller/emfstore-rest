@@ -12,6 +12,6 @@ public class AddTagHandler extends AbstractEMFStoreHandler {
 	public void handle() throws EmfStoreException {
 		HistoryInfo historyInfo = requireSelection(HistoryInfo.class);
 		ProjectSpace projectSpace = (ProjectSpace) ModelUtil.getParent(ProjectSpace.class, historyInfo);
-		new UITagController(getShell(), projectSpace, historyInfo).addTag();
+		new UITagController(getShell()).addTag(projectSpace, historyInfo);
 	}
 }
