@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * CheckoutHandler for exporting a {@link Project}.
+ * Handler for exporting a {@link Project}.
  * 
  * @author emueller
  */
@@ -24,6 +24,6 @@ public class ExportProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIExportController(getShell()).exportProjectController(requireSelection(ProjectSpace.class));
+		new UIExportController(getShell()).exportProject(requireSelection(ProjectSpace.class));
 	}
 }

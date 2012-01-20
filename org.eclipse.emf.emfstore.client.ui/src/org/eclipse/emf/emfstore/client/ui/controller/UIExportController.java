@@ -11,23 +11,23 @@ public class UIExportController extends UIGenericExportImportController {
 		super(shell);
 	}
 
-	public void exportProjectHistoryController(ProjectInfo projectInfo) {
+	public void exportProjectHistory(ProjectInfo projectInfo) {
 		execute(ExportImportControllerFactory.Export.getExportProjectHistoryController(projectInfo));
 	}
 
-	public void exportChangesController(ProjectSpace projectSpace) {
+	public void exportChanges(ProjectSpace projectSpace) {
 		execute(ExportImportControllerFactory.Export.getExportChangesController(projectSpace));
 	}
 
-	public void exportProjectController(ProjectSpace projectSpace) {
+	public void exportProject(ProjectSpace projectSpace) {
 		execute(ExportImportControllerFactory.Export.getExportProjectController(projectSpace));
 	}
 
-	public void exportWorkspaceController() {
+	public void exportWorkspace() {
 		execute(ExportImportControllerFactory.Export.getExportWorkspaceController());
 	}
 
-	public void exportProjectSpaceController(ProjectSpace projectSpace) {
+	public void exportProjectSpace(ProjectSpace projectSpace) {
 		execute(ExportImportControllerFactory.Export.getExportProjectSpaceController(projectSpace));
 	}
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * CheckoutHandler for import a project space.
+ * Handler for importing a project space.
  * 
  * @author emueller
  * 
@@ -25,7 +25,7 @@ public class ImportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIImportController(getShell()).importProjectSpaceController(requireSelection(ProjectSpace.class));
+		new UIImportController(getShell()).importProjectSpace(requireSelection(ProjectSpace.class));
 	}
 
 }

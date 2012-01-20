@@ -21,7 +21,7 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * CheckoutHandler for importing a project.
+ * Handler for importing a project.
  * 
  * @author emueller
  * 
@@ -34,7 +34,7 @@ public class ImportProjectHandler extends AbstractEMFStoreHandler {
 		if (projectName == null) {
 			return;
 		}
-		new UIImportController(getShell()).importProjectController(projectName);
+		new UIImportController(getShell()).importProject(projectName);
 	}
 
 	/**

@@ -11,19 +11,19 @@ public class UIImportController extends UIGenericExportImportController {
 		super(shell);
 	}
 
-	public void importProjectHistoryController(ProjectInfo projectInfo) {
+	public void importProjectHistory(ProjectInfo projectInfo) {
 		execute(ExportImportControllerFactory.Import.getImportProjectHistoryController());
 	}
 
-	public void importChangesController(ProjectSpace projectSpace) {
+	public void importChanges(ProjectSpace projectSpace) {
 		execute(ExportImportControllerFactory.Import.getImportChangesController(projectSpace));
 	}
 
-	public void importProjectController(String projectName) {
+	public void importProject(String projectName) {
 		execute(ExportImportControllerFactory.Import.getImportProjectController(projectName));
 	}
 
-	public void importProjectSpaceController(ProjectSpace projectSpace) {
+	public void importProjectSpace(ProjectSpace projectSpace) {
 		execute(ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace));
 	}
 }

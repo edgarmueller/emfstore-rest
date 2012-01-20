@@ -77,7 +77,7 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 */
 	public String getFilename() {
 		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
-		return "projectspace_" + getProjectSpace().getProjectName() + "@"
+		return "ProjectSpace_" + getProjectSpace().getProjectName() + "@"
 			+ (baseVersion == null ? 0 : baseVersion.getIdentifier())
 			+ ExportImportDataUnits.ProjectSpace.getExtension();
 	}

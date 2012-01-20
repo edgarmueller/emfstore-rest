@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * CheckoutHandler for importing changes that will be applied upon the selected {@link ProjectSpace}.
+ * Handler for importing changes that will be applied upon the selected {@link ProjectSpace}.
  * 
  * @author emueller
  * 
@@ -25,7 +25,7 @@ public class ImportChangesHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIImportController(getShell()).importChangesController(requireSelection(ProjectSpace.class));
+		new UIImportController(getShell()).importChanges(requireSelection(ProjectSpace.class));
 	}
 
 }
