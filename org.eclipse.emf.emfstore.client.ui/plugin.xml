@@ -786,11 +786,6 @@
                  <instanceof
                        value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
                  </instanceof>
-                 <test
-                       forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
-                       value="true">
-                 </test>
               </iterate>
            </visibleWhen>
         </command>
@@ -1309,5 +1304,24 @@
            id="org.eclipse.emf.emfstore.client.ui.compareProjects"
            name="NEWcompareProjects">
      </command>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.common.observer">
+      <observer
+            extensionPointName="org.eclipse.emf.emfstore.client.ui.observer1"
+            observerAttributeName="org.eclipse.emf.emfstore.client.ui.observer1">
+      </observer>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.loginObserver">
+      <observer
+            loginObserver="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelDecorator">
+      </observer>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.logoutObserver">
+      <observer
+            logoutObserver="org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelDecorator">
+      </observer>
    </extension>
 </plugin>

@@ -5,9 +5,7 @@ import org.eclipse.emf.emfstore.client.model.controller.ChangeSessionController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 public class UIChangeSessionController extends AbstractEMFStoreUIController {
 
@@ -24,12 +22,5 @@ public class UIChangeSessionController extends AbstractEMFStoreUIController {
 		} catch (EmfStoreException e) {
 			MessageDialog.openError(getShell(), "Error", e.getMessage());
 		}
-		// TODO: remove manual update
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				PlatformUI.getWorkbench().getDecoratorManager()
-					.update("org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.LoginDecorator");
-			}
-		});
 	}
 }

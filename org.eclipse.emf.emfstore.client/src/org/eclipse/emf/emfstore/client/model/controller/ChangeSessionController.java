@@ -8,23 +8,21 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 public class ChangeSessionController extends ServerCall<Void> {
 
-	private final ServerInfo serverInfo;
-
 	public ChangeSessionController(ServerInfo serverInfo) {
-		this.serverInfo = serverInfo;
+		super(serverInfo);
 	}
 
 	@Override
 	protected Void run() throws EmfStoreException {
 		try {
-			serverInfo.getLastUsersession().logout();
+			getUsersession().logout();
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}
-		serverInfo.getLastUsersession().setSessionId(null);
+
 		// reset the password in the RAM cache
-		if (!serverInfo.getLastUsersession().isSavePassword()) {
-			serverInfo.getLastUsersession().setPassword(null);
+		if (!getUsersession().isSavePassword()) {
+			getUsersession().setPassword(null);
 		}
 		WorkspaceManager.getInstance().getCurrentWorkspace().save();
 		return null;
