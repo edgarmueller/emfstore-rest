@@ -9,6 +9,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -57,6 +58,9 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 		labelProvider = new ServerInfoLabelProvider();
 		listViewer.setLabelProvider(labelProvider);
 		listViewer.setInput(servers);
+		if (servers.size() == 1) {
+			listViewer.setSelection(new StructuredSelection(servers.get(0)));
+		}
 		return area;
 	}
 
