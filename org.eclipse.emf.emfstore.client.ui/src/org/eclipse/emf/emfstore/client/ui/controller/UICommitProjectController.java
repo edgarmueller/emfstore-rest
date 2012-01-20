@@ -55,17 +55,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController impl
 			return false;
 		}
 		CommitDialog commitDialog = new CommitDialog(getShell(), changePackage, projectSpace);
-		// TODO add getLogMessage to callback
-		// if (predefinedCommitMessage != null) {
-		// if (changePackage.getLogMessage() == null) {
-		// changePackage.setLogMessage(logMessage);
-		// }
-		// changePackage.getLogMessage().setMessage(predefinedCommitMessage);
-		// }
 		if (commitDialog.open() == Dialog.OK) {
-			// logMessage.setAuthor(usersession.getUsername());
-			// logMessage.setClientDate(new Date());
-			// logMessage.setMessage(commitDialog.getLogText());
+			changePackage.getLogMessage().setMessage(commitDialog.getLogText());
 			return true;
 		}
 		return false;
