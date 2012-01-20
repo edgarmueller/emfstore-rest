@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  */
 public class SetupHelper {
 
-	private static final Logger LOGGER = Logger.getLogger("org.unicase.workspace.test.SetupHelper");
+	private static final Logger LOGGER = Logger.getLogger("org.eclipse.emf.emfstore.client.test.SetupHelper");
 
 	private Workspace workSpace;
 	private ProjectSpace testProjectSpace;
