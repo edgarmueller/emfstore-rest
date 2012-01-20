@@ -148,7 +148,6 @@ public class LoginDialog extends TitleAreaDialog {
 			return;
 		}
 
-		System.out.println("loading :" + usersession);
 		selectedUsersession = usersession;
 
 		// reset fields
