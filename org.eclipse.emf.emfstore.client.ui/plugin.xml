@@ -266,7 +266,7 @@
 	               operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.isServerAdmin"
                        value="true">
                  </test>
                  <test
@@ -289,7 +289,7 @@
                     operator="and">
                  <test
                        forcePluginActivation="true"
-                       property="org.eclipse.emf.emfstore.client.ui.commands.isServerAdmin"
+                       property="org.eclipse.emf.emfstore.client.ui.testers.isServerAdmin"
                        value="true">
                  </test>
                  <test
@@ -390,7 +390,7 @@
         <command
               commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
               icon="icons/info.png"
-              label="Properties"
+              label="Project Properties"
               style="push">
            <visibleWhen
                  checkEnabled="false">
@@ -406,7 +406,7 @@
         <command
               commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ServerProperties"
               icon="icons/serverEdit.png"
-              label="Properties"
+              label="Server Properties"
               style="push">
            <visibleWhen
                  checkEnabled="false">
@@ -607,10 +607,10 @@
         </propertyTester>
         <propertyTester
               class="org.eclipse.emf.emfstore.client.ui.testers.IsServerAdminTester"
-              id="org.eclipse.emf.emfstore.client.ui.commands.isServerAdminTester"
-              namespace="org.eclipse.emf.emfstore.client.ui.commands"
+              id="org.eclipse.emf.emfstore.client.ui.testers.isServerAdminTester"
+              namespace="org.eclipse.emf.emfstore.client.ui.testers"
               properties="isServerAdmin"
-              type="org.eclipse.jface.viewers.TreeNode">
+              type="org.eclipse.emf.emfstore.client.model.ServerInfo">
         </propertyTester>
         <propertyTester
               class="org.eclipse.emf.emfstore.client.ui.testers.ServerInfoIsLoggedInTester"
