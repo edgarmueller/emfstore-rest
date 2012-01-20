@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client  (Incubation)
@@ -25,3 +26,29 @@ Export-Package: org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.impl,
  org.eclipse.emf.emfstore.client.model.observers,
  org.eclipse.emf.emfstore.client.model.util
+=======
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFStore Client  (Incubation)
+Bundle-SymbolicName: org.eclipse.emf.emfstore.client;singleton:=true
+Bundle-Version: 0.8.9.M912
+Bundle-ClassPath: .
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.emf.emfstore.server;visibility:=reexport,
+ org.eclipse.emf.edit
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.emf.emfstore.client.model.Activator
+Import-Package: org.eclipse.emf.emfstore.client.model.observers
+Export-Package: org.eclipse.emf.emfstore.client.model,
+ org.eclipse.emf.emfstore.client.model.accesscontrol,
+ org.eclipse.emf.emfstore.client.model.connectionmanager,
+ org.eclipse.emf.emfstore.client.model.controller,
+ org.eclipse.emf.emfstore.client.model.controller.callbacks,
+ org.eclipse.emf.emfstore.client.model.exceptions,
+ org.eclipse.emf.emfstore.client.model.impl,
+ org.eclipse.emf.emfstore.client.model.importexport,
+ org.eclipse.emf.emfstore.client.model.observers,
+ org.eclipse.emf.emfstore.client.model.util
+>>>>>>> ae1c716e7bd3bb75e3b2b136b9e7fb624a43e5e4

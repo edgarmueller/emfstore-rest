@@ -8,29 +8,37 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
+import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
- * Exports pending changes on a given {@link ProjectSpace}.
+ * Exports the whole {@link Workspace}.
  * 
  * @author emueller
  */
-public class ExportChangesController extends ProjectSpaceBasedExportController {
+public class ExportWorkspaceController implements IExportImportController {
 
 	/**
-	 * Constructor.
 	 * 
-	 * @param projectSpace the {@link ProjectSpace} whose local changes should be exported
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
-	public ExportChangesController(ProjectSpace projectSpace) {
-		super(projectSpace);
+	public String getLabel() {
+		return "workspace";
 	}
 
 	/**
@@ -40,7 +48,7 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore change package (" + ExportImportDataUnits.Change.getExtension() + ")",
+		return new String[] { "EMFStore Workspace Files (*" + ExportImportDataUnits.Workspace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -51,17 +59,7 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Change.getExtension(), "*.*" };
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
-	 */
-	public String getLabel() {
-		return "changes";
+		return new String[] { "*" + ExportImportDataUnits.Workspace.getExtension() + ", *.*" };
 	}
 
 	/**
@@ -71,8 +69,7 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getFilename()
 	 */
 	public String getFilename() {
-		return "LocalChanges_" + getProjectSpace().getProjectName() + "@"
-			+ getProjectSpace().getBaseVersion().getIdentifier();
+		return "Workspace_" + new Date();
 	}
 
 	/**
@@ -82,7 +79,7 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return null;
+		return "org.eclipse.emf.emfstore.client.ui.exportWorkSpacePath";
 	}
 
 	/**
@@ -93,7 +90,17 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		getProjectSpace().exportLocalChanges(file.getAbsolutePath());
+		Workspace copy = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace());
+
+		int i = 0;
+
+		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
+			Project orgProject = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(i++)
+				.getProject();
+			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
+		}
+
+		ResourceHelper.putWorkspaceIntoNewResource(file.getAbsolutePath(), copy);
 	}
 
 	/**

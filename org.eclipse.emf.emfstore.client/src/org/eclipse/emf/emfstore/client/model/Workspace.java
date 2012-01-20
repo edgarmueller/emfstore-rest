@@ -10,11 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,16 +41,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
- * </ul>
- * </p>
- *
+ * 
+ *             <p>
+ *             The following features are supported:
+ *             <ul>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
+ *             </ul>
+ *             </p>
+ * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
@@ -173,38 +175,52 @@ public interface Workspace extends EObject, IAdaptable {
 		throws EmfStoreException;
 
 	/**
-	 * Exports a project to a file.
+	 * Exports a project space to a file.
 	 * 
 	 * @param projectSpace
-	 *            The project space that contains the project that should be exported
-	 * @param absoluteFileName
-	 *            The absolute path of the file to export to
+	 *            The project space that should be exported
+	 * @param file
+	 *            The file to export to
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, File file) throws IOException;
 
 	/**
 	 * Exports a project space to a file.
 	 * 
 	 * @param projectSpace
 	 *            The project space that should be exported
-	 * @param absoluteFileName
-	 *            The absolute path of the file to export to
+	 * @param file
+	 *            The file to export to
+	 * @param progressMonitor
+	 *            The progress monitor that should be used during the xport
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
 	 * Exports the whole workspace.
 	 * 
-	 * @param absoluteFileName
-	 *            The absolute path of the file to export to
+	 * @param file
+	 *            The file to export to
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportWorkSpace(String absoluteFileName) throws IOException;
+	void exportWorkSpace(File file) throws IOException;
+
+	/**
+	 * Exports the whole workspace to the given file.
+	 * 
+	 * @param file
+	 *            The file to export to
+	 * @param progressMonitor
+	 *            The progress monitor that should be used during the export
+	 * @throws IOException
+	 *             If creating the export file fails
+	 */
+	void exportWorkSpace(File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
 	 * Returns an {@link AdminBroker} related to the given {@link ServerInfo}.
@@ -293,13 +309,15 @@ public interface Workspace extends EObject, IAdaptable {
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
+	 * <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
@@ -342,6 +360,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
@@ -358,6 +377,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
@@ -532,4 +552,19 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             if an error occurs while updating the project information
 	 */
 	void updateProjectInfos(Usersession session) throws EmfStoreException;
+
+	/**
+	 * Adds an serverinfo and saves.
+	 * 
+	 * @param serverInfo server info
+	 */
+	public void addServerInfo(ServerInfo serverInfo);
+
+	/**
+	 * Removes an serverinfo and saves.
+	 * 
+	 * @param serverInfo server info
+	 */
+	public void removeServerInfo(ServerInfo serverInfo);
+
 } // Workspace

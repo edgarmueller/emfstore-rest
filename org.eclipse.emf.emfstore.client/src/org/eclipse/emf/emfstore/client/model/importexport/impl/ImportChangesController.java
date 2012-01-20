@@ -8,24 +8,36 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 
 /**
- * Controller that is capable of import a project space.
+ * A controller for importing changes which then will be applied upon
+ * a given {@link ProjectSpace}.
  * 
  * @author emueller
  * 
  */
-public class ImportProjectSpaceController implements IExportImportController {
+public class ImportChangesController implements IExportImportController {
+
+	private final ProjectSpace projectSpace;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the {@link ProjectSpace} upon which to apply the changes being imported
+	 */
+	public ImportChangesController(ProjectSpace projectSpace) {
+		this.projectSpace = projectSpace;
+	}
 
 	/**
 	 * 
@@ -34,7 +46,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "project space";
+		return "changes";
 	}
 
 	/**
@@ -44,7 +56,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
+		return new String[] { "EMFStore change package (" + ExportImportDataUnits.Change.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -55,7 +67,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.Change.getExtension(), "*.*" };
 	}
 
 	/**
@@ -65,7 +77,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.importProjectSpacePath";
+		return null;
 	}
 
 	/**
@@ -76,8 +88,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		currentWorkspace.importProjectSpace(file.getAbsolutePath());
+		projectSpace.importLocalChanges(file.getAbsolutePath());
 	}
 
 	/**
@@ -99,4 +110,5 @@ public class ImportProjectSpaceController implements IExportImportController {
 	public boolean isExport() {
 		return false;
 	}
+
 }

@@ -10,14 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ImportProjectSpaceController;
-import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * CheckoutHandler for import a project space.
+ * Handler for importing a project space.
  * 
  * @author emueller
  * 
@@ -26,12 +25,7 @@ public class ImportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		try {
-			new UIGenericExportImportController(getShell(), new ImportProjectSpaceController()).execute();
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		}
+		new UIImportController(getShell()).importProjectSpace(requireSelection(ProjectSpace.class));
 	}
 
 }

@@ -414,7 +414,7 @@
                     ifEmpty="false"
                     operator="and">
                  <instanceof
-                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.client.model.ServerInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>

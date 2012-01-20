@@ -1,39 +1,30 @@
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
- * Controller class for exporting a {@link ProjectHistory}.
+ * Controller for import a {@link ProjectHistory}.
  * 
  * @author emueller
  * 
  */
-/*
- * TODO: either the importhistory or exporthistory controller won't work
- * because of run and execute -> clarify control flow
- */
-public class ExportProjectHistoryController extends ServerCall<Void> implements IExportImportController {
+public class ImportProjectHistoryController extends ServerCall<Void> implements IExportImportController {
 
 	private ProjectHistory projectHistory;
-	private ProjectInfo projectInfo;
-
-	public ExportProjectHistoryController(ProjectInfo projectInfo) {
-		this.projectInfo = projectInfo;
-	}
 
 	/**
 	 * 
@@ -42,7 +33,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "Exporting changes";
+		return "Importing project history";
 	}
 
 	/**
@@ -52,7 +43,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore Project Files (*" + ExportImportDataUnits.History.getExtension() + ")",
+		return new String[] { "EMFStore Project History Files (*" + ExportImportDataUnits.History.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -63,7 +54,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.History.getExtension() + ", *.*" };
+		return new String[] { "*" + ExportImportDataUnits.History.getExtension(), "*.*" };
 	}
 
 	/**
@@ -73,7 +64,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.exportProjectHistoryPath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectHistoryPath";
 	}
 
 	/**
@@ -84,14 +75,17 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		saveProjectHistory(projectHistory, file.getAbsolutePath());
-	}
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+		EList<EObject> directContents = resource.getContents();
 
-	private void saveProjectHistory(ProjectHistory projectHistory, String absoluteFileName) throws IOException {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
-		resource.getContents().add(projectHistory);
-		resource.save(null);
+		// sanity check
+		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ProjectHistory))) {
+			throw new IOException("File is corrupt, does not contain a ProjectHistory.");
+		}
+
+		projectHistory = (ProjectHistory) directContents.get(0);
+		resource.getContents().remove(projectHistory);
 	}
 
 	/**
@@ -101,9 +95,8 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilename()
 	 */
 	public String getFilename() {
-		return "ProjectHistory_of_" + projectInfo.getName() + "@"
-			+ projectHistory.getLastVersion().getPrimarySpec().getIdentifier()
-			+ ExportImportDataUnits.History.getExtension();
+		// no suggestion
+		return null;
 	}
 
 	/**
@@ -113,13 +106,19 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#isExport()
 	 */
 	public boolean isExport() {
-		return true;
+		return false;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
+	 */
 	@Override
 	protected Void run() throws EmfStoreException {
-		projectHistory = WorkspaceManager.getInstance().getConnectionManager()
-			.exportProjectHistoryFromServer(getSessionId(), projectInfo.getProjectId());
+		WorkspaceManager.getInstance().getConnectionManager()
+			.importProjectHistoryToServer(getUsersession().getSessionId(), projectHistory);
 		return null;
 	}
 

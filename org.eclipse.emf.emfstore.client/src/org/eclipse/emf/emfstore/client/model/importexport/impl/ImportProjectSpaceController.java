@@ -8,36 +8,24 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.controller.importexport.impl;
+package org.eclipse.emf.emfstore.client.model.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 
 /**
- * Imports a project.
+ * Controller that is capable of import a project space.
  * 
  * @author emueller
+ * 
  */
-public class ImportProjectController implements IExportImportController {
-
-	private final String projectName;
-
-	/**
-	 * Constructor.
-	 * 
-	 * @param projectName
-	 *            the name that should be used for the imported project
-	 */
-	public ImportProjectController(String projectName) {
-		this.projectName = projectName;
-	}
+public class ImportProjectSpaceController implements IExportImportController {
 
 	/**
 	 * 
@@ -46,7 +34,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "project";
+		return "project space";
 	}
 
 	/**
@@ -56,7 +44,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.Project.getExtension() + ")",
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -67,7 +55,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Project.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
 	}
 
 	/**
@@ -77,7 +65,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.importProjectPath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectSpacePath";
 	}
 
 	/**
@@ -86,15 +74,10 @@ public class ImportProjectController implements IExportImportController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 * 
-	 * @throws IOException
-	 *             in case an error occurs during the import of the project
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
 		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
-		projectSpace.setProjectName(projectName);
-		projectSpace.eResource().save(null);
+		currentWorkspace.importProjectSpace(file.getAbsolutePath());
 	}
 
 	/**
