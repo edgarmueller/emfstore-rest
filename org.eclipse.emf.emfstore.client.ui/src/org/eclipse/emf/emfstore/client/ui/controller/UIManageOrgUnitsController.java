@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
@@ -13,17 +13,13 @@ import org.eclipse.ui.PlatformUI;
 
 public class UIManageOrgUnitsController extends AbstractEMFStoreUIController {
 
-	private final ServerInfo serverInfo;
-
-	public UIManageOrgUnitsController(Shell shell, ServerInfo serverInfo) {
+	public UIManageOrgUnitsController(Shell shell) {
 		super(shell);
-		this.serverInfo = serverInfo;
 	}
 
-	public void openManageOrgUnitsDialog() {
+	public void openManageOrgUnitsDialog(Usersession usersession) {
 		try {
-			AdminBroker adminBroker = WorkspaceManager.getInstance().getCurrentWorkspace()
-				.getAdminBroker(serverInfo.getLastUsersession());
+			AdminBroker adminBroker = WorkspaceManager.getInstance().getCurrentWorkspace().getAdminBroker(usersession);
 			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
 				.getActiveShell(), adminBroker);
 			dialog.create();

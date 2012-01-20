@@ -579,7 +579,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	public AdminBroker getAdminBroker(final Usersession usersession) throws EmfStoreException, AccessControlException {
-		return new ServerCall<AdminBroker>() {
+		return new ServerCall<AdminBroker>(usersession) {
 			@Override
 			protected AdminBroker run() throws EmfStoreException {
 				return new AdminBrokerImpl(usersession.getServerInfo(), getSessionId());
