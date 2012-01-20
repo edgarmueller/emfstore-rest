@@ -21,5 +21,7 @@ Export-Package: org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.controller.callbacks,
  org.eclipse.emf.emfstore.client.model.exceptions,
  org.eclipse.emf.emfstore.client.model.impl,
+ org.eclipse.emf.emfstore.client.model.importexport,
+ org.eclipse.emf.emfstore.client.model.importexport.impl,
  org.eclipse.emf.emfstore.client.model.observers,
  org.eclipse.emf.emfstore.client.model.util
