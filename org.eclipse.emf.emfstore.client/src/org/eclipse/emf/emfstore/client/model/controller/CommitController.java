@@ -65,6 +65,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Gathering changes");
 		ChangePackage changePackage = getProjectSpace().getLocalChangePackage(
 				true);
+		changePackage.setLogMessage(logMessage);
 		if (changePackage.getOperations().isEmpty()) {
 			for (AbstractOperation operation : getProjectSpace()
 					.getOperations()) {
@@ -90,7 +91,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 				.createVersion(getUsersession().getSessionId(),
 						getProjectSpace().getProjectId(),
 						getProjectSpace().getBaseVersion(), changePackage,
-						logMessage);
+						changePackage.getLogMessage());
 
 		getProgressMonitor().worked(75);
 		getProgressMonitor().subTask("Finalizing commit");
