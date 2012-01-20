@@ -8,7 +8,7 @@ public class DeleteServerHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIServerController(getShell(), requireSelection(ServerInfo.class)).deleteServer();
+		new UIServerController(getShell()).removeServer(requireSelection(ServerInfo.class));
 	}
 
 }
