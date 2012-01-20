@@ -15,4 +15,5 @@ Import-Package: org.eclipse.emf.emfstore.client.model.observers
 Export-Package: org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.connectionmanager,
  org.eclipse.emf.emfstore.client.model.controller.callbacks,
+ org.eclipse.emf.emfstore.client.model.observers,
  org.eclipse.emf.emfstore.client.model.util
