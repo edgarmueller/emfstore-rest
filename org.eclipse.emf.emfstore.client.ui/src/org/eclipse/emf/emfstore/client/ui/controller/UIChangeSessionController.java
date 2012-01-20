@@ -18,7 +18,7 @@ public class UIChangeSessionController extends AbstractEMFStoreUIController {
 
 	public void changeSession() {
 		try {
-			new ChangeSessionController(serverInfo).execute();
+			new ChangeSessionController(serverInfo).logout();
 		} catch (EmfStoreException e) {
 			MessageDialog.openError(getShell(), "Error", e.getMessage());
 		}

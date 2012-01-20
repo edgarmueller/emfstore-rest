@@ -10,20 +10,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model;
 
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.client.model.impl.UsersessionImpl;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * Controller class to carry out the session procedures.
  * 
- * @author Shterev
+ * @author wesendon
  */
-public final class LoginManager {
+public final class LoginUtil {
 
-	private LoginManager() {
-		// TODO Auto-generated constructor stub
+	private LoginUtil() {
 	}
 
 	/**
@@ -47,24 +44,20 @@ public final class LoginManager {
 		session.logout();
 	}
 
-	/**
-	 * Sets a new password for the given session.
-	 * 
-	 * @param session the usersession.
-	 * @param newPassword the new password
-	 */
-	public static void setPassword(Usersession session, String newPassword) {
-		if (newPassword != null) {
-			((UsersessionImpl) session).setPasswordGen(KeyStoreManager.getInstance().encrypt(newPassword,
-				session.getServerInfo()));
-		} else {
-			((UsersessionImpl) session).setPasswordGen(null);
-		}
-		if (session.isSavePassword()) {
-			if (!(newPassword.equals(session.getPersistentPassword()))) {
-				session.setPersistentPassword(KeyStoreManager.getInstance().encrypt(newPassword,
-					session.getServerInfo()));
-			}
-		}
+	public static ServerInfo createServerInfo(String name, String url, int port, String alias) {
+		ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+		serverInfo.setName(name);
+		serverInfo.setUrl(url);
+		serverInfo.setPort(port);
+		serverInfo.setCertificateAlias(alias);
+		return serverInfo;
+	}
+
+	public static Usersession createUsersession(String name, String password, ServerInfo serverInfo) {
+		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
+		usersession.setUsername(name);
+		usersession.setPassword(password);
+		usersession.setServerInfo(serverInfo);
+		return usersession;
 	}
 }

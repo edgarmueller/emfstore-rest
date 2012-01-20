@@ -102,7 +102,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 		}
 
 		// TODO: provide sensible label for given model element
-		return " \"" + trim(modelElement.toString()) + "\"";
+		return " \"" + trim(adapterFactoryLabelProvider.getText(modelElement)) + "\"";
 	}
 
 	private String trim(Object object) {

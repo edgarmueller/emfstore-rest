@@ -14,7 +14,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportProjectSpaceController;
 import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * CheckoutHandler for exporting a {@link ProjectSpace}.
@@ -25,14 +25,9 @@ import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
 public class ExportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		try {
-			new UIGenericExportImportController(getShell(), new ExportProjectSpaceController(
-				requireSelection(ProjectSpace.class))).execute();
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		}
+	public void handle() throws EmfStoreException {
+		new UIGenericExportImportController(getShell(), new ExportProjectSpaceController(
+			requireSelection(ProjectSpace.class))).execute();
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.ui.controller.UICheckoutController;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
@@ -12,7 +13,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 public class CheckoutHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
+	public void handle() throws EmfStoreException {
 		new UICheckoutController(getShell(), requireSelection(ProjectInfo.class)).checkout();
 	}
 

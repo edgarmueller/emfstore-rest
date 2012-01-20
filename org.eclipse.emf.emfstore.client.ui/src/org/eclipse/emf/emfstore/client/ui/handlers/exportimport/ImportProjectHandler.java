@@ -15,7 +15,7 @@ import java.util.Date;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ImportProjectController;
 import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -30,17 +30,12 @@ import org.eclipse.ui.PlatformUI;
 public class ImportProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
+	public void handle() throws EmfStoreException {
 		String projectName = showProjectNameDialog("Imported project@" + new Date());
 		if (projectName == null) {
 			return;
 		}
-		try {
-			new UIGenericExportImportController(getShell(), new ImportProjectController(projectName)).execute();
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		}
+		new UIGenericExportImportController(getShell(), new ImportProjectController(projectName)).execute();
 	}
 
 	/**

@@ -14,7 +14,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ImportChangesController;
 import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * CheckoutHandler for importing changes that will be applied upon the selected {@link ProjectSpace}.
@@ -25,14 +25,9 @@ import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
 public class ImportChangesHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		try {
-			new UIGenericExportImportController(getShell(), new ImportChangesController(
-				requireSelection(ProjectSpace.class))).execute();
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		}
+	public void handle() throws EmfStoreException {
+		new UIGenericExportImportController(getShell(), new ImportChangesController(
+			requireSelection(ProjectSpace.class))).execute();
 	}
 
 }

@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Display;
 
 public class LoginDialogController implements ILoginDialogController {
 
+	private Usersession usersession;
+	private ServerInfo serverInfo;
+
 	public Usersession[] getKnownUsersessions() {
 		HashSet<Object> set = new HashSet<Object>();
 		for (Usersession session : WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions()) {
@@ -23,29 +26,22 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	public Usersession login() throws AccessControlException {
+	private Usersession login() throws EmfStoreException {
 		LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), this);
 		dialog.setBlockOnOpen(true);
 
-		if (dialog.open() != Window.OK) {
+		if (dialog.open() != Window.OK || usersession == null) {
 			throw new AccessControlException("Couldn't login.");
 		}
 
-		return dialog.getSelectedUsersession();
-		// try {
-		// selectedUsersession.logIn();
-		// } catch (EmfStoreException e) {
-		// e.printStackTrace();
-		// }
-		// return selectedUsersession;
+		// contract #validate() sets the usersession;
+		return this.usersession;
 	}
 
 	public boolean isUsersessionLocked() {
-		if (getUsersession() == null || getUsersession().getUsername() == null
-			|| getUsersession().getUsername().equals("")) {
+		if (getUsersession() == null) {
 			return false;
 		}
-
 		return true;
 	}
 
@@ -54,26 +50,14 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	public void validate(Usersession usersession) throws EmfStoreException {
-		usersession.logIn();
-		EList<Usersession> usersessions = WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions();
 		// TODO login code
+		usersession.logIn();
+		// if successful, else exception is thrown prior reaching this code
+		EList<Usersession> usersessions = WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions();
 		if (!usersessions.contains(usersession)) {
 			usersessions.add(usersession);
 		}
-		// if login successfuly set usersesion to field fo
-	}
-
-	private Usersession usersession;
-	private ServerInfo serverInfo;
-
-	public LoginDialogController(Usersession usersession) {
 		this.usersession = usersession;
-		serverInfo = usersession.getServerInfo();
-	}
-
-	public LoginDialogController(ServerInfo serverInfo) {
-		this.serverInfo = serverInfo;
-		this.usersession = null;
 	}
 
 	public Usersession getUsersession() {
@@ -81,12 +65,21 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	public ServerInfo getServerInfo() {
-
 		if (serverInfo != null) {
 			return serverInfo;
 		}
-
 		return usersession.getServerInfo();
 	}
 
+	public Usersession login(ServerInfo serverInfo) throws EmfStoreException {
+		this.serverInfo = serverInfo;
+		this.usersession = null;
+		return login();
+	}
+
+	public void login(Usersession usersession) throws EmfStoreException {
+		this.serverInfo = null;
+		this.usersession = usersession;
+		login();
+	}
 }
