@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.ui.controller.UICreateProjectController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Display;
 
@@ -32,7 +32,7 @@ public class CreateProjectOnServerHandler extends AbstractEMFStoreHandler {
 			return;
 		}
 
-		new UICreateProjectController(Display.getCurrent().getActiveShell()).createRemoteProject(serverInfo
+		new UIProjectController(Display.getCurrent().getActiveShell()).createRemoteProject(serverInfo
 			.getLastUsersession());
 	}
 }

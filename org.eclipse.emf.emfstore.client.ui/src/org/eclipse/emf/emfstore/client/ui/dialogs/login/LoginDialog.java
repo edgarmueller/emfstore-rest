@@ -115,7 +115,11 @@ public class LoginDialog extends TitleAreaDialog {
 		new Label(loginContainer, SWT.NONE);
 
 		initData();
-		loadUsersession(controller.getUsersession());
+		if (controller.getUsersession() == null) {
+			loadUsersession(controller.getServerInfo().getLastUsersession());
+		} else {
+			loadUsersession(controller.getUsersession());
+		}
 		return area;
 	}
 
@@ -155,6 +159,12 @@ public class LoginDialog extends TitleAreaDialog {
 		savePassword.setSelection(false);
 
 		if (selectedUsersession != null) {
+
+			// check whether text is set correctly
+			if (!usernameCombo.getCombo().getText().equals(selectedUsersession.getUsername())) {
+				usernameCombo.getCombo().setText(selectedUsersession.getUsername());
+			}
+
 			if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
 				passwordField.setMessage("<password is saved, reenter to change>");
 				passwordField.setText("");

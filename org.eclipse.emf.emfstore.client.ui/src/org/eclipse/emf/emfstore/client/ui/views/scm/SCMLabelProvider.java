@@ -90,7 +90,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		} else if (element instanceof ModelElementId && changePackageVisualizationHelper != null) {
 			EObject modelElement = changePackageVisualizationHelper.getModelElement((ModelElementId) element);
 			if (modelElement != null) {
-				ret = adapterFactoryLabelProvider.getText(element);
+				ret = adapterFactoryLabelProvider.getText(modelElement);
 			} else {
 				return ELEMENT_NOT_FOUND;
 			}
