@@ -26,12 +26,4 @@ public interface UpdateCallback {
 			return false;
 		}
 	};
-
-	/**
-	 * Return constants
-	 */
-
-	public static final String PROJECTSPACE = "projectspace";
-	public static final String NEWVERSION = "newversion";
-	public static final String OLDVERSION = "oldversion";
 }

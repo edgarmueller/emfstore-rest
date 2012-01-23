@@ -707,52 +707,52 @@
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.updateProject"
-           name="NEWupdate">
+           name="update">
      </command>
          <command
                categoryId="org.eclipse.emf.emfstore.client.ui.project"
                defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectVersionHandler"
                id="org.eclipse.emf.emfstore.client.ui.updateProjectVersion"
-               name="NEWupdateToVersion">
+               name="updateToVersion">
          </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ShareProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.shareProject"
-           name="NEWshare">
+           name="share">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.deleteProject"
-           name="NEWdeleteProject">
+           name="deleteProject">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CreateLocalProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
-           name="NEWNewLocalProject">
+           name="NewLocalProject">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
            id="org.eclipse.emf.emfstore.client.ui.revert"
-           name="NEWRevert">
+           name="Revert">
      </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
            id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
-           name="NEWundoLastOperation">
+           name="undoLastOperation">
      </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectPropertiesHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
-           name="NEWProjectProperties">
+           name="ProjectProperties">
      </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CompareProjectsHandler"
            id="org.eclipse.emf.emfstore.client.ui.compareProjects"
-           name="NEWcompareProjects">
+           name="compareProjects">
      </command>
    </extension>
    <extension
