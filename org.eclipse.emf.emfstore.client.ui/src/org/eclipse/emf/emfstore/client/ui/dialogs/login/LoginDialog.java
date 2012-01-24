@@ -207,7 +207,7 @@ public class LoginDialog extends TitleAreaDialog {
 			}
 			controller.validate(candidate);
 		} catch (EmfStoreException e) {
-			setErrorMessage(e.getMessage());
+			setErrorMessage(e.getMessage() + " Maybe your password changed.");
 			return;
 		}
 		super.okPressed();
