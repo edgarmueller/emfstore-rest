@@ -386,6 +386,11 @@ public final class ServerConfiguration {
 	 */
 	public static final String EMFSTORE_HOME = "-EMFStoreHome";
 
+	/**
+	 * Whether user names should be matched case insensitively.
+	 */
+	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
+
 	private static boolean testing;
 
 	private static Properties properties;
@@ -577,8 +582,7 @@ public final class ServerConfiguration {
 	public static String getServerVersion() {
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
-			org.osgi.framework.Constants.BUNDLE_VERSION);
+		String emfStoreVersionString = emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
 	}
 
