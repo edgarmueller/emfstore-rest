@@ -15,6 +15,8 @@ Import-Package: org.eclipse.emf.emfstore.client.model.observers
 Export-Package: org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.accesscontrol,
  org.eclipse.emf.emfstore.client.model.changeTracking.commands,
+ org.eclipse.emf.emfstore.client.model.changeTracking.notification,
+ org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording,
  org.eclipse.emf.emfstore.client.model.connectionmanager,
  org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc,
  org.eclipse.emf.emfstore.client.model.controller,
@@ -24,4 +26,5 @@ Export-Package: org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.importexport,
  org.eclipse.emf.emfstore.client.model.importexport.impl,
  org.eclipse.emf.emfstore.client.model.observers,
- org.eclipse.emf.emfstore.client.model.util
+ org.eclipse.emf.emfstore.client.model.util,
+ org.eclipse.emf.emfstore.client.properties
