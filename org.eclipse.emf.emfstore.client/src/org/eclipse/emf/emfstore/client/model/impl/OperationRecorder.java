@@ -53,6 +53,7 @@ import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SettingWithReferencedElement;
+import org.eclipse.emf.emfstore.common.observer.PostCreationObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -188,6 +189,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		}
 
 		if (isRecording) {
+			// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
+			stopChangeRecording();
+			WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
+			startChangeRecording();
+
 			Set<EObject> allModelElements = new HashSet<EObject>();
 			allModelElements.add(modelElement);
 			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
