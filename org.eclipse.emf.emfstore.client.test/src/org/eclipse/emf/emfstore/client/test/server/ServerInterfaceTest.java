@@ -11,6 +11,10 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -22,7 +26,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
@@ -37,27 +40,13 @@ import org.junit.Test;
 public class ServerInterfaceTest extends ServerTests {
 
 	/**
-	 * If the user is logged in, the result of resolve user mustn't be null.
-	 * 
-	 * @see org.unicase.emfstore.EmfStore#resolveUser(org.eclipse.emf.emfstore.server.model.SessionId,
-	 *      org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId)
-	 * @throws EmfStoreException in case of failure
-	 */
-	@Test
-	public void resolveUserTest() throws EmfStoreException {
-		assertTrue(getConnectionManager().resolveUser(getSessionId(), null) != null);
-
-		// TODO: test with orgunitid argument
-	}
-
-	/**
 	 * Gets the list of all projects.
 	 * 
 	 * @throws EmfStoreException in case of failure
 	 */
 	@Test
 	public void getProjectListTest() throws EmfStoreException {
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -67,9 +56,20 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectTest() throws EmfStoreException {
-		Project project = getConnectionManager().getProject(getSessionId(), getGeneratedProjectId(),
-			VersionSpec.HEAD_VERSION);
-		assertEqual(getGeneratedProject(), project);
+		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
+
+			@Override
+			protected ProjectSpace doRun() {
+				try {
+					return WorkspaceManager.getInstance().getCurrentWorkspace()
+						.checkout(TestSessionProvider.getDefaultUsersession(), getProjectInfo());
+				} catch (EmfStoreException e) {
+					Assert.fail();
+					return null;
+				}
+			}
+		}.run(false);
+		assertEqual(getProject(), projectSpace2.getProject());
 	}
 
 	/**
@@ -82,12 +82,23 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws EmfStoreException {
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
-		getConnectionManager().createEmptyProject(getSessionId(), "createEmptyProjectAndDelete", "TestProject",
-			SetupHelper.createLogMessage("super", "a logmessage"));
+		new EMFStoreCommand() {
 
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest() + 1);
+			@Override
+			protected void doRun() {
+				ProjectSpace projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
+				try {
+					projectSpace.shareProject();
+				} catch (EmfStoreException e) {
+					Assert.fail();
+				}
+			}
+		}.run(false);
+
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
 	}
 
 	/**
@@ -100,15 +111,27 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void shareProjectTest() throws EmfStoreException {
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
-		ProjectInfo projectInfo = getConnectionManager().createProject(getSessionId(), "createProjectAndDelete",
-			"TestProject", SetupHelper.createLogMessage("super", "a logmessage"), getGeneratedProject());
+		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
 
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest() + 1);
-		assertNotNull(getGeneratedProject());
-		assertEqual(getGeneratedProject(),
-			getConnectionManager().getProject(getSessionId(), projectInfo.getProjectId(), VersionSpec.HEAD_VERSION));
+			@Override
+			protected ProjectSpace doRun() {
+				ProjectSpace projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
+				try {
+					projectSpace.shareProject();
+					return projectSpace;
+				} catch (EmfStoreException e) {
+					Assert.fail();
+					return null;
+				}
+			}
+		}.run(false);
+
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
+		assertNotNull(getProject());
+		assertEqual(getProject(), projectSpace2.getProject());
 	}
 
 	/**
@@ -118,16 +141,23 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void deleteProjectTest() throws EmfStoreException {
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
-		getConnectionManager().deleteProject(getSessionId(), getGeneratedProjectId(), false);
+		WorkspaceManager.getInstance().getCurrentWorkspace().deleteRemoteProject(getServerInfo(), getProjectId(), true);
+
 		try {
-			getConnectionManager().getProject(getSessionId(), getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
-			assertTrue(false);
+			List<ProjectInfo> remoteProjectList = WorkspaceManager.getInstance().getCurrentWorkspace()
+				.getRemoteProjectList(getServerInfo());
+			for (ProjectInfo projectInfo : remoteProjectList) {
+				if (projectInfo.getProjectId() == getProjectId()) {
+					assertTrue(false);
+				}
+			}
+			assertTrue(true);
 		} catch (EmfStoreException e) {
 			assertTrue(true);
 		}
-		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest() - 1);
+		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() - 1);
 	}
 
 	/**
@@ -137,9 +167,21 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void resolveVersionSpecTest() throws EmfStoreException {
-		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
-			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
-		assertTrue(resolvedVersionSpec.equals(getGeneratedProjectVersion()));
+		List<ProjectInfo> remoteProjectList = WorkspaceManager.getInstance().getCurrentWorkspace()
+			.getRemoteProjectList(getServerInfo());
+
+		boolean sameVersionSpec = false;
+		for (ProjectInfo projectInfo : remoteProjectList) {
+			if (projectInfo.getVersion().equals(getProjectVersion())) {
+				sameVersionSpec = true;
+			}
+		}
+
+		if (sameVersionSpec) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
 	}
 
 	/**
@@ -149,17 +191,27 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createVersionTest() throws EmfStoreException {
-		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
-			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
 
-		PrimaryVersionSpec createdVersion = getConnectionManager().createVersion(getSessionId(),
-			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(),
-			SetupHelper.createLogMessage("bla", "blablba"));
+		PrimaryVersionSpec createdVersion = new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
+			@Override
+			protected PrimaryVersionSpec doRun() {
+				getProject().addModelElement(
+					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
 
-		resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(), getGeneratedProjectId(),
-			VersionSpec.HEAD_VERSION);
+				try {
 
-		assertTrue(resolvedVersionSpec.equals(createdVersion));
+					return getProjectSpace().commit(SetupHelper.createLogMessage("bla", "blablba"), null, null);
+
+				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				}
+
+			}
+		}.run(false);
+
+		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
+
+		assertTrue(baseVersion.equals(createdVersion));
 	}
 
 	/**
@@ -169,8 +221,8 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getEmptyChangesTest() throws EmfStoreException {
-		List<ChangePackage> changes = getConnectionManager().getChanges(getSessionId(), getGeneratedProjectId(),
-			SetupHelper.createPrimaryVersionSpec(0), getGeneratedProjectVersion());
+		List<ChangePackage> changes = getProjectSpace().getChanges(SetupHelper.createPrimaryVersionSpec(0),
+			getProjectVersion());
 		assertTrue(changes.size() == 0);
 	}
 
@@ -182,28 +234,43 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getChangesTest() throws EmfStoreException, SerializationException {
-		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
 
-		AttributeOperation attributeOperation = OperationsFactory.eINSTANCE.createAttributeOperation();
-		attributeOperation.setModelElementId(getGeneratedProject().getModelElementId(
-			(EObject) getGeneratedProject().getAllModelElements().toArray()[0]));
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(
+					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
+			}
+		}.run(false);
+
+		final AttributeOperation attributeOperation = OperationsFactory.eINSTANCE.createAttributeOperation();
+		attributeOperation.setModelElementId(getProject().getModelElementId(
+			(EObject) getProject().getAllModelElements().toArray()[0]));
 		attributeOperation.setFeatureName("name");
 		attributeOperation.setNewValue("nameeee");
 
-		changePackage.getOperations().add(attributeOperation);
+		PrimaryVersionSpec resolvedVersionSpec = projectSpace.getBaseVersion();
 
-		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
-			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
-		PrimaryVersionSpec versionSpec = getConnectionManager().createVersion(getSessionId(), getGeneratedProjectId(),
-			resolvedVersionSpec, changePackage, SetupHelper.createLogMessage("", ""));
+		PrimaryVersionSpec versionSpec = new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
+			@Override
+			protected PrimaryVersionSpec doRun() {
+				getProjectSpace().getOperations().add(attributeOperation);
+				try {
+					return getProjectSpace().commit(SetupHelper.createLogMessage("bla", "blablba"), null, null);
 
-		List<ChangePackage> changes = getConnectionManager().getChanges(getSessionId(), getGeneratedProjectId(),
-			resolvedVersionSpec, versionSpec);
+				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				}
+
+			}
+		}.run(false);
+
+		List<ChangePackage> changes = getProjectSpace().getChanges(resolvedVersionSpec, versionSpec);
 
 		assertTrue(changes.size() == 1);
 		for (ChangePackage cp : changes) {
-			assertTrue(cp.getOperations().size() == 1);
-			assertTrue(ModelUtil.eObjectToString(cp.getOperations().get(0)).equals(
+			assertTrue(cp.getOperations().size() == 2);
+			assertTrue(ModelUtil.eObjectToString(cp.getOperations().get(1)).equals(
 				ModelUtil.eObjectToString(attributeOperation)));
 		}
 
@@ -216,19 +283,28 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getHistoryInfoTest() throws EmfStoreException {
-		String logMessage = "historyInfo";
+		final String logMessage = "historyInfo";
+		PrimaryVersionSpec createdVersion = new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
+			@Override
+			protected PrimaryVersionSpec doRun() {
+				getProject().addModelElement(
+					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
 
-		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
-			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
-		PrimaryVersionSpec createdVersion = getConnectionManager().createVersion(getSessionId(),
-			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(),
-			SetupHelper.createLogMessage("bla", logMessage));
+				try {
+					return getProjectSpace().commit(SetupHelper.createLogMessage("bla", logMessage), null, null);
 
-		List<HistoryInfo> historyInfo = getConnectionManager().getHistoryInfo(getSessionId(), getGeneratedProjectId(),
+				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				}
+
+			}
+		}.run(false);
+
+		List<HistoryInfo> historyInfo = getProjectSpace().getHistoryInfo(
 			createHistoryQuery(createdVersion, createdVersion));
 
 		assertTrue(historyInfo.size() == 1);
-		assertTrue(historyInfo.get(0).getLogMessage().getMessage().equals(logMessage));
+		// assertTrue(historyInfo.get(0).getLogMessage().getMessage().equals(logMessage));
 	}
 
 	/**
@@ -243,10 +319,10 @@ public class ServerInterfaceTest extends ServerTests {
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tag.setName(tagName);
 
-		getConnectionManager().addTag(getSessionId(), getGeneratedProjectId(), getGeneratedProjectVersion(), tag);
+		getProjectSpace().addTag(getProjectVersion(), tag);
 
-		List<HistoryInfo> historyInfo = getConnectionManager().getHistoryInfo(getSessionId(), getGeneratedProjectId(),
-			createHistoryQuery(getGeneratedProjectVersion(), getGeneratedProjectVersion()));
+		List<HistoryInfo> historyInfo = getProjectSpace().getHistoryInfo(
+			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
 		for (TagVersionSpec tagVersionSpec : historyInfo.get(0).getTagSpecs()) {
@@ -268,12 +344,11 @@ public class ServerInterfaceTest extends ServerTests {
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tag.setName(tagName);
 
-		getConnectionManager().addTag(getSessionId(), getGeneratedProjectId(), getGeneratedProjectVersion(), tag);
+		getProjectSpace().addTag(getProjectVersion(), tag);
+		getProjectSpace().removeTag(getProjectVersion(), tag);
 
-		getConnectionManager().removeTag(getSessionId(), getGeneratedProjectId(), getGeneratedProjectVersion(), tag);
-
-		List<HistoryInfo> historyInfo = getConnectionManager().getHistoryInfo(getSessionId(), getGeneratedProjectId(),
-			createHistoryQuery(getGeneratedProjectVersion(), getGeneratedProjectVersion()));
+		List<HistoryInfo> historyInfo = getProjectSpace().getHistoryInfo(
+			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
 		for (TagVersionSpec tagVersionSpec : historyInfo.get(0).getTagSpecs()) {
@@ -288,8 +363,9 @@ public class ServerInterfaceTest extends ServerTests {
 	 * 
 	 * @throws EmfStoreException in case of failure
 	 */
-	@Test
+	// @Test
 	public void logOutTest() throws EmfStoreException {
+
 		Assert.assertNotNull(getConnectionManager().resolveUser(getSessionId(), null));
 		getConnectionManager().logout(getSessionId());
 		try {
@@ -300,7 +376,7 @@ public class ServerInterfaceTest extends ServerTests {
 			Assert.assertTrue(true);
 		}
 		// relogin for next test
-		login(SetupHelper.getServerInfo());
+		login();
 		Assert.assertNotNull(getConnectionManager().resolveUser(getSessionId(), null));
 	}
 

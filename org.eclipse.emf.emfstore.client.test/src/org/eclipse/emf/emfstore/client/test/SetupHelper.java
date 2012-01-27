@@ -27,9 +27,11 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
+import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
@@ -138,9 +140,18 @@ public class SetupHelper {
 	 * @return acorgunitid
 	 * @throws EmfStoreException in case of failure
 	 */
-	public static ACOrgUnitId createUserOnServer(SessionId sessionId, String username) throws EmfStoreException {
+	public static ACOrgUnitId createUserOnServer(String username) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
+	}
+
+	public static void deleteUserOnServer(ACOrgUnitId userId) throws EmfStoreException {
+		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		adminConnectionManager.initConnection(getServerInfo(), sessionId);
+		adminConnectionManager.deleteUser(sessionId, userId);
 	}
 
 	/**
@@ -150,9 +161,10 @@ public class SetupHelper {
 	 * @param projectId projectid, can be null, if role is serveradmin
 	 * @throws EmfStoreException in case of failure
 	 */
-	public static void setUsersRole(SessionId sessionId, ACOrgUnitId orgUnitId, EClass role, ProjectId projectId)
-		throws EmfStoreException {
+	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
 	}
 
@@ -237,7 +249,7 @@ public class SetupHelper {
 		serverInfo.setPort(8080);
 		// serverInfo.setUrl("127.0.0.1");
 		serverInfo.setUrl("localhost");
-		serverInfo.setCertificateAlias("emfstore test certificate (do not use in production!)");
+		serverInfo.setCertificateAlias(KeyStoreManager.DEFAULT_CERTIFICATE);
 
 		return serverInfo;
 	}
@@ -645,14 +657,18 @@ public class SetupHelper {
 		}.run(false);
 	}
 
-	public static void removeServerTestProfile() {
+	/**
+	 * Delete client and server test profile.
+	 * 
+	 * @throws IOException if deletion fails
+	 */
+	public static void removeServerTestProfile() throws IOException {
 		String serverPath = ServerConfiguration.getServerHome();
 		File serverDirectory = new File(serverPath);
-		try {
-			FileUtil.deleteFolder(serverDirectory);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		FileUtil.deleteFolder(serverDirectory);
+		String clientPath = Configuration.getWorkspaceDirectory();
+		File clientDirectory = new File(clientPath);
+		FileUtil.deleteFolder(clientDirectory);
 
 	}
 

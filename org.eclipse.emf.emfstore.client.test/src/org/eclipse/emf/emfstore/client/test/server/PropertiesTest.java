@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -18,6 +17,8 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,58 +32,21 @@ public class PropertiesTest extends ServerTests {
 	private static PropertyManager propertyManager2;
 	private static Usersession usersession1;
 	private static Usersession usersession2;
-	private static ServerInfo severInfo;
+	private ACOrgUnitId user1;
+	private ACOrgUnitId user2;
 
 	@Before
-	public void setUpTests() {
-		// SetupHelper.removeServerTestProfile();
-		severInfo = SetupHelper.getServerInfo();
-
-		setUpUsersession();
-	}
-
-	@After
-	public void afterTests() throws EmfStoreException {
-		super.afterTest();
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				try {
-					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace1);
-					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace2);
-					SetupHelper.cleanupWorkspace();
-					SetupHelper.cleanupServer();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}.run(false);
-	}
-
-	private void setUpUsersession() {
-
-		usersession1 = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
-		usersession1.setServerInfo(severInfo);
-		usersession1.setUsername("writer1");
-		usersession1.setPassword("foo");
-
-		usersession2 = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
-		usersession2.setServerInfo(severInfo);
-		usersession2.setUsername("writer2");
-		usersession2.setPassword("foo");
-
-	}
-
-	@Test
-	public void sharedPropertiesTest() throws EmfStoreException {
-
+	public void setUpTests() throws EmfStoreException {
+		user1 = setupUsers("writer1", RolesPackage.eINSTANCE.getWriterRole());
+		user2 = setupUsers("writer2", RolesPackage.eINSTANCE.getWriterRole());
+		usersession1 = setUpUsersession("writer1", "foo");
+		usersession2 = setUpUsersession("writer2", "foo");
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
 				Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-				workspace.getServerInfos().add(severInfo);
+				workspace.getServerInfos().add(getServerInfo());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);
 				workspace.save();
@@ -99,6 +63,18 @@ public class PropertiesTest extends ServerTests {
 				}
 			}
 		}.run(false);
+
+	}
+
+	@After
+	public void tearDownUsers() throws EmfStoreException {
+		SetupHelper.deleteUserOnServer(user1);
+		SetupHelper.deleteUserOnServer(user2);
+
+	}
+
+	@Test
+	public void sharedPropertiesTest() throws EmfStoreException {
 
 		propertyManager1 = projectSpace1.getPropertyManager();
 		propertyManager2 = projectSpace2.getPropertyManager();

@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcClientManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
-import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
@@ -41,7 +40,6 @@ public class InvalidArgumentsTest extends ServerTests {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws EmfStoreException {
-		ServerTests.setUpBeforeClass();
 		setConnectionManager(new XmlRpcConnectionManager() {
 			@Override
 			protected XmlRpcClientManager getConnectionProxy(SessionId sessionId) throws UnknownSessionException {
@@ -52,7 +50,7 @@ public class InvalidArgumentsTest extends ServerTests {
 
 			}
 		});
-		ServerTests.login(SetupHelper.getServerInfo());
+		ServerTests.login();
 	}
 
 	/**

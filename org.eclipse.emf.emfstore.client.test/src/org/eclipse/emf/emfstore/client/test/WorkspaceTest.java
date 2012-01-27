@@ -28,8 +28,9 @@ import org.junit.Before;
  * @author koegel
  */
 public abstract class WorkspaceTest {
-	private Project project;
-	private ProjectSpace projectSpace;
+	protected Project project;
+	protected ProjectSpace projectSpace;
+	protected static Workspace workspace;
 
 	/**
 	 * Setup a dummy project for testing.
@@ -42,7 +43,6 @@ public abstract class WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-
 				ProjectSpace localProject = workspace.createLocalProject("testProject", "test Project");
 				setProjectSpace(localProject);
 				setProject(getProjectSpace().getProject());
@@ -80,7 +80,7 @@ public abstract class WorkspaceTest {
 	/**
 	 * @param project the project to set
 	 */
-	private void setProject(Project project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 
