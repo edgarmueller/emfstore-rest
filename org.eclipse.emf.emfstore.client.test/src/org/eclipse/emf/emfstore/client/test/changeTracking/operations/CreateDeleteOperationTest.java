@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -52,6 +53,7 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.observer.PostCreationObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
@@ -93,6 +95,52 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		ModelElementId useCaseId = ModelUtil.getProject(useCase).getModelElementId(useCase);
 
 		assertEquals(useCaseId, createDeleteOperation.getModelElementId());
+		assertEquals(0, createDeleteOperation.getSubOperations().size());
+		assertEquals(false, createDeleteOperation.isDelete());
+	}
+
+	/**
+	 * Test element creation tracking.
+	 * 
+	 * @throws UnsupportedOperationException on test fail
+	 * @throws UnsupportedNotificationException on test fail
+	 */
+	@Test
+	public void createElementWithPostCreationObserverTest() throws UnsupportedOperationException,
+		UnsupportedNotificationException {
+
+		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
+		useCase.setName("oldName");
+		PostCreationObserver observer = new PostCreationObserver() {
+
+			public void onCreation(EObject modelElement) {
+				if (modelElement instanceof UseCase) {
+					UseCase useCase = (UseCase) modelElement;
+					useCase.setName("postCreationChangedName");
+				}
+			}
+		};
+		WorkspaceManager.getObserverBus().register(observer);
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(useCase);
+			}
+		}.run(false);
+
+		WorkspaceManager.getObserverBus().unregister(observer);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+
+		ModelElementId useCaseId = ModelUtil.getProject(useCase).getModelElementId(useCase);
+
+		assertEquals(useCaseId, createDeleteOperation.getModelElementId());
+		assertEquals("postCreationChangedName", ((UseCase) createDeleteOperation.getModelElement()).getName());
 		assertEquals(0, createDeleteOperation.getSubOperations().size());
 		assertEquals(false, createDeleteOperation.isDelete());
 	}

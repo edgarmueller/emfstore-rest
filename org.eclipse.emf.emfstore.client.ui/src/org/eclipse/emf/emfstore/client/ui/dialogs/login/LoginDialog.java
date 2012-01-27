@@ -9,6 +9,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -31,10 +32,11 @@ public class LoginDialog extends TitleAreaDialog {
 	private Text passwordField;
 	private Button savePassword;
 	private ComboViewer usernameCombo;
+
 	private final ILoginDialogController controller;
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
-	private Button okButton;
+	private Usersession[] knownUsersessions;
 
 	/**
 	 * Create the dialog.
@@ -74,12 +76,14 @@ public class LoginDialog extends TitleAreaDialog {
 		usernameLabel.setText("Username");
 
 		usernameCombo = new ComboViewer(loginContainer, SWT.NONE);
-		usernameCombo.addSelectionChangedListener(new ComboListener());
+		ComboListener comboListener = new ComboListener();
+		usernameCombo.addPostSelectionChangedListener(comboListener);
 		Combo combo = usernameCombo.getCombo();
 		if (controller.isUsersessionLocked()) {
 			combo.setEnabled(false);
-			combo.setText(controller.getUsersession().getUsername());
+			// combo.setText(controller.getUsersession().getUsername());
 		}
+		combo.addModifyListener(comboListener);
 		GridData gd_usernameCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_usernameCombo.widthHint = 235;
 		combo.setLayoutData(gd_usernameCombo);
@@ -111,14 +115,29 @@ public class LoginDialog extends TitleAreaDialog {
 		new Label(loginContainer, SWT.NONE);
 
 		initData();
-		loadUsersession(controller.getUsersession());
+		if (controller.getUsersession() == null) {
+			loadUsersession(controller.getServerInfo().getLastUsersession());
+		} else {
+			loadUsersession(controller.getUsersession());
+		}
 		return area;
 	}
 
 	private void initData() {
 		usernameCombo.setContentProvider(ArrayContentProvider.getInstance());
+		usernameCombo.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				if (element instanceof Usersession && ((Usersession) element).getUsername() != null) {
+					return ((Usersession) element).getUsername();
+				}
+				return super.getText(element);
+			}
+		});
+
+		knownUsersessions = controller.getKnownUsersessions();
 		if (!controller.isUsersessionLocked()) {
-			usernameCombo.setInput(controller.getKnownUsersessions());
+			usernameCombo.setInput(knownUsersessions);
 		}
 	}
 
@@ -129,23 +148,31 @@ public class LoginDialog extends TitleAreaDialog {
 	 *            the user session to be loaded
 	 */
 	private void loadUsersession(Usersession usersession) {
-
-		// session may be null; this is the case when LoginDialogController#login
-		// has been called with a server info instead of an user session
-		if (usersession == null || usersession.getUsername() == null || usersession.getUsername().equals("")) {
+		if (usersession != null && selectedUsersession == usersession) {
 			return;
 		}
 
 		selectedUsersession = usersession;
 
-		if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
-			// passwordField.setText(selectedUsersession.getPassword());
+		// reset fields
+		passwordField.setMessage("");
+		savePassword.setSelection(false);
+
+		if (selectedUsersession != null) {
+
+			// check whether text is set correctly
+			if (!usernameCombo.getCombo().getText().equals(selectedUsersession.getUsername())) {
+				usernameCombo.getCombo().setText(selectedUsersession.getUsername());
+			}
+
+			if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
+				passwordField.setMessage("<password is saved, reenter to change>");
+				passwordField.setText("");
+				savePassword.setSelection(true);
+			}
+			// reset password modified. modified password is only relevant when dealing with saved passwords.
+			passwordModified = false;
 		}
-
-		passwordField.setMessage("Otto is doof");
-
-		passwordModified = false;
-		savePassword.setSelection(selectedUsersession.isSavePassword());
 	}
 
 	/**
@@ -157,34 +184,42 @@ public class LoginDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		try {
+			String username = usernameCombo.getCombo().getText();
+			String password = passwordField.getText();
+			boolean savePass = savePassword.getSelection();
 
-			if (selectedUsersession == null) {
-				selectedUsersession = ModelFactory.eINSTANCE.createUsersession();
+			Usersession candidate = selectedUsersession;
+
+			// try to find usersession with same username in order to avoid duplicates
+			if (candidate == null) {
+				candidate = getUsersessionIfKnown(username);
 			}
 
-			selectedUsersession.setUsername(usernameCombo.getCombo().getText());
-			selectedUsersession.setSavePassword(savePassword.getSelection());
-			selectedUsersession.setServerInfo(controller.getServerInfo());
+			if (candidate == null) {
+				candidate = ModelFactory.eINSTANCE.createUsersession();
+				candidate.setServerInfo(controller.getServerInfo());
+				candidate.setUsername(username);
+			}
 
+			candidate.setSavePassword(savePass);
 			if (passwordModified) {
-				selectedUsersession.setPassword(passwordField.getText());
+				candidate.setPassword(password);
 			}
-
-			controller.validate(selectedUsersession);
+			controller.validate(candidate);
 		} catch (EmfStoreException e) {
-			setErrorMessage(e.getMessage());
+			setErrorMessage(e.getMessage() + " Maybe your password changed.");
 			return;
 		}
 		super.okPressed();
 	}
 
-	/**
-	 * Returns the selected {@link Usersession}.
-	 * 
-	 * @return the user session selected by the user
-	 */
-	public Usersession getSelectedUsersession() {
-		return selectedUsersession;
+	private Usersession getUsersessionIfKnown(String username) {
+		for (Usersession session : knownUsersessions) {
+			if (session.getUsername().equals(username)) {
+				return session;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -217,7 +252,9 @@ public class LoginDialog extends TitleAreaDialog {
 		setErrorMessage(null);
 	}
 
-	private final class ComboListener implements ISelectionChangedListener {
+	private final class ComboListener implements ISelectionChangedListener, ModifyListener {
+		private String lastText = "";
+
 		public void selectionChanged(SelectionChangedEvent event) {
 			ISelection selection = event.getSelection();
 			if (selection instanceof StructuredSelection) {
@@ -225,6 +262,14 @@ public class LoginDialog extends TitleAreaDialog {
 				if (firstElement instanceof Usersession) {
 					loadUsersession((Usersession) firstElement);
 				}
+			}
+		}
+
+		public void modifyText(ModifyEvent e) {
+			String text = usernameCombo.getCombo().getText();
+			if (text != null && !text.equals("") && !text.equals(lastText)) {
+				loadUsersession(getUsersessionIfKnown(text));
+				lastText = text;
 			}
 			flushErrorMessage();
 		}

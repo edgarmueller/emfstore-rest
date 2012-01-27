@@ -31,8 +31,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 		// TODO sanity check projectspace (is null, is shared)
 		try {
 			openProgress();
+			PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 			PrimaryVersionSpec updatedVersion = projectSpace.update(version, this, getProgressMonitor());
-			if (projectSpace.getBaseVersion().getIdentifier() == updatedVersion.getIdentifier()) {
+			if (oldBaseVersion.equals(updatedVersion)) {
 				noChangesOnServer();
 			}
 		} finally {

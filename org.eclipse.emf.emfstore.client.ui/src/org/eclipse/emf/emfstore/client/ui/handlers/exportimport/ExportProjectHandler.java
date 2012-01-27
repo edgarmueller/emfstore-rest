@@ -11,26 +11,19 @@
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.importexport.impl.ExportProjectController;
-import org.eclipse.emf.emfstore.client.ui.controller.UIGenericExportImportController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.client.ui.handlers.RequiredSelectionException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * CheckoutHandler for exporting a {@link Project}.
+ * Handler for exporting a {@link Project}.
  * 
  * @author emueller
  */
 public class ExportProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		try {
-			new UIGenericExportImportController(getShell(), new ExportProjectController(
-				requireSelection(ProjectSpace.class))).execute();
-		} catch (RequiredSelectionException e) {
-			// TODO:
-			e.printStackTrace();
-		}
+	public void handle() throws EmfStoreException {
+		new UIExportController(getShell()).exportProject(requireSelection(ProjectSpace.class));
 	}
 }

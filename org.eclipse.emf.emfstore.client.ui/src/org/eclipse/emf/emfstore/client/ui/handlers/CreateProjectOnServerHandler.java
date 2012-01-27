@@ -10,28 +10,29 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.ui.controller.UICreateProjectController;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.ui.controller.UIProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * CheckoutHandler to create an empty project on a server.
+ * Creates an empty project on a server.
  * 
- * @author Shterev
+ * @author emueller
+ * 
  */
-
-// TODO
 public class CreateProjectOnServerHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		try {
-			new UICreateProjectController(Display.getCurrent().getActiveShell()).createRemoteProject();
-		} catch (EmfStoreException e) {
-			//
-			// TODO
-			//
-			e.printStackTrace();
+	public void handle() throws EmfStoreException {
+
+		ServerInfo serverInfo = requireSelection(ServerInfo.class);
+
+		if (serverInfo == null || serverInfo.getLastUsersession() == null) {
+			return;
 		}
+
+		new UIProjectController(Display.getCurrent().getActiveShell()).createRemoteProject(serverInfo
+			.getLastUsersession());
 	}
 }

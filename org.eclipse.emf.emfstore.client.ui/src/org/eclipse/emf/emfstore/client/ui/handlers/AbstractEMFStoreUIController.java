@@ -25,11 +25,6 @@ public abstract class AbstractEMFStoreUIController {
 		this.shell = shell;
 	}
 
-	public void handleException(Exception exception) {
-		EMFStoreMessageDialog.showExceptionDialog(exception);
-		closeProgress();
-	}
-
 	protected ProgressMonitorDialog openProgress() {
 		progressDialog = new ProgressMonitorDialog(getShell());
 		progressDialog.open();
@@ -55,6 +50,11 @@ public abstract class AbstractEMFStoreUIController {
 			new String[] { "Yes", "No" }, 0);
 
 		return dialog.open() == Dialog.OK;
+	}
+
+	public void handleException(Exception exception) {
+		EMFStoreMessageDialog.showExceptionDialog(exception);
+		closeProgress();
 	}
 
 }

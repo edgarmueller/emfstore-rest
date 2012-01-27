@@ -202,6 +202,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private ComposedAdapterFactory adapterFactory;
 
+	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+
 	/**
 	 * Constructor.
 	 */
@@ -359,7 +361,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		};
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 		showRoots.setImageDescriptor(ImageDescriptor.createFromImage(adapterFactoryLabelProvider
 			.getImage(VersioningFactory.eINSTANCE.createChangePackage())));
 		showRoots.setToolTipText("Show revision nodes");
@@ -535,8 +537,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		String label = "History for ";
 		Project project = projectSpace.getProject();
 		if (me != null && project.containsInstance(me)) {
-			// TODO: sensible name for model element
-			label += me.toString();
+			label += adapterFactoryLabelProvider.getText(me);
 			groupByMe.setChecked(false);
 			showRoots.setChecked(false);
 			contentProvider = new SCMContentProvider.Detailed(viewer);

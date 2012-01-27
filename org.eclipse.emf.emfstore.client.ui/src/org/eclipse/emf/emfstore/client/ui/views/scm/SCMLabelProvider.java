@@ -90,7 +90,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		} else if (element instanceof ModelElementId && changePackageVisualizationHelper != null) {
 			EObject modelElement = changePackageVisualizationHelper.getModelElement((ModelElementId) element);
 			if (modelElement != null) {
-				ret = modelElement.toString();
+				ret = adapterFactoryLabelProvider.getText(modelElement);
 			} else {
 				return ELEMENT_NOT_FOUND;
 			}
@@ -98,12 +98,12 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			ChangePackage changePackage = (ChangePackage) element;
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
-			ret = element.toString();
+			ret = adapterFactoryLabelProvider.getText(element);
 		} else {
-			ret = element.toString();
+			ret = super.getText(element);
 		}
 
-		return super.getText(element);
+		return ret;
 	}
 
 	private String getText(ChangePackage changePackage) {

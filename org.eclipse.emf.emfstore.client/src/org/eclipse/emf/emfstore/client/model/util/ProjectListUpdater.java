@@ -12,14 +12,16 @@ package org.eclipse.emf.emfstore.client.model.util;
 
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
+import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
-public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver {
+public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver, LogoutObserver {
 
 	private Workspace workspace;
 
@@ -76,6 +78,13 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 
 	private void update(Usersession session) throws EmfStoreException {
 		workspace.updateProjectInfos(session);
+	}
+
+	public void logoutCompleted(Usersession session) {
+		ServerInfo serverInfo = session.getServerInfo();
+		if (serverInfo != null) {
+			serverInfo.getProjectInfos().clear();
+		}
 	}
 
 }

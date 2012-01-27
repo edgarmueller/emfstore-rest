@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -46,12 +48,14 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectSpaceController;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportWorkspaceController;
+import org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -239,6 +243,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		addProjectSpace(projectSpace);
 		this.save();
+
+		WorkspaceManager.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
 
 		return projectSpace;
 	}
@@ -495,54 +501,49 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	}
 
 	// BEGIN OF CUSTOM CODE
+
 	/**
-	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportProject(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      java.lang.String)
-	 */
-	public void exportProject(ProjectSpace projectSpace, String absoluteFileName) throws IOException {
-
-		Project project = EcoreUtil.copy(projectSpace.getProject());
-		ResourceHelper.putElementIntoNewResource(absoluteFileName, project);
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      java.lang.String)
+	 *      java.io.File)
 	 */
-	public void exportProjectSpace(ProjectSpace projectSpace, String absoluteFileName) throws IOException {
-
-		ProjectSpace copiedProjectSpace = EcoreUtil.copy(projectSpace);
-		copiedProjectSpace.setUsersession(null);
-
-		Project clonedProject = ModelUtil.clone(projectSpace.getProject());
-		copiedProjectSpace.setProject(clonedProject);
-
-		ResourceHelper.putElementIntoNewResourceWithProject(absoluteFileName, copiedProjectSpace,
-			copiedProjectSpace.getProject());
+	public void exportProjectSpace(ProjectSpace projectSpace, File file) throws IOException {
+		new ExportProjectSpaceController(projectSpace).execute(file, new NullProgressMonitor());
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportWorkSpace(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      java.io.File, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void exportWorkSpace(String absoluteFileName) throws IOException {
+	public void exportProjectSpace(ProjectSpace projectSpace, File file, IProgressMonitor progressMonitor)
+		throws IOException {
+		new ExportProjectSpaceController(projectSpace).execute(file, progressMonitor);
+	}
 
-		Workspace copy = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace());
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportWorkSpace(java.io.File)
+	 */
+	public void exportWorkSpace(File file) throws IOException {
+		new ExportWorkspaceController().execute(file, new NullProgressMonitor());
+	}
 
-		int i = 0;
-
-		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(i++)
-				.getProject();
-			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
-		}
-
-		ResourceHelper.putWorkspaceIntoNewResource(absoluteFileName, copy);
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#exportWorkSpace(java.io.File,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void exportWorkSpace(File file, IProgressMonitor progressMonitor) throws IOException {
+		new ExportWorkspaceController().execute(file, progressMonitor);
 	}
 
 	/**
@@ -579,7 +580,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	public AdminBroker getAdminBroker(final Usersession usersession) throws EmfStoreException, AccessControlException {
-		return new ServerCall<AdminBroker>() {
+		return new ServerCall<AdminBroker>(usersession) {
 			@Override
 			protected AdminBroker run() throws EmfStoreException {
 				return new AdminBrokerImpl(usersession.getServerInfo(), getSessionId());
@@ -979,6 +980,29 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 		}.execute();
 	}
+
 	// END OF CUSTOM CODE
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#addServerInfo(org.eclipse.emf.emfstore.client.model.ServerInfo)
+	 */
+	public void addServerInfo(ServerInfo serverInfo) {
+		getServerInfos().add(serverInfo);
+		save();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#removeServerInfo(org.eclipse.emf.emfstore.client.model.ServerInfo)
+	 */
+	public void removeServerInfo(ServerInfo serverInfo) {
+		getServerInfos().remove(serverInfo);
+		save();
+	}
 
 } // WorkspaceImpl

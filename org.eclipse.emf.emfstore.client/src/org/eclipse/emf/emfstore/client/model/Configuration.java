@@ -312,12 +312,14 @@ public final class Configuration {
 	}
 
 	/**
-	 * Retrieve the editing domain. Will return null until the domain is
-	 * initialized by the WorkspaceManager.
+	 * Retrieve the editing domain.
 	 * 
 	 * @return the workspace editing domain
 	 */
 	public static EditingDomain getEditingDomain() {
+		if (editingDomain == null) {
+			WorkspaceManager.getInstance();
+		}
 		return Configuration.editingDomain;
 	}
 

@@ -3,6 +3,7 @@ package org.eclipse.emf.emfstore.client.model.controller;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -16,7 +17,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 public class ShareController extends ServerCall<Void> {
 
-	public ShareController(ProjectSpaceBase projectSpaceImpl, Usersession session, IProgressMonitor monitor) {
+	public ShareController(ProjectSpaceBase projectSpaceImpl,
+			Usersession session, IProgressMonitor monitor) {
 		super(projectSpaceImpl);
 
 		// if session is null, session will be injected by sessionmanager
@@ -56,17 +58,20 @@ public class ShareController extends ServerCall<Void> {
 		getProgressMonitor().subTask("Sharing project with server");
 
 		createdProject = WorkspaceManager
-			.getInstance()
-			.getConnectionManager()
-			.createProject(getUsersession().getSessionId(), getProjectSpace().getProjectName(),
-				getProjectSpace().getProjectDescription(), logMessage, getProjectSpace().getProject());
+				.getInstance()
+				.getConnectionManager()
+				.createProject(getUsersession().getSessionId(),
+						getProjectSpace().getProjectName(),
+						getProjectSpace().getProjectDescription(), logMessage,
+						getProjectSpace().getProject());
 
 		getProgressMonitor().worked(70);
 		getProgressMonitor().subTask("Finalizing share");
 
 		// set attributes after server call
 		this.setUsersession(getUsersession());
-		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
+		WorkspaceManager.getObserverBus().register(getProjectSpace(),
+				LoginObserver.class);
 
 		getProjectSpace().getStatePersister().setAutoSave(true);
 		getProjectSpace().getStatePersister().saveDirtyResources();
@@ -79,13 +84,15 @@ public class ShareController extends ServerCall<Void> {
 
 		// TODO ASYNC implement File Upload with observer
 		// If any files have already been added, upload them.
-		// fileTransferManager.uploadQueuedFiles(new NullProgressMonitor());
+		getProjectSpace().getFileTransferManager().uploadQueuedFiles(
+				new NullProgressMonitor());
 
 		getProjectSpace().getOperations().clear();
 		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();
-		WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(getProjectSpace());
+		WorkspaceManager.getObserverBus().notify(ShareObserver.class)
+				.shareDone(getProjectSpace());
 	}
 
 }

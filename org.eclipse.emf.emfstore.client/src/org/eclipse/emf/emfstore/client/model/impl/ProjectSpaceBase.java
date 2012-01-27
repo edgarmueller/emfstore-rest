@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -49,9 +50,10 @@ import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundExceptio
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportChangesController;
+import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -161,8 +163,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will
-	 * be stopped meanwhile and the operations are added to the project space.
+	 * Applies a list of operations to the project. The change tracking will be
+	 * stopped meanwhile and the operations are added to the project space.
 	 * 
 	 * @param operations
 	 *            the list of operations to be applied upon the project space
@@ -172,8 +174,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will
-	 * be stopped meanwhile.
+	 * Applies a list of operations to the project. The change tracking will be
+	 * stopped meanwhile.
 	 * 
 	 * 
 	 * @param operations
@@ -222,7 +224,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * Applies a list of operations to the project. It is possible to force
-	 * import operations. Change tracking is not stopped while applying the changes.
+	 * import operations. Change tracking is not stopped while applying the
+	 * changes.
 	 * 
 	 * @param operations
 	 *            the list of operations to be applied upon the project space
@@ -269,27 +272,46 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
+	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
 		throws EmfStoreException {
 		return new CommitController(this, logMessage, callback, monitor).execute();
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.io.File,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void exportLocalChanges(String fileName) throws IOException {
-		ResourceHelper.putElementIntoNewResourceWithProject(fileName, getLocalChangePackage(false), getProject());
+	public void exportLocalChanges(File file, IProgressMonitor progressMonitor) throws IOException {
+		new ExportChangesController(this).execute(file, progressMonitor);
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportProject(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportLocalChanges(java.io.File)
 	 */
-	public void exportProject(String absoluteFileName) throws IOException {
-		WorkspaceManager.getInstance().getCurrentWorkspace().exportProject(this, absoluteFileName);
+	public void exportLocalChanges(File file) throws IOException {
+		new ExportChangesController(this).execute(file, new NullProgressMonitor());
+	}
+
+	public void exportProject(File file, IProgressMonitor progressMonitor) throws IOException {
+		new ExportProjectController(this).execute(file, progressMonitor);
+	}
+
+	public void exportProject(File file) throws IOException {
+		new ExportProjectController(this).execute(file, new NullProgressMonitor());
 	}
 
 	/**
@@ -519,6 +541,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		cleanCutElements();
 	}
 
+	public FileTransferManager getFileTransferManager() {
+		return fileTransferManager;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -606,7 +632,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 */
 	public void loginCompleted(Usersession session) {
-		// TODO Implement possibility in observerbus to register only for certain notifier
+		// TODO Implement possibility in observerbus to register only for
+		// certain notifier
 		if (getUsersession() == null || !getUsersession().equals(session)) {
 			return;
 		}
@@ -766,7 +793,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				getUsersession().getACUser().getProperties().add(property);
 				propertyMap.put(property.getName(), property);
 			}
-			// the properties that have been altered are retained in a separate list
+			// the properties that have been altered are retained in a separate
+			// list
 			for (OrgUnitProperty changedProperty : getUsersession().getChangedProperties()) {
 				if (changedProperty.getName().equals(property.getName())
 					&& changedProperty.getProject().equals(getProjectId())) {
@@ -946,4 +974,5 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void updateDirtyState() {
 		setDirty(!getOperations().isEmpty());
 	}
+
 }

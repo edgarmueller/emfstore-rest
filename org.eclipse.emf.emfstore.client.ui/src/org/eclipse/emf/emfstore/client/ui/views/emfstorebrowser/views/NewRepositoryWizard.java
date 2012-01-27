@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views;
 
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.controller.AddServerController;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -63,7 +63,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		if (this.getContainer().getCurrentPage().canFlipToNextPage()) {
-			new AddServerController(serverInfo);
+			WorkspaceManager.getInstance().getCurrentWorkspace().addServerInfo(serverInfo);
 			dispose();
 		} else {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error",

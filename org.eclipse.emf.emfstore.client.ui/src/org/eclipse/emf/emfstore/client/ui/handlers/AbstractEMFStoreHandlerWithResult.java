@@ -3,6 +3,7 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -13,7 +14,7 @@ public abstract class AbstractEMFStoreHandlerWithResult<T> extends AbstractHandl
 	public T execute(ExecutionEvent event) throws ExecutionException {
 		this.event = event;
 
-		new EMFStoreUICommandWithResult<T>() {
+		new EMFStoreCommandWithResult<T>() {
 			@Override
 			protected T doRun() {
 				return handleWithResult();

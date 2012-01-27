@@ -10,13 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.ui.controller.UICreateProjectController;
+import org.eclipse.emf.emfstore.client.ui.controller.UIProjectController;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 public class CreateLocalProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() {
-		new UICreateProjectController(getShell()).createLocalProject();
+	public void handle() throws EmfStoreException {
+		new UIProjectController(getShell()).createLocalProject();
 	}
 
 }

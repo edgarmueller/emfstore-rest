@@ -145,28 +145,56 @@ public interface ProjectSpace extends IdentifiableElement {
 		throws EmfStoreException;
 
 	/**
-	 * Export all local changes to a file with the given name.
+	 * Export all local changes to a file.
 	 * 
-	 * @param fileName
-	 *            the file name
+	 * @param file
+	 *            the file being exported to
 	 * @throws IOException
 	 *             if writing to the given file fails
 	 * 
 	 * @generated NOT
 	 */
-	void exportLocalChanges(String fileName) throws IOException;
+	void exportLocalChanges(File file) throws IOException;
 
 	/**
-	 * Export a project to a file with the given name.
+	 * Export all local changes to a file.
 	 * 
-	 * @param fileName
-	 *            the file name
+	 * @param file
+	 *            the file being exported to
+	 * @param progressMonitor
+	 *            the progress monitor that should be used while exporting
 	 * @throws IOException
 	 *             if writing to the given file fails
 	 * 
 	 * @generated NOT
 	 */
-	void exportProject(String fileName) throws IOException;
+	void exportLocalChanges(File file, IProgressMonitor progressMonitor) throws IOException;
+
+	/**
+	 * Export a project to the given file.
+	 * 
+	 * @param file
+	 *            the file being exported to
+	 * @throws IOException
+	 *             if writing to the given file fails
+	 * 
+	 * @generated NOT
+	 */
+	void exportProject(File file) throws IOException;
+
+	/**
+	 * Export a project to the given file.
+	 * 
+	 * @param file
+	 *            the file being exported to
+	 * @param progressMonitor
+	 *            the progress monitor that should be used during the export
+	 * @throws IOException
+	 *             if writing to the given file fails
+	 * 
+	 * @generated NOT
+	 */
+	void exportProject(File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
 	 * Returns the value of the '<em><b>Base Version</b></em>' containment reference.

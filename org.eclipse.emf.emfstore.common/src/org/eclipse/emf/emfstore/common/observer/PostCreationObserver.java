@@ -26,10 +26,8 @@ public interface PostCreationObserver extends IObserver {
 	 * Called when a new model element has been created. Use this method to to
 	 * modify attributes of a newly created model element.
 	 * 
-	 * @param container
-	 *            the container object that contains the newly created model element
 	 * @param modelElement
 	 *            the model element that has been created
 	 */
-	void onCreation(Class<? extends EObject> container, EObject modelElement);
+	void onCreation(EObject modelElement);
 }
