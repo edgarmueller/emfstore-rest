@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * . The decorator to show version of a ProjectSpace
+ * The decorator that shows the version of a ProjectSpace.
  * 
  * @author Helming
  */
@@ -39,8 +39,8 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	private ProjectSpace element;
 
 	public VersionDecorator() {
-		WorkspaceManager.getObserverBus().register(this, CommitObserver.class);
-		WorkspaceManager.getObserverBus().register(this, UpdateObserver.class);
+		WorkspaceManager.getObserverBus().register(this);
+		WorkspaceManager.getObserverBus().register(this);
 	}
 
 	/**
@@ -59,22 +59,23 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 			String string = stringBuilder.toString();
 			decoration.addSuffix(string);
 		}
-		// //ZH Check this
-		// if(this.element==null){
-		// this.element=(ProjectSpace) element;
-		// this.element.eAdapters().add(this);
-		// }
 	}
 
 	/**
-	 * . {@inheritDoc}
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	public void addListener(ILabelProviderListener listener) {
 		listeners.add(listener);
 	}
 
 	/**
-	 * . {@inheritDoc}
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
 	 */
 	public void dispose() {
 		listeners.removeAll(listeners);
@@ -89,15 +90,15 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	}
 
 	/**
-	 * . {@inheritDoc}
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	public void removeListener(ILabelProviderListener listener) {
 		listeners.remove(listener);
 	}
 
-	/**
-	 * . {@inheritDoc}
-	 */
 	public void decorationChanged() {
 		LabelProviderChangedEvent event = new LabelProviderChangedEvent(this, element);
 		for (ILabelProviderListener listener : listeners) {
@@ -106,25 +107,55 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	}
 
 	/**
-	 * . {@inheritDoc}
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.common.notify.impl.AdapterImpl#notifyChanged(org.eclipse.emf.common.notify.Notification)
 	 */
 	@Override
 	public void notifyChanged(Notification msg) {
 		decorationChanged();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
+	 */
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
 		return false;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 */
 	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
 		update();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      java.util.List)
+	 */
 	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
 		return false;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 */
 	public void updateCompleted(ProjectSpace projectSpace) {
 		update();
 	}

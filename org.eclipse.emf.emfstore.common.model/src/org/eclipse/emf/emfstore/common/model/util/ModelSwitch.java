@@ -11,11 +11,9 @@
 package org.eclipse.emf.emfstore.common.model.util;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.*;
 import org.eclipse.emf.emfstore.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
