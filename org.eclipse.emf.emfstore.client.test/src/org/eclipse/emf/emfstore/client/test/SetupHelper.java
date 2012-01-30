@@ -142,14 +142,14 @@ public class SetupHelper {
 	 */
 	public static ACOrgUnitId createUserOnServer(String username) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
-		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
 	}
 
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
-		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
 	}
@@ -163,7 +163,7 @@ public class SetupHelper {
 	 */
 	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
-		SessionId sessionId = TestSessionProvider.getDefaultUsersession().getSessionId();
+		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
 	}

@@ -62,7 +62,7 @@ public class ServerInterfaceTest extends ServerTests {
 			protected ProjectSpace doRun() {
 				try {
 					return WorkspaceManager.getInstance().getCurrentWorkspace()
-						.checkout(TestSessionProvider.getDefaultUsersession(), getProjectInfo());
+						.checkout(TestSessionProvider.getInstance().getDefaultUsersession(), getProjectInfo());
 				} catch (EmfStoreException e) {
 					Assert.fail();
 					return null;
