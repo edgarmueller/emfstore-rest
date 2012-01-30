@@ -41,12 +41,18 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	private TestSessionProvider() {
-		Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
 		usersession.setUsername("super");
 		usersession.setPassword("super");
-		workspace.getUsersessions().add(usersession);
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				workspace.getUsersessions().add(usersession);
+			}
+		}.run(false);
+
 		workspace.save();
 	}
 
