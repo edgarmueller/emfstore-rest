@@ -14,8 +14,16 @@ import org.junit.Assert;
 public class TestSessionProvider extends AbstractSessionProvider {
 
 	private static Usersession usersession;
+	private static TestSessionProvider instance;
 
-	public static Usersession getDefaultUsersession() throws AccessControlException, EmfStoreException {
+	public static TestSessionProvider getInstance() {
+		if (instance == null) {
+			instance = new TestSessionProvider();
+		}
+		return instance;
+	}
+
+	public Usersession getDefaultUsersession() throws AccessControlException, EmfStoreException {
 		new EMFStoreCommand() {
 
 			@Override
@@ -32,7 +40,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 		return usersession;
 	}
 
-	public TestSessionProvider() {
+	private TestSessionProvider() {
 		Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
