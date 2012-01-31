@@ -605,7 +605,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
             name="CheckoutRevision">
       </command>
