@@ -432,16 +432,9 @@
                    <iterate
                          ifEmpty="true"
                          operator="and">
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
+                      <instanceof
                             value="org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo">
-                      </test>
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.historyBrowserAdminTester"
-                            value="true">
-                      </test>
+                      </instanceof>
                    </iterate>
                 </visibleWhen>
              </command>
@@ -455,16 +448,9 @@
                    <iterate
                          ifEmpty="false"
                          operator="and">
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
+                      <instanceof
                             value="org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo">
-                      </test>
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.historyBrowserAdminTester"
-                            value="true">
-                      </test>
+                      </instanceof>
                    </iterate>
                 </visibleWhen>
              </command>
@@ -477,64 +463,18 @@
                    label="Checkout this revision"
                    style="push"
                    tooltip="Checkout this revision of the project">
-                <visibleWhen
-                      checkEnabled="false">
-                   <iterate
-                         ifEmpty="false"
-                         operator="and">
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                            value="org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo">
-                      </test>
-                   </iterate>
-                </visibleWhen>
              </command>
              <command
                    commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
                    label="Revert this revision"
                    style="push"
                    tooltip="Revert this revision of the project, the reversed changes between the previous revision has been applied">
-                <visibleWhen
-                      checkEnabled="false">
-                   <iterate
-                         ifEmpty="false"
-                         operator="and">
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                            value="org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo">
-                      </test>
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.historyBrowserAdminTester"
-                            value="true">
-                      </test>
-                   </iterate>
-                </visibleWhen>
              </command>
              <command
                    commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
                    label="Force to revert this revision"
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
-                <visibleWhen
-                      checkEnabled="false">
-                   <iterate
-                         ifEmpty="false"
-                         operator="and">
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.treeNodeClassTester"
-                            value="org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo">
-                      </test>
-                      <test
-                            forcePluginActivation="true"
-                            property="org.eclipse.emf.emfstore.client.ui.commands.historyBrowserAdminTester"
-                            value="true">
-                      </test>
-                   </iterate>
-                </visibleWhen>
              </command>
           </menuContribution>
   </extension>

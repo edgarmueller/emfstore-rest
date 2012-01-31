@@ -226,8 +226,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		viewer = new TreeViewerWithModelElementSelectionProvider(parent, SWT.NONE);
 
-		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		MenuManager menuMgr = new MenuManager();
 		menuMgr.add(new Separator("additions"));
+		getSite().registerContextMenu(menuMgr, viewer);
 		Control control = viewer.getControl();
 		Menu menu = menuMgr.createContextMenu(control);
 		control.setMenu(menu);
