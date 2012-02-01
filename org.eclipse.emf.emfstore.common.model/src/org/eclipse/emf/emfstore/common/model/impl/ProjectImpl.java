@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.impl;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.core.runtime.Platform;
@@ -21,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
@@ -34,17 +32,6 @@ import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObser
  * @generated NOT
  */
 public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Project {
-
-	/**
-	 * 
-	 * @param xmiResource
-	 * @throws IOException
-	 * 
-	 * @generated NOT
-	 */
-	public ProjectImpl(XMIResource xmiResource) throws IOException {
-		super(xmiResource);
-	}
 
 	/**
 	 * The cached value of the '{@link #getModelElements()
@@ -81,6 +68,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> .<!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -105,6 +93,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<EObject> getCutElements() {
@@ -117,6 +106,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -132,6 +122,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -147,6 +138,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -167,6 +159,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -184,6 +177,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
