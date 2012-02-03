@@ -226,8 +226,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Unknown Operation";
 	}
 
 	/**
