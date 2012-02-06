@@ -55,10 +55,17 @@ public class CompositeOperationReversibilityTest extends OperationsReversibility
 			protected void doRun() {
 
 				doTest();
-				getTestProjectSpace().revert();
 
 			}
 
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+			}
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),

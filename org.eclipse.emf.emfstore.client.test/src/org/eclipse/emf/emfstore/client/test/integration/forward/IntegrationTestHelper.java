@@ -1292,12 +1292,27 @@ public final class IntegrationTestHelper {
 	 */
 	public void doDeleteAndRevert() {
 
-		EObject modelElement = getRandomME(getTestProject());
-		getTestProject().deleteModelElement(modelElement);
+		final EObject modelElement = getRandomME(getTestProject());
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProject().deleteModelElement(modelElement);
+			}
+		}.run(false);
+
 		List<AbstractOperation> operations = WorkspaceManager.getProjectSpace(testProject).getOperations();
-		CreateDeleteOperation operation = (CreateDeleteOperation) operations.get(operations.size() - 1);
-		CreateDeleteOperation reverse = (CreateDeleteOperation) operation.reverse();
-		reverse.apply(getTestProject());
+		final CreateDeleteOperation operation = (CreateDeleteOperation) operations.get(operations.size() - 1);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				CreateDeleteOperation reverse = (CreateDeleteOperation) operation.reverse();
+				reverse.apply(getTestProject());
+			}
+		};
+
 	}
 
 	/**

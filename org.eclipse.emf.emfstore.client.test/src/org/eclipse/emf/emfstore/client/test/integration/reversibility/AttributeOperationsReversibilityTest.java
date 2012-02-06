@@ -60,9 +60,16 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 			@Override
 			protected void doRun() {
 				testHelper.doChangeAttribute();
-				getTestProjectSpace().revert();
 			}
 
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+			}
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
@@ -85,9 +92,15 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 			@Override
 			protected void doRun() {
 				testHelper.doAttributeTransitiveChange();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
 				getTestProjectSpace().revert();
 			}
-
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),

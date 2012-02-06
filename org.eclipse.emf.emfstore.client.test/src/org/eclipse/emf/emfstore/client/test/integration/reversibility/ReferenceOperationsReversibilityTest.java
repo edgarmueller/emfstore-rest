@@ -37,9 +37,17 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			@Override
 			protected void doRun() {
 				testHelper.doContainemntReferenceAddNew();
-				getTestProjectSpace().revert();
 			}
 
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+
+			}
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
@@ -60,14 +68,20 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 		System.out.println("ContainmentRefTransitiveChangeReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testHelper.doContainmentRefTransitiveChange();
+			}
+		}.run(false);
+
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				testHelper.doContainmentRefTransitiveChange();
 				getTestProjectSpace().revert();
 			}
-
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
@@ -114,9 +128,15 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			@Override
 			protected void doRun() {
 				testHelper.doNonContainmentReferenceAdd();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
 				getTestProjectSpace().revert();
 			}
-
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
@@ -143,6 +163,14 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+			}
+		}.run(false);
+
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
 			"NonContainmentReferenceRemoveReversibilityTest"));
 
@@ -164,6 +192,12 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			@Override
 			protected void doRun() {
 				testHelper.doContainmentReferenceMove();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
 				getTestProjectSpace().revert();
 			}
 		}.run(false);

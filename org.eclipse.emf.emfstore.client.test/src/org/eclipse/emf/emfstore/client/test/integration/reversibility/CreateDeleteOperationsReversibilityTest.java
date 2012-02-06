@@ -33,11 +33,17 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
-
 				testHelper.doCreateAndChangeAttribute();
+				getTestProjectSpace().revert();
+			}
+
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
 				getTestProjectSpace().revert();
 			}
 
@@ -71,6 +77,13 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		}.run(false);
 
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+			}
+		}.run(false);
+
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
 			"CreateAndMultipleChangeReversibilityTest"));
 
@@ -93,6 +106,15 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 			protected void doRun() {
 
 				testHelper.doCreateAndChangeRef();
+				getTestProjectSpace().revert();
+			}
+
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
 				getTestProjectSpace().revert();
 			}
 
@@ -192,9 +214,16 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 			@Override
 			protected void doRun() {
 				testHelper.doDelete();
-				getTestProjectSpace().revert();
 			}
 
+		}.run(false);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				getTestProjectSpace().revert();
+			}
 		}.run(false);
 
 		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "DeleteReversibilityTest"));
