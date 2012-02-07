@@ -290,13 +290,59 @@ public interface ModelPackage extends EPackage {
 	int EMF_STORE_PROPERTY__TYPE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_STORE_PROPERTY__VERSION = 3;
+
+	/**
 	 * The number of structural features of the '<em>EMF Store Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_STORE_PROPERTY_FEATURE_COUNT = 3;
+	int EMF_STORE_PROPERTY_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl <em>Property Map Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
+	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
+	 * @generated
+	 */
+	int PROPERTY_MAP_ENTRY = 8;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_MAP_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_MAP_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Property Map Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl <em>Property String Value</em>}' class.
@@ -306,7 +352,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyStringValue()
 	 * @generated
 	 */
-	int PROPERTY_STRING_VALUE = 8;
+	int PROPERTY_STRING_VALUE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -334,7 +380,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getEMFStorePropertyType()
 	 * @generated
 	 */
-	int EMF_STORE_PROPERTY_TYPE = 9;
+	int EMF_STORE_PROPERTY_TYPE = 10;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.Project <em>Project</em>}'.
@@ -503,6 +549,51 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEMFStoreProperty_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion()
+	 * @see #getEMFStoreProperty()
+	 * @generated
+	 */
+	EAttribute getEMFStoreProperty_Version();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Property Map Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Map Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueType="org.eclipse.emf.emfstore.common.model.EMFStoreProperty"
+	 * @generated
+	 */
+	EClass getPropertyMapEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getPropertyMapEntry()
+	 * @generated
+	 */
+	EAttribute getPropertyMapEntry_Key();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getPropertyMapEntry()
+	 * @generated
+	 */
+	EReference getPropertyMapEntry_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.PropertyStringValue <em>Property String Value</em>}'.
@@ -700,6 +791,40 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMF_STORE_PROPERTY__TYPE = eINSTANCE.getEMFStoreProperty_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_STORE_PROPERTY__VERSION = eINSTANCE.getEMFStoreProperty_Version();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl <em>Property Map Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
+		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
+		 * @generated
+		 */
+		EClass PROPERTY_MAP_ENTRY = eINSTANCE.getPropertyMapEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_MAP_ENTRY__KEY = eINSTANCE.getPropertyMapEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_MAP_ENTRY__VALUE = eINSTANCE.getPropertyMapEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl <em>Property String Value</em>}' class.

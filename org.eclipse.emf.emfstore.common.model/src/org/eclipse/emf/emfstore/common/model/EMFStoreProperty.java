@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +106,31 @@ public interface EMFStoreProperty extends EObject {
 	 * @generated
 	 */
 	void setType(EMFStorePropertyType value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(int)
+	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getEMFStoreProperty_Version()
+	 * @model
+	 * @generated
+	 */
+	int getVersion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(int value);
 
 } // EMFStoreProperty
