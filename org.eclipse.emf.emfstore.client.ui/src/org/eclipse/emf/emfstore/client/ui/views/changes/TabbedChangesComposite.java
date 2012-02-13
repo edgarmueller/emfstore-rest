@@ -96,7 +96,7 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 		compactTabTreeViewer.setContentProvider(compactContentProvider);
 		compactTabTreeViewer.setLabelProvider(compactLabelProvider);
 		compactTabTreeViewer.setInput(changePackages);
-		compactTabTreeViewer.expandToLevel(2);
+		compactTabTreeViewer.expandToLevel(0);
 
 		TabItem meTab = new TabItem(folder, style);
 		meTab.setText("ModelElements");
