@@ -3,15 +3,9 @@
 	installLocation="${user.home}\.hudson\jobs\emf-emfstore-integration\workspace\_target" 
 	materializer="p2"
 	name="local.mspec" url="build.cquery">
-	<mspec:property key="target.os" value="*"/>
-	<mspec:property key="target.ws" value="*"/>
-	<mspec:property key="target.arch" value="*"/>
-	<mspec:property key="resolve.target.platform" value="true"/>
 	
-	<mspec:property key="eclipse.downloads" value="http://download.eclipse.org"/>
-	<mspec:property key="buckminster.download.source" value="true"/>
+	<mspec:mspecNode namePattern="org\.eclipse\.emf\.emfstore\..*" materializer="workspace"/>
 	
-	<!--mspec:mspecNode namePattern="org\.eclipse\.emf\.emfstore\..*" materializer="workspace"/-->
-	
-	<mspec:mspecNode materializer="workspace" filter="(buckminster.source=true)"/>
+	<!--mspec:property key="resolve.target.platform" value="true"/-->
+	<!--mspec:mspecNode materializer="workspace" filter="(buckminster.source=true)"/-->
 </mspec:mspec>
