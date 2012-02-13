@@ -903,29 +903,6 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Check of the two elements are linked by the given reference.
-	 * 
-	 * @param modelElement
-	 *            first model element
-	 * @param otherModelElement
-	 *            second modelelement
-	 * @param reference
-	 *            candidate reference feature of first element
-	 * @return true if the reference feature links the two elements
-	 */
-	private static boolean isCorrespondingReference(EObject modelElement, EObject otherModelElement,
-		EReference reference) {
-		if (reference.isMany()) {
-			if (otherModelElement.eGet(reference) == null) {
-				return false;
-			}
-			return ((List<?>) otherModelElement.eGet(reference)).contains(modelElement);
-		} else {
-			return modelElement.equals(otherModelElement.eGet(reference));
-		}
-	}
-
-	/**
 	 * Delete all outgoing cross references of the given model element.
 	 * 
 	 * @param modelElement
@@ -943,7 +920,7 @@ public final class ModelUtil {
 			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
 				setting.getEObject().eUnset(setting.getEStructuralFeature());
 			} else {
-				List<EObject> references = (List<EObject>) setting.getEObject().eGet(setting.getEStructuralFeature());
+				List<?> references = (List<?>) setting.getEObject().eGet(setting.getEStructuralFeature());
 				references.remove(settingWithReferencedElement.getReferencedElement());
 			}
 		}

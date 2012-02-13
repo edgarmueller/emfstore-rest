@@ -8,7 +8,7 @@
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.emfstore.common.model.provider.RootElementItemProvider"
     editPluginID="org.eclipse.emf.emfstore.common.model.edit" editorPluginID="org.eclipse.emf.emfstore.common.model.editor"
-    language="">
+    runtimeVersion="2.5" language="">
   <foreignModel>common.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.common" disposableProviderFactory="true"
       ecorePackage="common.ecore#/">
