@@ -26,13 +26,11 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -507,8 +505,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				// copy list before clearing reference
 				// TODO is this really the underlying list
 				List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
-				Resource resource = this.editingDomain.getResourceSet().createResource(URI.createURI("AAA"));
-				resource.getContents().add(modelElement);
+				// TODO: check whether we really have to perform resolveAll
 				EcoreUtil.resolveAll(modelElement);
 				modelElement.eUnset(reference);
 				for (EObject mapEntry : mapEntries) {

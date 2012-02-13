@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.connection.xmlrpc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
@@ -204,12 +205,13 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void transmitEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties, ProjectId projectId)
-		throws EmfStoreException {
+	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties,
+		ProjectId projectId) throws EmfStoreException {
 		if (properties != null && properties.size() > 0) {
-			getEmfStore().transmitEMFProperties(sessionId, properties, projectId);
+			return getEmfStore().setEMFProperties(sessionId, properties, projectId);
 		}
 
+		return new ArrayList<EMFStoreProperty>();
 	}
 
 	/**

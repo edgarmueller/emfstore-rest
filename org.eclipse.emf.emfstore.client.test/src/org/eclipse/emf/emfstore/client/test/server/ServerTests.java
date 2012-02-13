@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
@@ -189,7 +190,19 @@ public class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					getProjectSpace().shareProject();
+					ServerInfo serverInfo = SetupHelper.getServerInfo();
+					Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE
+						.createUsersession();
+					session.setServerInfo(serverInfo);
+					session.setUsername("super");
+					session.setPassword("super");
+					session.setSavePassword(true);
+
+					Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+					currentWorkspace.getServerInfos().add(serverInfo);
+					currentWorkspace.getUsersessions().add(session);
+					currentWorkspace.save();
+					getProjectSpace().shareProject(session, null);
 				} catch (EmfStoreException e) {
 					Assert.fail();
 				}
@@ -207,11 +220,13 @@ public class ServerTests extends WorkspaceTest {
 	 */
 	@After
 	public void afterTest() throws EmfStoreException {
+
 		for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
 			.getRemoteProjectList(getServerInfo())) {
 			WorkspaceManager.getInstance().getCurrentWorkspace()
 				.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
 		}
+
 		SetupHelper.cleanupServer();
 	}
 
