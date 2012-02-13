@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cs:cspecExtension xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 	<cs:dependencies>
-		<cs:dependency name="org.eclipse.emf.emfstore.site" componentType="eclipse.feature"/>
+		<!--cs:dependency name="org.eclipse.emf.emfstore.site" componentType="eclipse.feature"/>
 		
 		<cs:dependency name="org.eclipse.equinox.executable" componentType="eclipse.feature"/>
 		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
@@ -9,6 +9,6 @@
 		<cs:dependency name="org.eclipse.jdt" componentType="eclipse.feature"/>
 		<cs:dependency name="org.eclipse.jdt.source" componentType="eclipse.feature"/>
 		<cs:dependency name="org.eclipse.pde" componentType="eclipse.feature"/>
-		<cs:dependency name="org.eclipse.pde.source" componentType="eclipse.feature"/>
+		<cs:dependency name="org.eclipse.pde.source" componentType="eclipse.feature"/-->
 	</cs:dependencies>
 </cs:cspecExtension>

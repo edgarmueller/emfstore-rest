@@ -4,13 +4,13 @@
   <rm:property key="emf.version" value="2.7"/>
   <rm:property key="orbit.version" value="S20110907174232"/>
 
-  <rm:property key="git.clone.emfstore.core" value="${user.home}/buckminster/org.eclipse.emf.emfstore.core"/>
-  <rm:property key="git.clone.emfstore.releng" value="${user.home}/buckminster/org.eclipse.emf.emfstore.releng"/>
-  <rm:property key="git.clone.emfstore.other" value="${user.home}/buckminster/org.eclipse.emf.emfstore.other"/>
+  <rm:property key="git.clone.emfstore.core" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfstore.core"/>
+  <rm:property key="git.clone.emfstore.releng" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfstore.releng"/>
+  <rm:property key="git.clone.emfstore.other" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfstore.other"/>
 
-  <rm:property key="git.clone.emfclient.core" value="${user.home}/buckminster/org.eclipse.emf.emfclient.core"/>
-  <rm:property key="git.clone.emfclient.releng" value="${user.home}/buckminster/org.eclipse.emf.emfclient.releng"/>
-  <rm:property key="git.clone.emfclient.other" value="${user.home}/buckminster/org.eclipse.emf.emfclient.other"/>
+  <rm:property key="git.clone.emfclient.core" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfclient.core"/>
+  <rm:property key="git.clone.emfclient.releng" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfclient.releng"/>
+  <rm:property key="git.clone.emfclient.other" value="${user.home}/buckminster_emfstore/org.eclipse.emf.emfclient.other"/>
 
   <rm:property key="eclipse.downloads" value="http://download.eclipse.org"/>
   <rm:property key="resolve.target.platform" value="true"/>
