@@ -353,7 +353,9 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 			if (user.getEffectiveGroups().contains(group)) {
 				continue;
 			}
-			user.getEffectiveGroups().add(EcoreUtil.copy(group));
+			ACGroup copy = EcoreUtil.copy(group);
+			user.getEffectiveGroups().add(copy);
+			copy.getMembers().clear();
 		}
 
 		return user;
