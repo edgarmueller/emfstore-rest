@@ -6,7 +6,8 @@
     editorDirectory="/org.eclipse.emf.emfstore.server.model.editor/src" modelPluginID="org.eclipse.emf.emfstore.server.model"
     modelName="Server" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.emf.emfstore.server.model.edit"
-    editorPluginID="org.eclipse.emf.emfstore.server.model.editor" language="" usedGenPackages="../../org.eclipse.emf.emfstore.common.model/model/common.genmodel#//model">
+    editorPluginID="org.eclipse.emf.emfstore.server.model.editor" runtimeVersion="2.5"
+    language="" usedGenPackages="../../org.eclipse.emf.emfstore.common.model/model/common.genmodel#//model">
   <foreignModel>server.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.server" disposableProviderFactory="true"
       ecorePackage="server.ecore#/">

@@ -42,8 +42,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Create Delete Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Create Delete Operation</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -56,8 +56,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  *
  * @generated
  */
-public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
-		CreateDeleteOperation {
+public class CreateDeleteOperationImpl extends AbstractOperationImpl implements CreateDeleteOperation {
 
 	public void apply(IdEObjectCollection project) {
 		if (isDelete()) {
@@ -65,9 +64,21 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 				// silently fail
 				return;
 			}
-			EObject localModelElement = project
-					.getModelElement(getModelElementId());
-			project.deleteModelElement(localModelElement);
+			EObject localModelElement = project.getModelElement(getModelElementId());
+
+			// remove model element from its parent
+			if (localModelElement.eContainmentFeature() != null) {
+				EReference eContainmentFeature = localModelElement.eContainmentFeature();
+				if (eContainmentFeature.isMany()) {
+					((List<?>) localModelElement.eContainer().eGet(eContainmentFeature)).remove(localModelElement);
+				} else {
+					localModelElement.eContainer().eSet(eContainmentFeature, null);
+				}
+			}
+			// project.deleteModelElement(localModelElement);
+			for (AbstractOperation op : getSubOperations()) {
+				op.apply(project);
+			}
 		} else {
 			if (project.contains(getModelElementId())) {
 				// silently fail
@@ -78,20 +89,18 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 			CreateDeleteOperationImpl clone = ModelUtil.clone(this);
 
 			EObject element = getModelElement();
-			List<EObject> allContainedModelElements = ModelUtil
-					.getAllContainedModelElementsAsList(element, false);
+			List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
 			allContainedModelElements.add(element);
 			EObject copiedElement = EcoreUtil.copy(element);
-			List<EObject> copiedAllContainedModelElements = ModelUtil
-					.getAllContainedModelElementsAsList(copiedElement, false);
+			List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
+				false);
 			copiedAllContainedModelElements.add(copiedElement);
 			clone.getEObjectToIdMap().clear();
 
 			for (int i = 0; i < allContainedModelElements.size(); i++) {
 				EObject child = allContainedModelElements.get(i);
 				EObject copiedChild = copiedAllContainedModelElements.get(i);
-				ModelElementId childId = ModelUtil.clone(getEObjectToIdMap()
-						.get(child));
+				ModelElementId childId = ModelUtil.clone(getEObjectToIdMap().get(child));
 
 				if (ModelUtil.isIgnoredDatatype(child)) {
 					continue;
@@ -103,8 +112,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 				clone.getEObjectToIdMap().put(copiedChild, childId);
 			}
 
-			project.addModelElement(clone.getModelElement(), clone
-					.getEObjectToIdMap().map());
+			project.addModelElement(clone.getModelElement(), clone.getEObjectToIdMap().map());
 
 			for (ReferenceOperation operation : getSubOperations()) {
 				operation.apply(project);
@@ -128,37 +136,30 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 	public AbstractOperation reverse() {
 		// TODO: see comment in checkValidity
 		// checkValidity();
-		CreateDeleteOperation createDeleteOperation = OperationsFactory.eINSTANCE
-				.createCreateDeleteOperation();
+		CreateDeleteOperation createDeleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
 		super.reverse(createDeleteOperation);
 		createDeleteOperation.setDelete(!this.isDelete());
 
 		EObject element = getModelElement();
-		List<EObject> allContainedModelElements = ModelUtil
-				.getAllContainedModelElementsAsList(element, false);
+		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
 		allContainedModelElements.add(element);
 		EObject copiedElement = EcoreUtil.copy(element);
 		createDeleteOperation.setModelElement(copiedElement);
-		createDeleteOperation.setModelElementId(ModelUtil.clone(this
-				.getModelElementId()));
-		List<EObject> copiedAllContainedModelElements = ModelUtil
-				.getAllContainedModelElementsAsList(copiedElement, false);
+		createDeleteOperation.setModelElementId(ModelUtil.clone(this.getModelElementId()));
+		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
+			false);
 		copiedAllContainedModelElements.add(copiedElement);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
 			EObject child = allContainedModelElements.get(i);
 			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = ModelUtil.clone(getEObjectToIdMap().get(
-					child));
-			((CreateDeleteOperationImpl) createDeleteOperation)
-					.getEObjectToIdMap().put(copiedChild, childId);
+			ModelElementId childId = ModelUtil.clone(getEObjectToIdMap().get(child));
+			((CreateDeleteOperationImpl) createDeleteOperation).getEObjectToIdMap().put(copiedChild, childId);
 		}
 
-		EList<ReferenceOperation> clonedSubOperations = createDeleteOperation
-				.getSubOperations();
+		EList<ReferenceOperation> clonedSubOperations = createDeleteOperation.getSubOperations();
 		for (ReferenceOperation operation : getSubOperations()) {
-			clonedSubOperations
-					.add(0, (ReferenceOperation) operation.reverse());
+			clonedSubOperations.add(0, (ReferenceOperation) operation.reverse());
 		}
 		return createDeleteOperation;
 	}
@@ -281,8 +282,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetModelElement(EObject newModelElement,
-			NotificationChain msgs) {
+	public NotificationChain basicSetModelElement(EObject newModelElement, NotificationChain msgs) {
 		EObject oldModelElement = modelElement;
 		modelElement = newModelElement;
 		if (eNotificationRequired()) {
@@ -337,8 +337,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT:
 				return basicSetModelElement(null, msgs);
@@ -519,8 +518,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getLeafOperations()
 	 */
 	public List<AbstractOperation> getLeafOperations() {
-		List<AbstractOperation> result = new ArrayList<AbstractOperation>(
-				getSubOperations().size() + 1);
+		List<AbstractOperation> result = new ArrayList<AbstractOperation>(getSubOperations().size() + 1);
 		CreateDeleteOperation createDeleteClone = ModelUtil.clone(this);
 		createDeleteClone.getSubOperations().clear();
 		result.add(createDeleteClone);
@@ -541,12 +539,10 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 			return null;
 		}
 
-		ReferenceOperation lastReferenceOperation = referenceOperations
-				.get(referenceOperations.size() - 1);
+		ReferenceOperation lastReferenceOperation = referenceOperations.get(referenceOperations.size() - 1);
 
 		try {
-			EStructuralFeature feature = lastReferenceOperation
-					.getFeature(project);
+			EStructuralFeature feature = lastReferenceOperation.getFeature(project);
 			if (!(feature instanceof EReference)) {
 				return null;
 			}
@@ -554,18 +550,16 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements
 			// reference is from parent side, so parent is the element that is
 			// changed by the last ref op
 			if (reference.isContainment()) {
-				if (lastReferenceOperation.getOtherInvolvedModelElements()
-						.contains(getModelElementId())) {
+				if (lastReferenceOperation.getOtherInvolvedModelElements().contains(getModelElementId())) {
 					return lastReferenceOperation.getModelElementId();
 				}
 				return null;
 				// reference is from child side, so parent is the only element
 				// in other involved of the ref op
 			} else if (reference.isContainer()) {
-				if (lastReferenceOperation.getModelElementId().equals(
-						getModelElementId())) {
+				if (lastReferenceOperation.getModelElementId().equals(getModelElementId())) {
 					Set<ModelElementId> otherInvolvedModelElements = lastReferenceOperation
-							.getOtherInvolvedModelElements();
+						.getOtherInvolvedModelElements();
 					if (otherInvolvedModelElements.size() > 0) {
 						return otherInvolvedModelElements.iterator().next();
 					}

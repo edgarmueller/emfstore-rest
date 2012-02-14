@@ -391,6 +391,16 @@ public final class ServerConfiguration {
 	 */
 	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
 
+	/**
+	 * Whether to perform the clean memory task.
+	 */
+	public static final String PERFORM_CLEAN_MEMORY_TASK = "emfstore.cleanmemorytask";
+
+	/**
+	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.
+	 */
+	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = TRUE;
+
 	private static boolean testing;
 
 	private static Properties properties;
