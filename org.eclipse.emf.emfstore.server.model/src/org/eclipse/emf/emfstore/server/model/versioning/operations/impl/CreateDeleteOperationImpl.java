@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -91,7 +90,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 			EObject element = getModelElement();
 			List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
 			allContainedModelElements.add(element);
-			EObject copiedElement = EcoreUtil.copy(element);
+			EObject copiedElement = ModelUtil.clone(element);
 			List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
 				false);
 			copiedAllContainedModelElements.add(copiedElement);
@@ -143,7 +142,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 		EObject element = getModelElement();
 		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
 		allContainedModelElements.add(element);
-		EObject copiedElement = EcoreUtil.copy(element);
+		EObject copiedElement = ModelUtil.clone(element);
 		createDeleteOperation.setModelElement(copiedElement);
 		createDeleteOperation.setModelElementId(ModelUtil.clone(this.getModelElementId()));
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,

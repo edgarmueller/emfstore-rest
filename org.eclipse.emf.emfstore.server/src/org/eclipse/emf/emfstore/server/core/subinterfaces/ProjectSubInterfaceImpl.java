@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -280,7 +279,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				deleteProject2(projectHistory.getProjectId(), true, false);
 				throw new StorageException(StorageException.NOSAVE);
 			}
-			return EcoreUtil.copy(projectHistory.getProjectId());
+			return ModelUtil.clone(projectHistory.getProjectId());
 		}
 	}
 
@@ -290,7 +289,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	public ProjectHistory exportProjectHistoryFromServer(ProjectId projectId)
 			throws EmfStoreException {
 		synchronized (getMonitor()) {
-			return EcoreUtil.copy(getProject(projectId));
+			return ModelUtil.clone(getProject(projectId));
 		}
 	}
 
@@ -335,8 +334,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		ProjectInfo info = ModelFactory.eINSTANCE.createProjectInfo();
 		info.setName(project.getProjectName());
 		info.setDescription(project.getProjectDescription());
-		info.setProjectId(EcoreUtil.copy(project.getProjectId()));
-		info.setVersion(EcoreUtil.copy(project.getLastVersion()
+		info.setProjectId(ModelUtil.clone(project.getProjectId()));
+		info.setVersion(ModelUtil.clone(project.getLastVersion()
 				.getPrimarySpec()));
 		return info;
 	}

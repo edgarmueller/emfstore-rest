@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
@@ -157,7 +156,7 @@ public class ServerTests extends WorkspaceTest {
 		arguments = new HashMap<Class<?>, Object>();
 		arguments.put(boolean.class, false);
 		arguments.put(String.class, new String());
-		arguments.put(SessionId.class, EcoreUtil.copy(getSessionId()));
+		arguments.put(SessionId.class, ModelUtil.clone(getSessionId()));
 		arguments.put(ProjectId.class, org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId());
 		arguments.put(PrimaryVersionSpec.class, VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		arguments.put(VersionSpec.class, VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
@@ -288,8 +287,8 @@ public class ServerTests extends WorkspaceTest {
 	 */
 	public static HistoryQuery createHistoryQuery(PrimaryVersionSpec ver1, PrimaryVersionSpec ver2) {
 		HistoryQuery historyQuery = VersioningFactory.eINSTANCE.createHistoryQuery();
-		historyQuery.setSource(EcoreUtil.copy(ver1));
-		historyQuery.setTarget(EcoreUtil.copy(ver2));
+		historyQuery.setSource(ModelUtil.clone(ver1));
+		historyQuery.setTarget(ModelUtil.clone(ver2));
 		return historyQuery;
 	}
 
