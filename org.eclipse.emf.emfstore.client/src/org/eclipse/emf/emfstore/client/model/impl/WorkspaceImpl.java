@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
@@ -56,6 +55,7 @@ import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -76,12 +76,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
@@ -97,6 +97,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * The cached value of the '{@link #getProjectSpaces() <em>Project Spaces</em>}' containment reference list.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectSpaces()
 	 * @generated
 	 * @ordered
@@ -113,6 +114,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getServerInfos()
 	 * @generated
 	 * @ordered
@@ -141,6 +143,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -184,7 +187,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		// FIXME: MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
-		ProjectInfo projectInfoCopy = EcoreUtil.copy(projectInfo);
+		ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
 		projectInfoCopy.setVersion(targetSpec);
 
 		// get project from server
@@ -373,6 +376,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -391,6 +395,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -405,6 +410,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -422,6 +428,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -439,6 +446,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -463,6 +471,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -472,6 +481,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -643,6 +653,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ProjectSpace> getProjectSpaces() {
@@ -689,6 +700,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ServerInfo> getServerInfos() {
@@ -701,6 +713,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Usersession> getUsersessions() {

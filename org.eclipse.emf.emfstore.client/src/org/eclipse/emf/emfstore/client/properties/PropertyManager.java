@@ -189,6 +189,18 @@ public final class PropertyManager {
 	}
 
 	/**
+	 * Set a shared property.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @param value
+	 *            the value of the shared property
+	 **/
+	public void setSharedProperty(String propertyName, EObject value) {
+		setSharedProperty(propertyName, value, false);
+	}
+
+	/**
 	 * Updates a shared versioned property within the project space to the one given, i.e.
 	 * the name of the property is first used to look it up within the project space.
 	 * If found, the value and version attributes are updated, otherwise the property will be created.

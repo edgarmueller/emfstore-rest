@@ -94,7 +94,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private List<OperationRecorderListener> operationRecordedListeners;
 
 	private EObjectChangeNotifier changeNotifier;
-	private boolean checkForIncomingCrossReferences;
 	private boolean cutOffIncomingCrossReferences;
 	private boolean emitOperationsWhenCommandCompleted;
 
@@ -127,15 +126,12 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		removedElements = new ArrayList<EObject>();
 		converter = new NotificationToOperationConverter(rootEObject);
-		// explicitly disable checks for cross-references
-		checkForIncomingCrossReferences = false;
-		cutOffIncomingCrossReferences = false;
+		// cut off incoming cross-references by default
+		cutOffIncomingCrossReferences = true;
 
 		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
 			"org.eclipse.emf.emfstore.client.recording.options");
 		if (elements != null && elements.length > 0) {
-			checkForIncomingCrossReferences = Boolean.parseBoolean(elements[0]
-				.getAttribute("checkForIncomingCrossReferences"));
 			cutOffIncomingCrossReferences = Boolean.parseBoolean(elements[0]
 				.getAttribute("cutOffIncomingCrossReferences"));
 		}
@@ -269,7 +265,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			EReference reference = (EReference) setting.getSetting().getEStructuralFeature();
 
 			if (setting.getSetting().getEStructuralFeature().isMany()) {
-				int position = ((List<EObject>) eObject.eGet(reference)).indexOf(referencedElement);
+				int position = ((List<?>) eObject.eGet(reference)).indexOf(referencedElement);
 				MultiReferenceOperation multiRefOp = NotificationToOperationConverter.createMultiReferenceOperation(
 					rootEObject, eObject, reference, Arrays.asList(referencedElement), true, position);
 				result.add(multiRefOp);
@@ -460,7 +456,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			} else {
 				// element was deleted
 				handleElementDelete(deletedElement);
-				// cleanResources(deletedElement);
 			}
 		}
 
@@ -541,7 +536,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				"Element was removed from containment of project but still has cross references!: "
 					+ rootEObject.getDeletedModelElementId(deletedElement).getId());
 			// TODO: EM, remove project cast, if possible
-		} else if (checkForIncomingCrossReferences) {
+		} else if (cutOffIncomingCrossReferences) {
 
 			// delete incoming cross references
 			Collection<Setting> inverseReferences = WorkspaceManager.getInstance().findInverseCrossReferences(
@@ -561,7 +556,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(deletedElement, false);
 		allContainedModelElements.add(deletedElement);
-		EObject copiedElement = EcoreUtil.copy(deletedElement);
+		EObject copiedElement = ModelUtil.clone(deletedElement);
 		deleteOperation.setModelElement(copiedElement);
 		deleteOperation.setModelElementId(rootEObject.getDeletedModelElementId(deletedElement));
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
@@ -781,9 +776,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		removedElements.clear();
 	}
 
-	// TODO: EM, update dirty state
-	// updateDirtyState();
-
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
+	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
 		// filter unwanted notifications
@@ -821,7 +820,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 						// set the last operation as the main one for natural
 						// composites
 						op.setMainOperation(ops.get(ops.size() - 1));
-						op.setModelElementId((ModelElementId) EcoreUtil.copy(op.getMainOperation().getModelElementId()));
+						op.setModelElementId(ModelUtil.clone(op.getMainOperation().getModelElementId()));
 						if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 							operations.add(op);
 						} else {
@@ -837,9 +836,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				}
 
 			}
-			// if (!commandIsRunning) {
-			// saveDirtyResources();
-			// }
 		}
 	}
 
@@ -856,7 +852,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// do nothing
 	}
 
-	public void setEmitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
+	/**
+	 * Whether operation should be emitted when command is completed.
+	 * 
+	 * @param emitOperationsImmediately
+	 *            If false, operations will be emitted immediately upon recording
+	 */
+	public void emitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
 		this.emitOperationsWhenCommandCompleted = emitOperationsImmediately;
 	}
 

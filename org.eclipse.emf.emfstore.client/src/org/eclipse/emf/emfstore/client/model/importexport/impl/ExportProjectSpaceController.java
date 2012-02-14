@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
@@ -100,7 +99,7 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		ProjectSpace copiedProjectSpace = EcoreUtil.copy(getProjectSpace());
+		ProjectSpace copiedProjectSpace = ModelUtil.clone(getProjectSpace());
 		copiedProjectSpace.setUsersession(null);
 
 		Project clonedProject = ModelUtil.clone(getProjectSpace().getProject());

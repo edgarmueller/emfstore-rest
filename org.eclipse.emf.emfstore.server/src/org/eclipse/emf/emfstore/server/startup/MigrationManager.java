@@ -134,23 +134,6 @@ public class MigrationManager {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	@Deprecated
-	private void convertAllBackupStates(ModelVersion modelVersion, File projectDirectory, File[] listFiles)
-		throws FatalEmfStoreException {
-		System.out.println("Migrating backup states...");
-		for (File backUpState : listFiles) {
-			if (backUpState.getName().startsWith(ServerConfiguration.FILE_PREFIX_BACKUPPROJECTSTATE)) {
-				URI projectURI = URI.createFileURI(backUpState.getAbsolutePath());
-				try {
-					migrate(projectURI, new ArrayList<URI>(), modelVersion.getReleaseNumber());
-				} catch (EMFStoreMigrationException e) {
-					throw new FatalEmfStoreException("Migration of project at " + projectDirectory + " failed!", e);
-				}
-			}
-		}
-	}
-
 	private void convertAllVersions(ModelVersion modelVersion, File projectDirectory, File[] listFiles)
 		throws FatalEmfStoreException {
 		List<URI> changePackageURIs = new ArrayList<URI>();
