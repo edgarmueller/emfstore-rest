@@ -13,12 +13,12 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation;
@@ -182,7 +182,7 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 					operation.getEObjectToIdMap()
 						.get(operation.getModelElement().eContents().get(1).eContents().get(1)));
 
-				CreateDeleteOperation copy = EcoreUtil.copy(operation);
+				CreateDeleteOperation copy = (CreateDeleteOperation) ModelUtil.clone(operation);
 
 				operation = (CreateDeleteOperation) operation.reverse().reverse();
 

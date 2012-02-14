@@ -1054,7 +1054,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		meeting.setIdentifiedWorkItemsSection(workItemMeetingSecion);
 
 		// copy meeting and check if the intra cross references were actually copied
-		Meeting copiedMeeting = EcoreUtil.copy(meeting);
+		Meeting copiedMeeting = (Meeting) ModelUtil.clone(meeting);
 		assertFalse(copiedMeeting.getIdentifiedIssuesSection() == meeting.getIdentifiedIssuesSection());
 		assertFalse(copiedMeeting.getIdentifiedWorkItemsSection() == meeting.getIdentifiedWorkItemsSection());
 

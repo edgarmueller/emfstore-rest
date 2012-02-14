@@ -197,7 +197,7 @@ public final class ModelUtil {
 			res.getContents().add(copiedProject);
 			copy = copiedProject;
 		} else {
-			copy = EcoreUtil.copy(object);
+			copy = ModelUtil.clone(object);
 			res.getContents().add(copy);
 		}
 
@@ -342,7 +342,7 @@ public final class ModelUtil {
 
 		// TODO: added to resolve model element map in a CreateDeleteOp
 		// check whether we can generalize this
-		EcoreUtil.resolveAll(result);
+		// EcoreUtil.resolveAll(result);
 
 		res.getContents().remove(result);
 		return result;
@@ -540,7 +540,7 @@ public final class ModelUtil {
 	public static <T extends EObject> List<T> clone(List<T> list) {
 		ArrayList<T> result = new ArrayList<T>();
 		for (EObject eObject : list) {
-			T clone = (T) EcoreUtil.copy(eObject);
+			T clone = (T) ModelUtil.clone(eObject);
 			result.add(clone);
 		}
 		return result;
@@ -1130,7 +1130,7 @@ public final class ModelUtil {
 
 		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(originalObject, false);
 		allContainedModelElements.add(originalObject);
-		// EObject copiedElement = EcoreUtil.copy(originalObject);
+		// EObject copiedElement = ModelUtil.clone(originalObject);
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
 			false);
 		copiedAllContainedModelElements.add(copiedObject);

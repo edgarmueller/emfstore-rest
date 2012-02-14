@@ -9,10 +9,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.taskmanager.tasks.CleanMemoryTask;
@@ -36,7 +37,7 @@ public class CleanMemoryTest extends WorkspaceTest {
 				res.getContents().add(getProject());
 				res2.getContents().add(version);
 				res2.getContents().add(nextVersion);
-				nextVersion.setProjectState(EcoreUtil.copy(getProject()));
+				nextVersion.setProjectState((Project) ModelUtil.clone(getProject()));
 				version.setNextVersion(nextVersion);
 			}
 		}.run(false);
