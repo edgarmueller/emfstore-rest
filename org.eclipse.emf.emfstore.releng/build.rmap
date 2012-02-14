@@ -6,23 +6,17 @@
   <rm:property key="eclipse.downloads" value="http://download.eclipse.org"/>
   <rm:property key="resolve.target.platform" value="true"/>
 
-  <rm:property key="git.clone.emfstore.core" value="git/org.eclipse.emf.emfstore.core"/>
-  <rm:property key="git.clone.emfstore.releng" value="git/org.eclipse.emf.emfstore.releng"/>
-  <rm:property key="git.clone.emfstore.other" value="git/org.eclipse.emf.emfstore.other"/>
-
-
   <rm:locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="git"/>
   <rm:locator pattern="^org\.eclipse\.emf(?:\..+)?$" searchPathRef="emf"/>
   <rm:locator searchPathRef="p2"/>
-
 
   
   <rm:searchPath name="git">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
       <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
       <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},{1}">
-        <bc:propertyRef key="git.clone.emfstore.core"/>
+      <rm:uri format="{0}/git/org.eclipse.emf.emfstore.core,{1}">
+        <bc:propertyRef key="workspace.root"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
@@ -30,8 +24,8 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
       <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
       <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},{1}">
-        <bc:propertyRef key="git.clone.emfstore.releng"/>
+      <rm:uri format="{0}/git/org.eclipse.emf.emfstore.releng,{1}">
+        <bc:propertyRef key="workspace.root"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>    
@@ -39,8 +33,8 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
       <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.other.git"/>
       <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},{1}">
-        <bc:propertyRef key="git.clone.emfstore.other"/>
+      <rm:uri format="{0}/git/org.eclipse.emf.emfstore.other,{1}">
+        <bc:propertyRef key="workspace.root"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
