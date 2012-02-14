@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -154,7 +154,7 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated NOT
 	 */
 	public void setProjectId(ProjectId newProjectId) {
-		setProjectIdGen(EcoreUtil.copy(newProjectId));
+		setProjectIdGen(ModelUtil.clone(newProjectId));
 	}
 
 	// end of custom code
@@ -270,7 +270,7 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated not
 	 */
 	public void setVersion(PrimaryVersionSpec newVersion) {
-		setVersionGen(EcoreUtil.copy(newVersion));
+		setVersionGen(ModelUtil.clone(newVersion));
 	}
 
 	/**
