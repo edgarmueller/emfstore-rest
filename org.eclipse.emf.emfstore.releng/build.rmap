@@ -6,9 +6,9 @@
   <rm:property key="eclipse.downloads" value="http://download.eclipse.org"/>
   <rm:property key="resolve.target.platform" value="true"/>
 
-  <rm:property key="git.clone.emfstore.core" value="${user.home}/.hudson/jobs/emf-emfstore-integration/workspace/git/org.eclipse.emf.emfstore.core"/>
-  <rm:property key="git.clone.emfstore.releng" value="${user.home}/.hudson/jobs/emf-emfstore-integration/workspace/git/org.eclipse.emf.emfstore.releng"/>
-  <rm:property key="git.clone.emfstore.other" value="${user.home}/.hudson/jobs/emf-emfstore-integration/workspace/git/org.eclipse.emf.emfstore.other"/>
+  <rm:property key="git.clone.emfstore.core" value="git/org.eclipse.emf.emfstore.core"/>
+  <rm:property key="git.clone.emfstore.releng" value="git/org.eclipse.emf.emfstore.releng"/>
+  <rm:property key="git.clone.emfstore.other" value="git/org.eclipse.emf.emfstore.other"/>
 
 
   <rm:locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="git"/>
