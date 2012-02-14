@@ -5,7 +5,4 @@
 	name="buckminster.mspec" url="build.cquery">
 	
 	<mspec:mspecNode namePattern="org\.eclipse\.emf\.emfstore\..*" materializer="workspace"/>
-	
-	<!--mspec:property key="resolve.target.platform" value="true"/-->
-	<!--mspec:mspecNode materializer="workspace" filter="(buckminster.source=true)"/-->
 </mspec:mspec>
