@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
@@ -344,16 +344,16 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	}
 
 	private ACUser copyAndResolveUser(ACUser tmpUser) {
-		ACUser user = EcoreUtil.copy(tmpUser);
+		ACUser user = ModelUtil.clone(tmpUser);
 		for (Role role : getRolesFromGroups(tmpUser)) {
-			user.getRoles().add(EcoreUtil.copy(role));
+			user.getRoles().add(ModelUtil.clone(role));
 		}
 
 		for (ACGroup group : getGroups(tmpUser)) {
 			if (user.getEffectiveGroups().contains(group)) {
 				continue;
 			}
-			ACGroup copy = EcoreUtil.copy(group);
+			ACGroup copy = ModelUtil.clone(group);
 			user.getEffectiveGroups().add(copy);
 			copy.getMembers().clear();
 		}

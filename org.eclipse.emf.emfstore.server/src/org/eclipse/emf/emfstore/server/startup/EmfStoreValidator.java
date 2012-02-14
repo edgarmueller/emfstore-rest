@@ -175,7 +175,7 @@ public class EmfStoreValidator {
 				continue;
 			}
 			System.out.println("Checking project: " + history.getProjectId().getId());
-			// history = (ProjectHistory) EcoreUtil.copy(history);
+			// history = (ProjectHistory) ModelUtil.clone(history);
 			Project state = null;
 
 			for (Version version : history.getVersions()) {

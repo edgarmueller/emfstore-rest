@@ -19,8 +19,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
@@ -211,12 +211,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Version version, boolean includeChangePackage) {
 		HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
 		if (includeChangePackage && version.getChanges() != null) {
-			history.setChangePackage(EcoreUtil.copy(version.getChanges()));
+			history.setChangePackage(ModelUtil.clone(version.getChanges()));
 		}
-		history.setLogMessage(EcoreUtil.copy(version.getLogMessage()));
-		history.setPrimerySpec(EcoreUtil.copy(version.getPrimarySpec()));
+		history.setLogMessage(ModelUtil.clone(version.getLogMessage()));
+		history.setPrimerySpec(ModelUtil.clone(version.getPrimarySpec()));
 		for (TagVersionSpec tagSpec : version.getTagSpecs()) {
-			history.getTagSpecs().add(EcoreUtil.copy(tagSpec));
+			history.getTagSpecs().add(ModelUtil.clone(tagSpec));
 		}
 		// add HEAD tag to history info
 		if (version.getPrimarySpec().equals(headRevision)) {
