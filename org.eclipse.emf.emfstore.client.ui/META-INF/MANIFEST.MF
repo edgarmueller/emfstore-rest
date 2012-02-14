@@ -7,8 +7,8 @@ Bundle-Activator: org.eclipse.emf.emfstore.client.ui.Activator
 Require-Bundle: org.eclipse.emf.emfstore.client.model.edit;visibility:=reexport,
  org.eclipse.jface,
  org.eclipse.emf.edit.ui,
- org.eclipse.core.expressions;bundle-version="3.4.200",
- org.eclipse.ui.forms;bundle-version="3.5.2"
+ org.eclipse.core.expressions;bundle-version="3.4.1",
+ org.eclipse.ui.forms;bundle-version="3.4.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
@@ -18,4 +18,8 @@ Export-Package: org.eclipse.emf.emfstore.client.ui.controller,
  org.eclipse.emf.emfstore.client.ui.decorators,
  org.eclipse.emf.emfstore.client.ui.dialogs,
  org.eclipse.emf.emfstore.client.ui.dialogs.login,
- org.eclipse.emf.emfstore.client.ui.handlers
+ org.eclipse.emf.emfstore.client.ui.handlers,
+ org.eclipse.emf.emfstore.client.ui.views.changes,
+ org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin,
+ org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views,
+ org.eclipse.emf.emfstore.client.ui.views.historybrowserview
