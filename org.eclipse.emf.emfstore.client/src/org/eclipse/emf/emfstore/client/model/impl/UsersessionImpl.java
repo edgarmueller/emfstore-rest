@@ -244,7 +244,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 */
 	public String getPassword() {
 		if (isSavePassword()) {
-			return persistentPassword;
+			return getPersistentPassword();
 		} else {
 			return password;
 		}
@@ -435,7 +435,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 
 		if (!newSavePassword) {
 			setPersistentPassword(null);
-		} else {
+		} else if (getPasswordGen() != null) {
 			setPersistentPassword(getPasswordGen());
 		}
 
