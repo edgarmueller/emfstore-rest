@@ -373,7 +373,7 @@ public final class ServerConfiguration {
 	/**
 	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.
 	 */
-	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = TRUE;
+	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = FALSE;
 
 	private static boolean testing;
 
@@ -566,8 +566,7 @@ public final class ServerConfiguration {
 	public static String getServerVersion() {
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
-			org.osgi.framework.Constants.BUNDLE_VERSION);
+		String emfStoreVersionString = emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
 	}
 
