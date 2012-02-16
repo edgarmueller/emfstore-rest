@@ -373,7 +373,7 @@ public final class ServerConfiguration {
 	/**
 	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.
 	 */
-	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = TRUE;
+	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = FALSE;
 
 	private static boolean testing;
 

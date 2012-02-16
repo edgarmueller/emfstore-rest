@@ -340,9 +340,7 @@ public final class ModelUtil {
 			project.initCaches(eObjectToIdMap, idToEObjectMap);
 		}
 
-		// TODO: added to resolve model element map in a CreateDeleteOp
-		// check whether we can generalize this
-		// EcoreUtil.resolveAll(result);
+		EcoreUtil.resolveAll(result);
 
 		res.getContents().remove(result);
 		return result;
@@ -358,7 +356,13 @@ public final class ModelUtil {
 	public static Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
 			resourceLoadOptions = new HashMap<Object, Object>();
-			// options.put(XMLResource.OPTION_CONFIGURATION_CACHE, true)
+			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
 		}

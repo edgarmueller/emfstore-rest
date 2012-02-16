@@ -37,12 +37,12 @@ public final class Configuration {
 	/**
 	 * Property for XML RPC connection timeout.
 	 */
-	private static final int XML_RPC_CONNECTION_TIMEOUT = 60000;
+	private static final int XML_RPC_CONNECTION_TIMEOUT = 600000;
 
 	/**
 	 * Property for XML RPC reply timeout.
 	 */
-	private static final int XML_RPC_REPLY_TIMEOUT = 60000;
+	private static final int XML_RPC_REPLY_TIMEOUT = 600000;
 
 	private static final String CLIENT_NAME = "emfstore eclipse client";
 	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
