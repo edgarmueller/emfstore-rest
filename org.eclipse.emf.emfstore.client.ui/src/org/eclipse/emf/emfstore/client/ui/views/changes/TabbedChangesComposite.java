@@ -39,8 +39,9 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 	private Composite compactTabComposite;
 	private TreeViewer compactTabTreeViewer;
 	private TreeViewer detailedTabTreeViewer;
-	private SCMContentProvider.Compact compactContentProvider;
-	private SCMContentProvider.Detailed detailedContentProvider;
+	private SCMContentProvider contentProvider;
+
+	// private SCMContentProvider.Detailed detailedContentProvider;
 
 	/**
 	 * Default constructor.
@@ -64,43 +65,44 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 		detailedTabTreeViewer = new TreeViewer(detailedTabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(detailedTabTreeViewer.getControl());
 
-		detailedContentProvider = new SCMContentProvider.Detailed(detailedTabTreeViewer);
-		detailedContentProvider.setShowRootNodes(true);
+		contentProvider = new SCMContentProvider();
+		// contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
 		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(changePackages,
 			project));
-		detailedContentProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
-			changePackages, project));
-		detailedTabTreeViewer.setContentProvider(detailedContentProvider);
+		// contentProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
+		// changePackages, project));
+		detailedTabTreeViewer.setContentProvider(contentProvider);
 		detailedTabTreeViewer.setLabelProvider(detailedLabelProvider);
 		detailedTabTreeViewer.setInput(changePackages);
-		detailedTabTreeViewer.expandToLevel(0);
+		detailedTabTreeViewer.expandToLevel(1);
 
 		TabItem opTab = new TabItem(folder, style);
 		opTab.setText("Operations");
 		opTab.setControl(detailedTabComposite);
 
-		// -----------------------Compact -----------------------------
-		compactTabComposite = new Composite(folder, SWT.NONE);
-		GridLayoutFactory.fillDefaults().applyTo(compactTabComposite);
-		compactTabTreeViewer = new TreeViewer(compactTabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(compactTabTreeViewer.getControl());
-
-		compactContentProvider = new SCMContentProvider.Compact(compactTabTreeViewer);
-		compactContentProvider.setShowRootNodes(true);
-		SCMLabelProvider compactLabelProvider = new SCMLabelProvider(project);
-		compactLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(changePackages,
-			project));
-		compactContentProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(changePackages,
-			project));
-		compactTabTreeViewer.setContentProvider(compactContentProvider);
-		compactTabTreeViewer.setLabelProvider(compactLabelProvider);
-		compactTabTreeViewer.setInput(changePackages);
-		compactTabTreeViewer.expandToLevel(0);
-
-		TabItem meTab = new TabItem(folder, style);
-		meTab.setText("ModelElements");
-		meTab.setControl(compactTabComposite);
+		// // -----------------------Compact -----------------------------
+		// compactTabComposite = new Composite(folder, SWT.NONE);
+		// GridLayoutFactory.fillDefaults().applyTo(compactTabComposite);
+		// compactTabTreeViewer = new TreeViewer(compactTabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
+		// GridDataFactory.fillDefaults().grab(true, true).applyTo(compactTabTreeViewer.getControl());
+		//
+		// compactContentProvider = new SCMContentProvider.Compact(compactTabTreeViewer);
+		// compactContentProvider.setShowRootNodes(true);
+		// SCMLabelProvider compactLabelProvider = new SCMLabelProvider(project);
+		// compactLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(changePackages,
+		// project));
+		// compactContentProvider.setChangePackageVisualizationHelper(new
+		// ChangePackageVisualizationHelper(changePackages,
+		// project));
+		// compactTabTreeViewer.setContentProvider(compactContentProvider);
+		// compactTabTreeViewer.setLabelProvider(compactLabelProvider);
+		// compactTabTreeViewer.setInput(changePackages);
+		// compactTabTreeViewer.expandToLevel(0);
+		//
+		// TabItem meTab = new TabItem(folder, style);
+		// meTab.setText("ModelElements");
+		// meTab.setControl(compactTabComposite);
 	}
 
 	/**
@@ -109,8 +111,8 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 	 * @param showRootNodes the new value
 	 */
 	public void setShowRootNodes(boolean showRootNodes) {
-		compactContentProvider.setShowRootNodes(showRootNodes);
-		detailedContentProvider.setShowRootNodes(showRootNodes);
+		// compactContentProvider.setShowRootNodes(showRootNodes);
+		// detailedContentProvider.setShowRootNodes(showRootNodes);
 	}
 
 	/**
@@ -120,8 +122,8 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 	 * @param reverseNodes wheter to reverse the nodes or not
 	 */
 	public void setReverseNodes(boolean reverseNodes) {
-		compactContentProvider.setReverseNodes(reverseNodes);
-		detailedContentProvider.setReverseNodes(reverseNodes);
+		// compactContentProvider.setReverseNodes(reverseNodes);
+		// detailedContentProvider.setReverseNodes(reverseNodes);
 	}
 
 	/**
