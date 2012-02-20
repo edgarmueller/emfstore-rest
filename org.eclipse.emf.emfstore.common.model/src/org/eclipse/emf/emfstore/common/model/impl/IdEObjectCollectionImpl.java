@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -95,8 +94,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		this();
 		boolean resourceHasIds = false;
 		try {
-			((ResourceImpl) xmiResource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
-			xmiResource.load(null);
+			if (!xmiResource.isLoaded()) {
+				xmiResource.load(null);
+			}
 		} catch (IOException e) {
 			ModelUtil.logException(String.format("XMIResource %s could not be loaded.", xmiResource.getURI()), e);
 			throw e;
@@ -666,32 +666,14 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	protected void removeModelElementAndChildrenFromCache(EObject modelElement) {
 
-		ModelElementId id = getModelElementId(modelElement);
-
 		if (deletedEObjectToIdMap.containsKey(modelElement)) {
 			return;
 		}
 
-		deletedEObjectToIdMap.put(modelElement, id);
-		deletedIdMapToEObject.put(id, modelElement);
-
-		newEObjectToIdMap.put(modelElement, id);
-		newIdMapToEObject.put(id, modelElement);
-
 		removeFromCaches(modelElement);
-		// eObjectToIdCache.remove(modelElement);
 
 		for (EObject child : ModelUtil.getAllContainedModelElements(modelElement, false)) {
-			ModelElementId childId = getModelElementId(child);
-
-			deletedEObjectToIdMap.put(child, childId);
-			deletedIdMapToEObject.put(childId, child);
-
-			newEObjectToIdMap.put(child, childId);
-			newIdMapToEObject.put(childId, child);
-
 			removeFromCaches(child);
-			// eObjectToIdCache.remove(child);
 		}
 	}
 
@@ -704,6 +686,13 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	private void removeFromCaches(EObject modelElement) {
 		if (isCacheInitialized()) {
 			ModelElementId id = this.getModelElementId(modelElement);
+
+			deletedEObjectToIdMap.put(modelElement, id);
+			deletedIdMapToEObject.put(id, modelElement);
+
+			newEObjectToIdMap.put(modelElement, id);
+			newIdMapToEObject.put(id, modelElement);
+
 			getEObjectsCache().remove(modelElement);
 			getIdToEObjectCache().remove(id);
 		}

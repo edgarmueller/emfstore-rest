@@ -61,17 +61,20 @@ public class DirtyResourceSet {
 	public void save() {
 
 		Set<Resource> resourcesToRemove = new HashSet<Resource>();
+
 		for (Resource resource : resources) {
 
+			if (resource.getURI() == null || resource.getURI().toString().equals("")) {
+				continue;
+			}
+
 			TreeIterator<EObject> allContents = resource.getAllContents();
+
 			while (allContents.hasNext()) {
 				EObject modelElement = allContents.next();
 				setModelElementIdOnResource((XMIResource) resource, modelElement);
 			}
 
-			if (resource.getURI() == null || resource.getURI().toString().equals("")) {
-				continue;
-			}
 			try {
 				resource.save(Configuration.getResourceSaveOptions());
 				resourcesToRemove.add(resource);
