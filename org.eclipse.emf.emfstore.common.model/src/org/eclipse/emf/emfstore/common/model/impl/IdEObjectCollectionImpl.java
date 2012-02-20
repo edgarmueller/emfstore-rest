@@ -11,11 +11,9 @@
 package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +25,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -43,7 +42,6 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection {
 
 	// Caches
-	private Set<EObject> eObjectsCache;
 	private Map<EObject, ModelElementId> eObjectToIdCache;
 	private Map<ModelElementId, EObject> idToEObjectCache;
 	private boolean cachesInitialized;
@@ -60,22 +58,25 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * Will be used to maintain the {@link ModelElementId}s of deleted {@link EObject}s.
 	 */
 	private Map<EObject, ModelElementId> deletedEObjectToIdMap;
+	private Map<ModelElementId, EObject> deletedIdMapToEObject;
 
 	/**
 	 * Will be used to assign specific {@link ModelElementId}s to newly created {@link EObject}s.
 	 */
 	private Map<EObject, ModelElementId> newEObjectToIdMap;
+	private HashMap<ModelElementId, EObject> newIdMapToEObject;
 
 	/**
 	 * Constructor.
 	 */
 	public IdEObjectCollectionImpl() {
-		eObjectsCache = new HashSet<EObject>();
 		eObjectToIdCache = new HashMap<EObject, ModelElementId>();
 		idToEObjectCache = new HashMap<ModelElementId, EObject>();
 		containedModelElements = new HashSet<EObject>();
 		deletedEObjectToIdMap = new HashMap<EObject, ModelElementId>();
+		deletedIdMapToEObject = new HashMap<ModelElementId, EObject>();
 		newEObjectToIdMap = new HashMap<EObject, ModelElementId>();
+		newIdMapToEObject = new HashMap<ModelElementId, EObject>();
 	}
 
 	/**
@@ -94,6 +95,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		this();
 		boolean resourceHasIds = false;
 		try {
+			((ResourceImpl) xmiResource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 			xmiResource.load(null);
 		} catch (IOException e) {
 			ModelUtil.logException(String.format("XMIResource %s could not be loaded.", xmiResource.getURI()), e);
@@ -202,13 +204,10 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @return the deleted model element or null if it is not in the project
 	 */
 	public EObject getDeletedModelElement(ModelElementId modelElementId) {
-		for (Map.Entry<EObject, ModelElementId> entry : deletedEObjectToIdMap.entrySet()) {
-			if (entry.getValue().equals(modelElementId)) {
-				return entry.getKey();
-			}
-		}
 
-		return ModelUtil.getSingleton(modelElementId);
+		EObject eObject = deletedIdMapToEObject.get(modelElementId);
+
+		return eObject != null ? eObject : ModelUtil.getSingleton(modelElementId);
 	}
 
 	/**
@@ -239,6 +238,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 				}
 
 				XMIResource xmiResource = (XMIResource) resource;
+
 				xmiResource.load(null);
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 
@@ -378,6 +378,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			// resource available, read ID
 			XMIResource xmiResource = (XMIResource) resource;
 			try {
+
 				xmiResource.load(null);
 			} catch (IOException e) {
 				throw new RuntimeException("Resource of model element " + modelElement + " couldn't be loaded");
@@ -405,7 +406,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initCaches();
 		}
 
-		return eObjectsCache;
+		return eObjectToIdCache.keySet();
 	}
 
 	/**
@@ -528,7 +529,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initCaches();
 		}
 
-		return eObjectsCache;
+		return eObjectToIdCache.keySet();
 	}
 
 	/**
@@ -567,8 +568,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 *            the model element, that should get added to the caches
 	 */
 	protected void addModelElementAndChildrenToCache(EObject modelElement) {
-
-		List<ModelElementId> removableIds = new ArrayList<ModelElementId>();
+		HashSet<ModelElementId> removableIds = new HashSet<ModelElementId>();
 
 		// first check whether ID should be reassigned
 		ModelElementId id = newEObjectToIdMap.get(modelElement);
@@ -586,6 +586,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 		for (EObject child : ModelUtil.getAllContainedModelElements(modelElement, false)) {
 			// first check whether ID should be reassigned
+
 			ModelElementId childId = newEObjectToIdMap.get(child);
 
 			if (childId == null) {
@@ -601,8 +602,19 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		}
 
 		// remove all IDs that are in use now
-		newEObjectToIdMap.values().removeAll(removableIds);
-		deletedEObjectToIdMap.values().removeAll(removableIds);
+		for (ModelElementId modelElementId : removableIds) {
+			EObject eObject = newIdMapToEObject.get(modelElementId);
+			newEObjectToIdMap.remove(eObject);
+		}
+
+		newIdMapToEObject.keySet().removeAll(removableIds);
+
+		for (ModelElementId modelElementId : removableIds) {
+			EObject eObject = deletedIdMapToEObject.get(modelElementId);
+			deletedEObjectToIdMap.remove(eObject);
+		}
+
+		deletedIdMapToEObject.keySet().removeAll(removableIds);
 	}
 
 	/**
@@ -615,7 +627,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		cachesInitialized = true;
 		eObjectToIdCache = eObjectToIdMap;
 		idToEObjectCache = idToEObjectMap;
-		eObjectsCache = eObjectToIdMap.keySet();
 	}
 
 	/**
@@ -629,9 +640,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	protected void putIntoCaches(EObject modelElement, ModelElementId modelElementId) {
 		eObjectToIdCache.put(modelElement, modelElementId);
 		idToEObjectCache.put(modelElementId, modelElement);
-		if (!eObjectsCache.contains(modelElement)) {
-			eObjectsCache.add(modelElement);
-		}
 	}
 
 	/**
@@ -665,17 +673,25 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		}
 
 		deletedEObjectToIdMap.put(modelElement, id);
+		deletedIdMapToEObject.put(id, modelElement);
+
 		newEObjectToIdMap.put(modelElement, id);
+		newIdMapToEObject.put(id, modelElement);
 
 		removeFromCaches(modelElement);
-		eObjectToIdCache.remove(modelElement);
+		// eObjectToIdCache.remove(modelElement);
 
 		for (EObject child : ModelUtil.getAllContainedModelElements(modelElement, false)) {
 			ModelElementId childId = getModelElementId(child);
+
 			deletedEObjectToIdMap.put(child, childId);
+			deletedIdMapToEObject.put(childId, child);
+
 			newEObjectToIdMap.put(child, childId);
+			newIdMapToEObject.put(childId, child);
+
 			removeFromCaches(child);
-			eObjectToIdCache.remove(child);
+			// eObjectToIdCache.remove(child);
 		}
 	}
 
@@ -714,6 +730,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			// this is the case when a copied instance of the model element gets
 			// added again
 			newEObjectToIdMap.put(modelElement, modelElementId);
+			newIdMapToEObject.put(modelElementId, modelElement);
 		}
 	}
 }
