@@ -17,19 +17,19 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
 /**
  * Content provider for the scm views.
  * 
- * @author Shterev
+ * @author emueller
  */
 public class SCMContentProvider extends AdapterFactoryContentProvider implements ITreeContentProvider {
 
-	private static ChangePackageVisualizationHelper changePackageVisualizationHelper;
 	private boolean showRootNodes = true;
 	private boolean reverseNodes = true;
 
@@ -63,21 +63,34 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return reverseNodes;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] getElements(Object object) {
 		if (object instanceof List<?> && showRootNodes) {
 			return ((List<?>) object).toArray();
 		} else if (object instanceof List<?>) {
-			List<HistoryInfo> historyInfos = (List<HistoryInfo>) object;
-			List<AbstractOperation> result = new ArrayList<AbstractOperation>(historyInfos.size());
-			for (HistoryInfo info : historyInfos) {
-				if (info.getChangePackage() != null) {
-					List<AbstractOperation> ops = new ArrayList<AbstractOperation>(info.getChangePackage()
-						.getOperations());
-					Collections.reverse(ops);
-					result.addAll(ops);
+			// valid inputs are a list of HistoryInfos as well as a list
+			// of ChangePackage
+			List<?> list = (List<?>) object;
+
+			if (list.size() == 0) {
+				return list.toArray();
+			}
+
+			List<AbstractOperation> result = new ArrayList<AbstractOperation>(list.size());
+
+			if (isListOf(list, HistoryInfo.class)) {
+				for (HistoryInfo info : (List<HistoryInfo>) list) {
+					if (info.getChangePackage() != null) {
+						result.addAll(getReversedOperations(info.getChangePackage()));
+					}
+				}
+			} else {
+				for (ChangePackage changePackage : (List<ChangePackage>) list) {
+					result.addAll(getReversedOperations(changePackage));
 				}
 			}
+
 			return result.toArray();
 		} else if (object instanceof EObject) {
 			return new Object[] { object };
@@ -86,12 +99,37 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return super.getElements(object);
 	}
 
+	private List<AbstractOperation> getReversedOperations(ChangePackage changePackage) {
+		List<AbstractOperation> ops = new ArrayList<AbstractOperation>(changePackage.getOperations());
+		Collections.reverse(ops);
+		return ops;
+	}
+
+	private boolean isListOf(List<?> list, Class<? extends EObject> clazz) {
+		Object firstElement = list.get(0);
+
+		return clazz.isInstance(firstElement);
+	}
+
+	private Object[] filter(Object[] input, Class<? extends EObject> clazz) {
+		List<Object> result = new ArrayList<Object>(input.length);
+		for (Object object : input) {
+			if (!clazz.isInstance(object)) {
+				result.add(object);
+			}
+		}
+
+		return result.toArray();
+	}
+
 	@Override
 	public Object[] getChildren(Object object) {
 
 		if (object instanceof HistoryInfo) {
 			HistoryInfo historyInfo = (HistoryInfo) object;
-			return super.getChildren(historyInfo.getChangePackage());
+			return getChildren(historyInfo.getChangePackage());
+		} else if (object instanceof ChangePackage) {
+			return filter(super.getChildren(object), LogMessage.class);
 		}
 
 		return super.getChildren(object);
