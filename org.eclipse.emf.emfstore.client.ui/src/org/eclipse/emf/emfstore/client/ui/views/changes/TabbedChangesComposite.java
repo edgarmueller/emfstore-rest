@@ -62,7 +62,7 @@ public class TabbedChangesComposite extends Composite {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
 
 		contentProvider = new SCMContentProvider();
-		contentProvider.setShowRootNodes(false);
+		contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
 		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(changePackages,
 			project));
