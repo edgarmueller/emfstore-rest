@@ -42,11 +42,13 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
@@ -177,12 +179,13 @@ public final class ModelUtil {
 	 */
 	public static String eObjectToString(EObject object, boolean overrideContainmentCheck, boolean overrideHrefCheck,
 		boolean overrideProxyCheck) throws SerializationException {
+
 		if (object == null) {
 			return null;
 		}
 
 		XMIResource res = (XMIResource) (new ResourceSetImpl()).createResource(VIRTUAL_URI);
-
+		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		EObject copy;
 		if (object instanceof Project) {
 			Project project = (Project) object;
@@ -228,6 +231,7 @@ public final class ModelUtil {
 		if (!overrideHrefCheck) {
 			hrefCheck(result);
 		}
+
 		return result;
 	}
 
@@ -296,12 +300,13 @@ public final class ModelUtil {
 	 *             if deserialization fails
 	 */
 	public static EObject stringToEObject(String object) throws SerializationException {
+		
 		if (object == null) {
 			return null;
 		}
 
 		XMIResource res = (XMIResource) (new ResourceSetImpl()).createResource(VIRTUAL_URI);
-
+		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		try {
 			res.load(new InputSource(new StringReader(object)), getResourceLoadOptions());
 		} catch (UnsupportedEncodingException e) {
@@ -311,6 +316,7 @@ public final class ModelUtil {
 		}
 
 		EObject result = res.getContents().get(0);
+	
 		if (result instanceof Project) {
 			Project project = (Project) result;
 			Map<EObject, ModelElementId> eObjectToIdMap = new HashMap<EObject, ModelElementId>();
@@ -341,8 +347,8 @@ public final class ModelUtil {
 		}
 
 		EcoreUtil.resolveAll(result);
-
 		res.getContents().remove(result);
+
 		return result;
 	}
 
@@ -356,15 +362,15 @@ public final class ModelUtil {
 	public static Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
 			resourceLoadOptions = new HashMap<Object, Object>();
-			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
-			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
-			// resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.TRUE);
-			// resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
-			// resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
-			// resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-
+			resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
+			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
+			resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.TRUE);
+			resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
+			resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
 		}
 		return resourceLoadOptions;
 	}
@@ -898,6 +904,7 @@ public final class ModelUtil {
 			}
 
 			EObject opposite = setting.getEObject();
+
 			if (eStructuralFeature.isMany()) {
 				((EList<?>) opposite.eGet(eStructuralFeature)).remove(modelElement);
 			} else {
