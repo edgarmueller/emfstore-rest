@@ -11,9 +11,11 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.properties.EMFStorePropertiesOutdatedException;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -74,7 +76,7 @@ public class PropertiesTest extends ServerTests {
 	}
 
 	@Test
-	public void sharedPropertiesTest() throws EmfStoreException {
+	public void testSharedProperties() throws EmfStoreException {
 
 		propertyManager1 = projectSpace1.getPropertyManager();
 		propertyManager2 = projectSpace2.getPropertyManager();
@@ -86,16 +88,24 @@ public class PropertiesTest extends ServerTests {
 				propertyManager2.setSharedStringProperty("SecondTest", "test2");
 
 				try {
-					propertyManager1.transmit();
-					propertyManager2.transmit();
-					propertyManager1.transmit();
+					propertyManager1.synchronizeSharedProperties();
+					propertyManager2.synchronizeSharedProperties();
+					propertyManager1.synchronizeSharedProperties();
 				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				} catch (EMFStorePropertiesOutdatedException e) {
 					throw new RuntimeException(e);
 				}
 			}
 		}.run(false);
 
 		// 1. Test, ob transmit funktioniert
+		Assert.assertEquals("test1", propertyManager1.getSharedStringProperty("FirstPropKey"));
+		Assert.assertEquals("test1", propertyManager2.getSharedStringProperty("FirstPropKey"));
+
+		Assert.assertEquals("test2", propertyManager1.getSharedStringProperty("SecondTest"));
+		Assert.assertEquals("test2", propertyManager2.getSharedStringProperty("SecondTest"));
+
 		Assert.assertEquals(propertyManager1.getSharedStringProperty("FirstPropKey"),
 			propertyManager2.getSharedStringProperty("FirstPropKey"));
 
@@ -109,10 +119,12 @@ public class PropertiesTest extends ServerTests {
 				propertyManager2.setSharedStringProperty("SecondTest", "test5");
 
 				try {
-					propertyManager1.transmit();
-					propertyManager2.transmit();
-					propertyManager1.transmit();
+					propertyManager1.synchronizeSharedProperties();
+					propertyManager2.synchronizeSharedProperties();
+					propertyManager1.synchronizeSharedProperties();
 				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				} catch (EMFStorePropertiesOutdatedException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -120,6 +132,44 @@ public class PropertiesTest extends ServerTests {
 
 		// 2. Funktioniert update
 		Assert.assertEquals("test5", propertyManager1.getSharedStringProperty("SecondTest"));
+		Assert.assertEquals("test5", propertyManager2.getSharedStringProperty("SecondTest"));
+	}
+
+	@Test
+	public void testVersionedProperty() {
+
+		propertyManager1 = projectSpace1.getPropertyManager();
+		propertyManager2 = projectSpace2.getPropertyManager();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				propertyManager1.setSharedVersionedStringProperty("SecondTest", "test1");
+				propertyManager2.setSharedVersionedStringProperty("SecondTest", "test2");
+
+				try {
+					propertyManager1.synchronizeSharedProperties();
+				} catch (Exception e) {
+					junit.framework.Assert.fail();
+				}
+
+				try {
+					propertyManager2.synchronizeSharedProperties();
+					junit.framework.Assert.fail();
+				} catch (EmfStoreException e) {
+					junit.framework.Assert.fail();
+				} catch (EMFStorePropertiesOutdatedException e) {
+					junit.framework.Assert.assertEquals(1, e.getOutdatedProperties().size());
+					Assert.assertEquals(propertyManager1.getSharedStringProperty("SecondTest"),
+						((PropertyStringValue) e.getOutdatedProperties().get(0).getValue()).getValue());
+
+				}
+			}
+		}.run(false);
+
+		// check if rollback succeeded
+		Assert.assertEquals("test1", propertyManager1.getSharedStringProperty("SecondTest"));
+		Assert.assertEquals("test1", propertyManager2.getSharedStringProperty("SecondTest"));
 	}
 
 	@Test

@@ -28,153 +28,214 @@ import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * This class handles shared and local properties which are bundled to the
- * project space.
+ * This class is responsible for the modification of EMFStore based properties. <br/>
+ * There are two kinds of properties, local and shared ones.
+ * <ul>
+ * <li>Local properties are project space specific and thus are not shared across project space boundaries.</li>
+ * <li>
+ * On the contrary, shared properties may be shared across project space boundaries via the synchronize call.<br/>
+ * If a property is shared it may either be versioned or not. <br/>
+ * Unversioned properties follow the principle 'last-write-wins' principle, i.e. if two callers modify the same property
+ * the one that executed the call later will have overwritten the the value written by the first caller.<br/>
+ * This is not the case with versioned properties.<br/>
+ * If two callers modify a versioned property the latter one will receive an exception telling him that the property
+ * that he has modify is outdated. The caller then should catch the exception and handle it appropriately, e.g. by
+ * updating the state of the shared properties and then retransmitting his changes.</li>
+ * </ul>
+ * Shared and local properties both have their own namespace meaning that a shared property named <code>"foo"</code> has
+ * nothing in common with a local property called <code>"foo"</code>.
  * 
  * @author haunolder
- * 
+ * @author emueller
  **/
 public final class PropertyManager {
 
-	private final ProjectSpace projectSpace;
-	private Map<String, EObject> sharedProperties;
-	private Map<String, EObject> localProperties;
+	private final ProjectSpaceImpl projectSpace;
+	private Map<String, EMFStoreProperty> sharedProperties;
+	private Map<String, EMFStoreProperty> localProperties;
 
 	/**
 	 * PropertyManager constructor.
 	 * 
 	 * @param projectSpace
-	 *            projectSpace for this PropertyManager ProjectSpace
+	 *            the project space that should get managed by the property manager
 	 **/
 	public PropertyManager(ProjectSpace projectSpace) {
-		this.projectSpace = projectSpace;
+		this.projectSpace = (ProjectSpaceImpl) projectSpace;
+		this.localProperties = createMap(EMFStorePropertyType.LOCAL);
+		this.sharedProperties = createMap(EMFStorePropertyType.SHARED);
 	}
 
 	/**
 	 * Set a local property. If the property already exists it will be updated.
 	 * 
-	 * @param key
-	 *            of the local property as String
+	 * @param propertyName
+	 *            the name of the local property
 	 * @param value
-	 *            of the local property as EObject
+	 *            the actual value of the property
 	 **/
-	public void setLocalProperty(String key, EObject value) {
-		EMFStoreProperty prop = createProperty(key, value);
-		prop.setType(EMFStorePropertyType.LOCAL);
-		this.projectSpace.getProperties().add(prop);
+	public void setLocalProperty(String propertyName, EObject value) {
+		EMFStoreProperty prop = findProperty(propertyName);
 
-		if (this.localProperties == null) {
-			this.localProperties = new HashMap<String, EObject>();
-			createMap(this.localProperties, EMFStorePropertyType.LOCAL);
+		if (prop == null) {
+			prop = createProperty(propertyName, value, false);
+			prop.setType(EMFStorePropertyType.LOCAL);
+			projectSpace.getProperties().add(prop);
+		} else {
+			prop.setValue(value);
 		}
 
-		this.localProperties.put(key, value);
-		((ProjectSpaceImpl) projectSpace).saveProjectSpaceOnly();
+		localProperties.put(propertyName, prop);
+		projectSpace.saveProjectSpaceOnly();
 	}
 
 	/**
-	 * Get a local property.
-	 * 
-	 * @param key
-	 *            of the local property
-	 * @return EObject the local property
-	 **/
-	public EObject getLocalProperty(String key) {
-		if (this.localProperties == null) {
-			this.localProperties = new HashMap<String, EObject>();
-			createMap(this.localProperties, EMFStorePropertyType.LOCAL);
-		}
-		return getPropertyValue(this.localProperties, key);
-	}
-
-	/**
-	 * Set a local string property. If the property already exists it will be
+	 * Sets a local string property. If the property already exists it will be
 	 * updated.
 	 * 
-	 * @param key
-	 *            of the local property
+	 * @param propertyName
+	 *            the name of the local property
 	 * @param value
-	 *            of the local property
+	 *            the value of the local property
 	 **/
-	public void setLocalStringProperty(String key, String value) {
+	public void setLocalStringProperty(String propertyName, String value) {
 		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-				.createPropertyStringValue();
+			.createPropertyStringValue();
 		propertyValue.setValue(value);
-		setLocalProperty(key, propertyValue);
+		setLocalProperty(propertyName, propertyValue);
 	}
 
 	/**
-	 * Get a local string property.
+	 * Retrieves a local property.
 	 * 
-	 * @param key
-	 *            of the local property
-	 * @return property value as String
-	 * 
+	 * @param propertyName
+	 *            the name of the local property
+	 * @return the local property
 	 **/
-	public String getLocalStringProperty(String key) {
-		PropertyStringValue propertyValue = (PropertyStringValue) getLocalProperty(key);
-		if (propertyValue != null) {
-			return propertyValue.getValue();
+	public EMFStoreProperty getLocalProperty(String propertyName) {
+		return localProperties.get(propertyName);
+	}
+
+	/**
+	 * Sets the property with the given name to the given value.
+	 * 
+	 * @param propertyName
+	 *            the name of the property to be set
+	 * @param value
+	 *            the actual value of the property
+	 */
+	public void setSharedVersionedProperty(String propertyName, EObject value) {
+		setSharedProperty(propertyName, value, true);
+	}
+
+	/**
+	 * Set a shared string property.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @param string
+	 *            the string value that should be set
+	 * 
+	 * @see this{@link #synchronizeSharedProperties()}
+	 **/
+	public void setSharedStringProperty(String propertyName, String string) {
+		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+			.createPropertyStringValue();
+		propertyValue.setValue(string);
+		setSharedProperty(propertyName, propertyValue, false);
+	}
+
+	/**
+	 * Set a versioned shared string property.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @param string
+	 *            the string value that should be set
+	 * 
+	 * @see this{@link #synchronizeSharedProperties()}
+	 **/
+	public void setSharedVersionedStringProperty(String propertyName, String string) {
+		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+			.createPropertyStringValue();
+		propertyValue.setValue(string);
+		setSharedProperty(propertyName, propertyValue, true);
+	}
+
+	/**
+	 * Set a shared property.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @param value
+	 *            the value of the shared property
+	 * @param isVersioned
+	 *            whether the shared property should be versioned or not
+	 **/
+	private void setSharedProperty(String propertyName, EObject value, boolean isVersioned) {
+
+		EMFStoreProperty prop = findProperty(propertyName);
+
+		if (prop == null) {
+			prop = createProperty(propertyName, value, isVersioned);
+			prop.setType(EMFStorePropertyType.SHARED);
+			this.projectSpace.getProperties().add(prop);
+		} else {
+			prop.setValue(value);
 		}
 
-		return null;
-	}
-
-	/**
-	 * Set a shared string property. It will be transmitted to the server. If
-	 * the property already exists it will be updated.
-	 * 
-	 * @param key
-	 *            of the shared property as String
-	 * @param value
-	 *            of the shared property as String
-	 * 
-	 **/
-	public void setSharedStringProperty(String key, String value) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-				.createPropertyStringValue();
-		propertyValue.setValue(value);
-		setSharedProperty(key, propertyValue);
-	}
-
-	/**
-	 * Get shared string property.
-	 * 
-	 * @param key
-	 *            of the shared property as String
-	 * @return value of the shared property as String
-	 **/
-	public String getSharedStringProperty(String key) {
-		if (key != null) {
-			PropertyStringValue propertyValue = (PropertyStringValue) getSharedProperty(key);
-			if (propertyValue != null) {
-				return propertyValue.getValue();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Set shared property which is transmitted to the server.
-	 * 
-	 * @param key
-	 *            of the shared property as String
-	 * @param value
-	 *            of the shared property as EObject
-	 **/
-	public void setSharedProperty(String key, EObject value) {
-		EMFStoreProperty prop = createProperty(key, value);
-		prop.setType(EMFStorePropertyType.SHARED);
-		this.projectSpace.getProperties().add(prop);
 		this.projectSpace.getChangedSharedProperties().add(prop);
+		projectSpace.saveProjectSpaceOnly();
+	}
 
-		if (this.sharedProperties == null) {
-			this.sharedProperties = new HashMap<String, EObject>();
-			createMap(this.sharedProperties, EMFStorePropertyType.SHARED);
+	/**
+	 * Set a shared property.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @param value
+	 *            the value of the shared property
+	 **/
+	public void setSharedProperty(String propertyName, EObject value) {
+		setSharedProperty(propertyName, value, false);
+	}
+
+	/**
+	 * Updates a shared versioned property within the project space to the one given, i.e.
+	 * the name of the property is first used to look it up within the project space.
+	 * If found, the value and version attributes are updated, otherwise the property will be created.
+	 * 
+	 * @param property
+	 *            the updated property
+	 */
+	private void updateProperty(EMFStoreProperty property) {
+
+		EMFStoreProperty prop = findProperty(property.getKey());
+
+		if (prop == null) {
+			prop = createProperty(property.getKey(), property.getValue(), property.getVersion() != 0);
+			prop.setType(EMFStorePropertyType.SHARED);
+			this.projectSpace.getProperties().add(prop);
+		} else {
+			prop.setValue(property.getValue());
 		}
 
-		this.sharedProperties.put(key, value);
-		((ProjectSpaceImpl) projectSpace).saveProjectSpaceOnly();
+		prop.setVersion(property.getVersion());
+
+		this.sharedProperties.put(property.getKey(), prop);
+		projectSpace.saveProjectSpaceOnly();
+	}
+
+	/**
+	 * Retrieves the shared property with the given name.
+	 * 
+	 * @param propertyName
+	 *            the name of the shared property
+	 * @return value
+	 *         the actual value of the shared property
+	 **/
+	public EMFStoreProperty getSharedProperty(String propertyName) {
+		return sharedProperties.get(propertyName);
 	}
 
 	/**
@@ -184,12 +245,9 @@ public final class PropertyManager {
 	 *            of the shared property as String
 	 * @return value of the shared property as EObject
 	 **/
-	public EObject getSharedProperty(String key) {
-		if (this.sharedProperties == null) {
-			this.sharedProperties = new HashMap<String, EObject>();
-			createMap(this.sharedProperties, EMFStorePropertyType.SHARED);
-		}
-		return getPropertyValue(this.sharedProperties, key);
+	public String getSharedStringProperty(String key) {
+		EMFStoreProperty property = sharedProperties.get(key);
+		return ((PropertyStringValue) property.getValue()).getValue();
 	}
 
 	/**
@@ -197,84 +255,157 @@ public final class PropertyManager {
 	 * changedSharedProperties List and fills shareProperties with the actual
 	 * properties from the server.
 	 * 
+	 * @throws AccessControlException
+	 *             if the caller has no write access to the project space
 	 * @throws EmfStoreException
-	 *             if any error occurs in the EmfStore
+	 *             if the project space being manipulated is not yet shared or an error occurs within EMFStore
+	 * @throws EMFStorePropertiesOutdatedException
+	 *             if any changed property is outdated
 	 **/
-	public void transmit() throws EmfStoreException {
+	public void synchronizeSharedProperties() throws AccessControlException, EmfStoreException,
+		EMFStorePropertiesOutdatedException {
 
-		try {
-			new AccessControlHelper(projectSpace.getUsersession())
-					.checkWriteAccess(projectSpace.getProjectId());
-		} catch (AccessControlException e) {
-			// do not transmit properties if user is a reader
-			return;
+		// check if project is shared, if not throw checked exception if it is shared
+		if (projectSpace.getUsersession() == null) {
+			throw new EmfStoreException("Project has not been shared yet.");
 		}
 
-		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>();
+		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
 
-		for (EMFStoreProperty prop : this.projectSpace
-				.getChangedSharedProperties()) {
-			changedProperties.add(prop);
-		}
+		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
+			projectSpace.getChangedSharedProperties());
 
-		WorkspaceManager
-				.getInstance()
-				.getConnectionManager()
-				.transmitEMFProperties(
-						this.projectSpace.getUsersession().getSessionId(),
-						changedProperties, this.projectSpace.getProjectId());
+		List<EMFStoreProperty> rejectedProperties = WorkspaceManager
+			.getInstance()
+			.getConnectionManager()
+			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
+				this.projectSpace.getProjectId());
 
-		this.projectSpace.getChangedSharedProperties().clear();
+		// setEMFProperties returns us a list of properties as found one the server,
+		// i.e. we have to deal with different object identities
+		List<EMFStoreProperty> nonRejectedProperties = filterNonRejected(changedProperties, rejectedProperties);
+		projectSpace.getChangedSharedProperties().removeAll(nonRejectedProperties);
 
-		List<EMFStoreProperty> sharedProperties = WorkspaceManager
-				.getInstance()
-				.getConnectionManager()
-				.getEMFProperties(
-						this.projectSpace.getUsersession().getSessionId(),
-						this.projectSpace.getProjectId());
+		// update properties to reflect current state on server
+		List<EMFStoreProperty> sharedProperties = WorkspaceManager.getInstance().getConnectionManager()
+			.getEMFProperties(this.projectSpace.getUsersession().getSessionId(), this.projectSpace.getProjectId());
 
 		for (EMFStoreProperty prop : sharedProperties) {
-			setUpdatedSharedProperty(prop.getKey(), prop.getValue());
+			updateProperty(prop);
+		}
+
+		if (rejectedProperties.size() > 0) {
+			throw new EMFStorePropertiesOutdatedException(rejectedProperties);
 		}
 	}
 
-	private EMFStoreProperty createProperty(String key, EObject value) {
-		EMFStoreProperty prop = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-				.createEMFStoreProperty();
+	/**
+	 * Filters a list of changed properties to find only those that have not been rejected.
+	 * 
+	 * @param changedProperties
+	 *            the list of changed properties
+	 * @param rejectedProperties
+	 *            the list containing all properties that have been rejected
+	 * @return a list of properties that have not been rejected
+	 */
+	private List<EMFStoreProperty> filterNonRejected(List<EMFStoreProperty> changedProperties,
+		List<EMFStoreProperty> rejectedProperties) {
+		List<EMFStoreProperty> result = new ArrayList<EMFStoreProperty>();
+
+		for (EMFStoreProperty changed : changedProperties) {
+
+			boolean isNotRejected = true;
+
+			for (EMFStoreProperty rejected : rejectedProperties) {
+				if (changed.getKey().equals(rejected.getKey())) {
+					isNotRejected = false;
+					break;
+				}
+			}
+
+			// a found property has been rejected, so we only pay attention to those
+			if (isNotRejected) {
+				result.add(changed);
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Creates a map based on the project properties of the given {@link EMFStorePropertyType}.
+	 * 
+	 * @param type
+	 *            the {@link EMFStorePropertyType} of the properties that should be contained in the map
+	 */
+	private Map<String, EMFStoreProperty> createMap(EMFStorePropertyType type) {
+		Map<String, EMFStoreProperty> map = new HashMap<String, EMFStoreProperty>();
+		EList<EMFStoreProperty> properties = this.projectSpace.getProperties();
+
+		for (EMFStoreProperty prop : properties) {
+			if (prop.getType() == type) {
+				map.put(prop.getKey(), prop);
+			}
+		}
+
+		return map;
+	}
+
+	/**
+	 * Creates a property with the given key and value.
+	 * 
+	 * @param key
+	 *            the name of the property
+	 * @param value
+	 *            the actual value of the property
+	 * @return the newly created property
+	 */
+	private EMFStoreProperty createProperty(String key, EObject value, boolean isVersioned) {
+		EMFStoreProperty prop = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty();
 		prop.setKey(key);
 		prop.setValue(value);
+
+		if (isVersioned) {
+			prop.setVersion(EMFStoreProperty.VERSIONED);
+		}
+
 		return prop;
 	}
 
-	private void createMap(Map<String, EObject> map, EMFStorePropertyType type) {
-		EList<EMFStoreProperty> persistendProperties = this.projectSpace
-				.getProperties();
-		for (EMFStoreProperty prop : persistendProperties) {
-			if (prop.getType() == type) {
-				map.put(prop.getKey(), prop.getValue());
+	/**
+	 * Returns the property with the given name if it is contained in properties map
+	 * of the project space.
+	 * 
+	 * @param propertyName
+	 *            the name of the property
+	 * @return the property or <code>null</code> if no such property has been found
+	 */
+	private EMFStoreProperty findProperty(String propertyName) {
+
+		EMFStoreProperty property = localProperties.get(propertyName);
+
+		if (property == null) {
+			property = sharedProperties.get(propertyName);
+		}
+
+		if (property == null) {
+			// actually we should never get here
+			for (EMFStoreProperty p : projectSpace.getProperties()) {
+				if (p.getKey().equals(propertyName)) {
+					property = p;
+				}
+			}
+
+			if (property != null) {
+				if (property.getType() == EMFStorePropertyType.LOCAL) {
+					localProperties.put(propertyName, property);
+				} else {
+					sharedProperties.put(propertyName, property);
+				}
 			}
 		}
-	}
 
-	private EObject getPropertyValue(Map<String, EObject> map, String key) {
-		if (map.containsKey(key)) {
-			return map.get(key);
-		} else {
-			return null;
-		}
-	}
-
-	private void setUpdatedSharedProperty(String key, EObject value) {
-		EMFStoreProperty prop = createProperty(key, value);
-		prop.setType(EMFStorePropertyType.SHARED);
-		this.projectSpace.getProperties().add(prop);
-
-		if (this.sharedProperties == null) {
-			this.sharedProperties = new HashMap<String, EObject>();
-			createMap(this.sharedProperties, EMFStorePropertyType.SHARED);
-		}
-
-		this.sharedProperties.put(key, value);
+		return property;
 	}
 
 }

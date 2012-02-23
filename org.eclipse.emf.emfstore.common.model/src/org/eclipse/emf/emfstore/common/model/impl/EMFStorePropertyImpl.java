@@ -28,20 +28,21 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getKey <em>Key</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getValue <em>Value</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class EMFStorePropertyImpl extends EObjectImpl implements EMFStoreProperty {
+
 	/**
 	 * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getKey()
 	 * @generated
 	 * @ordered
@@ -52,7 +53,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	 * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getKey()
 	 * @generated
 	 * @ordered
@@ -63,7 +63,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -74,7 +73,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -85,7 +83,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -93,9 +90,28 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	protected EMFStorePropertyType type = TYPE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int VERSION_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected int version = VERSION_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected EMFStorePropertyImpl() {
@@ -105,7 +121,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -116,7 +131,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getKey() {
@@ -126,7 +140,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setKey(String newKey) {
@@ -139,7 +152,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EObject getValue() {
@@ -167,7 +179,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EObject basicGetValue() {
@@ -177,7 +188,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
@@ -197,7 +207,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setValue(EObject newValue) {
@@ -220,7 +229,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EMFStorePropertyType getType() {
@@ -230,7 +238,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setType(EMFStorePropertyType newType) {
@@ -243,7 +250,28 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	public int getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVersion(int newVersion) {
+		int oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EMF_STORE_PROPERTY__VERSION, oldVersion,
+				version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -258,7 +286,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -272,6 +299,8 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 			return basicGetValue();
 		case ModelPackage.EMF_STORE_PROPERTY__TYPE:
 			return getType();
+		case ModelPackage.EMF_STORE_PROPERTY__VERSION:
+			return getVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -279,7 +308,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -294,6 +322,9 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 		case ModelPackage.EMF_STORE_PROPERTY__TYPE:
 			setType((EMFStorePropertyType) newValue);
 			return;
+		case ModelPackage.EMF_STORE_PROPERTY__VERSION:
+			setVersion((Integer) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -301,7 +332,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -316,6 +346,9 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 		case ModelPackage.EMF_STORE_PROPERTY__TYPE:
 			setType(TYPE_EDEFAULT);
 			return;
+		case ModelPackage.EMF_STORE_PROPERTY__VERSION:
+			setVersion(VERSION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -323,7 +356,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -335,6 +367,8 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 			return value != null;
 		case ModelPackage.EMF_STORE_PROPERTY__TYPE:
 			return type != TYPE_EDEFAULT;
+		case ModelPackage.EMF_STORE_PROPERTY__VERSION:
+			return version != VERSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -342,7 +376,6 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -355,8 +388,42 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 		result.append(key);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#isVersioned()
+	 */
+	public boolean isVersioned() {
+		return getVersion() != UNVERSIONED;
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#setVersioned()
+	 */
+	public void setVersioned() {
+		if (isVersioned()) {
+			return;
+		}
+
+		setVersion(VERSIONED);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#increaseVersion()
+	 */
+	public void increaseVersion() {
+		setVersion(getVersion() + 1);
 	}
 
 } // EMFStorePropertyImpl

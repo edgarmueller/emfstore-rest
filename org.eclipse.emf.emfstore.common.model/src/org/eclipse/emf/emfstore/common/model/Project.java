@@ -69,8 +69,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	/**
 	 * Initializes the ID caches of the project with the given mappings.
 	 */
-	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap,
-			Map<ModelElementId, EObject> idToEObjectMap);
+	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap);
 
 	/**
 	 * Returns the value of the '<em><b>Cut Elements</b></em>' containment
@@ -106,8 +105,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list, Boolean subclasses);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list, Boolean subclasses);
 
 	/**
 	 * Retrieve a list of ALL model elements of a certain type in project.
@@ -122,8 +120,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Retrieve a list of model elements of a certain type in project that are
@@ -139,8 +136,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @return a list of model elements of the given type
 	 * @generated NOT
 	 */
-	<T extends EObject> EList<T> getModelElementsByClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getModelElementsByClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Returns whether the project contains the exact same instance of the model
@@ -168,8 +164,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @param observer
 	 *            the change observer
 	 */
-	void addIdEObjectCollectionChangeObserver(
-			IdEObjectCollectionChangeObserver observer);
+	void addIdEObjectCollectionChangeObserver(IdEObjectCollectionChangeObserver observer);
 
 	/**
 	 * Remove an observer to the project. See {@link ProjectChangeObserver}.
@@ -177,8 +172,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @param observer
 	 *            the change observer
 	 */
-	void removeIdEObjectCollectionChangeObserver(
-			IdEObjectCollectionChangeObserver observer);
+	void removeIdEObjectCollectionChangeObserver(IdEObjectCollectionChangeObserver observer);
 
 	/**
 	 * Delete an element from the Project including all its containments and
@@ -207,8 +201,7 @@ public interface Project extends NotifiableIdEObjectCollection, IAdaptable {
 	 * @param idMap
 	 *            a map containing the ID of the model element and its children
 	 */
-	void addModelElement(EObject newModelElement,
-			Map<EObject, ModelElementId> idMap);
+	void addModelElement(EObject newModelElement, Map<EObject, ModelElementId> idMap);
 
 	/**
 	 * Returns whether the project contains a model element with the same id.

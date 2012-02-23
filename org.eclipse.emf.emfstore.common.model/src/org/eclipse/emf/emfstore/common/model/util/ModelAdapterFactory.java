@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -116,6 +118,11 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseEMFStoreProperty(EMFStoreProperty object) {
 			return createEMFStorePropertyAdapter();
+		}
+
+		@Override
+		public Adapter casePropertyMapEntry(Map.Entry<String, EMFStoreProperty> object) {
+			return createPropertyMapEntryAdapter();
 		}
 
 		@Override
@@ -252,6 +259,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEMFStorePropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Property Map Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createPropertyMapEntryAdapter() {
 		return null;
 	}
 

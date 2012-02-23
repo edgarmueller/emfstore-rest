@@ -74,7 +74,7 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 		detailedTabTreeViewer.setContentProvider(detailedContentProvider);
 		detailedTabTreeViewer.setLabelProvider(detailedLabelProvider);
 		detailedTabTreeViewer.setInput(changePackages);
-		detailedTabTreeViewer.expandToLevel(2);
+		detailedTabTreeViewer.expandToLevel(0);
 
 		TabItem opTab = new TabItem(folder, style);
 		opTab.setText("Operations");
@@ -96,7 +96,7 @@ public class TabbedChangesComposite extends Composite implements ChangesComposit
 		compactTabTreeViewer.setContentProvider(compactContentProvider);
 		compactTabTreeViewer.setLabelProvider(compactLabelProvider);
 		compactTabTreeViewer.setInput(changePackages);
-		compactTabTreeViewer.expandToLevel(2);
+		compactTabTreeViewer.expandToLevel(0);
 
 		TabItem meTab = new TabItem(folder, style);
 		meTab.setText("ModelElements");

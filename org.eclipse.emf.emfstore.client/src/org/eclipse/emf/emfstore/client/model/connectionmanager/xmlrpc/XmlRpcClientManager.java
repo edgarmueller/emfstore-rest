@@ -19,6 +19,7 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.client.XmlRpcSun15HttpTransportFactory;
+import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
@@ -60,8 +61,8 @@ public class XmlRpcClientManager {
 			config.setServerURL(createURL(serverInfo));
 			config.setEnabledForExceptions(true);
 			config.setEnabledForExtensions(true);
-			config.setConnectionTimeout(60 * 1000);
-			config.setReplyTimeout(60 * 1000);
+			config.setConnectionTimeout(Configuration.getXMLRPCConnectionTimeout());
+			config.setReplyTimeout(Configuration.getXMLRPCReplyTimeout());
 
 			client = new XmlRpcClient();
 			client.setTypeFactory(new EObjectTypeFactory(client));

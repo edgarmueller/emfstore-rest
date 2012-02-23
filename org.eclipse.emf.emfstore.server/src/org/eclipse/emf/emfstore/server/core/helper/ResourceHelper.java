@@ -127,17 +127,12 @@ public class ResourceHelper {
 
 				for (Map.Entry<EObject, ModelElementId> e : ((CreateDeleteOperationImpl) createDeleteOp)
 					.getEObjectToIdMap().entrySet()) {
-					XMIResource res = (XMIResource) e.getKey().eResource();
 
 					EObject modelElement = e.getKey();
 
 					if (ModelUtil.isIgnoredDatatype(modelElement)) {
 						ignoredDatatypes.add(e);
 						continue;
-					}
-
-					if (res != null) {
-						res.setID(e.getKey(), e.getValue().getId());
 					}
 				}
 

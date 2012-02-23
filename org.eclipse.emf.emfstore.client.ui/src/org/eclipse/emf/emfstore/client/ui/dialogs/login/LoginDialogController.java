@@ -58,6 +58,7 @@ public class LoginDialogController implements ILoginDialogController {
 			usersessions.add(usersession);
 		}
 		this.usersession = usersession;
+		WorkspaceManager.getInstance().getCurrentWorkspace().save();
 	}
 
 	public Usersession getUsersession() {

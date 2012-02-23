@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionConfig;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 
@@ -94,7 +95,7 @@ public class MergeTextOption extends ConflictOption {
 					AbstractOperation tmp = option.getOperations().get(0);
 					if (tmp instanceof AttributeOperation) {
 						option.getOperations().remove(0);
-						AttributeOperation mergedOp = (AttributeOperation) EcoreUtil.copy(tmp);
+						AttributeOperation mergedOp = (AttributeOperation) ModelUtil.clone(tmp);
 						mergedOp.setIdentifier(EcoreUtil.generateUUID());
 						mergedOp.setNewValue(text);
 						option.getOperations().add(0, mergedOp);

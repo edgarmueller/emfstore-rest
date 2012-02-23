@@ -137,6 +137,9 @@ public class ProjectItemProvider extends RootElementItemProvider implements IEdi
 			ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
+
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__MODEL_ELEMENTS,
 			ModelFactory.eINSTANCE.createPropertyStringValue()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
@@ -150,6 +153,9 @@ public class ProjectItemProvider extends RootElementItemProvider implements IEdi
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
 			ModelFactory.eINSTANCE.createEMFStoreProperty()));
+
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
+			ModelFactory.eINSTANCE.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT__CUT_ELEMENTS,
 			ModelFactory.eINSTANCE.createPropertyStringValue()));

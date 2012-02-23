@@ -171,6 +171,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyMapEntryItemProvider propertyMapEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyMapEntryAdapter() {
+		if (propertyMapEntryItemProvider == null) {
+			propertyMapEntryItemProvider = new PropertyMapEntryItemProvider(this);
+		}
+
+		return propertyMapEntryItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.common.model.PropertyStringValue} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,6 +323,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 			modelVersionItemProvider.dispose();
 		if (emfStorePropertyItemProvider != null)
 			emfStorePropertyItemProvider.dispose();
+		if (propertyMapEntryItemProvider != null)
+			propertyMapEntryItemProvider.dispose();
 		if (propertyStringValueItemProvider != null)
 			propertyStringValueItemProvider.dispose();
 	}

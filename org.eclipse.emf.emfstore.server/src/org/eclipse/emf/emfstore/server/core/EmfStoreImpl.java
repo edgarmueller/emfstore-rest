@@ -262,12 +262,12 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements EmfStore 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void transmitEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties, ProjectId projectId)
-		throws EmfStoreException {
+	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties,
+		ProjectId projectId) throws EmfStoreException {
 		sanityCheckObjects(projectId, properties);
 		checkWriteAccess(sessionId, projectId, null);
-		EMFStorePropertiesSubInterfaceImpl temp = getSubInterface(EMFStorePropertiesSubInterfaceImpl.class);
+		EMFStorePropertiesSubInterfaceImpl propertiesInterface = getSubInterface(EMFStorePropertiesSubInterfaceImpl.class);
 
-		temp.setProperties(properties, projectId);
+		return propertiesInterface.setProperties(properties, projectId);
 	}
 }

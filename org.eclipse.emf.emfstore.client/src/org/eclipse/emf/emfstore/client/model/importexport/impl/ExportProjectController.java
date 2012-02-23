@@ -14,11 +14,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -97,7 +97,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Project project = EcoreUtil.copy(getProjectSpace().getProject());
+		Project project = ModelUtil.clone(getProjectSpace().getProject());
 		ResourceHelper.putElementIntoNewResource(file.getAbsolutePath(), project);
 	}
 

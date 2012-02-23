@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent;
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent;
@@ -64,8 +64,7 @@ public final class EventManager extends Thread {
 				if (event != null) {
 					synchronized (this) {
 						for (ListenerContainer e : listeners) {
-							boolean successful = e.handleEvent(EcoreUtil
-									.copy(event));
+							boolean successful = e.handleEvent(ModelUtil.clone(event));
 							if (!successful) {
 								tmp.add(e);
 							}
@@ -90,8 +89,7 @@ public final class EventManager extends Thread {
 	 * @param clazz
 	 *            not implemented yet
 	 */
-	public void registerListener(EMFStoreEventListener listener,
-			ProjectId projectId, EClass clazz) {
+	public void registerListener(EMFStoreEventListener listener, ProjectId projectId, EClass clazz) {
 		if (listener == null) {
 			return;
 		}
@@ -144,8 +142,7 @@ public final class EventManager extends Thread {
 		@SuppressWarnings("unused")
 		private final EClass clazz;
 
-		public ListenerContainer(EMFStoreEventListener listener,
-				ProjectId projectId, EClass clazz) {
+		public ListenerContainer(EMFStoreEventListener listener, ProjectId projectId, EClass clazz) {
 			this.listener = listener;
 			this.projectId = projectId;
 			this.clazz = clazz;
@@ -153,8 +150,7 @@ public final class EventManager extends Thread {
 
 		public boolean handleEvent(ServerEvent event) {
 			if (projectId != null && event instanceof ServerProjectEvent) {
-				if (!projectId.equals(((ServerProjectEvent) event)
-						.getProjectId())) {
+				if (!projectId.equals(((ServerProjectEvent) event).getProjectId())) {
 					return true;
 				}
 			}

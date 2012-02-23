@@ -141,7 +141,7 @@ public final class IntegrationTestHelper {
 			@Override
 			protected void doRun() {
 				for (AbstractOperation op : operations) {
-					changePackage.getOperations().add(EcoreUtil.copy(op));
+					changePackage.getOperations().add((AbstractOperation) ModelUtil.clone(op));
 
 				}
 				if (clearOperations) {
@@ -193,7 +193,7 @@ public final class IntegrationTestHelper {
 		// Save change package for later reference to disk.
 		// The saved change package will be overwritten every time a test
 		// succeeds.
-		EObject copyChangePackage = EcoreUtil.copy(changePackage);
+		EObject copyChangePackage = ModelUtil.clone(changePackage);
 		ResourceSet reseourceSet = new ResourceSetImpl();
 		Resource resource = reseourceSet.createResource(URI.createFileURI(TEMP_PATH + File.separator
 			+ "changePackage.txt"));
@@ -270,7 +270,7 @@ public final class IntegrationTestHelper {
 		}
 		Resource res = (new ResourceSetImpl()).createResource(URI.createURI("virtualUnicaseUri"));
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		res.getContents().add(EcoreUtil.copy(object));
+		res.getContents().add(ModelUtil.clone(object));
 		try {
 			res.save(out, null);
 		} catch (IOException e) {

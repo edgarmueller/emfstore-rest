@@ -214,9 +214,10 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public void transmitEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties, ProjectId projectId)
-		throws EmfStoreException {
-		getConnectionProxy(sessionId).call("transmitEMFProperties", sessionId, properties, projectId);
+	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties,
+		ProjectId projectId) throws EmfStoreException {
+		return getConnectionProxy(sessionId).callWithListResult("setEMFProperties", EMFStoreProperty.class, sessionId,
+			properties, projectId);
 	}
 
 	/**

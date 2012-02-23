@@ -150,24 +150,12 @@ public final class ServerConfiguration {
 	public static final String PROJECTSPACE_VERSION_PERSISTENCE_DEFAULT = PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS;
 
 	/**
-	 * Property for the count of versions, needed by the BACKUP everyXVersion policy.
-	 */
-	@Deprecated
-	public static final String PROJECTSTATE_VERSION_BACKUP_PERSISTENCE_EVERYXVERSIONS_X = "emfstore.persistence.version.backup.projectstate.everyxversions";
-
-	/**
-	 * Default value for the BACKUP everyXVersion policy.
-	 */
-	@Deprecated
-	public static final String PROJECTSTATE_VERSION_BACKUP_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT = "1";
-
-	/**
 	 * Property for timeout time of a user session.
 	 */
 	public static final String SESSION_TIMEOUT = "emfstore.accesscontrol.session.timeout";
 
 	/**
-	 * Default timeout (=30 min).
+	 * Default timeout (= 30 minutes).
 	 */
 	public static final String SESSION_TIMEOUT_DEFAULT = "1800000";
 
@@ -247,14 +235,6 @@ public final class ServerConfiguration {
 	 * Path to property file for spfv authentication.
 	 */
 	public static final String AUTHENTICATION_SPFV_FILEPATH = "emfstore.accesscontrol.authentication.spfv";
-
-	/**
-	 * Default filepath for spfv authentication.
-	 * 
-	 * @deprecated use {@link #getDefaultSPFVFilePath()}
-	 */
-	@Deprecated
-	public static final String AUTHENTICATION_SPFV_FILEPATH_DEFAULT = getConfDirectory() + "user.properties";
 
 	/**
 	 * Property to validate server on start up.
@@ -351,12 +331,6 @@ public final class ServerConfiguration {
 	 */
 
 	/**
-	 * File prefix for file: backup projectstate.
-	 */
-	@Deprecated
-	public static final String FILE_PREFIX_BACKUPPROJECTSTATE = "backup_";
-
-	/**
 	 * File prefix for file: changepackage.
 	 */
 	public static final String FILE_PREFIX_CHANGEPACKAGE = "changepackage-";
@@ -390,6 +364,16 @@ public final class ServerConfiguration {
 	 * Whether user names should be matched case insensitively.
 	 */
 	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
+
+	/**
+	 * Whether to perform the clean memory task.
+	 */
+	public static final String PERFORM_CLEAN_MEMORY_TASK = "emfstore.cleanmemorytask";
+
+	/**
+	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.
+	 */
+	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = FALSE;
 
 	private static boolean testing;
 
@@ -582,7 +566,8 @@ public final class ServerConfiguration {
 	public static String getServerVersion() {
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		String emfStoreVersionString = emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
+		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
+			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
 	}
 

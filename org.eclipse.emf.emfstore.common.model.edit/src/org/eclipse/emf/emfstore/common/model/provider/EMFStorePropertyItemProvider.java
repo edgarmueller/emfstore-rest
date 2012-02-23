@@ -56,6 +56,7 @@ public class EMFStorePropertyItemProvider extends RootElementItemProvider implem
 			addKeyPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addVersionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -109,6 +110,22 @@ public class EMFStorePropertyItemProvider extends RootElementItemProvider implem
 	}
 
 	/**
+	 * This adds a property descriptor for the Version feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVersionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_EMFStoreProperty_version_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_EMFStoreProperty_version_feature",
+				"_UI_EMFStoreProperty_type"), ModelPackage.Literals.EMF_STORE_PROPERTY__VERSION, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This returns EMFStoreProperty.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,6 +163,7 @@ public class EMFStorePropertyItemProvider extends RootElementItemProvider implem
 		switch (notification.getFeatureID(EMFStoreProperty.class)) {
 		case ModelPackage.EMF_STORE_PROPERTY__KEY:
 		case ModelPackage.EMF_STORE_PROPERTY__TYPE:
+		case ModelPackage.EMF_STORE_PROPERTY__VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

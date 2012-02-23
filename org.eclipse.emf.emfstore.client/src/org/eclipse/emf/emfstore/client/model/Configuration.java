@@ -34,6 +34,16 @@ import org.osgi.framework.Bundle;
  */
 public final class Configuration {
 
+	/**
+	 * Property for XML RPC connection timeout.
+	 */
+	private static final int XML_RPC_CONNECTION_TIMEOUT = 600000;
+
+	/**
+	 * Property for XML RPC reply timeout.
+	 */
+	private static final int XML_RPC_REPLY_TIMEOUT = 600000;
+
 	private static final String CLIENT_NAME = "emfstore eclipse client";
 	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
 	private static final String UPS = ".ups";
@@ -42,9 +52,13 @@ public final class Configuration {
 	private static final String PS = "ps-";
 	private static final String UPF = ".upf";
 	private static final String PLUGIN_BASEDIR = "pluginData";
+
 	private static boolean testing;
 	private static LocationProvider locationProvider;
 	private static EditingDomain editingDomain;
+	private static int xmlRPCConnectionTimeout = XML_RPC_CONNECTION_TIMEOUT;
+	private static int xmlRPCReplyTimeout = XML_RPC_REPLY_TIMEOUT;
+	private static Boolean resourceSplitting;
 
 	private Configuration() {
 		// nothing to do
@@ -102,6 +116,24 @@ public final class Configuration {
 	 */
 	public static String getWorkspacePath() {
 		return getWorkspaceDirectory() + "workspace.ucw";
+	}
+
+	/**
+	 * Returns the XML RPC connection timeout value.
+	 * 
+	 * @return the connection timeout value
+	 */
+	public static int getXMLRPCConnectionTimeout() {
+		return xmlRPCConnectionTimeout;
+	}
+
+	/**
+	 * Returns the XML RPC timeout value.
+	 * 
+	 * @return the timeout value
+	 */
+	public static int getXMLRPCReplyTimeout() {
+		return xmlRPCReplyTimeout;
 	}
 
 	/**
@@ -187,6 +219,7 @@ public final class Configuration {
 	 * 
 	 * @return the client version number
 	 */
+	@SuppressWarnings("cast")
 	public static ClientVersionInfo getClientVersion() {
 		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
 			.createClientVersionInfo();
@@ -334,12 +367,10 @@ public final class Configuration {
 	}
 
 	/**
-	 * Determines whether to use resource splitting.
+	 * Determines whether resource splitting is enabled.
 	 * 
-	 * @return true of resource splitting is enabled.
+	 * @return true, if resource splitting is enabled, false otherwise
 	 */
-	private static Boolean resourceSplitting;
-
 	public static boolean isResourceSplittingEnabled() {
 		if (resourceSplitting != null) {
 			return resourceSplitting;

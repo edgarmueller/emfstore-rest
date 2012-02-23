@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
@@ -56,6 +55,7 @@ import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -187,7 +187,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		// FIXME: MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
-		ProjectInfo projectInfoCopy = EcoreUtil.copy(projectInfo);
+		ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
 		projectInfoCopy.setVersion(targetSpec);
 
 		// get project from server

@@ -167,7 +167,6 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 			getActiveProjectSpace().getProject());
 		changesComposite.setShowRootNodes(false);
 		changesComposite.setReverseNodes(false);
-		changesComposite.setInput(changePackages);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
 
 		return contents;

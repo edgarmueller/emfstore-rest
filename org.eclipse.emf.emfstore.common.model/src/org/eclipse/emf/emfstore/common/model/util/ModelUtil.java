@@ -197,7 +197,7 @@ public final class ModelUtil {
 			res.getContents().add(copiedProject);
 			copy = copiedProject;
 		} else {
-			copy = EcoreUtil.copy(object);
+			copy = ModelUtil.clone(object);
 			res.getContents().add(copy);
 		}
 
@@ -340,8 +340,6 @@ public final class ModelUtil {
 			project.initCaches(eObjectToIdMap, idToEObjectMap);
 		}
 
-		// TODO: added to resolve model element map in a CreateDeleteOp
-		// check whether we can generalize this
 		EcoreUtil.resolveAll(result);
 
 		res.getContents().remove(result);
@@ -358,7 +356,13 @@ public final class ModelUtil {
 	public static Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
 			resourceLoadOptions = new HashMap<Object, Object>();
-			// options.put(XMLResource.OPTION_CONFIGURATION_CACHE, true)
+			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.TRUE);
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
 		}
@@ -540,7 +544,7 @@ public final class ModelUtil {
 	public static <T extends EObject> List<T> clone(List<T> list) {
 		ArrayList<T> result = new ArrayList<T>();
 		for (EObject eObject : list) {
-			T clone = (T) EcoreUtil.copy(eObject);
+			T clone = (T) ModelUtil.clone(eObject);
 			result.add(clone);
 		}
 		return result;
@@ -903,29 +907,6 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Check of the two elements are linked by the given reference.
-	 * 
-	 * @param modelElement
-	 *            first model element
-	 * @param otherModelElement
-	 *            second modelelement
-	 * @param reference
-	 *            candidate reference feature of first element
-	 * @return true if the reference feature links the two elements
-	 */
-	private static boolean isCorrespondingReference(EObject modelElement, EObject otherModelElement,
-		EReference reference) {
-		if (reference.isMany()) {
-			if (otherModelElement.eGet(reference) == null) {
-				return false;
-			}
-			return ((List<?>) otherModelElement.eGet(reference)).contains(modelElement);
-		} else {
-			return modelElement.equals(otherModelElement.eGet(reference));
-		}
-	}
-
-	/**
 	 * Delete all outgoing cross references of the given model element.
 	 * 
 	 * @param modelElement
@@ -943,7 +924,7 @@ public final class ModelUtil {
 			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
 				setting.getEObject().eUnset(setting.getEStructuralFeature());
 			} else {
-				List<EObject> references = (List<EObject>) setting.getEObject().eGet(setting.getEStructuralFeature());
+				List<?> references = (List<?>) setting.getEObject().eGet(setting.getEStructuralFeature());
 				references.remove(settingWithReferencedElement.getReferencedElement());
 			}
 		}
@@ -1153,7 +1134,7 @@ public final class ModelUtil {
 
 		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(originalObject, false);
 		allContainedModelElements.add(originalObject);
-		// EObject copiedElement = EcoreUtil.copy(originalObject);
+		// EObject copiedElement = ModelUtil.clone(originalObject);
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
 			false);
 		copiedAllContainedModelElements.add(copiedObject);
