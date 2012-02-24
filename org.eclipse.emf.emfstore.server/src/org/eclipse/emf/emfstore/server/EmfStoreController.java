@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
@@ -119,7 +120,6 @@ public class EmfStoreController implements IApplication, Runnable {
 		properties = initProperties();
 
 		new MigrationManager().migrateModel();
-
 		this.serverSpace = initServerSpace();
 
 		handleStartupListener();
@@ -147,10 +147,10 @@ public class EmfStoreController implements IApplication, Runnable {
 
 		ModelUtil.logInfo("Initialitation COMPLETE.");
 		ModelUtil.logInfo("Server is RUNNING...");
-
 		if (waitForTermination) {
 			waitForTermination();
 		}
+
 	}
 
 	private void initLogging() {
@@ -235,6 +235,8 @@ public class EmfStoreController implements IApplication, Runnable {
 		ResourceStorage storage = initStorage();
 		URI resourceUri = storage.init(properties);
 		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
+		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		resource = resourceSet.createResource(resourceUri);
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());

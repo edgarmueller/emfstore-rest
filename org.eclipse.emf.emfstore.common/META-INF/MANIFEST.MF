@@ -6,7 +6,8 @@ Bundle-Version: 0.8.9.M928
 Bundle-Activator: org.eclipse.emf.emfstore.common.Activator
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)",
- org.eclipse.core.resources;visibility:=reexport
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.emfstore.common,
  org.eclipse.emf.emfstore.common.observer
