@@ -14,9 +14,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
  * Track a set of dirty resources for saving.
@@ -26,11 +31,17 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 public class DirtyResourceSet {
 
 	private Set<Resource> resources;
+	private final IdEObjectCollection collection;
 
 	/**
 	 * Constructor.
+	 * 
+	 * @param collection
+	 *            the {@link IdEObjectCollection} that is supposed to contain the model elements
+	 *            that will be saved by the dirty resource set
 	 */
-	public DirtyResourceSet() {
+	public DirtyResourceSet(IdEObjectCollection collection) {
+		this.collection = collection;
 		resources = new HashSet<Resource>();
 	}
 
@@ -48,11 +59,22 @@ public class DirtyResourceSet {
 	 * Save all dirty resources in this set.
 	 */
 	public void save() {
+
 		Set<Resource> resourcesToRemove = new HashSet<Resource>();
+
 		for (Resource resource : resources) {
+
 			if (resource.getURI() == null || resource.getURI().toString().equals("")) {
 				continue;
 			}
+
+			TreeIterator<EObject> allContents = resource.getAllContents();
+
+			while (allContents.hasNext()) {
+				EObject modelElement = allContents.next();
+				setModelElementIdOnResource((XMIResource) resource, modelElement);
+			}
+
 			try {
 				resource.save(Configuration.getResourceSaveOptions());
 				resourcesToRemove.add(resource);
@@ -66,4 +88,30 @@ public class DirtyResourceSet {
 		WorkspaceUtil.logWarning(message, null);
 		// }
 	}
+
+	private void setModelElementIdOnResource(XMIResource resource, EObject modelElement) {
+
+		if (modelElement instanceof IdEObjectCollection) {
+			return;
+		}
+
+		ModelElementId modelElementId = getIDForEObject(modelElement);
+
+		String modelElementIdString = modelElementId.getId();
+		resource.setID(modelElement, modelElementIdString);
+	}
+
+	private ModelElementId getIDForEObject(EObject modelElement) {
+		ModelElementId modelElementId = collection.getModelElementId(modelElement);
+
+		if (modelElementId == null) {
+			modelElementId = collection.getDeletedModelElementId(modelElement);
+		}
+
+		if (modelElementId == null) {
+			WorkspaceUtil.handleException(new IllegalStateException("No ID for model element" + modelElement));
+		}
+		return modelElementId;
+	}
+
 }
