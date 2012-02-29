@@ -28,8 +28,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -165,33 +163,10 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		changePackages.add(changes);
 		TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changePackages,
 			getActiveProjectSpace().getProject());
-		changesComposite.setShowRootNodes(false);
-		changesComposite.setReverseNodes(false);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
 
 		return contents;
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void configureShell(Shell newShell) {
-
-		super.configureShell(newShell);
-		newShell.setText("Commit");
-		Rectangle area = newShell.getShell().getParent().getClientArea();
-		int width = area.width * 2 / 3;
-		int height = area.height * 2 / 3;
-		newShell.setBounds((area.width - width) / 2, (area.height - height) / 2, width, height);
-		newShell.addDisposeListener(new DisposeListener() {
-			public void widgetDisposed(DisposeEvent e) {
-				for (CommitDialogTray tray : trays.values()) {
-					tray.dispose();
-				}
-			}
-		});
 	}
 
 	/**
