@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TouchFilter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TransientFilter;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -80,7 +81,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 *            the collection that should be persisted
 	 */
 	public StatePersister(EObjectChangeNotifier changeNotifier, EMFStoreCommandStack commandStack,
-		IdEObjectCollection collection) {
+		IdEObjectCollectionImpl collection) {
 		this.autoSave = true;
 		this.commandStack = commandStack;
 		this.commandStack.addCommandStackObserver(this);

@@ -97,7 +97,6 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 */
 	public void modelElementAdded(final IdEObjectCollection project, final EObject eObject) {
 		addModelElementAndChildrenToCache(eObject);
-
 		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
 			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
 				projectChangeObserver.modelElementAdded(project, eObject);
