@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
@@ -328,13 +329,27 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 
 	public void apply(IdEObjectCollection project) {
 		EObject modelElement = project.getModelElement(getModelElementId());
+		if (modelElement == null) {
+			modelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getModelElementId());
+		}
+
 		EObject oldModelElement = project.getModelElement(getOldValue());
+		if (oldModelElement == null) {
+			oldModelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getOldValue());
+		}
+
 		EObject newModelElement = project.getModelElement(getNewValue());
+		if (newModelElement == null) {
+			newModelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getNewValue());
+		}
+
 		if (modelElement == null) {
 			// silently fail
 			return;
 		}
+
 		EReference reference;
+
 		try {
 			reference = (EReference) this.getFeature(modelElement);
 			modelElement.eSet(reference, newModelElement);
