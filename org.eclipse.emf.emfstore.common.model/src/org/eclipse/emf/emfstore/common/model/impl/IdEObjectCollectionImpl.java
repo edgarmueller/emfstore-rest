@@ -40,18 +40,22 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
  */
 public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection {
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#dispose()
+	 */
+	public void dispose() {
+		eObjectToIdCache.clear();
+		idToEObjectCache.clear();
+		clearCaches();
+		cachesInitialized = false;
+	}
+
 	// Caches
 	private Map<EObject, ModelElementId> eObjectToIdCache;
 	private Map<ModelElementId, EObject> idToEObjectCache;
 	private boolean cachesInitialized;
-
-	/**
-	 * Will be used to cache all model elements of a project in order to avoid
-	 * fetching those multiple times when trying to retrieve a model element ID.
-	 * 
-	 * @see NotifiableIdEObjectCollectionImpl#getModelElementId(EObject)
-	 */
-	private Set<EObject> containedModelElements;
 
 	/**
 	 * Will be used to maintain the {@link ModelElementId}s of deleted {@link EObject}s.
@@ -71,7 +75,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public IdEObjectCollectionImpl() {
 		eObjectToIdCache = new HashMap<EObject, ModelElementId>();
 		idToEObjectCache = new HashMap<ModelElementId, EObject>();
-		containedModelElements = new HashSet<EObject>();
 		deletedEObjectToIdMap = new HashMap<EObject, ModelElementId>();
 		deletedIdMapToEObject = new HashMap<ModelElementId, EObject>();
 		newEObjectToIdMap = new HashMap<EObject, ModelElementId>();
@@ -219,14 +222,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public ModelElementId getModelElementId(EObject eObject) {
 
 		if (!eObjectToIdCache.containsKey(eObject) && !isCacheInitialized()) {
-
-			if (containedModelElements == null) {
-				containedModelElements = ModelUtil.getAllContainedModelElements(this, false);
-			}
-
-			if (!containedModelElements.contains(eObject)) {
-				return null;
-			}
 
 			// EObject contained in project, load ID from resource
 			try {
@@ -721,5 +716,15 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			newEObjectToIdMap.put(modelElement, modelElementId);
 			newIdMapToEObject.put(modelElementId, modelElement);
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void clearCaches() {
+		deletedEObjectToIdMap.clear();
+		deletedIdMapToEObject.clear();
+		newEObjectToIdMap.clear();
+		newIdMapToEObject.clear();
 	}
 }
