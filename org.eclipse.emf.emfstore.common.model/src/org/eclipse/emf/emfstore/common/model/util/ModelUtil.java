@@ -16,6 +16,7 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -44,7 +45,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -300,7 +300,7 @@ public final class ModelUtil {
 	 *             if deserialization fails
 	 */
 	public static EObject stringToEObject(String object) throws SerializationException {
-		
+
 		if (object == null) {
 			return null;
 		}
@@ -316,7 +316,7 @@ public final class ModelUtil {
 		}
 
 		EObject result = res.getContents().get(0);
-	
+
 		if (result instanceof Project) {
 			Project project = (Project) result;
 			Map<EObject, ModelElementId> eObjectToIdMap = new HashMap<EObject, ModelElementId>();
@@ -825,15 +825,37 @@ public final class ModelUtil {
 	 */
 	public static Set<EObject> getAllContainedModelElements(EObject modelElement, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
+		return getAllContainedModelElements(Collections.singletonList(modelElement), includeTransientContainments,
+			ignoreSingletonDatatypes);
+	}
+
+	public static Set<EObject> getAllContainedModelElements(Resource resource, boolean includeTransientContainments,
+		boolean ignoreSingletonDatatypes) {
+		return getAllContainedModelElements(resource.getContents(), includeTransientContainments,
+			ignoreSingletonDatatypes);
+	}
+
+	public static Set<EObject> getAllContainedModelElements(Collection<EObject> modelElements,
+		boolean includeTransientContainments, boolean ignoreSingletonDatatypes) {
+
 		Set<EObject> result = new HashSet<EObject>();
-		for (EObject containee : modelElement.eContents()) {
-			if (!isSingleton(containee) || !containee.eContainingFeature().isTransient()
-				|| includeTransientContainments) {
-				Set<EObject> elements = getAllContainedModelElements(containee, includeTransientContainments);
-				result.add(containee);
-				result.addAll(elements);
+
+		for (EObject modelElement : modelElements) {
+			for (EObject containee : modelElement.eContents()) {
+
+				if (!ignoreSingletonDatatypes && isSingleton(containee)) {
+					continue;
+				}
+
+				if (!containee.eContainingFeature().isTransient() || includeTransientContainments) {
+					Set<EObject> elements = getAllContainedModelElements(containee, includeTransientContainments,
+						ignoreSingletonDatatypes);
+					result.add(containee);
+					result.addAll(elements);
+				}
 			}
 		}
+
 		return result;
 	}
 
@@ -1077,57 +1099,6 @@ public final class ModelUtil {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Checks whether any element within the given {@link Project} has any cross-references to the given {@link EObject}
-	 * .
-	 * 
-	 * @param element a {@link EObject}
-	 * @param project a {@link Project}
-	 * @param cutOffReferences whether cross-references should get cut off
-	 * @return true, if there are any cross-references to the {@link EObject} within the given {@link Project}
-	 */
-	public static boolean handleIncomingCrossReferences(EObject element, Project project, boolean cutOffReferences) {
-		Set<EObject> projectContents = project.getAllModelElements();
-		Set<EObject> elementEObjects = getAllContainedModelElements(element, false);
-		elementEObjects.add(element);
-
-		for (EObject eObject : projectContents) {
-
-			@SuppressWarnings("rawtypes")
-			EContentsEList.FeatureIterator featureIterator = (EContentsEList.FeatureIterator) eObject
-				.eCrossReferences().iterator();
-
-			while (featureIterator.hasNext()) {
-				EObject referencedObject = (EObject) featureIterator.next();
-
-				if (elementEObjects.contains(referencedObject)) {
-					ModelElementId referencedObjectId = project.getModelElementId(referencedObject) == null ? project
-						.getDeletedModelElementId(referencedObject) : project.getModelElementId(referencedObject);
-					ModelElementId elementId = project.getModelElementId(element) == null ? project
-						.getDeletedModelElementId(element) : project.getModelElementId(element);
-					if (cutOffReferences) {
-						EReference eReference = (EReference) featureIterator.feature();
-						if (eReference.isMany()) {
-							@SuppressWarnings("unchecked")
-							List<EObject> eObjects = (List<EObject>) eObject.eGet(eReference);
-							eObjects.remove(referencedObject);
-							logInfo("Cross-reference " + referencedObjectId + " removed from many reference "
-								+ eReference + ".");
-						} else {
-							eObject.eUnset(eReference);
-							logInfo("Cross-reference " + referencedObject + " removed from " + eReference + ".");
-						}
-					} else {
-						throw new IllegalStateException("Cross-reference from " + referencedObject + " to " + elementId
-							+ " detected.");
-					}
-				}
-			}
-		}
-
-		return false;
 	}
 
 	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
