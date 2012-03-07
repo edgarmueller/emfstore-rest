@@ -60,7 +60,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.common.model.util.AutoSplitAndSaveResourceContainmentList;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -518,7 +517,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		statePersister = new StatePersister(changeNotifier, ((EMFStoreCommandStack) Configuration.getEditingDomain()
 			.getCommandStack()), (IdEObjectCollectionImpl) this.getProject());
 
-		// TODO: initialization order important
+		// initialization order is important!
 		getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
 		getProject().addIdEObjectCollectionChangeObserver(statePersister);
 
@@ -919,6 +918,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#undoLastOperation()
 	 */
 	public void undoLastOperation() {
+		undoLastOperations(1);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#undoLastOperation()
+	 */
+	public void undoLastOperations(int numberOfOperations) {
+
+		if (numberOfOperations <= 0) {
+			return;
+		}
+
 		if (!this.getOperations().isEmpty()) {
 			List<AbstractOperation> operations = this.getOperations();
 			AbstractOperation lastOperation = operations.get(operations.size() - 1);
@@ -934,6 +948,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				startChangeRecording();
 			}
 			operations.remove(lastOperation);
+			undoLastOperations(--numberOfOperations);
 		}
 		updateDirtyState();
 	}
