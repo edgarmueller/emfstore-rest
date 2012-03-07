@@ -8,6 +8,7 @@
     <!-- these are referenced by the target platform feature in the releng repository: deactivated for debugging -->
 	<cq:advisorNode namePattern="^org\.eclipse\.(?:gmf|gef|draw2d|ocl)(?:\..+)?$" skipComponent="true"/>
     <cq:advisorNode namePattern="^edu\.tum\.cs\.cope(?:\..+)?$" skipComponent="true"/>
+    <cq:advisorNode namePattern="^org\.codehaus\.groovy(?:\..+)?$" skipComponent="true"/>
     
     <cq:advisorNode namePattern="^org\.eclipse\.emf\.emfstore.*\.source.*" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.apache\.commons\.logging\.source.*" skipComponent="true"/>
