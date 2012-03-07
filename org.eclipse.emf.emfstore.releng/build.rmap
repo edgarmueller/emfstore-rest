@@ -26,29 +26,7 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
-
-		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
-			<property key="git.auto.fetch" value="true"/>
-			<uri format="{0}/git/org.eclipse.emf.emfstore.releng,{1}">
-				<bc:propertyRef key="workspace.root"/>
-				<bc:propertyRef key="buckminster.component"/>
-			</uri>
-		</provider>
-
-		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.other.git"/>
-			<property key="git.auto.fetch" value="true"/>
-			<uri format="{0}/git/org.eclipse.emf.emfstore.other,{1}">
-				<bc:propertyRef key="workspace.root"/>
-				<bc:propertyRef key="buckminster.component"/>
-			</uri>
-		</provider>
-
 	</searchPath>
-
-
-
 
 	<searchPath name="p2">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false"
