@@ -11,22 +11,36 @@
 	<property key="eclipse.downloads" value="http://download.eclipse.org"/>
 	<property key="resolve.target.platform" value="true"/>
 
-	<locator pattern="^EMFStore(?:\..+)?$" searchPathRef="git"/>
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="git"/>
+	<locator pattern="^EMFStore(?:\..+)?$" searchPathRef="localgit"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localgit"/>
 	<locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
 	<locator searchPathRef="p2"/>
 
 
-	<searchPath name="git">
+	<searchPath name="localgit">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
-			<uri format="{0}/git/org.eclipse.emf.emfstore.core,{1}">
-				<bc:propertyRef key="workspace.root"/>
+			<uri format="{0}/git/ssh_emfstore.core,{1}">
+				<bc:propertyRef key="user.home"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
 	</searchPath>
+	
+	<searchPath name="git">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
+			<property key="git.auto.fetch" value="true"/>
+			<uri format="{0},{1}">
+				<bc:propertyRef key="git.clone.emfstore.core"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+
+	</searchPath>
+
+
 
 	<searchPath name="p2">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false"
