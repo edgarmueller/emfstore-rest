@@ -35,4 +35,12 @@
          id="org.eclipse.emf.emfstore.client.ui.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.emf.emfstore.perspective.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.ecore.feature"
+         version="0.0.0"/>
+
 </feature>
