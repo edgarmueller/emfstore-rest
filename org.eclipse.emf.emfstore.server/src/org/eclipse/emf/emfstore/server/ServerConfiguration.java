@@ -438,8 +438,8 @@ public final class ServerConfiguration {
 				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.server.locationprovider", true)
 					.getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
-				String message = "Error while instantiating location provider, switching to default location!";
-				ModelUtil.logWarning(message, e);
+				String message = "No location provider or error while instantiating location provider, switching to default location!";
+				ModelUtil.logWarning(message);
 			}
 
 			if (locationProvider == null) {
