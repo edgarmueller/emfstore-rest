@@ -63,6 +63,7 @@ public class IsServerAdminTester extends PropertyTester {
 				}
 			};
 			Boolean result = command.run(false);
+			System.out.println(":::::::::::::::::::::::::::::::::::::: I am " + result);
 			return result;
 
 		}
