@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * A collection of {@link EObject}s where each one can be identified via a
- * {@link ModelElementId}. {@link EObject}s can be added and deleted and checked
+ * A collection of {@link EObject}s where each one can be identified via a {@link ModelElementId}. {@link EObject}s can
+ * be added and deleted and checked
  * whether they are part of the collection.
  * 
  * @author emueller
@@ -42,8 +42,7 @@ public interface IdEObjectCollection extends EObject {
 	 *            A map containing {@link ModelElementId}s for the model element
 	 *            and its children
 	 */
-	void addModelElement(EObject modelElement,
-			Map<EObject, ModelElementId> modelElementToIdMap);
+	void addModelElement(EObject modelElement, Map<EObject, ModelElementId> modelElementToIdMap);
 
 	/**
 	 * Checks whether a given model element is contained in the collection.
@@ -65,8 +64,7 @@ public interface IdEObjectCollection extends EObject {
 	Collection<EObject> getModelElements();
 
 	/**
-	 * Checks whether the {@link EObject} with the given {@link ModelElementId}
-	 * is contained in the collection.
+	 * Checks whether the {@link EObject} with the given {@link ModelElementId} is contained in the collection.
 	 * 
 	 * @param eObjectId
 	 *            the {@link ModelElementId} of the {@link EObject}, which
@@ -75,16 +73,6 @@ public interface IdEObjectCollection extends EObject {
 	 *         question is contained in the collection
 	 */
 	boolean contains(ModelElementId eObjectId);
-
-	/**
-	 * Retrieve the {@link ModelElementId} of the deleted an already deleted
-	 * model element.
-	 * 
-	 * @param deletedModelElement
-	 *            a deleted model element
-	 * @return the {@link ModelElementId} of the deleted model element
-	 */
-	ModelElementId getDeletedModelElementId(EObject deletedModelElement);
 
 	/**
 	 * Retrieve the {@link ModelElementId} of the given model element.
@@ -101,8 +89,7 @@ public interface IdEObjectCollection extends EObject {
 	 * @param modelElementId
 	 *            the {@link ModelElementId} of the model element, that should
 	 *            get retrieved
-	 * @return the model element that has the given {@link ModelElementId}
-	 *         assigned
+	 * @return the model element that has the given {@link ModelElementId} assigned
 	 */
 	EObject getModelElement(ModelElementId modelElementId);
 
@@ -131,8 +118,8 @@ public interface IdEObjectCollection extends EObject {
 	/**
 	 * Initializes the ID caches of the collection, i.e. the collection will
 	 * call {@link IdEObjectCollection#getModelElements()} and for each model
-	 * element the {@link ModelElementId} is fetched via
-	 * {@link IdEObjectCollection#getModelElementId(EObject)}. Then a mapping
+	 * element the {@link ModelElementId} is fetched via {@link IdEObjectCollection#getModelElementId(EObject)}. Then a
+	 * mapping
 	 * between the model element and its {@link ModelElementId} is created
 	 * within the cache.
 	 */
@@ -145,8 +132,7 @@ public interface IdEObjectCollection extends EObject {
 	 * 
 	 * @param idToEObjectMap
 	 */
-	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap,
-			Map<ModelElementId, EObject> idToEObjectMap);
+	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap);
 
 	/**
 	 * Retrieve a list of all model elements of a certain type in the
@@ -160,12 +146,11 @@ public interface IdEObjectCollection extends EObject {
 	 *            a list of model elements, can be empty, but must be of the
 	 *            same type as the <code>modelElementClass</code> indicates.
 	 * @param includeSubclasses
-	 *            whether to also include all subclasses of the given
-	 *            {@link EClass} in the list
+	 *            whether to also include all subclasses of the given {@link EClass} in the list
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list, Boolean includeSubclasses);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list,
+		Boolean includeSubclasses);
 
 	/**
 	 * Retrieve a list of all model elements of a certain type in the
@@ -180,8 +165,7 @@ public interface IdEObjectCollection extends EObject {
 	 *            same type as the <code>modelElementClass</code> indicates.
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Retrieve a list of model elements of a certain type in the collection
@@ -196,8 +180,7 @@ public interface IdEObjectCollection extends EObject {
 	 *            same type as the <code>modelElementClass</code> indicates.
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> EList<T> getModelElementsByClass(
-			EClass modelElementClass, EList<T> list);
+	<T extends EObject> EList<T> getModelElementsByClass(EClass modelElementClass, EList<T> list);
 
 	/**
 	 * Assigns all EObjects that are contained in the collection and as keys in
@@ -211,4 +194,5 @@ public interface IdEObjectCollection extends EObject {
 	 */
 	void preAssignModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
 
+	void dispose();
 }

@@ -70,9 +70,15 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 				// silently fail
 				return;
 			}
+
 			EObject localModelElement = project.getModelElement(getModelElementId());
 
-			// remove model element from its parent
+			for (AbstractOperation op : getSubOperations()) {
+				op.apply(project);
+			}
+
+			// remove model element from its parent, this should only apply if
+			// the local model element in directly contained in the project
 			if (localModelElement.eContainmentFeature() != null) {
 				EReference eContainmentFeature = localModelElement.eContainmentFeature();
 				if (eContainmentFeature.isMany()) {
@@ -80,10 +86,6 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 				} else {
 					localModelElement.eContainer().eSet(eContainmentFeature, null);
 				}
-			}
-			// project.deleteModelElement(localModelElement);
-			for (AbstractOperation op : getSubOperations()) {
-				op.apply(project);
 			}
 		} else {
 			if (project.contains(getModelElementId())) {

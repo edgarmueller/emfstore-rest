@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -22,16 +21,18 @@ import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
- * Track a set of dirty resources for saving.
+ * Tracks a set of dirty resources for saving.
  * 
  * @author koegel
  */
 public class DirtyResourceSet {
 
 	private Set<Resource> resources;
-	private final IdEObjectCollection collection;
+	private final IdEObjectCollectionImpl collection;
 
 	/**
 	 * Constructor.
@@ -40,7 +41,7 @@ public class DirtyResourceSet {
 	 *            the {@link IdEObjectCollection} that is supposed to contain the model elements
 	 *            that will be saved by the dirty resource set
 	 */
-	public DirtyResourceSet(IdEObjectCollection collection) {
+	public DirtyResourceSet(IdEObjectCollectionImpl collection) {
 		this.collection = collection;
 		resources = new HashSet<Resource>();
 	}
@@ -68,10 +69,9 @@ public class DirtyResourceSet {
 				continue;
 			}
 
-			TreeIterator<EObject> allContents = resource.getAllContents();
+			Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
 
-			while (allContents.hasNext()) {
-				EObject modelElement = allContents.next();
+			for (EObject modelElement : modelElements) {
 				setModelElementIdOnResource((XMIResource) resource, modelElement);
 			}
 
@@ -111,6 +111,7 @@ public class DirtyResourceSet {
 		if (modelElementId == null) {
 			WorkspaceUtil.handleException(new IllegalStateException("No ID for model element" + modelElement));
 		}
+
 		return modelElementId;
 	}
 

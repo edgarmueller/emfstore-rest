@@ -13,13 +13,13 @@ package org.eclipse.emf.emfstore.server.model.versioning.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -33,6 +33,7 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -193,7 +194,9 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 			Resource resource = project.eResource();
 			if (resource instanceof XMIResource) {
-				EMap<EObject, ModelElementId> eObjectToIdMap = loadIdsFromResource((XMIResource) resource);
+				Set<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElements(project, false);
+				EMap<EObject, ModelElementId> eObjectToIdMap = loadIdsFromResourceForEObjects(
+					allContainedModelElements, (XMIResource) resource);
 
 				// create reverse mapping
 				Map<ModelElementId, EObject> idToEObjectMap = new HashMap<ModelElementId, EObject>(
@@ -528,7 +531,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return a map consisting of object/id mappings, if the resource doesn't
 	 *         contain an eobject/id mapping null will be returned
 	 */
-	private EMap<EObject, ModelElementId> loadIdsFromResource(XMIResource xmiResource) {
+	private EMap<EObject, ModelElementId> loadIdsFromResourceForEObjects(Set<EObject> modelElements,
+		XMIResource xmiResource) {
 
 		EMap<EObject, ModelElementId> eObjectToIdMap;
 
@@ -536,18 +540,16 @@ public class VersionImpl extends EObjectImpl implements Version {
 			// guess a rough initial size by looking at the size of the contents
 			eObjectToIdMap = new BasicEMap<EObject, ModelElementId>(xmiResource.getContents().size());
 
-			TreeIterator<EObject> it = xmiResource.getAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				String objId = xmiResource.getID(obj);
+			for (EObject eObject : modelElements) {
+				String objId = xmiResource.getID(eObject);
 				if (objId != null) {
 					ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 					modelElementId.setId(objId);
-					eObjectToIdMap.put(obj, modelElementId);
+					eObjectToIdMap.put(eObject, modelElementId);
 				}
 			}
 
-			return eObjectToIdMap; // .map();
+			return eObjectToIdMap;
 		}
 
 		return null;

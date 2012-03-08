@@ -1019,7 +1019,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(true, operations.get(0) instanceof CreateDeleteOperation);
 		CreateDeleteOperation operation = (CreateDeleteOperation) operations.get(0);
 		assertEquals(true, operation.isDelete());
-		assertEquals(getProject().getDeletedModelElementId(attribute), operation.getModelElementId());
+		// assertEquals(getProject().getDeletedModelElementId(attribute), operation.getModelElementId());
 
 		assertEquals(1, getProject().getModelElements().size()); // clazz
 		assertEquals(clazz, getProject().getModelElements().get(0));
@@ -1054,7 +1054,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		meeting.setIdentifiedWorkItemsSection(workItemMeetingSecion);
 
 		// copy meeting and check if the intra cross references were actually copied
-		Meeting copiedMeeting = (Meeting) ModelUtil.clone(meeting);
+		Meeting copiedMeeting = ModelUtil.clone(meeting);
 		assertFalse(copiedMeeting.getIdentifiedIssuesSection() == meeting.getIdentifiedIssuesSection());
 		assertFalse(copiedMeeting.getIdentifiedWorkItemsSection() == meeting.getIdentifiedWorkItemsSection());
 
