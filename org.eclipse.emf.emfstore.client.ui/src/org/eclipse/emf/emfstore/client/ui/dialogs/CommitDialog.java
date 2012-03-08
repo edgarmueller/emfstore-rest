@@ -15,13 +15,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -72,16 +72,16 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
 		trays = new HashMap<String, CommitDialogTray>();
-		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray");
-		for (IConfigurationElement c : config) {
-			try {
-				CommitDialogTray tray = (CommitDialogTray) c.createExecutableExtension("class");
-				String name = c.getAttribute("name");
-				tray.init(this);
-				trays.put(name, tray);
-			} catch (CoreException e) {
 
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
+			.getExtensionElements()) {
+			try {
+				CommitDialogTray tray = element.getClass("class", CommitDialogTray.class);
+				String name = element.getAttribute("name");
+				tray.init(CommitDialog.this);
+				trays.put(name, tray);
+			} catch (ExtensionPointException e) {
+				// fail silently
 			}
 		}
 	}
@@ -230,9 +230,8 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// final String notifyUsers = "Notify users";
-		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray");
-		for (IConfigurationElement c : config) {
+		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
+			.getExtensionElements()) {
 			final String name = c.getAttribute("name");
 			final CommitDialogTray tray = trays.get(name);
 			if (tray != null) {
