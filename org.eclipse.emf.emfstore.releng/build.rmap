@@ -19,7 +19,8 @@
 	<locator pattern="^org\.eclipse\.emf\.emfstore\.branding$" searchPathRef="localother"/>
 
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localcore"/>
-	<locator pattern="^EMFStore.*" searchPathRef="localreleng"/>
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localreleng"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="localcore"/>
 
 	<locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
 	<locator searchPathRef="p2"/>
