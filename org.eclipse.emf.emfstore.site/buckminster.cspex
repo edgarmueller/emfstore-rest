@@ -7,6 +7,5 @@
 		<dependency name="EMFStoreTargetPlatform" componentType="eclipse.feature"/>
 		
 		<dependency name="org.eclipse.emf.emfstore.client.test"/>
-		<dependency name="org.eclipse.emf.emfstore.ecore"/>
 	</dependencies>
 </cspecExtension>
