@@ -11,12 +11,21 @@
 	<property key="eclipse.downloads" value="http://download.eclipse.org"/>
 	<property key="resolve.target.platform" value="true"/>
 	
+	<!-- DEBUG -->
+	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localreleng"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localcore"/>
 	
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localreleng"/>
 	<locator pattern="^EMFStoreDeveloper$" searchPathRef="localcore"/>
-
+	-->
+	
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="releng"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="core"/>
+	
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="releng"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="core"/>
+	
 	<locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
 	<locator searchPathRef="p2"/>
 
