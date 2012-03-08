@@ -8,6 +8,5 @@
 		
 		<dependency name="org.eclipse.emf.emfstore.client.test"/>
 		<dependency name="org.eclipse.emf.emfstore.ecore"/>
-		<dependency name="org.eclipse.emf.emfstore.perspective"/>
 	</dependencies>
 </cspecExtension>
