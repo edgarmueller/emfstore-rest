@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -189,6 +190,7 @@ public final class WorkspaceManager {
 	private Workspace initWorkSpace() {
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
+		((ResourceSetImpl) resourceSet).setURIResourceMap(new HashMap<URI, Resource>());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
 		boolean useCrossReferenceAdapter = false;
