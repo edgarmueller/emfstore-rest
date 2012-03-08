@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
@@ -45,6 +43,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
@@ -129,11 +128,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// cut off incoming cross-references by default
 		cutOffIncomingCrossReferences = true;
 
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.recording.options");
-		if (elements != null && elements.length > 0) {
-			cutOffIncomingCrossReferences = Boolean.parseBoolean(elements[0]
-				.getAttribute("cutOffIncomingCrossReferences"));
+		Boolean cutOff = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
+			.getBoolean("cutOffIncomingCrossReferences");
+		if (cutOff != null) {
+			cutOffIncomingCrossReferences = cutOff;
 		}
 
 		emitOperationsWhenCommandCompleted = true;

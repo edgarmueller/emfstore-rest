@@ -20,10 +20,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.common.Activator;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 
 /**
  * This is a universal observer bus. This class follows the publish/subscribe pattern, it is a central dispatcher for
@@ -35,7 +34,8 @@ import org.eclipse.emf.emfstore.common.Activator;
  * Observers are notified.
  * This is implemented by using the java {@link Proxy} class. By calling {@link #notify(Class)} a proxy is returned,
  * which then calls all registered observers.
- * The proxy can also be casted into {@link ObserverCall}, which allows to access all results by the different observers.
+ * The proxy can also be casted into {@link ObserverCall}, which allows to access all results by the different
+ * observers.
  * 
  * 
  * Example code:
@@ -285,20 +285,14 @@ public class ObserverBus {
 	 * Pulls observers from an extensionpoint and registers them.
 	 */
 	public void collectionExtensionPoints() {
-		IConfigurationElement[] confs = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.common.observer");
-		for (IConfigurationElement element : confs) {
+		for (ExtensionElement outer : new ExtensionPoint("org.eclipse.emf.emfstore.common.observer",true)
+			.getExtensionElements()) {
 			try {
-				String extensionPointName = element.getAttribute("extensionPointName");
-				String observerAttributeName = element.getAttribute("observerAttributeName");
-				IConfigurationElement[] extensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
-					extensionPointName);
-				for (IConfigurationElement extension : extensions) {
-					IObserver o = (IObserver) extension.createExecutableExtension(observerAttributeName);
-					register(o);
+				for (ExtensionElement inner : new ExtensionPoint(outer.getAttribute("extensionPointName"),true)
+					.getExtensionElements()) {
+					register(inner.getClass(outer.getAttribute("observerAttributeName"), IObserver.class));
 				}
-			} catch (CoreException e) {
-				Activator.getDefault().logException(e.getMessage(), e);
+			} catch (ExtensionPointException e) {
 			}
 		}
 	}

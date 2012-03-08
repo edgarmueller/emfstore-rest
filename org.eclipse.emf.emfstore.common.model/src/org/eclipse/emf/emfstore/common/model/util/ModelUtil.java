@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -50,6 +48,9 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.CommonUtil;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -150,12 +151,12 @@ public final class ModelUtil {
 		boolean hrefCheckEnabled = false;
 		boolean proxyCheckEnabled = false;
 
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.common.model.serializationoptions");
-		if (elements != null && elements.length > 0) {
-			hrefCheckEnabled = Boolean.parseBoolean(elements[0].getAttribute("HrefCheck"));
-			proxyCheckEnabled = Boolean.parseBoolean(elements[0].getAttribute("ProxyCheck"));
-			containmentCheckEnabled = Boolean.parseBoolean(elements[0].getAttribute("SelfContainmentCheck"));
+		ExtensionElement element = new ExtensionPoint("org.eclipse.emf.emfstore.common.model.serializationoptions")
+			.getFirst();
+		if (element != null) {
+			hrefCheckEnabled = element.getBoolean("HrefCheck");
+			proxyCheckEnabled = element.getBoolean("ProxyCheck");
+			containmentCheckEnabled = element.getBoolean("SelfContainmentCheck");
 		}
 
 		return eObjectToString(object, !containmentCheckEnabled, !hrefCheckEnabled, !proxyCheckEnabled);
@@ -278,11 +279,12 @@ public final class ModelUtil {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new HashSet<String>();
-			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-				"org.eclipse.emf.emfstore.common.model.ignoredatatype");
-			for (IConfigurationElement extension : config) {
-				String className = extension.getAttribute("type");
-				ignoredDataTypes.add(className);
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoredatatype",
+				true).getExtensionElements()) {
+				try {
+					ignoredDataTypes.add(element.getAttribute("type"));
+				} catch (ExtensionPointException e) {
+				}
 			}
 		}
 
@@ -713,22 +715,17 @@ public final class ModelUtil {
 	 *             if there is no well formed or defined model version
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.common.model.modelversion");
-		if (rawExtensions.length != 1) {
-			String message = "There is " + rawExtensions.length
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.common.model.modelversion", true);
+		if (extensionPoint.size() != 1) {
+			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
 			logInfo(message);
 			return 0;
 		}
-		IConfigurationElement extension = rawExtensions[0];
-		String string = extension.getAttribute("versionIdentifier");
 		try {
-			int version = Integer.parseInt(string);
-			return version;
-		} catch (NumberFormatException e) {
-			throw new MalformedModelVersionException("Version identifier was malformed, it must be an integer: "
-				+ string);
+			return extensionPoint.getFirst().getInteger("versionIdentifier");
+		} catch (ExtensionPointException e) {
+			throw new MalformedModelVersionException("Version identifier was malformed, it must be an integer.", e);
 		}
 	}
 
@@ -1086,15 +1083,12 @@ public final class ModelUtil {
 		if (singletonIdResolvers == null) {
 			// collect singleton ID resolvers
 			singletonIdResolvers = new HashSet<SingletonIdResolver>();
-			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
-				"org.eclipse.emf.emfstore.common.model.singletonidresolver");
 
-			for (IConfigurationElement extension : config) {
-				SingletonIdResolver resolver;
+			for (ExtensionElement element : new ExtensionPoint(
+				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
 				try {
-					resolver = (SingletonIdResolver) extension.createExecutableExtension("class");
-					singletonIdResolvers.add(resolver);
-				} catch (CoreException e) {
+					singletonIdResolvers.add(element.getClass("class", SingletonIdResolver.class));
+				} catch (ExtensionPointException e) {
 					ModelUtil.logWarning("Couldn't instantiate Singleton ID resolver:" + e.getMessage());
 				}
 			}

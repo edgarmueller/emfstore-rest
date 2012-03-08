@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -44,6 +41,9 @@ import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
@@ -132,27 +132,23 @@ public final class WorkspaceManager {
 
 	private void initializeObserverBus() {
 		this.observerBus = new ObserverBus();
-		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.observers");
-		for (IConfigurationElement extension : rawExtensions) {
+
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.observers", true)
+			.getExtensionElements()) {
 			try {
-				IObserver observer = (IObserver) extension.createExecutableExtension("ObserverClass");
-				observerBus.register(observer);
-			} catch (CoreException e) {
+				observerBus.register(element.getClass("ObserverClass", IObserver.class));
+			} catch (ExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
 	}
 
 	private void notifyPostWorkspaceInitiators() {
-		IConfigurationElement[] workspaceObservers = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.notify.postinit");
-		for (IConfigurationElement element : workspaceObservers) {
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
+			.getExtensionElements()) {
 			try {
-				PostWorkspaceInitiator workspaceObserver = (PostWorkspaceInitiator) element
-					.createExecutableExtension("class");
-				workspaceObserver.workspaceInitComplete(currentWorkspace);
-			} catch (CoreException e) {
+				element.getClass("class", PostWorkspaceInitiator.class).workspaceInitComplete(currentWorkspace);
+			} catch (ExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
@@ -195,14 +191,11 @@ public final class WorkspaceManager {
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.inverseCrossReferenceCache");
 		boolean useCrossReferenceAdapter = false;
 
-		if (elements != null && elements.length > 0) {
-			for (IConfigurationElement element : elements) {
-				useCrossReferenceAdapter |= Boolean.parseBoolean(element.getAttribute("activated"));
-			}
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
+			.getExtensionElements()) {
+			useCrossReferenceAdapter |= element.getBoolean("activated");
 		}
 
 		if (useCrossReferenceAdapter) {
@@ -267,19 +260,9 @@ public final class WorkspaceManager {
 	}
 
 	private EditingDomainProvider getDomainProvider() {
-		IConfigurationElement[] rawExtensions = Platform.getExtensionRegistry().getConfigurationElementsFor(
-			"org.eclipse.emf.emfstore.client.editingDomainProvider");
-		for (IConfigurationElement extension : rawExtensions) {
-			try {
-				EditingDomainProvider provider = (EditingDomainProvider) extension.createExecutableExtension("class");
-				if (provider != null) {
-					return provider;
-				}
-			} catch (CoreException e) {
-				// fail silently
-			}
-		}
-		return null;
+		// TODO EXPT PRIO
+		return new ExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider").getClass("class",
+			EditingDomainProvider.class);
 	}
 
 	private Workspace createNewWorkspace(ResourceSet resourceSet, URI fileURI) {
@@ -604,7 +587,7 @@ public final class WorkspaceManager {
 	}
 
 	/**
-	 * Returns the {@link SessionManager}
+	 * Returns the {@link SessionManager}.
 	 * 
 	 * @return session manager
 	 */
