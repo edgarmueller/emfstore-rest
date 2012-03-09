@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.provider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,8 @@ public class CustomOperationLabelProviderManager {
 	}
 
 	private void initExtensions() {
+
+		list = new ArrayList<AbstractOperationCustomLabelProvider>();
 
 		for (ExtensionElement element : new ExtensionPoint(
 			"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true).getExtensionElements()) {
