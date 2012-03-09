@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.emfstore.common.Activator;
 
 /**
  * This class is a convenience wrapper for eclipse extension points. It can be configured to return null if a value
@@ -223,9 +224,19 @@ public class ExtensionPoint {
 			if (expOrNull == null) {
 				throw new ExtensionPointException("Value not found.");
 			}
+			logException(expOrNull);
 			throw new ExtensionPointException(expOrNull);
 		}
 		return null;
+	}
+
+	/**
+	 * Convenience method for logging.
+	 * 
+	 * @param e exception
+	 */
+	protected static void logException(Exception e) {
+		Activator.getDefault().logException("An exception occurred while using an ExtensionPoint", e);
 	}
 
 	/**
