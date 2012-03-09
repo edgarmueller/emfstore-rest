@@ -9,7 +9,7 @@
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
-
+THIS IS AN INTENTIONAL SYNTAX ERROR TO TEST CONTINUOUS INTEGRATION
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.osgi.framework.BundleContext;
