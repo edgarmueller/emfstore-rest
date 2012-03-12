@@ -12,19 +12,23 @@
 	<property key="resolve.target.platform" value="true"/>
 	
 	<!-- DEBUG -->
-	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localreleng"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localcore"/>
-	
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localreleng"/>
 	<locator pattern="^EMFStoreDeveloper$" searchPathRef="localcore"/>
-	-->
 	
+	<locator pattern="^org\.eclipse\.ecp(?:\..+)?\.feature$" searchPathRef="localecpreleng"/>
+	<locator pattern="^org\.eclipse\.ecp(?:\..+)?$" searchPathRef="localecpcore"/>
+	<locator pattern="^ECPTargetPlatform$" searchPathRef="localecpreleng"/>
+	<locator pattern="^ECPDeveloper$" searchPathRef="localecpcore"/>
+	
+	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="releng"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="core"/>
 	
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="releng"/>
 	<locator pattern="^EMFStoreDeveloper$" searchPathRef="core"/>
+	-->
 	
 	<locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
 	<locator searchPathRef="p2"/>
@@ -73,6 +77,32 @@
 			</uri>
 		</provider>
 	</searchPath>
+
+
+
+
+	<searchPath name="localecpcore">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.core.git"/>
+			<property key="git.auto.fetch" value="true"/>
+			<uri format="{0}/git/ssh_emfcp.core,{1}">
+				<bc:propertyRef key="user.home"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="localecpreleng">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.releng.git"/>
+			<property key="git.auto.fetch" value="true"/>
+			<uri format="{0}/git/ssh_emfcp.releng,{1}">
+				<bc:propertyRef key="user.home"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+	</searchPath>
+
 
 
 

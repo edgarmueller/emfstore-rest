@@ -7,6 +7,9 @@
 		<dependency name="EMFStoreTargetPlatform" componentType="eclipse.feature"/>
 		<dependency name="EMFStoreDeveloper" componentType="eclipse.feature"/>
 		
+		<dependency name="ECPTargetPlatform" componentType="eclipse.feature"/>
+		<dependency name="ECPDeveloper" componentType="eclipse.feature"/>
+		
 		<dependency name="org.eclipse.emf.emfstore.client.test"/>
 	</dependencies>
 </cspecExtension>
