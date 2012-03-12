@@ -17,8 +17,8 @@
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localreleng"/>
 	<locator pattern="^EMFStoreDeveloper$" searchPathRef="localcore"/>
 	
-	<locator pattern="^org\.eclipse\.ecp(?:\..+)?\.feature$" searchPathRef="localecpreleng"/>
-	<locator pattern="^org\.eclipse\.ecp(?:\..+)?$" searchPathRef="localecpcore"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="localecpreleng"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localecpcore"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localecpreleng"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="localecpcore"/>
 	
