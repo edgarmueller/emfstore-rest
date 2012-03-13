@@ -2,6 +2,9 @@
 <cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="build.rmap" properties="buckminster.properties">
     <cq:rootRequest name="org.eclipse.emf.emfstore.site" componentType="eclipse.feature"/>
     
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.ecp(?:\..+)?$" branchTagPath="ECP_materialization,master"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" branchTagPath="ECP_materialization,master"/>
+    
     <!-- ecp.license is in ecp repository and will be pulled in if the site-feature from the releng repo is used -->
     <cq:advisorNode namePattern="^org\.eclipse\.emf\.ecp\.license$" skipComponent="true"/>
     
