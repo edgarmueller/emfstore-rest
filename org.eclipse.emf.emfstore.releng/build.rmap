@@ -122,9 +122,6 @@
 		</provider>
 	</searchPath>
 
-
-
-
 	<searchPath name="localecp">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.core.git"/>
