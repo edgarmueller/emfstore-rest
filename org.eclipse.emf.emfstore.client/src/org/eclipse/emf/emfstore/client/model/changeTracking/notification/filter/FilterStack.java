@@ -30,8 +30,9 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 public final class FilterStack implements NotificationFilter {
 
 	private static final NotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
-		new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(), new IgnoreOutsideProjectReferencesFilter(),
-		new IgnoreNullFeatureNotificationsFilter(), new NotifiableIdEObjectCollectionFilter() };
+		new UnknownEventTypeFilter(), new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(),
+		new IgnoreOutsideProjectReferencesFilter(), new IgnoreNullFeatureNotificationsFilter(),
+		new NotifiableIdEObjectCollectionFilter() };
 
 	/**
 	 * The default filter stack.
