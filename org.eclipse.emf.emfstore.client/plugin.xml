@@ -80,5 +80,12 @@
            observerAttributeName="checkoutObserver">
      </observer>
   </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observer">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.exceptionObserver"
+           observerAttributeName="exceptionObserver">
+     </observer>
+  </extension>
 
 </plugin>
