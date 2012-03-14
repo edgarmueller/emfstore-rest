@@ -13,32 +13,32 @@
 	
 	<!-- DEBUG -->
 	<!--
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localreleng"/>
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localcore"/>
-	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localreleng"/>
-	<locator pattern="^EMFStoreDeveloper$" searchPathRef="localcore"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="local"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="local"/>
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="local"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="local"/>
 	
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="localecpreleng"/>
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localecpcore"/>
-	<locator pattern="^ECPTargetPlatform$" searchPathRef="localecpreleng"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="localecpcore"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="localecp"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localecp"/>
+	<locator pattern="^ECPTargetPlatform$" searchPathRef="localecp"/>
+	<locator pattern="^ECPDeveloper$" searchPathRef="localecp"/>
 	-->
 	
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="releng"/>
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="core"/>
-	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="releng"/>
-	<locator pattern="^EMFStoreDeveloper$" searchPathRef="core"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="remote"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="remote"/>
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="remote"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="remote"/>
 	
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="ecpreleng"/>
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="ecpcore"/>
-	<locator pattern="^ECPTargetPlatform$" searchPathRef="ecpreleng"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="ecpcore"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="remoteecp"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="remoteecp"/>
+	<locator pattern="^ECPTargetPlatform$" searchPathRef="remoteecp"/>
+	<locator pattern="^ECPDeveloper$" searchPathRef="remoteecp"/>
 	
 	
 	<locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
 	<locator searchPathRef="p2"/>
 
-	<searchPath name="core">
+	<searchPath name="remote">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -47,9 +47,6 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
-	</searchPath>
-
-	<searchPath name="releng">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -58,9 +55,17 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.other.git"/>
+			<property key="git.auto.fetch" value="true"/>
+            <uri format="{0}/git/org.eclipse.emf.emfstore.other,{1}">
+                <bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
 	</searchPath>
 	
-	<searchPath name="ecpcore">
+	<searchPath name="remoteecp">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -69,13 +74,18 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
-	</searchPath>
-
-	<searchPath name="ecpreleng">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.releng.git"/>
 			<property key="git.auto.fetch" value="true"/>
             <uri format="{0}/git/org.eclipse.emf.emfstore.releng,{1}">
+                <bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.other.git"/>
+			<property key="git.auto.fetch" value="true"/>
+            <uri format="{0}/git/org.eclipse.emf.emfstore.other,{1}">
                 <bc:propertyRef key="workspace.root"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
@@ -85,7 +95,7 @@
 
 
 
-	<searchPath name="localcore">
+	<searchPath name="local">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -94,9 +104,6 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
-	</searchPath>
-
-	<searchPath name="localreleng">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -105,12 +112,20 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.other.git"/>
+			<property key="git.auto.fetch" value="true"/>
+			<uri format="{0}/git/ssh_emfstore.other,{1}">
+				<bc:propertyRef key="user.home"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
 	</searchPath>
 
 
 
 
-	<searchPath name="localecpcore">
+	<searchPath name="localecp">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
@@ -119,13 +134,18 @@
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
-	</searchPath>
-
-	<searchPath name="localecpreleng">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.releng.git"/>
 			<property key="git.auto.fetch" value="true"/>
 			<uri format="{0}/git/ssh_emfcp.releng,{1}">
+				<bc:propertyRef key="user.home"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emfclient/org.eclipse.emf.ecp.other.git"/>
+			<property key="git.auto.fetch" value="true"/>
+			<uri format="{0}/git/ssh_emfcp.other,{1}">
 				<bc:propertyRef key="user.home"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
