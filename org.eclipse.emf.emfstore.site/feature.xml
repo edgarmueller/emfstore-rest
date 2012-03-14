@@ -40,10 +40,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.ecore.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.emf.ecp.common.feature"
          version="0.0.0"/>
 
