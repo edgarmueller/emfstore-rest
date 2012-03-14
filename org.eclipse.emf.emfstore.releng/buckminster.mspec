@@ -5,5 +5,6 @@
 	
 	<mspec:mspecNode namePattern="^EMFStore(?:\..+)?$" materializer="workspace"/>
 	<mspec:mspecNode namePattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" materializer="workspace"/>
+	<mspec:mspecNode namePattern="^ECP(?:\..+)?$" materializer="workspace"/>
 	<mspec:mspecNode namePattern="^org\.eclipse\.emf\.ecp(?:\..+)?$" materializer="workspace"/>
 </mspec:mspec>

@@ -40,7 +40,39 @@
          version="0.0.0"/>
 
    <includes
+         id="org.eclipse.emf.ecp.common.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.ecp.editor.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.ecp.navigator.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.ecp.navigatoreditorbridge.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.ecp.validation.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.backchannel.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.client.transaction.feature"
+         version="0.0.0"/>
+
+   <includes
          id="org.eclipse.emf.emfstore.ecore.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.emfstore.ecp.feature"
          version="0.0.0"/>
 
 </feature>
