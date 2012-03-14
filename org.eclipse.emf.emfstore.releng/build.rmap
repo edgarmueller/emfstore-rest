@@ -42,7 +42,7 @@
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.core.git"/>
 			<property key="git.auto.fetch" value="true"/>
-            <uri format="{0}/git2/org.eclipse.emf.emfstore.core,{1}">
+            <uri format="{0}/git3/org.eclipse.emf.emfstore.core,{1}">
                 <bc:propertyRef key="workspace.root"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
@@ -50,7 +50,7 @@
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.releng.git"/>
 			<property key="git.auto.fetch" value="true"/>
-            <uri format="{0}/git2/org.eclipse.emf.emfstore.releng,{1}">
+            <uri format="{0}/git3/org.eclipse.emf.emfstore.releng,{1}">
                 <bc:propertyRef key="workspace.root"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
@@ -58,7 +58,7 @@
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="git" source="true">
 			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf-store/org.eclipse.emf.emfstore.other.git"/>
 			<property key="git.auto.fetch" value="true"/>
-            <uri format="{0}/git2/org.eclipse.emf.emfstore.other,{1}">
+            <uri format="{0}/git3/org.eclipse.emf.emfstore.other,{1}">
                 <bc:propertyRef key="workspace.root"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
