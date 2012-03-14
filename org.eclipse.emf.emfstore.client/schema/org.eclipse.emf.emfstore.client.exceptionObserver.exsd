@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Commit Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Exception Observer"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
