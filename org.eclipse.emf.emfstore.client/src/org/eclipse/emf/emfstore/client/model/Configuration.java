@@ -383,7 +383,7 @@ public final class Configuration {
 	 * 
 	 * @param enabled whether to enable auto save
 	 */
-	public void setAutoSave(boolean enabled) {
+	public static void setAutoSave(boolean enabled) {
 		Configuration.autoSave = enabled;
 	}
 
