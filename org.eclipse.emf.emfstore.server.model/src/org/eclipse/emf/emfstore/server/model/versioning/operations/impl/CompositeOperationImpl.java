@@ -174,18 +174,33 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 		return OperationsPackage.Literals.COMPOSITE_OPERATION;
 	}
 
+	// begin of custom code
+
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * Returns all sub operations. Will not enforce uniqueness. Will not enforce uniqueness, do NOT add the same element
+	 * twice!
 	 * 
-	 * @generated
+	 * @return a list of sub operation
+	 *         <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
+	@SuppressWarnings("serial")
 	public EList<AbstractOperation> getSubOperations() {
 		if (subOperations == null) {
 			subOperations = new EObjectContainmentEList.Resolving<AbstractOperation>(AbstractOperation.class, this,
-				OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS);
+				OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS) {
+				@Override
+				protected boolean isUnique() {
+					return false;
+				}
+			};
 		}
 		return subOperations;
 	}
+
+	// end of custom code
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

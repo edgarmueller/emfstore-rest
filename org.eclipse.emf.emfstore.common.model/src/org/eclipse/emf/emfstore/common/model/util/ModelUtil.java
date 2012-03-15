@@ -190,17 +190,7 @@ public final class ModelUtil {
 		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		EObject copy;
 		if (object instanceof Project) {
-			Project project = (Project) object;
-			Project copiedProject = (Project) clone(object);
-
-			for (ModelElementId modelElementId : project.getAllModelElementIds()) {
-				if (isIgnoredDatatype(project.getModelElement(modelElementId))) {
-					continue;
-				}
-				res.setID(copiedProject.getModelElement(modelElementId), modelElementId.getId());
-			}
-			res.getContents().add(copiedProject);
-			copy = copiedProject;
+			copy = copyProject(object, res);
 		} else {
 			copy = ModelUtil.clone(object);
 			res.getContents().add(copy);
@@ -235,6 +225,22 @@ public final class ModelUtil {
 		}
 
 		return result;
+	}
+
+	private static EObject copyProject(EObject object, XMIResource res) {
+		EObject copy;
+		Project project = (Project) object;
+		Project copiedProject = (Project) clone(object);
+
+		for (ModelElementId modelElementId : project.getAllModelElementIds()) {
+			if (isIgnoredDatatype(project.getModelElement(modelElementId))) {
+				continue;
+			}
+			res.setID(copiedProject.getModelElement(modelElementId), modelElementId.getId());
+		}
+		res.getContents().add(copiedProject);
+		copy = copiedProject;
+		return copy;
 	}
 
 	/**
@@ -362,6 +368,7 @@ public final class ModelUtil {
 	 * 
 	 * @return map of options for {@link XMIResource} or {@link XMLResource}.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
 			resourceLoadOptions = new HashMap<Object, Object>();
@@ -371,9 +378,6 @@ public final class ModelUtil {
 			resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-
-			// resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			// resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
 		}
 		return resourceLoadOptions;
 	}
@@ -383,6 +387,7 @@ public final class ModelUtil {
 	 * 
 	 * @return map of options for {@link XMIResource} or {@link XMLResource}.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Map<Object, Object> getResourceSaveOptions() {
 		if (resourceSaveOptions == null) {
 			resourceSaveOptions = new HashMap<Object, Object>();
@@ -829,12 +834,39 @@ public final class ModelUtil {
 			ignoreSingletonDatatypes);
 	}
 
+	/**
+	 * Get all contained elements of a given resource.
+	 * 
+	 * @param resource
+	 *            the resource
+	 * @param includeTransientContainments
+	 *            true if transient containments should be included in the
+	 *            result
+	 * @param ignoreSingletonDatatypes
+	 *            whether to ignore singleton datatypes like, for example,
+	 *            EString
+	 * @return a set of contained model elements
+	 *         Get all
+	 */
 	public static Set<EObject> getAllContainedModelElements(Resource resource, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
 		return getAllContainedModelElements(resource.getContents(), includeTransientContainments,
 			ignoreSingletonDatatypes);
 	}
 
+	/**
+	 * Get all contained elements of a given collection of model elements.
+	 * 
+	 * @param modelElements
+	 *            a collection of elements
+	 * @param includeTransientContainments
+	 *            true if transient containments should be included in the
+	 *            result
+	 * @param ignoreSingletonDatatypes
+	 *            whether to ignore singleton datatypes like, for example,
+	 *            EString
+	 * @return a set of contained model elements
+	 */
 	public static Set<EObject> getAllContainedModelElements(Collection<EObject> modelElements,
 		boolean includeTransientContainments, boolean ignoreSingletonDatatypes) {
 
@@ -897,11 +929,7 @@ public final class ModelUtil {
 			EObject containee = it.next();
 			if (containee.eContainingFeature() != null && !containee.eContainingFeature().isTransient()
 				|| includeTransientContainments) {
-				List<EObject> elements = getAllContainedModelElementsAsList(containee, includeTransientContainments);
-				if (!result.contains(containee)) {
-					result.add(containee);
-				}
-				result.addAll(elements);
+				result.add(containee);
 			}
 		}
 
@@ -909,9 +937,10 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Delete all incoming cross references to the given model element from any
+	 * Delete the given incoming cross references to the given model element from any
 	 * other model element in the given project.
 	 * 
+	 * @param inverseReferences a collection of inverse references
 	 * @param modelElement
 	 *            the model element
 	 */
@@ -936,8 +965,9 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Delete all outgoing cross references of the given model element.
+	 * Delete all outgoing cross references of the given model element to any element in the given collection.
 	 * 
+	 * @param collection the collection
 	 * @param modelElement
 	 *            the model element
 	 */
@@ -959,12 +989,19 @@ public final class ModelUtil {
 		}
 	}
 
+	/**
+	 * Retrieve all outgoing connections from the model elements to other elements in the collection.
+	 * 
+	 * @param collection the collection
+	 * @param modelElements the model elements
+	 * @return a List of references
+	 */
 	public static List<SettingWithReferencedElement> collectOutgoingCrossReferences(IdEObjectCollection collection,
-		Set<EObject> allModelElements) {
+		Set<EObject> modelElements) {
 		// result object
 		List<SettingWithReferencedElement> settings = new ArrayList<SettingWithReferencedElement>();
 
-		for (EObject currentElement : allModelElements) {
+		for (EObject currentElement : modelElements) {
 
 			for (EReference reference : currentElement.eClass().getEAllReferences()) {
 				EClassifier eType = reference.getEType();
@@ -981,7 +1018,7 @@ public final class ModelUtil {
 					@SuppressWarnings("unchecked")
 					List<EObject> referencedElements = (List<EObject>) currentElement.eGet(reference);
 					for (EObject referencedElement : referencedElements) {
-						if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+						if (shouldBeCollected(collection, modelElements, referencedElement)) {
 							settings.add(new SettingWithReferencedElement(setting, referencedElement));
 						}
 					}
@@ -989,7 +1026,7 @@ public final class ModelUtil {
 					// single references
 
 					EObject referencedElement = (EObject) currentElement.eGet(reference);
-					if (shouldBeCollected(collection, allModelElements, referencedElement)) {
+					if (shouldBeCollected(collection, modelElements, referencedElement)) {
 						settings.add(new SettingWithReferencedElement(setting, referencedElement));
 					}
 
@@ -1000,6 +1037,15 @@ public final class ModelUtil {
 		return settings;
 	}
 
+	/**
+	 * Checks if the referenced elements is an element in the given collection which is not a singleton, not an ignored
+	 * data type and not already contained in the given set of elements.
+	 * 
+	 * @param collection the collection
+	 * @param allModelElements the set of model elements
+	 * @param referencedElement the referenced element
+	 * @return true, if the specified conditions are met.
+	 */
 	public static boolean shouldBeCollected(IdEObjectCollection collection, Set<EObject> allModelElements,
 		EObject referencedElement) {
 
@@ -1098,6 +1144,13 @@ public final class ModelUtil {
 		}
 	}
 
+	/**
+	 * Copy an element including its ids from a project.
+	 * 
+	 * @param originalObject the source
+	 * @param copiedObject the target
+	 * @return a map from copied objects to ids.
+	 */
 	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
 
 		Map<EObject, ModelElementId> idMap = new HashMap<EObject, ModelElementId>();
