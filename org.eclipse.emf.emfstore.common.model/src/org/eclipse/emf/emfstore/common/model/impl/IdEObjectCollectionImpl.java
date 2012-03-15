@@ -40,21 +40,11 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
  */
 public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection {
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#dispose()
-	 */
-	public void dispose() {
-		eObjectToIdCache.clear();
-		idToEObjectCache.clear();
-		clearCaches();
-		cachesInitialized = false;
-	}
-
 	// Caches
 	private Map<EObject, ModelElementId> eObjectToIdCache;
 	private Map<ModelElementId, EObject> idToEObjectCache;
+	private Map<String, EObject> idStringToEObjectMap;
+	private Map<EObject, String> eObjectToIdStringMap;
 	private boolean cachesInitialized;
 
 	/**
@@ -75,6 +65,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public IdEObjectCollectionImpl() {
 		eObjectToIdCache = new HashMap<EObject, ModelElementId>();
 		idToEObjectCache = new HashMap<ModelElementId, EObject>();
+		this.idStringToEObjectMap = new HashMap<String, EObject>();
+		this.eObjectToIdStringMap = new HashMap<EObject, String>();
 		deletedEObjectToIdMap = new HashMap<EObject, ModelElementId>();
 		deletedIdMapToEObject = new HashMap<ModelElementId, EObject>();
 		newEObjectToIdMap = new HashMap<EObject, ModelElementId>();
@@ -635,6 +627,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	protected void putIntoCaches(EObject modelElement, ModelElementId modelElementId) {
 		eObjectToIdCache.put(modelElement, modelElementId);
 		idToEObjectCache.put(modelElementId, modelElement);
+		getIdStringToEObjectMap().put(modelElementId.getId(), modelElement);
+		getEObjectToIdStringMap().put(modelElement, modelElementId.getId());
 	}
 
 	/**
@@ -651,6 +645,20 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		((IdEObjectCollectionImpl) result).cachesInitialized = true;
 		copier.copyReferences();
 		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#dispose()
+	 */
+	public void dispose() {
+		eObjectToIdCache.clear();
+		idToEObjectCache.clear();
+		idStringToEObjectMap.clear();
+		eObjectToIdStringMap.clear();
+		clearVolatileCaches();
+		cachesInitialized = false;
 	}
 
 	/**
@@ -708,6 +716,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			if (isAlreadyContained) {
 				eObjectToIdCache.put(modelElement, modelElementId);
 				idToEObjectCache.put(modelElementId, modelElement);
+				this.getEObjectToIdStringMap().put(modelElement, modelElementId.getId());
+				getIdStringToEObjectMap().put(modelElementId.getId(), modelElement);
 			}
 
 			// do this even if the model element is already contained;
@@ -719,12 +729,34 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	}
 
 	/**
-	 * 
+	 * Clear all caches.
 	 */
-	public void clearCaches() {
+	public void clearVolatileCaches() {
 		deletedEObjectToIdMap.clear();
 		deletedIdMapToEObject.clear();
 		newEObjectToIdMap.clear();
 		newIdMapToEObject.clear();
+	}
+
+	/**
+	 * Returns the ID/EObject mapping where IDs are represented as strings.
+	 * This method is mainly provided for convenience and performance reasons,
+	 * where the ID must be a string.
+	 * 
+	 * @return the ID/EObject mapping
+	 */
+	public Map<String, EObject> getIdStringToEObjectMap() {
+		return idStringToEObjectMap;
+	}
+
+	/**
+	 * Returns the EObject/ID mapping where IDs are represented as strings.
+	 * This method is mainly provided for convenience and performance reasons,
+	 * where the ID must be a string.
+	 * 
+	 * @return the EObject/ID mapping
+	 */
+	public Map<EObject, String> getEObjectToIdStringMap() {
+		return eObjectToIdStringMap;
 	}
 }

@@ -466,7 +466,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// remove all deleted elements
 		newElementsOnClipboardAfterCommand.removeAll(deletedElements);
 
-		collection.clearCaches();
+		collection.clearVolatileCaches();
 	}
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
