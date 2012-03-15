@@ -61,6 +61,8 @@ public final class Configuration {
 	private static int xmlRPCReplyTimeout = XML_RPC_REPLY_TIMEOUT;
 	private static Boolean resourceSplitting;
 
+	private static boolean autoSave;
+
 	private Configuration() {
 		// nothing to do
 	}
@@ -209,7 +211,6 @@ public final class Configuration {
 	 * 
 	 * @return the client version number
 	 */
-	@SuppressWarnings("cast")
 	public static ClientVersionInfo getClientVersion() {
 		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
 			.createClientVersionInfo();
@@ -373,5 +374,25 @@ public final class Configuration {
 		}
 
 		return resourceSplitting;
+	}
+
+	/**
+	 * Whether to enable the automatic saving of the workspace.
+	 * If disabled, performance improves vastly, but clients have to
+	 * perform the saving of the workspace manually.
+	 * 
+	 * @param enabled whether to enable auto save
+	 */
+	public void setAutoSave(boolean enabled) {
+		Configuration.autoSave = enabled;
+	}
+
+	/**
+	 * Whether auto-save is enabled.
+	 * 
+	 * @return true, if auto-save is enabled, false otherwise
+	 */
+	public static boolean isAutoSaveEnabled() {
+		return autoSave;
 	}
 }
