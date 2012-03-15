@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.emf.emfstore.site"
       label="EMF Store Site"
-      version="1.0.0.qualifier"
+      version="0.8.9.qualifier"
       provider-name="EMFT"
       image="eclipse_update_120.jpg"
       license-feature-version="2.0.0.qualifier">

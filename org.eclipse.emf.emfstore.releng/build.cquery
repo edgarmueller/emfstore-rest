@@ -7,19 +7,8 @@
     <cq:advisorNode namePattern="^EMFStore.*?$" branchTagPath="ECP_materialization,main"/>
     <cq:advisorNode namePattern="^ECP.*?$" branchTagPath="ECP_materialization,main"/-->
     
-    <!-- ecp.license is in ecp repository and will be pulled in if the site-feature from the releng repo is used -->
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.ecp\.license$" skipComponent="true"/>
-    
-    <!-- these are referenced by the target platform feature in the releng repository: deactivated for debugging -->
-	<cq:advisorNode namePattern="^org\.eclipse\.(?:gmf|gef|draw2d|ocl)(?:\..+)?$" skipComponent="true"/>
-    <cq:advisorNode namePattern="^edu\.tum\.cs\.cope(?:\..+)?$" skipComponent="true"/>
-    <cq:advisorNode namePattern="^org\.codehaus\.groovy(?:\..+)?$" skipComponent="true"/>
-    
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.emfstore.*\.source.*" skipComponent="true"/>
-    <cq:advisorNode namePattern="^org\.apache\.commons\.logging\.source.*" skipComponent="true"/>
-    
     <cq:advisorNode namePattern="^org\.eclipse\.emf$" versionOverride="[2.5.0.v200906151043,2.5.0.v200906151043]"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.(?:ant|common|ecore|converter|doc|edit|example|importer|mapping|edapt)(?:\..+)?$" versionOverride="[2.5.0.v200906151043,2.5.0.v200906151043]"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.(?:ant|common|ecore|converter|doc|edit|example|importer|mapping)(?:\..+)?$" versionOverride="[2.5.0.v200906151043,2.5.0.v200906151043]"/>
     <cq:advisorNode namePattern="^org\.eclipse\.emf\.databinding(?:\..+)?$" versionOverride="[1.1.0.v200906151043,1.1.0.v200906151043]"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xsd(?:\..+)?$" versionOverride="[2.5.0.v200906151043,2.5.0.v200906151043]"/>
 </cq:componentQuery>
