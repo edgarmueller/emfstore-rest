@@ -232,11 +232,12 @@ public final class ModelUtil {
 		Project project = (Project) object;
 		Project copiedProject = (Project) clone(object);
 
-		for (ModelElementId modelElementId : project.getAllModelElementIds()) {
-			if (isIgnoredDatatype(project.getModelElement(modelElementId))) {
+		for (EObject modelElement : project.getAllModelElements()) {
+			if (isIgnoredDatatype(modelElement)) {
 				continue;
 			}
-			res.setID(copiedProject.getModelElement(modelElementId), modelElementId.getId());
+			ModelElementId modelElementId = project.getModelElementId(modelElement);
+			res.setID(modelElement, modelElementId.getId());
 		}
 		res.getContents().add(copiedProject);
 		copy = copiedProject;
@@ -328,8 +329,8 @@ public final class ModelUtil {
 
 		if (result instanceof Project) {
 			Project project = (Project) result;
-			Map<EObject, ModelElementId> eObjectToIdMap = new HashMap<EObject, ModelElementId>();
-			Map<ModelElementId, EObject> idToEObjectMap = new HashMap<ModelElementId, EObject>();
+			Map<EObject, String> eObjectToIdMap = new HashMap<EObject, String>();
+			Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>();
 			TreeIterator<EObject> it = ((Project) result).eAllContents();
 			while (it.hasNext()) {
 				EObject me = it.next();
@@ -347,10 +348,8 @@ public final class ModelUtil {
 					throw new SerializationException("Failed to retrieve ID for EObject contained in project: " + me);
 				}
 
-				ModelElementId meId = ModelFactory.eINSTANCE.createModelElementId();
-				meId.setId(id);
-				eObjectToIdMap.put(me, meId);
-				idToEObjectMap.put(meId, me);
+				eObjectToIdMap.put(me, id);
+				idToEObjectMap.put(id, me);
 			}
 			project.initCaches(eObjectToIdMap, idToEObjectMap);
 		}
@@ -631,18 +630,16 @@ public final class ModelUtil {
 		if (eObject instanceof Project && resource instanceof XMIResource) {
 			XMIResource xmiResource = (XMIResource) resource;
 			Project project = (Project) eObject;
-			Map<EObject, ModelElementId> eObjectToIdMap = new HashMap<EObject, ModelElementId>();
-			Map<ModelElementId, EObject> idToEObjectMap = new HashMap<ModelElementId, EObject>();
+			Map<EObject, String> eObjectToIdMap = new HashMap<EObject, String>();
+			Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>();
 
 			TreeIterator<EObject> it = project.eAllContents();
 			while (it.hasNext()) {
 				EObject obj = it.next();
-				ModelElementId objId = ModelFactory.eINSTANCE.createModelElementId();
 				String id = xmiResource.getID(obj);
 				if (id != null) {
-					objId.setId(id);
-					eObjectToIdMap.put(obj, objId);
-					idToEObjectMap.put(objId, obj);
+					eObjectToIdMap.put(obj, id);
+					idToEObjectMap.put(id, obj);
 				}
 			}
 

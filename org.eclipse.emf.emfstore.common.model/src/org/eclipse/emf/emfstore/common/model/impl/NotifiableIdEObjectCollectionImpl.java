@@ -158,7 +158,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 * @see org.eclipse.emf.emfstore.common.model.Project#initCaches(java.util.Map, java.util.Map)
 	 */
 	@Override
-	public void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap) {
+	public void initCaches(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
 		super.initCaches(eObjectToIdMap, idToEObjectMap);
 		changeNotifier = new EObjectChangeNotifier(this, this);
 	}

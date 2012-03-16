@@ -207,6 +207,8 @@ public final class WorkspaceManager {
 
 		// register an editing domain on the resource
 		Configuration.setEditingDomain(createEditingDomain(resourceSet));
+		// enable auto-save by default
+		Configuration.setAutoSave(true);
 
 		URI fileURI = URI.createFileURI(Configuration.getWorkspacePath());
 		File workspaceFile = new File(Configuration.getWorkspacePath());

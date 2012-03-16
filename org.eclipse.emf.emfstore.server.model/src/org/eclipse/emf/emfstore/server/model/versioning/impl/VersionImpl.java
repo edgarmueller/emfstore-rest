@@ -29,8 +29,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -195,14 +193,13 @@ public class VersionImpl extends EObjectImpl implements Version {
 			Resource resource = project.eResource();
 			if (resource instanceof XMIResource) {
 				Set<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElements(project, false);
-				EMap<EObject, ModelElementId> eObjectToIdMap = loadIdsFromResourceForEObjects(
-					allContainedModelElements, (XMIResource) resource);
+				EMap<EObject, String> eObjectToIdMap = loadIdsFromResourceForEObjects(allContainedModelElements,
+					(XMIResource) resource);
 
 				// create reverse mapping
-				Map<ModelElementId, EObject> idToEObjectMap = new HashMap<ModelElementId, EObject>(
-					eObjectToIdMap.size());
+				Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>(eObjectToIdMap.size());
 
-				for (Map.Entry<EObject, ModelElementId> entry : eObjectToIdMap.entrySet()) {
+				for (Map.Entry<EObject, String> entry : eObjectToIdMap.entrySet()) {
 					idToEObjectMap.put(entry.getValue(), entry.getKey());
 				}
 
@@ -531,21 +528,18 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return a map consisting of object/id mappings, if the resource doesn't
 	 *         contain an eobject/id mapping null will be returned
 	 */
-	private EMap<EObject, ModelElementId> loadIdsFromResourceForEObjects(Set<EObject> modelElements,
-		XMIResource xmiResource) {
+	private EMap<EObject, String> loadIdsFromResourceForEObjects(Set<EObject> modelElements, XMIResource xmiResource) {
 
-		EMap<EObject, ModelElementId> eObjectToIdMap;
+		EMap<EObject, String> eObjectToIdMap;
 
 		if (xmiResource != null) {
 			// guess a rough initial size by looking at the size of the contents
-			eObjectToIdMap = new BasicEMap<EObject, ModelElementId>(xmiResource.getContents().size());
+			eObjectToIdMap = new BasicEMap<EObject, String>(xmiResource.getContents().size());
 
 			for (EObject eObject : modelElements) {
 				String objId = xmiResource.getID(eObject);
 				if (objId != null) {
-					ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
-					modelElementId.setId(objId);
-					eObjectToIdMap.put(eObject, modelElementId);
+					eObjectToIdMap.put(eObject, objId);
 				}
 			}
 

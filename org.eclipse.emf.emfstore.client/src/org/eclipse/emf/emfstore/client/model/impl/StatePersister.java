@@ -55,11 +55,6 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	private boolean commandIsRunning;
 
 	/**
-	 * Indicates whether a resource is saved automatically.
-	 */
-	private boolean autoSave;
-
-	/**
 	 * Indicates whether a resource may be split when a model element has been
 	 * added.
 	 */
@@ -82,7 +77,6 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 */
 	public StatePersister(EObjectChangeNotifier changeNotifier, EMFStoreCommandStack commandStack,
 		IdEObjectCollectionImpl collection) {
-		this.autoSave = true;
 		this.commandStack = commandStack;
 		this.commandStack.addCommandStackObserver(this);
 		this.dirtyResourceSet = new DirtyResourceSet(collection);
@@ -155,7 +149,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 * Save all dirty resources to disk now if autosave is active.
 	 */
 	public void saveDirtyResources() {
-		if (autoSave) {
+		if (Configuration.isAutoSaveEnabled()) {
 			dirtyResourceSet.save();
 		}
 	}
@@ -243,8 +237,8 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 				newFileName = File.createTempFile("frag", Configuration.getProjectFragmentFileExtension(),
 					new File(oldFile.getParent())).getAbsolutePath();
 			} catch (IOException e) {
-				// TODO: reasonable error message
-				throw new IllegalStateException("File fragment \"" + "\" already exists - ProjectSpace corrupted.");
+				throw new IllegalStateException("File fragment \"" + "\" already exists - ProjectSpace corrupted.\n"
+					+ "Cause: " + e.getMessage());
 			}
 
 			URI fileURI = URI.createFileURI(newFileName);
@@ -253,17 +247,6 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 			newResource.getContents().add(modelElement);
 			currentResource = newResource;
 		}
-	}
-
-	/**
-	 * Enable or disable save. I save is disabled, dirty resources will not bes
-	 * saved.
-	 * 
-	 * @param newValue
-	 *            true if auto save should be enabled
-	 */
-	public void setAutoSave(boolean newValue) {
-		autoSave = newValue;
 	}
 
 	/**

@@ -109,13 +109,6 @@ public interface IdEObjectCollection extends EObject {
 	Set<EObject> getAllModelElements();
 
 	/**
-	 * Retrieve all {@link ModelElementId}s of the collection
-	 * 
-	 * @return a set of {@link ModelElementId}s
-	 */
-	Set<ModelElementId> getAllModelElementIds();
-
-	/**
 	 * Initializes the ID caches of the collection, i.e. the collection will
 	 * call {@link IdEObjectCollection#getModelElements()} and for each model
 	 * element the {@link ModelElementId} is fetched via {@link IdEObjectCollection#getModelElementId(EObject)}. Then a
@@ -132,7 +125,7 @@ public interface IdEObjectCollection extends EObject {
 	 * 
 	 * @param idToEObjectMap
 	 */
-	void initCaches(Map<EObject, ModelElementId> eObjectToIdMap, Map<ModelElementId, EObject> idToEObjectMap);
+	void initCaches(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap);
 
 	/**
 	 * Retrieve a list of all model elements of a certain type in the
@@ -194,5 +187,8 @@ public interface IdEObjectCollection extends EObject {
 	 */
 	void preAssignModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
 
+	/**
+	 * Disposes the collection, i.e. clears all caches.
+	 */
 	void dispose();
 }

@@ -60,7 +60,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.common.model.util.AutoSplitAndSaveResourceContainmentList;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -751,6 +750,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void saveProjectSpaceOnly() {
 		saveResource(this.eResource());
+	}
+
+	public void save() {
+		saveProjectSpaceOnly();
+		operationsList.save();
+		statePersister.saveDirtyResources();
 	}
 
 	/**
