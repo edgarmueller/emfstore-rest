@@ -170,9 +170,7 @@ public class AutoSplitAndSaveResourceContainmentList<T extends EObject> implemen
 		for (T element : c) {
 			addToResource(element);
 		}
-		long currentTimeMillis = System.currentTimeMillis();
 		boolean result = list.addAll(c);
-		System.out.println(System.currentTimeMillis() - currentTimeMillis);
 		markAsDirty(rootResource);
 		saveDirtyResources();
 		return result;

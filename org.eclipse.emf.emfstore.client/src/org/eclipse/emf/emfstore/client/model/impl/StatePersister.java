@@ -102,7 +102,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 */
 	public void commandCompleted(Command command) {
 		commandIsRunning = false;
-		saveDirtyResources();
+		saveDirtyResources(false);
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	/**
 	 * Save all dirty resources to disk now if autosave is active.
 	 */
-	public void saveDirtyResources() {
-		if (Configuration.isAutoSaveEnabled()) {
+	public void saveDirtyResources(boolean force) {
+		if (force || Configuration.isAutoSaveEnabled()) {
 			dirtyResourceSet.save();
 		}
 	}
@@ -171,7 +171,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 		addToDirtyResources(modelElement);
 
 		if (!commandIsRunning) {
-			saveDirtyResources();
+			saveDirtyResources(false);
 		}
 	}
 

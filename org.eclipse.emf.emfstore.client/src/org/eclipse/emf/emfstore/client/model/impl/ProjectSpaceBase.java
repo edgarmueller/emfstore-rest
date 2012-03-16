@@ -755,7 +755,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void save() {
 		saveProjectSpaceOnly();
 		operationsList.save();
-		statePersister.saveDirtyResources();
+		statePersister.saveDirtyResources(true);
 	}
 
 	/**

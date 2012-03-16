@@ -51,7 +51,7 @@ public class ShareController extends ServerCall<Void> {
 		getProgressMonitor().worked(10);
 		if (getProgressMonitor().isCanceled()) {
 			Configuration.setAutoSave(true);
-			getProjectSpace().getStatePersister().saveDirtyResources();
+			getProjectSpace().getStatePersister().saveDirtyResources(true);
 			getProjectSpace().startChangeRecording();
 			getProgressMonitor().done();
 		}
@@ -71,7 +71,7 @@ public class ShareController extends ServerCall<Void> {
 		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
 
 		Configuration.setAutoSave(true);
-		getProjectSpace().getStatePersister().saveDirtyResources();
+		getProjectSpace().getStatePersister().saveDirtyResources(true);
 		getProjectSpace().startChangeRecording();
 		getProjectSpace().setBaseVersion(createdProject.getVersion());
 		getProjectSpace().setLastUpdated(new Date());
