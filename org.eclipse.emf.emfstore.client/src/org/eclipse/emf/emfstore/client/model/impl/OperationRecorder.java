@@ -539,6 +539,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				// remove all (outgoing) references to elements outside of the containment tree of the element to be
 				// deleted
 				if (reference.isMany()) {
+					@SuppressWarnings("unchecked")
 					List<EObject> referencedElements = (List<EObject>) modelElement.eGet(reference);
 					List<EObject> referencesToRemove = new ArrayList<EObject>();
 					for (EObject referencedElement : referencedElements) {
@@ -569,15 +570,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		// no key reference found
 		return null;
-	}
-
-	private boolean hasOnlyContainmentReferences(EClass mapEntryEClass) {
-		for (EReference mapEntryReference : mapEntryEClass.getEAllReferences()) {
-			if (!mapEntryReference.isContainment()) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	private void handleElementDelete(EObject deletedElement) {
