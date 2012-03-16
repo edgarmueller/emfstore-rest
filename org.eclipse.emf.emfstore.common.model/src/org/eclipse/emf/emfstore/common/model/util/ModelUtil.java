@@ -46,7 +46,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
@@ -189,8 +188,8 @@ public final class ModelUtil {
 		XMIResource res = (XMIResource) (new ResourceSetImpl()).createResource(VIRTUAL_URI);
 		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		EObject copy;
-		if (object instanceof Project) {
-			copy = copyProject(object, res);
+		if (object instanceof IdEObjectCollection) {
+			copy = copyIdEObjectCollection((IdEObjectCollection) object, res);
 		} else {
 			copy = ModelUtil.clone(object);
 			res.getContents().add(copy);
@@ -224,24 +223,23 @@ public final class ModelUtil {
 			hrefCheck(result);
 		}
 
+		System.out.println(result);
 		return result;
 	}
 
-	private static EObject copyProject(EObject object, XMIResource res) {
-		EObject copy;
-		Project project = (Project) object;
-		Project copiedProject = (Project) clone(object);
+	private static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
+		IdEObjectCollection copiedCollection = clone(collection);
 
-		for (EObject modelElement : project.getAllModelElements()) {
+		for (EObject modelElement : copiedCollection.getAllModelElements()) {
 			if (isIgnoredDatatype(modelElement)) {
 				continue;
 			}
-			ModelElementId modelElementId = project.getModelElementId(modelElement);
+			ModelElementId modelElementId = copiedCollection.getModelElementId(modelElement);
 			res.setID(modelElement, modelElementId.getId());
 		}
-		res.getContents().add(copiedProject);
-		copy = copiedProject;
-		return copy;
+
+		res.getContents().add(copiedCollection);
+		return copiedCollection;
 	}
 
 	/**
@@ -327,31 +325,31 @@ public final class ModelUtil {
 
 		EObject result = res.getContents().get(0);
 
-		if (result instanceof Project) {
-			Project project = (Project) result;
+		if (result instanceof IdEObjectCollection) {
+			IdEObjectCollection collection = (IdEObjectCollection) result;
 			Map<EObject, String> eObjectToIdMap = new HashMap<EObject, String>();
 			Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>();
-			TreeIterator<EObject> it = ((Project) result).eAllContents();
-			while (it.hasNext()) {
-				EObject me = it.next();
-				String id;
 
-				if (ModelUtil.isIgnoredDatatype(me)) {
+			for (EObject modelElement : collection.getAllModelElements()) {
+				String modelElementId;
+				if (ModelUtil.isIgnoredDatatype(modelElement)) {
 					// create random ID for generic types, won't get serialized
 					// anyway
-					id = ModelFactory.eINSTANCE.createModelElementId().getId();
+					modelElementId = ModelFactory.eINSTANCE.createModelElementId().getId();
 				} else {
-					id = res.getID(me);
+					modelElementId = res.getID(modelElement);
 				}
 
-				if (id == null) {
-					throw new SerializationException("Failed to retrieve ID for EObject contained in project: " + me);
+				if (modelElementId == null) {
+					throw new SerializationException("Failed to retrieve ID for EObject contained in project: "
+						+ modelElement);
 				}
 
-				eObjectToIdMap.put(me, id);
-				idToEObjectMap.put(id, me);
+				eObjectToIdMap.put(modelElement, modelElementId);
+				idToEObjectMap.put(modelElementId, modelElement);
 			}
-			project.initCaches(eObjectToIdMap, idToEObjectMap);
+
+			collection.initCaches(eObjectToIdMap, idToEObjectMap);
 		}
 
 		EcoreUtil.resolveAll(result);
@@ -391,8 +389,8 @@ public final class ModelUtil {
 		if (resourceSaveOptions == null) {
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList());
-			resourceSaveOptions.put(XMLResource.OPTION_XML_MAP, new XMLMapImpl());
+			// resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList());
+			// resourceSaveOptions.put(XMLResource.OPTION_XML_MAP, new XMLMapImpl());
 		}
 		return resourceSaveOptions;
 	}
