@@ -160,7 +160,9 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	@Override
 	public void initCaches(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
 		super.initCaches(eObjectToIdMap, idToEObjectMap);
-		changeNotifier = new EObjectChangeNotifier(this, this);
+		if (changeNotifier == null) {
+			changeNotifier = new EObjectChangeNotifier(this, this);
+		}
 	}
 
 	/**
