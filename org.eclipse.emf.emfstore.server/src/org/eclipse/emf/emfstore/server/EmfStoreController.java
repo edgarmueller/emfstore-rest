@@ -80,7 +80,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	/**
 	 * The period of time in seconds between executing the clean memory task.
 	 */
-	private static final int CLEAN_MEMORY_TASK_PERIOD = 10;
+	private static final int CLEAN_MEMORY_TASK_PERIOD = 60;
 
 	/**
 	 * {@inheritDoc}
