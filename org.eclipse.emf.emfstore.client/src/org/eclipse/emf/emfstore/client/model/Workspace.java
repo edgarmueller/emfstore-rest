@@ -41,16 +41,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
- * </ul>
- * </p>
- *
+ * 
+ *             <p>
+ *             The following features are supported:
+ *             <ul>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
+ *             <li>{@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
+ *             </ul>
+ *             </p>
+ * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
@@ -309,13 +309,15 @@ public interface Workspace extends EObject, IAdaptable {
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
+	 * <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
@@ -358,6 +360,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
@@ -374,6 +377,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
@@ -499,13 +503,22 @@ public interface Workspace extends EObject, IAdaptable {
 	void setConnectionManager(ConnectionManager connectionManager);
 
 	/**
+	 * Returns the workspace resource set.
+	 * 
+	 * @return
+	 *         The resource set of the workspace
+	 * @generated NOT
+	 */
+	ResourceSet getResourceSet();
+
+	/**
 	 * Set the workspace resource set.
 	 * 
 	 * @param resourceSet
 	 *            The resource set to be set.
 	 * @generated NOT
 	 */
-	void setWorkspaceResourceSet(ResourceSet resourceSet);
+	void setResourceSet(ResourceSet resourceSet);
 
 	/**
 	 * Updates the ACUser and it roles.
@@ -550,17 +563,17 @@ public interface Workspace extends EObject, IAdaptable {
 	void updateProjectInfos(Usersession session) throws EmfStoreException;
 
 	/**
-	 * Adds an serverinfo and saves.
+	 * Adds an server info and saves.
 	 * 
-	 * @param serverInfo server info
+	 * @param serverInfo the server info to be added
 	 */
-	public void addServerInfo(ServerInfo serverInfo);
+	void addServerInfo(ServerInfo serverInfo);
 
 	/**
-	 * Removes an serverinfo and saves.
+	 * Removes an server info and saves.
 	 * 
-	 * @param serverInfo server info
+	 * @param serverInfo the server info to be removed
 	 */
-	public void removeServerInfo(ServerInfo serverInfo);
+	void removeServerInfo(ServerInfo serverInfo);
 
 } // Workspace

@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
+import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -66,15 +67,37 @@ public final class WorkspaceManager {
 	private static WorkspaceManager instance;
 
 	private Workspace currentWorkspace;
+	private SessionManager sessionManager;
+	private ObserverBus observerBus;
+
 	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
 
-	private ObserverBus observerBus;
-
-	private ECrossReferenceAdapter crossReferenceAdapter;
+	private ExtendedCrossReferenceAdapter crossReferenceAdapter;
 	private ResourceSet resourceSet;
 
-	private SessionManager sessionManager;
+	/**
+	 * A cross-reference adapter implementation that dismisses tracking of deleted project space resources.
+	 */
+	static class ExtendedCrossReferenceAdapter extends ECrossReferenceAdapter {
+
+		@Override
+		protected void unsetTarget(EObject target) {
+			super.unsetTarget(target);
+			if (target instanceof ProjectSpace) {
+				ProjectSpace projectSpace = (ProjectSpace) target;
+				String pathToProject = Configuration.getWorkspaceDirectory()
+					+ Configuration.getProjectSpaceDirectoryPrefix() + projectSpace.getIdentifier();
+				List<Resource> toDelete = new ArrayList<Resource>();
+				for (Resource resource : unloadedResources) {
+					if (resource.getURI().toFileString().startsWith(pathToProject)) {
+						toDelete.add(resource);
+					}
+				}
+				unloadedResources.removeAll(toDelete);
+			}
+		}
+	}
 
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
@@ -201,8 +224,14 @@ public final class WorkspaceManager {
 		}
 
 		if (useCrossReferenceAdapter) {
-			crossReferenceAdapter = new ECrossReferenceAdapter();
+			crossReferenceAdapter = new ExtendedCrossReferenceAdapter();
 			resourceSet.eAdapters().add(crossReferenceAdapter);
+			getObserverBus().register(new DeleteProjectSpaceObserver() {
+				public void projectSpaceDeleted(ProjectSpace projectSpace) {
+					// remove project resources from cross reference adapter
+					crossReferenceAdapter.unsetTarget(projectSpace);
+				}
+			});
 		}
 
 		// register an editing domain on the resource
@@ -238,7 +267,7 @@ public final class WorkspaceManager {
 		}
 
 		workspace.setConnectionManager(this.connectionManager);
-		workspace.setWorkspaceResourceSet(resourceSet);
+		workspace.setResourceSet(resourceSet);
 
 		new EMFStoreCommand() {
 			@Override
@@ -470,6 +499,9 @@ public final class WorkspaceManager {
 
 	/**
 	 * Returns the {@link ECrossReferenceAdapter}, if available.
+	 * 
+	 * @param modelElement
+	 *            the model element for which to find inverse cross references
 	 * 
 	 * @return the {@link ECrossReferenceAdapter}
 	 */
