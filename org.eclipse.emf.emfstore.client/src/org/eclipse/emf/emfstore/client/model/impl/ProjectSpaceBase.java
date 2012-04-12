@@ -61,6 +61,7 @@ import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
@@ -110,6 +111,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private HashMap<String, OrgUnitProperty> propertyMap;
 
 	private StatePersister statePersister;
+
+	private ResourceSet resourceSet;
 
 	/**
 	 * Constructor.
@@ -554,6 +557,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
+		this.resourceSet = resourceSet;
 		initCompleted = true;
 		String projectSpaceFileNamePrefix = Configuration.getWorkspaceDirectory()
 			+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
@@ -607,6 +611,37 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		init();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#delete()
+	 * @generated NOT
+	 */
+	public void delete() throws IOException {
+		operationManager.removeOperationListener(modifiedModelElementsCache);
+		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
+		WorkspaceManager.getObserverBus().unregister(this);
+
+		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
+			+ getIdentifier();
+		List<Resource> toDelete = new ArrayList<Resource>();
+
+		for (Resource resource : resourceSet.getResources()) {
+			if (resource.getURI().toFileString().startsWith(pathToProject)) {
+				toDelete.add(resource);
+			}
+		}
+
+		for (Resource resource : toDelete) {
+			resource.delete(null);
+		}
+
+		resourceSet.getResources().clear();
+
+		// delete folder of project space
+		FileUtil.deleteFolder(new File(pathToProject));
 	}
 
 	/**
@@ -752,6 +787,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		saveResource(this.eResource());
 	}
 
+	/**
+	 * Saves the project space.
+	 */
 	public void save() {
 		saveProjectSpaceOnly();
 		operationsList.save();
