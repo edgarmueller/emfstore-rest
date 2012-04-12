@@ -219,6 +219,7 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.client");
+		@SuppressWarnings("cast")
 		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
 			org.osgi.framework.Constants.BUNDLE_VERSION);
 
