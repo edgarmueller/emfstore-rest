@@ -95,6 +95,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private boolean cutOffIncomingCrossReferences;
 	private boolean emitOperationsWhenCommandCompleted;
 
+	// no use of ObserverBus
+	private List<OperationRecorderListener> observers;
+
 	/**
 	 * Constructor.
 	 * 
@@ -108,6 +111,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		this.changeNotifier = changeNotifier;
 		operations = new ArrayList<AbstractOperation>();
 		editingDomain = Configuration.getEditingDomain();
+		observers = new ArrayList<OperationRecorderListener>();
 
 		CommandStack commandStack = editingDomain.getCommandStack();
 
@@ -291,7 +295,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		WorkspaceManager.getObserverBus().notify(OperationRecorderListener.class).operationsRecorded(operations);
+		for (OperationRecorderListener observer : observers) {
+			observer.operationsRecorded(operations);
+		}
 	}
 
 	/**
@@ -301,7 +307,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 *            the observer to be added
 	 */
 	public void addOperationRecorderListener(OperationRecorderListener observer) {
-		WorkspaceManager.getObserverBus().register(observer);
+		observers.add(observer);
 	}
 
 	/**
@@ -311,7 +317,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 *            the observer to be removed
 	 */
 	public void removeOperationRecorderListener(OperationRecorderListener observer) {
-		WorkspaceManager.getObserverBus().unregister(observer);
+		observers.remove(observer);
 	}
 
 	/**
