@@ -621,6 +621,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void delete() throws IOException {
 		operationManager.removeOperationListener(modifiedModelElementsCache);
+		operationManager.dispose();
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this);
 
