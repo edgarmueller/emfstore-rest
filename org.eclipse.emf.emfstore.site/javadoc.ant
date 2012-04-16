@@ -1,6 +1,6 @@
 <project default="run" name="EMFStore" basedir=".">
 
-	<taskdef resource="org/apache/commons/attributes/anttasks.properties" />
+	<taskdef resource="org/eclipse/emf/emfstore/site/buckminster.properties" />
 
 	<target name="run" description="o Create Javadocs for EMFStores">
 
