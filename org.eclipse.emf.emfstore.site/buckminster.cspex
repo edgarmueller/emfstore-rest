@@ -20,7 +20,7 @@
 				<property key="targets" value="run"/>
 			</actorProperties>
 			<properties>
-				<property key="source" value="../"/>
+				<property key="source" value="../../"/>
       			<property key="javadoc.output" value="${buckminster.output.root}/javadoc"/>
             </properties>
 		</public>
