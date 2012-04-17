@@ -226,7 +226,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl#setModelElements(java.util.Collection)
-	 * @generate NOT
+	 * @generated NOT
 	 */
 	@Override
 	protected void setModelElements(EList<EObject> modelElements) {
