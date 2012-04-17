@@ -1,0 +1,36 @@
+<project default="run" name="EMFStore" basedir=".">
+
+	<taskdef resource="org/eclipse/emf/emfstore/site/buckminster.properties" />
+
+	<target name="run" description="o Create Javadocs for EMFStores">
+
+		<property environment="env" />
+
+		<!-- set target platform as classpath -->
+		<path id="files-classpath">
+			<fileset dir="${target.platform}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<echo message="base dir: ${basedir}"/>
+
+		<!-- clean and create output location -->
+		<delete dir="${basedir}/javadoc/" />
+		<mkdir dir="${basedir}/javadoc/" />
+		<javadoc destdir="${basedir}/javadoc/" executable="${env.JAVA_HOME}/bin/javadoc" classpathref="files-classpath" maxmemory="1024m" source="1.6" useexternalfile="true" author="true" version="true" use="true" windowtitle="EMFStore">
+			<!-- link external APIs -->
+			<link offline="false" href="http://java.sun.com/javase/6/docs/api/" />
+			<link offline="false" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.5.0/" />
+			
+			<fileset dir="${source}/" defaultexcludes="true">
+				<include name="**/*.java" />
+				<exclude name="**/test/**" />
+			</fileset>
+
+			<bottom><![CDATA[<i>Copyright 2012 EclipseSource Munich</i>]]></bottom>
+	</javadoc>
+</target>
+
+</project>
+
