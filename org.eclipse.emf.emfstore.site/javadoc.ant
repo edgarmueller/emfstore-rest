@@ -45,11 +45,11 @@
 			</bottom>
 	
 			<!-- EMF tags -->
-			<tag name="generated" scope="all" description="Generated:" />
-			<tag name="ordered" scope="all" description="Ordered:" />
-			<tag name="model" scope="all" description="Model:" />
-			<tag name="implements" scope="all" description="Implements:" />
-			<tag name="extends" scope="all" description="Extends:" />
+			<tag name="generated" scope="all" description="EMF Generated:" />
+			<tag name="ordered" scope="all" description="EMF Ordered:" />
+			<tag name="model" scope="all" description="EMF Model:" />
+			<tag name="implements" scope="all" description="EMF Implements:" />
+			<tag name="extends" scope="all" description="EMF Extends:" />
 	
 			<!-- Grouping in package overview -->
 			<group title="EMFStore" packages="org.eclipse.emf.emfstore.*" />
