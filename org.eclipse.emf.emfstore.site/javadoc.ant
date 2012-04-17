@@ -3,6 +3,9 @@
 	<!--taskdef resource="org/eclipse/emf/emfstore/site/buckminster.properties" /-->
 
 	<target name="run" description="o Create Javadocs for EMFStores">
+		<tstamp>
+			<format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
+		</tstamp>
 
 		<property environment="env" />
 
@@ -20,23 +23,39 @@
 			<!-- link external APIs -->
 			<link offline="false" href="http://java.sun.com/javase/6/docs/api/" />
 			<link offline="false" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.5.0/" />
-			
+
 			<fileset dir="${source}/" defaultexcludes="true">
-				<include name="*/org.eclipse.emf.emfstore.*/**/*.java" />
-				<include name="*/org.eclipse.emf.ecp.*/**/*.java" />
+				<include name="*emfstore.core/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.*.backchannel/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.examplemodel/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.migration.edapt/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.client.transaction/**/*.java" />
+
+				<include name="*ecp.core/**/*.java" />
+
 				<exclude name="**/test/**" />
-				<exclude name="**/example/**" />
 			</fileset>
 
-			<doctitle><![CDATA[<h1>EMFStore / EMF Client Platform</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright 2012 EclipseSource Munich. All Rights Reserved.</i>]]></bottom>
-			
-		    <tag name="generated" scope="all" description="Generated:"/>
-			<tag name="ordered" scope="all" description="Ordered:"/>
-		    <group title="EMFStore" packages="org.eclipse.emf.emfstore.*"/>
-			<group title="EMF Client Platform" packages="org.eclipse.emf.ecp.*"/>
-	</javadoc>
-</target>
+			<doctitle>
+				<![CDATA[<h1>EMFStore / EMF Client Platform</h1>]]>
+			</doctitle>
+			<bottom>
+				<![CDATA[Timestamp: ${current.time}<br />
+				<i>Copyright 2012 EclipseSource Munich. All Rights Reserved.</i>]]>
+			</bottom>
+	
+			<!-- EMF tags -->
+			<tag name="generated" scope="all" description="Generated:" />
+			<tag name="ordered" scope="all" description="Ordered:" />
+			<tag name="model" scope="all" description="Model:" />
+			<tag name="implements" scope="all" description="Implements:" />
+			<tag name="extends" scope="all" description="Extends:" />
+	
+			<!-- Grouping in package overview -->
+			<group title="EMFStore" packages="org.eclipse.emf.emfstore.*" />
+			<group title="EMF Client Platform" packages="org.eclipse.emf.ecp.*" />
+		</javadoc>
+	</target>
 
 </project>
 
