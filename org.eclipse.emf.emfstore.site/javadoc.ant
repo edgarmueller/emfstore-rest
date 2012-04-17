@@ -1,6 +1,6 @@
 <project default="run" name="EMFStore" basedir=".">
 
-	<taskdef resource="org/eclipse/emf/emfstore/site/buckminster.properties" />
+	<!--taskdef resource="org/eclipse/emf/emfstore/site/buckminster.properties" /-->
 
 	<target name="run" description="o Create Javadocs for EMFStores">
 
@@ -13,22 +13,28 @@
 			</fileset>
 		</path>
 
-		<echo message="base dir: ${basedir}"/>
-
 		<!-- clean and create output location -->
 		<delete dir="${basedir}/javadoc/" />
 		<mkdir dir="${basedir}/javadoc/" />
-		<javadoc destdir="${basedir}/javadoc/" executable="${env.JAVA_HOME}/bin/javadoc" classpathref="files-classpath" maxmemory="1024m" source="1.6" useexternalfile="true" author="true" version="true" use="true" windowtitle="EMFStore">
+		<javadoc destdir="${basedir}/javadoc/" executable="${env.JAVA_HOME}/bin/javadoc" classpathref="files-classpath" maxmemory="1024m" source="1.6" useexternalfile="true" author="true" version="true" use="true" windowtitle="EMFStore / EMF Client Platform" excludepackagenames="org.unicase.*">
 			<!-- link external APIs -->
 			<link offline="false" href="http://java.sun.com/javase/6/docs/api/" />
 			<link offline="false" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.5.0/" />
 			
 			<fileset dir="${source}/" defaultexcludes="true">
-				<include name="**/*.java" />
+				<include name="*/org.eclipse.emf.emfstore.*/**/*.java" />
+				<include name="*/org.eclipse.emf.ecp.*/**/*.java" />
 				<exclude name="**/test/**" />
+				<exclude name="**/example/**" />
 			</fileset>
 
-			<bottom><![CDATA[<i>Copyright 2012 EclipseSource Munich</i>]]></bottom>
+			<doctitle><![CDATA[<h1>EMFStore / EMF Client Platform</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright 2012 EclipseSource Munich. All Rights Reserved.</i>]]></bottom>
+			
+		    <tag name="generated" scope="all" description="Generated:"/>
+			<tag name="ordered" scope="all" description="Ordered:"/>
+		    <group title="EMFStore" packages="org.eclipse.emf.emfstore.*"/>
+			<group title="EMF Client Platform" packages="org.eclipse.emf.ecp.*"/>
 	</javadoc>
 </target>
 
