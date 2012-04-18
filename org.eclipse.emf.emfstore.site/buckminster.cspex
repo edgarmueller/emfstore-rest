@@ -17,7 +17,7 @@
 		<public name="create.javadoc" actor="ant">
 			<actorProperties>
 				<property key="buildFile" value="javadoc.ant"/>
-				<property key="targets" value="run"/>
+				<property key="targets" value="create.javadoc"/>
 			</actorProperties>
 			<properties>
 				<property key="source" value="../../"/>
