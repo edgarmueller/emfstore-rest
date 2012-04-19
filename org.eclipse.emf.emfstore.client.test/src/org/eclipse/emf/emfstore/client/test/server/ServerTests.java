@@ -152,7 +152,7 @@ public class ServerTests extends WorkspaceTest {
 			serverInfo, Configuration.getClientVersion());
 	}
 
-	private static void initArguments() {
+	protected static void initArguments() {
 		arguments = new HashMap<Class<?>, Object>();
 		arguments.put(boolean.class, false);
 		arguments.put(String.class, new String());
