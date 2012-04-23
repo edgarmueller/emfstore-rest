@@ -9,6 +9,9 @@
 		<!-- prefix for environment variables -->
 		<property environment="env" />
 
+		<!-- debug output -->
+		<echo message="JAVA_HOME ${env.JAVA_HOME}"/>
+		
 		<!-- set target platform as classpath -->
 		<path id="files-classpath">
 			<fileset dir="${target.platform}">
