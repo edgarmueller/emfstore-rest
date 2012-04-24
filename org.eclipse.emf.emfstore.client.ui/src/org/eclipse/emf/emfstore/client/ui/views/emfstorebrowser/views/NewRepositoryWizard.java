@@ -31,6 +31,8 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 
 	private NewRepositoryWizardPageOne mainPage;
 
+	private boolean edit;
+
 	/**
 	 * Default constructor.
 	 */
