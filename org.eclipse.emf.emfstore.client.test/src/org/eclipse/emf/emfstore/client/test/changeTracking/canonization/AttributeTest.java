@@ -400,6 +400,7 @@ public class AttributeTest extends WorkspaceTest {
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
+		fail();
 	}
 
 	/**
