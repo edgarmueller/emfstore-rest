@@ -115,7 +115,6 @@ public class ObserverBus {
 	 * @param clazz class of observer
 	 * @return call object
 	 */
-	@SuppressWarnings("unchecked")
 	public <T extends IObserver> T notify(Class<T> clazz) {
 		if (clazz == null) {
 			return null;
