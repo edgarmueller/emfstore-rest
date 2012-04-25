@@ -57,7 +57,6 @@ public class ServerTests extends WorkspaceTest {
 	private int projectsOnServerBeforeTest;
 	private static HashMap<Class<?>, Object> arguments;
 	private static ServerInfo serverInfo;
-	private ProjectInfo projectInfo = null;
 
 	public static void setServerInfo(ServerInfo server_Info) {
 		serverInfo = server_Info;
