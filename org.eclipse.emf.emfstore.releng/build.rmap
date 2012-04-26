@@ -188,7 +188,7 @@
 			mutable="false">
 			<property key="buckminster.source" value="false"/>
 			<property key="buckminster.mutable" value="false"/>
-			<uri format="{0}/modeling/mdt/ocl/3_0/updates/releases/">
+			<uri format="{0}/modeling/mdt/ocl/updates/">
 				<bc:propertyRef key="eclipse.downloads"/>
 			</uri>
 		</provider>
