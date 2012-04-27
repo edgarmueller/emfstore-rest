@@ -322,6 +322,7 @@ public class SetupHelper {
 					uriString = uriString.replace("/", File.separator);
 				}
 				uriString = uriString.replace("initial@", "");
+				uriString = new File(uriString).getAbsolutePath();
 				LOGGER.log(Level.INFO, "importing " + uriString);
 				try {
 					testProjectSpace = importProject(uriString);
