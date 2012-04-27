@@ -321,6 +321,7 @@ public class SetupHelper {
 					uriString = uriString.replace("reference:file:/", "");
 					uriString = uriString.replace("/", File.separator);
 				}
+				uriString = uriString.replace("initial@", "");
 				LOGGER.log(Level.INFO, "importing " + uriString);
 				try {
 					testProjectSpace = importProject(uriString);
