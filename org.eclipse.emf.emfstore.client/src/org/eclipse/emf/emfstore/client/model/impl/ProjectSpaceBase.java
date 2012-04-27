@@ -29,9 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ModifiedModelElementsCache;
-import org.eclipse.emf.emfstore.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -99,8 +97,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private boolean isTransient;
 
 	private ModifiedModelElementsCache modifiedModelElementsCache;
-
-	private AutoSplitAndSaveResourceContainmentList<AbstractOperation> operationsList;
 
 	private OperationManager operationManager;
 
@@ -412,22 +408,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getOperations()
 	 */
 	public List<AbstractOperation> getOperations() {
-		// check if operation composite exists
-		OperationComposite operationComposite = this.getLocalOperations();
-		if (operationComposite == null) {
-			this.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-			operationComposite = getLocalOperations();
+		ChangePackage localChangePackage = getLocalChangePackage();
+		if (localChangePackage == null) {
+			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
+			localChangePackage = getLocalChangePackage();
 		}
-		if (isTransient) {
-			return operationComposite.getOperations();
-		}
-		if (operationsList == null) {
-			operationsList = new AutoSplitAndSaveResourceContainmentList<AbstractOperation>(operationComposite,
-				operationComposite.getOperations(), this.eResource().getResourceSet(),
-				Configuration.getWorkspaceDirectory() + "ps-" + getIdentifier() + File.separatorChar + "operations",
-				".off");
-		}
-		return operationsList;
+		return localChangePackage.getOperations();
 	}
 
 	/**
@@ -591,10 +577,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		Resource operationCompositeResource = resourceSet.createResource(operationCompositeURI);
-		if (this.getLocalOperations() == null) {
-			this.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
+		if (this.getLocalChangePackage() == null) {
+			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 		}
-		operationCompositeResource.getContents().add(this.getLocalOperations());
+		operationCompositeResource.getContents().add(this.getLocalChangePackage());
 		resources.add(operationCompositeResource);
 
 		Resource projectSpaceResource = resourceSet.createResource(projectSpaceURI);
@@ -793,7 +779,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void save() {
 		saveProjectSpaceOnly();
-		operationsList.save();
+		// operationsList.save();
+		try {
+			ChangePackage localChangePackage = getLocalChangePackage();
+			if (localChangePackage.eResource() != null) {
+				localChangePackage.eResource().save(ModelUtil.getResourceSaveOptions());
+			}
+		} catch (IOException e) {
+			WorkspaceUtil.logException("Could not save local change package", e);
+		}
 		statePersister.saveDirtyResources(true);
 	}
 
