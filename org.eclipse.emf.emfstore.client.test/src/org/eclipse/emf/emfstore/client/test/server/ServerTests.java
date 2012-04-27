@@ -50,14 +50,13 @@ import org.junit.BeforeClass;
  * @author wesendon
  */
 
-public class ServerTests extends WorkspaceTest {
+public abstract class ServerTests extends WorkspaceTest {
 
 	private static SessionId sessionId;
 	private static ConnectionManager connectionManager;
 	private int projectsOnServerBeforeTest;
 	private static HashMap<Class<?>, Object> arguments;
 	private static ServerInfo serverInfo;
-	private ProjectInfo projectInfo = null;
 
 	public static void setServerInfo(ServerInfo server_Info) {
 		serverInfo = server_Info;
