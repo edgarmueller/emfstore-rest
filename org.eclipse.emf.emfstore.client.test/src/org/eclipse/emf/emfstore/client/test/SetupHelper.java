@@ -321,10 +321,10 @@ public class SetupHelper {
 					uriString = uriString.replace("reference:file:/", "");
 					uriString = uriString.replace("/", File.separator);
 				}
-				uriString = uriString.replace("initial@", "");
-				uriString = new File(uriString).getAbsolutePath();
-				LOGGER.log(Level.INFO, "importing " + uriString);
 				try {
+					uriString = uriString.replace("initial@", "");
+					uriString = new File(uriString).getCanonicalPath();
+					LOGGER.log(Level.INFO, "importing " + uriString);
 					testProjectSpace = importProject(uriString);
 				} catch (IOException e) {
 					e.printStackTrace();
