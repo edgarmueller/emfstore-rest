@@ -1,5 +1,4 @@
 ### Use these as JVM arguments:
-#-Xms40m 
 #-Xmx512m
 
 resolve --properties http://git.eclipse.org/c/emf-store/org.eclipse.emf.emfstore.core.git/plain/org.eclipse.emf.emfstore.site/buckminster.properties  http://git.eclipse.org/c/emf-store/org.eclipse.emf.emfstore.core.git/plain/org.eclipse.emf.emfstore.releng/buckminster.mspec
