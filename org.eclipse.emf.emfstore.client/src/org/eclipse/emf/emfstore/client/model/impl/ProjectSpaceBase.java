@@ -410,7 +410,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public List<AbstractOperation> getOperations() {
 		ChangePackage localChangePackage = getLocalChangePackage();
 		if (localChangePackage == null) {
-			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
+			this.setLocalChangePackage(new AutoSaveChangePackageImpl()); // VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
 		return localChangePackage.getOperations();
@@ -554,7 +554,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix + Configuration.getProjectFolderName()
 			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
-		URI operationCompositeURI = URI.createFileURI(operationsCompositeFileName);
+		URI localChangePackageURI = URI.createFileURI(operationsCompositeFileName);
 
 		setResourceCount(0);
 		String fileName = projectFragementsFileNamePrefix + getResourceCount()
@@ -576,12 +576,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			}
 		}
 
-		Resource operationCompositeResource = resourceSet.createResource(operationCompositeURI);
+		Resource localChangePackageResource = resourceSet.createResource(localChangePackageURI);
 		if (this.getLocalChangePackage() == null) {
-			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
+			this.setLocalChangePackage(new AutoSaveChangePackageImpl());
 		}
-		operationCompositeResource.getContents().add(this.getLocalChangePackage());
-		resources.add(operationCompositeResource);
+		localChangePackageResource.getContents().add(this.getLocalChangePackage());
+		resources.add(localChangePackageResource);
 
 		Resource projectSpaceResource = resourceSet.createResource(projectSpaceURI);
 		projectSpaceResource.getContents().add(this);
@@ -605,6 +605,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#delete()
 	 * @generated NOT
 	 */
+	@SuppressWarnings("unchecked")
 	public void delete() throws IOException {
 		operationManager.removeOperationListener(modifiedModelElementsCache);
 		operationManager.dispose();
@@ -779,14 +780,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void save() {
 		saveProjectSpaceOnly();
-		// operationsList.save();
-		try {
-			ChangePackage localChangePackage = getLocalChangePackage();
-			if (localChangePackage.eResource() != null) {
-				localChangePackage.eResource().save(ModelUtil.getResourceSaveOptions());
-			}
-		} catch (IOException e) {
-			WorkspaceUtil.logException("Could not save local change package", e);
+		ChangePackage localChangePackage = getLocalChangePackage();
+		if (localChangePackage.eResource() != null) {
+			saveResource(localChangePackage.eResource());
 		}
 		statePersister.saveDirtyResources(true);
 	}
