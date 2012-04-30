@@ -1,13 +1,13 @@
 ### Use these as JVM arguments:
-#-XX:MaxPermSize=256m
+#-Xms40m 
 #-Xmx512m
 
 resolve --properties http://git.eclipse.org/c/emf-store/org.eclipse.emf.emfstore.core.git/plain/org.eclipse.emf.emfstore.site/buckminster.properties  http://git.eclipse.org/c/emf-store/org.eclipse.emf.emfstore.core.git/plain/org.eclipse.emf.emfstore.releng/buckminster.mspec
 
 build --clean --thorough
 
-junit -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m --launch "org.eclipse.emf.emfstore.client.test/AllChangeTrackingTestsWithTransactionalEditingDomain.launch" --flatXML --output "${WORKSPACE}/AllChangeTrackingTestsWithTransactionalEditingDomain_testReport.xml"
-junit -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m --launch "org.eclipse.emf.emfstore.client.test/AllTestsWithNormalEditingDomain.launch" --flatXML --output "${WORKSPACE}/AllTestsWithNormalEditingDomain_testReport.xml"
+junit -Dosgi.requiredJavaVersion=1.5 --launch "org.eclipse.emf.emfstore.client.test/AllChangeTrackingTestsWithTransactionalEditingDomain.launch" --flatXML --output "${WORKSPACE}/AllChangeTrackingTestsWithTransactionalEditingDomain_testReport.xml"
+junit -Dosgi.requiredJavaVersion=1.5 --launch "org.eclipse.emf.emfstore.client.test/AllTestsWithNormalEditingDomain.launch" --flatXML --output "${WORKSPACE}/AllTestsWithNormalEditingDomain_testReport.xml"
 
 perform --properties http://git.eclipse.org/c/emf-store/org.eclipse.emf.emfstore.core.git/plain/org.eclipse.emf.emfstore.site/buckminster.properties -D target.os=* -D target.ws=* -D target.arch=* org.eclipse.emf.emfstore.site#site.p2
 
