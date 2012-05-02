@@ -107,6 +107,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private HashMap<String, OrgUnitProperty> propertyMap;
 
 	private StatePersister statePersister;
+	private OperationPersister operationPersister;
 
 	private ResourceSet resourceSet;
 
@@ -267,6 +268,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return this.operationManager.beginCompositeOperation();
 	}
 
+	/**
+	 * Removes the elements that are marked as cutted from the project.
+	 */
 	public void cleanCutElements() {
 		for (EObject cutElement : getProject().getCutElements()) {
 			getProject().deleteModelElement(cutElement);
@@ -307,10 +311,23 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		new ExportChangesController(this).execute(file, new NullProgressMonitor());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportProject(java.io.File,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public void exportProject(File file, IProgressMonitor progressMonitor) throws IOException {
 		new ExportProjectController(this).execute(file, progressMonitor);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#exportProject(java.io.File)
+	 */
 	public void exportProject(File file) throws IOException {
 		new ExportProjectController(this).execute(file, new NullProgressMonitor());
 	}
@@ -410,7 +427,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public List<AbstractOperation> getOperations() {
 		ChangePackage localChangePackage = getLocalChangePackage();
 		if (localChangePackage == null) {
-			this.setLocalChangePackage(new AutoSaveChangePackageImpl()); // VersioningFactory.eINSTANCE.createChangePackage());
+			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
 		return localChangePackage.getOperations();
@@ -459,15 +476,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Returns the {@link StatePersister}.
-	 * 
-	 * @return persister
-	 */
-	public StatePersister getStatePersister() {
-		return statePersister;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#importLocalChanges(java.lang.String)
@@ -503,8 +511,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		operationRecorder = new OperationRecorder((IdEObjectCollectionImpl) this.getProject(), changeNotifier);
 		operationManager = new OperationManager(operationRecorder, this);
 		operationManager.addOperationListener(modifiedModelElementsCache);
+
 		statePersister = new StatePersister(changeNotifier, ((EMFStoreCommandStack) Configuration.getEditingDomain()
 			.getCommandStack()), (IdEObjectCollectionImpl) this.getProject());
+		operationPersister = new OperationPersister(this);
+
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
+
+		commandStack.addCommandStackObserver(statePersister);
+		commandStack.addCommandStackObserver(operationPersister);
 
 		// initialization order is important!
 		getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
@@ -532,6 +547,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		cleanCutElements();
 	}
 
+	/**
+	 * Returns the file transfer manager.
+	 * 
+	 * @return the file transfer manager
+	 */
 	public FileTransferManager getFileTransferManager() {
 		return fileTransferManager;
 	}
@@ -578,7 +598,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		Resource localChangePackageResource = resourceSet.createResource(localChangePackageURI);
 		if (this.getLocalChangePackage() == null) {
-			this.setLocalChangePackage(new AutoSaveChangePackageImpl());
+			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 		}
 		localChangePackageResource.getContents().add(this.getLocalChangePackage());
 		resources.add(localChangePackageResource);
@@ -605,12 +625,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#delete()
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	public void delete() throws IOException {
 		operationManager.removeOperationListener(modifiedModelElementsCache);
 		operationManager.dispose();
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this);
+		((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack())
+			.removeCommandStackObserver(operationPersister);
 
 		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
 			+ getIdentifier();
@@ -780,11 +801,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void save() {
 		saveProjectSpaceOnly();
+		saveChangePackage();
+		statePersister.saveDirtyResources(true);
+	}
+
+	private void saveChangePackage() {
 		ChangePackage localChangePackage = getLocalChangePackage();
 		if (localChangePackage.eResource() != null) {
 			saveResource(localChangePackage.eResource());
 		}
-		statePersister.saveDirtyResources(true);
 	}
 
 	/**
