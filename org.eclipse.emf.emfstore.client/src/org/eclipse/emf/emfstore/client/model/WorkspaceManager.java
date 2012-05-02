@@ -393,7 +393,7 @@ public final class WorkspaceManager {
 					continue;
 				}
 				for (File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(Configuration.getOperationCompositeFileExtension())) {
+					if (subDirFile.getName().endsWith(Configuration.getLocalChangePackageFileExtension())) {
 						operationsFilePath = subDirFile.getAbsolutePath();
 					}
 				}

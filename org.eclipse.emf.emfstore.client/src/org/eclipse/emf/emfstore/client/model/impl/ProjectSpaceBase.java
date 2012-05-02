@@ -430,7 +430,30 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
+
+		if (getLocalOperations() != null && getLocalOperations().getOperations().size() > 0) {
+			migrateOperations(localChangePackage);
+		}
+
 		return localChangePackage.getOperations();
+	}
+
+	private void migrateOperations(ChangePackage localChangePackage) {
+
+		if (getLocalOperations() != null) {
+			for (AbstractOperation op : getLocalOperations().getOperations()) {
+				localChangePackage.getOperations().add(op);
+			}
+
+			Resource eResource = getLocalOperations().eResource();
+
+			setLocalOperations(null);
+			eResource.getContents().remove(0);
+			eResource.getContents().add(localChangePackage);
+			saveResource(eResource);
+
+			save();
+		}
 	}
 
 	/**
@@ -569,12 +592,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
 		String projectSpaceFileName = projectSpaceFileNamePrefix + this.getIdentifier()
 			+ Configuration.getProjectSpaceFileExtension();
-		String operationsCompositeFileName = projectSpaceFileNamePrefix + this.getIdentifier()
-			+ Configuration.getOperationCompositeFileExtension();
+		String localChangePackageFileName = projectSpaceFileNamePrefix + this.getIdentifier()
+			+ Configuration.getLocalChangePackageFileExtension();
 		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix + Configuration.getProjectFolderName()
 			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
-		URI localChangePackageURI = URI.createFileURI(operationsCompositeFileName);
+		URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
 
 		setResourceCount(0);
 		String fileName = projectFragementsFileNamePrefix + getResourceCount()
