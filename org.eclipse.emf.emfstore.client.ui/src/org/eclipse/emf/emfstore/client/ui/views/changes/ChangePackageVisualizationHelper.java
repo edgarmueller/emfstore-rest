@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
@@ -43,7 +44,7 @@ import org.eclipse.swt.graphics.Image;
  * @author shterev
  * @author emueller
  */
-public class ChangePackageVisualizationHelper {
+public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private CustomOperationLabelProviderManager customLabelProviderManager;
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
@@ -207,7 +208,7 @@ public class ChangePackageVisualizationHelper {
 			if (i % 2 == 1) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
-				stringBuilder.append(labelProvider.getModelElementName(modelElementId));
+				stringBuilder.append(labelProvider.getModelElementName(getModelElement(modelElementId)));
 			} else {
 				stringBuilder.append(strings[i]);
 			}
