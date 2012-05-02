@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
@@ -154,9 +156,9 @@ public class CleanMemoryTask extends TimerTask {
 		res.unload();
 		res.getResourceSet().getResources().remove(res);
 
-		if (eObject instanceof Project) {
-			Project project = (Project) eObject;
-			project.dispose();
+		if (eObject instanceof IdEObjectCollection && eObject instanceof IDisposable) {
+			IDisposable disposable = (IDisposable) eObject;
+			disposable.dispose();
 		}
 
 		// sanity check
