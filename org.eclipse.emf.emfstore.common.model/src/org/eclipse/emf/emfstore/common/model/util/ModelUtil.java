@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.common.model.util;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -369,6 +370,37 @@ public final class ModelUtil {
 			throw new SerializationException(e);
 		}
 
+		return handleParsedEObject(res);
+	}
+
+	/**
+	 * Reads from a given {@link Reader} instance and converts the read stream
+	 * into an {@link EObject}.
+	 * 
+	 * @param reader
+	 *            the {@link Reader} capable of reading in a serialized EObject
+	 * @return the deserialized {@link EObject}
+	 * @throws SerializationException
+	 *             if deserialization fails
+	 */
+	public static EObject stringToEObject(Reader reader) throws SerializationException {
+
+		XMIResource res = (XMIResource) (new ResourceSetImpl()).createResource(VIRTUAL_URI);
+		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+		URIConverter.ReadableInputStream ris = new URIConverter.ReadableInputStream(reader, "UTF-8");
+
+		try {
+			res.load(ris, getResourceLoadOptions());
+		} catch (UnsupportedEncodingException e) {
+			throw new SerializationException(e);
+		} catch (IOException e) {
+			throw new SerializationException(e);
+		}
+
+		return handleParsedEObject(res);
+	}
+
+	private static EObject handleParsedEObject(XMIResource res) throws SerializationException {
 		EObject result = res.getContents().get(0);
 
 		if (result instanceof IdEObjectCollection) {

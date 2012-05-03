@@ -10,8 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.connection.xmlrpc.util;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.parser.ByteArrayParser;
@@ -30,13 +32,15 @@ public class EObjectTypeParser extends ByteArrayParser {
 		try {
 			byte[] res = (byte[]) super.getResult();
 			ByteArrayInputStream bais = new ByteArrayInputStream(res);
-			int length = bais.available();
-			byte[] buff = new byte[length];
-			bais.read(buff);
+			// int length = bais.available();
+			// char[] buff = new char[length];
+			BufferedReader reader = new BufferedReader(new InputStreamReader(bais));
 			try {
-				return ModelUtil.stringToEObject(new String(buff));
+				return ModelUtil.stringToEObject(reader);// , buff.length);
 			} catch (SerializationException e) {
 				throw new XmlRpcException("Couldn't parse EObject", e);
+			} finally {
+				reader.close();
 			}
 		} catch (IOException e) {
 			throw new XmlRpcException("Failed to read result object: " + e.getMessage(), e);
