@@ -58,9 +58,10 @@ public class EObjectSerializer extends TypeSerializerImpl {
 					bos.write(ModelUtil.eObjectToString((EObject) pObject).getBytes());
 				}
 			} catch (SerializationException e) {
-				e.printStackTrace();
+				throw new SAXException("Couldn't serialize EObject", e);
+			} finally {
+				bos.close();
 			}
-			bos.close();
 		} catch (Base64.SAXIOException e) {
 			throw e.getSAXException();
 		} catch (IOException e) {
