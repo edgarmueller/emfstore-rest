@@ -32,11 +32,9 @@ public class EObjectTypeParser extends ByteArrayParser {
 		try {
 			byte[] res = (byte[]) super.getResult();
 			ByteArrayInputStream bais = new ByteArrayInputStream(res);
-			// int length = bais.available();
-			// char[] buff = new char[length];
 			BufferedReader reader = new BufferedReader(new InputStreamReader(bais));
 			try {
-				return ModelUtil.stringToEObject(reader);// , buff.length);
+				return ModelUtil.stringToEObject(reader);
 			} catch (SerializationException e) {
 				throw new XmlRpcException("Couldn't parse EObject", e);
 			} finally {
