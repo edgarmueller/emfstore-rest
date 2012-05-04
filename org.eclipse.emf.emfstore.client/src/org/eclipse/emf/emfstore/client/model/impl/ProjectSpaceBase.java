@@ -19,7 +19,6 @@ import java.util.ListIterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -54,7 +53,6 @@ import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
@@ -611,12 +609,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		resources.add(resource);
 		setResourceCount(getResourceCount() + 1);
 
-		if (Configuration.isResourceSplittingEnabled()) {
-			splitResources(resourceSet, projectFragementsFileNamePrefix, resources, this.getProject());
-		} else {
-			for (EObject modelElement : getProject().getAllModelElements()) {
-				((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
-			}
+		for (EObject modelElement : getProject().getAllModelElements()) {
+			((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
 		}
 
 		Resource localChangePackageResource = resourceSet.createResource(localChangePackageURI);
@@ -912,37 +906,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void shareProject(Usersession session, IProgressMonitor monitor) throws EmfStoreException {
 		new ShareController(this, session, monitor).execute();
-	}
-
-	private void splitResources(ResourceSet resourceSet, String projectFragementsFileNamePrefix,
-		List<Resource> resources, Project project) {
-		String fileName;
-		URI fileURI;
-
-		Resource resource = project.eResource();
-		int counter = 0;
-		for (EObject modelElement : project.getAllModelElements()) {
-
-			// never split maps
-			if (modelElement instanceof BasicEMap.Entry) {
-				((XMIResource) modelElement.eContainer().eResource()).setID(modelElement, getProject()
-					.getModelElementId(modelElement).getId());
-				continue;
-			}
-
-			if (counter > Configuration.getMaxMECountPerResource()) {
-				fileName = projectFragementsFileNamePrefix + getResourceCount()
-					+ Configuration.getProjectFragmentFileExtension();
-				fileURI = URI.createFileURI(fileName);
-				resource = resourceSet.createResource(fileURI);
-				setResourceCount(getResourceCount() + 1);
-				resources.add(resource);
-				counter = 0;
-			}
-			counter++;
-
-			assignElementToResource(resource, modelElement);
-		}
 	}
 
 	/**
