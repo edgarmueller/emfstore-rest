@@ -533,8 +533,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		operationManager = new OperationManager(operationRecorder, this);
 		operationManager.addOperationListener(modifiedModelElementsCache);
 
-		statePersister = new StatePersister(changeNotifier, ((EMFStoreCommandStack) Configuration.getEditingDomain()
-			.getCommandStack()), (IdEObjectCollectionImpl) this.getProject());
+		statePersister = new StatePersister(
+			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()),
+			(IdEObjectCollectionImpl) this.getProject());
 		operationPersister = new OperationPersister(this);
 
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();

@@ -67,8 +67,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 * @param collection
 	 *            the collection that should be persisted
 	 */
-	public StatePersister(EObjectChangeNotifier changeNotifier, EMFStoreCommandStack commandStack,
-		IdEObjectCollectionImpl collection) {
+	public StatePersister(EMFStoreCommandStack commandStack, IdEObjectCollectionImpl collection) {
 		this.commandStack = commandStack;
 		this.dirtyResourceSet = new DirtyResourceSet(collection);
 		filterStack = new FilterStack(new NotificationFilter[] { new TouchFilter(), new TransientFilter(),
