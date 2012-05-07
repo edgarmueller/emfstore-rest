@@ -105,6 +105,12 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 		notifyIdEObjectCollectionChangeObservers(command);
 	}
 
+	/**
+	 * Notifies all collection change observers.
+	 * 
+	 * @param command
+	 *            the notification command
+	 */
 	protected synchronized void notifyIdEObjectCollectionChangeObservers(
 		EObjectChangeObserverNotificationCommand command) {
 		isNotifiying = true;
@@ -252,9 +258,12 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
-	 * Copies the current project.
+	 * Copies the current collection.
 	 * 
-	 * @return the copied project
+	 * @param <T>
+	 *            the actual collection type to be copied
+	 * 
+	 * @return the copied collection
 	 */
 	@Override
 	public <T extends IdEObjectCollection> T copy() {
@@ -282,6 +291,11 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection#getChangeNotifier()
+	 */
 	public EObjectChangeNotifier getChangeNotifier() {
 		return changeNotifier;
 	}
