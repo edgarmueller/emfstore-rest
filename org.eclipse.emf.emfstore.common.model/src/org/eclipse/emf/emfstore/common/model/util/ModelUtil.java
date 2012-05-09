@@ -140,6 +140,35 @@ public final class ModelUtil {
 	}
 
 	/**
+	 * Compares two lists of EObject by checking whether the string representations of
+	 * the EObjects are equal.
+	 * 
+	 * @param listA
+	 *            the first list of EObject
+	 * @param listB
+	 *            the second list of EObject
+	 * @return true if the two lists are equal
+	 */
+	public static boolean areEqual(EList<? extends EObject> listA, EList<? extends EObject> listB) {
+		if (listA == listB) {
+			return true;
+		}
+
+		if (listA.size() != listB.size()) {
+			return false;
+		}
+
+		for (int i = 0; i < listA.size(); ++i) {
+			EObject o1 = listA.get(i);
+			EObject o2 = listB.get(i);
+			if (!areEqual(o1, o2)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Converts an EObject to a String.
 	 * 
 	 * @param object
@@ -784,6 +813,25 @@ public final class ModelUtil {
 		ArrayList<EObject> list = new ArrayList<EObject>();
 		list.add(eObject);
 		saveEObjectToResource(list, resourceURI);
+	}
+
+	/**
+	 * Deletes all resources from resourceSet, which string representation of URI starts with prefix.
+	 * 
+	 * @param resourceSet resource set
+	 * @param prefix string prefix of the resource path
+	 * @throws IOException
+	 */
+	public static void deleteResourcesWithPrefix(ResourceSet resourceSet, String prefix) throws IOException {
+		List<Resource> toDelete = new ArrayList<Resource>();
+		for (Resource resource : resourceSet.getResources()) {
+			if (resource.getURI().toFileString().startsWith(prefix)) {
+				toDelete.add(resource);
+			}
+		}
+		for (Resource resource : toDelete) {
+			resource.delete(null);
+		}
 	}
 
 	/**

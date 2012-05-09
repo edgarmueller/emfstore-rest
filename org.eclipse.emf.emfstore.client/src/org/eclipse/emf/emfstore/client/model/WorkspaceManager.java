@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.client.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,12 +20,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -37,7 +33,6 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
-import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -73,31 +68,7 @@ public final class WorkspaceManager {
 	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
 
-	private ExtendedCrossReferenceAdapter crossReferenceAdapter;
 	private ResourceSet resourceSet;
-
-	/**
-	 * A cross-reference adapter implementation that dismisses tracking of deleted project space resources.
-	 */
-	static class ExtendedCrossReferenceAdapter extends ECrossReferenceAdapter {
-
-		@Override
-		protected void unsetTarget(EObject target) {
-			super.unsetTarget(target);
-			if (target instanceof ProjectSpace) {
-				ProjectSpace projectSpace = (ProjectSpace) target;
-				String pathToProject = Configuration.getWorkspaceDirectory()
-					+ Configuration.getProjectSpaceDirectoryPrefix() + projectSpace.getIdentifier();
-				List<Resource> toDelete = new ArrayList<Resource>();
-				for (Resource resource : unloadedResources) {
-					if (resource.getURI().toFileString().startsWith(pathToProject)) {
-						toDelete.add(resource);
-					}
-				}
-				unloadedResources.removeAll(toDelete);
-			}
-		}
-	}
 
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
@@ -215,24 +186,6 @@ public final class WorkspaceManager {
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		((ResourceSetImpl) resourceSet).setURIResourceMap(new HashMap<URI, Resource>());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
-
-		boolean useCrossReferenceAdapter = false;
-
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
-			.getExtensionElements()) {
-			useCrossReferenceAdapter |= element.getBoolean("activated");
-		}
-
-		if (useCrossReferenceAdapter) {
-			crossReferenceAdapter = new ExtendedCrossReferenceAdapter();
-			resourceSet.eAdapters().add(crossReferenceAdapter);
-			getObserverBus().register(new DeleteProjectSpaceObserver() {
-				public void projectSpaceDeleted(ProjectSpace projectSpace) {
-					// remove project resources from cross reference adapter
-					crossReferenceAdapter.unsetTarget(projectSpace);
-				}
-			});
-		}
 
 		// register an editing domain on the resource
 		Configuration.setEditingDomain(createEditingDomain(resourceSet));
@@ -495,22 +448,6 @@ public final class WorkspaceManager {
 			modelVersion.setReleaseNumber(4);
 			return modelVersion;
 		}
-	}
-
-	/**
-	 * Returns the {@link ECrossReferenceAdapter}, if available.
-	 * 
-	 * @param modelElement
-	 *            the model element for which to find inverse cross references
-	 * 
-	 * @return the {@link ECrossReferenceAdapter}
-	 */
-	public Collection<Setting> findInverseCrossReferences(EObject modelElement) {
-		if (crossReferenceAdapter != null) {
-			return crossReferenceAdapter.getInverseReferences(modelElement);
-		}
-
-		return UsageCrossReferencer.find(modelElement, resourceSet);
 	}
 
 	/**
