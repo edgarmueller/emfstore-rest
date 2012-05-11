@@ -11,6 +11,17 @@
 	<property key="eclipse.downloads" value="http://download.eclipse.org"/>
 	<property key="resolve.target.platform" value="true"/>
 	
+	<!-- HUDSON: local resolution using the local readerType (this requires the pre-defined names for all repositories) -->
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="hudson"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="hudson"/>
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="hudson"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="hudson"/>
+	
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="hudsonecp"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="hudsonecp"/>
+	<locator pattern="^ECPTargetPlatform$" searchPathRef="hudsonecp"/>
+	<locator pattern="^ECPDeveloper$" searchPathRef="hudsonecp"/>
+	
 	<!-- DEBUG: local resolution using the git readerType (this requires the pre-defined names for all repositories) -->
 	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localgit"/>
@@ -23,21 +34,9 @@
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="localgitecp"/>
 	-->
-	
-	<!-- HUDSON: local resolution using the local readerType (this requires the pre-defined names for all repositories) -->
-	<!--
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="hudson"/>
-	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="hudson"/>
-	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="hudson"/>
-	<locator pattern="^EMFStoreDeveloper$" searchPathRef="hudson"/>
-	
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="hudsonecp"/>
-	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="hudsonecp"/>
-	<locator pattern="^ECPTargetPlatform$" searchPathRef="hudsonecp"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="hudsonecp"/>
-	-->
 		
 	<!-- DEBUG: local resolution comparable to HUDSON -->
+	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="local"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="local"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="local"/>
@@ -47,6 +46,7 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localecp"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="localecp"/>
+	-->
 	
 	<!-- LEGACY: remote resolution using the git readerType (this requires the git readerType to be installed on Hudson) -->
 	<!--
