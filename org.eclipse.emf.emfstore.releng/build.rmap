@@ -24,6 +24,18 @@
 	<locator pattern="^ECPDeveloper$" searchPathRef="localecp"/>
 	-->
 	
+	<!-- HUDSON -->
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="hudson"/>
+	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="hudson"/>
+	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="hudson"/>
+	<locator pattern="^EMFStoreDeveloper$" searchPathRef="hudson"/>
+	
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="hudsonecp"/>
+	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="hudsonecp"/>
+	<locator pattern="^ECPTargetPlatform$" searchPathRef="hudsonecp"/>
+	<locator pattern="^ECPDeveloper$" searchPathRef="hudsonecp"/>
+	
+	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="remote"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="remote"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="remote"/>
@@ -33,6 +45,7 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="remoteecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="remoteecp"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="remoteecp"/>
+	-->
 	
 	<locator pattern="^org\.eclipse\.emf\.edapt(?:\..+)?$" searchPathRef="p2"/>
 	<locator pattern="^org\.eclipse\.ocl(?:\..+)?$" searchPathRef="p2"/>
@@ -150,6 +163,56 @@
 			</uri>
 		</provider>
 	</searchPath>
+
+
+
+
+
+
+	<searchPath name="hudson">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.emfstore.core/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.emfstore.releng/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.emfstore.other/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="hudsonecp">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.ecp.core/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.ecp.releng/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
+			<uri format="{0}/git/org.eclipse.emf.ecp.other/{1}">
+				<bc:propertyRef key="workspace.root"/>
+				<bc:propertyRef key="buckminster.component"/>
+			</uri>
+		</provider>
+	</searchPath>
+
+
+
 
 
 
