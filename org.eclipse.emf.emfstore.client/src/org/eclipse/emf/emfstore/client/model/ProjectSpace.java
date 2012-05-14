@@ -633,6 +633,14 @@ public interface ProjectSpace extends IdentifiableElement {
 	ResourceSet getResourceSet();
 
 	/**
+	 * Sets the resource set of the project space.
+	 * 
+	 * @param resourceSet
+	 *            the resource set to be used by this project space
+	 */
+	void setResourceSet(ResourceSet resourceSet);
+
+	/**
 	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
