@@ -64,13 +64,16 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            The user session that should be used to checkout the project.
 	 * @param projectInfo
 	 *            An {@link ProjectInfo} instance describing the project and its version.
+	 * @param progressMonitor
+	 *            the progress monitor that should be used during checkout
 	 * @throws EmfStoreException
 	 *             If an error occurs during the checkout.
 	 * @return the project space containing the project
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, IProgressMonitor progressMonitor)
+		throws EmfStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -81,14 +84,16 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            An {@link ProjectInfo} instance describing the project and its version.
 	 * @param targetSpec
 	 *            The target version.
+	 * @param progressMonitor
+	 *            the progress monitor that should be used during checkout
 	 * @throws EmfStoreException
 	 *             If an error occurs during the checkout.
 	 * @return the project space containing the project
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec)
-		throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec,
+		IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
 	 * Creates a new local project that is not shared with the server yet.
@@ -113,8 +118,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName, String projectDescription)
-		throws EmfStoreException;
+	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName, String projectDescription,
+		IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -130,8 +135,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	ProjectInfo createRemoteProject(Usersession usersession, String projectName, String projectDescription)
-		throws EmfStoreException;
+	ProjectInfo createRemoteProject(Usersession usersession, String projectName, String projectDescription,
+		IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Deletes the given project space.

@@ -21,7 +21,7 @@ public abstract class AbstractEMFStoreHandler extends AbstractEMFStoreHandlerWit
 	public abstract void handle() throws EmfStoreException;
 
 	public void handleException(Exception exception) {
-		EMFStoreMessageDialog.showExceptionDialog(exception);
+		EMFStoreMessageDialog.showExceptionDialog(getShell(), exception);
 	}
 
 }

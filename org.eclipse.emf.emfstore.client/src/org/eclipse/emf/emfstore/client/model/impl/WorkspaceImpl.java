@@ -20,6 +20,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -53,6 +58,7 @@ import org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.common.MonitoredEMFStoreRequest;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -138,6 +144,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	private ResourceSet workspaceResourceSet;
 
+	private ExecutorService executor;
+
 	// end of custom code
 
 	/**
@@ -162,15 +170,17 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo)
+	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo) throws EmfStoreException {
+	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
+		IProgressMonitor progressMonitor) throws EmfStoreException {
 		PrimaryVersionSpec targetSpec = this.connectionManager.resolveVersionSpec(usersession.getSessionId(),
 			projectInfo.getProjectId(), VersionSpec.HEAD_VERSION);
-		return checkout(usersession, projectInfo, targetSpec);
+		return checkout(usersession, projectInfo, targetSpec, progressMonitor);
 	}
 
 	/**
@@ -179,10 +189,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
-		PrimaryVersionSpec targetSpec) throws EmfStoreException {
+		PrimaryVersionSpec targetSpec, IProgressMonitor progressMonitor) throws EmfStoreException {
 
 		// FIXME: MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
@@ -248,15 +259,31 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		return projectSpace;
 	}
 
-	private ProjectInfo createEmptyRemoteProject(Usersession usersession, final String projectName,
-		final String projectDescription) throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
-		LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
+	private ProjectInfo createEmptyRemoteProject(final Usersession usersession, final String projectName,
+		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException {
+		final ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		log.setMessage("Creating project '" + projectName + "'");
 		log.setAuthor(usersession.getUsername());
 		log.setClientDate(new Date());
-		ProjectInfo emptyProject = connectionManager.createEmptyProject(usersession.getSessionId(), projectName,
-			projectDescription, log);
+		ProjectInfo emptyProject = null;
+
+		try {
+			new MonitoredEMFStoreRequest(progressMonitor).execute(new Callable<ProjectInfo>() {
+				public ProjectInfo call() throws Exception {
+					return connectionManager.createEmptyProject(usersession.getSessionId(), projectName,
+						projectDescription, log);
+				}
+			});
+		} catch (InterruptedException e) {
+			throw new EmfStoreException("Monitored EMFStore request interruped.", e);
+		} catch (ExecutionException e) {
+			throw new EmfStoreException("Error during Monitored EMFStore request.", e);
+		} catch (TimeoutException e) {
+			throw new EmfStoreException("Timeout occurred during Monitored EMFStore request.", e);
+		}
+
+		progressMonitor.worked(10);
 		updateProjectInfos(usersession);
 		return emptyProject;
 	}
@@ -291,11 +318,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(ServerInfo serverInfo, final String projectName,
-		final String projectDescription) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException {
 		return new ServerCall<ProjectInfo>(serverInfo) {
 			@Override
 			protected ProjectInfo run() throws EmfStoreException {
-				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription);
+				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
 	}
@@ -308,11 +335,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(Usersession usersession, final String projectName,
-		final String projectDescription) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException {
 		return new ServerCall<ProjectInfo>(usersession) {
 			@Override
 			protected ProjectInfo run() throws EmfStoreException {
-				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription);
+				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
 	}
@@ -781,6 +808,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void init() {
+		executor = Executors.newCachedThreadPool();
 		projectToProjectSpaceMap = new HashMap<Project, ProjectSpace>();
 		// initialize all projectSpaces
 		for (ProjectSpace projectSpace : getProjectSpaces()) {

@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -63,8 +64,11 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					return WorkspaceManager.getInstance().getCurrentWorkspace()
-						.checkout(TestSessionProvider.getInstance().getDefaultUsersession(), getProjectInfo());
+					return WorkspaceManager
+						.getInstance()
+						.getCurrentWorkspace()
+						.checkout(TestSessionProvider.getInstance().getDefaultUsersession(), getProjectInfo(),
+							new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					Assert.fail();
 					return null;

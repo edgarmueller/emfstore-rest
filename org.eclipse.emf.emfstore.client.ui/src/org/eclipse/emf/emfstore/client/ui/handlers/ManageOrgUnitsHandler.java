@@ -14,6 +14,6 @@ public class ManageOrgUnitsHandler extends AbstractEMFStoreHandler {
 			throw new RequiredSelectionException("Usersession not available in selected ServerInfo.");
 		}
 
-		new UIManageOrgUnitsController(getShell()).openManageOrgUnitsDialog(serverInfo.getLastUsersession());
+		new UIManageOrgUnitsController(getShell(), serverInfo.getLastUsersession()).execute(false, false);
 	}
 }

@@ -10,7 +10,7 @@ public class ShowHistoryHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() throws EmfStoreException {
 		new UIShowHistoryController(getShell(), requireSelection(ProjectSpace.class), requireSelection(EObject.class))
-			.showHistory();
+			.execute(true, true);
 	}
 
 }

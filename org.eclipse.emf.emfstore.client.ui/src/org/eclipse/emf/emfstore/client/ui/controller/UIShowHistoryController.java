@@ -1,5 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -13,7 +24,13 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-public class UIShowHistoryController extends AbstractEMFStoreUIController {
+/**
+ * Controller responsible for showing the history view.
+ * 
+ * @author emueller
+ * 
+ */
+public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> {
 
 	private ProjectSpace projectSpace;
 	private final EObject modelElement;
@@ -31,22 +48,44 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController {
 		this.modelElement = modelElement;
 	}
 
-	public void showHistory() throws EmfStoreException {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	protected Void doRun(IProgressMonitor pm) throws EmfStoreException {
+
 		if (projectSpace == null) {
 			projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
 				.getProjectSpace(ModelUtil.getProject(modelElement));
 		}
 
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		HistoryBrowserView historyBrowserView = null;
-		String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
-		try {
-			historyBrowserView = (HistoryBrowserView) page.showView(viewId);
-		} catch (PartInitException e) {
-			EMFStoreMessageDialog.showExceptionDialog(e);
-		}
-		if (historyBrowserView != null) {
-			historyBrowserView.setInput(projectSpace, modelElement);
-		}
+		new RunInUIThread(getShell()) {
+
+			@Override
+			public Void run(Shell shell) {
+
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				HistoryBrowserView historyBrowserView = null;
+				// TODO: remove hard-coded reference
+				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
+
+				try {
+					historyBrowserView = (HistoryBrowserView) page.showView(viewId);
+				} catch (PartInitException e) {
+					EMFStoreMessageDialog.showExceptionDialog(shell, e);
+				}
+
+				if (historyBrowserView != null) {
+					historyBrowserView.setInput(projectSpace, modelElement);
+				}
+
+				return null;
+			}
+		}.execute();
+
+		return null;
 	}
 }

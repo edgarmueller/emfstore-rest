@@ -13,7 +13,7 @@ public class RevertCommitHandler extends AbstractEMFStoreHandler {
 	public void handle() throws EmfStoreException {
 		HistoryInfo historyInfo = requireSelection(HistoryInfo.class);
 		PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
-		new UIRevertCommitController(getShell(), requireSelection(ProjectSpace.class), versionSpec).revertCommit();
+		new UIRevertCommitController(getShell(), requireSelection(ProjectSpace.class), versionSpec).execute(false,
+			false);
 	}
-
 }

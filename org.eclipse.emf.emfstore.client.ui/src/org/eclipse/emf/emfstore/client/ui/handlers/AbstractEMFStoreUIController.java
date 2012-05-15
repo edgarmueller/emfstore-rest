@@ -1,17 +1,44 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.swt.widgets.Shell;
+import java.lang.reflect.InvocationTargetException;
 
-public abstract class AbstractEMFStoreUIController {
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThreadWithReturnValue;
+import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.progress.IProgressService;
+
+/**
+ * Abstract UI controller class
+ * 
+ * @author ovonwesen
+ * @author emueller
+ * 
+ * @param <T> return type of the controller
+ */
+public abstract class AbstractEMFStoreUIController<T> {
 
 	protected Shell shell;
-	private ProgressMonitorDialog progressDialog;
+	private T returnValue;
+	private EmfStoreException exception;
 
 	public AbstractEMFStoreUIController(Shell shell) {
 		setShell(shell);
@@ -25,36 +52,66 @@ public abstract class AbstractEMFStoreUIController {
 		this.shell = shell;
 	}
 
-	protected ProgressMonitorDialog openProgress() {
-		progressDialog = new ProgressMonitorDialog(getShell());
-		progressDialog.setCancelable(true);
-		progressDialog.open();
-		return progressDialog;
+	/**
+	 * Shows a confirmation dialog.
+	 * 
+	 * @param title
+	 *            the title of the confirmation dialog
+	 * @param message
+	 *            the message to be shown in the dialog
+	 * 
+	 * @return true, if the user confirms the dialog by clicking "Yes", otherwise false
+	 */
+	public boolean confirm(final String title, final String message) {
+		return new RunInUIThreadWithReturnValue<Boolean>(getShell()) {
+			@Override
+			public Boolean run(Shell shell) {
+				MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION,
+					new String[] { "Yes", "No" }, 0);
+				int result = dialog.open();
+				return result == Window.OK;
+			}
+		}.execute();
 	}
 
-	protected void closeProgress() {
-		if (progressDialog != null) {
-			progressDialog.close();
+	public void handleException(final Exception exception) {
+		new RunInUIThread(getShell()) {
+			@Override
+			public Void run(Shell shell) {
+				EMFStoreMessageDialog.showExceptionDialog(shell, exception);
+				return null;
+			}
+		}.execute();
+	}
+
+	public T execute(boolean fork, boolean cancelable) throws EmfStoreException {
+
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		IProgressService progressService = workbench.getProgressService();
+		exception = null;
+
+		try {
+			progressService.run(fork, cancelable, new IRunnableWithProgress() {
+				public void run(final IProgressMonitor pm) {
+					try {
+						returnValue = doRun(pm);
+					} catch (EmfStoreException e) {
+						exception = e;
+					}
+				}
+			});
+		} catch (InvocationTargetException e) {
+			WorkspaceUtil.logException("Error during excuting an EMFStore UI controller: " + e.getMessage(), e);
+		} catch (InterruptedException e) {
+			WorkspaceUtil.logException("Error during excuting an EMFStore UI controller: " + e.getMessage(), e);
 		}
-	}
 
-	protected IProgressMonitor getProgressMonitor() {
-		if (progressDialog != null) {
-			return progressDialog.getProgressMonitor();
+		if (exception != null) {
+			throw exception;
 		}
-		return new NullProgressMonitor();
+
+		return returnValue;
 	}
 
-	protected boolean confirmationDialog(String message) {
-		MessageDialog dialog = new MessageDialog(null, "Confirmation", null, message, MessageDialog.QUESTION,
-			new String[] { "Yes", "No" }, 0);
-
-		return dialog.open() == Dialog.OK;
-	}
-
-	public void handleException(Exception exception) {
-		EMFStoreMessageDialog.showExceptionDialog(exception);
-		closeProgress();
-	}
-
+	protected abstract T doRun(IProgressMonitor pm) throws EmfStoreException;
 }

@@ -5,6 +5,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 public interface CommitCallback {
 
+	/**
+	 * Called when {@link ProjectSpace} that should be updated is out of date.
+	 * A caller may veto against updating the project space by returning false.
+	 * 
+	 * @param projectSpace
+	 *            the project space being out of date
+	 * @return true, if the caller is willing to update the project space, false otherwise
+	 */
 	boolean baseVersionOutOfDate(ProjectSpace projectSpace);
 
 	boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage);

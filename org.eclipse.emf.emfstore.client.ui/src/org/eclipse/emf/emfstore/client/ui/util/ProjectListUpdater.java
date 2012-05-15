@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.util;
+package org.eclipse.emf.emfstore.client.ui.util;
 
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -19,11 +19,16 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThread;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver, LogoutObserver {
 
 	private Workspace workspace;
+	private EmfStoreException exception;
 
 	/**
 	 * 
@@ -76,8 +81,25 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 		}
 	}
 
-	private void update(Usersession session) throws EmfStoreException {
-		workspace.updateProjectInfos(session);
+	private void update(final Usersession session) throws EmfStoreException {
+		exception = null;
+
+		new RunInUIThread(Display.getDefault()) {
+
+			@Override
+			public Void run(Shell shell) {
+				try {
+					workspace.updateProjectInfos(session);
+				} catch (EmfStoreException e) {
+					exception = e;
+				}
+				return null;
+			}
+		}.execute();
+
+		if (exception != null) {
+			throw exception;
+		}
 	}
 
 	public void logoutCompleted(Usersession session) {

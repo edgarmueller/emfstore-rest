@@ -6,12 +6,12 @@
 	xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 
-	<property key="platform.version" value="3.7"/>
+	<property key="platform.version" value="3.5"/>
 	<property key="orbit.version" value="S20110907174232"/>
 	<property key="eclipse.downloads" value="http://download.eclipse.org"/>
 	<property key="resolve.target.platform" value="true"/>
 	
-	<!-- HUDSON: local resolution using the local readerType (this requires the pre-defined names for all repositories) -->
+	<!-- HUDSON: local resolution using the local readerType (this requires the pre-defined names for all repositories) 
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="hudson"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="hudson"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="hudson"/>
@@ -20,10 +20,9 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="hudsonecp"/>
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="hudsonecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="hudsonecp"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="hudsonecp"/>
+    <locator pattern="^ECPDeveloper$" searchPathRef="hudsonecp"/>-->
 	
 	<!-- DEBUG: local resolution using the git readerType (this requires the pre-defined names for all repositories) -->
-	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localgit"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localgit"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localgit"/>
@@ -33,7 +32,6 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="localgitecp"/>
-	-->
 		
 	<!-- DEBUG: local resolution comparable to HUDSON -->
 	<!--

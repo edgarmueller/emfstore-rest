@@ -87,6 +87,12 @@
      </handler>
   </extension>
   <extension
+        point="org.eclipse.emf.emfstore.client.notify.postinit">
+     <initiator
+           class="org.eclipse.emf.emfstore.client.ui.util.ProjectListUpdater">
+     </initiator>
+  </extension>
+  <extension
         point="org.eclipse.ui.commands">
      <category
            id="org.eclipse.emf.emfstore.client.ui.project"

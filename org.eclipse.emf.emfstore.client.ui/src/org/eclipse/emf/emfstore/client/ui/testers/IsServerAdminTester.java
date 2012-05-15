@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
@@ -41,7 +42,15 @@ public class IsServerAdminTester extends PropertyTester {
 				serverInfo = (ServerInfo) receiver;
 			} else if (receiver instanceof ProjectInfo) {
 				ProjectInfo projectInfo = (ProjectInfo) receiver;
-				serverInfo = findServerInfo(projectInfo);
+				try {
+					serverInfo = findServerInfo(projectInfo);
+				} catch (EmfStoreException e) {
+					return false;
+				}
+			}
+
+			if (serverInfo == null) {
+				return false;
 			}
 
 			final ServerInfo finalServerInfo = serverInfo;
@@ -66,20 +75,20 @@ public class IsServerAdminTester extends PropertyTester {
 			return result;
 
 		}
-		return false;
+		return true;
 	}
 
-	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
+	private ServerInfo findServerInfo(ProjectInfo projectInfo) throws EmfStoreException {
 		for (ServerInfo serverInfo : WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos()) {
 			if (projectInfo.eContainer() != null && projectInfo.eContainer().equals(serverInfo)) {
 				return serverInfo;
-			} else {
-				for (ProjectInfo info : serverInfo.getProjectInfos()) {
-					if (info.getProjectId().equals(projectInfo.getProjectId())) {
-						return serverInfo;
-					}
-				}
 			}
+			// for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
+			// .getRemoteProjectList(serverInfo)) {
+			// if (info.getProjectId().equals(projectInfo.getProjectId())) {
+			// return serverInfo;
+			// }
+			// }
 		}
 
 		return null;

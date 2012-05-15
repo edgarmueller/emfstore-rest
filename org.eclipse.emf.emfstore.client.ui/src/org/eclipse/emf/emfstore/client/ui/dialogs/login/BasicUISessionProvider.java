@@ -14,11 +14,12 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
+import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThreadWithReturnValue;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * 
@@ -34,18 +35,31 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
+	public Usersession provideUsersession(final ServerInfo serverInfo) throws EmfStoreException {
+
+		ServerInfo info = serverInfo;
+
 		if (serverInfo == null) {
-			// try to retrieve a server info by showing a server info selection dialog
-			ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent().getActiveShell(),
-				WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());
-			if (dialog.open() == Dialog.OK) {
-				serverInfo = dialog.getResult();
-			} else if (dialog.open() == Dialog.CANCEL) {
-				throw new LoginCanceledException("Operation canceled by user.");
-			}
+			info = new RunInUIThreadWithReturnValue<ServerInfo>(Display.getDefault()) {
+				@Override
+				public ServerInfo run(Shell shell) {
+					if (serverInfo == null) {
+						// try to retrieve a server info by showing a server info selection dialog
+						ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
+							.getActiveShell(), WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());
+						if (dialog.open() == Dialog.OK) {
+							return dialog.getResult();
+						} else if (dialog.open() == Dialog.CANCEL) {
+							// throw new LoginCanceledException("Operation canceled by user.");
+						}
+					}
+
+					return null;
+				}
+			}.execute();
 		}
-		if (serverInfo == null) {
+
+		if (info == null) {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
 
@@ -54,7 +68,13 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 		// return serverInfo.getLastUsersession();
 		// }
 
-		return new LoginDialogController().login(serverInfo);
+		try {
+			return new LoginDialogController().login(info);
+		} catch (EmfStoreException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	@Override

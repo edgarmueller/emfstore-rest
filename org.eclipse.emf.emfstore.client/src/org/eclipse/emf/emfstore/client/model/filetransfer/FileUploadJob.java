@@ -75,10 +75,14 @@ public class FileUploadJob extends FileTransferJob {
 	private boolean executeTransfer(IProgressMonitor monitor) throws EmfStoreException {
 		FileChunk fileChunk;
 		initializeMonitor(monitor);
+		long transmitted = 0;
 		do {
 			fileChunk = FilePartitionerUtil.readChunk(getFile(), getFileInformation());
 			getConnectionManager().uploadFileChunk(getSessionId(), getProjectId(), fileChunk);
+			transmitted += fileChunk.getData().length;
 			monitor.worked(1);
+			monitor.subTask("Sending file " + getFileInformation() + ": " + transmitted + " of "
+				+ getFileInformation().getFileSize() + " bytes transmitted");
 			incrementChunkNumber();
 			if (isCanceled()) {
 				return false;
