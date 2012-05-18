@@ -281,6 +281,16 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit()
+	 */
+	public PrimaryVersionSpec commit() throws EmfStoreException {
+		return new CommitController(this, null, null, new NullProgressMonitor()).execute();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
 	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)

@@ -135,6 +135,16 @@ public interface ProjectSpace extends IdentifiableElement {
 	/**
 	 * Commits all pending changes of the project space.
 	 * 
+	 * @throws EmfStoreException
+	 *             in case the commit went wrong
+	 * 
+	 * @return the current version spec
+	 **/
+	PrimaryVersionSpec commit() throws EmfStoreException;
+
+	/**
+	 * Commits all pending changes of the project space.
+	 * 
 	 * @param logMessage
 	 *            a log message describing the changes to be committed
 	 * @param callback
