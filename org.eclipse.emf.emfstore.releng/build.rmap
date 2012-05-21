@@ -23,8 +23,15 @@
 		
 		
 	<!-- path configuration for HUDSON build -->
-	<property key="local.reader.path.base.emfstore" value="${hudson.git.checkout.base}${hudson.git.checkout.emfstore.extension}" mutable="true"/>
-	<property key="local.reader.path.base.ecp"      value="${hudson.git.checkout.base}${hudson.git.checkout.ecp.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.base"   value="${hudson.git.checkout.base}" mutable="true"/>
+	<property key="local.reader.path.emfstore.core"   value="${hudson.git.checkout.emfstore.core.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.releng" value="${hudson.git.checkout.emfstore.releng.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.other"  value="${hudson.git.checkout.emfstore.other.extension}" mutable="true"/>
+	
+	<property key="local.reader.path.ecp.base"   value="${hudson.git.checkout.base}" mutable="true"/>
+	<property key="local.reader.path.ecp.core"   value="${hudson.git.checkout.ecp.core.extension}" mutable="true"/>
+	<property key="local.reader.path.ecp.releng" value="${hudson.git.checkout.ecp.releng.extension}" mutable="true"/>
+	<property key="local.reader.path.ecp.other"  value="${hudson.git.checkout.ecp.other.extension}" mutable="true"/>
 	
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="emfstore"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="emfstore"/>
@@ -38,8 +45,15 @@
 	
 	
 	<!-- path configuration for LOCAL buid -->
-	<property key="local.reader.path.base.emfstore" value="${local.git.checkout.base}${local.git.checkout.emfstore.extension}" mutable="true"/>
-	<property key="local.reader.path.base.ecp"      value="${local.git.checkout.base}${local.git.checkout.ecp.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.base"   value="${local.git.checkout.base}" mutable="true"/>
+	<property key="local.reader.path.emfstore.core"   value="${local.git.checkout.emfstore.core.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.releng" value="${local.git.checkout.emfstore.releng.extension}" mutable="true"/>
+	<property key="local.reader.path.emfstore.other"  value="${local.git.checkout.emfstore.other.extension}" mutable="true"/>
+	
+	<property key="local.reader.path.ecp.base"   value="${local.git.checkout.base}" mutable="true"/>
+	<property key="local.reader.path.ecp.core"   value="${local.git.checkout.ecp.core.extension}" mutable="true"/>
+	<property key="local.reader.path.ecp.releng" value="${local.git.checkout.ecp.releng.extension}" mutable="true"/>
+	<property key="local.reader.path.ecp.other"  value="${local.git.checkout.ecp.other.extension}" mutable="true"/>
 
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="emfstore"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="emfstore"/>
@@ -61,24 +75,26 @@
 
 
 
-
 	<!-- EMFStore/ECP -->
 	<searchPath name="emfstore">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.core/{1}">
-				<bc:propertyRef key="local.reader.path.base.emfstore"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.emfstore.base"/>
+				<bc:propertyRef key="local.reader.path.emfstore.core"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.releng/{1}">
-				<bc:propertyRef key="local.reader.path.base.emfstore"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.emfstore.base"/>
+				<bc:propertyRef key="local.reader.path.emfstore.releng"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.other/{1}">
-				<bc:propertyRef key="local.reader.path.base.emfstore"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.emfstore.base"/>
+				<bc:propertyRef key="local.reader.path.emfstore.other"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
@@ -86,20 +102,23 @@
 
 	<searchPath name="ecp">
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.core/{1}">
-				<bc:propertyRef key="local.reader.path.base.ecp"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.ecp.base"/>
+				<bc:propertyRef key="local.reader.path.ecp.core"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.releng/{1}">
-				<bc:propertyRef key="local.reader.path.base.ecp"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.ecp.base"/>
+				<bc:propertyRef key="local.reader.path.ecp.releng"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="local" source="true">
-			<uri format="{0}.other/{1}">
-				<bc:propertyRef key="local.reader.path.base.ecp"/>
+			<uri format="{0}{1}/{2}">
+				<bc:propertyRef key="local.reader.path.ecp.base"/>
+				<bc:propertyRef key="local.reader.path.ecp.other"/>
 				<bc:propertyRef key="buckminster.component"/>
 			</uri>
 		</provider>
