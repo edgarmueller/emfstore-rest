@@ -6,12 +6,6 @@
 	xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 
-	<property key="platform.version" value="3.7"/>
-	<property key="orbit.version" value="S20110907174232"/>
-	<property key="eclipse.downloads" value="http://download.eclipse.org"/>
-	<property key="resolve.target.platform" value="true"/>
-	
-		
 	<!-- LEGACY: local resolution using the git readerType (this requires the pre-defined names for all repositories) -->
 	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localgit"/>
@@ -29,8 +23,8 @@
 		
 		
 	<!-- path configuration for HUDSON build -->
-	<property key="local.reader.path.base.ecp" value="${workspace.root}/git/org.eclipse.emf.ecp" mutable="true"/>
-	<property key="local.reader.path.base.emfstore" value="${workspace.root}/git/org.eclipse.emf.emfstore" mutable="true"/>
+	<property key="local.reader.path.base.emfstore" value="${hudson.git.checkout.base}${hudson.git.checkout.emfstore.extension}" mutable="true"/>
+	<property key="local.reader.path.base.ecp"      value="${hudson.git.checkout.base}${hudson.git.checkout.ecp.extension}" mutable="true"/>
 	
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="emfstore"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="emfstore"/>
@@ -44,8 +38,8 @@
 	
 	
 	<!-- path configuration for LOCAL buid -->
-	<property key="local.reader.path.base.ecp" value="${user.home}/git/ssh_emfcp" mutable="true"/>
-	<property key="local.reader.path.base.emfstore" value="${user.home}/git/ssh_emfstore" mutable="true"/>
+	<property key="local.reader.path.base.emfstore" value="${local.git.checkout.base}${local.git.checkout.emfstore.extension}" mutable="true"/>
+	<property key="local.reader.path.base.ecp"      value="${local.git.checkout.base}${local.git.checkout.ecp.extension}" mutable="true"/>
 
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="emfstore"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="emfstore"/>
