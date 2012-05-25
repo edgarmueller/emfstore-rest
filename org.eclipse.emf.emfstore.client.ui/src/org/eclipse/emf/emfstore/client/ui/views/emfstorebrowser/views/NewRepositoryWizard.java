@@ -44,6 +44,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		mainPage = new NewRepositoryWizardPageOne();
+		setWindowTitle("Server Details");
 		addPage(mainPage);
 	}
 
