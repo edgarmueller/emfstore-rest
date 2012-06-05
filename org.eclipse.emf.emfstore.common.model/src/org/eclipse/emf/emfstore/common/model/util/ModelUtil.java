@@ -357,7 +357,7 @@ public final class ModelUtil {
 	 *            the EObject which is to be checked
 	 * @return true, if the EObject will be ignored, false otherwise
 	 */
-	public synchronized static boolean isIgnoredDatatype(EObject eObject) {
+	public static synchronized boolean isIgnoredDatatype(EObject eObject) {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new HashSet<String>();
@@ -473,7 +473,7 @@ public final class ModelUtil {
 	 * @return map of options for {@link XMIResource} or {@link XMLResource}.
 	 */
 	@SuppressWarnings("rawtypes")
-	public synchronized static Map<Object, Object> getResourceLoadOptions() {
+	public static synchronized Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
 			resourceLoadOptions = new HashMap<Object, Object>();
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
@@ -491,7 +491,7 @@ public final class ModelUtil {
 	 * 
 	 * @return map of options for {@link XMIResource} or {@link XMLResource}.
 	 */
-	public synchronized static Map<Object, Object> getResourceSaveOptions() {
+	public static synchronized Map<Object, Object> getResourceSaveOptions() {
 		if (resourceSaveOptions == null) {
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
@@ -1247,7 +1247,7 @@ public final class ModelUtil {
 	/**
 	 * Initializes all available {@link SingletonIdResolver}.
 	 */
-	private synchronized static void initSingletonIdResolvers() {
+	private static synchronized void initSingletonIdResolvers() {
 		if (singletonIdResolvers == null) {
 			// collect singleton ID resolvers
 			singletonIdResolvers = new HashSet<SingletonIdResolver>();

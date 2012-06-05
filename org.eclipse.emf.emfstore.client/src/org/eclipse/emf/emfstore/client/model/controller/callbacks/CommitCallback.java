@@ -11,7 +11,7 @@ public interface CommitCallback {
 
 	void noLocalChanges(ProjectSpace projectSpace);
 
-	public final CommitCallback NOCALLBACK = new CommitCallback() {
+	CommitCallback NOCALLBACK = new CommitCallback() {
 
 		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
 			return true;
