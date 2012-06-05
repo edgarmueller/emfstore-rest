@@ -441,7 +441,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			localChangePackage = getLocalChangePackage();
 		}
 
-		if (getLocalOperations() != null && getLocalOperations().getOperations().size() > 0) {
+		if (getLocalOperations() != null) {
 			migrateOperations(localChangePackage);
 		}
 
@@ -454,12 +454,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
 
 			Resource eResource = getLocalOperations().eResource();
-
+			// if for some reason the resource of project space and operations
+			// are not different, then reinitialize operations URI
+			if (this.eResource() == eResource) {
+				String localChangePackageFileName = Configuration.getWorkspaceDirectory()
+					+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
+					+ this.getIdentifier() + Configuration.getLocalChangePackageFileExtension();
+				eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
+			} else {
+				eResource.getContents().remove(0);
+			}
 			setLocalOperations(null);
-			eResource.getContents().remove(0);
 			eResource.getContents().add(localChangePackage);
 			saveResource(eResource);
-
 			save();
 		}
 	}
