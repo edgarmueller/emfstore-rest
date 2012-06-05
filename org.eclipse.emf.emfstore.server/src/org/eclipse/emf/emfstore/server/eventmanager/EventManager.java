@@ -88,10 +88,6 @@ public final class EventManager extends Thread {
 	 * 
 	 * @param listener
 	 *            the listener
-	 * @param projectId
-	 *            project id, can be null
-	 * @param clazz
-	 *            not implemented yet
 	 */
 	public void registerListener(ListenerContainer listener) {
 		if (listener == null) {
