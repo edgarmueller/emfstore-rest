@@ -23,11 +23,7 @@ Export-Package: org.eclipse.emf.emfstore.client.test,
  org.eclipse.emf.emfstore.client.test.testmodel,
  org.eclipse.emf.emfstore.client.test.testmodel.impl,
  org.eclipse.emf.emfstore.client.test.testmodel.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.junit4;visibility:=reexport,
- org.eclipse.emf.emfstore.common.model,
- org.eclipse.emf.emfstore.server.model,
+Require-Bundle: org.junit4;visibility:=reexport,
  org.eclipse.emf.emfstore.client,
  org.eclipse.emf.emfstore.client.model.edit
 Bundle-ActivationPolicy: lazy
