@@ -450,25 +450,28 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void migrateOperations(ChangePackage localChangePackage) {
 
-		if (getLocalOperations() != null) {
-			localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
-
-			Resource eResource = getLocalOperations().eResource();
-			// if for some reason the resource of project space and operations
-			// are not different, then reinitialize operations URI
-			if (this.eResource() == eResource) {
-				String localChangePackageFileName = Configuration.getWorkspaceDirectory()
-					+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-					+ this.getIdentifier() + Configuration.getLocalChangePackageFileExtension();
-				eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
-			} else {
-				eResource.getContents().remove(0);
-			}
-			setLocalOperations(null);
-			eResource.getContents().add(localChangePackage);
-			saveResource(eResource);
-			save();
+		if (getLocalOperations() == null || isTransient()) {
+			return;
 		}
+
+		localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
+
+		Resource eResource = getLocalOperations().eResource();
+		// if for some reason the resource of project space and operations
+		// are not different, then reinitialize operations URI
+		if (this.eResource() == eResource) {
+			String localChangePackageFileName = Configuration.getWorkspaceDirectory()
+				+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
+				+ this.getIdentifier() + Configuration.getLocalChangePackageFileExtension();
+			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
+		} else {
+			eResource.getContents().remove(0);
+		}
+		setLocalOperations(null);
+		eResource.getContents().add(localChangePackage);
+		saveResource(eResource);
+		save();
+
 	}
 
 	/**
