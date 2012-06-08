@@ -17,8 +17,8 @@ import java.util.Map;
 
 /**
  * ProxyObserver, returned by the {@link ObserverBus} when calling {@link ObserverBus#notify(Class))}, normally it has
- * the type of the IObserver in order to call observer interface with type safety.
- * However, the same proxies can be casted into {@link ObserverCall} in order to gain all results by the registered
+ * the type of the class extending IObserver in order to call the observer interface with type safety.
+ * However, the same proxies can be casted into {@link ObserverCall} in order to access the results by all registered
  * observers.
  * 
  * @author wesendon

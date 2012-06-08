@@ -31,6 +31,12 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getReferences <em>References</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElements <em>Contained
  * Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getReference <em>Reference</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElement <em>Contained
+ * Element</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getOtherReference <em>Other Reference
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  * 
@@ -86,6 +92,56 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	 * @ordered
 	 */
 	protected EList<TestElement> containedElements;
+
+	/**
+	 * The cached value of the '{@link #getReference() <em>Reference</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected TestElement reference;
+
+	/**
+	 * The cached value of the '{@link #getContainedElement() <em>Contained Element</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getContainedElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected TestElement containedElement;
+
+	/**
+	 * The cached value of the '{@link #getOtherReference() <em>Other Reference</em>}' reference. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @see #getOtherReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected TestElement otherReference;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -170,11 +226,165 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	 * 
 	 * @generated
 	 */
+	public TestElement getReference() {
+		if (reference != null && reference.eIsProxy()) {
+			InternalEObject oldReference = (InternalEObject) reference;
+			reference = (TestElement) eResolveProxy(oldReference);
+			if (reference != oldReference) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TestmodelPackage.TEST_ELEMENT__REFERENCE,
+						oldReference, reference));
+			}
+		}
+		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public TestElement basicGetReference() {
+		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setReference(TestElement newReference) {
+		TestElement oldReference = reference;
+		reference = newReference;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT__REFERENCE,
+				oldReference, reference));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public TestElement getContainedElement() {
+		return containedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetContainedElement(TestElement newContainedElement, NotificationChain msgs) {
+		TestElement oldContainedElement = containedElement;
+		containedElement = newContainedElement;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT, oldContainedElement, newContainedElement);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setContainedElement(TestElement newContainedElement) {
+		if (newContainedElement != containedElement) {
+			NotificationChain msgs = null;
+			if (containedElement != null)
+				msgs = ((InternalEObject) containedElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT, null, msgs);
+			if (newContainedElement != null)
+				msgs = ((InternalEObject) newContainedElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT, null, msgs);
+			msgs = basicSetContainedElement(newContainedElement, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT,
+				newContainedElement, newContainedElement));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public TestElement getOtherReference() {
+		if (otherReference != null && otherReference.eIsProxy()) {
+			InternalEObject oldOtherReference = (InternalEObject) otherReference;
+			otherReference = (TestElement) eResolveProxy(oldOtherReference);
+			if (otherReference != oldOtherReference) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE, oldOtherReference, otherReference));
+			}
+		}
+		return otherReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public TestElement basicGetOtherReference() {
+		return otherReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setOtherReference(TestElement newOtherReference) {
+		TestElement oldOtherReference = otherReference;
+		otherReference = newOtherReference;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE,
+				oldOtherReference, otherReference));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT__DESCRIPTION,
+				oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENTS:
 			return ((InternalEList<?>) getContainedElements()).basicRemove(otherEnd, msgs);
+		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT:
+			return basicSetContainedElement(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -195,6 +405,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 			return getReferences();
 		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENTS:
 			return getContainedElements();
+		case TestmodelPackage.TEST_ELEMENT__REFERENCE:
+			if (resolve)
+				return getReference();
+			return basicGetReference();
+		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT:
+			return getContainedElement();
+		case TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE:
+			if (resolve)
+				return getOtherReference();
+			return basicGetOtherReference();
+		case TestmodelPackage.TEST_ELEMENT__DESCRIPTION:
+			return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -223,6 +445,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 			getContainedElements().clear();
 			getContainedElements().addAll((Collection<? extends TestElement>) newValue);
 			return;
+		case TestmodelPackage.TEST_ELEMENT__REFERENCE:
+			setReference((TestElement) newValue);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT:
+			setContainedElement((TestElement) newValue);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE:
+			setOtherReference((TestElement) newValue);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__DESCRIPTION:
+			setDescription((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -247,6 +481,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENTS:
 			getContainedElements().clear();
 			return;
+		case TestmodelPackage.TEST_ELEMENT__REFERENCE:
+			setReference((TestElement) null);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT:
+			setContainedElement((TestElement) null);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE:
+			setOtherReference((TestElement) null);
+			return;
+		case TestmodelPackage.TEST_ELEMENT__DESCRIPTION:
+			setDescription(DESCRIPTION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -267,6 +513,14 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 			return references != null && !references.isEmpty();
 		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENTS:
 			return containedElements != null && !containedElements.isEmpty();
+		case TestmodelPackage.TEST_ELEMENT__REFERENCE:
+			return reference != null;
+		case TestmodelPackage.TEST_ELEMENT__CONTAINED_ELEMENT:
+			return containedElement != null;
+		case TestmodelPackage.TEST_ELEMENT__OTHER_REFERENCE:
+			return otherReference != null;
+		case TestmodelPackage.TEST_ELEMENT__DESCRIPTION:
+			return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -286,6 +540,8 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 		result.append(name);
 		result.append(", strings: ");
 		result.append(strings);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

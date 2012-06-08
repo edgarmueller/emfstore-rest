@@ -61,7 +61,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController impl
 		boolean mergeSuccessful = false;
 		try {
 			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
-			mergeSuccessful = projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+			mergeSuccessful = projectSpace.merge(targetVersion, new MergeProjectHandler());
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException("Exception when merging the project!", e);
 			handleException(e);

@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.options.MergeTextOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.options.MergeTextOption;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components.DetailsComponent;
 import org.eclipse.swt.SWT;

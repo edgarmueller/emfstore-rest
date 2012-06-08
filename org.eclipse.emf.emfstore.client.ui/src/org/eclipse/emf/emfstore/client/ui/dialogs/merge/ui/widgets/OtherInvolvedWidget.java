@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets;
 
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.DecisionManager;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionUtil;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.swt.SWT;
@@ -43,8 +43,7 @@ public class OtherInvolvedWidget extends Composite {
 	 * @param option
 	 *            option
 	 */
-	public OtherInvolvedWidget(Composite parent,
-			DecisionManager decisionManager, ConflictOption option) {
+	public OtherInvolvedWidget(Composite parent, DecisionManager decisionManager, ConflictOption option) {
 		super(parent, SWT.None);
 		TableWrapLayout wrapLayout = new TableWrapLayout();
 		wrapLayout.numColumns = COLUMNS;
@@ -59,12 +58,11 @@ public class OtherInvolvedWidget extends Composite {
 		wrapData.colspan = COLUMNS;
 		label.setLayoutData(wrapData);
 
-		ChangePackageVisualizationHelper visualizationHelper = decisionManager
-				.getChangePackageVisualizationHelper();
+		ChangePackageVisualizationHelper visualizationHelper = UIDecisionUtil
+			.getChangePackageVisualizationHelper(decisionManager);
 
 		for (AbstractOperation ao : option.getOperations()) {
-			Image image = visualizationHelper.getImage(
-					DecisionUtil.getAdapterFactory(), ao);
+			Image image = visualizationHelper.getImage(UIDecisionUtil.getAdapterFactory(), ao);
 
 			CLabel meLabel = new CLabel(this, SWT.WRAP);
 			if (image != null) {

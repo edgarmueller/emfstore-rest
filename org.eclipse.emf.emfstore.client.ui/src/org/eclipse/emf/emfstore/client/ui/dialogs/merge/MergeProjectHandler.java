@@ -11,14 +11,18 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider;
 import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.CaseStudySwitch;
+import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -37,10 +41,8 @@ public class MergeProjectHandler implements ConflictResolver {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param conflictException
-	 *            the ChangeConflictException
 	 */
-	public MergeProjectHandler(ChangeConflictException conflictException) {
+	public MergeProjectHandler() {
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
 	}
@@ -68,21 +70,20 @@ public class MergeProjectHandler implements ConflictResolver {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.ConflictResolver#getAcceptedMine()
 	 */
-	public boolean resolveConflicts(Project project, List<ChangePackage> theirChangePackages,
-		ChangePackage myChangePackage, PrimaryVersionSpec base, PrimaryVersionSpec target) {
+	@SuppressWarnings("unchecked")
+	public boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec base, PrimaryVersionSpec target) {
 
-		boolean caseStudy = false;
+		DefaultMergeLabelProvider labelProvider = new DefaultMergeLabelProvider();
+		WorkspaceManager.getObserverBus().register(labelProvider, MergeLabelProvider.class);
 
-		if (caseStudy) {
-			CaseStudySwitch studySwitch = new CaseStudySwitch();
-			studySwitch.flattenChangePackages(myChangePackage, theirChangePackages);
-		}
-
-		DecisionManager decisionManager = new DecisionManager(project, myChangePackage, theirChangePackages, base,
+		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
 			target);
 
-		if (decisionManager.getConflicts().size() == 0) {
-			// conflict has been resolved automatically
+		if (decisionManager.isResolved()) {
+			decisionManager.calcResult();
+			acceptedMine = decisionManager.getAcceptedMine();
+			rejectedTheirs = decisionManager.getRejectedTheirs();
 			return true;
 		}
 
@@ -96,6 +97,41 @@ public class MergeProjectHandler implements ConflictResolver {
 		acceptedMine = decisionManager.getAcceptedMine();
 		rejectedTheirs = decisionManager.getRejectedTheirs();
 
+		labelProvider.dispose();
 		return (open == Window.OK);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.ConflictResolver#getMergedResult()
+	 */
+	public ChangePackage getMergedResult() {
+		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();
+		for (AbstractOperation operationToReverse : getRejectedTheirs()) {
+			mergeResult.add(0, operationToReverse.reverse());
+		}
+		mergeResult.addAll(getAcceptedMine());
+		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
+		result.getOperations().addAll(mergeResult);
+
+		return result;
+	}
+
+	/**
+	 * Adapter Until "Branch" branch is merged into master
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project,
+	 *      java.util.List, org.eclipse.emf.emfstore.server.model.versioning.ChangePackage,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 */
+	public boolean resolveConflicts(Project project, List<ChangePackage> theirChangePackages,
+		ChangePackage myChangePackage, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
+		return resolveConflicts(project, Arrays.asList(myChangePackage), theirChangePackages, baseVersion,
+			targetVersion);
 	}
 }

@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.MergeTextWidget;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.OtherInvolvedWidget;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionConfig;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
@@ -75,12 +75,12 @@ public class DetailsComponent extends Section {
 			if (!option.isDetailsProvider()) {
 				continue;
 			}
-			if (option.getDetailProvider().startsWith(DecisionConfig.WIDGET_MULTILINE)) {
+			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
 				if (multiWidget == null) {
 					multiWidget = new MergeTextWidget(decisionBox, this);
 				}
 				multiWidget.addOption(option);
-			} else if (option.getDetailProvider().startsWith(DecisionConfig.WIDGET_OTHERINVOLVED)) {
+			} else if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_OTHERINVOLVED)) {
 				new OtherInvolvedWidget(client, decisionBox.getDecisionManager(), option);
 			}
 		}

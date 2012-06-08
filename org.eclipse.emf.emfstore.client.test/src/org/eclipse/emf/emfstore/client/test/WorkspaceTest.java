@@ -15,6 +15,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -133,5 +134,29 @@ public abstract class WorkspaceTest {
 		TestElement element = TestmodelFactory.eINSTANCE.createTestElement();
 		element.setName(name);
 		return element;
+	}
+
+	public TestElement createTestElement() {
+		return new EMFStoreCommandWithResult<TestElement>() {
+			@Override
+			protected TestElement doRun() {
+				return getTestElement();
+			}
+		}.run(false);
+	}
+
+	public TestElement createFilledTestElement(final int count) {
+		final TestElement testElement = createTestElement();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < count; i++) {
+					testElement.getStrings().add("value" + i);
+				}
+			}
+		}.run(false);
+
+		return testElement;
 	}
 }

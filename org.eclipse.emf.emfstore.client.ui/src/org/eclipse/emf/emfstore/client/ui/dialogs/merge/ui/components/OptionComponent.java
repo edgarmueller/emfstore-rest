@@ -10,12 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.conflict.CustomConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.CustomConflictOption;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionConfig;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DecisionUtil;
+import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionConfig;
+import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -113,11 +114,11 @@ public class OptionComponent {
 		for (Control composite : group.getChildren()) {
 			if (composite instanceof OptionContainer) {
 				if (conflict.isResolved() && conflict.getSolution() == ((OptionContainer) composite).getOption()) {
-					setColor((Composite) composite, DecisionConfig.getOptionSelectedBack(),
-						DecisionConfig.getOptionSelectedFor());
+					setColor((Composite) composite, UIDecisionConfig.getOptionSelectedBack(),
+						UIDecisionConfig.getOptionSelectedFor());
 				} else {
-					setColor((Composite) composite, DecisionConfig.getDefaultColor(),
-						DecisionConfig.getDefaultTextColor());
+					setColor((Composite) composite, UIDecisionConfig.getDefaultColor(),
+						UIDecisionConfig.getDefaultTextColor());
 				}
 			}
 		}
@@ -175,7 +176,7 @@ public class OptionComponent {
 		private void setText() {
 			String prefix = generatePrefix(option);
 
-			String result = DecisionUtil.cutString(option.getStrippedOptionLabel(), DecisionConfig.OPTION_LENGTH, true);
+			String result = UIDecisionUtil.cutString(option.getStrippedOptionLabel(), DecisionUtil.OPTION_LENGTH, true);
 			styledText.setText(prefix + " " + result);
 
 			if (prefix != null || prefix != "") {
@@ -214,10 +215,11 @@ public class OptionComponent {
 
 			case SWT.MouseEnter:
 				if (conflict.isResolved() && conflict.getSolution() == composite.getOption()) {
-					setColor(composite, DecisionConfig.getOptionSelectedBackEnter(),
-						DecisionConfig.getDefaultTextColor());
+					setColor(composite, UIDecisionConfig.getOptionSelectedBackEnter(),
+						UIDecisionConfig.getDefaultTextColor());
 				} else {
-					setColor(composite, DecisionConfig.getOptionEnteredColor(), DecisionConfig.getDefaultTextColor());
+					setColor(composite, UIDecisionConfig.getOptionEnteredColor(),
+						UIDecisionConfig.getDefaultTextColor());
 				}
 				break;
 
