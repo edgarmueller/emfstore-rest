@@ -85,22 +85,19 @@ public final class XmlRpcWebserverManager {
 				protected ServerSocket createServerSocket(int pPort, int backlog, InetAddress addr) throws IOException {
 
 					SSLServerSocketFactory serverSocketFactory = null;
-					Exception exception = null;
 
 					try {
 						SSLContext context = SSLContext.getInstance("TLS");
 						context.init(ServerKeyStoreManager.getInstance().getKeyManagerFactory().getKeyManagers(), null,
 							null);
 						serverSocketFactory = context.getServerSocketFactory();
-					} catch (NoSuchAlgorithmException e) {
-						exception = e;
-					} catch (KeyManagementException e) {
-						exception = e;
-					} catch (ServerKeyStoreException e) {
-						exception = e;
+					} catch (NoSuchAlgorithmException exception) {
+						shutdown(serverSocketFactory, exception);
+					} catch (KeyManagementException exception) {
+						shutdown(serverSocketFactory, exception);
+					} catch (ServerKeyStoreException exception) {
+						shutdown(serverSocketFactory, exception);
 					}
-
-					shutdown(serverSocketFactory, exception);
 
 					return serverSocketFactory.createServerSocket(pPort, backlog, addr);
 				}

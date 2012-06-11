@@ -24,11 +24,23 @@ public class ListenerContainer {
 	private final EMFStoreEventListener listener;
 	private final ProjectId projectId;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param listener the listener
+	 * @param projectId the project id
+	 */
 	public ListenerContainer(EMFStoreEventListener listener, ProjectId projectId) {
 		this.listener = listener;
 		this.projectId = projectId;
 	}
 
+	/**
+	 * Handle a given event.
+	 * 
+	 * @param event the event
+	 * @return true if the listener wants to keep receiving events
+	 */
 	public boolean handleEvent(ServerEvent event) {
 		if (projectId != null && event instanceof ServerProjectEvent) {
 			if (!projectId.equals(((ServerProjectEvent) event).getProjectId())) {
