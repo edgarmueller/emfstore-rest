@@ -17,6 +17,8 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithReturnValue;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
@@ -49,7 +51,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 *            the {@link ProjectSpace} that should get updated
 	 */
 	public UIUpdateProjectController(Shell shell, ProjectSpace projectSpace) {
-		super(shell);
+		super(shell, true, true);
 		this.projectSpace = projectSpace;
 		version = null;
 	}
@@ -133,9 +135,24 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	}
 
 	@Override
-	protected PrimaryVersionSpec doRun(IProgressMonitor pm) throws EmfStoreException {
+	public PrimaryVersionSpec doRun(final IProgressMonitor pm) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
-		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, this, pm);
+		PrimaryVersionSpec newBaseVersion = new RunInUIThreadWithReturnValue<PrimaryVersionSpec>(getShell()) {
+			@Override
+			public PrimaryVersionSpec run(Shell shell) {
+				try {
+					return projectSpace.update(version, UIUpdateProjectController.this, pm);
+				} catch (EmfStoreException e) {
+					setException(e);
+				}
+
+				return null;
+			}
+		}.execute();
+
+		if (hasException()) {
+			throw getException();
+		}
 
 		if (oldBaseVersion.equals(newBaseVersion)) {
 			noChangesOnServer();
@@ -144,5 +161,4 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 
 		return newBaseVersion;
 	}
-
 }

@@ -31,53 +31,41 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 
 	public void deleteProject(final ProjectSpace projectSpace) {
 		final Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		new RunInUIThread(getShell()) {
-
-			@Override
-			public Void run(Shell shell) {
-				try {
-					currentWorkspace.deleteProjectSpace(projectSpace);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					// Do NOT catch all Exceptions ("catch (Exception e)")
-					// Log AND handle Exceptions if possible
-					//
-					// You can just uncomment one of the lines below to log an exception:
-					// logException will show the logged excpetion to the user
-					// ModelUtil.logException(e);
-					// ModelUtil.logException("YOUR MESSAGE HERE", e);
-					// logWarning will only add the message to the error log
-					// ModelUtil.logWarning("YOUR MESSAGE HERE", e);
-					// ModelUtil.logWarning("YOUR MESSAGE HERE");
-					//
-					// If handling is not possible declare and rethrow Exception
-					e.printStackTrace();
-				}
-				return null;
-			}
-		}.execute();
+		try {
+			currentWorkspace.deleteProjectSpace(projectSpace);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			// Do NOT catch all Exceptions ("catch (Exception e)")
+			// Log AND handle Exceptions if possible
+			//
+			// You can just uncomment one of the lines below to log an exception:
+			// logException will show the logged excpetion to the user
+			// ModelUtil.logException(e);
+			// ModelUtil.logException("YOUR MESSAGE HERE", e);
+			// logWarning will only add the message to the error log
+			// ModelUtil.logWarning("YOUR MESSAGE HERE", e);
+			// ModelUtil.logWarning("YOUR MESSAGE HERE");
+			//
+			// If handling is not possible declare and rethrow Exception
+			e.printStackTrace();
+		}
 	}
 
 	private boolean confirmation(final ProjectSpace projectSpace) {
-		return new RunInUIThreadWithReturnValue<Boolean>(getShell()) {
-			@Override
-			public Boolean run(Shell shell) {
-				String message = "Do you really want to delete your local copy of project \""
-					+ projectSpace.getProjectName() + "\n";
+		String message = "Do you really want to delete your local copy of project \"" + projectSpace.getProjectName()
+			+ "\n";
 
-				if (projectSpace.getBaseVersion() != null) {
-					message += " in version " + projectSpace.getBaseVersion().getIdentifier();
-				}
+		if (projectSpace.getBaseVersion() != null) {
+			message += " in version " + projectSpace.getBaseVersion().getIdentifier();
+		}
 
-				message += " ?";
+		message += " ?";
 
-				return confirm("Confirmation", message);
-			}
-		}.execute();
+		return confirm("Confirmation", message);
 	}
 
 	@Override
-	protected Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
 
 		if (!confirmation(projectSpace)) {
 			return null;

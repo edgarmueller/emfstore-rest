@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,6 +37,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
@@ -58,7 +58,6 @@ import org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.common.MonitoredEMFStoreRequest;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -269,12 +268,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		ProjectInfo emptyProject = null;
 
 		try {
-			new MonitoredEMFStoreRequest(progressMonitor).execute(new Callable<ProjectInfo>() {
-				public ProjectInfo call() throws Exception {
+			new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
+				@Override
+				public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
 					return connectionManager.createEmptyProject(usersession.getSessionId(), projectName,
 						projectDescription, log);
 				}
-			});
+			}.execute();
 		} catch (InterruptedException e) {
 			throw new EmfStoreException("Monitored EMFStore request interruped.", e);
 		} catch (ExecutionException e) {

@@ -74,15 +74,8 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	}
 
 	@Override
-	protected Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-
-		File file = new RunInUIThreadWithReturnValue<File>(getShell()) {
-			@Override
-			public File run(Shell shell) {
-				return selectFile();
-			}
-		}.execute();
-
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+		File file = selectFile();
 		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
 		progressMonitor.beginTask("Import " + controller.getLabel() + " ...", 100);

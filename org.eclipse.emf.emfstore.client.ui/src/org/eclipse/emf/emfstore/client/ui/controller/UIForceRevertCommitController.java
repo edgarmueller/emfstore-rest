@@ -25,7 +25,7 @@ public class UIForceRevertCommitController extends AbstractEMFStoreUIController<
 	}
 
 	@Override
-	protected Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
 		// TODO: remove HistoryBrowserView
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();

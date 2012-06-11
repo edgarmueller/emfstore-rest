@@ -37,21 +37,15 @@ public abstract class UITagController extends AbstractEMFStoreUIController<Void>
 	}
 
 	protected HistoryBrowserView getHistoryBrowserViewFromActivePart() {
-		return new RunInUIThreadWithReturnValue<HistoryBrowserView>(getShell()) {
+		// TODO: controller currently does not work if the active workbench window is not
+		// the history view
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 
-			@Override
-			public HistoryBrowserView run(Shell shell) {
-				// TODO: controller currently does not work if the active workbench window is not
-				// the history view
-				IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
+			return null;
+		}
 
-				if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
-					return null;
-				}
-
-				return (HistoryBrowserView) activePage.getActivePart();
-			}
-		}.execute();
+		return (HistoryBrowserView) activePage.getActivePart();
 	}
 }

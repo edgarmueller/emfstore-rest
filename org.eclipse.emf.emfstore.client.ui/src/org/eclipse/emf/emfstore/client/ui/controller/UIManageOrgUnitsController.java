@@ -52,36 +52,18 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	protected Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
 			final AdminBroker adminBroker = WorkspaceManager.getInstance().getCurrentWorkspace()
 				.getAdminBroker(session);
-			new RunInUIThread(getShell()) {
-				@Override
-				public Void run(Shell shell) {
-					ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
-						.getActiveShell(), adminBroker);
-					dialog.create();
-					dialog.open();
-					return null;
-				}
-			}.execute();
+			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
+				.getActiveShell(), adminBroker);
+			dialog.create();
+			dialog.open();
 		} catch (final AccessControlException e) {
-			new RunInUIThread(getShell()) {
-				@Override
-				public Void run(Shell shell) {
-					MessageDialog.openError(getShell(), "Access denied ", e.getMessage());
-					return null;
-				}
-			}.execute();
+			MessageDialog.openError(getShell(), "Access denied ", e.getMessage());
 		} catch (final EmfStoreException e) {
-			new RunInUIThread(getShell()) {
-				@Override
-				public Void run(Shell shell) {
-					MessageDialog.openError(getShell(), "Error while retrieving the admin broker", e.getMessage());
-					return null;
-				}
-			}.execute();
+			MessageDialog.openError(getShell(), "Error while retrieving the admin broker", e.getMessage());
 		}
 
 		return null;

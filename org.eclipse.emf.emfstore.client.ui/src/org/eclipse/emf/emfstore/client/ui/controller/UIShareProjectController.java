@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -40,12 +41,12 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	 *            the {@link ProjectSpace} that should get shared
 	 */
 	public UIShareProjectController(Shell shell, ProjectSpace projectSpace) {
-		super(shell);
+		super(shell, true, true);
 		this.projectSpace = projectSpace;
 	}
 
 	@Override
-	protected Void doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
 
 		try {
 			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);

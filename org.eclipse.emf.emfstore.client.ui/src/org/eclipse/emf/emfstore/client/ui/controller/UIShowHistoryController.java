@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
@@ -43,7 +44,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * @param modelElement the model element whose history should be queried
 	 */
 	public UIShowHistoryController(Shell shell, ProjectSpace projectSpace, EObject modelElement) {
-		super(shell);
+		super(shell, true, true);
 		this.projectSpace = projectSpace;
 		this.modelElement = modelElement;
 	}
@@ -55,7 +56,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	protected Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
 
 		if (projectSpace == null) {
 			projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()

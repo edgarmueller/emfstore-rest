@@ -16,7 +16,7 @@ public class UIUndoLastOperationController extends AbstractEMFStoreUIController<
 	}
 
 	@Override
-	protected Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		projectSpace.getOperationManager().undoLastOperation();
 		return null;
 	}

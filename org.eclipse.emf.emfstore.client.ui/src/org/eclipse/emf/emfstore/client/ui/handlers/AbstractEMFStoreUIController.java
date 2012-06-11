@@ -10,21 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import java.lang.reflect.InvocationTargetException;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThread;
-import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThreadWithReturnValue;
+import org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreRequest;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithReturnValue;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.IProgressService;
 
 /**
  * Abstract UI controller class
@@ -34,13 +27,24 @@ import org.eclipse.ui.progress.IProgressService;
  * 
  * @param <T> return type of the controller
  */
-public abstract class AbstractEMFStoreUIController<T> {
+public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreRequest<T> {
 
 	protected Shell shell;
 	private T returnValue;
 	private EmfStoreException exception;
 
 	public AbstractEMFStoreUIController(Shell shell) {
+		super(false, false);
+		setShell(shell);
+	}
+
+	public AbstractEMFStoreUIController(Shell shell, boolean cancelable) {
+		super(false, cancelable);
+		setShell(shell);
+	}
+
+	public AbstractEMFStoreUIController(Shell shell, boolean fork, boolean cancelable) {
+		super(fork, cancelable);
 		setShell(shell);
 	}
 
@@ -84,34 +88,15 @@ public abstract class AbstractEMFStoreUIController<T> {
 		}.execute();
 	}
 
-	public T execute(boolean fork, boolean cancelable) throws EmfStoreException {
-
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		IProgressService progressService = workbench.getProgressService();
-		exception = null;
-
-		try {
-			progressService.run(fork, cancelable, new IRunnableWithProgress() {
-				public void run(final IProgressMonitor pm) {
-					try {
-						returnValue = doRun(pm);
-					} catch (EmfStoreException e) {
-						exception = e;
-					}
-				}
-			});
-		} catch (InvocationTargetException e) {
-			WorkspaceUtil.logException("Error during excuting an EMFStore UI controller: " + e.getMessage(), e);
-		} catch (InterruptedException e) {
-			WorkspaceUtil.logException("Error during excuting an EMFStore UI controller: " + e.getMessage(), e);
-		}
-
-		if (exception != null) {
-			throw exception;
-		}
-
-		return returnValue;
+	protected EmfStoreException getException() {
+		return exception;
 	}
 
-	protected abstract T doRun(IProgressMonitor pm) throws EmfStoreException;
+	protected boolean hasException() {
+		return exception != null;
+	}
+
+	protected void setException(EmfStoreException exception) {
+		this.exception = exception;
+	}
 }

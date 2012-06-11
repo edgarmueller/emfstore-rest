@@ -8,8 +8,7 @@ public class ChangeSessionHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UILogoutSessionController(getShell(), requireSelection(ServerInfo.class).getLastUsersession()).execute(
-			false, false);
+		new UILogoutSessionController(getShell(), requireSelection(ServerInfo.class).getLastUsersession()).execute();
 	}
 
 }

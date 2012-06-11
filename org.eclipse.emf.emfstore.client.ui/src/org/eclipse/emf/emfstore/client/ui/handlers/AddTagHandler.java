@@ -13,6 +13,6 @@ public class AddTagHandler extends AbstractEMFStoreHandler {
 		HistoryInfo historyInfo = requireSelection(HistoryInfo.class);
 		ProjectSpace projectSpace = (ProjectSpace) ModelUtil.getParent(ProjectSpace.class, historyInfo);
 		// TODO: pass in proejctSpace
-		new UIAddTagController(getShell(), historyInfo).execute(false, false);
+		new UIAddTagController(getShell(), historyInfo).execute();
 	}
 }

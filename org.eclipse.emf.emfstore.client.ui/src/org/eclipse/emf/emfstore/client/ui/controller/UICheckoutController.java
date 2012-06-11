@@ -46,7 +46,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 *            checked out
 	 */
 	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo) {
-		super(shell);
+		super(shell, true, true);
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
 		versionSpec = null;
@@ -81,7 +81,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	protected ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		return new ServerCall<ProjectSpace>(serverInfo, progressMonitor) {
 			@Override
 			protected ProjectSpace run() throws EmfStoreException {

@@ -7,7 +7,7 @@ public class AddServerHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIAddServerController(getShell()).execute(false, false);
+		new UIAddServerController(getShell()).execute();
 	}
 
 }

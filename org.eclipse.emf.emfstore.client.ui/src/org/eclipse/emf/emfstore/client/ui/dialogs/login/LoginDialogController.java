@@ -6,12 +6,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.ui.controller.RunInUIThreadWithReturnValue;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 public class LoginDialogController implements ILoginDialogController {
 
@@ -29,17 +27,10 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private Usersession login() throws EmfStoreException {
-		Integer selection = new RunInUIThreadWithReturnValue<Integer>(Display.getDefault()) {
+		LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), this);
+		dialog.setBlockOnOpen(true);
 
-			@Override
-			public Integer run(Shell shell) {
-				LoginDialog dialog = new LoginDialog(shell, LoginDialogController.this);
-				dialog.setBlockOnOpen(true);
-				return dialog.open();
-			}
-		}.execute();
-
-		if (selection != Window.OK || usersession == null) {
+		if (dialog.open() != Window.OK || usersession == null) {
 			throw new AccessControlException("Couldn't login.");
 		}
 

@@ -53,7 +53,7 @@ public class UIImportController {
 	public void importProjectHistory(ProjectInfo projectInfo) {
 		try {
 			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectHistoryController()).execute(false, false);
+				ExportImportControllerFactory.Import.getImportProjectHistoryController()).execute();
 		} catch (EmfStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project history", e);
 		}
@@ -68,7 +68,7 @@ public class UIImportController {
 	public void importChanges(ProjectSpace projectSpace) {
 		try {
 			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportChangesController(projectSpace)).execute(false, false);
+				ExportImportControllerFactory.Import.getImportChangesController(projectSpace)).execute();
 		} catch (EmfStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import changes", e);
 		}
@@ -83,7 +83,7 @@ public class UIImportController {
 	public void importProject(String projectName) {
 		try {
 			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectController(projectName)).execute(false, false);
+				ExportImportControllerFactory.Import.getImportProjectController(projectName)).execute();
 		} catch (EmfStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project", e);
 		}
@@ -98,8 +98,7 @@ public class UIImportController {
 	public void importProjectSpace(ProjectSpace projectSpace) {
 		try {
 			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace)).execute(false,
-				false);
+				ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace)).execute();
 		} catch (EmfStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project space", e);
 		}
