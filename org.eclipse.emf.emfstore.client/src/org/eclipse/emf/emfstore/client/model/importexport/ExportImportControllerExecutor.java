@@ -13,8 +13,6 @@ package org.eclipse.emf.emfstore.client.model.importexport;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.ProgressMonitor;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 
@@ -36,7 +34,7 @@ public class ExportImportControllerExecutor {
 	 * @param file
 	 *            the file that should be exported/imported
 	 * @param monitor
-	 *            a {@link ProgressMonitor} to inform about the progress of the export/import process
+	 *            a ProgressMonitor to inform about the progress of the export/import process
 	 */
 	public ExportImportControllerExecutor(File file, IProgressMonitor monitor) {
 		this.file = file;

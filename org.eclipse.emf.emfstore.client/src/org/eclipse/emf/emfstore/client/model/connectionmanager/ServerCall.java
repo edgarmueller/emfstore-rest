@@ -163,7 +163,7 @@ public abstract class ServerCall<U> {
 		ret = run();
 	}
 
-	abstract protected U run() throws EmfStoreException;
+	protected abstract U run() throws EmfStoreException;
 
 	public U execute() throws EmfStoreException {
 		WorkspaceManager.getInstance().getSessionManager().execute(this);

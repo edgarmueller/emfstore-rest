@@ -230,7 +230,7 @@ public final class Configuration {
 		}
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.client");
-		versionId = (String) emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
+		versionId = emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		clientVersionInfo.setVersion(versionId);
 
 		return clientVersionInfo;

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
 import java.util.List;
@@ -8,13 +18,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 public interface UpdateCallback {
 
-	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes);
+	boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes);
 
-	public void noChangesOnServer();
+	void noChangesOnServer();
 
-	public boolean conflictOccurred(ChangeConflictException changeConflictException);
+	boolean conflictOccurred(ChangeConflictException changeConflictException);
 
-	public final UpdateCallback NOCALLBACK = new UpdateCallback() {
+	UpdateCallback NOCALLBACK = new UpdateCallback() {
 		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes) {
 			return true;
 		}

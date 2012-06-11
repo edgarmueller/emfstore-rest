@@ -51,7 +51,10 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * begin-user-doc -->
+	 * 
+	 * @param adapterFactory the adapter factory
+	 *            <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
