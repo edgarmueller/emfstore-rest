@@ -217,32 +217,18 @@ public final class ModelUtil {
 			return null;
 		}
 
-		XMIResource res = (XMIResource) (new ResourceSetImpl()).createResource(VIRTUAL_URI);
-		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
-		EObject copy;
-		if (object instanceof IdEObjectCollection) {
-			copy = copyIdEObjectCollection((IdEObjectCollection) object, res);
-		} else {
-			copy = ModelUtil.clone(object);
-			res.getContents().add(copy);
-		}
-
-		if (!overrideContainmentCheck && !(copy instanceof EClass)) {
-			if (!CommonUtil.isSelfContained(copy) || !CommonUtil.isContainedInResource(copy, res)) {
-				throw new SerializationException(copy);
-			}
-		}
-
+		Resource res;
 		int step = 200;
 		int initialSize = step;
-		if (object instanceof Project) {
-			Project project = (Project) object;
-			initialSize = project.getAllModelElements().size() * step;
+		if (object instanceof IdEObjectCollection) {
+			IdEObjectCollection collection = (IdEObjectCollection) object;
+			initialSize = collection.getAllModelElements().size() * step;
+			res = collection.eResource();
+		} else {
+			res = (new ResourceSetImpl()).createResource(VIRTUAL_URI);
+			((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+			res.getContents().add(object);
 		}
-		if (!overrideProxyCheck) {
-			proxyCheck(res);
-		}
-
 		StringWriter stringWriter = new StringWriter(initialSize);
 		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 		try {
@@ -301,21 +287,6 @@ public final class ModelUtil {
 		} catch (IOException e) {
 			throw new SerializationException(e);
 		}
-	}
-
-	private static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
-		IdEObjectCollection copiedCollection = clone(collection);
-
-		for (EObject modelElement : copiedCollection.getAllModelElements()) {
-			if (isIgnoredDatatype(modelElement)) {
-				continue;
-			}
-			ModelElementId modelElementId = copiedCollection.getModelElementId(modelElement);
-			res.setID(modelElement, modelElementId.getId());
-		}
-
-		res.getContents().add(copiedCollection);
-		return copiedCollection;
 	}
 
 	/**
