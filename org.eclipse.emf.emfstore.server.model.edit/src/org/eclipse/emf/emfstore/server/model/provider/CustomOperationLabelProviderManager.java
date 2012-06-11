@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * @author Michael Kagel
  * @author emueller
  */
-public class CustomOperationLabelProviderManager implements IDisposable {
+public final class CustomOperationLabelProviderManager implements IDisposable {
 
 	/**
 	 * Initializes the singleton instance statically.
