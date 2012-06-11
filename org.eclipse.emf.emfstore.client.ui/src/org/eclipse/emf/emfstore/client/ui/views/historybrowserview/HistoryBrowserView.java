@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
+import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -48,6 +49,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -63,13 +65,16 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -184,7 +189,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private Action showRoots;
 
-	private Label noProjectHint;
+	private Link noProjectHint;
 
 	private Composite parent;
 
@@ -212,13 +217,51 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void createPartControl(Composite parent) {
+	public void createPartControl(final Composite parent) {
 		GridLayoutFactory.fillDefaults().applyTo(parent);
 		this.parent = parent;
 
-		noProjectHint = new Label(parent, SWT.WRAP);
-		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.CENTER).grab(true, true).applyTo(noProjectHint);
-		noProjectHint.setText("Please call 'Show history' from the context menu of an element in the navigator.");
+		noProjectHint = new Link(parent, SWT.WRAP);
+		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.CENTER).grab(true, false).applyTo(noProjectHint);
+
+		noProjectHint
+			.setText("Select a <a>project</a> or call 'Show history' from the context menu of an element in the navigator.");
+		noProjectHint.addSelectionListener(new SelectionListener() {
+
+			public void widgetSelected(SelectionEvent e) {
+				ElementListSelectionDialog elsd = new ElementListSelectionDialog(parent.getShell(),
+					new ESBrowserLabelProvider());
+				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
+				for (ProjectSpace ps : WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces()) {
+					if (ps.getUsersession() != null) {
+						relevantProjectSpaces.add(ps);
+					}
+				}
+				elsd.setElements(relevantProjectSpaces.toArray());
+				elsd.setMultipleSelection(false);
+				elsd.setTitle("Select a project from the workspace");
+				elsd.setMessage("Please select a project from the current workspace.");
+				int reult = elsd.open();
+				if (Dialog.OK == reult) {
+					Object[] selectedElements = elsd.getResult();
+					ProjectSpace resultSelection = null;
+					for (Object o : selectedElements) {
+						resultSelection = (ProjectSpace) o;
+						break;
+					}
+					if (resultSelection != null) {
+						setInput(resultSelection);
+					}
+				}
+			}
+
+			public void widgetDefaultSelected(SelectionEvent e) {
+				this.widgetSelected(e);
+			}
+		});
+		// noProjectHint = new Label(parent, SWT.WRAP);
+		// GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.CENTER).grab(true, true).applyTo(noProjectHint);
+		// noProjectHint.setText("Please call 'Show history' from the context menu of an element in the navigator.");
 
 		viewer = new TreeViewerWithModelElementSelectionProvider(parent, SWT.NONE);
 
@@ -498,7 +541,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 *            the input model element
 	 */
 	public void setInput(ProjectSpace projectSpace, EObject me) {
-		noProjectHint.dispose();
+		// noProjectHint.dispose();
 		this.parent.layout();
 		this.projectSpace = projectSpace;
 		modelElement = me;
