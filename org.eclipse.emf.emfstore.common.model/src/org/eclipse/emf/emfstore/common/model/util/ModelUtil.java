@@ -791,7 +791,7 @@ public final class ModelUtil {
 	 * 
 	 * @param resourceSet resource set
 	 * @param prefix string prefix of the resource path
-	 * @throws IOException
+	 * @throws IOException if deleting the resource fails
 	 */
 	public static void deleteResourcesWithPrefix(ResourceSet resourceSet, String prefix) throws IOException {
 		List<Resource> toDelete = new ArrayList<Resource>();

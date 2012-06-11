@@ -14,23 +14,40 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 
 /**
- * @author Edgar
+ * Represents a Setting (EObject and Feature) and its referenced element.
  * 
+ * @author Edgar Mueller
  */
 public class SettingWithReferencedElement {
 
 	private Setting setting;
 	private EObject referencedElement;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param setting the setting
+	 * @param referencedElement the referenced element
+	 */
 	public SettingWithReferencedElement(Setting setting, EObject referencedElement) {
 		this.referencedElement = referencedElement;
 		this.setting = setting;
 	}
 
+	/**
+	 * Get the referenced element.
+	 * 
+	 * @return the element
+	 */
 	public EObject getReferencedElement() {
 		return referencedElement;
 	}
 
+	/**
+	 * Get the setting.
+	 * 
+	 * @return the setting
+	 */
 	public Setting getSetting() {
 		return setting;
 	}

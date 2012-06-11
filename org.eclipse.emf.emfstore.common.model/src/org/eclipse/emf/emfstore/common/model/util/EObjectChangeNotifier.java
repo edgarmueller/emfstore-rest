@@ -14,13 +14,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl;
 
 /**
@@ -39,11 +37,11 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	private boolean notificationDisabled;
 
 	/**
-	 * Constructor. Attaches an {@link Adapter} to the given {@link Notifier} and forwards notifications to the given
-	 * {@link NotifiableIdEObjectCollection}, that reacts appropriately.
+	 * Constructor. Attaches an Adapter to the given {@link Notifier} and forwards notifications to the given
+	 * NotifiableIdEObjectCollection, that reacts appropriately.
 	 * 
 	 * @param notifiableCollection
-	 *            a {@link NotifiableIdEObjectCollection}
+	 *            a NotifiableIdEObjectCollection
 	 * @param notifier
 	 *            the {@link Notifier} to listen to
 	 */
