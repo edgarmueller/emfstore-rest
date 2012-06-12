@@ -8,6 +8,7 @@ package org.eclipse.emf.emfstore.client.test.integration.forward;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class AttributeTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "MultiAttributeMoveTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -64,7 +65,7 @@ public class AttributeTest extends IntegrationTest {
 
 		commitChanges();
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "AttributeChangeTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -89,9 +90,7 @@ public class AttributeTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"AttributeTransitiveChangeTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 }

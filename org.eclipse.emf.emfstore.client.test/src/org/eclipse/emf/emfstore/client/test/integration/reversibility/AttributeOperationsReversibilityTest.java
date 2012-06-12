@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.Test;
@@ -39,9 +40,7 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"MultiAttributeMoveReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -72,8 +71,7 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"AttributeChangeReversibilityTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -103,9 +101,7 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"AttributeTransitiveChangeReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 }

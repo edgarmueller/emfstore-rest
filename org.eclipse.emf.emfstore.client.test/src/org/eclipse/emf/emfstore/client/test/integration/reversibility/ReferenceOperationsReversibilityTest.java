@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.Test;
@@ -50,8 +51,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"ContainmentReferenceAddNewReversibilityTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -84,9 +84,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"ContainmentRefTransitiveChangeReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -107,9 +105,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"MultiReferenceMoveReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -139,8 +135,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"NonContainmentReferenceAddReversibilityTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -171,9 +166,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"NonContainmentReferenceRemoveReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -202,9 +195,7 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 			}
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"ContainmentReferenceMoveReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 }

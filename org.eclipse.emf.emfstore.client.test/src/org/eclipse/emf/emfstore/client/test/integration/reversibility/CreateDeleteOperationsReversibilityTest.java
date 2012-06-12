@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.Test;
@@ -49,9 +50,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"CreateAndChangeAttributeReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -85,9 +84,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"CreateAndChangeRefReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -110,9 +107,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"CreateChangeRefDeleteReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -135,9 +130,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 
 		}.run(false);
 
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(),
-			"CreateDeleteReversibilityTest"));
-
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 }

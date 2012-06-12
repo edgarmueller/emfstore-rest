@@ -5,9 +5,7 @@
  */
 package org.eclipse.emf.emfstore.client.test.integration.forward;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,8 +15,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -47,7 +43,6 @@ import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -61,9 +56,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteO
  * @author Hodaie
  */
 public final class IntegrationTestHelper {
-
-	private static final Logger LOGGER = Logger
-		.getLogger("org.unicase.workspace.test.integration.forward.IntegrationTestHelper");
 
 	/**
 	 * Numbers of different integration tests. Each integration test case must have a corresponding method in this class
@@ -220,26 +212,6 @@ public final class IntegrationTestHelper {
 	}
 
 	/**
-	 * Uses linearCompare(projectA, projectB) method to compare projects contained in given project spaces. The result
-	 * is an array of integers with following elements: index 0 (ARE_EQUAL) 0 if files are not equal and 1 otherwise;
-	 * index 1 (DIFFRENCE_POSITION) index of differing character; index 2 (CHARACTER) the differing character; index 3
-	 * (LINE_NUM) line number of first differing character; index 4 (COL_NUM) column number of first differing
-	 * character. If any exceptions is thrown, all indices in result array will be -1.
-	 * 
-	 * @param testSpace test project space
-	 * @param compareSpace compare project space
-	 * @return if projects inside these project spaces are equal or not, and if they are not equal the location of
-	 *         differing character in their serialized string
-	 */
-	public static int[] linearCompare(ProjectSpace testSpace, ProjectSpace compareSpace) {
-
-		prepareCompare(testSpace, compareSpace, false);
-		System.out.println("linear comparing...");
-		return linearCompare(testSpace.getProject(), compareSpace.getProject());
-
-	}
-
-	/**
 	 * Returns editing domain.
 	 * 
 	 * @return editing domain
@@ -251,151 +223,6 @@ public final class IntegrationTestHelper {
 
 		}
 		return domain;
-	}
-
-	/**
-	 * Returns a serialized string for this object. It can also save serialized string to disk (in TMP_PATH) under given
-	 * name.
-	 * 
-	 * @param object object
-	 * @param name name to save string representation of object
-	 * @param writeToDisk if serialized string must be saved to disk
-	 * @return serialized string representation of this object
-	 * @throws SerializationException SerializationException
-	 */
-	public static String eObjectToString(EObject object, String name, boolean writeToDisk)
-		throws SerializationException {
-		if (object == null) {
-			return null;
-		}
-		Resource res = (new ResourceSetImpl()).createResource(URI.createURI("virtualUnicaseUri"));
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		res.getContents().add(ModelUtil.clone(object));
-		try {
-			res.save(out, null);
-		} catch (IOException e) {
-			throw new SerializationException(e);
-		}
-
-		if (writeToDisk) {
-			writeToDisk(name, out);
-		}
-
-		return out.toString();
-	}
-
-	/**
-	 * Save the given OutputStream to disk under the given name.
-	 * 
-	 * @param name
-	 * @param out
-	 */
-	private static void writeToDisk(String name, ByteArrayOutputStream out) {
-		File file = new File(TEMP_PATH + File.separator + name + ".txt");
-		try {
-			if (!file.exists()) {
-
-				new File(TEMP_PATH).mkdir();
-			}
-
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(out.toByteArray());
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * This method compare two projects with each other. It first converts projects in string and finds location of
-	 * first character in which these strings differ. The result is an array of integers with following elements: index
-	 * 0 (ARE_EQUAL) 0 if files are not equal and 1 otherwise; index 1 (DIFFRENCE_POSITION) index of differing
-	 * character; index 2 (CHARACTER) the differing character; index 3 (LINE_NUM) line number of first differing
-	 * character; index 4 (COL_NUM) column number of first differing character. If any exceptions is thrown, all indices
-	 * in result array will be -1.
-	 * 
-	 * @param projectA project A
-	 * @param projectB project B
-	 * @return if projects are equal or not, and if they are not equal the location of differing character in their
-	 *         serialized string
-	 */
-	public static int[] linearCompare(Project projectA, Project projectB) {
-		int[] result = new int[5];
-		int areEqual = 0;
-		int differencePosition = 1;
-		int character = 2;
-		int lineNum = 3;
-		int columnNum = 4;
-		result[areEqual] = 1;
-		String stringA;
-		String stringB;
-
-		try {
-
-			stringA = eObjectToString(projectA, "testProj", false);
-			stringB = eObjectToString(projectB, "compareProj", false);
-
-		} catch (SerializationException e) {
-			for (int i = 0; i < 5; i++) {
-				result[i] = -1;
-			}
-			return result;
-		}
-
-		int length = Math.min(stringA.length(), stringB.length());
-		for (int index = 0; index < length; index++) {
-			if (stringA.charAt(index) != stringB.charAt(index)) {
-				result[areEqual] = 0;
-				result[differencePosition] = index;
-				result[character] = stringA.charAt(index);
-				int lineNumber = getLineNum(stringA, index);
-				result[lineNum] = lineNumber;
-				result[columnNum] = getColNum(stringA, index);
-				break;
-			}
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * Finds column number of given index inside a multi-line string.
-	 * 
-	 * @param stringA string
-	 * @param index index
-	 * @return
-	 */
-	private static int getColNum(String stringA, int index) {
-		int pos = index;
-		int j = 0;
-		for (int i = 0; i < index; i++) {
-			j++;
-			if (stringA.charAt(i) == '\n') {
-				pos -= j;
-				j = 0;
-			}
-		}
-		return pos;
-
-	}
-
-	/**
-	 * Finds line number of a given index inside a multi-line string.
-	 * 
-	 * @param stringA
-	 * @param index
-	 * @return
-	 */
-	private static int getLineNum(String stringA, int index) {
-		int lineNum = 1;
-		for (int i = 0; i < index; i++) {
-			if (stringA.charAt(i) == '\n') {
-				lineNum++;
-			}
-		}
-		return lineNum;
 	}
 
 	/**
@@ -897,23 +724,6 @@ public final class IntegrationTestHelper {
 			Collections.swap(eList, position1, position2);
 		}
 
-	}
-
-	/**
-	 * Compares test project and compare project using their serialized strings.
-	 * 
-	 * @param testProject test project
-	 * @param compareProject compare project
-	 * @param testName test name
-	 * @return if serialized string from projects are equal
-	 * @throws SerializationException SerializationException
-	 */
-	public static boolean areEqual(Project testProject, Project compareProject, String testName)
-		throws SerializationException {
-		LOGGER.log(Level.INFO, "examining the equlity of test project and the checked out compare project...");
-		String strTestProj = eObjectToString(testProject, testName + "-test", true);
-		String strCompareProj = eObjectToString(compareProject, testName + "-compare", true);
-		return strTestProj.equals(strCompareProj);
 	}
 
 	/**

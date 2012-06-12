@@ -8,6 +8,7 @@ package org.eclipse.emf.emfstore.client.test.integration.forward;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.Test;
@@ -43,8 +44,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper
-			.areEqual(getTestProject(), getCompareProject(), "CreateAndChangeAttributeTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -72,7 +72,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "CreateAndMultipleChangeTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -99,7 +99,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "CreateAndChangeRefTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -123,7 +123,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "CreateChangeRefDeleteTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -147,7 +147,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "CreateDeleteTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
@@ -165,7 +165,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		testHelper.doDeleteAndRevert();
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "DeleteAndRevertDeleteTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class CreateDeleteTest extends IntegrationTest {
 		}.run(false);
 
 		commitChanges();
-		assertTrue(IntegrationTestHelper.areEqual(getTestProject(), getCompareProject(), "DeleteTest"));
+		assertTrue(ModelUtil.areEqual(getTestProject(), getCompareProject()));
 
 	}
 
