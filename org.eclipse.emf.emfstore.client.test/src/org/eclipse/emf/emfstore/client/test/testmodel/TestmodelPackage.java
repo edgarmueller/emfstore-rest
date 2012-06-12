@@ -20,44 +20,42 @@ import org.eclipse.emf.ecore.EcorePackage;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory
  * @model kind="package"
  * @generated
  */
 public interface TestmodelPackage extends EPackage {
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNAME = "testmodel";
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_URI = "http://eclipse.org/emf/emfstore/client/test/testmodel";
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test";
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	TestmodelPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl
-	 * <em>Test Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl <em>Test Element</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElement()
 	 * @generated
@@ -65,8 +63,8 @@ public interface TestmodelPackage extends EPackage {
 	int TEST_ELEMENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -81,58 +79,58 @@ public interface TestmodelPackage extends EPackage {
 	// int TEST_ELEMENT__IDENTIFIER = ModelPackage. 0; // ModelPackage.UNI MetamodelPackage.MODEL_ELEMENT__IDENTIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Strings</b></em>' attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Strings</b></em>' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__STRINGS = EcorePackage.EOBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>References</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>References</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__REFERENCES = EcorePackage.EOBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Contained Elements</b></em>' containment reference list. <!-- begin-user-doc -->
+	 * The feature id for the '<em><b>Contained Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__CONTAINED_ELEMENTS = EcorePackage.EOBJECT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Reference</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__REFERENCE = EcorePackage.EOBJECT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Contained Element</b></em>' containment reference. <!-- begin-user-doc --> <!--
+	 * The feature id for the '<em><b>Contained Element</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__CONTAINED_ELEMENT = EcorePackage.EOBJECT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Other Reference</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Other Reference</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int TEST_ELEMENT__OTHER_REFERENCE = EcorePackage.EOBJECT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -148,9 +146,8 @@ public interface TestmodelPackage extends EPackage {
 	int TEST_ELEMENT_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 8;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement
-	 * <em>Test Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement <em>Test Element</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Test Element</em>'.
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement
 	 * @generated
@@ -158,10 +155,9 @@ public interface TestmodelPackage extends EPackage {
 	EClass getTestElement();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getName <em>Name</em>}'. <!-- begin-user-doc
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getName()
 	 * @see #getTestElement()
@@ -194,10 +190,8 @@ public interface TestmodelPackage extends EPackage {
 	EReference getTestElement_References();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElements
-	 * <em>Contained Elements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElements <em>Contained Elements</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Contained Elements</em>'.
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElements()
 	 * @see #getTestElement()
@@ -218,10 +212,8 @@ public interface TestmodelPackage extends EPackage {
 	EReference getTestElement_Reference();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElement <em>Contained Element</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElement <em>Contained Element</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Contained Element</em>'.
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElement()
 	 * @see #getTestElement()
@@ -230,10 +222,8 @@ public interface TestmodelPackage extends EPackage {
 	EReference getTestElement_ContainedElement();
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getOtherReference <em>Other Reference</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getOtherReference <em>Other Reference</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the reference '<em>Other Reference</em>'.
 	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getOtherReference()
 	 * @see #getTestElement()
@@ -254,8 +244,8 @@ public interface TestmodelPackage extends EPackage {
 	EAttribute getTestElement_Description();
 
 	/**
-	 * Returns the factory that creates the instances of the model. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
@@ -270,14 +260,12 @@ public interface TestmodelPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl
-		 * <em>Test Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl <em>Test Element</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl
 		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElement()
 		 * @generated
@@ -285,25 +273,25 @@ public interface TestmodelPackage extends EPackage {
 		EClass TEST_ELEMENT = eINSTANCE.getTestElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute TEST_ELEMENT__NAME = eINSTANCE.getTestElement_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature. <!-- begin-user-doc -->
+		 * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute TEST_ELEMENT__STRINGS = eINSTANCE.getTestElement_Strings();
 
 		/**
-		 * The meta object literal for the '<em><b>References</b></em>' reference list feature. <!-- begin-user-doc -->
+		 * The meta object literal for the '<em><b>References</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference TEST_ELEMENT__REFERENCES = eINSTANCE.getTestElement_References();
@@ -317,9 +305,9 @@ public interface TestmodelPackage extends EPackage {
 		EReference TEST_ELEMENT__CONTAINED_ELEMENTS = eINSTANCE.getTestElement_ContainedElements();
 
 		/**
-		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference TEST_ELEMENT__REFERENCE = eINSTANCE.getTestElement_Reference();
@@ -333,17 +321,17 @@ public interface TestmodelPackage extends EPackage {
 		EReference TEST_ELEMENT__CONTAINED_ELEMENT = eINSTANCE.getTestElement_ContainedElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Other Reference</b></em>' reference feature. <!-- begin-user-doc -->
+		 * The meta object literal for the '<em><b>Other Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference TEST_ELEMENT__OTHER_REFERENCE = eINSTANCE.getTestElement_OtherReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute TEST_ELEMENT__DESCRIPTION = eINSTANCE.getTestElement_Description();
