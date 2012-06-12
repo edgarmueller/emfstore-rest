@@ -811,6 +811,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * Complete the current composite operation.
 	 */
 	public void endCompositeOperation() {
+		if (!commandIsRunning || !emitOperationsWhenCommandCompleted) {
+			operations.remove(compositeOperation);
+			operationRecorded(compositeOperation);
+		}
 		this.compositeOperation = null;
 	}
 
