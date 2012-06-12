@@ -86,6 +86,12 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		}
 	}
 
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText("Commit your local changes to the server");
+	}
+
 	/**
 	 * @return the change package
 	 */
