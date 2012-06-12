@@ -246,8 +246,8 @@ public class EmfStoreValidator {
 		String stringB = "";
 
 		try {
-			stringA = ModelUtil.eObjectToString(projectA);
-			stringB = ModelUtil.eObjectToString(projectB);
+			stringA = ModelUtil.copyAndSerialize(projectA);
+			stringB = ModelUtil.copyAndSerialize(projectB);
 		} catch (SerializationException e) {
 			ModelUtil.logException(e);
 			result[areEqual] = 0;

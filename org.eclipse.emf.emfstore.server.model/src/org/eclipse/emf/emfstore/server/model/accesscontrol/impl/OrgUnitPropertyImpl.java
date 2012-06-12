@@ -390,7 +390,7 @@ public class OrgUnitPropertyImpl extends EObjectImpl implements OrgUnitProperty 
 		String[] newValue = new String[value.length];
 		try {
 			for (int i = 0; i < value.length; i++) {
-				newValue[i] = ModelUtil.eObjectToString(value[i]);
+				newValue[i] = ModelUtil.copyAndSerialize(value[i]);
 			}
 			setValue(newValue);
 		} catch (SerializationException e) {

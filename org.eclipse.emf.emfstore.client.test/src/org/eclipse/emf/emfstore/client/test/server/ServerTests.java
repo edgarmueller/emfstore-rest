@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
@@ -268,12 +267,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @param compare to be compared
 	 */
 	public static void assertEqual(Project expected, Project compare) {
-		try {
-			if (!ModelUtil.eObjectToString(expected).equals(ModelUtil.eObjectToString(compare))) {
-				throw new AssertionError("Projects are not equal.");
-			}
-		} catch (SerializationException e) {
-			throw new AssertionError("Couldn't compare projects.");
+		if (!ModelUtil.areEqual(expected, compare)) {
+			throw new AssertionError("Projects are not equal.");
 		}
 	}
 

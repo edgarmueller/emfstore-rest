@@ -294,8 +294,7 @@ public class ServerInterfaceTest extends ServerTests {
 		assertTrue(changes.size() == 1);
 		for (ChangePackage cp : changes) {
 			assertTrue(cp.getOperations().size() == 2);
-			assertTrue(ModelUtil.eObjectToString(cp.getOperations().get(1)).equals(
-				ModelUtil.eObjectToString(attributeOperation)));
+			assertTrue(ModelUtil.areEqual(cp.getOperations().get(1), attributeOperation));
 		}
 
 	}
