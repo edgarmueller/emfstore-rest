@@ -699,8 +699,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resource.delete(null);
 		}
 
-		resourceSet.getResources().clear();
-
 		// delete folder of project space
 		FileUtil.deleteFolder(new File(pathToProject));
 	}
