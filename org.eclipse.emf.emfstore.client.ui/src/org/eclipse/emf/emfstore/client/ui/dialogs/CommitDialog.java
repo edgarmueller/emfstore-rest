@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -32,6 +33,7 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -57,6 +59,7 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	private EList<String> oldLogMessages;
 	private ProjectSpace activeProjectSpace;
 	private HashMap<String, CommitDialogTray> trays;
+	private Image commitImage;
 
 	/**
 	 * Constructor.
@@ -67,7 +70,6 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	 */
 	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace) {
 		super(parentShell);
-		setTitle("Commit your changes");
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
@@ -89,7 +91,9 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Commit your local changes to the server");
+		newShell.setText("Commit");
+		commitImage = Activator.getImageDescriptor("icons/arrow_right.png").createImage();
+		newShell.setImage(commitImage);
 	}
 
 	/**
@@ -117,8 +121,11 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		Composite contents = new Composite(parent, SWT.NONE);
 		contents.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		contents.setLayout(new GridLayout(2, false));
-
-		setTitle("Commit your local changes to the server");
+		String projectName = "";
+		if (activeProjectSpace.getProjectName() != null && activeProjectSpace.getProjectName().length() > 0) {
+			projectName = "of project \"" + activeProjectSpace.getProjectName() + "\" ";
+		}
+		setTitle("Commit your local changes " + projectName + "to the server");
 		setMessage("Don't forget the commit message!");
 
 		// Log message
@@ -205,6 +212,12 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		}
 
 		super.okPressed();
+	}
+
+	@Override
+	public boolean close() {
+		commitImage.dispose();
+		return super.close();
 	}
 
 	/**

@@ -13,10 +13,12 @@ package org.eclipse.emf.emfstore.client.ui.dialogs;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -33,6 +35,7 @@ public class UpdateDialog extends TitleAreaDialog {
 
 	private List<ChangePackage> changes;
 	private ProjectSpace projectSpace;
+	private Image updateImage;
 
 	/**
 	 * Constructor.
@@ -65,8 +68,17 @@ public class UpdateDialog extends TitleAreaDialog {
 			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		}
 
+		String projectName = "";
 		// show number of changes on dialog title
-		setTitle("Changes from server");
+		if (projectSpace.getProjectName() != null && projectSpace.getProjectName().length() > 0) {
+			projectName = " for project \"" + projectSpace.getProjectName() + "\"";
+		}
+		setTitle("Incoming changes from server" + projectName);
+		int operationCount = 0;
+		for (ChangePackage changePackage : changes) {
+			operationCount += changePackage.getOperations().size();
+		}
+		setMessage(changes.size() + " version(s) " + " with a total of " + operationCount + " change(s)");
 		return contents;
 
 	}
@@ -78,6 +90,14 @@ public class UpdateDialog extends TitleAreaDialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Update");
+		updateImage = Activator.getImageDescriptor("icons/arrow_up.png").createImage();
+		newShell.setImage(updateImage);
+	}
+
+	@Override
+	public boolean close() {
+		updateImage.dispose();
+		return super.close();
 	}
 
 	/**
