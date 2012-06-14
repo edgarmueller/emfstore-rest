@@ -10,9 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.accesscontrol.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -390,7 +387,7 @@ public class OrgUnitPropertyImpl extends EObjectImpl implements OrgUnitProperty 
 		String[] newValue = new String[value.length];
 		try {
 			for (int i = 0; i < value.length; i++) {
-				newValue[i] = ModelUtil.copyAndSerialize(value[i]);
+				newValue[i] = ModelUtil.eObjectToString(value[i]);
 			}
 			setValue(newValue);
 		} catch (SerializationException e) {
@@ -436,34 +433,4 @@ public class OrgUnitPropertyImpl extends EObjectImpl implements OrgUnitProperty 
 		throw new IllegalStateException("Existing key without value!");
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	/**
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getEObjectListProperty(java.util.List)
-	 */
-	@SuppressWarnings("unchecked")
-	public <T extends EObject> List<T> getEObjectListProperty(List<T> result) {
-		String[] value = getStringArrayProperty();
-		List<Exception> causes = new ArrayList<Exception>();
-		if (value != null && value.length > 0) {
-			for (int i = 0; i < value.length; i++) {
-				try {
-					EObject eObject = ModelUtil.stringToEObject(value[i]);
-					result.add((T) eObject);
-				} catch (SerializationException e) {
-					causes.add(e);
-				} catch (ClassCastException e) {
-					causes.add(e);
-				}
-			}
-			if (!causes.isEmpty()) {
-				setValue(result.toArray(new EObject[0]));
-				for (Exception cause : causes) {
-					ModelUtil.logWarning("Removed broken entries from property " + this.getName() + ".", cause);
-				}
-			}
-		}
-		return result;
-	}
 } // OrgUnitPropertyImpl
