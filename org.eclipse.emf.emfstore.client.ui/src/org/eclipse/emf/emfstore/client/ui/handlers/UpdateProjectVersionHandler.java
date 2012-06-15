@@ -11,7 +11,7 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 	public void handle() throws EmfStoreException {
 		// TODO: ask for specific version, not HEAD
 		new UIUpdateProjectController(getShell(), requireSelection(ProjectSpace.class), VersionSpec.HEAD_VERSION)
-			.execute(true, true);
+			.execute();
 	}
 
 }

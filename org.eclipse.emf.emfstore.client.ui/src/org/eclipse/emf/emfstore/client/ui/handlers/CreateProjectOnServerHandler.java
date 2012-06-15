@@ -31,6 +31,6 @@ public class CreateProjectOnServerHandler extends AbstractEMFStoreHandler {
 			return;
 		}
 
-		new UICreateRemoteProjectController(getShell(), serverInfo.getLastUsersession()).execute(false, false);
+		new UICreateRemoteProjectController(getShell(), serverInfo.getLastUsersession()).execute();
 	}
 }

@@ -8,7 +8,7 @@ public class ProjectInfoPropertiesHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIShowProjectPropertiesController(getShell(), requireSelection(ProjectInfo.class)).execute(false, false);
+		new UIShowProjectPropertiesController(getShell(), requireSelection(ProjectInfo.class)).execute();
 	}
 
 }

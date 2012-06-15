@@ -9,7 +9,7 @@ public class ServerLoginHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() throws EmfStoreException {
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
-		new UILoginSessionController(getShell(), serverInfo).execute(false, false);
+		new UILoginSessionController(getShell(), serverInfo).execute();
 	}
 
 }

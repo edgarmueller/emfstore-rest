@@ -54,6 +54,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 			// fail silently
 		} catch (EmfStoreException e) {
 			MessageDialog.openError(getShell(), "Error", e.getMessage());
+			return null;
 		}
 
 		new RunInUIThread(getShell()) {

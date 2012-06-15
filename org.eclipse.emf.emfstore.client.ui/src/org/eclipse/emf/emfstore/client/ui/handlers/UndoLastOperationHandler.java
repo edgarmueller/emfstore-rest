@@ -8,7 +8,7 @@ public class UndoLastOperationHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIUndoLastOperationController(getShell(), requireSelection(ProjectSpace.class)).execute(false, false);
+		new UIUndoLastOperationController(getShell(), requireSelection(ProjectSpace.class)).execute();
 	}
 
 }

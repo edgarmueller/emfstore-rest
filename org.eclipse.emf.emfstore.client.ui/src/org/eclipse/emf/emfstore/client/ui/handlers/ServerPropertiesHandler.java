@@ -8,7 +8,7 @@ public class ServerPropertiesHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIEditServerPropertiesController(getShell(), requireSelection(ServerInfo.class)).execute(false, false);
+		new UIEditServerPropertiesController(getShell(), requireSelection(ServerInfo.class)).execute();
 	}
 
 }

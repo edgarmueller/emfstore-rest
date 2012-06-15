@@ -42,7 +42,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 
 		// FIXME: eContainer call
 		new UICheckoutController(getShell(), view.getProjectSpace().getUsersession().getServerInfo(), projectInfo,
-			versionSpec).execute(true, true);
+			versionSpec).execute();
 	}
 
 }

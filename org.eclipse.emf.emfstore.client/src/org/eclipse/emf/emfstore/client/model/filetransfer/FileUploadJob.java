@@ -81,7 +81,7 @@ public class FileUploadJob extends FileTransferJob {
 			getConnectionManager().uploadFileChunk(getSessionId(), getProjectId(), fileChunk);
 			transmitted += fileChunk.getData().length;
 			monitor.worked(1);
-			monitor.subTask("Sending file " + getFileInformation() + ": " + transmitted + " of "
+			monitor.subTask("Sending file " + getFileInformation() + ": " + transmitted + "/"
 				+ getFileInformation().getFileSize() + " bytes transmitted");
 			incrementChunkNumber();
 			if (isCanceled()) {

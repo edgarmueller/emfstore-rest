@@ -8,7 +8,7 @@ public class CommitProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UICommitProjectController(getShell(), requireSelection(ProjectSpace.class)).execute(true, true);
+		new UICommitProjectController(getShell(), requireSelection(ProjectSpace.class)).execute();
 	}
 
 }

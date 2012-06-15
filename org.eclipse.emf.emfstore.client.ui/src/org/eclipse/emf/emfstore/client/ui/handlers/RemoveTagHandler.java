@@ -8,7 +8,7 @@ public class RemoveTagHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIRemoveTagController(getShell(), requireSelection(HistoryInfo.class)).execute(false, false);
+		new UIRemoveTagController(getShell(), requireSelection(HistoryInfo.class)).execute();
 	}
 
 }

@@ -8,7 +8,7 @@ public class DeleteServerHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIRemoveServerController(getShell(), requireSelection(ServerInfo.class)).execute(false, false);
+		new UIRemoveServerController(getShell(), requireSelection(ServerInfo.class)).execute();
 	}
 
 }

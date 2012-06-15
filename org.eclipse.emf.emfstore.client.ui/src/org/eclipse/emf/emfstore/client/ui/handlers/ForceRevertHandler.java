@@ -8,7 +8,7 @@ public class ForceRevertHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIForceRevertCommitController(getShell(), requireSelection(HistoryInfo.class)).execute(false, false);
+		new UIForceRevertCommitController(getShell(), requireSelection(HistoryInfo.class)).execute();
 	}
 
 }

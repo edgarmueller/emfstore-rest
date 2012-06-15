@@ -8,6 +8,6 @@ public class DeleteProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIDeleteProjectController(getShell(), requireSelection(ProjectSpace.class)).execute(false, false);
+		new UIDeleteProjectController(getShell(), requireSelection(ProjectSpace.class)).execute();
 	}
 }

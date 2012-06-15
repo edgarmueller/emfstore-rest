@@ -17,7 +17,7 @@ public class CreateLocalProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UICreateLocalProjectController(getShell()).execute(false, false);
+		new UICreateLocalProjectController(getShell()).execute();
 	}
 
 }

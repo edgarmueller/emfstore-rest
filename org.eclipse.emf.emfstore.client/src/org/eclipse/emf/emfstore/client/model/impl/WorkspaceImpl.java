@@ -27,6 +27,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -194,14 +195,40 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
 		PrimaryVersionSpec targetSpec, IProgressMonitor progressMonitor) throws EmfStoreException {
 
+		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 1);
+
+		// progressMonitor.beginTask("Performing checkout...", 100);
 		// FIXME: MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
-		ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
+		final ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
 		projectInfoCopy.setVersion(targetSpec);
 
 		// get project from server
-		Project project = this.connectionManager.getProject(usersession.getSessionId(), projectInfo.getProjectId(),
-			projectInfoCopy.getVersion());
+		Project project = null;
+		SubMonitor newChild = parent.newChild(50);
+		newChild.beginTask("Fetching project from server...", 50);
+		try {
+			project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
+				@Override
+				public Project run(IProgressMonitor monitor) throws EmfStoreException {
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e) {
+
+					}
+					return connectionManager.getProject(usersession.getSessionId(), projectInfo.getProjectId(),
+						projectInfoCopy.getVersion());
+				}
+			}.execute();
+		} catch (TimeoutException e1) {
+
+		} catch (InterruptedException e1) {
+
+		} catch (ExecutionException e1) {
+
+		}
+
+		parent.setWorkRemaining(50);
 
 		if (project == null) {
 			throw new EmfStoreException("Server returned a null project!");
@@ -212,6 +239,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 
 		// initialize project space
+		parent.subTask("Initializing Projectspace...");
 		projectSpace.setProjectId(projectInfo.getProjectId());
 		projectSpace.setProjectName(projectInfo.getName());
 		projectSpace.setProjectDescription(projectInfo.getDescription());
@@ -222,8 +250,45 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		projectSpace.setProject(project);
 		projectSpace.setResourceCount(0);
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
+		parent.worked(20);
 
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			// Do NOT catch all Exceptions ("catch (Exception e)")
+			// Log AND handle Exceptions if possible
+			//
+			// You can just uncomment one of the lines below to log an exception:
+			// logException will show the logged excpetion to the user
+			// ModelUtil.logException(e1);
+			// ModelUtil.logException("YOUR MESSAGE HERE", e1);
+			// logWarning will only add the message to the error log
+			// ModelUtil.logWarning("YOUR MESSAGE HERE", e1);
+			// ModelUtil.logWarning("YOUR MESSAGE HERE");
+			//
+			// If handling is not possible declare and rethrow Exception
+		}
+		parent.subTask("AA");
 		projectSpace.initResources(this.workspaceResourceSet);
+		parent.worked(30);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			// Do NOT catch all Exceptions ("catch (Exception e)")
+			// Log AND handle Exceptions if possible
+			//
+			// You can just uncomment one of the lines below to log an exception:
+			// logException will show the logged excpetion to the user
+			// ModelUtil.logException(e1);
+			// ModelUtil.logException("YOUR MESSAGE HERE", e1);
+			// logWarning will only add the message to the error log
+			// ModelUtil.logWarning("YOUR MESSAGE HERE", e1);
+			// ModelUtil.logWarning("YOUR MESSAGE HERE");
+			//
+			// If handling is not possible declare and rethrow Exception
+		}
 
 		// retrieve recent changes
 		try {
@@ -254,6 +319,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		this.save();
 
 		WorkspaceManager.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
+
+		progressMonitor.done();
 
 		return projectSpace;
 	}

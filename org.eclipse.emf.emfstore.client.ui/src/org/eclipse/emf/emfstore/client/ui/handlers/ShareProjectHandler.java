@@ -9,7 +9,7 @@ public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHan
 
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIShareProjectController(getShell(), requireSelection(ProjectSpace.class)).execute(true, true);
+		new UIShareProjectController(getShell(), requireSelection(ProjectSpace.class)).execute();
 		;
 	}
 
