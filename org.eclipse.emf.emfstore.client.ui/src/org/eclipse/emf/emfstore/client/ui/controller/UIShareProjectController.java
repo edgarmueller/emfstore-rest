@@ -15,10 +15,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -47,24 +45,11 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 
 	@Override
 	public Void doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
-
 		try {
 			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);
 		} catch (LoginCanceledException e) {
 			// fail silently
-		} catch (EmfStoreException e) {
-			MessageDialog.openError(getShell(), "Error", e.getMessage());
-			return null;
 		}
-
-		new RunInUIThread(getShell()) {
-			@Override
-			public Void run(Shell shell) {
-				MessageDialog.openInformation(getShell(), "Share completed", "The project was successfully shared.");
-				return null;
-			}
-		}.execute();
-
 		return null;
 	}
 }

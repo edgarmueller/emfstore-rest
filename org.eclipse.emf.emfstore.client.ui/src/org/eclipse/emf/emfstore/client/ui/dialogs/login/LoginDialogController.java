@@ -6,7 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithReturnValue;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.window.Window;
@@ -29,7 +29,7 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private Usersession login() throws EmfStoreException {
-		AccessControlException exception = new RunInUIThreadWithReturnValue<AccessControlException>(
+		AccessControlException exception = new RunInUIThreadWithResult<AccessControlException>(
 			Display.getDefault()) {
 
 			@Override

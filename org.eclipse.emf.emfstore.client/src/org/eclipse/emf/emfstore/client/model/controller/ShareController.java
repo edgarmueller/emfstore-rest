@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
@@ -68,20 +67,16 @@ public class ShareController extends ServerCall<Void> {
 		}
 		getProgressMonitor().subTask("Sharing project with server");
 
-		try {
-			createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
-				@Override
-				public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
-					return WorkspaceManager
-						.getInstance()
-						.getConnectionManager()
-						.createProject(getUsersession().getSessionId(), getProjectSpace().getProjectName(),
-							getProjectSpace().getProjectDescription(), logMessage, getProjectSpace().getProject());
-				}
-			}.execute();
-		} catch (ExecutionException cause) {
-			throw new EmfStoreException("An error occured during creation of the project", cause);
-		}
+		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
+			@Override
+			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
+				return WorkspaceManager
+					.getInstance()
+					.getConnectionManager()
+					.createProject(getUsersession().getSessionId(), getProjectSpace().getProjectName(),
+						getProjectSpace().getProjectDescription(), logMessage, getProjectSpace().getProject());
+			}
+		}.execute();
 
 		getProgressMonitor().worked(30);
 		getProgressMonitor().subTask("Finalizing share");

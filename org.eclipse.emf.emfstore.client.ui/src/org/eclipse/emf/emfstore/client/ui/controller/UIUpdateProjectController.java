@@ -1,11 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH,
+ * All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse
+ * Public License v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
@@ -18,7 +15,7 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithReturnValue;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
@@ -31,7 +28,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * UI-dependent controller for updating a project.
+ * UI controller for updating a project.
  * 
  * @author ovonwesen
  * @author emueller
@@ -41,6 +38,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 
 	private final ProjectSpace projectSpace;
 	private VersionSpec version;
+	private EmfStoreException exception;
 
 	/**
 	 * Constructor.
@@ -95,18 +93,41 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
 	 */
-	public boolean conflictOccurred(ChangeConflictException conflictException) {
-		ProjectSpace projectSpace = conflictException.getProjectSpace();
+	public boolean conflictOccurred(final ChangeConflictException conflictException) {
+		final ProjectSpace projectSpace = conflictException.getProjectSpace();
 		boolean mergeSuccessful = false;
 		try {
-			PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
-			mergeSuccessful = projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
+			// merge opens up a dialog
+			exception = null;
+			mergeSuccessful = new RunInUIThreadWithResult<Boolean>(getShell()) {
+
+				@Override
+				public Boolean run(Shell shell) {
+					try {
+						return projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+					} catch (EmfStoreException e) {
+						exception = e;
+					}
+					return null;
+				}
+
+			}.execute();
 		} catch (EmfStoreException e) {
-			WorkspaceUtil.logException(
-				String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
-			handleException(e);
+			handleMergeException(projectSpace, e);
 		}
+
+		if (exception != null) {
+			handleMergeException(projectSpace, exception);
+		}
+
 		return mergeSuccessful;
+	}
+
+	private void handleMergeException(final ProjectSpace projectSpace, EmfStoreException e) {
+		WorkspaceUtil.logException(
+			String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
+		handleException(e);
 	}
 
 	/**
@@ -117,7 +138,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages) {
-		return new RunInUIThreadWithReturnValue<Boolean>(getShell()) {
+		return new RunInUIThreadWithResult<Boolean>(getShell()) {
 			@Override
 			public Boolean run(Shell shell) {
 				UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages);
@@ -130,28 +151,31 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 
 	}
 
-	public void updateCompleted(ProjectSpace projectSpace, PrimaryVersionSpec oldVersion, PrimaryVersionSpec newVersion) {
-
-	}
-
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreRequest#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
 	public PrimaryVersionSpec doRun(final IProgressMonitor pm) throws EmfStoreException {
+		exception = null;
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
-		PrimaryVersionSpec newBaseVersion = new RunInUIThreadWithReturnValue<PrimaryVersionSpec>(getShell()) {
+		PrimaryVersionSpec newBaseVersion = new RunInUIThreadWithResult<PrimaryVersionSpec>(getShell()) {
 			@Override
 			public PrimaryVersionSpec run(Shell shell) {
 				try {
 					return projectSpace.update(version, UIUpdateProjectController.this, pm);
 				} catch (EmfStoreException e) {
-					setException(e);
+					exception = e;
 				}
 
 				return null;
 			}
 		}.execute();
 
-		if (hasException()) {
-			throw getException();
+		if (exception != null) {
+			throw exception;
 		}
 
 		if (oldBaseVersion.equals(newBaseVersion)) {

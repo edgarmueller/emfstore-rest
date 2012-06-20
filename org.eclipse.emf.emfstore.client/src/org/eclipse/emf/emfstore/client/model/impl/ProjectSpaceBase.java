@@ -587,7 +587,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
-		boolean useCrossReferenceAdapter = false;
+		boolean useCrossReferenceAdapter = true;
 
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
 			.getExtensionElements()) {
@@ -681,7 +681,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resource.delete(null);
 		}
 
-		resourceSet.getResources().clear();
+		// resourceSet.getResources().clear();
 
 		// delete folder of project space
 		FileUtil.deleteFolder(new File(pathToProject));

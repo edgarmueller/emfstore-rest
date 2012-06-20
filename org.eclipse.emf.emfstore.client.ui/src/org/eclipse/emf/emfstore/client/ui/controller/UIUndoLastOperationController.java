@@ -6,6 +6,11 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * 
+ * @author Edgar
+ * 
+ */
 public class UIUndoLastOperationController extends AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;

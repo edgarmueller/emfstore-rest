@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithReturnValue;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
@@ -41,7 +41,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
 		if (serverInfo == null) {
 
-			Integer userInput = new RunInUIThreadWithReturnValue<Integer>(Display.getDefault()) {
+			Integer userInput = new RunInUIThreadWithResult<Integer>(Display.getDefault()) {
 				@Override
 				public Integer run(Shell shell) {
 					// try to retrieve a server info by showing a server info selection dialog

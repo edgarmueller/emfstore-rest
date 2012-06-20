@@ -7,6 +7,16 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * Handlers are the top level abstraction that clients should use execute actions within the EMFStore
+ * workspace. They are responsible for calling the UI controllers and therefore provide
+ * helper methods that can determine the currently selected element.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ * 
+ * @param <T> the return type of the handler
+ */
 public abstract class AbstractEMFStoreHandlerWithResult<T> extends AbstractHandler {
 
 	private ExecutionEvent event;

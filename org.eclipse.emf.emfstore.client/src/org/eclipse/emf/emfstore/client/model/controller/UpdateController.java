@@ -1,9 +1,9 @@
 package org.eclipse.emf.emfstore.client.model.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
@@ -58,9 +58,14 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}
 
 		getProgressMonitor().subTask("Fetching changes from server");
-		List<ChangePackage> changes = new ArrayList<ChangePackage>();
-		changes = getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
-			getProjectSpace().getBaseVersion(), resolvedVersion);
+		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
+			@Override
+			public List<ChangePackage> run(IProgressMonitor monitor) throws EmfStoreException {
+				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
+					getProjectSpace().getBaseVersion(), resolvedVersion);
+			}
+		}.execute();
+
 		ChangePackage localchanges = getProjectSpace().getLocalChangePackage(false);
 		getProgressMonitor().worked(65);
 

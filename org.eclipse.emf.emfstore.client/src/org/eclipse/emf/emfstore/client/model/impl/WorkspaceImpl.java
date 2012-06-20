@@ -20,10 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -195,9 +193,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
 		PrimaryVersionSpec targetSpec, IProgressMonitor progressMonitor) throws EmfStoreException {
 
-		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 1);
+		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
 
-		// progressMonitor.beginTask("Performing checkout...", 100);
 		// FIXME: MK: hack: set head version manually because esbrowser does not update
 		// revisions properly
 		final ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
@@ -205,37 +202,22 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		// get project from server
 		Project project = null;
-		SubMonitor newChild = parent.newChild(50);
-		newChild.beginTask("Fetching project from server...", 50);
-		try {
-			project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
-				@Override
-				public Project run(IProgressMonitor monitor) throws EmfStoreException {
-					try {
-						Thread.sleep(4000);
-					} catch (InterruptedException e) {
 
-					}
-					return connectionManager.getProject(usersession.getSessionId(), projectInfo.getProjectId(),
-						projectInfoCopy.getVersion());
-				}
-			}.execute();
-		} catch (TimeoutException e1) {
-
-		} catch (InterruptedException e1) {
-
-		} catch (ExecutionException e1) {
-
-		}
-
-		parent.setWorkRemaining(50);
+		SubMonitor newChild = parent.newChild(40);
+		parent.subTask("Fetching project from server...");
+		project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
+			@Override
+			public Project run(IProgressMonitor monitor) throws EmfStoreException {
+				return connectionManager.getProject(usersession.getSessionId(), projectInfo.getProjectId(),
+					projectInfoCopy.getVersion());
+			}
+		}.execute();
 
 		if (project == null) {
 			throw new EmfStoreException("Server returned a null project!");
 		}
 
 		final PrimaryVersionSpec primaryVersionSpec = projectInfoCopy.getVersion();
-
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 
 		// initialize project space
@@ -252,45 +234,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		parent.worked(20);
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			// Do NOT catch all Exceptions ("catch (Exception e)")
-			// Log AND handle Exceptions if possible
-			//
-			// You can just uncomment one of the lines below to log an exception:
-			// logException will show the logged excpetion to the user
-			// ModelUtil.logException(e1);
-			// ModelUtil.logException("YOUR MESSAGE HERE", e1);
-			// logWarning will only add the message to the error log
-			// ModelUtil.logWarning("YOUR MESSAGE HERE", e1);
-			// ModelUtil.logWarning("YOUR MESSAGE HERE");
-			//
-			// If handling is not possible declare and rethrow Exception
-		}
-		parent.subTask("AA");
 		projectSpace.initResources(this.workspaceResourceSet);
-		parent.worked(30);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			// Do NOT catch all Exceptions ("catch (Exception e)")
-			// Log AND handle Exceptions if possible
-			//
-			// You can just uncomment one of the lines below to log an exception:
-			// logException will show the logged excpetion to the user
-			// ModelUtil.logException(e1);
-			// ModelUtil.logException("YOUR MESSAGE HERE", e1);
-			// logWarning will only add the message to the error log
-			// ModelUtil.logWarning("YOUR MESSAGE HERE", e1);
-			// ModelUtil.logWarning("YOUR MESSAGE HERE");
-			//
-			// If handling is not possible declare and rethrow Exception
-		}
+		parent.worked(10);
 
 		// retrieve recent changes
+		parent.subTask("Retrieving recent changes...");
 		try {
 			DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();
 			Calendar calendar = Calendar.getInstance();
@@ -314,12 +262,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		} catch (IOException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}
+		parent.worked(10);
 
+		parent.subTask("Finishing checkout...");
 		addProjectSpace(projectSpace);
-		this.save();
-
+		save();
 		WorkspaceManager.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
-
+		parent.worked(10);
 		progressMonitor.done();
 
 		return projectSpace;
@@ -334,21 +283,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		log.setClientDate(new Date());
 		ProjectInfo emptyProject = null;
 
-		try {
-			new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
-				@Override
-				public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
-					return connectionManager.createEmptyProject(usersession.getSessionId(), projectName,
-						projectDescription, log);
-				}
-			}.execute();
-		} catch (InterruptedException e) {
-			throw new EmfStoreException("Monitored EMFStore request interruped.", e);
-		} catch (ExecutionException e) {
-			throw new EmfStoreException("Error during Monitored EMFStore request.", e);
-		} catch (TimeoutException e) {
-			throw new EmfStoreException("Timeout occurred during Monitored EMFStore request.", e);
-		}
+		new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
+			@Override
+			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
+				return connectionManager.createEmptyProject(usersession.getSessionId(), projectName,
+					projectDescription, log);
+			}
+		}.execute();
 
 		progressMonitor.worked(10);
 		updateProjectInfos(usersession);
@@ -432,12 +373,20 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		WorkspaceManager.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(projectSpace);
 	}
 
-	public void deleteRemoteProject(ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles)
-		throws EmfStoreException {
+	public void deleteRemoteProject(ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles,
+		final IProgressMonitor monitor) throws EmfStoreException {
 		new ServerCall<Void>(serverInfo) {
 			@Override
 			protected Void run() throws EmfStoreException {
-				getConnectionManager().deleteProject(getSessionId(), projectId, deleteFiles);
+				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
+
+					@Override
+					public Void run(IProgressMonitor monitor) throws EmfStoreException {
+						getConnectionManager().deleteProject(getSessionId(), projectId, deleteFiles);
+						return null;
+					}
+				}.execute();
+
 				updateProjectInfos(getUsersession());
 				return null;
 			}
