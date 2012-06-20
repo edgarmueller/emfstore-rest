@@ -7,7 +7,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreRequest;
+import org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  * @param <T> return type of the controller
  */
-public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreRequest<T> {
+public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreAction<T> {
 
 	protected Shell shell;
 
@@ -97,7 +97,7 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreR
 	public boolean confirm(final String title, final String message) {
 		return new RunInUIThreadWithResult<Boolean>(getShell()) {
 			@Override
-			public Boolean run(Shell shell) {
+			public Boolean doRun(Shell shell) {
 				MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION,
 					new String[] { "Yes", "No" }, 0);
 				int result = dialog.open();
@@ -109,7 +109,7 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreR
 	public void handleException(final Exception exception) {
 		new RunInUIThread(getShell()) {
 			@Override
-			public Void run(Shell shell) {
+			public Void doRun(Shell shell) {
 				EMFStoreMessageDialog.showExceptionDialog(shell, exception);
 				return null;
 			}

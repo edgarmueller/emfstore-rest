@@ -8,20 +8,23 @@
  * 
  * Contributors:
  ******************************************************************************/
+
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
+ * UI controller for reverting any changes upon a {@link ProjectSpace}.
  * 
- * @author Edgar
+ * @author emueller
  * 
  */
-public class UIUndoLastOperationController extends AbstractEMFStoreUIController<Void> {
+public class UIRevertOperationController extends AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;
 
@@ -29,25 +32,28 @@ public class UIUndoLastOperationController extends AbstractEMFStoreUIController<
 	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the shell that will be used during the reversal of the operation
+	 *            the parent {@link Shell} to be used during the revert of the operations
 	 * @param projectSpace
-	 *            the {@link ProjectSpace} upon which to reverse the last operation
+	 *            the {@link ProjectSpace} upon which to revert operations
 	 */
-	public UIUndoLastOperationController(Shell shell, ProjectSpace projectSpace) {
+	public UIRevertOperationController(Shell shell, ProjectSpace projectSpace) {
 		super(shell);
 		this.projectSpace = projectSpace;
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
-	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		projectSpace.getOperationManager().undoLastOperation();
+
+		String message = "Do you really want to revert all your changes on project " + projectSpace.getProjectName()
+			+ "?";
+
+		if (confirm("Confirmation", message)) {
+			progressMonitor.beginTask("Revert project...", 100);
+			progressMonitor.worked(10);
+			projectSpace.revert();
+			MessageDialog.openInformation(shell, "Revert", "Reverted project ");
+		}
+
 		return null;
 	}
-
 }

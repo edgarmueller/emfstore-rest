@@ -26,7 +26,6 @@ public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHan
 			new UIShareProjectController(getShell(), projectSpace).execute();
 		}
 
-		MessageDialog.openInformation(getShell(), "Share succeeded", "The project " + projectSpace.getProjectName()
-			+ " has been successfully shared.");
+		MessageDialog.openInformation(getShell(), "Share succeeded", "The project has been successfully shared.");
 	}
 }

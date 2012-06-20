@@ -24,7 +24,9 @@ import org.eclipse.swt.widgets.Shell;
  * <li>project spaces</li>
  * <li>changes</li>
  * <li>project history</li>
- * <li>a whole workspace</li> All import calls first open a file selection dialog that enables the user to select the
+ * <li>a whole workspace</li>
+ * </ul>
+ * All import calls first open a file selection dialog that enables the user to select the
  * file for import.
  * 
  * @author emueller

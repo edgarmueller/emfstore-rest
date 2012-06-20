@@ -87,7 +87,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 		new RunInUIThread(Display.getDefault()) {
 
 			@Override
-			public Void run(Shell shell) {
+			public Void doRun(Shell shell) {
 				try {
 					workspace.updateProjectInfos(session);
 				} catch (EmfStoreException e) {

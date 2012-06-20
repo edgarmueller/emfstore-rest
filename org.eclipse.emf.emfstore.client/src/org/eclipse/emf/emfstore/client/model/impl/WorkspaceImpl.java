@@ -374,8 +374,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		WorkspaceManager.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(projectSpace);
 	}
 
-	public void deleteRemoteProject(ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles,
-		final IProgressMonitor monitor) throws EmfStoreException {
+	public void deleteRemoteProject(ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles)
+		throws EmfStoreException {
 		new ServerCall<Void>(serverInfo) {
 			@Override
 			protected Void run() throws EmfStoreException {

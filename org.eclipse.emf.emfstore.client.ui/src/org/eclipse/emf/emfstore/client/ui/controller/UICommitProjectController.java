@@ -64,7 +64,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	public void noLocalChanges(ProjectSpace projectSpace) {
 		new RunInUIThread(getShell()) {
 			@Override
-			public Void run(Shell shell) {
+			public Void doRun(Shell shell) {
 				MessageDialog.openInformation(shell, null, "No local changes in your project. No need to commit.");
 				return null;
 			}
@@ -83,7 +83,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 
 		return new RunInUIThreadWithResult<Boolean>(getShell()) {
 			@Override
-			public Boolean run(Shell shell) {
+			public Boolean doRun(Shell shell) {
 				boolean shouldUpdate = MessageDialog.openConfirm(shell, "Confirmation", message);
 
 				if (shouldUpdate) {
@@ -112,7 +112,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 
 			new RunInUIThread(getShell()) {
 				@Override
-				public Void run(Shell shell) {
+				public Void doRun(Shell shell) {
 					MessageDialog.openInformation(getShell(), "No local changes",
 						"Your local changes were mutually exclusive.\n" + "There are no changes pending for commit.");
 					return null;
@@ -126,7 +126,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 
 		dialogReturnValue = new RunInUIThreadWithResult<Integer>(getShell()) {
 			@Override
-			public Integer run(Shell shell) {
+			public Integer doRun(Shell shell) {
 				return commitDialog.open();
 			}
 		}.execute();

@@ -26,7 +26,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Controller responsible for showing the history view.
+ * UI controller responsible for opening up the history view.
  * 
  * @author emueller
  * 
@@ -66,7 +66,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 		new RunInUIThread(getShell()) {
 
 			@Override
-			public Void run(Shell shell) {
+			public Void doRun(Shell shell) {
 
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				HistoryBrowserView historyBrowserView = null;

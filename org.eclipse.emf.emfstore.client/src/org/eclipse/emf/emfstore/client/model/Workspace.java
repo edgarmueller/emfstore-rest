@@ -161,8 +161,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while deleting the project.
 	 */
-	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId, boolean deleteFiles, IProgressMonitor monitor)
-		throws EmfStoreException;
+	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
 
 	/**
 	 * Deletes a project on the server.

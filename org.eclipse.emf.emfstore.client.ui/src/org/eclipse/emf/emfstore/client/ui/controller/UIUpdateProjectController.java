@@ -1,8 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH,
- * All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
@@ -79,7 +82,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public void noChangesOnServer() {
 		new RunInUIThread(getShell()) {
 			@Override
-			public Void run(Shell shell) {
+			public Void doRun(Shell shell) {
 				MessageDialog.openInformation(getShell(), "No need to update",
 					"Your project is up to date, you do not need to update.");
 				return null;
@@ -103,9 +106,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			mergeSuccessful = new RunInUIThreadWithResult<Boolean>(getShell()) {
 
 				@Override
-				public Boolean run(Shell shell) {
+				public Boolean doRun(Shell shell) {
 					try {
-						return projectSpace.merge(targetVersion, new MergeProjectHandler(conflictException));
+						return projectSpace.merge(targetVersion, new MergeProjectHandler());
 					} catch (EmfStoreException e) {
 						exception = e;
 					}
@@ -140,7 +143,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages) {
 		return new RunInUIThreadWithResult<Boolean>(getShell()) {
 			@Override
-			public Boolean run(Shell shell) {
+			public Boolean doRun(Shell shell) {
 				UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages);
 				if (updateDialog.open() == Window.OK) {
 					return true;
@@ -151,19 +154,13 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreRequest#doRun(org.eclipse.core.runtime.IProgressMonitor)
-	 */
 	@Override
 	public PrimaryVersionSpec doRun(final IProgressMonitor pm) throws EmfStoreException {
 		exception = null;
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 		PrimaryVersionSpec newBaseVersion = new RunInUIThreadWithResult<PrimaryVersionSpec>(getShell()) {
 			@Override
-			public PrimaryVersionSpec run(Shell shell) {
+			public PrimaryVersionSpec doRun(Shell shell) {
 				try {
 					return projectSpace.update(version, UIUpdateProjectController.this, pm);
 				} catch (EmfStoreException e) {

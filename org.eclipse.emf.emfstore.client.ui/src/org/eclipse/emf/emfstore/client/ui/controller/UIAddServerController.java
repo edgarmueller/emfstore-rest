@@ -11,31 +11,29 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.NewRepositoryWizard;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 /**
+ * UI controller for adding a server (also called repository).
  * 
- * @author Edgar
- * 
+ * @author emueller
  */
-public class UIUndoLastOperationController extends AbstractEMFStoreUIController<Void> {
-
-	private final ProjectSpace projectSpace;
+public class UIAddServerController extends AbstractEMFStoreUIController<Void> {
 
 	/**
-	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the shell that will be used during the reversal of the operation
-	 * @param projectSpace
-	 *            the {@link ProjectSpace} upon which to reverse the last operation
+	 *            the {@link Shell} that will be used during the update
 	 */
-	public UIUndoLastOperationController(Shell shell, ProjectSpace projectSpace) {
+	public UIAddServerController(Shell shell) {
 		super(shell);
-		this.projectSpace = projectSpace;
 	}
 
 	/**
@@ -46,8 +44,13 @@ public class UIUndoLastOperationController extends AbstractEMFStoreUIController<
 	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		projectSpace.getOperationManager().undoLastOperation();
+		NewRepositoryWizard wizard = new NewRepositoryWizard();
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		wizard.init(activeWorkbenchWindow.getWorkbench(), (IStructuredSelection) activeWorkbenchWindow
+			.getSelectionService().getSelection());
+		WizardDialog dialog = new WizardDialog(activeWorkbenchWindow.getShell(), wizard);
+		dialog.create();
+		dialog.open();
 		return null;
 	}
-
 }

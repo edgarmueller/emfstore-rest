@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -15,15 +25,35 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * UI controller for reverting a commit.
+ * 
+ * @author emueller
+ * 
+ */
 public class UIForceRevertCommitController extends AbstractEMFStoreUIController<Void> {
 
 	private final HistoryInfo historyInfo;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the shell that is used during the revert
+	 * @param historyInfo
+	 *            the {@link HistoryInfo} that is used to determine which commit to revert
+	 */
 	public UIForceRevertCommitController(Shell shell, HistoryInfo historyInfo) {
 		super(shell);
 		this.historyInfo = historyInfo;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
 	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
 		// TODO: remove HistoryBrowserView

@@ -43,7 +43,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 
 			Integer userInput = new RunInUIThreadWithResult<Integer>(Display.getDefault()) {
 				@Override
-				public Integer run(Shell shell) {
+				public Integer doRun(Shell shell) {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
 						.getActiveShell(), WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());

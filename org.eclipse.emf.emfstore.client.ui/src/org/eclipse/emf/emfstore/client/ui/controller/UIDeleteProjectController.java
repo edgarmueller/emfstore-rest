@@ -20,16 +20,29 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * UI controller for deleting a local project.
+ * 
+ * @author emueller
+ */
 public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the shell that will be used during the deletion of the project
+	 * @param projectSpace
+	 *            the {@link ProjectSpace} containing the project that should be deleted
+	 */
 	public UIDeleteProjectController(Shell shell, ProjectSpace projectSpace) {
 		super(shell);
 		this.projectSpace = projectSpace;
 	}
 
-	public void deleteProject(final ProjectSpace projectSpace) {
+	private void deleteProject(final ProjectSpace projectSpace) {
 		final Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		try {
 			currentWorkspace.deleteProjectSpace(projectSpace);

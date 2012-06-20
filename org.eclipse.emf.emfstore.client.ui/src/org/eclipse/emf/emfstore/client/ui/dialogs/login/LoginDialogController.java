@@ -33,7 +33,7 @@ public class LoginDialogController implements ILoginDialogController {
 			Display.getDefault()) {
 
 			@Override
-			public AccessControlException run(Shell shell) {
+			public AccessControlException doRun(Shell shell) {
 				LoginDialog dialog = new LoginDialog(shell, LoginDialogController.this);
 				dialog.setBlockOnOpen(true);
 
