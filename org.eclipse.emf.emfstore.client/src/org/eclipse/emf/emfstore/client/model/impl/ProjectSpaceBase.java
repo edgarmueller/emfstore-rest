@@ -616,6 +616,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
+		boolean useCrossReferenceAdapter = true;
 
 		this.resourceSet = resourceSet;
 		initCompleted = true;
@@ -699,6 +700,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resource.delete(null);
 		}
 
+		// resourceSet.getResources().clear();
+
 		// delete folder of project space
 		FileUtil.deleteFolder(new File(pathToProject));
 	}
@@ -726,12 +729,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return resourceSet;
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#setResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
-	 */
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}

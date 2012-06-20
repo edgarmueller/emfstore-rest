@@ -1,5 +1,6 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.controller.ForceRevertController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
@@ -14,7 +15,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-public class UIForceRevertCommitController extends AbstractEMFStoreUIController {
+public class UIForceRevertCommitController extends AbstractEMFStoreUIController<Void> {
 
 	private final HistoryInfo historyInfo;
 
@@ -23,16 +24,18 @@ public class UIForceRevertCommitController extends AbstractEMFStoreUIController 
 		this.historyInfo = historyInfo;
 	}
 
-	public void revert() {
+	@Override
+	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
 		// TODO: remove HistoryBrowserView
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+
 		if (activePage == null) {
-			return;
+			return null;
 		}
 
 		if (!(activePage.getActivePart() instanceof HistoryBrowserView)) {
-			return;
+			return null;
 		}
 
 		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
@@ -49,5 +52,6 @@ public class UIForceRevertCommitController extends AbstractEMFStoreUIController 
 
 			}
 		}
+		return null;
 	}
 }

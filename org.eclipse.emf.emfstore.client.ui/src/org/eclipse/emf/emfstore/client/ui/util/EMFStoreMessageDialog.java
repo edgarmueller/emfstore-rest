@@ -30,6 +30,16 @@ public final class EMFStoreMessageDialog {
 
 	}
 
+	public static void showExceptionDialog(Exception cause) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		showExceptionDialog(shell, cause);
+	}
+
+	public static void showExceptionDialog(String message, Exception cause) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		showExceptionDialog(shell, message, cause);
+	}
+
 	/**
 	 * Opens a standard error message dialog displaying the given
 	 * message and exception to the user.
@@ -40,8 +50,8 @@ public final class EMFStoreMessageDialog {
 	 *            the exception to be shown
 	 * 
 	 */
-	public static void showExceptionDialog(String message, Exception cause) {
-		createAndShowErrorDialog(cause, new StringBuilder(message + ": "));
+	public static void showExceptionDialog(Shell shell, String message, Exception cause) {
+		createAndShowErrorDialog(shell, cause, new StringBuilder(message + ": "));
 	}
 
 	/**
@@ -52,12 +62,11 @@ public final class EMFStoreMessageDialog {
 	 *            the exception to be shown
 	 * 
 	 */
-	public static void showExceptionDialog(Exception cause) {
-		createAndShowErrorDialog(cause, new StringBuilder());
+	public static void showExceptionDialog(Shell shell, Exception cause) {
+		createAndShowErrorDialog(shell, cause, new StringBuilder());
 	}
 
-	private static void createAndShowErrorDialog(Exception cause, StringBuilder stringBuilder) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	private static void createAndShowErrorDialog(Shell shell, Exception cause, StringBuilder stringBuilder) {
 		String title = "Error";
 
 		if (cause != null) {

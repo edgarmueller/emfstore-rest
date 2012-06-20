@@ -385,7 +385,8 @@ public class SetupHelper {
 		ProjectInfo projectInfo = connectionManager.createEmptyProject(usersession.getSessionId(),
 			projectId.toString(), "test_project", createLogMessage("test", "log this!"));
 
-		WorkspaceManager.getInstance().getCurrentWorkspace().checkout(usersession, projectInfo);
+		WorkspaceManager.getInstance().getCurrentWorkspace()
+			.checkout(usersession, projectInfo, new NullProgressMonitor());
 
 	}
 
@@ -578,7 +579,7 @@ public class SetupHelper {
 
 				try {
 					compareProject = WorkspaceManager.getInstance().getCurrentWorkspace()
-						.checkout(usersession, projectInfo).getProject();
+						.checkout(usersession, projectInfo, new NullProgressMonitor()).getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
