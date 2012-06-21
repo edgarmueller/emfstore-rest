@@ -41,7 +41,7 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 				testElement.getStrings().add("second");
 				testElement.getStrings().add("third");
@@ -238,7 +238,7 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 				testElement.getStrings().add("second");
 
@@ -271,7 +271,7 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-				testElement = getTestElement();
+				testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 				testElement.getStrings().add("second");
 				clearOperations();

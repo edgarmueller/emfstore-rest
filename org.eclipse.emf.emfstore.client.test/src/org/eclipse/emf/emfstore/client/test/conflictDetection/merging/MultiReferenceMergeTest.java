@@ -15,8 +15,8 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addRemoveSame() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child);
 
@@ -44,9 +44,9 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addRemoveManySame() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement decoyChild = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement decoyChild = getTestElement();
 		parent.getReferences().add(decoyChild);
 
 		final MergeCase mc = newMergeCase(parent, child, decoyChild);
@@ -77,9 +77,9 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addRemoveDifferentNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 		parent.getReferences().add(child2);
 
 		final MergeCase mc = newMergeCase(parent, child, child2);
@@ -103,9 +103,9 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addRemoveSameWithNoise() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2);
 
@@ -136,9 +136,9 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addManyRemoveSame() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2);
 
@@ -166,9 +166,9 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addManyRemoveManySame() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2);
 
@@ -200,10 +200,10 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addManyRemoveDifferentNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
-		final TestElement child3 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
+		final TestElement child3 = getTestElement();
 		parent.getReferences().add(child3);
 
 		final MergeCase mc = newMergeCase(parent, child, child2, child3);
@@ -227,11 +227,11 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void addManyRemoveSameWithNoise() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
-		final TestElement decoy1 = createTestElement();
-		final TestElement decoy2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
+		final TestElement decoy1 = getTestElement();
+		final TestElement decoy2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2, decoy1, decoy2);
 
@@ -264,10 +264,10 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void removeVsSet() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
 		parent.getReferences().add(child);
-		final TestElement newChild = createTestElement();
+		final TestElement newChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, newChild);
 
@@ -294,12 +294,12 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void removeManyVsSet() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 		parent.getReferences().add(child);
 		parent.getReferences().add(child2);
-		final TestElement newChild = createTestElement();
+		final TestElement newChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2, newChild);
 
@@ -326,14 +326,14 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void removeVsSetDifferentNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
-		final TestElement child3 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
+		final TestElement child3 = getTestElement();
 		parent.getReferences().add(child);
 		parent.getReferences().add(child2);
 		parent.getReferences().add(child3);
-		final TestElement newChild = createTestElement();
+		final TestElement newChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2, child3, newChild);
 
@@ -358,11 +358,11 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void setVsSet() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
 		parent.getReferences().add(child);
-		final TestElement newChild = createTestElement();
-		final TestElement newChild2 = createTestElement();
+		final TestElement newChild = getTestElement();
+		final TestElement newChild2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, newChild, newChild2);
 
@@ -389,10 +389,10 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void setVsSetSameNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
 		parent.getReferences().add(child);
-		final TestElement newChild = createTestElement();
+		final TestElement newChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, newChild);
 
@@ -415,13 +415,13 @@ public class MultiReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void setVsSetDifferentNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 		parent.getReferences().add(child);
 		parent.getReferences().add(child2);
-		final TestElement newChild = createTestElement();
-		final TestElement newChild2 = createTestElement();
+		final TestElement newChild = getTestElement();
+		final TestElement newChild2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2, newChild, newChild2);
 

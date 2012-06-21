@@ -35,7 +35,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 
 				assertTrue(testElement.getStrings().size() == 0);
 
@@ -62,7 +62,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 
 				assertTrue(testElement.getStrings().size() == 1);
@@ -91,7 +91,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 
 				assertTrue(testElement.getStrings().size() == 1);
@@ -123,7 +123,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 
 				assertTrue(testElement.getStrings().size() == 1);
@@ -150,7 +150,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement = getTestElement();
+				testElement = createTestElementWithoutTransaction();
 				clearOperations();
 				testElement.getStrings().add("first");
 				testElement.getStrings().addAll(Arrays.asList("second", "third"));
@@ -185,7 +185,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement = getTestElement();
+				testElement = createTestElementWithoutTransaction();
 
 				testElement.getStrings().add("first");
 				testElement.getStrings().addAll(Arrays.asList("second", "third"));
@@ -214,7 +214,7 @@ public class MultiAttributeTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement = getTestElement();
+				testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("first");
 				testElement.getStrings().add("second");
 

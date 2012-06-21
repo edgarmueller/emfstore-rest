@@ -35,7 +35,7 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				element = getTestElement();
+				element = createTestElementWithoutTransaction();
 				element.getStrings().add("oldValue");
 				clearOperations();
 			}
@@ -65,7 +65,7 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("oldValue");
 				assertTrue(testElement.getStrings().size() == 1);
 
@@ -92,7 +92,7 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().add("oldValue");
 				assertTrue(testElement.getStrings().size() == 1);
 
@@ -119,7 +119,7 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
 				testElement.getStrings().addAll(Arrays.asList("first", "second", "third"));
 				assertTrue(testElement.getStrings().size() == 3);
 
@@ -148,7 +148,7 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				element = getTestElement();
+				element = createTestElementWithoutTransaction();
 				element.getStrings().add("oldValue");
 
 				clearOperations();

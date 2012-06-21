@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -43,15 +44,14 @@ public class MergeTest extends ConflictDetectionTest {
 	 * @return case helper
 	 */
 	public MergeCase newMergeCase() {
-		mergeCase = new MergeCase();
-		return mergeCase;
+		return newMergeCase(new EObject[0]);
 	}
 
 	public MergeCase newMergeCase(EObject... objs) {
-		MergeCase mCase = newMergeCase();
-		mCase.add(objs);
-		mCase.ensureCopy();
-		return mCase;
+		mergeCase = new MergeCase();
+		mergeCase.add(objs);
+		mergeCase.ensureCopy();
+		return mergeCase;
 	}
 
 	public List<ModelElementId> getIds(EObject... objs) {
@@ -83,16 +83,26 @@ public class MergeTest extends ConflictDetectionTest {
 
 		private ProjectSpace theirProjectSpace;
 
-		private void add(EObject... objs) {
-			for (EObject obj : objs) {
-				getProject().addModelElement(obj);
-			}
+		private void add(final EObject... objs) {
+			new EMFStoreCommand() {
+				@Override
+				protected void doRun() {
+					for (EObject obj : objs) {
+						getProject().addModelElement(obj);
+					}
+				}
+			}.run(false);
 		}
 
-		public void addTheirs(EObject... objs) {
-			for (EObject obj : objs) {
-				getTheirProject().addModelElement(obj);
-			}
+		public void addTheirs(final EObject... objs) {
+			new EMFStoreCommand() {
+				@Override
+				protected void doRun() {
+					for (EObject obj : objs) {
+						getTheirProject().addModelElement(obj);
+					}
+				}
+			}.run(false);
 		}
 
 		@SuppressWarnings("unchecked")
@@ -121,8 +131,13 @@ public class MergeTest extends ConflictDetectionTest {
 
 		public void ensureCopy() {
 			if (theirProjectSpace == null) {
-				clearOperations();
-				this.theirProjectSpace = cloneProjectSpace(getProjectSpace());
+				new EMFStoreCommand() {
+					@Override
+					protected void doRun() {
+						clearOperations();
+						theirProjectSpace = cloneProjectSpace(getProjectSpace());
+					}
+				}.run(false);
 			}
 		}
 
@@ -138,6 +153,7 @@ public class MergeTest extends ConflictDetectionTest {
 
 		public DecisionManager execute() {
 			ensureCopy();
+
 			PrimaryVersionSpec spec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 			spec.setIdentifier(23);
 

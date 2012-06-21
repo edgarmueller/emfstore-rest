@@ -2,11 +2,13 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
 
 import static java.util.Arrays.asList;
 
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.DeletionConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSetConflict;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.junit.Test;
@@ -15,9 +17,9 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addSameToDifferent() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, parent2, child);
 
@@ -44,8 +46,8 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addSameToSameNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child);
 
@@ -68,10 +70,10 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addSameManyToDifferent() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, parent2, child, child2);
 
@@ -99,9 +101,9 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addSameManyToSameNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, child, child2);
 
@@ -125,12 +127,12 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addRemoveSame() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
-		parent2.getContainedElements().add(child);
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
+		// parent2.getContainedElements().add(child);
 
-		final MergeCase mc = newMergeCase(parent, parent2);
+		final MergeCase mc = newMergeCase(parent, parent2, child);
 
 		new EMFStoreCommand() {
 			@Override
@@ -143,29 +145,24 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 			@Override
 			protected void doRun() {
 				// V1
+				mc.getTheirItem(parent2).getContainedElements().add(mc.getTheirItem(child));
 				mc.getTheirItem(parent2).getContainedElements().remove(mc.getTheirItem(child));
-				// V2
-				// mc.getTheirItem(parent).setContainedElement(mc.getTheirItem(child));
-				// V3
-				// TestElement theirItem = mc.getTheirItem(child);
-				// mc.getTheirItem(parent2).getContainedElements().remove(theirItem);
-				// mc.getTheirProject().addModelElement(theirItem);
 			}
 		}.run(false);
 
-		mc.hasConflict(MultiReferenceConflict.class)
+		mc.hasConflict(DeletionConflict.class)
 		// My
-			.myIs(MultiReferenceOperation.class).andReturns("isAdd", true).andNoOtherMyOps()
+			.myIs(MultiReferenceOperation.class).andReturns("isAdd", true)
 			// Theirs
-			.theirsIs(MultiReferenceOperation.class).andReturns("isAdd", false).andNoOtherTheirOps();
+			.theirsIs(CreateDeleteOperation.class).andReturns("isDelete", true);
 	}
 
 	@Test
 	public void addSetSameToDifferent() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement decoy = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement decoy = getTestElement();
 		parent2.getContainedElements().add(decoy);
 
 		final MergeCase mc = newMergeCase(parent, parent2, child);
@@ -193,9 +190,9 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void addSetSameToSameNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement decoy = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement decoy = getTestElement();
 		parent.getContainedElements().add(decoy);
 
 		final MergeCase mc = newMergeCase(parent, child);
@@ -228,11 +225,11 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void setSetSameToDifferent() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement decoy = createTestElement();
-		final TestElement decoy2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement decoy = getTestElement();
+		final TestElement decoy2 = getTestElement();
 		parent.getContainedElements().add(decoy);
 		parent2.getContainedElements().add(decoy2);
 
@@ -261,9 +258,9 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 	@Test
 	public void setSetSameToSameNC() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement decoy = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement decoy = getTestElement();
 		parent.getContainedElements().add(decoy);
 
 		final MergeCase mc = newMergeCase(parent, child);
@@ -282,6 +279,7 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		mc.hasConflict(null);
+		// false negative
+		mc.hasConflict(DeletionConflict.class, 2);
 	}
 }
