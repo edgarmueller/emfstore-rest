@@ -50,6 +50,7 @@ public class MergeTest extends ConflictDetectionTest {
 	public MergeCase newMergeCase(EObject... objs) {
 		MergeCase mCase = newMergeCase();
 		mCase.add(objs);
+		mCase.ensureCopy();
 		return mCase;
 	}
 
@@ -82,7 +83,7 @@ public class MergeTest extends ConflictDetectionTest {
 
 		private ProjectSpace theirProjectSpace;
 
-		public void add(EObject... objs) {
+		private void add(EObject... objs) {
 			for (EObject obj : objs) {
 				getProject().addModelElement(obj);
 			}
@@ -105,7 +106,7 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		public ModelElementId getTheirId(EObject obj) {
-			return getTheirProject().getModelElementId(obj);
+			return getTheirProject().getModelElementId(getTheirItem(obj));
 		}
 
 		@SuppressWarnings("unchecked")
@@ -118,7 +119,7 @@ public class MergeTest extends ConflictDetectionTest {
 			return getProject().getModelElementId(id);
 		}
 
-		private void ensureCopy() {
+		public void ensureCopy() {
 			if (theirProjectSpace == null) {
 				clearOperations();
 				this.theirProjectSpace = cloneProjectSpace(getProjectSpace());

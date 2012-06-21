@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.accesscontrol;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
@@ -164,12 +162,5 @@ public interface OrgUnitProperty extends EObject {
 	 * @return the array value of the property or null if it doesn't exist
 	 */
 	String[] getStringArrayProperty();
-
-	/**
-	 * @param <T> the EObject sub type
-	 * @param result the result list (transient parameter)
-	 * @return the result list filled with the properties if any
-	 */
-	<T extends EObject> List<T> getEObjectListProperty(List<T> result);
 
 } // OrgUnitProperties

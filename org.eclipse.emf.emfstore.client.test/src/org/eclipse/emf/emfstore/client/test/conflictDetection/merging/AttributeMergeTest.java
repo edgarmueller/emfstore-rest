@@ -138,10 +138,10 @@ public class AttributeMergeTest extends MergeTest {
 	 */
 	@Test
 	public void simpleAttributeCollisionWithUninvolvedAfter() {
-		final MergeCase mergeCase = newMergeCase();
 
 		final ActionItem item = TaskFactory.eINSTANCE.createActionItem();
-		mergeCase.add(item);
+
+		final MergeCase mergeCase = newMergeCase(item);
 
 		new EMFStoreCommand() {
 			@Override
@@ -167,10 +167,9 @@ public class AttributeMergeTest extends MergeTest {
 	 */
 	@Test
 	public void simpleAttributeCollisionWithUninvolvedBeforeTheir() {
-		final MergeCase mergeCase = newMergeCase();
 
 		final ActionItem item = TaskFactory.eINSTANCE.createActionItem();
-		mergeCase.add(item);
+		final MergeCase mergeCase = newMergeCase(item);
 
 		new EMFStoreCommand() {
 			@Override

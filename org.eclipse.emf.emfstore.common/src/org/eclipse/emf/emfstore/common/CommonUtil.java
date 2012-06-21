@@ -229,28 +229,13 @@ public final class CommonUtil {
 		return true;
 	}
 	
-	/**
-	 * Check if containment tree is in given resource.
-	 * 
-	 * @param root the root of the tree
-	 * @param resource the resource to check for
-	 * 
-	 * @return true iff all contents of the containment tree of root are in the given resource
-	 */
-	public static boolean isContainedInResource(EObject root, Resource resource) {
-		Set<EObject> allChildEObjects = getNonTransientContents(root);
-		Set<EObject> allEObjects = new HashSet<EObject>(allChildEObjects);
-		allEObjects.add(root);
-		for (EObject eObject: allEObjects) {
-			if (resource!=eObject.eResource()) {
-				return false;
-			}
-		}
-		return true;
-	}
 
-	@SuppressWarnings("unchecked")
-	private static Set<EObject> getNonTransientContents(EObject object) {
+	/**
+	 * Get all contained Eobjects not including transient containment features.
+	 * @param object the root
+	 * @return a set of contained elements not including root.
+	 */
+	public static Set<EObject> getNonTransientContents(EObject object) {
 		Set<EObject> result = new HashSet<EObject>();
 		if (object == null) {
 			return result;
@@ -259,6 +244,7 @@ public final class CommonUtil {
 			if (!containmentReference.isTransient()) {
 				Object contentObject = object.eGet(containmentReference, true);
 				if (containmentReference.isMany()) {
+					@SuppressWarnings("unchecked")
 					EList<? extends EObject> contentList = (EList<? extends EObject>) contentObject;
 					for (EObject content : contentList) {
 						result.add(content);

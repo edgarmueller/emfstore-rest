@@ -127,10 +127,10 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 	public void addRemoveSame() {
 		final TestElement parent = createTestElement();
 		final TestElement parent2 = createTestElement();
-		final TestElement parent3 = createTestElement();
 		final TestElement child = createTestElement();
+		parent2.getContainedElements().add(child);
 
-		final MergeCase mc = newMergeCase(parent, parent2, parent3, child);
+		final MergeCase mc = newMergeCase(parent, parent2);
 
 		new EMFStoreCommand() {
 			@Override
@@ -142,12 +142,14 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement theirChild = mc.getTheirItem(child);
-				// add first in order to remove
-				mc.getTheirItem(parent2).getContainedElements().add(theirChild);
-				mc.getTheirItem(parent2).getContainedElements().remove(theirChild);
-				// avoid deletion operation, so readd in containment tree
-				mc.addTheirs(theirChild);
+				// V1
+				mc.getTheirItem(parent2).getContainedElements().remove(mc.getTheirItem(child));
+				// V2
+				// mc.getTheirItem(parent).setContainedElement(mc.getTheirItem(child));
+				// V3
+				// TestElement theirItem = mc.getTheirItem(child);
+				// mc.getTheirItem(parent2).getContainedElements().remove(theirItem);
+				// mc.getTheirProject().addModelElement(theirItem);
 			}
 		}.run(false);
 
@@ -201,9 +203,15 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement myDecoy = mc.getMyItem(decoy);
-				mc.getMyItem(parent).getContainedElements().remove(myDecoy);
-				mc.add(myDecoy);
+				// remove element from containedElements lists
+				mc.getMyItem(parent).setContainedElement(mc.getMyItem(decoy));
+				clearOperations();
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
 				mc.getMyItem(parent).getContainedElements().add(mc.getMyItem(child));
 			}
 		}.run(false);
@@ -276,5 +284,4 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 
 		mc.hasConflict(null);
 	}
-
 }

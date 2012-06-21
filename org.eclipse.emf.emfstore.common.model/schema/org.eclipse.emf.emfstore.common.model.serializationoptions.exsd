@@ -56,13 +56,6 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="ProxyCheck" type="boolean">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
          <attribute name="SelfContainmentCheck" type="boolean">
             <annotation>
                <documentation>
