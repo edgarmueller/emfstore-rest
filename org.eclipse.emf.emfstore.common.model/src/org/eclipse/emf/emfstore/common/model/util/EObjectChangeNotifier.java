@@ -184,8 +184,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		super.notifyChanged(notification);
 		currentNotifications.pop();
 
-		// collection itself is not a valid model element
-		if (!notification.isTouch() && notifier instanceof EObject && notifier != collection) {
+		if (!notification.isTouch() && notifier instanceof EObject) {
 			collection.notify(notification, collection, (EObject) notifier);
 
 		}
