@@ -33,7 +33,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	@Override
 	protected Void run() throws EmfStoreException {
 		ProjectSpace revertSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), versionSpec);
+			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), versionSpec, getProgressMonitor());
 		PrimaryVersionSpec sourceVersion = ModelUtil.clone(versionSpec);
 		sourceVersion.setIdentifier(sourceVersion.getIdentifier() - 1);
 		List<ChangePackage> changes = revertSpace.getChanges(sourceVersion, versionSpec);

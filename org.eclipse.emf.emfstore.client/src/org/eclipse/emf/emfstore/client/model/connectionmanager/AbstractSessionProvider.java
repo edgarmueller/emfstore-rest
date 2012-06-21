@@ -21,7 +21,8 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
  * , it is possible to gain more context for the {@link Usersession} selection. However, in most usecases most users
  * will use the session provider to open a login dialog of kind. For this purpose
  * it is better to use {@link #provideUsersession(ServerInfo)}. SessionProviders can be registered via an extension
- * point.
+ * point.<br/>
+ * Implementations of SessionProviders must not assume that they are executed within the UI-Thread.
  * 
  * @author wesendon
  * 

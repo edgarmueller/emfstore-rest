@@ -13,26 +13,28 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Generic and UI-specific controller class that is capable of executing
- * both import and export controller classes.
+ * Generic UI-specific controller class that is capable of executing
+ * both, import and export controller classes.
  * 
  * @author emueller
  * 
  */
-public class UIGenericExportImportController extends AbstractEMFStoreUIController {
+public class UIGenericExportImportController extends AbstractEMFStoreUIController<Void> {
+
+	private final IExportImportController controller;
 
 	/**
 	 * Constructor.
@@ -42,15 +44,12 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	 * @param controller
 	 *            the {@link IExportImportController} to be executed
 	 */
-	public UIGenericExportImportController(Shell shell) {
+	public UIGenericExportImportController(Shell shell, IExportImportController controller) {
 		super(shell);
+		this.controller = controller;
 	}
 
-	/**
-	 * Executes the controller.
-	 */
-	protected void execute(final IExportImportController controller) {
-
+	private File selectFile() {
 		FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 			controller.isExport() ? SWT.SAVE : SWT.OPEN);
 		dialog.setFilterNames(controller.getFilteredNames());
@@ -65,33 +64,29 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 
 		dialog.setFileName(controller.getFilename());
 		String fn = dialog.open();
+
 		if (fn == null) {
-			return;
+			return null;
 		}
 
 		final File file = new File(dialog.getFilterPath(), dialog.getFileName());
+		return file;
+	}
+
+	@Override
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+		File file = selectFile();
 		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
-		final ProgressMonitorDialog progress = openProgress();
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				try {
-					progress.open();
-					progress.getProgressMonitor().beginTask("Import " + controller.getLabel() + " ...", 100);
-					progress.getProgressMonitor().worked(10);
-					new ExportImportControllerExecutor(file, getProgressMonitor()).execute(controller);
-				} catch (IOException e) {
-					EMFStoreMessageDialog.showExceptionDialog(e);
-				} finally {
-					progress.getProgressMonitor().done();
-					progress.close();
-				}
+		progressMonitor.beginTask("Import " + controller.getLabel() + " ...", 100);
+		progressMonitor.worked(10);
 
-			}
-		}.run();
+		try {
+			new ExportImportControllerExecutor(file, progressMonitor).execute(controller);
+		} catch (IOException e) {
+			EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
+		}
 
-		// TODO: include confirmation dialog messages in interface
-		// MessageDialog.openInformation(null, "Import", "Imported changes from file " + file.getAbsolutePath());
+		return null;
 	}
 }

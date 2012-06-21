@@ -15,10 +15,12 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * 
@@ -26,6 +28,8 @@ import org.eclipse.swt.widgets.Display;
  * 
  */
 public class BasicUISessionProvider extends AbstractSessionProvider {
+
+	private ServerInfo selectedServerInfo;
 
 	/**
 	 * 
@@ -36,23 +40,28 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	@Override
 	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
 		if (serverInfo == null) {
-			// try to retrieve a server info by showing a server info selection dialog
-			ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent().getActiveShell(),
-				WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());
-			if (dialog.open() == Dialog.OK) {
-				serverInfo = dialog.getResult();
-			} else if (dialog.open() == Dialog.CANCEL) {
+
+			Integer userInput = new RunInUIThreadWithResult<Integer>(Display.getDefault()) {
+				@Override
+				public Integer doRun(Shell shell) {
+					// try to retrieve a server info by showing a server info selection dialog
+					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
+						.getActiveShell(), WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());
+					int input = dialog.open();
+					selectedServerInfo = dialog.getResult();
+					return input;
+				}
+			}.execute();
+
+			if (userInput == Dialog.OK) {
+				serverInfo = selectedServerInfo;
+			} else if (userInput == Dialog.CANCEL) {
 				throw new LoginCanceledException("Operation canceled by user.");
 			}
 		}
 		if (serverInfo == null) {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
-
-		// TODO Review this
-		// if (serverInfo.getLastUsersession() != null) {
-		// return serverInfo.getLastUsersession();
-		// }
 
 		return new LoginDialogController().login(serverInfo);
 	}

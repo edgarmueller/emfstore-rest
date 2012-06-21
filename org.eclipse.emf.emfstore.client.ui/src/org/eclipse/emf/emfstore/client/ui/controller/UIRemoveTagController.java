@@ -10,16 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -29,37 +26,42 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 /**
- * UI-related controller for adding and removing version tags.
+ * UI controller for removing version tags.
  * 
  * @author emueller
  * 
  */
 // TODO: re-package exception for more sensible error messages
-public class UITagController extends AbstractEMFStoreUIController {
+public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
+
+	private final HistoryInfo historyInfo;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param shell
 	 *            the parent {@link Shell}
+	 * @param historyInfo
+	 *            the {@link HistoryInfo} from which to remove the tag
 	 */
-	public UITagController(Shell shell) {
+	public UIRemoveTagController(Shell shell, HistoryInfo historyInfo) {
 		super(shell);
+		this.historyInfo = historyInfo;
 	}
 
-	public void addTag(ProjectSpace projectSpace, HistoryInfo historyInfo) throws EmfStoreException {
-		PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
-		InputDialog inputDialog = new InputDialog(getShell(), "Add tag", "Please enter the tag's name.", "", null);
-		inputDialog.open();
-		String str = inputDialog.getValue().trim();
-		if (str != null && str.length() > 0) {
-			TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
-			tag.setName(str);
-			projectSpace.addTag(versionSpec, tag);
+	@Override
+	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
+
+		// TODO: controller currently does not work if the active workbench window is not
+		// the history view
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+
+		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
+			return null;
 		}
-	}
 
-	public void removeTag(HistoryInfo historyInfo) throws EmfStoreException {
+		final HistoryBrowserView historyBrowserView = (HistoryBrowserView) activePage.getActivePart();
 
 		final LabelProvider tagLabelProvider = new LabelProvider() {
 			@Override
@@ -75,29 +77,23 @@ public class UITagController extends AbstractEMFStoreUIController {
 		dlg.setBlockOnOpen(true);
 		dlg.setMultipleSelection(true);
 		int ret = dlg.open();
+
 		if (ret != Window.OK) {
-			return;
+			return null;
 		}
 
-		// TODO: controller currently does not work if the active workbench window is not
-		// the history view
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
-			return;
+		ProjectSpace projectSpace = historyBrowserView.getProjectSpace();
+		Object[] result = dlg.getResult();
+
+		for (Object o : result) {
+			if (o instanceof TagVersionSpec) {
+				TagVersionSpec tag = (TagVersionSpec) o;
+				projectSpace.removeTag(historyInfo.getPrimerySpec(), tag);
+			}
 		}
 
-		HistoryBrowserView historyBrowserView = (HistoryBrowserView) activePage.getActivePart();
-
-		Object[] tags = dlg.getResult();
-		for (Object tag : tags) {
-			// TODO: do not fetch project space via history browser view
-			historyBrowserView.getProjectSpace().removeTag(historyInfo.getPrimerySpec(), (TagVersionSpec) tag);
-		}
-
-		// TODO: remove manual refresh
 		historyBrowserView.refresh();
 
-		return;
+		return null;
 	}
 }

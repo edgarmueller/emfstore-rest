@@ -273,6 +273,7 @@ public final class ModelUtil {
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
+			// TODO XMLResource.OPTION_ROOT_OBJECTS
 		}
 		return resourceSaveOptions;
 	}

@@ -3,6 +3,12 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
+/**
+ * 
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public abstract class AbstractEMFStoreHandler extends AbstractEMFStoreHandlerWithResult<Object> {
 
 	@Override
@@ -21,7 +27,7 @@ public abstract class AbstractEMFStoreHandler extends AbstractEMFStoreHandlerWit
 	public abstract void handle() throws EmfStoreException;
 
 	public void handleException(Exception exception) {
-		EMFStoreMessageDialog.showExceptionDialog(exception);
+		EMFStoreMessageDialog.showExceptionDialog(getShell(), exception);
 	}
 
 }

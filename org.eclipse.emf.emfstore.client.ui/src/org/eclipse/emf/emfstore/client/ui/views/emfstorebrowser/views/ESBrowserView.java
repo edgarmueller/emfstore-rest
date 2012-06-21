@@ -87,7 +87,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		public void notifyChanged(final Notification msg) {
 			if (msg.getFeature() != null
 				&& msg.getFeature().equals(ModelPackage.eINSTANCE.getServerInfo_ProjectInfos())) {
-				Display.getCurrent().asyncExec(new Runnable() {
+				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
 						if (msg.getEventType() == Notification.REMOVE_MANY || msg.getEventType() == Notification.REMOVE) {
 							viewer.collapseToLevel(serverInfo, 0);

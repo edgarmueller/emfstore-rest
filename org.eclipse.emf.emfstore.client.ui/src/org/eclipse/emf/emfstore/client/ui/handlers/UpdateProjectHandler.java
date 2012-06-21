@@ -6,9 +6,23 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 public class UpdateProjectHandler extends AbstractEMFStoreHandler {
 
+	private final ProjectSpace projectSpace;
+
+	public UpdateProjectHandler() {
+		this.projectSpace = null;
+	}
+
+	public UpdateProjectHandler(ProjectSpace projectSpace) {
+		this.projectSpace = projectSpace;
+	}
+
 	@Override
 	public void handle() throws EmfStoreException {
-		new UIUpdateProjectController(getShell()).update(requireSelection(ProjectSpace.class));
+		if (projectSpace == null) {
+			new UIUpdateProjectController(getShell(), requireSelection(ProjectSpace.class)).execute();
+		} else {
+			new UIUpdateProjectController(getShell(), projectSpace).execute();
+		}
 	}
 
 }

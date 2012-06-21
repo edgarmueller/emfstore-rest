@@ -7,7 +7,6 @@
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 
 	<!-- LEGACY: local resolution using the git readerType (this requires the pre-defined names for all repositories) -->
-	<!--
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localgit"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localgit"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localgit"/>
@@ -17,7 +16,6 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPDeveloper$" searchPathRef="localgitecp"/>
-	-->
 		
 		
 		

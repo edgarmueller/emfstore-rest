@@ -114,7 +114,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private OperationPersister operationPersister;
 	private ECrossReferenceAdapter crossReferenceAdapter;
 
-	protected ResourceSet resourceSet;
+	private ResourceSet resourceSet;
 
 	/**
 	 * Constructor.
@@ -616,7 +616,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
-
 		this.resourceSet = resourceSet;
 		initCompleted = true;
 		String projectSpaceFileNamePrefix = Configuration.getWorkspaceDirectory()
@@ -705,6 +704,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * Returns the {@link ECrossReferenceAdapter}, if available.
+	 * 
+	 * @param modelElement
+	 *            the model element for which to find inverse cross references
 	 * 
 	 * @return the {@link ECrossReferenceAdapter}
 	 */
