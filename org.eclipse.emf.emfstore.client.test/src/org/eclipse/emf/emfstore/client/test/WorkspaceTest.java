@@ -119,7 +119,7 @@ public abstract class WorkspaceTest {
 	 * 
 	 * @return test element
 	 */
-	protected TestElement getTestElement() {
+	protected TestElement createTestElementWithoutTransaction() {
 		TestElement element = TestmodelFactory.eINSTANCE.createTestElement();
 		getProject().getModelElements().add(element);
 		return element;
@@ -136,11 +136,15 @@ public abstract class WorkspaceTest {
 		return element;
 	}
 
+	public TestElement getTestElement() {
+		return getTestElement("");
+	}
+
 	public TestElement createTestElement() {
 		return new EMFStoreCommandWithResult<TestElement>() {
 			@Override
 			protected TestElement doRun() {
-				return getTestElement();
+				return createTestElementWithoutTransaction();
 			}
 		}.run(false);
 	}

@@ -75,7 +75,7 @@ public class MultiReferenceSetSingleConflict extends Conflict {
 		theirOption.addOperations(getTheirOperations());
 
 		EObject target = getDecisionManager().getModelElement(
-			((SingleReferenceOperation) getLeftOperation()).getNewValue());
+			((SingleReferenceOperation) getRightOperation()).getNewValue());
 
 		myOption.setOptionLabel("Move " + getClassAndName(target) + "to"
 			+ getClassAndName(getDecisionManager().getModelElement(getMyOperation().getModelElementId())));

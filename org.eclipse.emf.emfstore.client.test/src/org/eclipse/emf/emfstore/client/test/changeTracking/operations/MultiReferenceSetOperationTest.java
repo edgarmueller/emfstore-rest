@@ -37,9 +37,9 @@ public class MultiReferenceSetOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				element = getTestElement();
-				oldValue = getTestElement();
-				newValue = getTestElement();
+				element = createTestElementWithoutTransaction();
+				oldValue = createTestElementWithoutTransaction();
+				newValue = createTestElementWithoutTransaction();
 
 				element.getReferences().add(oldValue);
 				clearOperations();
@@ -71,10 +71,10 @@ public class MultiReferenceSetOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement oldValue = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
+				TestElement oldValue = createTestElementWithoutTransaction();
 				testElement.getReferences().add(oldValue);
-				TestElement newValue = getTestElement();
+				TestElement newValue = createTestElementWithoutTransaction();
 				assertTrue(testElement.getReferences().size() == 1);
 				assertTrue(testElement.getReferences().get(0).equals(oldValue));
 
@@ -102,10 +102,10 @@ public class MultiReferenceSetOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement oldValue = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
+				TestElement oldValue = createTestElementWithoutTransaction();
 				testElement.getReferences().add(oldValue);
-				TestElement newValue = getTestElement();
+				TestElement newValue = createTestElementWithoutTransaction();
 
 				assertTrue(testElement.getReferences().size() == 1);
 				assertTrue(testElement.getReferences().get(0).equals(oldValue));
@@ -133,11 +133,11 @@ public class MultiReferenceSetOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				TestElement testElement = getTestElement();
-				TestElement first = getTestElement();
-				TestElement second = getTestElement();
-				TestElement third = getTestElement();
-				TestElement newValue = getTestElement();
+				TestElement testElement = createTestElementWithoutTransaction();
+				TestElement first = createTestElementWithoutTransaction();
+				TestElement second = createTestElementWithoutTransaction();
+				TestElement third = createTestElementWithoutTransaction();
+				TestElement newValue = createTestElementWithoutTransaction();
 
 				testElement.getReferences().addAll(Arrays.asList(first, second, third));
 				assertTrue(testElement.getReferences().size() == 3);
@@ -165,10 +165,10 @@ public class MultiReferenceSetOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				element = getTestElement();
-				oldValue = getTestElement();
+				element = createTestElementWithoutTransaction();
+				oldValue = createTestElementWithoutTransaction();
 				element.getReferences().add(oldValue);
-				newValue = getTestElement();
+				newValue = createTestElementWithoutTransaction();
 
 				clearOperations();
 				assertTrue(element.getReferences().size() == 1);

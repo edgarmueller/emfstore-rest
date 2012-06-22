@@ -20,9 +20,9 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 
 	@Test
 	public void setVsMultiAdd() {
-		final TestElement parent = createTestElement();
-		final TestElement secondparent = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement secondparent = getTestElement();
+		final TestElement child = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, secondparent, child);
 
@@ -49,10 +49,10 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 
 	@Test
 	public void setVsMultiAddNC() {
-		final TestElement parent = createTestElement();
-		final TestElement secondparent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement secondChild = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement secondparent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement secondChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, secondparent, child, secondChild);
 
@@ -75,10 +75,10 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 
 	@Test
 	public void setVsMultiAddMany() {
-		final TestElement parent = createTestElement();
-		final TestElement secondparent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement secondChild = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement secondparent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement secondChild = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, secondparent, child, secondChild);
 
@@ -106,10 +106,10 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 
 	@Test
 	public void setVsMultiSet() {
-		final TestElement parent = createTestElement();
-		final TestElement secondparent = createTestElement();
-		secondparent.getContainedElements().add(createTestElement());
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement secondparent = getTestElement();
+		secondparent.getContainedElements().add(getTestElement());
+		final TestElement child = getTestElement();
 
 		final MergeCase mc = newMergeCase(parent, secondparent, child);
 

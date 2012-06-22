@@ -16,7 +16,7 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDel() {
-		final TestElement element = createTestElement();
+		final TestElement element = getTestElement();
 
 		final MergeCase mc = newMergeCase(element);
 
@@ -43,7 +43,7 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void multiAttVsDel() {
-		final TestElement element = createTestElement();
+		final TestElement element = getTestElement();
 
 		final MergeCase mc = newMergeCase(element);
 
@@ -70,8 +70,8 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDelDifferentNC() {
-		final TestElement element = createTestElement();
-		final TestElement element2 = createTestElement();
+		final TestElement element = getTestElement();
+		final TestElement element2 = getTestElement();
 
 		final MergeCase mc = newMergeCase(element, element2);
 
@@ -94,8 +94,8 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void singleVsDel() {
-		final TestElement element = createTestElement();
-		final TestElement link = createTestElement();
+		final TestElement element = getTestElement();
+		final TestElement link = getTestElement();
 
 		final MergeCase mc = newMergeCase(element, link);
 
@@ -122,8 +122,8 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void multiRefVsDel() {
-		final TestElement element = createTestElement();
-		final TestElement link = createTestElement();
+		final TestElement element = getTestElement();
+		final TestElement link = getTestElement();
 
 		final MergeCase mc = newMergeCase(element, link);
 
@@ -150,9 +150,9 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void multiRefContainmentVsDel() {
-		final TestElement parent = createTestElement();
-		final TestElement parent2 = createTestElement();
-		final TestElement child = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement parent2 = getTestElement();
+		final TestElement child = getTestElement();
 		parent.getContainedElements().add(child);
 
 		final MergeCase mc = newMergeCase(parent, parent2);
@@ -180,9 +180,9 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDelInSteps() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
 		parent.getContainedElements().add(child);
 		child.getContainedElements().add(child2);
 
@@ -212,10 +212,10 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDelIndirectInSteps() {
-		final TestElement parent = createTestElement();
-		final TestElement child = createTestElement();
-		final TestElement child2 = createTestElement();
-		final TestElement child3 = createTestElement();
+		final TestElement parent = getTestElement();
+		final TestElement child = getTestElement();
+		final TestElement child2 = getTestElement();
+		final TestElement child3 = getTestElement();
 		parent.getContainedElements().add(child);
 		child.getContainedElements().add(child2);
 		child2.getContainedElements().add(child3);
