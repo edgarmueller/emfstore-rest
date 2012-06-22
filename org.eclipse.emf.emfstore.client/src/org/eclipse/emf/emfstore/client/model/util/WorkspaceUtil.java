@@ -93,7 +93,7 @@ public final class WorkspaceUtil {
 		RuntimeException runtimeException = new RuntimeException(errorMessage, exception);
 		Boolean errorHandeled = WorkspaceManager.getObserverBus().notify(ExceptionObserver.class)
 			.handleError(runtimeException);
-		logException("An error occured.", exception);
+		logException(exception.getMessage(), exception);
 		if (!errorHandeled.booleanValue()) {
 			throw runtimeException;
 		}

@@ -42,6 +42,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCom
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
+import org.eclipse.emf.emfstore.client.model.exceptions.MissingCommandException;
 import org.eclipse.emf.emfstore.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -93,7 +94,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private boolean isRecording;
 	private boolean commandIsRunning;
+
 	private boolean cutOffIncomingCrossReferences;
+	private boolean forceCommands;
+
 	private boolean emitOperationsWhenCommandCompleted;
 
 	// no use of ObserverBus
@@ -102,8 +106,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * Constructor.
 	 * 
-	 * @param collection
-	 *            the collection the operation recorder will be operating on
+	 * @param projectSpace
+	 *            the {@link ProjectSpaceBase} the recorder should be attached to
 	 * @param changeNotifier
 	 *            a change notifier that informs clients about changes in the collection
 	 */
@@ -111,10 +115,12 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		this.projectSpace = projectSpace;
 		this.collection = (IdEObjectCollectionImpl) projectSpace.getProject();
 		this.changeNotifier = changeNotifier;
-		operations = new ArrayList<AbstractOperation>();
-		editingDomain = Configuration.getEditingDomain();
-		observers = new ArrayList<OperationRecorderListener>();
 
+		operations = new ArrayList<AbstractOperation>();
+		observers = new ArrayList<OperationRecorderListener>();
+		removedElements = new ArrayList<EObject>();
+
+		editingDomain = Configuration.getEditingDomain();
 		CommandStack commandStack = editingDomain.getCommandStack();
 
 		if (commandStack instanceof EMFStoreCommandStack) {
@@ -124,18 +130,24 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			throw new IllegalStateException("Setup of ResourceSet is invalid, there is no EMFStoreCommandStack!");
 		}
 
-		removedElements = new ArrayList<EObject>();
 		converter = new NotificationToOperationConverter(collection);
-		cutOffIncomingCrossReferences = true; // cut off incoming cross-references by default
 
-		Boolean cutOff = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
-			.getBoolean("cutOffIncomingCrossReferences");
-
-		if (cutOff != null) {
-			cutOffIncomingCrossReferences = cutOff;
-		}
+		cutOffIncomingCrossReferences = getBooleanExtensionPoint("org.eclipse.emf.emfstore.client.recording.options",
+			"cutOffIncomingCrossReferences", true); // cut off incoming cross-references by default
+		forceCommands = getBooleanExtensionPoint("org.eclipse.emf.emfstore.client.recording.options", "forceCommands",
+			false); // usage of commands is not forced by default
 
 		emitOperationsWhenCommandCompleted = true;
+	}
+
+	private boolean getBooleanExtensionPoint(String extensionPointId, String attributeName, boolean defaultValue) {
+		Boolean booleanOption = new ExtensionPoint(extensionPointId).getBoolean(attributeName);
+
+		if (booleanOption != null) {
+			return booleanOption;
+		}
+
+		return defaultValue;
 	}
 
 	/**
@@ -225,6 +237,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			} else {
 				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 					operations.add(createDeleteOperation);
+				} else if (!commandIsRunning && forceCommands) {
+					WorkspaceUtil.handleException("An element has been added without using a command!",
+						new MissingCommandException("Element " + modelElement
+							+ " has been added without using a command"));
 				} else {
 					operationRecorded(createDeleteOperation);
 				}
@@ -661,6 +677,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		} else {
 			if (commandIsRunning) {
 				operations.add(deleteOperation);
+			} else if (!commandIsRunning && forceCommands) {
+				WorkspaceUtil.handleException("An element has been deleted without using a command!",
+					new MissingCommandException("Element " + deletedElement
+						+ " has been deleted without using a command"));
 			} else {
 				operationRecorded(deleteOperation);
 			}
@@ -881,8 +901,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				// set the last operation as the main one for natural composites
 				op.setMainOperation(ops.get(ops.size() - 1));
 				op.setModelElementId(ModelUtil.clone(op.getMainOperation().getModelElementId()));
+
 				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 					operations.add(op);
+				} else if (!commandIsRunning && forceCommands) {
+					WorkspaceUtil.handleException("CompositeOperation has been recorded without using a command!",
+						new MissingCommandException("CompositeOperation" + op.getModelElementId()
+							+ " has been recorded without using a command"));
 				} else {
 					operationRecorded(op);
 				}
