@@ -86,8 +86,7 @@
   <extension
         point="org.eclipse.emf.emfstore.client.recording.options">
      <RecordingOptions
-           cutOffIncomingCrossReferences="true"
-           forceCommands="true">
+           cutOffIncomingCrossReferences="true">
      </RecordingOptions>
   </extension>
 
