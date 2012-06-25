@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.NewRepositoryWizard;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -42,7 +41,7 @@ public class UIEditServerPropertiesController extends AbstractEMFStoreUIControll
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) {
 		NewRepositoryWizard wizard = new NewRepositoryWizard();
 		wizard.setServerInfo(serverInfo);
 		WizardDialog dialog = new WizardDialog(getShell(), wizard);

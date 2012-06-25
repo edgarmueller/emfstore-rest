@@ -14,12 +14,14 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -112,20 +114,34 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	@Override
-	public ProjectInfo doRun(IProgressMonitor monitor) throws EmfStoreException {
-		if (session == null) {
-			return createRemoteProject(monitor);
+	public ProjectInfo doRun(IProgressMonitor monitor) {
+		try {
+			if (session == null) {
+				return createRemoteProject(monitor);
+			}
+
+			if (projectName == null) {
+				return createRemoteProject(session, monitor);
+			}
+
+			if (projectName == null) {
+				throw new IllegalArgumentException("Project name must not be null.");
+			}
+
+			return createRemoteProject(session, projectName, description, monitor);
+
+		} catch (final EmfStoreException e) {
+			new RunInUIThread(getShell()) {
+				@Override
+				public Void doRun(Shell shell) {
+					MessageDialog.openError(shell, "Create project failed",
+						"Creation of remote project failed: " + e.getMessage());
+					return null;
+				}
+			}.execute();
 		}
 
-		if (projectName == null) {
-			return createRemoteProject(session, monitor);
-		}
-
-		if (projectName == null) {
-			throw new IllegalArgumentException("Project name must not be null.");
-		}
-
-		return createRemoteProject(session, projectName, description, monitor);
+		return null;
 	}
 
 }

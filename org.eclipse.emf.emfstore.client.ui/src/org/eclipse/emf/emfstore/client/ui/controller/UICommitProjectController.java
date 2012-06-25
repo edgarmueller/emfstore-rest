@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CommitDialog;
@@ -87,11 +88,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 				boolean shouldUpdate = MessageDialog.openConfirm(shell, "Confirmation", message);
 
 				if (shouldUpdate) {
-					try {
-						new UIUpdateProjectController(getShell(), projectSpace).execute();
-					} catch (EmfStoreException e) {
-						handleException(e);
-					}
+					new UIUpdateProjectController(getShell(), projectSpace).execute();
 				}
 
 				return shouldUpdate;
@@ -146,9 +143,22 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
-		PrimaryVersionSpec version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
+	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) {
+		PrimaryVersionSpec version;
+		try {
+			version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
+			return version;
+		} catch (final EmfStoreException e) {
+			WorkspaceUtil.logException(e.getMessage(), e);
+			new RunInUIThread(getShell()) {
+				@Override
+				public Void doRun(Shell shell) {
+					MessageDialog.openError(getShell(), "Commit failed", "Commit failed: " + e.getMessage());
+					return null;
+				}
+			}.execute();
+		}
 
-		return version;
+		return null;
 	}
 }

@@ -15,10 +15,13 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -81,19 +84,33 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		return new ServerCall<ProjectSpace>(serverInfo, progressMonitor) {
-			@Override
-			protected ProjectSpace run() throws EmfStoreException {
+	public ProjectSpace doRun(IProgressMonitor progressMonitor) {
+		try {
+			return new ServerCall<ProjectSpace>(serverInfo, progressMonitor) {
+				@Override
+				protected ProjectSpace run() throws EmfStoreException {
 
-				if (versionSpec == null) {
+					if (versionSpec == null) {
+						return WorkspaceManager.getInstance().getCurrentWorkspace()
+							.checkout(getUsersession(), projectInfo, getProgressMonitor());
+					}
+
 					return WorkspaceManager.getInstance().getCurrentWorkspace()
-						.checkout(getUsersession(), projectInfo, getProgressMonitor());
+						.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
 				}
+			}.execute();
+		} catch (final EmfStoreException e) {
+			new RunInUIThread(getShell()) {
+				@Override
+				public Void doRun(Shell shell) {
+					WorkspaceUtil.logException(e.getMessage(), e);
+					MessageDialog.openError(shell, "Checkout failed", "Checkout of project " + projectInfo.getName()
+						+ " failed: " + e.getMessage());
+					return null;
+				}
+			}.execute();
+		}
 
-				return WorkspaceManager.getInstance().getCurrentWorkspace()
-					.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
-			}
-		}.execute();
+		return null;
 	}
 }

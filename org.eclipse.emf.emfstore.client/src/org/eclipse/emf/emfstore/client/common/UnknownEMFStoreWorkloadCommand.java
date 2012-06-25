@@ -53,7 +53,7 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 				throw new EmfStoreException("Workload command got interrupted", e);
 			} catch (ExecutionException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
-				throw new EmfStoreException("Workload could not be executed.", e);
+				throw new EmfStoreException(e.getCause().getMessage());
 			} catch (TimeoutException e) {
 				// do nothing
 			}

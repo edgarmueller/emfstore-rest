@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.controller.UICreateRemoteProjectController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * Creates an empty project on a server.
@@ -23,7 +22,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 public class CreateProjectOnServerHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() throws EmfStoreException {
+	public void handle() {
 
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
 

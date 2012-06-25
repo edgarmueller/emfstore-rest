@@ -14,7 +14,6 @@ import java.util.Date;
 
 import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -29,7 +28,7 @@ import org.eclipse.ui.PlatformUI;
 public class ImportProjectHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() throws EmfStoreException {
+	public void handle() {
 		String projectName = showProjectNameDialog("Imported project@" + new Date());
 		if (projectName == null) {
 			return;

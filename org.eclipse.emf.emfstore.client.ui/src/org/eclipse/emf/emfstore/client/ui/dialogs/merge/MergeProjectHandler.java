@@ -120,7 +120,7 @@ public class MergeProjectHandler implements ConflictResolver {
 	}
 
 	/**
-	 * Adapter Until "Branch" branch is merged into master
+	 * Adapter Until "Branch" branch is merged into master.
 	 * 
 	 * {@inheritDoc}
 	 * 

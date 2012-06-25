@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.util;
+package org.eclipse.emf.emfstore.client.ui.dialogs;
 
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -30,11 +30,29 @@ public final class EMFStoreMessageDialog {
 
 	}
 
+	/**
+	 * Opens a standard error message dialog displaying the given
+	 * exception to the user.
+	 * 
+	 * @param cause
+	 *            the exception to be shown
+	 * 
+	 */
 	public static void showExceptionDialog(Exception cause) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		showExceptionDialog(shell, cause);
 	}
 
+	/**
+	 * Opens a standard error message dialog displaying the given
+	 * message and exception to the user.
+	 * 
+	 * @param message
+	 *            the message to be shown
+	 * @param cause
+	 *            the exception to be shown
+	 * 
+	 */
 	public static void showExceptionDialog(String message, Exception cause) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		showExceptionDialog(shell, message, cause);
@@ -44,6 +62,8 @@ public final class EMFStoreMessageDialog {
 	 * Opens a standard error message dialog displaying the given
 	 * message and exception to the user.
 	 * 
+	 * @param shell
+	 *            the shell that is used to show the exception dialog
 	 * @param message
 	 *            the message to be shown
 	 * @param cause
@@ -58,6 +78,8 @@ public final class EMFStoreMessageDialog {
 	 * Opens a standard error message dialog displaying the given
 	 * exception to the user.
 	 * 
+	 * @param shell
+	 *            the shell that is used to show the exception dialog
 	 * @param cause
 	 *            the exception to be shown
 	 * 

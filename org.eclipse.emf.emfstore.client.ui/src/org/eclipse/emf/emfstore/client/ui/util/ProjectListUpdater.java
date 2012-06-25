@@ -25,6 +25,10 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * This class is responsible for keeping the workspace's project infos update to date.
+ * 
+ */
 public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver, LogoutObserver {
 
 	private Workspace workspace;
@@ -102,6 +106,12 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
 	public void logoutCompleted(Usersession session) {
 		ServerInfo serverInfo = session.getServerInfo();
 		if (serverInfo != null) {

@@ -41,7 +41,7 @@ public class UILoginSessionController extends AbstractEMFStoreUIController<Void>
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) {
 		final LoginDialogController loginDialogController = new LoginDialogController();
 
 		try {

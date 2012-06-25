@@ -1,14 +1,16 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH,
- * All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.ui.controller.UIRemoveTagController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 
 /**
@@ -20,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 public class RemoveTagHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() throws EmfStoreException {
+	public void handle() {
 		new UIRemoveTagController(getShell(), requireSelection(HistoryInfo.class)).execute();
 	}
 

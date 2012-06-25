@@ -14,12 +14,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -56,11 +57,16 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) {
 
 		if (projectSpace == null) {
-			projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
-				.getProjectSpace(ModelUtil.getProject(modelElement));
+			try {
+				projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+					.getProjectSpace(ModelUtil.getProject(modelElement));
+			} catch (UnkownProjectException e) {
+				MessageDialog.openWarning(getShell(), "Unknown project", e.getMessage());
+				return null;
+			}
 		}
 
 		new RunInUIThread(getShell()) {

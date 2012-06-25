@@ -82,10 +82,20 @@ public class CreateProjectDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
+	/**
+	 * Returns the description of the project as entered by the user.
+	 * 
+	 * @return the description of the project that is going to be created
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Returns the name of the project as entered by the user.
+	 * 
+	 * @return the name of the project that is going to be created
+	 */
 	public String getName() {
 		return name;
 	}

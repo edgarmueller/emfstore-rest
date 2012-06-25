@@ -8,27 +8,32 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.handlers;
-
-import org.eclipse.emf.emfstore.client.ui.controller.UIAddServerController;
+package org.eclipse.emf.emfstore.client.ui.exceptions;
 
 /**
- * Handler for adding a server/repository.
+ * Indicates that a required selection is missing.
  * 
  * @author ovonwesen
  * @author emueller
  */
-public class AddServerHandler extends AbstractEMFStoreHandler {
+public class RequiredSelectionException extends RuntimeException {
+
+	private static final long serialVersionUID = 3011252354930520148L;
 
 	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * Default constructor.
 	 */
-	@Override
-	public void handle() {
-		new UIAddServerController(getShell()).execute();
+	public RequiredSelectionException() {
+		super("The selected element is invalid for this action.");
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param msg
+	 *            detailed message why the selection is invalid
+	 */
+	public RequiredSelectionException(String msg) {
+		super(msg);
+	}
 }

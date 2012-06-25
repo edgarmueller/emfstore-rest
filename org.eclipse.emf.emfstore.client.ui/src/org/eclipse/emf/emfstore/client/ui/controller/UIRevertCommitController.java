@@ -47,7 +47,7 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor pm) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) {
 
 		if (!confirm("Confirmation",
 			"Do you really want to revert changes of this version on project " + projectSpace.getProjectName())) {

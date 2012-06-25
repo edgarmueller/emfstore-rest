@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.observers.OpenModelElementObserver;
 import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.client.ui.Activator;
-import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
@@ -241,16 +241,13 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				elsd.setMultipleSelection(false);
 				elsd.setTitle("Select a project from the workspace");
 				elsd.setMessage("Please select a project from the current workspace.");
-				int reult = elsd.open();
-				if (Dialog.OK == reult) {
-					Object[] selectedElements = elsd.getResult();
-					ProjectSpace resultSelection = null;
-					for (Object o : selectedElements) {
-						resultSelection = (ProjectSpace) o;
+				if (Dialog.OK == elsd.open()) {
+					for (Object o : elsd.getResult()) {
+						ProjectSpace resultSelection = (ProjectSpace) o;
+						if (resultSelection != null) {
+							setInput(resultSelection);
+						}
 						break;
-					}
-					if (resultSelection != null) {
-						setInput(resultSelection);
 					}
 				}
 			}

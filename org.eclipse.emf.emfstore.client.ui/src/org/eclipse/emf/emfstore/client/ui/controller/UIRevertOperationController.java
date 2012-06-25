@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -42,7 +41,7 @@ public class UIRevertOperationController extends AbstractEMFStoreUIController<Vo
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) {
 
 		String message = "Do you really want to revert all your changes on project " + projectSpace.getProjectName()
 			+ "?";
@@ -51,7 +50,7 @@ public class UIRevertOperationController extends AbstractEMFStoreUIController<Vo
 			progressMonitor.beginTask("Revert project...", 100);
 			progressMonitor.worked(10);
 			projectSpace.revert();
-			MessageDialog.openInformation(shell, "Revert", "Reverted project ");
+			MessageDialog.openInformation(getShell(), "Revert", "Reverted project ");
 		}
 
 		return null;

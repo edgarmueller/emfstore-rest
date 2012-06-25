@@ -12,8 +12,6 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerFactory;
-import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.swt.widgets.Shell;
 
@@ -53,12 +51,8 @@ public class UIImportController {
 	 *            the project info instance the imported history should get attached to
 	 */
 	public void importProjectHistory(ProjectInfo projectInfo) {
-		try {
-			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectHistoryController()).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project history", e);
-		}
+		new UIGenericExportImportController(shell,
+			ExportImportControllerFactory.Import.getImportProjectHistoryController()).execute();
 	}
 
 	/**
@@ -68,12 +62,8 @@ public class UIImportController {
 	 *            the {@link ProjectSpace} the imported changes should get attached to
 	 */
 	public void importChanges(ProjectSpace projectSpace) {
-		try {
-			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportChangesController(projectSpace)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import changes", e);
-		}
+		new UIGenericExportImportController(shell,
+			ExportImportControllerFactory.Import.getImportChangesController(projectSpace)).execute();
 	}
 
 	/**
@@ -83,12 +73,8 @@ public class UIImportController {
 	 *            the name that will be assigned to the imported project
 	 */
 	public void importProject(String projectName) {
-		try {
-			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectController(projectName)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project", e);
-		}
+		new UIGenericExportImportController(shell,
+			ExportImportControllerFactory.Import.getImportProjectController(projectName)).execute();
 	}
 
 	/**
@@ -98,11 +84,7 @@ public class UIImportController {
 	 *            the project space that should get imported
 	 */
 	public void importProjectSpace(ProjectSpace projectSpace) {
-		try {
-			new UIGenericExportImportController(shell,
-				ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(shell, "Could not import project space", e);
-		}
+		new UIGenericExportImportController(shell,
+			ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace)).execute();
 	}
 }

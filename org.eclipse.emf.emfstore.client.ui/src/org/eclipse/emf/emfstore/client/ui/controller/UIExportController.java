@@ -12,8 +12,6 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerFactory;
-import org.eclipse.emf.emfstore.client.ui.util.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.swt.widgets.Shell;
 
@@ -61,12 +59,8 @@ public class UIExportController {
 	 *            exported
 	 */
 	public void exportProjectHistory(ProjectInfo projectInfo) {
-		try {
-			new UIGenericExportImportController(getShell(),
-				ExportImportControllerFactory.Export.getExportProjectHistoryController(projectInfo)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(getShell(), "Could not export project history", e);
-		}
+		new UIGenericExportImportController(getShell(),
+			ExportImportControllerFactory.Export.getExportProjectHistoryController(projectInfo)).execute();
 	}
 
 	/**
@@ -76,12 +70,8 @@ public class UIExportController {
 	 *            the {@link ProjectSpace} that contains the local changes that should get exported
 	 */
 	public void exportChanges(ProjectSpace projectSpace) {
-		try {
-			new UIGenericExportImportController(getShell(),
-				ExportImportControllerFactory.Export.getExportChangesController(projectSpace)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(getShell(), "Could not export changes", e);
-		}
+		new UIGenericExportImportController(getShell(),
+			ExportImportControllerFactory.Export.getExportChangesController(projectSpace)).execute();
 	}
 
 	/**
@@ -91,12 +81,8 @@ public class UIExportController {
 	 *            the {@link ProjectSpace} that contains the project that should get exported
 	 */
 	public void exportProject(ProjectSpace projectSpace) {
-		try {
-			new UIGenericExportImportController(getShell(),
-				ExportImportControllerFactory.Export.getExportProjectController(projectSpace)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(getShell(), "Could not project", e);
-		}
+		new UIGenericExportImportController(getShell(),
+			ExportImportControllerFactory.Export.getExportProjectController(projectSpace)).execute();
 	}
 
 	/**
@@ -104,12 +90,8 @@ public class UIExportController {
 	 * 
 	 */
 	public void exportWorkspace() {
-		try {
-			new UIGenericExportImportController(getShell(),
-				ExportImportControllerFactory.Export.getExportWorkspaceController()).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(getShell(), "Could not export workspace", e);
-		}
+		new UIGenericExportImportController(getShell(),
+			ExportImportControllerFactory.Export.getExportWorkspaceController()).execute();
 	}
 
 	/**
@@ -119,11 +101,7 @@ public class UIExportController {
 	 *            the project space that should get exported
 	 */
 	public void exportProjectSpace(ProjectSpace projectSpace) {
-		try {
-			new UIGenericExportImportController(getShell(),
-				ExportImportControllerFactory.Export.getExportProjectSpaceController(projectSpace)).execute();
-		} catch (EmfStoreException e) {
-			EMFStoreMessageDialog.showExceptionDialog(getShell(), "Could not export project space", e);
-		}
+		new UIGenericExportImportController(getShell(),
+			ExportImportControllerFactory.Export.getExportProjectSpaceController(projectSpace)).execute();
 	}
 }

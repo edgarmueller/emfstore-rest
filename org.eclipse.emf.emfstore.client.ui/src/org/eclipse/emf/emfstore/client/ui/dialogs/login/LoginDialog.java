@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
@@ -27,6 +37,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.ResourceManager;
 
+/**
+ * The login dialog.
+ * 
+ * @author ovonwesen
+ * 
+ * @see LoginDialogController
+ */
 public class LoginDialog extends TitleAreaDialog {
 
 	private Text passwordField;
@@ -42,6 +59,10 @@ public class LoginDialog extends TitleAreaDialog {
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
+	 *            the parent shell to be used by the dialog
+	 * @param controller
+	 *            the login dialog controller repsonsible for opening up the login dialog
+	 * 
 	 */
 	public LoginDialog(Shell parentShell, ILoginDialogController controller) {
 		super(parentShell);
@@ -49,9 +70,10 @@ public class LoginDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * Create contents of the dialog.
 	 * 
-	 * @param parent
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.jface.dialogs.TitleAreaDialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
@@ -70,9 +92,9 @@ public class LoginDialog extends TitleAreaDialog {
 		loginContainer.setBounds(0, 0, 64, 64);
 
 		Label usernameLabel = new Label(loginContainer, SWT.NONE);
-		GridData gd_usernameLabel = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
-		gd_usernameLabel.widthHint = 95;
-		usernameLabel.setLayoutData(gd_usernameLabel);
+		GridData gridData = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
+		gridData.widthHint = 95;
+		usernameLabel.setLayoutData(gridData);
 		usernameLabel.setText("Username");
 
 		usernameCombo = new ComboViewer(loginContainer, SWT.NONE);
@@ -84,22 +106,22 @@ public class LoginDialog extends TitleAreaDialog {
 		// // combo.setText(controller.getUsersession().getUsername());
 		// }
 		combo.addModifyListener(comboListener);
-		GridData gd_usernameCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_usernameCombo.widthHint = 235;
-		combo.setLayoutData(gd_usernameCombo);
+		gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gridData.widthHint = 235;
+		combo.setLayoutData(gridData);
 		new Label(loginContainer, SWT.NONE);
 
 		Label passwordLabel = new Label(loginContainer, SWT.NONE);
-		GridData gd_passwordLabel = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_passwordLabel.widthHint = 80;
-		passwordLabel.setLayoutData(gd_passwordLabel);
+		gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gridData.widthHint = 80;
+		passwordLabel.setLayoutData(gridData);
 		passwordLabel.setText("Password");
 
 		passwordField = new Text(loginContainer, SWT.BORDER | SWT.PASSWORD);
 		// passwordField.setText("password");
-		GridData gd_passwordField = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_passwordField.widthHint = 250;
-		passwordField.setLayoutData(gd_passwordField);
+		gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gridData.widthHint = 250;
+		passwordField.setLayoutData(gridData);
 		passwordField.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				passwordModified = true;
@@ -252,6 +274,13 @@ public class LoginDialog extends TitleAreaDialog {
 		setErrorMessage(null);
 	}
 
+	/**
+	 * Simple listener for loading the selected usersession if the user changes the selected entry within
+	 * the combo box that contains all known usersessions.
+	 * 
+	 * @author ovonwesen
+	 * 
+	 */
 	private final class ComboListener implements ISelectionChangedListener, ModifyListener {
 		private String lastText = "";
 

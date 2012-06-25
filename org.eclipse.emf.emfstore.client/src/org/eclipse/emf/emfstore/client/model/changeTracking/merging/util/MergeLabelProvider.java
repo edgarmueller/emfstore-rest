@@ -13,8 +13,33 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.observer.PrioritizedIObserver;
 
+/**
+ * 
+ * 
+ * @author ovonwesen
+ * 
+ */
 public interface MergeLabelProvider extends PrioritizedIObserver {
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.observer.PrioritizedIObserver#getPriority()
+	 */
+	int getPriority();
+
+	/**
+	 * Returns a textual description of the given model element.
+	 * 
+	 * @param modelElement
+	 *            the model element whose description is requested
+	 * @return a textual description for the given model element
+	 */
 	String getText(EObject modelElement);
 
+	/**
+	 * Disposes the label provider.
+	 */
+	void dispose();
 }

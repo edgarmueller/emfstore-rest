@@ -36,8 +36,6 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	/**
 	 * Default constructor.
 	 * 
-	 * @param treeViewer
-	 *            the tree viewer. the project.
 	 */
 	public SCMContentProvider() {
 		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
@@ -135,10 +133,21 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return super.getChildren(object);
 	}
 
+	/**
+	 * Whether to show root nodes.
+	 * 
+	 * @return true, if root nodes are shown, false otherwise
+	 */
 	public boolean isShowRootNodes() {
 		return showRootNodes;
 	}
 
+	/**
+	 * Determines whether root nodes are shown.
+	 * 
+	 * @param showRootNodes
+	 *            if true, root nodes will be shown
+	 */
 	public void setShowRootNodes(boolean showRootNodes) {
 		this.showRootNodes = showRootNodes;
 	}

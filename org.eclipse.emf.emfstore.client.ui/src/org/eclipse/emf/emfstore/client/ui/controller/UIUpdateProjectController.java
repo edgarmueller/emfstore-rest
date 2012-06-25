@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
+import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
@@ -130,7 +131,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	private void handleMergeException(final ProjectSpace projectSpace, EmfStoreException e) {
 		WorkspaceUtil.logException(
 			String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
-		handleException(e);
+		EMFStoreMessageDialog.showExceptionDialog(getShell(), exception);
 	}
 
 	/**
@@ -155,14 +156,14 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	}
 
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor pm) throws EmfStoreException {
+	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) {
 		exception = null;
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 		PrimaryVersionSpec newBaseVersion = new RunInUIThreadWithResult<PrimaryVersionSpec>(getShell()) {
 			@Override
 			public PrimaryVersionSpec doRun(Shell shell) {
 				try {
-					return projectSpace.update(version, UIUpdateProjectController.this, pm);
+					return projectSpace.update(version, UIUpdateProjectController.this, monitor);
 				} catch (EmfStoreException e) {
 					exception = e;
 				}
@@ -170,10 +171,6 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 				return null;
 			}
 		}.execute();
-
-		if (exception != null) {
-			throw exception;
-		}
 
 		if (oldBaseVersion.equals(newBaseVersion)) {
 			noChangesOnServer();

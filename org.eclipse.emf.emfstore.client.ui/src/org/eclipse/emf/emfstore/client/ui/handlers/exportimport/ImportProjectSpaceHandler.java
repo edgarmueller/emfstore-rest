@@ -13,18 +13,16 @@ package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * Handler for importing a project space.
  * 
  * @author emueller
- * 
  */
 public class ImportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() throws EmfStoreException {
+	public void handle() {
 		new UIImportController(getShell()).importProjectSpace(requireSelection(ProjectSpace.class));
 	}
 

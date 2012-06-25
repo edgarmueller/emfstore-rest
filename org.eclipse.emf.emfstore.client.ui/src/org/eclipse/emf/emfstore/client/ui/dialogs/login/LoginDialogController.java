@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.HashSet;
@@ -13,11 +23,25 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} to determine
+ * when it is necessary to open a {@link LoginDialog} in order to authenticate the user.
+ * It does not, however, open a dialog, if the usersession is already logged in.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public class LoginDialogController implements ILoginDialogController {
 
 	private Usersession usersession;
 	private ServerInfo serverInfo;
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
+	 */
 	public Usersession[] getKnownUsersessions() {
 		HashSet<Object> set = new HashSet<Object>();
 		for (Usersession session : WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions()) {
@@ -29,8 +53,7 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private Usersession login() throws EmfStoreException {
-		AccessControlException exception = new RunInUIThreadWithResult<AccessControlException>(
-			Display.getDefault()) {
+		AccessControlException exception = new RunInUIThreadWithResult<AccessControlException>(Display.getDefault()) {
 
 			@Override
 			public AccessControlException doRun(Shell shell) {
@@ -49,10 +72,16 @@ public class LoginDialogController implements ILoginDialogController {
 			throw exception;
 		}
 
-		// contract #validate() sets the usersession;
+		// contract: #validate() sets the usersession;
 		return usersession;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#isUsersessionLocked()
+	 */
 	public boolean isUsersessionLocked() {
 		if (getUsersession() == null) {
 			return false;
@@ -60,10 +89,22 @@ public class LoginDialogController implements ILoginDialogController {
 		return true;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerLabel()
+	 */
 	public String getServerLabel() {
 		return getServerInfo().getName();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.client.model.Usersession)
+	 */
 	public void validate(Usersession usersession) throws EmfStoreException {
 		// TODO login code
 		usersession.logIn();
@@ -76,10 +117,22 @@ public class LoginDialogController implements ILoginDialogController {
 		WorkspaceManager.getInstance().getCurrentWorkspace().save();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getUsersession()
+	 */
 	public Usersession getUsersession() {
 		return usersession;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
+	 */
 	public ServerInfo getServerInfo() {
 		if (serverInfo != null) {
 			return serverInfo;
@@ -87,12 +140,31 @@ public class LoginDialogController implements ILoginDialogController {
 		return usersession.getServerInfo();
 	}
 
+	/**
+	 * Perform a login using an {@link Usersession} that can be determined
+	 * with the given {@link ServerInfo}.
+	 * 
+	 * 
+	 * @param serverInfo
+	 *            the server info to be used in order to determine a valid usersession
+	 * @return a logged-in usersession
+	 * @throws EmfStoreException
+	 *             in case the login fails
+	 */
 	public Usersession login(ServerInfo serverInfo) throws EmfStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login();
 	}
 
+	/**
+	 * Perform a login using the given {@link Usersession}.
+	 * 
+	 * @param usersession
+	 *            the usersession to be used during login
+	 * @throws EmfStoreException
+	 *             in case the login fails
+	 */
 	public void login(Usersession usersession) throws EmfStoreException {
 		this.serverInfo = null;
 		this.usersession = usersession;

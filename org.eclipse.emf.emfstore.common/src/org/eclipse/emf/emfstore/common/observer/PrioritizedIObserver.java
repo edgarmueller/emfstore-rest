@@ -10,8 +10,20 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.observer;
 
+/**
+ * An observer with a priority.  The higher the number the more important is the observer. 
+ * 
+ * @author ovonwesen
+ */
 public interface PrioritizedIObserver extends IObserver {
 	
+	/**
+	 * Returns the priority of this observer.  The higher the number returned 
+	 * by this method, the more likely it is that this observer is notified before 
+	 * others.
+	 * 
+	 * @return the priority of this observer
+	 */
 	int getPriority();
 
 }

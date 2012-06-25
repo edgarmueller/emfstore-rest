@@ -104,16 +104,24 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		if (projectInfo != null) {
-			deleteRemoteProject(projectInfo, progressMonitor);
-			return null;
-		} else if (session != null) {
-			deleteRemoteProject(session, projectId, deleteFiles);
-			return null;
+	public Void doRun(IProgressMonitor progressMonitor) {
+
+		try {
+
+			if (projectInfo != null) {
+				deleteRemoteProject(projectInfo, progressMonitor);
+				return null;
+			} else if (session != null) {
+				deleteRemoteProject(session, projectId, deleteFiles);
+				return null;
+			}
+
+			deleteRemoteProject(serverInfo, projectId, deleteFiles, progressMonitor);
+		} catch (EmfStoreException e) {
+			MessageDialog.openError(getShell(), "Delete project failed.",
+				"Deletion of project " + projectInfo.getName() + " failed: " + e.getMessage());
 		}
 
-		deleteRemoteProject(serverInfo, projectId, deleteFiles, progressMonitor);
 		return null;
 	}
 

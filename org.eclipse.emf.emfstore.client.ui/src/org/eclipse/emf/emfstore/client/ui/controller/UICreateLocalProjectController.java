@@ -16,7 +16,6 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -76,7 +75,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	}
 
 	@Override
-	public ProjectSpace doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public ProjectSpace doRun(IProgressMonitor monitor) {
 		if (name == null) {
 			return createLocalProject();
 		}

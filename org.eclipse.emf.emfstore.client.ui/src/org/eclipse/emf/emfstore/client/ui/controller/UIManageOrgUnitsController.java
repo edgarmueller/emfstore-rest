@@ -52,7 +52,7 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) {
 		try {
 			final AdminBroker adminBroker = WorkspaceManager.getInstance().getCurrentWorkspace()
 				.getAdminBroker(session);

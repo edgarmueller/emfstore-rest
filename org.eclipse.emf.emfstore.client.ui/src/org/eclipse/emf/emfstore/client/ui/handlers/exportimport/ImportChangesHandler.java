@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
  * Handler for importing changes that will be applied upon the selected {@link ProjectSpace}.
@@ -24,7 +23,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 public class ImportChangesHandler extends AbstractEMFStoreHandler {
 
 	@Override
-	public void handle() throws EmfStoreException {
+	public void handle() {
 		new UIImportController(getShell()).importChanges(requireSelection(ProjectSpace.class));
 	}
 
