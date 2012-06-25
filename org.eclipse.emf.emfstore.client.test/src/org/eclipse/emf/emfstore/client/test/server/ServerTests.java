@@ -57,8 +57,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	private static HashMap<Class<?>, Object> arguments;
 	private static ServerInfo serverInfo;
 
-	public static void setServerInfo(ServerInfo server_Info) {
-		serverInfo = server_Info;
+	public static void setServerInfo(ServerInfo newServerInfo) {
+		serverInfo = newServerInfo;
 	}
 
 	public static ServerInfo getServerInfo() {
@@ -72,8 +72,8 @@ public abstract class ServerTests extends WorkspaceTest {
 		return sessionId;
 	}
 
-	public static void setSessionId(SessionId session_id) {
-		sessionId = session_id;
+	public static void setSessionId(SessionId newSessionId) {
+		sessionId = newSessionId;
 	}
 
 	/**
@@ -83,8 +83,8 @@ public abstract class ServerTests extends WorkspaceTest {
 		return connectionManager;
 	}
 
-	public static void setConnectionManager(ConnectionManager connection_Manager) {
-		connectionManager = connection_Manager;
+	public static void setConnectionManager(ConnectionManager newConnectionManager) {
+		connectionManager = newConnectionManager;
 	}
 
 	public ProjectInfo getProjectInfo() {
