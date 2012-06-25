@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.emf.emfstore.modelmutator.testModel/src"
+    modelPluginID="org.eclipse.emf.emfstore.modelmutator.testModel" modelName="TestModel"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    runtimeVersion="2.5">
+  <foreignModel>testModel.ecore</foreignModel>
+  <genPackages prefix="TestModel" basePackage="org.eclipse.emf.emfstore.modelmutator"
+      disposableProviderFactory="true" ecorePackage="testModel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="testModel.ecore#//ElementType">
+      <genEnumLiterals ecoreEnumLiteral="testModel.ecore#//ElementType/Type1"/>
+      <genEnumLiterals ecoreEnumLiteral="testModel.ecore#//ElementType/Type2"/>
+    </genEnums>
+    <genClasses ecoreClass="testModel.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/bigdeci"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/bigint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/bool"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/Boolean"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Node/byte"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testModel.ecore#//Node/subNode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testModel.ecore#//Node/contains"/>
+    </genClasses>
+    <genClasses ecoreClass="testModel.ecore#//ContainedLeaf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/byteArray"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/byteObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/char"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/Character"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/double"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/DoubleObj"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/float"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//ContainedLeaf/elementType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testModel.ecore#//ContainedLeaf/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testModel.ecore#//ContainedLeaf/upperBound"/>
+    </genClasses>
+    <genClasses ecoreClass="testModel.ecore#//referedLeaf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/Float"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/int"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/Integer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/long"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/LongObj"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/short"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/ShortObj"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/name"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//referedLeaf/notChangeable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testModel.ecore#//referedLeaf/multiRef"/>
+    </genClasses>
+    <genClasses ecoreClass="testModel.ecore#//multiRefLeaf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//multiRefLeaf/name"/>
+    </genClasses>
+    <genClasses ecoreClass="testModel.ecore#//upperBoundLeaf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//upperBoundLeaf/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="testModel.ecore#//Leafs"/>
+  </genPackages>
+</genmodel:GenModel>
