@@ -64,6 +64,21 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            The user session that should be used to checkout the project.
 	 * @param projectInfo
 	 *            An {@link ProjectInfo} instance describing the project and its version.
+	 * @throws EmfStoreException
+	 *             If an error occurs during the checkout.
+	 * @return the project space containing the project
+	 * @model
+	 * @generated NOT
+	 */
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
+
+	/**
+	 * Checkout a project to the workspace in a given version.
+	 * 
+	 * @param usersession
+	 *            The user session that should be used to checkout the project.
+	 * @param projectInfo
+	 *            An {@link ProjectInfo} instance describing the project and its version.
 	 * @param progressMonitor
 	 *            the progress monitor that should be used during checkout
 	 * @throws EmfStoreException
