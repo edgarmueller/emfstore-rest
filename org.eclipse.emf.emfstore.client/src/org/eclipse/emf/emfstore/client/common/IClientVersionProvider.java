@@ -13,12 +13,17 @@ package org.eclipse.emf.emfstore.client.common;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 
 /**
- * Determines the version identifier of the client component
+ * Determines the version identifier of the client component.
  * 
  * @author emueller
  * 
  */
 public interface IClientVersionProvider {
 
+	/**
+	 * Returns the version of the client.
+	 * 
+	 * @return the client version
+	 */
 	ClientVersionInfo getVersion();
 }
