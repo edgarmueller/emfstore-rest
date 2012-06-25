@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIShareProjectController;
-import org.eclipse.jface.dialogs.MessageDialog;
 
 /**
  * Handler for sharing a {@link ProjectSpace}.<br/>
@@ -58,7 +57,5 @@ public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHan
 		} else {
 			new UIShareProjectController(getShell(), projectSpace).execute();
 		}
-
-		MessageDialog.openInformation(getShell(), "Share succeeded", "The project has been successfully shared.");
 	}
 }

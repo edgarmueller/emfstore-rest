@@ -49,6 +49,14 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	public Void doRun(final IProgressMonitor progressMonitor) {
 		try {
 			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);
+			new RunInUIThread(getShell()) {
+				@Override
+				public Void doRun(Shell shell) {
+					MessageDialog.openInformation(getShell(), "Share succeeded",
+						"The project has been successfully shared.");
+					return null;
+				}
+			}.execute();
 		} catch (LoginCanceledException e) {
 			// fail silently
 		} catch (final EmfStoreException e) {
