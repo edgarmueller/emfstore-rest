@@ -20,7 +20,7 @@
 		
 		
 		
-	<!-- path configuration for HUDSON build 
+    <!-- path configuration for HUDSON build -->
 	<property key="local.reader.path.emfstore.base"   value="${hudson.git.checkout.base}" mutable="true"/>
 	<property key="local.reader.path.emfstore.core"   value="${hudson.git.checkout.emfstore.core.extension}" mutable="true"/>
 	<property key="local.reader.path.emfstore.releng" value="${hudson.git.checkout.emfstore.releng.extension}" mutable="true"/>
@@ -39,7 +39,7 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="ecp"/>
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="ecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="ecp"/>
-    <locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>-->
+    <locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>
 	
 	
     <!-- path configuration for LOCAL buid -->
