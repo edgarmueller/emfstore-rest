@@ -319,6 +319,9 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			ModelFactory.eINSTANCE.createFileIdentifier()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+			ModelFactory.eINSTANCE.createAuthenticationInformation()));
+
+		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
 			VersioningFactory.eINSTANCE.createTagVersionSpec()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,

@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -49,13 +50,14 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public SessionId logIn(String username, String password, ServerInfo serverInfo, ClientVersionInfo clientVersionInfo)
-		throws EmfStoreException {
+	public AuthenticationInformation logIn(String username, String password, ServerInfo serverInfo,
+		ClientVersionInfo clientVersionInfo) throws EmfStoreException {
 		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcConnectionHandler.EMFSTORE);
 		clientManager.initConnection(serverInfo);
-		SessionId id = clientManager.callWithResult("logIn", SessionId.class, username, password, clientVersionInfo);
-		addConnectionProxy(id, clientManager);
-		return id;
+		AuthenticationInformation authenticationInformation = clientManager.callWithResult("logIn",
+			AuthenticationInformation.class, username, password, clientVersionInfo);
+		addConnectionProxy(authenticationInformation.getSessionId(), clientManager);
+		return authenticationInformation;
 	}
 
 	/**

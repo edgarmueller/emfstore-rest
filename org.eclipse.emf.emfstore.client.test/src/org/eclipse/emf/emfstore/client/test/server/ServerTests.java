@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -133,7 +134,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @throws EmfStoreException in case of failure
 	 */
 	protected static void login() throws EmfStoreException {
-		SessionId sessionId = login(getServerInfo(), "super", "super");
+		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
 		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
 		setSessionId(sessionId);
 	}
@@ -145,7 +146,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @return sessionId
 	 * @throws EmfStoreException in case of failure
 	 */
-	protected static SessionId login(ServerInfo serverInfo, String username, String password) throws EmfStoreException {
+	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password)
+		throws EmfStoreException {
 		return getConnectionManager().logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
 			serverInfo, Configuration.getClientVersion());
 	}

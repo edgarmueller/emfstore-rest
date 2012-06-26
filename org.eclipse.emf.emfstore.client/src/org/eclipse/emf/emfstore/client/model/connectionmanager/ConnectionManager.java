@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
@@ -59,12 +60,12 @@ public interface ConnectionManager extends EmfStore {
 	 * @param password the password
 	 * @param severInfo the server info for the server to log into
 	 * @param clientVersionInfo the client's version
-	 * @return a session id that can be used for later authentication
+	 * @return {@link AuthenticationInformation} that can be used for later authentication
 	 * @throws EmfStoreException in case of failure
 	 * @generated NOT
 	 */
-	SessionId logIn(String username, String password, ServerInfo severInfo, ClientVersionInfo clientVersionInfo)
-		throws EmfStoreException;
+	AuthenticationInformation logIn(String username, String password, ServerInfo severInfo,
+		ClientVersionInfo clientVersionInfo) throws EmfStoreException;
 
 	/**
 	 * Deletes a session on the server.

@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.server.connection.ServerKeyStoreManager;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ClientVersionOutOfDateException;
 import org.eclipse.emf.emfstore.server.exceptions.ServerKeyStoreException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -44,12 +45,15 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	/**
 	 * {@inheritDoc}
 	 */
-	public SessionId logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
 		checkClientVersion(clientVersionInfo);
 		password = preparePassword(password);
 		if (verifySuperUser(username, password) || verifyPassword(username, password)) {
-			return ModelFactory.eINSTANCE.createSessionId();
+			AuthenticationInformation authenticationInformation = ModelFactory.eINSTANCE
+				.createAuthenticationInformation();
+			authenticationInformation.setSessionId(ModelFactory.eINSTANCE.createSessionId());
+			return authenticationInformation;
 		}
 		throw new AccessControlException();
 	}

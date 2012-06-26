@@ -34,6 +34,7 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
@@ -568,11 +569,11 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		// prepare serverInfo for send: copy and remove usersession
 		ServerInfo copy = ModelUtil.clone(serverInfo);
 		copy.setLastUsersession(null);
-		SessionId newSessionId = null;
-
-		newSessionId = connectionManager.logIn(username, getPassword(), copy, Configuration.getClientVersion());
+		AuthenticationInformation authenticationInformation = connectionManager.logIn(username, getPassword(), copy,
+			Configuration.getClientVersion());
 		getServerInfo().setLastUsersession(this);
-		this.setSessionId(newSessionId);
+		this.setSessionId(authenticationInformation.getSessionId());
+		this.setACUser(authenticationInformation.getResolvedACUser());
 		WorkspaceManager.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
 	}
 
