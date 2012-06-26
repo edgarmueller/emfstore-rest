@@ -26,10 +26,26 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
+/**
+ * Shares a project.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public class ShareController extends ServerCall<Void> {
 
-	public ShareController(ProjectSpaceBase projectSpaceImpl, Usersession session, IProgressMonitor monitor) {
-		super(projectSpaceImpl);
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the project space to be shared
+	 * @param session
+	 *            the session to use during share
+	 * @param monitor
+	 *            a progress monitor that is used to indicate the progress of the share
+	 */
+	public ShareController(ProjectSpaceBase projectSpace, Usersession session, IProgressMonitor monitor) {
+		super(projectSpace);
 
 		// if session is null, session will be injected by sessionmanager
 		setUsersession(session);
