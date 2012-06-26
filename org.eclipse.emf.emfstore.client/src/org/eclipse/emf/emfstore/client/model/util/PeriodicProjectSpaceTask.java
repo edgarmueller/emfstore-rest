@@ -24,8 +24,6 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
  */
 public abstract class PeriodicProjectSpaceTask extends TimerTask {
 
-	public static final int DEFAULT_INTERVAL = 900000; // 15 minutes
-
 	private final ProjectSpace projectSpace;
 	private final long interval;
 	private Timer timer;
