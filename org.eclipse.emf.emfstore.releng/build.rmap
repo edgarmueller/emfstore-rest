@@ -6,7 +6,7 @@
 	xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 
-	<!-- LEGACY: local resolution using the git readerType (this requires the pre-defined names for all repositories) -->
+	<!-- LEGACY: local resolution using the git readerType (this requires the pre-defined names for all repositories) 
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?\.feature$" searchPathRef="localgit"/>
 	<locator pattern="^org\.eclipse\.emf\.emfstore(?:\..+)?$" searchPathRef="localgit"/>
 	<locator pattern="^EMFStoreTargetPlatform$" searchPathRef="localgit"/>
@@ -15,12 +15,12 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="localgitecp"/>
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="localgitecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="localgitecp"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="localgitecp"/>
+    <locator pattern="^ECPDeveloper$" searchPathRef="localgitecp"/>-->
 		
 		
 		
 		
-	<!-- path configuration for HUDSON build -->
+	<!-- path configuration for HUDSON build 
 	<property key="local.reader.path.emfstore.base"   value="${hudson.git.checkout.base}" mutable="true"/>
 	<property key="local.reader.path.emfstore.core"   value="${hudson.git.checkout.emfstore.core.extension}" mutable="true"/>
 	<property key="local.reader.path.emfstore.releng" value="${hudson.git.checkout.emfstore.releng.extension}" mutable="true"/>
@@ -39,10 +39,10 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="ecp"/>
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="ecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="ecp"/>
-	<locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>
+    <locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>-->
 	
 	
-	<!-- path configuration for LOCAL buid 
+    <!-- path configuration for LOCAL buid -->
 	<property key="local.reader.path.emfstore.base"   value="${local.git.checkout.base}" mutable="true"/>
 	<property key="local.reader.path.emfstore.core"   value="${local.git.checkout.emfstore.core.extension}" mutable="true"/>
 	<property key="local.reader.path.emfstore.releng" value="${local.git.checkout.emfstore.releng.extension}" mutable="true"/>
@@ -61,7 +61,7 @@
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?\.feature$" searchPathRef="ecp"/>
 	<locator pattern="^org\.eclipse\.emf.ecp(?:\..+)?$" searchPathRef="ecp"/>
 	<locator pattern="^ECPTargetPlatform$" searchPathRef="ecp"/>
-    <locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>-->
+    <locator pattern="^ECPDeveloper$" searchPathRef="ecp"/>
 	
 	
 	<!-- Dependencies: EMF, Eclipse, ... -->
