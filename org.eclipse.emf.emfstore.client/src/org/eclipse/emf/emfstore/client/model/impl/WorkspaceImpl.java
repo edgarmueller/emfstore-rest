@@ -914,7 +914,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(final Usersession usersession, final VersionSpec versionSpec,
 		final ProjectId projectId) throws EmfStoreException {
-		return new ServerCall<PrimaryVersionSpec>() {
+		return new ServerCall<PrimaryVersionSpec>(usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws EmfStoreException {
 				ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
