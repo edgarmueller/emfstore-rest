@@ -50,8 +50,14 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 		this.historyInfo = historyInfo;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
 		// TODO: controller currently does not work if the active workbench window is not
 		// the history view

@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -81,10 +83,10 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ProjectSpace doRun(IProgressMonitor progressMonitor) {
+	public ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
 			return new ServerCall<ProjectSpace>(serverInfo, progressMonitor) {
 				@Override
@@ -100,15 +102,14 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 				}
 			}.execute();
 		} catch (final EmfStoreException e) {
-			new RunInUIThread(getShell()) {
-				@Override
-				public Void doRun(Shell shell) {
+			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
-					MessageDialog.openError(shell, "Checkout failed", "Checkout of project " + projectInfo.getName()
-						+ " failed: " + e.getMessage());
+					MessageDialog.openError(getShell(), "Checkout failed",
+						"Checkout of project " + projectInfo.getName() + " failed: " + e.getMessage());
 					return null;
 				}
-			}.execute();
+			});
 		}
 
 		return null;

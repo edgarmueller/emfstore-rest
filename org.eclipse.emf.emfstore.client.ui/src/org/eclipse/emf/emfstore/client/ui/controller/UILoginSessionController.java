@@ -40,8 +40,14 @@ public class UILoginSessionController extends AbstractEMFStoreUIController<Void>
 		this.serverInfo = serverInfo;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 		final LoginDialogController loginDialogController = new LoginDialogController();
 
 		try {

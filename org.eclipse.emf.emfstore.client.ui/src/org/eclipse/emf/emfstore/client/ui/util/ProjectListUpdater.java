@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.util;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
@@ -20,10 +22,8 @@ import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * This class is responsible for keeping the workspace's project infos update to date.
@@ -32,7 +32,6 @@ import org.eclipse.swt.widgets.Shell;
 public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver, LogoutObserver {
 
 	private Workspace workspace;
-	private EmfStoreException exception;
 
 	/**
 	 * 
@@ -86,24 +85,12 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	}
 
 	private void update(final Usersession session) throws EmfStoreException {
-		exception = null;
-
-		new RunInUIThread(Display.getDefault()) {
-
-			@Override
-			public Void doRun(Shell shell) {
-				try {
-					workspace.updateProjectInfos(session);
-				} catch (EmfStoreException e) {
-					exception = e;
-				}
+		RunInUI.WithException.withoutResult(new Callable<Void>() {
+			public Void call() throws Exception {
+				workspace.updateProjectInfos(session);
 				return null;
 			}
-		}.execute();
-
-		if (exception != null) {
-			throw exception;
-		}
+		});
 	}
 
 	/**

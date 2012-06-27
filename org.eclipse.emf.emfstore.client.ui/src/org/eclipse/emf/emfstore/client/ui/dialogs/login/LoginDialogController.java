@@ -11,17 +11,17 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.HashSet;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} to determine
@@ -53,27 +53,19 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private Usersession login() throws EmfStoreException {
-		AccessControlException exception = new RunInUIThreadWithResult<AccessControlException>(Display.getDefault()) {
-
-			@Override
-			public AccessControlException doRun(Shell shell) {
-				LoginDialog dialog = new LoginDialog(shell, LoginDialogController.this);
+		return RunInUI.WithException.withResult(new Callable<Usersession>() {
+			public Usersession call() throws Exception {
+				LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), LoginDialogController.this);
 				dialog.setBlockOnOpen(true);
 
 				if (dialog.open() != Window.OK || usersession == null) {
-					return new AccessControlException("Couldn't login.");
+					throw new AccessControlException("Couldn't login.");
 				}
 
-				return null;
+				// contract: #validate() sets the usersession;
+				return usersession;
 			}
-		}.execute();
-
-		if (exception != null) {
-			throw exception;
-		}
-
-		// contract: #validate() sets the usersession;
-		return usersession;
+		});
 	}
 
 	/**
