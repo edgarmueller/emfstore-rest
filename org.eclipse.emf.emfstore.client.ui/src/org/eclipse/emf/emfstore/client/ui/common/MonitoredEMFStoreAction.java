@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -60,7 +61,11 @@ public abstract class MonitoredEMFStoreAction<T> {
 		try {
 			progressService.run(fork, cancelable, new IRunnableWithProgress() {
 				public void run(final IProgressMonitor monitor) {
-					returnValue = doRun(monitor);
+					try {
+						returnValue = doRun(monitor);
+					} catch (EmfStoreException e) {
+						handleException(e);
+					}
 				}
 			});
 		} catch (InvocationTargetException e) {
@@ -73,12 +78,35 @@ public abstract class MonitoredEMFStoreAction<T> {
 	}
 
 	/**
+	 * Generic exception handling method that is called in case {@link #doRun(IProgressMonitor)} throws an
+	 * {@link EmfStoreException}.<br/>
+	 * Clients may override this method if they want to treat all {@link EmfStoreException} equally. Otherwise
+	 * they are obliged to handle {@link EmfStoreException} in {@link #doRun(IProgressMonitor)}, if possible.
+	 * 
+	 * @param e
+	 *            the exception that has been thrown
+	 */
+	protected abstract void handleException(EmfStoreException e);
+
+	/**
 	 * The actual behavior that should be performed when the {@link #execute()} is called.<br/>
-	 * Must be implemented by clients.
+	 * Must be implemented by clients. Clients should
 	 * 
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that should be used by clients to update the status of their progress
 	 * @return an optional return value
+	 * 
+	 * @throws EmfStoreException
+	 *             in case an error occurs
 	 */
-	public abstract T doRun(IProgressMonitor monitor);
+	public abstract T doRun(IProgressMonitor monitor) throws EmfStoreException;
+
+	/**
+	 * Whether this action runs in its own thread.
+	 * 
+	 * @return true, if this action has been forked to run in its own thread, false otherwise
+	 */
+	public boolean isForked() {
+		return fork;
+	}
 }

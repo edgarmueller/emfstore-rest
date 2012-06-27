@@ -52,7 +52,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) {
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		ServerInfo serverInfo = (projectInfo.eContainer() instanceof ServerInfo) ? (ServerInfo) projectInfo
 			.eContainer() : null;
 		String revision = "<unknown>";

@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -20,8 +21,9 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -52,10 +54,10 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
 		boolean shouldDelete = MessageDialog.openQuestion(getShell(), "Confirm deletion",
 			String.format("Are you sure you want to delete the server \'%s\'", serverInfo.getName()));
@@ -74,21 +76,18 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 			}
 		}
 
-		new RunInUIThread(getShell()) {
-
-			@Override
-			public Void doRun(Shell shell) {
+		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			public Void call() throws Exception {
 				WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos().remove(serverInfo);
 				return null;
 			}
-		}.execute();
+		});
 
 		if (usedSpaces.size() == 0) {
 			// TODO: add code to add & remove server
 			new EMFStoreCommand() {
 				@Override
 				protected void doRun() {
-
 					EcoreUtil.delete(serverInfo);
 					WorkspaceManager.getInstance().getCurrentWorkspace().save();
 				};

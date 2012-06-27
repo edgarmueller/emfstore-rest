@@ -10,16 +10,19 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThread;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
@@ -54,10 +57,10 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
 		if (projectSpace == null) {
 			try {
@@ -69,11 +72,8 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 			}
 		}
 
-		new RunInUIThread(getShell()) {
-
-			@Override
-			public Void doRun(Shell shell) {
-
+		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			public Void call() throws Exception {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				HistoryBrowserView historyBrowserView = null;
 				// TODO: remove hard-coded reference
@@ -82,16 +82,15 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 				try {
 					historyBrowserView = (HistoryBrowserView) page.showView(viewId);
 				} catch (PartInitException e) {
-					EMFStoreMessageDialog.showExceptionDialog(shell, e);
+					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 				}
 
 				if (historyBrowserView != null) {
 					historyBrowserView.setInput(projectSpace, modelElement);
 				}
-
 				return null;
 			}
-		}.execute();
+		});
 
 		return null;
 	}

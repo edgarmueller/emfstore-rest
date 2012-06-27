@@ -10,8 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
+import java.util.concurrent.Callable;
+
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction;
-import org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -103,14 +107,36 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreA
 	 * @return true, if the user confirms the dialog by clicking "Yes", otherwise false
 	 */
 	public boolean confirm(final String title, final String message) {
-		return new RunInUIThreadWithResult<Boolean>(getShell()) {
-			@Override
-			public Boolean doRun(Shell shell) {
-				MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION,
-					new String[] { "Yes", "No" }, 0);
-				int result = dialog.open();
-				return result == Window.OK;
-			}
-		}.execute();
+		if (isForked()) {
+			return RunInUI.WithoutException.withResult(new Callable<Boolean>() {
+				public Boolean call() throws Exception {
+					MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION,
+						new String[] { "Yes", "No" }, 0);
+					int result = dialog.open();
+					return result == Window.OK;
+				}
+			});
+		} else {
+			MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION, new String[] {
+				"Yes", "No" }, 0);
+			int result = dialog.open();
+			return result == Window.OK;
+		}
+	}
+
+	@Override
+	protected void handleException(final EmfStoreException e) {
+		WorkspaceUtil.logException(e.getMessage(), e);
+
+		if (isForked()) {
+			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+				public Void call() throws Exception {
+					MessageDialog.openError(getShell(), "Error", e.getMessage());
+					return null;
+				}
+			});
+		} else {
+			MessageDialog.openError(getShell(), "Error", e.getMessage());
+		}
 	}
 }

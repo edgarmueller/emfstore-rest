@@ -46,8 +46,14 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 		this.versionSpec = versionSpec;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
 		if (!confirm("Confirmation",
 			"Do you really want to revert changes of this version on project " + projectSpace.getProjectName())) {

@@ -67,8 +67,14 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 		return (HistoryBrowserView) activePage.getActivePart();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) {
+	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
 		HistoryBrowserView historyBrowserView = getHistoryBrowserViewFromActivePart();
 

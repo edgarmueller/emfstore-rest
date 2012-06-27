@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -44,7 +45,7 @@ public class UIUndoLastOperationController extends AbstractEMFStoreUIController<
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) {
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		projectSpace.getOperationManager().undoLastOperation();
 		return null;
 	}

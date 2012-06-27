@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.importexport.IExportImportControlle
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -72,8 +73,14 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 		return file;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) {
+	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		File file = selectFile();
 		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
