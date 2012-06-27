@@ -81,7 +81,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#noChangesOnServer()
 	 */
 	public void noChangesOnServer() {
-		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), "No need to update",
 					"Your project is up to date, you do not need to update.");
@@ -102,7 +102,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		try {
 			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
 			// merge opens up a dialog
-			mergeSuccessful = RunInUI.WithException.withResult(new Callable<Boolean>() {
+			mergeSuccessful = RunInUI.WithException.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return projectSpace.merge(targetVersion, new MergeProjectHandler());
 				}
@@ -128,7 +128,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages) {
-		return RunInUI.WithoutException.withResult(new Callable<Boolean>() {
+		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages);
 				if (updateDialog.open() == Window.OK) {
@@ -157,7 +157,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = RunInUI.WithException.withResult(new Callable<PrimaryVersionSpec>() {
+		PrimaryVersionSpec newBaseVersion = RunInUI.WithException.runWithResult(new Callable<PrimaryVersionSpec>() {
 			public PrimaryVersionSpec call() throws Exception {
 				return projectSpace.update(version, UIUpdateProjectController.this, monitor);
 			}

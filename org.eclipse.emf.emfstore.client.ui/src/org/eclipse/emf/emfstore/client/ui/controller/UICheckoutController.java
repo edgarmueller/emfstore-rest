@@ -102,7 +102,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 				}
 			}.execute();
 		} catch (final EmfStoreException e) {
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
 					MessageDialog.openError(getShell(), "Checkout failed",

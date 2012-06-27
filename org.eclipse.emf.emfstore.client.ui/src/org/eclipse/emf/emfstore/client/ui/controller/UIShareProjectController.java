@@ -57,7 +57,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	public Void doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
 			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "Share succeeded",
 						"The project has been successfully shared.");
@@ -67,7 +67,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 		} catch (LoginCanceledException e) {
 			// fail silently
 		} catch (final EmfStoreException e) {
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Share project failed",
 						"Share project failed: " + e.getMessage());

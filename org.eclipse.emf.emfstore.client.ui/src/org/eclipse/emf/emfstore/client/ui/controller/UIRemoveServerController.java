@@ -76,7 +76,7 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 			}
 		}
 
-		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos().remove(serverInfo);
 				return null;

@@ -85,7 +85,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	}
 
 	private void update(final Usersession session) throws EmfStoreException {
-		RunInUI.WithException.withoutResult(new Callable<Void>() {
+		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				workspace.updateProjectInfos(session);
 				return null;

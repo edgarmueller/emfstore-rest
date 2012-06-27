@@ -53,7 +53,7 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private Usersession login() throws EmfStoreException {
-		return RunInUI.WithException.withResult(new Callable<Usersession>() {
+		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 				LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), LoginDialogController.this);
 				dialog.setBlockOnOpen(true);

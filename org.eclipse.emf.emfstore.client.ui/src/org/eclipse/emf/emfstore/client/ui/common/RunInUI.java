@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Display;
 
 public class RunInUI {
 
+	private static RunInUI runInUI;
+
 	private RunInUI() {
 
 	}
@@ -15,7 +17,7 @@ public class RunInUI {
 
 		private static RunInUI runInUI = new RunInUI();
 
-		public static <T> T withResult(final Callable<T> callable) throws EmfStoreException {
+		public static <T> T runWithResult(final Callable<T> callable) throws EmfStoreException {
 			return runInUI.new RunInUIThreadWithResult<T>() {
 				@Override
 				public T doRun() throws EmfStoreException {
@@ -30,7 +32,7 @@ public class RunInUI {
 			}.execute();
 		}
 
-		public static void withoutResult(final Callable<Void> callable) throws EmfStoreException {
+		public static void run(final Callable<Void> callable) throws EmfStoreException {
 			runInUI.new RunInUIThread() {
 				@Override
 				public Void doRun() throws EmfStoreException {
@@ -45,51 +47,52 @@ public class RunInUI {
 		}
 	}
 
-	public static class WithoutException {
+	// public static class _ {
 
-		private static RunInUI runInUI = new RunInUI();
+	// private static RunInUI runInUI = new RunInUI();
 
-		/*
-		 * TODO: provider additional methods with Display parameter
-		 */
+	/*
+	 * TODO: provider additional methods with Display parameter
+	 */
 
-		public static void withoutResult(final Callable<Void> callable) {
-			try {
-				runInUI.new RunInUIThread() {
-					@Override
-					public Void doRun() throws EmfStoreException {
-						try {
-							callable.call();
-							return null;
-						} catch (Exception e) {
-							throw new EmfStoreException(e.getMessage());
-						}
+	public static void run(final Callable<Void> callable) {
+		try {
+			runInUI.new RunInUIThread() {
+				@Override
+				public Void doRun() throws EmfStoreException {
+					try {
+						callable.call();
+						return null;
+					} catch (Exception e) {
+						throw new EmfStoreException(e.getMessage());
 					}
-				}.execute();
-			} catch (EmfStoreException e) {
-				// ignore
-			}
-		}
-
-		public static <T> T withResult(final Callable<T> callable) {
-			try {
-				return runInUI.new RunInUIThreadWithResult<T>() {
-					@Override
-					public T doRun() throws EmfStoreException {
-						try {
-							return callable.call();
-						} catch (Exception e) {
-							throw new EmfStoreException(e.getMessage());
-						}
-					}
-				}.execute();
-			} catch (EmfStoreException e) {
-				// ignore
-			}
-
-			return null;
+				}
+			}.execute();
+		} catch (EmfStoreException e) {
+			// ignore
 		}
 	}
+
+	public static <T> T runWithResult(final Callable<T> callable) {
+		try {
+			return runInUI.new RunInUIThreadWithResult<T>() {
+				@Override
+				public T doRun() throws EmfStoreException {
+					try {
+						return callable.call();
+					} catch (Exception e) {
+						throw new EmfStoreException(e.getMessage());
+					}
+				}
+			}.execute();
+		} catch (EmfStoreException e) {
+			// ignore
+		}
+
+		return null;
+	}
+
+	// }
 
 	/**
 	 * A simple wrapper for UI calls that has the same effect as calling {@link Display#syncExec(Runnable)} and is

@@ -43,8 +43,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	@Override
 	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
 		if (serverInfo == null) {
-
-			Integer userInput = RunInUI.WithoutException.withResult(new Callable<Integer>() {
+			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()

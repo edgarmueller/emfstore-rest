@@ -72,7 +72,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 			}
 		}
 
-		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				HistoryBrowserView historyBrowserView = null;

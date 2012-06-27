@@ -65,8 +65,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#noLocalChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
 	public void noLocalChanges(ProjectSpace projectSpace) {
-		RunInUI.WithoutException.withoutResult(new Callable<Void>() {
-
+		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null, "No local changes in your project. No need to commit.");
 				return null;
@@ -83,8 +82,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace) {
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
-
-		return RunInUI.WithoutException.withResult(new Callable<Boolean>() {
+		return RunInUI.runWithResult(new Callable<Boolean>() {
 
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
@@ -112,7 +110,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
 
 		if (changePackage.getOperations().isEmpty()) {
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "No local changes",
@@ -126,7 +124,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 
 		final CommitDialog commitDialog = new CommitDialog(getShell(), changePackage, projectSpace);
 
-		dialogReturnValue = RunInUI.WithoutException.withResult(new Callable<Integer>() {
+		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
 				return commitDialog.open();
 			}
@@ -157,7 +155,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 			// ignore
 		} catch (final EmfStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Commit failed", "Commit failed: " + e.getMessage());
 					return null;

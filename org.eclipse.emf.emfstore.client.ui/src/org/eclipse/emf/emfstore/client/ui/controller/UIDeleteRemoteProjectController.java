@@ -129,7 +129,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 	private void deleteRemoteProject(final ProjectInfo projectInfo, IProgressMonitor monitor) throws EmfStoreException {
 
-		Boolean[] ret = RunInUI.WithoutException.withResult(new Callable<Boolean[]>() {
+		Boolean[] ret = RunInUI.runWithResult(new Callable<Boolean[]>() {
 			public Boolean[] call() throws Exception {
 				MessageDialogWithToggle dialog = MessageDialogWithToggle.openOkCancelConfirm(getShell(), "Delete "
 					+ projectInfo.getName(),

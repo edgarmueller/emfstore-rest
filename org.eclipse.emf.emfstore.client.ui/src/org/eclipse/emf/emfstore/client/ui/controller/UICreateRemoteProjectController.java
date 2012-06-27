@@ -90,7 +90,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 
 	private ProjectInfo createRemoteProject(Usersession usersession, IProgressMonitor monitor) throws EmfStoreException {
 
-		String[] ret = RunInUI.WithoutException.withResult(new Callable<String[]>() {
+		String[] ret = RunInUI.runWithResult(new Callable<String[]>() {
 
 			public String[] call() throws Exception {
 				CreateProjectDialog dialog = new CreateProjectDialog(getShell());
@@ -137,7 +137,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 			return createRemoteProject(session, projectName, description, monitor);
 
 		} catch (final EmfStoreException e) {
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Create project failed", "Creation of remote project failed: "
 						+ e.getMessage());

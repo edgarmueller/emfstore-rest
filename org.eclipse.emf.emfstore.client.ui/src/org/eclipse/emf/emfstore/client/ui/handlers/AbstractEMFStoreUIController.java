@@ -108,7 +108,7 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreA
 	 */
 	public boolean confirm(final String title, final String message) {
 		if (isForked()) {
-			return RunInUI.WithoutException.withResult(new Callable<Boolean>() {
+			return RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					MessageDialog dialog = new MessageDialog(shell, title, null, message, MessageDialog.QUESTION,
 						new String[] { "Yes", "No" }, 0);
@@ -129,7 +129,7 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreA
 		WorkspaceUtil.logException(e.getMessage(), e);
 
 		if (isForked()) {
-			RunInUI.WithoutException.withoutResult(new Callable<Void>() {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Error", e.getMessage());
 					return null;

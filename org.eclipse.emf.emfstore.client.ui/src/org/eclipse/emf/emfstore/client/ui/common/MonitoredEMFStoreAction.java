@@ -90,7 +90,7 @@ public abstract class MonitoredEMFStoreAction<T> {
 
 	/**
 	 * The actual behavior that should be performed when the {@link #execute()} is called.<br/>
-	 * Must be implemented by clients. Clients should
+	 * Must be implemented by clients.
 	 * 
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that should be used by clients to update the status of their progress
