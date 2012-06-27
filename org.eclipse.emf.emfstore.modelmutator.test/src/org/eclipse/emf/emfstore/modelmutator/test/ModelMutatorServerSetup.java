@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -56,7 +57,7 @@ public class ModelMutatorServerSetup {
 	 * @return the sessionId
 	 */
 	public static SessionId getSessionId() {
-		return sessionId;
+		return authenticationInfo.getSessionId();
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class ModelMutatorServerSetup {
 		return generatedProjectVersion;
 	}
 
-	private static SessionId sessionId;
+	private static AuthenticationInformation authenticationInfo;
 	private static ConnectionManager connectionManager;
 	private static Project generatedProject;
 	private static ProjectId generatedProjectId;
@@ -141,7 +142,7 @@ public class ModelMutatorServerSetup {
 	public static void setupUsers() throws EmfStoreException {
 		try {
 			AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
-			for(ACUser user:adminConnectionManager.getUsers(sessionId)) {
+			for(ACUser user:adminConnectionManager.getUsers(authenticationInfo.getSessionId())) {
 				if (user.getName().equals("reader") || user.getName().equals("writer1") || user.getName().equals("writer2") || user.getName().equals("projectadmin")) {
 					throw new InvalidInputException("User already exists");
 				}
@@ -181,8 +182,8 @@ public class ModelMutatorServerSetup {
 	 * @throws EmfStoreException in case of failure
 	 */
 	protected static void login(ServerInfo serverInfo) throws EmfStoreException {
-		sessionId = login(serverInfo, "super", "super");
-		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(serverInfo, sessionId);
+		authenticationInfo = login(serverInfo, "super", "super");
+		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(serverInfo, authenticationInfo.getSessionId());
 	}
 
 	/**
@@ -192,7 +193,7 @@ public class ModelMutatorServerSetup {
 	 * @return sessionId
 	 * @throws EmfStoreException in case of failure
 	 */
-	protected static SessionId login(ServerInfo serverInfo, String username, String password) throws EmfStoreException {
+	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password) throws EmfStoreException {
 		return connectionManager.logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
 			serverInfo, Configuration.getClientVersion());
 	}
@@ -229,7 +230,7 @@ public class ModelMutatorServerSetup {
 	 */
 	@Before
 	public void beforeTest() throws EmfStoreException {
-		projectInfo = connectionManager.createProject(sessionId, "initialProject", "TestProject",
+		projectInfo = connectionManager.createProject(authenticationInfo.getSessionId(), "initialProject", "TestProject",
 			SetupHelper.createLogMessage("super", "a logmessage"), generatedProject);
 		generatedProjectId = projectInfo.getProjectId();
 		generatedProjectVersion = projectInfo.getVersion();
@@ -243,8 +244,8 @@ public class ModelMutatorServerSetup {
 	 */
 	@After
 	public void afterTest() throws EmfStoreException {
-		for (ProjectInfo info : connectionManager.getProjectList(sessionId)) {
-			connectionManager.deleteProject(sessionId, info.getProjectId(), true);
+		for (ProjectInfo info : connectionManager.getProjectList(authenticationInfo.getSessionId())) {
+			connectionManager.deleteProject(authenticationInfo.getSessionId(), info.getProjectId(), true);
 		}
 	}
 
