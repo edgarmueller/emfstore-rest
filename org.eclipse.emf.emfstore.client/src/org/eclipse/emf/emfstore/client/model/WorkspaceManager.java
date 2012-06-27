@@ -33,10 +33,12 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.CommonUtil;
+import org.eclipse.emf.emfstore.common.IReinitializable;
 import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -57,7 +59,7 @@ import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class WorkspaceManager {
+public final class WorkspaceManager implements IReinitializable {
 
 	private static WorkspaceManager instance;
 
@@ -121,8 +123,8 @@ public final class WorkspaceManager {
 		initializeObserverBus();
 		this.connectionManager = initConnectionManager();
 		this.adminConnectionManager = initAdminConnectionManager();
-		this.currentWorkspace = initWorkSpace();
 		this.sessionManager = new SessionManager();
+		reinit();
 	}
 
 	private void initializeObserverBus() {
@@ -181,7 +183,12 @@ public final class WorkspaceManager {
 	 * @return the workspace
 	 * @generated NOT
 	 */
-	private Workspace initWorkSpace() {
+	public void reinit() {
+
+		if (!isDisposed()) {
+			return;
+		}
+
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		((ResourceSetImpl) resourceSet).setURIResourceMap(new HashMap<URI, Resource>());
@@ -229,7 +236,7 @@ public final class WorkspaceManager {
 			}
 		}.run(true);
 
-		return workspace;
+		currentWorkspace = workspace;
 
 	}
 
@@ -566,5 +573,20 @@ public final class WorkspaceManager {
 	 */
 	public SessionManager getSessionManager() {
 		return sessionManager;
+	}
+
+	public void dispose() {
+		if (currentWorkspace != null) {
+			((WorkspaceImpl) currentWorkspace).dispose();
+			for (Resource resource : resourceSet.getResources()) {
+				resource.unload();
+			}
+			currentWorkspace = null;
+		}
+
+	}
+
+	public boolean isDisposed() {
+		return currentWorkspace == null;
 	}
 }
