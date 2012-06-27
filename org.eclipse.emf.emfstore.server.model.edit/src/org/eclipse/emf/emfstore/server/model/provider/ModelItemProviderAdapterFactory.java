@@ -293,6 +293,32 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected AuthenticationInformationItemProvider authenticationInformationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createAuthenticationInformationAdapter() {
+		if (authenticationInformationItemProvider == null) {
+			authenticationInformationItemProvider = new AuthenticationInformationItemProvider(this);
+		}
+
+		return authenticationInformationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,6 +442,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 			clientVersionInfoItemProvider.dispose();
 		if (fileIdentifierItemProvider != null)
 			fileIdentifierItemProvider.dispose();
+		if (authenticationInformationItemProvider != null)
+			authenticationInformationItemProvider.dispose();
 	}
 
 }

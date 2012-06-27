@@ -435,6 +435,48 @@ public interface ModelPackage extends EPackage {
 	int FILE_IDENTIFIER_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl
+	 * <em>Authentication Information</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl
+	 * @see org.eclipse.emf.emfstore.server.model.impl.ModelPackageImpl#getAuthenticationInformation()
+	 * @generated
+	 */
+	int AUTHENTICATION_INFORMATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Session Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AUTHENTICATION_INFORMATION__SESSION_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved AC User</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AUTHENTICATION_INFORMATION__RESOLVED_AC_USER = 1;
+
+	/**
+	 * The number of structural features of the '<em>Authentication Information</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AUTHENTICATION_INFORMATION_FEATURE_COUNT = 2;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory
 	 * <em>Project History</em>}'.
 	 * <!-- begin-user-doc -->
@@ -738,6 +780,45 @@ public interface ModelPackage extends EPackage {
 	EClass getFileIdentifier();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation
+	 * <em>Authentication Information</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Authentication Information</em>'.
+	 * @see org.eclipse.emf.emfstore.server.model.AuthenticationInformation
+	 * @generated
+	 */
+	EClass getAuthenticationInformation();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Session Id</em>'.
+	 * @see org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId()
+	 * @see #getAuthenticationInformation()
+	 * @generated
+	 */
+	EReference getAuthenticationInformation_SessionId();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
+	 * <em>Resolved AC User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Resolved AC User</em>'.
+	 * @see org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser()
+	 * @see #getAuthenticationInformation()
+	 * @generated
+	 */
+	EReference getAuthenticationInformation_ResolvedACUser();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1000,6 +1081,38 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_IDENTIFIER = eINSTANCE.getFileIdentifier();
+
+		/**
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl
+		 * <em>Authentication Information</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl
+		 * @see org.eclipse.emf.emfstore.server.model.impl.ModelPackageImpl#getAuthenticationInformation()
+		 * @generated
+		 */
+		EClass AUTHENTICATION_INFORMATION = eINSTANCE.getAuthenticationInformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Session Id</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference AUTHENTICATION_INFORMATION__SESSION_ID = eINSTANCE.getAuthenticationInformation_SessionId();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved AC User</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference AUTHENTICATION_INFORMATION__RESOLVED_AC_USER = eINSTANCE
+			.getAuthenticationInformation_ResolvedACUser();
 
 	}
 

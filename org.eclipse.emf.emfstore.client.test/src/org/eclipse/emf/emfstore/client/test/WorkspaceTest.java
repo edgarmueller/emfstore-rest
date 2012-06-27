@@ -72,9 +72,11 @@ public abstract class WorkspaceTest {
 
 	/**
 	 * Delete all persisted data.
+	 * 
+	 * @throws IOException if deletion fails
 	 */
 	@AfterClass
-	public static void deleteData() {
+	public static void deleteData() throws IOException {
 		SetupHelper.cleanupWorkspace();
 	}
 

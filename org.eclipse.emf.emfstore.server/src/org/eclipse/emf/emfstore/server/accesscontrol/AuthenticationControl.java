@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.accesscontrol;
 
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
@@ -27,11 +28,11 @@ public interface AuthenticationControl {
 	 * @param username the user name
 	 * @param password the password
 	 * @param clientVersionInfo the client's version
-	 * @return a session id that can be used for later authentication
+	 * @return {@link AuthenticationInformation} id that can be used for later authentication
 	 * @throws AccessControlException if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	SessionId logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
 		throws AccessControlException;
 
 	/**

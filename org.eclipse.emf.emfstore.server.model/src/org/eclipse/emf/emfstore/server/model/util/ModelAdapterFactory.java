@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
@@ -125,6 +126,11 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseFileIdentifier(FileIdentifier object) {
 			return createFileIdentifierAdapter();
+		}
+
+		@Override
+		public Adapter caseAuthenticationInformation(AuthenticationInformation object) {
+			return createAuthenticationInformationAdapter();
 		}
 
 		@Override
@@ -282,6 +288,22 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFileIdentifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation <em>Authentication Information</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.server.model.AuthenticationInformation
+	 * @generated
+	 */
+	public Adapter createAuthenticationInformationAdapter() {
 		return null;
 	}
 

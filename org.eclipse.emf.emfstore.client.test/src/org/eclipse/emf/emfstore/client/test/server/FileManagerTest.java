@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +28,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.junit.Test;
 
+/**
+ * Tests the file manager.
+ * 
+ * @author mkoegel
+ * 
+ */
 public class FileManagerTest extends TransmissionTests {
 
 	@Test
@@ -38,7 +54,13 @@ public class FileManagerTest extends TransmissionTests {
 		while (status.getStatus() != Status.FINISHED) {
 			Thread.sleep(500);
 		}
-		assertEquals(IOUtils.toByteArray(new FileInputStream(file)),
-			IOUtils.toByteArray(new FileInputStream(status.getTransferredFile())));
+		FileInputStream fileInputStream = new FileInputStream(file);
+		FileInputStream fileInputStream2 = new FileInputStream(status.getTransferredFile());
+		try {
+			assertEquals(IOUtils.toByteArray(fileInputStream), IOUtils.toByteArray(fileInputStream2));
+		} finally {
+			fileInputStream.close();
+			fileInputStream2.close();
+		}
 	}
 }

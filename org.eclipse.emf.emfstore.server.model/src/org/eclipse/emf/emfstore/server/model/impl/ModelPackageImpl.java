@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
@@ -103,6 +104,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass fileIdentifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass authenticationInformationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -427,6 +436,36 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getAuthenticationInformation() {
+		return authenticationInformationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getAuthenticationInformation_SessionId() {
+		return (EReference) authenticationInformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getAuthenticationInformation_ResolvedACUser() {
+		return (EReference) authenticationInformationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -486,6 +525,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(clientVersionInfoEClass, CLIENT_VERSION_INFO__NAME);
 
 		fileIdentifierEClass = createEClass(FILE_IDENTIFIER);
+
+		authenticationInformationEClass = createEClass(AUTHENTICATION_INFORMATION);
+		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__SESSION_ID);
+		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
 	}
 
 	/**
@@ -606,6 +649,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(fileIdentifierEClass, FileIdentifier.class, "FileIdentifier", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(authenticationInformationEClass, AuthenticationInformation.class, "AuthenticationInformation",
+			!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAuthenticationInformation_SessionId(), this.getSessionId(), null, "sessionId", null, 0, 1,
+			AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAuthenticationInformation_ResolvedACUser(), theAccesscontrolPackage.getACUser(), null,
+			"resolvedACUser", null, 0, 1, AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -45,6 +45,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FileIdentifier" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AuthenticationInformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessionId" eType="#//SessionId"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedACUser" eType="#//accesscontrol/ACUser"
+        containment="true"/>
+  </eClassifiers>
   <eSubpackages name="versioning" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning"
       nsPrefix="org.eclipse.emf.emfstore.server.model.versioning">
     <eClassifiers xsi:type="ecore:EClass" name="TagVersionSpec" eSuperTypes="#//versioning/VersionSpec">

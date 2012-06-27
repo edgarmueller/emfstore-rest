@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -56,7 +57,7 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 */
-	public SessionId logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
 		return getAccessControl().logIn(username, password, clientVersionInfo);
 	}

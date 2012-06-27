@@ -1,21 +1,29 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
-
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.security.AccessControlException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import junit.framework.Assert;
+
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -135,9 +143,10 @@ public class SetupHelper {
 	}
 
 	/**
-	 * @param sessionId sessionId
-	 * @param username username
-	 * @return acorgunitid
+	 * Create a user on the server.
+	 * 
+	 * @param username the username
+	 * @return the user`s org unit id
 	 * @throws EmfStoreException in case of failure
 	 */
 	public static ACOrgUnitId createUserOnServer(String username) throws EmfStoreException {
@@ -147,6 +156,12 @@ public class SetupHelper {
 		return adminConnectionManager.createUser(sessionId, username);
 	}
 
+	/**
+	 * Delete a user from the server.
+	 * 
+	 * @param userId the users id
+	 * @throws EmfStoreException if deletion fails
+	 */
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws EmfStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
@@ -155,7 +170,8 @@ public class SetupHelper {
 	}
 
 	/**
-	 * @param sessionId sessionid
+	 * Set a role for a user.
+	 * 
 	 * @param orgUnitId orgunitid
 	 * @param role role
 	 * @param projectId projectid, can be null, if role is serveradmin
@@ -313,15 +329,18 @@ public class SetupHelper {
 
 			@Override
 			protected void doRun() {
-				String uriString = Activator.getDefault().getBundle().getLocation() + path;
-				if (File.separator.equals("/")) {
-					uriString = uriString.replace("reference:file:", "");
-
-				} else {
-					uriString = uriString.replace("reference:file:/", "");
-					uriString = uriString.replace("/", File.separator);
-				}
 				try {
+					String uriString = FileLocator.toFileURL(Activator.getDefault().getBundle().getEntry("."))
+						.getPath() + path;
+
+					// String uriString = Activator.getDefault().getBundle().getLocation() + path;
+					if (File.separator.equals("/")) {
+						uriString = uriString.replace("reference:file:", "");
+
+					} else {
+						uriString = uriString.replace("reference:file:", "");
+						uriString = uriString.replace("/", File.separator);
+					}
 					uriString = uriString.replace("initial@", ".." + File.separator + ".." + File.separator);
 					uriString = new File(uriString).getCanonicalPath();
 					LOGGER.log(Level.INFO, "importing " + uriString);
@@ -420,9 +439,15 @@ public class SetupHelper {
 
 	/**
 	 * Cleans workspace up.
+	 * 
+	 * @throws IOException if deletion fails
 	 */
-	public static void cleanupWorkspace() {
+	public static void cleanupWorkspace() throws IOException {
 
+		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
+			currentWorkspace.deleteProjectSpace(projectSpace);
+		}
 		String workspacePath = Configuration.getWorkspaceDirectory();
 		File workspaceDirectory = new File(workspacePath);
 		FileFilter workspaceFileFilter = new FileFilter() {
@@ -434,12 +459,7 @@ public class SetupHelper {
 		};
 		File[] filesToDelete = workspaceDirectory.listFiles(workspaceFileFilter);
 		for (int i = 0; i < filesToDelete.length; i++) {
-			try {
-				FileUtil.deleteFolder(filesToDelete[i]);
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
+			FileUtil.deleteFolder(filesToDelete[i]);
 		}
 
 		new File(workspacePath + "workspace.ucw").delete();
@@ -461,8 +481,9 @@ public class SetupHelper {
 	 * Imports a project space from an exported project file.
 	 * 
 	 * @param projectTemplate project template
+	 * @throws IOException if import fails
 	 */
-	public void importProject(TestProjectEnum projectTemplate) {
+	public void importProject(TestProjectEnum projectTemplate) throws IOException {
 		final String path;
 		path = projectTemplate.getPath();
 
@@ -471,18 +492,12 @@ public class SetupHelper {
 			@Override
 			protected void doRun() {
 				String uriString = Activator.getDefault().getBundle().getLocation() + path;
-				if (File.separator.equals("/")) {
-					uriString = uriString.replace("reference:file:", "");
-
-				} else {
-					uriString = uriString.replace("reference:file:/", "");
-				}
 				try {
 					testProjectSpace = workSpace.importProject(uriString);
 					testProject = testProjectSpace.getProject();
 					projectId = testProjectSpace.getProjectId();
 				} catch (IOException e) {
-					e.printStackTrace();
+					Assert.fail();
 				}
 			}
 		}.run(false);

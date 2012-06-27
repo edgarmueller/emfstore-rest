@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
+import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
@@ -85,13 +86,16 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl#logIn(java.lang.String,
 	 *      java.lang.String)
 	 */
-	public SessionId logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
 			ACUser user = resolveUser(username);
-			SessionId sessionId = authenticationControl.logIn(user.getName(), password, clientVersionInfo);
-			sessionUserMap.put(sessionId, new ACUserContainer(user));
-			return sessionId;
+			AuthenticationInformation authenticationInformation = authenticationControl.logIn(user.getName(), password,
+				clientVersionInfo);
+			sessionUserMap.put(authenticationInformation.getSessionId(), new ACUserContainer(user));
+			ACUser resolvedUser = resolveUser(authenticationInformation.getSessionId());
+			authenticationInformation.setResolvedACUser(resolvedUser);
+			return authenticationInformation;
 		}
 	}
 

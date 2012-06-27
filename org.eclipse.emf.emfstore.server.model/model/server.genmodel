@@ -40,6 +40,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//ClientVersionInfo/name"/>
     </genClasses>
     <genClasses ecoreClass="server.ecore#//FileIdentifier"/>
+    <genClasses ecoreClass="server.ecore#//AuthenticationInformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//AuthenticationInformation/sessionId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//AuthenticationInformation/resolvedACUser"/>
+    </genClasses>
     <nestedGenPackages prefix="Versioning" basePackage="org.eclipse.emf.emfstore.server.model"
         disposableProviderFactory="true" ecorePackage="server.ecore#//versioning">
       <genClasses ecoreClass="server.ecore#//versioning/TagVersionSpec">
