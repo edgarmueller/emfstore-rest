@@ -13,12 +13,14 @@ package org.eclipse.emf.emfstore.server;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Timer;
@@ -29,9 +31,11 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -41,6 +45,7 @@ import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcAdminConnectionHa
 import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
+import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
@@ -119,6 +124,8 @@ public class EmfStoreController implements IApplication, Runnable {
 
 		properties = initProperties();
 
+		this.loadDynamicModels();
+
 		new MigrationManager().migrateModel();
 		this.serverSpace = initServerSpace();
 
@@ -150,6 +157,36 @@ public class EmfStoreController implements IApplication, Runnable {
 			waitForTermination();
 		}
 
+	}
+
+	// loads the ".ecore"-files from the dynamic-models-folder
+	private void loadDynamicModels() {
+		ServerConfiguration.getServerHome();
+
+		// TODO: retrieve path from configuration-file
+		File dir = new File(ServerConfiguration.getServerHome() + "dynamic-models");
+		File[] files = null;
+
+		files = dir.listFiles(new FilenameFilter() {
+			public boolean accept(File d, String name) {
+				return name.endsWith(".ecore");
+			}
+		});
+		if (files != null) {
+			for (File file : files) {
+				ResourceSet resourceSet = new ResourceSetImpl();
+				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+					.put("ecore", new EcoreResourceFactoryImpl());
+				Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+				EPackage model = (EPackage) resource.getContents().get(0);
+				EPackage.Registry.INSTANCE.put(model.getNsURI(), model);
+				List<EPackage> packages = EPackageHelper.getAllSubPackages(model);
+				for (EPackage subPkg : packages) {
+					EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
+				}
+				ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
+			}
+		}
 	}
 
 	private void initLogging() {

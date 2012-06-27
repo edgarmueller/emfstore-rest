@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -379,5 +380,18 @@ public interface EmfStore extends EmfStoreInterface {
 	 * 
 	 * **/
 	List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EmfStoreException;
+
+	/**
+	 * Register a new EPackage.
+	 * 
+	 * @param sessionId
+	 *            session id
+	 * @param pkg
+	 *            the EPackage to be registered
+	 * 
+	 * @throws EmfStoreException
+	 *             if any error occurs in the EmfStore
+	 */
+	void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException;
 
 }

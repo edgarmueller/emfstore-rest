@@ -282,6 +282,11 @@
            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
            name="ForceRevertRevision">
      </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.epackages.RegisterEPackageHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RegisterEPackage"
+           name="RegisterEPackage">
+     </command>
   </extension>
   <extension
         point="org.eclipse.ui.menus">
@@ -564,6 +569,32 @@
                    label="Force to revert this revision"
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
+             </command>
+          </menuContribution>
+          <menuContribution
+                locationURI="popup:org.eclipse.emf.emfstore.client.ui.views.RepositoryView?after=org.eclipse.emf.emfstore.client.ui.repositorybrowser.ManageOrgUnits">
+             <command
+                   commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RegisterEPackage"
+                   icon="icons/arrow_up.png"
+                   label="Register EPackage"
+                   style="push">
+                <visibleWhen
+                      checkEnabled="false">
+                   <iterate
+                         ifEmpty="false"
+                         operator="and">
+                      <test
+                            forcePluginActivation="true"
+                            property="org.eclipse.emf.emfstore.client.ui.testers.isServerAdmin"
+                            value="true">
+                      </test>
+                      <test
+                            forcePluginActivation="true"
+                            property="org.eclipse.emf.emfstore.client.ui.testers.serverInfoIsLoggedIn"
+                            value="true">
+                      </test>
+                   </iterate>
+                </visibleWhen>
              </command>
           </menuContribution>
   </extension>

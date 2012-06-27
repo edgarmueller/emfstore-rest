@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server.connection.xmlrpc;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.EmfStore;
@@ -220,5 +221,16 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	 */
 	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
 		return getEmfStore().getEMFProperties(sessionId, projectId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.EmfStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
+	 *      org.eclipse.emf.ecore.EPackage)
+	 */
+	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException {
+		getEmfStore().registerEPackage(sessionId, pkg);
+
 	}
 }
