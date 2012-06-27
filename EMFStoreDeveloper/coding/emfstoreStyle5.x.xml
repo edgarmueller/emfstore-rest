@@ -164,6 +164,7 @@
     </module>
     <module name="IllegalThrows">
       <property name="illegalClassNames" value="java.lang.Throwable, java.lang.Error, java.lang.RuntimeException, java.lang.Exception"/>
+      <property name="ignoredMethodNames" value="finalize, call"/>
     </module>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
