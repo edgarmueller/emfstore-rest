@@ -16,8 +16,8 @@ public class PersistenceTest extends WorkspaceTest {
 	@Test
 	public void testReinitWorkspace() {
 		Configuration.setAutoSave(false);
-		Project project = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0).getProject();
-		Project originalProject = ModelUtil.clone(project);
+		Project originalProject = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace()
+			.getProjectSpaces().get(0).getProject());
 		project.addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
 		assertEquals(WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0).getProject()
 			.getModelElements().size(), 1);

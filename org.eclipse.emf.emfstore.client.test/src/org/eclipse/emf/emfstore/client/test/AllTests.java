@@ -12,6 +12,7 @@ import org.eclipse.emf.emfstore.client.test.common.observerbus.AllObserverBusTes
 import org.eclipse.emf.emfstore.client.test.conflictDetection.AllConflictDetectionTests;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.merging.AllMergeTests;
 import org.eclipse.emf.emfstore.client.test.integration.AllIntegrationTests;
+import org.eclipse.emf.emfstore.client.test.persistence.PersistenceTest;
 import org.eclipse.emf.emfstore.client.test.server.AllServerTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -23,7 +24,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
-	AllServerTests.class, AllIntegrationTests.class, AllObserverBusTests.class, AllMergeTests.class })
+	AllServerTests.class, AllIntegrationTests.class, AllObserverBusTests.class, AllMergeTests.class,
+	PersistenceTest.class })
 public class AllTests {
 
 }
