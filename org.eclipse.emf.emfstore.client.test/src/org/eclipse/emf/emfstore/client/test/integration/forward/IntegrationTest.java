@@ -5,6 +5,7 @@
  */
 package org.eclipse.emf.emfstore.client.test.integration.forward;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -57,9 +58,11 @@ public abstract class IntegrationTest {
 
 	/**
 	 * cleans server and workspace after tests are run.
+	 * 
+	 * @throws IOException if deletion fails
 	 */
 	@After
-	public void cleanUp() {
+	public void cleanUp() throws IOException {
 		SetupHelper.cleanupWorkspace();
 
 		SetupHelper.cleanupServer();
