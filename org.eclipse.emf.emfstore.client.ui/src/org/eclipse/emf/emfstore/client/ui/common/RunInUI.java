@@ -7,15 +7,13 @@ import org.eclipse.swt.widgets.Display;
 
 public class RunInUI {
 
-	private static RunInUI runInUI;
+	private static RunInUI runInUI = new RunInUI();
 
 	private RunInUI() {
 
 	}
 
 	public static class WithException {
-
-		private static RunInUI runInUI = new RunInUI();
 
 		public static <T> T runWithResult(final Callable<T> callable) throws EmfStoreException {
 			return runInUI.new RunInUIThreadWithResult<T>() {
