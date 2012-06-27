@@ -578,12 +578,8 @@ public final class WorkspaceManager implements IReinitializable {
 	public void dispose() {
 		if (currentWorkspace != null) {
 			((WorkspaceImpl) currentWorkspace).dispose();
-			for (Resource resource : resourceSet.getResources()) {
-				resource.unload();
-			}
 			currentWorkspace = null;
 		}
-
 	}
 
 	public boolean isDisposed() {

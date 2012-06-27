@@ -30,9 +30,8 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 
 	public OperationManager(OperationRecorder operationRecorder, ProjectSpace projectSpace) {
 		this.operationRecorder = operationRecorder;
-		operationRecorder.addOperationRecorderListener(this);
-		operationListeners = new ArrayList<OperationObserver>();
 		this.projectSpace = projectSpace;
+		operationListeners = new ArrayList<OperationObserver>();
 	}
 
 	/**

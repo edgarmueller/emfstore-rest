@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -121,14 +120,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		removedElements = new ArrayList<EObject>();
 
 		editingDomain = Configuration.getEditingDomain();
-		CommandStack commandStack = editingDomain.getCommandStack();
-
-		if (commandStack instanceof EMFStoreCommandStack) {
-			emfStoreCommandStack = (EMFStoreCommandStack) commandStack;
-			emfStoreCommandStack.addCommandStackObserver(this);
-		} else {
-			throw new IllegalStateException("Setup of ResourceSet is invalid, there is no EMFStoreCommandStack!");
-		}
 
 		converter = new NotificationToOperationConverter(collection);
 

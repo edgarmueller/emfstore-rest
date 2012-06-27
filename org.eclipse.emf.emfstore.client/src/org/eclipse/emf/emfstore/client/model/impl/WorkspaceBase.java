@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -22,7 +20,6 @@ import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
@@ -57,7 +54,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
- * Project space base class that contains custom user methods.
+ * Workspace space base class that contains custom user methods.
  * 
  * @author koegel
  * @author wesendon
@@ -68,8 +65,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 
 	/**
 	 * The current connection manager used to connect to the server(s).
-	 * 
-	 * @generated NOT
 	 */
 	private ConnectionManager connectionManager;
 
@@ -86,8 +81,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	private ResourceSet workspaceResourceSet;
-
-	private ExecutorService executor;
 
 	// BEGIN OF CUSTOM CODE
 	/**
@@ -364,10 +357,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
-	 * @generated NOT
 	 */
 	public void init() {
-		executor = Executors.newCachedThreadPool();
 		projectToProjectSpaceMap = new HashMap<Project, ProjectSpace>();
 		// initialize all projectSpaces
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
@@ -377,10 +368,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 	}
 
 	public void dispose() {
-		getProjectSpaces().clear();
-		eSet(ModelPackage.eINSTANCE.getWorkspace_ProjectSpaces(), null);
-		projectToProjectSpaceMap.clear();
-		executor = null;
+		for (ProjectSpace projectSpace : getProjectSpaces()) {
+			((ProjectSpaceBase) projectSpace).dispose();
+		}
 	}
 
 	/**
