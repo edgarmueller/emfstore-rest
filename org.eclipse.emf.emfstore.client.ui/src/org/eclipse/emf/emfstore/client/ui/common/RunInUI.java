@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Display;
 
 public class RunInUI {
 
-	private static RunInUI runInUI;
+	private static RunInUI runInUI = new RunInUI();
 
 	private RunInUI() {
 
