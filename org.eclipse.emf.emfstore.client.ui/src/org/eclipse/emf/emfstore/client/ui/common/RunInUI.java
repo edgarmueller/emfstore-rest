@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.common;
 
 import java.util.concurrent.Callable;
@@ -5,7 +15,13 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Display;
 
-public class RunInUI {
+/**
+ * Utility class for executing {@link Callable}s within the UI Thread.
+ * 
+ * @author emueller
+ * 
+ */
+public final class RunInUI {
 
 	private static RunInUI runInUI = new RunInUI();
 
@@ -13,8 +29,21 @@ public class RunInUI {
 
 	}
 
+	/**
+	 * The {@link Callable} to be executed may throw an exception.
+	 */
 	public static class WithException {
 
+		/**
+		 * Executes the given callable and returns the result.
+		 * 
+		 * @param callable
+		 *            the callable to be execued
+		 * @return the return value of the {@link Callable}
+		 * @throws EmfStoreException in case an error occurs during execution of the callable
+		 * 
+		 * @param <T> the return type of the callable
+		 */
 		public static <T> T runWithResult(final Callable<T> callable) throws EmfStoreException {
 			return runInUI.new RunInUIThreadWithResult<T>() {
 				@Override
@@ -23,13 +52,22 @@ public class RunInUI {
 						return callable.call();
 					} catch (EmfStoreException e) {
 						throw e;
+						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
+						// END SUPRESS CATCH EXCEPTION
 						throw new EmfStoreException(e.getMessage(), e);
 					}
 				}
 			}.execute();
 		}
 
+		/**
+		 * Executes the given callable and returns the result.
+		 * 
+		 * @param callable
+		 *            the callable to be execued
+		 * @throws EmfStoreException in case an error occurs during execution of the callable
+		 */
 		public static void run(final Callable<Void> callable) throws EmfStoreException {
 			runInUI.new RunInUIThread() {
 				@Override
@@ -37,7 +75,9 @@ public class RunInUI {
 					try {
 						callable.call();
 						return null;
+						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
+						// END SUPRESS CATCH EXCEPTION
 						throw new EmfStoreException(e.getMessage());
 					}
 				}
@@ -45,14 +85,12 @@ public class RunInUI {
 		}
 	}
 
-	// public static class _ {
-
-	// private static RunInUI runInUI = new RunInUI();
-
-	/*
-	 * TODO: provider additional methods with Display parameter
+	/**
+	 * Executes the given callable and returns the result.
+	 * 
+	 * @param callable
+	 *            the callable to be execued
 	 */
-
 	public static void run(final Callable<Void> callable) {
 		try {
 			runInUI.new RunInUIThread() {
@@ -61,7 +99,9 @@ public class RunInUI {
 					try {
 						callable.call();
 						return null;
+						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
+						// END SUPRESS CATCH EXCEPTION
 						throw new EmfStoreException(e.getMessage());
 					}
 				}
@@ -71,6 +111,15 @@ public class RunInUI {
 		}
 	}
 
+	/**
+	 * Executes the given callable and returns the result.
+	 * 
+	 * @param callable
+	 *            the callable to be execued
+	 * @return the return value of the {@link Callable}
+	 * 
+	 * @param <T> the return type of the callable
+	 */
 	public static <T> T runWithResult(final Callable<T> callable) {
 		try {
 			return runInUI.new RunInUIThreadWithResult<T>() {
@@ -78,7 +127,9 @@ public class RunInUI {
 				public T doRun() throws EmfStoreException {
 					try {
 						return callable.call();
+						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
+						// END SUPRESS CATCH EXCEPTION
 						throw new EmfStoreException(e.getMessage());
 					}
 				}
@@ -104,16 +155,6 @@ public class RunInUI {
 
 		public RunInUIThread() {
 			super(Display.getDefault());
-		}
-
-		/**
-		 * Constructor.
-		 * 
-		 * @param display
-		 *            the {@link Display} that will be used to execute the wrapped call
-		 */
-		public RunInUIThread(Display display) {
-			super(display);
 		}
 
 		/**
