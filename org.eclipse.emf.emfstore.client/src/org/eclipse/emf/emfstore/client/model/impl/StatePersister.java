@@ -191,6 +191,8 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	 */
 	public void modelElementRemoved(IdEObjectCollection rootEObject, EObject modelElement) {
 		cleanResources(modelElement);
+		// save the collection's resource from where the element has been removed
+		addToDirtyResources(rootEObject);
 	}
 
 	/**

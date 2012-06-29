@@ -1024,7 +1024,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(2, getProject().getAllModelElements().size()); // clazz, attribute2
 
 		// load ProjectSpace from Resource and initialize
-		((ProjectSpaceImpl) getProjectSpace()).saveProjectSpaceOnly();
+		((ProjectSpaceImpl) getProjectSpace()).save();
 		ProjectSpace loadedProjectSpace = ModelUtil.loadEObjectFromResource(ModelPackage.eINSTANCE.getProjectSpace(),
 			getProjectSpace().eResource().getURI(), false);
 		loadedProjectSpace.init();
