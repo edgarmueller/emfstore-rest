@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.server.model.provider.ServerEditPlugin;
  * 
  * @generated
  */
+@SuppressWarnings("deprecation")
 public final class ModelEditPlugin extends EMFPlugin {
 	/**
 	 * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->

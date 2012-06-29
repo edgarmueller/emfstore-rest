@@ -277,7 +277,7 @@ public class MergeTest extends ConflictDetectionTest {
 			try {
 				for (Method method : lastObject.getClass().getMethods()) {
 					if (method.getName().equals(methodName)) {
-						Object invoke = method.invoke(lastObject, null);
+						Object invoke = method.invoke(lastObject, (Object) null);
 						assertEquals(b, invoke);
 						return this;
 					}
