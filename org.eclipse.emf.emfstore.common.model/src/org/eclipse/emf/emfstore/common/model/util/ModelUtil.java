@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -273,7 +274,6 @@ public final class ModelUtil {
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
-			// TODO XMLResource.OPTION_ROOT_OBJECTS
 		}
 		return resourceSaveOptions;
 	}
@@ -767,7 +767,7 @@ public final class ModelUtil {
 	public static Set<EObject> getAllContainedModelElements(Collection<EObject> modelElements,
 		boolean includeTransientContainments, boolean ignoreSingletonDatatypes) {
 
-		Set<EObject> result = new HashSet<EObject>();
+		Set<EObject> result = new LinkedHashSet<EObject>();
 
 		for (EObject modelElement : modelElements) {
 			for (EObject containee : modelElement.eContents()) {
