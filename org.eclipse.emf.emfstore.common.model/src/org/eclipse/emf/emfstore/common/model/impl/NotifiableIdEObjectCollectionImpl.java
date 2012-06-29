@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.ISafeRunnable;
+import org.eclipse.emf.emfstore.common.SafeRunner;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
@@ -111,31 +113,37 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 *            the notification command
 	 */
 	protected synchronized void notifyIdEObjectCollectionChangeObservers(
-		EObjectChangeObserverNotificationCommand command) {
+		final EObjectChangeObserverNotificationCommand command) {
 		isNotifiying = true;
-		for (IdEObjectCollectionChangeObserver changeObserver : this.observers) {
-			try {
-				command.run(changeObserver);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException ex) {
-				// END SUPRESS CATCH EXCEPTION
-				if (exceptionThrowingObservers.contains(changeObserver)) {
-					if (!undetachableObservers.contains(changeObserver)) {
-						observersToRemove.add(changeObserver);
-						ModelUtil.logException(
-							"EObject Change Observer threw an exception again, it has been detached, UI may not update now: "
-								+ changeObserver.getClass().getName(), ex);
-					} else {
-						ModelUtil.logException(
-							"EObject Change Observer threw an exception again, but it will not be detached."
-								+ changeObserver.getClass().getName(), ex);
-					}
-				} else {
-					exceptionThrowingObservers.add(changeObserver);
-					ModelUtil.logWarning("EObject Change Observer threw an exception: "
-						+ changeObserver.getClass().getName(), ex);
+		for (final IdEObjectCollectionChangeObserver changeObserver : this.observers) {
+
+			ISafeRunnable code = new ISafeRunnable() {
+
+				public void run() {
+					command.run(changeObserver);
 				}
-			}
+
+				public void handleException(Throwable exception) {
+					if (exceptionThrowingObservers.contains(changeObserver)) {
+						if (!undetachableObservers.contains(changeObserver)) {
+							observersToRemove.add(changeObserver);
+							ModelUtil.logException(
+								"EObject Change Observer threw an exception again, it has been detached, UI may not update now: "
+									+ changeObserver.getClass().getName(), exception);
+						} else {
+							ModelUtil.logException(
+								"EObject Change Observer threw an exception again, but it will not be detached."
+									+ changeObserver.getClass().getName(), exception);
+						}
+					} else {
+						exceptionThrowingObservers.add(changeObserver);
+						ModelUtil.logWarning("EObject Change Observer threw an exception: "
+							+ changeObserver.getClass().getName(), exception);
+					}
+				}
+			};
+
+			SafeRunner.run(code);
 		}
 		isNotifiying = false;
 		for (IdEObjectCollectionChangeObserver observer : this.observersToRemove) {

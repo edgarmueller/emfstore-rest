@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.emfstore.common.ISafeRunnable;
+import org.eclipse.emf.emfstore.common.SafeRunner;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
@@ -38,15 +40,21 @@ public class EMFStoreCommandNotifier {
 	 * 
 	 * @param command the command
 	 */
-	public void notifiyListenersAboutStart(Command command) {
-		for (CommandObserver commandObservers : this.commandObservers) {
-			try {
-				commandObservers.commandStarted(command);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
-				// END SUPRESS CATCH EXCEPTION
-				ModelUtil.logWarning("Command Observer threw exception", e);
-			}
+	public void notifiyListenersAboutStart(final Command command) {
+		for (final CommandObserver commandObservers : this.commandObservers) {
+			ISafeRunnable code = new ISafeRunnable() {
+
+				public void run() {
+					commandObservers.commandStarted(command);
+				}
+
+				public void handleException(Throwable exception) {
+					ModelUtil.logWarning("Command Observer threw exception", exception);
+				}
+			};
+
+			SafeRunner.run(code);
+
 		}
 	}
 
@@ -56,15 +64,20 @@ public class EMFStoreCommandNotifier {
 	 * @param command the command
 	 * @param exception the exception that triggered the failure
 	 */
-	public void notifiyListenersAboutCommandFailed(Command command, Exception exception) {
-		for (CommandObserver commandObservers : this.commandObservers) {
-			try {
-				commandObservers.commandFailed(command, exception);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
-				// END SUPRESS CATCH EXCEPTION
-				ModelUtil.logWarning("Command Observer threw exception", e);
-			}
+	public void notifiyListenersAboutCommandFailed(final Command command, final Exception exception) {
+		for (final CommandObserver commandObservers : this.commandObservers) {
+			ISafeRunnable code = new ISafeRunnable() {
+
+				public void run() {
+					commandObservers.commandFailed(command, exception);
+				}
+
+				public void handleException(Throwable exception) {
+					ModelUtil.logWarning("Command Observer threw exception", exception);
+				}
+			};
+
+			SafeRunner.run(code);
 		}
 	}
 
@@ -73,15 +86,20 @@ public class EMFStoreCommandNotifier {
 	 * 
 	 * @param command the command
 	 */
-	public void notifiyListenersAboutCommandCompleted(Command command) {
-		for (CommandObserver commandObservers : this.commandObservers) {
-			try {
-				commandObservers.commandCompleted(command);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
-				// END SUPRESS CATCH EXCEPTION
-				ModelUtil.logWarning("Command Observer threw exception", e);
-			}
+	public void notifiyListenersAboutCommandCompleted(final Command command) {
+		for (final CommandObserver commandObservers : this.commandObservers) {
+			ISafeRunnable code = new ISafeRunnable() {
+
+				public void run() {
+					commandObservers.commandCompleted(command);
+				}
+
+				public void handleException(Throwable exception) {
+					ModelUtil.logWarning("Command Observer threw exception", exception);
+				}
+			};
+
+			SafeRunner.run(code);
 		}
 	}
 
