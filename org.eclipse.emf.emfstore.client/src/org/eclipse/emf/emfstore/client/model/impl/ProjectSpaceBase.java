@@ -1111,7 +1111,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		setDirty(!getOperations().isEmpty());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 */
 	// TODO: is not public ATM because it only detaches observers
+	@SuppressWarnings("unchecked")
 	public void dispose() {
 		stopChangeRecording();
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
