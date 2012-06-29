@@ -1,8 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH,
- * All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.modelmutator.api;
@@ -15,7 +18,7 @@ import org.eclipse.emf.emfstore.modelmutator.intern.AbstractModelMutator;
  * TODO Merge with AbstractModelMutator?
  * 
  * @author Eugen Neufeld
- * @author Stephan K?hler
+ * @author Stephan Köhler
  * @author Philip Achenbach
  * @author Dmitry Litvinov
  */
@@ -28,7 +31,7 @@ public class ModelMutator extends AbstractModelMutator {
 	 */
 	public static void generateModel(ModelMutatorConfiguration config) {
 		ModelMutator modelMutator = new ModelMutator(config);
-		modelMutator.mutate();
+		modelMutator.generate();
 	}
 	
 	/**
@@ -63,34 +66,6 @@ public class ModelMutator extends AbstractModelMutator {
 		super.mutate();
 	}
 
-	@Override
-	public void changeAttributes(int maxNumber) {
-		super.changeAttributes(maxNumber);
-	}
-
-	@Override
-	public void createEObjects(int maxNumber) {
-		super.createEObjects(maxNumber);
-	}
-
-	@Override
-	public void deleteEObjects(int maxNumber) {
-		super.deleteEObjects(maxNumber);
-	}
-
-	@Override
-	public void changeContainmentReferences(int maxNumber) {
-		super.changeContainmentReferences(maxNumber);
-	}
-
-	@Override
-	public void setContaintments() {
-		super.setContaintments();
-	}
-
-	@Override
-	public void changeCrossReferences(int maxNumber) {
-		super.changeCrossReferences(maxNumber);
-	}
+	
 
 }

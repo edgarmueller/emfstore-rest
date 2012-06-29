@@ -1,8 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH,
- * All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.modelmutator.api;
@@ -16,12 +19,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.domain.EditingDomain;
 
 /**
  * Configuration for the ModelMutator.
  * 
  * @author Eugen Neufeld
- * @author Stephan K?hler
+ * @author Stephan Köhler
  * @author Philip Achenbach
  */
 public class ModelMutatorConfiguration {
@@ -40,7 +44,8 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean allElementsOnRoot;
-
+	
+	private EditingDomain editingDomain;
 
 	/**
 	 * The constructor for the configuration.
@@ -53,7 +58,7 @@ public class ModelMutatorConfiguration {
 		this.modelPackage = modelPackage;
 		this.rootEObject = rootEObject;
 		this.random = new Random(seed);
-
+		
 		this.eClassesToIgnore = new LinkedHashSet<EClass>();
 		this.eStructuralFeaturesToIgnore = new LinkedHashSet<EStructuralFeature>();
 		this.exceptionLog = new LinkedHashSet<RuntimeException>();
@@ -202,6 +207,20 @@ public class ModelMutatorConfiguration {
 	 */
 	public void setAllElementsOnRoot(boolean allElementsOnRoot) {
 		this.allElementsOnRoot = allElementsOnRoot;
+	}
+	
+	/**
+	 * @return The {@link EditingDomain} specified in the config.
+	 */
+	public EditingDomain getEditingDomain() {
+		return editingDomain;
+	}
+	
+	/**
+	 * @param editingDomain The {@link EditingDomain} to use by commands.
+	 */
+	public void setEditingDomain(EditingDomain editingDomain) {
+		this.editingDomain = editingDomain;
 	}
 
 }
