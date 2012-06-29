@@ -184,7 +184,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		super.notifyChanged(notification);
 		currentNotifications.pop();
 
-		if (!notification.isTouch() && notifier instanceof EObject) {
+		if (!notification.isTouch()
+			&& notifier instanceof EObject
+			&& (collection.getModelElementId((EObject) notifier) != null || collection
+				.getDeletedModelElementId((EObject) notifier) != null)) {
 			collection.notify(notification, collection, (EObject) notifier);
 
 		}
