@@ -84,16 +84,17 @@ public class ExtensionPoint {
 	 * Gets a class from the element with highest priority ({@link #getElementWithHighestPriority()}, default
 	 * {@link #getFirst()}). Or rather the registered instance of that class.
 	 * 
-	 * @param class_id attribute id
+	 * @param classAttributeName class attribute name
 	 * @param returnType Class of expected return value
+	 * @param <T> the type of the class
 	 * @return the result or either null, or an runtime exception is thrown in the case of
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getClass(String class_id, Class<T> returnType) {
+	public <T> T getClass(String classAttributeName, Class<T> returnType) {
 		ExtensionElement first = getElementWithHighestPriority();
 		if (first != null) {
-			return first.getClass(class_id, returnType);
+			return first.getClass(classAttributeName, returnType);
 		}
 		return (T) handleErrorOrNull(exceptionInsteadOfNull, null);
 	}

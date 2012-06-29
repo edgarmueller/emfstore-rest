@@ -248,7 +248,9 @@ public class ObserverBus {
 			this.lastResults = new ArrayList<ObserverCall.Result>();
 		}
 
+		// BEGIN SUPRESS CATCH EXCEPTION
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+			// END SUPRESS CATCH EXCEPTION
 			// fork for calls to ObserverCall.class
 			if (ObserverCall.class.equals(method.getDeclaringClass())) {
 				return accessObserverCall(method, args);
@@ -281,7 +283,9 @@ public class ObserverBus {
 			for (IObserver observer : observers) {
 				try {
 					results.add(new Result(observer, method, method.invoke(observer, args)));
+				// BEGIN SUPRESS CATCH EXCEPTION
 				} catch (Throwable e) {
+				// END SUPRESS CATCH EXCEPTION
 					results.add(new Result(observer, e, method));
 				}
 			}

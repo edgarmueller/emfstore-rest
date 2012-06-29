@@ -90,14 +90,15 @@ public class ExtensionElement {
 	/**
 	 * Returns a class, or rather the registered instance of this class.
 	 * 
-	 * @param class_id attribute id
+	 * @param classAttributeName attribute name of the class attribute
 	 * @param returnType expected class type
+	 * @param <T> type of class
 	 * @return Instance, null or a {@link ExtensionPointException} is thrown
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getClass(String class_id, Class<T> returnType) {
+	public <T> T getClass(String classAttributeName, Class<T> returnType) {
 		try {
-			Object executableExtension = this.element.createExecutableExtension(class_id);
+			Object executableExtension = this.element.createExecutableExtension(classAttributeName);
 			if (returnType.isInstance(executableExtension)) {
 				return (T) executableExtension;
 			}
