@@ -208,7 +208,7 @@ public class CompositeOperationItemProvider extends AbstractOperationItemProvide
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
+	 * {@inheritDoc} This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
