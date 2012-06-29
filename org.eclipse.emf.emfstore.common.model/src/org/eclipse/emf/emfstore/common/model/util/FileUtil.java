@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +19,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 
 /**
  * Helper class for file system operations.
@@ -156,5 +160,69 @@ public final class FileUtil {
 		} else {
 			throw new IllegalStateException();
 		}
+	}
+
+	/**
+	 * Compares the contents of two files.
+	 * 
+	 * @param file1
+	 *            the first file
+	 * @param file2
+	 *            the second file
+	 * @return true, if the content of both files is equal, false otherwise
+	 */
+	public static boolean areEqual(File file1, File file2) {
+		return areEqual(file1, file2, new NullProgressMonitor());
+	}
+
+	/**
+	 * Compares the contents of two files.
+	 * 
+	 * @param file1
+	 *            the first file
+	 * @param file2
+	 *            the second file
+	 * @param monitor
+	 *            a progress monitor that may be used to indicate the progress of the equality check
+	 * @return true, if the content of both files is equal, false otherwise
+	 */
+	public static boolean areEqual(File file1, File file2, IProgressMonitor monitor) {
+
+		BufferedInputStream stream1 = null;
+		BufferedInputStream stream2 = null;
+		try {
+			stream1 = new BufferedInputStream(new FileInputStream(file1));
+			stream2 = new BufferedInputStream(new FileInputStream(file2));
+			monitor.beginTask("Comparing...",
+				file1.length() > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) file1.length());
+			boolean equals = areEqual(stream1, stream2, monitor);
+			monitor.done();
+			return equals;
+		} catch (IOException e) {
+			return false;
+		} finally {
+			try {
+				stream1.close();
+				stream2.close();
+			} catch (IOException e) {
+				return false;
+			}
+		}
+	}
+
+	private static boolean areEqual(InputStream inputStream1, InputStream input2, IProgressMonitor monitor)
+		throws IOException {
+
+		int char1 = inputStream1.read();
+
+		while (char1 != -1) {
+			int char2 = input2.read();
+			if (char1 != char2) {
+				return false;
+			}
+			char1 = inputStream1.read();
+		}
+
+		return input2.read() == -1;
 	}
 }
