@@ -150,7 +150,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
 		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.resolveVersionSpec(projectSpace.getUsersession(), version.HEAD_VERSION, projectSpace.getProjectId());
+			.resolveVersionSpec(projectSpace.getUsersession(), VersionSpec.HEAD_VERSION, projectSpace.getProjectId());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();

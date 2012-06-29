@@ -8,12 +8,10 @@ package org.eclipse.emf.emfstore.client.test.testmodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.emf.emfstore.client.test.testmodel.*;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
 
 /**
  * <!-- begin-user-doc -->

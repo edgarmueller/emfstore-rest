@@ -6,9 +6,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
 
-import java.util.ArrayList;
-
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
@@ -127,7 +124,7 @@ public class AttributeMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		ArrayList<Conflict> conflicts = mergeCase.execute().getConflicts();
+		mergeCase.execute().getConflicts();
 
 		mergeCase.hasConflict(AttributeConflict.class).myIs(AttributeOperation.class)
 			.theirsIs(AttributeOperation.class);

@@ -67,6 +67,7 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  * 
  * @generated
  */
+@SuppressWarnings("unused")
 public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

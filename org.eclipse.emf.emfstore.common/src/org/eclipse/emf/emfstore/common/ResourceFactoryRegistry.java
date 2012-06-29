@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
+ * A Registry for EMFResources that will return itself as Factory and always provide an EMFStore Resource.
  * 
  * @author emueller
  */
@@ -28,22 +29,38 @@ public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements R
 		return new EMFStoreResource(uri);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI)
+	 */
 	public Factory getFactory(URI uri) {
 		return this;
 	}
 
+	/** {@inheritDoc}
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI, java.lang.String)
+	 */
 	public Factory getFactory(URI uri, String contentType) {
 		return this;
 	}
 
+	/** {@inheritDoc}
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getProtocolToFactoryMap()
+	 */
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
 	}
 
+	/** {@inheritDoc}
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getExtensionToFactoryMap()
+	 */
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return null;
 	}
 
+	/** {@inheritDoc}
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getContentTypeToFactoryMap()
+	 */
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return null;
 	}
