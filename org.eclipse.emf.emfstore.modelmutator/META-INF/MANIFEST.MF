@@ -1,12 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Model Mutator
+Bundle-Name: EMF ModelMutator (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.modelmutator
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.emf.emfstore.modelmutator.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.osgi.framework;version="1.3.0"
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.eclipse.emf.edit;bundle-version="2.5.0"
+Require-Bundle: org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)"
 Export-Package: org.eclipse.emf.emfstore.modelmutator.api
