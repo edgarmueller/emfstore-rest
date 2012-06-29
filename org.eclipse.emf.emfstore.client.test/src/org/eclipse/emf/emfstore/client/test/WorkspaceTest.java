@@ -10,7 +10,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -18,6 +17,7 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,7 +38,7 @@ public abstract class WorkspaceTest {
 	 */
 	@Before
 	public void setupProjectSpace() {
-		Configuration.setTesting(true);
+		CommonUtil.setTesting(true);
 		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		new EMFStoreCommand() {
 

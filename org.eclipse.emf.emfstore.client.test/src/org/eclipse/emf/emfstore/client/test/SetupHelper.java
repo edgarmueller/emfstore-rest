@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
@@ -275,7 +276,7 @@ public class SetupHelper {
 	 */
 	public void setupWorkSpace() {
 		LOGGER.log(Level.INFO, "setting up workspace...");
-		Configuration.setTesting(true);
+		CommonUtil.setTesting(true);
 		workSpace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		LOGGER.log(Level.INFO, "workspace initialized");
 

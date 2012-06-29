@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.client.model.util;
 
 import static org.eclipse.emf.emfstore.client.model.Configuration.isInternalReleaseVersion;
 import static org.eclipse.emf.emfstore.client.model.Configuration.isReleaseVersion;
-import static org.eclipse.emf.emfstore.client.model.Configuration.isTesting;
 
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.server.LocationProvider;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
@@ -57,7 +57,7 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 		String parameter = getStartParameter("-profile");
 		if (parameter == null) {
 			parameter = "default";
-			if (isTesting()) {
+			if (CommonUtil.isTesting()) {
 				parameter += "_test";
 			} else if (!isReleaseVersion()) {
 				if (isInternalReleaseVersion()) {

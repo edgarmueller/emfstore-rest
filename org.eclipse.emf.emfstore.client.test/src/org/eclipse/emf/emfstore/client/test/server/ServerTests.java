@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -121,7 +122,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws EmfStoreException, IOException {
 		ServerConfiguration.setTesting(true);
-		Configuration.setTesting(true);
+		CommonUtil.setTesting(true);
 
 		// delete all data before test start
 		SetupHelper.removeServerTestProfile();

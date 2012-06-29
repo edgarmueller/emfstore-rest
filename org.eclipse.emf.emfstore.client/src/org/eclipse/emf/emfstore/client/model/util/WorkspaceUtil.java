@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.emfstore.client.model.Activator;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 
 /**
  * Workspace utility class.
@@ -61,6 +62,9 @@ public final class WorkspaceUtil {
 		Activator activator = Activator.getDefault();
 		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), statusInt, message, exception);
 		activator.getLog().log(status);
+		if (CommonUtil.isTesting() && exception != null) {
+			throw new RuntimeException(exception);
+		}
 	}
 
 	/**

@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public final class CommonUtil {
 
+	private static boolean testing;
+	
 	/**
 	 * Private constructor since this is a utility class.
 	 */
@@ -364,5 +366,24 @@ public final class CommonUtil {
 		result = validation(resource, errorStrings);
 
 		return result;
+	}
+	
+	/**
+	 * If we are running tests. In this case the workspace will be created in
+	 * USERHOME/.emfstore.test.
+	 * 
+	 * @param testing
+	 *            the testing to set
+	 */
+	public static void setTesting(boolean testing) {
+		CommonUtil.testing = testing;
+	}
+
+	/**
+	 * @return if we are running tests. In this case the workspace will be
+	 *         created in USERHOME/.emfstore.test.
+	 */
+	public static boolean isTesting() {
+		return testing;
 	}
 }

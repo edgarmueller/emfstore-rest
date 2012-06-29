@@ -57,7 +57,6 @@ public final class Configuration {
 	private static final String PLUGIN_BASEDIR = "pluginData";
 
 	private static boolean autoSave;
-	private static boolean testing;
 
 	private static LocationProvider locationProvider;
 	private static EditingDomain editingDomain;
@@ -316,25 +315,6 @@ public final class Configuration {
 	 */
 	public static String getModelReleaseNumberFileName() {
 		return getWorkspaceDirectory() + MODEL_VERSION_FILENAME;
-	}
-
-	/**
-	 * If we are running tests. In this case the workspace will be created in
-	 * USERHOME/.emfstore.test.
-	 * 
-	 * @param testing
-	 *            the testing to set
-	 */
-	public static void setTesting(boolean testing) {
-		Configuration.testing = testing;
-	}
-
-	/**
-	 * @return if we are running tests. In this case the workspace will be
-	 *         created in USERHOME/.emfstore.test.
-	 */
-	public static boolean isTesting() {
-		return testing;
 	}
 
 	/**
