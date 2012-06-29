@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionMa
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -120,7 +121,7 @@ public class ModelMutatorServerSetup {
 	@BeforeClass
 	public static void setUpBeforeClass() throws EmfStoreException, IOException {
 		ServerConfiguration.setTesting(true);
-		Configuration.setTesting(true);
+		CommonUtil.setTesting(true);
 
 		SetupHelper.addUserFileToServer(false);
 
