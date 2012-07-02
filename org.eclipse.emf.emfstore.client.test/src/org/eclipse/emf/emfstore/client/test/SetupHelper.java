@@ -34,7 +34,6 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -377,36 +376,6 @@ public class SetupHelper {
 		}.run(false);
 
 		testProject = testProjectSpace.getProject();
-
-	}
-
-	/**
-	 * @throws EmfStoreException if any error occurs
-	 */
-	public void setupTestProjectOnServer() throws EmfStoreException {
-		System.out.println("**********************************************************");
-		System.out.println("*                                                        *");
-		System.out.println("*     Creating a random project with given parameters    *");
-		System.out.println("*                                                        *");
-		System.out.println("**********************************************************");
-
-		// running the server
-		startSever();
-		// logging in on server
-		loginServer();
-		// create a new project id
-		projectId = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId();
-		// visual check if null
-		System.out.println("-> Session id is: " + usersession.getSessionId().getId());
-		System.out.println("-> Project id is: " + projectId.getId());
-		// create a log message
-
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
-		ProjectInfo projectInfo = connectionManager.createEmptyProject(usersession.getSessionId(),
-			projectId.toString(), "test_project", createLogMessage("test", "log this!"));
-
-		WorkspaceManager.getInstance().getCurrentWorkspace()
-			.checkout(usersession, projectInfo, new NullProgressMonitor());
 
 	}
 

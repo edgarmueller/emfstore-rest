@@ -177,11 +177,15 @@ public abstract class ServerTests extends WorkspaceTest {
 
 	/**
 	 * Shuts down server after testing.
+	 * 
+	 * @throws IOException
+	 *             in case cleanup/teardown fails
 	 */
 	@AfterClass
-	public static void tearDownAfterClass() {
+	public static void tearDownAfterClass() throws IOException {
 		SetupHelper.stopServer();
-
+		SetupHelper.cleanupWorkspace();
+		SetupHelper.cleanupServer();
 	}
 
 	/**

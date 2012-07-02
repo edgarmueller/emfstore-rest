@@ -13,6 +13,7 @@ import org.eclipse.emf.emfstore.client.test.TestProjectEnum;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -37,7 +38,12 @@ public abstract class IntegrationTest {
 
 		SetupHelper.startSever();
 		serverRunning = true;
+	}
 
+	@AfterClass
+	public static void tearDownAfterClass() {
+		SetupHelper.stopServer();
+		serverRunning = false;
 	}
 
 	/**
