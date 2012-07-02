@@ -56,7 +56,8 @@ public final class Configuration {
 	private static final String UPF = ".upf";
 	private static final String PLUGIN_BASEDIR = "pluginData";
 
-	private static boolean autoSave;
+	// default is to enable auto-save by default
+	private static boolean autoSave = true;
 
 	private static LocationProvider locationProvider;
 	private static EditingDomain editingDomain;

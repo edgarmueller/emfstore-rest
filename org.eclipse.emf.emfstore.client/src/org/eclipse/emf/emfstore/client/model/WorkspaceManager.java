@@ -177,11 +177,8 @@ public final class WorkspaceManager implements IReinitializable {
 	}
 
 	/**
-	 * Initialize the workspace. Loads workspace from persistent storage if
+	 * (Re-)Initializes the workspace. Loads workspace from persistent storage if
 	 * present. There is always one current Workspace.
-	 * 
-	 * @return the workspace
-	 * @generated NOT
 	 */
 	public void reinit() {
 
@@ -196,8 +193,6 @@ public final class WorkspaceManager implements IReinitializable {
 
 		// register an editing domain on the resource
 		Configuration.setEditingDomain(createEditingDomain(resourceSet));
-		// enable auto-save by default
-		Configuration.setAutoSave(true);
 
 		URI fileURI = URI.createFileURI(Configuration.getWorkspacePath());
 		File workspaceFile = new File(Configuration.getWorkspacePath());
@@ -575,6 +570,12 @@ public final class WorkspaceManager implements IReinitializable {
 		return sessionManager;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 */
 	public void dispose() {
 		if (currentWorkspace != null) {
 			((WorkspaceImpl) currentWorkspace).dispose();
@@ -582,6 +583,12 @@ public final class WorkspaceManager implements IReinitializable {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.IReinitializable#isDisposed()
+	 */
 	public boolean isDisposed() {
 		return currentWorkspace == null;
 	}
