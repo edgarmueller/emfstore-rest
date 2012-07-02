@@ -210,7 +210,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 		save();
 		WorkspaceManager.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
 		parent.worked(10);
-		progressMonitor.done();
+		parent.done();
 
 		return projectSpace;
 	}
