@@ -28,10 +28,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -69,25 +71,43 @@ public class EObjectSerializer extends TypeSerializerImpl {
 			BufferedOutputStream bos = new BufferedOutputStream(ostream);
 			try {
 				EObject eObject = (EObject) pObject;
-				if (eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) {
+				XMIResource resource = (XMIResource) eObject.eResource();
+
+				if ((eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) && resource != null) {
 					OutputStreamWriter writer = new OutputStreamWriter(bos);
 					Resource res = eObject.eResource();
 					uws = new URIConverter.WriteableOutputStream(writer, "UTF-8");
 					checkResource(res);
 					res.save(uws, ModelUtil.getResourceSaveOptions());
 				} else {
+					resource = (XMIResource) (new ResourceSetImpl()).createResource(ModelUtil.VIRTUAL_URI);
+					((ResourceImpl) resource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+					EObject copy;
 
-					Resource res = (new ResourceSetImpl()).createResource(ModelUtil.VIRTUAL_URI);
-					((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
-					EObject copy = ModelUtil.clone(eObject);
-					res.getContents().add(copy);
+					if (eObject instanceof IdEObjectCollection) {
+						copy = ModelUtil.copyIdEObjectCollection((IdEObjectCollection) eObject, resource);
+					} else {
+						copy = ModelUtil.clone(eObject);
+					}
 
+					if (copy instanceof IdEObjectCollection) {
+						IdEObjectCollection collection = ((IdEObjectCollection) eObject);
+						for (EObject element : collection.getAllModelElements()) {
+							if (ModelUtil.isIgnoredDatatype(element)) {
+								continue;
+							}
+							ModelElementId elementId = collection.getModelElementId(element);
+							resource.setID(element, elementId.getId());
+						}
+					}
+
+					resource.getContents().add(copy);
 					StringWriter stringWriter = new StringWriter();
 					uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 					// save string into Stringwriter
-					checkResource(res);
-					res.save(uws, ModelUtil.getResourceSaveOptions());
-					// get string from string writer and werite to bos
+					checkResource(resource);
+					resource.save(uws, ModelUtil.getResourceSaveOptions());
+					// get string from string writer and write to bos
 					String string = stringWriter.toString();
 					hrefCheck(string);
 					bos.write(string.getBytes());

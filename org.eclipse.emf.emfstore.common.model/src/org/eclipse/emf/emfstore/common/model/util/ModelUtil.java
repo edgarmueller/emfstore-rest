@@ -176,7 +176,7 @@ public final class ModelUtil {
 		return result;
 	}
 
-	private static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
+	public static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
 		IdEObjectCollection copiedCollection = clone(collection);
 
 		for (EObject modelElement : copiedCollection.getAllModelElements()) {
