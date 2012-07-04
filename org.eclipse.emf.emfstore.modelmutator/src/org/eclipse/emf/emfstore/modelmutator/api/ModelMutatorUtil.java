@@ -768,55 +768,52 @@ public final class ModelMutatorUtil {
 	 */
 	public static Map<EClassifier, AttributeSetter<?>> getAttributeSetters(Random random) {
 
-		if (attributeSetters == null) {
+		EcorePackage ecoreInstance = EcorePackage.eINSTANCE;
 
-			EcorePackage ecoreInstance = EcorePackage.eINSTANCE;
+		attributeSetters = new LinkedHashMap<EClassifier, AttributeSetter<?>>();
+		AttributeSetter<?> oAttributeSetter;
 
-			attributeSetters = new LinkedHashMap<EClassifier, AttributeSetter<?>>();
-			AttributeSetter<?> oAttributeSetter;
+		oAttributeSetter = new AttributeSetterEBoolean(random);
+		attributeSetters.put(ecoreInstance.getEBoolean(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEBooleanObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEBoolean(random);
-			attributeSetters.put(ecoreInstance.getEBoolean(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEBooleanObject(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEByteArray(), new AttributeSetterEByteArray(random, 100));
 
-			attributeSetters.put(ecoreInstance.getEByteArray(), new AttributeSetterEByteArray(random, 100));
+		attributeSetters.put(ecoreInstance.getEString(), new AttributeSetterEString(random));
 
-			attributeSetters.put(ecoreInstance.getEString(), new AttributeSetterEString(random));
+		oAttributeSetter = new AttributeSetterEInt(random);
+		attributeSetters.put(ecoreInstance.getEInt(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEIntegerObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEInt(random);
-			attributeSetters.put(ecoreInstance.getEInt(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEIntegerObject(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEDate(), new AttributeSetterEDate(random));
 
-			attributeSetters.put(ecoreInstance.getEDate(), new AttributeSetterEDate(random));
+		oAttributeSetter = new AttributeSetterELong(random);
+		attributeSetters.put(ecoreInstance.getELong(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getELongObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterELong(random);
-			attributeSetters.put(ecoreInstance.getELong(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getELongObject(), oAttributeSetter);
+		oAttributeSetter = new AttributeSetterEByte(random);
+		attributeSetters.put(ecoreInstance.getEByte(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEByteObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEByte(random);
-			attributeSetters.put(ecoreInstance.getEByte(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEByteObject(), oAttributeSetter);
+		oAttributeSetter = new AttributeSetterEChar(random);
+		attributeSetters.put(ecoreInstance.getEChar(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getECharacterObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEChar(random);
-			attributeSetters.put(ecoreInstance.getEChar(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getECharacterObject(), oAttributeSetter);
+		oAttributeSetter = new AttributeSetterEDouble(random);
+		attributeSetters.put(ecoreInstance.getEDouble(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEDoubleObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEDouble(random);
-			attributeSetters.put(ecoreInstance.getEDouble(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEDoubleObject(), oAttributeSetter);
+		oAttributeSetter = new AttributeSetterEFloat(random);
+		attributeSetters.put(ecoreInstance.getEFloat(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEFloatObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEFloat(random);
-			attributeSetters.put(ecoreInstance.getEFloat(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEFloatObject(), oAttributeSetter);
+		oAttributeSetter = new AttributeSetterEShort(random);
+		attributeSetters.put(ecoreInstance.getEShort(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEShortObject(), oAttributeSetter);
 
-			oAttributeSetter = new AttributeSetterEShort(random);
-			attributeSetters.put(ecoreInstance.getEShort(), oAttributeSetter);
-			attributeSetters.put(ecoreInstance.getEShortObject(), oAttributeSetter);
+		attributeSetters.put(ecoreInstance.getEBigInteger(), new AttributeSetterEBigInteger(random));
 
-			attributeSetters.put(ecoreInstance.getEBigInteger(), new AttributeSetterEBigInteger(random));
-
-			attributeSetters.put(ecoreInstance.getEBigDecimal(), new AttributeSetterEBigDecimal(random));
-		}
+		attributeSetters.put(ecoreInstance.getEBigDecimal(), new AttributeSetterEBigDecimal(random));
 
 		return attributeSetters;
 	}
