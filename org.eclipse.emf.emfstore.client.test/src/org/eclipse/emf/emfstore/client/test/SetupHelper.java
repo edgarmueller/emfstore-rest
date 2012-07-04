@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,8 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -42,6 +45,9 @@ import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
+import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
+import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -78,7 +84,6 @@ public class SetupHelper {
 	 * @param projectTemplate test project to initialize SetupHelper
 	 */
 	public SetupHelper(TestProjectEnum projectTemplate) {
-
 		this.projectTemplate = projectTemplate;
 		LOGGER.log(Level.INFO, "SetupHelper instantiated with " + projectTemplate);
 	}
@@ -88,9 +93,47 @@ public class SetupHelper {
 	 *            used as test project.
 	 */
 	public SetupHelper(String absolutePath) {
-
 		projectPath = absolutePath;
 		LOGGER.log(Level.INFO, "SetupHelper instantiated with " + absolutePath);
+	}
+
+	/**
+	 * Generates a project randomly.
+	 * 
+	 * @param modelKey
+	 *            the key of the model to be used
+	 * @param width
+	 *            the max width of a tree node
+	 * @param depth
+	 *            the max depth of a tree node
+	 * @param seed
+	 *            an initial seed value
+	 * @return the project space containing the generated project
+	 */
+	public static ProjectSpace generateProject(String modelKey, int width, int depth, long seed) {
+		ProjectSpace createLocalProject = WorkspaceManager.getInstance().getCurrentWorkspace()
+			.createLocalProject("", "");
+		Project project = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject();
+		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, width, depth, seed);
+		Configuration.setAutoSave(false);
+		ModelMutator.generateModel(config);
+		createLocalProject.setProject(project);
+		return createLocalProject;
+	}
+
+	private static ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
+		int width, int depth, long seed) {
+		ModelMutatorConfiguration config = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
+			rootObject, seed);
+		config.setIgnoreAndLog(false);
+		config.setDepth(depth);
+		config.setWidth(width);
+		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
+		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.common.model.ModelPackage.eINSTANCE
+			.getProject_CutElements());
+		config.setEditingDomain(WorkspaceManager.getInstance().getCurrentWorkspace().getEditingDomain());
+		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
+		return config;
 	}
 
 	/**
