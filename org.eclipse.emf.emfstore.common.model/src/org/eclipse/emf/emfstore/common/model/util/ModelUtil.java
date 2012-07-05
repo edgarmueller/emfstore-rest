@@ -176,6 +176,15 @@ public final class ModelUtil {
 		return result;
 	}
 
+	/**
+	 * Copies the given {@link IdEObjectCollection} and writes the IDs it contains into the given {@link XMIResource}.
+	 * 
+	 * @param collection
+	 *            the collection to be copied
+	 * @param res
+	 *            the resource into which the collection's IDs should be written into
+	 * @return the copied collection
+	 */
 	public static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
 		IdEObjectCollection copiedCollection = clone(collection);
 
