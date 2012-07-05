@@ -696,11 +696,17 @@ public class SetupHelper {
 	 */
 	public static void removeServerTestProfile() throws IOException {
 		String serverPath = ServerConfiguration.getServerHome();
-		File serverDirectory = new File(serverPath);
-		FileUtils.deleteDirectory(serverDirectory);
 		String clientPath = Configuration.getWorkspaceDirectory();
+		File serverDirectory = new File(serverPath);
 		File clientDirectory = new File(clientPath);
-		FileUtils.deleteDirectory(clientDirectory);
+
+		if (serverDirectory.exists()) {
+			FileUtils.deleteDirectory(serverDirectory);
+		}
+
+		if (clientDirectory.exists()) {
+			FileUtils.deleteDirectory(clientDirectory);
+		}
 	}
 
 }
