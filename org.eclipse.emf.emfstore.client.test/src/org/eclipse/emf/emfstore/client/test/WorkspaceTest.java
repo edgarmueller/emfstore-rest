@@ -15,6 +15,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.CommonUtil;
@@ -44,8 +45,8 @@ public abstract class WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace localProject = workspace.createLocalProject("testProject", "test Project");
-				setProjectSpace(localProject);
+				ProjectSpace localProjectSpace = workspace.createLocalProject("testProject", "test Project");
+				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 			}
 		}.run(false);
@@ -53,21 +54,28 @@ public abstract class WorkspaceTest {
 	}
 
 	/**
-	 * Clean workspace.
+	 * Clean up workspace.
 	 */
 	@After
 	public void cleanProjectSpace() {
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
+				int retried = 0;
 				try {
 					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(getProjectSpace());
 				} catch (IOException e) {
-					fail();
+					if (retried++ > 2) {
+						fail();
+					} else {
+						WorkspaceUtil.logWarning(e.getMessage() + " Retrying...(" + retried + " out of 3)", e);
+					}
 				}
 			}
 		}.run(false);
+
+		setProject(null);
+		setProjectSpace(null);
 	}
 
 	/**
