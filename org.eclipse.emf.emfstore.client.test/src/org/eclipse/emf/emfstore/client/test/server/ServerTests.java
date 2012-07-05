@@ -124,9 +124,6 @@ public abstract class ServerTests extends WorkspaceTest {
 		ServerConfiguration.setTesting(true);
 		CommonUtil.setTesting(true);
 
-		// delete all data before test start
-		SetupHelper.removeServerTestProfile();
-
 		SetupHelper.addUserFileToServer(false);
 		SetupHelper.startSever();
 		setConnectionManager(WorkspaceManager.getInstance().getConnectionManager());
@@ -186,6 +183,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		SetupHelper.stopServer();
 		SetupHelper.cleanupWorkspace();
 		SetupHelper.cleanupServer();
+		SetupHelper.removeServerTestProfile();
 	}
 
 	/**
@@ -199,6 +197,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
+					Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 					ServerInfo serverInfo = SetupHelper.getServerInfo();
 					Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE
 						.createUsersession();
@@ -207,7 +206,6 @@ public abstract class ServerTests extends WorkspaceTest {
 					session.setPassword("super");
 					session.setSavePassword(true);
 
-					Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 					currentWorkspace.getServerInfos().add(serverInfo);
 					currentWorkspace.getUsersessions().add(session);
 					currentWorkspace.save();
