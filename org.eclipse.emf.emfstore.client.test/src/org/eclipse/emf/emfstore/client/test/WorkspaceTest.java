@@ -68,6 +68,11 @@ public abstract class WorkspaceTest {
 					if (retried++ > 2) {
 						fail();
 					} else {
+						try {
+							Thread.sleep(retried * 1000);
+						} catch (InterruptedException e1) {
+							// ignore
+						}
 						WorkspaceUtil.logWarning(e.getMessage() + " Retrying...(" + retried + " out of 3)", e);
 					}
 				}
