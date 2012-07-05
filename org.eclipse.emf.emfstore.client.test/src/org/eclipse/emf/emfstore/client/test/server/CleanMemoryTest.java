@@ -23,8 +23,8 @@ public class CleanMemoryTest extends WorkspaceTest {
 	@Test
 	public void testUnload() throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		final Resource res = resourceSet.createResource(URI.createFileURI("C:\\Users\\Edgar\\Documents\\test.xmi"));
-		final Resource res2 = resourceSet.createResource(URI.createFileURI("C:\\Users\\Edgar\\Documents\\test2.xmi"));
+		final Resource res = resourceSet.createResource(URI.createURI("CleanMemoryTestURI-1"));
+		final Resource res2 = resourceSet.createResource(URI.createFileURI("CleanMemoryTestURI-1"));
 		final Version version = VersioningFactory.eINSTANCE.createVersion();
 		final Version nextVersion = VersioningFactory.eINSTANCE.createVersion();
 		new EMFStoreCommand() {
