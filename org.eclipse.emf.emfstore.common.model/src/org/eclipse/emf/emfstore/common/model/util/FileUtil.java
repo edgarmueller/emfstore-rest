@@ -38,29 +38,6 @@ public final class FileUtil {
 	}
 
 	/**
-	 * This method deletes a folder including all subfolders and files.
-	 * 
-	 * @param folder the folder
-	 * @throws IOException if can't delete
-	 */
-	public static void deleteFolder(File folder) throws IOException {
-		if (folder.exists()) {
-			for (File child : folder.listFiles()) {
-				if (child.isDirectory()) {
-					deleteFolder(child);
-				} else {
-					if (!child.delete()) {
-						throw new IOException("Deletion of file: " + child.getAbsolutePath() + " failed.");
-					}
-				}
-			}
-			if (!folder.delete()) {
-				throw new IOException("Deletion of folder: " + folder.getAbsolutePath() + " failed.");
-			}
-		}
-	}
-
-	/**
 	 * This method copies a single file.
 	 * 
 	 * @param source the source

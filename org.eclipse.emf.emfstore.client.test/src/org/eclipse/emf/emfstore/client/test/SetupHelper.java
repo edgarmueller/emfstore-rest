@@ -438,7 +438,7 @@ public class SetupHelper {
 		File[] filesToDeleteOnServer = serverDirectory.listFiles(serverFileFilter);
 		for (int i = 0; i < filesToDeleteOnServer.length; i++) {
 			try {
-				FileUtil.deleteFolder(filesToDeleteOnServer[i]);
+				FileUtils.deleteDirectory(filesToDeleteOnServer[i]);
 			} catch (IOException e) {
 
 				e.printStackTrace();
@@ -472,7 +472,7 @@ public class SetupHelper {
 		};
 		File[] filesToDelete = workspaceDirectory.listFiles(workspaceFileFilter);
 		for (int i = 0; i < filesToDelete.length; i++) {
-			FileUtil.deleteFolder(filesToDelete[i]);
+			FileUtils.deleteDirectory(filesToDelete[i]);
 		}
 
 		new File(workspacePath + "workspace.ucw").delete();
@@ -697,11 +697,10 @@ public class SetupHelper {
 	public static void removeServerTestProfile() throws IOException {
 		String serverPath = ServerConfiguration.getServerHome();
 		File serverDirectory = new File(serverPath);
-		FileUtil.deleteFolder(serverDirectory);
+		FileUtils.deleteDirectory(serverDirectory);
 		String clientPath = Configuration.getWorkspaceDirectory();
 		File clientDirectory = new File(clientPath);
-		FileUtil.deleteFolder(clientDirectory);
-
+		FileUtils.deleteDirectory(clientDirectory);
 	}
 
 }
