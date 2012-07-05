@@ -48,9 +48,6 @@ public class InvalidArgumentsTest extends ServerTests {
 		ServerConfiguration.setTesting(true);
 		CommonUtil.setTesting(true);
 
-		// delete all data before test start
-		SetupHelper.removeServerTestProfile();
-
 		SetupHelper.addUserFileToServer(false);
 
 		// setConnectionManager(WorkspaceManager.getInstance().getConnectionManager());
