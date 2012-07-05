@@ -669,7 +669,9 @@ public final class IntegrationTestHelper {
 					+ ModelUtil.getProject(me).getModelElementId(me).getId());
 			} else {
 				int position = getRandomPosition(eList.size());
-				eList.add(position, toBeReferencedME);
+				if (!eList.contains(toBeReferencedME)) {
+					eList.add(position, toBeReferencedME);
+				}
 			}
 		} else {
 			me.eSet(ref, toBeReferencedME);
