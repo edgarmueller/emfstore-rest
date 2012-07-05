@@ -181,8 +181,6 @@ public class CompositeOperationTest extends WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-				clearOperations();
-				cleanProjectSpace();
 				final LeafSection section = DocumentFactory.eINSTANCE.createLeafSection();
 				final WorkPackage workPackage = TaskFactory.eINSTANCE.createWorkPackage();
 				final ActionItem actionItem = TaskFactory.eINSTANCE.createActionItem();
@@ -212,8 +210,6 @@ public class CompositeOperationTest extends WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-				clearOperations();
-				cleanProjectSpace();
 				CompositeOperationHandle compositeOperationHandle = getProjectSpace().beginCompositeOperation();
 				try {
 					compositeOperationHandle.abort();
