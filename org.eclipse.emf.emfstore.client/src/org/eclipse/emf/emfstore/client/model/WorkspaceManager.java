@@ -100,10 +100,6 @@ public final class WorkspaceManager implements IReinitializable {
 		return instance;
 	}
 
-	public static synchronized void destroy() {
-		instance = null;
-	}
-
 	/**
 	 * Initialize the Workspace Manager singleton.
 	 */
@@ -580,6 +576,7 @@ public final class WorkspaceManager implements IReinitializable {
 		if (currentWorkspace != null) {
 			((WorkspaceImpl) currentWorkspace).dispose();
 			currentWorkspace = null;
+			instance = null;
 		}
 	}
 
