@@ -55,6 +55,11 @@ public class LoginDialogController implements ILoginDialogController {
 	private Usersession login() throws EmfStoreException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
+
+				if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn()) {
+					return serverInfo.getLastUsersession();
+				}
+
 				LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), LoginDialogController.this);
 				dialog.setBlockOnOpen(true);
 
