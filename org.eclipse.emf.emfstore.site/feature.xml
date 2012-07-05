@@ -79,4 +79,8 @@
          id="org.eclipse.emf.emfstore.modelmutator.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.emf.emfstore.test.feature"
+         version="0.0.0"/>
+
 </feature>
