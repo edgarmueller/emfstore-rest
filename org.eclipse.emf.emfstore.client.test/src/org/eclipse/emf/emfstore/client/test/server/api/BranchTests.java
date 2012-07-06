@@ -81,9 +81,9 @@ public class BranchTests extends CoreServerTest {
 				try {
 					Workspace workspace = getWorkspace();
 					workspace.setConnectionManager(getConnectionMock());
-					Usersession usersession = copy(projectSpace.getUsersession());
-					return workspace.checkout(usersession, ModelUtil.clone(projectSpace.getProjectInfo()),
-						ModelUtil.clone(projectSpace.getBaseVersion()), new NullProgressMonitor());
+					return workspace.checkout(projectSpace.getUsersession(),
+						ModelUtil.clone(projectSpace.getProjectInfo()), ModelUtil.clone(projectSpace.getBaseVersion()),
+						new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}
