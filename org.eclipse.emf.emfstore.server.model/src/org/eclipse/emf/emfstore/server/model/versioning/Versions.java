@@ -1,6 +1,6 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 public class Versions {
 
@@ -49,8 +49,8 @@ public class Versions {
 	public static AncestorVersionSpec ANCESTOR(PrimaryVersionSpec source, PrimaryVersionSpec target) {
 		AncestorVersionSpec ancestor = VersioningFactory.eINSTANCE.createAncestorVersionSpec();
 		ancestor.setBranch(source.getBranch());
-		ancestor.setSource(EcoreUtil.copy(source));
-		ancestor.setTarget(EcoreUtil.copy(target));
+		ancestor.setSource(ModelUtil.clone(source));
+		ancestor.setTarget(ModelUtil.clone(target));
 		return ancestor;
 	}
 
