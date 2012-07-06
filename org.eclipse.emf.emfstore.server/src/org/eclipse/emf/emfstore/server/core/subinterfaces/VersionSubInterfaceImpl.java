@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -264,7 +263,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				}
 				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
 				newVersion.setPreviousVersion(baseVersion);
-				baseBranch.setHead(EcoreUtil.copy(newVersion.getPrimarySpec()));
+				baseBranch.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
 
 			} else if (getBranchInfo(projectHistory, targetBranch) == null) {
 				if (targetBranch.getBranch().equals("")) {
@@ -336,8 +335,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// TODO BRANCH make sure branch name is not null
 		BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
 		branchInfo.setName(branch.getBranch());
-		branchInfo.setSource(EcoreUtil.copy(baseSpec));
-		branchInfo.setHead(EcoreUtil.copy(primarySpec));
+		branchInfo.setSource(ModelUtil.clone(baseSpec));
+		branchInfo.setHead(ModelUtil.clone(primarySpec));
 
 		projectHistory.getBranches().add(branchInfo);
 
@@ -403,7 +402,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 			ArrayList<BranchInfo> result = new ArrayList<BranchInfo>();
 			for (BranchInfo branch : projectHistory.getBranches()) {
-				result.add(EcoreUtil.copy(branch));
+				result.add(ModelUtil.clone(branch));
 			}
 			return result;
 		}

@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
@@ -311,8 +310,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// create branch information
 		BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
 		branchInfo.setName(VersionSpec.BRANCH_DEFAULT_NAME);
-		branchInfo.setHead(EcoreUtil.copy(primary));
-		branchInfo.setSource(EcoreUtil.copy(primary));
+		branchInfo.setHead(ModelUtil.clone(primary));
+		branchInfo.setSource(ModelUtil.clone(primary));
 		projectHistory.getBranches().add(branchInfo);
 
 		// create initial project
