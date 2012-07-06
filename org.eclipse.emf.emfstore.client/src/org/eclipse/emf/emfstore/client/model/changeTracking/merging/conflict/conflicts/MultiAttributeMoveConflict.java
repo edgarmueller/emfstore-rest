@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 public class MultiAttributeMoveConflict extends Conflict {
@@ -39,11 +40,12 @@ public class MultiAttributeMoveConflict extends Conflict {
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 		if (isLeftMy()) {
-			description
-				.setDescription("You have added an element to the [feature] attribute of [modelelement], which was moved in the repository");
+			description.setDescription(DecisionUtil.getDescription("multiattributemoveconflict.my",
+				getDecisionManager().isBranchMerge()));
+
 		} else {
-			description
-				.setDescription("You've moved an element of the [feature] attribute of [modelelement], which stands in conflict with an add on the repository.");
+			description.setDescription(DecisionUtil.getDescription("multiattributemoveconflict.their",
+				getDecisionManager().isBranchMerge()));
 		}
 
 		return description;

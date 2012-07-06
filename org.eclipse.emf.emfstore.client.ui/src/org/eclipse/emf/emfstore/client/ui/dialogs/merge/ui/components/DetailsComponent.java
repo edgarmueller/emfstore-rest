@@ -16,6 +16,8 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.Decisio
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.MergeTextWidget;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.OtherInvolvedWidget;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
@@ -72,9 +74,10 @@ public class DetailsComponent extends Section {
 
 		MergeTextWidget multiWidget = null;
 		for (ConflictOption option : conflict.getOptions()) {
-			if (!option.isDetailsProvider()) {
+			if (!option.isDetailsProvider() || option.getDetailProvider() == null) {
 				continue;
 			}
+			// TODO BRANCH hardcoded behavior, maybe generalize in later iteration
 			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
 				if (multiWidget == null) {
 					multiWidget = new MergeTextWidget(decisionBox, this);
@@ -82,6 +85,16 @@ public class DetailsComponent extends Section {
 				multiWidget.addOption(option);
 			} else if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_OTHERINVOLVED)) {
 				new OtherInvolvedWidget(client, decisionBox.getDecisionManager(), option);
+			}
+
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.detailwidget")
+				.getExtensionElements()) {
+				if (option.getDetailProvider().equals(element.getAttribute("id"))) {
+					DetailsPart detailsPart = element.getClass("class", DetailsPart.class);
+					if (detailsPart != null) {
+						detailsPart.initialize(decisionBox.getDecisionManager(), option, client);
+					}
+				}
 			}
 		}
 

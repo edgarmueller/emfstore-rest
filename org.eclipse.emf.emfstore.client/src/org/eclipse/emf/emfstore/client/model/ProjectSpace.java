@@ -19,13 +19,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.impl.OperationManager;
-import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -161,6 +162,10 @@ public interface ProjectSpace extends IdentifiableElement {
 	 */
 	PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
 		throws EmfStoreException;
+
+	// TODO BRANCH
+	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, CommitCallback callback,
+		IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Export all local changes to a file.
@@ -308,6 +313,35 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @generated
 	 */
 	void setLocalChangePackage(ChangePackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Merged Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Merged Version</em>' containment reference isn't clear, there really should be more of
+	 * a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Merged Version</em>' containment reference.
+	 * @see #setMergedVersion(PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_MergedVersion()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	PrimaryVersionSpec getMergedVersion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getMergedVersion
+	 * <em>Merged Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Merged Version</em>' containment reference.
+	 * @see #getMergedVersion()
+	 * @generated
+	 */
+	void setMergedVersion(PrimaryVersionSpec value);
 
 	/**
 	 * @return a list of the change packages between two PrimarySpecVersions.
@@ -705,10 +739,10 @@ public interface ProjectSpace extends IdentifiableElement {
 	 *            a conflict resolver that will actually perform the conflict
 	 *            resolution
 	 * 
-	 * @return whether the merge could be proceed
 	 * 
 	 * @throws EmfStoreException
 	 *             if the connection to the server fails
+	 * @return true if merge was succesful
 	 * 
 	 * @generated NOT
 	 */

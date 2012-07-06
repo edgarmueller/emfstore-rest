@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 
@@ -57,18 +58,17 @@ public class MultiReferenceConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "";
 
 		if (containmentConflict) {
-			descriptionTxt = "You have moved [target] to the [feature] reference of [modelelement], on the repository it was moved to [othercontainer].";
+			description.setDescription(DecisionUtil.getDescription("multireferenceconflict.containment",
+				getDecisionManager().isBranchMerge()));
 		} else if (isLeftMy()) {
-			descriptionTxt = "You have added [target] to the [feature]" + " reference of the [modelelement]."
-				+ " This item was removed on the repository.";
+			description.setDescription(DecisionUtil.getDescription("multireferenceconflict.my", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			descriptionTxt = "The [target] was added to the [feature] reference"
-				+ " of the [modelelement] on the repository." + " You chose to remove it, please decide.";
+			description.setDescription(DecisionUtil.getDescription("multireferenceconflict.their", getDecisionManager()
+				.isBranchMerge()));
 		}
-		description.setDescription(descriptionTxt);
 		description.add("target", getMyOperation(MultiReferenceOperation.class).getReferencedModelElements().get(0));
 		description.add("othercontainer", getTheirOperation(MultiReferenceOperation.class).getModelElementId());
 

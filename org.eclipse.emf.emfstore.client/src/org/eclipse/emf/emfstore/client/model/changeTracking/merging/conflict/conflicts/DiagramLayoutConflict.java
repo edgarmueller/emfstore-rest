@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionMana
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -45,7 +46,7 @@ public class DiagramLayoutConflict extends AttributeConflict {
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 		description = super.initConflictDescription(description);
 		description
-			.setDescription("The diagram layout of [modelelement], which you have edited, was edited on the repository as well.");
+			.setDescription(DecisionUtil.getDescription("diagramconflict", getDecisionManager().isBranchMerge()));
 		return description;
 	}
 

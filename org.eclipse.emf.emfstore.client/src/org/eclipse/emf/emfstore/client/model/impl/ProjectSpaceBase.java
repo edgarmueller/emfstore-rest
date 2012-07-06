@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
@@ -38,8 +40,10 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
@@ -53,7 +57,6 @@ import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectController;
-import org.eclipse.emf.emfstore.client.model.observers.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
@@ -68,11 +71,14 @@ import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -81,6 +87,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
@@ -169,6 +176,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException {
 		final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
 		cm.addTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
+	}
+
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
+		// revert
+		revert();
+
+		// apply changes from repo. incoming (aka theirs)
+		for (ChangePackage change : incoming) {
+			applyOperations(change.getCopyOfOperations(), false);
+		}
+		// reapply local changes
+		applyOperations(myChanges.getCopyOfOperations(), true);
+
+		setBaseVersion(baseSpec);
+		saveProjectSpaceOnly();
 	}
 
 	/**
@@ -300,6 +322,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
 		throws EmfStoreException {
 		return new CommitController(this, logMessage, callback, monitor).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, CommitCallback callback,
+		IProgressMonitor monitor) throws EmfStoreException {
+		return new CommitController(this, branch, logMessage, callback, monitor).execute();
 	}
 
 	/**
@@ -759,7 +789,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EmfStoreException {
-		PrimaryVersionSpec headVersion = resolveVersionSpec(VersionSpec.HEAD_VERSION);
+		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.HEAD_VERSION(getBaseVersion()));
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -795,39 +825,55 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @return
 	 */
+	// TODO BRANCH rewrite
 	public boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
 		// merge the conflicts
 		ChangePackage myCp = this.getLocalChangePackage(true);
 		List<ChangePackage> theirCps = this.getChanges(getBaseVersion(), target);
-		if (conflictResolver.resolveConflicts(getProject(), theirCps, myCp, getBaseVersion(), target)) {
-
-			// revert the local operations and apply all their operations
-			this.revert();
-
-			for (ChangePackage changePackage : theirCps) {
-				applyOperations(changePackage.getOperations(), false);
-			}
-
-			// generate merge result and apply to local workspace
-			List<AbstractOperation> acceptedMine = conflictResolver.getAcceptedMine();
-			List<AbstractOperation> rejectedTheirs = conflictResolver.getRejectedTheirs();
-			List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();
-			for (AbstractOperation operationToReverse : rejectedTheirs) {
-				mergeResult.add(0, operationToReverse.reverse());
-			}
-			mergeResult.addAll(acceptedMine);
-
-			applyOperations(mergeResult, true);
-
-			this.setBaseVersion(target);
-
-			saveProjectSpaceOnly();
-			return true;
-		} else {
-			// merge could not proceed
-			return false;
+		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myCp), theirCps, getBaseVersion(), target)) {
+			ChangePackage mergedResult = conflictResolver.getMergedResult();
+			applyChanges(target, theirCps, mergedResult);
 		}
+		return true;
+	}
+
+	// TODO BRANCH
+	// add to emfstore interface
+	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver)
+		throws EmfStoreException {
+		new ServerCall<Void>(this) {
+			@Override
+			protected Void run() throws EmfStoreException {
+
+				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
+					throw new InvalidVersionSpecException("Can't merge branch with itself.");
+				}
+
+				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.ANCESTOR(getBaseVersion(), branchSpec));
+
+				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
+				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
+
+				if (conflictResolver.resolveConflicts(getProject(), branchChanges, baseChanges, getBaseVersion(), null)) {
+					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
+					setMergedVersion(EcoreUtil.copy(branchSpec));
+				}
+				return null;
+			}
+		}.execute();
+	}
+
+	public List<BranchInfo> getBranches() throws EmfStoreException {
+		return new ServerCall<List<BranchInfo>>(this) {
+			@Override
+			protected List<BranchInfo> run() throws EmfStoreException {
+				final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+				return cm.getBranches(getSessionId(), getProjectId());
+			};
+		}.execute();
 	}
 
 	/**
@@ -861,9 +907,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @throws EmfStoreException
 	 * @generated NOT
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec) throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
-		return connectionManager.resolveVersionSpec(getUsersession().getSessionId(), getProjectId(), versionSpec);
+	public PrimaryVersionSpec resolveVersionSpec(final VersionSpec versionSpec) throws EmfStoreException {
+		return new ServerCall<PrimaryVersionSpec>(this) {
+			@Override
+			protected PrimaryVersionSpec run() throws EmfStoreException {
+				ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+				return connectionManager.resolveVersionSpec(getSessionId(), getProjectId(), versionSpec);
+			}
+		}.execute();
 	}
 
 	/**
@@ -1078,7 +1129,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update()
 	 */
 	public PrimaryVersionSpec update() throws EmfStoreException {
-		return update(VersionSpec.HEAD_VERSION);
+		return update(Versions.HEAD_VERSION(getBaseVersion()));
 	}
 
 	/**

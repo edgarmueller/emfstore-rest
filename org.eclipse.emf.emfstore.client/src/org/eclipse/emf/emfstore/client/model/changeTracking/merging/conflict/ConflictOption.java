@@ -150,7 +150,8 @@ public class ConflictOption {
 	 * @return detail provider identifier
 	 */
 	public String getDetailProvider() {
-		return detailProvider;
+		// return detailProvider;
+		return (detailProvider == null) ? "jawoll" : detailProvider;
 	}
 
 	/**

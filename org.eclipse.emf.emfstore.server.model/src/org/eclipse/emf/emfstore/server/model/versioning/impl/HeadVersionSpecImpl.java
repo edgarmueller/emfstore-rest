@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.server.model.versioning.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
@@ -23,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class HeadVersionSpecImpl extends EObjectImpl implements HeadVersionSpec {
+public class HeadVersionSpecImpl extends VersionSpecImpl implements HeadVersionSpec {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

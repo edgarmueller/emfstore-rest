@@ -62,14 +62,14 @@ public class MultiReferenceSetConflict extends Conflict {
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 
 		if (containmentConflict) {
-			description
-				.setDescription("You have moved [target] to the [feature] reference of [modelelement], on the repository it was moved to [othercontainer].");
+			description.setDescription(DecisionUtil.getDescription("multireferencesetconflict.containment",
+				getDecisionManager().isBranchMerge()));
 		} else if (isLeftMy()) {
-			description
-				.setDescription("You have removed [target] from the [feature] reference of [modelelement], which was set in the repository");
+			description.setDescription(DecisionUtil.getDescription("multireferencesetconflict.my", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			description
-				.setDescription("You have set [target] in the [feature] reference of [modelelement], which was removed in the repository.");
+			description.setDescription(DecisionUtil.getDescription("multireferencesetconflict.their",
+				getDecisionManager().isBranchMerge()));
 		}
 
 		description.add("target", isLeftMy() ? getMyOperation(MultiReferenceOperation.class)

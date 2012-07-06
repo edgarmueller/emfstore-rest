@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.server.model.versioning.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
@@ -29,7 +28,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class TagVersionSpecImpl extends EObjectImpl implements TagVersionSpec {
+public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpec {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->

@@ -10,9 +10,9 @@ public class SingleReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void setSameTarget() {
-		final TestElement target = createTestElement();
-		final TestElement myLink = createTestElement();
-		final TestElement theirLink = createTestElement();
+		final TestElement target = createTestElement("target");
+		final TestElement myLink = createTestElement("myLink");
+		final TestElement theirLink = createTestElement("theirLink");
 
 		final MergeCase mc = newMergeCase(target, myLink, theirLink);
 
@@ -101,9 +101,9 @@ public class SingleReferenceMergeTest extends MergeTest {
 
 	@Test
 	public void setSameTargetContainment() {
-		final TestElement target = createTestElement();
-		final TestElement myLink = createTestElement();
-		final TestElement theirLink = createTestElement();
+		final TestElement target = createTestElement("target");
+		final TestElement myLink = createTestElement("myLink");
+		final TestElement theirLink = createTestElement("theirLink");
 
 		final MergeCase mc = newMergeCase(target, myLink, theirLink);
 

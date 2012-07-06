@@ -64,6 +64,23 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
 
+		return loginServerInfo(serverInfo);
+	}
+
+	/**
+	 * Extracted from {@link #provideUsersession(ServerInfo)} in order to allow overwriting. This method logs in a given
+	 * serverInfo.
+	 * 
+	 * @param serverInfo given serverInfo
+	 * @return Usersession
+	 * @throws EmfStoreException in case of an exception
+	 */
+	protected Usersession loginServerInfo(ServerInfo serverInfo) throws EmfStoreException {
+		// TODO BRANCH Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
+		// wanted.
+		if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn()) {
+			return serverInfo.getLastUsersession();
+		}
 		return new LoginDialogController().login(serverInfo);
 	}
 

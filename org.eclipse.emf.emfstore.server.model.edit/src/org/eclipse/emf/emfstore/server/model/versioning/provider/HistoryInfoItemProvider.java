@@ -131,6 +131,10 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE);
@@ -187,6 +191,10 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(HistoryInfo.class)) {
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
 		case VersioningPackage.HISTORY_INFO__TAG_SPECS:
 		case VersioningPackage.HISTORY_INFO__VERSION_PROPERTIES:
 		case VersioningPackage.HISTORY_INFO__CHANGE_PACKAGE:
@@ -207,6 +215,18 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+
 		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS,
 			VersioningFactory.eINSTANCE.createTagVersionSpec()));
 
@@ -215,6 +235,30 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 
 		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE,
 			VersioningFactory.eINSTANCE.createChangePackage()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify = childFeature == VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_TO;
+
+		if (qualify) {
+			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
+				getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

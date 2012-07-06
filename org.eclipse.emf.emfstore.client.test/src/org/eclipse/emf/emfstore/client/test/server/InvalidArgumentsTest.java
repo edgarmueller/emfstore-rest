@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
@@ -124,7 +125,7 @@ public class InvalidArgumentsTest extends ServerTests {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod(
 				"createVersion",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, ChangePackage.class,
-					LogMessage.class }));
+					BranchVersionSpec.class, PrimaryVersionSpec.class, LogMessage.class }));
 		} catch (SecurityException e) {
 			throw new EmfStoreException(e);
 		} catch (NoSuchMethodException e) {

@@ -53,7 +53,6 @@ public class MergeWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 		if (decisionManager.isResolved()) {
-			decisionManager.calcResult();
 			return true;
 		}
 

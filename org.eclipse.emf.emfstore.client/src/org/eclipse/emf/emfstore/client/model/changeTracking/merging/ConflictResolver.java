@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import java.util.List;
 
@@ -37,8 +37,8 @@ public interface ConflictResolver {
 	 * @param targetVersion the version to which is updated
 	 * @return true if the merge can proceed, false if it has to be cancelled
 	 */
-	boolean resolveConflicts(Project project, List<ChangePackage> theirChangePackages, ChangePackage myChangePackage,
-		PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
+	boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
 
 	/**
 	 * Get all operations that have been rejected in their changepackages.
@@ -53,4 +53,6 @@ public interface ConflictResolver {
 	 * @return a list of operations
 	 */
 	List<AbstractOperation> getAcceptedMine();
+
+	ChangePackage getMergedResult();
 }

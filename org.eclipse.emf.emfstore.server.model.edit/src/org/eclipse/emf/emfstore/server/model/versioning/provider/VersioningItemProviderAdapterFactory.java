@@ -327,6 +327,84 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected BranchVersionSpecItemProvider branchVersionSpecItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createBranchVersionSpecAdapter() {
+		if (branchVersionSpecItemProvider == null) {
+			branchVersionSpecItemProvider = new BranchVersionSpecItemProvider(this);
+		}
+
+		return branchVersionSpecItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected BranchInfoItemProvider branchInfoItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createBranchInfoAdapter() {
+		if (branchInfoItemProvider == null) {
+			branchInfoItemProvider = new BranchInfoItemProvider(this);
+		}
+
+		return branchInfoItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected AncestorVersionSpecItemProvider ancestorVersionSpecItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createAncestorVersionSpecAdapter() {
+		if (ancestorVersionSpecItemProvider == null) {
+			ancestorVersionSpecItemProvider = new AncestorVersionSpecItemProvider(this);
+		}
+
+		return ancestorVersionSpecItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -447,6 +525,12 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 			headVersionSpecItemProvider.dispose();
 		if (versionPropertyItemProvider != null)
 			versionPropertyItemProvider.dispose();
+		if (branchVersionSpecItemProvider != null)
+			branchVersionSpecItemProvider.dispose();
+		if (branchInfoItemProvider != null)
+			branchInfoItemProvider.dispose();
+		if (ancestorVersionSpecItemProvider != null)
+			ancestorVersionSpecItemProvider.dispose();
 	}
 
 }

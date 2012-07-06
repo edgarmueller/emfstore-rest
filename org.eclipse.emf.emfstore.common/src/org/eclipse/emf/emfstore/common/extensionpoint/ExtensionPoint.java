@@ -43,7 +43,7 @@ public class ExtensionPoint {
 	}
 
 	/**
-	 * Constructor with option of set the thow exception option.
+	 * Constructor with option of set the throw exception option.
 	 * 
 	 * @param id extension point id
 	 * @param throwException if true, an {@link ExtensionPointException} is thrown instead of returning null
@@ -148,7 +148,7 @@ public class ExtensionPoint {
 	}
 
 	/**
-	 * Returns the element with hightes priority, by default {@link #getFirst()} is used. This method is inteded to be
+	 * Returns the element with highest priority, by default {@link #getFirst()} is used. This method is intended to be
 	 * overriden in order to modify default behavior.
 	 * 
 	 * @return {@link ExtensionElement}

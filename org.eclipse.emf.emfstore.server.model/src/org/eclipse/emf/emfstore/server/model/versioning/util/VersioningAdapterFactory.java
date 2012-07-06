@@ -14,6 +14,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
@@ -135,6 +138,21 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseVersionProperty(VersionProperty object) {
 			return createVersionPropertyAdapter();
+		}
+
+		@Override
+		public Adapter caseBranchVersionSpec(BranchVersionSpec object) {
+			return createBranchVersionSpecAdapter();
+		}
+
+		@Override
+		public Adapter caseBranchInfo(BranchInfo object) {
+			return createBranchInfoAdapter();
+		}
+
+		@Override
+		public Adapter caseAncestorVersionSpec(AncestorVersionSpec object) {
+			return createAncestorVersionSpecAdapter();
 		}
 
 		@Override
@@ -316,6 +334,54 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVersionPropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec <em>Branch Version Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec
+	 * @generated
+	 */
+	public Adapter createBranchVersionSpecAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
+	 * <em>Branch Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
+	 * @generated
+	 */
+	public Adapter createBranchInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec <em>Ancestor Version Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec
+	 * @generated
+	 */
+	public Adapter createAncestorVersionSpecAdapter() {
 		return null;
 	}
 

@@ -1,5 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+ * // TODO Auto-generated method stub
+ * return null;
+ * } * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -32,6 +35,8 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -98,9 +103,10 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
-		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, LogMessage logMessage)
-		throws EmfStoreException, InvalidVersionSpecException {
-		return getEmfStore().createVersion(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
+		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EmfStoreException, InvalidVersionSpecException {
+		return getEmfStore().createVersion(sessionId, projectId, baseVersionSpec, changePackage, targetBranch,
+			sourceVersion, logMessage);
 	}
 
 	/**
@@ -132,6 +138,14 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	public List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source,
 		VersionSpec target) throws EmfStoreException {
 		return getEmfStore().getChanges(sessionId, projectId, source, target);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
+	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+		return getEmfStore().getBranches(sessionId, projectId);
 	}
 
 	/**

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.common;
 
 /**
- * Disposable interface for marking classes that need to perform clean up tasks when 
+ * Disposable interface for marking classes that need to perform clean up tasks when
  * de-initialized.
  * 
  * @author emueller

@@ -49,15 +49,14 @@ public class SingleReferenceConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "";
 		if (isContainmentFeature()) {
-			descriptionTxt = "You have moved the [modelelement] to the [myvalue]."
-				+ "This element was moved to [theirvalue] on the repository. Please decide.";
+			description.setDescription(DecisionUtil.getDescription("singlereferenceconflict.move", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			descriptionTxt = "You have changed the reference [feature] of [modelelement] to [myvalue]."
-				+ "This reference was set to [theirvalue] on the repository. Please decide.";
+			description.setDescription(DecisionUtil.getDescription("singlereferenceconflict.set", getDecisionManager()
+				.isBranchMerge()));
 		}
-		description.setDescription(descriptionTxt);
+
 		EObject myNewValue = getDecisionManager().getModelElement(
 			getMyOperation(SingleReferenceOperation.class).getNewValue());
 		description.add("myvalue", (myNewValue == null) ? "(unset)" : myNewValue);

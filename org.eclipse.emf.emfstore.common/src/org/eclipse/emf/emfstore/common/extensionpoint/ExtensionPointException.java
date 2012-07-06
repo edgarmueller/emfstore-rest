@@ -10,15 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
-
 /**
  * Exception thrown by the {@link ExtensionPoint} wrapper.
  * 
  * @author wesendon
- *
+ * 
  */
 public class ExtensionPointException extends RuntimeException {
-	
+
 	/**
 	 * 
 	 */

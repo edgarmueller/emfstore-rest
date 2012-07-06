@@ -454,6 +454,16 @@ public interface ModelPackage extends EPackage {
 	int PROJECT_SPACE__LOCAL_CHANGE_PACKAGE = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Merged Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT_SPACE__MERGED_VERSION = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 16;
+
+	/**
 	 * The number of structural features of the '<em>Project Space</em>' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -461,7 +471,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_SPACE_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 16;
+	int PROJECT_SPACE_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.model.impl.OperationCompositeImpl
@@ -1019,6 +1029,19 @@ public interface ModelPackage extends EPackage {
 	EReference getProjectSpace_LocalChangePackage();
 
 	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getMergedVersion <em>Merged Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Merged Version</em>'.
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getMergedVersion()
+	 * @see #getProjectSpace()
+	 * @generated
+	 */
+	EReference getProjectSpace_MergedVersion();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.model.OperationComposite
 	 * <em>Operation Composite</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1478,6 +1501,15 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT_SPACE__LOCAL_CHANGE_PACKAGE = eINSTANCE.getProjectSpace_LocalChangePackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Merged Version</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT_SPACE__MERGED_VERSION = eINSTANCE.getProjectSpace_MergedVersion();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.model.impl.OperationCompositeImpl

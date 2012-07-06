@@ -37,6 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeChangePackage <em>Include
  * Change Package</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeAllVersions <em>Include
+ * All Versions</em>}</li>
  * </ul>
  * </p>
  * 
@@ -94,6 +96,28 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 	 * @ordered
 	 */
 	protected boolean includeChangePackage = INCLUDE_CHANGE_PACKAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIncludeAllVersions() <em>Include All Versions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #isIncludeAllVersions()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INCLUDE_ALL_VERSIONS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIncludeAllVersions() <em>Include All Versions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #isIncludeAllVersions()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean includeAllVersions = INCLUDE_ALL_VERSIONS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -304,6 +328,30 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean isIncludeAllVersions() {
+		return includeAllVersions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setIncludeAllVersions(boolean newIncludeAllVersions) {
+		boolean oldIncludeAllVersions = includeAllVersions;
+		includeAllVersions = newIncludeAllVersions;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS, oldIncludeAllVersions, includeAllVersions));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -341,6 +389,8 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 			return getModelElements();
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE:
 			return isIncludeChangePackage();
+		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
+			return isIncludeAllVersions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,6 +417,9 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE:
 			setIncludeChangePackage((Boolean) newValue);
 			return;
+		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
+			setIncludeAllVersions((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -391,6 +444,9 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE:
 			setIncludeChangePackage(INCLUDE_CHANGE_PACKAGE_EDEFAULT);
 			return;
+		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
+			setIncludeAllVersions(INCLUDE_ALL_VERSIONS_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -411,6 +467,8 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 			return modelElements != null && !modelElements.isEmpty();
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE:
 			return includeChangePackage != INCLUDE_CHANGE_PACKAGE_EDEFAULT;
+		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
+			return includeAllVersions != INCLUDE_ALL_VERSIONS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -428,6 +486,8 @@ public class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (includeChangePackage: ");
 		result.append(includeChangePackage);
+		result.append(", includeAllVersions: ");
+		result.append(includeAllVersions);
 		result.append(')');
 		return result.toString();
 	}
