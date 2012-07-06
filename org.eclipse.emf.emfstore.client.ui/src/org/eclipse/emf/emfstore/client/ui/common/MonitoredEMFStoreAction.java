@@ -59,6 +59,10 @@ public abstract class MonitoredEMFStoreAction<T> {
 		IProgressService progressService = workbench.getProgressService();
 
 		try {
+			if (!preRun()) {
+				return null;
+			}
+
 			progressService.run(fork, cancelable, new IRunnableWithProgress() {
 				public void run(final IProgressMonitor monitor) {
 					try {
@@ -75,6 +79,19 @@ public abstract class MonitoredEMFStoreAction<T> {
 		}
 
 		return returnValue;
+	}
+
+	/**
+	 * Called right before {@link #doRun(IProgressMonitor)} is called. This method will not be executed
+	 * via the {@link IProgressService} and is intended to be overridden by clients to initialize data that needs user
+	 * involvement via UI calls. Client should not execute long-lasting operations via this method.
+	 * 
+	 * @return true, if execution may continue, false, if requirements for executing {@link #doRun(IProgressMonitor)}
+	 *         are not met
+	 */
+	public boolean preRun() {
+		// default is true
+		return true;
 	}
 
 	/**
