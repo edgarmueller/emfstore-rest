@@ -134,6 +134,7 @@ public final class FileUtil {
 				zipStream.write(buffer, 0, read);
 			}
 			zipStream.closeEntry();
+			file.close();
 		} else {
 			throw new IllegalStateException();
 		}
