@@ -15,6 +15,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sharedProperties" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//EMFStoreProperty"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
+        eType="#//versioning/BranchInfo" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProjectInfo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -65,7 +67,10 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="VersionSpec" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="VersionSpec" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="trunk"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LogMessage">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -88,6 +93,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="HistoryInfo">
       <eStructuralFeatures xsi:type="ecore:EReference" name="primerySpec" lowerBound="1"
           eType="#//versioning/PrimaryVersionSpec" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nextSpec" lowerBound="1"
+          upperBound="-1" eType="#//versioning/PrimaryVersionSpec" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="previousSpec" lowerBound="1"
+          eType="#//versioning/PrimaryVersionSpec" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mergedFrom" lowerBound="1"
+          upperBound="-1" eType="#//versioning/PrimaryVersionSpec" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mergedTo" lowerBound="1"
+          upperBound="-1" eType="#//versioning/PrimaryVersionSpec" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="logMessage" lowerBound="1"
           eType="#//versioning/LogMessage" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="tagSpecs" upperBound="-1"
@@ -107,6 +120,7 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeChangePackage"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeAllVersions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Version">
       <eStructuralFeatures xsi:type="ecore:EReference" name="projectState" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//Project"
@@ -123,11 +137,33 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="logMessage" eType="#//versioning/LogMessage"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ancestorVersion" eType="#//versioning/Version"
+          eOpposite="#//versioning/Version/branchedVersions"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="branchedVersions" upperBound="-1"
+          eType="#//versioning/Version" eOpposite="#//versioning/Version/ancestorVersion"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mergedToVersion" upperBound="-1"
+          eType="#//versioning/Version" eOpposite="#//versioning/Version/mergedFromVersion"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mergedFromVersion" upperBound="-1"
+          eType="#//versioning/Version" eOpposite="#//versioning/Version/mergedToVersion"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HeadVersionSpec" eSuperTypes="#//versioning/VersionSpec"/>
     <eClassifiers xsi:type="ecore:EClass" name="VersionProperty">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BranchVersionSpec" eSuperTypes="#//versioning/VersionSpec"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BranchInfo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//versioning/PrimaryVersionSpec"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//versioning/PrimaryVersionSpec"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AncestorVersionSpec" eSuperTypes="#//versioning/VersionSpec">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//versioning/PrimaryVersionSpec"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//versioning/PrimaryVersionSpec"
+          containment="true"/>
     </eClassifiers>
     <eSubpackages name="operations" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations"
         nsPrefix="org.eclipse.emf.emfstore.server.model.versioning.operations">

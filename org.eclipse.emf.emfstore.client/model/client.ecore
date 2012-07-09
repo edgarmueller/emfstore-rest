@@ -71,6 +71,8 @@
         eOpposite="#//Workspace/projectSpaces"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localChangePackage" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/ChangePackage"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mergedVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationComposite">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"

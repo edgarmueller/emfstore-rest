@@ -39,21 +39,22 @@ public class OptionComponent {
 
 	private Group group;
 	private final Conflict conflict;
+	private DecisionBox dBox;
 
 	// private final DecisionBox parent;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param parent
+	 * @param dBox
 	 *            parent
 	 * @param conflict
 	 *            conflict.
 	 */
-	public OptionComponent(DecisionBox parent, Conflict conflict) {
-		// this.parent = parent;
+	public OptionComponent(DecisionBox dBox, Conflict conflict) {
+		this.dBox = dBox;
 		this.conflict = conflict;
-		group = new Group(parent, SWT.NONE);
+		group = new Group(dBox, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.horizontalSpacing = 1;
 		layout.verticalSpacing = 1;
@@ -74,10 +75,10 @@ public class OptionComponent {
 		String result = "";
 		switch (option.getType()) {
 		case MyOperation:
-			result = "Keep My Change: ";
+			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change: ";
 			break;
 		case TheirOperation:
-			result = "Keep Their Change: ";
+			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change: ";
 			break;
 		case Custom:
 			if (option instanceof CustomConflictOption) {

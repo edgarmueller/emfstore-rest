@@ -232,6 +232,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 			childrenFeatures.add(ModelPackage.Literals.PROJECT_SPACE__WAITING_UPLOADS);
 			childrenFeatures.add(ModelPackage.Literals.PROJECT_SPACE__PROPERTIES);
 			childrenFeatures.add(ModelPackage.Literals.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE);
+			childrenFeatures.add(ModelPackage.Literals.PROJECT_SPACE__MERGED_VERSION);
 		}
 		return childrenFeatures;
 	}
@@ -324,6 +325,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 		case ModelPackage.PROJECT_SPACE__WAITING_UPLOADS:
 		case ModelPackage.PROJECT_SPACE__PROPERTIES:
 		case ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE:
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -361,6 +363,31 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE,
 			VersioningFactory.eINSTANCE.createChangePackage()));
+
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__MERGED_VERSION,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify = childFeature == ModelPackage.Literals.PROJECT_SPACE__BASE_VERSION
+			|| childFeature == ModelPackage.Literals.PROJECT_SPACE__MERGED_VERSION;
+
+		if (qualify) {
+			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
+				getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -20,6 +20,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getNextSpec <em>Next Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec <em>Previous Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedFrom <em>Merged From</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedTo <em>Merged To</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage <em>Log Message</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getTagSpecs <em>Tag Specs</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getVersionProperties <em>Version Properties
@@ -60,6 +64,86 @@ public interface HistoryInfo extends EObject {
 	 * @generated
 	 */
 	void setPrimerySpec(PrimaryVersionSpec value);
+
+	/**
+	 * Returns the value of the '<em><b>Next Spec</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Next Spec</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Next Spec</em>' containment reference list.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_NextSpec()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 * @generated
+	 */
+	EList<PrimaryVersionSpec> getNextSpec();
+
+	/**
+	 * Returns the value of the '<em><b>Previous Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Previous Spec</em>' containment reference isn't clear, there really should be more of
+	 * a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Previous Spec</em>' containment reference.
+	 * @see #setPreviousSpec(PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_PreviousSpec()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 * @generated
+	 */
+	PrimaryVersionSpec getPreviousSpec();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec
+	 * <em>Previous Spec</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Previous Spec</em>' containment reference.
+	 * @see #getPreviousSpec()
+	 * @generated
+	 */
+	void setPreviousSpec(PrimaryVersionSpec value);
+
+	/**
+	 * Returns the value of the '<em><b>Merged From</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Merged From</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Merged From</em>' containment reference list.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_MergedFrom()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 * @generated
+	 */
+	EList<PrimaryVersionSpec> getMergedFrom();
+
+	/**
+	 * Returns the value of the '<em><b>Merged To</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Merged To</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Merged To</em>' containment reference list.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_MergedTo()
+	 * @model containment="true" resolveProxies="true" required="true"
+	 * @generated
+	 */
+	EList<PrimaryVersionSpec> getMergedTo();
 
 	/**
 	 * Returns the value of the '<em><b>Log Message</b></em>' containment reference.

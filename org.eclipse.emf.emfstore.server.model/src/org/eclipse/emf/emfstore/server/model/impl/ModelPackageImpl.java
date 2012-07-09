@@ -274,6 +274,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getProjectHistory_Branches() {
+		return (EReference) projectHistoryEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -500,6 +510,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(projectHistoryEClass, PROJECT_HISTORY__PROJECT_NAME);
 		createEAttribute(projectHistoryEClass, PROJECT_HISTORY__PROJECT_DESCRIPTION);
 		createEReference(projectHistoryEClass, PROJECT_HISTORY__SHARED_PROPERTIES);
+		createEReference(projectHistoryEClass, PROJECT_HISTORY__BRANCHES);
 
 		projectInfoEClass = createEClass(PROJECT_INFO);
 		createEAttribute(projectInfoEClass, PROJECT_INFO__NAME);
@@ -596,6 +607,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getProjectHistory_SharedProperties(), theModelPackage_1.getEMFStoreProperty(), null,
 			"sharedProperties", null, 0, -1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectHistory_Branches(), theVersioningPackage.getBranchInfo(), null, "branches", null, 0,
+			-1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(projectInfoEClass, ProjectInfo.class, "ProjectInfo", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);

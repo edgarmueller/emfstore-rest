@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -100,7 +101,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		final ProjectSpace projectSpace = conflictException.getProjectSpace();
 		boolean mergeSuccessful = false;
 		try {
-			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(VersionSpec.HEAD_VERSION);
+			// TODO BRANCH
+			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.HEAD_VERSION(projectSpace
+				.getBaseVersion()));
 			// merge opens up a dialog
 			mergeSuccessful = RunInUI.WithException.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
@@ -149,8 +152,11 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.resolveVersionSpec(projectSpace.getUsersession(), VersionSpec.HEAD_VERSION, projectSpace.getProjectId());
+		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager
+			.getInstance()
+			.getCurrentWorkspace()
+			.resolveVersionSpec(projectSpace.getUsersession(), Versions.HEAD_VERSION(oldBaseVersion),
+				projectSpace.getProjectId());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();

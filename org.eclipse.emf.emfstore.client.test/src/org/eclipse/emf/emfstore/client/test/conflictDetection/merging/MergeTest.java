@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionT
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 
@@ -153,9 +153,7 @@ public class MergeTest extends ConflictDetectionTest {
 
 		public DecisionManager execute() {
 			ensureCopy();
-
-			PrimaryVersionSpec spec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-			spec.setIdentifier(23);
+			PrimaryVersionSpec spec = Versions.PRIMARY(23);
 
 			DecisionManager manager = new DecisionManager(getProject(), Arrays.asList(getProjectSpace()
 				.getLocalChangePackage(true)), Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true)), spec,

@@ -36,6 +36,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery Spec
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>Previous Spec
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged From</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log Message</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>Version
@@ -57,6 +62,50 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	 * @ordered
 	 */
 	protected PrimaryVersionSpec primerySpec;
+
+	/**
+	 * The cached value of the '{@link #getNextSpec() <em>Next Spec</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getNextSpec()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PrimaryVersionSpec> nextSpec;
+
+	/**
+	 * The cached value of the '{@link #getPreviousSpec() <em>Previous Spec</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getPreviousSpec()
+	 * @generated
+	 * @ordered
+	 */
+	protected PrimaryVersionSpec previousSpec;
+
+	/**
+	 * The cached value of the '{@link #getMergedFrom() <em>Merged From</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getMergedFrom()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PrimaryVersionSpec> mergedFrom;
+
+	/**
+	 * The cached value of the '{@link #getMergedTo() <em>Merged To</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getMergedTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PrimaryVersionSpec> mergedTo;
 
 	/**
 	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference. <!--
@@ -192,6 +241,129 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.HISTORY_INFO__PRIMERY_SPEC,
 				newPrimerySpec, newPrimerySpec));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EList<PrimaryVersionSpec> getNextSpec() {
+		if (nextSpec == null) {
+			nextSpec = new EObjectContainmentEList.Resolving<PrimaryVersionSpec>(PrimaryVersionSpec.class, this,
+				VersioningPackage.HISTORY_INFO__NEXT_SPEC);
+		}
+		return nextSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PrimaryVersionSpec getPreviousSpec() {
+		if (previousSpec != null && previousSpec.eIsProxy()) {
+			InternalEObject oldPreviousSpec = (InternalEObject) previousSpec;
+			previousSpec = (PrimaryVersionSpec) eResolveProxy(oldPreviousSpec);
+			if (previousSpec != oldPreviousSpec) {
+				InternalEObject newPreviousSpec = (InternalEObject) previousSpec;
+				NotificationChain msgs = oldPreviousSpec.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, null, null);
+				if (newPreviousSpec.eInternalContainer() == null) {
+					msgs = newPreviousSpec.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, null, msgs);
+				}
+				if (msgs != null)
+					msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, oldPreviousSpec, previousSpec));
+			}
+		}
+		return previousSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PrimaryVersionSpec basicGetPreviousSpec() {
+		return previousSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetPreviousSpec(PrimaryVersionSpec newPreviousSpec, NotificationChain msgs) {
+		PrimaryVersionSpec oldPreviousSpec = previousSpec;
+		previousSpec = newPreviousSpec;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, oldPreviousSpec, newPreviousSpec);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setPreviousSpec(PrimaryVersionSpec newPreviousSpec) {
+		if (newPreviousSpec != previousSpec) {
+			NotificationChain msgs = null;
+			if (previousSpec != null)
+				msgs = ((InternalEObject) previousSpec).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, null, msgs);
+			if (newPreviousSpec != null)
+				msgs = ((InternalEObject) newPreviousSpec).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC, null, msgs);
+			msgs = basicSetPreviousSpec(newPreviousSpec, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC,
+				newPreviousSpec, newPreviousSpec));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EList<PrimaryVersionSpec> getMergedFrom() {
+		if (mergedFrom == null) {
+			mergedFrom = new EObjectContainmentEList.Resolving<PrimaryVersionSpec>(PrimaryVersionSpec.class, this,
+				VersioningPackage.HISTORY_INFO__MERGED_FROM);
+		}
+		return mergedFrom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EList<PrimaryVersionSpec> getMergedTo() {
+		if (mergedTo == null) {
+			mergedTo = new EObjectContainmentEList.Resolving<PrimaryVersionSpec>(PrimaryVersionSpec.class, this,
+				VersioningPackage.HISTORY_INFO__MERGED_TO);
+		}
+		return mergedTo;
 	}
 
 	/**
@@ -384,6 +556,14 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		switch (featureID) {
 		case VersioningPackage.HISTORY_INFO__PRIMERY_SPEC:
 			return basicSetPrimerySpec(null, msgs);
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+			return ((InternalEList<?>) getNextSpec()).basicRemove(otherEnd, msgs);
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+			return basicSetPreviousSpec(null, msgs);
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+			return ((InternalEList<?>) getMergedFrom()).basicRemove(otherEnd, msgs);
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
+			return ((InternalEList<?>) getMergedTo()).basicRemove(otherEnd, msgs);
 		case VersioningPackage.HISTORY_INFO__LOG_MESSAGE:
 			return basicSetLogMessage(null, msgs);
 		case VersioningPackage.HISTORY_INFO__TAG_SPECS:
@@ -408,6 +588,16 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 			if (resolve)
 				return getPrimerySpec();
 			return basicGetPrimerySpec();
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+			return getNextSpec();
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+			if (resolve)
+				return getPreviousSpec();
+			return basicGetPreviousSpec();
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+			return getMergedFrom();
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
+			return getMergedTo();
 		case VersioningPackage.HISTORY_INFO__LOG_MESSAGE:
 			if (resolve)
 				return getLogMessage();
@@ -435,6 +625,21 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		switch (featureID) {
 		case VersioningPackage.HISTORY_INFO__PRIMERY_SPEC:
 			setPrimerySpec((PrimaryVersionSpec) newValue);
+			return;
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+			getNextSpec().clear();
+			getNextSpec().addAll((Collection<? extends PrimaryVersionSpec>) newValue);
+			return;
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+			setPreviousSpec((PrimaryVersionSpec) newValue);
+			return;
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+			getMergedFrom().clear();
+			getMergedFrom().addAll((Collection<? extends PrimaryVersionSpec>) newValue);
+			return;
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
+			getMergedTo().clear();
+			getMergedTo().addAll((Collection<? extends PrimaryVersionSpec>) newValue);
 			return;
 		case VersioningPackage.HISTORY_INFO__LOG_MESSAGE:
 			setLogMessage((LogMessage) newValue);
@@ -465,6 +670,18 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		case VersioningPackage.HISTORY_INFO__PRIMERY_SPEC:
 			setPrimerySpec((PrimaryVersionSpec) null);
 			return;
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+			getNextSpec().clear();
+			return;
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+			setPreviousSpec((PrimaryVersionSpec) null);
+			return;
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+			getMergedFrom().clear();
+			return;
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
+			getMergedTo().clear();
+			return;
 		case VersioningPackage.HISTORY_INFO__LOG_MESSAGE:
 			setLogMessage((LogMessage) null);
 			return;
@@ -491,6 +708,14 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		switch (featureID) {
 		case VersioningPackage.HISTORY_INFO__PRIMERY_SPEC:
 			return primerySpec != null;
+		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
+			return nextSpec != null && !nextSpec.isEmpty();
+		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
+			return previousSpec != null;
+		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
+			return mergedFrom != null && !mergedFrom.isEmpty();
+		case VersioningPackage.HISTORY_INFO__MERGED_TO:
+			return mergedTo != null && !mergedTo.isEmpty();
 		case VersioningPackage.HISTORY_INFO__LOG_MESSAGE:
 			return logMessage != null;
 		case VersioningPackage.HISTORY_INFO__TAG_SPECS:

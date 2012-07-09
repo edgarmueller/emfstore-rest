@@ -48,17 +48,17 @@ public class MultiReferenceSetSetConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String txt = "";
 		if (!containmentConflict) {
-			txt = "You have set the value [value] to the [feature] reference of [modelelement], it was set to [ovalue] on the repository";
+			description.setDescription(DecisionUtil.getDescription("multireferencesetsetconflict.set",
+				getDecisionManager().isBranchMerge()));
 		} else {
-			txt = "You have moved the element [value] to [modelelement], it was moved to [othercontainer] on the repository.";
+			description.setDescription(DecisionUtil.getDescription("multireferencesetsetconflict.move",
+				getDecisionManager().isBranchMerge()));
 		}
 
 		description.add("value", getMyOperation(MultiReferenceSetOperation.class).getNewValue());
 		description.add("ovalue", getTheirOperation(MultiReferenceSetOperation.class).getNewValue());
 		description.add("othercontainer", getTheirOperation().getModelElementId());
-		description.setDescription(txt);
 		description.setImage("multiref.gif");
 		return description;
 	}

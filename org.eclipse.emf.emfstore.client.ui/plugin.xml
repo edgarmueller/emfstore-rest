@@ -3,6 +3,7 @@
 <plugin>
    <extension-point id="org.eclipse.emf.emfstore.client.ui.merge.customoption" name="customoption" schema="schema/org.eclipse.emf.emfstore.client.ui.customoption.exsd"/>
   <extension-point id="org.eclipse.emf.emfstore.client.ui.commitdialog.tray" name="org.eclipse.emf.emfstore.client.ui.commitdialog.tray" schema="schema/org.eclipse.emf.emfstore.client.ui.commitdialog.tray.exsd"/>
+  <extension-point id="org.eclipse.emf.emfstore.client.ui.merge.detailwidget" name="Merge Detail Widget" schema="schema/org.eclipse.emf.emfstore.client.ui.merge.detailwidget.exsd"/>
   <extension
         point="org.eclipse.ui.handlers">
       <handler
@@ -81,6 +82,41 @@
                        property="org.eclipse.emf.emfstore.client.ui.commands.projectHasLocalChanges"
                        value="true">
                  </test>
+              </iterate>
+           </and>
+        </enabledWhen>
+     </handler>
+     <handler
+           class="org.eclipse.emf.emfstore.client.ui.handlers.CreateBranchHandler"
+           commandId="org.eclipse.emf.emfstore.client.ui.createBranch">
+        <enabledWhen>
+           <and>
+              <iterate
+                    ifEmpty="true"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
+                 </instanceof>
+                 <!-- <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.client.ui.commands.projectHasLocalChanges"
+                       value="true">
+                 </test> -->
+              </iterate>
+           </and>
+        </enabledWhen>
+     </handler>
+     <handler
+           class="org.eclipse.emf.emfstore.client.ui.handlers.MergeBranchHandler"
+           commandId="org.eclipse.emf.emfstore.client.ui.mergeBranch">
+        <enabledWhen>
+           <and>
+              <iterate
+                    ifEmpty="true"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.client.model.ProjectSpace">
+                 </instanceof>
               </iterate>
            </and>
         </enabledWhen>
@@ -202,60 +238,14 @@
            name="Project Properties">
      </command>
      <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           id="org.eclipse.emf.emfstore.client.ui.commitProject"
-           name="commit">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.updateProject"
-           name="update">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectVersionHandler"
-           id="org.eclipse.emf.emfstore.client.ui.updateProjectVersion"
-           name="updateToVersion">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ShareProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.shareProject"
-           name="share">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.deleteProject"
-           name="deleteProject">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CreateLocalProjectHandler"
-           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
-           name="NewLocalProject">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
-           id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
-           name="undoLastOperation">
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.BranchCheckoutHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.BranchCheckout"
+           name="Branch Checkout">
      </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectInfoPropertiesHandler"
            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
            name="ProjectInfo Properties">
-     </command>
-     <command
-           categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
-           id="org.eclipse.emf.emfstore.client.ui.revert"
-           name="Revert">
-     </command>
-     <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CompareProjectsHandler"
-           id="org.eclipse.emf.emfstore.client.ui.compareProjects"
-           name="compareProjects">
      </command>
      <command
            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
@@ -332,6 +322,22 @@
               commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectCheckout"
               icon="icons/checkout.png"
               label="Checkout"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.BranchCheckout"
+              icon="icons/checkout.png"
+              label="Checkout Branch..."
               style="push">
            <visibleWhen
                  checkEnabled="false">
@@ -722,6 +728,109 @@
         </enablement>
      </decorator>
   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
+            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
+            name="CheckoutRevision">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.AddTagHandler"
+            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
+            name="AddTag">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RemoveTagHandler"
+            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.removetag"
+            name="RemoveTag">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
+            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
+            name="RevertRevision">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
+            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
+            name="ForceRevertRevision">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.sessionprovider">
+      <sessionProvider
+            class="org.eclipse.emf.emfstore.client.ui.dialogs.login.BasicUISessionProvider">
+      </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+            id="org.eclipse.emf.emfstore.client.ui.commitProject"
+            name="commit">
+      </command>
+      <command
+            categoryId="org.eclipse.emf.emfstore.client.ui.project"
+            id="org.eclipse.emf.emfstore.client.ui.createBranch"
+            name="create branch">
+      </command>
+         <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.updateProject"
+           name="update">
+     </command>
+         <command
+               categoryId="org.eclipse.emf.emfstore.client.ui.project"
+               defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UpdateProjectVersionHandler"
+               id="org.eclipse.emf.emfstore.client.ui.updateProjectVersion"
+               name="updateToVersion">
+         </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ShareProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.shareProject"
+           name="share">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.DeleteProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.deleteProject"
+           name="deleteProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CreateLocalProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
+           name="NewLocalProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
+           id="org.eclipse.emf.emfstore.client.ui.revert"
+           name="Revert">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
+           id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
+           name="undoLastOperation">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectInfoPropertiesHandler"
+           id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
+           name="ProjectInfo Properties">
+     </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CompareProjectsHandler"
+           id="org.eclipse.emf.emfstore.client.ui.compareProjects"
+           name="compareProjects">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           id="org.eclipse.emf.emfstore.client.ui.mergeBranch"
+           name="mergeBranch">
+     </command>
+   </extension>
    <extension
          point="org.eclipse.emf.emfstore.client.sessionprovider">
       <sessionProvider

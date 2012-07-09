@@ -25,6 +25,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getModelElements <em>Model Elements</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackage <em>Include Change
  * Package</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions <em>Include All
+ * Versions</em>}</li>
  * </ul>
  * </p>
  * 
@@ -134,5 +136,34 @@ public interface HistoryQuery extends EObject {
 	 * @generated
 	 */
 	void setIncludeChangePackage(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Include All Versions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Include All Versions</em>' attribute isn't clear, there really should be more of a
+	 * description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Include All Versions</em>' attribute.
+	 * @see #setIncludeAllVersions(boolean)
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryQuery_IncludeAllVersions()
+	 * @model
+	 * @generated
+	 */
+	boolean isIncludeAllVersions();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions
+	 * <em>Include All Versions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Include All Versions</em>' attribute.
+	 * @see #isIncludeAllVersions()
+	 * @generated
+	 */
+	void setIncludeAllVersions(boolean value);
 
 } // HistoryQuery

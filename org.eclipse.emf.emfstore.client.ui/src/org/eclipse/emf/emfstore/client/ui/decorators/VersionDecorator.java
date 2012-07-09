@@ -54,6 +54,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 			if (projectSpace.getBaseVersion() != null) {
 				stringBuilder.append("@");
 				stringBuilder.append(projectSpace.getBaseVersion().getIdentifier());
+				stringBuilder.append(" [" + projectSpace.getBaseVersion().getBranch() + "]");
 			} else {
 				stringBuilder.append("(Not shared)");
 			}

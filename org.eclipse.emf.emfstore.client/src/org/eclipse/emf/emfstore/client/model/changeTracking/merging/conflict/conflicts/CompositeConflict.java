@@ -56,13 +56,13 @@ public class CompositeConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "";
 		if (isLeftMy()) {
-			descriptionTxt = "A change on the [opposite] from the repository conflicts with your operation \"[compdescription]\".";
+			description.setDescription(DecisionUtil.getDescription("compositeconflict.my", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			descriptionTxt = "Your change on the [opposite] conflicts with the operation \"[compdescription]\" from the repository.";
+			description.setDescription(DecisionUtil.getDescription("compositeconflict.their", getDecisionManager()
+				.isBranchMerge()));
 		}
-		description.setDescription(descriptionTxt);
 
 		description.add("compdescription", getLeftOperation());
 		description.add("opposite", getDecisionManager().getModelElement(getRightOperation().getModelElementId()));

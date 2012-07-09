@@ -48,9 +48,12 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.ReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
@@ -81,6 +84,8 @@ public class DecisionManager {
 	private ArrayList<AbstractOperation> rejectedTheirs;
 	private final PrimaryVersionSpec baseVersion;
 	private final PrimaryVersionSpec targetVersion;
+	private List<ConflictHandler> conflictHandler;
+	private final boolean isBranchMerge;
 
 	/**
 	 * Default constructor.
@@ -97,14 +102,44 @@ public class DecisionManager {
 	 *            new target version
 	 */
 	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion,
+		boolean isBranchMerge) {
 		this.project = project;
 		this.myChangePackages = myChangePackages;
 		this.theirChangePackages = theirChangePackages;
 		this.baseVersion = baseVersion;
 		this.targetVersion = targetVersion;
-		conflictDetector = new ConflictDetector();
+		this.isBranchMerge = isBranchMerge;
+		this.conflictDetector = initConflictDetector();
+		this.conflictHandler = initConflictHandlers();
 		init();
+	}
+
+	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
+		this(project, myChangePackages, theirChangePackages, baseVersion, targetVersion, false);
+	}
+
+	private ConflictDetector initConflictDetector() {
+		ConflictDetectionStrategy strategy = new ExtensionPoint(
+			"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
+			ConflictDetectionStrategy.class);
+		if (strategy != null) {
+			return new ConflictDetector(strategy);
+		}
+		return new ConflictDetector();
+	}
+
+	private List<ConflictHandler> initConflictHandlers() {
+		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.merge.conflictHandler")
+			.getExtensionElements()) {
+			ConflictHandler handler = element.getClass("class", ConflictHandler.class);
+			if (handler != null) {
+				result.add(handler);
+			}
+		}
+		return result;
 	}
 
 	private void init() {
@@ -180,7 +215,11 @@ public class DecisionManager {
 			AbstractOperation my = conf.getMyOperation();
 			AbstractOperation their = conf.getTheirOperation();
 
-			if (isDiagramLayout(my) && isDiagramLayout(their)) {
+			// #checkRegistedHandlers adds Conflicts on its own
+			if (checkRegisteredHandlers(conf)) {
+				continue;
+
+			} else if (isDiagramLayout(my) && isDiagramLayout(their)) {
 
 				addConflict(createDiagramLayoutDecision(conf));
 				continue;
@@ -267,6 +306,16 @@ public class DecisionManager {
 
 			}
 		}
+	}
+
+	private boolean checkRegisteredHandlers(Conflicting conf) {
+		for (ConflictHandler handler : this.conflictHandler) {
+			if (handler.canHandle(conf)) {
+				addConflict(handler.handle(this, conf));
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void addConflict(Conflict conflict) {
@@ -528,6 +577,10 @@ public class DecisionManager {
 		return conflictDetector;
 	}
 
+	public boolean isBranchMerge() {
+		return isBranchMerge;
+	}
+
 	/**
 	 * Get the Name of an model element by modelelement id.
 	 * 
@@ -710,7 +763,7 @@ public class DecisionManager {
 	 * 
 	 * @author wesendon
 	 */
-	private class Conflicting {
+	public class Conflicting {
 
 		private ArrayList<AbstractOperation> myOps;
 		private ArrayList<AbstractOperation> theirOps;

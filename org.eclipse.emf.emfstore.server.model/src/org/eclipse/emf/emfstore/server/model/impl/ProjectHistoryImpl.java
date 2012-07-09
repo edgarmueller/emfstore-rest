@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 
 /**
@@ -117,6 +118,17 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	 * @ordered
 	 */
 	protected EList<EMFStoreProperty> sharedProperties;
+
+	/**
+	 * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getBranches()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BranchInfo> branches;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -299,6 +311,20 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EList<BranchInfo> getBranches() {
+		if (branches == null) {
+			branches = new EObjectContainmentEList.Resolving<BranchInfo>(BranchInfo.class, this,
+				ModelPackage.PROJECT_HISTORY__BRANCHES);
+		}
+		return branches;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -312,6 +338,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 			return ((InternalEList<?>) getVersions()).basicRemove(otherEnd, msgs);
 		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
 			return ((InternalEList<?>) getSharedProperties()).basicRemove(otherEnd, msgs);
+		case ModelPackage.PROJECT_HISTORY__BRANCHES:
+			return ((InternalEList<?>) getBranches()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -336,6 +364,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 			return getProjectDescription();
 		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
 			return getSharedProperties();
+		case ModelPackage.PROJECT_HISTORY__BRANCHES:
+			return getBranches();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -366,6 +396,10 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 			getSharedProperties().clear();
 			getSharedProperties().addAll((Collection<? extends EMFStoreProperty>) newValue);
 			return;
+		case ModelPackage.PROJECT_HISTORY__BRANCHES:
+			getBranches().clear();
+			getBranches().addAll((Collection<? extends BranchInfo>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -393,6 +427,9 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
 			getSharedProperties().clear();
 			return;
+		case ModelPackage.PROJECT_HISTORY__BRANCHES:
+			getBranches().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -416,6 +453,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 				.equals(projectDescription);
 		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
 			return sharedProperties != null && !sharedProperties.isEmpty();
+		case ModelPackage.PROJECT_HISTORY__BRANCHES:
+			return branches != null && !branches.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

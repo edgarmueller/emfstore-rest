@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 
@@ -52,9 +53,9 @@ public class MultiReferenceSingleConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "You have moved [target] to the [feature] reference of [modelelement], on the repository it was moved to [othercontainer].";
+		description.setDescription(DecisionUtil.getDescription("multireferencesingleconflict", getDecisionManager()
+			.isBranchMerge()));
 
-		description.setDescription(descriptionTxt);
 		description.add("target", ((MultiReferenceOperation) getLeftOperation()).getReferencedModelElements().get(0));
 		description.add("othercontainer", getTheirOperation().getModelElementId());
 

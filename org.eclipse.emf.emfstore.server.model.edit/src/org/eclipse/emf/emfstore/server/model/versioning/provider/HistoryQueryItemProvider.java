@@ -65,6 +65,7 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 			addSourcePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addIncludeChangePackagePropertyDescriptor(object);
+			addIncludeAllVersionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -117,6 +118,23 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 			getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeChangePackage_feature",
 				"_UI_HistoryQuery_type"), VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE, true,
 			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Include All Versions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addIncludeAllVersionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_HistoryQuery_includeAllVersions_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeAllVersions_feature",
+				"_UI_HistoryQuery_type"), VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_ALL_VERSIONS, true, false,
+			false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -186,6 +204,7 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 
 		switch (notification.getFeatureID(HistoryQuery.class)) {
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE:
+		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case VersioningPackage.HISTORY_QUERY__MODEL_ELEMENTS:

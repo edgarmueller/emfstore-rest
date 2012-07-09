@@ -154,9 +154,10 @@ public class ModelMutatorServerInterfaceTest extends ModelMutatorServerSetup {
 		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
 			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
 
+		// TODO BRANCH
 		PrimaryVersionSpec createdVersion = getConnectionManager().createVersion(getSessionId(),
-			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(),
-			SetupHelper.createLogMessage("bla", "blablba"));
+			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(), null,
+			null, SetupHelper.createLogMessage("bla", "blablba"));
 
 		resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(), getGeneratedProjectId(),
 			VersionSpec.HEAD_VERSION);
@@ -196,8 +197,9 @@ public class ModelMutatorServerInterfaceTest extends ModelMutatorServerSetup {
 
 		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
 			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
+		// TODO BRANCH
 		PrimaryVersionSpec versionSpec = getConnectionManager().createVersion(getSessionId(), getGeneratedProjectId(),
-			resolvedVersionSpec, changePackage, SetupHelper.createLogMessage("", ""));
+			resolvedVersionSpec, changePackage, null, null, SetupHelper.createLogMessage("", ""));
 
 		List<ChangePackage> changes = getConnectionManager().getChanges(getSessionId(), getGeneratedProjectId(),
 			resolvedVersionSpec, versionSpec);
@@ -222,9 +224,11 @@ public class ModelMutatorServerInterfaceTest extends ModelMutatorServerSetup {
 
 		PrimaryVersionSpec resolvedVersionSpec = getConnectionManager().resolveVersionSpec(getSessionId(),
 			getGeneratedProjectId(), VersionSpec.HEAD_VERSION);
+
+		// TODO BRANCH
 		PrimaryVersionSpec createdVersion = getConnectionManager().createVersion(getSessionId(),
-			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(),
-			SetupHelper.createLogMessage("bla", logMessage));
+			getGeneratedProjectId(), resolvedVersionSpec, VersioningFactory.eINSTANCE.createChangePackage(), null,
+			null, SetupHelper.createLogMessage("bla", logMessage));
 
 		List<HistoryInfo> historyInfo = getConnectionManager().getHistoryInfo(getSessionId(), getGeneratedProjectId(),
 			createHistoryQuery(createdVersion, createdVersion));

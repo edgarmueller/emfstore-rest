@@ -13,6 +13,7 @@ import java.io.IOException;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -32,15 +33,21 @@ import org.junit.Before;
 public abstract class WorkspaceTest {
 	protected Project project;
 	protected ProjectSpace projectSpace;
-	protected static Workspace workspace;
+	private Workspace workspace;
 
 	/**
 	 * Setup a dummy project for testing.
 	 */
 	@Before
 	public void setupProjectSpace() {
+		beforeHook();
 		CommonUtil.setTesting(true);
-		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
+		ConnectionManager connectionManager = initConnectionManager();
+		if (connectionManager != null) {
+			workspaceManager.setConnectionManager(connectionManager);
+		}
+		workspace = workspaceManager.getCurrentWorkspace();
 		new EMFStoreCommand() {
 
 			@Override
@@ -53,17 +60,37 @@ public abstract class WorkspaceTest {
 
 	}
 
+	public Workspace getWorkspace() {
+		return workspace;
+	}
+
+	public void beforeHook() {
+	}
+
+	public ConnectionManager initConnectionManager() {
+		return null;
+	}
+
 	/**
 	 * Clean up workspace.
 	 */
 	@After
 	public void cleanProjectSpace() {
+		cleanProjectSpace(getProjectSpace());
+	}
+
+	/**
+	 * Clean workspace.
+	 * 
+	 * @param ps projectSpace
+	 */
+	public void cleanProjectSpace(final ProjectSpace ps) {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				int retried = 0;
 				try {
-					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(getProjectSpace());
+					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(ps);
 				} catch (IOException e) {
 					if (retried++ > 2) {
 						fail();
@@ -132,12 +159,19 @@ public abstract class WorkspaceTest {
 	/**
 	 * Creates an test element.
 	 * 
+	 * @param name
+	 * 
 	 * @return test element
 	 */
-	protected TestElement createTestElementWithoutTransaction() {
+	protected TestElement createTestElementWithoutTransaction(String name) {
 		TestElement element = TestmodelFactory.eINSTANCE.createTestElement();
+		element.setName(name);
 		getProject().getModelElements().add(element);
 		return element;
+	}
+
+	protected TestElement createTestElementWithoutTransaction() {
+		return createTestElement("");
 	}
 
 	/**
@@ -147,7 +181,9 @@ public abstract class WorkspaceTest {
 	 */
 	protected TestElement getTestElement(String name) {
 		TestElement element = TestmodelFactory.eINSTANCE.createTestElement();
-		element.setName(name);
+		if (name != null) {
+			element.setName(name);
+		}
 		return element;
 	}
 
@@ -156,10 +192,14 @@ public abstract class WorkspaceTest {
 	}
 
 	public TestElement createTestElement() {
+		return createTestElement(null);
+	}
+
+	public TestElement createTestElement(final String name) {
 		return new EMFStoreCommandWithResult<TestElement>() {
 			@Override
 			protected TestElement doRun() {
-				return createTestElementWithoutTransaction();
+				return createTestElementWithoutTransaction(name);
 			}
 		}.run(false);
 	}

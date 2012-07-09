@@ -134,7 +134,7 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		lblLogMsg.setText("Log message:");
 
 		txtLogMsg = new Text(contents, SWT.MULTI | SWT.LEAD | SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).align(SWT.FILL, SWT.TOP).hint(1, 75)
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).align(SWT.FILL, SWT.TOP).hint(1, 45)
 			.applyTo(txtLogMsg);
 		String logMsg = "";
 		LogMessage logMessage = changes.getLogMessage();

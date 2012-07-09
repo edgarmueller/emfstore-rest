@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 public class ForceRevertController extends ServerCall<Void> {
 
@@ -44,7 +44,7 @@ public class ForceRevertController extends ServerCall<Void> {
 				projectSpace.getUsersession(),
 				projectSpace.getProjectInfo(),
 				connectionManager.resolveVersionSpec(projectSpace.getUsersession().getSessionId(),
-					projectSpace.getProjectId(), VersionSpec.HEAD_VERSION), getProgressMonitor());
+					projectSpace.getProjectId(), Versions.HEAD_VERSION(versionSpec)), getProgressMonitor());
 		PrimaryVersionSpec sourceVersion = ModelUtil.clone(versionSpec);
 		sourceVersion.setIdentifier(sourceVersion.getIdentifier() - 1);
 		List<ChangePackage> changes = revertSpace.getChanges(sourceVersion, versionSpec);

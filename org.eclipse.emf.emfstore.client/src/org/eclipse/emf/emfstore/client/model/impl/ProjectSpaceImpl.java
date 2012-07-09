@@ -278,6 +278,17 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 	protected ChangePackage localChangePackage;
 
 	/**
+	 * The cached value of the '{@link #getMergedVersion() <em>Merged Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getMergedVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected PrimaryVersionSpec mergedVersion;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -500,6 +511,10 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 			if (resolve)
 				return getLocalChangePackage();
 			return basicGetLocalChangePackage();
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
+			if (resolve)
+				return getMergedVersion();
+			return basicGetMergedVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -545,6 +560,8 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 			return basicSetWorkspace(null, msgs);
 		case ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE:
 			return basicSetLocalChangePackage(null, msgs);
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
+			return basicSetMergedVersion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -590,6 +607,8 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 			return basicGetWorkspace() != null;
 		case ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE:
 			return localChangePackage != null;
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
+			return mergedVersion != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -654,6 +673,9 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 			return;
 		case ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE:
 			setLocalChangePackage((ChangePackage) newValue);
+			return;
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
+			setMergedVersion((PrimaryVersionSpec) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -724,6 +746,9 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 			return;
 		case ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE:
 			setLocalChangePackage((ChangePackage) null);
+			return;
+		case ModelPackage.PROJECT_SPACE__MERGED_VERSION:
+			setMergedVersion((PrimaryVersionSpec) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1233,6 +1258,87 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_SPACE__LOCAL_CHANGE_PACKAGE,
 				newLocalChangePackage, newLocalChangePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PrimaryVersionSpec getMergedVersion() {
+		if (mergedVersion != null && mergedVersion.eIsProxy()) {
+			InternalEObject oldMergedVersion = (InternalEObject) mergedVersion;
+			mergedVersion = (PrimaryVersionSpec) eResolveProxy(oldMergedVersion);
+			if (mergedVersion != oldMergedVersion) {
+				InternalEObject newMergedVersion = (InternalEObject) mergedVersion;
+				NotificationChain msgs = oldMergedVersion.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.PROJECT_SPACE__MERGED_VERSION, null, null);
+				if (newMergedVersion.eInternalContainer() == null) {
+					msgs = newMergedVersion.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- ModelPackage.PROJECT_SPACE__MERGED_VERSION, null, msgs);
+				}
+				if (msgs != null)
+					msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						ModelPackage.PROJECT_SPACE__MERGED_VERSION, oldMergedVersion, mergedVersion));
+			}
+		}
+		return mergedVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PrimaryVersionSpec basicGetMergedVersion() {
+		return mergedVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetMergedVersion(PrimaryVersionSpec newMergedVersion, NotificationChain msgs) {
+		PrimaryVersionSpec oldMergedVersion = mergedVersion;
+		mergedVersion = newMergedVersion;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				ModelPackage.PROJECT_SPACE__MERGED_VERSION, oldMergedVersion, newMergedVersion);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setMergedVersion(PrimaryVersionSpec newMergedVersion) {
+		if (newMergedVersion != mergedVersion) {
+			NotificationChain msgs = null;
+			if (mergedVersion != null)
+				msgs = ((InternalEObject) mergedVersion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.PROJECT_SPACE__MERGED_VERSION, null, msgs);
+			if (newMergedVersion != null)
+				msgs = ((InternalEObject) newMergedVersion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- ModelPackage.PROJECT_SPACE__MERGED_VERSION, null, msgs);
+			msgs = basicSetMergedVersion(newMergedVersion, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_SPACE__MERGED_VERSION,
+				newMergedVersion, newMergedVersion));
 	}
 
 	/**

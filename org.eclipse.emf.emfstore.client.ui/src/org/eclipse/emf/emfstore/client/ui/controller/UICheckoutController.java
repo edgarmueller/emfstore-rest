@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -17,12 +18,16 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -34,9 +39,10 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSpace> {
 
-	private final ServerInfo serverInfo;
-	private final ProjectInfo projectInfo;
-	private final PrimaryVersionSpec versionSpec;
+	private ServerInfo serverInfo;
+	private ProjectInfo projectInfo;
+	private PrimaryVersionSpec versionSpec;
+	private boolean askForBranch;
 
 	/**
 	 * Constructor.
@@ -54,6 +60,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 		super(shell, true, true);
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
+		this.askForBranch = false;
+		versionSpec = null;
+	}
+
+	// TODO BRANCH quick hack, ask eddy how to solve correctly
+	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo, boolean askForBranch) {
+		super(shell, true, true);
+		this.serverInfo = serverInfo;
+		this.projectInfo = projectInfo;
+		this.askForBranch = askForBranch;
 		versionSpec = null;
 	}
 
@@ -77,6 +93,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
 		this.versionSpec = versionSpec;
+		this.askForBranch = false;
 	}
 
 	/**
@@ -88,10 +105,14 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	@Override
 	public ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
+
+			if (askForBranch && versionSpec == null) {
+				versionSpec = branchSelection(serverInfo, projectInfo);
+			}
+
 			return new ServerCall<ProjectSpace>(serverInfo, progressMonitor) {
 				@Override
 				protected ProjectSpace run() throws EmfStoreException {
-
 					if (versionSpec == null) {
 						return WorkspaceManager.getInstance().getCurrentWorkspace()
 							.checkout(getUsersession(), projectInfo, getProgressMonitor());
@@ -101,6 +122,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 						.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
 				}
 			}.execute();
+
 		} catch (final EmfStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -113,5 +135,26 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 		}
 
 		return null;
+	}
+
+	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EmfStoreException {
+		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceManager.getInstance().getCurrentWorkspace())
+			.getBranches(serverInfo, projectInfo.getProjectId());
+
+		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {
+			public BranchInfo call() throws Exception {
+				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
+					getShell(), branches);
+				dialog.setBlockOnOpen(true);
+
+				if (dialog.open() != Dialog.OK || dialog.getResult() == null) {
+					throw new EmfStoreException("No Branch specified");
+				}
+				return dialog.getResult();
+
+			}
+		});
+
+		return result.getHead();
 	}
 }

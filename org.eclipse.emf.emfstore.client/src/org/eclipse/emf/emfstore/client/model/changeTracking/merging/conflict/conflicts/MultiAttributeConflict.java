@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
 
@@ -43,15 +44,13 @@ public class MultiAttributeConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "Multiattribute Conflict";
-
 		if (isLeftMy()) {
-			descriptionTxt = "You have added an element to the [feature] attribute of [modelelement], which was removed in the repository.";
+			description.setDescription(DecisionUtil.getDescription("multiattributeconflict.my", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			descriptionTxt = "An element of the [feature] attribute of [modelelement] was added in the repository. You chose to remove it.";
+			description.setDescription(DecisionUtil.getDescription("multiattributeconflict.their", getDecisionManager()
+				.isBranchMerge()));
 		}
-
-		description.setDescription(descriptionTxt);
 		description.setImage("attribute.gif");
 		return description;
 	}

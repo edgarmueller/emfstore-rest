@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server.core.subinterfaces;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -88,6 +90,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	// TODO BRANCH change
 	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
 
 		synchronized (getMonitor()) {
@@ -95,8 +98,13 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				projectId, versionSpec);
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, resolvedVersion);
 			if (version.getProjectState() == null) {
-				while (version.getProjectState() == null && version.getPreviousVersion() != null) {
-					version = version.getPreviousVersion();
+
+				// TODO BRANCH review. performance optimization by searching state in both directions
+				ArrayList<Version> versions = new ArrayList<Version>();
+				Version currentVersion = version;
+				while (currentVersion.getProjectState() == null) {
+					versions.add(currentVersion);
+					currentVersion = VersionSubInterfaceImpl.findNextVersion(currentVersion);
 				}
 				if (version.getProjectState() == null) {
 					// TODO: nicer exception.
@@ -106,9 +114,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					throw new EmfStoreException("Couldn't find project state.");
 				}
 				Project projectState = ModelUtil.clone(version.getProjectState());
-				for (Version next = version.getNextVersion(); next != null
-					&& next.getPrimarySpec().compareTo(resolvedVersion) < 1; next = next.getNextVersion()) {
-					next.getChanges().apply(projectState);
+				Collections.reverse(versions);
+				for (Version vers : versions) {
+					vers.getChanges().apply(projectState);
 				}
 				return projectState;
 			}
@@ -298,6 +306,13 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		PrimaryVersionSpec primary = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		primary.setIdentifier(0);
 		firstVersion.setPrimarySpec(primary);
+
+		// create branch information
+		BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
+		branchInfo.setName(VersionSpec.BRANCH_DEFAULT_NAME);
+		branchInfo.setHead(ModelUtil.clone(primary));
+		branchInfo.setSource(ModelUtil.clone(primary));
+		projectHistory.getBranches().add(branchInfo);
 
 		// create initial project
 		// Project project =

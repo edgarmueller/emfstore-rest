@@ -27,6 +27,8 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -108,7 +110,8 @@ public interface EmfStore extends EmfStoreInterface {
 	 * @generated NOT
 	 */
 	PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec baseVersionSpec,
-		ChangePackage changePackage, LogMessage logMessage) throws EmfStoreException, InvalidVersionSpecException;
+		ChangePackage changePackage, BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
+		LogMessage logMessage) throws EmfStoreException, InvalidVersionSpecException;
 
 	/**
 	 * Resolve a version specified to a primary version specifier.
@@ -146,6 +149,8 @@ public interface EmfStore extends EmfStoreInterface {
 	 */
 	List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source, VersionSpec target)
 		throws EmfStoreException;
+
+	List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EmfStoreException;
 
 	/**
 	 * Get history information from the server. The list returned will describe

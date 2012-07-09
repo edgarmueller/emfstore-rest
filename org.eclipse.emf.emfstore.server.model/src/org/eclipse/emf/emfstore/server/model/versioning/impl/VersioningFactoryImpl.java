@@ -15,6 +15,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
@@ -91,6 +94,12 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 			return createHeadVersionSpec();
 		case VersioningPackage.VERSION_PROPERTY:
 			return createVersionProperty();
+		case VersioningPackage.BRANCH_VERSION_SPEC:
+			return createBranchVersionSpec();
+		case VersioningPackage.BRANCH_INFO:
+			return createBranchInfo();
+		case VersioningPackage.ANCESTOR_VERSION_SPEC:
+			return createAncestorVersionSpec();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -194,6 +203,39 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	public VersionProperty createVersionProperty() {
 		VersionPropertyImpl versionProperty = new VersionPropertyImpl();
 		return versionProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public BranchVersionSpec createBranchVersionSpec() {
+		BranchVersionSpecImpl branchVersionSpec = new BranchVersionSpecImpl();
+		return branchVersionSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public BranchInfo createBranchInfo() {
+		BranchInfoImpl branchInfo = new BranchInfoImpl();
+		return branchInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public AncestorVersionSpec createAncestorVersionSpec() {
+		AncestorVersionSpecImpl ancestorVersionSpec = new AncestorVersionSpecImpl();
+		return ancestorVersionSpec;
 	}
 
 	/**

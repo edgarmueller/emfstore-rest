@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.server.model.versioning.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
@@ -30,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class PrimaryVersionSpecImpl extends EObjectImpl implements PrimaryVersionSpec {
+public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVersionSpec {
 	/**
 	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -173,14 +172,15 @@ public class PrimaryVersionSpecImpl extends EObjectImpl implements PrimaryVersio
 	public boolean equals(Object object) {
 		if (object instanceof PrimaryVersionSpec) {
 			PrimaryVersionSpec otherPrimaryVersionSpec = (PrimaryVersionSpec) object;
-			return this.getIdentifier() == otherPrimaryVersionSpec.getIdentifier();
+			return this.getIdentifier() == otherPrimaryVersionSpec.getIdentifier()
+				&& (this.getBranch() != null && this.getBranch().equals(otherPrimaryVersionSpec.getBranch()));
 		} else {
 			return false;
 		}
 	}
 
 	public int compareTo(PrimaryVersionSpec o) {
-		if (this.equals(o)) {
+		if (this.getIdentifier() == o.getIdentifier()) {
 			return 0;
 		} else if (this.getIdentifier() < o.getIdentifier()) {
 			return -1;

@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
@@ -38,7 +39,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		 * SANITY CHECKS
 		 */
 		if (version == null) {
-			version = VersionSpec.HEAD_VERSION;
+			version = Versions.HEAD_VERSION(projectSpace.getBaseVersion());
 		}
 		if (callback == null) {
 			callback = UpdateCallback.NOCALLBACK;
@@ -84,6 +85,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}
 
 		getProgressMonitor().subTask("Checking for conflicts");
+
 		ConflictDetector conflictDetector = new ConflictDetector();
 		for (ChangePackage change : changes) {
 			if (conflictDetector.doConflict(change, localchanges)) {
@@ -95,6 +97,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 				}
 			}
 		}
+
 		getProgressMonitor().worked(15);
 		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled() || !callback.inspectChanges(getProjectSpace(), changes)) {
@@ -104,18 +107,8 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
 
 		getProgressMonitor().subTask("Applying changes");
-		final List<ChangePackage> cps = changes;
-		// revert
-		getProjectSpace().revert();
-		// apply changes from repo
-		for (ChangePackage change : cps) {
-			getProjectSpace().applyOperations(change.getCopyOfOperations(), false);
-		}
-		// reapply local changes
-		getProjectSpace().applyOperations(localchanges.getCopyOfOperations(), true);
 
-		getProjectSpace().setBaseVersion(resolvedVersion);
-		getProjectSpace().saveProjectSpaceOnly();
+		getProjectSpace().applyChanges(resolvedVersion, changes, localchanges);
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
 

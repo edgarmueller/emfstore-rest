@@ -47,6 +47,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  */
 public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
+	private HistoryCache historyCache;
+
 	/**
 	 * Default constructor.
 	 * 
@@ -59,6 +61,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		super(parentInterface);
 	}
 
+	@Override
+	protected void initSubInterface() throws FatalEmfStoreException {
+		super.initSubInterface();
+		historyCache = EmfStoreController.getHistoryCache(getServerSpace());
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -68,10 +76,13 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// are related to these modelelements will
 			// be returned.
 			if (historyQuery.getModelElements().size() > 0) {
-				return getHistoryInfo(projectId, historyQuery.getModelElements(), historyQuery.isIncludeChangePackage());
+				// TODO OW: why don't we restrict by version?!
+				return getHistoryInfoForModelElements(projectId, historyQuery.getModelElements(),
+					historyQuery.isIncludeChangePackage());
 			} else {
 				List<HistoryInfo> result = getHistoryInfo(projectId, historyQuery.getSource(),
-					historyQuery.getTarget(), historyQuery.isIncludeChangePackage());
+					historyQuery.getTarget(), historyQuery.isIncludeChangePackage(),
+					historyQuery.isIncludeAllVersions());
 				if (historyQuery.getSource().compareTo(historyQuery.getTarget()) < 0) {
 					Collections.reverse(result);
 				}
@@ -87,6 +98,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throws EmfStoreException {
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
+			// TODO BRANCH
+			// stamp branch instead of throwing an exception
+			tag.setBranch(versionSpec.getBranch());
+
 			version.getTagSpecs().add(tag);
 			try {
 				save(version);
@@ -117,9 +132,8 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	private List<HistoryInfo> getHistoryInfo(ProjectId projectId, List<ModelElementId> moList,
+	private List<HistoryInfo> getHistoryInfoForModelElements(ProjectId projectId, List<ModelElementId> moList,
 		boolean includeChangePackage) throws EmfStoreException {
-		HistoryCache historyCache = EmfStoreController.getInstance().getHistoryCache();
 		// TODO only the first modelelement is included in the request.
 		ModelElementId modelElementId = moList.get(0);
 		TreeSet<Version> elements = historyCache.getChangesForModelElement(projectId, modelElementId);
@@ -127,9 +141,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (versions.size() == 0) {
 			return new ArrayList<HistoryInfo>();
 		}
+		// TODO OW: why only last 20. And if so, why can't one set an offset
 		// only the last 20 or less versions are considered
 		int historyCount = Math.min(versions.size(), 20);
-		List<HistoryInfo> historyInfos = getHistoryInfo(versions.subList(0, historyCount), projectId,
+		List<HistoryInfo> historyInfos = getHistoryInfosFromVersions(versions.subList(0, historyCount), projectId,
 			includeChangePackage);
 		// filter operations to selected model element
 
@@ -154,16 +169,17 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<HistoryInfo> getHistoryInfo(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target,
-		boolean includeChangePackage) throws EmfStoreException {
+		boolean includeChangePackage, boolean includeAllVersions) throws EmfStoreException {
 		if (source == null || target == null) {
 			throw new InvalidInputException();
 		}
-		return getHistoryInfo(getSubInterface(VersionSubInterfaceImpl.class).getVersions(projectId, source, target),
+		return getHistoryInfosFromVersions(
+			getSubInterface(VersionSubInterfaceImpl.class).getVersions(projectId, source, target, includeAllVersions),
 			projectId, includeChangePackage);
 	}
 
-	private List<HistoryInfo> getHistoryInfo(List<Version> versions, ProjectId projectId, boolean includeChangePackage)
-		throws EmfStoreException {
+	private List<HistoryInfo> getHistoryInfosFromVersions(List<Version> versions, ProjectId projectId,
+		boolean includeChangePackage) throws EmfStoreException {
 		List<HistoryInfo> result = new ArrayList<HistoryInfo>();
 		PrimaryVersionSpec headRevision = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId)
 			.getLastVersion().getPrimarySpec();
@@ -191,10 +207,22 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			history.setChangePackage(ModelUtil.clone(version.getChanges()));
 		}
 		history.setLogMessage(ModelUtil.clone(version.getLogMessage()));
+		// Set Version References
 		history.setPrimerySpec(ModelUtil.clone(version.getPrimarySpec()));
-		for (TagVersionSpec tagSpec : version.getTagSpecs()) {
-			history.getTagSpecs().add(ModelUtil.clone(tagSpec));
+		if (version.getAncestorVersion() != null) {
+			history.setPreviousSpec(ModelUtil.clone(version.getAncestorVersion().getPrimarySpec()));
+		} else if (version.getPreviousVersion() != null) {
+			history.setPreviousSpec(ModelUtil.clone(version.getPreviousVersion().getPrimarySpec()));
 		}
+		if (version.getNextVersion() != null) {
+			history.getNextSpec().add(ModelUtil.clone(version.getNextVersion().getPrimarySpec()));
+		}
+		history.getNextSpec().addAll(addSpecs(version.getBranchedVersions()));
+		history.getMergedFrom().addAll(addSpecs(version.getMergedFromVersion()));
+		history.getMergedTo().addAll(addSpecs(version.getMergedToVersion()));
+
+		// Set TAGS
+		history.getTagSpecs().addAll(ModelUtil.clone(version.getTagSpecs()));
 		// add HEAD tag to history info
 		if (version.getPrimarySpec().equals(headRevision)) {
 			TagVersionSpec spec = VersioningFactory.eINSTANCE.createTagVersionSpec();
@@ -202,5 +230,13 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			history.getTagSpecs().add(spec);
 		}
 		return history;
+	}
+
+	private List<PrimaryVersionSpec> addSpecs(List<Version> versions) {
+		ArrayList<PrimaryVersionSpec> result = new ArrayList<PrimaryVersionSpec>();
+		for (Version version : versions) {
+			result.add(ModelUtil.clone(version.getPrimarySpec()));
+		}
+		return result;
 	}
 }

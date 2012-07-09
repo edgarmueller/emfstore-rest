@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 public class MultiAttributeSetSetConflict extends Conflict {
@@ -39,8 +40,8 @@ public class MultiAttributeSetSetConflict extends Conflict {
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 
-		description
-			.setDescription("You have changed an element from the [feature] attribute of [modelelement], which was changed in the repository");
+		description.setDescription(DecisionUtil.getDescription("multiattributesetsetconflict", getDecisionManager()
+			.isBranchMerge()));
 
 		return description;
 	}

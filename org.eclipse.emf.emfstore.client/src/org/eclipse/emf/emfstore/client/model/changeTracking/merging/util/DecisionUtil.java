@@ -147,6 +147,16 @@ public final class DecisionUtil {
 		return false;
 	}
 
+	private static DescriptionProvider descriptionProvider;
+
+	public static String getDescription(String key, boolean isBranchMerge) {
+		if (descriptionProvider == null) {
+			descriptionProvider = new DescriptionProvider();
+		}
+		descriptionProvider.setPrefix(isBranchMerge ? "branchmerge" : null);
+		return descriptionProvider.getDescription(key);
+	}
+
 	/**
 	 * Uses the object's toString method or returns unset string.
 	 * 
@@ -157,7 +167,7 @@ public final class DecisionUtil {
 	 * @return obj.toString or unset
 	 */
 	public static String getLabel(Object obj, String unset) {
-		return (obj != null && obj.toString().length() > 1) ? obj.toString() : unset;
+		return (obj != null && obj.toString().length() > 0) ? obj.toString() : unset;
 	}
 
 	/**

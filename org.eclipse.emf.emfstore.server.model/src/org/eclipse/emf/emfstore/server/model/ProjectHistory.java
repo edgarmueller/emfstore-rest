@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server.model;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 
 /**
@@ -158,5 +159,22 @@ public interface ProjectHistory extends EObject {
 	 * @generated
 	 */
 	EList<EMFStoreProperty> getSharedProperties();
+
+	/**
+	 * Returns the value of the '<em><b>Branches</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Branches</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Branches</em>' containment reference list.
+	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getProjectHistory_Branches()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<BranchInfo> getBranches();
 
 } // ProjectHistory

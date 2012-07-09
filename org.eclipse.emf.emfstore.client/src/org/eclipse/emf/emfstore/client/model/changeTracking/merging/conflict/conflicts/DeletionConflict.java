@@ -56,18 +56,14 @@ public class DeletionConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		String descriptionTxt = "";
-
 		if (isLeftMy()) {
-			descriptionTxt = "You have deleted the [modelelement]."
-				+ " This deletion conflicts with a change on the [firstother]" + " element" + generateOthers()
-				+ ". Please choose an option.";
+			description.setDescription(DecisionUtil.getDescription("deletionconflict.my", getDecisionManager()
+				.isBranchMerge()));
 		} else {
-			descriptionTxt = "The [modelelement] was deleted on the repository which conflicts with"
-				+ " the change on your [firstother]" + generateOthers() + ". Please choose an option.";
+			description.setDescription(DecisionUtil.getDescription("deletionconflict.their", getDecisionManager()
+				.isBranchMerge()));
 		}
 
-		description.setDescription(descriptionTxt);
 		description.add("modelelement", getLeftOperation().getModelElementId());
 		description.add("firstother", getRightOperation().getModelElementId());
 		description.add("otherinvolved", generateOthers());

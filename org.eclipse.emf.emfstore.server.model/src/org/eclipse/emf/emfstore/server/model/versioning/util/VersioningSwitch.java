@@ -14,6 +14,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
@@ -181,6 +184,31 @@ public class VersioningSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case VersioningPackage.BRANCH_VERSION_SPEC: {
+			BranchVersionSpec branchVersionSpec = (BranchVersionSpec) theEObject;
+			T result = caseBranchVersionSpec(branchVersionSpec);
+			if (result == null)
+				result = caseVersionSpec(branchVersionSpec);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case VersioningPackage.BRANCH_INFO: {
+			BranchInfo branchInfo = (BranchInfo) theEObject;
+			T result = caseBranchInfo(branchInfo);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case VersioningPackage.ANCESTOR_VERSION_SPEC: {
+			AncestorVersionSpec ancestorVersionSpec = (AncestorVersionSpec) theEObject;
+			T result = caseAncestorVersionSpec(ancestorVersionSpec);
+			if (result == null)
+				result = caseVersionSpec(ancestorVersionSpec);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -337,6 +365,54 @@ public class VersioningSwitch<T> {
 	 * @generated
 	 */
 	public T caseVersionProperty(VersionProperty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Branch Version Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Branch Version Spec</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBranchVersionSpec(BranchVersionSpec object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Branch Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Branch Info</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBranchInfo(BranchInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ancestor Version Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ancestor Version Spec</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAncestorVersionSpec(AncestorVersionSpec object) {
 		return null;
 	}
 
