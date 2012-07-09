@@ -32,7 +32,7 @@ public interface ConflictResolver {
 	 *            in other words the base version plus local operations
 	 * @param theirChangePackages an ordered list of change packages that are incoming in the update, in other words all
 	 *            change packages from base to target
-	 * @param myChangePackage the change package of operations that are to be applied locally
+	 * @param myChangePackages the change packages of operations that are to be applied locally
 	 * @param baseVersion baseVersion of projectspace and sourceversion of changes from server
 	 * @param targetVersion the version to which is updated
 	 * @return true if the merge can proceed, false if it has to be cancelled
