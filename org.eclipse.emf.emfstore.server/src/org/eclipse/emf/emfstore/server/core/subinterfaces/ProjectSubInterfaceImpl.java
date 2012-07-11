@@ -17,8 +17,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
@@ -236,7 +236,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				if (deleteFiles) {
 					File projectFolder = new File(getResourceHelper().getProjectFolder(projectId));
 					try {
-						FileUtils.deleteDirectory(projectFolder);
+						FileUtil.deleteDirectory(projectFolder, true);
 					} catch (IOException e) {
 						ModelUtil.logException(
 							"Project files couldn't be deleted, but it was deleted from containment tree.", e);
