@@ -25,14 +25,25 @@ import org.eclipse.swt.widgets.Display;
  * 
  * @author wesendon
  */
-public class MergeProjectHandler extends AbstractConflictResolver implements ConflictResolver {
+public class MergeProjectHandler extends AbstractConflictResolver implements
+		ConflictResolver {
 
 	private DefaultMergeLabelProvider labelProvider;
 
+	/**
+	 * Default constructor.
+	 * 
+	 * @param isBranchMerge
+	 *            specifies whether two branches are merged, rather then changes
+	 *            from the same branches.
+	 */
 	public MergeProjectHandler(boolean isBranchMerge) {
 		super(isBranchMerge);
 	}
 
+	/**
+	 * Default constructor.
+	 */
 	public MergeProjectHandler() {
 		super();
 	}
@@ -41,13 +52,15 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 	@Override
 	protected void preDecisionManagerHook() {
 		labelProvider = new DefaultMergeLabelProvider();
-		WorkspaceManager.getObserverBus().register(labelProvider, MergeLabelProvider.class);
+		WorkspaceManager.getObserverBus().register(labelProvider,
+				MergeLabelProvider.class);
 	}
 
 	@Override
 	protected boolean controlDecisionManager(DecisionManager decisionManager) {
 		MergeWizard wizard = new MergeWizard(decisionManager);
-		WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
+		WizardDialog dialog = new WizardDialog(Display.getCurrent()
+				.getActiveShell(), wizard);
 		dialog.setPageSize(1000, 500);
 		dialog.setBlockOnOpen(true);
 		dialog.create();

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import java.util.ArrayList;
@@ -9,18 +19,44 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
+/**
+ * Convenience super class for implementing {@link ConflictResolver}.
+ * 
+ * @author wesendon
+ */
 public abstract class AbstractConflictResolver implements ConflictResolver {
 
+	/**
+	 * Allows access for subclasses.
+	 */
 	protected List<AbstractOperation> acceptedMine;
+
+	/**
+	 * Allows access for subclasses.
+	 */
 	protected List<AbstractOperation> rejectedTheirs;
+
+	/**
+	 * Allows access for subclasses.
+	 */
 	protected final boolean isBranchMerge;
 
+	/**
+	 * Default Constructor.
+	 * 
+	 * @param isBranchMerge
+	 *            specifies whether two branches are merged oppossed to changes
+	 *            from the same branch.
+	 */
 	public AbstractConflictResolver(boolean isBranchMerge) {
 		this.isBranchMerge = isBranchMerge;
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
 	}
 
+	/**
+	 * Default constructor.
+	 */
 	public AbstractConflictResolver() {
 		this(false);
 	}
@@ -48,16 +84,20 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project,
-	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      java.util.List, java.util.List,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec base, PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project,
+			List<ChangePackage> myChangePackages,
+			List<ChangePackage> theirChangePackages, PrimaryVersionSpec base,
+			PrimaryVersionSpec target) {
 
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
-			target, isBranchMerge);
+		DecisionManager decisionManager = new DecisionManager(project,
+				myChangePackages, theirChangePackages, base, target,
+				isBranchMerge);
 
 		if (decisionManager.isResolved()) {
 			setResults(decisionManager);
@@ -80,10 +120,22 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		rejectedTheirs = decisionManager.getRejectedTheirs();
 	}
 
+	/**
+	 * Allows to execute code before the {@link DecisionManager} is
+	 * initiallized.
+	 */
 	protected void preDecisionManagerHook() {
 	}
 
-	abstract protected boolean controlDecisionManager(DecisionManager decisionManager);
+	/**
+	 * Conflict resolution should be implemented in this method.
+	 * 
+	 * @param decisionManager
+	 *            initialized {@link DecisionManager}
+	 * @return true, if all conflicts could be resolved
+	 */
+	protected abstract boolean controlDecisionManager(
+			DecisionManager decisionManager);
 
 	/**
 	 * 
@@ -97,7 +149,8 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 			mergeResult.add(0, operationToReverse.reverse());
 		}
 		mergeResult.addAll(getAcceptedMine());
-		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
+		ChangePackage result = VersioningFactory.eINSTANCE
+				.createChangePackage();
 		result.getOperations().addAll(mergeResult);
 
 		return result;

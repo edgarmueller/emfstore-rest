@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.core.commands.IHandler;
@@ -5,7 +15,13 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
-public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements IHandler {
+/**
+ * Allows to checkout branches.
+ * 
+ * @author wesendon
+ */
+public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements
+		IHandler {
 
 	@Override
 	public void handle() {
@@ -17,7 +33,9 @@ public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements IH
 		}
 
 		// FIXME: eContainer call
-		new UICheckoutController(getShell(), ((ServerInfo) projectInfo.eContainer()), projectInfo, true).execute();
+		new UICheckoutController(getShell(),
+				((ServerInfo) projectInfo.eContainer()), projectInfo, true)
+				.execute();
 	}
 
 }

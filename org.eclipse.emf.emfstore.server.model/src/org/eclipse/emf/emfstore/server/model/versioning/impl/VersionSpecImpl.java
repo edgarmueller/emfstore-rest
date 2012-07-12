@@ -1,11 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * 
- * 
- * 
- */
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning.impl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,23 +18,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Version Spec</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl#getBranch <em>Branch</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl#getBranch
+ * <em>Branch</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec {
+public abstract class VersionSpecImpl extends EObjectImpl implements
+		VersionSpec {
 	/**
-	 * The default value of the '{@link #getBranch() <em>Branch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getBranch() <em>Branch</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getBranch()
 	 * @generated
@@ -42,8 +45,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 
 	/**
 	 * The cached value of the '{@link #getBranch() <em>Branch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getBranch()
 	 * @generated
@@ -52,8 +54,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	protected String branch = BRANCH_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -62,8 +63,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -73,8 +73,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -83,8 +82,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -92,13 +90,12 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 		String oldBranch = branch;
 		branch = newBranch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_SPEC__BRANCH, oldBranch,
-				branch));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					VersioningPackage.VERSION_SPEC__BRANCH, oldBranch, branch));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -112,8 +109,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -128,8 +124,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -144,8 +139,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -153,14 +147,14 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.VERSION_SPEC__BRANCH:
-			return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT.equals(branch);
+			return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT
+					.equals(branch);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

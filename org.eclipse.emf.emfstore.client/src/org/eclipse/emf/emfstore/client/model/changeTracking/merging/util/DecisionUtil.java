@@ -30,7 +30,8 @@ public final class DecisionUtil {
 	}
 
 	/**
-	 * TODO BRANCH some of this stuff is UI related and isn't supposed to be defined here.
+	 * TODO BRANCH some of this stuff is UI related and isn't supposed to be
+	 * defined here.
 	 */
 
 	/**
@@ -56,7 +57,8 @@ public final class DecisionUtil {
 	/**
 	 * Multiline editable widget detail provider.
 	 */
-	public static final String WIDGET_MULTILINE_EDITABLE = WIDGET_MULTILINE + SEPERATOR + EDITABLE;
+	public static final String WIDGET_MULTILINE_EDITABLE = WIDGET_MULTILINE
+			+ SEPERATOR + EDITABLE;
 
 	/**
 	 * Option for other involved detail provider.
@@ -112,7 +114,8 @@ public final class DecisionUtil {
 	 *            type
 	 * @return resulting option or null
 	 */
-	public static ConflictOption getConflictOptionByType(List<ConflictOption> options, OptionType type) {
+	public static ConflictOption getConflictOptionByType(
+			List<ConflictOption> options, OptionType type) {
 		for (ConflictOption option : options) {
 			if (option.getType().equals(type)) {
 				return option;
@@ -136,7 +139,8 @@ public final class DecisionUtil {
 			if (!option.isDetailsProvider()) {
 				continue;
 			}
-			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
+			if (option.getDetailProvider().startsWith(
+					DecisionUtil.WIDGET_MULTILINE)) {
 				if (option.getOptionLabel().length() > DecisionUtil.OPTION_LENGTH) {
 					return true;
 				}
@@ -149,6 +153,17 @@ public final class DecisionUtil {
 
 	private static DescriptionProvider descriptionProvider;
 
+	/**
+	 * Returns conflict descriptions on basis of the {@link DescriptionProvider}
+	 * .
+	 * 
+	 * @param key
+	 *            key
+	 * @param isBranchMerge
+	 *            if true, a prefix will be added to the key in order to get
+	 *            branch wording
+	 * @return description
+	 */
 	public static String getDescription(String key, boolean isBranchMerge) {
 		if (descriptionProvider == null) {
 			descriptionProvider = new DescriptionProvider();
@@ -167,7 +182,8 @@ public final class DecisionUtil {
 	 * @return obj.toString or unset
 	 */
 	public static String getLabel(Object obj, String unset) {
-		return (obj != null && obj.toString().length() > 0) ? obj.toString() : unset;
+		return (obj != null && obj.toString().length() > 0) ? obj.toString()
+				: unset;
 	}
 
 	/**
@@ -181,17 +197,20 @@ public final class DecisionUtil {
 		if (modelElement == null) {
 			return "";
 		}
-		return modelElement.eClass().getName() + " \"" + getModelElementName(modelElement) + "\"";
+		return modelElement.eClass().getName() + " \""
+				+ getModelElementName(modelElement) + "\"";
 	}
 
 	/**
 	 * Returns name for an element by using {@link MergeLabelProvider}.
 	 * 
-	 * @param modelElement specified element
+	 * @param modelElement
+	 *            specified element
 	 * @return name for element;
 	 */
 	public static String getModelElementName(EObject modelElement) {
-		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus().notify(MergeLabelProvider.class, true);
+		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus()
+				.notify(MergeLabelProvider.class, true);
 		if (labelProvider == null) {
 			return modelElement.toString();
 		}

@@ -65,7 +65,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @throws FatalEmfStoreException
 	 *             in case of failure
 	 */
-	public VersionSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public VersionSubInterfaceImpl(AbstractEmfstoreInterface parentInterface)
+			throws FatalEmfStoreException {
 		super(parentInterface);
 	}
 
@@ -94,67 +95,86 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @throws EmfStoreException
 	 *             if versionSpec can't be resolved or other failure
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
+	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId,
+			VersionSpec versionSpec) throws EmfStoreException {
 		synchronized (getMonitor()) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			ProjectHistory projectHistory = getSubInterface(
+					ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			if (versionSpec instanceof PrimaryVersionSpec) {
 
-				return resolvePrimaryVersionSpec(projectHistory, ((PrimaryVersionSpec) versionSpec));
+				return resolvePrimaryVersionSpec(projectHistory,
+						((PrimaryVersionSpec) versionSpec));
 
 			} else if (versionSpec instanceof HeadVersionSpec) {
 
-				return resolveHeadVersionSpec(projectHistory, (HeadVersionSpec) versionSpec);
+				return resolveHeadVersionSpec(projectHistory,
+						(HeadVersionSpec) versionSpec);
 
 			} else if (versionSpec instanceof DateVersionSpec) {
 
-				return resolveDateVersionSpec(projectHistory, (DateVersionSpec) versionSpec);
+				return resolveDateVersionSpec(projectHistory,
+						(DateVersionSpec) versionSpec);
 
 			} else if (versionSpec instanceof TagVersionSpec) {
 
-				return resolveTagVersionSpec(projectHistory, (TagVersionSpec) versionSpec);
+				return resolveTagVersionSpec(projectHistory,
+						(TagVersionSpec) versionSpec);
 
 			} else if (versionSpec instanceof BranchVersionSpec) {
 
-				return resolveBranchVersionSpec(projectHistory, (BranchVersionSpec) versionSpec);
+				return resolveBranchVersionSpec(projectHistory,
+						(BranchVersionSpec) versionSpec);
 
 			} else if (versionSpec instanceof AncestorVersionSpec) {
 
-				return resolveAncestorVersionSpec(projectHistory, (AncestorVersionSpec) versionSpec);
+				return resolveAncestorVersionSpec(projectHistory,
+						(AncestorVersionSpec) versionSpec);
 
 			}
 			throw new InvalidVersionSpecException();
 		}
 	}
 
-	private PrimaryVersionSpec resolveAncestorVersionSpec(ProjectHistory projectHistory, AncestorVersionSpec versionSpec)
-		throws InvalidVersionSpecException {
+	private PrimaryVersionSpec resolveAncestorVersionSpec(
+			ProjectHistory projectHistory, AncestorVersionSpec versionSpec)
+			throws InvalidVersionSpecException {
 
-		Version currentSource = getVersion(projectHistory, versionSpec.getSource());
-		Version currentTarget = getVersion(projectHistory, versionSpec.getTarget());
+		Version currentSource = getVersion(projectHistory,
+				versionSpec.getSource());
+		Version currentTarget = getVersion(projectHistory,
+				versionSpec.getTarget());
 
 		if (currentSource == null || currentTarget == null) {
-			throw new InvalidVersionSpecException("Specified source and/or target version invalid.");
+			throw new InvalidVersionSpecException(
+					"Specified source and/or target version invalid.");
 		}
 
 		// TODO BRANCH
-		// The goal is to find the common ancestor version of the source and target version from different branches. In
-		// order to find the ancestor the algorithm starts at the specified version and walks down the version tree in
-		// parallel for source and target until the current versions are equal and the ancestor is found. In Each step
-		// only one version (of target and source) is decremented. To find the global ancestor it is necessary that the
+		// The goal is to find the common ancestor version of the source and
+		// target version from different branches. In
+		// order to find the ancestor the algorithm starts at the specified
+		// version and walks down the version tree in
+		// parallel for source and target until the current versions are equal
+		// and the ancestor is found. In Each step
+		// only one version (of target and source) is decremented. To find the
+		// global ancestor it is necessary that the
 		// version with the higher version number is decremented.
 		while (currentSource != null && currentTarget != null) {
 			if (currentSource == currentTarget) {
 				return currentSource.getPrimarySpec();
 			}
 
-			// Shortcut for most common merge usecase: If you have 2 parallel branches and merge several times
-			// from the one branch into the another. This case is also supported by #getVersions
+			// Shortcut for most common merge usecase: If you have 2 parallel
+			// branches and merge several times
+			// from the one branch into the another. This case is also supported
+			// by #getVersions
 			if (currentSource.getMergedFromVersion().contains(currentTarget)) {
 				return currentTarget.getPrimarySpec();
 			}
 
-			if (currentSource.getPrimarySpec().getIdentifier() >= currentTarget.getPrimarySpec().getIdentifier()) {
+			if (currentSource.getPrimarySpec().getIdentifier() >= currentTarget
+					.getPrimarySpec().getIdentifier()) {
 				currentSource = findNextVersion(currentSource);
 			} else {
 				currentTarget = findNextVersion(currentTarget);
@@ -164,15 +184,17 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throw new InvalidVersionSpecException();
 	}
 
-	private PrimaryVersionSpec resolvePrimaryVersionSpec(ProjectHistory projectHistory, PrimaryVersionSpec versionSpec)
-		throws InvalidVersionSpecException {
+	private PrimaryVersionSpec resolvePrimaryVersionSpec(
+			ProjectHistory projectHistory, PrimaryVersionSpec versionSpec)
+			throws InvalidVersionSpecException {
 		int index = versionSpec.getIdentifier();
 		String branch = versionSpec.getBranch();
 		int versions = projectHistory.getVersions().size();
 		if (0 > index || index >= versions || branch == null) {
 			throw new InvalidVersionSpecException();
 		}
-		// Get biggest primary version of given branch which is equal or lower to the given versionSpec
+		// Get biggest primary version of given branch which is equal or lower
+		// to the given versionSpec
 		for (int i = index; i >= 0; i--) {
 			Version version = projectHistory.getVersions().get(i);
 			if (branch.equals(version.getPrimarySpec().getBranch())) {
@@ -183,8 +205,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throw new InvalidVersionSpecException();
 	}
 
-	private PrimaryVersionSpec resolveHeadVersionSpec(ProjectHistory projectHistory, HeadVersionSpec versionSpec)
-		throws InvalidVersionSpecException {
+	private PrimaryVersionSpec resolveHeadVersionSpec(
+			ProjectHistory projectHistory, HeadVersionSpec versionSpec)
+			throws InvalidVersionSpecException {
 		BranchInfo info = getBranchInfo(projectHistory, versionSpec);
 		if (info != null) {
 			return info.getHead();
@@ -192,7 +215,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throw new InvalidVersionSpecException();
 	}
 
-	private PrimaryVersionSpec resolveDateVersionSpec(ProjectHistory projectHistory, DateVersionSpec versionSpec) {
+	private PrimaryVersionSpec resolveDateVersionSpec(
+			ProjectHistory projectHistory, DateVersionSpec versionSpec) {
 		for (Version version : projectHistory.getVersions()) {
 			LogMessage logMessage = version.getLogMessage();
 			if (logMessage == null || logMessage.getDate() == null) {
@@ -201,7 +225,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (versionSpec.getDate().before(logMessage.getDate())) {
 				Version previousVersion = version.getPreviousVersion();
 				if (previousVersion == null) {
-					return VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+					return VersioningFactory.eINSTANCE
+							.createPrimaryVersionSpec();
 				}
 				return previousVersion.getPrimarySpec();
 			}
@@ -209,8 +234,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return projectHistory.getLastVersion().getPrimarySpec();
 	}
 
-	private PrimaryVersionSpec resolveTagVersionSpec(ProjectHistory projectHistory, TagVersionSpec versionSpec)
-		throws InvalidVersionSpecException {
+	private PrimaryVersionSpec resolveTagVersionSpec(
+			ProjectHistory projectHistory, TagVersionSpec versionSpec)
+			throws InvalidVersionSpecException {
 		for (Version version : projectHistory.getVersions()) {
 			for (TagVersionSpec tag : version.getTagSpecs()) {
 				if (versionSpec.equals(tag)) {
@@ -221,8 +247,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throw new InvalidVersionSpecException();
 	}
 
-	private PrimaryVersionSpec resolveBranchVersionSpec(ProjectHistory projectHistory, BranchVersionSpec versionSpec)
-		throws InvalidVersionSpecException {
+	private PrimaryVersionSpec resolveBranchVersionSpec(
+			ProjectHistory projectHistory, BranchVersionSpec versionSpec)
+			throws InvalidVersionSpecException {
 		BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
 		if (branchInfo == null) {
 			throw new InvalidVersionSpecException();
@@ -235,15 +262,18 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param user
 	 */
-	public PrimaryVersionSpec createVersion(ProjectId projectId, PrimaryVersionSpec baseVersionSpec,
-		ChangePackage changePackage, BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
-		LogMessage logMessage, ACUser user) throws EmfStoreException {
+	public PrimaryVersionSpec createVersion(ProjectId projectId,
+			PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage,
+			BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
+			LogMessage logMessage, ACUser user) throws EmfStoreException {
 		synchronized (getMonitor()) {
 			long currentTimeMillis = System.currentTimeMillis();
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			ProjectHistory projectHistory = getSubInterface(
+					ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			// Find branch
-			BranchInfo baseBranch = getBranchInfo(projectHistory, baseVersionSpec);
+			BranchInfo baseBranch = getBranchInfo(projectHistory,
+					baseVersionSpec);
 			Version baseVersion = getVersion(projectHistory, baseVersionSpec);
 			// TODO BRANCH
 			if (baseVersion == null || baseBranch == null) {
@@ -255,23 +285,32 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Version newVersion = null;
 
 			// normal commit
-			if (targetBranch == null || (baseVersion.getPrimarySpec().getBranch().equals(targetBranch.getBranch()))) {
+			if (targetBranch == null
+					|| (baseVersion.getPrimarySpec().getBranch()
+							.equals(targetBranch.getBranch()))) {
 
-				// If branch is null or branch equals base branch, create new version for specific branch
-				if (!baseVersionSpec.equals(isHeadOfBranch(projectHistory, baseVersion.getPrimarySpec()))) {
+				// If branch is null or branch equals base branch, create new
+				// version for specific branch
+				if (!baseVersionSpec.equals(isHeadOfBranch(projectHistory,
+						baseVersion.getPrimarySpec()))) {
 					throw new BaseVersionOutdatedException();
 				}
-				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
+				newVersion = createVersion(projectHistory, changePackage,
+						logMessage, user, baseVersion);
 				newVersion.setPreviousVersion(baseVersion);
-				baseBranch.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
+				baseBranch
+						.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
 
 			} else if (getBranchInfo(projectHistory, targetBranch) == null) {
 				if (targetBranch.getBranch().equals("")) {
-					throw new EmfStoreException("Empty branch name is not permitted.");
+					throw new EmfStoreException(
+							"Empty branch name is not permitted.");
 				}
 				// when branch does NOT exist, create new branch
-				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
-				createNewBranch(projectHistory, baseVersion.getPrimarySpec(), newVersion.getPrimarySpec(), targetBranch);
+				newVersion = createVersion(projectHistory, changePackage,
+						logMessage, user, baseVersion);
+				createNewBranch(projectHistory, baseVersion.getPrimarySpec(),
+						newVersion.getPrimarySpec(), targetBranch);
 				newVersion.setAncestorVersion(baseVersion);
 
 			} else {
@@ -281,18 +320,23 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			// TODO BRANCH review
 			if (sourceVersion != null) {
-				newVersion.getMergedFromVersion().add(getVersion(projectHistory, sourceVersion));
+				newVersion.getMergedFromVersion().add(
+						getVersion(projectHistory, sourceVersion));
 			}
 
 			// TODO BRANCH fix in memory first, then persistence
 			// try to save
 			try {
 				try {
-					getResourceHelper().createResourceForProject(newVersion.getProjectState(),
-						newVersion.getPrimarySpec(), projectHistory.getProjectId());
-					getResourceHelper().createResourceForChangePackage(changePackage, newVersion.getPrimarySpec(),
-						projectId);
-					getResourceHelper().createResourceForVersion(newVersion, projectHistory.getProjectId());
+					getResourceHelper().createResourceForProject(
+							newVersion.getProjectState(),
+							newVersion.getPrimarySpec(),
+							projectHistory.getProjectId());
+					getResourceHelper().createResourceForChangePackage(
+							changePackage, newVersion.getPrimarySpec(),
+							projectId);
+					getResourceHelper().createResourceForVersion(newVersion,
+							projectHistory.getProjectId());
 				} catch (FatalEmfStoreException e) {
 					// try to roll back
 					baseVersion.setNextVersion(null);
@@ -304,10 +348,12 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					throw new StorageException(StorageException.NOSAVE, e);
 				}
 
-				// if ancesotr isn't null, a new branch was created. In this case we want to keep the old base project
+				// if ancesotr isn't null, a new branch was created. In this
+				// case we want to keep the old base project
 				// state
 				if (newVersion.getAncestorVersion() == null) {
-					// delete projectstate from last revision depending on persistence policy
+					// delete projectstate from last revision depending on
+					// persistence policy
 					handleOldProjectState(projectId, baseVersion);
 				}
 
@@ -315,7 +361,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				save(projectHistory);
 
 				// update history cache
-				// TODO BRANCH history Cache should work without any further changes
+				// TODO BRANCH history Cache should work without any further
+				// changes
 				historyCache.addVersionToCache(projectId, newVersion);
 			} catch (FatalEmfStoreException e) {
 				// roll back failed
@@ -323,13 +370,15 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				throw new EmfStoreException("Shutting down server.");
 			}
 
-			ModelUtil.logInfo("Total time for commit: " + (System.currentTimeMillis() - currentTimeMillis));
+			ModelUtil.logInfo("Total time for commit: "
+					+ (System.currentTimeMillis() - currentTimeMillis));
 			return newVersion.getPrimarySpec();
 		}
 	}
 
-	private void createNewBranch(ProjectHistory projectHistory, PrimaryVersionSpec baseSpec,
-		PrimaryVersionSpec primarySpec, BranchVersionSpec branch) {
+	private void createNewBranch(ProjectHistory projectHistory,
+			PrimaryVersionSpec baseSpec, PrimaryVersionSpec primarySpec,
+			BranchVersionSpec branch) {
 		primarySpec.setBranch(branch.getBranch());
 
 		// TODO BRANCH make sure branch name is not null
@@ -342,12 +391,14 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	}
 
-	private Version createVersion(ProjectHistory projectHistory, ChangePackage changePackage, LogMessage logMessage,
-		ACUser user, Version previousHeadVersion) {
+	private Version createVersion(ProjectHistory projectHistory,
+			ChangePackage changePackage, LogMessage logMessage, ACUser user,
+			Version previousHeadVersion) {
 		Version newVersion = VersioningFactory.eINSTANCE.createVersion();
 
 		// copy project and apply changes
-		Project newProjectState = ((ProjectImpl) previousHeadVersion.getProjectState()).copy();
+		Project newProjectState = ((ProjectImpl) previousHeadVersion
+				.getProjectState()).copy();
 		changePackage.apply(newProjectState);
 		newVersion.setProjectState(newProjectState);
 		newVersion.setChanges(changePackage);
@@ -356,28 +407,34 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		logMessage.setAuthor(user.getName());
 		newVersion.setLogMessage(logMessage);
 
-		// latest version == getVersion.size() (version start with index 0 as the list), branch from previous is used.
-		newVersion.setPrimarySpec(Versions.PRIMARY(previousHeadVersion.getPrimarySpec(), projectHistory.getVersions()
-			.size()));
+		// latest version == getVersion.size() (version start with index 0 as
+		// the list), branch from previous is used.
+		newVersion.setPrimarySpec(Versions.PRIMARY(previousHeadVersion
+				.getPrimarySpec(), projectHistory.getVersions().size()));
 		newVersion.setNextVersion(null);
 
 		projectHistory.getVersions().add(newVersion);
 		return newVersion;
 	}
 
-	private Version getVersion(ProjectHistory projectHistory, PrimaryVersionSpec baseVersionSpec) {
+	private Version getVersion(ProjectHistory projectHistory,
+			PrimaryVersionSpec baseVersionSpec) {
 		if (0 > baseVersionSpec.getIdentifier()
-			|| baseVersionSpec.getIdentifier() > projectHistory.getVersions().size() - 1) {
+				|| baseVersionSpec.getIdentifier() > projectHistory
+						.getVersions().size() - 1) {
 			return null;
 		}
-		Version version = projectHistory.getVersions().get(baseVersionSpec.getIdentifier());
-		if (version == null || !version.getPrimarySpec().equals(baseVersionSpec)) {
+		Version version = projectHistory.getVersions().get(
+				baseVersionSpec.getIdentifier());
+		if (version == null
+				|| !version.getPrimarySpec().equals(baseVersionSpec)) {
 			return null;
 		}
 		return version;
 	}
 
-	private PrimaryVersionSpec isHeadOfBranch(ProjectHistory projectHistory, PrimaryVersionSpec versionSpec) {
+	private PrimaryVersionSpec isHeadOfBranch(ProjectHistory projectHistory,
+			PrimaryVersionSpec versionSpec) {
 		BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
 		if (branchInfo != null && branchInfo.getHead().equals(versionSpec)) {
 			return branchInfo.getHead();
@@ -385,7 +442,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return null;
 	}
 
-	private BranchInfo getBranchInfo(ProjectHistory projectHistory, VersionSpec versionSpec) {
+	private BranchInfo getBranchInfo(ProjectHistory projectHistory,
+			VersionSpec versionSpec) {
 		for (BranchInfo branchInfo : projectHistory.getBranches()) {
 			if (branchInfo.getName().equals(versionSpec.getBranch())) {
 				return branchInfo;
@@ -397,9 +455,11 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<BranchInfo> getBranches(ProjectId projectId) throws EmfStoreException {
+	public List<BranchInfo> getBranches(ProjectId projectId)
+			throws EmfStoreException {
 		synchronized (getMonitor()) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			ProjectHistory projectHistory = getSubInterface(
+					ProjectSubInterfaceImpl.class).getProject(projectId);
 			ArrayList<BranchInfo> result = new ArrayList<BranchInfo>();
 			for (BranchInfo branch : projectHistory.getBranches()) {
 				result.add(ModelUtil.clone(branch));
@@ -413,13 +473,15 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	// TODO what's the purpose of this task
 	@Deprecated
-	public PrimaryVersionSpec createVersionForProject(ProjectId projectId, PrimaryVersionSpec baseVersionSpec,
-		ChangePackage changePackage, LogMessage logMessage) throws EmfStoreException {
+	public PrimaryVersionSpec createVersionForProject(ProjectId projectId,
+			PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage,
+			LogMessage logMessage) throws EmfStoreException {
 		synchronized (getMonitor()) {
 
 			long currentTimeMillis = System.currentTimeMillis();
 
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			ProjectHistory projectHistory = getSubInterface(
+					ProjectSubInterfaceImpl.class).getProject(projectId);
 			List<Version> versions = projectHistory.getVersions();
 
 			// OW: check here if base version is valid at all
@@ -428,14 +490,16 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				throw new BaseVersionOutdatedException();
 			}
 
-			PrimaryVersionSpec newVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+			PrimaryVersionSpec newVersionSpec = VersioningFactory.eINSTANCE
+					.createPrimaryVersionSpec();
 			newVersionSpec.setIdentifier(baseVersionSpec.getIdentifier() + 1);
 
 			Version newVersion = VersioningFactory.eINSTANCE.createVersion();
 
 			Version previousHeadVersion = versions.get(versions.size() - 1);
 
-			Project newProjectState = ModelUtil.clone(previousHeadVersion.getProjectState());
+			Project newProjectState = ModelUtil.clone(previousHeadVersion
+					.getProjectState());
 
 			changePackage.apply(newProjectState);
 
@@ -453,11 +517,14 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// try to save
 			try {
 				try {
-					getResourceHelper().createResourceForProject(newProjectState, newVersion.getPrimarySpec(),
-						projectHistory.getProjectId());
-					getResourceHelper().createResourceForChangePackage(changePackage, newVersion.getPrimarySpec(),
-						projectId);
-					getResourceHelper().createResourceForVersion(newVersion, projectHistory.getProjectId());
+					getResourceHelper().createResourceForProject(
+							newProjectState, newVersion.getPrimarySpec(),
+							projectHistory.getProjectId());
+					getResourceHelper().createResourceForChangePackage(
+							changePackage, newVersion.getPrimarySpec(),
+							projectId);
+					getResourceHelper().createResourceForVersion(newVersion,
+							projectHistory.getProjectId());
 				} catch (FatalEmfStoreException e) {
 					// try to roll back
 					previousHeadVersion.setNextVersion(null);
@@ -484,7 +551,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				throw new EmfStoreException("Shutting down server.");
 			}
 
-			ModelUtil.logInfo("Total time for commit: " + (System.currentTimeMillis() - currentTimeMillis));
+			ModelUtil.logInfo("Total time for commit: "
+					+ (System.currentTimeMillis() - currentTimeMillis));
 			return newVersionSpec;
 		}
 	}
@@ -497,48 +565,64 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param previousHeadVersion
 	 *            last head version
 	 */
-	private void handleOldProjectState(ProjectId projectId, Version previousHeadVersion) {
+	private void handleOldProjectState(ProjectId projectId,
+			Version previousHeadVersion) {
 		String property = ServerConfiguration.getProperties().getProperty(
-			ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE,
-			ServerConfiguration.PROJECTSPACE_VERSION_PERSISTENCE_DEFAULT);
+				ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE,
+				ServerConfiguration.PROJECTSPACE_VERSION_PERSISTENCE_DEFAULT);
 
-		if (property.equals(ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS)) {
+		if (property
+				.equals(ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS)) {
 
-			int x = getResourceHelper().getXFromPolicy(
-				ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X,
-				ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT, false);
+			int x = getResourceHelper()
+					.getXFromPolicy(
+							ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X,
+							ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT,
+							false);
 
 			// always save projecstate of first version
-			int lastVersion = previousHeadVersion.getPrimarySpec().getIdentifier();
+			int lastVersion = previousHeadVersion.getPrimarySpec()
+					.getIdentifier();
 			if (lastVersion != 0 && lastVersion % x != 0) {
-				getResourceHelper().deleteProjectState(previousHeadVersion, projectId);
+				getResourceHelper().deleteProjectState(previousHeadVersion,
+						projectId);
 			}
 
 		} else {
-			getResourceHelper().deleteProjectState(previousHeadVersion, projectId);
+			getResourceHelper().deleteProjectState(previousHeadVersion,
+					projectId);
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ChangePackage> getChanges(ProjectId projectId, VersionSpec source, VersionSpec target)
-		throws EmfStoreException {
+	public List<ChangePackage> getChanges(ProjectId projectId,
+			VersionSpec source, VersionSpec target) throws EmfStoreException {
 		synchronized (getMonitor()) {
-			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);
-			PrimaryVersionSpec resolvedTarget = resolveVersionSpec(projectId, target);
+			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId,
+					source);
+			PrimaryVersionSpec resolvedTarget = resolveVersionSpec(projectId,
+					target);
 
 			// if target and source are equal return empty list
-			if (resolvedSource.getIdentifier() == resolvedTarget.getIdentifier()) {
+			if (resolvedSource.getIdentifier() == resolvedTarget
+					.getIdentifier()) {
 				return new ArrayList<ChangePackage>();
 			}
-			boolean updateForward = resolvedTarget.getIdentifier() > resolvedSource.getIdentifier();
+			boolean updateForward = resolvedTarget.getIdentifier() > resolvedSource
+					.getIdentifier();
 
-			// Example: if you want the changes to get from version 5 to 7, you need the changes contained in version 6
-			// and 7. The reason is that each version holds the changes which occurred from the predecessor to the
-			// version itself. Version 5 holds the changes to get from version 4 to 5 and therefore is irrelevant.
-			// For that reason the first version is removed, since getVersions always sorts ascending order.
-			List<Version> versions = getVersions(projectId, resolvedSource, resolvedTarget);
+			// Example: if you want the changes to get from version 5 to 7, you
+			// need the changes contained in version 6
+			// and 7. The reason is that each version holds the changes which
+			// occurred from the predecessor to the
+			// version itself. Version 5 holds the changes to get from version 4
+			// to 5 and therefore is irrelevant.
+			// For that reason the first version is removed, since getVersions
+			// always sorts ascending order.
+			List<Version> versions = getVersions(projectId, resolvedSource,
+					resolvedTarget);
 			if (versions.size() > 1) {
 				versions.remove(0);
 			}
@@ -547,7 +631,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			for (Version version : versions) {
 				ChangePackage changes = version.getChanges();
 				if (changes != null) {
-					changes.setLogMessage(ModelUtil.clone(version.getLogMessage()));
+					changes.setLogMessage(ModelUtil.clone(version
+							.getLogMessage()));
 					result.add(changes);
 				}
 			}
@@ -557,11 +642,13 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				// reverse list and change packages
 				List<ChangePackage> resultReverse = new ArrayList<ChangePackage>();
 				for (ChangePackage changePackage : result) {
-					ChangePackage changePackageReverse = changePackage.reverse();
+					ChangePackage changePackageReverse = changePackage
+							.reverse();
 					// copy again log message
 					// reverse() created a new change package without copying
 					// existent attributes
-					changePackageReverse.setLogMessage(ModelUtil.clone(changePackage.getLogMessage()));
+					changePackageReverse.setLogMessage(ModelUtil
+							.clone(changePackage.getLogMessage()));
 					resultReverse.add(changePackageReverse);
 				}
 
@@ -584,9 +671,12 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @throws EmfStoreException
 	 *             if version couldn't be found
 	 */
-	protected Version getVersion(ProjectId projectId, PrimaryVersionSpec versionSpec) throws EmfStoreException {
-		EList<Version> versions = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId).getVersions();
-		if (versionSpec.getIdentifier() < 0 || versionSpec.getIdentifier() > versions.size() - 1) {
+	protected Version getVersion(ProjectId projectId,
+			PrimaryVersionSpec versionSpec) throws EmfStoreException {
+		EList<Version> versions = getSubInterface(ProjectSubInterfaceImpl.class)
+				.getProject(projectId).getVersions();
+		if (versionSpec.getIdentifier() < 0
+				|| versionSpec.getIdentifier() > versions.size() - 1) {
 			throw new InvalidVersionSpecException();
 		}
 		return versions.get(versionSpec.getIdentifier());
@@ -603,16 +693,19 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *            source
 	 * @param target
 	 *            target
-	 * @param includeAllVersions returns all versions, including versions from other branches
+	 * @param includeAllVersions
+	 *            returns all versions, including versions from other branches
 	 * @return list of versions
 	 * @throws EmfStoreException
 	 *             if source or target are out of range or any other problem
 	 *             occurs
 	 */
-	protected List<Version> getVersions(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target,
-		boolean includeAllVersions) throws EmfStoreException {
+	protected List<Version> getVersions(ProjectId projectId,
+			PrimaryVersionSpec source, PrimaryVersionSpec target,
+			boolean includeAllVersions) throws EmfStoreException {
 		if (source.compareTo(target) < 1) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			ProjectHistory projectHistory = getSubInterface(
+					ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			Version sourceVersion = getVersion(projectHistory, source);
 			Version targetVersion = getVersion(projectHistory, target);
@@ -623,24 +716,29 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			List<Version> result = new ArrayList<Version>();
 
 			if (includeAllVersions) {
-				Iterator<Version> iter = projectHistory.getVersions().listIterator(source.getIdentifier());
+				Iterator<Version> iter = projectHistory.getVersions()
+						.listIterator(source.getIdentifier());
 				int steps = target.getIdentifier() - source.getIdentifier();
 				while (iter.hasNext() && steps-- >= 0) {
 					result.add(iter.next());
 				}
 			} else {
 				// TODO BRANCH
-				// since the introduction of branches the versions are collected in different order.
+				// since the introduction of branches the versions are collected
+				// in different order.
 				Version currentVersion = targetVersion;
 				while (currentVersion != null) {
 					result.add(currentVersion);
 					if (currentVersion.equals(sourceVersion)) {
 						break;
 					}
-					// Shortcut for most common merge usecase: If you have 2 parallel branches and merge several times
+					// Shortcut for most common merge usecase: If you have 2
+					// parallel branches and merge several times
 					// from the one branch into the another.
-					if (currentVersion.getMergedFromVersion().contains(sourceVersion)) {
-						// add sourceVersion because #getChanges always removes the first version
+					if (currentVersion.getMergedFromVersion().contains(
+							sourceVersion)) {
+						// add sourceVersion because #getChanges always removes
+						// the first version
 						result.add(sourceVersion);
 						break;
 					}
@@ -671,15 +769,18 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *             if source or target are out of range or any other problem
 	 *             occurs
 	 */
-	protected List<Version> getVersions(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target)
-		throws EmfStoreException {
+	protected List<Version> getVersions(ProjectId projectId,
+			PrimaryVersionSpec source, PrimaryVersionSpec target)
+			throws EmfStoreException {
 		return getVersions(projectId, source, target, false);
 	}
 
-	// protected List<Version> getAllVersions(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target)
+	// protected List<Version> getAllVersions(ProjectId projectId,
+	// PrimaryVersionSpec source, PrimaryVersionSpec target)
 	// throws EmfStoreException {
 	// if (source.compareTo(target) < 1) {
-	// ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+	// ProjectHistory projectHistory =
+	// getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 	//
 	// Version sourceVersion = getVersion(projectHistory, source);
 	// Version targetVersion = getVersion(projectHistory, target);
@@ -698,21 +799,25 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	// }
 
 	/**
-	 * Helper method which retrieves the next version in the history tree. This method must be used in reversed order.
-	 * TODO better documentation
+	 * Helper method which retrieves the next version in the history tree. This
+	 * method must be used in reversed order. TODO better documentation
 	 * 
 	 * @param currentVersion
-	 * @return
+	 *            current version
+	 * @return version
 	 * @throws InvalidVersionSpecException
+	 *             if the path can't be followed further
 	 */
-	public static Version findNextVersion(Version currentVersion) throws InvalidVersionSpecException {
+	public static Version findNextVersion(Version currentVersion)
+			throws InvalidVersionSpecException {
 		// find next version
 		if (currentVersion.getPreviousVersion() != null) {
 			currentVersion = currentVersion.getPreviousVersion();
 		} else if (currentVersion.getAncestorVersion() != null) {
 			currentVersion = currentVersion.getAncestorVersion();
 		} else {
-			throw new InvalidVersionSpecException("Couldn't determine next version in history.");
+			throw new InvalidVersionSpecException(
+					"Couldn't determine next version in history.");
 		}
 		return currentVersion;
 	}
