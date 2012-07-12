@@ -36,7 +36,7 @@ public class CompositeOperationHandle {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param operationManager
+	 * @param operationRecorder
 	 *            the change tracker this composite is tracked on
 	 * @param compositeOperation
 	 *            the composite operation to be handled

@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -67,6 +66,7 @@ import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
@@ -805,7 +805,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 		}
 
 		// delete folder of project space
-		FileUtils.deleteDirectory(new File(pathToProject));
+		FileUtil.deleteDirectory(new File(pathToProject), true);
 	}
 
 	/**

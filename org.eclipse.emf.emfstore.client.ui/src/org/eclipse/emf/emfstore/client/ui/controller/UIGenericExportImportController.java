@@ -35,6 +35,7 @@ import org.eclipse.ui.PlatformUI;
 public class UIGenericExportImportController extends AbstractEMFStoreUIController<Void> {
 
 	private final IExportImportController controller;
+	private File file;
 
 	/**
 	 * Constructor.
@@ -47,6 +48,18 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	public UIGenericExportImportController(Shell shell, IExportImportController controller) {
 		super(shell);
 		this.controller = controller;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#preRun()
+	 */
+	@Override
+	public boolean preRun() {
+		file = selectFile();
+		return file != null;
 	}
 
 	private File selectFile() {
@@ -81,7 +94,6 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		File file = selectFile();
 		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
 		progressMonitor.beginTask("Import " + controller.getLabel() + " ...", 100);
