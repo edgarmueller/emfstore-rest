@@ -27,14 +27,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Attribute Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Multi Attribute Operation</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#isAdd <em>Add
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getIndexes
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#isAdd
+ * <em>Add</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getIndexes
  * <em>Indexes</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getReferencedValues
@@ -44,7 +46,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * 
  * @generated
  */
-public class MultiAttributeOperationImpl extends FeatureOperationImpl implements MultiAttributeOperation {
+public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
+		MultiAttributeOperation {
 	/**
 	 * The default value of the '{@link #isAdd() <em>Add</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -66,8 +69,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	protected boolean add = ADD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getIndexes() <em>Indexes</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getIndexes() <em>Indexes</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getIndexes()
 	 * @generated
@@ -76,8 +79,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	protected EList<Integer> indexes;
 
 	/**
-	 * The cached value of the '{@link #getReferencedValues() <em>Referenced Values</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getReferencedValues()
+	 * <em>Referenced Values</em>}' attribute list. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getReferencedValues()
@@ -123,8 +126,9 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 		boolean oldAdd = add;
 		add = newAdd;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD,
-				oldAdd, add));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD, oldAdd,
+					add));
 	}
 
 	/**
@@ -135,7 +139,7 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	public EList<Integer> getIndexes() {
 		if (indexes == null) {
 			indexes = new EDataTypeUniqueEList<Integer>(Integer.class, this,
-				OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES);
+					OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES);
 		}
 		return indexes;
 	}
@@ -147,8 +151,10 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 */
 	public EList<Object> getReferencedValues() {
 		if (referencedValues == null) {
-			referencedValues = new EDataTypeEList<Object>(Object.class, this,
-				OperationsPackage.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES);
+			referencedValues = new EDataTypeEList<Object>(
+					Object.class,
+					this,
+					OperationsPackage.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES);
 		}
 		return referencedValues;
 	}
@@ -189,7 +195,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 			return;
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES:
 			getReferencedValues().clear();
-			getReferencedValues().addAll((Collection<? extends Object>) newValue);
+			getReferencedValues().addAll(
+					(Collection<? extends Object>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -309,7 +316,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 */
 	@Override
 	public AbstractOperation reverse() {
-		MultiAttributeOperation operation = OperationsFactoryImpl.eINSTANCE.createMultiAttributeOperation();
+		MultiAttributeOperation operation = OperationsFactoryImpl.eINSTANCE
+				.createMultiAttributeOperation();
 		super.reverse(operation);
 		operation.setAdd(!isAdd());
 		operation.getReferencedValues().addAll(getReferencedValues());

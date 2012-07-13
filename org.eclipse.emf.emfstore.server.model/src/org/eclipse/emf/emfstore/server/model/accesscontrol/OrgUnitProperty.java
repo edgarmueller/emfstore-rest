@@ -14,17 +14,25 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Org Unit Properties</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Org Unit Properties</b></em>'. <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue <em>Value</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName
+ * <em>Name</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue
+ * <em>Value</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject
+ * <em>Project</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperties()
+ * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty()
  * @model
  * @generated
  */
@@ -33,10 +41,11 @@ public interface OrgUnitProperty extends EObject {
 	public final static String ARRAY_SEPARATOR = "%%";
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -49,22 +58,23 @@ public interface OrgUnitProperty extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName
-	 * <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName
+	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Value</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -77,11 +87,12 @@ public interface OrgUnitProperty extends EObject {
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue
-	 * <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue
+	 * <em>Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
 	 * @generated
 	 */
@@ -91,8 +102,8 @@ public interface OrgUnitProperty extends EObject {
 	 * Returns the value of the '<em><b>Project</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Project</em>' containment reference isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -105,11 +116,13 @@ public interface OrgUnitProperty extends EObject {
 	ProjectId getProject();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject
-	 * <em>Project</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject
+	 * <em>Project</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Project</em>' containment reference.
+	 * @param value
+	 *            the new value of the '<em>Project</em>' containment reference.
 	 * @see #getProject()
 	 * @generated
 	 */
@@ -118,8 +131,10 @@ public interface OrgUnitProperty extends EObject {
 	/**
 	 * Sets a new boolean property.
 	 * 
-	 * @param name the name of the property
-	 * @param value the new value
+	 * @param name
+	 *            the name of the property
+	 * @param value
+	 *            the new value
 	 * @generated NOT
 	 */
 	void setValue(boolean value);
@@ -127,7 +142,8 @@ public interface OrgUnitProperty extends EObject {
 	/**
 	 * Sets a new int property.
 	 * 
-	 * @param value the new value
+	 * @param value
+	 *            the new value
 	 * @generated NOT
 	 */
 	void setValue(int value);
@@ -135,7 +151,8 @@ public interface OrgUnitProperty extends EObject {
 	/**
 	 * Sets a new String[] property.
 	 * 
-	 * @param value the new value
+	 * @param value
+	 *            the new value
 	 * @generated NOT
 	 */
 	void setValue(String[] value);
@@ -143,7 +160,8 @@ public interface OrgUnitProperty extends EObject {
 	/**
 	 * Sets a new EObject[] property.
 	 * 
-	 * @param value the new EObject[] value
+	 * @param value
+	 *            the new EObject[] value
 	 * @generated NOT
 	 */
 	void setValue(EObject[] value);

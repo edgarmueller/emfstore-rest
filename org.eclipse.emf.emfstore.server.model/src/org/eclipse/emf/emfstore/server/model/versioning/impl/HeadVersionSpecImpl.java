@@ -15,14 +15,15 @@ import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Head Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Head Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class HeadVersionSpecImpl extends VersionSpecImpl implements HeadVersionSpec {
+public class HeadVersionSpecImpl extends VersionSpecImpl implements
+		HeadVersionSpec {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

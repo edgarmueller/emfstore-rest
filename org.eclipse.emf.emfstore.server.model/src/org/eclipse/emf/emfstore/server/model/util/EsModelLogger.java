@@ -28,21 +28,30 @@ public final class EsModelLogger {
 	/**
 	 * This will add a new entry to error log view of eclipse.
 	 * 
-	 * @param message message
-	 * @param exception exception
-	 * @param statusInt severity. Use one of constants in org.eclipse.core.runtime.Status class.
+	 * @param message
+	 *            message
+	 * @param exception
+	 *            exception
+	 * @param statusInt
+	 *            severity. Use one of constants in
+	 *            org.eclipse.core.runtime.Status class.
 	 */
 	public static void log(String message, Exception exception, int statusInt) {
-		Status status = new Status(statusInt, Platform.getBundle("org.eclipse.emf.ecp.model").getSymbolicName(),
-			statusInt, message, exception);
-		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.server.model")).log(status);
+		Status status = new Status(statusInt, Platform.getBundle(
+				"org.eclipse.emf.ecp.model").getSymbolicName(), statusInt,
+				message, exception);
+		Platform.getLog(
+				Platform.getBundle("org.eclipse.emf.emfstore.server.model"))
+				.log(status);
 	}
 
 	/**
 	 * Log an exception to the platform log. This will create a popup in the ui.
 	 * 
-	 * @param message the message
-	 * @param exception the exception
+	 * @param message
+	 *            the message
+	 * @param exception
+	 *            the exception
 	 */
 	public static void logException(String message, Exception exception) {
 		log(message, exception, IStatus.ERROR);
@@ -51,8 +60,10 @@ public final class EsModelLogger {
 	/**
 	 * Log an exception to the platform log. This will create a popup in the ui.
 	 * 
-	 * @param message the message
-	 * @param exception the exception
+	 * @param message
+	 *            the message
+	 * @param exception
+	 *            the exception
 	 */
 	public static void logWarning(String message, Exception exception) {
 		log(message, exception, IStatus.WARNING);

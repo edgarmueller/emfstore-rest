@@ -19,21 +19,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Date Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Date Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl#getDate <em>Date</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl#getDate
+ * <em>Date</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionSpec {
+public class DateVersionSpecImpl extends VersionSpecImpl implements
+		DateVersionSpec {
 	/**
-	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDate()
 	 * @generated
@@ -42,8 +45,8 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 	protected static final Date DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDate()
 	 * @generated
@@ -88,8 +91,8 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.DATE_VERSION_SPEC__DATE, oldDate,
-				date));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					VersioningPackage.DATE_VERSION_SPEC__DATE, oldDate, date));
 	}
 
 	/**
@@ -145,7 +148,8 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.DATE_VERSION_SPEC__DATE:
-			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT
+					.equals(date);
 		}
 		return super.eIsSet(featureID);
 	}

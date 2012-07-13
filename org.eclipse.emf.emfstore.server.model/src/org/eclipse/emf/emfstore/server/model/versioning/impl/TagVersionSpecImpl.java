@@ -17,21 +17,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Tag Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Tag Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl#getName <em>Name</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl#getName
+ * <em>Name</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpec {
+public class TagVersionSpecImpl extends VersionSpecImpl implements
+		TagVersionSpec {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getName()
 	 * @generated
@@ -40,8 +43,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getName()
 	 * @generated
@@ -86,8 +89,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.TAG_VERSION_SPEC__NAME, oldName,
-				name));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					VersioningPackage.TAG_VERSION_SPEC__NAME, oldName, name));
 	}
 
 	/**
@@ -143,7 +146,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}

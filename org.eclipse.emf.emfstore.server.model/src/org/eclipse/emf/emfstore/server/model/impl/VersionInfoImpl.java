@@ -19,12 +19,14 @@ import org.eclipse.emf.emfstore.server.model.VersionInfo;
 import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Version Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Version Info</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.impl.VersionInfoImpl#getEmfStoreVersionString <em>Emf Store Version
- * String</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.impl.VersionInfoImpl#getEmfStoreVersionString
+ * <em>Emf Store Version String</em>}</li>
  * </ul>
  * </p>
  * 
@@ -32,8 +34,9 @@ import org.osgi.framework.Version;
  */
 public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 	/**
-	 * The default value of the '{@link #getEmfStoreVersionString() <em>Emf Store Version String</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getEmfStoreVersionString()
+	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getEmfStoreVersionString()
 	 * @generated
@@ -42,8 +45,9 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 	protected static final String EMF_STORE_VERSION_STRING_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEmfStoreVersionString() <em>Emf Store Version String</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEmfStoreVersionString()
+	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getEmfStoreVersionString()
 	 * @generated
@@ -88,8 +92,9 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 		String oldEmfStoreVersionString = emfStoreVersionString;
 		emfStoreVersionString = newEmfStoreVersionString;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING,
-				oldEmfStoreVersionString, emfStoreVersionString));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING,
+					oldEmfStoreVersionString, emfStoreVersionString));
 	}
 
 	// begin of custom code
@@ -106,7 +111,8 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 	/**
 	 * <!-- begin-user-doc --> Set the version String.
 	 * 
-	 * @param emfStoreVersion the version <!-- end-user-doc -->
+	 * @param emfStoreVersion
+	 *            the version <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void setEmfStoreVersion(Version emfStoreVersion) {
@@ -169,7 +175,8 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 		switch (featureID) {
 		case ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING:
 			return EMF_STORE_VERSION_STRING_EDEFAULT == null ? emfStoreVersionString != null
-				: !EMF_STORE_VERSION_STRING_EDEFAULT.equals(emfStoreVersionString);
+					: !EMF_STORE_VERSION_STRING_EDEFAULT
+							.equals(emfStoreVersionString);
 		}
 		return super.eIsSet(featureID);
 	}

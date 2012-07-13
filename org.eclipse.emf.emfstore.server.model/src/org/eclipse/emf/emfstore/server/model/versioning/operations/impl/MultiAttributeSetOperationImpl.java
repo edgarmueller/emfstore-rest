@@ -24,12 +24,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Attribute Set Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Multi Attribute Set Operation</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex
  * <em>Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getOldValue
@@ -42,7 +43,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * 
  * @generated
  */
-public class MultiAttributeSetOperationImpl extends FeatureOperationImpl implements MultiAttributeSetOperation {
+public class MultiAttributeSetOperationImpl extends FeatureOperationImpl
+		implements MultiAttributeSetOperation {
 	/**
 	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -64,8 +66,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected int index = INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -74,8 +76,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected static final Object OLD_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -84,8 +86,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected Object oldValue = OLD_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated
@@ -94,8 +96,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected static final Object NEW_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated
@@ -141,7 +143,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		index = newIndex;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__INDEX, oldIndex, index));
+					OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__INDEX,
+					oldIndex, index));
 	}
 
 	/**
@@ -163,7 +166,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		oldValue = newOldValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__OLD_VALUE, oldOldValue, oldValue));
+					OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__OLD_VALUE,
+					oldOldValue, oldValue));
 	}
 
 	/**
@@ -185,7 +189,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		newValue = newNewValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE, oldNewValue, newValue));
+					OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE,
+					oldNewValue, newValue));
 	}
 
 	/**
@@ -259,9 +264,11 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		case OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__INDEX:
 			return index != INDEX_EDEFAULT;
 		case OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__OLD_VALUE:
-			return OLD_VALUE_EDEFAULT == null ? oldValue != null : !OLD_VALUE_EDEFAULT.equals(oldValue);
+			return OLD_VALUE_EDEFAULT == null ? oldValue != null
+					: !OLD_VALUE_EDEFAULT.equals(oldValue);
 		case OperationsPackage.MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE:
-			return NEW_VALUE_EDEFAULT == null ? newValue != null : !NEW_VALUE_EDEFAULT.equals(newValue);
+			return NEW_VALUE_EDEFAULT == null ? newValue != null
+					: !NEW_VALUE_EDEFAULT.equals(newValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,7 +321,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 
 	@Override
 	public AbstractOperation reverse() {
-		MultiAttributeSetOperation attributeOperation = OperationsFactory.eINSTANCE.createMultiAttributeSetOperation();
+		MultiAttributeSetOperation attributeOperation = OperationsFactory.eINSTANCE
+				.createMultiAttributeSetOperation();
 		super.reverse(attributeOperation);
 		attributeOperation.setIndex(getIndex());
 		// swap old and new value

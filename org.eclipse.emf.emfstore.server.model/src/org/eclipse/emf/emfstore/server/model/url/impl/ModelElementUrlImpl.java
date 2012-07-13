@@ -23,16 +23,20 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Model Element Url</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Model Element Url</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getServerUrl <em>Server Url</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getProjectUrlFragment <em>Project Url
- * Fragment </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getModelElementUrlFragment <em>Model
- * Element Url Fragment</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getServerUrl
+ * <em>Server Url</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getProjectUrlFragment
+ * <em>Project Url Fragment</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getModelElementUrlFragment
+ * <em>Model Element Url Fragment</em>}</li>
  * </ul>
  * </p>
  * 
@@ -42,9 +46,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	private static final String EMFSTORE_PROTOCOL_PREFIX = "emfstore://";
 
 	/**
-	 * The cached value of the '{@link #getServerUrl() <em>Server Url</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getServerUrl() <em>Server Url</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getServerUrl()
 	 * @generated
@@ -53,8 +56,9 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	protected ServerUrl serverUrl;
 
 	/**
-	 * The cached value of the '{@link #getProjectUrlFragment() <em>Project Url Fragment</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectUrlFragment()
+	 * <em>Project Url Fragment</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectUrlFragment()
 	 * @generated
@@ -63,9 +67,9 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	protected ProjectUrlFragment projectUrlFragment;
 
 	/**
-	 * The cached value of the '{@link #getModelElementUrlFragment() <em>Model Element Url Fragment</em>}' containment
-	 * reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getModelElementUrlFragment()
+	 * <em>Model Element Url Fragment</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getModelElementUrlFragment()
 	 * @generated
@@ -103,17 +107,22 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 			serverUrl = (ServerUrl) eResolveProxy(oldServerUrl);
 			if (serverUrl != oldServerUrl) {
 				InternalEObject newServerUrl = (InternalEObject) serverUrl;
-				NotificationChain msgs = oldServerUrl.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, null);
+				NotificationChain msgs = oldServerUrl.eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+						null, null);
 				if (newServerUrl.eInternalContainer() == null) {
-					msgs = newServerUrl.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, msgs);
+					msgs = newServerUrl.eInverseAdd(this,
+							EOPPOSITE_FEATURE_BASE
+									- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+							null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
-						oldServerUrl, serverUrl));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+							oldServerUrl, serverUrl));
 			}
 		}
 		return serverUrl;
@@ -133,12 +142,14 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetServerUrl(ServerUrl newServerUrl, NotificationChain msgs) {
+	public NotificationChain basicSetServerUrl(ServerUrl newServerUrl,
+			NotificationChain msgs) {
 		ServerUrl oldServerUrl = serverUrl;
 		serverUrl = newServerUrl;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, oldServerUrl, newServerUrl);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+					oldServerUrl, newServerUrl);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -156,17 +167,22 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 		if (newServerUrl != serverUrl) {
 			NotificationChain msgs = null;
 			if (serverUrl != null)
-				msgs = ((InternalEObject) serverUrl).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, msgs);
+				msgs = ((InternalEObject) serverUrl).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+						null, msgs);
 			if (newServerUrl != null)
-				msgs = ((InternalEObject) newServerUrl).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, msgs);
+				msgs = ((InternalEObject) newServerUrl).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
+						null, msgs);
 			msgs = basicSetServerUrl(newServerUrl, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.MODEL_ELEMENT_URL__SERVER_URL,
-				newServerUrl, newServerUrl));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, newServerUrl,
+					newServerUrl));
 	}
 
 	/**
@@ -180,17 +196,26 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 			projectUrlFragment = (ProjectUrlFragment) eResolveProxy(oldProjectUrlFragment);
 			if (projectUrlFragment != oldProjectUrlFragment) {
 				InternalEObject newProjectUrlFragment = (InternalEObject) projectUrlFragment;
-				NotificationChain msgs = oldProjectUrlFragment.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, null);
+				NotificationChain msgs = oldProjectUrlFragment
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+								null, null);
 				if (newProjectUrlFragment.eInternalContainer() == null) {
-					msgs = newProjectUrlFragment.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, msgs);
+					msgs = newProjectUrlFragment
+							.eInverseAdd(
+									this,
+									EOPPOSITE_FEATURE_BASE
+											- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+									null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, oldProjectUrlFragment, projectUrlFragment));
+							UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+							oldProjectUrlFragment, projectUrlFragment));
 			}
 		}
 		return projectUrlFragment;
@@ -210,12 +235,15 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetProjectUrlFragment(ProjectUrlFragment newProjectUrlFragment, NotificationChain msgs) {
+	public NotificationChain basicSetProjectUrlFragment(
+			ProjectUrlFragment newProjectUrlFragment, NotificationChain msgs) {
 		ProjectUrlFragment oldProjectUrlFragment = projectUrlFragment;
 		projectUrlFragment = newProjectUrlFragment;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, oldProjectUrlFragment, newProjectUrlFragment);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+					oldProjectUrlFragment, newProjectUrlFragment);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -233,17 +261,26 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 		if (newProjectUrlFragment != projectUrlFragment) {
 			NotificationChain msgs = null;
 			if (projectUrlFragment != null)
-				msgs = ((InternalEObject) projectUrlFragment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, msgs);
+				msgs = ((InternalEObject) projectUrlFragment)
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+								null, msgs);
 			if (newProjectUrlFragment != null)
-				msgs = ((InternalEObject) newProjectUrlFragment).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, msgs);
+				msgs = ((InternalEObject) newProjectUrlFragment)
+						.eInverseAdd(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+								null, msgs);
 			msgs = basicSetProjectUrlFragment(newProjectUrlFragment, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
-				newProjectUrlFragment, newProjectUrlFragment));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+					newProjectUrlFragment, newProjectUrlFragment));
 	}
 
 	/**
@@ -252,23 +289,34 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public ModelElementUrlFragment getModelElementUrlFragment() {
-		if (modelElementUrlFragment != null && modelElementUrlFragment.eIsProxy()) {
+		if (modelElementUrlFragment != null
+				&& modelElementUrlFragment.eIsProxy()) {
 			InternalEObject oldModelElementUrlFragment = (InternalEObject) modelElementUrlFragment;
 			modelElementUrlFragment = (ModelElementUrlFragment) eResolveProxy(oldModelElementUrlFragment);
 			if (modelElementUrlFragment != oldModelElementUrlFragment) {
 				InternalEObject newModelElementUrlFragment = (InternalEObject) modelElementUrlFragment;
-				NotificationChain msgs = oldModelElementUrlFragment.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, null);
+				NotificationChain msgs = oldModelElementUrlFragment
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+								null, null);
 				if (newModelElementUrlFragment.eInternalContainer() == null) {
-					msgs = newModelElementUrlFragment.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, msgs);
+					msgs = newModelElementUrlFragment
+							.eInverseAdd(
+									this,
+									EOPPOSITE_FEATURE_BASE
+											- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+									null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, oldModelElementUrlFragment,
-						modelElementUrlFragment));
+					eNotify(new ENotificationImpl(
+							this,
+							Notification.RESOLVE,
+							UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+							oldModelElementUrlFragment, modelElementUrlFragment));
 			}
 		}
 		return modelElementUrlFragment;
@@ -288,14 +336,16 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetModelElementUrlFragment(ModelElementUrlFragment newModelElementUrlFragment,
-		NotificationChain msgs) {
+	public NotificationChain basicSetModelElementUrlFragment(
+			ModelElementUrlFragment newModelElementUrlFragment,
+			NotificationChain msgs) {
 		ModelElementUrlFragment oldModelElementUrlFragment = modelElementUrlFragment;
 		modelElementUrlFragment = newModelElementUrlFragment;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, oldModelElementUrlFragment,
-				newModelElementUrlFragment);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+					oldModelElementUrlFragment, newModelElementUrlFragment);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -309,22 +359,32 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * 
 	 * @generated
 	 */
-	public void setModelElementUrlFragment(ModelElementUrlFragment newModelElementUrlFragment) {
+	public void setModelElementUrlFragment(
+			ModelElementUrlFragment newModelElementUrlFragment) {
 		if (newModelElementUrlFragment != modelElementUrlFragment) {
 			NotificationChain msgs = null;
 			if (modelElementUrlFragment != null)
-				msgs = ((InternalEObject) modelElementUrlFragment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, msgs);
+				msgs = ((InternalEObject) modelElementUrlFragment)
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+								null, msgs);
 			if (newModelElementUrlFragment != null)
-				msgs = ((InternalEObject) newModelElementUrlFragment).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, msgs);
-			msgs = basicSetModelElementUrlFragment(newModelElementUrlFragment, msgs);
+				msgs = ((InternalEObject) newModelElementUrlFragment)
+						.eInverseAdd(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+								null, msgs);
+			msgs = basicSetModelElementUrlFragment(newModelElementUrlFragment,
+					msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-				UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, newModelElementUrlFragment,
-				newModelElementUrlFragment));
+					UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+					newModelElementUrlFragment, newModelElementUrlFragment));
 	}
 
 	/**
@@ -333,7 +393,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			return basicSetServerUrl(null, msgs);

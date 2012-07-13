@@ -15,14 +15,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Model Element Group</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Model Element Group</b></em>'. <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model
- * Elements </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName
+ * <em>Name</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements
+ * <em>Model Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -32,10 +36,11 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  */
 public interface ModelElementGroup extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -49,11 +54,11 @@ public interface ModelElementGroup extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}'
-	 * attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName
+	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
@@ -61,11 +66,12 @@ public interface ModelElementGroup extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.common.model.ModelElementId}.
-	 * <!-- begin-user-doc -->
+	 * The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Elements</em>' reference list isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Model Elements</em>' reference list isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

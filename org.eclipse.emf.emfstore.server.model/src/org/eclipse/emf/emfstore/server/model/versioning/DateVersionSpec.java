@@ -13,12 +13,15 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 import java.util.Date;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Date Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Date Version Spec</b></em>'. <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate <em>Date</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
+ * <em>Date</em>}</li>
  * </ul>
  * </p>
  * 
@@ -28,10 +31,11 @@ import java.util.Date;
  */
 public interface DateVersionSpec extends VersionSpec {
 	/**
-	 * Returns the value of the '<em><b>Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Date</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Date</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Date</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -44,11 +48,12 @@ public interface DateVersionSpec extends VersionSpec {
 	Date getDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
-	 * <em>Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
+	 * <em>Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Date</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Date</em>' attribute.
 	 * @see #getDate()
 	 * @generated
 	 */

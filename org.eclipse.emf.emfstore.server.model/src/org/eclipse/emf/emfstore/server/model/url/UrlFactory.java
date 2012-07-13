@@ -15,8 +15,8 @@ import java.net.MalformedURLException;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
- * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a create method for each non-abstract class of
- * the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
+ * create method for each non-abstract class of the model. <!-- end-user-doc -->
  * 
  * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage
  * @generated
@@ -24,16 +24,17 @@ import org.eclipse.emf.ecore.EFactory;
 public interface UrlFactory extends EFactory {
 
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	UrlFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlFactoryImpl.init();
+	UrlFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlFactoryImpl
+			.init();
 
 	/**
-	 * Returns a new object of class '<em>Server Url</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Server Url</em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Server Url</em>'.
 	 * @generated
@@ -41,8 +42,8 @@ public interface UrlFactory extends EFactory {
 	ServerUrl createServerUrl();
 
 	/**
-	 * Returns a new object of class '<em>Project Url Fragment</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Project Url Fragment</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Project Url Fragment</em>'.
 	 * @generated
@@ -50,8 +51,8 @@ public interface UrlFactory extends EFactory {
 	ProjectUrlFragment createProjectUrlFragment();
 
 	/**
-	 * Returns a new object of class '<em>Model Element Url Fragment</em>'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * Returns a new object of class '<em>Model Element Url Fragment</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Model Element Url Fragment</em>'.
 	 * @generated
@@ -59,8 +60,8 @@ public interface UrlFactory extends EFactory {
 	ModelElementUrlFragment createModelElementUrlFragment();
 
 	/**
-	 * Returns a new object of class '<em>Model Element Url</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Model Element Url</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Model Element Url</em>'.
 	 * @generated
@@ -68,8 +69,8 @@ public interface UrlFactory extends EFactory {
 	ModelElementUrl createModelElementUrl();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.
 	 * @generated
@@ -79,11 +80,14 @@ public interface UrlFactory extends EFactory {
 	/**
 	 * Creates and parses the model element url.
 	 * 
-	 * @throws MalformedURLException when the url is malformed (d'oh!)
+	 * @throws MalformedURLException
+	 *             when the url is malformed (d'oh!)
 	 * @generated NOT
 	 * @return the newly created {@link ModelElementUrl}
-	 * @param url the url as a string.
+	 * @param url
+	 *            the url as a string.
 	 */
-	ModelElementUrl createModelElementUrl(String url) throws MalformedURLException;
+	ModelElementUrl createModelElementUrl(String url)
+			throws MalformedURLException;
 
 } // UrlFactory

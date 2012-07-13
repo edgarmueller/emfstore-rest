@@ -30,17 +30,18 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectInfo} object.
- * <!-- begin-user-doc
- * --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.server.model.ProjectInfo} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
-	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectInfoItemProvider extends ItemProviderAdapter implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -49,8 +50,8 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -68,83 +69,101 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ProjectInfo_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_name_feature", "_UI_ProjectInfo_type"),
-			ModelPackage.Literals.PROJECT_INFO__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-			null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_ProjectInfo_name_feature"),
+						getString("_UI_PropertyDescriptor_description",
+								"_UI_ProjectInfo_name_feature",
+								"_UI_ProjectInfo_type"),
+						ModelPackage.Literals.PROJECT_INFO__NAME, true, false,
+						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Description feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ProjectInfo_description_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_description_feature",
-				"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__DESCRIPTION, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectInfo_description_feature"),
+				getString("_UI_PropertyDescriptor_description",
+						"_UI_ProjectInfo_description_feature",
+						"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__DESCRIPTION, true, false,
+				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Project Id feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Project Id feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addProjectIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_ProjectInfo_projectId_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_projectId_feature",
-					"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__PROJECT_ID, true, false, true, null,
-				null, null));
+				getString("_UI_PropertyDescriptor_description",
+						"_UI_ProjectInfo_projectId_feature",
+						"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__PROJECT_ID, true, false,
+				true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Version feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Version feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ProjectInfo_version_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_version_feature", "_UI_ProjectInfo_type"),
-			ModelPackage.Literals.PROJECT_INFO__VERSION, true, false, true, null, null, null));
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectInfo_version_feature"),
+				getString("_UI_PropertyDescriptor_description",
+						"_UI_ProjectInfo_version_feature",
+						"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__VERSION, true, false, true,
+				null, null, null));
 	}
 
 	/**
-	 * This returns ProjectInfo.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns ProjectInfo.gif. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ProjectInfo"));
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/ProjectInfo"));
 	}
 
 	// begin of custom code
 	/**
 	 * This returns the label text for the adapted class.
 	 * 
-	 * @param object the object the label is based upon.
+	 * @param object
+	 *            the object the label is based upon.
 	 * @return the label for the object
 	 * @generated NOT
 	 */
@@ -152,10 +171,12 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	public String getText(Object object) {
 		ProjectInfo projectInfo = ((ProjectInfo) object);
 		String ret = "";
-		if (projectInfo.getName() == null || projectInfo.getName().length() == 0) {
+		if (projectInfo.getName() == null
+				|| projectInfo.getName().length() == 0) {
 			ret = getString("_UI_ProjectInfo_type");
 		} else {
-			ret = projectInfo.getName() + "[Revision: " + ((ProjectInfo) object).getVersion().getIdentifier() + "]";
+			ret = projectInfo.getName() + "[Revision: "
+					+ ((ProjectInfo) object).getVersion().getIdentifier() + "]";
 		}
 		return ret;
 	}
@@ -163,9 +184,10 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	// end of custom code
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -176,27 +198,29 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 		switch (notification.getFeatureID(ProjectInfo.class)) {
 		case ModelPackage.PROJECT_INFO__NAME:
 		case ModelPackage.PROJECT_INFO__DESCRIPTION:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Return the resource locator for this item provider's resources. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

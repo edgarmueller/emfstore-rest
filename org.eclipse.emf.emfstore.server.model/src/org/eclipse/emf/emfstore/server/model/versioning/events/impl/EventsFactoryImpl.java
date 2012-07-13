@@ -20,21 +20,22 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
 public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static EventsFactory init() {
 		try {
 			EventsFactory theEventsFactory = (EventsFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/events");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/events");
 			if (theEventsFactory != null) {
 				return theEventsFactory;
 			}
@@ -45,8 +46,8 @@ public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -65,7 +66,8 @@ public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 		case EventsPackage.EVENT:
 			return createEvent();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 

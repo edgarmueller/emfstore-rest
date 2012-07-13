@@ -24,8 +24,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Attribute Move Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Multi Attribute Move Operation</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -43,10 +43,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * 
  * @generated
  */
-public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implements MultiAttributeMoveOperation {
+public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl
+		implements MultiAttributeMoveOperation {
 	/**
-	 * The default value of the '{@link #getOldIndex() <em>Old Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getOldIndex() <em>Old Index</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldIndex()
 	 * @generated
@@ -55,8 +56,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	protected static final int OLD_INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getOldIndex() <em>Old Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldIndex() <em>Old Index</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldIndex()
 	 * @generated
@@ -65,8 +66,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	protected int oldIndex = OLD_INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNewIndex() <em>New Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getNewIndex() <em>New Index</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewIndex()
 	 * @generated
@@ -75,8 +76,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	protected static final int NEW_INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getNewIndex() <em>New Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewIndex() <em>New Index</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewIndex()
 	 * @generated
@@ -85,8 +86,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	protected int newIndex = NEW_INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getReferencedValue()
+	 * <em>Referenced Value</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getReferencedValue()
@@ -96,8 +97,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	protected static final Object REFERENCED_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getReferencedValue()
+	 * <em>Referenced Value</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getReferencedValue()
@@ -143,8 +144,11 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 		int oldOldIndex = oldIndex;
 		oldIndex = newOldIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX, oldOldIndex, oldIndex));
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX,
+					oldOldIndex, oldIndex));
 	}
 
 	/**
@@ -165,8 +169,11 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 		int oldNewIndex = newIndex;
 		newIndex = newNewIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX, oldNewIndex, newIndex));
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX,
+					oldNewIndex, newIndex));
 	}
 
 	/**
@@ -187,8 +194,11 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 		Object oldReferencedValue = referencedValue;
 		referencedValue = newReferencedValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE, oldReferencedValue, referencedValue));
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE,
+					oldReferencedValue, referencedValue));
 	}
 
 	/**
@@ -264,8 +274,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 		case OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX:
 			return newIndex != NEW_INDEX_EDEFAULT;
 		case OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE:
-			return REFERENCED_VALUE_EDEFAULT == null ? referencedValue != null : !REFERENCED_VALUE_EDEFAULT
-				.equals(referencedValue);
+			return REFERENCED_VALUE_EDEFAULT == null ? referencedValue != null
+					: !REFERENCED_VALUE_EDEFAULT.equals(referencedValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -322,7 +332,8 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 
 	@Override
 	public AbstractOperation reverse() {
-		MultiAttributeMoveOperation operation = OperationsFactory.eINSTANCE.createMultiAttributeMoveOperation();
+		MultiAttributeMoveOperation operation = OperationsFactory.eINSTANCE
+				.createMultiAttributeMoveOperation();
 		super.reverse(operation);
 		operation.setNewIndex(getOldIndex());
 		operation.setOldIndex(getNewIndex());

@@ -19,12 +19,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Reference Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Reference Operation</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional
  * <em>Bidirectional</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#getOppositeFeatureName
@@ -37,11 +38,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
  * 
  * @generated
  */
-public abstract class ReferenceOperationImpl extends FeatureOperationImpl implements ReferenceOperation {
+public abstract class ReferenceOperationImpl extends FeatureOperationImpl
+		implements ReferenceOperation {
 	/**
-	 * The default value of the '{@link #isBidirectional() <em>Bidirectional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #isBidirectional()
+	 * <em>Bidirectional</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #isBidirectional()
 	 * @generated
@@ -50,9 +52,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final boolean BIDIRECTIONAL_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isBidirectional() <em>Bidirectional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #isBidirectional()
+	 * <em>Bidirectional</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #isBidirectional()
 	 * @generated
@@ -64,7 +66,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected void reverse(AbstractOperation abstractOperation) {
 		super.reverse(abstractOperation);
 		if (!(abstractOperation instanceof ReferenceOperation)) {
-			throw new IllegalArgumentException("Given operation is not a reference operation.");
+			throw new IllegalArgumentException(
+					"Given operation is not a reference operation.");
 		}
 		ReferenceOperation referenceOperation = (ReferenceOperation) abstractOperation;
 		referenceOperation.setBidirectional(isBidirectional());
@@ -73,8 +76,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	}
 
 	/**
-	 * The default value of the '{@link #getOppositeFeatureName() <em>Opposite Feature Name</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getOppositeFeatureName()
+	 * <em>Opposite Feature Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getOppositeFeatureName()
 	 * @generated
@@ -83,8 +87,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final String OPPOSITE_FEATURE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOppositeFeatureName() <em>Opposite Feature Name</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOppositeFeatureName()
+	 * <em>Opposite Feature Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getOppositeFeatureName()
 	 * @generated
@@ -93,9 +98,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected String oppositeFeatureName = OPPOSITE_FEATURE_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getContainmentType() <em>Containment Type</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getContainmentType()
+	 * <em>Containment Type</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getContainmentType()
 	 * @generated
@@ -104,9 +109,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final ContainmentType CONTAINMENT_TYPE_EDEFAULT = ContainmentType.NONE;
 
 	/**
-	 * The cached value of the '{@link #getContainmentType() <em>Containment Type</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getContainmentType()
+	 * <em>Containment Type</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getContainmentType()
 	 * @generated
@@ -151,8 +156,9 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 		boolean oldBidirectional = bidirectional;
 		bidirectional = newBidirectional;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.REFERENCE_OPERATION__BIDIRECTIONAL,
-				oldBidirectional, bidirectional));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					OperationsPackage.REFERENCE_OPERATION__BIDIRECTIONAL,
+					oldBidirectional, bidirectional));
 	}
 
 	/**
@@ -173,9 +179,11 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 		String oldOppositeFeatureName = oppositeFeatureName;
 		oppositeFeatureName = newOppositeFeatureName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME, oldOppositeFeatureName,
-				oppositeFeatureName));
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					OperationsPackage.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME,
+					oldOppositeFeatureName, oppositeFeatureName));
 	}
 
 	/**
@@ -194,10 +202,12 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	 */
 	public void setContainmentType(ContainmentType newContainmentType) {
 		ContainmentType oldContainmentType = containmentType;
-		containmentType = newContainmentType == null ? CONTAINMENT_TYPE_EDEFAULT : newContainmentType;
+		containmentType = newContainmentType == null ? CONTAINMENT_TYPE_EDEFAULT
+				: newContainmentType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-				OperationsPackage.REFERENCE_OPERATION__CONTAINMENT_TYPE, oldContainmentType, containmentType));
+					OperationsPackage.REFERENCE_OPERATION__CONTAINMENT_TYPE,
+					oldContainmentType, containmentType));
 	}
 
 	/**
@@ -272,7 +282,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 			return bidirectional != BIDIRECTIONAL_EDEFAULT;
 		case OperationsPackage.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME:
 			return OPPOSITE_FEATURE_NAME_EDEFAULT == null ? oppositeFeatureName != null
-				: !OPPOSITE_FEATURE_NAME_EDEFAULT.equals(oppositeFeatureName);
+					: !OPPOSITE_FEATURE_NAME_EDEFAULT
+							.equals(oppositeFeatureName);
 		case OperationsPackage.REFERENCE_OPERATION__CONTAINMENT_TYPE:
 			return containmentType != CONTAINMENT_TYPE_EDEFAULT;
 		}

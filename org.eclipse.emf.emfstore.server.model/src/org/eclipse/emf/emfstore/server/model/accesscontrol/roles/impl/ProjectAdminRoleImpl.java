@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRol
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Project Admin Role</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Project Admin Role</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 
