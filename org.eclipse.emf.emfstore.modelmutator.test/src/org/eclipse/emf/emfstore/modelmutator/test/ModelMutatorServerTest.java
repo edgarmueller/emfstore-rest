@@ -39,9 +39,10 @@ import org.junit.Test;
 
 /**
  * The implementation of the Server Tests.
+ * 
  * @author Eugen Neufeld
  * @author Stephan K?hler
- *
+ * 
  */
 public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 	// private Project fullProject;
@@ -58,7 +59,7 @@ public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 	@Before
 	public void beforeTest() throws EmfStoreException {
 		super.beforeTest();
-		
+
 		projectSpace = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
 		projectSpace.setProjectName(projectName);
@@ -69,14 +70,16 @@ public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		projectSpace.initResources(resourceSet);
 
-		/*Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
-		session.setServerInfo(SetupHelper.getServerInfo());
-		session.setUsername("super");
-		session.setPassword("super");
-		session.setSessionId(getSessionId());
-		projectSpace.setUsersession(session);
-		projectSpace.eResource().getContents().add(session);
-		projectSpace.eResource().getContents().add(session.getServerInfo());*/
+		/*
+		 * Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
+		 * session.setServerInfo(SetupHelper.getServerInfo());
+		 * session.setUsername("super");
+		 * session.setPassword("super");
+		 * session.setSessionId(getSessionId());
+		 * projectSpace.setUsersession(session);
+		 * projectSpace.eResource().getContents().add(session);
+		 * projectSpace.eResource().getContents().add(session.getServerInfo());
+		 */
 
 		EPackage pckge = ModelMutatorUtil.getEPackage(modelKey);
 
@@ -87,9 +90,8 @@ public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 		eStructuralFeaturesToIgnore.addAll(projectSpace.getProject().eClass().getEAllContainments());
 		eStructuralFeaturesToIgnore.remove(projectSpace.getProject().eClass().getEStructuralFeature("modelElements"));
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
-		
+
 		ModelMutator.generateModel(config);
-		
 
 		// count num of projects
 		assertTrue(getConnectionManager().getProjectList(getSessionId()).size() == getProjectsOnServerBeforeTest());
@@ -125,24 +127,28 @@ public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 
 	/**
 	 * Tests the generation of models.
+	 * 
 	 * @throws EmfStoreException Server exception
 	 */
 	@Test
 	public void generateModelTest() throws EmfStoreException {
 		Project pro = getConnectionManager().getProject(getSessionId(), projectSpace.getProjectId(),
 			VersionSpec.HEAD_VERSION);
-		/* For Debug only
+		/*
+		 * For Debug only
 		 * try {
-			System.out.println("Print: "+ModelMutatorHelper.eObjectToString(pro));
-		} catch (SerializationException e) {
-			e.printStackTrace();
-		}*/
+		 * System.out.println("Print: "+ModelMutatorHelper.eObjectToString(pro));
+		 * } catch (SerializationException e) {
+		 * e.printStackTrace();
+		 * }
+		 */
 		assertEqual(projectSpace.getProject(), pro);
 
 	}
 
 	/**
 	 * Tests the changing of models in the EMFStore.
+	 * 
 	 * @throws EmfStoreException Emf Store exception
 	 */
 	@SuppressWarnings("unused")
@@ -174,15 +180,15 @@ public class ModelMutatorServerTest extends ModelMutatorServerSetup {
 		// System.out.println(ModelUtil.eObjectToString(projectSpace.getProject()));
 		System.out.println("FROM SERVER:" + pro.getAllModelElements().size());
 		// System.out.println(ModelUtil.eObjectToString(pro));
-		/* Debug only
+		/*
+		 * Debug only
 		 * try {
-			System.out.println(ModelMutatorHelper.eObjectToString(projectSpace.getProject()));
-			System.out.println("\n\n\n"+ModelMutatorHelper.eObjectToString(pro));
-		} catch (SerializationException e) {
-			
-			e.printStackTrace();
-		}
-		*/
+		 * System.out.println(ModelMutatorHelper.eObjectToString(projectSpace.getProject()));
+		 * System.out.println("\n\n\n"+ModelMutatorHelper.eObjectToString(pro));
+		 * } catch (SerializationException e) {
+		 * e.printStackTrace();
+		 * }
+		 */
 		assertEqual(projectSpace.getProject(), pro);
 		// } catch (SerializationException e) {
 		// e.printStackTrace();

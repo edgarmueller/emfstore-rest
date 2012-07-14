@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -116,7 +117,7 @@ public class ModelMutatorServerSetup {
 	 * Start server and gain sessionid.
 	 * 
 	 * @throws EmfStoreException in case of failure
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws EmfStoreException, IOException {
@@ -143,27 +144,24 @@ public class ModelMutatorServerSetup {
 	public static void setupUsers() throws EmfStoreException {
 		try {
 			AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
-			for(ACUser user:adminConnectionManager.getUsers(authenticationInfo.getSessionId())) {
-				if (user.getName().equals("reader") || user.getName().equals("writer1") || user.getName().equals("writer2") || user.getName().equals("projectadmin")) {
+			for (ACUser user : adminConnectionManager.getUsers(authenticationInfo.getSessionId())) {
+				if (user.getName().equals("reader") || user.getName().equals("writer1")
+					|| user.getName().equals("writer2") || user.getName().equals("projectadmin")) {
 					throw new InvalidInputException("User already exists");
 				}
 			}
-			
+
 			ACOrgUnitId orgUnitId = SetupHelper.createUserOnServer("reader");
-			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getReaderRole(),
-				getGeneratedProjectId());
+			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getReaderRole(), getGeneratedProjectId());
 
 			orgUnitId = SetupHelper.createUserOnServer("writer1");
-			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getWriterRole(),
-				getGeneratedProjectId());
+			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getWriterRole(), getGeneratedProjectId());
 
 			orgUnitId = SetupHelper.createUserOnServer("writer2");
-			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getWriterRole(),
-				getGeneratedProjectId());
+			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getWriterRole(), getGeneratedProjectId());
 
 			orgUnitId = SetupHelper.createUserOnServer("projectadmin");
-			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getProjectAdminRole(),
-				getGeneratedProjectId());
+			SetupHelper.setUsersRole(orgUnitId, RolesPackage.eINSTANCE.getProjectAdminRole(), getGeneratedProjectId());
 		} catch (InvalidInputException e) {
 			// do nothing, user already exists.
 		}
@@ -184,7 +182,8 @@ public class ModelMutatorServerSetup {
 	 */
 	protected static void login(ServerInfo serverInfo) throws EmfStoreException {
 		authenticationInfo = login(serverInfo, "super", "super");
-		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(serverInfo, authenticationInfo.getSessionId());
+		WorkspaceManager.getInstance().getAdminConnectionManager()
+			.initConnection(serverInfo, authenticationInfo.getSessionId());
 	}
 
 	/**
@@ -194,7 +193,8 @@ public class ModelMutatorServerSetup {
 	 * @return sessionId
 	 * @throws EmfStoreException in case of failure
 	 */
-	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password) throws EmfStoreException {
+	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password)
+		throws EmfStoreException {
 		return connectionManager.logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
 			serverInfo, Configuration.getClientVersion());
 	}
@@ -231,8 +231,8 @@ public class ModelMutatorServerSetup {
 	 */
 	@Before
 	public void beforeTest() throws EmfStoreException {
-		projectInfo = connectionManager.createProject(authenticationInfo.getSessionId(), "initialProject", "TestProject",
-			SetupHelper.createLogMessage("super", "a logmessage"), generatedProject);
+		projectInfo = connectionManager.createProject(authenticationInfo.getSessionId(), "initialProject",
+			"TestProject", SetupHelper.createLogMessage("super", "a logmessage"), generatedProject);
 		generatedProjectId = projectInfo.getProjectId();
 		generatedProjectVersion = projectInfo.getVersion();
 		setupUsers();
@@ -258,7 +258,7 @@ public class ModelMutatorServerSetup {
 	 * @return historyquery
 	 */
 	public static HistoryQuery createHistoryQuery(PrimaryVersionSpec ver1, PrimaryVersionSpec ver2) {
-		HistoryQuery historyQuery = VersioningFactory.eINSTANCE.createHistoryQuery();
+		PathQuery historyQuery = VersioningFactory.eINSTANCE.createPathQuery();
 		historyQuery.setSource((PrimaryVersionSpec) EcoreUtil.copy(ver1));
 		historyQuery.setTarget((PrimaryVersionSpec) EcoreUtil.copy(ver2));
 		return historyQuery;
@@ -276,7 +276,7 @@ public class ModelMutatorServerSetup {
 		arguments.put(LogMessage.class, VersioningFactory.eINSTANCE.createLogMessage());
 		arguments.put(Project.class, ModelFactory.eINSTANCE.createProject());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
-		arguments.put(HistoryQuery.class, VersioningFactory.eINSTANCE.createHistoryQuery());
+		arguments.put(HistoryQuery.class, VersioningFactory.eINSTANCE.createPathQuery());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
 		arguments.put(ACOrgUnitId.class, AccesscontrolFactory.eINSTANCE.createACOrgUnitId());
 	}

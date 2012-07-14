@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.client.test.server.api;
+package org.eclipse.emf.emfstore.client.test.server.api.util;
 
 import java.io.IOException;
 import java.io.InputStream;
