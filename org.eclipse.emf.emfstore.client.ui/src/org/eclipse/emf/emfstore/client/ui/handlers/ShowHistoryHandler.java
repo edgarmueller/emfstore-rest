@@ -11,22 +11,22 @@
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIShowHistoryController;
 
 /**
- * Brings up the history view for a selected {@link ProjectSpace}.<br/>
- * It is assumed that the user previously has selected a {@link ProjectSpace} instance.
+ * Brings up the history view for a selected {@link EObject}<br/>
+ * If the {@link EObject} is a ProjectSpace the complete history is shown.
  * 
  * @author emueller
+ * @author wesendon
  * 
  */
 public class ShowHistoryHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIShowHistoryController(getShell(), requireSelection(ProjectSpace.class), requireSelection(EObject.class))
-			.execute();
+		new UIShowHistoryController(getShell(), requireSelection(EObject.class))
+				.execute();
 	}
 
 }

@@ -35,6 +35,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
+ * UIController for branch creation. Slightly modified copy of the commit
+ * controller
  * 
  * @author wesendon
  * 
@@ -53,6 +55,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * @param shell
 	 *            the parent {@link Shell} that should be used during the creation of the branch
 	 * @param projectSpace
+	 *            the project space for which to create a branch for
 	 */
 	public UICreateBranchController(Shell shell, ProjectSpace projectSpace) {
 		this(shell, projectSpace, null);
@@ -64,7 +67,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * @param shell
 	 *            the parent {@link Shell} that should be used during the creation of the branch
 	 * @param projectSpace
+	 *            the project space for which to create a branch for
 	 * @param branch
+	 *            the branch to be committed
 	 */
 	public UICreateBranchController(Shell shell, ProjectSpace projectSpace, BranchVersionSpec branch) {
 		super(shell, true, true);

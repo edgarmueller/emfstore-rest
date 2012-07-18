@@ -862,7 +862,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
 		// filter unwanted notifications
-		if (FilterStack.DEFAULT.check(new NotificationInfo(notification))) {
+		if (FilterStack.DEFAULT.check(new NotificationInfo(notification), collection)) {
 			return;
 		}
 

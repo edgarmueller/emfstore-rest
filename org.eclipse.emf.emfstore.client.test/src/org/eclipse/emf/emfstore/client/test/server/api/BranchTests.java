@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -18,8 +20,11 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.junit.Test;
 
@@ -48,12 +53,13 @@ public class BranchTests extends CoreServerTest {
 		}.run(false);
 	}
 
-	private void share(final ProjectSpace ps) {
-		new EMFStoreCommand() {
+	private PrimaryVersionSpec share(final ProjectSpace ps) {
+		return new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
 			@Override
-			protected void doRun() {
+			protected PrimaryVersionSpec doRun() {
 				try {
 					ps.shareProject();
+					return ps.getBaseVersion();
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -131,6 +137,9 @@ public class BranchTests extends CoreServerTest {
 		assertEquals("b1", branchedVersion.getPrimarySpec().getBranch());
 		assertTrue(branchedVersion.getAncestorVersion() == initialVersion);
 		assertTrue(branchedVersion.getNextVersion() == null);
+		assertTrue(branchedVersion.getPreviousVersion() == null);
+		assertTrue(initialVersion.getNextVersion() == null);
+		assertTrue(initialVersion.getPreviousVersion() == null);
 
 	}
 
@@ -569,13 +578,86 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void queryglobalHistory() {
-		assertTrue(false);
+	public void queryglobalHistory() throws EmfStoreException {
+		final ProjectSpace ps = getProjectSpace();
+		createTestElement("Horst");
+		PrimaryVersionSpec v0 = share(ps);
+
+		PrimaryVersionSpec v1 = branch(ps, "b1");
+		PrimaryVersionSpec v2 = branch(ps, "b2");
+
+		HistoryQuery query = VersioningFactory.eINSTANCE.createHistoryQuery();
+		// TODO If source and target are exchanged, it works, seems like a bug
+		query.setSource(ModelUtil.clone(v0));
+		query.setTarget(ModelUtil.clone(v2));
+		query.setIncludeAllVersions(true);
+
+		List<HistoryInfo> result = ps.getHistoryInfo(query);
+
+		assertEquals(3, result.size());
+		assertEquals(v0, result.get(0).getPrimerySpec());
+		assertEquals(v1, result.get(1).getPrimerySpec());
+		assertEquals(v2, result.get(2).getPrimerySpec());
 	}
 
 	@Test
-	public void queryelementHistory() {
-		assertTrue(false);
+	public void queryElementFullPath() throws EmfStoreException {
+		final ProjectSpace ps = getProjectSpace();
+		final TestElement element = createTestElement("Horst");
+		PrimaryVersionSpec v0 = share(ps);
+
+		PrimaryVersionSpec v1 = branch(ps, "b1");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				element.setName("JŸrgen");
+			}
+		}.run(false);
+
+		PrimaryVersionSpec v2 = commit(ps);
+
+		HistoryQuery query = VersioningFactory.eINSTANCE.createHistoryQuery();
+		query.setSource(ModelUtil.clone(v0));
+		query.setTarget(ModelUtil.clone(v2));
+		query.setIncludeAllVersions(true);
+		query.getModelElements().add(ps.getProject().getModelElementId(element));
+
+		List<HistoryInfo> result = ps.getHistoryInfo(query);
+
+		assertEquals(2, result.size());
+		assertEquals(v0, result.get(0).getPrimerySpec());
+		assertEquals(v2, result.get(1).getPrimerySpec());
+	}
+
+	@Test
+	public void queryElementPartialPath() throws EmfStoreException {
+		final ProjectSpace ps = getProjectSpace();
+		final TestElement element = createTestElement("Horst");
+		PrimaryVersionSpec v0 = share(ps);
+
+		PrimaryVersionSpec v1 = branch(ps, "b1");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				element.setName("JŸrgen");
+			}
+		}.run(false);
+
+		PrimaryVersionSpec v2 = commit(ps);
+
+		HistoryQuery query = VersioningFactory.eINSTANCE.createHistoryQuery();
+		query.setSource(ModelUtil.clone(v1));
+		query.setTarget(ModelUtil.clone(v2));
+		query.setIncludeAllVersions(true);
+		query.getModelElements().add(ps.getProject().getModelElementId(element));
+
+		List<HistoryInfo> result = ps.getHistoryInfo(query);
+
+		assertEquals(2, result.size());
+		assertEquals(v0, result.get(0).getPrimerySpec());
+		assertEquals(v2, result.get(1).getPrimerySpec());
 	}
 
 	@Test

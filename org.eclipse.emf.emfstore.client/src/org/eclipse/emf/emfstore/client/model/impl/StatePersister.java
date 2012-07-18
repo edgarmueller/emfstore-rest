@@ -160,7 +160,7 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	public void notify(Notification notification, IdEObjectCollection rootEObject, EObject modelElement) {
 		// filter unwanted notifications that did not change anything in the
 		// state
-		if (filterStack.check(new NotificationInfo(notification))) {
+		if (filterStack.check(new NotificationInfo(notification), rootEObject)) {
 			return;
 		}
 

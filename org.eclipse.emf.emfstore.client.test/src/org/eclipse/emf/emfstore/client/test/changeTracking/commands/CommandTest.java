@@ -319,6 +319,10 @@ public class CommandTest extends WorkspaceTest {
 		final Actor newActor = RequirementFactory.eINSTANCE.createActor();
 		final Actor otherActor = RequirementFactory.eINSTANCE.createActor();
 
+		oldActor.setName("old Actor");
+		newActor.setName("new Actor");
+		otherActor.setName("other Actor");
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {

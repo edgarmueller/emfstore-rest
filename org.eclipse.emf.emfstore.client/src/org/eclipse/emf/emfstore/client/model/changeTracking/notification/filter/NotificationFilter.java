@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 
 /**
  * Interface for filtering notifications.
@@ -23,9 +24,13 @@ public interface NotificationFilter {
 	/**
 	 * Check a notification if it should be ignored.
 	 * 
-	 * @param notificationInfo the {@link NotificationInfo} to check
+	 * @param notificationInfo
+	 *            the {@link NotificationInfo} to check
+	 * @param collection
+	 *            the collection that holds or did hold the model element the notification
+	 *            is about
 	 * @return true if the notification is to be ignored
 	 */
-	boolean check(NotificationInfo notificationInfo);
+	boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection);
 
 }

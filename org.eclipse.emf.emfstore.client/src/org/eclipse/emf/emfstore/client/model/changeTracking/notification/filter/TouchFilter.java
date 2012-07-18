@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 
 /**
  * Filters touch notifications, as these have no effect on the model state.
@@ -24,7 +25,7 @@ public class TouchFilter implements NotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo) {
+	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
 
 		return notificationInfo.isTouch();
 	}

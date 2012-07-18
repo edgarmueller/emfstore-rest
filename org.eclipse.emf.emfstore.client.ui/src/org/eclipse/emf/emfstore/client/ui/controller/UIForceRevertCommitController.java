@@ -79,7 +79,7 @@ public class UIForceRevertCommitController extends AbstractEMFStoreUIController<
 			try {
 				new ForceRevertController(view.getProjectSpace(), versionSpec).execute();
 			} catch (EmfStoreException e) {
-
+				// TODO: no error handling?
 			}
 		}
 		return null;

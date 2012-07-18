@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
@@ -202,5 +203,35 @@ public final class FileUtil {
 		}
 
 		return input2.read() == -1;
+	}
+
+	/**
+	 * Deletes a directory.
+	 * 
+	 * @param file the directory
+	 * @param force true if delete should try to delete forcefully including retries, this may be slow.
+	 * @throws IOException if delete fails
+	 */
+	public static void deleteDirectory(File file, boolean force) throws IOException {
+		int maxRetry = 3;
+		if (!force) {
+			maxRetry = 1;
+		}
+		for (int i = 0; i <= maxRetry; i++) {
+			try {
+				FileUtils.deleteDirectory(file);
+				return;
+			} catch (IOException exception) {
+				// ignore exception if retry counter below max
+				if (i >= maxRetry) {
+					throw exception;
+				}
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					throw exception;
+				}
+			}
+		}
 	}
 }

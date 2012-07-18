@@ -37,7 +37,8 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSpace> {
+public class UICheckoutController extends
+		AbstractEMFStoreUIController<ProjectSpace> {
 
 	private ServerInfo serverInfo;
 	private ProjectInfo projectInfo;
@@ -50,13 +51,14 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param serverInfo
-	 *            the {@link ServerInfo} that is used to determine the server where
-	 *            the project that should get checked out, is located on
+	 *            the {@link ServerInfo} that is used to determine the server
+	 *            where the project that should get checked out, is located on
 	 * @param projectInfo
-	 *            the {@link ProjectInfo} that is used to determine the project that should get
-	 *            checked out
+	 *            the {@link ProjectInfo} that is used to determine the project
+	 *            that should get checked out
 	 */
-	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo) {
+	public UICheckoutController(Shell shell, ServerInfo serverInfo,
+			ProjectInfo projectInfo) {
 		super(shell, true, true);
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
@@ -64,8 +66,25 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 		versionSpec = null;
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the parent {@link Shell} that will be used during checkout
+	 * @param serverInfo
+	 *            the {@link ServerInfo} that is used to determine the server
+	 *            where the project that should get checked out, is located on
+	 * @param projectInfo
+	 *            the {@link ProjectInfo} that is used to determine the project
+	 *            that should get checked out
+	 * @param askForBranch
+	 *            if true and the version spec is null, a branch selectino
+	 *            dialog is triggered. This is used to checkout branched
+	 *            versions
+	 */
 	// TODO BRANCH quick hack, ask eddy how to solve correctly
-	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo, boolean askForBranch) {
+	public UICheckoutController(Shell shell, ServerInfo serverInfo,
+			ProjectInfo projectInfo, boolean askForBranch) {
 		super(shell, true, true);
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
@@ -79,16 +98,17 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param serverInfo
-	 *            the {@link ServerInfo} that is used to determine the server where
-	 *            the project that should get checked out, is located on
+	 *            the {@link ServerInfo} that is used to determine the server
+	 *            where the project that should get checked out, is located on
 	 * @param projectInfo
-	 *            the {@link ProjectInfo} that is used to determine the project that should get
-	 *            checked out
+	 *            the {@link ProjectInfo} that is used to determine the project
+	 *            that should get checked out
 	 * @param versionSpec
-	 *            the specific version of the project that should get checked out
+	 *            the specific version of the project that should get checked
+	 *            out
 	 */
-	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo,
-		PrimaryVersionSpec versionSpec) {
+	public UICheckoutController(Shell shell, ServerInfo serverInfo,
+			ProjectInfo projectInfo, PrimaryVersionSpec versionSpec) {
 		super(shell);
 		this.serverInfo = serverInfo;
 		this.projectInfo = projectInfo;
@@ -103,7 +123,8 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ProjectSpace doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public ProjectSpace doRun(IProgressMonitor progressMonitor)
+			throws EmfStoreException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
@@ -114,12 +135,18 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 				@Override
 				protected ProjectSpace run() throws EmfStoreException {
 					if (versionSpec == null) {
-						return WorkspaceManager.getInstance().getCurrentWorkspace()
-							.checkout(getUsersession(), projectInfo, getProgressMonitor());
+						return WorkspaceManager
+								.getInstance()
+								.getCurrentWorkspace()
+								.checkout(getUsersession(), projectInfo,
+										getProgressMonitor());
 					}
 
-					return WorkspaceManager.getInstance().getCurrentWorkspace()
-						.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
+					return WorkspaceManager
+							.getInstance()
+							.getCurrentWorkspace()
+							.checkout(getUsersession(), projectInfo,
+									versionSpec, getProgressMonitor());
 				}
 			}.execute();
 
@@ -128,7 +155,8 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
 					MessageDialog.openError(getShell(), "Checkout failed",
-						"Checkout of project " + projectInfo.getName() + " failed: " + e.getMessage());
+							"Checkout of project " + projectInfo.getName()
+									+ " failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -137,23 +165,27 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 		return null;
 	}
 
-	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EmfStoreException {
-		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceManager.getInstance().getCurrentWorkspace())
-			.getBranches(serverInfo, projectInfo.getProjectId());
+	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo,
+			ProjectInfo projectInfo) throws EmfStoreException {
+		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceManager
+				.getInstance().getCurrentWorkspace()).getBranches(serverInfo,
+				projectInfo.getProjectId());
 
-		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {
-			public BranchInfo call() throws Exception {
-				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-					getShell(), branches);
-				dialog.setBlockOnOpen(true);
+		BranchInfo result = RunInUI.WithException
+				.runWithResult(new Callable<BranchInfo>() {
+					public BranchInfo call() throws Exception {
+						BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
+								getShell(), branches);
+						dialog.setBlockOnOpen(true);
 
-				if (dialog.open() != Dialog.OK || dialog.getResult() == null) {
-					throw new EmfStoreException("No Branch specified");
-				}
-				return dialog.getResult();
+						if (dialog.open() != Dialog.OK
+								|| dialog.getResult() == null) {
+							throw new EmfStoreException("No Branch specified");
+						}
+						return dialog.getResult();
 
-			}
-		});
+					}
+				});
 
 		return result.getHead();
 	}

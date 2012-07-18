@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.NotifiableIdEObjectCollection;
 
 /**
@@ -27,7 +28,7 @@ public class NotifiableIdEObjectCollectionFilter implements NotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo) {
+	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
 		return (notificationInfo.getNotifier() instanceof NotifiableIdEObjectCollection);
 	}
 

@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 
 /**
  * This class filters a notification recording according to predefined stacks of
@@ -32,7 +33,7 @@ public final class FilterStack implements NotificationFilter {
 	private static final NotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
 		new UnknownEventTypeFilter(), new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(),
 		new IgnoreOutsideProjectReferencesFilter(), new IgnoreNullFeatureNotificationsFilter(),
-		new NotifiableIdEObjectCollectionFilter() };
+		new NotifiableIdEObjectCollectionFilter(), new IgnoreNotificationsOutsideProject() };
 
 	/**
 	 * The default filter stack.
@@ -69,9 +70,9 @@ public final class FilterStack implements NotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo) {
+	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
 		for (NotificationFilter f : filterList) {
-			if (f.check(notificationInfo)) {
+			if (f.check(notificationInfo, collection)) {
 				return true;
 			}
 		}

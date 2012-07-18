@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs;
 
 import java.util.List;
@@ -25,19 +35,45 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * Dialog for branch selection. Has subclasses which modify the dialog for
+ * certain usecases, such as {@link Creation} and {@link CheckoutSelection}
+ * 
+ * @author wesendon
+ */
 public class BranchSelectionDialog extends TitleAreaDialog {
+	/**
+	 * Access for subclasses.
+	 */
 	protected final java.util.List<BranchInfo> branches;
+
+	/**
+	 * Access for subclasses.
+	 */
 	protected TableViewer tableViewer;
+
+	/**
+	 * Access for subclasses.
+	 */
 	protected BranchInfo result;
+
+	/**
+	 * Access for subclasses.
+	 */
 	protected final PrimaryVersionSpec baseVersion;
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
-	 * @param primaryVersionSpec
+	 *            parent shell
+	 * @param baseVersion
+	 *            base version
+	 * @param branches
+	 *            list of branches
 	 */
-	public BranchSelectionDialog(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
+	public BranchSelectionDialog(Shell parentShell,
+			PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
 		super(parentShell);
 		this.baseVersion = baseVersion;
 		this.branches = branches;
@@ -47,6 +83,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * Create contents of the dialog.
 	 * 
 	 * @param parent
+	 *            parent component
+	 * @return a control
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
@@ -72,10 +110,12 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 				Object element = cell.getElement();
 				if (element instanceof BranchInfo) {
 					BranchInfo branch = (BranchInfo) element;
-					StyledString styledString = new StyledString("Branch:  " + branch.getName() + "  ", StyledString
-						.createColorRegistryStyler("red", null));
-					styledString.append("[Version: " + branch.getHead().getIdentifier() + "]",
-						StyledString.DECORATIONS_STYLER);
+					StyledString styledString = new StyledString("Branch:  "
+							+ branch.getName() + "  ", StyledString
+							.createColorRegistryStyler("red", null));
+					styledString.append("[Version: "
+							+ branch.getHead().getIdentifier() + "]",
+							StyledString.DECORATIONS_STYLER);
 					cell.setText(styledString.toString());
 					cell.setStyleRanges(styledString.getStyleRanges());
 				}
@@ -91,6 +131,9 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		return area;
 	}
 
+	/**
+	 * Hook for initialization.
+	 */
 	protected void endOfInit() {
 	}
 
@@ -98,20 +141,35 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		ISelection selection = tableViewer.getSelection();
 		if (selection instanceof IStructuredSelection) {
-			result = (BranchInfo) ((IStructuredSelection) selection).getFirstElement();
+			result = (BranchInfo) ((IStructuredSelection) selection)
+					.getFirstElement();
 		}
 		super.okPressed();
 	}
 
+	/**
+	 * Returns a {@link BranchInfo} as result or null for certain dialogs.
+	 * 
+	 * @return {@link BranchInfo}
+	 */
 	public BranchInfo getResult() {
 		return result;
 	}
 
+	/**
+	 * Hook to set header texts.
+	 */
 	protected void setHeaderTexts() {
 		setTitle("Branch Selection");
 		setMessage("Please select which Branch you want to merge into your local copy of the project.");
 	}
 
+	/**
+	 * Hook to add additional components to the dialog.
+	 * 
+	 * @param container
+	 *            parent
+	 */
 	protected void addCreationField(Composite container) {
 	}
 
@@ -119,23 +177,40 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * Create contents of the button bar.
 	 * 
 	 * @param parent
+	 *            parent
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+				true);
+		createButton(parent, IDialogConstants.CANCEL_ID,
+				IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	/**
-	 * Return the initial size of the dialog.
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Point getInitialSize() {
 		return new Point(400, 350);
 	}
 
-	static public class CheckoutSelection extends BranchSelectionDialog {
+	/**
+	 * Alternative version of this dialog for Checkout Selection.
+	 * 
+	 * @author wesendon
+	 * 
+	 */
+	public static class CheckoutSelection extends BranchSelectionDialog {
 
+		/**
+		 * Default constructor.
+		 * 
+		 * @param parentShell
+		 *            parent
+		 * @param branches
+		 *            list of branches
+		 */
 		public CheckoutSelection(Shell parentShell, List<BranchInfo> branches) {
 			super(parentShell, null, branches);
 		}
@@ -148,12 +223,31 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 	}
 
-	static public class Creation extends BranchSelectionDialog {
+	/**
+	 * Alternative version of this dialog for Branch Creation. In this version
+	 * branches can't be selected but are displayed in order to avoid duplicate
+	 * naming.
+	 * 
+	 * @author wesendon
+	 * 
+	 */
+	public static class Creation extends BranchSelectionDialog {
 
 		private Text text;
 		private String newName = "";
 
-		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
+		/**
+		 * Default constructor.
+		 * 
+		 * @param parentShell
+		 *            parent
+		 * @param baseVersion
+		 *            baseversion
+		 * @param branches
+		 *            list of branches
+		 */
+		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion,
+				java.util.List<BranchInfo> branches) {
 			super(parentShell, baseVersion, branches);
 		}
 
@@ -163,6 +257,11 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 			setMessage("Please specify a name for the new Branch.");
 		}
 
+		/**
+		 * Returns the selected name for the branch.
+		 * 
+		 * @return String
+		 */
 		public String getNewBranch() {
 			return newName;
 		}
@@ -170,7 +269,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		@Override
 		protected void endOfInit() {
 			tableViewer.getTable().setEnabled(false);
-			tableViewer.getTable().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
+			tableViewer.getTable().setBackground(
+					Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
 		}
 
 		@Override
@@ -185,14 +285,17 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		protected void addCreationField(Composite container) {
 			Composite creationContainer = new Composite(container, SWT.NONE);
 			creationContainer.setLayout(new GridLayout(2, false));
-			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
+					true, false, 1, 1));
 
 			Label lblNewBranch = new Label(creationContainer, SWT.NONE);
-			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
 			lblNewBranch.setText("New Branch:");
 
 			text = new Text(creationContainer, SWT.BORDER);
-			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+					1, 1));
 		}
 	}
 }

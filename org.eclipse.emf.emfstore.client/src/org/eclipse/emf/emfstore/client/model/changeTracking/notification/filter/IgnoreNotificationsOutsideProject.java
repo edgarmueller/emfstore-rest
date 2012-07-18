@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,18 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
-import java.util.Collection;
-
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 
 /**
- * This class filters zero effect remove operations from a notification recording. An example of a zero effect remove is
- * a notification that [] changed to null.
+ * Filter notifications from elements outside of the project.
  * 
- * @author chodnick
  */
-public class EmptyRemovalsFilter implements NotificationFilter {
+public class IgnoreNotificationsOutsideProject implements NotificationFilter {
 
 	/**
 	 * {@inheritDoc}
@@ -30,8 +27,14 @@ public class EmptyRemovalsFilter implements NotificationFilter {
 	 */
 	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
 
-		return notificationInfo.isRemoveManyEvent() && notificationInfo.getNewValue() == null
-			&& notificationInfo.getOldValue() instanceof Collection<?>
-			&& ((Collection<?>) notificationInfo.getOldValue()).isEmpty();
+		// do not filter notifications from (deleted) elements in project
+		if (collection.getModelElementId(notificationInfo.getNotifierModelElement()) != null
+			|| ((IdEObjectCollectionImpl) collection).getDeletedModelElementId(notificationInfo
+				.getNotifierModelElement()) != null) {
+			return false;
+		}
+
+		return true;
 	}
+
 }

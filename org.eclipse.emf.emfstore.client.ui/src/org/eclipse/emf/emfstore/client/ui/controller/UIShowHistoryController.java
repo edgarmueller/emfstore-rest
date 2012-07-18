@@ -43,14 +43,20 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	/**
 	 * Constructor.
 	 * 
-	 * @param shell the parent {@link Shell}
-	 * @param projectSpace the {@link ProjectSpace} the <code>modelElement</code> is contained in
-	 * @param modelElement the model element whose history should be queried
+	 * @param shell
+	 *            the parent {@link Shell}
+	 * @param modelElement
+	 *            the model element whose history should be queried
 	 */
-	public UIShowHistoryController(Shell shell, ProjectSpace projectSpace, EObject modelElement) {
+	public UIShowHistoryController(Shell shell, EObject modelElement) {
 		super(shell, true, true);
-		this.projectSpace = projectSpace;
-		this.modelElement = modelElement;
+		if (modelElement instanceof ProjectSpace) {
+			this.projectSpace = (ProjectSpace) modelElement;
+			this.modelElement = null;
+		} else {
+			this.projectSpace = null;
+			this.modelElement = modelElement;
+		}
 	}
 
 	/**
@@ -64,23 +70,27 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 
 		if (projectSpace == null) {
 			try {
-				projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
-					.getProjectSpace(ModelUtil.getProject(modelElement));
+				projectSpace = WorkspaceManager.getInstance()
+						.getCurrentWorkspace()
+						.getProjectSpace(ModelUtil.getProject(modelElement));
 			} catch (UnkownProjectException e) {
-				MessageDialog.openWarning(getShell(), "Unknown project", e.getMessage());
+				MessageDialog.openWarning(getShell(), "Unknown project",
+						e.getMessage());
 				return null;
 			}
 		}
 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
 				HistoryBrowserView historyBrowserView = null;
 				// TODO: remove hard-coded reference
 				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
 
 				try {
-					historyBrowserView = (HistoryBrowserView) page.showView(viewId);
+					historyBrowserView = (HistoryBrowserView) page
+							.showView(viewId);
 				} catch (PartInitException e) {
 					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 				}
