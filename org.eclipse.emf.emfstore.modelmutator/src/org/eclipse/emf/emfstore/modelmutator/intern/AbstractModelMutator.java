@@ -29,6 +29,8 @@ import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
 
 /**
  * Basic implementation of the {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutator}.
+ * 
+ *
  */
 public abstract class AbstractModelMutator {
 	
@@ -39,11 +41,16 @@ public abstract class AbstractModelMutator {
 	// randomly eobjects are saved into this map and are used later instead of creating new ones 
 	private Map<EClass, List<EObject>> freeObjects = new LinkedHashMap<EClass, List<EObject>>();
 	
+	private Map<EClass, List<EObject>> allObjects = new LinkedHashMap<EClass, List<EObject>>();
+
+	private ModelMutatorUtil util;
+	
 	/**
 	 * @param config The {@link ModelMutatorConfiguration} to use for mutation.
 	 */
 	public AbstractModelMutator(ModelMutatorConfiguration config) {
 		this.config = config;
+		this.util = new ModelMutatorUtil(config);
 	}
 	
 	/**
@@ -63,7 +70,9 @@ public abstract class AbstractModelMutator {
 		preMutate();
 		
 		createChildrenForRoot();
-						
+		
+		changeCrossReferences();
+					
 		postMutate();
 	}
 	
@@ -77,9 +86,9 @@ public abstract class AbstractModelMutator {
 		
 		changeCrossReferences();
 		
-		mutateAttributes();
+		mutateAttributes();			
 	}
-	
+		
 	/**
 	 * Create the children for the root object.
 	 */
@@ -107,7 +116,7 @@ public abstract class AbstractModelMutator {
 		if(depth >= config.getDepth()){
 			return;
 		}
-				
+								
 		// create children for the current root object
 		List<EObject> children = createChildren(root);
 				
@@ -132,8 +141,7 @@ public abstract class AbstractModelMutator {
 		for (EReference reference : root.eClass().getEAllContainments()) {
 			
 			// check if the reference is valid: not to be ignored AND can be set/added
-			if (ignore.contains(reference) || 
-					!ModelMutatorUtil.isValid(reference, root, config)){
+			if (ignore.contains(reference) || !util.isValid(reference, root)){
 				continue;
 			}
 						
@@ -148,18 +156,19 @@ public abstract class AbstractModelMutator {
 					
 					// randomly first changeCrossReferences					
 					if(random.nextBoolean()){
-						changeCrossReferences(obj, ModelMutatorUtil.getAllClassesAndObjects(config.getRootEObject()));
+						changeCrossReferences(obj);
 					}
 					
-					// randomly add directly to parent or add to free objects 
+					// add directly to parent or add to free objects 
 					// only add if it is many or if it is only one
-					if((reference.isMany() || i == 1) && random.nextBoolean()){
+					if((reference.isMany() || i == 1)){
 						addToParent(root, obj, reference);
+						children.add(obj);		
 					} else {
 						addToFreeObjects(obj);
 					}
 					
-					children.add(obj);	
+					addToAllObjects(obj);
 				}
 			}
 		}
@@ -178,16 +187,18 @@ public abstract class AbstractModelMutator {
 				
 		// randomly select objects to delete
 		for(TreeIterator<EObject> it = root.eAllContents(); it.hasNext(); ){
-			EObject obj = it.next();
+			EObject obj = it.next();			
 			if(random.nextBoolean()){
 				toDelete.add(obj);
 				addToFreeObjects(obj);
 			}
 		}
 		
+		int deleteModes = config.isUseEcoreUtilDelete() ? 3 : 2;
+		
 		// delete selected objects
 		for(EObject obj : new ArrayList<EObject>(toDelete)){
-			ModelMutatorUtil.removeFullPerCommand(obj, random.nextInt(3), config);
+			util.removeFullPerCommand(obj, random.nextInt(deleteModes));
 		}		
 	}
 	
@@ -196,6 +207,15 @@ public abstract class AbstractModelMutator {
 		if(objects == null){
 			objects = new ArrayList<EObject>();
 			freeObjects.put(obj.eClass(), objects);
+		}
+		objects.add(obj);		
+	}
+	
+	private void addToAllObjects(EObject obj){
+		List<EObject> objects = allObjects.get(obj.eClass());
+		if(objects == null){
+			objects = new ArrayList<EObject>();
+			allObjects.put(obj.eClass(), objects);
 		}
 		objects.add(obj);		
 	}
@@ -214,12 +234,12 @@ public abstract class AbstractModelMutator {
 		if(classes == null){
 			
 			// get all classes of the modelpackage
-			classes = ModelMutatorUtil.getAllEContainments(reference, config.getModelPackage());
+			classes = util.getAllEContainments(reference);
 			
 			// check if they should be ignored
 			for (EClass eClass : config.geteClassesToIgnore()) {
 				classes.remove(eClass);
-				classes.removeAll(ModelMutatorUtil.getAllSubEClasses(eClass));
+				classes.removeAll(util.getAllSubEClasses(eClass));
 			}
 			
 			// remove classes which cannot have an instance
@@ -261,7 +281,7 @@ public abstract class AbstractModelMutator {
 			newObject = EcoreUtil.create(eClass);
 		}
 				
-		ModelMutatorUtil.setEObjectAttributes(newObject, config);		
+		util.setEObjectAttributes(newObject);		
 		return newObject;
 	}
 	
@@ -276,9 +296,9 @@ public abstract class AbstractModelMutator {
 		Random random = config.getRandom();
 		if (reference.isMany()) {
 			Integer index = random.nextBoolean() ? 0 : null;
-			ModelMutatorUtil.addPerCommand(parent, reference, newObject, index, config);
+			util.addPerCommand(parent, reference, newObject, index);
 		} else {
-			ModelMutatorUtil.setPerCommand(parent, reference, newObject, config);
+			util.setPerCommand(parent, reference, newObject);
 		}
 	}
 	
@@ -288,18 +308,17 @@ public abstract class AbstractModelMutator {
 	public void mutateAttributes() {
 		for (TreeIterator<EObject> it = config.getRootEObject().eAllContents(); it.hasNext();) {
 			EObject obj = (EObject) it.next();
-			ModelMutatorUtil.setEObjectAttributes(obj, config);
+			util.setEObjectAttributes(obj);
 		}
 	}
 	
 	/**
 	 * Changes CrossReferences for all {@link EObject}s of the model.
 	 */
-	public void changeCrossReferences() {	
-		Map<EClass, List<EObject>> allObjectsByEClass = ModelMutatorUtil.getAllClassesAndObjects(config.getRootEObject());
-		for (Entry<EClass, List<EObject>> entry : allObjectsByEClass.entrySet()) {
+	public void changeCrossReferences() {			
+		for (Entry<EClass, List<EObject>> entry : allObjects.entrySet()) {
 			for (EObject obj : entry.getValue()) {
-				changeCrossReferences(obj, allObjectsByEClass);
+				changeCrossReferences(obj);
 			}
 		}		
 	}	
@@ -308,12 +327,11 @@ public abstract class AbstractModelMutator {
 	 * Changes CrossReferences of an {@link EObject}.
 	 * 
 	 * @param obj The {@link EObject} where to change the CrossReferences.
-	 * @param allObjectsByEClass A map where all {@link EObject} are mapped to their {@link EClass}.
 	 */
-	public void changeCrossReferences(EObject obj, Map<EClass, List<EObject>> allObjectsByEClass){	
-		for (EReference reference : ModelMutatorUtil.getValidCrossReferences(obj, config)) {
-			for (EClass referenceClass : ModelMutatorUtil.getReferenceClasses(reference, allObjectsByEClass.keySet())) {
-				ModelMutatorUtil.setReference(obj, referenceClass, reference, config, allObjectsByEClass);
+	public void changeCrossReferences(EObject obj){	
+		for (EReference reference : util.getValidCrossReferences(obj)) {
+			for (EClass referenceClass : util.getReferenceClasses(reference, allObjects.keySet())) {
+				util.setReference(obj, referenceClass, reference, allObjects);
 			}
 		}
 	}	

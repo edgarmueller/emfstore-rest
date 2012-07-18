@@ -44,6 +44,7 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean allElementsOnRoot;
+	private boolean useEcoreUtilDelete;
 	
 	private EditingDomain editingDomain;
 
@@ -66,6 +67,8 @@ public class ModelMutatorConfiguration {
 		
 		this.depth = 5; // Default depth
 		this.width = 5; // Default width
+		
+		useEcoreUtilDelete = false;
 	}
 
 	/**
@@ -221,6 +224,23 @@ public class ModelMutatorConfiguration {
 	 */
 	public void setEditingDomain(EditingDomain editingDomain) {
 		this.editingDomain = editingDomain;
+	}
+	
+	/**
+	 * @return Should the Mutator use {@link org.eclipse.emf.ecore.util.EcoreUtil#delete(EObject)}?
+	 */
+	public boolean isUseEcoreUtilDelete() {
+		return useEcoreUtilDelete;
+	}
+	
+	/**
+	 * Should the Mutator use {@link org.eclipse.emf.ecore.util.EcoreUtil#delete(EObject)}?<br>
+	 * NOTE: This is a very expensive method and will decrease the performance dramatically.
+	 * 
+	 * @param useEcoreUtilDelete Should the Mutator use {@link org.eclipse.emf.ecore.util.EcoreUtil#delete(EObject)}?
+	 */
+	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
+		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
 
 }
