@@ -47,10 +47,25 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	private int dialogReturnValue;
 	private BranchVersionSpec branch;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the parent {@link Shell} that should be used during the creation of the branch
+	 * @param projectSpace
+	 */
 	public UICreateBranchController(Shell shell, ProjectSpace projectSpace) {
 		this(shell, projectSpace, null);
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the parent {@link Shell} that should be used during the creation of the branch
+	 * @param projectSpace
+	 * @param branch
+	 */
 	public UICreateBranchController(Shell shell, ProjectSpace projectSpace, BranchVersionSpec branch) {
 		super(shell, true, true);
 		this.projectSpace = projectSpace;
