@@ -153,6 +153,12 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 		operationRecorder.clearOperations();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 */
 	public void dispose() {
 		operationRecorder.removeOperationRecorderListener(this);
 	}
