@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -47,10 +48,10 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	public void initServer() throws FatalEmfStoreException {
 		ServerConfiguration.setTesting(true);
 		serverSpace = initServerSpace();
-		EmfStoreController.getHistoryCache(serverSpace);
 		authMock = new AuthControlMock();
 		emfStore = new EmfStoreImpl(serverSpace, authMock);
 		connectionMock = new ConnectionMock(emfStore, authMock);
+		EmfStoreController.getHistoryCache(serverSpace, true);
 	}
 
 	private ServerSpace initServerSpace() {
@@ -139,6 +140,22 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					return workspace.checkout(projectSpace.getUsersession(),
 						ModelUtil.clone(projectSpace.getProjectInfo()), ModelUtil.clone(projectSpace.getBaseVersion()),
 						new NullProgressMonitor());
+				} catch (EmfStoreException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}.run(false);
+	}
+
+	protected ProjectSpace checkout(final ProjectInfo projectInfo, final PrimaryVersionSpec baseVersion) {
+		return new EMFStoreCommandWithResult<ProjectSpace>() {
+			@Override
+			protected ProjectSpace doRun() {
+				try {
+					Workspace workspace = getWorkspace();
+					workspace.setConnectionManager(getConnectionMock());
+					return workspace.checkout(projectSpace.getUsersession(), ModelUtil.clone(projectInfo),
+						ModelUtil.clone(baseVersion), new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}

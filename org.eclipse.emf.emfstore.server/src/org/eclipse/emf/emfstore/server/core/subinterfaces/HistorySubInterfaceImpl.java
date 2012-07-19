@@ -19,6 +19,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -71,7 +73,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	@Override
 	protected void initSubInterface() throws FatalEmfStoreException {
 		super.initSubInterface();
-		historyCache = EmfStoreController.getHistoryCache(getServerSpace());
+		historyCache = EmfStoreController.getHistoryCache(getServerSpace(), false);
 	}
 
 	/**
@@ -153,6 +155,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		result.add(version);
 		result.addAll(addBackwardVersions(project, version, query.getLowerLimit(), query.isIncludeIncoming(),
 			query.isIncludeOutgoing()));
+		Collections.sort(result, new VersionComparator(false));
 		return result;
 	}
 
@@ -178,7 +181,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private List<HistoryInfo> handleMEQuery(ProjectId projectId, ModelElementQuery query) throws EmfStoreException {
 		List<Version> inRange = handleRangeQuery(projectId, query);
-		Set<Version> relevantVersions = new HashSet<Version>();
+		SortedSet<Version> relevantVersions = new TreeSet<Version>(new VersionComparator(false));
 		for (ModelElementId id : query.getModelElements()) {
 			relevantVersions.addAll(historyCache.getChangesForModelElement(projectId, id));
 		}
@@ -245,32 +248,48 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return result;
 	}
 
-	private List<Version> addForwardVersions(ProjectHistory project, Version version, int limit,
+	private Collection<Version> addForwardVersions(ProjectHistory project, Version version, int limit,
 		boolean includeIncoming, boolean includeOutgoing) {
-		List<Version> result = new ArrayList<Version>();
+		if (limit == 0) {
+			return Collections.emptyList();
+		}
+		SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		Version currentVersion = version;
 		while (currentVersion != null && result.size() < limit) {
-			if (currentVersion.getBranchedVersions().size() > 0) {
+			if (includeOutgoing && currentVersion.getBranchedVersions().size() > 0) {
 				result.addAll(currentVersion.getBranchedVersions());
 			}
+			if (includeIncoming && currentVersion.getMergedFromVersion().size() > 0) {
+				result.addAll(currentVersion.getMergedFromVersion());
+			}
+
 			currentVersion = currentVersion.getNextVersion();
 			if (currentVersion != null) {
 				result.add(currentVersion);
 			}
 		}
 
-		Collections.sort(result, new VersionComparator(false));
-		if (result.size() > limit) {
-			result = result.subList(0, limit - 1);
+		if (limit > 0 && result.size() > limit) {
+			return new ArrayList<Version>(result).subList(0, limit);
 		}
 		return result;
 	}
 
-	private List<Version> addBackwardVersions(ProjectHistory project, Version version, int limit,
+	private Collection<Version> addBackwardVersions(ProjectHistory project, Version version, int limit,
 		boolean includeIncoming, boolean includeOutgoing) {
-		ArrayList<Version> result = new ArrayList<Version>();
+		if (limit == 0) {
+			return Collections.emptyList();
+		}
+		SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		Version currentVersion = version;
-		while (currentVersion != null && limit > 0) {
+		while (currentVersion != null && result.size() < limit) {
+			if (includeOutgoing && currentVersion.getBranchedVersions().size() > 0) {
+				result.addAll(currentVersion.getBranchedVersions());
+			}
+			if (includeIncoming && currentVersion.getMergedFromVersion().size() > 0) {
+				result.addAll(currentVersion.getMergedFromVersion());
+			}
+			// move in tree
 			if (currentVersion.getPreviousVersion() != null) {
 				currentVersion = currentVersion.getPreviousVersion();
 			} else if (currentVersion.getAncestorVersion() != null) {
@@ -278,12 +297,14 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			} else {
 				currentVersion = null;
 			}
+			// add versions
 			if (currentVersion != null) {
 				result.add(currentVersion);
-				limit--;
 			}
 		}
-
+		if (limit > 0 && result.size() > limit) {
+			return new ArrayList<Version>(result).subList(0, limit);
+		}
 		return result;
 	}
 

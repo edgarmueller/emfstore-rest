@@ -22,10 +22,13 @@ import org.junit.Test;
  * Branches for history test
  * 
  * <pre>
- *     b1     b2
- *     
- * v5 	      o
- * v4	o	  |
+ *     b1    b2    b3
+ * 
+ * v7              o
+ * 				/  |
+ * v6         /    o
+ * v5 	      o   / 
+ * v4	o	  |  /
  * v3	|	  o
  * v2	o	 /
  * v1 	 \ o
@@ -38,14 +41,15 @@ import org.junit.Test;
  */
 public class HistoryAPITests extends CoreServerTest {
 
-	final private PrimaryVersionSpec[] versions = { Versions.PRIMARY("trunk", 0), Versions.PRIMARY("trunk", 1),
-		Versions.PRIMARY("b1", 2), Versions.PRIMARY("b2", 3), Versions.PRIMARY("b1", 4), Versions.PRIMARY("b2", 5), };
+	final public PrimaryVersionSpec[] versions = { Versions.PRIMARY("trunk", 0), Versions.PRIMARY("trunk", 1),
+		Versions.PRIMARY("b1", 2), Versions.PRIMARY("b2", 3), Versions.PRIMARY("b1", 4), Versions.PRIMARY("b2", 5),
+		Versions.PRIMARY("b3", 6), Versions.PRIMARY("b3", 7) };
 
-	final private String[] elementNames = { "v0", "v1", "v2", "v3", "v4", "v5" };
+	final public String[] elementNames = { "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7" };
 
-	final private String[] branches = { "b1", "b2" };
+	final public String[] branches = { "b1", "b2", "b3" };
 
-	private ProjectSpace createHistory() {
+	public ProjectSpace createHistory() {
 		ProjectSpace ps = getProjectSpace();
 		// v0
 		createTestElement(elementNames[0]);
@@ -71,6 +75,16 @@ public class HistoryAPITests extends CoreServerTest {
 		// v5
 		rename(ps2, 5);
 		assertEquals(versions[5], commit(ps2));
+
+		// v6
+		ProjectSpace thirdBranch = checkout(ps.getProjectInfo(), versions[3]);
+		rename(thirdBranch, 6);
+		assertEquals(versions[6], branch(thirdBranch, branches[2]));
+
+		// v7
+		mergeWithBranch(thirdBranch, versions[5], 1);
+		rename(thirdBranch, 7);
+		assertEquals(versions[7], commit(thirdBranch));
 
 		return ps;
 	}
@@ -106,20 +120,22 @@ public class HistoryAPITests extends CoreServerTest {
 		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[3], 5, 25, true, false,
 			false, false));
 
-		assertEquals(6, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[4], result.get(1).getPrimerySpec());
-		assertEquals(versions[3], result.get(2).getPrimerySpec());
-		assertEquals(versions[2], result.get(3).getPrimerySpec());
-		assertEquals(versions[1], result.get(4).getPrimerySpec());
-		assertEquals(versions[0], result.get(5).getPrimerySpec());
+		assertEquals(8, result.size());
+		assertEquals(versions[7], result.get(0).getPrimerySpec());
+		assertEquals(versions[6], result.get(1).getPrimerySpec());
+		assertEquals(versions[5], result.get(2).getPrimerySpec());
+		assertEquals(versions[4], result.get(3).getPrimerySpec());
+		assertEquals(versions[3], result.get(4).getPrimerySpec());
+		assertEquals(versions[2], result.get(5).getPrimerySpec());
+		assertEquals(versions[1], result.get(6).getPrimerySpec());
+		assertEquals(versions[0], result.get(7).getPrimerySpec());
 	}
 
 	@Test
 	public void rangequeryIncludeCp() throws EmfStoreException {
 		ProjectSpace ps = createHistory();
 
-		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[3], 5, 25, false, false,
+		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[3], 1, 25, false, false,
 			false, true));
 
 		assertEquals(4, result.size());
@@ -174,22 +190,26 @@ public class HistoryAPITests extends CoreServerTest {
 	public void rangequeryIncoming() throws EmfStoreException {
 		ProjectSpace ps = createHistory();
 
-		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[0], 0, 0, false, false,
+		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[7], 0, 2, false, true,
 			false, false));
 
-		// TODO implement
-		assertTrue(false);
+		assertEquals(3, result.size());
+		assertEquals(versions[7], result.get(0).getPrimerySpec());
+		assertEquals(versions[6], result.get(1).getPrimerySpec());
+		assertEquals(versions[5], result.get(2).getPrimerySpec());
 	}
 
 	@Test
 	public void rangequeryOutgoing() throws EmfStoreException {
 		ProjectSpace ps = createHistory();
 
-		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[0], 0, 0, false, false,
-			false, false));
+		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.rangeQuery(versions[3], 2, 0, false, false,
+			true, false));
 
-		// TODO implement
-		assertTrue(false);
+		assertEquals(3, result.size());
+		assertEquals(versions[6], result.get(0).getPrimerySpec());
+		assertEquals(versions[5], result.get(1).getPrimerySpec());
+		assertEquals(versions[3], result.get(2).getPrimerySpec());
 	}
 
 	@Test
@@ -276,8 +296,10 @@ public class HistoryAPITests extends CoreServerTest {
 		List<HistoryInfo> result = ps.getHistoryInfo(HistoryQueryBuilder.modelelementQuery(versions[3], id, 1, 1,
 			false, false));
 
-		assertEquals(1, result.size());
-		assertEquals(versions[3], result.get(0).getPrimerySpec());
+		assertEquals(3, result.size());
+		assertEquals(versions[5], result.get(0).getPrimerySpec());
+		assertEquals(versions[3], result.get(1).getPrimerySpec());
+		assertEquals(versions[1], result.get(2).getPrimerySpec());
 	}
 
 	@Test
