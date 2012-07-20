@@ -89,8 +89,12 @@ public class ShareController extends ServerCall<Void> {
 				return WorkspaceManager
 					.getInstance()
 					.getConnectionManager()
-					.createProject(getUsersession().getSessionId(), getProjectSpace().getProjectName(),
-						getProjectSpace().getProjectDescription(), logMessage, getProjectSpace().getProject());
+					.createProject(
+						getUsersession().getSessionId(),
+						getProjectSpace().getProjectName() == null ? "Project@" + new Date() : getProjectSpace()
+							.getProjectName(),
+						getProjectSpace().getProjectDescription() == null ? "" : getProjectSpace()
+							.getProjectDescription(), logMessage, getProjectSpace().getProject());
 			}
 		}.execute();
 
