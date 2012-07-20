@@ -5,12 +5,14 @@
  */
 package org.eclipse.emf.emfstore.client.test.server;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -355,11 +357,11 @@ public class ServerInterfaceTest extends ServerTests {
 			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
-		for (TagVersionSpec tagVersionSpec : historyInfo.get(0).getTagSpecs()) {
-			if (!tagVersionSpec.getName().equals("HEAD")) {
-				assertTrue(tagVersionSpec.getName().equals(tagName));
-			}
-		}
+		EList<TagVersionSpec> tagSpecs = historyInfo.get(0).getTagSpecs();
+		assertEquals(3, tagSpecs.size());
+		assertEquals("HEAD", tagSpecs.get(0).getName());
+		assertEquals("HEAD: trunk", tagSpecs.get(1).getName());
+		assertEquals(tagName, tagSpecs.get(2).getName());
 	}
 
 	/**
@@ -384,11 +386,10 @@ public class ServerInterfaceTest extends ServerTests {
 			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
-		for (TagVersionSpec tagVersionSpec : historyInfo.get(0).getTagSpecs()) {
-			if (!tagVersionSpec.getName().equals("HEAD")) {
-				assertTrue(tagVersionSpec.getName().equals(tagName));
-			}
-		}
+		EList<TagVersionSpec> tagSpecs = historyInfo.get(0).getTagSpecs();
+		assertEquals(2, tagSpecs.size());
+		assertEquals("HEAD", tagSpecs.get(0).getName());
+		assertEquals("HEAD: trunk", tagSpecs.get(1).getName());
 	}
 
 	/**
