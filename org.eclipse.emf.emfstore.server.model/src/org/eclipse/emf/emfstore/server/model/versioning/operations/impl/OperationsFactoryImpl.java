@@ -37,21 +37,23 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFactory {
+public class OperationsFactoryImpl extends EFactoryImpl implements
+		OperationsFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static OperationsFactory init() {
 		try {
 			OperationsFactory theOperationsFactory = (OperationsFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/operations");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/operations");
 			if (theOperationsFactory != null) {
 				return theOperationsFactory;
 			}
@@ -62,8 +64,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -108,7 +110,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP:
 			return (EObject) createEObjectToModelElementIdMap();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 
@@ -123,7 +126,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return createContainmentTypeFromString(eDataType, initialValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -138,7 +142,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return convertContainmentTypeToString(eDataType, instanceValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -287,11 +292,13 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * 
 	 * @generated
 	 */
-	public ContainmentType createContainmentTypeFromString(EDataType eDataType, String initialValue) {
+	public ContainmentType createContainmentTypeFromString(EDataType eDataType,
+			String initialValue) {
 		ContainmentType result = ContainmentType.get(initialValue);
 		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
-				+ eDataType.getName() + "'");
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
@@ -300,7 +307,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 * 
 	 * @generated
 	 */
-	public String convertContainmentTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertContainmentTypeToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

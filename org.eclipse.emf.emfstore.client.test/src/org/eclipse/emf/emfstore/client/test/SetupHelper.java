@@ -456,11 +456,20 @@ public class SetupHelper {
 	 * @throws IOException if deletion fails
 	 */
 	public static void cleanupWorkspace() throws IOException {
+		final Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
+					try {
+						currentWorkspace.deleteProjectSpace(projectSpace);
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+				}
+			}
+		}.run(false);
 
-		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
-			currentWorkspace.deleteProjectSpace(projectSpace);
-		}
 		String workspacePath = Configuration.getWorkspaceDirectory();
 		File workspaceDirectory = new File(workspacePath);
 		FileFilter workspaceFileFilter = new FileFilter() {

@@ -18,7 +18,8 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>File Identifier</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>File Identifier</b></em>'.
  * 
  * @implements Serializable <!-- end-user-doc -->
  *             <p>
@@ -26,7 +27,8 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  * 
  * @generated
  */
-public class FileIdentifierImpl extends IdentifiableElementImpl implements FileIdentifier, Serializable {
+public class FileIdentifierImpl extends IdentifiableElementImpl implements
+		FileIdentifier, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

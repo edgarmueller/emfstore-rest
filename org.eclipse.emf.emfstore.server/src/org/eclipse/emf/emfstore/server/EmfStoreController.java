@@ -262,12 +262,13 @@ public class EmfStoreController implements IApplication, Runnable {
 	 * Returns the history cache.
 	 * 
 	 * @param serverSpace target server space
+	 * @param resetForTest reinits the cache.
 	 * 
 	 * @return the history cache.
 	 */
-	public static HistoryCache getHistoryCache(ServerSpace serverSpace) {
+	public static HistoryCache getHistoryCache(ServerSpace serverSpace, boolean resetForTest) {
 		if (ServerConfiguration.isTesting()) {
-			if (testHistoryCache == null) {
+			if (testHistoryCache == null || resetForTest) {
 				testHistoryCache = initHistoryCache(serverSpace);
 			}
 			return testHistoryCache;

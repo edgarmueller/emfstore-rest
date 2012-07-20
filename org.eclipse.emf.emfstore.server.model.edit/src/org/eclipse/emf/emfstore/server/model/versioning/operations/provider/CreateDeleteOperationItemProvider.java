@@ -46,18 +46,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation} object.
- * <!-- begin-user-doc
- * --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class CreateDeleteOperationItemProvider extends AbstractOperationItemProvider implements
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
-	IItemPropertySource {
+public class CreateDeleteOperationItemProvider extends
+		AbstractOperationItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -66,8 +66,8 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -82,37 +82,46 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	}
 
 	/**
-	 * This adds a property descriptor for the Delete feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Delete feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addDeletePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_CreateDeleteOperation_delete_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_CreateDeleteOperation_delete_feature",
-				"_UI_CreateDeleteOperation_type"), OperationsPackage.Literals.CREATE_DELETE_OPERATION__DELETE, true,
-			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_CreateDeleteOperation_delete_feature"),
+				getString("_UI_PropertyDescriptor_description",
+						"_UI_CreateDeleteOperation_delete_feature",
+						"_UI_CreateDeleteOperation_type"),
+				OperationsPackage.Literals.CREATE_DELETE_OPERATION__DELETE,
+				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null, null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to
+	 * deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT);
-			childrenFeatures.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS);
-			childrenFeatures.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP);
+			childrenFeatures
+					.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT);
+			childrenFeatures
+					.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS);
+			childrenFeatures
+					.add(OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP);
 		}
 		return childrenFeatures;
 	}
@@ -124,7 +133,8 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
@@ -141,7 +151,8 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			ret.add(operation.getModelElementId());
 			List<ReferenceOperation> subOps = operation.getSubOperations();
 			if (subOps.size() > 0) {
-				OperationGroup operationGroup = OperationsFactory.eINSTANCE.createOperationGroup();
+				OperationGroup operationGroup = OperationsFactory.eINSTANCE
+						.createOperationGroup();
 				if (operation.isDelete()) {
 					operationGroup.setName("Deleted Cross-References");
 				} else {
@@ -156,11 +167,13 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	}
 
 	/**
-	 * This returns CreateDeleteOperation.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns CreateDeleteOperation.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated NOT
 	 * 
-	 * @param object the object for which to provide the label image
+	 * @param object
+	 *            the object for which to provide the label image
 	 * @return the image used to label the object
 	 */
 	@Override
@@ -168,18 +181,22 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 		CreateDeleteOperation op = (CreateDeleteOperation) object;
 		Object image = null;
 		if (op.isDelete()) {
-			image = getResourceLocator().getImage("full/obj16/DeleteOperation.png");
+			image = getResourceLocator().getImage(
+					"full/obj16/DeleteOperation.png");
 		} else {
-			image = getResourceLocator().getImage("full/obj16/CreateOperation.png");
+			image = getResourceLocator().getImage(
+					"full/obj16/CreateOperation.png");
 		}
 		return overlayImage(object, image);
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
-	 * @param object the object to be described
+	 * @param object
+	 *            the object to be described
 	 * @return the description of the given object
 	 */
 	@Override
@@ -187,7 +204,8 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 		if (object instanceof CreateDeleteOperation) {
 			CreateDeleteOperation op = (CreateDeleteOperation) object;
 			EObject modelElement = op.getModelElement();
-			int childrenCount = ModelUtil.getAllContainedModelElements(modelElement, false).size();
+			int childrenCount = ModelUtil.getAllContainedModelElements(
+					modelElement, false).size();
 			String description;
 
 			StringBuilder stringBuilder = new StringBuilder();
@@ -206,10 +224,13 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			EList<ReferenceOperation> subOperations = op.getSubOperations();
 			int subOperationCount = subOperations.size();
 			if (op.isDelete() && subOperationCount > 0) {
-				ReferenceOperation referenceOperation = subOperations.get(subOperationCount - 1);
-				if (referenceOperation.getContainmentType().equals(ContainmentType.CONTAINMENT)) {
+				ReferenceOperation referenceOperation = subOperations
+						.get(subOperationCount - 1);
+				if (referenceOperation.getContainmentType().equals(
+						ContainmentType.CONTAINMENT)) {
 					description += " from its parent "
-						+ getModelElementClassAndName(referenceOperation.getModelElementId());
+							+ getModelElementClassAndName(referenceOperation
+									.getModelElementId());
 				}
 			}
 			return description;
@@ -218,9 +239,10 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -230,236 +252,388 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 
 		switch (notification.getFeatureID(CreateDeleteOperation.class)) {
 		case OperationsPackage.CREATE_DELETE_OPERATION__DELETE:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		case OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT:
 		case OperationsPackage.CREATE_DELETE_OPERATION__SUB_OPERATIONS:
 		case OperationsPackage.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createCompositeOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE.createCompositeOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createCreateDeleteOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createCreateDeleteOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createAttributeOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE.createAttributeOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiAttributeOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiAttributeOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiAttributeSetOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiAttributeSetOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiAttributeMoveOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiAttributeMoveOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createSingleReferenceOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createSingleReferenceOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiReferenceSetOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiReferenceSetOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiReferenceOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiReferenceOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createMultiReferenceMoveOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.createMultiReferenceMoveOperation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createOperationId()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE.createOperationId()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createOperationGroup()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE.createOperationGroup()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.createModelElementGroup()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE.createModelElementGroup()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			OperationsFactory.eINSTANCE.create(OperationsPackage.Literals.EOBJECT_TO_MODEL_ELEMENT_ID_MAP)));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						OperationsFactory.eINSTANCE
+								.create(OperationsPackage.Literals.EOBJECT_TO_MODEL_ELEMENT_ID_MAP)));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createProjectHistory()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createProjectHistory()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createProjectInfo()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createProjectInfo()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createSessionId()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createSessionId()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createServerSpace()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createServerSpace()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createProjectId()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createVersionInfo()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createVersionInfo()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createClientVersionInfo()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createClientVersionInfo()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createFileIdentifier()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE.createFileIdentifier()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ModelFactory.eINSTANCE.createAuthenticationInformation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ModelFactory.eINSTANCE
+								.createAuthenticationInformation()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createTagVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createTagVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createDateVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createDateVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createLogMessage()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createLogMessage()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createChangePackage()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createChangePackage()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createHistoryInfo()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createHistoryInfo()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createHistoryQuery()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createRangeQuery()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createVersion()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createPathQuery()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createHeadVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createModelElementQuery()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createVersionProperty()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createVersion()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createBranchVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createHeadVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createBranchInfo()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createVersionProperty()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			VersioningFactory.eINSTANCE.createAncestorVersionSpec()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createBranchVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			EventsFactory.eINSTANCE.createEvent()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createBranchInfo()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			ServerFactory.eINSTANCE.createProjectUpdatedEvent()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						VersioningFactory.eINSTANCE.createAncestorVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			AccesscontrolFactory.eINSTANCE.createACOrgUnit()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						EventsFactory.eINSTANCE.createEvent()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			AccesscontrolFactory.eINSTANCE.createACUser()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						ServerFactory.eINSTANCE.createProjectUpdatedEvent()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			AccesscontrolFactory.eINSTANCE.createACGroup()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						AccesscontrolFactory.eINSTANCE.createACOrgUnit()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			AccesscontrolFactory.eINSTANCE.createACOrgUnitId()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						AccesscontrolFactory.eINSTANCE.createACUser()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			AccesscontrolFactory.eINSTANCE.createOrgUnitProperty()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						AccesscontrolFactory.eINSTANCE.createACGroup()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			RolesFactory.eINSTANCE.createReaderRole()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						AccesscontrolFactory.eINSTANCE.createACOrgUnitId()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			RolesFactory.eINSTANCE.createWriterRole()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						AccesscontrolFactory.eINSTANCE.createOrgUnitProperty()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			RolesFactory.eINSTANCE.createProjectAdminRole()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						RolesFactory.eINSTANCE.createReaderRole()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			RolesFactory.eINSTANCE.createServerAdmin()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						RolesFactory.eINSTANCE.createWriterRole()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			UrlFactory.eINSTANCE.createServerUrl()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						RolesFactory.eINSTANCE.createProjectAdminRole()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			UrlFactory.eINSTANCE.createProjectUrlFragment()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						RolesFactory.eINSTANCE.createServerAdmin()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			UrlFactory.eINSTANCE.createModelElementUrlFragment()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						UrlFactory.eINSTANCE.createServerUrl()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			UrlFactory.eINSTANCE.createModelElementUrl()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						UrlFactory.eINSTANCE.createProjectUrlFragment()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						UrlFactory.eINSTANCE.createModelElementUrlFragment()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						UrlFactory.eINSTANCE.createModelElementUrl()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createModelVersion()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createProject()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createModelElementId()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-				.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createModelVersion()));
 
-		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createPropertyStringValue()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createEMFStoreProperty()));
 
-		newChildDescriptors.add(createChildParameter(
-			OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
-			OperationsFactory.eINSTANCE.createSingleReferenceOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
 
-		newChildDescriptors.add(createChildParameter(
-			OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
-			OperationsFactory.eINSTANCE.createMultiReferenceSetOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
+						org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+								.createPropertyStringValue()));
 
-		newChildDescriptors.add(createChildParameter(
-			OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
-			OperationsFactory.eINSTANCE.createMultiReferenceOperation()));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
+						OperationsFactory.eINSTANCE
+								.createSingleReferenceOperation()));
 
-		newChildDescriptors.add(createChildParameter(
-			OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP,
-			OperationsFactory.eINSTANCE.create(OperationsPackage.Literals.EOBJECT_TO_MODEL_ELEMENT_ID_MAP)));
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
+						OperationsFactory.eINSTANCE
+								.createMultiReferenceSetOperation()));
+
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,
+						OperationsFactory.eINSTANCE
+								.createMultiReferenceOperation()));
+
+		newChildDescriptors
+				.add(createChildParameter(
+						OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP,
+						OperationsFactory.eINSTANCE
+								.create(OperationsPackage.Literals.EOBJECT_TO_MODEL_ELEMENT_ID_MAP)));
 	}
 
 	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the label text for
+	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
 		boolean qualify = childFeature == OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT
-			|| childFeature == OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS
-			|| childFeature == OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP;
+				|| childFeature == OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS
+				|| childFeature == OperationsPackage.Literals.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
-				getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", new Object[] {
+					getTypeText(childObject), getFeatureText(childFeature),
+					getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

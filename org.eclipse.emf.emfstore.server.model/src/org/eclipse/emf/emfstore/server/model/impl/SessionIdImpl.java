@@ -16,7 +16,8 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Session Id</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Session Id</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 

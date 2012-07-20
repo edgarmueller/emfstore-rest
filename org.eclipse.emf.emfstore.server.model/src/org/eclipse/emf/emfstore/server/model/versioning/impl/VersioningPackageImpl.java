@@ -32,7 +32,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionProperty;
@@ -49,11 +52,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class VersioningPackageImpl extends EPackageImpl implements VersioningPackage {
+public class VersioningPackageImpl extends EPackageImpl implements
+		VersioningPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -115,6 +120,27 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
+	private EClass rangeQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass pathQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass modelElementQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EClass versionEClass = null;
 
 	/**
@@ -132,35 +158,34 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	private EClass versionPropertyEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	private EClass branchVersionSpecEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	private EClass branchInfoEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	private EClass ancestorVersionSpecEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
-	 * EPackage.Registry} by the package package URI value.
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * package package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
-	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
+	 * Note: the correct way to create the package is via the static factory
+	 * method {@link #init init()}, which also performs initialization of the
+	 * package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
@@ -180,12 +205,14 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model,
+	 * and for any others upon which it depends.
 	 * 
 	 * <p>
-	 * This method is used to initialize {@link VersioningPackage#eINSTANCE} when that field is accessed. Clients should
-	 * not invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link VersioningPackage#eINSTANCE}
+	 * when that field is accessed. Clients should not invoke it directly.
+	 * Instead, they should simply access that field to obtain the package. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -194,11 +221,13 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 */
 	public static VersioningPackage init() {
 		if (isInited)
-			return (VersioningPackage) EPackage.Registry.INSTANCE.getEPackage(VersioningPackage.eNS_URI);
+			return (VersioningPackage) EPackage.Registry.INSTANCE
+					.getEPackage(VersioningPackage.eNS_URI);
 
 		// Obtain or create and register package
-		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new VersioningPackageImpl());
+		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE
+				.get(eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI) : new VersioningPackageImpl());
 
 		isInited = true;
 
@@ -207,29 +236,33 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage_1 = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
-			: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
+				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
+				: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
+				.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(OperationsPackage.eNS_URI)
+				: OperationsPackage.eINSTANCE);
 		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(SemanticPackage.eNS_URI) : SemanticPackage.eINSTANCE);
+				.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SemanticPackage.eNS_URI)
+				: SemanticPackage.eINSTANCE);
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
+				.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
+				.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
+				.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(AccesscontrolPackage.eNS_URI)
+				: AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE
-			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
-		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+				.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
+		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theVersioningPackage.createPackageContents();
@@ -257,7 +290,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		theVersioningPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(VersioningPackage.eNS_URI, theVersioningPackage);
+		EPackage.Registry.INSTANCE.put(VersioningPackage.eNS_URI,
+				theVersioningPackage);
 		return theVersioningPackage;
 	}
 
@@ -276,7 +310,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	public EAttribute getTagVersionSpec_Name() {
-		return (EAttribute) tagVersionSpecEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) tagVersionSpecEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
@@ -294,7 +329,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	public EAttribute getDateVersionSpec_Date() {
-		return (EAttribute) dateVersionSpecEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) dateVersionSpecEClass.getEStructuralFeatures().get(
+				0);
 	}
 
 	/**
@@ -312,7 +348,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	public EAttribute getPrimaryVersionSpec_Identifier() {
-		return (EAttribute) primaryVersionSpecEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) primaryVersionSpecEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
@@ -325,8 +362,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -443,8 +479,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -453,8 +488,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -463,8 +497,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -473,8 +506,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -541,36 +573,99 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getHistoryQuery_Target() {
-		return (EReference) historyQueryEClass.getEStructuralFeatures().get(1);
+	public EAttribute getHistoryQuery_IncludeChangePackages() {
+		return (EAttribute) historyQueryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EReference getHistoryQuery_ModelElements() {
-		return (EReference) historyQueryEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EAttribute getHistoryQuery_IncludeChangePackage() {
-		return (EAttribute) historyQueryEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public EAttribute getHistoryQuery_IncludeAllVersions() {
-		return (EAttribute) historyQueryEClass.getEStructuralFeatures().get(4);
+		return (EAttribute) historyQueryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getRangeQuery() {
+		return rangeQueryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getRangeQuery_UpperLimit() {
+		return (EAttribute) rangeQueryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getRangeQuery_LowerLimit() {
+		return (EAttribute) rangeQueryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getRangeQuery_IncludeIncoming() {
+		return (EAttribute) rangeQueryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getRangeQuery_IncludeOutgoing() {
+		return (EAttribute) rangeQueryEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getPathQuery() {
+		return pathQueryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getPathQuery_Target() {
+		return (EReference) pathQueryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getModelElementQuery() {
+		return modelElementQueryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getModelElementQuery_ModelElements() {
+		return (EReference) modelElementQueryEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
@@ -646,8 +741,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -656,8 +750,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -666,8 +759,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -676,8 +768,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -709,7 +800,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	public EAttribute getVersionProperty_Name() {
-		return (EAttribute) versionPropertyEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) versionPropertyEClass.getEStructuralFeatures().get(
+				0);
 	}
 
 	/**
@@ -718,12 +810,12 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	public EAttribute getVersionProperty_Value() {
-		return (EAttribute) versionPropertyEClass.getEStructuralFeatures().get(1);
+		return (EAttribute) versionPropertyEClass.getEStructuralFeatures().get(
+				1);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -732,8 +824,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -742,8 +833,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -752,8 +842,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -762,8 +851,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -772,8 +860,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -782,23 +869,23 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public EReference getAncestorVersionSpec_Target() {
-		return (EReference) ancestorVersionSpecEClass.getEStructuralFeatures().get(0);
+		return (EReference) ancestorVersionSpecEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public EReference getAncestorVersionSpec_Source() {
-		return (EReference) ancestorVersionSpecEClass.getEStructuralFeatures().get(1);
+		return (EReference) ancestorVersionSpecEClass.getEStructuralFeatures()
+				.get(1);
 	}
 
 	/**
@@ -818,9 +905,9 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the meta-model objects for the package. This method is guarded to
+	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -837,7 +924,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		createEAttribute(dateVersionSpecEClass, DATE_VERSION_SPEC__DATE);
 
 		primaryVersionSpecEClass = createEClass(PRIMARY_VERSION_SPEC);
-		createEAttribute(primaryVersionSpecEClass, PRIMARY_VERSION_SPEC__IDENTIFIER);
+		createEAttribute(primaryVersionSpecEClass,
+				PRIMARY_VERSION_SPEC__IDENTIFIER);
 
 		versionSpecEClass = createEClass(VERSION_SPEC);
 		createEAttribute(versionSpecEClass, VERSION_SPEC__BRANCH);
@@ -852,7 +940,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		createEReference(changePackageEClass, CHANGE_PACKAGE__OPERATIONS);
 		createEReference(changePackageEClass, CHANGE_PACKAGE__EVENTS);
 		createEReference(changePackageEClass, CHANGE_PACKAGE__LOG_MESSAGE);
-		createEReference(changePackageEClass, CHANGE_PACKAGE__VERSION_PROPERTIES);
+		createEReference(changePackageEClass,
+				CHANGE_PACKAGE__VERSION_PROPERTIES);
 
 		historyInfoEClass = createEClass(HISTORY_INFO);
 		createEReference(historyInfoEClass, HISTORY_INFO__PRIMERY_SPEC);
@@ -867,10 +956,23 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		historyQueryEClass = createEClass(HISTORY_QUERY);
 		createEReference(historyQueryEClass, HISTORY_QUERY__SOURCE);
-		createEReference(historyQueryEClass, HISTORY_QUERY__TARGET);
-		createEReference(historyQueryEClass, HISTORY_QUERY__MODEL_ELEMENTS);
-		createEAttribute(historyQueryEClass, HISTORY_QUERY__INCLUDE_CHANGE_PACKAGE);
-		createEAttribute(historyQueryEClass, HISTORY_QUERY__INCLUDE_ALL_VERSIONS);
+		createEAttribute(historyQueryEClass,
+				HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES);
+		createEAttribute(historyQueryEClass,
+				HISTORY_QUERY__INCLUDE_ALL_VERSIONS);
+
+		rangeQueryEClass = createEClass(RANGE_QUERY);
+		createEAttribute(rangeQueryEClass, RANGE_QUERY__UPPER_LIMIT);
+		createEAttribute(rangeQueryEClass, RANGE_QUERY__LOWER_LIMIT);
+		createEAttribute(rangeQueryEClass, RANGE_QUERY__INCLUDE_INCOMING);
+		createEAttribute(rangeQueryEClass, RANGE_QUERY__INCLUDE_OUTGOING);
+
+		pathQueryEClass = createEClass(PATH_QUERY);
+		createEReference(pathQueryEClass, PATH_QUERY__TARGET);
+
+		modelElementQueryEClass = createEClass(MODEL_ELEMENT_QUERY);
+		createEReference(modelElementQueryEClass,
+				MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
 
 		versionEClass = createEClass(VERSION);
 		createEReference(versionEClass, VERSION__PROJECT_STATE);
@@ -899,8 +1001,10 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		createEReference(branchInfoEClass, BRANCH_INFO__SOURCE);
 
 		ancestorVersionSpecEClass = createEClass(ANCESTOR_VERSION_SPEC);
-		createEReference(ancestorVersionSpecEClass, ANCESTOR_VERSION_SPEC__TARGET);
-		createEReference(ancestorVersionSpecEClass, ANCESTOR_VERSION_SPEC__SOURCE);
+		createEReference(ancestorVersionSpecEClass,
+				ANCESTOR_VERSION_SPEC__TARGET);
+		createEReference(ancestorVersionSpecEClass,
+				ANCESTOR_VERSION_SPEC__SOURCE);
 	}
 
 	/**
@@ -912,8 +1016,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 	/**
 	 * Complete the initialization of the package and its meta-model. This
-	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * method is guarded to have no affect on any invocation but its first. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -929,9 +1033,11 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		// Obtain other dependent packages
 		OperationsPackage theOperationsPackage = (OperationsPackage) EPackage.Registry.INSTANCE
-			.getEPackage(OperationsPackage.eNS_URI);
-		EventsPackage theEventsPackage = (EventsPackage) EPackage.Registry.INSTANCE.getEPackage(EventsPackage.eNS_URI);
-		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+				.getEPackage(OperationsPackage.eNS_URI);
+		EventsPackage theEventsPackage = (EventsPackage) EPackage.Registry.INSTANCE
+				.getEPackage(EventsPackage.eNS_URI);
+		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE
+				.getEPackage(ModelPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theOperationsPackage);
@@ -945,174 +1051,287 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		tagVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		dateVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		primaryVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
+		rangeQueryEClass.getESuperTypes().add(this.getHistoryQuery());
+		pathQueryEClass.getESuperTypes().add(this.getHistoryQuery());
+		modelElementQueryEClass.getESuperTypes().add(this.getRangeQuery());
 		headVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		branchVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		ancestorVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(tagVersionSpecEClass, TagVersionSpec.class, "TagVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTagVersionSpec_Name(), ecorePackage.getEString(), "name", null, 1, 1, TagVersionSpec.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tagVersionSpecEClass, TagVersionSpec.class,
+				"TagVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTagVersionSpec_Name(), ecorePackage.getEString(),
+				"name", null, 1, 1, TagVersionSpec.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(dateVersionSpecEClass, DateVersionSpec.class, "DateVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDateVersionSpec_Date(), ecorePackage.getEDate(), "date", null, 1, 1, DateVersionSpec.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(dateVersionSpecEClass, DateVersionSpec.class,
+				"DateVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDateVersionSpec_Date(), ecorePackage.getEDate(),
+				"date", null, 1, 1, DateVersionSpec.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(primaryVersionSpecEClass, PrimaryVersionSpec.class, "PrimaryVersionSpec", !IS_ABSTRACT,
-			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPrimaryVersionSpec_Identifier(), ecorePackage.getEInt(), "identifier", null, 1, 1,
-			PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+		initEClass(primaryVersionSpecEClass, PrimaryVersionSpec.class,
+				"PrimaryVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPrimaryVersionSpec_Identifier(),
+				ecorePackage.getEInt(), "identifier", null, 1, 1,
+				PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
-		initEClass(versionSpecEClass, VersionSpec.class, "VersionSpec", IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVersionSpec_Branch(), ecorePackage.getEString(), "branch", "trunk", 0, 1, VersionSpec.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(versionSpecEClass, VersionSpec.class, "VersionSpec",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVersionSpec_Branch(), ecorePackage.getEString(),
+				"branch", "trunk", 0, 1, VersionSpec.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(logMessageEClass, LogMessage.class, "LogMessage", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLogMessage_Author(), ecorePackage.getEString(), "author", null, 1, 1, LogMessage.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogMessage_Message(), ecorePackage.getEString(), "message", null, 1, 1, LogMessage.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogMessage_Date(), ecorePackage.getEDate(), "date", null, 1, 1, LogMessage.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogMessage_ClientDate(), ecorePackage.getEDate(), "clientDate", null, 0, 1, LogMessage.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(logMessageEClass, LogMessage.class, "LogMessage",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLogMessage_Author(), ecorePackage.getEString(),
+				"author", null, 1, 1, LogMessage.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLogMessage_Message(), ecorePackage.getEString(),
+				"message", null, 1, 1, LogMessage.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLogMessage_Date(), ecorePackage.getEDate(), "date",
+				null, 1, 1, LogMessage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getLogMessage_ClientDate(), ecorePackage.getEDate(),
+				"clientDate", null, 0, 1, LogMessage.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(changePackageEClass, ChangePackage.class, "ChangePackage", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getChangePackage_Operations(), theOperationsPackage.getAbstractOperation(), null, "operations",
-			null, 0, -1, ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChangePackage_Events(), theEventsPackage.getEvent(), null, "events", null, 0, -1,
-			ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChangePackage_LogMessage(), this.getLogMessage(), null, "logMessage", null, 0, 1,
-			ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChangePackage_VersionProperties(), this.getVersionProperty(), null, "versionProperties",
-			null, 0, -1, ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(changePackageEClass, ChangePackage.class, "ChangePackage",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChangePackage_Operations(),
+				theOperationsPackage.getAbstractOperation(), null,
+				"operations", null, 0, -1, ChangePackage.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChangePackage_Events(), theEventsPackage.getEvent(),
+				null, "events", null, 0, -1, ChangePackage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getChangePackage_LogMessage(), this.getLogMessage(),
+				null, "logMessage", null, 0, 1, ChangePackage.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getChangePackage_VersionProperties(),
+				this.getVersionProperty(), null, "versionProperties", null, 0,
+				-1, ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(historyInfoEClass, HistoryInfo.class, "HistoryInfo", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHistoryInfo_PrimerySpec(), this.getPrimaryVersionSpec(), null, "primerySpec", null, 1, 1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_NextSpec(), this.getPrimaryVersionSpec(), null, "nextSpec", null, 1, -1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_PreviousSpec(), this.getPrimaryVersionSpec(), null, "previousSpec", null, 1, 1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_MergedFrom(), this.getPrimaryVersionSpec(), null, "mergedFrom", null, 1, -1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_MergedTo(), this.getPrimaryVersionSpec(), null, "mergedTo", null, 1, -1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_LogMessage(), this.getLogMessage(), null, "logMessage", null, 1, 1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_TagSpecs(), this.getTagVersionSpec(), null, "tagSpecs", null, 0, -1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_VersionProperties(), this.getVersionProperty(), null, "versionProperties", null,
-			0, -1, HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryInfo_ChangePackage(), this.getChangePackage(), null, "changePackage", null, 0, 1,
-			HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(historyInfoEClass, HistoryInfo.class, "HistoryInfo",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getHistoryInfo_PrimerySpec(),
+				this.getPrimaryVersionSpec(), null, "primerySpec", null, 1, 1,
+				HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryInfo_NextSpec(), this.getPrimaryVersionSpec(),
+				null, "nextSpec", null, 1, -1, HistoryInfo.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getHistoryInfo_PreviousSpec(),
+				this.getPrimaryVersionSpec(), null, "previousSpec", null, 1, 1,
+				HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryInfo_MergedFrom(),
+				this.getPrimaryVersionSpec(), null, "mergedFrom", null, 1, -1,
+				HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryInfo_MergedTo(), this.getPrimaryVersionSpec(),
+				null, "mergedTo", null, 1, -1, HistoryInfo.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getHistoryInfo_LogMessage(), this.getLogMessage(), null,
+				"logMessage", null, 1, 1, HistoryInfo.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryInfo_TagSpecs(), this.getTagVersionSpec(),
+				null, "tagSpecs", null, 0, -1, HistoryInfo.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getHistoryInfo_VersionProperties(),
+				this.getVersionProperty(), null, "versionProperties", null, 0,
+				-1, HistoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryInfo_ChangePackage(), this.getChangePackage(),
+				null, "changePackage", null, 0, 1, HistoryInfo.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
-		initEClass(historyQueryEClass, HistoryQuery.class, "HistoryQuery", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHistoryQuery_Source(), this.getPrimaryVersionSpec(), null, "source", null, 0, 1,
-			HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryQuery_Target(), this.getPrimaryVersionSpec(), null, "target", null, 0, 1,
-			HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryQuery_ModelElements(), theModelPackage.getModelElementId(), null, "modelElements",
-			null, 0, -1, HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHistoryQuery_IncludeChangePackage(), ecorePackage.getEBoolean(), "includeChangePackage",
-			null, 0, 1, HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHistoryQuery_IncludeAllVersions(), ecorePackage.getEBoolean(), "includeAllVersions", null, 0,
-			1, HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+		initEClass(historyQueryEClass, HistoryQuery.class, "HistoryQuery",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getHistoryQuery_Source(), this.getPrimaryVersionSpec(),
+				null, "source", null, 0, 1, HistoryQuery.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHistoryQuery_IncludeChangePackages(),
+				ecorePackage.getEBoolean(), "includeChangePackages", null, 0,
+				1, HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getHistoryQuery_IncludeAllVersions(),
+				ecorePackage.getEBoolean(), "includeAllVersions", null, 0, 1,
+				HistoryQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVersion_ProjectState(), theModelPackage.getProject(), null, "projectState", null, 0, 1,
-			Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_PrimarySpec(), this.getPrimaryVersionSpec(), null, "primarySpec", null, 1, 1,
-			Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_TagSpecs(), this.getTagVersionSpec(), null, "tagSpecs", null, 0, -1, Version.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_NextVersion(), this.getVersion(), this.getVersion_PreviousVersion(), "nextVersion",
-			null, 0, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_PreviousVersion(), this.getVersion(), this.getVersion_NextVersion(),
-			"previousVersion", null, 0, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_Changes(), this.getChangePackage(), null, "changes", null, 0, 1, Version.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_LogMessage(), this.getLogMessage(), null, "logMessage", null, 0, 1, Version.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_AncestorVersion(), this.getVersion(), this.getVersion_BranchedVersions(),
-			"ancestorVersion", null, 0, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_BranchedVersions(), this.getVersion(), this.getVersion_AncestorVersion(),
-			"branchedVersions", null, 0, -1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_MergedToVersion(), this.getVersion(), this.getVersion_MergedFromVersion(),
-			"mergedToVersion", null, 0, -1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_MergedFromVersion(), this.getVersion(), this.getVersion_MergedToVersion(),
-			"mergedFromVersion", null, 0, -1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(rangeQueryEClass, RangeQuery.class, "RangeQuery",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRangeQuery_UpperLimit(), ecorePackage.getEInt(),
+				"upperLimit", null, 0, 1, RangeQuery.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRangeQuery_LowerLimit(), ecorePackage.getEInt(),
+				"lowerLimit", null, 0, 1, RangeQuery.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRangeQuery_IncludeIncoming(),
+				ecorePackage.getEBoolean(), "includeIncoming", null, 0, 1,
+				RangeQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRangeQuery_IncludeOutgoing(),
+				ecorePackage.getEBoolean(), "includeOutgoing", null, 0, 1,
+				RangeQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(headVersionSpecEClass, HeadVersionSpec.class, "HeadVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(pathQueryEClass, PathQuery.class, "PathQuery", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPathQuery_Target(), this.getPrimaryVersionSpec(),
+				null, "target", null, 0, 1, PathQuery.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(versionPropertyEClass, VersionProperty.class, "VersionProperty", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVersionProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, VersionProperty.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVersionProperty_Value(), ecorePackage.getEString(), "value", null, 0, 1,
-			VersionProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+		initEClass(modelElementQueryEClass, ModelElementQuery.class,
+				"ModelElementQuery", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelElementQuery_ModelElements(),
+				theModelPackage.getModelElementId(), null, "modelElements",
+				null, 0, -1, ModelElementQuery.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(branchVersionSpecEClass, BranchVersionSpec.class, "BranchVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVersion_ProjectState(), theModelPackage.getProject(),
+				null, "projectState", null, 0, 1, Version.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_PrimarySpec(), this.getPrimaryVersionSpec(),
+				null, "primarySpec", null, 1, 1, Version.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_TagSpecs(), this.getTagVersionSpec(), null,
+				"tagSpecs", null, 0, -1, Version.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_NextVersion(), this.getVersion(),
+				this.getVersion_PreviousVersion(), "nextVersion", null, 0, 1,
+				Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_PreviousVersion(), this.getVersion(),
+				this.getVersion_NextVersion(), "previousVersion", null, 0, 1,
+				Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_Changes(), this.getChangePackage(), null,
+				"changes", null, 0, 1, Version.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_LogMessage(), this.getLogMessage(), null,
+				"logMessage", null, 0, 1, Version.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_AncestorVersion(), this.getVersion(),
+				this.getVersion_BranchedVersions(), "ancestorVersion", null, 0,
+				1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_BranchedVersions(), this.getVersion(),
+				this.getVersion_AncestorVersion(), "branchedVersions", null, 0,
+				-1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_MergedToVersion(), this.getVersion(),
+				this.getVersion_MergedFromVersion(), "mergedToVersion", null,
+				0, -1, Version.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVersion_MergedFromVersion(), this.getVersion(),
+				this.getVersion_MergedToVersion(), "mergedFromVersion", null,
+				0, -1, Version.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(branchInfoEClass, BranchInfo.class, "BranchInfo", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBranchInfo_Name(), ecorePackage.getEString(), "name", null, 0, 1, BranchInfo.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBranchInfo_Head(), this.getPrimaryVersionSpec(), null, "head", null, 0, 1, BranchInfo.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEReference(getBranchInfo_Source(), this.getPrimaryVersionSpec(), null, "source", null, 0, 1,
-			BranchInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(headVersionSpecEClass, HeadVersionSpec.class,
+				"HeadVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(ancestorVersionSpecEClass, AncestorVersionSpec.class, "AncestorVersionSpec", !IS_ABSTRACT,
-			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAncestorVersionSpec_Target(), this.getPrimaryVersionSpec(), null, "target", null, 0, 1,
-			AncestorVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAncestorVersionSpec_Source(), this.getPrimaryVersionSpec(), null, "source", null, 0, 1,
-			AncestorVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(versionPropertyEClass, VersionProperty.class,
+				"VersionProperty", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVersionProperty_Name(), ecorePackage.getEString(),
+				"name", null, 0, 1, VersionProperty.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVersionProperty_Value(), ecorePackage.getEString(),
+				"value", null, 0, 1, VersionProperty.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(branchVersionSpecEClass, BranchVersionSpec.class,
+				"BranchVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(branchInfoEClass, BranchInfo.class, "BranchInfo",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBranchInfo_Name(), ecorePackage.getEString(), "name",
+				null, 0, 1, BranchInfo.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getBranchInfo_Head(), this.getPrimaryVersionSpec(),
+				null, "head", null, 0, 1, BranchInfo.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBranchInfo_Source(), this.getPrimaryVersionSpec(),
+				null, "source", null, 0, 1, BranchInfo.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ancestorVersionSpecEClass, AncestorVersionSpec.class,
+				"AncestorVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAncestorVersionSpec_Target(),
+				this.getPrimaryVersionSpec(), null, "target", null, 0, 1,
+				AncestorVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAncestorVersionSpec_Source(),
+				this.getPrimaryVersionSpec(), null, "source", null, 0, 1,
+				AncestorVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } // VersioningPackageImpl

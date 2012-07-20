@@ -16,7 +16,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
 
 /**
- * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains
+ * accessors for the meta objects to represent
  * <ul>
  * <li>each class,</li>
  * <li>each feature of each class,</li>
@@ -31,43 +32,39 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  */
 public interface ServerPackage extends EPackage {
 	/**
-	 * The package name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNAME = "server";
 
 	/**
-	 * The package namespace URI.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://eclipse.org/emf/emfstore/server/model/versioning/events/server/";
 
 	/**
-	 * The package namespace name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.events.server";
 
 	/**
-	 * The singleton instance of the package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	ServerPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl
-		.init();
+			.init();
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl <em>Event</em>}'
-	 * class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl
+	 * <em>Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getServerEvent()
@@ -76,8 +73,8 @@ public interface ServerPackage extends EPackage {
 	int SERVER_EVENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Timestamp</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -85,8 +82,8 @@ public interface ServerPackage extends EPackage {
 	int SERVER_EVENT__TIMESTAMP = EventsPackage.EVENT__TIMESTAMP;
 
 	/**
-	 * The number of structural features of the '<em>Event</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Event</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -96,8 +93,8 @@ public interface ServerPackage extends EPackage {
 	/**
 	 * The meta object id for the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl
-	 * <em>Project Event</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Project Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getServerProjectEvent()
@@ -106,8 +103,8 @@ public interface ServerPackage extends EPackage {
 	int SERVER_PROJECT_EVENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Timestamp</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -115,9 +112,8 @@ public interface ServerPackage extends EPackage {
 	int SERVER_PROJECT_EVENT__TIMESTAMP = SERVER_EVENT__TIMESTAMP;
 
 	/**
-	 * The feature id for the '<em><b>Project Id</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The feature id for the '<em><b>Project Id</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -126,8 +122,7 @@ public interface ServerPackage extends EPackage {
 
 	/**
 	 * The number of structural features of the '<em>Project Event</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -137,8 +132,8 @@ public interface ServerPackage extends EPackage {
 	/**
 	 * The meta object id for the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl
-	 * <em>Project Updated Event</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Project Updated Event</em>}' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getProjectUpdatedEvent()
@@ -147,8 +142,8 @@ public interface ServerPackage extends EPackage {
 	int PROJECT_UPDATED_EVENT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Timestamp</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -156,9 +151,8 @@ public interface ServerPackage extends EPackage {
 	int PROJECT_UPDATED_EVENT__TIMESTAMP = SERVER_PROJECT_EVENT__TIMESTAMP;
 
 	/**
-	 * The feature id for the '<em><b>Project Id</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The feature id for the '<em><b>Project Id</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -166,9 +160,8 @@ public interface ServerPackage extends EPackage {
 	int PROJECT_UPDATED_EVENT__PROJECT_ID = SERVER_PROJECT_EVENT__PROJECT_ID;
 
 	/**
-	 * The feature id for the '<em><b>New Version</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The feature id for the '<em><b>New Version</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -176,9 +169,8 @@ public interface ServerPackage extends EPackage {
 	int PROJECT_UPDATED_EVENT__NEW_VERSION = SERVER_PROJECT_EVENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Project Updated Event</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The number of structural features of the '<em>Project Updated Event</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -187,8 +179,8 @@ public interface ServerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent <em>Event</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent
+	 * <em>Event</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Event</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent
@@ -198,9 +190,8 @@ public interface ServerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent <em>Project Event</em>}
-	 * '. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent
+	 * <em>Project Event</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Project Event</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent
@@ -211,10 +202,10 @@ public interface ServerPackage extends EPackage {
 	/**
 	 * Returns the meta object for the containment reference '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId
-	 * <em>Project Id</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Project Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>Project Id</em>'.
+	 * @return the meta object for the containment reference '
+	 *         <em>Project Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId()
 	 * @see #getServerProjectEvent()
 	 * @generated
@@ -224,8 +215,8 @@ public interface ServerPackage extends EPackage {
 	/**
 	 * Returns the meta object for class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent
-	 * <em>Project Updated Event</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Project Updated Event</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Project Updated Event</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent
@@ -236,10 +227,10 @@ public interface ServerPackage extends EPackage {
 	/**
 	 * Returns the meta object for the containment reference '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion
-	 * <em>New Version</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>New Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>New Version</em>'.
+	 * @return the meta object for the containment reference '
+	 *         <em>New Version</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion()
 	 * @see #getProjectUpdatedEvent()
 	 * @generated
@@ -247,8 +238,8 @@ public interface ServerPackage extends EPackage {
 	EReference getProjectUpdatedEvent_NewVersion();
 
 	/**
-	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the factory that creates the instances of the model. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the factory that creates the instances of the model.
 	 * @generated
@@ -256,7 +247,8 @@ public interface ServerPackage extends EPackage {
 	ServerFactory getServerFactory();
 
 	/**
-	 * <!-- begin-user-doc --> Defines literals for the meta objects that represent
+	 * <!-- begin-user-doc --> Defines literals for the meta objects that
+	 * represent
 	 * <ul>
 	 * <li>each class,</li>
 	 * <li>each feature of each class,</li>
@@ -270,9 +262,8 @@ public interface ServerPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl <em>Event</em>}'
-		 * class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl
+		 * <em>Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerEventImpl
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getServerEvent()
@@ -283,8 +274,8 @@ public interface ServerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl
-		 * <em>Project Event</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <em>Project Event</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getServerProjectEvent()
@@ -293,18 +284,20 @@ public interface ServerPackage extends EPackage {
 		EClass SERVER_PROJECT_EVENT = eINSTANCE.getServerProjectEvent();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Id</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Project Id</b></em>'
+		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference SERVER_PROJECT_EVENT__PROJECT_ID = eINSTANCE.getServerProjectEvent_ProjectId();
+		EReference SERVER_PROJECT_EVENT__PROJECT_ID = eINSTANCE
+				.getServerProjectEvent_ProjectId();
 
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl
-		 * <em>Project Updated Event</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <em>Project Updated Event</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl#getProjectUpdatedEvent()
@@ -313,12 +306,14 @@ public interface ServerPackage extends EPackage {
 		EClass PROJECT_UPDATED_EVENT = eINSTANCE.getProjectUpdatedEvent();
 
 		/**
-		 * The meta object literal for the '<em><b>New Version</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>New Version</b></em>'
+		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference PROJECT_UPDATED_EVENT__NEW_VERSION = eINSTANCE.getProjectUpdatedEvent_NewVersion();
+		EReference PROJECT_UPDATED_EVENT__NEW_VERSION = eINSTANCE
+				.getProjectUpdatedEvent_NewVersion();
 
 	}
 

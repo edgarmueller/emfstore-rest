@@ -130,7 +130,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			// check if we need to update first
 			PrimaryVersionSpec resolvedVersion = getProjectSpace()
 					.resolveVersionSpec(
-							Versions.HEAD_VERSION(getProjectSpace()
+							Versions.createHEAD(getProjectSpace()
 									.getBaseVersion()));
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace())) {

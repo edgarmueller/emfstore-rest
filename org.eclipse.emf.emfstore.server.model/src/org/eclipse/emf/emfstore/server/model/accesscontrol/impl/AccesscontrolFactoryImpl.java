@@ -24,21 +24,23 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class AccesscontrolFactoryImpl extends EFactoryImpl implements AccesscontrolFactory {
+public class AccesscontrolFactoryImpl extends EFactoryImpl implements
+		AccesscontrolFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static AccesscontrolFactory init() {
 		try {
 			AccesscontrolFactory theAccesscontrolFactory = (AccesscontrolFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/accesscontrol");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/accesscontrol");
 			if (theAccesscontrolFactory != null) {
 				return theAccesscontrolFactory;
 			}
@@ -49,8 +51,8 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements Accesscont
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -77,7 +79,8 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements Accesscont
 		case AccesscontrolPackage.ORG_UNIT_PROPERTY:
 			return createOrgUnitProperty();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 

@@ -23,21 +23,22 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
 public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static RolesFactory init() {
 		try {
 			RolesFactory theRolesFactory = (RolesFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/roles");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/roles");
 			if (theRolesFactory != null) {
 				return theRolesFactory;
 			}
@@ -48,8 +49,8 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -74,7 +75,8 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 		case RolesPackage.SERVER_ADMIN:
 			return createServerAdmin();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 

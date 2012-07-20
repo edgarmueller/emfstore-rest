@@ -39,7 +39,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		 * SANITY CHECKS
 		 */
 		if (version == null) {
-			version = Versions.HEAD_VERSION(projectSpace.getBaseVersion());
+			version = Versions.createHEAD(projectSpace.getBaseVersion());
 		}
 		if (callback == null) {
 			callback = UpdateCallback.NOCALLBACK;

@@ -102,7 +102,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		boolean mergeSuccessful = false;
 		try {
 			// TODO BRANCH
-			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.HEAD_VERSION(projectSpace
+			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
 			mergeSuccessful = RunInUI.WithException.runWithResult(new Callable<Boolean>() {
@@ -155,7 +155,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager
 			.getInstance()
 			.getCurrentWorkspace()
-			.resolveVersionSpec(projectSpace.getUsersession(), Versions.HEAD_VERSION(oldBaseVersion),
+			.resolveVersionSpec(projectSpace.getUsersession(), Versions.createHEAD(oldBaseVersion),
 				projectSpace.getProjectId());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {

@@ -39,37 +39,44 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is a composite operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isComposite(AbstractOperation operation) {
-		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() == null;
+		return operation instanceof CompositeOperation
+				&& ((CompositeOperation) operation).getMainOperation() == null;
 	}
 
 	/**
 	 * Checks whether given operation is a reference operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isReference(AbstractOperation operation) {
-		return isSingleRef(operation) || isMultiRef(operation) || isCompositeRef(operation);
+		return isSingleRef(operation) || isMultiRef(operation)
+				|| isCompositeRef(operation);
 	}
 
 	/**
 	 * Checks whether given operation is a reference composite.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isCompositeRef(AbstractOperation operation) {
-		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() != null;
+		return operation instanceof CompositeOperation
+				&& ((CompositeOperation) operation).getMainOperation() != null;
 	}
 
 	/**
 	 * Checks whether given operation is singleref operation .
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isSingleRef(AbstractOperation operation) {
@@ -79,7 +86,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is a multiref operation .
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiRef(AbstractOperation operation) {
@@ -89,7 +97,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is a multiref set operation .
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiRefSet(AbstractOperation operation) {
@@ -99,7 +108,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is multimove operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiMoveRef(AbstractOperation operation) {
@@ -109,7 +119,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is attribute operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isAttribute(AbstractOperation operation) {
@@ -119,7 +130,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is multi attribute operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiAtt(AbstractOperation operation) {
@@ -129,7 +141,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is multi attribute set operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiAttSet(AbstractOperation operation) {
@@ -139,7 +152,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is multi attribute move operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isMultiAttMove(AbstractOperation operation) {
@@ -149,7 +163,8 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is diagram operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isDiagramLayout(AbstractOperation operation) {
@@ -159,27 +174,32 @@ public final class OperationUtil {
 	/**
 	 * Checks whether given operation is a creating operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isCreate(AbstractOperation operation) {
-		return isCreateDelete(operation) && !((CreateDeleteOperation) operation).isDelete();
+		return isCreateDelete(operation)
+				&& !((CreateDeleteOperation) operation).isDelete();
 	}
 
 	/**
 	 * Checks whether given operation is a deleting operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isDelete(AbstractOperation operation) {
-		return isCreateDelete(operation) && ((CreateDeleteOperation) operation).isDelete();
+		return isCreateDelete(operation)
+				&& ((CreateDeleteOperation) operation).isDelete();
 	}
 
 	/**
 	 * Checks whether given operation is a createDelete operation.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            operation
 	 * @return true if correct
 	 */
 	public static boolean isCreateDelete(AbstractOperation operation) {

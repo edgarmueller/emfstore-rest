@@ -17,23 +17,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Primary Version Spec</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Primary Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier
- * </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier
+ * <em>Identifier</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVersionSpec {
+public class PrimaryVersionSpecImpl extends VersionSpecImpl implements
+		PrimaryVersionSpec {
 	/**
-	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getIdentifier()
 	 * @generated
@@ -42,9 +43,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	protected static final int IDENTIFIER_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getIdentifier()
 	 * @generated
@@ -89,8 +89,9 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 		int oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
-				oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
+					oldIdentifier, identifier));
 	}
 
 	/**
@@ -172,8 +173,10 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	public boolean equals(Object object) {
 		if (object instanceof PrimaryVersionSpec) {
 			PrimaryVersionSpec otherPrimaryVersionSpec = (PrimaryVersionSpec) object;
-			return this.getIdentifier() == otherPrimaryVersionSpec.getIdentifier()
-				&& (this.getBranch() != null && this.getBranch().equals(otherPrimaryVersionSpec.getBranch()));
+			return this.getIdentifier() == otherPrimaryVersionSpec
+					.getIdentifier()
+					&& (this.getBranch() != null && this.getBranch().equals(
+							otherPrimaryVersionSpec.getBranch()));
 		} else {
 			return false;
 		}

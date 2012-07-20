@@ -35,17 +35,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation} object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class SemanticCompositeOperationItemProvider extends CompositeOperationItemProvider implements
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
-	IItemPropertySource {
+public class SemanticCompositeOperationItemProvider extends
+		CompositeOperationItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -54,8 +55,8 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -69,8 +70,8 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -78,13 +79,15 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	public String getText(Object object) {
 		String label = ((SemanticCompositeOperation) object).getCompositeName();
 		return label == null || label.length() == 0 ? getString("_UI_SemanticCompositeOperation_type")
-			: getString("_UI_SemanticCompositeOperation_type") + " " + label;
+				: getString("_UI_SemanticCompositeOperation_type") + " "
+						+ label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -95,20 +98,21 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Return the resource locator for this item provider's resources. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -131,19 +135,24 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 			ArrayList<Object> result = new ArrayList<Object>();
 
 			OperationsFactory factory = OperationsFactory.eINSTANCE;
-			for (EStructuralFeature feature : operation.eClass().getEStructuralFeatures()) {
+			for (EStructuralFeature feature : operation.eClass()
+					.getEStructuralFeatures()) {
 				if (feature instanceof EReference) {
 					EReference reference = (EReference) feature;
 
-					ModelElementGroup referenceGroup = factory.createModelElementGroup();
-					String key = "_UI_" + reference.getEContainingClass().getName() + "_" + reference.getName()
-						+ "_feature";
+					ModelElementGroup referenceGroup = factory
+							.createModelElementGroup();
+					String key = "_UI_"
+							+ reference.getEContainingClass().getName() + "_"
+							+ reference.getName() + "_feature";
 					referenceGroup.setName(getString(key));
 					if (reference.isMany()) {
-						List<ModelElementId> value = (List<ModelElementId>) operation.eGet(reference);
+						List<ModelElementId> value = (List<ModelElementId>) operation
+								.eGet(reference);
 						referenceGroup.getModelElements().addAll(value);
 					} else {
-						ModelElementId value = (ModelElementId) operation.eGet(reference);
+						ModelElementId value = (ModelElementId) operation
+								.eGet(reference);
 						referenceGroup.getModelElements().add(value);
 					}
 					result.add(referenceGroup);

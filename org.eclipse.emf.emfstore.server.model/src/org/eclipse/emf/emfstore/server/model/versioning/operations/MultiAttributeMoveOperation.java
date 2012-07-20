@@ -11,16 +11,18 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Multi Attribute Move Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Multi Attribute Move Operation</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>
- * Old Index</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>
- * New Index</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex
+ * <em>Old Index</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex
+ * <em>New Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
  * <em>Referenced Value</em>}</li>
@@ -33,11 +35,11 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  */
 public interface MultiAttributeMoveOperation extends FeatureOperation {
 	/**
-	 * Returns the value of the '<em><b>Old Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Old Index</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -52,21 +54,22 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex
-	 * <em>Old Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Old Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>Old Index</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Old Index</em>' attribute.
 	 * @see #getOldIndex()
 	 * @generated
 	 */
 	void setOldIndex(int value);
 
 	/**
-	 * Returns the value of the '<em><b>New Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>New Index</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -81,10 +84,11 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex
-	 * <em>New Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>New Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>New Index</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>New Index</em>' attribute.
 	 * @see #getNewIndex()
 	 * @generated
 	 */
@@ -94,8 +98,8 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Referenced Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Value</em>' attribute isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Referenced Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -110,10 +114,11 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
-	 * <em>Referenced Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Referenced Value</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Referenced Value</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Referenced Value</em>' attribute.
 	 * @see #getReferencedValue()
 	 * @generated
 	 */

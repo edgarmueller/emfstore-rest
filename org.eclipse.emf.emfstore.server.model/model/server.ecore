@@ -110,17 +110,27 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="changePackage" eType="#//versioning/ChangePackage"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HistoryQuery">
+    <eClassifiers xsi:type="ecore:EClass" name="HistoryQuery" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//versioning/PrimaryVersionSpec"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeChangePackages"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeAllVersions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RangeQuery" eSuperTypes="#//versioning/HistoryQuery">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeIncoming" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeOutgoing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PathQuery" eSuperTypes="#//versioning/HistoryQuery">
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//versioning/PrimaryVersionSpec"
           containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelElementQuery" eSuperTypes="#//versioning/RangeQuery">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modelElements" upperBound="-1"
           eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeChangePackage"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeAllVersions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Version">
       <eStructuralFeatures xsi:type="ecore:EReference" name="projectState" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//Project"

@@ -29,18 +29,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class SingleReferenceOperationItemProvider extends ReferenceOperationItemProvider implements
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
-	IItemPropertySource {
+public class SingleReferenceOperationItemProvider extends
+		ReferenceOperationItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -49,8 +49,8 @@ public class SingleReferenceOperationItemProvider extends ReferenceOperationItem
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -66,40 +66,51 @@ public class SingleReferenceOperationItemProvider extends ReferenceOperationItem
 	}
 
 	/**
-	 * This adds a property descriptor for the Old Value feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Old Value feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addOldValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_SingleReferenceOperation_oldValue_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_SingleReferenceOperation_oldValue_feature",
-				"_UI_SingleReferenceOperation_type"), OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__OLD_VALUE,
-			true, false, true, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_SingleReferenceOperation_oldValue_feature"),
+						getString(
+								"_UI_PropertyDescriptor_description",
+								"_UI_SingleReferenceOperation_oldValue_feature",
+								"_UI_SingleReferenceOperation_type"),
+						OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__OLD_VALUE,
+						true, false, true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the New Value feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the New Value feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addNewValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_SingleReferenceOperation_newValue_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_SingleReferenceOperation_newValue_feature",
-				"_UI_SingleReferenceOperation_type"), OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE,
-			true, false, true, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_SingleReferenceOperation_newValue_feature"),
+						getString(
+								"_UI_PropertyDescriptor_description",
+								"_UI_SingleReferenceOperation_newValue_feature",
+								"_UI_SingleReferenceOperation_type"),
+						OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE,
+						true, false, true, null, null, null));
 	}
 
 	// begin of custom code
 	/**
-	 * @param object the object
+	 * @param object
+	 *            the object
 	 * @return This returns the image.
 	 * @generated NOT
 	 */
@@ -111,7 +122,8 @@ public class SingleReferenceOperationItemProvider extends ReferenceOperationItem
 	// end of custom code
 
 	/**
-	 * {@inheritDoc} This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@inheritDoc} This returns the label text for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
@@ -123,32 +135,39 @@ public class SingleReferenceOperationItemProvider extends ReferenceOperationItem
 			ModelElementId newElement = op.getNewValue();
 			String oldName = getModelElementClassAndName(op.getOldValue());
 			String newName = getModelElementClassAndName(op.getNewValue());
-			String elementName = getModelElementClassAndName(op.getModelElementId());
+			String elementName = getModelElementClassAndName(op
+					.getModelElementId());
 
-			boolean isContainer = op.getContainmentType().equals(ContainmentType.CONTAINER);
+			boolean isContainer = op.getContainmentType().equals(
+					ContainmentType.CONTAINER);
 
 			// changing containment means relocating the item
 			if (isContainer && oldElement != null && newElement != null) {
-				return "Moved " + elementName + " from " + oldName + " to " + newName;
+				return "Moved " + elementName + " from " + oldName + " to "
+						+ newName;
 			} else if (isContainer && newElement != null) {
 				return "Moved " + elementName + " to " + newName;
 			} else if (oldElement == null && newElement == null) {
 				return "Unset " + op.getFeatureName() + " in " + elementName;
 			} else if (oldElement == null && newElement != null) {
-				return "Set " + op.getFeatureName() + " in " + elementName + " to " + newName;
+				return "Set " + op.getFeatureName() + " in " + elementName
+						+ " to " + newName;
 			} else if (oldElement != null && newElement == null) {
-				return "Unset " + op.getFeatureName() + " in " + elementName + " from previous value " + oldName;
+				return "Unset " + op.getFeatureName() + " in " + elementName
+						+ " from previous value " + oldName;
 			} else {
-				return "Set " + op.getFeatureName() + " in " + elementName + " from " + oldName + " to " + newName;
+				return "Set " + op.getFeatureName() + " in " + elementName
+						+ " from " + oldName + " to " + newName;
 			}
 		}
 		return super.getText(object);
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -159,14 +178,15 @@ public class SingleReferenceOperationItemProvider extends ReferenceOperationItem
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

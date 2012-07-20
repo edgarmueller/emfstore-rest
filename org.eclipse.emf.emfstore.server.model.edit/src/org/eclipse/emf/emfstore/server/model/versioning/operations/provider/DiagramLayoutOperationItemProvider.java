@@ -25,18 +25,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayout
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayoutOperation} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayoutOperation}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class DiagramLayoutOperationItemProvider extends AttributeOperationItemProvider implements
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
-	IItemPropertySource {
+public class DiagramLayoutOperationItemProvider extends
+		AttributeOperationItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -45,8 +45,8 @@ public class DiagramLayoutOperationItemProvider extends AttributeOperationItemPr
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -60,17 +60,22 @@ public class DiagramLayoutOperationItemProvider extends AttributeOperationItemPr
 	}
 
 	/**
-	 * {@inheritDoc} This returns DiagramLayoutOperation.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@inheritDoc} This returns DiagramLayoutOperation.gif. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DiagramLayoutOperation.png"));
+		return overlayImage(
+				object,
+				getResourceLocator().getImage(
+						"full/obj16/DiagramLayoutOperation.png"));
 	}
 
 	/**
-	 * {@inheritDoc} This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@inheritDoc} This returns the label text for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
@@ -78,16 +83,18 @@ public class DiagramLayoutOperationItemProvider extends AttributeOperationItemPr
 	public String getText(Object object) {
 		if (object instanceof DiagramLayoutOperation) {
 			DiagramLayoutOperation diagramLayoutOperation = (DiagramLayoutOperation) object;
-			return "Changed Layout of Diagram \"" + getModelElementName(diagramLayoutOperation.getModelElementId())
-				+ "\"";
+			return "Changed Layout of Diagram \""
+					+ getModelElementName(diagramLayoutOperation
+							.getModelElementId()) + "\"";
 		}
 		return super.getText(object);
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -98,14 +105,15 @@ public class DiagramLayoutOperationItemProvider extends AttributeOperationItemPr
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

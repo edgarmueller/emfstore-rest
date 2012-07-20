@@ -29,18 +29,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation} object.
- * <!-- begin-user-doc
- * --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class MultiReferenceMoveOperationItemProvider extends FeatureOperationItemProvider implements
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
-	IItemPropertySource {
+public class MultiReferenceMoveOperationItemProvider extends
+		FeatureOperationItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider,
+		IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -49,8 +49,8 @@ public class MultiReferenceMoveOperationItemProvider extends FeatureOperationIte
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -67,61 +67,74 @@ public class MultiReferenceMoveOperationItemProvider extends FeatureOperationIte
 	}
 
 	/**
-	 * This adds a property descriptor for the Old Index feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Old Index feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addOldIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_MultiReferenceMoveOperation_oldIndex_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceMoveOperation_oldIndex_feature",
-				"_UI_MultiReferenceMoveOperation_type"),
-			OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX, true, false, false,
-			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiReferenceMoveOperation_oldIndex_feature"),
+						getString(
+								"_UI_PropertyDescriptor_description",
+								"_UI_MultiReferenceMoveOperation_oldIndex_feature",
+								"_UI_MultiReferenceMoveOperation_type"),
+						OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the New Index feature.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the New Index feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addNewIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_MultiReferenceMoveOperation_newIndex_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceMoveOperation_newIndex_feature",
-				"_UI_MultiReferenceMoveOperation_type"),
-			OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX, true, false, false,
-			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiReferenceMoveOperation_newIndex_feature"),
+						getString(
+								"_UI_PropertyDescriptor_description",
+								"_UI_MultiReferenceMoveOperation_newIndex_feature",
+								"_UI_MultiReferenceMoveOperation_type"),
+						OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX,
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Referenced Model Element Id feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Referenced Model Element Id
+	 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected void addReferencedModelElementIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_MultiReferenceMoveOperation_referencedModelElementId_feature"),
-			getString("_UI_PropertyDescriptor_description",
-				"_UI_MultiReferenceMoveOperation_referencedModelElementId_feature",
-				"_UI_MultiReferenceMoveOperation_type"),
-			OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID, true, false, true,
-			null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_MultiReferenceMoveOperation_referencedModelElementId_feature"),
+						getString(
+								"_UI_PropertyDescriptor_description",
+								"_UI_MultiReferenceMoveOperation_referencedModelElementId_feature",
+								"_UI_MultiReferenceMoveOperation_type"),
+						OperationsPackage.Literals.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID,
+						true, false, true, null, null, null));
 	}
 
 	// begin of custom code
 	/**
-	 * @param object the object
+	 * @param object
+	 *            the object
 	 * @return This returns the image.
 	 * @generated NOT
 	 */
@@ -133,7 +146,8 @@ public class MultiReferenceMoveOperationItemProvider extends FeatureOperationIte
 	// end of custom code
 
 	/**
-	 * {@inheritDoc} This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@inheritDoc} This returns the label text for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
@@ -141,18 +155,22 @@ public class MultiReferenceMoveOperationItemProvider extends FeatureOperationIte
 	public String getText(Object object) {
 		if (object instanceof MultiReferenceMoveOperation) {
 			MultiReferenceMoveOperation op = (MultiReferenceMoveOperation) object;
-			String elementName = getModelElementClassAndName(op.getModelElementId());
-			String movedElementName = getModelElementClassAndName(op.getReferencedModelElementId());
-			return "Reordered " + op.getFeatureName() + " in " + elementName + ", moved " + movedElementName
-				+ " from position " + op.getOldIndex() + " to " + op.getNewIndex();
+			String elementName = getModelElementClassAndName(op
+					.getModelElementId());
+			String movedElementName = getModelElementClassAndName(op
+					.getReferencedModelElementId());
+			return "Reordered " + op.getFeatureName() + " in " + elementName
+					+ ", moved " + movedElementName + " from position "
+					+ op.getOldIndex() + " to " + op.getNewIndex();
 		}
 		return super.getText(object);
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -163,21 +181,23 @@ public class MultiReferenceMoveOperationItemProvider extends FeatureOperationIte
 		switch (notification.getFeatureID(MultiReferenceMoveOperation.class)) {
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX:
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

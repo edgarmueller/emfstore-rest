@@ -31,17 +31,18 @@ import org.eclipse.emf.emfstore.server.model.url.UrlFactory;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl} object.
- * <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ModelElementUrlItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
-	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ModelElementUrlItemProvider extends ItemProviderAdapter implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -50,8 +51,8 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -65,21 +66,26 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to
+	 * deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(
+			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL);
-			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT);
-			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT);
+			childrenFeatures
+					.add(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL);
+			childrenFeatures
+					.add(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT);
+			childrenFeatures
+					.add(UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT);
 		}
 		return childrenFeatures;
 	}
@@ -91,26 +97,28 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns ModelElementUrl.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns ModelElementUrl.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelElementUrl"));
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/ModelElementUrl"));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -120,9 +128,10 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -134,36 +143,42 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 		case UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT:
 		case UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL,
-			UrlFactory.eINSTANCE.createServerUrl()));
+		newChildDescriptors.add(createChildParameter(
+				UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL,
+				UrlFactory.eINSTANCE.createServerUrl()));
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
-			UrlFactory.eINSTANCE.createProjectUrlFragment()));
+		newChildDescriptors.add(createChildParameter(
+				UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+				UrlFactory.eINSTANCE.createProjectUrlFragment()));
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
-			UrlFactory.eINSTANCE.createModelElementUrlFragment()));
+		newChildDescriptors
+				.add(createChildParameter(
+						UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+						UrlFactory.eINSTANCE.createModelElementUrlFragment()));
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Return the resource locator for this item provider's resources. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

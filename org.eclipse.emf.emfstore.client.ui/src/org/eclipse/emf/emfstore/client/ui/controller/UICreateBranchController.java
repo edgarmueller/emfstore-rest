@@ -191,6 +191,6 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			}
 		});
 
-		return Versions.BRANCH(branch);
+		return Versions.createBRANCH(branch);
 	}
 }

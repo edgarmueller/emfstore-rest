@@ -13,13 +13,16 @@ package org.eclipse.emf.emfstore.server.model.url;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Server Url</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Server Url</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName
+ * <em>Host Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>
+ * Port</em>}</li>
  * </ul>
  * </p>
  * 
@@ -29,11 +32,11 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ServerUrl extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Host Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Host Name</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Host Name</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Host Name</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -46,21 +49,24 @@ public interface ServerUrl extends EObject {
 	String getHostName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName <em>Host Name</em>}
-	 * ' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName
+	 * <em>Host Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>Host Name</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Host Name</em>' attribute.
 	 * @see #getHostName()
 	 * @generated
 	 */
 	void setHostName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Port</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Port</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Port</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Port</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -73,11 +79,12 @@ public interface ServerUrl extends EObject {
 	int getPort();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}'
-	 * attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort
+	 * <em>Port</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Port</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Port</em>' attribute.
 	 * @see #getPort()
 	 * @generated
 	 */

@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.client.test.server.api;
+package org.eclipse.emf.emfstore.client.test.server.api.util;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;

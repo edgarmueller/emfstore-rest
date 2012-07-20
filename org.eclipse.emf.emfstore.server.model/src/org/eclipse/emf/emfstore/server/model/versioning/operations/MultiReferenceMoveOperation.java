@@ -13,16 +13,18 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Multi Reference Move Operation</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Multi Reference Move Operation</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex <em>
- * Old Index</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex <em>
- * New Index</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex
+ * <em>Old Index</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex
+ * <em>New Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId
  * <em>Referenced Model Element Id</em>}</li>
@@ -35,11 +37,11 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  */
 public interface MultiReferenceMoveOperation extends FeatureOperation {
 	/**
-	 * Returns the value of the '<em><b>Old Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Old Index</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -54,21 +56,22 @@ public interface MultiReferenceMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex
-	 * <em>Old Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Old Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>Old Index</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Old Index</em>' attribute.
 	 * @see #getOldIndex()
 	 * @generated
 	 */
 	void setOldIndex(int value);
 
 	/**
-	 * Returns the value of the '<em><b>New Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>New Index</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -83,26 +86,27 @@ public interface MultiReferenceMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex
-	 * <em>New Index</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>New Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>New Index</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>New Index</em>' attribute.
 	 * @see #getNewIndex()
 	 * @generated
 	 */
 	void setNewIndex(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Referenced Model Element Id</b></em>' containment reference.
-	 * <!-- begin-user-doc
-	 * -->
+	 * Returns the value of the '<em><b>Referenced Model Element Id</b></em>'
+	 * containment reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Model Element Id</em>' reference isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Referenced Model Element Id</em>' reference
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Referenced Model Element Id</em>' containment reference.
+	 * @return the value of the '<em>Referenced Model Element Id</em>'
+	 *         containment reference.
 	 * @see #setReferencedModelElementId(ModelElementId)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceMoveOperation_ReferencedModelElementId()
 	 * @model containment="true" resolveProxies="true"
@@ -113,10 +117,12 @@ public interface MultiReferenceMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId
-	 * <em>Referenced Model Element Id</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Referenced Model Element Id</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Referenced Model Element Id</em>' containment reference.
+	 * @param value
+	 *            the new value of the '<em>Referenced Model Element Id</em>'
+	 *            containment reference.
 	 * @see #getReferencedModelElementId()
 	 * @generated
 	 */

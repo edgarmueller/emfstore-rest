@@ -17,8 +17,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Containment Type</b></em>', and
- * utility methods for working with them. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '
+ * <em><b>Containment Type</b></em>', and utility methods for working with them.
+ * <!-- end-user-doc -->
  * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getContainmentType()
  * @model
@@ -26,8 +27,8 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ContainmentType implements Enumerator {
 	/**
-	 * The '<em><b>NONE</b></em>' literal object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The '<em><b>NONE</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #NONE_VALUE
 	 * @generated
@@ -36,8 +37,8 @@ public enum ContainmentType implements Enumerator {
 	NONE(0, "NONE", "NONE"),
 
 	/**
-	 * The '<em><b>CONTAINER</b></em>' literal object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The '<em><b>CONTAINER</b></em>' literal object. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #CONTAINER_VALUE
 	 * @generated
@@ -46,8 +47,8 @@ public enum ContainmentType implements Enumerator {
 	CONTAINER(1, "CONTAINER", "CONTAINER"),
 
 	/**
-	 * The '<em><b>CONTAINMENT</b></em>' literal object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The '<em><b>CONTAINMENT</b></em>' literal object. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #CONTAINMENT_VALUE
 	 * @generated
@@ -56,11 +57,10 @@ public enum ContainmentType implements Enumerator {
 	CONTAINMENT(2, "CONTAINMENT", "CONTAINMENT");
 
 	/**
-	 * The '<em><b>NONE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>NONE</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -72,11 +72,10 @@ public enum ContainmentType implements Enumerator {
 	public static final int NONE_VALUE = 0;
 
 	/**
-	 * The '<em><b>CONTAINER</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>CONTAINER</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CONTAINER</b></em>' literal object isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of '<em><b>CONTAINER</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -88,11 +87,10 @@ public enum ContainmentType implements Enumerator {
 	public static final int CONTAINER_VALUE = 1;
 
 	/**
-	 * The '<em><b>CONTAINMENT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>CONTAINMENT</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CONTAINMENT</b></em>' literal object isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of '<em><b>CONTAINMENT</b></em>' literal object isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -104,26 +102,26 @@ public enum ContainmentType implements Enumerator {
 	public static final int CONTAINMENT_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Containment Type</b></em>' enumerators.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * An array of all the '<em><b>Containment Type</b></em>' enumerators. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	private static final ContainmentType[] VALUES_ARRAY = new ContainmentType[] { NONE, CONTAINER, CONTAINMENT, };
+	private static final ContainmentType[] VALUES_ARRAY = new ContainmentType[] {
+			NONE, CONTAINER, CONTAINMENT, };
 
 	/**
-	 * A public read-only list of all the '<em><b>Containment Type</b></em>' enumerators.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * A public read-only list of all the '<em><b>Containment Type</b></em>'
+	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public static final List<ContainmentType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ContainmentType> VALUES = Collections
+			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified
+	 * literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -138,9 +136,8 @@ public enum ContainmentType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified
+	 * name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -155,9 +152,8 @@ public enum ContainmentType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified
+	 * integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -195,8 +191,8 @@ public enum ContainmentType implements Enumerator {
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -234,9 +230,8 @@ public enum ContainmentType implements Enumerator {
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string
+	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

@@ -27,55 +27,102 @@ public final class Versions {
 	 * 
 	 * @return head version
 	 */
-	public static HeadVersionSpec HEAD_VERSION() {
+	public static HeadVersionSpec createHEAD() {
 		return VersioningFactory.eINSTANCE.createHeadVersionSpec();
 	}
 
-	public static HeadVersionSpec HEAD_VERSION(String branch) {
-		HeadVersionSpec headVersionSpec = VersioningFactory.eINSTANCE
-				.createHeadVersionSpec();
+	/**
+	 * Create {@link HeadVersionSpec}.
+	 * 
+	 * @param branch name of branch
+	 * @return version spec
+	 */
+	public static HeadVersionSpec createHEAD(String branch) {
+		HeadVersionSpec headVersionSpec = VersioningFactory.eINSTANCE.createHeadVersionSpec();
 		headVersionSpec.setBranch(branch);
 		return headVersionSpec;
 	}
 
-	public static HeadVersionSpec HEAD_VERSION(VersionSpec versionSpec) {
+	/**
+	 * Create {@link HeadVersionSpec}.
+	 * 
+	 * @param versionSpec copies branch name from
+	 * @return version spec
+	 */
+	public static HeadVersionSpec createHEAD(VersionSpec versionSpec) {
 		if (versionSpec == null) {
-			return HEAD_VERSION();
+			return createHEAD();
 		}
-		return HEAD_VERSION(versionSpec.getBranch());
+		return createHEAD(versionSpec.getBranch());
 	}
 
-	public static PrimaryVersionSpec PRIMARY(String branch, int index) {
-		PrimaryVersionSpec spec = VersioningFactory.eINSTANCE
-				.createPrimaryVersionSpec();
+	/**
+	 * Create {@link PrimaryVersionSpec}.
+	 * 
+	 * @param branch branch name
+	 * @param index verison number
+	 * @return version spec
+	 */
+	public static PrimaryVersionSpec createPRIMARY(String branch, int index) {
+		PrimaryVersionSpec spec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		spec.setIdentifier(index);
 		spec.setBranch(branch);
 		return spec;
 	}
 
-	public static PrimaryVersionSpec PRIMARY(VersionSpec versionSpec, int index) {
-		return PRIMARY(versionSpec.getBranch(), index);
+	/**
+	 * Create {@link PrimaryVersionSpec}.
+	 * 
+	 * @param versionSpec copy branch name from
+	 * @param index version number
+	 * 
+	 * @return version spec
+	 */
+	public static PrimaryVersionSpec createPRIMARY(VersionSpec versionSpec, int index) {
+		return createPRIMARY(versionSpec.getBranch(), index);
 	}
 
-	public static PrimaryVersionSpec PRIMARY(int i) {
-		return PRIMARY(VersionSpec.BRANCH_DEFAULT_NAME, i);
+	/**
+	 * Create {@link PrimaryVersionSpec}.
+	 * 
+	 * @param i version number
+	 * @return version spec
+	 */
+	public static PrimaryVersionSpec createPRIMARY(int i) {
+		return createPRIMARY(VersionSpec.BRANCH_DEFAULT_NAME, i);
 	}
 
-	public static BranchVersionSpec BRANCH(String value) {
-		BranchVersionSpec branchSpec = VersioningFactory.eINSTANCE
-				.createBranchVersionSpec();
+	/**
+	 * Create {@link BranchVersionSpec}.
+	 * 
+	 * @param value branch name
+	 * @return version spec
+	 */
+	public static BranchVersionSpec createBRANCH(String value) {
+		BranchVersionSpec branchSpec = VersioningFactory.eINSTANCE.createBranchVersionSpec();
 		branchSpec.setBranch(value);
 		return branchSpec;
 	}
 
-	public static BranchVersionSpec BRANCH(VersionSpec head) {
-		return BRANCH(head.getBranch());
+	/**
+	 * Creates {@link BranchVersionSpec}.
+	 * 
+	 * @param spec copies branch name from
+	 * @return version spec
+	 */
+	public static BranchVersionSpec createBRANCH(VersionSpec spec) {
+		return createBRANCH(spec.getBranch());
 	}
 
-	public static AncestorVersionSpec ANCESTOR(PrimaryVersionSpec source,
-			PrimaryVersionSpec target) {
-		AncestorVersionSpec ancestor = VersioningFactory.eINSTANCE
-				.createAncestorVersionSpec();
+	/**
+	 * Creates {@link AncestorVersionSpec}.
+	 * 
+	 * @param source source
+	 * @param target target
+	 * @return version spec
+	 */
+	public static AncestorVersionSpec createANCESTOR(PrimaryVersionSpec source, PrimaryVersionSpec target) {
+		AncestorVersionSpec ancestor = VersioningFactory.eINSTANCE.createAncestorVersionSpec();
 		ancestor.setBranch(source.getBranch());
 		ancestor.setSource(ModelUtil.clone(source));
 		ancestor.setTarget(ModelUtil.clone(target));
@@ -95,16 +142,21 @@ public final class Versions {
 		if (spec1 == null || spec2 == null) {
 			return false;
 		}
-		if (spec1.getBranch() != null
-				&& spec1.getBranch().equals(spec2.getBranch())) {
+		if (spec1.getBranch() != null && spec1.getBranch().equals(spec2.getBranch())) {
 			return true;
 		}
 		return false;
 	}
 
-	public static TagVersionSpec TAG(String tag, String branch) {
-		TagVersionSpec tagSpec = VersioningFactory.eINSTANCE
-				.createTagVersionSpec();
+	/**
+	 * Creates {@link TagVersionSpec}.
+	 * 
+	 * @param tag tag
+	 * @param branch branch name
+	 * @return version spec
+	 */
+	public static TagVersionSpec createTAG(String tag, String branch) {
+		TagVersionSpec tagSpec = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tagSpec.setBranch(branch);
 		tagSpec.setName(tag);
 		return tagSpec;

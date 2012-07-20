@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
+ * <em>Branch</em>}</li>
  * </ul>
  * </p>
  * 
@@ -29,9 +31,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface VersionSpec extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Branch</b></em>' attribute.
-	 * The default value is <code>"trunk"</code>.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Branch</b></em>' attribute. The default
+	 * value is <code>"trunk"</code>. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Branch</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -47,12 +48,12 @@ public interface VersionSpec extends EObject {
 	String getBranch();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
-	 * <em>Branch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
+	 * <em>Branch</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
-	 * @param value the new value of the '<em>Branch</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Branch</em>' attribute.
 	 * @see #getBranch()
 	 * @generated
 	 */
@@ -69,5 +70,8 @@ public interface VersionSpec extends EObject {
 	String BASE = "BASE";
 
 	String BRANCH_DEFAULT_NAME = "trunk";
+
+	// magic global variable
+	String GLOBAL = "___GLOBAL___";
 
 } // VersionSpec

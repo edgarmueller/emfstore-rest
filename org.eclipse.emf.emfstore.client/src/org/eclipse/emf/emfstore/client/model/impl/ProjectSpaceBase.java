@@ -792,7 +792,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EmfStoreException {
-		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.HEAD_VERSION(getBaseVersion()));
+		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions
+				.createHEAD(getBaseVersion()));
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -858,7 +859,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.ANCESTOR(getBaseVersion(), branchSpec));
+				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions
+						.createANCESTOR(getBaseVersion(), branchSpec));
 
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
@@ -1140,7 +1142,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update()
 	 */
 	public PrimaryVersionSpec update() throws EmfStoreException {
-		return update(Versions.HEAD_VERSION(getBaseVersion()));
+		return update(Versions.createHEAD(getBaseVersion()));
 	}
 
 	/**
