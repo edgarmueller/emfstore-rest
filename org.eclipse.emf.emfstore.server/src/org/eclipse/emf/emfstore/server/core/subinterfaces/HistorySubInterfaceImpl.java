@@ -36,6 +36,7 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
@@ -46,6 +47,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -129,12 +131,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			} else if (historyQuery instanceof RangeQuery) {
 
-				return versionToHistoryInfo(handleRangeQuery(projectId, (RangeQuery) historyQuery),
+				return versionToHistoryInfo(projectId, handleRangeQuery(projectId, (RangeQuery) historyQuery),
 					historyQuery.isIncludeChangePackages());
 
 			} else if (historyQuery instanceof PathQuery) {
 
-				return versionToHistoryInfo(handlePathQuery(projectId, (PathQuery) historyQuery),
+				return versionToHistoryInfo(projectId, handlePathQuery(projectId, (PathQuery) historyQuery),
 					historyQuery.isIncludeChangePackages());
 
 			}
@@ -186,7 +188,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			relevantVersions.addAll(historyCache.getChangesForModelElement(projectId, id));
 		}
 		relevantVersions.retainAll(inRange);
-		List<HistoryInfo> result = versionToHistoryInfo(relevantVersions, query.isIncludeChangePackages());
+		List<HistoryInfo> result = versionToHistoryInfo(projectId, relevantVersions, query.isIncludeChangePackages());
 		// filter ops
 		for (HistoryInfo historyInfo : result) {
 			filterOperationsForSelectedME(query.getModelElements(), historyInfo);
@@ -324,11 +326,11 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		operations.removeAll(operationsToRemove);
 	}
 
-	private List<HistoryInfo> versionToHistoryInfo(Collection<Version> versions, boolean includeCP) {
+	private List<HistoryInfo> versionToHistoryInfo(ProjectId projectId, Collection<Version> versions, boolean includeCP)
+		throws EmfStoreException {
 		ArrayList<HistoryInfo> result = new ArrayList<HistoryInfo>();
 		for (Version version : versions) {
-			// TODO BRANCH fix head version
-			result.add(createHistoryInfo(null, version, includeCP));
+			result.add(createHistoryInfo(projectId, version, includeCP));
 		}
 		return result;
 	}
@@ -337,14 +339,16 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * Generates a history info from a version. If needed also adds the HEAD
 	 * tag, which isn't persistent.
 	 * 
-	 * @param headRevision
-	 *            head revision
+	 * @param projectId
+	 *            project
 	 * @param version
 	 *            version
 	 * @param includeChangePackage
 	 * @return history info
+	 * @throws EmfStoreException
 	 */
-	private HistoryInfo createHistoryInfo(PrimaryVersionSpec headRevision, Version version, boolean includeChangePackage) {
+	private HistoryInfo createHistoryInfo(ProjectId projectId, Version version, boolean includeChangePackage)
+		throws EmfStoreException {
 		HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
 		if (includeChangePackage && version.getChanges() != null) {
 			history.setChangePackage(ModelUtil.clone(version.getChanges()));
@@ -364,15 +368,23 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		history.getMergedFrom().addAll(addSpecs(version.getMergedFromVersion()));
 		history.getMergedTo().addAll(addSpecs(version.getMergedToVersion()));
 
-		// Set TAGS
-		history.getTagSpecs().addAll(ModelUtil.clone(version.getTagSpecs()));
-		// add HEAD tag to history info
-		if (version.getPrimarySpec().equals(headRevision)) {
-			TagVersionSpec spec = VersioningFactory.eINSTANCE.createTagVersionSpec();
-			spec.setName(VersionSpec.HEAD);
-			history.getTagSpecs().add(spec);
-		}
+		setTags(projectId, version, history);
 		return history;
+	}
+
+	private void setTags(ProjectId projectId, Version version, HistoryInfo history) throws EmfStoreException {
+		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+
+		if (version.getPrimarySpec().equals(project.getLastVersion().getPrimarySpec())) {
+			history.getTagSpecs().add(Versions.TAG("HEAD", VersionSpec.GLOBAL));
+		}
+		for (BranchInfo branch : project.getBranches()) {
+			if (version.getPrimarySpec().equals(branch.getHead())) {
+				history.getTagSpecs().add(Versions.TAG("HEAD: " + branch.getName(), branch.getName()));
+			}
+		}
+
+		history.getTagSpecs().addAll(ModelUtil.clone(version.getTagSpecs()));
 	}
 
 	private List<PrimaryVersionSpec> addSpecs(List<Version> versions) {
@@ -383,6 +395,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return result;
 	}
 
+	/**
+	 * Sorts versions based on the primary version spec.
+	 * 
+	 * @author wesendon
+	 * 
+	 */
 	private final class VersionComparator implements Comparator<Version> {
 		private final boolean asc;
 
