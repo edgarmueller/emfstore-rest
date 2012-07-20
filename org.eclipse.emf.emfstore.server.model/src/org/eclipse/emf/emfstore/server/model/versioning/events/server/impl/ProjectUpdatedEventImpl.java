@@ -20,22 +20,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpd
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Project Updated Event</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Project Updated Event</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl#getNewVersion
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl#getNewVersion
  * <em>New Version</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements ProjectUpdatedEvent {
+public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements
+		ProjectUpdatedEvent {
 	/**
-	 * The cached value of the '{@link #getNewVersion() <em>New Version</em>}' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewVersion() <em>New Version</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewVersion()
 	 * @generated
@@ -73,17 +75,26 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 			newVersion = (PrimaryVersionSpec) eResolveProxy(oldNewVersion);
 			if (newVersion != oldNewVersion) {
 				InternalEObject newNewVersion = (InternalEObject) newVersion;
-				NotificationChain msgs = oldNewVersion.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, null);
+				NotificationChain msgs = oldNewVersion
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+								null, null);
 				if (newNewVersion.eInternalContainer() == null) {
-					msgs = newNewVersion.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, msgs);
+					msgs = newNewVersion
+							.eInverseAdd(
+									this,
+									EOPPOSITE_FEATURE_BASE
+											- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+									null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, oldNewVersion, newVersion));
+							ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+							oldNewVersion, newVersion));
 			}
 		}
 		return newVersion;
@@ -103,12 +114,15 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetNewVersion(PrimaryVersionSpec newNewVersion, NotificationChain msgs) {
+	public NotificationChain basicSetNewVersion(
+			PrimaryVersionSpec newNewVersion, NotificationChain msgs) {
 		PrimaryVersionSpec oldNewVersion = newVersion;
 		newVersion = newNewVersion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, oldNewVersion, newNewVersion);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+					oldNewVersion, newNewVersion);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -126,17 +140,26 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 		if (newNewVersion != newVersion) {
 			NotificationChain msgs = null;
 			if (newVersion != null)
-				msgs = ((InternalEObject) newVersion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, msgs);
+				msgs = ((InternalEObject) newVersion)
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+								null, msgs);
 			if (newNewVersion != null)
-				msgs = ((InternalEObject) newNewVersion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, msgs);
+				msgs = ((InternalEObject) newNewVersion)
+						.eInverseAdd(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+								null, msgs);
 			msgs = basicSetNewVersion(newNewVersion, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
-				newNewVersion, newNewVersion));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION,
+					newNewVersion, newNewVersion));
 	}
 
 	/**
@@ -145,7 +168,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			return basicSetNewVersion(null, msgs);

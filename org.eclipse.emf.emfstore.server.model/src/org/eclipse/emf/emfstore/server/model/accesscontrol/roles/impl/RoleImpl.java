@@ -25,11 +25,14 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Role</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Role</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl#getProjects <em>Projects</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl#getProjects
+ * <em>Projects</em>}</li>
  * </ul>
  * </p>
  * 
@@ -37,8 +40,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
  */
 public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjects()
 	 * @generated
@@ -78,7 +81,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 			// the contains() method of EObjectEList uses reference equality ,
 			// because its useEquals() return false.
 			// we need to compare using equals method.
-			projects = new EObjectResolvingEList<ProjectId>(ProjectId.class, this, RolesPackage.ROLE__PROJECTS) {
+			projects = new EObjectResolvingEList<ProjectId>(ProjectId.class,
+					this, RolesPackage.ROLE__PROJECTS) {
 
 				@Override
 				protected boolean useEquals() {
@@ -91,9 +95,11 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> Determines if the role can administrate the project.
+	 * <!-- begin-user-doc --> Determines if the role can administrate the
+	 * project.
 	 * 
-	 * @param projectId the project id
+	 * @param projectId
+	 *            the project id
 	 * @return true if the role can <!-- end-user-doc --> {@inheritDoc}
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role#canAdministrate(org.eclipse.emf.emfstore.server.model.ProjectId)
 	 * @generated NOT
@@ -154,10 +160,12 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case RolesPackage.ROLE__PROJECTS:
-			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -165,7 +173,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecore.impl.BasicEObjectImpl#eGet(int, boolean, boolean)
+	 * @see org.eclipse.emf.ecore.impl.BasicEObjectImpl#eGet(int, boolean,
+	 *      boolean)
 	 * @generated
 	 */
 	@Override
@@ -226,7 +235,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
 	 * Checks whether the role is connected to a project.
 	 * 
-	 * @param projectId the project
+	 * @param projectId
+	 *            the project
 	 * @return true or false
 	 * @generated NOT
 	 */

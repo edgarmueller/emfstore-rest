@@ -23,15 +23,17 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGrou
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Operation Group</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Operation Group</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl#getName <em>Name</em>}
- * </li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl#getOperations <em>
- * Operations </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl#getName
+ * <em>Name</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl#getOperations
+ * <em>Operations</em>}</li>
  * </ul>
  * </p>
  * 
@@ -39,8 +41,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  */
 public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getName()
 	 * @generated
@@ -49,8 +51,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getName()
 	 * @generated
@@ -59,9 +61,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOperations()
 	 * @generated
@@ -106,8 +107,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.OPERATION_GROUP__NAME, oldName,
-				name));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					OperationsPackage.OPERATION_GROUP__NAME, oldName, name));
 	}
 
 	/**
@@ -117,8 +118,9 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	 */
 	public EList<AbstractOperation> getOperations() {
 		if (operations == null) {
-			operations = new EObjectResolvingEList<AbstractOperation>(AbstractOperation.class, this,
-				OperationsPackage.OPERATION_GROUP__OPERATIONS);
+			operations = new EObjectResolvingEList<AbstractOperation>(
+					AbstractOperation.class, this,
+					OperationsPackage.OPERATION_GROUP__OPERATIONS);
 		}
 		return operations;
 	}
@@ -153,7 +155,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 			return;
 		case OperationsPackage.OPERATION_GROUP__OPERATIONS:
 			getOperations().clear();
-			getOperations().addAll((Collection<? extends AbstractOperation>) newValue);
+			getOperations().addAll(
+					(Collection<? extends AbstractOperation>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -186,7 +189,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case OperationsPackage.OPERATION_GROUP__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		case OperationsPackage.OPERATION_GROUP__OPERATIONS:
 			return operations != null && !operations.isEmpty();
 		}

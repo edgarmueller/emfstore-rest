@@ -24,17 +24,18 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec}
- * object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec}
+ * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class HeadVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
-	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class HeadVersionSpecItemProvider extends VersionSpecItemProvider
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -43,8 +44,8 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider impleme
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -58,19 +59,20 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider impleme
 	}
 
 	/**
-	 * This returns HeadVersionSpec.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns HeadVersionSpec.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/HeadVersionSpec"));
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/HeadVersionSpec"));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -78,13 +80,14 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider impleme
 	public String getText(Object object) {
 		String label = ((HeadVersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_HeadVersionSpec_type")
-			: getString("_UI_HeadVersionSpec_type") + " " + label;
+				: getString("_UI_HeadVersionSpec_type") + " " + label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached children and by creating
-	 * a viewer notification, which it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -95,14 +98,15 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider impleme
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(
+			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

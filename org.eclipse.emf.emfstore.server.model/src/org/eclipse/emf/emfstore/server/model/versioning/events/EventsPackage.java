@@ -15,7 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
- * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains
+ * accessors for the meta objects to represent
  * <ul>
  * <li>each class,</li>
  * <li>each feature of each class,</li>
@@ -30,41 +31,39 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public interface EventsPackage extends EPackage {
 	/**
-	 * The package name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNAME = "events";
 
 	/**
-	 * The package namespace URI.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://eclipse.org/emf/emfstore/server/model/versioning/events";
 
 	/**
-	 * The package namespace name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.events";
 
 	/**
-	 * The singleton instance of the package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	EventsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl.init();
+	EventsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl
+			.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
-	 * <em>Event</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
+	 * <em>Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
@@ -73,8 +72,8 @@ public interface EventsPackage extends EPackage {
 	int EVENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Timestamp</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -82,8 +81,8 @@ public interface EventsPackage extends EPackage {
 	int EVENT__TIMESTAMP = 0;
 
 	/**
-	 * The number of structural features of the '<em>Event</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Event</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -91,9 +90,9 @@ public interface EventsPackage extends EPackage {
 	int EVENT_FEATURE_COUNT = 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
-	 * <em>Event</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * <em>Event</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Event</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event
@@ -103,8 +102,8 @@ public interface EventsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp
+	 * <em>Timestamp</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Timestamp</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp()
@@ -114,8 +113,8 @@ public interface EventsPackage extends EPackage {
 	EAttribute getEvent_Timestamp();
 
 	/**
-	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the factory that creates the instances of the model. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the factory that creates the instances of the model.
 	 * @generated
@@ -123,7 +122,8 @@ public interface EventsPackage extends EPackage {
 	EventsFactory getEventsFactory();
 
 	/**
-	 * <!-- begin-user-doc --> Defines literals for the meta objects that represent
+	 * <!-- begin-user-doc --> Defines literals for the meta objects that
+	 * represent
 	 * <ul>
 	 * <li>each class,</li>
 	 * <li>each feature of each class,</li>
@@ -137,8 +137,8 @@ public interface EventsPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl <em>Event</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
+		 * <em>Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
@@ -147,9 +147,8 @@ public interface EventsPackage extends EPackage {
 		EClass EVENT = eINSTANCE.getEvent();
 
 		/**
-		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!--
-		 * end-user-doc -->
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */

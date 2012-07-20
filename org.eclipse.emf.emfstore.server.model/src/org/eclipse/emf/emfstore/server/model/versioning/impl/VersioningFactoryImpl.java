@@ -22,9 +22,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionProperty;
@@ -32,21 +34,23 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFactory {
+public class VersioningFactoryImpl extends EFactoryImpl implements
+		VersioningFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static VersioningFactory init() {
 		try {
 			VersioningFactory theVersioningFactory = (VersioningFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning");
 			if (theVersioningFactory != null) {
 				return theVersioningFactory;
 			}
@@ -57,8 +61,8 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -86,8 +90,12 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 			return createChangePackage();
 		case VersioningPackage.HISTORY_INFO:
 			return createHistoryInfo();
-		case VersioningPackage.HISTORY_QUERY:
-			return createHistoryQuery();
+		case VersioningPackage.RANGE_QUERY:
+			return createRangeQuery();
+		case VersioningPackage.PATH_QUERY:
+			return createPathQuery();
+		case VersioningPackage.MODEL_ELEMENT_QUERY:
+			return createModelElementQuery();
 		case VersioningPackage.VERSION:
 			return createVersion();
 		case VersioningPackage.HEAD_VERSION_SPEC:
@@ -101,7 +109,8 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 		case VersioningPackage.ANCESTOR_VERSION_SPEC:
 			return createAncestorVersionSpec();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 
@@ -170,9 +179,29 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	 * 
 	 * @generated
 	 */
-	public HistoryQuery createHistoryQuery() {
-		HistoryQueryImpl historyQuery = new HistoryQueryImpl();
-		return historyQuery;
+	public RangeQuery createRangeQuery() {
+		RangeQueryImpl rangeQuery = new RangeQueryImpl();
+		return rangeQuery;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PathQuery createPathQuery() {
+		PathQueryImpl pathQuery = new PathQueryImpl();
+		return pathQuery;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ModelElementQuery createModelElementQuery() {
+		ModelElementQueryImpl modelElementQuery = new ModelElementQueryImpl();
+		return modelElementQuery;
 	}
 
 	/**
@@ -206,8 +235,7 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -217,8 +245,7 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -228,8 +255,7 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

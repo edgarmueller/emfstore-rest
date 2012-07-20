@@ -16,14 +16,15 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>AC Org Unit Id</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>AC Org Unit Id</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class ACOrgUnitIdImpl extends UniqueIdentifierImpl implements ACOrgUnitId {
+public class ACOrgUnitIdImpl extends UniqueIdentifierImpl implements
+		ACOrgUnitId {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

@@ -39,13 +39,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
+import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -568,40 +569,17 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		refresh();
 	}
 
-	private int getHeadVersionIdentifier() throws EmfStoreException {
-		PrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(Versions.HEAD_VERSION(projectSpace
-			.getBaseVersion()));
-		return resolveVersionSpec.getIdentifier();
-	}
-
+	// TODO BRANCH work in progress
 	private HistoryQuery getQuery(int end) throws EmfStoreException {
-		HistoryQuery query = VersioningFactory.eINSTANCE.createHistoryQuery();
 
-		headVersion = getHeadVersionIdentifier();
+		boolean allVersions = false;
+		RangeQuery query = HistoryQueryBuilder.rangeQuery(projectSpace.getBaseVersion(), 5, 10, allVersions, false,
+			false, true);
 
-		if (end == -1) {
-			end = headVersion;
-			currentEnd = headVersion;// -1;
-		} else {
-			currentEnd = end;
-			PrimaryVersionSpec tempVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-			tempVersionSpec.setIdentifier(end);
-			end = projectSpace.resolveVersionSpec(tempVersionSpec).getIdentifier();
-		}
-
-		int temp = end - startOffset;
-		int start = (temp > 0 ? temp : 0);
-
-		PrimaryVersionSpec source = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-		source.setIdentifier(start);
-		PrimaryVersionSpec target = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-		target.setIdentifier(end);
-		query.setSource(source);
-		query.setTarget(target);
-		query.setIncludeChangePackage(true);
-		if (modelElement != null && !(modelElement instanceof ProjectSpace)) {
-			query.getModelElements().add(ModelUtil.getProject(modelElement).getModelElementId(modelElement));
-		}
+		// query.setIncludeChangePackage(true);
+		// if (modelElement != null && !(modelElement instanceof ProjectSpace)) {
+		// query.getModelElements().add(ModelUtil.getProject(modelElement).getModelElementId(modelElement));
+		// }
 
 		return query;
 	}

@@ -30,14 +30,23 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Space</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Server Space</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getGroups <em>Groups</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getProjects <em>Projects</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getOpenSessions <em>Open Sessions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getUsers <em>Users</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getGroups
+ * <em>Groups</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getProjects
+ * <em>Projects</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getOpenSessions
+ * <em>Open Sessions</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.impl.ServerSpaceImpl#getUsers
+ * <em>Users</em>}</li>
  * </ul>
  * </p>
  * 
@@ -45,9 +54,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  */
 public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	/**
-	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGroups() <em>Groups</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getGroups()
 	 * @generated
@@ -56,9 +64,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	protected EList<ACGroup> groups;
 
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjects()
 	 * @generated
@@ -67,8 +74,9 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	protected EList<ProjectHistory> projects;
 
 	/**
-	 * The cached value of the '{@link #getOpenSessions() <em>Open Sessions</em>}' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOpenSessions()
+	 * <em>Open Sessions</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOpenSessions()
 	 * @generated
@@ -77,9 +85,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	protected EList<SessionId> openSessions;
 
 	/**
-	 * The cached value of the '{@link #getUsers() <em>Users</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getUsers() <em>Users</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUsers()
 	 * @generated
@@ -115,8 +122,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ACGroup> getGroups() {
 		if (groups == null) {
-			groups = new EObjectContainmentEList.Resolving<ACGroup>(ACGroup.class, this,
-				ModelPackage.SERVER_SPACE__GROUPS);
+			groups = new EObjectContainmentEList.Resolving<ACGroup>(
+					ACGroup.class, this, ModelPackage.SERVER_SPACE__GROUPS);
 		}
 		return groups;
 	}
@@ -128,8 +135,9 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ProjectHistory> getProjects() {
 		if (projects == null) {
-			projects = new EObjectResolvingEList<ProjectHistory>(ProjectHistory.class, this,
-				ModelPackage.SERVER_SPACE__PROJECTS);
+			projects = new EObjectResolvingEList<ProjectHistory>(
+					ProjectHistory.class, this,
+					ModelPackage.SERVER_SPACE__PROJECTS);
 		}
 		return projects;
 	}
@@ -141,8 +149,9 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<SessionId> getOpenSessions() {
 		if (openSessions == null) {
-			openSessions = new EObjectContainmentEList.Resolving<SessionId>(SessionId.class, this,
-				ModelPackage.SERVER_SPACE__OPEN_SESSIONS);
+			openSessions = new EObjectContainmentEList.Resolving<SessionId>(
+					SessionId.class, this,
+					ModelPackage.SERVER_SPACE__OPEN_SESSIONS);
 		}
 		return openSessions;
 	}
@@ -154,7 +163,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ACUser> getUsers() {
 		if (users == null) {
-			users = new EObjectContainmentEList.Resolving<ACUser>(ACUser.class, this, ModelPackage.SERVER_SPACE__USERS);
+			users = new EObjectContainmentEList.Resolving<ACUser>(ACUser.class,
+					this, ModelPackage.SERVER_SPACE__USERS);
 		}
 		return users;
 	}
@@ -165,12 +175,14 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.SERVER_SPACE__GROUPS:
 			return ((InternalEList<?>) getGroups()).basicRemove(otherEnd, msgs);
 		case ModelPackage.SERVER_SPACE__OPEN_SESSIONS:
-			return ((InternalEList<?>) getOpenSessions()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getOpenSessions()).basicRemove(otherEnd,
+					msgs);
 		case ModelPackage.SERVER_SPACE__USERS:
 			return ((InternalEList<?>) getUsers()).basicRemove(otherEnd, msgs);
 		}
@@ -212,11 +224,13 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 			return;
 		case ModelPackage.SERVER_SPACE__PROJECTS:
 			getProjects().clear();
-			getProjects().addAll((Collection<? extends ProjectHistory>) newValue);
+			getProjects().addAll(
+					(Collection<? extends ProjectHistory>) newValue);
 			return;
 		case ModelPackage.SERVER_SPACE__OPEN_SESSIONS:
 			getOpenSessions().clear();
-			getOpenSessions().addAll((Collection<? extends SessionId>) newValue);
+			getOpenSessions()
+					.addAll((Collection<? extends SessionId>) newValue);
 			return;
 		case ModelPackage.SERVER_SPACE__USERS:
 			getUsers().clear();

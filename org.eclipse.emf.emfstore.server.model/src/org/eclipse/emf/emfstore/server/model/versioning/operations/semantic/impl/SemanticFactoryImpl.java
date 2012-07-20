@@ -19,21 +19,23 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class SemanticFactoryImpl extends EFactoryImpl implements SemanticFactory {
+public class SemanticFactoryImpl extends EFactoryImpl implements
+		SemanticFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static SemanticFactory init() {
 		try {
 			SemanticFactory theSemanticFactory = (SemanticFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic");
+					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic");
 			if (theSemanticFactory != null) {
 				return theSemanticFactory;
 			}
@@ -44,8 +46,8 @@ public class SemanticFactoryImpl extends EFactoryImpl implements SemanticFactory
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -62,7 +64,8 @@ public class SemanticFactoryImpl extends EFactoryImpl implements SemanticFactory
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 

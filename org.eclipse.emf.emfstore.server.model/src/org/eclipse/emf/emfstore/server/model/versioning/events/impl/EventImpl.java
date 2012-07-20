@@ -20,11 +20,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Event</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Event</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl#getTimestamp <em>Timestamp</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl#getTimestamp
+ * <em>Timestamp</em>}</li>
  * </ul>
  * </p>
  * 
@@ -32,9 +35,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  */
 public class EventImpl extends EObjectImpl implements Event {
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTimestamp()
 	 * @generated
@@ -43,9 +45,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	protected static final Date TIMESTAMP_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTimestamp()
 	 * @generated
@@ -90,8 +91,8 @@ public class EventImpl extends EObjectImpl implements Event {
 		Date oldTimestamp = timestamp;
 		timestamp = newTimestamp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EventsPackage.EVENT__TIMESTAMP, oldTimestamp,
-				timestamp));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					EventsPackage.EVENT__TIMESTAMP, oldTimestamp, timestamp));
 	}
 
 	/**
@@ -147,7 +148,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case EventsPackage.EVENT__TIMESTAMP:
-			return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
+			return TIMESTAMP_EDEFAULT == null ? timestamp != null
+					: !TIMESTAMP_EDEFAULT.equals(timestamp);
 		}
 		return super.eIsSet(featureID);
 	}

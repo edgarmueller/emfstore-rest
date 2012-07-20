@@ -20,10 +20,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * @author Michael Kagel
  * @author emueller
  */
-public abstract class AbstractOperationCustomLabelProvider implements IDisposable {
+public abstract class AbstractOperationCustomLabelProvider implements
+		IDisposable {
 
 	/**
-	 * Constant for render priority meaning this provider does not want to render the given element.
+	 * Constant for render priority meaning this provider does not want to
+	 * render the given element.
 	 */
 	protected static final int CANNOT_RENDER = 0;
 
@@ -64,9 +66,10 @@ public abstract class AbstractOperationCustomLabelProvider implements IDisposabl
 	 * 
 	 * @param operation
 	 *            the operation which should be checked
-	 * @return a priority for rendering this element. The higher the priority the more likely this provider will render
-	 *         the element. Returning {@link AbstractOperationCustomLabelProvider#CANNOT_RENDER} means this provider
-	 *         does not want to render this element.
+	 * @return a priority for rendering this element. The higher the priority
+	 *         the more likely this provider will render the element. Returning
+	 *         {@link AbstractOperationCustomLabelProvider#CANNOT_RENDER} means
+	 *         this provider does not want to render this element.
 	 */
 	public abstract int canRender(AbstractOperation operation);
 

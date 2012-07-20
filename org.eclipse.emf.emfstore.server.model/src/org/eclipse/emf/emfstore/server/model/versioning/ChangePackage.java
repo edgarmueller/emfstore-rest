@@ -21,16 +21,24 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Change Package</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents <em>Events</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage <em>Log Message</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getVersionProperties <em>Version Properties
- * </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations
+ * <em>Operations</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents
+ * <em>Events</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
+ * <em>Log Message</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getVersionProperties
+ * <em>Version Properties</em>}</li>
  * </ul>
  * </p>
  * 
@@ -41,13 +49,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 public interface ChangePackage extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-	 * The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Operations</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}
+	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Operations</em>' containment reference list.
+	 * @return the value of the '<em>Operations</em>' containment reference
+	 *         list.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getChangePackage_Operations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
@@ -55,12 +63,13 @@ public interface ChangePackage extends EObject {
 	EList<AbstractOperation> getOperations();
 
 	/**
-	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
+	 * Returns the value of the '<em><b>Events</b></em>' containment reference
+	 * list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Events</em>' containment reference list isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -72,11 +81,11 @@ public interface ChangePackage extends EObject {
 	EList<Event> getEvents();
 
 	/**
-	 * Returns the value of the '<em><b>Log Message</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Log Message</b></em>' containment
+	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Log Message</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Log Message</em>' containment reference isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -89,27 +98,32 @@ public interface ChangePackage extends EObject {
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
-	 * <em>Log Message</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
+	 * <em>Log Message</em>}' containment reference. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Log Message</em>' containment reference.
+	 * @param value
+	 *            the new value of the '<em>Log Message</em>' containment
+	 *            reference.
 	 * @see #getLogMessage()
 	 * @generated
 	 */
 	void setLogMessage(LogMessage value);
 
 	/**
-	 * Returns the value of the '<em><b>Version Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty}.
+	 * Returns the value of the '<em><b>Version Properties</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Version Properties</em>' containment reference list isn't clear, there really should
-	 * be more of a description here...
+	 * If the meaning of the '<em>Version Properties</em>' containment reference
+	 * list isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Version Properties</em>' containment reference list.
+	 * @return the value of the '<em>Version Properties</em>' containment
+	 *         reference list.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getChangePackage_VersionProperties()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
@@ -119,27 +133,32 @@ public interface ChangePackage extends EObject {
 	/**
 	 * Apply all operations in the change package to the given project.
 	 * 
-	 * @param project the project
+	 * @param project
+	 *            the project
 	 */
 	void apply(Project project);
 
 	/**
-	 * Apply all operations in the change package to the given project. Additional you can force the operations to be
-	 * applied with illegal operations being ignored.
+	 * Apply all operations in the change package to the given project.
+	 * Additional you can force the operations to be applied with illegal
+	 * operations being ignored.
 	 * 
-	 * @param project the project
-	 * @param force if true, illegal Operations won't stop the other to be applied
+	 * @param project
+	 *            the project
+	 * @param force
+	 *            if true, illegal Operations won't stop the other to be applied
 	 */
 	void apply(Project project, boolean force);
 
 	/**
-	 * Remove all operations from the change package that are masked by later operations in the same package.
+	 * Remove all operations from the change package that are masked by later
+	 * operations in the same package.
 	 */
 	void cannonize();
 
 	/**
-	 * Reverse the change package. Applying a change package and then its reversed change package does not change a
-	 * project in effect.
+	 * Reverse the change package. Applying a change package and then its
+	 * reversed change package does not change a project in effect.
 	 * 
 	 * @return the reverse change package
 	 */
@@ -151,8 +170,9 @@ public interface ChangePackage extends EObject {
 	List<AbstractOperation> getCopyOfOperations();
 
 	/**
-	 * Get all leaf operations of a change package, decomposing all composite operations. The effect of the leaf
-	 * operations on a project is the same as the effect of the root operations of this change package.
+	 * Get all leaf operations of a change package, decomposing all composite
+	 * operations. The effect of the leaf operations on a project is the same as
+	 * the effect of the root operations of this change package.
 	 * 
 	 * @return a list of leaf operations.
 	 */
@@ -166,7 +186,8 @@ public interface ChangePackage extends EObject {
 	Set<ModelElementId> getAllInvolvedModelElements();
 
 	/**
-	 * Get all operations of a change package, that are touching the given model element id
+	 * Get all operations of a change package, that are touching the given model
+	 * element id
 	 * 
 	 * @return a list of leaf operations.
 	 */

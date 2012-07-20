@@ -44,6 +44,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -167,7 +168,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		arguments.put(LogMessage.class, VersioningFactory.eINSTANCE.createLogMessage());
 		arguments.put(Project.class, ModelFactory.eINSTANCE.createProject());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
-		arguments.put(HistoryQuery.class, VersioningFactory.eINSTANCE.createHistoryQuery());
+		arguments.put(HistoryQuery.class, VersioningFactory.eINSTANCE.createPathQuery());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
 		arguments.put(ACOrgUnitId.class, AccesscontrolFactory.eINSTANCE.createACOrgUnitId());
 	}
@@ -290,10 +291,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @return historyquery
 	 */
 	public static HistoryQuery createHistoryQuery(PrimaryVersionSpec ver1, PrimaryVersionSpec ver2) {
-		HistoryQuery historyQuery = VersioningFactory.eINSTANCE.createHistoryQuery();
-		historyQuery.setSource(ModelUtil.clone(ver1));
-		historyQuery.setTarget(ModelUtil.clone(ver2));
-		return historyQuery;
+		return HistoryQueryBuilder.pathQuery(ver1, ver2, false, false);
 	}
 
 	/**

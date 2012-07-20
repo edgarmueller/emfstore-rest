@@ -23,11 +23,14 @@ public class UnkownFeatureException extends Exception {
 	/**
 	 * Constructor.
 	 * 
-	 * @param eClass the EClass of the element
-	 * @param featureName the missing features name
+	 * @param eClass
+	 *            the EClass of the element
+	 * @param featureName
+	 *            the missing features name
 	 */
 	public UnkownFeatureException(EClass eClass, String featureName) {
-		super("The feature \"" + featureName + " is unkown for EClass \"" + eClass.getName());
+		super("The feature \"" + featureName + " is unkown for EClass \""
+				+ eClass.getName());
 	}
 
 }

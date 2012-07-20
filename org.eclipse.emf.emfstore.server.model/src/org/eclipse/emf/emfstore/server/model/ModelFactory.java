@@ -13,28 +13,25 @@ package org.eclipse.emf.emfstore.server.model;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
- * <!-- begin-user-doc -->
- * The <b>Factory</b> for the model.
- * It provides a create method for each non-abstract class of the model.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
+ * create method for each non-abstract class of the model. <!-- end-user-doc -->
  * 
  * @see org.eclipse.emf.emfstore.server.model.ModelPackage
  * @generated
  */
 public interface ModelFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.impl.ModelFactoryImpl.init();
+	ModelFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.impl.ModelFactoryImpl
+			.init();
 
 	/**
-	 * Returns a new object of class '<em>Project History</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Project History</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Project History</em>'.
 	 * @generated
@@ -42,9 +39,8 @@ public interface ModelFactory extends EFactory {
 	ProjectHistory createProjectHistory();
 
 	/**
-	 * Returns a new object of class '<em>Project Info</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Project Info</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Project Info</em>'.
 	 * @generated
@@ -52,9 +48,8 @@ public interface ModelFactory extends EFactory {
 	ProjectInfo createProjectInfo();
 
 	/**
-	 * Returns a new object of class '<em>Session Id</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Session Id</em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Session Id</em>'.
 	 * @generated
@@ -62,9 +57,8 @@ public interface ModelFactory extends EFactory {
 	SessionId createSessionId();
 
 	/**
-	 * Returns a new object of class '<em>Server Space</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Server Space</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Server Space</em>'.
 	 * @generated
@@ -72,9 +66,8 @@ public interface ModelFactory extends EFactory {
 	ServerSpace createServerSpace();
 
 	/**
-	 * Returns a new object of class '<em>Project Id</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Project Id</em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Project Id</em>'.
 	 * @generated
@@ -82,9 +75,8 @@ public interface ModelFactory extends EFactory {
 	ProjectId createProjectId();
 
 	/**
-	 * Returns a new object of class '<em>Version Info</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Version Info</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Version Info</em>'.
 	 * @generated
@@ -92,9 +84,8 @@ public interface ModelFactory extends EFactory {
 	VersionInfo createVersionInfo();
 
 	/**
-	 * Returns a new object of class '<em>Client Version Info</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Client Version Info</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Client Version Info</em>'.
 	 * @generated
@@ -102,9 +93,8 @@ public interface ModelFactory extends EFactory {
 	ClientVersionInfo createClientVersionInfo();
 
 	/**
-	 * Returns a new object of class '<em>File Identifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>File Identifier</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>File Identifier</em>'.
 	 * @generated
@@ -112,9 +102,8 @@ public interface ModelFactory extends EFactory {
 	FileIdentifier createFileIdentifier();
 
 	/**
-	 * Returns a new object of class '<em>Authentication Information</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new object of class '<em>Authentication Information</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Authentication Information</em>'.
 	 * @generated
@@ -122,8 +111,7 @@ public interface ModelFactory extends EFactory {
 	AuthenticationInformation createAuthenticationInformation();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+	 * Returns the package supported by this factory. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.
