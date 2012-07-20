@@ -23,6 +23,8 @@ public class PersistenceTest extends WorkspaceTest {
 			.getModelElements().size(), 1);
 		WorkspaceManager.getInstance().dispose();
 		WorkspaceManager.getInstance().reinit();
+		projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0);
+		project = projectSpace.getProject();
 		assertTrue(ModelUtil.areEqual(WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0)
 			.getProject(), originalProject));
 	}

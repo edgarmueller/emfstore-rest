@@ -80,6 +80,11 @@ public class SetupHelper {
 	private String projectPath;
 	private TestProjectEnum projectTemplate;
 
+	private int width;
+	private int height;
+	private long seed;
+	private String modelKey;
+
 	/**
 	 * @param projectTemplate test project to initialize SetupHelper
 	 */
@@ -97,6 +102,13 @@ public class SetupHelper {
 		LOGGER.log(Level.INFO, "SetupHelper instantiated with " + absolutePath);
 	}
 
+	public SetupHelper(String modelKey, int width, int height, long seed) {
+		this.width = width;
+		this.height = height;
+		this.seed = seed;
+		this.modelKey = modelKey;
+	}
+
 	/**
 	 * Generates a project randomly.
 	 * 
@@ -110,15 +122,15 @@ public class SetupHelper {
 	 *            an initial seed value
 	 * @return the project space containing the generated project
 	 */
-	public static ProjectSpace generateProject(String modelKey, int width, int depth, long seed) {
-		ProjectSpace createLocalProject = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.createLocalProject("", "");
+	public void generateRandomProject() {
 		Project project = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject();
-		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, width, depth, seed);
+		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, width, height, seed);
 		Configuration.setAutoSave(false);
 		ModelMutator.generateModel(config);
-		createLocalProject.setProject(project);
-		return createLocalProject;
+		testProjectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+			.importProject(project, "Generated project", "");
+		testProject = testProjectSpace.getProject();
+		projectId = testProjectSpace.getProjectId();
 	}
 
 	private static ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
@@ -356,9 +368,11 @@ public class SetupHelper {
 		if (projectTemplate != null) {
 			// we are using a project template
 			setupTestProjectSpace(projectTemplate);
-		} else {
+		} else if (projectPath != null) {
 			// we are using the absolute path of an exported unicase project (.ucp file)
 			setupTestProjectSpace(projectPath);
+		} else {
+			generateRandomProject();
 		}
 		LOGGER.log(Level.INFO, "projectspace initialized");
 
