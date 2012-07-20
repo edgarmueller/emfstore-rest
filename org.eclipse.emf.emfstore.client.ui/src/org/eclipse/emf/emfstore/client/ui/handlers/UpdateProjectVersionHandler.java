@@ -29,7 +29,7 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 	public void handle() {
 		// TODO: ask for specific version, not HEAD
 		ProjectSpace ps = requireSelection(ProjectSpace.class);
-		new UIUpdateProjectController(getShell(), ps, Versions.HEAD_VERSION(ps
+		new UIUpdateProjectController(getShell(), ps, Versions.createHEAD(ps
 				.getBaseVersion())).execute();
 	}
 

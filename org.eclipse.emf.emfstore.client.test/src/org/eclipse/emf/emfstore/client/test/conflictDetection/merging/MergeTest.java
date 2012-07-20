@@ -153,7 +153,7 @@ public class MergeTest extends ConflictDetectionTest {
 
 		public DecisionManager execute() {
 			ensureCopy();
-			PrimaryVersionSpec spec = Versions.PRIMARY(23);
+			PrimaryVersionSpec spec = Versions.createPRIMARY(23);
 
 			DecisionManager manager = new DecisionManager(getProject(), Arrays.asList(getProjectSpace()
 				.getLocalChangePackage(true)), Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true)), spec,

@@ -41,9 +41,9 @@ import org.junit.Test;
  */
 public class HistoryAPITests extends CoreServerTest {
 
-	final static public PrimaryVersionSpec[] versions = { Versions.PRIMARY("trunk", 0), Versions.PRIMARY("trunk", 1),
-		Versions.PRIMARY("b1", 2), Versions.PRIMARY("b2", 3), Versions.PRIMARY("b1", 4), Versions.PRIMARY("b2", 5),
-		Versions.PRIMARY("b3", 6), Versions.PRIMARY("b3", 7) };
+	final static public PrimaryVersionSpec[] versions = { Versions.createPRIMARY("trunk", 0), Versions.createPRIMARY("trunk", 1),
+		Versions.createPRIMARY("b1", 2), Versions.createPRIMARY("b2", 3), Versions.createPRIMARY("b1", 4), Versions.createPRIMARY("b2", 5),
+		Versions.createPRIMARY("b3", 6), Versions.createPRIMARY("b3", 7) };
 
 	final static public String[] elementNames = { "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7" };
 

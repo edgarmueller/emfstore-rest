@@ -862,7 +862,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 */
 	public boolean isUpdated() throws EmfStoreException {
 		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions
-				.HEAD_VERSION(getBaseVersion()));
+				.createHEAD(getBaseVersion()));
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -938,7 +938,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 							"Can't merge branch with itself.");
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions
-						.ANCESTOR(getBaseVersion(), branchSpec));
+						.createANCESTOR(getBaseVersion(), branchSpec));
 
 				List<ChangePackage> baseChanges = getChanges(commonAncestor,
 						getBaseVersion());
@@ -1246,7 +1246,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#update()
 	 */
 	public PrimaryVersionSpec update() throws EmfStoreException {
-		return update(Versions.HEAD_VERSION(getBaseVersion()));
+		return update(Versions.createHEAD(getBaseVersion()));
 	}
 
 	/**

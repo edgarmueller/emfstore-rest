@@ -95,7 +95,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					return ps.commitToBranch(Versions.BRANCH(branchName), null, null, null);
+					return ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}

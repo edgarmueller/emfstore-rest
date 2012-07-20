@@ -44,7 +44,7 @@ public class ForceRevertController extends ServerCall<Void> {
 				projectSpace.getUsersession(),
 				projectSpace.getProjectInfo(),
 				connectionManager.resolveVersionSpec(projectSpace.getUsersession().getSessionId(),
-					projectSpace.getProjectId(), Versions.HEAD_VERSION(versionSpec)), getProgressMonitor());
+					projectSpace.getProjectId(), Versions.createHEAD(versionSpec)), getProgressMonitor());
 		PrimaryVersionSpec sourceVersion = ModelUtil.clone(versionSpec);
 		sourceVersion.setIdentifier(sourceVersion.getIdentifier() - 1);
 		List<ChangePackage> changes = revertSpace.getChanges(sourceVersion, versionSpec);

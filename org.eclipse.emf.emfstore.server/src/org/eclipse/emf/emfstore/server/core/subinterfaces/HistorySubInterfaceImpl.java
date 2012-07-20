@@ -376,11 +376,11 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 		if (version.getPrimarySpec().equals(project.getLastVersion().getPrimarySpec())) {
-			history.getTagSpecs().add(Versions.TAG("HEAD", VersionSpec.GLOBAL));
+			history.getTagSpecs().add(Versions.createTAG("HEAD", VersionSpec.GLOBAL));
 		}
 		for (BranchInfo branch : project.getBranches()) {
 			if (version.getPrimarySpec().equals(branch.getHead())) {
-				history.getTagSpecs().add(Versions.TAG("HEAD: " + branch.getName(), branch.getName()));
+				history.getTagSpecs().add(Versions.createTAG("HEAD: " + branch.getName(), branch.getName()));
 			}
 		}
 

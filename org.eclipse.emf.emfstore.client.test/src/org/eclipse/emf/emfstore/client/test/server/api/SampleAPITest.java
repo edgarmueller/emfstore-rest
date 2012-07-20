@@ -51,7 +51,7 @@ public class SampleAPITest extends CoreServerTest {
 					getProjectSpace().commit();
 
 					testElement.setName("2");
-					PrimaryVersionSpec branch = getProjectSpace().commitToBranch(Versions.BRANCH("test"), null, null,
+					PrimaryVersionSpec branch = getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null, null,
 						null);
 
 				} catch (EmfStoreException e) {

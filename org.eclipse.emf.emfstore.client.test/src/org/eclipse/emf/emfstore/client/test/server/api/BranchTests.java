@@ -188,7 +188,7 @@ public class BranchTests extends CoreServerTest {
 
 		PrimaryVersionSpec branch = branch(ps, "b1");
 
-		ps.addTag(branch, Versions.TAG("mytag", branch.getBranch()));
+		ps.addTag(branch, Versions.createTAG("mytag", branch.getBranch()));
 
 		ProjectHistory history = getProjectHistory(ps);
 		assertEquals(2, history.getVersions().size());
@@ -222,12 +222,12 @@ public class BranchTests extends CoreServerTest {
 
 		Version branchedVersion = history.getVersions().get(1);
 
-		branchedVersion.getTagSpecs().add(Versions.TAG("mytag", "b1"));
+		branchedVersion.getTagSpecs().add(Versions.createTAG("mytag", "b1"));
 
 		assertEquals(1, branchedVersion.getTagSpecs().size());
 		assertEquals("mytag", branchedVersion.getTagSpecs().get(0).getName());
 
-		ps.removeTag(branch, Versions.TAG("mytag", "b1"));
+		ps.removeTag(branch, Versions.createTAG("mytag", "b1"));
 
 		assertEquals(0, branchedVersion.getTagSpecs().size());
 	}

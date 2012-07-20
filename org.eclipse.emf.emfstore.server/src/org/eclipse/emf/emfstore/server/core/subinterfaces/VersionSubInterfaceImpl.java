@@ -379,7 +379,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		// latest version == getVersion.size() (version start with index 0 as
 		// the list), branch from previous is used.
-		newVersion.setPrimarySpec(Versions.PRIMARY(previousHeadVersion.getPrimarySpec(), projectHistory.getVersions()
+		newVersion.setPrimarySpec(Versions.createPRIMARY(previousHeadVersion.getPrimarySpec(), projectHistory.getVersions()
 			.size()));
 		newVersion.setNextVersion(null);
 
