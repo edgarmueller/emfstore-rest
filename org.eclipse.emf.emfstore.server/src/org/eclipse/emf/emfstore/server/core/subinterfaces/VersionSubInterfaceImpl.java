@@ -177,6 +177,11 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (0 > index || index >= versions || branch == null) {
 			throw new InvalidVersionSpecException();
 		}
+
+		if (branch.equals(VersionSpec.GLOBAL)) {
+			return projectHistory.getVersions().get(versions - 1).getPrimarySpec();
+		}
+
 		// Get biggest primary version of given branch which is equal or lower
 		// to the given versionSpec
 		for (int i = index; i >= 0; i--) {
@@ -191,6 +196,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private PrimaryVersionSpec resolveHeadVersionSpec(ProjectHistory projectHistory, HeadVersionSpec versionSpec)
 		throws InvalidVersionSpecException {
+		if (VersionSpec.GLOBAL.equals(versionSpec.getBranch())) {
+			return projectHistory.getVersions().get(projectHistory.getVersions().size() - 1).getPrimarySpec();
+		}
 		BranchInfo info = getBranchInfo(projectHistory, versionSpec);
 		if (info != null) {
 			return info.getHead();
@@ -275,6 +283,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			} else if (getBranchInfo(projectHistory, targetBranch) == null) {
 				if (targetBranch.getBranch().equals("")) {
 					throw new EmfStoreException("Empty branch name is not permitted.");
+				}
+				if (targetBranch.getBranch().equals(VersionSpec.GLOBAL)) {
+					throw new EmfStoreException("Reserved branch name.");
 				}
 				// when branch does NOT exist, create new branch
 				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);

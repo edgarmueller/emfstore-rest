@@ -5,6 +5,7 @@
  */
 package org.eclipse.emf.emfstore.client.test.server;
 
+import org.eclipse.emf.emfstore.client.test.server.api.AllServerAPITests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -15,7 +16,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class, InvalidAuthenticationTest.class,
-	PropertiesTest.class, FileManagerTest.class })
+	PropertiesTest.class, FileManagerTest.class, AllServerAPITests.class })
 public class AllServerTests {
 
 }

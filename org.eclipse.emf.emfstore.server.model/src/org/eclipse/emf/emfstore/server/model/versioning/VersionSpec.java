@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -35,8 +34,8 @@ public interface VersionSpec extends EObject {
 	 * Returns the value of the '<em><b>Branch</b></em>' attribute. The default
 	 * value is <code>"trunk"</code>. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Branch</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Branch</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -49,8 +48,7 @@ public interface VersionSpec extends EObject {
 	String getBranch();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
 	 * <em>Branch</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -65,13 +63,15 @@ public interface VersionSpec extends EObject {
 	 * Use {@link Versions} instead.
 	 */
 	@Deprecated
-	VersionSpec HEAD_VERSION = VersioningFactory.eINSTANCE
-			.createHeadVersionSpec();
+	VersionSpec HEAD_VERSION = VersioningFactory.eINSTANCE.createHeadVersionSpec();
 
 	String HEAD = "HEAD";
 
 	String BASE = "BASE";
 
 	String BRANCH_DEFAULT_NAME = "trunk";
+
+	// magic global variable
+	String GLOBAL = "___GLOBAL___";
 
 } // VersionSpec
