@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.emf.emfstore.modelmutator
 Bundle-Version: 0.9.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)",
+Require-Bundle: org.eclipse.emf.edit;bundle-version="[2.7.0,3.0.0)",
  org.eclipse.emf.emfstore.common.model;bundle-version="0.9.0",
- org.eclipse.emf.edit.ui;bundle-version="2.5.0"
+ org.eclipse.emf.edit.ui;bundle-version="2.7.0"
 Export-Package: org.eclipse.emf.emfstore.modelmutator.api

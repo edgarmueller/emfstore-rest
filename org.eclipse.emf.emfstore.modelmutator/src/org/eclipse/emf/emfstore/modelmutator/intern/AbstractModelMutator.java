@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
 /**
  * Basic implementation of the {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutator}.
  * 
+ * @author Julian Sommerfeldt
  *
  */
 public abstract class AbstractModelMutator {
@@ -45,12 +46,21 @@ public abstract class AbstractModelMutator {
 
 	private ModelMutatorUtil util;
 	
+	private int currentObjectCount;
+	
+	private int targetObjectCount;
+	
+	private int currentWidth = 1;
+	
+	private int currentDepth = 1;
+	
 	/**
 	 * @param config The {@link ModelMutatorConfiguration} to use for mutation.
 	 */
 	public AbstractModelMutator(ModelMutatorConfiguration config) {
 		this.config = config;
 		this.util = new ModelMutatorUtil(config);
+		this.targetObjectCount = config.getMinObjectsCount();
 	}
 	
 	/**
@@ -69,26 +79,34 @@ public abstract class AbstractModelMutator {
 	public void generate(){
 		preMutate();
 		
-		createChildrenForRoot();
-		
-		changeCrossReferences();
-					
+		// generate till therer are enough objects
+		Random random = config.getRandom();
+		while(currentObjectCount < targetObjectCount){
+			createChildrenForRoot();
+			currentWidth++;
+			if(random.nextBoolean() && random.nextBoolean() && random.nextBoolean()){
+				currentDepth++;
+			}
+		}
+							
 		postMutate();
 	}
 	
 	/**
 	 * Mutation after an initial generation.
 	 */
-	public void mutate() {
+	public void mutate() {		
 		deleteEObjects(config.getRootEObject());
+		
+		currentObjectCount = ModelMutatorUtil.getAllObjectsCount(config.getRootEObject());
 		
 		generate();
 		
 		changeCrossReferences();
-		
+			
 		mutateAttributes();			
 	}
-		
+			
 	/**
 	 * Create the children for the root object.
 	 */
@@ -112,14 +130,18 @@ public abstract class AbstractModelMutator {
 	 * @param depth The depth of the EObject in the total tree.
 	 */
 	public void createChildren(EObject root, int depth){
+		if(currentObjectCount >= targetObjectCount){
+			return;
+		}
+		
 		// check if we reached the maximal depth
-		if(depth >= config.getDepth()){
+		if(depth >= currentDepth){
 			return;
 		}
 								
 		// create children for the current root object
 		List<EObject> children = createChildren(root);
-				
+						
 		// create children for the children (one step deeper)
 		for(EObject obj : children){
 			createChildren(obj, depth + 1);
@@ -146,7 +168,7 @@ public abstract class AbstractModelMutator {
 			}
 						
 			// add remaining children (specified through config)
-			int i = config.getWidth() - root.eContents().size();
+			int i = (currentWidth / 2) - root.eContents().size();
 			
 			// add children to fulfill width constraint 
 			for(; i > 0; i--){
@@ -163,12 +185,18 @@ public abstract class AbstractModelMutator {
 					// only add if it is many or if it is only one
 					if((reference.isMany() || i == 1)){
 						addToParent(root, obj, reference);
-						children.add(obj);		
+						children.add(obj);	
+						currentObjectCount++;
+						currentObjectCount += obj.eContents().size();
 					} else {
-						addToFreeObjects(obj);
+						addToEClassToObjectsMap(obj, freeObjects);
 					}
 					
-					addToAllObjects(obj);
+					addToEClassToObjectsMap(obj, allObjects);
+					
+					if(currentObjectCount >= targetObjectCount){
+						return children;
+					}
 				}
 			}
 		}
@@ -190,36 +218,37 @@ public abstract class AbstractModelMutator {
 			EObject obj = it.next();			
 			if(random.nextBoolean()){
 				toDelete.add(obj);
-				addToFreeObjects(obj);
-			}
+				addToEClassToObjectsMap(obj, freeObjects);
+			} 
+			addToEClassToObjectsMap(obj, allObjects);
 		}
 		
-		int deleteModes = config.isUseEcoreUtilDelete() ? 3 : 2;
+		// check for delete modes to use
+		List<Integer> deleteModes = new ArrayList<Integer>();
+		deleteModes.add(ModelMutatorUtil.DELETE_DELETE_COMMAND);
+		if(config.isUseEcoreUtilDelete()){
+			deleteModes.add(ModelMutatorUtil.DELETE_ECORE);
+		}
+		if(config.isUseRemoveCommand()){
+			deleteModes.add(ModelMutatorUtil.DELETE_REMOVE_COMMAND);
+		}
 		
 		// delete selected objects
+		int size = deleteModes.size();
 		for(EObject obj : new ArrayList<EObject>(toDelete)){
-			util.removeFullPerCommand(obj, random.nextInt(deleteModes));
+			util.removeFullPerCommand(obj, deleteModes.get(random.nextInt(size)));
 		}		
 	}
 	
-	private void addToFreeObjects(EObject obj){
-		List<EObject> objects = freeObjects.get(obj.eClass());
+	private void addToEClassToObjectsMap(EObject obj, Map<EClass, List<EObject>> map){
+		List<EObject> objects = map.get(obj.eClass());
 		if(objects == null){
 			objects = new ArrayList<EObject>();
-			freeObjects.put(obj.eClass(), objects);
+			map.put(obj.eClass(), objects);
 		}
-		objects.add(obj);		
+		objects.add(obj);	
 	}
-	
-	private void addToAllObjects(EObject obj){
-		List<EObject> objects = allObjects.get(obj.eClass());
-		if(objects == null){
-			objects = new ArrayList<EObject>();
-			allObjects.put(obj.eClass(), objects);
-		}
-		objects.add(obj);		
-	}
-	
+		
 	/**
 	 * Get a {@link EClass}, which is valid for the given {@link EReference}.
 	 * 
@@ -295,8 +324,7 @@ public abstract class AbstractModelMutator {
 	private void addToParent(EObject parent, EObject newObject, EReference reference){
 		Random random = config.getRandom();
 		if (reference.isMany()) {
-			Integer index = random.nextBoolean() ? 0 : null;
-			util.addPerCommand(parent, reference, newObject, index);
+			util.addPerCommand(parent, reference, newObject, random.nextBoolean() ? 0 : null);
 		} else {
 			util.setPerCommand(parent, reference, newObject);
 		}

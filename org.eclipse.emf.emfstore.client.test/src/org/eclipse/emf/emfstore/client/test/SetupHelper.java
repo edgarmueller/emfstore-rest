@@ -80,8 +80,7 @@ public class SetupHelper {
 	private String projectPath;
 	private TestProjectEnum projectTemplate;
 
-	private int width;
-	private int height;
+	private int minObjectsCount;
 	private long seed;
 	private String modelKey;
 
@@ -102,9 +101,8 @@ public class SetupHelper {
 		LOGGER.log(Level.INFO, "SetupHelper instantiated with " + absolutePath);
 	}
 
-	public SetupHelper(String modelKey, int width, int height, long seed) {
-		this.width = width;
-		this.height = height;
+	public SetupHelper(String modelKey, int minObjectsCount, long seed) {
+		this.minObjectsCount = minObjectsCount;
 		this.seed = seed;
 		this.modelKey = modelKey;
 	}
@@ -124,7 +122,8 @@ public class SetupHelper {
 	 */
 	public void generateRandomProject() {
 		Project project = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject();
-		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, width, height, seed);
+		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, minObjectsCount,
+			seed);
 		Configuration.setAutoSave(false);
 		ModelMutator.generateModel(config);
 		testProjectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
@@ -134,12 +133,11 @@ public class SetupHelper {
 	}
 
 	private ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
-		int width, int depth, long seed) {
+		int minObjectsCount, long seed) {
 		ModelMutatorConfiguration config = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
 			rootObject, seed);
 		config.setIgnoreAndLog(false);
-		config.setDepth(depth);
-		config.setWidth(width);
+		config.setMinObjectsCount(minObjectsCount);
 		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
 		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());

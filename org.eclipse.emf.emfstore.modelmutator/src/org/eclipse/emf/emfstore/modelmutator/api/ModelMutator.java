@@ -65,7 +65,4 @@ public class ModelMutator extends AbstractModelMutator {
 	public void mutate() {
 		super.mutate();
 	}
-
-	
-
 }

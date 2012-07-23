@@ -41,8 +41,7 @@ public class PerformanceTest {
 	private Usersession usersession;
 	private ProjectSpace projectSpace2;
 	private final String modelKey = "http://org/eclipse/example/bowling";
-	private final int width = 10;
-	private final int depth = 2;
+	private final int minObjectsCount = 10000;
 	private final long seed = 1234567800;
 
 	private long lastSeed = seed + 1;
@@ -74,7 +73,7 @@ public class PerformanceTest {
 	 */
 	@Before
 	public void beforeTest() throws EmfStoreException {
-		setupHelper = new SetupHelper(modelKey, 7, 7, lastSeed);
+		setupHelper = new SetupHelper(modelKey, 10000, lastSeed);
 		setupHelper.setupWorkSpace();
 		setupHelper.generateRandomProject();
 		setupHelper.shareProject();
@@ -398,8 +397,7 @@ public class PerformanceTest {
 		lastSeed = lastSeed == seed ? seed + 1 : seed;
 		final ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
 			prjSpace.getProject(), lastSeed);
-		mmc.setDepth(depth);
-		mmc.setWidth(width);
+		mmc.setMinObjectsCount(minObjectsCount);
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {

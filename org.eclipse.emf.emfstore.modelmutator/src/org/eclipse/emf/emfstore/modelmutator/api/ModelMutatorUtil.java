@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.modelmutator.api;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -64,18 +65,19 @@ import org.eclipse.emf.emfstore.modelmutator.intern.attribute.AttributeSetterESt
  * @author Stephan Köhler
  * @author Philip Achenbach
  * @author Dmitry Litvinov
+ * @author Julian Sommerfeldt
  */
 public final class ModelMutatorUtil {
 
 	/**
 	 * Indicates deleting with the {@link DeleteCommand}.
 	 */
-	public static final int DELETE_COMMAND = 0;
+	public static final int DELETE_DELETE_COMMAND = 0;
 
 	/**
 	 * Indicates deleting through removing containment references.
 	 */
-	public static final int DELETE_CONTAINMENT = 1;
+	public static final int DELETE_REMOVE_COMMAND = 1;
 	
 	/**
 	 * Indicates deleting with the {@link EcoreUtil#delete(EObject)} method.
@@ -290,7 +292,7 @@ public final class ModelMutatorUtil {
 			allEClasses = new ArrayList<EClass>();
 			Registry registry = EPackage.Registry.INSTANCE;
 			// for all registered EPackages
-			for (Entry<String, Object> entry : registry.entrySet()) {
+			for (Entry<String, Object> entry : new HashSet<Entry<String, Object>>(registry.entrySet())) {
 				EPackage ePackage = registry.getEPackage(entry.getKey());
 				for (EClass eClass : getAllEClasses(ePackage)) {
 					// no abstracts or interfaces
@@ -324,6 +326,7 @@ public final class ModelMutatorUtil {
 					list.add((EClass) classifier);
 				}
 			}
+			allClassesInPackage.put(ePackage, list);
 		}
 
 		return list;
@@ -372,14 +375,13 @@ public final class ModelMutatorUtil {
 	 * @param feature the EStructuralFeature that <code>newObject</code> shall be added to
 	 * @param newValue the Object that shall be added to <code>feature</code>
 	 * @param index the index where to add the object or null if it should be added to the end.
-	 * @return <code>newValue</code> if the <code>AddCommand</code> was performed successful or <code>null</code> if it failed
 	 * @see AddCommand#AddCommand(EditingDomain, EObject, EStructuralFeature, Object)
 	 */
-	public EObject addPerCommand(EObject eObject, EStructuralFeature feature, Object newValue, Integer index) {
+	public void addPerCommand(EObject eObject, EStructuralFeature feature, Object newValue, Integer index) {
 		try {
 			if (feature.isUnique() && ((Collection<?>) eObject.eGet(feature)).contains(newValue)) {
 				// unique feature already contains object -> nothing to do
-				return null;
+				return;
 			}
 			EditingDomain domain = config.getEditingDomain();
 			if (index == null) {
@@ -387,16 +389,11 @@ public final class ModelMutatorUtil {
 			} else {
 				domain.getCommandStack().execute(new AddCommand(domain, eObject, feature, newValue, index));
 			}
-			if (newValue instanceof EObject) {
-				return (EObject) newValue;
-			} else {
-				return null;
-			}
+			
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
-			handle(e, config);
-			return null;
+			handle(e, config);			
 		}
 	}
 
@@ -539,32 +536,20 @@ public final class ModelMutatorUtil {
 	 * Deletes the {@link EObject} using the specified <code>howToDelete</code>.
 	 * 
 	 * @param eObject The {@link EObject} to delete.
-	 * @param howToDelete The way to delete: {@link #DELETE_ECORE}, {@link #DELETE_COMMAND} or
-	 *            {@link #DELETE_CONTAINMENT}.
+	 * @param howToDelete The way to delete: {@link #DELETE_ECORE}, {@link #DELETE_DELETE_COMMAND} or
+	 *            {@link #DELETE_REMOVE_COMMAND}.
 	 */
-	@SuppressWarnings("unchecked")
 	public void removeFullPerCommand(final EObject eObject, int howToDelete) {
 		try {
+			EditingDomain domain = config.getEditingDomain();
 			// delete with DeleteCommand
-			if (DELETE_COMMAND == howToDelete) {
-				List<EObject> toDelete = new ArrayList<EObject>(1);
-				toDelete.add(eObject);
-				EditingDomain domain = config.getEditingDomain();
-				domain.getCommandStack().execute(new DeleteCommand(domain, toDelete));
+			if (DELETE_DELETE_COMMAND == howToDelete) {				
+				domain.getCommandStack().execute(new DeleteCommand(domain, Collections.singleton(eObject)));
 
-			// delete through cutting containment
-			} else if (DELETE_CONTAINMENT == howToDelete) {
-				EStructuralFeature feature = eObject.eContainingFeature();
-				if (feature == null) {
-					EcoreUtil.delete(eObject, true);
-				}
-
-				EObject eContainer = eObject.eContainer();
-				if (feature.isMany()) {
-					((EList<Object>) eContainer.eGet(feature)).remove(eObject);
-				} else {
-					eContainer.eSet(feature, null);
-				}
+			// delete through cutting containment (RemoveCommand)
+			} else if (DELETE_REMOVE_COMMAND == howToDelete) {
+				domain.getCommandStack().execute(
+					new RemoveCommand(domain, eObject.eContainer(), eObject.eContainingFeature(), Collections.singleton(eObject)));
 			
 			// delete with EcoreUtil
 			} else if (DELETE_ECORE == howToDelete) {
@@ -764,7 +749,7 @@ public final class ModelMutatorUtil {
 		if (attributeSetters.containsKey(attributeType)) {
 			return attributeSetters.get(attributeType);
 		} else if (isEnum(attributeType)) {
-			return getEEnumSetter((EEnum) attributeType, config.getRandom());
+			return new AttributeSetterEEnum((EEnum) attributeType, config.getRandom());
 		}
 		return null;
 	}
@@ -851,17 +836,18 @@ public final class ModelMutatorUtil {
 			setPerCommand(eObject, reference, possibleReferenceObjects.get(index));
 		}
 	}
-
+	
 	/**
-	 * Returns an instance of the EEnum AttributeSetter belonging to the EEnum
-	 * specified by eEnum.
-	 * 
-	 * @param eEnum
-	 *            the EEnum to create the AttributeSetter for
-	 * @param random the Random object
-	 * @return a new AttributeSetterEEnum instance
+	 * @param obj The root object containing the direct and indirect children. 
+	 * @return The count of all direct and indirect children of the object.
 	 */
-	public static AttributeSetter<?> getEEnumSetter(EEnum eEnum, Random random) {
-		return new AttributeSetterEEnum(eEnum, random);
+	public static int getAllObjectsCount(EObject obj){
+		TreeIterator<EObject> eAllContents = obj.eAllContents();		
+		int i = 0;
+		while (eAllContents.hasNext()) {
+			i++;
+			eAllContents.next();
+		}
+		return i;
 	}
 }

@@ -15,11 +15,14 @@ import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 
+import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 
 /**
  * Configuration for the ModelMutator.
@@ -27,26 +30,35 @@ import org.eclipse.emf.edit.domain.EditingDomain;
  * @author Eugen Neufeld
  * @author Stephan Köhler
  * @author Philip Achenbach
+ * @author Julian Sommerfeldt
  */
 public class ModelMutatorConfiguration {
 
-	private final EPackage modelPackage;
-	private final EObject rootEObject;
-	private final Random random;
+	private EPackage modelPackage;
+	private EObject rootEObject;
+	private Random random;
+	
+	private Long seed;
 
-	private int depth;
-	private int width;
-
+	private int minObjectsCount;
+	
 	private boolean ignoreAndLog;
 	private Collection<EClass> eClassesToIgnore;
 	private Collection<EStructuralFeature> eStructuralFeaturesToIgnore;
 	private Set<RuntimeException> exceptionLog;
 
 	private boolean doNotGenerateRoot;
-	private boolean allElementsOnRoot;
 	private boolean useEcoreUtilDelete;
+	private boolean useRemoveCommand;
 	
 	private EditingDomain editingDomain;
+	
+	/**
+	 * Initialize variables with null. Variables have to be set later!
+	 */
+	public ModelMutatorConfiguration(){
+		this(null, null, null);
+	}
 
 	/**
 	 * The constructor for the configuration.
@@ -55,50 +67,63 @@ public class ModelMutatorConfiguration {
 	 * @param rootEObject the rootObject for the generation/change
 	 * @param seed the seed for the generation/change
 	 */
-	public ModelMutatorConfiguration(EPackage modelPackage, EObject rootEObject, long seed) {
+	public ModelMutatorConfiguration(EPackage modelPackage, EObject rootEObject, Long seed) {
 		this.modelPackage = modelPackage;
 		this.rootEObject = rootEObject;
-		this.random = new Random(seed);
+		this.seed = seed;
 		
 		this.eClassesToIgnore = new LinkedHashSet<EClass>();
 		this.eStructuralFeaturesToIgnore = new LinkedHashSet<EStructuralFeature>();
 		this.exceptionLog = new LinkedHashSet<RuntimeException>();
-		this.ignoreAndLog = true;
+		this.ignoreAndLog = false;
 		
-		this.depth = 5; // Default depth
-		this.width = 5; // Default width
+		minObjectsCount = 100;
 		
 		useEcoreUtilDelete = false;
+		useRemoveCommand = true;
+	}
+	
+	/**
+	 * Reset the {@link ModelMutatorConfiguration}. Means that it has the same state after the first initialization.
+	 */
+	public void reset(){
+		random = null;		
+		editingDomain = null;
+	}
+	
+	/**
+	 * @param modelPackage the EPackage
+	 */
+	public void setModelPackage(EPackage modelPackage) {
+		this.modelPackage = modelPackage;
+	}
+	
+	/**
+	 * @param rootEObject the rootObject for the generation/change
+	 */
+	public void setRootEObject(EObject rootEObject) {
+		this.rootEObject = rootEObject;
+	}
+	
+	/**
+	 * @param seed The seed for the random.
+	 */
+	public void setSeed(Long seed) {
+		this.seed = seed;
+	}
+	
+	/**
+	 * @return The minimum number of objects to generate.
+	 */
+	public int getMinObjectsCount() {
+		return minObjectsCount;
 	}
 
 	/**
-	 * @return the depth
+	 * @param minObjectsCount The minimum number of objects to generate.
 	 */
-	public int getDepth() {
-		return depth;
-	}
-
-	/**
-	 * @param depth
-	 *            the depth to set
-	 */
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	/**
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * @param width
-	 *            the width to set
-	 */
-	public void setWidth(int width) {
-		this.width = width;
+	public void setMinObjectsCount(int minObjectsCount) {
+		this.minObjectsCount = minObjectsCount;
 	}
 
 	/**
@@ -164,6 +189,9 @@ public class ModelMutatorConfiguration {
 	 * @return the random
 	 */
 	public Random getRandom() {
+		if(random == null){
+			this.random = new Random(seed);
+		}
 		return random;
 	}
 
@@ -196,26 +224,15 @@ public class ModelMutatorConfiguration {
 	public void setDoNotGenerateRoot(boolean doNotGenerateRoot) {
 		this.doNotGenerateRoot = doNotGenerateRoot;
 	}
-
-	/**
-	 * @return the allElementsOnRoot
-	 */
-	public boolean isAllElementsOnRoot() {
-		return allElementsOnRoot;
-	}
-
-	/**
-	 * @param allElementsOnRoot
-	 *            the allElementsOnRoot to set
-	 */
-	public void setAllElementsOnRoot(boolean allElementsOnRoot) {
-		this.allElementsOnRoot = allElementsOnRoot;
-	}
-	
+		
 	/**
 	 * @return The {@link EditingDomain} specified in the config.
 	 */
 	public EditingDomain getEditingDomain() {
+		if(editingDomain == null){
+			editingDomain = new AdapterFactoryEditingDomain(new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE), new BasicCommandStack());
+		}
 		return editingDomain;
 	}
 	
@@ -241,6 +258,20 @@ public class ModelMutatorConfiguration {
 	 */
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
+	}
+	
+	/**
+	 * @return Should the mutator use the RemoveCommand when deleting?
+	 */
+	public boolean isUseRemoveCommand() {
+		return useRemoveCommand;
+	}
+	
+	/**
+	 * @param useRemoveCommand Should the mutator use the RemoveCommand when deleting?
+	 */
+	public void setUseRemoveCommand(boolean useRemoveCommand) {
+		this.useRemoveCommand = useRemoveCommand;
 	}
 
 }
