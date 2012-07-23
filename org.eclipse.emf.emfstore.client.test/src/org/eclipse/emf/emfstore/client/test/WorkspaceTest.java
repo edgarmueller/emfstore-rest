@@ -8,8 +8,10 @@ package org.eclipse.emf.emfstore.client.test;
 
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -21,8 +23,8 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 
 /**
@@ -39,7 +41,7 @@ public abstract class WorkspaceTest {
 	 * Setup a dummy project for testing.
 	 */
 	@Before
-	public void setupProjectSpace() {
+	public void setupTest() {
 		beforeHook();
 		CommonUtil.setTesting(true);
 		WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
@@ -73,10 +75,16 @@ public abstract class WorkspaceTest {
 
 	/**
 	 * Clean up workspace.
+	 * 
+	 * @throws IOException
 	 */
 	@After
-	public void cleanProjectSpace() {
-		cleanProjectSpace(getProjectSpace());
+	public void teardown() throws IOException {
+		WorkspaceManager.getInstance().dispose();
+		setProject(null);
+		setProjectSpace(null);
+		workspace = null;
+		FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 	}
 
 	/**
@@ -108,16 +116,6 @@ public abstract class WorkspaceTest {
 
 		setProject(null);
 		setProjectSpace(null);
-	}
-
-	/**
-	 * Delete all persisted data.
-	 * 
-	 * @throws IOException if deletion fails
-	 */
-	@AfterClass
-	public static void deleteData() throws IOException {
-		SetupHelper.cleanupWorkspace();
 	}
 
 	/**

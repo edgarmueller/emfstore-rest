@@ -133,7 +133,7 @@ public class SetupHelper {
 		projectId = testProjectSpace.getProjectId();
 	}
 
-	private static ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
+	private ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
 		int width, int depth, long seed) {
 		ModelMutatorConfiguration config = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
 			rootObject, seed);
