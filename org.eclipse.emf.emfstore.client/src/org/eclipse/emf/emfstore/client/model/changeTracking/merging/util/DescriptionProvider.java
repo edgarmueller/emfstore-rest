@@ -52,14 +52,23 @@ public class DescriptionProvider {
 
 	private Properties load() {
 		Properties properties = new Properties();
+		Bundle bundle = Activator.getDefault().getBundle();
+		URL fileURL = bundle.getEntry("resources/conflictdescription.ini");
+		FileInputStream fileInputStream = null;
 
 		try {
-			Bundle bundle = Activator.getDefault().getBundle();
-			URL fileURL = bundle.getEntry("resources/conflictdescription.ini");
-			properties.load(new FileInputStream(new File(FileLocator.resolve(
-					fileURL).toURI())));
+			fileInputStream = new FileInputStream(new File(FileLocator.resolve(fileURL).toURI()));
+			properties.load(fileInputStream);
 		} catch (URISyntaxException e1) {
+			// ignore
 		} catch (IOException e1) {
+			// ignore
+		} finally {
+			try {
+				fileInputStream.close();
+			} catch (IOException e) {
+				// ignore
+			}
 		}
 
 		return properties;

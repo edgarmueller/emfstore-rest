@@ -57,23 +57,29 @@ public final class FileUtil {
 	 * @throws IOException copy problem
 	 */
 	public static void copyFile(InputStream source, File destination) throws IOException {
-		if (source == null || destination == null) {
-			throw new IOException("Source or destination is null.");
-		}
+		FileOutputStream outputStream = null;
 
-		if (destination.getParentFile() != null) {
-			destination.getParentFile().mkdirs();
-		}
-		FileOutputStream outputStream = new FileOutputStream(destination);
+		try {
 
-		byte[] buffer = new byte[4096];
-		int read;
-		while ((read = source.read(buffer)) != -1) {
-			outputStream.write(buffer, 0, read);
-		}
+			if (source == null || destination == null) {
+				throw new IOException("Source or destination is null.");
+			}
 
-		source.close();
-		outputStream.close();
+			if (destination.getParentFile() != null) {
+				destination.getParentFile().mkdirs();
+			}
+
+			outputStream = new FileOutputStream(destination);
+
+			byte[] buffer = new byte[4096];
+			int read;
+			while ((read = source.read(buffer)) != -1) {
+				outputStream.write(buffer, 0, read);
+			}
+		} finally {
+			source.close();
+			outputStream.close();
+		}
 	}
 
 	/**

@@ -158,12 +158,7 @@ public class CSVImportSource extends ImportSource {
 
 				childOrgUnits.add(userImportWrapper);
 				importWrapper.setChildOrgUnits(childOrgUnits);
-
 			}
-
-			bufferedReader.close();
-			isr.close();
-
 		} catch (FileNotFoundException e) {
 			// TODO: sensible error messages
 			WorkspaceUtil.logWarning(e.getMessage(), e);
@@ -177,6 +172,15 @@ public class CSVImportSource extends ImportSource {
 			WorkspaceUtil.logWarning(e.getMessage(), e);
 			EMFStoreMessageDialog.showExceptionDialog("ArrayIndexOutOfBoundsException", e);
 			return false;
+		} finally {
+			try {
+				bufferedReader.close();
+				isr.close();
+			} catch (IOException e) {
+				WorkspaceUtil.logWarning(e.getMessage(), e);
+				EMFStoreMessageDialog.showExceptionDialog("An I/O-exception occured", e);
+				return false;
+			}
 		}
 
 		return true;

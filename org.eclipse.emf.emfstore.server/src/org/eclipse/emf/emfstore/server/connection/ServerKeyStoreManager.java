@@ -104,9 +104,11 @@ public final class ServerKeyStoreManager {
 
 	private KeyStore getKeyStore() throws ServerKeyStoreException {
 		if (keyStore == null) {
+			FileInputStream fileInputStream = null;
 			try {
 				keyStore = KeyStore.getInstance("JKS");
-				keyStore.load(new FileInputStream(ServerConfiguration.getServerKeyStorePath()), getKeyStorePassword());
+				fileInputStream = new FileInputStream(ServerConfiguration.getServerKeyStorePath());
+				keyStore.load(fileInputStream, getKeyStorePassword());
 			} catch (NoSuchAlgorithmException e) {
 				throw new ServerKeyStoreException(e);
 			} catch (CertificateException e) {
@@ -117,6 +119,12 @@ public final class ServerKeyStoreManager {
 				throw new ServerKeyStoreException(e);
 			} catch (KeyStoreException e) {
 				throw new ServerKeyStoreException(e);
+			} finally {
+				try {
+					fileInputStream.close();
+				} catch (IOException e) {
+					throw new ServerKeyStoreException(e);
+				}
 			}
 		}
 		return keyStore;

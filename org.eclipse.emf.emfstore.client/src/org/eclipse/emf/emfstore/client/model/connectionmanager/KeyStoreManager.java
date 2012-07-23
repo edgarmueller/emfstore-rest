@@ -211,12 +211,24 @@ public final class KeyStoreManager {
 	 *             illegal operations.
 	 */
 	public void addCertificate(String alias, String path) throws InvalidCertificateException, CertificateStoreException {
+		FileInputStream fileInputStream = null;
 		try {
-			addCertificate(alias, new FileInputStream(path));
+			fileInputStream = new FileInputStream(path);
+			addCertificate(alias, fileInputStream);
 		} catch (FileNotFoundException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logException(message, e);
 			throw new CertificateStoreException(message, e);
+		} finally {
+			if (fileInputStream != null) {
+				try {
+					fileInputStream.close();
+				} catch (IOException e) {
+					String message = "Storing certificate failed!";
+					WorkspaceUtil.logException(message, e);
+					throw new CertificateStoreException(message, e);
+				}
+			}
 		}
 	}
 

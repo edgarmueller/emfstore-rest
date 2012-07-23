@@ -71,15 +71,23 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 		this.hash = hash;
 
 		passwordFile = new Properties();
+		File propertyFile = new File(filePath);
+		FileInputStream fis = null;
 		try {
-			File propertyFile = new File(filePath);
-			FileInputStream fis = new FileInputStream(propertyFile);
+			fis = new FileInputStream(propertyFile);
 			passwordFile.load(fis);
-			fis.close();
 		} catch (IOException e) {
 			ModelUtil.logInfo("Couldn't load password file from path: " + filePath);
 			// Run with empty password file
 			// throw new AccessControlException("Couldn't load password file from path: "+filePath);
+		} finally {
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					ModelUtil.logInfo("Couldn't load password file from path: " + filePath);
+				}
+			}
 		}
 	}
 
