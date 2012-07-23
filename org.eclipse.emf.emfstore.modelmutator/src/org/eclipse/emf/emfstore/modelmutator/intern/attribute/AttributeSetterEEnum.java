@@ -36,7 +36,6 @@ public class AttributeSetterEEnum extends AttributeSetter<Enumerator> {
 	 */
 	private EEnum eEnum;
 
-
 	/**
 	 * Creates a new AttributeSetter for Enumerator attributes.
 	 * 

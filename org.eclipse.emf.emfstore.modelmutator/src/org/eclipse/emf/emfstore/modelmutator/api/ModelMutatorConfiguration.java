@@ -37,11 +37,11 @@ public class ModelMutatorConfiguration {
 	private EPackage modelPackage;
 	private EObject rootEObject;
 	private Random random;
-	
+
 	private Long seed;
 
 	private int minObjectsCount;
-	
+
 	private boolean ignoreAndLog;
 	private Collection<EClass> eClassesToIgnore;
 	private Collection<EStructuralFeature> eStructuralFeaturesToIgnore;
@@ -50,13 +50,13 @@ public class ModelMutatorConfiguration {
 	private boolean doNotGenerateRoot;
 	private boolean useEcoreUtilDelete;
 	private boolean useRemoveCommand;
-	
+
 	private EditingDomain editingDomain;
-	
+
 	/**
 	 * Initialize variables with null. Variables have to be set later!
 	 */
-	public ModelMutatorConfiguration(){
+	public ModelMutatorConfiguration() {
 		this(null, null, null);
 	}
 
@@ -71,47 +71,47 @@ public class ModelMutatorConfiguration {
 		this.modelPackage = modelPackage;
 		this.rootEObject = rootEObject;
 		this.seed = seed;
-		
+
 		this.eClassesToIgnore = new LinkedHashSet<EClass>();
 		this.eStructuralFeaturesToIgnore = new LinkedHashSet<EStructuralFeature>();
 		this.exceptionLog = new LinkedHashSet<RuntimeException>();
 		this.ignoreAndLog = false;
-		
+
 		minObjectsCount = 100;
-		
+
 		useEcoreUtilDelete = false;
 		useRemoveCommand = true;
 	}
-	
+
 	/**
 	 * Reset the {@link ModelMutatorConfiguration}. Means that it has the same state after the first initialization.
 	 */
-	public void reset(){
-		random = null;		
+	public void reset() {
+		random = null;
 		editingDomain = null;
 	}
-	
+
 	/**
 	 * @param modelPackage the EPackage
 	 */
 	public void setModelPackage(EPackage modelPackage) {
 		this.modelPackage = modelPackage;
 	}
-	
+
 	/**
 	 * @param rootEObject the rootObject for the generation/change
 	 */
 	public void setRootEObject(EObject rootEObject) {
 		this.rootEObject = rootEObject;
 	}
-	
+
 	/**
 	 * @param seed The seed for the random.
 	 */
 	public void setSeed(Long seed) {
 		this.seed = seed;
 	}
-	
+
 	/**
 	 * @return The minimum number of objects to generate.
 	 */
@@ -189,7 +189,7 @@ public class ModelMutatorConfiguration {
 	 * @return the random
 	 */
 	public Random getRandom() {
-		if(random == null){
+		if (random == null) {
 			this.random = new Random(seed);
 		}
 		return random;
@@ -224,32 +224,32 @@ public class ModelMutatorConfiguration {
 	public void setDoNotGenerateRoot(boolean doNotGenerateRoot) {
 		this.doNotGenerateRoot = doNotGenerateRoot;
 	}
-		
+
 	/**
 	 * @return The {@link EditingDomain} specified in the config.
 	 */
 	public EditingDomain getEditingDomain() {
-		if(editingDomain == null){
+		if (editingDomain == null) {
 			editingDomain = new AdapterFactoryEditingDomain(new ComposedAdapterFactory(
 				ComposedAdapterFactory.Descriptor.Registry.INSTANCE), new BasicCommandStack());
 		}
 		return editingDomain;
 	}
-	
+
 	/**
 	 * @param editingDomain The {@link EditingDomain} to use by commands.
 	 */
 	public void setEditingDomain(EditingDomain editingDomain) {
 		this.editingDomain = editingDomain;
 	}
-	
+
 	/**
 	 * @return Should the Mutator use {@link org.eclipse.emf.ecore.util.EcoreUtil#delete(EObject)}?
 	 */
 	public boolean isUseEcoreUtilDelete() {
 		return useEcoreUtilDelete;
 	}
-	
+
 	/**
 	 * Should the Mutator use {@link org.eclipse.emf.ecore.util.EcoreUtil#delete(EObject)}?<br>
 	 * NOTE: This is a very expensive method and will decrease the performance dramatically.
@@ -259,14 +259,14 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
-	
+
 	/**
 	 * @return Should the mutator use the RemoveCommand when deleting?
 	 */
 	public boolean isUseRemoveCommand() {
 		return useRemoveCommand;
 	}
-	
+
 	/**
 	 * @param useRemoveCommand Should the mutator use the RemoveCommand when deleting?
 	 */
