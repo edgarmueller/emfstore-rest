@@ -31,7 +31,6 @@ public class AttributeSetterEByteArray extends AttributeSetter<byte[]> {
 	 */
 	private int bytesize;
 
-
 	/**
 	 * Creates a new AttributeSetter for Byte[] attributes.
 	 * 

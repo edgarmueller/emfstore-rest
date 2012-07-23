@@ -18,25 +18,25 @@ import java.util.Random;
  * to generate or change Ecore models. Attributes are created
  * using a Random object.
  * 
- * @param <E> the attribute type of the attributes to create 
+ * @param <E> the attribute type of the attributes to create
  */
 public abstract class AttributeSetter<E> {
 
 	/**
-	 * Random object that is used to determine values for attributes created 
+	 * Random object that is used to determine values for attributes created
 	 * by {@link #createNewAttribute()} and {@link #createNewAttributes()}.
 	 */
 	private final Random random;
 
-
 	/**
 	 * The construction of the AttributeSetter with Random object.
+	 * 
 	 * @param random the random object used for the setters
 	 */
 	public AttributeSetter(Random random) {
 		this.random = random;
 	}
-	
+
 	/**
 	 * Creates one attribute of type <code>E</code>.
 	 * The result is determined by <code>random</code>.
@@ -46,7 +46,7 @@ public abstract class AttributeSetter<E> {
 	public abstract E createNewAttribute();
 
 	/**
-	 * Creates a collection of attributes of type <code>E</code>. 
+	 * Creates a collection of attributes of type <code>E</code>.
 	 * The result is determined by <code>random</code>.
 	 * 
 	 * @param maxAmount the maximum amount of attributes to create

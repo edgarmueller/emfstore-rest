@@ -40,14 +40,14 @@ public class AttributeSetterEString extends AttributeSetter<String> {
 	 * {@inheritDoc}
 	 */
 	public String createNewAttribute() {
-		if(getRandom().nextBoolean()){
+		if (getRandom().nextBoolean()) {
 			return null;
 		}
 		StringBuffer string = new StringBuffer();
 		string.delete(0, string.length());
 		for (int j = -5; j < getRandom().nextInt(10); j++) {
-			//string.append((char) (random.nextInt(94) + 33));
-			//"Nicer" strings
+			// string.append((char) (random.nextInt(94) + 33));
+			// "Nicer" strings
 			string.append((char) (getRandom().nextInt(75) + 48));
 		}
 		return string.toString();
