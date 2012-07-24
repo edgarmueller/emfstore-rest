@@ -45,22 +45,22 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	/**
 	 * Access for subclasses.
 	 */
-	protected final java.util.List<BranchInfo> branches;
+	private final java.util.List<BranchInfo> branches;
 
 	/**
 	 * Access for subclasses.
 	 */
-	protected TableViewer tableViewer;
+	private TableViewer tableViewer;
 
 	/**
 	 * Access for subclasses.
 	 */
-	protected BranchInfo result;
+	private BranchInfo result;
 
 	/**
 	 * Access for subclasses.
 	 */
-	protected final PrimaryVersionSpec baseVersion;
+	private final PrimaryVersionSpec baseVersion;
 
 	/**
 	 * Create the dialog.
@@ -72,8 +72,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * @param branches
 	 *            list of branches
 	 */
-	public BranchSelectionDialog(Shell parentShell,
-			PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
+	public BranchSelectionDialog(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
 		super(parentShell);
 		this.baseVersion = baseVersion;
 		this.branches = branches;
@@ -98,24 +97,22 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		addCreationField(container);
 
-		tableViewer = new TableViewer(container, SWT.BORDER | SWT.V_SCROLL);
-		Table list = tableViewer.getTable();
+		setTableViewer(new TableViewer(container, SWT.BORDER | SWT.V_SCROLL));
+		Table list = getTableViewer().getTable();
 		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
+		getTableViewer().setContentProvider(ArrayContentProvider.getInstance());
 
-		tableViewer.setLabelProvider(new StyledCellLabelProvider() {
+		getTableViewer().setLabelProvider(new StyledCellLabelProvider() {
 			@Override
 			public void update(ViewerCell cell) {
 				Object element = cell.getElement();
 				if (element instanceof BranchInfo) {
 					BranchInfo branch = (BranchInfo) element;
-					StyledString styledString = new StyledString("Branch:  "
-							+ branch.getName() + "  ", StyledString
-							.createColorRegistryStyler("red", null));
-					styledString.append("[Version: "
-							+ branch.getHead().getIdentifier() + "]",
-							StyledString.DECORATIONS_STYLER);
+					StyledString styledString = new StyledString("Branch:  " + branch.getName() + "  ", StyledString
+						.createColorRegistryStyler("red", null));
+					styledString.append("[Version: " + branch.getHead().getIdentifier() + "]",
+						StyledString.DECORATIONS_STYLER);
 					cell.setText(styledString.toString());
 					cell.setStyleRanges(styledString.getStyleRanges());
 				}
@@ -124,7 +121,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 			}
 		});
 
-		tableViewer.setInput(branches);
+		getTableViewer().setInput(getBranches());
 
 		endOfInit();
 
@@ -139,10 +136,9 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-		ISelection selection = tableViewer.getSelection();
+		ISelection selection = getTableViewer().getSelection();
 		if (selection instanceof IStructuredSelection) {
-			result = (BranchInfo) ((IStructuredSelection) selection)
-					.getFirstElement();
+			setResult((BranchInfo) ((IStructuredSelection) selection).getFirstElement());
 		}
 		super.okPressed();
 	}
@@ -181,10 +177,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
-				true);
-		createButton(parent, IDialogConstants.CANCEL_ID,
-				IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	/**
@@ -193,6 +187,53 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	@Override
 	protected Point getInitialSize() {
 		return new Point(400, 350);
+	}
+
+	/**
+	 * Returns the base version.
+	 * 
+	 * @return the base version
+	 */
+	protected PrimaryVersionSpec getBaseVersion() {
+		return baseVersion;
+	}
+
+	/**
+	 * Returns the branches.
+	 * 
+	 * @return the branches
+	 */
+	protected java.util.List<BranchInfo> getBranches() {
+		return branches;
+	}
+
+	/**
+	 * Returns the table viewer.
+	 * 
+	 * @return the table viewer
+	 */
+	protected TableViewer getTableViewer() {
+		return tableViewer;
+	}
+
+	/**
+	 * Sets the table viewer.
+	 * 
+	 * @param tableViewer
+	 *            the table viewer to be set
+	 */
+	protected void setTableViewer(TableViewer tableViewer) {
+		this.tableViewer = tableViewer;
+	}
+
+	/**
+	 * Sets the result.
+	 * 
+	 * @param result
+	 *            the result to be set
+	 */
+	protected void setResult(BranchInfo result) {
+		this.result = result;
 	}
 
 	/**
@@ -246,8 +287,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 * @param branches
 		 *            list of branches
 		 */
-		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion,
-				java.util.List<BranchInfo> branches) {
+		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<BranchInfo> branches) {
 			super(parentShell, baseVersion, branches);
 		}
 
@@ -268,9 +308,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		@Override
 		protected void endOfInit() {
-			tableViewer.getTable().setEnabled(false);
-			tableViewer.getTable().setBackground(
-					Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
+			getTableViewer().getTable().setEnabled(false);
+			getTableViewer().getTable().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
 		}
 
 		@Override
@@ -285,17 +324,14 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		protected void addCreationField(Composite container) {
 			Composite creationContainer = new Composite(container, SWT.NONE);
 			creationContainer.setLayout(new GridLayout(2, false));
-			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
-					true, false, 1, 1));
+			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 			Label lblNewBranch = new Label(creationContainer, SWT.NONE);
-			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
-					false, false, 1, 1));
+			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 			lblNewBranch.setText("New Branch:");
 
 			text = new Text(creationContainer, SWT.BORDER);
-			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-					1, 1));
+			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		}
 	}
 }

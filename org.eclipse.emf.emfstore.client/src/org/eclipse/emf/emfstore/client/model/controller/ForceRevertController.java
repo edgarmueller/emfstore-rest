@@ -22,17 +22,31 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
+/**
+ * Controller that forces a revert of version spec.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public class ForceRevertController extends ServerCall<Void> {
 
 	private ProjectSpace projectSpace;
 	private PrimaryVersionSpec versionSpec;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the project to be reverted
+	 * @param versionSpec
+	 *            the target version to revert to
+	 */
 	public ForceRevertController(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec) {
 		this.projectSpace = projectSpace;
 		this.versionSpec = versionSpec;
 	}
 
-	public void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec)
+	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec)
 		throws EmfStoreException {
 
 		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
@@ -56,6 +70,11 @@ public class ForceRevertController extends ServerCall<Void> {
 		reversedChangePackage.apply(revertSpace.getProject(), true);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
+	 */
 	@Override
 	protected Void run() throws EmfStoreException {
 		checkoutHeadAndReverseCommit(projectSpace, versionSpec);
