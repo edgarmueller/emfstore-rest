@@ -605,7 +605,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		fileTransferManager = new FileTransferManager(this);
 
 		operationRecorder = new OperationRecorder(this, changeNotifier);
-		operationManager = new OperationManager(operationRecorder, this);
+		operationManager = new OperationManager(operationRecorder);
 		operationManager.addOperationListener(modifiedModelElementsCache);
 		operationRecorder.addOperationRecorderListener(operationManager);
 
@@ -792,8 +792,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EmfStoreException {
-		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions
-				.createHEAD(getBaseVersion()));
+		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()));
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -859,8 +858,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions
-						.createANCESTOR(getBaseVersion(), branchSpec));
+				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
+					branchSpec));
 
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);

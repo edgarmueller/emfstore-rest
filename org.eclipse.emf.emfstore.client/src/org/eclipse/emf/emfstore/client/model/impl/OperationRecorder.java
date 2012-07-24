@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
@@ -79,7 +80,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private EditingDomain editingDomain;
 	private EMFStoreCommandStack emfStoreCommandStack;
 
-	private Set<EObject> currentClipboard;
+	// TODO: currently not in use
+	// private Set<EObject> currentClipboard;
 	private List<AbstractOperation> operations;
 	private List<EObject> removedElements;
 
@@ -771,7 +773,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
-		currentClipboard = getModelElementsFromClipboard();
+		// TODO: clipboard currently not in use
+		// currentClipboard = getModelElementsFromClipboard();
 		commandIsRunning = true;
 	}
 
@@ -956,5 +959,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			String message = String.format("Resource %s could not be saved!", resource.getURI());
 			WorkspaceUtil.logWarning(message, null);
 		}
+	}
+
+	/**
+	 * Returns the project space this operation recorder is attached to.
+	 * 
+	 * @return the project space this operation recorder is attached to
+	 */
+	public ProjectSpace getProjectSpace() {
+		return projectSpace;
 	}
 }
