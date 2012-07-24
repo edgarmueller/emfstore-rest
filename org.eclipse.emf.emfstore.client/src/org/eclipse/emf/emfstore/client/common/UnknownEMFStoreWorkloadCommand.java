@@ -22,29 +22,65 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
+/**
+ * This class provides a way to indicate the progress of a command without knowing
+ * the actual workload, i.e. the {@link IProgressMonitor} instance that is passed
+ * to the run method is incremented every
+ * 
+ * @author emueller
+ * 
+ * @param <T> the return type of the command's run method
+ */
 public abstract class UnknownEMFStoreWorkloadCommand<T> {
 
-	private static final int POLLING_INTERVAL = 500;
+	private static final int DEFAULT_POLLING_INTERVAL = 500;
 	private final IProgressMonitor monitor;
 	private int worked;
+	private int pollingInterval;
 
+	/**
+	 * Singleton.
+	 */
 	private static class SingletonHolder {
-		private static final ExecutorService executor = Executors.newCachedThreadPool();
+		private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 	}
 
 	/**
+	 * Constructor.
 	 * 
 	 * @param monitor
 	 *            the monitor that will be used to indicate that the command is in progress
 	 */
 	public UnknownEMFStoreWorkloadCommand(IProgressMonitor monitor) {
 		this.monitor = monitor;
+		this.pollingInterval = DEFAULT_POLLING_INTERVAL;
 		worked = 0;
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param monitor
+	 *            the monitor that will be used to indicate that the command is in progress
+	 * @param pollingInterval
+	 *            at which rate the <code>monitor</code> should get incremented, measured in milliseconds
+	 */
+	public UnknownEMFStoreWorkloadCommand(IProgressMonitor monitor, int pollingInterval) {
+		this.monitor = monitor;
+		this.pollingInterval = pollingInterval;
+		worked = 0;
+	}
+
+	/**
+	 * Executes the command.
+	 * 
+	 * @return the return value as determined by the run method
+	 * @throws EmfStoreException
+	 *             in case the command throws an exception
+	 */
 	public T execute() throws EmfStoreException {
 
-		Future<T> future = SingletonHolder.executor.submit(new Callable<T>() {
+		Future<T> future = SingletonHolder.EXECUTOR.submit(new Callable<T>() {
 			public T call() throws Exception {
 				return run(monitor);
 			}
@@ -56,7 +92,7 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 		while (!resultReceived) {
 
 			try {
-				result = future.get(POLLING_INTERVAL, TimeUnit.MILLISECONDS);
+				result = future.get(pollingInterval, TimeUnit.MILLISECONDS);
 				resultReceived = true;
 			} catch (InterruptedException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
@@ -76,7 +112,7 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 	}
 
 	/**
-	 * Returns how many ticks the command has incremented the monitor
+	 * Returns how many ticks the command has incremented the monitor.
 	 * 
 	 * @return amount of ticks that were incremented
 	 */
@@ -84,5 +120,14 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 		return worked;
 	}
 
+	/**
+	 * The actual behavior of the command that is meant to be implemented by clients.
+	 * 
+	 * @param monitor
+	 *            a progress monitor that is used to indicate
+	 * @return an optional value of type <code>T</code>
+	 * @throws EmfStoreException
+	 *             in case the command throws an exception
+	 */
 	public abstract T run(IProgressMonitor monitor) throws EmfStoreException;
 }

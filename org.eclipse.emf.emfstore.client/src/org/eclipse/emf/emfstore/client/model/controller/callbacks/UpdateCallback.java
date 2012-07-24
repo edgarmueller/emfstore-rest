@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
- * Call
+ * Callback interface for updating a project space.
  * 
  * @author ovonwesen
  * @author emueller
