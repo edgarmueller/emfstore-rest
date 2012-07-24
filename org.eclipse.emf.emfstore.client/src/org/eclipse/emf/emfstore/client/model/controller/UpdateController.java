@@ -27,28 +27,52 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
+/**
+ * Controller class for updating a project space.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 	private VersionSpec version;
 	private UpdateCallback callback;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the project space to be updated
+	 * @param version
+	 *            the target version
+	 * @param callback
+	 *            an optional update callback instance
+	 * @param progress
+	 *            a progress monitor that is used to indicate the progress of the update
+	 */
 	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, UpdateCallback callback,
 		IProgressMonitor progress) {
 		super(projectSpace);
-		/**
-		 * SANITY CHECKS
-		 */
+
+		// SANITY CHECKS
 		if (version == null) {
 			version = Versions.createHEAD(projectSpace.getBaseVersion());
 		}
 		if (callback == null) {
 			callback = UpdateCallback.NOCALLBACK;
 		}
+
 		this.version = version;
 		this.callback = callback;
 		setProgressMonitor(progress);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
+	 */
 	@Override
 	protected PrimaryVersionSpec run() throws EmfStoreException {
 		return doUpdate(version);
