@@ -1180,7 +1180,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
 	 */
-	// TODO: is not public ATM because it only detaches observers
 	@SuppressWarnings("unchecked")
 	public void dispose() {
 		stopChangeRecording();
@@ -1204,5 +1203,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isShared()
+	 */
+	public boolean isShared() {
+		return getUsersession() != null;
 	}
 }
