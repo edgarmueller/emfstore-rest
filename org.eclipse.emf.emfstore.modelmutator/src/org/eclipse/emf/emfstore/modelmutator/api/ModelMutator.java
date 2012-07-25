@@ -33,7 +33,7 @@ public class ModelMutator extends AbstractModelMutator {
 		ModelMutator modelMutator = new ModelMutator(config);
 		modelMutator.generate();
 	}
-	
+
 	/**
 	 * Modifies a model as specified in the config.
 	 * 
@@ -43,11 +43,12 @@ public class ModelMutator extends AbstractModelMutator {
 		ModelMutator modelMutator = new ModelMutator(config);
 		modelMutator.mutate();
 	}
-	
+
 	/**
 	 * The constructor.
+	 * 
 	 * @param config
-	 * 			the configuration used in the process
+	 *            the configuration used in the process
 	 */
 	public ModelMutator(ModelMutatorConfiguration config) {
 		super(config);
@@ -60,12 +61,9 @@ public class ModelMutator extends AbstractModelMutator {
 	@Override
 	public void postMutate() {
 	}
-	
+
 	@Override
 	public void mutate() {
 		super.mutate();
 	}
-
-	
-
 }

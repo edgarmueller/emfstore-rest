@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -61,7 +61,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 			PrimaryVersionSpec versionSpec;
 			try {
 				versionSpec = WorkspaceManager.getInstance().getCurrentWorkspace()
-					.resolveVersionSpec(serverInfo, VersionSpec.HEAD_VERSION, projectInfo.getProjectId());
+					.resolveVersionSpec(serverInfo, Versions.createHEAD(), projectInfo.getProjectId());
 				revision = "" + versionSpec.getIdentifier();
 			} catch (EmfStoreException e) {
 				// do nothing

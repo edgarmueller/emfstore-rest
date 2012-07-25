@@ -20,11 +20,25 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
+/**
+ * Controller for reverting a commit.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 public class RevertCommitController extends ServerCall<Void> {
 
 	private final ProjectSpace projectSpace;
 	private final PrimaryVersionSpec versionSpec;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the project space to be reverted
+	 * @param versionSpec
+	 *            the target version to revert to
+	 */
 	public RevertCommitController(ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec) {
 		this.projectSpace = projectSpace;
 		this.versionSpec = versionSpec;

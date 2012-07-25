@@ -119,7 +119,7 @@ public final class PropertyManager {
 	}
 
 	/**
-	 * Retrieves a local string property
+	 * Retrieves a local string property.
 	 * 
 	 * @param propertyName
 	 *            the name of a local string property

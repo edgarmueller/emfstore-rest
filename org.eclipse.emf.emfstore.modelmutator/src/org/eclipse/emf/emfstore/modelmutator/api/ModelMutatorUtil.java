@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.modelmutator.api;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -64,42 +65,44 @@ import org.eclipse.emf.emfstore.modelmutator.intern.attribute.AttributeSetterESt
  * @author Stephan Köhler
  * @author Philip Achenbach
  * @author Dmitry Litvinov
+ * @author Julian Sommerfeldt
  */
 public final class ModelMutatorUtil {
 
 	/**
 	 * Indicates deleting with the {@link DeleteCommand}.
 	 */
-	public static final int DELETE_COMMAND = 0;
+	public static final int DELETE_DELETE_COMMAND = 0;
 
 	/**
 	 * Indicates deleting through removing containment references.
 	 */
-	public static final int DELETE_CONTAINMENT = 1;
-	
+	public static final int DELETE_REMOVE_COMMAND = 1;
+
 	/**
 	 * Indicates deleting with the {@link EcoreUtil#delete(EObject)} method.
 	 */
 	public static final int DELETE_ECORE = 2;
 
 	private Map<EClassifier, AttributeSetter<?>> attributeSetters;
-	
+
 	private Map<EObject, List<EReference>> validContainmentReferences = new LinkedHashMap<EObject, List<EReference>>();
-	
+
 	private Map<EObject, List<EReference>> validCrossReferences = new LinkedHashMap<EObject, List<EReference>>();
-	
+
 	private Map<EReference, List<EClass>> allContainments = new LinkedHashMap<EReference, List<EClass>>();
-	
+
 	private Map<EClass, List<EClass>> allSubClasses = new LinkedHashMap<EClass, List<EClass>>();
-	
+
 	private Map<EPackage, List<EClass>> allClassesInPackage = new LinkedHashMap<EPackage, List<EClass>>();
 
 	private ModelMutatorConfiguration config;
 
 	private List<EClass> allEClasses;
-	
+
 	/**
 	 * A new {@link ModelMutatorUtil}.
+	 * 
 	 * @param config The {@link ModelMutatorConfiguration} of the {@link ModelMutatorUtil}.
 	 */
 	public ModelMutatorUtil(ModelMutatorConfiguration config) {
@@ -130,7 +133,7 @@ public final class ModelMutatorUtil {
 	 */
 	public List<EReference> getValidContainmentReferences(EObject eObject) {
 		List<EReference> list = validContainmentReferences.get(eObject);
-		if(list == null){
+		if (list == null) {
 			list = new ArrayList<EReference>();
 			for (EReference reference : eObject.eClass().getEAllReferences()) {
 				if (reference.isContainment() && isValid(reference, eObject)) {
@@ -154,7 +157,7 @@ public final class ModelMutatorUtil {
 	 */
 	public List<EReference> getValidCrossReferences(EObject eObject) {
 		List<EReference> list = validCrossReferences.get(eObject);
-		if(list == null){
+		if (list == null) {
 			list = new ArrayList<EReference>();
 			for (EReference reference : eObject.eClass().getEAllReferences()) {
 				if (!reference.isContainer() && !reference.isContainment() && isValid(reference, eObject)) {
@@ -162,7 +165,7 @@ public final class ModelMutatorUtil {
 				}
 			}
 			validCrossReferences.put(eObject, list);
-		}		
+		}
 		return list;
 	}
 
@@ -220,20 +223,20 @@ public final class ModelMutatorUtil {
 	 */
 	public List<EClass> getAllEContainments(EReference reference) {
 		List<EClass> list = allContainments.get(reference);
-		if(list == null){
+		if (list == null) {
 			list = new ArrayList<EClass>();
-			
+
 			EClass referenceType = reference.getEReferenceType();
 			if (EcorePackage.eINSTANCE.getEObject().equals(referenceType)) {
 				list.addAll(getAllEClasses(config.getModelPackage()));
 			}
-			
+
 			if (canHaveInstance(referenceType)) {
 				list.add(referenceType);
 			}
-	
+
 			list.addAll(getAllSubEClasses(referenceType));
-			
+
 			allContainments.put(reference, list);
 		}
 		return list;
@@ -259,18 +262,18 @@ public final class ModelMutatorUtil {
 	 *            the EClass to get subclasses for
 	 * @return all subclasses of <code>eClass</code>
 	 */
-	public List<EClass> getAllSubEClasses(EClass eClass) {		
+	public List<EClass> getAllSubEClasses(EClass eClass) {
 		List<EClass> list = allSubClasses.get(eClass);
-		if(list == null){
+		if (list == null) {
 			list = new ArrayList<EClass>();
-			List<EClass> allEClasses = getAllEClasses();			
+			List<EClass> allEClasses = getAllEClasses();
 			for (EClass possibleSubClass : allEClasses) {
 				// is the EClass really a subClass, while not being abstract or an interface?
 				if (eClass.isSuperTypeOf(possibleSubClass) && canHaveInstance(possibleSubClass)) {
 					list.add(possibleSubClass);
 				}
 			}
-			
+
 			allSubClasses.put(eClass, list);
 		}
 
@@ -285,12 +288,12 @@ public final class ModelMutatorUtil {
 	 * @return a set of all EClasses that are contained in registered EPackages
 	 * @see Registry
 	 */
-	public List<EClass> getAllEClasses() {		
-		if(allEClasses == null){
+	public List<EClass> getAllEClasses() {
+		if (allEClasses == null) {
 			allEClasses = new ArrayList<EClass>();
 			Registry registry = EPackage.Registry.INSTANCE;
 			// for all registered EPackages
-			for (Entry<String, Object> entry : registry.entrySet()) {
+			for (Entry<String, Object> entry : new HashSet<Entry<String, Object>>(registry.entrySet())) {
 				EPackage ePackage = registry.getEPackage(entry.getKey());
 				for (EClass eClass : getAllEClasses(ePackage)) {
 					// no abstracts or interfaces
@@ -312,7 +315,7 @@ public final class ModelMutatorUtil {
 	 */
 	public List<EClass> getAllEClasses(EPackage ePackage) {
 		List<EClass> list = allClassesInPackage.get(ePackage);
-		if(list == null){		
+		if (list == null) {
 			list = new ArrayList<EClass>();
 			// obtain all EClasses from sub packages
 			for (EPackage subPackage : ePackage.getESubpackages()) {
@@ -324,6 +327,7 @@ public final class ModelMutatorUtil {
 					list.add((EClass) classifier);
 				}
 			}
+			allClassesInPackage.put(ePackage, list);
 		}
 
 		return list;
@@ -372,14 +376,13 @@ public final class ModelMutatorUtil {
 	 * @param feature the EStructuralFeature that <code>newObject</code> shall be added to
 	 * @param newValue the Object that shall be added to <code>feature</code>
 	 * @param index the index where to add the object or null if it should be added to the end.
-	 * @return <code>newValue</code> if the <code>AddCommand</code> was performed successful or <code>null</code> if it failed
 	 * @see AddCommand#AddCommand(EditingDomain, EObject, EStructuralFeature, Object)
 	 */
-	public EObject addPerCommand(EObject eObject, EStructuralFeature feature, Object newValue, Integer index) {
+	public void addPerCommand(EObject eObject, EStructuralFeature feature, Object newValue, Integer index) {
 		try {
 			if (feature.isUnique() && ((Collection<?>) eObject.eGet(feature)).contains(newValue)) {
 				// unique feature already contains object -> nothing to do
-				return null;
+				return;
 			}
 			EditingDomain domain = config.getEditingDomain();
 			if (index == null) {
@@ -387,16 +390,11 @@ public final class ModelMutatorUtil {
 			} else {
 				domain.getCommandStack().execute(new AddCommand(domain, eObject, feature, newValue, index));
 			}
-			if (newValue instanceof EObject) {
-				return (EObject) newValue;
-			} else {
-				return null;
-			}
+
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
 			handle(e, config);
-			return null;
 		}
 	}
 
@@ -463,7 +461,8 @@ public final class ModelMutatorUtil {
 	 * @param feature the EStructuralFeature that shall be set
 	 * @param newValue the Object that shall be set as a feature in <code>parentEObject</code>
 	 * @param index Where to set to object to or null if it should be set to the end.
-	 * @return <code>newValue</code> if the <code>SetCommand</code> was performed successful or <code>null</code> if it failed
+	 * @return <code>newValue</code> if the <code>SetCommand</code> was performed successful or <code>null</code> if it
+	 *         failed
 	 * @see SetCommand
 	 */
 	public EObject setPerCommand(EObject eObject, EStructuralFeature feature, Object newValue, Integer index) {
@@ -539,38 +538,27 @@ public final class ModelMutatorUtil {
 	 * Deletes the {@link EObject} using the specified <code>howToDelete</code>.
 	 * 
 	 * @param eObject The {@link EObject} to delete.
-	 * @param howToDelete The way to delete: {@link #DELETE_ECORE}, {@link #DELETE_COMMAND} or
-	 *            {@link #DELETE_CONTAINMENT}.
+	 * @param howToDelete The way to delete: {@link #DELETE_ECORE}, {@link #DELETE_DELETE_COMMAND} or
+	 *            {@link #DELETE_REMOVE_COMMAND}.
 	 */
-	@SuppressWarnings("unchecked")
 	public void removeFullPerCommand(final EObject eObject, int howToDelete) {
 		try {
+			EditingDomain domain = config.getEditingDomain();
 			// delete with DeleteCommand
-			if (DELETE_COMMAND == howToDelete) {
-				List<EObject> toDelete = new ArrayList<EObject>(1);
-				toDelete.add(eObject);
-				EditingDomain domain = config.getEditingDomain();
-				domain.getCommandStack().execute(new DeleteCommand(domain, toDelete));
+			if (DELETE_DELETE_COMMAND == howToDelete) {
+				domain.getCommandStack().execute(new DeleteCommand(domain, Collections.singleton(eObject)));
 
-			// delete through cutting containment
-			} else if (DELETE_CONTAINMENT == howToDelete) {
-				EStructuralFeature feature = eObject.eContainingFeature();
-				if (feature == null) {
-					EcoreUtil.delete(eObject, true);
-				}
+				// delete through cutting containment (RemoveCommand)
+			} else if (DELETE_REMOVE_COMMAND == howToDelete) {
+				domain.getCommandStack().execute(
+					new RemoveCommand(domain, eObject.eContainer(), eObject.eContainingFeature(), Collections
+						.singleton(eObject)));
 
-				EObject eContainer = eObject.eContainer();
-				if (feature.isMany()) {
-					((EList<Object>) eContainer.eGet(feature)).remove(eObject);
-				} else {
-					eContainer.eSet(feature, null);
-				}
-			
-			// delete with EcoreUtil
+				// delete with EcoreUtil
 			} else if (DELETE_ECORE == howToDelete) {
 				EcoreUtil.delete(eObject, false);
-				
-			// no valid delete mode
+
+				// no valid delete mode
 			} else {
 				throw new IllegalArgumentException("This is not a valid delete mode argument: " + howToDelete);
 			}
@@ -702,69 +690,69 @@ public final class ModelMutatorUtil {
 	 * @see AttributeSetter
 	 */
 	public Map<EClassifier, AttributeSetter<?>> getAttributeSetters() {
-		
-		if(attributeSetters == null){
-			
+
+		if (attributeSetters == null) {
+
 			Random random = config.getRandom();
-		
+
 			EcorePackage ecoreInstance = EcorePackage.eINSTANCE;
-	
+
 			attributeSetters = new LinkedHashMap<EClassifier, AttributeSetter<?>>();
 			AttributeSetter<?> oAttributeSetter;
-	
+
 			oAttributeSetter = new AttributeSetterEBoolean(random);
 			attributeSetters.put(ecoreInstance.getEBoolean(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEBooleanObject(), oAttributeSetter);
-	
+
 			attributeSetters.put(ecoreInstance.getEByteArray(), new AttributeSetterEByteArray(random, 100));
-	
+
 			attributeSetters.put(ecoreInstance.getEString(), new AttributeSetterEString(random));
-	
+
 			oAttributeSetter = new AttributeSetterEInt(random);
 			attributeSetters.put(ecoreInstance.getEInt(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEIntegerObject(), oAttributeSetter);
-	
+
 			attributeSetters.put(ecoreInstance.getEDate(), new AttributeSetterEDate(random));
-	
+
 			oAttributeSetter = new AttributeSetterELong(random);
 			attributeSetters.put(ecoreInstance.getELong(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getELongObject(), oAttributeSetter);
-	
+
 			oAttributeSetter = new AttributeSetterEByte(random);
 			attributeSetters.put(ecoreInstance.getEByte(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEByteObject(), oAttributeSetter);
-	
+
 			oAttributeSetter = new AttributeSetterEChar(random);
 			attributeSetters.put(ecoreInstance.getEChar(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getECharacterObject(), oAttributeSetter);
-	
+
 			oAttributeSetter = new AttributeSetterEDouble(random);
 			attributeSetters.put(ecoreInstance.getEDouble(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEDoubleObject(), oAttributeSetter);
-	
+
 			oAttributeSetter = new AttributeSetterEFloat(random);
 			attributeSetters.put(ecoreInstance.getEFloat(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEFloatObject(), oAttributeSetter);
-	
+
 			oAttributeSetter = new AttributeSetterEShort(random);
 			attributeSetters.put(ecoreInstance.getEShort(), oAttributeSetter);
 			attributeSetters.put(ecoreInstance.getEShortObject(), oAttributeSetter);
-	
+
 			attributeSetters.put(ecoreInstance.getEBigInteger(), new AttributeSetterEBigInteger(random));
-	
+
 			attributeSetters.put(ecoreInstance.getEBigDecimal(), new AttributeSetterEBigDecimal(random));
-			
+
 		}
 
 		return attributeSetters;
 	}
 
-	private AttributeSetter<?> getAttributeSetter(EClassifier attributeType) {	
+	private AttributeSetter<?> getAttributeSetter(EClassifier attributeType) {
 		getAttributeSetters();
 		if (attributeSetters.containsKey(attributeType)) {
 			return attributeSetters.get(attributeType);
 		} else if (isEnum(attributeType)) {
-			return getEEnumSetter((EEnum) attributeType, config.getRandom());
+			return new AttributeSetterEEnum((EEnum) attributeType, config.getRandom());
 		}
 		return null;
 	}
@@ -809,7 +797,8 @@ public final class ModelMutatorUtil {
 	 * @see #addPerCommand(EObject, EStructuralFeature, Object, Set, boolean)
 	 * @see #setPerCommand(EObject, EStructuralFeature, Object, Set, boolean)
 	 */
-	public void setReference(EObject eObject, EClass referenceClass, EReference reference, Map<EClass, List<EObject>> allEObjects) {
+	public void setReference(EObject eObject, EClass referenceClass, EReference reference,
+		Map<EClass, List<EObject>> allEObjects) {
 		Random random = config.getRandom();
 
 		List<EObject> possibleReferenceObjects = allEObjects.get(referenceClass);
@@ -853,15 +842,16 @@ public final class ModelMutatorUtil {
 	}
 
 	/**
-	 * Returns an instance of the EEnum AttributeSetter belonging to the EEnum
-	 * specified by eEnum.
-	 * 
-	 * @param eEnum
-	 *            the EEnum to create the AttributeSetter for
-	 * @param random the Random object
-	 * @return a new AttributeSetterEEnum instance
+	 * @param obj The root object containing the direct and indirect children.
+	 * @return The count of all direct and indirect children of the object.
 	 */
-	public static AttributeSetter<?> getEEnumSetter(EEnum eEnum, Random random) {
-		return new AttributeSetterEEnum(eEnum, random);
+	public static int getAllObjectsCount(EObject obj) {
+		TreeIterator<EObject> eAllContents = obj.eAllContents();
+		int i = 0;
+		while (eAllContents.hasNext()) {
+			i++;
+			eAllContents.next();
+		}
+		return i;
 	}
 }

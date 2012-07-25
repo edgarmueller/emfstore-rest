@@ -32,15 +32,17 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
  * @author emueller
  * 
  */
-/*
- * TODO: either the importhistory or exporthistory controller won't work
- * because of run and execute -> clarify control flow
- */
 public class ExportProjectHistoryController extends ServerCall<Void> implements IExportImportController {
 
 	private ProjectHistory projectHistory;
 	private ProjectInfo projectInfo;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectInfo
+	 *            the project info containing the history to be exported
+	 */
 	public ExportProjectHistoryController(ProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;
 	}

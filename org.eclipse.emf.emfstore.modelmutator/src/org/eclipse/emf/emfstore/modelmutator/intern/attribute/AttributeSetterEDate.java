@@ -29,7 +29,6 @@ public class AttributeSetterEDate extends AttributeSetter<Date> {
 
 	private static final long HUNDRED_YEARS_MILLIS = 3155670000000L;
 
-
 	/**
 	 * Creates a new AttributeSetter for Date attributes.
 	 * 
