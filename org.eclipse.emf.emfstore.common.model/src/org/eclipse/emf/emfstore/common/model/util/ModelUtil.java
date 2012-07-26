@@ -955,7 +955,11 @@ public final class ModelUtil {
 	public static boolean shouldBeCollected(IdEObjectCollection collection, Set<EObject> allModelElements,
 		EObject referencedElement) {
 
-		if (referencedElement == null || !collection.containsInstance(referencedElement)) {
+		if (referencedElement == null) {
+			return false;
+		}
+		if ((!collection.containsInstance(referencedElement))
+			&& ((ProjectImpl) collection).getDeletedModelElementId(referencedElement) == null) {
 			return false;
 		}
 

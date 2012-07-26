@@ -226,4 +226,8 @@
     <property name="headerFile" value="${samedir}/header.txt"/>
     <property name="fileExtensions" value="java"/>
   </module>
+  <module name="SuppressionCommentFilter">
+    <property name="offCommentFormat" value="// REUSED CLASS"/>
+    <property name="onCommentFormat" value="// END REUSED CLASS"/>
+  </module>
 </module>
