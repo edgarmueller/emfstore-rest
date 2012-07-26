@@ -212,12 +212,12 @@ public abstract class AbstractModelMutator {
 	public void deleteEObjects(EObject root) {
 		List<EObject> toDelete = new ArrayList<EObject>();
 		Random random = config.getRandom();
-
-		// randomly select objects to delete
+		
+		// randomly select objects to delete		
 		for (TreeIterator<EObject> it = root.eAllContents(); it.hasNext();) {
 			EObject obj = it.next();
 			if (random.nextBoolean()) {
-				toDelete.add(obj);
+				toDelete.add(obj);				
 				addToEClassToObjectsMap(obj, freeObjects);
 			}
 			addToEClassToObjectsMap(obj, allObjects);
@@ -226,13 +226,11 @@ public abstract class AbstractModelMutator {
 		// check for delete modes to use
 		List<Integer> deleteModes = new ArrayList<Integer>();
 		deleteModes.add(ModelMutatorUtil.DELETE_DELETE_COMMAND);
+		deleteModes.add(ModelMutatorUtil.DELETE_CUT_CONTAINMENT);
 		if (config.isUseEcoreUtilDelete()) {
 			deleteModes.add(ModelMutatorUtil.DELETE_ECORE);
 		}
-		if (config.isUseRemoveCommand()) {
-			deleteModes.add(ModelMutatorUtil.DELETE_REMOVE_COMMAND);
-		}
-
+		
 		// delete selected objects
 		int size = deleteModes.size();
 		for (EObject obj : new ArrayList<EObject>(toDelete)) {

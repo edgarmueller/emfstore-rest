@@ -41,7 +41,7 @@ public class ModelMutatorConfiguration {
 	private Long seed;
 
 	private int minObjectsCount;
-
+	
 	private boolean ignoreAndLog;
 	private Collection<EClass> eClassesToIgnore;
 	private Collection<EStructuralFeature> eStructuralFeaturesToIgnore;
@@ -49,8 +49,7 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean useEcoreUtilDelete;
-	private boolean useRemoveCommand;
-
+	
 	private EditingDomain editingDomain;
 
 	/**
@@ -78,9 +77,8 @@ public class ModelMutatorConfiguration {
 		this.ignoreAndLog = false;
 
 		minObjectsCount = 100;
-
+		
 		useEcoreUtilDelete = false;
-		useRemoveCommand = true;
 	}
 
 	/**
@@ -259,19 +257,4 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
-
-	/**
-	 * @return Should the mutator use the RemoveCommand when deleting?
-	 */
-	public boolean isUseRemoveCommand() {
-		return useRemoveCommand;
-	}
-
-	/**
-	 * @param useRemoveCommand Should the mutator use the RemoveCommand when deleting?
-	 */
-	public void setUseRemoveCommand(boolean useRemoveCommand) {
-		this.useRemoveCommand = useRemoveCommand;
-	}
-
 }

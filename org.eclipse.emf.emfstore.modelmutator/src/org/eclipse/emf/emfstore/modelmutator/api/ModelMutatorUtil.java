@@ -77,7 +77,7 @@ public final class ModelMutatorUtil {
 	/**
 	 * Indicates deleting through removing containment references.
 	 */
-	public static final int DELETE_REMOVE_COMMAND = 1;
+	public static final int DELETE_CUT_CONTAINMENT = 1;
 
 	/**
 	 * Indicates deleting with the {@link EcoreUtil#delete(EObject)} method.
@@ -539,8 +539,9 @@ public final class ModelMutatorUtil {
 	 * 
 	 * @param eObject The {@link EObject} to delete.
 	 * @param howToDelete The way to delete: {@link #DELETE_ECORE}, {@link #DELETE_DELETE_COMMAND} or
-	 *            {@link #DELETE_REMOVE_COMMAND}.
+	 *            {@link #DELETE_CUT_CONTAINMENT}.
 	 */
+	@SuppressWarnings("unchecked")
 	public void removeFullPerCommand(final EObject eObject, int howToDelete) {
 		try {
 			EditingDomain domain = config.getEditingDomain();
@@ -549,10 +550,18 @@ public final class ModelMutatorUtil {
 				domain.getCommandStack().execute(new DeleteCommand(domain, Collections.singleton(eObject)));
 
 				// delete through cutting containment (RemoveCommand)
-			} else if (DELETE_REMOVE_COMMAND == howToDelete) {
-				domain.getCommandStack().execute(
-					new RemoveCommand(domain, eObject.eContainer(), eObject.eContainingFeature(), Collections
-						.singleton(eObject)));
+			} else if (DELETE_CUT_CONTAINMENT == howToDelete) {
+				EStructuralFeature feature = eObject.eContainingFeature();
+				if (feature == null) {
+					EcoreUtil.delete(eObject, true);
+				}
+
+				EObject eContainer = eObject.eContainer();
+				if (feature.isMany()) {
+					((EList<Object>) eContainer.eGet(feature)).remove(eObject);
+				} else {
+					eContainer.eSet(feature, null);
+				}
 
 				// delete with EcoreUtil
 			} else if (DELETE_ECORE == howToDelete) {
