@@ -212,12 +212,15 @@ public abstract class AbstractModelMutator {
 	public void deleteEObjects(EObject root) {
 		List<EObject> toDelete = new ArrayList<EObject>();
 		Random random = config.getRandom();
+		int maxDeleteCount = config.getMaxDeleteCount();
 		
-		// randomly select objects to delete		
+		// randomly select objects to delete
+		int deleted = 0;
 		for (TreeIterator<EObject> it = root.eAllContents(); it.hasNext();) {
 			EObject obj = it.next();
-			if (random.nextBoolean()) {
-				toDelete.add(obj);				
+			if (deleted < maxDeleteCount && random.nextBoolean()) {
+				toDelete.add(obj);
+				deleted++;
 				addToEClassToObjectsMap(obj, freeObjects);
 			}
 			addToEClassToObjectsMap(obj, allObjects);

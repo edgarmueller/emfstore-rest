@@ -41,7 +41,8 @@ public class ModelMutatorConfiguration {
 	private Long seed;
 
 	private int minObjectsCount;
-	
+	private Integer maxDeleteCount;
+
 	private boolean ignoreAndLog;
 	private Collection<EClass> eClassesToIgnore;
 	private Collection<EStructuralFeature> eStructuralFeaturesToIgnore;
@@ -257,4 +258,19 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
+	
+	/**
+	 * @return How many objects should the mutation process delete maximal?
+	 */
+	public int getMaxDeleteCount() {
+		return maxDeleteCount != null ? maxDeleteCount : minObjectsCount;
+	}
+
+	/**
+	 * @param maxDeleteCount How many objects should the mutation process delete maximal?
+	 */
+	public void setMaxDeleteCount(Integer maxDeleteCount) {
+		this.maxDeleteCount = maxDeleteCount;
+	}
+
 }
