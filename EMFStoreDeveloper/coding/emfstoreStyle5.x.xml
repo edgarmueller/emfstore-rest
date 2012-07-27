@@ -135,10 +135,11 @@
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
+<!-- replaced with RegexpMultiline and RegexpSingleline and RegexpSinglelineJava in checkstyle 5.x
     <module name="GenericIllegalRegexp">
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>
+    </module>-->
     <module name="TodoComment">
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
@@ -181,10 +182,11 @@
       <property name="id" value="complexity"/>
       <property name="max" value="15"/>
     </module>
+<!-- replaced with JavadocPackage in checkstyle 5.x
     <module name="PackageHtml">
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>
+    </module>-->
   </module>
   <module name="FileLength">
     <property name="severity" value="info"/>
@@ -225,9 +227,5 @@
     <metadata name="net.sf.eclipsecs.core.comment" value="EclipseSource or TU"/>
     <property name="headerFile" value="${samedir}/header.txt"/>
     <property name="fileExtensions" value="java"/>
-  </module>
-  <module name="SuppressionCommentFilter">
-    <property name="offCommentFormat" value="// REUSED CLASS"/>
-    <property name="onCommentFormat" value="// END REUSED CLASS"/>
   </module>
 </module>
