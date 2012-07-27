@@ -104,6 +104,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	// no use of ObserverBus
 	private List<OperationRecorderListener> observers;
 
+	private OperationModificator modificator;
+
 	/**
 	 * Constructor.
 	 * 
@@ -131,6 +133,24 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			false); // usage of commands is not forced by default
 
 		emitOperationsWhenCommandCompleted = true;
+
+		modificator = initOperationModificator();
+	}
+
+	private OperationModificator initOperationModificator() {
+		OperationModificator result = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator")
+			.getClass("class", OperationModificator.class);
+		if (result != null) {
+			return result;
+		}
+
+		Boolean wrap = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator.default")
+			.getBoolean("wrap");
+		if (wrap != null && wrap) {
+			return new AutoOperationWrapper();
+		}
+
+		return null;
 	}
 
 	private boolean getBooleanExtensionPoint(String extensionPointId, String attributeName, boolean defaultValue) {
@@ -496,6 +516,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			}
 		}
 
+		operations = modifyOperations(operations, command);
+
 		operationsRecorded(operations);
 		removedElements.clear();
 		operations.clear();
@@ -506,6 +528,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		newElementsOnClipboardAfterCommand.removeAll(deletedElements);
 
 		collection.clearVolatileCaches();
+	}
+
+	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {
+		if (modificator == null) {
+			return operations;
+		}
+		return modificator.modify(operations, command);
 	}
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
