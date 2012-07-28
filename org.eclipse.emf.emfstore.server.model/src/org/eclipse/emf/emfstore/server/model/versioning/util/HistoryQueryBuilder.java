@@ -26,8 +26,23 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  * 
  * @author wesendon
  */
-public class HistoryQueryBuilder {
+public final class HistoryQueryBuilder {
 
+	private HistoryQueryBuilder() {
+	}
+
+	/**
+	 * Factory method for range query.
+	 * 
+	 * @param source source version
+	 * @param upper upper limit
+	 * @param lower lower limit
+	 * @param allVersions include all versions, from all branches
+	 * @param incoming include incoming versions, only if allVersions is false
+	 * @param outgoing include outgoing versions
+	 * @param includeCp include changepackges
+	 * @return query
+	 */
 	public static RangeQuery rangeQuery(PrimaryVersionSpec source, int upper, int lower, boolean allVersions,
 		boolean incoming, boolean outgoing, boolean includeCp) {
 		RangeQuery query = VersioningFactory.eINSTANCE.createRangeQuery();
@@ -41,6 +56,15 @@ public class HistoryQueryBuilder {
 		return query;
 	}
 
+	/**
+	 * Factory method for path query. Getting all changes from source to target.
+	 * 
+	 * @param source source version
+	 * @param target target version
+	 * @param allVersions include all versions, from all branches
+	 * @param includeCp include changepackages
+	 * @return query
+	 */
 	public static PathQuery pathQuery(PrimaryVersionSpec source, PrimaryVersionSpec target, boolean allVersions,
 		boolean includeCp) {
 		PathQuery query = VersioningFactory.eINSTANCE.createPathQuery();
@@ -51,6 +75,17 @@ public class HistoryQueryBuilder {
 		return query;
 	}
 
+	/**
+	 * Factory method for modelelements range queries.
+	 * 
+	 * @param source source version
+	 * @param modelElements modelelements
+	 * @param upper upper limit
+	 * @param lower lower limit
+	 * @param allVersions include all versions, from all branches
+	 * @param includeCp include change packages
+	 * @return query
+	 */
 	public static ModelElementQuery modelelementQuery(PrimaryVersionSpec source, List<ModelElementId> modelElements,
 		int upper, int lower, boolean allVersions, boolean includeCp) {
 		ModelElementQuery query = VersioningFactory.eINSTANCE.createModelElementQuery();
@@ -65,6 +100,17 @@ public class HistoryQueryBuilder {
 		return query;
 	}
 
+	/**
+	 * Factory method for modelelement range queries.
+	 * 
+	 * @param source source version
+	 * @param id modelelement
+	 * @param upper upper limit
+	 * @param lower lower limit
+	 * @param allVersions include all versions, from all branches
+	 * @param includeCp include change packages
+	 * @return query
+	 */
 	public static ModelElementQuery modelelementQuery(PrimaryVersionSpec source, ModelElementId id, int upper,
 		int lower, boolean allVersions, boolean includeCp) {
 		return modelelementQuery(source, Arrays.asList(id), upper, lower, allVersions, includeCp);
