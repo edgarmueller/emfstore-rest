@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TransientFilter;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
@@ -59,9 +58,6 @@ public class StatePersister implements CommandObserver, IdEObjectCollectionChang
 	/**
 	 * Constructor.
 	 * 
-	 * @param changeNotifier
-	 *            the {@link EObjectChangeNotifier} that is used to trigger the state persister
-	 *            upon changes
 	 * @param commandStack
 	 *            an instance of an {@link EMFStoreCommandStack}
 	 * @param collection
