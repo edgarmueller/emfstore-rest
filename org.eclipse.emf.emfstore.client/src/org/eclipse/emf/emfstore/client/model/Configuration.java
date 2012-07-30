@@ -37,6 +37,8 @@ import org.osgi.framework.Bundle;
  */
 public final class Configuration {
 
+	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
+
 	/**
 	 * Property for XML RPC connection timeout.
 	 */
@@ -56,8 +58,7 @@ public final class Configuration {
 	private static final String UPF = ".upf";
 	private static final String PLUGIN_BASEDIR = "pluginData";
 
-	// default is to enable auto-save by default
-	private static boolean autoSave = true;
+	private static Boolean autoSave;
 
 	private static LocationProvider locationProvider;
 	private static EditingDomain editingDomain;
@@ -215,6 +216,7 @@ public final class Configuration {
 	 * 
 	 * @return the client version number
 	 */
+	@SuppressWarnings("cast")
 	public static ClientVersionInfo getClientVersion() {
 		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
 			.createClientVersionInfo();
@@ -358,7 +360,7 @@ public final class Configuration {
 	 * @param enabled whether to enable auto save
 	 */
 	public static void setAutoSave(boolean enabled) {
-		Configuration.autoSave = enabled;
+		Configuration.autoSave = new Boolean(enabled);
 	}
 
 	/**
@@ -367,6 +369,16 @@ public final class Configuration {
 	 * @return true, if auto-save is enabled, false otherwise
 	 */
 	public static boolean isAutoSaveEnabled() {
+		if (autoSave == null) {
+			String attribute = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
+				.getAttribute(AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME);
+			if (attribute != null) {
+				autoSave = Boolean.parseBoolean(attribute);
+			} else {
+				// set default
+				autoSave = new Boolean(true);
+			}
+		}
 		return autoSave;
 	}
 }
