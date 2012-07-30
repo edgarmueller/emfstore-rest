@@ -39,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Workspace</b></em>'.
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
  * @implements IAdaptable <!-- end-user-doc -->
  * 
@@ -79,8 +78,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo)
-			throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -98,8 +96,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo,
-			IProgressMonitor progressMonitor) throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, IProgressMonitor progressMonitor)
+		throws EmfStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -119,9 +117,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo,
-			PrimaryVersionSpec targetSpec, IProgressMonitor progressMonitor)
-			throws EmfStoreException;
+	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec,
+		IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
 	 * Creates a new local project that is not shared with the server yet.
@@ -132,8 +129,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            the project description
 	 * @return the project space that the new project resides in
 	 */
-	ProjectSpace createLocalProject(String projectName,
-			String projectDescription);
+	ProjectSpace createLocalProject(String projectName, String projectDescription);
 
 	/**
 	 * Creates an empty project on the server.
@@ -145,14 +141,16 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            The name of the project.
 	 * @param projectDescription
 	 *            A description of the project to be created.
+	 * @param monitor
+	 *            a progress monitor instance that is used to indicate progress
+	 *            about creating the remote project
 	 * @return a {@link ProjectInfo} object containing information about the
 	 *         created project
 	 * @throws EmfStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName,
-			String projectDescription, IProgressMonitor monitor)
-			throws EmfStoreException;
+	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName, String projectDescription,
+		IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -171,9 +169,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	ProjectInfo createRemoteProject(Usersession usersession,
-			String projectName, String projectDescription,
-			IProgressMonitor monitor) throws EmfStoreException;
+	ProjectInfo createRemoteProject(Usersession usersession, String projectName, String projectDescription,
+		IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Deletes the given project space.
@@ -198,8 +195,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while deleting the project.
 	 */
-	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId,
-			boolean deleteFiles) throws EmfStoreException;
+	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
 
 	/**
 	 * Deletes a project on the server.
@@ -216,8 +212,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             If an error occurs while deleting the project.
 	 */
-	void deleteRemoteProject(Usersession usersession, ProjectId projectId,
-			boolean deleteFiles) throws EmfStoreException;
+	void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
+		throws EmfStoreException;
 
 	/**
 	 * Exports a project space to a file.
@@ -229,8 +225,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportProjectSpace(ProjectSpace projectSpace, File file)
-			throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, File file) throws IOException;
 
 	/**
 	 * Exports a project space to a file.
@@ -244,8 +239,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportProjectSpace(ProjectSpace projectSpace, File file,
-			IProgressMonitor progressMonitor) throws IOException;
+	void exportProjectSpace(ProjectSpace projectSpace, File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
 	 * Exports the whole workspace.
@@ -267,8 +261,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws IOException
 	 *             If creating the export file fails
 	 */
-	void exportWorkSpace(File file, IProgressMonitor progressMonitor)
-			throws IOException;
+	void exportWorkSpace(File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
 	 * Returns an {@link AdminBroker} related to the given {@link ServerInfo}.
@@ -283,8 +276,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If access is denied
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker(ServerInfo serverInfo) throws EmfStoreException,
-			AccessControlException;
+	AdminBroker getAdminBroker(ServerInfo serverInfo) throws EmfStoreException, AccessControlException;
 
 	/**
 	 * Returns an {@link AdminBroker} related to the given {@link Usersession}.
@@ -301,8 +293,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If access is denied
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker(Usersession session) throws EmfStoreException,
-			AccessControlException;
+	AdminBroker getAdminBroker(Usersession session) throws EmfStoreException, AccessControlException;
 
 	/**
 	 * Return this editing domain belonging to this workspace.
@@ -324,8 +315,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws EmfStoreException
 	 *             in case of an exception
 	 */
-	List<BranchInfo> getBranches(ServerInfo serverInfo,
-			final ProjectId projectId) throws EmfStoreException;
+	List<BranchInfo> getBranches(ServerInfo serverInfo, final ProjectId projectId) throws EmfStoreException;
 
 	/**
 	 * Retrieves history information for a project.
@@ -342,8 +332,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If an error occurs while retrieving the history information
 	 * @generated NOT
 	 */
-	List<HistoryInfo> getHistoryInfo(ServerInfo serverInfo,
-			ProjectId projectId, HistoryQuery query) throws EmfStoreException;
+	List<HistoryInfo> getHistoryInfo(ServerInfo serverInfo, ProjectId projectId, HistoryQuery query)
+		throws EmfStoreException;
 
 	/**
 	 * Retrieves history information for a project.
@@ -361,8 +351,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If an error occurs while retrieving the history information
 	 * @generated NOT
 	 */
-	List<HistoryInfo> getHistoryInfo(Usersession usersession,
-			ProjectId projectId, HistoryQuery query) throws EmfStoreException;
+	List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
+		throws EmfStoreException;
 
 	/**
 	 * Retrieves the project space for the given project.
@@ -377,14 +367,12 @@ public interface Workspace extends EObject, IAdaptable {
 
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}. It is
-	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}. It is
+	 * bidirectional and its opposite is ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -409,8 +397,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If an error occurs while retrieving the remote project list.
 	 * @generated NOT
 	 */
-	List<ProjectInfo> getRemoteProjectList(ServerInfo serverInfo)
-			throws EmfStoreException;
+	List<ProjectInfo> getRemoteProjectList(ServerInfo serverInfo) throws EmfStoreException;
 
 	/**
 	 * Get the list of remotely available projects.
@@ -425,17 +412,15 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If an error occurs while retrieving the remote project list.
 	 * @generated NOT
 	 */
-	List<ProjectInfo> getRemoteProjectList(Usersession usersession)
-			throws EmfStoreException;
+	List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException;
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.model.ServerInfo}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ServerInfo}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Server Infos</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Server Infos</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -449,12 +434,11 @@ public interface Workspace extends EObject, IAdaptable {
 
 	/**
 	 * Returns the value of the '<em><b>Usersessions</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.model.Usersession}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.Usersession}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Usersessions</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Usersessions</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -524,8 +508,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             if the project belonging to the given project URL fragment
 	 *             cannot be found in workspace
 	 */
-	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment)
-			throws ProjectUrlResolutionException;
+	Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException;
 
 	/**
 	 * Resolves a server URL to a server.
@@ -536,8 +519,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @throws ServerUrlResolutionException
 	 *             if no matching server info can be found
 	 */
-	Set<ServerInfo> resolve(ServerUrl serverUrl)
-			throws ServerUrlResolutionException;
+	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
 	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
@@ -555,9 +537,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo,
-			VersionSpec versionSpec, ProjectId projectId)
-			throws EmfStoreException;
+	PrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, VersionSpec versionSpec, ProjectId projectId)
+		throws EmfStoreException;
 
 	/**
 	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
@@ -577,9 +558,8 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec resolveVersionSpec(Usersession session,
-			VersionSpec versionSpec, ProjectId projectId)
-			throws EmfStoreException;
+	PrimaryVersionSpec resolveVersionSpec(Usersession session, VersionSpec versionSpec, ProjectId projectId)
+		throws EmfStoreException;
 
 	/**
 	 * Make the current workspace state persistent.
