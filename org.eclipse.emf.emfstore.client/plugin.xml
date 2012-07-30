@@ -85,11 +85,5 @@
            observerAttributeName="exceptionObserver">
      </observer>
   </extension>
-  <extension
-        point="org.eclipse.emf.emfstore.client.recording.options">
-     <RecordingOptions
-           cutOffIncomingCrossReferences="true">
-     </RecordingOptions>
-  </extension>
 
 </plugin>
