@@ -910,10 +910,4 @@
          </variable>
       </sourceProvider>
    </extension>
-   <extension
-         point="org.eclipse.emf.emfstore.client.recording.options">
-      <RecordingOptions
-            autoSave="false">
-      </RecordingOptions>
-   </extension>
 </plugin>
