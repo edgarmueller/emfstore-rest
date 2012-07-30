@@ -612,6 +612,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		statePersister = new StatePersister(
 			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()),
 			(IdEObjectCollectionImpl) this.getProject());
+		statePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
 		operationPersister = new OperationPersister(this);
 
 		commandStack.addCommandStackObserver(operationRecorder);
@@ -718,7 +719,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#delete()
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	public void delete() throws IOException {
 		dispose();
 		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
@@ -792,8 +792,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EmfStoreException {
-		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions
-				.createHEAD(getBaseVersion()));
+		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()));
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -859,8 +858,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions
-						.createANCESTOR(getBaseVersion(), branchSpec));
+				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
+					branchSpec));
 
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
@@ -956,6 +955,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		saveProjectSpaceOnly();
 		saveChangePackage();
 		statePersister.saveDirtyResources(true);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasUnsavedChanges()
+	 */
+	public boolean hasUnsavedChanges() {
+		return statePersister.isDirty();
 	}
 
 	private void saveChangePackage() {
