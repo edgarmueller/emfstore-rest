@@ -26,20 +26,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  */
 public abstract class AbstractConflictResolver implements ConflictResolver {
 
-	/**
-	 * Allows access for subclasses.
-	 */
-	protected List<AbstractOperation> acceptedMine;
-
-	/**
-	 * Allows access for subclasses.
-	 */
-	protected List<AbstractOperation> rejectedTheirs;
-
-	/**
-	 * Allows access for subclasses.
-	 */
-	protected final boolean isBranchMerge;
+	private List<AbstractOperation> acceptedMine;
+	private List<AbstractOperation> rejectedTheirs;
+	private final boolean isBranchMerge;
 
 	/**
 	 * Default Constructor.
@@ -84,20 +73,16 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project,
-	 *      java.util.List, java.util.List,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public boolean resolveConflicts(Project project,
-			List<ChangePackage> myChangePackages,
-			List<ChangePackage> theirChangePackages, PrimaryVersionSpec base,
-			PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec base, PrimaryVersionSpec target) {
 
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project,
-				myChangePackages, theirChangePackages, base, target,
-				isBranchMerge);
+		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
+			target, isBranchMerge);
 
 		if (decisionManager.isResolved()) {
 			setResults(decisionManager);
@@ -134,8 +119,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 *            initialized {@link DecisionManager}
 	 * @return true, if all conflicts could be resolved
 	 */
-	protected abstract boolean controlDecisionManager(
-			DecisionManager decisionManager);
+	protected abstract boolean controlDecisionManager(DecisionManager decisionManager);
 
 	/**
 	 * 
@@ -149,8 +133,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 			mergeResult.add(0, operationToReverse.reverse());
 		}
 		mergeResult.addAll(getAcceptedMine());
-		ChangePackage result = VersioningFactory.eINSTANCE
-				.createChangePackage();
+		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
 		result.getOperations().addAll(mergeResult);
 
 		return result;

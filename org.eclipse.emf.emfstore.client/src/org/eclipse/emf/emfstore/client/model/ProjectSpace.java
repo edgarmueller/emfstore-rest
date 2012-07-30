@@ -1121,4 +1121,9 @@ public interface ProjectSpace extends IdentifiableElement {
 	 */
 	void save();
 
+	 * Whether this project space has been shared.
+	 * 
+	 * @return true, if the project space has been shared, false otherwise
+	 */
+	boolean isShared();
 } // ProjectContainer

@@ -215,6 +215,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throws EmfStoreException {
 		synchronized (getMonitor()) {
 			try {
+				historyCache.removeProjectFromCache(projectId);
 				ProjectHistory project = getProject(projectId);
 				getServerSpace().getProjects().remove(project);
 				try {

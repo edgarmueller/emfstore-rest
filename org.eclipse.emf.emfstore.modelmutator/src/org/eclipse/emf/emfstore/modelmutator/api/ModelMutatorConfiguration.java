@@ -41,6 +41,7 @@ public class ModelMutatorConfiguration {
 	private Long seed;
 
 	private int minObjectsCount;
+	private Integer maxDeleteCount;
 
 	private boolean ignoreAndLog;
 	private Collection<EClass> eClassesToIgnore;
@@ -49,8 +50,7 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean useEcoreUtilDelete;
-	private boolean useRemoveCommand;
-
+	
 	private EditingDomain editingDomain;
 
 	/**
@@ -78,9 +78,8 @@ public class ModelMutatorConfiguration {
 		this.ignoreAndLog = false;
 
 		minObjectsCount = 100;
-
+		
 		useEcoreUtilDelete = false;
-		useRemoveCommand = true;
 	}
 
 	/**
@@ -259,19 +258,19 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
-
+	
 	/**
-	 * @return Should the mutator use the RemoveCommand when deleting?
+	 * @return How many objects should the mutation process delete maximal?
 	 */
-	public boolean isUseRemoveCommand() {
-		return useRemoveCommand;
+	public int getMaxDeleteCount() {
+		return maxDeleteCount != null ? maxDeleteCount : minObjectsCount;
 	}
 
 	/**
-	 * @param useRemoveCommand Should the mutator use the RemoveCommand when deleting?
+	 * @param maxDeleteCount How many objects should the mutation process delete maximal?
 	 */
-	public void setUseRemoveCommand(boolean useRemoveCommand) {
-		this.useRemoveCommand = useRemoveCommand;
+	public void setMaxDeleteCount(Integer maxDeleteCount) {
+		this.maxDeleteCount = maxDeleteCount;
 	}
 
 }

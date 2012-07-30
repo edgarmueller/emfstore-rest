@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -379,8 +378,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		// latest version == getVersion.size() (version start with index 0 as
 		// the list), branch from previous is used.
-		newVersion.setPrimarySpec(Versions.createPRIMARY(previousHeadVersion.getPrimarySpec(), projectHistory.getVersions()
-			.size()));
+		newVersion.setPrimarySpec(Versions.createPRIMARY(previousHeadVersion.getPrimarySpec(), projectHistory
+			.getVersions().size()));
 		newVersion.setNextVersion(null);
 
 		projectHistory.getVersions().add(newVersion);
@@ -611,11 +610,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *             if version couldn't be found
 	 */
 	protected Version getVersion(ProjectId projectId, PrimaryVersionSpec versionSpec) throws EmfStoreException {
-		EList<Version> versions = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId).getVersions();
-		if (versionSpec.getIdentifier() < 0 || versionSpec.getIdentifier() > versions.size() - 1) {
-			throw new InvalidVersionSpecException();
-		}
-		return versions.get(versionSpec.getIdentifier());
+		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+		return getVersion(project, versionSpec);
 	}
 
 	/**

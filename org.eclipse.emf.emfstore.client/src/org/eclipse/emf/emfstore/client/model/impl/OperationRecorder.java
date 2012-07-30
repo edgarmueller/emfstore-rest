@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
@@ -79,7 +80,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	private EditingDomain editingDomain;
 	private EMFStoreCommandStack emfStoreCommandStack;
 
-	private Set<EObject> currentClipboard;
+	// TODO: currently not in use
+	// private Set<EObject> currentClipboard;
 	private List<AbstractOperation> operations;
 	private List<EObject> removedElements;
 
@@ -101,6 +103,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	// no use of ObserverBus
 	private List<OperationRecorderListener> observers;
+
+	private OperationModificator modificator;
 
 	/**
 	 * Constructor.
@@ -129,6 +133,24 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			false); // usage of commands is not forced by default
 
 		emitOperationsWhenCommandCompleted = true;
+
+		modificator = initOperationModificator();
+	}
+
+	private OperationModificator initOperationModificator() {
+		OperationModificator result = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator")
+			.getClass("class", OperationModificator.class);
+		if (result != null) {
+			return result;
+		}
+
+		Boolean wrap = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator.default")
+			.getBoolean("wrap");
+		if (wrap != null && wrap) {
+			return new AutoOperationWrapper();
+		}
+
+		return null;
 	}
 
 	private boolean getBooleanExtensionPoint(String extensionPointId, String attributeName, boolean defaultValue) {
@@ -494,6 +516,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			}
 		}
 
+		operations = modifyOperations(operations, command);
+
 		operationsRecorded(operations);
 		removedElements.clear();
 		operations.clear();
@@ -504,6 +528,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		newElementsOnClipboardAfterCommand.removeAll(deletedElements);
 
 		collection.clearVolatileCaches();
+	}
+
+	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {
+		if (modificator == null) {
+			return operations;
+		}
+		return modificator.modify(operations, command);
 	}
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
@@ -771,7 +802,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
-		currentClipboard = getModelElementsFromClipboard();
+		// TODO: clipboard currently not in use
+		// currentClipboard = getModelElementsFromClipboard();
 		commandIsRunning = true;
 	}
 
@@ -956,5 +988,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			String message = String.format("Resource %s could not be saved!", resource.getURI());
 			WorkspaceUtil.logWarning(message, null);
 		}
+	}
+
+	/**
+	 * Returns the project space this operation recorder is attached to.
+	 * 
+	 * @return the project space this operation recorder is attached to
+	 */
+	public ProjectSpace getProjectSpace() {
+		return projectSpace;
 	}
 }

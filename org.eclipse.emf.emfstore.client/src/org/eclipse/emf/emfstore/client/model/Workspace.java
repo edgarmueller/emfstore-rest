@@ -141,7 +141,9 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            The name of the project.
 	 * @param projectDescription
 	 *            A description of the project to be created.
-	 * @param monitor a monitor to show the progress
+	 * @param monitor
+	 *            a progress monitor instance that is used to indicate progress
+	 *            about creating the remote project
 	 * @return a {@link ProjectInfo} object containing information about the
 	 *         created project
 	 * @throws EmfStoreException
