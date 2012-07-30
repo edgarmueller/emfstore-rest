@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.io.File;
@@ -16,6 +26,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -53,6 +64,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
  * Workspace space base class that contains custom user methods.
@@ -62,7 +74,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  * @author emueller
  * 
  */
-public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
+public abstract class WorkspaceBase extends EObjectImpl implements Workspace, IDisposable {
 
 	/**
 	 * The current connection manager used to connect to the server(s).
@@ -117,7 +129,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
 		IProgressMonitor progressMonitor) throws EmfStoreException {
 		PrimaryVersionSpec targetSpec = this.connectionManager.resolveVersionSpec(usersession.getSessionId(),
-			projectInfo.getProjectId(), VersionSpec.HEAD_VERSION);
+			projectInfo.getProjectId(), Versions.createHEAD());
 		return checkout(usersession, projectInfo, targetSpec, progressMonitor);
 	}
 
@@ -329,6 +341,13 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 		WorkspaceManager.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(projectSpace);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteRemoteProject(org.eclipse.emf.emfstore.client.model.ServerInfo,
+	 *      org.eclipse.emf.emfstore.server.model.ProjectId, boolean)
+	 */
 	public void deleteRemoteProject(ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles)
 		throws EmfStoreException {
 		new ServerCall<Void>(serverInfo) {
@@ -382,6 +401,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.edit.provider.IDisposable#dispose()
+	 */
 	public void dispose() {
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
 			((ProjectSpaceBase) projectSpace).dispose();
