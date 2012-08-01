@@ -138,18 +138,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	private OperationModificator initOperationModificator() {
-		OperationModificator result = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator")
-			.getClass("class", OperationModificator.class);
+		OperationModificator result = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getClass(
+			"operationModificator", OperationModificator.class);
 		if (result != null) {
 			return result;
 		}
-
-		Boolean wrap = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.modificator.default")
-			.getBoolean("wrap");
-		if (wrap != null && wrap) {
-			return new AutoOperationWrapper();
-		}
-
 		return null;
 	}
 

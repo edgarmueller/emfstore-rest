@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 
 /**
  * This interface allows to hook into the operation recorder and to modify the recorded operations. Generally this is
- * usefull for combining similar operations in composite operations.
+ * useful for combining similar operations in composite operations.
  * 
  * @author wesendon
  */
