@@ -167,6 +167,7 @@ public class EmfStoreValidator {
 	/**
 	 * {@value #PROJECTGENERATION}.
 	 */
+	// TODO BRANCH fix
 	private boolean validateProjectGeneration() {
 		start("Project generation compare ...");
 		List<String> errors = new ArrayList<String>();
