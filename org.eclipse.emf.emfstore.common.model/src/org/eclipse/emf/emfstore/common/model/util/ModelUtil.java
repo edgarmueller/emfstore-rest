@@ -551,10 +551,12 @@ public final class ModelUtil {
 	 * @param resourceURI
 	 *            the URI of the resource, which should be used to save the
 	 *            EObjects
+	 * @param options The save options for the resource.
 	 * @throws IOException
 	 *             if saving to the resource fails
 	 */
-	public static void saveEObjectToResource(List<? extends EObject> eObjects, URI resourceURI) throws IOException {
+	public static void saveEObjectToResource(List<? extends EObject> eObjects, URI resourceURI,
+		Map<Object, Object> options) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(resourceURI);
 		EList<EObject> contents = resource.getContents();
@@ -567,7 +569,22 @@ public final class ModelUtil {
 		}
 
 		contents.addAll(eObjects);
-		resource.save(null);
+		resource.save(options);
+	}
+
+	/**
+	 * Save a list of EObjects to the resource with the given URI.
+	 * 
+	 * @param eObjects
+	 *            the EObjects to be saved
+	 * @param resourceURI
+	 *            the URI of the resource, which should be used to save the
+	 *            EObjects
+	 * @throws IOException
+	 *             if saving to the resource fails
+	 */
+	public static void saveEObjectToResource(List<? extends EObject> eObjects, URI resourceURI) throws IOException {
+		saveEObjectToResource(eObjects, resourceURI, null);
 	}
 
 	/**
