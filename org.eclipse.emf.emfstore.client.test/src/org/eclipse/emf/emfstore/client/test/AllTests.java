@@ -25,7 +25,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
 	AllServerTests.class, AllIntegrationTests.class, AllObserverBusTests.class, AllMergeTests.class,
-	PersistenceTest.class, AllServerTests.class })
+	PersistenceTest.class })
 public class AllTests {
 
 }

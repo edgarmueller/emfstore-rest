@@ -229,13 +229,22 @@ public abstract class ServerTests extends WorkspaceTest {
 	@After
 	public void afterTest() throws EmfStoreException {
 
-		for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
-			.getRemoteProjectList(getServerInfo())) {
-			WorkspaceManager.getInstance().getCurrentWorkspace()
-				.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
-		}
+		new EMFStoreCommand() {
 
-		SetupHelper.cleanupServer();
+			@Override
+			protected void doRun() {
+				try {
+					for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
+						.getRemoteProjectList(getServerInfo())) {
+						WorkspaceManager.getInstance().getCurrentWorkspace()
+							.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
+					}
+				} catch (EmfStoreException e) {
+				}
+
+				SetupHelper.cleanupServer();
+			}
+		}.run(false);
 	}
 
 	/**
