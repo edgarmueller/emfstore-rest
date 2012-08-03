@@ -83,6 +83,9 @@ public class ShareController extends ServerCall<Void> {
 		}
 		getProgressMonitor().subTask("Sharing project with server");
 
+		// make sure, current state of caches is written to resource
+		getProjectSpace().save();
+
 		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
 			@Override
 			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {

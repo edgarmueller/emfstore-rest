@@ -76,6 +76,16 @@ public class HistoryCache {
 		}
 	}
 
+	/**
+	 * Removes a history entry for the project with the given ID.
+	 * 
+	 * @param projectId
+	 *            the ID of the project that should get removed
+	 */
+	public void removeProjectFromCache(ProjectId projectId) {
+		historyCache.remove(projectId);
+	}
+
 	private void addChangePackageToCache(HashMap<ModelElementId, TreeSet<Version>> hashMap, Version version) {
 		ChangePackage changes = version.getChanges();
 		if (changes != null) {

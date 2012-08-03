@@ -11,7 +11,9 @@
 package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -34,6 +36,7 @@ public class DirtyResourceSet {
 	private Set<Resource> resources;
 	private final IdEObjectCollectionImpl collection;
 	private boolean resourcesPending;
+	private List<IDEObjectCollectionDirtyStateListener> listeners;
 
 	/**
 	 * Constructor.
@@ -45,6 +48,7 @@ public class DirtyResourceSet {
 	public DirtyResourceSet(IdEObjectCollectionImpl collection) {
 		this.collection = collection;
 		resources = new HashSet<Resource>();
+		listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
 	}
 
 	/**
@@ -55,6 +59,10 @@ public class DirtyResourceSet {
 	 */
 	public void addDirtyResource(Resource resource) {
 		resources.add(resource);
+		//only fire dirty state change notification if set was previously empty
+		if (resources.size() <= 1) {
+			fireDirtyStateChangedNotification();
+		}
 	}
 
 	/**
@@ -96,6 +104,7 @@ public class DirtyResourceSet {
 			resourcesPending = (resources.size() != 0);
 		} else {
 			resourcesPending = false;
+			fireDirtyStateChangedNotification();
 		}
 	}
 
@@ -125,4 +134,36 @@ public class DirtyResourceSet {
 		return modelElementId;
 	}
 
+	/**
+	 * Determine if resource set does contain resources to save.
+	 * 
+	 * @return true if there is still resources to save
+	 */
+	public boolean isDirty() {
+		return !resources.isEmpty();
+	}
+
+	/**
+	 * Add a dirty state change listener.
+	 * 
+	 * @param listener the listener
+	 */
+	public void addDirtyStateChangeLister(IDEObjectCollectionDirtyStateListener listener) {
+		listeners.add(listener);
+	}
+
+	/**
+	 * Remove a dirty state change listener.
+	 * 
+	 * @param listener the listener
+	 */
+	public void removeDirtyStateChangeLister(IDEObjectCollectionDirtyStateListener listener) {
+		listeners.remove(listener);
+	}
+
+	private void fireDirtyStateChangedNotification() {
+		for (IDEObjectCollectionDirtyStateListener listener : listeners) {
+			listener.notifyAboutDirtyStateChange();
+		}
+	}
 }

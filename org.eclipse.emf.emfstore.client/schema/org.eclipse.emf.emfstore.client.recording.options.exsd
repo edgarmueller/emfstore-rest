@@ -63,6 +63,13 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="autoSave" type="boolean">
+            <annotation>
+               <documentation>
+                  Whether after each recorded command a projectspace save is triggered. Default is true.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

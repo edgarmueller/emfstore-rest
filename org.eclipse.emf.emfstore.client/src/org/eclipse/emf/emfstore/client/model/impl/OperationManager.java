@@ -21,16 +21,28 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
+/**
+ * This class acts as a simple wrapper around the operation recorder and provides convenience methods
+ * for undoing operations and handling composite operations.
+ * 
+ * @author koegel
+ * @author emueller
+ */
 public class OperationManager implements OperationRecorderListener, IDisposable {
 
 	private OperationRecorder operationRecorder;
 	private List<OperationObserver> operationListeners;
-
 	private ProjectSpace projectSpace;
 
-	public OperationManager(OperationRecorder operationRecorder, ProjectSpace projectSpace) {
+	/**
+	 * Constructor.
+	 * 
+	 * @param operationRecorder
+	 *            the operation recorder that should get wrapped
+	 */
+	public OperationManager(OperationRecorder operationRecorder) {
 		this.operationRecorder = operationRecorder;
-		this.projectSpace = projectSpace;
+		this.projectSpace = operationRecorder.getProjectSpace();
 		operationListeners = new ArrayList<OperationObserver>();
 	}
 
@@ -53,24 +65,33 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 	}
 
 	/**
+	 * Adds an operation observer that gets notified whenever an operation
+	 * is either executed or undone.
 	 * 
-	 * @param operationListener
+	 * @param operationObserver
+	 *            the operation observer to be added
 	 */
-	public void addOperationListener(OperationObserver operationListener) {
-		operationListeners.add(operationListener);
+	public void addOperationListener(OperationObserver operationObserver) {
+		operationListeners.add(operationObserver);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Removed the given operation observer from the list of operation observers.
 	 * 
-	 * @param operationListner
+	 * @param operationObserver
+	 *            the operation observer to be removed
 	 */
-	public void removeOperationListener(OperationObserver operationListner) {
-		operationListeners.remove(operationListner);
+	public void removeOperationListener(OperationObserver operationObserver) {
+		operationListeners.remove(operationObserver);
 
 	}
 
-	// TODO: EM, changed to public
+	/**
+	 * Notifies all operations observer that an operation has been undone.
+	 * 
+	 * @param operation
+	 *            the operation that has been undone
+	 */
 	public void notifyOperationUndone(AbstractOperation operation) {
 		for (OperationObserver operationListener : operationListeners) {
 			operationListener.operationUnDone(operation);
@@ -97,20 +118,6 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 			operationListener.operationExecuted(operation);
 		}
 	}
-
-	// public CompositeOperationHandle beginCompositeOperation() {
-	// // notificationRecorder.newRecording();
-	// if (this.compositeOperation != null) {
-	// throw new IllegalStateException(
-	// "Can only have one composite at once!");
-	// }
-	// this.compositeOperation = OperationsFactory.eINSTANCE
-	// .createCompositeOperation();
-	// operationRecorder.addOperation(this.compositeOperation);
-	// CompositeOperationHandle handle = new CompositeOperationHandle(this,
-	// compositeOperation);
-	// return handle;
-	// }
 
 	/**
 	 * Aborts the current composite operation.
@@ -141,14 +148,28 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 		endCompositeOperation();
 	}
 
+	/**
+	 * Opens up a handle for creating a composite operation.
+	 * 
+	 * @return the handle for the composite operation
+	 */
 	public CompositeOperationHandle beginCompositeOperation() {
 		return operationRecorder.beginCompositeOperation();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.impl.OperationRecorderListener#operationsRecorded(java.util.List)
+	 */
 	public void operationsRecorded(List<? extends AbstractOperation> operations) {
 		projectSpace.addOperations(operations);
 	}
 
+	/**
+	 * Clears all recorded operations.
+	 */
 	public void clearOperations() {
 		operationRecorder.clearOperations();
 	}

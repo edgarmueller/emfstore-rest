@@ -670,26 +670,30 @@ public final class ModelUtil {
 	public static Project getProject(EObject modelElement) {
 		Set<EObject> seenModelElements = new HashSet<EObject>();
 		seenModelElements.add(modelElement);
-		return (Project) getParent(Project.class, modelElement, seenModelElements);
+		return getParent(Project.class, modelElement, seenModelElements);
 	}
 
 	/**
 	 * Get the EContainer that contains the given model element and whose
 	 * EContainer is null.
 	 * 
+	 * @param <T>
+	 * 
 	 * @param parent
 	 *            the Class of the parent
 	 * @param child
 	 *            the model element whose container should get returned
+	 * @param <T> type of the parent class
 	 * @return the container
 	 */
-	public static EObject getParent(Class<? extends EObject> parent, EObject child) {
+	public static <T extends EObject> T getParent(Class<T> parent, EObject child) {
 		Set<EObject> seenModelElements = new HashSet<EObject>();
 		seenModelElements.add(child);
 		return getParent(parent, child, seenModelElements);
 	}
 
-	private static EObject getParent(Class<? extends EObject> parent, EObject child, Set<EObject> seenModelElements) {
+	@SuppressWarnings("unchecked")
+	private static <T extends EObject> T getParent(Class<T> parent, EObject child, Set<EObject> seenModelElements) {
 		if (child == null) {
 			return null;
 		}
@@ -699,7 +703,7 @@ public final class ModelUtil {
 		}
 
 		if (parent.isInstance(child)) {
-			return child;
+			return (T) child;
 		} else {
 			seenModelElements.add(child);
 			return getParent(parent, child.eContainer(), seenModelElements);
