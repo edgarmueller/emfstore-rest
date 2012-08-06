@@ -87,4 +87,8 @@
          id="org.eclipse.emf.emfstore.fuzzy.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.emf.emfstore.fuzzy.test.feature"
+         version="0.0.0"/>
+
 </feature>
