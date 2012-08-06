@@ -26,6 +26,10 @@ public class ResourceFactoryMock extends XMIResourceFactoryImpl implements Regis
 			}
 
 			@Override
+			protected void doUnload() {
+			}
+
+			@Override
 			public void save(Map<?, ?> options) throws IOException {
 			}
 

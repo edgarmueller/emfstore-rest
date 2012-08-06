@@ -151,14 +151,13 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				sourceNumber(query) + query.getUpperLimit(), true);
 		}
 		Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, query.getSource());
-		ArrayList<Version> result = new ArrayList<Version>();
+		TreeSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		result.addAll(addForwardVersions(project, version, query.getUpperLimit(), query.isIncludeIncoming(),
 			query.isIncludeOutgoing()));
 		result.add(version);
 		result.addAll(addBackwardVersions(project, version, query.getLowerLimit(), query.isIncludeIncoming(),
 			query.isIncludeOutgoing()));
-		Collections.sort(result, new VersionComparator(false));
-		return result;
+		return new ArrayList<Version>(result);
 	}
 
 	private List<Version> handlePathQuery(ProjectId projectId, PathQuery query) throws EmfStoreException {

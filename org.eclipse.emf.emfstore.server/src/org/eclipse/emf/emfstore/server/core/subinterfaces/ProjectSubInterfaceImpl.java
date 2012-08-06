@@ -29,6 +29,7 @@ import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidProjectIdException;
+import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
@@ -108,31 +109,35 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class).resolveVersionSpec(
 				projectId, versionSpec);
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, resolvedVersion);
-			if (version.getProjectState() == null) {
-
-				// TODO BRANCH review. performance optimization by searching state in both directions
-				ArrayList<Version> versions = new ArrayList<Version>();
-				Version currentVersion = version;
-				while (currentVersion.getProjectState() == null) {
-					versions.add(currentVersion);
-					currentVersion = VersionSubInterfaceImpl.findNextVersion(currentVersion);
-				}
-				if (version.getProjectState() == null) {
-					// TODO: nicer exception.
-					// is this null check necessary anyway? (there were problems
-					// in past, because
-					// the xml files were inconsistent.
-					throw new EmfStoreException("Couldn't find project state.");
-				}
-				Project projectState = ModelUtil.clone(version.getProjectState());
-				Collections.reverse(versions);
-				for (Version vers : versions) {
-					vers.getChanges().apply(projectState);
-				}
-				return projectState;
-			}
-			return version.getProjectState();
+			return getProject(version);
 		}
+	}
+
+	protected Project getProject(Version version) throws InvalidVersionSpecException, EmfStoreException {
+		if (version.getProjectState() == null) {
+
+			// TODO BRANCH review. performance optimization by searching state in both directions
+			ArrayList<Version> versions = new ArrayList<Version>();
+			Version currentVersion = version;
+			while (currentVersion.getProjectState() == null) {
+				versions.add(currentVersion);
+				currentVersion = VersionSubInterfaceImpl.findNextVersion(currentVersion);
+			}
+			if (currentVersion.getProjectState() == null) {
+				// TODO: nicer exception.
+				// is this null check necessary anyway? (there were problems
+				// in past, because
+				// the xml files were inconsistent.
+				throw new EmfStoreException("Couldn't find project state.");
+			}
+			Project projectState = ModelUtil.clone(currentVersion.getProjectState());
+			Collections.reverse(versions);
+			for (Version vers : versions) {
+				vers.getChanges().apply(projectState);
+			}
+			return projectState;
+		}
+		return version.getProjectState();
 	}
 
 	/**

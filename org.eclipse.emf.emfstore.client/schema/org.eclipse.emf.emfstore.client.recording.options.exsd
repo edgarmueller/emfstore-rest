@@ -70,6 +70,16 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="operationModificator" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.impl.OperationModificator"/>
+               </appInfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
