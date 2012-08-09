@@ -17,6 +17,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 
 public interface OperationRecorderListener extends IObserver {
 
+	/**
+	 * Notify observer about recorded operations.
+	 * 
+	 * @param operations a list of operations
+	 */
 	void operationsRecorded(List<? extends AbstractOperation> operations);
 
 }
