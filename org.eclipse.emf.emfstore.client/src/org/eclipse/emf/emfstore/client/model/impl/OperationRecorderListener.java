@@ -15,6 +15,12 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
+/**
+ * Listener for operations recorded by operation recorder.
+ * 
+ * @author mkoegel
+ * 
+ */
 public interface OperationRecorderListener extends IObserver {
 
 	/**
