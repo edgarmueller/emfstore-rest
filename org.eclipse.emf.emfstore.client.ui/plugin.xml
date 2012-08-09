@@ -479,7 +479,7 @@
                    id="org.eclipse.emf.emfstore.client.ui.toolbar">
                 <command
                       commandId="org.eclipse.emf.emfstore.client.ui.save"
-                      icon="icons/database_go.png"
+                      icon="icons/database_save.png"
                       label="Save Project"
                       style="push">
                    <visibleWhen
