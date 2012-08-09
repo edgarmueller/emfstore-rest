@@ -204,8 +204,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private SCMLabelProvider labelProvider;
 
-	private Action showRoots;
-
 	private Link noProjectHint;
 
 	private Composite parent;
@@ -394,10 +392,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		IActionBars bars = getViewSite().getActionBars();
 		IToolBarManager menuManager = bars.getToolBarManager();
 
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+
 		addExpandAllAndCollapseAllAction(menuManager);
 		addRefreshAction(menuManager);
 		addShowAllBranchesAction(menuManager);
-		addShowRootAction(menuManager);
 		addNextAndPreviousAction(menuManager);
 		addJumpToRevisionAction(menuManager);
 		addLinkWithNavigatorAction(menuManager);
@@ -451,28 +451,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		showAllBranches.setToolTipText("Show All Branches");
 		showAllBranches.setChecked(DEFAULT_SHOW_ALL_BRANCHES);
 		menuManager.add(showAllBranches);
-	}
-
-	private void addShowRootAction(IToolBarManager menuManager) {
-		showRoots = new Action("", SWT.TOGGLE) {
-			@Override
-			public void run() {
-				if (isChecked()) {
-					contentProvider.setShowRootNodes(true);
-				} else {
-					contentProvider.setShowRootNodes(false);
-				}
-				viewer.refresh();
-			}
-
-		};
-		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
-		showRoots.setImageDescriptor(ImageDescriptor.createFromImage(adapterFactoryLabelProvider
-			.getImage(VersioningFactory.eINSTANCE.createChangePackage())));
-		showRoots.setToolTipText("Show revision nodes");
-		showRoots.setChecked(true);
-		menuManager.add(showRoots);
 	}
 
 	/**
@@ -684,11 +662,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		if (me != null && project.containsInstance(me)) {
 			label += adapterFactoryLabelProvider.getText(me);
-			showRoots.setChecked(false);
 			contentProvider.setShowRootNodes(false);
 		} else {
 			label += projectSpace.getProjectName();
-			showRoots.setChecked(true);
 			contentProvider.setShowRootNodes(true);
 		}
 
