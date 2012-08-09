@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -28,6 +29,11 @@ import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.IPlotCommit;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.IPlotCommitProvider;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.PlotCommitProvider;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.PlotLane;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.SWTPlotRenderer;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -36,16 +42,14 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
-import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -68,13 +72,18 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Link;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.part.ViewPart;
 
@@ -84,8 +93,12 @@ import org.eclipse.ui.part.ViewPart;
  * @author Hodaie
  * @author Wesendonk
  * @author Shterev
+ * @author Aumann
  */
 public class HistoryBrowserView extends ViewPart implements ProjectSpaceContainer {
+	private static final int INFOS_ABOVE_BASE = 10;
+	private static final int INFOS_BELOW_BASE = 20;
+	private static final boolean DEFAULT_SHOW_ALL_BRANCHES = true;
 
 	/**
 	 * Treeviewer that provides a model element selection for selected
@@ -96,6 +109,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private final class TreeViewerWithModelElementSelectionProvider extends TreeViewer {
 		private TreeViewerWithModelElementSelectionProvider(Composite parent, int style) {
 			super(parent, style);
+		}
+
+		@Override
+		protected Widget internalExpand(Object elementOrPath, boolean expand) {
+			// TODO Auto-generated method stub
+			return super.internalExpand(elementOrPath, expand);
 		}
 
 		/**
@@ -166,18 +185,15 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private List<HistoryInfo> historyInfos;
 
+	private PaginationManager paginationManager;
+
 	private ProjectSpace projectSpace;
-
-	private int startOffset = 24;
-
-	/**
-	 * this should be the UNRESOLVED VersionSpec ID (-1 for HeadVersionSpec).
-	 */
-	private int currentEnd;
 
 	private int headVersion;
 
 	private EObject modelElement;
+
+	private final Font nFont;
 
 	private TreeViewer viewer;
 	private Map<Integer, ChangePackage> changePackageCache;
@@ -198,7 +214,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private TreeViewerColumn changesColumn;
 
-	private TreeViewerColumn logColumn;
+	private TreeViewerColumn commitInfoColumn;
+
+	private TreeViewerColumn messageColumn;
 
 	private LogMessageColumnLabelProvider logLabelProvider;
 
@@ -206,12 +224,21 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
 
+	private TreeViewerColumn graphColumn;
+
+	private static final int BRANCH_COLUMN = 1;
+
+	private SWTPlotRenderer renderer;
+
+	private IPlotCommitProvider commitProvider;
+
 	/**
 	 * Constructor.
 	 */
 	public HistoryBrowserView() {
 		historyInfos = new ArrayList<HistoryInfo>();
 		changePackageCache = new HashMap<Integer, ChangePackage>();
+		nFont = PlatformUI.getWorkbench().getDisplay().getSystemFont();
 	}
 
 	/**
@@ -293,16 +320,74 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		changesColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		changesColumn.getColumn().setText("Changes");
-		changesColumn.getColumn().setWidth(400);
+		changesColumn.getColumn().setWidth(200);
 
-		logColumn = new TreeViewerColumn(viewer, SWT.NONE);
-		logColumn.getColumn().setText("Commit information");
-		logColumn.getColumn().setWidth(300);
+		graphColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		graphColumn.getColumn().setText("Branches");
+		graphColumn.getColumn().setWidth(150);
+		viewer.getTree().addListener(SWT.PaintItem, new Listener() {
+
+			public void handleEvent(Event event) {
+				doPaint(event);
+
+			}
+		});
+
+		messageColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		messageColumn.getColumn().setText("Commit message");
+		messageColumn.getColumn().setWidth(250);
+
+		commitInfoColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		commitInfoColumn.getColumn().setText("Author and date");
+		commitInfoColumn.getColumn().setWidth(200);
+
+		renderer = new SWTPlotRenderer(parent.getDisplay());
 
 		Tree tree = viewer.getTree();
 		tree.setHeaderVisible(true);
 
 		hookToobar();
+	}
+
+	/**
+	 * Paints a certain column of the TreeViewer.
+	 * 
+	 * @param event The underlying paint event.
+	 */
+	protected void doPaint(final Event event) {
+		if (event.index != BRANCH_COLUMN) {
+			return;
+		}
+
+		Object data;
+		TreeItem currItem = (TreeItem) event.item;
+		data = currItem.getData();
+		boolean isCommitItem = true;
+
+		while (!(data instanceof HistoryInfo)) {
+			isCommitItem = false;
+			currItem = currItem.getParentItem();
+			if (currItem == null) {
+				// no history info in parent hierarchy, do not draw.
+				// Happens e.g. if the user deactivates showing the commits
+				return;
+			}
+			data = currItem.getData();
+		}
+
+		assert data instanceof HistoryInfo : "Would have returned otherwise.";
+
+		final IPlotCommit c = commitProvider.getCommitFor((HistoryInfo) data, !isCommitItem);
+		final PlotLane lane = c.getLane();
+		if (lane != null && lane.getSaturatedColor().isDisposed()) {
+			return;
+		}
+		// if (highlight != null && c.has(highlight))
+		// event.gc.setFont(hFont);
+		// else
+		event.gc.setFont(nFont);
+
+		renderer.paint(event, c);
 	}
 
 	private void hookToobar() {
@@ -311,6 +396,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		addExpandAllAndCollapseAllAction(menuManager);
 		addRefreshAction(menuManager);
+		addShowAllBranchesAction(menuManager);
 		addShowRootAction(menuManager);
 		addNextAndPreviousAction(menuManager);
 		addJumpToRevisionAction(menuManager);
@@ -350,6 +436,21 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		refresh.setImageDescriptor(Activator.getImageDescriptor("/icons/refresh.png"));
 		refresh.setToolTipText("Refresh");
 		menuManager.add(refresh);
+	}
+
+	private void addShowAllBranchesAction(IToolBarManager menuManager) {
+		Action showAllBranches = new Action("", SWT.TOGGLE) {
+			@Override
+			public void run() {
+				paginationManager.setShowAllVersions(isChecked());
+				refresh();
+			}
+
+		};
+		showAllBranches.setImageDescriptor(Activator.getImageDescriptor("icons/arrow_branch.png"));
+		showAllBranches.setToolTipText("Show All Branches");
+		showAllBranches.setChecked(DEFAULT_SHOW_ALL_BRANCHES);
+		menuManager.add(showAllBranches);
 	}
 
 	private void addShowRootAction(IToolBarManager menuManager) {
@@ -395,31 +496,25 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		Action prev = new Action() {
 			@Override
 			public void run() {
-				int temp = currentEnd + startOffset;
-				if (temp <= headVersion) {
-					currentEnd = temp;
-				}
+				paginationManager.previousPage();
 				refresh();
 			}
 
 		};
 		prev.setImageDescriptor(Activator.getImageDescriptor("/icons/prev.png"));
-		prev.setToolTipText("Previous " + (startOffset + 1) + " items");
+		prev.setToolTipText("Previous " + INFOS_ABOVE_BASE + " items");
 		menuManager.add(prev);
 
 		Action next = new Action() {
 			@Override
 			public void run() {
-				int temp = currentEnd - startOffset;
-				if (temp > 0) {
-					currentEnd = temp;
-				}
+				paginationManager.nextPage();
 				refresh();
 			}
 
 		};
 		next.setImageDescriptor(Activator.getImageDescriptor("/icons/next.png"));
-		next.setToolTipText("Next " + (startOffset + 1) + " items");
+		next.setToolTipText("Next " + INFOS_BELOW_BASE + " items");
 		menuManager.add(next);
 	}
 
@@ -431,11 +526,14 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				if (inputDialog.open() == Window.OK) {
 					try {
 						int temp = Integer.parseInt(inputDialog.getValue());
-						currentEnd = temp;
+						paginationManager.setVersion(temp);
 						refresh();
 					} catch (NumberFormatException e) {
 						MessageDialog.openError(getSite().getShell(), "Error", "A numeric value was expected!");
 						run();
+					} catch (EmfStoreException e) {
+						EMFStoreMessageDialog
+							.showExceptionDialog("Error: The version you requested does not exist.", e);
 					}
 				}
 			}
@@ -465,19 +563,30 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 	/**
 	 * Refreshes the view using the current end point.
+	 * 
+	 * @throws EmfStoreException
 	 */
 	public void refresh() {
-		load(currentEnd);
+		int prevHead = headVersion;
+		try {
+			headVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace.getBaseVersion()))
+				.getIdentifier();
+		} catch (EmfStoreException e) {
+			headVersion = prevHead;
+		}
+		load();
 		viewer.setContentProvider(contentProvider);
-		viewer.setInput(getHistoryInfos());
+		List<HistoryInfo> historyInfos = getHistoryInfos();
+		commitProvider.refresh(historyInfos);
+		viewer.setInput(historyInfos);
 	}
 
-	private void load(final int end) {
+	private void load() {
 		try {
 			new ServerCall<Void>(projectSpace.getUsersession()) {
 				@Override
 				protected Void run() throws EmfStoreException {
-					loadContent(end);
+					loadContent();
 					return null;
 				}
 			}.execute();
@@ -486,20 +595,24 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		}
 	}
 
-	private void loadContent(int end) throws EmfStoreException {
+	private void loadContent() throws EmfStoreException {
 		if (projectSpace == null) {
 			historyInfos.clear();
 			return;
 		}
-		HistoryQuery query = getQuery(end);
-		List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
+		// HistoryQuery query = getQuery(centerVersion);
+		// List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
+		List<HistoryInfo> historyInfo = paginationManager.retrieveHistoryInfos();
 
 		if (historyInfo != null) {
 			for (HistoryInfo hi : historyInfo) {
 				if (hi.getPrimerySpec().equals(projectSpace.getBaseVersion())) {
 					TagVersionSpec spec = VersioningFactory.eINSTANCE.createTagVersionSpec();
 					spec.setName(VersionSpec.BASE);
-					hi.getTagSpecs().add(spec);
+
+					if (!containsTag(hi.getTagSpecs(), spec)) {
+						hi.getTagSpecs().add(spec);
+					}
 					break;
 				}
 			}
@@ -518,7 +631,25 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			changePackageCache.values()), projectSpace.getProject());
 		labelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 		logLabelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
+
 		// contentProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
+	}
+
+	/**
+	 * Checks whether the list of TagVersionSpec's contains the given spec. This method exists as the EList
+	 * implementation does not base contain on {@link #equals(Object)}.
+	 * 
+	 * @param tagSpecs The list to search for the containing object.
+	 * @param spec The object to search for.
+	 * @return true if the object has been found, false otherwise.
+	 */
+	private boolean containsTag(EList<TagVersionSpec> tagSpecs, TagVersionSpec spec) {
+		for (TagVersionSpec listSpec : tagSpecs) {
+			if (listSpec.equals(spec)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -540,14 +671,16 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 *            the input model element
 	 */
 	public void setInput(ProjectSpace projectSpace, EObject me) {
-		// noProjectHint.dispose();
+		noProjectHint.dispose();
 		this.parent.layout();
 		this.projectSpace = projectSpace;
 		modelElement = me;
-		currentEnd = -1;
 		String label = "History for ";
 		Project project = projectSpace.getProject();
 		contentProvider = new SCMContentProvider();
+		commitProvider = new PlotCommitProvider();
+		paginationManager = new PaginationManager(projectSpace, me, INFOS_ABOVE_BASE, INFOS_BELOW_BASE);
+		paginationManager.setShowAllVersions(DEFAULT_SHOW_ALL_BRANCHES);
 
 		if (me != null && project.containsInstance(me)) {
 			label += adapterFactoryLabelProvider.getText(me);
@@ -560,28 +693,18 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		}
 
 		setContentDescription(label);
-		labelProvider = new SCMLabelProvider(project);
+
+		graphColumn.setLabelProvider(new BranchGraphLabelProvider());
+
+		labelProvider = new HistorySCMLabelProvider(project);
 		changesColumn.setLabelProvider(labelProvider);
 
 		logLabelProvider = new LogMessageColumnLabelProvider(project);
-		logColumn.setLabelProvider(logLabelProvider);
+		messageColumn.setLabelProvider(logLabelProvider);
+
+		commitInfoColumn.setLabelProvider(new CommitInfoColumnLabelProvider());
 
 		refresh();
-	}
-
-	// TODO BRANCH work in progress
-	private HistoryQuery getQuery(int end) {
-
-		boolean allVersions = false;
-		RangeQuery query = HistoryQueryBuilder.rangeQuery(projectSpace.getBaseVersion(), 5, 10, allVersions, false,
-			false, true);
-
-		// query.setIncludeChangePackage(true);
-		// if (modelElement != null && !(modelElement instanceof ProjectSpace)) {
-		// query.getModelElements().add(ModelUtil.getProject(modelElement).getModelElementId(modelElement));
-		// }
-
-		return query;
 	}
 
 	/**
