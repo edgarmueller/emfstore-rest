@@ -691,10 +691,10 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 
 		if (me != null && project.containsInstance(me)) {
 			label += adapterFactoryLabelProvider.getText(me);
-			contentProvider.setShowRootNodes(false);
+			// contentProvider.setShowRootNodes(false);
 		} else {
 			label += projectSpace.getProjectName();
-			contentProvider.setShowRootNodes(true);
+			// contentProvider.setShowRootNodes(true);
 		}
 
 		setContentDescription(label);
