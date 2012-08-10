@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
@@ -266,6 +267,15 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		historyInfos = new ArrayList<HistoryInfo>();
 		changePackageCache = new HashMap<Integer, ChangePackage>();
 		nFont = PlatformUI.getWorkbench().getDisplay().getSystemFont();
+		WorkspaceManager.getObserverBus().register(new DeleteProjectSpaceObserver() {
+
+			public void projectSpaceDeleted(ProjectSpace projectSpace) {
+				if (HistoryBrowserView.this.projectSpace == projectSpace) {
+					HistoryBrowserView.this.getViewSite().getPage().hideView(HistoryBrowserView.this);
+				}
+			}
+
+		});
 	}
 
 	/**
