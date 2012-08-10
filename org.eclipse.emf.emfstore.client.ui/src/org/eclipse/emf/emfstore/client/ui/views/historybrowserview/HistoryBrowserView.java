@@ -96,9 +96,36 @@ import org.eclipse.ui.part.ViewPart;
  * @author Aumann
  */
 public class HistoryBrowserView extends ViewPart implements ProjectSpaceContainer {
-	private static final int INFOS_ABOVE_BASE = 10;
-	private static final int INFOS_BELOW_BASE = 20;
+
+	private static final int INFOS_ABOVE_BASE = 2;
+	private static final int INFOS_BELOW_BASE = 4;
 	private static final boolean DEFAULT_SHOW_ALL_BRANCHES = true;
+
+	private final class ExCoAction extends Action {
+		private final ImageDescriptor expandImg;
+		private final ImageDescriptor collapseImg;
+
+		private ExCoAction(String text, int style, ImageDescriptor expandImg, ImageDescriptor collapseImg) {
+			super(text, style);
+			this.expandImg = expandImg;
+			this.collapseImg = collapseImg;
+		}
+
+		@Override
+		public void run() {
+			if (!isChecked()) {
+				setImage(true);
+				viewer.collapseAll();
+			} else {
+				setImage(false);
+				viewer.expandToLevel(2);
+			}
+		}
+
+		public void setImage(boolean expand) {
+			setImageDescriptor(expand ? expandImg : collapseImg);
+		}
+	}
 
 	/**
 	 * Treeviewer that provides a model element selection for selected
@@ -229,6 +256,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private SWTPlotRenderer renderer;
 
 	private IPlotCommitProvider commitProvider;
+
+	private ExCoAction expandAndCollapse;
 
 	/**
 	 * Constructor.
@@ -407,19 +436,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		final ImageDescriptor expandImg = Activator.getImageDescriptor("icons/expandall.gif");
 		final ImageDescriptor collapseImg = Activator.getImageDescriptor("icons/collapseall.gif");
 
-		Action expandAndCollapse = new Action("", SWT.TOGGLE) {
-			@Override
-			public void run() {
-				if (!isChecked()) {
-					setImageDescriptor(expandImg);
-					viewer.collapseAll();
-				} else {
-					setImageDescriptor(collapseImg);
-					viewer.expandToLevel(2);
-				}
-			}
-
-		};
+		expandAndCollapse = new ExCoAction("", SWT.TOGGLE, expandImg, collapseImg);
 		expandAndCollapse.setImageDescriptor(expandImg);
 		expandAndCollapse.setToolTipText("Use this toggle to expand or collapse all elements");
 		menuManager.add(expandAndCollapse);
@@ -552,6 +569,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		} catch (EmfStoreException e) {
 			headVersion = prevHead;
 		}
+		expandAndCollapse.setChecked(false);
+		expandAndCollapse.setImage(true);
 		load();
 		viewer.setContentProvider(contentProvider);
 		List<HistoryInfo> historyInfos = getHistoryInfos();
