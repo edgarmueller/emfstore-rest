@@ -51,10 +51,12 @@ public class ExportImportControllerExecutor {
 	 */
 	public void execute(final IExportImportController controller) throws IOException {
 
+		final String action = controller.isExport() ? "Exporting " : "Importing ";
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				monitor.beginTask(controller.getLabel(), 100);
+				monitor.beginTask(action + controller.getLabel(), 100);
 				// TODO: let export controllers set worked state
 				monitor.worked(10);
 				try {
