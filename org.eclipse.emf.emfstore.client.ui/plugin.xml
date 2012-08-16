@@ -874,12 +874,10 @@
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
            id="org.eclipse.emf.emfstore.client.ui.revert"
            name="Revert">
      </command>
      <command
-           defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.UndoLastOperationHandler"
            id="org.eclipse.emf.emfstore.client.ui.undoLastOperation"
            name="undoLastOperation">
      </command>
