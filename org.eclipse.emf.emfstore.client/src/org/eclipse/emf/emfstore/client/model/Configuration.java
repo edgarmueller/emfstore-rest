@@ -370,14 +370,8 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			String attribute = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
-				.getAttribute(AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME);
-			if (attribute != null) {
-				autoSave = Boolean.parseBoolean(attribute);
-			} else {
-				// set default
-				autoSave = new Boolean(true);
-			}
+			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getBoolean(
+				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
 	}
