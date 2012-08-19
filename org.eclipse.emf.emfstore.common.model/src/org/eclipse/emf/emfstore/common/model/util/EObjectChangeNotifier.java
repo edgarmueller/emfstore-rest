@@ -182,6 +182,19 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		}
 
 		super.notifyChanged(notification);
+
+		// detect if the notification is about a reference to an object outside of the collection => notify
+		// project
+		if (feature instanceof EReference) {
+			Object newValue = notification.getNewValue();
+			if (newValue instanceof EObject) {
+				EObject newEObject = (EObject) newValue;
+				if (!collection.containsInstance(newEObject)) {
+					collection.addCutElement(newEObject);
+				}
+			}
+		}
+
 		currentNotifications.pop();
 
 		if (!notification.isTouch()
