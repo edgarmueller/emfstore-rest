@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 
@@ -25,10 +24,9 @@ public class HistorySCMLabelProvider extends SCMLabelProvider {
 	/**
 	 * Creates a new {@link HistorySCMLabelProvider} for the given project.
 	 * 
-	 * @param project The project to represent.
 	 */
-	public HistorySCMLabelProvider(Project project) {
-		super(project);
+	public HistorySCMLabelProvider() {
+		super();
 	}
 
 	@Override

@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -22,7 +20,6 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.provider.AbstractOperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.server.model.provider.CustomOperationLabelProviderManager;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -52,13 +49,11 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	/**
 	 * Constructor.
 	 * 
-	 * @param changePackages
-	 *            a list of change packages
 	 * @param collection
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
 	 */
-	public ChangePackageVisualizationHelper(List<ChangePackage> changePackages, IdEObjectCollection collection) {
+	public ChangePackageVisualizationHelper(IdEObjectCollection collection) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.collection = collection;
 	}

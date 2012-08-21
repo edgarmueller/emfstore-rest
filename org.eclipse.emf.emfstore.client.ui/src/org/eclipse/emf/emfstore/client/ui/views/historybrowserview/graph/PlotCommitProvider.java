@@ -40,8 +40,8 @@ import org.eclipse.swt.widgets.Display;
 public class PlotCommitProvider implements IPlotCommitProvider {
 
 	private IPlotCommit[] commits;
-	private final TreeSet<Integer> freePositions;
-	private final HashSet<PlotLane> activeLanes;
+	private TreeSet<Integer> freePositions;
+	private HashSet<PlotLane> activeLanes;
 	private int positionsAllocated;
 	private Map<HistoryInfo, IPlotCommit> commitForHistory = new HashMap<HistoryInfo, IPlotCommit>();
 	private Map<Integer, IPlotCommit> commitForID;
@@ -67,11 +67,17 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	 * 
 	 */
 	public PlotCommitProvider() {
+		reset(null);
+	}
+
+	public void reset(List<HistoryInfo> infos) {
 		this.nextBranchColorIndex = 0;
 		this.freePositions = new TreeSet<Integer>();
 		this.activeLanes = new HashSet<PlotLane>(32);
 		this.commitForHistory = new HashMap<HistoryInfo, IPlotCommit>();
-
+		if (infos != null) {
+			refresh(infos);
+		}
 	}
 
 	/**

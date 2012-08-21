@@ -674,6 +674,20 @@ public final class ModelUtil {
 	}
 
 	/**
+	 * Searches for the project and then looks for the modelelement id.
+	 * 
+	 * @param modelElement me
+	 * @return id
+	 */
+	public static ModelElementId getModelElementId(EObject modelElement) {
+		Project project = getProject(modelElement);
+		if (project == null) {
+			return null;
+		}
+		return project.getModelElementId(modelElement);
+	}
+
+	/**
 	 * Get the EContainer that contains the given model element and whose
 	 * EContainer is null.
 	 * 

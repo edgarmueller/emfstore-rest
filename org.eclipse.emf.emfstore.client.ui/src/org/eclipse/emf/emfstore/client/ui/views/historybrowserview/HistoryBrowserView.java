@@ -634,8 +634,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				changePackageCache.put(hi.getPrimerySpec().getIdentifier(), hi.getChangePackage());
 			}
 		}
-		changePackageVisualizationHelper = new ChangePackageVisualizationHelper(new ArrayList<ChangePackage>(
-			changePackageCache.values()), projectSpace.getProject());
+		changePackageVisualizationHelper = new ChangePackageVisualizationHelper(projectSpace.getProject());
 		labelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 		logLabelProvider.setChangePackageVisualizationHelper(changePackageVisualizationHelper);
 

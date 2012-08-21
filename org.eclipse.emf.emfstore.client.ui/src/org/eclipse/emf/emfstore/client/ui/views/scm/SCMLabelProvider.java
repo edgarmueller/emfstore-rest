@@ -80,6 +80,10 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		headRevision = Activator.getImageDescriptor("icons/HistoryInfo_head.png").createImage();
 	}
 
+	public SCMLabelProvider() {
+		this(null);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -333,5 +337,14 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 */
 	protected Project getProject() {
 		return project;
+	}
+
+	/**
+	 * Set the active project.
+	 * 
+	 * @param project project
+	 */
+	public void setProject(Project project) {
+		this.project = project;
 	}
 }

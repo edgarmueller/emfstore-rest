@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.jface.viewers.TreeNode;
@@ -29,8 +28,8 @@ public class LogMessageColumnLabelProvider extends SCMLabelProvider {
 	 * 
 	 * @param project the project
 	 */
-	public LogMessageColumnLabelProvider(Project project) {
-		super(project);
+	public LogMessageColumnLabelProvider() {
+		super();
 	}
 
 	/**

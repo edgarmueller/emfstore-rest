@@ -602,7 +602,7 @@
       <view
             allowMultiple="false"
             category="org.eclipse.emf.ecp"
-            class="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView"
+            class="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView2"
             icon="icons/historyview.png"
             id="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView"
             name="History Browser"

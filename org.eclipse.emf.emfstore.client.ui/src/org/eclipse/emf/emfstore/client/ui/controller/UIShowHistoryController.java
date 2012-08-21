@@ -14,16 +14,11 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView2;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -37,7 +32,6 @@ import org.eclipse.ui.PlatformUI;
  */
 public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> {
 
-	private ProjectSpace projectSpace;
 	private final EObject modelElement;
 
 	/**
@@ -50,13 +44,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 */
 	public UIShowHistoryController(Shell shell, EObject modelElement) {
 		super(shell, true, true);
-		if (modelElement instanceof ProjectSpace) {
-			this.projectSpace = (ProjectSpace) modelElement;
-			this.modelElement = null;
-		} else {
-			this.projectSpace = null;
-			this.modelElement = modelElement;
-		}
+		this.modelElement = modelElement;
 	}
 
 	/**
@@ -68,35 +56,21 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 
-		if (projectSpace == null) {
-			try {
-				projectSpace = WorkspaceManager.getInstance()
-						.getCurrentWorkspace()
-						.getProjectSpace(ModelUtil.getProject(modelElement));
-			} catch (UnkownProjectException e) {
-				MessageDialog.openWarning(getShell(), "Unknown project",
-						e.getMessage());
-				return null;
-			}
-		}
-
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				IWorkbenchPage page = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage();
-				HistoryBrowserView historyBrowserView = null;
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				HistoryBrowserView2 historyBrowserView = null;
 				// TODO: remove hard-coded reference
 				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
 
 				try {
-					historyBrowserView = (HistoryBrowserView) page
-							.showView(viewId);
+					historyBrowserView = (HistoryBrowserView2) page.showView(viewId);
 				} catch (PartInitException e) {
 					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 				}
 
 				if (historyBrowserView != null) {
-					historyBrowserView.setInput(projectSpace, modelElement);
+					historyBrowserView.setInput(modelElement);
 				}
 				return null;
 			}
