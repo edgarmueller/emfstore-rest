@@ -125,7 +125,8 @@ public class ExtensionPoint {
 		if (element != null) {
 			return element.getBoolean(name, defaultValue);
 		}
-		return (Boolean) handleErrorOrNull(exceptionInsteadOfNull, null);
+		handleErrorOrNull(exceptionInsteadOfNull, null);
+		return defaultValue;
 	}
 
 	/**
