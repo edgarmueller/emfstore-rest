@@ -287,7 +287,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 */
 	@Override
 	public String getToolTipText(Object element) {
-		HistoryInfo historyInfo = (HistoryInfo) ModelUtil.getParent(HistoryInfo.class, (EObject) element);
+		HistoryInfo historyInfo = ModelUtil.getParent(HistoryInfo.class, (EObject) element);
 		return getText(historyInfo);
 	}
 

@@ -32,8 +32,7 @@ public class HistoryBrowserAdminTester extends PropertyTester {
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
 		if (receiver instanceof EObject && ModelUtil.getParent(ProjectSpace.class, (EObject) receiver) != null
 			&& expectedValue instanceof Boolean) {
-			final ProjectSpace projectSpace = (ProjectSpace) ModelUtil
-				.getParent(ProjectSpace.class, (EObject) receiver);
+			final ProjectSpace projectSpace = ModelUtil.getParent(ProjectSpace.class, (EObject) receiver);
 			if (projectSpace == null) {
 				return false;
 			}

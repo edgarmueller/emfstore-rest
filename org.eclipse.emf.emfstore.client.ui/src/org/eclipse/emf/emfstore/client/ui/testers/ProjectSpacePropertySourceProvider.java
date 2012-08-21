@@ -94,11 +94,12 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			return false;
 		}
 		Object[] selectedObjects = listselectionDialog.getResult();
-		for (Object projectSpaceObject : selectedObjects)
+		for (Object projectSpaceObject : selectedObjects) {
 			if (projectSpaceObject instanceof ProjectSpace) {
 				ProjectSpace projectSpace = (ProjectSpace) projectSpaceObject;
 				projectSpace.save();
 			}
+		}
 		return true;
 	}
 

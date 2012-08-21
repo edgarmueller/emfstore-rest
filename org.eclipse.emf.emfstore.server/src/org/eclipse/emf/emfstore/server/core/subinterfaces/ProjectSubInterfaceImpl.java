@@ -113,6 +113,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	protected Project getProject(Version version) throws InvalidVersionSpecException, EmfStoreException {
 		if (version.getProjectState() == null) {
 
