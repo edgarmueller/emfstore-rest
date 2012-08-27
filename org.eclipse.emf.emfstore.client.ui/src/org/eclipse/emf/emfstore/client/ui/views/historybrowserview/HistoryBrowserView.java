@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2012 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
 import java.util.ArrayList;
@@ -72,14 +82,26 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.part.ViewPart;
 
+/**
+ * This eclipse views displays the version history of EMFStore.
+ * 
+ * @author wesendon
+ * @author Aumann
+ * @author Hodaie
+ * @author Shterev
+ * 
+ */
 public class HistoryBrowserView extends ViewPart implements ProjectSpaceContainer {
 
+	// Config
 	private static final int UPPER_LIMIT = 10;
 	private static final int LOWER_LIMIT = 20;
 
+	// model state
 	private ProjectSpace projectSpace;
 	private EObject modelElement;
 
+	private List<HistoryInfo> infos;
 	private PrimaryVersionSpec centerVersion;
 	private boolean showAllVersions;
 
@@ -106,7 +128,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private ExpandCollapseAction expandAndCollapse;
 	private boolean isUnlinkedFromNavigator;
 	private Action showAllBranches;
-	private List<HistoryInfo> infos;
 
 	/**
 	 * {@inheritDoc}
@@ -168,42 +189,43 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				doPaint(event);
 			}
 
-			private void doPaint(Event event) {
-				if (event.index != BRANCH_COLUMN) {
-					return;
-				}
-
-				Object data;
-				TreeItem currItem = (TreeItem) event.item;
-				data = currItem.getData();
-				boolean isCommitItem = true;
-
-				while (!(data instanceof HistoryInfo)) {
-					isCommitItem = false;
-					currItem = currItem.getParentItem();
-					if (currItem == null) {
-						// no history info in parent hierarchy, do not draw.
-						// Happens e.g. if the user deactivates showing the commits
-						return;
-					}
-					data = currItem.getData();
-				}
-
-				assert data instanceof HistoryInfo : "Would have returned otherwise.";
-
-				final IPlotCommit c = commitProvider.getCommitFor((HistoryInfo) data, !isCommitItem);
-				final PlotLane lane = c.getLane();
-				if (lane != null && lane.getSaturatedColor().isDisposed()) {
-					return;
-				}
-				// if (highlight != null && c.has(highlight))
-				// event.gc.setFont(hFont);
-				// else
-				event.gc.setFont(PlatformUI.getWorkbench().getDisplay().getSystemFont());
-
-				renderer.paint(event, c);
-			}
 		});
+	}
+
+	private void doPaint(Event event) {
+		if (event.index != BRANCH_COLUMN) {
+			return;
+		}
+
+		Object data;
+		TreeItem currItem = (TreeItem) event.item;
+		data = currItem.getData();
+		boolean isCommitItem = true;
+
+		while (!(data instanceof HistoryInfo)) {
+			isCommitItem = false;
+			currItem = currItem.getParentItem();
+			if (currItem == null) {
+				// no history info in parent hierarchy, do not draw.
+				// Happens e.g. if the user deactivates showing the commits
+				return;
+			}
+			data = currItem.getData();
+		}
+
+		assert data instanceof HistoryInfo : "Would have returned otherwise.";
+
+		final IPlotCommit c = commitProvider.getCommitFor((HistoryInfo) data, !isCommitItem);
+		final PlotLane lane = c.getLane();
+		if (lane != null && lane.getSaturatedColor().isDisposed()) {
+			return;
+		}
+		// if (highlight != null && c.has(highlight))
+		// event.gc.setFont(hFont);
+		// else
+		event.gc.setFont(PlatformUI.getWorkbench().getDisplay().getSystemFont());
+
+		renderer.paint(event, c);
 	}
 
 	private TreeViewerColumn createColumn(String label, int width) {
@@ -224,6 +246,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		getSite().registerContextMenu(menuMgr, viewer);
 	}
 
+	/**
+	 * Reloads the view with the current parameters.
+	 */
 	public void refresh() {
 		setDescription();
 		resetExpandCollapse();
@@ -333,6 +358,11 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		commitProvider.reset(infos);
 	}
 
+	/**
+	 * Displays the history for the given input.
+	 * 
+	 * @param input eobject in projectspace or projectspace itself
+	 */
 	public void setInput(EObject input) {
 		try {
 			if (input instanceof ProjectSpace) {
