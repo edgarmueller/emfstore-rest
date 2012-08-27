@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView2;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
@@ -59,12 +59,12 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				HistoryBrowserView2 historyBrowserView = null;
+				HistoryBrowserView historyBrowserView = null;
 				// TODO: remove hard-coded reference
 				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
 
 				try {
-					historyBrowserView = (HistoryBrowserView2) page.showView(viewId);
+					historyBrowserView = (HistoryBrowserView) page.showView(viewId);
 				} catch (PartInitException e) {
 					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 				}

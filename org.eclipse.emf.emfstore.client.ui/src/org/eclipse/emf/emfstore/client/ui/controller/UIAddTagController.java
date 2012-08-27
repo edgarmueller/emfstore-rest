@@ -108,6 +108,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 			}
 			// also add tag to the selected history info
 			historyInfo.getTagSpecs().add(tag);
+			historyBrowserView.refresh();
 		}
 
 		return null;

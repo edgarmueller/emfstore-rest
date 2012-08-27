@@ -10,14 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.util;
 
-import java.util.ArrayList;
-
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -126,10 +123,10 @@ public final class UIDecisionUtil {
 	 * @return visualizationhelper
 	 */
 	public static ChangePackageVisualizationHelper getChangePackageVisualizationHelper(DecisionManager decisionManager) {
-		ArrayList<ChangePackage> list = new ArrayList<ChangePackage>();
-		list.addAll(decisionManager.Internal.getMyChangePackages());
-		list.addAll(decisionManager.Internal.getTheirChangePackages());
-		return new ChangePackageVisualizationHelper(list, decisionManager.getProject());
+		// ArrayList<ChangePackage> list = new ArrayList<ChangePackage>();
+		// list.addAll(decisionManager.Internal.getMyChangePackages());
+		// list.addAll(decisionManager.Internal.getTheirChangePackages());
+		return new ChangePackageVisualizationHelper(decisionManager.getProject());
 	}
 
 	/**

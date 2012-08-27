@@ -602,7 +602,7 @@
       <view
             allowMultiple="false"
             category="org.eclipse.emf.ecp"
-            class="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView2"
+            class="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView"
             icon="icons/historyview.png"
             id="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView"
             name="History Browser"
@@ -789,7 +789,7 @@
             name="RemoveTag">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertCommitHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
             name="RevertRevision">
       </command>
