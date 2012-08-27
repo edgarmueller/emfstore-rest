@@ -73,8 +73,8 @@ import org.eclipse.ui.part.ViewPart;
 
 public class HistoryBrowserView2 extends ViewPart implements ProjectSpaceContainer {
 
-	private static final int UPPER_LIMIT = 10;
-	private static final int LOWER_LIMIT = 20;
+	private static final int UPPER_LIMIT = 3;
+	private static final int LOWER_LIMIT = 3;
 
 	private ProjectSpace projectSpace;
 	private EObject modelElement;

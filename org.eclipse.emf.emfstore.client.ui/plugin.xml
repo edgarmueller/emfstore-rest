@@ -807,32 +807,7 @@
             id="org.eclipse.emf.emfstore.client.ui.save"
             name="Save Project">
       </command>
-            <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
-            name="CheckoutRevision">
-      </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.AddTagHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
-            name="AddTag">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RemoveTagHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.removetag"
-            name="RemoveTag">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-            name="RevertRevision">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-            name="ForceRevertRevision">
-      </command>
-            <command
             categoryId="org.eclipse.emf.emfstore.client.ui.project"
             id="org.eclipse.emf.emfstore.client.ui.commitProject"
             name="commit">
