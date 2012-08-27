@@ -168,27 +168,20 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				useCase.getFunctionalRequirements().add(functionalRequirement);
 				clearOperations();
+				useCase.getFunctionalRequirements().add(functionalRequirement);
 			}
 		}.run(false);
 
 		assertEquals(functionalRequirement, useCase.getFunctionalRequirements().get(0));
 		assertEquals(useCase, functionalRequirement.getUseCases().get(0));
 
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				getProject().addModelElement(functionalRequirement);
-			}
-		}.run(false);
-
 		assertEquals(true, getProject().containsInstance(functionalRequirement));
 		assertEquals(getProject(), ModelUtil.getProject(functionalRequirement));
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 
-		assertEquals(1, operations.size());
+		assertEquals(2, operations.size());
 		AbstractOperation operation = operations.get(0);
 		assertEquals(true, operation instanceof CreateDeleteOperation);
 		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
@@ -1212,12 +1205,11 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(false, getProject().containsInstance(newTestElement));
 		assertEquals(false, getProject().containsInstance(newChildElement1));
 		assertEquals(false, getProject().containsInstance(newChildElement2));
-		assertEquals(false, getProject().containsInstance(newChildElement3));
+		assertEquals(true, getProject().containsInstance(newChildElement3));
 
-		assertEquals(3, newTestElement.getContainedElements().size());
+		assertEquals(2, newTestElement.getContainedElements().size());
 		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
 		assertEquals(newChildElement2, newTestElement.getContainedElements().get(1));
-		assertEquals(newChildElement3, newTestElement.getContainedElements().get(2));
 
 		assertEquals(newTestElement, newChildElement1.getReferences().get(0));
 		assertEquals(newChildElement1, newChildElement2.getReferences().get(0));
@@ -1247,10 +1239,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(true, getProject().containsInstance(newChildElement2));
 		assertEquals(true, getProject().containsInstance(newChildElement3));
 
-		assertEquals(3, newTestElement.getContainedElements().size());
+		assertEquals(2, newTestElement.getContainedElements().size());
 		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
 		assertEquals(newChildElement2, newTestElement.getContainedElements().get(1));
-		assertEquals(newChildElement3, newTestElement.getContainedElements().get(2));
 
 		assertEquals(newTestElement, newChildElement1.getReferences().get(0));
 		assertEquals(newChildElement1, newChildElement2.getReferences().get(0));
@@ -1268,13 +1259,13 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		TestElement copiedNewChildElement1 = copiedNewTestElement.getContainedElements().get(0);
 		TestElement copiedNewChildElement2 = copiedNewTestElement.getContainedElements().get(1);
 
-		assertEquals(3, copiedNewTestElement.getContainedElements().size());
+		assertEquals(2, copiedNewTestElement.getContainedElements().size());
 		assertEquals(copiedNewTestElement, copiedNewChildElement1.getReferences().get(0));
 		assertEquals(copiedNewChildElement1, copiedNewChildElement2.getReferences().get(0));
 		assertEquals(1, copiedNewChildElement2.getReferences().size());
 
 		assertEquals(newTestElementId, createDeleteOperation.getModelElementId());
-		assertEquals(2, createDeleteOperation.getSubOperations().size());
+		assertEquals(1, createDeleteOperation.getSubOperations().size());
 		assertEquals(false, createDeleteOperation.isDelete());
 		assertTrue(CommonUtil.isSelfContained(createDeleteOperation, true));
 
@@ -1286,14 +1277,6 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(newChildElement2, getProject().getModelElement(subOperation1.getModelElementId()));
 		assertEquals("references", subOperation1.getFeatureName());
 		assertEquals(testElement, getProject().getModelElement(subOperation1.getReferencedModelElements().get(0)));
-
-		MultiReferenceOperation subOperation2 = (MultiReferenceOperation) createDeleteOperation.getSubOperations().get(
-			1);
-
-		// sub-operation 2
-		assertEquals(testElement, getProject().getModelElement(subOperation2.getModelElementId()));
-		assertEquals("references", subOperation2.getFeatureName());
-		assertEquals(newChildElement3, getProject().getModelElement(subOperation2.getReferencedModelElements().get(0)));
 
 		// check 2nd operation
 		MultiReferenceOperation operation2 = (MultiReferenceOperation) operations.get(1);

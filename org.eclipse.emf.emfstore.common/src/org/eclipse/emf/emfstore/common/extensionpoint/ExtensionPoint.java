@@ -100,19 +100,33 @@ public class ExtensionPoint {
 	}
 
 	/**
-	 * Gets a Boolean from the element with highest priority ({@link #getElementWithHighestPriority()}, default
-	 * {@link #getFirst()}).
+	 * Returns the value of the boolean attribute, if existing, or given false otherwise, from the element with
+	 * highest priority ({@link #getElementWithHighestPriority()}, default {@link #getFirst()}).
 	 * 
 	 * @param name attribute id
 	 * @return the result or either null, or an runtime exception is thrown in the case of
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public Boolean getBoolean(String name) {
+		return getBoolean(name, false);
+	}
+
+	/**
+	 * Returns the value of the boolean attribute, if existing, or given defaultValue otherwise, from the element with
+	 * highest priority ({@link #getElementWithHighestPriority()}, default {@link #getFirst()}).
+	 * 
+	 * @param name attribute id
+	 * @param defaultValue the default value if attribute does not exist
+	 * @return the result or either null, or an runtime exception is thrown in the case of
+	 *         {@link #setThrowException(boolean)} is true.
+	 */
+	public Boolean getBoolean(String name, boolean defaultValue) {
 		ExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
-			return element.getBoolean(name);
+			return element.getBoolean(name, defaultValue);
 		}
-		return (Boolean) handleErrorOrNull(exceptionInsteadOfNull, null);
+		handleErrorOrNull(exceptionInsteadOfNull, null);
+		return defaultValue;
 	}
 
 	/**

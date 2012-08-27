@@ -107,6 +107,13 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
+	 * Add a new cut element.
+	 * 
+	 * @param eObject The new cut element.
+	 */
+	public abstract void addCutElement(EObject eObject);
+
+	/**
 	 * Notifies all collection change observers.
 	 * 
 	 * @param command

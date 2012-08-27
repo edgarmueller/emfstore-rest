@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -96,11 +97,11 @@ public class UIGenericExportImportController extends AbstractEMFStoreUIControlle
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		EMFStorePreferenceHelper.setPreference(controller.getParentFolderPropertyKey(), file.getParent());
 
-		progressMonitor.beginTask("Import " + controller.getLabel() + " ...", 100);
-		progressMonitor.worked(10);
-
 		try {
 			new ExportImportControllerExecutor(file, progressMonitor).execute(controller);
+			MessageDialog.openInformation(getShell(), controller.isExport() ? "Export" : "Import" + " successfull",
+				"The " + controller.getLabel() + " has been successfully "
+					+ (controller.isExport() ? "exported." : "imported."));
 		} catch (IOException e) {
 			EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 		}

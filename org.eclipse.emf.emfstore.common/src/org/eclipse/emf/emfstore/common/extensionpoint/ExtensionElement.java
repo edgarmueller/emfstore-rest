@@ -50,15 +50,31 @@ public class ExtensionElement {
 	}
 
 	/**
-	 * Returns a Boolean attribute.
+	 * Returns the value of the boolean attribute, if existing, or false otherwise.
 	 * 
 	 * @param name attribute id
-	 * @return Boolean, null or an {@link ExtensionPointException} is thrown
+	 * @return Boolean or an {@link ExtensionPointException} is thrown
 	 */
 	public Boolean getBoolean(String name) {
-		return Boolean.parseBoolean(getAttribute(name));
+		return getBoolean(name, false);
 	}
 
+
+	/**
+	 * Returns the value of the boolean attribute, if existing, or given defaultValue otherwise.
+	 * 
+	 * @param name attribute id
+	 * @param defaultValue the default value
+	 * @return Boolean or an {@link ExtensionPointException} is thrown
+	 */
+	public Boolean getBoolean(String name, boolean defaultValue) {
+		String attribute = getAttribute(name);
+		if (attribute==null) {
+			return defaultValue;
+		}
+		return Boolean.parseBoolean(attribute);
+	}
+	
 	/**
 	 * Returns an Integer attribute.
 	 * 

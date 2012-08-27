@@ -80,6 +80,13 @@
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="denyAddCutElementsToModelElements" type="boolean">
+            <annotation>
+               <documentation>
+                  Should the operation recording automatically add elements, which are in the cut elements, to the model elements? If false, an exception will thrown if there are still objects in the cut elements at the end of the command.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

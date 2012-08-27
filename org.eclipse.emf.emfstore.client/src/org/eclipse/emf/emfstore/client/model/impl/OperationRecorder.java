@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -48,6 +49,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
@@ -98,6 +100,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private boolean cutOffIncomingCrossReferences;
 	private boolean forceCommands;
+	private boolean denyAddCutElementsToModelElements;
 
 	private boolean emitOperationsWhenCommandCompleted;
 
@@ -131,6 +134,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			"cutOffIncomingCrossReferences", true); // cut off incoming cross-references by default
 		forceCommands = getBooleanExtensionPoint("org.eclipse.emf.emfstore.client.recording.options", "forceCommands",
 			false); // usage of commands is not forced by default
+
+		denyAddCutElementsToModelElements = getBooleanExtensionPoint(
+			"org.eclipse.emf.emfstore.client.recording.options", "denyAddCutElementsToModelElements", false);
 
 		emitOperationsWhenCommandCompleted = true;
 
@@ -507,6 +513,19 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				// element was deleted
 				handleElementDelete(deletedElement);
 			}
+		}
+
+		// add all cut elements to modelElements to guarantee a consistent state if it is allowed
+		Project project = projectSpace.getProject();
+		EList<EObject> cutElements = project.getCutElements();
+		if (denyAddCutElementsToModelElements && cutElements.size() != 0) {
+			throw new IllegalStateException(
+				"It is not allowed to have cutelements at the end of the command."
+					+ " Remove them or use denyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
+		}
+
+		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
+			project.addModelElement(eObject);
 		}
 
 		operations = modifyOperations(operations, command);

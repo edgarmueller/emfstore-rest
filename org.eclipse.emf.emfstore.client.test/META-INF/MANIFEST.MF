@@ -18,12 +18,13 @@ Export-Package: org.eclipse.emf.emfstore.client.test,
  org.eclipse.emf.emfstore.client.test.integration.forward,
  org.eclipse.emf.emfstore.client.test.integration.reversibility,
  org.eclipse.emf.emfstore.client.test.server,
+ org.eclipse.emf.emfstore.client.test.server.api,
  org.eclipse.emf.emfstore.client.test.testmodel,
  org.eclipse.emf.emfstore.client.test.testmodel.impl,
  org.eclipse.emf.emfstore.client.test.testmodel.util
 Require-Bundle: org.junit4;bundle-version="[4.5.0,5.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.client,
- org.eclipse.emf.emfstore.client.model.edit,
- org.eclipse.emf.emfstore.modelmutator;bundle-version="0.9.3"
+ org.eclipse.emf.emfstore.client;visibility:=reexport,
+ org.eclipse.emf.emfstore.client.model.edit;visibility:=reexport,
+ org.eclipse.emf.emfstore.modelmutator;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
