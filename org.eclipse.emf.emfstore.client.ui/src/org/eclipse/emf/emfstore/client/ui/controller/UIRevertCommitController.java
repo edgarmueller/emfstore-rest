@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,39 +11,42 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.RevertCommitController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 /**
- * UI controller for reverting changes on a {@link ProjectSpace}.
+ * UI controller for reverting a commit.
  * 
  * @author emueller
+ * @author wesendon
  * 
  */
 public class UIRevertCommitController extends AbstractEMFStoreUIController<Void> {
 
-	private final ProjectSpace projectSpace;
-	private final PrimaryVersionSpec versionSpec;
+	private final HistoryInfo historyInfo;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the parent {@link Shell}
-	 * @param projectSpace
-	 *            the project upon which to revert changes
-	 * @param versionSpec
-	 *            the version to revert to
+	 *            the shell that is used during the revert
+	 * @param historyInfo
+	 *            the {@link HistoryInfo} that is used to determine which commit to revert
 	 */
-	public UIRevertCommitController(Shell shell, final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec) {
+	public UIRevertCommitController(Shell shell, HistoryInfo historyInfo) {
 		super(shell);
-		this.projectSpace = projectSpace;
-		this.versionSpec = versionSpec;
+		this.historyInfo = historyInfo;
 	}
 
 	/**
@@ -54,17 +57,27 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 	 */
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+		// TODO: remove HistoryBrowserView
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 
-		if (!confirm("Confirmation",
-			"Do you really want to revert changes of this version on project " + projectSpace.getProjectName())) {
+		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
 			return null;
 		}
 
-		try {
-			new RevertCommitController(projectSpace, versionSpec).execute();
-		} catch (EmfStoreException e) {
-			MessageDialog
-				.openError(getShell(), "Error", "An error occurred while revert the commit: " + e.getMessage());
+		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
+
+		MessageDialog dialog = new MessageDialog(null, "Confirmation", null,
+			"Do you really want to force to revert changes of this version on project "
+				+ view.getProjectSpace().getProjectName(), MessageDialog.QUESTION, new String[] { "Yes", "No" }, 0);
+		int result = dialog.open();
+		if (result == Window.OK) {
+			PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
+			try {
+				new RevertCommitController(view.getProjectSpace(), versionSpec).execute();
+			} catch (EmfStoreException e) {
+				// TODO: no error handling?
+			}
 		}
 		return null;
 	}

@@ -10,16 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIRevertCommitController;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
- * Handler for reverting a commit on a selected {@link HistoryInfo}.<br/>
- * It is assumed that the user previously has selected a {@link HistoryInfo} instance.
+ * Handler for forcing the revert of a commit.
  * 
+ * @author ovonwesen
  * @author emueller
  * 
  */
@@ -33,8 +30,7 @@ public class RevertCommitHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		HistoryInfo historyInfo = requireSelection(HistoryInfo.class);
-		PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
-		new UIRevertCommitController(getShell(), requireSelection(ProjectSpace.class), versionSpec).execute();
+		new UIRevertCommitController(getShell(), requireSelection(HistoryInfo.class)).execute();
 	}
+
 }

@@ -436,13 +436,7 @@
              </command>
              <command
                    commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-                   label="Revert this revision"
-                   style="push"
-                   tooltip="Revert this revision of the project, the reversed changes between the previous revision has been applied">
-             </command>
-             <command
-                   commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-                   label="Force to revert this revision"
+                   label="Revert to this revision"
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
              </command>
@@ -791,12 +785,7 @@
       <command
             defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertCommitHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-            name="RevertRevision">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-            name="ForceRevertRevision">
+            name="Revert Revision">
       </command>
       <command
             defaultHandler="org.eclipse.emf.emfstore.client.ui.epackages.RegisterEPackageHandler"
