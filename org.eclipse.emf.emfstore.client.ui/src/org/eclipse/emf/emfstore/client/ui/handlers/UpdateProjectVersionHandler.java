@@ -26,8 +26,7 @@ import org.eclipse.ui.dialogs.ListDialog;
 
 /**
  * Handler for updating a project to a specific version.<br/>
- * It is assumed that the user previously has selected a {@link ProjectSpace}
- * instance.<br/>
+ * It is assumed that the user previously has selected a {@link ProjectSpace} instance.<br/>
  * 
  * @author ovonwesen
  * @author emueller
@@ -39,19 +38,17 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 	public void handle() {
 		ProjectSpace ps = requireSelection(ProjectSpace.class);
 		if (ps != null) {
-			RangeQuery query = HistoryQueryBuilder.rangeQuery(
-					ps.getBaseVersion(), 5, 10, true, false, false, true);
+			// TODO move logic to UIController
+			RangeQuery query = HistoryQueryBuilder.rangeQuery(ps.getBaseVersion(), 20, 0, false, false, false, false);
 			try {
 				List<HistoryInfo> historyInfo = ps.getHistoryInfo(query);
 				if (historyInfo.size() == 0) {
-					new UIUpdateProjectController(getShell(), ps,
-							Versions.createHEAD(ps.getBaseVersion())).execute();
+					new UIUpdateProjectController(getShell(), ps, Versions.createHEAD(ps.getBaseVersion())).execute();
 					return;
 				}
 
 				ListDialog listDialog = new ListDialog(getShell());
-				listDialog.setContentProvider(ArrayContentProvider
-						.getInstance());
+				listDialog.setContentProvider(ArrayContentProvider.getInstance());
 				listDialog.setLabelProvider(new LabelProvider() {
 
 					@Override
@@ -61,8 +58,7 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 
 						StringBuilder sb = new StringBuilder();
 						sb.append("Version ");
-						sb.append(Integer.toString(historyInfo.getPrimerySpec()
-								.getIdentifier()));
+						sb.append(Integer.toString(historyInfo.getPrimerySpec().getIdentifier()));
 						sb.append("  -  ");
 						sb.append(historyInfo.getLogMessage().getMessage());
 
@@ -86,18 +82,15 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 				});
 				listDialog.setInput(historyInfo);
 				listDialog.setTitle("Select a Version to update to");
-				listDialog
-						.setMessage("The project will be updated to the selected Version");
-				listDialog.setInitialSelections(new Object[] { historyInfo
-						.get(0) });
+				listDialog.setMessage("The project will be updated to the selected Version");
+				listDialog.setInitialSelections(new Object[] { historyInfo.get(0) });
 				int result = listDialog.open();
 				if (Dialog.OK == result) {
 					Object[] selection = listDialog.getResult();
 					HistoryInfo info = (HistoryInfo) selection[0];
 
-					new UIUpdateProjectController(getShell(), ps,
-							Versions.createPRIMARY(info.getPrimerySpec()
-									.getIdentifier())).execute();
+					new UIUpdateProjectController(getShell(), ps, Versions.createPRIMARY(info.getPrimerySpec()
+						.getIdentifier())).execute();
 				}
 			} catch (EmfStoreException e) {
 
