@@ -228,7 +228,9 @@ public final class ModelMutatorUtil {
 
 			EClass referenceType = reference.getEReferenceType();
 			if (EcorePackage.eINSTANCE.getEObject().equals(referenceType)) {
-				list.addAll(getAllEClasses(config.getModelPackage()));
+				for(EPackage ePackage : config.getModelPackages()){
+					list.addAll(getAllEClasses(ePackage));
+				}
 			}
 
 			if (canHaveInstance(referenceType)) {
@@ -266,7 +268,7 @@ public final class ModelMutatorUtil {
 		List<EClass> list = allSubClasses.get(eClass);
 		if (list == null) {
 			list = new ArrayList<EClass>();
-			List<EClass> allEClasses = getAllEClasses();
+			List<EClass> allEClasses = getAllEClasses(config.getModelPackages());
 			for (EClass possibleSubClass : allEClasses) {
 				// is the EClass really a subClass, while not being abstract or an interface?
 				if (eClass.isSuperTypeOf(possibleSubClass) && canHaveInstance(possibleSubClass)) {
@@ -304,6 +306,20 @@ public final class ModelMutatorUtil {
 			}
 		}
 		return allEClasses;
+	}
+	
+	/**
+	 * Get all {@link EClass}es in the {@link EPackage}s.
+	 * 
+	 * @param ePackages The {@link EPackage}s containg the {@link EClass}es.
+	 * @return The {@link EClass}es contained in the {@link EPackage}s.
+	 */
+	public List<EClass> getAllEClasses(Collection<EPackage> ePackages){
+		List<EClass> eClasses = new ArrayList<EClass>(); 
+		for (EPackage ePackage : ePackages) {
+			eClasses.addAll(getAllEClasses(ePackage));
+		}
+		return eClasses;
 	}
 
 	/**

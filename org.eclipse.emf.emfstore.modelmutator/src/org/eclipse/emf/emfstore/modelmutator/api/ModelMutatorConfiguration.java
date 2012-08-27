@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.modelmutator.api;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
@@ -34,7 +35,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
  */
 public class ModelMutatorConfiguration {
 
-	private EPackage modelPackage;
+	private Collection<EPackage> modelPackages;
 	private EObject rootEObject;
 	private Random random;
 
@@ -57,18 +58,29 @@ public class ModelMutatorConfiguration {
 	 * Initialize variables with null. Variables have to be set later!
 	 */
 	public ModelMutatorConfiguration() {
-		this(null, null, null);
+		this((EPackage) null, null, null);
+	}
+	
+	/**
+	 * The constructor for the configuration.
+	 * 
+	 * @param modelPackage the EPackages
+	 * @param rootEObject the rootObject for the generation/change
+	 * @param seed the seed for the generation/change
+	 */
+	public ModelMutatorConfiguration(EPackage modelPackage, EObject rootEObject, Long seed) {
+		this(Collections.singleton(modelPackage), rootEObject, seed);
 	}
 
 	/**
 	 * The constructor for the configuration.
 	 * 
-	 * @param modelPackage the EPackage
+	 * @param modelPackages the EPackages
 	 * @param rootEObject the rootObject for the generation/change
 	 * @param seed the seed for the generation/change
 	 */
-	public ModelMutatorConfiguration(EPackage modelPackage, EObject rootEObject, Long seed) {
-		this.modelPackage = modelPackage;
+	public ModelMutatorConfiguration(Collection<EPackage> modelPackages, EObject rootEObject, Long seed) {
+		this.modelPackages = modelPackages;
 		this.rootEObject = rootEObject;
 		this.seed = seed;
 
@@ -91,10 +103,10 @@ public class ModelMutatorConfiguration {
 	}
 
 	/**
-	 * @param modelPackage the EPackage
+	 * @param modelPackages the EPackages
 	 */
-	public void setModelPackage(EPackage modelPackage) {
-		this.modelPackage = modelPackage;
+	public void setModelPackages(Collection<EPackage> modelPackages) {
+		this.modelPackages = modelPackages;
 	}
 
 	/**
@@ -158,8 +170,8 @@ public class ModelMutatorConfiguration {
 	/**
 	 * @return the modelPackage
 	 */
-	public EPackage getModelPackage() {
-		return modelPackage;
+	public Collection<EPackage> getModelPackages() {
+		return modelPackages;
 	}
 
 	/**
