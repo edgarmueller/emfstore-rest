@@ -24,6 +24,8 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -103,7 +105,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	// TODO BRANCH change
+	@EmfStoreMethod(MethodId.GETPROJECT)
 	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec);
 
 		synchronized (getMonitor()) {
 			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class).resolveVersionSpec(
@@ -149,6 +153,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @throws EmfStoreException
 	 * @throws AccessControlException
 	 */
+	@EmfStoreMethod(MethodId.GETPROJECTLIST)
 	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EmfStoreException {
 		synchronized (getMonitor()) {
 			List<ProjectInfo> result = new ArrayList<ProjectInfo>();
@@ -184,8 +189,10 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.CREATEPROJECT)
 	public ProjectInfo createProject(String name, String description, LogMessage logMessage, Project project)
 		throws EmfStoreException {
+		sanityCheckObjects(name, description, logMessage, project);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = null;
 			try {
@@ -202,7 +209,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.DELETEPROJECT)
 	public void deleteProject(ProjectId projectId, boolean deleteFiles) throws EmfStoreException {
+		sanityCheckObjects(projectId);
 		deleteProject(projectId, deleteFiles, true);
 	}
 
@@ -269,7 +278,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.IMPORTPROJECTHISTORYTOSERVER)
 	public ProjectId importProjectHistoryToServer(ProjectHistory projectHistory) throws EmfStoreException {
+		sanityCheckObjects(projectHistory);
 		synchronized (getMonitor()) {
 			ProjectHistory projectOrNull = getProjectOrNull(projectHistory.getProjectId());
 			if (projectOrNull != null) {
@@ -305,7 +316,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.EXPORTPROJECTHISTORYFROMSERVER)
 	public ProjectHistory exportProjectHistoryFromServer(ProjectId projectId) throws EmfStoreException {
+		sanityCheckObjects(projectId);
 		synchronized (getMonitor()) {
 			return ModelUtil.clone(getProject(projectId));
 		}

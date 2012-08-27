@@ -22,6 +22,8 @@ import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -30,6 +32,7 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
@@ -92,7 +95,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @throws EmfStoreException
 	 *             if versionSpec can't be resolved or other failure
 	 */
+	@EmfStoreMethod(MethodId.RESOLVEVERSIONSPEC)
 	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
@@ -248,9 +253,12 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param user
 	 */
-	public PrimaryVersionSpec createVersion(ProjectId projectId, PrimaryVersionSpec baseVersionSpec,
-		ChangePackage changePackage, BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
-		LogMessage logMessage, ACUser user) throws EmfStoreException {
+	@EmfStoreMethod(MethodId.CREATEVERSION)
+	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
+		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EmfStoreException {
+		ACUser user = getAuthorizationControl().resolveUser(sessionId);
+		sanityCheckObjects(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
 		synchronized (getMonitor()) {
 			long currentTimeMillis = System.currentTimeMillis();
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
@@ -463,8 +471,10 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.GETCHANGES)
 	public List<ChangePackage> getChanges(ProjectId projectId, VersionSpec source, VersionSpec target)
 		throws EmfStoreException {
+		sanityCheckObjects(projectId, source, target);
 		synchronized (getMonitor()) {
 			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);
 			PrimaryVersionSpec resolvedTarget = resolveVersionSpec(projectId, target);

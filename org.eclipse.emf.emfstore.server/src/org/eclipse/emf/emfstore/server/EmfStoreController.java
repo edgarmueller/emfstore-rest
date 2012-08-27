@@ -134,7 +134,7 @@ public class EmfStoreController implements IApplication, Runnable {
 		historyCache = initHistoryCache(serverSpace);
 
 		accessControl = initAccessControl(serverSpace);
-		emfStore = new EmfStoreImpl(serverSpace, accessControl);
+		emfStore = EmfStoreImpl.createInterface(serverSpace, accessControl);
 		adminEmfStore = new AdminEmfStoreImpl(serverSpace, accessControl);
 
 		// copy keystore file to workspace if not existent

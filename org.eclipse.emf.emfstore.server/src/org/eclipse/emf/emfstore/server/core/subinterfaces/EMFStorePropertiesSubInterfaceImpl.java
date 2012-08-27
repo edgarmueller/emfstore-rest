@@ -24,6 +24,8 @@ import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
@@ -64,8 +66,10 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	 * 
 	 * @return a list of properties that could not be updated since they are outdated
 	 */
-	public List<EMFStoreProperty> setProperties(List<EMFStoreProperty> properties, ProjectId projectId)
+	@EmfStoreMethod(MethodId.SETEMFPROPERTIES)
+	public List<EMFStoreProperty> setEMFProperties(List<EMFStoreProperty> properties, ProjectId projectId)
 		throws EmfStoreException {
+		sanityCheckObjects(properties, projectId);
 
 		synchronized (MonitorProvider.getInstance().getMonitor(EMFSTORE_PROPERTIES_MONITOR)) {
 
@@ -130,7 +134,9 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	 * @throws EmfStoreException
 	 *             if specified property does not exist
 	 */
-	public List<EMFStoreProperty> getProperties(ProjectId projectId) throws EmfStoreException {
+	@EmfStoreMethod(MethodId.GETEMFPROPERTIES)
+	public List<EMFStoreProperty> getEMFProperties(ProjectId projectId) throws EmfStoreException {
+		sanityCheckObjects(projectId);
 
 		ProjectHistory history = findHistory(projectId);
 

@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.accesscontrol;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,9 @@ import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactoryImpl;
+import org.eclipse.emf.emfstore.server.core.MethodInvocation;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
@@ -47,6 +50,37 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin;
  * @author wesendonk
  */
 public class AccessControlImpl implements AuthenticationControl, AuthorizationControl {
+
+	/**
+	 * Contains possible access levels.
+	 */
+	private enum AccessLevel {
+		PROJECT_READ, PROJECT_WRITE, PROJECT_ADMIN, SERVER_ADMIN, NONE
+	}
+
+	private EnumMap<MethodId, AccessLevel> accessMap;
+
+	private void initAccessMap() {
+		if (accessMap != null) {
+			return;
+		}
+		accessMap = new EnumMap<MethodId, AccessControlImpl.AccessLevel>(MethodId.class);
+		addAccessMapping(AccessLevel.PROJECT_READ, MethodId.GETPROJECT, MethodId.GETEMFPROPERTIES,
+			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK);
+		addAccessMapping(AccessLevel.PROJECT_WRITE, MethodId.SETEMFPROPERTIES, MethodId.TRANSMITPROPERTY,
+			MethodId.UPLOADFILECHUNK, MethodId.CREATEVERSION);
+		addAccessMapping(AccessLevel.PROJECT_ADMIN, MethodId.REMOVETAG, MethodId.ADDTAG);
+		addAccessMapping(AccessLevel.SERVER_ADMIN, MethodId.CREATEPROJECT, MethodId.CREATEEMPTYPROJECT,
+			MethodId.DELETEPROJECT, MethodId.IMPORTPROJECTHISTORYTOSERVER, MethodId.EXPORTPROJECTHISTORYFROMSERVER,
+			MethodId.REGISTEREPACKAGE);
+		addAccessMapping(AccessLevel.NONE, MethodId.GETPROJECTLIST, MethodId.RESOLVEUSER);
+	}
+
+	private void addAccessMapping(AccessLevel type, MethodId... operationTypes) {
+		for (MethodId opType : operationTypes) {
+			accessMap.put(opType, type);
+		}
+	}
 
 	private Map<SessionId, ACUserContainer> sessionUserMap;
 	private ServerSpace serverSpace;
@@ -414,5 +448,50 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		private void active() {
 			lastActive = System.currentTimeMillis();
 		}
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkAccess(org.eclipse.emf.emfstore.server.core.MethodInvocation)
+	 */
+	public void checkAccess(MethodInvocation op) throws AccessControlException {
+		initAccessMap();
+		AccessLevel accessType = accessMap.get(op.getType());
+		if (accessType == null) {
+			// no access type means "no access"
+			throw new AccessControlException("no access");
+		}
+		switch (accessType) {
+		case PROJECT_READ:
+			ProjectId projectId = getProjectIdFromParameters(op);
+			checkReadAccess(op.getSessionId(), projectId, null);
+			break;
+		case PROJECT_WRITE:
+			projectId = getProjectIdFromParameters(op);
+			checkWriteAccess(op.getSessionId(), projectId, null);
+			break;
+		case PROJECT_ADMIN:
+			projectId = getProjectIdFromParameters(op);
+			checkProjectAdminAccess(op.getSessionId(), projectId);
+			break;
+		case SERVER_ADMIN:
+			checkServerAdminAccess(op.getSessionId());
+			break;
+		case NONE:
+			break;
+		default:
+			throw new AccessControlException("unknown access type");
+		}
+	}
+
+	private ProjectId getProjectIdFromParameters(MethodInvocation op) {
+		for (Object obj : op.getParameters()) {
+			if (obj instanceof ProjectId) {
+				return (ProjectId) obj;
+			}
+		}
+		throw new IllegalArgumentException("the operation MUST have a project id");
 	}
 }

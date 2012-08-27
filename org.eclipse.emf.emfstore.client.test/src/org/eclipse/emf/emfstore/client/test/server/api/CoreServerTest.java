@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ResourceFactoryMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
@@ -31,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 public abstract class CoreServerTest extends WorkspaceTest {
 
-	private EmfStoreImpl emfStore;
+	private EmfStore emfStore;
 	private AuthControlMock authMock;
 	private ServerSpace serverSpace;
 	private ConnectionMock connectionMock;
@@ -49,7 +50,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		ServerConfiguration.setTesting(true);
 		serverSpace = initServerSpace();
 		authMock = new AuthControlMock();
-		emfStore = new EmfStoreImpl(serverSpace, authMock);
+		emfStore = EmfStoreImpl.createInterface(serverSpace, authMock);
 		connectionMock = new ConnectionMock(emfStore, authMock);
 		EmfStoreController.getHistoryCache(serverSpace, true);
 	}
@@ -68,7 +69,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		return connectionMock;
 	}
 
-	public EmfStoreImpl getEmfStore() {
+	public EmfStore getEmfStore() {
 		return emfStore;
 	}
 
