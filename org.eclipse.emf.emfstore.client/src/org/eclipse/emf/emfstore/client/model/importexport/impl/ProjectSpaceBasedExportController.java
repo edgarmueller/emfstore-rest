@@ -13,14 +13,31 @@ package org.eclipse.emf.emfstore.client.model.importexport.impl;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 
+/**
+ * Exports a entity which is part of a project space.
+ * 
+ * @author emueller
+ * 
+ */
 public abstract class ProjectSpaceBasedExportController implements IExportImportController {
 
 	private final ProjectSpace projectSpace;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the project space that contains the data to be exported
+	 */
 	public ProjectSpaceBasedExportController(ProjectSpace projectSpace) {
 		this.projectSpace = projectSpace;
 	}
 
+	/**
+	 * Returns the project space.
+	 * 
+	 * @return the project space.
+	 */
 	ProjectSpace getProjectSpace() {
 		return projectSpace;
 	}
