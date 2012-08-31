@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -175,9 +176,9 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private String decorate(AbstractOperationCustomLabelProvider labelProvider, AbstractOperation op) {
 		String namesResolved = resolveIds(labelProvider, labelProvider.getDescription(op),
-			AbstractOperationItemProvider.NAME_TAG__SEPARATOR);
+			AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
 		String allResolved = resolveIds(labelProvider, namesResolved,
-			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR);
+			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
@@ -202,14 +203,25 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	}
 
 	private String resolveIds(AbstractOperationCustomLabelProvider labelProvider, String unresolvedString,
-		String devider) {
+		String devider, AbstractOperation op) {
 		String[] strings = unresolvedString.split(devider);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
 			if (i % 2 == 1) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
-				stringBuilder.append(labelProvider.getModelElementName(getModelElement(modelElementId)));
+				EObject modelElement = getModelElement(modelElementId);
+				if (modelElement != null) {
+					stringBuilder.append(labelProvider.getModelElementName(modelElement));
+				} else if (modelElement == null && op instanceof CreateDeleteOperation) {
+					CreateDeleteOperation createDeleteOp = (CreateDeleteOperation) op;
+					for (Map.Entry<EObject, ModelElementId> entry : createDeleteOp.getEObjectToIdMap()) {
+						if (entry.getValue().equals(modelElementId)) {
+							stringBuilder.append(labelProvider.getModelElementName(entry.getKey()));
+							break;
+						}
+					}
+				}
 			} else {
 				stringBuilder.append(strings[i]);
 			}
