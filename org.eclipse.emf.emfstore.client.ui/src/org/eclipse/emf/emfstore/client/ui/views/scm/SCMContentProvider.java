@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
 /**
@@ -128,6 +129,8 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			return getChildren(historyInfo.getChangePackage());
 		} else if (object instanceof ChangePackage) {
 			return filter(super.getChildren(object), LogMessage.class);
+		} else if (object instanceof CompositeOperation) {
+			return ((CompositeOperation) object).getSubOperations().toArray();
 		}
 
 		return super.getChildren(object);

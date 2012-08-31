@@ -34,7 +34,7 @@ public class AutoOperationWrapper implements OperationModificator {
 	 *      org.eclipse.emf.common.command.Command)
 	 */
 	public List<AbstractOperation> modify(List<AbstractOperation> operations, Command command) {
-		if (operations.size() == 0) {
+		if (operations.size() == 0 || (operations.size() == 1 && operations.get(0) instanceof CompositeOperation)) {
 			return operations;
 		}
 		CompositeOperation compositeOperation = OperationsFactory.eINSTANCE.createCompositeOperation();
@@ -43,6 +43,7 @@ public class AutoOperationWrapper implements OperationModificator {
 		compositeOperation.setCompositeDescription(getText(command.getDescription()));
 		compositeOperation.setModelElementId(ModelUtil.clone(operations.get(0).getModelElementId()));
 		compositeOperation.getSubOperations().addAll(operations);
+		// compositeOperation.setMainOperation(operations.get(operations.size() - 1));
 
 		ArrayList<AbstractOperation> result = new ArrayList<AbstractOperation>();
 		result.add(compositeOperation);
