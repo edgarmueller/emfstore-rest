@@ -1015,6 +1015,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		return projectSpace;
 	}
 
+	/**
+	 * Returns the used operation modificator, if any.
+	 * 
+	 * @return the operation modificator in use
+	 */
 	public OperationModificator getModificator() {
 		return modificator;
 	}
