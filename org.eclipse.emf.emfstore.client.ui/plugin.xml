@@ -436,13 +436,7 @@
              </command>
              <command
                    commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-                   label="Revert this revision"
-                   style="push"
-                   tooltip="Revert this revision of the project, the reversed changes between the previous revision has been applied">
-             </command>
-             <command
-                   commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-                   label="Force to revert this revision"
+                   label="Revert to this revision"
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
              </command>
@@ -789,14 +783,9 @@
             name="RemoveTag">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertCommitHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-            name="RevertRevision">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-            name="ForceRevertRevision">
+            name="Revert Revision">
       </command>
       <command
             defaultHandler="org.eclipse.emf.emfstore.client.ui.epackages.RegisterEPackageHandler"
@@ -807,32 +796,7 @@
             id="org.eclipse.emf.emfstore.client.ui.save"
             name="Save Project">
       </command>
-            <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
-            name="CheckoutRevision">
-      </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.AddTagHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
-            name="AddTag">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RemoveTagHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.removetag"
-            name="RemoveTag">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.revert"
-            name="RevertRevision">
-      </command>
-      <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ForceRevertHandler"
-            id="org.eclipse.emf.emfstore.client.ui.historybrowserview.forcerevert"
-            name="ForceRevertRevision">
-      </command>
-            <command
             categoryId="org.eclipse.emf.emfstore.client.ui.project"
             id="org.eclipse.emf.emfstore.client.ui.commitProject"
             name="commit">

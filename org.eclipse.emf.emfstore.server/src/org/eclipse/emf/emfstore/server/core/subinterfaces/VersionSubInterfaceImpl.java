@@ -183,7 +183,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 
 		if (branch.equals(VersionSpec.GLOBAL)) {
-			return projectHistory.getVersions().get(versions - 1).getPrimarySpec();
+			return projectHistory.getVersions().get(index).getPrimarySpec();
 		}
 
 		// Get biggest primary version of given branch which is equal or lower

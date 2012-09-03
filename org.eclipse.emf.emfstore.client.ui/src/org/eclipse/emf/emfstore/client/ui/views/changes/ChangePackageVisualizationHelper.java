@@ -49,19 +49,20 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IdEObjectCollection collection;
+	private List<ChangePackage> changePackages;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param changePackages
-	 *            a list of change packages
 	 * @param collection
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
+	 * @param changePackages add changepackages in order to find deleted elements
 	 */
-	public ChangePackageVisualizationHelper(List<ChangePackage> changePackages, IdEObjectCollection collection) {
+	public ChangePackageVisualizationHelper(IdEObjectCollection collection, List<ChangePackage> changePackages) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.collection = collection;
+		this.changePackages = changePackages;
 	}
 
 	/**
@@ -237,7 +238,37 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return collection.getModelElement(modelElementId);
+		EObject modelElement = collection.getModelElement(modelElementId);
+		if (modelElement == null && modelElementId != null) {
+			modelElement = getMeFromChangePackage(modelElementId);
+		}
+		return modelElement;
+	}
+
+	private EObject getMeFromChangePackage(ModelElementId modelElementId) {
+		for (ChangePackage cp : changePackages) {
+			EObject me = getMeFromOpsList(modelElementId, cp.getOperations());
+			if (me != null) {
+				return me;
+			}
+		}
+		return null;
+	}
+
+	private EObject getMeFromOpsList(ModelElementId modelElementId, List<AbstractOperation> operations) {
+		for (AbstractOperation op : operations) {
+			if (op instanceof CreateDeleteOperation) {
+				if (modelElementId.equals(op.getModelElementId())) {
+					return ((CreateDeleteOperation) op).getModelElement();
+				}
+			} else if (op instanceof CompositeOperation) {
+				EObject me = getMeFromOpsList(modelElementId, ((CompositeOperation) op).getSubOperations());
+				if (me != null) {
+					return me;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
