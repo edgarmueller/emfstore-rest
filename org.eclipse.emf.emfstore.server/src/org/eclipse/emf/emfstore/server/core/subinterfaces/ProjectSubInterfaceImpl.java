@@ -172,7 +172,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.CREATEEMPTYPROJECT)
 	public ProjectInfo createProject(String name, String description, LogMessage logMessage) throws EmfStoreException {
+		sanityCheckObjects(name, description, logMessage);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = null;
 			try {

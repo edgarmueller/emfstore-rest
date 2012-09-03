@@ -154,6 +154,9 @@ public abstract class AbstractSubEmfstoreInterface {
 			throw new EmfStoreException(e);
 		} catch (InvocationTargetException e) {
 			ModelUtil.logWarning("exception on execution", e);
+			if (e.getTargetException() instanceof EmfStoreException) {
+				throw (EmfStoreException) e.getTargetException();
+			}
 			throw new EmfStoreException(e.getTargetException());
 		}
 	}

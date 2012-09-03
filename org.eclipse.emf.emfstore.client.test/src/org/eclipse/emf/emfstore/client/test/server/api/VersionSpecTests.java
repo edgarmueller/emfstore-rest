@@ -31,7 +31,7 @@ public class VersionSpecTests extends CoreServerTest {
 	public void resolvePrimaryGlobal() throws EmfStoreException {
 		ProjectSpace history = createHistory(this);
 
-		assertEquals(versions[7], history.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL, 5)));
+		assertEquals(versions[5], history.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL, 5)));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
