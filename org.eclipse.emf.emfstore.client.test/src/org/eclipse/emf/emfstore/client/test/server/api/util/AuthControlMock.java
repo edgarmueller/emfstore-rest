@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
+import org.eclipse.emf.emfstore.server.core.MethodInvocation;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -50,5 +51,10 @@ public class AuthControlMock implements AuthorizationControl {
 		ACUser dummy = AccesscontrolFactory.eINSTANCE.createACUser();
 		dummy.setName("asdf");
 		return dummy;
+	}
+
+	public void checkAccess(MethodInvocation op) throws AccessControlException {
+		// TODO Auto-generated method stub
+
 	}
 }

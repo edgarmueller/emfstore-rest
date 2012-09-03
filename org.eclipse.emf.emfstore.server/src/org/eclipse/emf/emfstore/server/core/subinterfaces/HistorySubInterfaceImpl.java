@@ -28,6 +28,8 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -81,8 +83,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.ADDTAG)
 	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
 			// TODO BRANCH
@@ -101,8 +105,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.REMOVETAG)
 	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
 			Iterator<TagVersionSpec> iterator = version.getTagSpecs().iterator();
@@ -122,7 +128,9 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.GETHISTORYINFO)
 	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws EmfStoreException {
+		sanityCheckObjects(projectId, historyQuery);
 		synchronized (getMonitor()) {
 
 			if (historyQuery instanceof ModelElementQuery) {
