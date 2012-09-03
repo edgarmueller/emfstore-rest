@@ -52,11 +52,11 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	private Usersession login() throws EmfStoreException {
+	private Usersession login(final boolean force) throws EmfStoreException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
-				if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn()) {
+				if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn() && !force) {
 					return serverInfo.getLastUsersession();
 				}
 
@@ -144,6 +144,41 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @param serverInfo
 	 *            the server info to be used in order to determine a valid usersession
+	 * @param force
+	 *            whether to force requesting the password
+	 * @return a logged-in usersession
+	 * @throws EmfStoreException
+	 *             in case the login fails
+	 */
+	public Usersession login(ServerInfo serverInfo, boolean force) throws EmfStoreException {
+		this.serverInfo = serverInfo;
+		this.usersession = null;
+		return login(force);
+	}
+
+	/**
+	 * Perform a login using the given {@link Usersession}.
+	 * 
+	 * @param usersession
+	 *            the usersession to be used during login
+	 * @param force
+	 *            whether to force requesting the password
+	 * @throws EmfStoreException
+	 *             in case the login fails
+	 */
+	public void login(Usersession usersession, boolean force) throws EmfStoreException {
+		this.serverInfo = null;
+		this.usersession = usersession;
+		login(force);
+	}
+
+	/**
+	 * Perform a login using an {@link Usersession} that can be determined
+	 * with the given {@link ServerInfo}.
+	 * 
+	 * 
+	 * @param serverInfo
+	 *            the server info to be used in order to determine a valid usersession
 	 * @return a logged-in usersession
 	 * @throws EmfStoreException
 	 *             in case the login fails
@@ -151,7 +186,7 @@ public class LoginDialogController implements ILoginDialogController {
 	public Usersession login(ServerInfo serverInfo) throws EmfStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
-		return login();
+		return login(false);
 	}
 
 	/**
@@ -165,6 +200,6 @@ public class LoginDialogController implements ILoginDialogController {
 	public void login(Usersession usersession) throws EmfStoreException {
 		this.serverInfo = null;
 		this.usersession = usersession;
-		login();
+		login(false);
 	}
 }

@@ -76,7 +76,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.modelmutator.feature"
+         id="org.eclipse.emf.emfstore.modelmutator.feature"	
          version="0.0.0"/>
 
    <includes
@@ -88,7 +88,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.fuzzy.test.feature"
+         id="org.eclipse.emf.emfstore.client.ui.errorreporting.feature"
          version="0.0.0"/>
 
 </feature>

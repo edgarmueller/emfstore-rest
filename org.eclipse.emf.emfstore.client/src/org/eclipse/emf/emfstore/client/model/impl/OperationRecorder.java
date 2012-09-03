@@ -140,7 +140,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		emitOperationsWhenCommandCompleted = true;
 
-		modificator = initOperationModificator();
+		setModificator(initOperationModificator());
 	}
 
 	private OperationModificator initOperationModificator() {
@@ -543,10 +543,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {
-		if (modificator == null) {
+		if (getModificator() == null) {
 			return operations;
 		}
-		return modificator.modify(operations, command);
+		return getModificator().modify(operations, command);
 	}
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
@@ -843,7 +843,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		CompositeOperationHandle handle = new CompositeOperationHandle(this, compositeOperation);
 		notificationRecorder.newRecording();
 
-		operations.add(compositeOperation);
+		// operations.add(compositeOperation);
 		// currentOperationListSize++;
 
 		return handle;
@@ -867,8 +867,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void endCompositeOperation() {
 		if (!commandIsRunning || !emitOperationsWhenCommandCompleted) {
-			operations.remove(compositeOperation);
+			// operations.remove(compositeOperation);
 			operationRecorded(compositeOperation);
+		} else {
+			operations.add(compositeOperation);
 		}
 		this.compositeOperation = null;
 	}
@@ -877,18 +879,20 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * Aborts the current composite operation.
 	 */
 	public void abortCompositeOperation() {
-		if (operations.size() > 0) {
-			AbstractOperation lastOp = operations.get(operations.size() - 1);
+		// if (operations.size() > 0) {
+		// AbstractOperation lastOp = operations.get(operations.size() - 1);
+		// AbstractOperation lastOp = compositeOperation.getSubOperations().get(
+		// compositeOperation.getSubOperations().size() - 1);
 
-			stopChangeRecording();
-			try {
-				lastOp.reverse().apply(getCollection());
-				operations.remove(operations.size() - 1);
-			} finally {
-				startChangeRecording();
-			}
-			this.removedElements.clear();
+		stopChangeRecording();
+		try {
+			compositeOperation.reverse().apply(getCollection());
+			// operations.remove(operations.size() - 1);
+		} finally {
+			startChangeRecording();
 		}
+		this.removedElements.clear();
+		// }
 		notificationRecorder.stopRecording();
 
 		compositeOperation = null;
@@ -1009,5 +1013,24 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public ProjectSpace getProjectSpace() {
 		return projectSpace;
+	}
+
+	/**
+	 * Returns the used operation modificator, if any.
+	 * 
+	 * @return the operation modificator in use
+	 */
+	public OperationModificator getModificator() {
+		return modificator;
+	}
+
+	/**
+	 * Sets an optional operation modificator to be used.
+	 * 
+	 * @param modificator
+	 *            the operation modificator to be used
+	 */
+	public void setModificator(OperationModificator modificator) {
+		this.modificator = modificator;
 	}
 }

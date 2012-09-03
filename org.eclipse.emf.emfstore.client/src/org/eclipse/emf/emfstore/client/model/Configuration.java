@@ -12,9 +12,11 @@ package org.eclipse.emf.emfstore.client.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.common.IClientVersionProvider;
@@ -26,6 +28,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.LocationProvider;
+import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.osgi.framework.Bundle;
 
@@ -36,6 +39,16 @@ import org.osgi.framework.Bundle;
  * @author wesendon
  */
 public final class Configuration {
+
+	/**
+	 * The value for enabling debug mode.
+	 */
+	public static final String DEBUG_SWITCH_ENABLED_VALUE = "enabled";
+
+	/**
+	 * The command line option for enabling debug mode.
+	 */
+	public static final String DEBUG_SWITCH = "-debug";
 
 	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
 
@@ -57,6 +70,7 @@ public final class Configuration {
 	private static final String PS = "ps-";
 	private static final String UPF = ".upf";
 	private static final String PLUGIN_BASEDIR = "pluginData";
+	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
 
 	private static Boolean autoSave;
 
@@ -85,6 +99,25 @@ public final class Configuration {
 			return workspaceDirectory + File.separatorChar;
 		}
 		return workspaceDirectory;
+	}
+
+	/**
+	 * Returns the directory that is used for error logging.<br/>
+	 * If the directory does not exist it will be created. Upon exit of the JVM it will be deleted.
+	 * 
+	 * @return the path to the error log directory
+	 */
+	public static String getErrorLogDirectory() {
+		String workspaceDirectory = getWorkspaceDirectory();
+		File errorDiagnosisDir = new File(StringUtils.join(Arrays.asList(workspaceDirectory, ERROR_DIAGNOSIS_DIR_NAME),
+			File.separatorChar));
+
+		if (!errorDiagnosisDir.exists()) {
+			errorDiagnosisDir.mkdir();
+			errorDiagnosisDir.deleteOnExit();
+		}
+
+		return errorDiagnosisDir.getAbsolutePath();
 	}
 
 	/**
@@ -374,5 +407,20 @@ public final class Configuration {
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
+	}
+
+	/**
+	 * Whether debug mode is enabled.
+	 * 
+	 * @return true, if debug mode is enabled, false otherwise
+	 */
+	public static boolean isDebugMode() {
+		String startArgument = ServerConfiguration.getStartArgument(DEBUG_SWITCH);
+
+		if (startArgument != null && startArgument.equals(DEBUG_SWITCH_ENABLED_VALUE)) {
+			return true;
+		}
+
+		return false;
 	}
 }

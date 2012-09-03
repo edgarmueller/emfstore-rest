@@ -65,8 +65,7 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 
 						HistoryInfo historyInfo = (HistoryInfo) element;
 
-						StringBuilder sb = new StringBuilder();
-						sb.append("Version ");
+						StringBuilder sb = new StringBuilder("Version ");
 						sb.append(Integer.toString(historyInfo.getPrimerySpec().getIdentifier()));
 						sb.append("  -  ");
 						sb.append(historyInfo.getLogMessage().getMessage());
@@ -94,5 +93,4 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 		}
 
 	}
-
 }

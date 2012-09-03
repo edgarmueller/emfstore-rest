@@ -88,7 +88,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
@@ -153,14 +152,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		updateDirtyState();
 
 		for (AbstractOperation op : operations) {
-			// do not notify on composite start, wait until completion
-			if (op instanceof CompositeOperation) {
-				// check of automatic composite if yes then continue
-				if (((CompositeOperation) op).getMainOperation() == null) {
-					return;
-				}
-			}
-
 			operationManager.notifyOperationExecuted(op);
 		}
 	}
@@ -1070,7 +1061,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void stopChangeRecording() {
-		this.operationRecorder.stopChangeRecording();
+		if (operationRecorder != null) {
+			this.operationRecorder.stopChangeRecording();
+		}
 	}
 
 	/**
