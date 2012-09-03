@@ -291,17 +291,19 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private List<HistoryInfo> getHistoryInfos() {
-		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell()) {
+		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell(), true,
+			false) {
 			@Override
-			public List<HistoryInfo> doRun(IProgressMonitor monitor) throws EmfStoreException {
+			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws EmfStoreException {
 				return new ServerCall<List<HistoryInfo>>((ProjectSpaceBase) projectSpace) {
 					@Override
 					protected List<HistoryInfo> run() throws EmfStoreException {
+						monitor.beginTask("Fetching history form server", 100);
 						List<HistoryInfo> historyInfos = getLocalChanges();
 						if (projectSpace != modelElement) {
 							historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.modelelementQuery(
 								centerVersion, Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-								LOWER_LIMIT, true, true)));
+								LOWER_LIMIT, showAllVersions, true)));
 						} else {
 							historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.rangeQuery(
 								centerVersion, UPPER_LIMIT, LOWER_LIMIT, showAllVersions, true, true, true)));
@@ -350,7 +352,15 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			oldHelper.dispose();
 		}
 
-		ChangePackageVisualizationHelper newHelper = new ChangePackageVisualizationHelper(projectSpace.getProject());
+		ArrayList<ChangePackage> cps = new ArrayList<ChangePackage>();
+		for (HistoryInfo info : infos) {
+			if (info.getChangePackage() != null) {
+				cps.add(info.getChangePackage());
+			}
+		}
+
+		ChangePackageVisualizationHelper newHelper = new ChangePackageVisualizationHelper(projectSpace.getProject(),
+			cps);
 		changeLabel.setProject(projectSpace.getProject());
 		changeLabel.setChangePackageVisualizationHelper(newHelper);
 		commitLabel.setProject(projectSpace.getProject());

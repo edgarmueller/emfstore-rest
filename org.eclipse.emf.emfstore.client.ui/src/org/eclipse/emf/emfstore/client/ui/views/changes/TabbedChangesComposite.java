@@ -62,7 +62,8 @@ public class TabbedChangesComposite extends Composite {
 		contentProvider = new SCMContentProvider();
 		contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
-		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(project));
+		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(project,
+			changePackages));
 		tabTreeViewer.setContentProvider(contentProvider);
 		tabTreeViewer.setLabelProvider(detailedLabelProvider);
 		tabTreeViewer.setInput(changePackages);

@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -20,6 +22,7 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.provider.AbstractOperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.server.model.provider.CustomOperationLabelProviderManager;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -45,6 +48,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IdEObjectCollection collection;
+	private List<ChangePackage> changePackages;
 
 	/**
 	 * Constructor.
@@ -52,10 +56,12 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @param collection
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
+	 * @param changePackages add changepackages in order to find deleted elements
 	 */
-	public ChangePackageVisualizationHelper(IdEObjectCollection collection) {
+	public ChangePackageVisualizationHelper(IdEObjectCollection collection, List<ChangePackage> changePackages) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.collection = collection;
+		this.changePackages = changePackages;
 	}
 
 	/**
@@ -220,7 +226,37 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return collection.getModelElement(modelElementId);
+		EObject modelElement = collection.getModelElement(modelElementId);
+		if (modelElement == null && modelElementId != null) {
+			modelElement = getMeFromChangePackage(modelElementId);
+		}
+		return modelElement;
+	}
+
+	private EObject getMeFromChangePackage(ModelElementId modelElementId) {
+		for (ChangePackage cp : changePackages) {
+			EObject me = getMeFromOpsList(modelElementId, cp.getOperations());
+			if (me != null) {
+				return me;
+			}
+		}
+		return null;
+	}
+
+	private EObject getMeFromOpsList(ModelElementId modelElementId, List<AbstractOperation> operations) {
+		for (AbstractOperation op : operations) {
+			if (op instanceof CreateDeleteOperation) {
+				if (modelElementId.equals(op.getModelElementId())) {
+					return ((CreateDeleteOperation) op).getModelElement();
+				}
+			} else if (op instanceof CompositeOperation) {
+				EObject me = getMeFromOpsList(modelElementId, ((CompositeOperation) op).getSubOperations());
+				if (me != null) {
+					return me;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
