@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.core;
 
-import java.util.Arrays;
-
 import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -60,7 +58,16 @@ public class MethodInvocation {
 	 * @return the parameters of the invocation
 	 */
 	public Object[] getParameters() {
-		return Arrays.copyOfRange(allParameters, 1, allParameters.length);
+		// return Arrays.copyOfRange(allParameters, 1, allParameters.length);
+		if (allParameters.length > 1) {
+			Object[] result = new Object[allParameters.length - 1];
+			for (int i = 1; i < allParameters.length; i++) {
+				result[i - 1] = allParameters[i];
+			}
+			return result;
+		} else {
+			return new Object[0];
+		}
 	}
 
 	/**
