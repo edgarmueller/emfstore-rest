@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -291,26 +292,34 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private List<HistoryInfo> getHistoryInfos() {
+		// TODO dudes, this wrapping is crazy!
 		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell(), true,
 			false) {
 			@Override
 			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws EmfStoreException {
-				return new ServerCall<List<HistoryInfo>>((ProjectSpaceBase) projectSpace) {
+				return new UnknownEMFStoreWorkloadCommand<List<HistoryInfo>>(monitor) {
 					@Override
-					protected List<HistoryInfo> run() throws EmfStoreException {
-						monitor.beginTask("Fetching history form server", 100);
-						List<HistoryInfo> historyInfos = getLocalChanges();
-						if (projectSpace != modelElement) {
-							historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.modelelementQuery(
-								centerVersion, Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-								LOWER_LIMIT, showAllVersions, true)));
-						} else {
-							historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.rangeQuery(
-								centerVersion, UPPER_LIMIT, LOWER_LIMIT, showAllVersions, true, true, true)));
-						}
-						return historyInfos;
+					public List<HistoryInfo> run(final IProgressMonitor monitor) throws EmfStoreException {
+						return new ServerCall<List<HistoryInfo>>((ProjectSpaceBase) projectSpace) {
+							@Override
+							protected List<HistoryInfo> run() throws EmfStoreException {
+								monitor.beginTask("Fetching history form server", 100);
+								List<HistoryInfo> historyInfos = getLocalChanges();
+								monitor.worked(10);
+								if (projectSpace != modelElement) {
+									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder
+										.modelelementQuery(centerVersion,
+											Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
+											LOWER_LIMIT, showAllVersions, true)));
+								} else {
+									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.rangeQuery(
+										centerVersion, UPPER_LIMIT, LOWER_LIMIT, showAllVersions, true, true, true)));
+								}
+								monitor.worked(90);
+								return historyInfos;
+							}
+						}.execute();
 					}
-
 				}.execute();
 			}
 		}.execute();
@@ -664,15 +673,21 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		return new AbstractEMFStoreUIController<PrimaryVersionSpec>(getViewSite().getShell()) {
 			@Override
 			public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EmfStoreException {
-				try {
-					return projectSpace.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL,
-						Integer.parseInt(value)));
-				} catch (EmfStoreException e) {
-					EMFStoreMessageDialog.showExceptionDialog("Error: The version you requested does not exist.", e);
-				} catch (NumberFormatException e) {
-					MessageDialog.openError(getSite().getShell(), "Error", "A numeric value was expected!");
-				}
-				return null;
+				return new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(monitor) {
+					@Override
+					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
+						try {
+							return projectSpace.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL,
+								Integer.parseInt(value)));
+						} catch (EmfStoreException e) {
+							EMFStoreMessageDialog.showExceptionDialog(
+								"Error: The version you requested does not exist.", e);
+						} catch (NumberFormatException e) {
+							MessageDialog.openError(getSite().getShell(), "Error", "A numeric value was expected!");
+						}
+						return null;
+					}
+				}.execute();
 			}
 		}.execute();
 	}
