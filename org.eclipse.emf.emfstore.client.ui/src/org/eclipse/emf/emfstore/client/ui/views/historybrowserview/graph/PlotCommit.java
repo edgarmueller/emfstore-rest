@@ -45,7 +45,7 @@ public class PlotCommit implements IPlotCommit {
 		initFields();
 
 		if (historyInfo.getPrimerySpec().getIdentifier() < 0) {
-			localHistoryOnly = true;
+			// localHistoryOnly = true;
 			this.branchName = "local";
 			this.id = -1;
 		} else if (historyInfo.getPrimerySpec() != null) {
