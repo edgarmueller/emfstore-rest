@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.server.core.subinterfaces;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +20,10 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -54,8 +51,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  */
 public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
-	private HistoryCache historyCache;
-
 	/**
 	 * Default constructor.
 	 * 
@@ -71,7 +66,6 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	@Override
 	protected void initSubInterface() throws FatalEmfStoreException {
 		super.initSubInterface();
-		historyCache = EmfStoreController.getHistoryCache(getServerSpace(), false);
 	}
 
 	/**
@@ -234,7 +228,6 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		throws EmfStoreException {
 		synchronized (getMonitor()) {
 			try {
-				historyCache.removeProjectFromCache(projectId);
 				ProjectHistory project = getProject(projectId);
 				getServerSpace().getProjects().remove(project);
 				try {
@@ -363,9 +356,6 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		getResourceHelper().createResourceForProjectHistory(projectHistory);
 		getServerSpace().getProjects().add(projectHistory);
 		save(getServerSpace());
-
-		// init cache
-		historyCache.initCache(Arrays.asList(projectHistory));
 
 		return projectHistory;
 	}

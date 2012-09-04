@@ -24,7 +24,6 @@ import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -56,8 +55,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
  */
 public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
-	private HistoryCache historyCache;
-
 	/**
 	 * Default constructor.
 	 * 
@@ -80,7 +77,6 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	@Override
 	public void initSubInterface() throws FatalEmfStoreException {
 		super.initSubInterface();
-		historyCache = EmfStoreController.getHistoryCache(getServerSpace(), false);
 	}
 
 	/**
@@ -341,10 +337,6 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				save(baseVersion);
 				save(projectHistory);
 
-				// update history cache
-				// TODO BRANCH history Cache should work without any further
-				// changes
-				historyCache.addVersionToCache(projectId, newVersion);
 			} catch (FatalEmfStoreException e) {
 				// roll back failed
 				EmfStoreController.getInstance().shutdown(e);

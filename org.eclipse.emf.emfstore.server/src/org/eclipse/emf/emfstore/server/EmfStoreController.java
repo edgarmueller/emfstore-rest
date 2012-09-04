@@ -46,7 +46,6 @@ import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcConnectionHandler
 import org.eclipse.emf.emfstore.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
-import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
@@ -83,7 +82,6 @@ public class EmfStoreController implements IApplication, Runnable {
 	private Properties properties;
 	private ServerSpace serverSpace;
 	private Resource resource;
-	private HistoryCache historyCache;
 
 	/**
 	 * {@inheritDoc}
@@ -130,8 +128,6 @@ public class EmfStoreController implements IApplication, Runnable {
 		this.serverSpace = initServerSpace();
 
 		handleStartupListener();
-
-		historyCache = initHistoryCache(serverSpace);
 
 		accessControl = initAccessControl(serverSpace);
 		emfStore = EmfStoreImpl.createInterface(serverSpace, accessControl);
@@ -250,42 +246,6 @@ public class EmfStoreController implements IApplication, Runnable {
 
 		return connectionHandlers;
 	}
-
-	private static HistoryCache initHistoryCache(ServerSpace serverSpace) {
-		HistoryCache cache = new HistoryCache();
-		cache.initCache(serverSpace.getProjects());
-		ModelUtil.logInfo("History cache has been initialized.");
-		return cache;
-	}
-
-	/**
-	 * Returns the history cache.
-	 * 
-	 * @param serverSpace target server space
-	 * @param resetForTest reinits the cache.
-	 * 
-	 * @return the history cache.
-	 */
-	public static HistoryCache getHistoryCache(ServerSpace serverSpace, boolean resetForTest) {
-		if (ServerConfiguration.isTesting()) {
-			if (testHistoryCache == null || resetForTest) {
-				testHistoryCache = initHistoryCache(serverSpace);
-			}
-			return testHistoryCache;
-		}
-		return getInstance().getHistoryCache();
-	}
-
-	/**
-	 * Returns the history cache.
-	 * 
-	 * @return the history cache.
-	 */
-	public HistoryCache getHistoryCache() {
-		return historyCache;
-	}
-
-	private static HistoryCache testHistoryCache;
 
 	private ServerSpace initServerSpace() throws FatalEmfStoreException {
 		ResourceStorage storage = initStorage();
