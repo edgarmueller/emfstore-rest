@@ -66,7 +66,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		}
 		accessMap = new EnumMap<MethodId, AccessControlImpl.AccessLevel>(MethodId.class);
 		addAccessMapping(AccessLevel.PROJECT_READ, MethodId.GETPROJECT, MethodId.GETEMFPROPERTIES,
-			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK);
+			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK,
+			MethodId.GETBRANCHES);
 		addAccessMapping(AccessLevel.PROJECT_WRITE, MethodId.SETEMFPROPERTIES, MethodId.TRANSMITPROPERTY,
 			MethodId.UPLOADFILECHUNK, MethodId.CREATEVERSION);
 		addAccessMapping(AccessLevel.PROJECT_ADMIN, MethodId.REMOVETAG, MethodId.ADDTAG);

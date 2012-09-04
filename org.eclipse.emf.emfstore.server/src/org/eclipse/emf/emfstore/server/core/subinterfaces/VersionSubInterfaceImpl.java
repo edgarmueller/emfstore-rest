@@ -419,6 +419,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.GETBRANCHES)
 	public List<BranchInfo> getBranches(ProjectId projectId) throws EmfStoreException {
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
