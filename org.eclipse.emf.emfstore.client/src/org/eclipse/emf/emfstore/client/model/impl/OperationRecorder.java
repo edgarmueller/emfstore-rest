@@ -700,9 +700,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		deleteOperation.setDelete(true);
 
 		// extract all reference ops that belong to the delete
-		List<CompositeOperation> compositeOperationsToDelete = new ArrayList<CompositeOperation>();
-		deleteOperation.getSubOperations().addAll(
-			extractReferenceOperationsForDelete(deletedElement, compositeOperationsToDelete));
+		List<ReferenceOperation> compositeOperationsToDelete = extractReferenceOperationsForDelete(deletedElement);
+		deleteOperation.getSubOperations().addAll(compositeOperationsToDelete);
 		operations.removeAll(compositeOperationsToDelete);
 
 		if (compositeOperation != null) {
@@ -722,8 +721,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<ReferenceOperation> extractReferenceOperationsForDelete(EObject deletedElement,
-		List<CompositeOperation> compositeOperationsToDelete) {
+	private List<ReferenceOperation> extractReferenceOperationsForDelete(EObject deletedElement) {
+		List<CompositeOperation> compositeOperationsToDelete = new ArrayList<CompositeOperation>();
+
 		Set<ModelElementId> allDeletedElementsIds = new HashSet<ModelElementId>();
 		for (EObject child : ModelUtil.getAllContainedModelElements(deletedElement, false)) {
 			ModelElementId childId = collection.getDeletedModelElementId(child);
