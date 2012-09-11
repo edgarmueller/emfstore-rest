@@ -9,7 +9,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
+import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -37,11 +37,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 public class ConnectionMock implements ConnectionManager {
 
-	private final EmfStoreImpl emfStore;
+	private final EmfStore emfStore;
 	private final AuthControlMock authMock;
 	private HashSet<SessionId> sessions;
 
-	public ConnectionMock(EmfStoreImpl emfStore, AuthControlMock authMock) {
+	public ConnectionMock(EmfStore emfStore, AuthControlMock authMock) {
 		this.emfStore = emfStore;
 		this.authMock = authMock;
 		sessions = new HashSet<SessionId>();

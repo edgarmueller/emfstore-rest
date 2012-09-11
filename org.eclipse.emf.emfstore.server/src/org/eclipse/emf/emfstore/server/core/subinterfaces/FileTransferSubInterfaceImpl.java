@@ -19,9 +19,12 @@ import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileNotOnServerException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
@@ -66,9 +69,12 @@ public class FileTransferSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param fileInformation file information object
 	 * @return FileChunk
 	 * @throws FileTransferException if any error occurs reading the file
+	 * @throws InvalidInputException thrown if one of the parameters is null
 	 */
-	public FileChunk readChunk(ProjectId projectId, FileTransferInformation fileInformation)
-		throws FileTransferException {
+	@EmfStoreMethod(MethodId.DOWNLOADFILECHUNK)
+	public FileChunk downloadFileChunk(ProjectId projectId, FileTransferInformation fileInformation)
+		throws FileTransferException, InvalidInputException {
+		sanityCheckObjects(projectId, fileInformation);
 
 		// check if folders exist, otherwise create
 		createDirectories(projectId);
@@ -91,8 +97,12 @@ public class FileTransferSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param projectId project id
 	 * @return fileInformation containing the (new) file version
 	 * @throws FileTransferException if any error occurs writing to the file
+	 * @throws InvalidInputException thrown if one of the parameters is null
 	 */
-	public FileTransferInformation writeChunk(FileChunk fileChunk, ProjectId projectId) throws FileTransferException {
+	@EmfStoreMethod(MethodId.UPLOADFILECHUNK)
+	public FileTransferInformation uploadFileChunk(ProjectId projectId, FileChunk fileChunk)
+		throws FileTransferException, InvalidInputException {
+		sanityCheckObjects(projectId, fileChunk);
 		synchronized (MonitorProvider.getInstance().getMonitor(FILELOAD)) {
 			// check if folders exist, otherwise create
 			createDirectories(projectId);

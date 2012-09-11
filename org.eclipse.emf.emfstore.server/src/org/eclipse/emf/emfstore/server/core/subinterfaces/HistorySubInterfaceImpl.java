@@ -25,10 +25,10 @@ import java.util.TreeSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
-import org.eclipse.emf.emfstore.server.core.helper.HistoryCache;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
@@ -58,8 +58,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  */
 public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
-	private HistoryCache historyCache;
-
 	/**
 	 * Default constructor.
 	 * 
@@ -75,14 +73,15 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	@Override
 	protected void initSubInterface() throws FatalEmfStoreException {
 		super.initSubInterface();
-		historyCache = EmfStoreController.getHistoryCache(getServerSpace(), false);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.ADDTAG)
 	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
 			// TODO BRANCH
@@ -101,8 +100,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.REMOVETAG)
 	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws EmfStoreException {
+		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
 			Iterator<TagVersionSpec> iterator = version.getTagSpecs().iterator();
@@ -122,7 +123,9 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.GETHISTORYINFO)
 	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws EmfStoreException {
+		sanityCheckObjects(projectId, historyQuery);
 		synchronized (getMonitor()) {
 
 			if (historyQuery instanceof ModelElementQuery) {
@@ -182,15 +185,45 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private List<HistoryInfo> handleMEQuery(ProjectId projectId, ModelElementQuery query) throws EmfStoreException {
 		List<Version> inRange = handleRangeQuery(projectId, query);
-		SortedSet<Version> relevantVersions = new TreeSet<Version>(new VersionComparator(false));
-		for (ModelElementId id : query.getModelElements()) {
-			relevantVersions.addAll(historyCache.getChangesForModelElement(projectId, id));
-		}
-		relevantVersions.retainAll(inRange);
+		// SortedSet<Version> relevantVersions = new TreeSet<Version>(new VersionComparator(false));
+		// for (ModelElementId id : query.getModelElements()) {
+		// relevantVersions.addAll(historyCache.getChangesForModelElement(projectId, id));
+		// }
+		// relevantVersions.retainAll(inRange);
+		List<Version> relevantVersions = filterVersions(inRange, query.getModelElements());
 		List<HistoryInfo> result = versionToHistoryInfo(projectId, relevantVersions, query.isIncludeChangePackages());
 		// filter ops
 		for (HistoryInfo historyInfo : result) {
 			filterOperationsForSelectedME(query.getModelElements(), historyInfo);
+		}
+		return result;
+	}
+
+	// TODO combine with op filtering
+	private List<Version> filterVersions(List<Version> inRange, List<ModelElementId> modelElements) {
+		ArrayList<Version> result = new ArrayList<Version>();
+		for (Version version : inRange) {
+			// special case for initial version
+			if (version.getPrimarySpec() != null && version.getPrimarySpec().getIdentifier() == 0) {
+				if (version.getProjectState() != null) {
+					for (ModelElementId id : modelElements) {
+						if (version.getProjectState().contains(id)) {
+							result.add(version);
+							break;
+						}
+					}
+				}
+			}
+			if (version.getChanges() == null) {
+				continue;
+			}
+			Set<ModelElementId> involvedModelElements = version.getChanges().getAllInvolvedModelElements();
+			for (ModelElementId id : modelElements) {
+				if (involvedModelElements.contains(id)) {
+					result.add(version);
+					break;
+				}
+			}
 		}
 		return result;
 	}

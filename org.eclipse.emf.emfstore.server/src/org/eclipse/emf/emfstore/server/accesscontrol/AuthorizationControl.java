@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server.accesscontrol;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.core.MethodInvocation;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -94,4 +95,12 @@ public interface AuthorizationControl {
 	 * @throws AccessControlException exception
 	 */
 	ACUser resolveUser(ACOrgUnitId orgUnitId) throws AccessControlException;
+
+	/**
+	 * 
+	 * @param user
+	 * @param op
+	 * @return
+	 */
+	void checkAccess(MethodInvocation op) throws AccessControlException;
 }

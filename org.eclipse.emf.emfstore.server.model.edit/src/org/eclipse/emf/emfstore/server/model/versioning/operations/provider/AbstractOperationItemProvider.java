@@ -35,23 +35,22 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class AbstractOperationItemProvider extends
-		IdentifiableElementItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class AbstractOperationItemProvider extends IdentifiableElementItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * Constant for name and class tag separator.
 	 */
-	public static final String NAME_CLASS_TAG_SEPARATOR = "&";
+	public static final String NAME_CLASS_TAG_SEPARATOR = "&&&";
 	/**
 	 * Constant for name tag separator.
 	 */
-	public static final String NAME_TAG__SEPARATOR = "%";
+	public static final String NAME_TAG__SEPARATOR = "%%%";
 
 	/**
 	 * Constant for reference type separator
@@ -114,17 +113,13 @@ public class AbstractOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addModelElementIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_AbstractOperation_modelElementId_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_AbstractOperation_modelElementId_feature",
-								"_UI_AbstractOperation_type"),
-						OperationsPackage.Literals.ABSTRACT_OPERATION__MODEL_ELEMENT_ID,
-						true, false, true, null, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_AbstractOperation_modelElementId_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_AbstractOperation_modelElementId_feature",
+				"_UI_AbstractOperation_type"), OperationsPackage.Literals.ABSTRACT_OPERATION__MODEL_ELEMENT_ID, true,
+			false, true, null, null, null));
 	}
 
 	/**
@@ -135,16 +130,12 @@ public class AbstractOperationItemProvider extends
 	 */
 	protected void addAcceptedPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AbstractOperation_accepted_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_AbstractOperation_accepted_feature",
-						"_UI_AbstractOperation_type"),
-				OperationsPackage.Literals.ABSTRACT_OPERATION__ACCEPTED, true,
-				false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null,
-				null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_AbstractOperation_accepted_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_AbstractOperation_accepted_feature",
+				"_UI_AbstractOperation_type"), OperationsPackage.Literals.ABSTRACT_OPERATION__ACCEPTED, true, false,
+			false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -155,16 +146,12 @@ public class AbstractOperationItemProvider extends
 	 */
 	protected void addClientDatePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AbstractOperation_clientDate_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_AbstractOperation_clientDate_feature",
-						"_UI_AbstractOperation_type"),
-				OperationsPackage.Literals.ABSTRACT_OPERATION__CLIENT_DATE,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_AbstractOperation_clientDate_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_AbstractOperation_clientDate_feature",
+				"_UI_AbstractOperation_type"), OperationsPackage.Literals.ABSTRACT_OPERATION__CLIENT_DATE, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -175,8 +162,7 @@ public class AbstractOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/AbstractOperation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AbstractOperation"));
 	}
 
 	/**
@@ -189,7 +175,7 @@ public class AbstractOperationItemProvider extends
 	public String getText(Object object) {
 		String label = ((AbstractOperation) object).getIdentifier();
 		return label == null || label.length() == 0 ? getString("_UI_AbstractOperation_type")
-				: getString("_UI_AbstractOperation_type") + " " + label;
+			: getString("_UI_AbstractOperation_type") + " " + label;
 	}
 
 	/**
@@ -207,8 +193,7 @@ public class AbstractOperationItemProvider extends
 		switch (notification.getFeatureID(AbstractOperation.class)) {
 		case OperationsPackage.ABSTRACT_OPERATION__ACCEPTED:
 		case OperationsPackage.ABSTRACT_OPERATION__CLIENT_DATE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -222,8 +207,7 @@ public class AbstractOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -239,12 +223,10 @@ public class AbstractOperationItemProvider extends
 	}
 
 	public static String getModelElementName(ModelElementId modelElementId) {
-		return NAME_TAG__SEPARATOR + modelElementId.getId()
-				+ NAME_TAG__SEPARATOR;
+		return NAME_TAG__SEPARATOR + modelElementId.getId() + NAME_TAG__SEPARATOR;
 	}
 
-	public static String getModelElementNames(
-			List<ModelElementId> modelElementIds) {
+	public static String getModelElementNames(List<ModelElementId> modelElementIds) {
 		StringBuilder builder = new StringBuilder();
 		for (ModelElementId modelElementId : modelElementIds) {
 			builder.append(NAME_TAG__SEPARATOR);
@@ -253,24 +235,20 @@ public class AbstractOperationItemProvider extends
 			builder.append(", ");
 		}
 		if (modelElementIds.size() > 0) {
-			builder.replace(builder.lastIndexOf(NAME_TAG__SEPARATOR + ", "),
-					builder.length(), NAME_TAG__SEPARATOR);
+			builder.replace(builder.lastIndexOf(NAME_TAG__SEPARATOR + ", "), builder.length(), NAME_TAG__SEPARATOR);
 		}
 		if (modelElementIds.size() > 1) {
 			builder.replace(builder.lastIndexOf(NAME_TAG__SEPARATOR + ", "),
-					builder.lastIndexOf(NAME_TAG__SEPARATOR + ", ") + 3,
-					NAME_TAG__SEPARATOR + " and ");
+				builder.lastIndexOf(NAME_TAG__SEPARATOR + ", ") + 3, NAME_TAG__SEPARATOR + " and ");
 		}
 		return builder.toString();
 	}
 
-	public static String getModelElementClassAndName(
-			ModelElementId modelElementId) {
+	public static String getModelElementClassAndName(ModelElementId modelElementId) {
 		if (modelElementId == null) {
 			return "(Unkown Element)";
 		}
-		return NAME_CLASS_TAG_SEPARATOR + modelElementId.getId()
-				+ NAME_CLASS_TAG_SEPARATOR;
+		return NAME_CLASS_TAG_SEPARATOR + modelElementId.getId() + NAME_CLASS_TAG_SEPARATOR;
 	}
 
 	/**
@@ -281,8 +259,7 @@ public class AbstractOperationItemProvider extends
 	 *            the list of model element IDs to return the names for
 	 * @return
 	 */
-	public static String getModelElementClassesAndNames(
-			EList<ModelElementId> idList, String typeName) {
+	public static String getModelElementClassesAndNames(EList<ModelElementId> idList, String typeName) {
 
 		StringBuilder sb = new StringBuilder();
 

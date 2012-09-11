@@ -110,7 +110,8 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 		if (operation instanceof CompositeOperation) {
 			// check of automatic composite, if yes then continue
 			if (((CompositeOperation) operation).getMainOperation() == null) {
-				return;
+				// && ((CompositeOperation) operation).getModelElementId() == null) {
+				// return;
 			}
 		}
 
@@ -182,5 +183,24 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 	 */
 	public void dispose() {
 		operationRecorder.removeOperationRecorderListener(this);
+	}
+
+	/**
+	 * Sets an optional operation modificator.
+	 * 
+	 * @param modificator
+	 *            the operation modificator to be used
+	 */
+	public void setOperationModificator(OperationModificator modificator) {
+		operationRecorder.setModificator(modificator);
+	}
+
+	/**
+	 * Returns the operation modificator, if any.
+	 * 
+	 * @return the operation modificator
+	 */
+	public OperationModificator getOperationModificator() {
+		return operationRecorder.getModificator();
 	}
 }

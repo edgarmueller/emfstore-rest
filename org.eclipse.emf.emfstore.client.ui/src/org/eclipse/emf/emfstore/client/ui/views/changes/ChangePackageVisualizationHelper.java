@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -48,19 +49,20 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IdEObjectCollection collection;
+	private List<ChangePackage> changePackages;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param changePackages
-	 *            a list of change packages
 	 * @param collection
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
+	 * @param changePackages add changepackages in order to find deleted elements
 	 */
-	public ChangePackageVisualizationHelper(List<ChangePackage> changePackages, IdEObjectCollection collection) {
+	public ChangePackageVisualizationHelper(IdEObjectCollection collection, List<ChangePackage> changePackages) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.collection = collection;
+		this.changePackages = changePackages;
 	}
 
 	/**
@@ -175,9 +177,9 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private String decorate(AbstractOperationCustomLabelProvider labelProvider, AbstractOperation op) {
 		String namesResolved = resolveIds(labelProvider, labelProvider.getDescription(op),
-			AbstractOperationItemProvider.NAME_TAG__SEPARATOR);
+			AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
 		String allResolved = resolveIds(labelProvider, namesResolved,
-			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR);
+			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
@@ -202,14 +204,25 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	}
 
 	private String resolveIds(AbstractOperationCustomLabelProvider labelProvider, String unresolvedString,
-		String devider) {
+		String devider, AbstractOperation op) {
 		String[] strings = unresolvedString.split(devider);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
 			if (i % 2 == 1) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
-				stringBuilder.append(labelProvider.getModelElementName(getModelElement(modelElementId)));
+				EObject modelElement = getModelElement(modelElementId);
+				if (modelElement != null) {
+					stringBuilder.append(labelProvider.getModelElementName(modelElement));
+				} else if (modelElement == null && op instanceof CreateDeleteOperation) {
+					CreateDeleteOperation createDeleteOp = (CreateDeleteOperation) op;
+					for (Map.Entry<EObject, ModelElementId> entry : createDeleteOp.getEObjectToIdMap()) {
+						if (entry.getValue().equals(modelElementId)) {
+							stringBuilder.append(labelProvider.getModelElementName(entry.getKey()));
+							break;
+						}
+					}
+				}
 			} else {
 				stringBuilder.append(strings[i]);
 			}
@@ -225,7 +238,37 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return collection.getModelElement(modelElementId);
+		EObject modelElement = collection.getModelElement(modelElementId);
+		if (modelElement == null && modelElementId != null) {
+			modelElement = getMeFromChangePackage(modelElementId);
+		}
+		return modelElement;
+	}
+
+	private EObject getMeFromChangePackage(ModelElementId modelElementId) {
+		for (ChangePackage cp : changePackages) {
+			EObject me = getMeFromOpsList(modelElementId, cp.getOperations());
+			if (me != null) {
+				return me;
+			}
+		}
+		return null;
+	}
+
+	private EObject getMeFromOpsList(ModelElementId modelElementId, List<AbstractOperation> operations) {
+		for (AbstractOperation op : operations) {
+			if (op instanceof CreateDeleteOperation) {
+				if (modelElementId.equals(op.getModelElementId())) {
+					return ((CreateDeleteOperation) op).getModelElement();
+				}
+			} else if (op instanceof CompositeOperation) {
+				EObject me = getMeFromOpsList(modelElementId, ((CompositeOperation) op).getSubOperations());
+				if (me != null) {
+					return me;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**

@@ -16,6 +16,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
@@ -160,6 +161,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			// project is out of date and user canceled update
 			// ignore
 		} catch (final EmfStoreException e) {
+			if (e instanceof CancelOperationException) {
+				return null;
+			}
 			WorkspaceUtil.logException(e.getMessage(), e);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -185,7 +189,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 				dialog.setBlockOnOpen(true);
 
 				if (dialog.open() != Dialog.OK || dialog.getNewBranch() == null || dialog.getNewBranch().equals("")) {
-					throw new EmfStoreException("No Branch specified");
+					throw new CancelOperationException("No Branch specified");
 				}
 				return dialog.getNewBranch();
 			}
