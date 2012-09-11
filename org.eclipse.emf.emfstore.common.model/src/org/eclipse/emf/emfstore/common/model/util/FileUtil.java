@@ -77,8 +77,12 @@ public final class FileUtil {
 				outputStream.write(buffer, 0, read);
 			}
 		} finally {
-			source.close();
-			outputStream.close();
+			if (source != null) {
+				source.close();
+			}
+			if (outputStream != null) {
+				outputStream.close();
+			}
 		}
 	}
 
