@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -38,9 +39,18 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 	public void handle() {
 		ProjectSpace ps = requireSelection(ProjectSpace.class);
 		if (ps != null) {
-			RangeQuery query = HistoryQueryBuilder.rangeQuery(ps.getBaseVersion(), 5, 10, true, false, false, true);
+			// TODO move logic to UIController
+			RangeQuery query = HistoryQueryBuilder.rangeQuery(ps.getBaseVersion(), 20, 0, false, false, false, false);
 			try {
 				List<HistoryInfo> historyInfo = ps.getHistoryInfo(query);
+				// filter base version
+				Iterator<HistoryInfo> iter = historyInfo.iterator();
+				while (iter.hasNext()) {
+					if (ps.getBaseVersion().equals(iter.next().getPrimerySpec())) {
+						iter.remove();
+						break;
+					}
+				}
 				if (historyInfo.size() == 0) {
 					new UIUpdateProjectController(getShell(), ps, Versions.createHEAD(ps.getBaseVersion())).execute();
 					return;
@@ -59,19 +69,6 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 						sb.append(Integer.toString(historyInfo.getPrimerySpec().getIdentifier()));
 						sb.append("  -  ");
 						sb.append(historyInfo.getLogMessage().getMessage());
-
-						// TODO remove if the displayed data is enough
-						// String tags = " ";
-						// for (TagVersionSpec tag : historyInfo.getTagSpecs())
-						// {
-						// tags += tag.getName() + " ";
-						// }
-						// sb.append(tags);
-
-						// sb.append(historyInfo.getLogMessage().getDate()
-						// .toString());
-						//
-						// sb.append(historyInfo.getLogMessage().getAuthor());
 
 						return sb.toString();
 
@@ -96,5 +93,4 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 		}
 
 	}
-
 }

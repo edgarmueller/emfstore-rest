@@ -47,7 +47,10 @@ import org.eclipse.swt.widgets.Display;
 public class SCMLabelProvider extends ColumnLabelProvider {
 
 	private static final String ELEMENT_NOT_FOUND = "There is no sufficient information to display this element";
-	private static final String LOCAL_REVISION = "Local revision";
+	/**
+	 * String to display as info for Local revisions.
+	 */
+	protected static final String LOCAL_REVISION = "Local revision";
 
 	private Project project;
 	private List<OperationId> highlighted;
@@ -75,6 +78,10 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		baseRevision = Activator.getImageDescriptor("icons/HistoryInfo_base.png").createImage();
 		currentRevision = Activator.getImageDescriptor("icons/HistoryInfo_current.png").createImage();
 		headRevision = Activator.getImageDescriptor("icons/HistoryInfo_head.png").createImage();
+	}
+
+	public SCMLabelProvider() {
+		this(null);
 	}
 
 	/**
@@ -127,7 +134,14 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		return builder.toString();
 	}
 
-	private String getText(HistoryInfo historyInfo) {
+	/**
+	 * Gets the text for a history info. This may be overriden by subclasses to change the behavior (e.g. if info should
+	 * be distributed across multiply label providers)
+	 * 
+	 * @param historyInfo The historInfo the text is retrieved for.
+	 * @return The text for the given historyInfo.
+	 */
+	protected String getText(HistoryInfo historyInfo) {
 		if (historyInfo.getPrimerySpec() != null && historyInfo.getPrimerySpec().getIdentifier() == -1) {
 			return LOCAL_REVISION;
 		}
@@ -316,5 +330,21 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		if (changePackageVisualizationHelper != null) {
 			changePackageVisualizationHelper.dispose();
 		}
+	}
+
+	/**
+	 * @return The project this label provider provides labels for.
+	 */
+	protected Project getProject() {
+		return project;
+	}
+
+	/**
+	 * Set the active project.
+	 * 
+	 * @param project project
+	 */
+	public void setProject(Project project) {
+		this.project = project;
 	}
 }

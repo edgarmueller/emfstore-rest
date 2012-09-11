@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -19,44 +20,63 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
- * Controller for reverting a commit.
+ * Controller that forces a revert of version spec.
  * 
  * @author ovonwesen
  * @author emueller
  */
 public class RevertCommitController extends ServerCall<Void> {
 
-	private final ProjectSpace projectSpace;
-	private final PrimaryVersionSpec versionSpec;
+	private ProjectSpace projectSpace;
+	private PrimaryVersionSpec versionSpec;
+	private final boolean headRevert;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param projectSpace
-	 *            the project space to be reverted
+	 *            the project to be reverted
 	 * @param versionSpec
 	 *            the target version to revert to
+	 * @param headRevert if true, otherwise just revert individual version
 	 */
-	public RevertCommitController(ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec) {
+	public RevertCommitController(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
 		this.projectSpace = projectSpace;
 		this.versionSpec = versionSpec;
+		this.headRevert = headRevert;
 	}
 
+	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
+		boolean headRevert) throws EmfStoreException {
+
+		PrimaryVersionSpec localHead = getConnectionManager()
+			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
+				Versions.createHEAD(baseVersion));
+
+		ProjectSpace revertSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), localHead, getProgressMonitor());
+
+		List<ChangePackage> changes = revertSpace.getChanges(baseVersion,
+			headRevert ? localHead : ModelUtil.clone(baseVersion));
+
+		Collections.reverse(changes);
+
+		for (ChangePackage cp : changes) {
+			cp.reverse().apply(revertSpace.getProject(), true);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
+	 */
 	@Override
 	protected Void run() throws EmfStoreException {
-		ProjectSpace revertSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
-			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), versionSpec, getProgressMonitor());
-		PrimaryVersionSpec sourceVersion = ModelUtil.clone(versionSpec);
-		sourceVersion.setIdentifier(sourceVersion.getIdentifier() - 1);
-		List<ChangePackage> changes = revertSpace.getChanges(sourceVersion, versionSpec);
-		if (changes.size() != 1) {
-			throw new EmfStoreException("Zero or more than 1 Change Package received for one revision!");
-		}
-		ChangePackage changePackage = changes.get(0);
-		ChangePackage reversedChangePackage = changePackage.reverse();
-		reversedChangePackage.apply(revertSpace.getProject(), true);
+		checkoutHeadAndReverseCommit(projectSpace, versionSpec, headRevert);
 		return null;
 	}
 }

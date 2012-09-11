@@ -33,6 +33,8 @@ import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 
@@ -62,6 +64,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param ePackage the package
 	 * @throws EmfStoreException if registration storage fails
 	 */
+	@EmfStoreMethod(MethodId.REGISTEREPACKAGE)
 	public void registerEPackage(EPackage ePackage) throws EmfStoreException {
 		synchronized (MonitorProvider.getInstance().getMonitor(E_PACKAGE_REGISTRATION)) {
 			List<EPackage> packages = EPackageHelper.getAllSubPackages(ePackage);
