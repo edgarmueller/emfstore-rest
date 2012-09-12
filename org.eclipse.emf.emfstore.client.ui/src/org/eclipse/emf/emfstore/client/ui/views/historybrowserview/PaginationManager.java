@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder
  * 
  */
 public class PaginationManager {
+
 	/**
 	 * The version around which history queries are created. At initialization
 	 * time this is the base version. It gets change if the user clicks on 'show
@@ -85,7 +86,7 @@ public class PaginationManager {
 	 */
 	public List<HistoryInfo> retrieveHistoryInfos() throws EmfStoreException {
 		PrimaryVersionSpec newCenterVersion;
-		int beforeCurrent = -1, afterCurrent = -1;
+		int beforeCurrent = -1;
 		if ((prevPage || nextPage) && currentCenterVersionShown != null && !currentlyPresentedInfos.isEmpty()) {
 			for (int i = 0; i < currentlyPresentedInfos.size(); i++) {
 				if (currentlyPresentedInfos.get(i).getPrimerySpec().getIdentifier() == currentCenterVersionShown
@@ -94,10 +95,9 @@ public class PaginationManager {
 					break;
 				}
 			}
+
 			assert beforeCurrent != -1 : "The currently shown center version should be contained in the currently shown history infos, why has it vanished?";
-			afterCurrent = currentlyPresentedInfos.size() - beforeCurrent - 1; // - 1
-																				// ==
-																				// currentCenter
+
 			if (prevPage) {
 				// there might be more versions, so swap page if there are
 				newCenterVersion = currentlyPresentedInfos.get(0).getPrimerySpec();

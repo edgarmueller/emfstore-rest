@@ -25,8 +25,6 @@ public class LogMessageColumnLabelProvider extends SCMLabelProvider {
 
 	/**
 	 * Default constructor.
-	 * 
-	 * @param project the project
 	 */
 	public LogMessageColumnLabelProvider() {
 		super();
