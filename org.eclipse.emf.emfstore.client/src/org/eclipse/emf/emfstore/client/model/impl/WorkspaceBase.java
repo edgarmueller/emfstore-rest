@@ -676,7 +676,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 */
 	public void save() {
 		try {
-			this.eResource().save(Configuration.getResourceSaveOptions());
+			this.eResource().save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			// MK Auto-generated catch block
 			// FIXME OW MK: also insert code for dangling href handling here
