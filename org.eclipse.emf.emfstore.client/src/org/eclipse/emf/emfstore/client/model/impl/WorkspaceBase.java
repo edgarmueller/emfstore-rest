@@ -207,7 +207,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 				sourceSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 				sourceSpec.setIdentifier(0);
 			}
-			projectSpace.eResource().save(null);
+			projectSpace.eResource().save(ModelUtil.getResourceSaveOptions());
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 			// BEGIN SUPRESS CATCH EXCEPTION

@@ -63,6 +63,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param ePackage the package
 	 * @throws EmfStoreException if registration storage fails
+	 * 
 	 */
 	@EmfStoreMethod(MethodId.REGISTEREPACKAGE)
 	public void registerEPackage(EPackage ePackage) throws EmfStoreException {
@@ -106,7 +107,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Resource resource = resourceSet.createResource(fileUri);
 			resource.getContents().add(ePackage);
 			try {
-				resource.save(null);
+				resource.save(ModelUtil.getResourceSaveOptions());
 			} catch (IOException e) {
 				if (e.getCause() instanceof DanglingHREFException) {
 					// Ignore, as the referenced elements were either stored earlier or can still be

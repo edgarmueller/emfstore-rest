@@ -191,7 +191,7 @@ public final class IntegrationTestHelper {
 			+ "changePackage.txt"));
 		resource.getContents().add(copyChangePackage);
 		try {
-			resource.save(null);
+			resource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 
 			e.printStackTrace();

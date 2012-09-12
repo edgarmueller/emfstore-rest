@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
@@ -30,8 +31,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Server Space</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Space</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -122,8 +122,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ACGroup> getGroups() {
 		if (groups == null) {
-			groups = new EObjectContainmentEList.Resolving<ACGroup>(
-					ACGroup.class, this, ModelPackage.SERVER_SPACE__GROUPS);
+			groups = new EObjectContainmentEList.Resolving<ACGroup>(ACGroup.class, this,
+				ModelPackage.SERVER_SPACE__GROUPS);
 		}
 		return groups;
 	}
@@ -135,9 +135,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ProjectHistory> getProjects() {
 		if (projects == null) {
-			projects = new EObjectResolvingEList<ProjectHistory>(
-					ProjectHistory.class, this,
-					ModelPackage.SERVER_SPACE__PROJECTS);
+			projects = new EObjectResolvingEList<ProjectHistory>(ProjectHistory.class, this,
+				ModelPackage.SERVER_SPACE__PROJECTS);
 		}
 		return projects;
 	}
@@ -149,9 +148,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<SessionId> getOpenSessions() {
 		if (openSessions == null) {
-			openSessions = new EObjectContainmentEList.Resolving<SessionId>(
-					SessionId.class, this,
-					ModelPackage.SERVER_SPACE__OPEN_SESSIONS);
+			openSessions = new EObjectContainmentEList.Resolving<SessionId>(SessionId.class, this,
+				ModelPackage.SERVER_SPACE__OPEN_SESSIONS);
 		}
 		return openSessions;
 	}
@@ -163,8 +161,7 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public EList<ACUser> getUsers() {
 		if (users == null) {
-			users = new EObjectContainmentEList.Resolving<ACUser>(ACUser.class,
-					this, ModelPackage.SERVER_SPACE__USERS);
+			users = new EObjectContainmentEList.Resolving<ACUser>(ACUser.class, this, ModelPackage.SERVER_SPACE__USERS);
 		}
 		return users;
 	}
@@ -175,14 +172,12 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ModelPackage.SERVER_SPACE__GROUPS:
 			return ((InternalEList<?>) getGroups()).basicRemove(otherEnd, msgs);
 		case ModelPackage.SERVER_SPACE__OPEN_SESSIONS:
-			return ((InternalEList<?>) getOpenSessions()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getOpenSessions()).basicRemove(otherEnd, msgs);
 		case ModelPackage.SERVER_SPACE__USERS:
 			return ((InternalEList<?>) getUsers()).basicRemove(otherEnd, msgs);
 		}
@@ -224,13 +219,11 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 			return;
 		case ModelPackage.SERVER_SPACE__PROJECTS:
 			getProjects().clear();
-			getProjects().addAll(
-					(Collection<? extends ProjectHistory>) newValue);
+			getProjects().addAll((Collection<? extends ProjectHistory>) newValue);
 			return;
 		case ModelPackage.SERVER_SPACE__OPEN_SESSIONS:
 			getOpenSessions().clear();
-			getOpenSessions()
-					.addAll((Collection<? extends SessionId>) newValue);
+			getOpenSessions().addAll((Collection<? extends SessionId>) newValue);
 			return;
 		case ModelPackage.SERVER_SPACE__USERS:
 			getUsers().clear();
@@ -288,13 +281,17 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 * {@inheritDoc}
 	 * 
 	 * @throws IOException
+	 * 
+	 * @generated NOT
 	 */
 	public void save() throws IOException {
-		this.resource.save(null);
+		this.resource.save(ModelUtil.getResourceSaveOptions());
 	}
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @generated NOT
 	 */
 	public void setResource(Resource resource) {
 		this.resource = resource;

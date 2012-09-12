@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 
@@ -41,7 +42,7 @@ public class XMLStorage implements ResourceStorage {
 		if (!serverFile.exists()) {
 			try {
 				Resource resource = resourceSet.createResource(fileURI);
-				resource.save(null);
+				resource.save(ModelUtil.getResourceSaveOptions());
 			} catch (IOException e) {
 				throw new FatalEmfStoreException("Could not init XMLRessource", e);
 			}

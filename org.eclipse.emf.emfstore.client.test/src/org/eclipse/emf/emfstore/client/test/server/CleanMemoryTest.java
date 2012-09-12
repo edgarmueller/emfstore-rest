@@ -41,8 +41,8 @@ public class CleanMemoryTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		res.save(null);
-		res2.save(null);
+		res.save(ModelUtil.getResourceSaveOptions());
+		res2.save(ModelUtil.getResourceSaveOptions());
 		CleanMemoryTask task = new CleanMemoryTask(resourceSet);
 		task.run();
 		// this is wrong?

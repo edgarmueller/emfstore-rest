@@ -99,7 +99,7 @@ public final class ResourceHelper {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(element);
-		resource.save(null);
+		resource.save(ModelUtil.getResourceSaveOptions());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public final class ResourceHelper {
 			}
 		}
 
-		resource.save(null);
+		resource.save(ModelUtil.getResourceSaveOptions());
 	}
 
 	/**
@@ -157,6 +157,6 @@ public final class ResourceHelper {
 			}
 		}
 
-		resource.save(null);
+		resource.save(ModelUtil.getResourceSaveOptions());
 	}
 }

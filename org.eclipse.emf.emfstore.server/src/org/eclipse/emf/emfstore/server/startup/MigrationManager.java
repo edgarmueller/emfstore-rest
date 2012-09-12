@@ -224,7 +224,7 @@ public class MigrationManager {
 		modelVersion.setReleaseNumber(modelReleaseNumber);
 		versionResource.getContents().add(modelVersion);
 		try {
-			versionResource.save(null);
+			versionResource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			// MK Auto-generated catch block
 			e.printStackTrace();
