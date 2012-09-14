@@ -272,7 +272,7 @@ public final class WorkspaceManager implements IReinitializable {
 		}.run(true);
 
 		try {
-			resource.save(Configuration.getResourceSaveOptions());
+			resource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
 				"Creating new workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(), e);
@@ -294,7 +294,7 @@ public final class WorkspaceManager implements IReinitializable {
 		modelVersion.setReleaseNumber(modelReleaseNumber);
 		versionResource.getContents().add(modelVersion);
 		try {
-			versionResource.save(Configuration.getResourceSaveOptions());
+			versionResource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
 				"Version stamping workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(),
