@@ -97,10 +97,12 @@ public interface AuthorizationControl {
 	ACUser resolveUser(ACOrgUnitId orgUnitId) throws AccessControlException;
 
 	/**
+	 * Checks whether a given operation may be executed.
 	 * 
-	 * @param user
 	 * @param op
-	 * @return
+	 *            the operation the user intends to execute
+	 * 
+	 * @throws AccessControlException in case access is denied
 	 */
 	void checkAccess(MethodInvocation op) throws AccessControlException;
 }
