@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
@@ -165,7 +166,8 @@ public final class ModelUtil {
 		res.getContents().add(copy);
 
 		StringWriter stringWriter = new StringWriter(initialSize);
-		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
+		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter,
+			CommonUtil.getEncoding());
 
 		try {
 			res.save(uws, getResourceSaveOptions());
@@ -269,7 +271,7 @@ public final class ModelUtil {
 			resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			resourceLoadOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
+			resourceLoadOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
 		}
 		return resourceLoadOptions;
 	}
@@ -284,7 +286,7 @@ public final class ModelUtil {
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
-			resourceSaveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
+			resourceSaveOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
 		}
 		return resourceSaveOptions;
 	}

@@ -385,4 +385,9 @@ public final class CommonUtil {
 	public static boolean isTesting() {
 		return testing;
 	}
+	
+
+	public static String getEncoding() {
+		return System.getProperty("file.encoding");
+	}
 }

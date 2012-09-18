@@ -76,7 +76,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 				if ((eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) && resource != null) {
 					OutputStreamWriter writer = new OutputStreamWriter(bos);
 					Resource res = eObject.eResource();
-					uws = new URIConverter.WriteableOutputStream(writer, "UTF-8");
+					uws = new URIConverter.WriteableOutputStream(writer, System.getProperty("file.encoding"));
 					checkResource(res);
 					res.save(uws, ModelUtil.getResourceSaveOptions());
 				} else {
@@ -103,7 +103,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 
 					resource.getContents().add(copy);
 					StringWriter stringWriter = new StringWriter();
-					uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
+					uws = new URIConverter.WriteableOutputStream(stringWriter, CommonUtil.getEncoding());
 					// save string into Stringwriter
 					checkResource(resource);
 					resource.save(uws, ModelUtil.getResourceSaveOptions());
