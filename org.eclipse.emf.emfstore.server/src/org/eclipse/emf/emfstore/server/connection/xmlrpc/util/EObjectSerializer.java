@@ -76,7 +76,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 				if ((eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) && resource != null) {
 					OutputStreamWriter writer = new OutputStreamWriter(bos);
 					Resource res = eObject.eResource();
-					uws = new URIConverter.WriteableOutputStream(writer, System.getProperty("file.encoding"));
+					uws = new URIConverter.WriteableOutputStream(writer, CommonUtil.getEncoding());
 					checkResource(res);
 					res.save(uws, ModelUtil.getResourceSaveOptions());
 				} else {

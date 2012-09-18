@@ -387,7 +387,11 @@ public final class CommonUtil {
 	}
 	
 
+	/**
+	 * Returns the file encoding in use.
+	 * @return the file encoding
+	 */
 	public static String getEncoding() {
-		return System.getProperty("file.encoding");
+		return "UTF-8";
 	}
 }
