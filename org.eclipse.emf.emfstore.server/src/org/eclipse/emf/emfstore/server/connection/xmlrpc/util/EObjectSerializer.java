@@ -110,7 +110,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 					// get string from string writer and write to bos
 					String string = stringWriter.toString();
 					hrefCheck(string);
-					bos.write(string.getBytes());
+					bos.write(string.getBytes(CommonUtil.getEncoding()));
 				}
 			} catch (SerializationException e) {
 				throw new SAXException(e);

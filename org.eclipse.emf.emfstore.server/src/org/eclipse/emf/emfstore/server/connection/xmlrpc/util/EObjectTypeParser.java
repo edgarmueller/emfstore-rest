@@ -44,7 +44,7 @@ public class EObjectTypeParser extends ByteArrayParser {
 		try {
 			byte[] res = (byte[]) super.getResult();
 			ByteArrayInputStream bais = new ByteArrayInputStream(res);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(bais));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(bais, CommonUtil.getEncoding()));
 			URIConverter.ReadableInputStream ris = new URIConverter.ReadableInputStream(reader,
 				CommonUtil.getEncoding());
 			try {
