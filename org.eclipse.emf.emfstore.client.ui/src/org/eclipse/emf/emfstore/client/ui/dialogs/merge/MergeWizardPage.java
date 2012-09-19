@@ -65,10 +65,6 @@ public class MergeWizardPage extends WizardPage {
 	 * {@inheritDoc}
 	 */
 	public void createControl(final Composite parent) {
-		parent.setLayout(new GridLayout());
-
-		Composite topBar = createTopBar(parent);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(topBar);
 
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
@@ -112,7 +108,7 @@ public class MergeWizardPage extends WizardPage {
 		// }
 		// });
 
-		setControl(parent);
+		setControl(scrolledComposite);
 	}
 
 	private Point calcParentSize(final Composite parent) {
