@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
@@ -97,6 +98,11 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
+
+		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.Project.getExtension())) {
+			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Project.getExtension());
+		}
+
 		Project project = ModelUtil.clone(getProjectSpace().getProject());
 		ResourceHelper.putElementIntoNewResource(file.getAbsolutePath(), project);
 	}

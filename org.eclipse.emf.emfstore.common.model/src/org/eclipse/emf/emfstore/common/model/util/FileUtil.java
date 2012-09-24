@@ -21,6 +21,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
@@ -243,5 +244,22 @@ public final class FileUtil {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Returns the extension of the given file.
+	 * 
+	 * @param file
+	 *            the file whose extension should be determined
+	 * @return the file extension, if any, otherwise empty string
+	 */
+	public static String getExtension(File file) {
+		int lastIndexOf = file.getName().lastIndexOf(".");
+
+		if (lastIndexOf == -1) {
+			return StringUtils.EMPTY;
+		}
+
+		return StringUtils.substring(file.getName(), lastIndexOf);
 	}
 }

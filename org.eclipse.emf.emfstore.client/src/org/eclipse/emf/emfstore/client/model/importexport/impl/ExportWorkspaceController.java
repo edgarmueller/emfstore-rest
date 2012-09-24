@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
@@ -90,6 +91,11 @@ public class ExportWorkspaceController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
+
+		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.Workspace.getExtension())) {
+			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Workspace.getExtension());
+		}
+
 		Workspace copy = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace());
 
 		int i = 0;

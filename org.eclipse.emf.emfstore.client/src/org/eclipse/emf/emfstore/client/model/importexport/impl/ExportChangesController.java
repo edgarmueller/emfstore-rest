@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 
 /**
  * Exports pending changes on a given {@link ProjectSpace}.
@@ -94,6 +95,11 @@ public class ExportChangesController extends ProjectSpaceBasedExportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
+
+		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.Change.getExtension())) {
+			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Change.getExtension());
+		}
+
 		ResourceHelper.putElementIntoNewResourceWithProject(file.getAbsolutePath(), getProjectSpace()
 			.getLocalChangePackage(false), getProjectSpace().getProject());
 	}
