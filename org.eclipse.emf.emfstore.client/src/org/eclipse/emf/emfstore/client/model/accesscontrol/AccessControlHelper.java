@@ -37,6 +37,15 @@ public class AccessControlHelper {
 		this.user = usersession.getACUser();
 	}
 
+	public void checkReadAccess(ProjectId projectId) throws AccessControlException {
+		for (Role role : user.getRoles()) {
+			if (role.canRead(projectId, null)) {
+				return;
+			}
+		}
+		throw new AccessControlException();
+	}
+
 	/**
 	 * Check write access for the given project.
 	 * 
