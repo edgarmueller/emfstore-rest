@@ -109,7 +109,7 @@ public class ShareController extends ServerCall<Void> {
 		this.setUsersession(getUsersession());
 		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
 
-		Configuration.setAutoSave(true);
+		Configuration.setAutoSave(Configuration.isAutoSaveEnabled());
 		getProjectSpace().save();
 		getProjectSpace().startChangeRecording();
 		getProjectSpace().setBaseVersion(createdProject.getVersion());
