@@ -51,7 +51,7 @@ public class DescriptionProvider {
 		InputStream inputStream = null;
 
 		try {
-			url = new URL("platform:/plugin/de.vogella.rcp.plugin.filereader/files/test.txt");
+			url = new URL("platform:/plugin/org.eclipse.emf.emfstore.client/resources/conflictdescription.ini");
 			inputStream = url.openConnection().getInputStream();
 			properties.load(inputStream);
 		} catch (MalformedURLException e2) {
