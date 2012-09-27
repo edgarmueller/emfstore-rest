@@ -97,6 +97,8 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	}
 
 	/**
+	 * Returns the change package displayed by the commit dialog.
+	 * 
 	 * @return the change package
 	 */
 	public ChangePackage getChangePackage() {
@@ -104,6 +106,8 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	}
 
 	/**
+	 * Returns the active project space.
+	 * 
 	 * @return the active project space
 	 */
 	public ProjectSpace getActiveProjectSpace() {
@@ -193,6 +197,7 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	 */
 	@Override
 	protected void okPressed() {
+
 		logMsg = txtLogMsg.getText();
 
 		// suppress duplicates

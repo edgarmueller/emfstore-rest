@@ -385,4 +385,13 @@ public final class CommonUtil {
 	public static boolean isTesting() {
 		return testing;
 	}
+	
+
+	/**
+	 * Returns the file encoding in use.
+	 * @return the file encoding
+	 */
+	public static String getEncoding() {
+		return "UTF-8";
+	}
 }

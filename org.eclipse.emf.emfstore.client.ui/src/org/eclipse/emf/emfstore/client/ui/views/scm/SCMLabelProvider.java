@@ -80,6 +80,9 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		headRevision = Activator.getImageDescriptor("icons/HistoryInfo_head.png").createImage();
 	}
 
+	/**
+	 * Default constructor.
+	 */
 	public SCMLabelProvider() {
 		this(null);
 	}

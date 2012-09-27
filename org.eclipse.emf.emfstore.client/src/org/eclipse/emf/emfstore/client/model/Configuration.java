@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
@@ -170,22 +169,6 @@ public final class Configuration {
 	 */
 	public static int getXMLRPCReplyTimeout() {
 		return xmlRPCReplyTimeout;
-	}
-
-	/**
-	 * Get the default resource save options.
-	 * 
-	 * @return the resource save options
-	 */
-	public static Map<Object, Object> getResourceSaveOptions() {
-		// MK: the options below should only be used with resourcemodification
-		// tracking enabled
-		// if (resourceSaveOptions == null) {
-		// resourceSaveOptions = new HashMap<Object, Object>();
-		// resourceSaveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-		// Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-		// }
-		return null;
 	}
 
 	/**

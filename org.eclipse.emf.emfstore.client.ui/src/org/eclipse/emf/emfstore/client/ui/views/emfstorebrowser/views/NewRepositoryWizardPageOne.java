@@ -144,6 +144,11 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 				aliases[i] = certificates.get(i);
 			}
 			cert.setItems(aliases);
+
+			NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
+			ServerInfo serverInfo = wizard.getServerInfo();
+			String selectedCertificate = serverInfo.getCertificateAlias();
+			cert.select(certificates.indexOf(selectedCertificate));
 		} catch (CertificateStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}

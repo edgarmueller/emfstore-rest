@@ -22,6 +22,8 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -96,6 +98,11 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
+
+		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.History.getExtension())) {
+			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.History.getExtension());
+		}
+
 		saveProjectHistory(projectHistory, file.getAbsolutePath());
 	}
 
@@ -103,7 +110,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(projectHistory);
-		resource.save(null);
+		resource.save(ModelUtil.getResourceSaveOptions());
 	}
 
 	/**

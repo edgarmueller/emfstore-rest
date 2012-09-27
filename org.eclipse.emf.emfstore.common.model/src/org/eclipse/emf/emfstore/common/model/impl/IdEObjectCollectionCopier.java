@@ -52,6 +52,10 @@ public class IdEObjectCollectionCopier extends Copier {
 			return copiedProject;
 		}
 
+		if (eObject.eContainingFeature() != null && eObject.eContainingFeature().isTransient()) {
+			return copiedEObject;
+		}
+
 		ModelElementId eObjectId = orgProject.getModelElementId(eObject);
 		eObjectToIdMap.put(copiedEObject, eObjectId.getId());
 		idToEObjectMap.put(eObjectId.getId(), copiedEObject);

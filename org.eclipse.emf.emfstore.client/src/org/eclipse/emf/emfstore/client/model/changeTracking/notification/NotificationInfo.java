@@ -194,6 +194,16 @@ public class NotificationInfo implements Notification {
 				return false;
 			}
 
+			Object feature = nextNotification.getFeature();
+
+			if (feature instanceof EReference) {
+				EReference eReference = (EReference) feature;
+
+				if (eReference.isTransient()) {
+					return false;
+				}
+			}
+
 			// notifications from project are never propagated, thus considered nonexistent
 			// however, they themselves might have followups
 			if (nextNotification.getNotifier() instanceof Project) {

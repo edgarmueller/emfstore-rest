@@ -74,9 +74,9 @@ public class EObjectSerializer extends TypeSerializerImpl {
 				XMIResource resource = (XMIResource) eObject.eResource();
 
 				if ((eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) && resource != null) {
-					OutputStreamWriter writer = new OutputStreamWriter(bos);
+					OutputStreamWriter writer = new OutputStreamWriter(bos, CommonUtil.getEncoding());
+					uws = new URIConverter.WriteableOutputStream(writer, CommonUtil.getEncoding());
 					Resource res = eObject.eResource();
-					uws = new URIConverter.WriteableOutputStream(writer, "UTF-8");
 					checkResource(res);
 					res.save(uws, ModelUtil.getResourceSaveOptions());
 				} else {
@@ -102,15 +102,14 @@ public class EObjectSerializer extends TypeSerializerImpl {
 					}
 
 					resource.getContents().add(copy);
-					StringWriter stringWriter = new StringWriter();
-					uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
+					StringWriter writer = new StringWriter();
+					uws = new URIConverter.WriteableOutputStream(writer, CommonUtil.getEncoding());
 					// save string into Stringwriter
 					checkResource(resource);
 					resource.save(uws, ModelUtil.getResourceSaveOptions());
-					// get string from string writer and write to bos
-					String string = stringWriter.toString();
+					String string = writer.toString();
 					hrefCheck(string);
-					bos.write(string.getBytes());
+					bos.write(string.getBytes(CommonUtil.getEncoding()));
 				}
 			} catch (SerializationException e) {
 				throw new SAXException(e);

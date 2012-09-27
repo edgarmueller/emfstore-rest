@@ -106,7 +106,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		boolean resourceHasIds = false;
 		try {
 			if (!xmiResource.isLoaded()) {
-				xmiResource.load(null);
+				xmiResource.load(ModelUtil.getResourceLoadOptions());
 			}
 		} catch (IOException e) {
 			ModelUtil.logException(String.format("XMIResource %s could not be loaded.", xmiResource.getURI()), e);
@@ -142,7 +142,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 		if (!resourceHasIds) {
 			// save, in order to write IDs back into resource
-			xmiResource.save(null);
+			xmiResource.save(ModelUtil.getResourceSaveOptions());
 		}
 	}
 
@@ -244,7 +244,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 				}
 
 				XMIResource xmiResource = (XMIResource) resource;
-				xmiResource.load(null);
+				xmiResource.load(ModelUtil.getResourceLoadOptions());
 				ModelElementId modelElementId = getNewModelElementID();
 				String id = xmiResource.getID(eObject);
 
@@ -363,7 +363,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		xmiResource.setID(eObject, null);
 
 		try {
-			xmiResource.save(null);
+			xmiResource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			throw new RuntimeException("XMI Resource for model element " + eObject + " could not be saved. "
 				+ "Reason: " + e.getMessage());
@@ -387,7 +387,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			XMIResource xmiResource = (XMIResource) resource;
 			try {
 
-				xmiResource.load(null);
+				xmiResource.load(ModelUtil.getResourceLoadOptions());
 			} catch (IOException e) {
 				throw new RuntimeException("Resource of model element " + modelElement + " couldn't be loaded");
 			}

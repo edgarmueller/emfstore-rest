@@ -10,16 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
-
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.emf.emfstore.client.model.Activator;
-import org.osgi.framework.Bundle;
 
 /**
  * Key-Value-Store for conflict descriptions.
@@ -52,22 +47,24 @@ public class DescriptionProvider {
 
 	private Properties load() {
 		Properties properties = new Properties();
-		Bundle bundle = Activator.getDefault().getBundle();
-		URL fileURL = bundle.getEntry("resources/conflictdescription.ini");
-		FileInputStream fileInputStream = null;
+		URL url;
+		InputStream inputStream = null;
 
 		try {
-			fileInputStream = new FileInputStream(new File(FileLocator.resolve(fileURL).toURI()));
-			properties.load(fileInputStream);
-		} catch (URISyntaxException e1) {
+			url = new URL("platform:/plugin/org.eclipse.emf.emfstore.client/resources/conflictdescription.ini");
+			inputStream = url.openConnection().getInputStream();
+			properties.load(inputStream);
+		} catch (MalformedURLException e2) {
 			// ignore
-		} catch (IOException e1) {
+		} catch (IOException e) {
 			// ignore
 		} finally {
-			try {
-				fileInputStream.close();
-			} catch (IOException e) {
-				// ignore
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					// ignore
+				}
 			}
 		}
 

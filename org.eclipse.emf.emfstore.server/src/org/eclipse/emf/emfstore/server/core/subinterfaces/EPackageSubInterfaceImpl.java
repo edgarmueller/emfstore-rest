@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.DanglingHREFException;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
@@ -63,6 +64,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param ePackage the package
 	 * @throws EmfStoreException if registration storage fails
+	 * 
 	 */
 	@EmfStoreMethod(MethodId.REGISTEREPACKAGE)
 	public void registerEPackage(EPackage ePackage) throws EmfStoreException {
@@ -92,7 +94,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// Save the EPackages to disc as an ".ecore"-file
 			String uriFileName = null;
 			try {
-				uriFileName = URLEncoder.encode(ePackage.getNsURI(), "UTF-8");
+				uriFileName = URLEncoder.encode(ePackage.getNsURI(), CommonUtil.getEncoding());
 			} catch (UnsupportedEncodingException e1) {
 				throw new EmfStoreException("Registration failed: Could not convert NsUri to filename!");
 			}
@@ -106,7 +108,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Resource resource = resourceSet.createResource(fileUri);
 			resource.getContents().add(ePackage);
 			try {
-				resource.save(null);
+				resource.save(ModelUtil.getResourceSaveOptions());
 			} catch (IOException e) {
 				if (e.getCause() instanceof DanglingHREFException) {
 					// Ignore, as the referenced elements were either stored earlier or can still be

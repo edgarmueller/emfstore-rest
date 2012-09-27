@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -43,8 +44,9 @@ public class EObjectTypeParser extends ByteArrayParser {
 		try {
 			byte[] res = (byte[]) super.getResult();
 			ByteArrayInputStream bais = new ByteArrayInputStream(res);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(bais));
-			URIConverter.ReadableInputStream ris = new URIConverter.ReadableInputStream(reader, "UTF-8");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(bais, CommonUtil.getEncoding()));
+			URIConverter.ReadableInputStream ris = new URIConverter.ReadableInputStream(reader,
+				CommonUtil.getEncoding());
 			try {
 				XMIResource resource = (XMIResource) (new ResourceSetImpl()).createResource(ModelUtil.VIRTUAL_URI);
 				((ResourceImpl) resource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
