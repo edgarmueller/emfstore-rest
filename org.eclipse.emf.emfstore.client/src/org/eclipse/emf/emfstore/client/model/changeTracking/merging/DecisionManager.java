@@ -24,8 +24,11 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -174,38 +177,91 @@ public class DecisionManager {
 
 		// Collect all conflicting
 		ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
+		long iterations = 0;
+		double seconds = 0;
+
+		Map<AbstractOperation, Conflicting> opToConflict = new HashMap<AbstractOperation, Conflicting>();
+
 		while (myIterator.hasPrevious()) {
+
 			AbstractOperation myOperation = myIterator.previous();
 			boolean involved = false;
 			ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
+
 			while (theirIterator.hasPrevious()) {
+				long then = System.currentTimeMillis();
+				iterations++;
 				AbstractOperation theirOperation = theirIterator.previous();
+
 				if (conflictDetector.doConflict(myOperation, theirOperation)) {
 					involved = true;
-					boolean conflictingYet = false;
-					List<Conflicting> tmpConf = new ArrayList<Conflicting>();
-					// check against conflicting
-					for (Conflicting conf : conflicting) {
-						if (conf.add(myOperation, theirOperation)) {
-							tmpConf.add(conf);
-							conflictingYet = true;
+					Conflicting myConflicting = opToConflict.get(myOperation);
+					Conflicting theirConflicting = opToConflict.get(theirOperation);
+
+					if (myConflicting == null && theirConflicting == null) {
+						Conflicting newConflicting = new Conflicting(myOperation, theirOperation);
+						opToConflict.put(myOperation, newConflicting);
+						opToConflict.put(theirOperation, newConflicting);
+						conflicting.add(newConflicting);
+					} else if (myConflicting != null && theirConflicting == null) {
+						myConflicting.theirOps.add(theirOperation);
+						opToConflict.put(theirOperation, myConflicting);
+					} else if (myConflicting == null && theirConflicting != null) {
+						theirConflicting.myOps.add(myOperation);
+						opToConflict.put(myOperation, theirConflicting);
+					} else {
+
+						myConflicting.myOps.addAll(theirConflicting.myOps);
+						for (AbstractOperation op : theirConflicting.myOps) {
+							opToConflict.put(op, myConflicting);
 						}
-					}
-					// merge conflicting
-					if (tmpConf.size() > 1) {
-						Conflicting main = tmpConf.get(0);
-						for (int i = 1; i < tmpConf.size(); i++) {
-							Conflicting conf = tmpConf.get(i);
-							main.addMyOps(conf.getMyOperations());
-							main.addTheirOps(conf.getTheirOperations());
-							conflicting.remove(conf);
+
+						myConflicting.theirOps.addAll(theirConflicting.theirOps);
+						for (AbstractOperation op : theirConflicting.theirOps) {
+							opToConflict.put(op, theirConflicting);
 						}
+
+						conflicting.remove(theirConflicting);
+
+						// opToConflict.
+						// conflicting.
+
 					}
-					if (!conflictingYet) {
-						conflicting.add(new Conflicting(myOperation, theirOperation));
-					}
+					// involved = true;
+					// boolean conflictingYet = false;
+					// List<Conflicting> tmpConf = new ArrayList<Conflicting>();
+					// // check against conflicting
+					// for (Conflicting conf : conflicting) {
+					// if (conf.add(myOperation, theirOperation)) {
+					// tmpConf.add(conf);
+					// conflictingYet = true;
+					// }
+					// }
+					// // merge conflicting
+					// if (tmpConf.size() > 1) {
+					// Conflicting main = tmpConf.get(0);
+					// for (int i = 1; i < tmpConf.size(); i++) {
+					// Conflicting conf = tmpConf.get(i);
+					// main.addMyOps(conf.getMyOperations());
+					// main.addTheirOps(conf.getTheirOperations());
+					// conflicting.remove(conf);
+					// }
+					// }
+					// if (!conflictingYet) {
+					// conflicting.add(new Conflicting(myOperation, theirOperation));
+					// }
+				}
+				long now = System.currentTimeMillis();
+				seconds += (now - then);
+				// if (now - then > 10000) {
+				// System.out.println("FOUND long lasting conflict detection: myOperation is " + myOperation
+				// + ", theirOperation is " + theirOperation + ", took " + (now - then) / 1000 + "seconds");
+				// }
+				if (iterations % 10000 == 0) {
+					System.out.println("Iterations: " + iterations + "\n");
 				}
 			}
+
 			if (!involved) {
 				notInvolvedInConflict.add(myOperation);
 			}
@@ -794,8 +850,10 @@ public class DecisionManager {
 	 */
 	public class Conflicting {
 
-		private ArrayList<AbstractOperation> myOps;
-		private ArrayList<AbstractOperation> theirOps;
+		private Set<AbstractOperation> myOps;
+		private Set<AbstractOperation> theirOps;
+		private AbstractOperation myOp;
+		private AbstractOperation theirOp;
 
 		/**
 		 * Default constructor.
@@ -806,9 +864,11 @@ public class DecisionManager {
 		 *            their operations.
 		 */
 		public Conflicting(AbstractOperation myOp, AbstractOperation theirOp) {
-			myOps = new ArrayList<AbstractOperation>();
+			this.myOp = myOp;
+			this.theirOp = theirOp;
+			myOps = new HashSet<AbstractOperation>();
 			myOps.add(myOp);
-			theirOps = new ArrayList<AbstractOperation>();
+			theirOps = new HashSet<AbstractOperation>();
 			theirOps.add(theirOp);
 		}
 
@@ -818,7 +878,7 @@ public class DecisionManager {
 		 * @return op
 		 */
 		public AbstractOperation getTheirOperation() {
-			return theirOps.get(0);
+			return theirOp;
 		}
 
 		/**
@@ -827,7 +887,7 @@ public class DecisionManager {
 		 * @return op
 		 */
 		public AbstractOperation getMyOperation() {
-			return myOps.get(0);
+			return myOp;
 		}
 
 		/**
@@ -836,7 +896,7 @@ public class DecisionManager {
 		 * @return ops
 		 */
 		public List<AbstractOperation> getTheirOperations() {
-			return theirOps;
+			return new ArrayList<AbstractOperation>(theirOps);
 		}
 
 		/**
@@ -845,7 +905,7 @@ public class DecisionManager {
 		 * @return ops
 		 */
 		public List<AbstractOperation> getMyOperations() {
-			return myOps;
+			return new ArrayList<AbstractOperation>(myOps);
 		}
 
 		/**
