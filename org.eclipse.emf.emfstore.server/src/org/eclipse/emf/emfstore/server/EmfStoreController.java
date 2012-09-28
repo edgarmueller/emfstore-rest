@@ -46,13 +46,19 @@ import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcConnectionHandler
 import org.eclipse.emf.emfstore.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
+import org.eclipse.emf.emfstore.server.core.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.startup.EmfStoreValidator;
 import org.eclipse.emf.emfstore.server.startup.ExtensionManager;
 import org.eclipse.emf.emfstore.server.startup.MigrationManager;
@@ -127,6 +133,8 @@ public class EmfStoreController implements IApplication, Runnable {
 		new MigrationManager().migrateModel();
 		this.serverSpace = initServerSpace();
 
+		initializeBranchesIfRequired(serverSpace);
+
 		handleStartupListener();
 
 		accessControl = initAccessControl(serverSpace);
@@ -153,6 +161,22 @@ public class EmfStoreController implements IApplication, Runnable {
 			waitForTermination();
 		}
 
+	}
+
+	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalEmfStoreException {
+		for (ProjectHistory project : serverSpace.getProjects()) {
+			if (project.getBranches().size() == 0) {
+				// create branch information
+				BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
+				branchInfo.setName(VersionSpec.BRANCH_DEFAULT_NAME);
+
+				branchInfo.setHead(ModelUtil.clone(project.getLastVersion().getPrimarySpec()));
+				// set branch source to 0 since no branches can have existed
+				branchInfo.setSource(ModelUtil.clone(Versions.createPRIMARY(VersionSpec.BRANCH_DEFAULT_NAME, 0)));
+				project.getBranches().add(branchInfo);
+				new ResourceHelper(serverSpace).save(project);
+			}
+		}
 	}
 
 	// loads the ".ecore"-files from the dynamic-models-folder
