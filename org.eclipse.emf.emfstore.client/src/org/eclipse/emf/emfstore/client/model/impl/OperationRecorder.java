@@ -217,46 +217,60 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (this.getModelElementsFromClipboard().contains(modelElement)) {
 			return;
 		}
+		if (!isRecording) {
+			return;
+		}
 
-		if (isRecording) {
-			// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
-			stopChangeRecording();
-			WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
-			startChangeRecording();
+		checkCommandConstraints(modelElement);
 
-			Set<EObject> allModelElements = new HashSet<EObject>();
-			allModelElements.add(modelElement);
-			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+		// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
+		stopChangeRecording();
+		WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
+		startChangeRecording();
 
-			// collect in- and out-going cross-reference for containment tree of modelElement
-			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
-				allModelElements);
+		Set<EObject> allModelElements = new HashSet<EObject>();
+		allModelElements.add(modelElement);
+		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
-			List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
-				allModelElements);
-			crossReferences.addAll(ingoingCrossReferences);
+		// collect in- and out-going cross-reference for containment tree of modelElement
+		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+			allModelElements);
 
-			// TODO: check if all cross-references are cut on copy
+		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+			allModelElements);
+		crossReferences.addAll(ingoingCrossReferences);
+
+		// collect recorded operations and add to create operation
+		List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
+
+		List<AbstractOperation> resultingOperations;
+
+		// check if create element has been deleted during running command, if so do not record a create operation
+		if (commandIsRunning && removedElements.contains(modelElement)) {
+			resultingOperations = new ArrayList<AbstractOperation>(recordedOperations);
+		} else {
 			CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
-
-			// collect recorded operations and add to create operation
-			List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
-
 			createDeleteOperation.getSubOperations().addAll(recordedOperations);
+			resultingOperations = new ArrayList<AbstractOperation>();
+			resultingOperations.add(createDeleteOperation);
+		}
+		if (this.compositeOperation != null) {
+			compositeOperation.getSubOperations().addAll(resultingOperations);
+			return;
+		}
 
-			if (this.compositeOperation != null) {
-				compositeOperation.getSubOperations().add(createDeleteOperation);
-			} else {
-				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
-					operations.add(createDeleteOperation);
-				} else if (!commandIsRunning && forceCommands) {
-					WorkspaceUtil.handleException("An element has been added without using a command!",
-						new MissingCommandException("Element " + modelElement
-							+ " has been added without using a command"));
-				} else {
-					operationRecorded(createDeleteOperation);
-				}
-			}
+		if (commandIsRunning && emitOperationsWhenCommandCompleted) {
+			operations.addAll(resultingOperations);
+		} else {
+			operationsRecorded(resultingOperations);
+		}
+
+	}
+
+	private void checkCommandConstraints(EObject modelElement) {
+		if (!commandIsRunning && forceCommands) {
+			WorkspaceUtil.handleException("An element has been changed without using a command!",
+				new MissingCommandException("Element " + modelElement + " has been changed without using a command"));
 		}
 	}
 
@@ -711,10 +725,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		} else {
 			if (commandIsRunning) {
 				operations.add(deleteOperation);
-			} else if (!commandIsRunning && forceCommands) {
-				WorkspaceUtil.handleException("An element has been deleted without using a command!",
-					new MissingCommandException("Element " + deletedElement
-						+ " has been deleted without using a command"));
 			} else {
 				operationRecorded(deleteOperation);
 			}
@@ -914,15 +924,15 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		if (isRecording) {
-			notificationRecorder.record(notification);
+		if (!isRecording) {
+			return;
 		}
 
-		if (notificationRecorder.isRecordingComplete()) {
+		checkCommandConstraints(modelElement);
 
-			if (!isRecording) {
-				return;
-			}
+		notificationRecorder.record(notification);
+
+		if (notificationRecorder.isRecordingComplete()) {
 
 			List<AbstractOperation> ops = recordingFinished();
 
@@ -943,10 +953,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 					operations.add(op);
-				} else if (!commandIsRunning && forceCommands) {
-					WorkspaceUtil.handleException("CompositeOperation has been recorded without using a command!",
-						new MissingCommandException("CompositeOperation" + op.getModelElementId()
-							+ " has been recorded without using a command"));
 				} else {
 					operationRecorded(op);
 				}
