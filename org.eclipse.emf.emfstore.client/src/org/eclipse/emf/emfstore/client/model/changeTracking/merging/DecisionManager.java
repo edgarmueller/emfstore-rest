@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -173,26 +172,69 @@ public class DecisionManager {
 		notInvolvedInConflict = new ArrayList<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
-		Set<Conflicting> conflictingsSet = new HashSet<Conflicting>();
+		Set<Conflicting> conflictingsCandidateSet = new HashSet<Conflicting>();
 
 		// TODO: use a union-find data structure here (constant time union and find)
 		// TODO: could also be done on a per feature base (deletes are difficult then!)
 		Map<String, Conflicting> idToConflictingMap = new HashMap<String, DecisionManager.Conflicting>();
 
-		ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
-		while (myIterator.hasPrevious()) {
-			AbstractOperation myOperation = myIterator.previous();
-			scanOperationIntoConflicting(conflictingsSet, idToConflictingMap, myOperation, true);
+		for (AbstractOperation myOperation : myOperations) {
+			scanOperationIntoConflicting(conflictingsCandidateSet, idToConflictingMap, myOperation, true);
 		}
 
-		ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
-		while (theirIterator.hasPrevious()) {
-			AbstractOperation theirOperation = theirIterator.previous();
-			scanOperationIntoConflicting(conflictingsSet, idToConflictingMap, theirOperation, false);
+		for (AbstractOperation theirOperation : theirOperations) {
+			scanOperationIntoConflicting(conflictingsCandidateSet, idToConflictingMap, theirOperation, false);
 		}
 
-		for (Conflicting conflicting : conflictingsSet) {
-			// now do each op against each op in the conflicting only
+		Set<Conflicting> conflictingsSet = new HashSet<Conflicting>();
+		for (Conflicting conflicting : conflictingsCandidateSet) {
+
+			long iterations = 0;
+			double seconds = 0;
+
+			Map<AbstractOperation, Conflicting> opToConflict = new HashMap<AbstractOperation, Conflicting>();
+
+			for (AbstractOperation myOperation : conflicting.myOps) {
+
+				boolean involved = false;
+
+				for (AbstractOperation theirOperation : conflicting.theirOps) {
+
+					long then = System.currentTimeMillis();
+					iterations++;
+
+					if (conflictDetector.doConflict(myOperation, theirOperation)) {
+						involved = true;
+						Conflicting myConflicting = opToConflict.get(myOperation);
+						Conflicting theirConflicting = opToConflict.get(theirOperation);
+
+						if (myConflicting == null && theirConflicting == null) {
+							Conflicting newConflicting = new Conflicting(myOperation, theirOperation);
+							opToConflict.put(myOperation, newConflicting);
+							opToConflict.put(theirOperation, newConflicting);
+							conflictingsSet.add(newConflicting);
+						} else if (myConflicting != null && theirConflicting == null) {
+							myConflicting.theirOps.add(theirOperation);
+							opToConflict.put(theirOperation, myConflicting);
+						} else if (myConflicting == null && theirConflicting != null) {
+							theirConflicting.myOps.add(myOperation);
+							opToConflict.put(myOperation, theirConflicting);
+						} else {
+							myConflicting.myOps.addAll(theirConflicting.myOps);
+							for (AbstractOperation op : theirConflicting.myOps) {
+								opToConflict.put(op, myConflicting);
+							}
+							myConflicting.theirOps.addAll(theirConflicting.theirOps);
+							for (AbstractOperation op : theirConflicting.theirOps) {
+								opToConflict.put(op, theirConflicting);
+							}
+
+							conflictingsSet.remove(theirConflicting);
+						}
+					}
+
+				}
+			}
 		}
 
 		// // Collect all conflicting
@@ -234,7 +276,7 @@ public class DecisionManager {
 		// }
 		// }
 
-		createConflicts(new ArrayList<DecisionManager.Conflicting>(conflicting));
+		createConflicts(new ArrayList<DecisionManager.Conflicting>(conflictingsSet));
 	}
 
 	private void scanOperationIntoConflicting(Set<Conflicting> conflictingsSet,
@@ -884,7 +926,6 @@ public class DecisionManager {
 	 * @author wesendon
 	 */
 	public class Conflicting {
-
 		private Set<String> involvedIds;
 		private Set<AbstractOperation> myOps;
 		private Set<AbstractOperation> theirOps;
@@ -932,6 +973,15 @@ public class DecisionManager {
 			}
 		}
 
+		public Conflicting(AbstractOperation myOp, AbstractOperation theirOp) {
+			this.myOp = myOp;
+			this.theirOp = theirOp;
+			myOps = new HashSet<AbstractOperation>();
+			myOps.add(myOp);
+			theirOps = new HashSet<AbstractOperation>();
+			theirOps.add(theirOp);
+		}
+
 		/**
 		 * Returns first of their operations.
 		 * 
@@ -967,48 +1017,6 @@ public class DecisionManager {
 		public List<AbstractOperation> getMyOperations() {
 			return new ArrayList<AbstractOperation>(myOps);
 		}
-
-		// /**
-		// * Adds a pair of conflicting operations to this bucket.
-		// *
-		// * @param myOp
-		// * my op
-		// * @param theirOp
-		// * their op
-		// * @return true, when it was added
-		// */
-		// public boolean add(AbstractOperation myOp, AbstractOperation theirOp) {
-		// for (AbstractOperation ao : getTheirOperations()) {
-		// if (conflictDetector.doConflict(myOp, ao)) {
-		// addToList(myOp, theirOp);
-		// return true;
-		// }
-		// }
-		// for (AbstractOperation ao : getMyOperations()) {
-		// if (conflictDetector.doConflict(ao, theirOp)) {
-		// addToList(myOp, theirOp);
-		// return true;
-		// }
-		// }
-		// return false;
-		// }
-		//
-		// private void addToList(AbstractOperation my, AbstractOperation their) {
-		// addMyOp(my);
-		// addTheirOp(their);
-		// }
-		//
-		// private void addMyOp(AbstractOperation my) {
-		// if (!myOps.contains(my)) {
-		// myOps.add(my);
-		// }
-		// }
-		//
-		// private void addTheirOp(AbstractOperation their) {
-		// if (!theirOps.contains(their)) {
-		// theirOps.add(their);
-		// }
-		// }
 
 	}
 }
