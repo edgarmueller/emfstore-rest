@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationsCanonizer;
 
 /**
@@ -499,6 +500,32 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			}
 		}
 		return result;
+	}
+
+	public int getSize() {
+		int ret = 0;
+		for (AbstractOperation operation : getOperations()) {
+			if (operation instanceof CompositeOperation) {
+				ret = ret + getSize((CompositeOperation) operation);
+			} else {
+				ret++;
+			}
+		}
+		return ret;
+	}
+
+	private int getSize(CompositeOperation compositeOperation) {
+		int ret = 0;
+		EList<AbstractOperation> subOperations = compositeOperation
+				.getSubOperations();
+		for (AbstractOperation abstractOperation : subOperations) {
+			if (abstractOperation instanceof CompositeOperation) {
+				ret = ret + getSize((CompositeOperation) abstractOperation);
+			} else {
+				ret++;
+			}
+		}
+		return ret;
 	}
 
 } // ChangePackageImpl

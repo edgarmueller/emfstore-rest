@@ -193,4 +193,12 @@ public interface ChangePackage extends EObject {
 	 */
 	List<AbstractOperation> getTouchingOperations(ModelElementId modelElementId);
 
+	/**
+	 * Counts the number of Leaf Operations within this change package. The
+	 * method will recursivly go thru all composite operations
+	 * 
+	 * @return the number of Leaf Operations
+	 */
+	int getSize();
+
 } // ChangePackage
