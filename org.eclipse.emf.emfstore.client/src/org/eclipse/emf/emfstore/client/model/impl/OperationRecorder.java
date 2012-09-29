@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -109,6 +110,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private OperationModificator modificator;
 
+	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
+
 	/**
 	 * Constructor.
 	 * 
@@ -125,6 +128,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
 		removedElements = new ArrayList<EObject>();
+		removedElementsToReferenceSettings = new HashMap<EObject, List<SettingWithReferencedElement>>();
 
 		editingDomain = Configuration.getEditingDomain();
 
@@ -232,10 +236,30 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		allModelElements.add(modelElement);
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
-		// collect in- and out-going cross-reference for containment tree of modelElement
+		// collect out-going cross-reference for containment tree of modelElement
 		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
 			allModelElements);
 
+		// clean up already existing references when collection already contained the object
+		if (removedElements.contains(modelElement)) {
+			List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
+			if (savedSettings != null) {
+				List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
+				for (SettingWithReferencedElement setting : savedSettings) {
+					for (SettingWithReferencedElement newSetting : crossReferences) {
+						if (setting.getSetting().getEStructuralFeature()
+							.equals(newSetting.getSetting().getEStructuralFeature())
+							&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
+							toRemove.add(newSetting);
+						}
+					}
+				}
+
+				crossReferences.removeAll(toRemove);
+			}
+		}
+
+		// collect in-going cross-reference for containment tree of modelElement
 		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
 			allModelElements);
 		crossReferences.addAll(ingoingCrossReferences);
@@ -264,7 +288,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		} else {
 			operationsRecorded(resultingOperations);
 		}
-
 	}
 
 	private void checkCommandConstraints(EObject modelElement) {
@@ -489,6 +512,12 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public void modelElementRemoved(IdEObjectCollection project, EObject modelElement) {
 		if (isRecording) {
 			removedElements.add(modelElement);
+
+			Set<EObject> allModelElements = new HashSet<EObject>();
+			allModelElements.add(modelElement);
+			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+			removedElementsToReferenceSettings.put(modelElement,
+				ModelUtil.collectOutgoingCrossReferences(collection, allModelElements));
 		}
 	}
 
