@@ -24,8 +24,11 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -170,48 +173,136 @@ public class DecisionManager {
 		notInvolvedInConflict = new ArrayList<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
-		ArrayList<Conflicting> conflicting = new ArrayList<Conflicting>();
+		Set<Conflicting> conflictingsSet = new HashSet<Conflicting>();
 
-		// Collect all conflicting
+		// TODO: use a union-find data structure here (constant time union and find)
+		// TODO: could also be done on a per feature base (deletes are difficult then!)
+		Map<String, Conflicting> idToConflictingMap = new HashMap<String, DecisionManager.Conflicting>();
+
 		ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
 		while (myIterator.hasPrevious()) {
 			AbstractOperation myOperation = myIterator.previous();
-			boolean involved = false;
-			ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
-			while (theirIterator.hasPrevious()) {
-				AbstractOperation theirOperation = theirIterator.previous();
-				if (conflictDetector.doConflict(myOperation, theirOperation)) {
-					involved = true;
-					boolean conflictingYet = false;
-					List<Conflicting> tmpConf = new ArrayList<Conflicting>();
-					// check against conflicting
-					for (Conflicting conf : conflicting) {
-						if (conf.add(myOperation, theirOperation)) {
-							tmpConf.add(conf);
-							conflictingYet = true;
-						}
-					}
-					// merge conflicting
-					if (tmpConf.size() > 1) {
-						Conflicting main = tmpConf.get(0);
-						for (int i = 1; i < tmpConf.size(); i++) {
-							Conflicting conf = tmpConf.get(i);
-							main.addMyOps(conf.getMyOperations());
-							main.addTheirOps(conf.getTheirOperations());
-							conflicting.remove(conf);
-						}
-					}
-					if (!conflictingYet) {
-						conflicting.add(new Conflicting(myOperation, theirOperation));
-					}
-				}
-			}
-			if (!involved) {
-				notInvolvedInConflict.add(myOperation);
-			}
+			scanOperationIntoConflicting(conflictingsSet, idToConflictingMap, myOperation, true);
 		}
 
-		createConflicts(conflicting);
+		ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
+		while (theirIterator.hasPrevious()) {
+			AbstractOperation theirOperation = theirIterator.previous();
+			scanOperationIntoConflicting(conflictingsSet, idToConflictingMap, theirOperation, false);
+		}
+
+		for (Conflicting conflicting : conflictingsSet) {
+			// now do each op against each op in the conflicting only
+		}
+
+		// // Collect all conflicting
+		// ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
+		// while (myIterator.hasPrevious()) {
+		// AbstractOperation myOperation = myIterator.previous();
+		// boolean involved = false;
+		// ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
+		// while (theirIterator.hasPrevious()) {
+		// AbstractOperation theirOperation = theirIterator.previous();
+		// if (conflictDetector.doConflict(myOperation, theirOperation)) {
+		// involved = true;
+		// boolean conflictingYet = false;
+		// List<Conflicting> tmpConf = new ArrayList<Conflicting>();
+		// // check against conflicting
+		// for (Conflicting conf : conflicting) {
+		// if (conf.add(myOperation, theirOperation)) {
+		// tmpConf.add(conf);
+		// conflictingYet = true;
+		// }
+		// }
+		// // merge conflicting
+		// if (tmpConf.size() > 1) {
+		// Conflicting main = tmpConf.get(0);
+		// for (int i = 1; i < tmpConf.size(); i++) {
+		// Conflicting conf = tmpConf.get(i);
+		// main.addMyOps(conf.getMyOperations());
+		// main.addTheirOps(conf.getTheirOperations());
+		// conflicting.remove(conf);
+		// }
+		// }
+		// if (!conflictingYet) {
+		// conflicting.add(new Conflicting(myOperation, theirOperation));
+		// }
+		// }
+		// }
+		// if (!involved) {
+		// notInvolvedInConflict.add(myOperation);
+		// }
+		// }
+
+		createConflicts(new ArrayList<DecisionManager.Conflicting>(conflicting));
+	}
+
+	private void scanOperationIntoConflicting(Set<Conflicting> conflictingsSet,
+		Map<String, Conflicting> idToConflictingMap, AbstractOperation operation, boolean isMyOperation) {
+		Set<String> allInvolvedModelElements = extractStringSetFromIds(operation.getAllInvolvedModelElements());
+		Conflicting currentOperationsConflicting = null;
+		for (String modelElementId : allInvolvedModelElements) {
+			Conflicting conflicting = idToConflictingMap.get(modelElementId.toString());
+
+			if (conflicting == null && currentOperationsConflicting == null) {
+				// no existing conflicting for id or current op => create new conflicting
+				currentOperationsConflicting = new Conflicting();
+				conflictingsSet.add(currentOperationsConflicting);
+				currentOperationsConflicting.addOp(operation, modelElementId, isMyOperation);
+				idToConflictingMap.put(modelElementId, currentOperationsConflicting);
+
+			} else if (conflicting == null && currentOperationsConflicting != null) {
+				// no existing conflicting for id but existing conflicting for operation => keep operations
+				// conflicting
+				idToConflictingMap.put(modelElementId, currentOperationsConflicting);
+				currentOperationsConflicting.involvedIds.add(modelElementId);
+
+			} else if (conflicting != null && currentOperationsConflicting == null) {
+				// existing conflicting for id but none for operation => keep id conflicting
+				currentOperationsConflicting = conflicting;
+				currentOperationsConflicting.addOp(operation, modelElementId, isMyOperation);
+
+			} else {
+				// existing conflicting for both id and operation => merge conflictings based on size
+				currentOperationsConflicting = mergeConflictings(conflictingsSet, idToConflictingMap,
+					currentOperationsConflicting, conflicting);
+				currentOperationsConflicting.involvedIds.add(modelElementId);
+			}
+		}
+	}
+
+	private Conflicting mergeConflictings(Set<Conflicting> conflictingsSet,
+		Map<String, Conflicting> idToConflictingMap, Conflicting currentOperationsConflicting, Conflicting conflicting) {
+		if (conflicting.size() > currentOperationsConflicting.size()) {
+			conflicting.myOps.addAll(currentOperationsConflicting.myOps);
+			conflicting.theirOps.addAll(currentOperationsConflicting.theirOps);
+			conflicting.involvedIds.addAll(currentOperationsConflicting.involvedIds);
+			for (String id : currentOperationsConflicting.involvedIds) {
+				idToConflictingMap.put(id, conflicting);
+			}
+			conflictingsSet.remove(currentOperationsConflicting);
+			currentOperationsConflicting = conflicting;
+		} else {
+			currentOperationsConflicting.myOps.addAll(conflicting.myOps);
+			currentOperationsConflicting.theirOps.addAll(conflicting.theirOps);
+			currentOperationsConflicting.involvedIds.addAll(conflicting.involvedIds);
+			currentOperationsConflicting.myOp = conflicting.myOp;
+			currentOperationsConflicting.theirOp = conflicting.theirOp;
+			for (String id : conflicting.involvedIds) {
+				idToConflictingMap.put(id, currentOperationsConflicting);
+			}
+			conflictingsSet.remove(conflicting);
+			conflicting = currentOperationsConflicting;
+		}
+		return currentOperationsConflicting;
+	}
+
+	private Set<String> extractStringSetFromIds(Set<ModelElementId> allInvolvedModelElements) {
+		Set<String> result = new HashSet<String>(allInvolvedModelElements.size());
+		for (ModelElementId modelElementId : allInvolvedModelElements) {
+			result.add(modelElementId.getId());
+		}
+		return result;
 	}
 
 	private List<AbstractOperation> flattenChangepackages(List<ChangePackage> cps) {
@@ -794,8 +885,11 @@ public class DecisionManager {
 	 */
 	public class Conflicting {
 
-		private ArrayList<AbstractOperation> myOps;
-		private ArrayList<AbstractOperation> theirOps;
+		private Set<String> involvedIds;
+		private Set<AbstractOperation> myOps;
+		private Set<AbstractOperation> theirOps;
+		private AbstractOperation myOp;
+		private AbstractOperation theirOp;
 
 		/**
 		 * Default constructor.
@@ -805,11 +899,37 @@ public class DecisionManager {
 		 * @param theirOp
 		 *            their operations.
 		 */
-		public Conflicting(AbstractOperation myOp, AbstractOperation theirOp) {
-			myOps = new ArrayList<AbstractOperation>();
-			myOps.add(myOp);
-			theirOps = new ArrayList<AbstractOperation>();
-			theirOps.add(theirOp);
+		public Conflicting() {
+			involvedIds = new HashSet<String>();
+			myOps = new HashSet<AbstractOperation>();
+			theirOps = new HashSet<AbstractOperation>();
+		}
+
+		public boolean isEmpty() {
+			return myOp == null || theirOp == null;
+		}
+
+		public int size() {
+			return theirOps.size() + myOps.size();
+		}
+
+		public void addOp(AbstractOperation operation, String id, boolean isMyOperation) {
+			if (operation == null) {
+				return;
+			}
+			involvedIds.add(id);
+
+			if (isMyOperation) {
+				if (myOp == null) {
+					myOp = operation;
+				}
+				myOps.add(operation);
+			} else {
+				if (theirOp == null) {
+					theirOp = operation;
+				}
+				theirOps.add(operation);
+			}
 		}
 
 		/**
@@ -818,7 +938,7 @@ public class DecisionManager {
 		 * @return op
 		 */
 		public AbstractOperation getTheirOperation() {
-			return theirOps.get(0);
+			return theirOp;
 		}
 
 		/**
@@ -827,7 +947,7 @@ public class DecisionManager {
 		 * @return op
 		 */
 		public AbstractOperation getMyOperation() {
-			return myOps.get(0);
+			return myOp;
 		}
 
 		/**
@@ -836,7 +956,7 @@ public class DecisionManager {
 		 * @return ops
 		 */
 		public List<AbstractOperation> getTheirOperations() {
-			return theirOps;
+			return new ArrayList<AbstractOperation>(theirOps);
 		}
 
 		/**
@@ -845,73 +965,50 @@ public class DecisionManager {
 		 * @return ops
 		 */
 		public List<AbstractOperation> getMyOperations() {
-			return myOps;
+			return new ArrayList<AbstractOperation>(myOps);
 		}
 
-		/**
-		 * Adds a pair of conflicting operations to this bucket.
-		 * 
-		 * @param myOp
-		 *            my op
-		 * @param theirOp
-		 *            their op
-		 * @return true, when it was added
-		 */
-		public boolean add(AbstractOperation myOp, AbstractOperation theirOp) {
-			for (AbstractOperation ao : getTheirOperations()) {
-				if (conflictDetector.doConflict(myOp, ao)) {
-					addToList(myOp, theirOp);
-					return true;
-				}
-			}
-			for (AbstractOperation ao : getMyOperations()) {
-				if (conflictDetector.doConflict(ao, theirOp)) {
-					addToList(myOp, theirOp);
-					return true;
-				}
-			}
-			return false;
-		}
+		// /**
+		// * Adds a pair of conflicting operations to this bucket.
+		// *
+		// * @param myOp
+		// * my op
+		// * @param theirOp
+		// * their op
+		// * @return true, when it was added
+		// */
+		// public boolean add(AbstractOperation myOp, AbstractOperation theirOp) {
+		// for (AbstractOperation ao : getTheirOperations()) {
+		// if (conflictDetector.doConflict(myOp, ao)) {
+		// addToList(myOp, theirOp);
+		// return true;
+		// }
+		// }
+		// for (AbstractOperation ao : getMyOperations()) {
+		// if (conflictDetector.doConflict(ao, theirOp)) {
+		// addToList(myOp, theirOp);
+		// return true;
+		// }
+		// }
+		// return false;
+		// }
+		//
+		// private void addToList(AbstractOperation my, AbstractOperation their) {
+		// addMyOp(my);
+		// addTheirOp(their);
+		// }
+		//
+		// private void addMyOp(AbstractOperation my) {
+		// if (!myOps.contains(my)) {
+		// myOps.add(my);
+		// }
+		// }
+		//
+		// private void addTheirOp(AbstractOperation their) {
+		// if (!theirOps.contains(their)) {
+		// theirOps.add(their);
+		// }
+		// }
 
-		private void addToList(AbstractOperation my, AbstractOperation their) {
-			addMyOp(my);
-			addTheirOp(their);
-		}
-
-		private void addMyOp(AbstractOperation my) {
-			if (!myOps.contains(my)) {
-				myOps.add(my);
-			}
-		}
-
-		private void addTheirOp(AbstractOperation their) {
-			if (!theirOps.contains(their)) {
-				theirOps.add(their);
-			}
-		}
-
-		/**
-		 * Adds operation to the 'my' list.
-		 * 
-		 * @param ops
-		 *            ops
-		 */
-		public void addMyOps(List<AbstractOperation> ops) {
-			for (AbstractOperation ao : ops) {
-				addMyOp(ao);
-			}
-		}
-
-		/**
-		 * Adds operation to the 'my' list.
-		 * 
-		 * @param ops
-		 *            ops
-		 */
-		public void addTheirOps(List<AbstractOperation> ops) {
-			for (AbstractOperation ao : ops) {
-				addTheirOp(ao);
-			}
-		}
 	}
 }
