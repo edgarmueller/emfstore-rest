@@ -88,8 +88,8 @@ public class UpdateDialog extends TitleAreaDialog {
 			operationCount += changePackage.getSize();
 		}
 		setMessage("Number of versions: " + changes.size()
-				+ ", Number of root operations: " + rootCount
-				+ ", Number of changes: " + operationCount);
+				+ ", Number of composite changes: " + rootCount
+				+ ", Number of overall changes: " + operationCount);
 		return contents;
 
 	}

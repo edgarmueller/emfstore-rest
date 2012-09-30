@@ -142,9 +142,9 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 					+ "\" ";
 		}
 		setTitle("Commit your local changes " + projectName + "to the server");
-		setMessage("Number of root operations: "
-				+ changes.getOperations().size() + ", Number of changes: "
-				+ numberOfChanges);
+		setMessage("Number of composite changes: "
+				+ changes.getOperations().size()
+				+ ", Number of overall changes: " + numberOfChanges);
 
 		// Log message
 		Label lblLogMsg = new Label(contents, SWT.NONE);
