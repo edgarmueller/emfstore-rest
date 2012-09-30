@@ -42,8 +42,9 @@ public class MultiReferenceConflict extends Conflict {
 	 * @param meAdding true, if merging user has adding multiref
 	 */
 	public MultiReferenceConflict(List<AbstractOperation> addingOperation, List<AbstractOperation> removingOperation,
-		DecisionManager decisionManager, boolean meAdding) {
-		super(addingOperation, removingOperation, decisionManager, meAdding, false);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean meAdding) {
+		super(addingOperation, removingOperation, leftOperation, rightOperation, decisionManager, meAdding, false);
 		containmentConflict = getMyOperation(MultiReferenceOperation.class).isAdd()
 			&& getTheirOperation(MultiReferenceOperation.class).isAdd();
 		init();

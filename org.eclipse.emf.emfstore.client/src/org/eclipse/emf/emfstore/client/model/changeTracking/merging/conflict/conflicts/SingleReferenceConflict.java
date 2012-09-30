@@ -40,8 +40,8 @@ public class SingleReferenceConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 */
 	public SingleReferenceConflict(List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations,
-		DecisionManager decisionManager) {
-		super(myOperations, theirOperations, decisionManager);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
 	}
 
 	/**

@@ -35,8 +35,9 @@ public class ReferenceConflict extends Conflict {
 	 * @param myOps list of my operations
 	 * @param theirOps list of their operations
 	 */
-	public ReferenceConflict(Conflict conflict, List<AbstractOperation> myOps, List<AbstractOperation> theirOps) {
-		super(myOps, theirOps, conflict.getDecisionManager(), conflict.isLeftMy(), false);
+	public ReferenceConflict(Conflict conflict, List<AbstractOperation> myOps, List<AbstractOperation> theirOps,
+		AbstractOperation leftOperation, AbstractOperation rightOperation) {
+		super(myOps, theirOps, leftOperation, rightOperation, conflict.getDecisionManager(), conflict.isLeftMy(), false);
 		if (!(conflict instanceof SingleReferenceConflict || conflict instanceof MultiReferenceConflict)) {
 			throw new IllegalStateException("Only reference conflicts allowed.");
 		}

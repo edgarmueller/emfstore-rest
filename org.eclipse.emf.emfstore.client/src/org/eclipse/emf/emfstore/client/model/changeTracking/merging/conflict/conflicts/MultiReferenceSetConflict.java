@@ -42,8 +42,9 @@ public class MultiReferenceSetConflict extends Conflict {
 	 * @param myMultiRef is my multireference
 	 */
 	public MultiReferenceSetConflict(List<AbstractOperation> multiRef, List<AbstractOperation> multiRefSet,
-		DecisionManager decisionManager, boolean myMultiRef) {
-		super(multiRef, multiRefSet, decisionManager, myMultiRef, false);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean myMultiRef) {
+		super(multiRef, multiRefSet, leftOperation, rightOperation, decisionManager, myMultiRef, false);
 		containmentConflict = ((MultiReferenceOperation) getLeftOperation()).isAdd()
 			&& !getLeftOperation().getModelElementId().equals(getRightOperation().getModelElementId());
 		init();

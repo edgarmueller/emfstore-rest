@@ -179,7 +179,7 @@ public class CompositeMergeTest extends MergeTest {
 
 		mc.hasConflict(CompositeConflict.class)
 		// my
-			.myIs(SingleReferenceOperation.class).andMyIs(AttributeOperation.class).andNoOtherMyOps()
+			.myIs(SingleReferenceOperation.class).myOtherContains(AttributeOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CompositeOperation.class).andNoOtherTheirOps();
 	}

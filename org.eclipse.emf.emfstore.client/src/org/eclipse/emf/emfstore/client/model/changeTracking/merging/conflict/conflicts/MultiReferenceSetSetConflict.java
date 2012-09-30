@@ -34,8 +34,8 @@ public class MultiReferenceSetSetConflict extends Conflict {
 	private boolean containmentConflict;
 
 	public MultiReferenceSetSetConflict(List<AbstractOperation> opsA, List<AbstractOperation> opsB,
-		DecisionManager decisionManager) {
-		super(opsA, opsB, decisionManager, true, false);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		super(opsA, opsB, leftOperation, rightOperation, decisionManager, true, false);
 		// is this rule enough?
 		containmentConflict = getMyOperation().getModelElementId().equals(getTheirOperation().getModelElementId());
 		init();

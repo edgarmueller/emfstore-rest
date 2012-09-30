@@ -38,8 +38,9 @@ public class MultiReferenceSetSingleConflict extends Conflict {
 	 * @param setLeft multi set ref is left
 	 */
 	public MultiReferenceSetSingleConflict(List<AbstractOperation> leftOperations,
-		List<AbstractOperation> rightOperations, DecisionManager decisionManager, boolean setLeft) {
-		super(leftOperations, rightOperations, decisionManager, setLeft, true);
+		List<AbstractOperation> rightOperations, AbstractOperation leftOperation, AbstractOperation rightOperation,
+		DecisionManager decisionManager, boolean setLeft) {
+		super(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, setLeft, true);
 	}
 
 	/**

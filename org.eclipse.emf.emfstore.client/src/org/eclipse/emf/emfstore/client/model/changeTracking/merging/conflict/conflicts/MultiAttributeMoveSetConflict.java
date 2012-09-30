@@ -28,8 +28,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 public class MultiAttributeMoveSetConflict extends Conflict {
 
 	public MultiAttributeMoveSetConflict(List<AbstractOperation> opsA, List<AbstractOperation> opsB,
-		DecisionManager decisionManager, boolean isMySet) {
-		super(opsA, opsB, decisionManager, isMySet, true);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean isMySet) {
+		super(opsA, opsB, leftOperation, rightOperation, decisionManager, isMySet, true);
 	}
 
 	/**

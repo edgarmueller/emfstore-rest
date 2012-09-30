@@ -240,29 +240,27 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
 			allModelElements);
 
-		// clean up already existing references when collection already contained the object
-		if (removedElements.contains(modelElement)) {
-			List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
-			if (savedSettings != null) {
-				List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
-				for (SettingWithReferencedElement setting : savedSettings) {
-					for (SettingWithReferencedElement newSetting : crossReferences) {
-						if (setting.getSetting().getEStructuralFeature()
-							.equals(newSetting.getSetting().getEStructuralFeature())
-							&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
-							toRemove.add(newSetting);
-						}
-					}
-				}
-
-				crossReferences.removeAll(toRemove);
-			}
-		}
-
 		// collect in-going cross-reference for containment tree of modelElement
 		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
 			allModelElements);
 		crossReferences.addAll(ingoingCrossReferences);
+
+		// clean up already existing references when collection already contained the object
+		List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
+		if (savedSettings != null) {
+			List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
+			for (SettingWithReferencedElement setting : savedSettings) {
+				for (SettingWithReferencedElement newSetting : crossReferences) {
+					if (setting.getSetting().getEStructuralFeature()
+						.equals(newSetting.getSetting().getEStructuralFeature())
+						&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
+						toRemove.add(newSetting);
+					}
+				}
+			}
+
+			crossReferences.removeAll(toRemove);
+		}
 
 		// collect recorded operations and add to create operation
 		List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
@@ -516,8 +514,16 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			Set<EObject> allModelElements = new HashSet<EObject>();
 			allModelElements.add(modelElement);
 			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
-			removedElementsToReferenceSettings.put(modelElement,
-				ModelUtil.collectOutgoingCrossReferences(collection, allModelElements));
+			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+				allModelElements);
+			List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+				allModelElements);
+			crossReferences.addAll(ingoingCrossReferences);
+			if (crossReferences.size() != 0) {
+				for (EObject eObject : allModelElements) {
+					removedElementsToReferenceSettings.put(eObject, crossReferences);
+				}
+			}
 		}
 	}
 

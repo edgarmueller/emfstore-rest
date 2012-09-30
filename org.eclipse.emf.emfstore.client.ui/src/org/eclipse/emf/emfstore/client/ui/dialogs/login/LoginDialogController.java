@@ -56,7 +56,8 @@ public class LoginDialogController implements ILoginDialogController {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
-				if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn() && !force) {
+				if (serverInfo != null && serverInfo.getLastUsersession() != null
+					&& serverInfo.getLastUsersession().isLoggedIn() && !force) {
 					return serverInfo.getLastUsersession();
 				}
 
