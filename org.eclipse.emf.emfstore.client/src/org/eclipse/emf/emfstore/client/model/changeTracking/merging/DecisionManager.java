@@ -172,171 +172,183 @@ public class DecisionManager {
 		notInvolvedInConflict = new ArrayList<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
-		Set<Conflicting> conflictingsCandidateSet = new HashSet<Conflicting>();
+		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new HashSet<ConflictBucketCandidate>();
+		scanOperationsIntoCandidateBuckets(myOperations, theirOperations, conflictBucketsCandidateSet);
 
-		// TODO: use a union-find data structure here (constant time union and find)
-		// TODO: could also be done on a per feature base (deletes are difficult then!)
-		Map<String, Conflicting> idToConflictingMap = new HashMap<String, DecisionManager.Conflicting>();
+		Set<ConflictBucket> conflictBucketsSet = scanForConflictsWithinCandidates(conflictBucketsCandidateSet);
+		conflictBucketsCandidateSet = null;
+
+		// sort operations in ConflictBuckets
+		sortOperationsinBucketsbyPriority(myOperations, theirOperations, conflictBucketsSet);
+
+		createConflicts(conflictBucketsSet);
+	}
+
+	private void sortOperationsinBucketsbyPriority(List<AbstractOperation> myOperations,
+		List<AbstractOperation> theirOperations, Set<ConflictBucket> conflictBucketsSet) {
+		Map<AbstractOperation, Integer> myOperationToPriorityMap = new HashMap<AbstractOperation, Integer>(
+			myOperations.size());
+		int counter = 0;
+		for (AbstractOperation myOperation : myOperations) {
+			myOperationToPriorityMap.put(myOperation, counter);
+			counter++;
+		}
+		for (ConflictBucket conflictBucket : conflictBucketsSet) {
+			Integer maxPriority = -1;
+			AbstractOperation maxOperation = null;
+			for (AbstractOperation myOperation : conflictBucket.getMyOperationsSet()) {
+				Integer currentPrio = myOperationToPriorityMap.get(myOperation);
+				if (currentPrio > maxPriority) {
+					maxPriority = currentPrio;
+					maxOperation = myOperation;
+				}
+			}
+			conflictBucket.setMyOperation(maxOperation);
+		}
+
+		counter = 0;
+		Map<AbstractOperation, Integer> theirOperationToPriorityMap = new HashMap<AbstractOperation, Integer>(
+			theirOperations.size());
+		for (AbstractOperation theirOperation : theirOperations) {
+			theirOperationToPriorityMap.put(theirOperation, counter);
+			counter++;
+		}
+		for (ConflictBucket conflictBucket : conflictBucketsSet) {
+			Integer maxPriority = -1;
+			AbstractOperation maxOperation = null;
+			for (AbstractOperation theirOperation : conflictBucket.getTheirOperationsSet()) {
+				Integer currentPrio = theirOperationToPriorityMap.get(theirOperation);
+				if (currentPrio > maxPriority) {
+					maxPriority = currentPrio;
+					maxOperation = theirOperation;
+				}
+			}
+			conflictBucket.setTheirOperation(maxOperation);
+		}
+	}
+
+	private void scanOperationsIntoCandidateBuckets(List<AbstractOperation> myOperations,
+		List<AbstractOperation> theirOperations, Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
+		Map<String, ConflictBucketCandidate> idToConflictBucketMap = new HashMap<String, ConflictBucketCandidate>();
 
 		for (AbstractOperation myOperation : myOperations) {
-			scanOperationIntoConflicting(conflictingsCandidateSet, idToConflictingMap, myOperation, true);
+			scanOperationIntoConflictBucket(conflictBucketsCandidateSet, idToConflictBucketMap, myOperation, true);
 		}
 
 		for (AbstractOperation theirOperation : theirOperations) {
-			scanOperationIntoConflicting(conflictingsCandidateSet, idToConflictingMap, theirOperation, false);
+			scanOperationIntoConflictBucket(conflictBucketsCandidateSet, idToConflictBucketMap, theirOperation, false);
 		}
+	}
 
-		Set<Conflicting> conflictingsSet = new HashSet<Conflicting>();
-		for (Conflicting conflicting : conflictingsCandidateSet) {
+	private Set<ConflictBucket> scanForConflictsWithinCandidates(
+		Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
+		// check for conflicts WITHIN one ConflictBucket candidate
+		Set<ConflictBucket> conflictBucketsSet = new HashSet<ConflictBucket>();
+		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {
 
-			long iterations = 0;
-			double seconds = 0;
+			Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new HashMap<AbstractOperation, ConflictBucket>();
 
-			Map<AbstractOperation, Conflicting> opToConflict = new HashMap<AbstractOperation, Conflicting>();
-
-			for (AbstractOperation myOperation : conflicting.myOps) {
+			for (AbstractOperation myOperation : conflictBucketCandidate.getMyOperations()) {
 
 				boolean involved = false;
 
-				for (AbstractOperation theirOperation : conflicting.theirOps) {
-
-					long then = System.currentTimeMillis();
-					iterations++;
+				for (AbstractOperation theirOperation : conflictBucketCandidate.getTheirOperations()) {
 
 					if (conflictDetector.doConflict(myOperation, theirOperation)) {
 						involved = true;
-						Conflicting myConflicting = opToConflict.get(myOperation);
-						Conflicting theirConflicting = opToConflict.get(theirOperation);
+						ConflictBucket myConflictBucket = operationToConflictBucketMap.get(myOperation);
+						ConflictBucket theirConflictBucket = operationToConflictBucketMap.get(theirOperation);
 
-						if (myConflicting == null && theirConflicting == null) {
-							Conflicting newConflicting = new Conflicting(myOperation, theirOperation);
-							opToConflict.put(myOperation, newConflicting);
-							opToConflict.put(theirOperation, newConflicting);
-							conflictingsSet.add(newConflicting);
-						} else if (myConflicting != null && theirConflicting == null) {
-							myConflicting.theirOps.add(theirOperation);
-							opToConflict.put(theirOperation, myConflicting);
-						} else if (myConflicting == null && theirConflicting != null) {
-							theirConflicting.myOps.add(myOperation);
-							opToConflict.put(myOperation, theirConflicting);
+						if (myConflictBucket == null && theirConflictBucket == null) {
+							ConflictBucket newConflictBucket = new ConflictBucket(myOperation, theirOperation);
+							operationToConflictBucketMap.put(myOperation, newConflictBucket);
+							operationToConflictBucketMap.put(theirOperation, newConflictBucket);
+							conflictBucketsSet.add(newConflictBucket);
+						} else if (myConflictBucket != null && theirConflictBucket == null) {
+							myConflictBucket.getTheirOperationsSet().add(theirOperation);
+							operationToConflictBucketMap.put(theirOperation, myConflictBucket);
+						} else if (myConflictBucket == null && theirConflictBucket != null) {
+							theirConflictBucket.getMyOperationsSet().add(myOperation);
+							operationToConflictBucketMap.put(myOperation, theirConflictBucket);
 						} else {
-							myConflicting.myOps.addAll(theirConflicting.myOps);
-							for (AbstractOperation op : theirConflicting.myOps) {
-								opToConflict.put(op, myConflicting);
+							myConflictBucket.getMyOperationsSet().addAll(theirConflictBucket.getMyOperationsSet());
+							for (AbstractOperation op : theirConflictBucket.getMyOperationsSet()) {
+								operationToConflictBucketMap.put(op, myConflictBucket);
 							}
-							myConflicting.theirOps.addAll(theirConflicting.theirOps);
-							for (AbstractOperation op : theirConflicting.theirOps) {
-								opToConflict.put(op, theirConflicting);
+							myConflictBucket.getTheirOperationsSet()
+								.addAll(theirConflictBucket.getTheirOperationsSet());
+							for (AbstractOperation op : theirConflictBucket.getTheirOperationsSet()) {
+								operationToConflictBucketMap.put(op, theirConflictBucket);
 							}
 
-							conflictingsSet.remove(theirConflicting);
+							conflictBucketsSet.remove(theirConflictBucket);
 						}
 					}
-
+				}
+				if (!involved) {
+					notInvolvedInConflict.add(myOperation);
 				}
 			}
 		}
-
-		// // Collect all conflicting
-		// ListIterator<AbstractOperation> myIterator = myOperations.listIterator(myOperations.size());
-		// while (myIterator.hasPrevious()) {
-		// AbstractOperation myOperation = myIterator.previous();
-		// boolean involved = false;
-		// ListIterator<AbstractOperation> theirIterator = theirOperations.listIterator(theirOperations.size());
-		// while (theirIterator.hasPrevious()) {
-		// AbstractOperation theirOperation = theirIterator.previous();
-		// if (conflictDetector.doConflict(myOperation, theirOperation)) {
-		// involved = true;
-		// boolean conflictingYet = false;
-		// List<Conflicting> tmpConf = new ArrayList<Conflicting>();
-		// // check against conflicting
-		// for (Conflicting conf : conflicting) {
-		// if (conf.add(myOperation, theirOperation)) {
-		// tmpConf.add(conf);
-		// conflictingYet = true;
-		// }
-		// }
-		// // merge conflicting
-		// if (tmpConf.size() > 1) {
-		// Conflicting main = tmpConf.get(0);
-		// for (int i = 1; i < tmpConf.size(); i++) {
-		// Conflicting conf = tmpConf.get(i);
-		// main.addMyOps(conf.getMyOperations());
-		// main.addTheirOps(conf.getTheirOperations());
-		// conflicting.remove(conf);
-		// }
-		// }
-		// if (!conflictingYet) {
-		// conflicting.add(new Conflicting(myOperation, theirOperation));
-		// }
-		// }
-		// }
-		// if (!involved) {
-		// notInvolvedInConflict.add(myOperation);
-		// }
-		// }
-
-		createConflicts(new ArrayList<DecisionManager.Conflicting>(conflictingsSet));
+		return conflictBucketsSet;
 	}
 
-	private void scanOperationIntoConflicting(Set<Conflicting> conflictingsSet,
-		Map<String, Conflicting> idToConflictingMap, AbstractOperation operation, boolean isMyOperation) {
+	private void scanOperationIntoConflictBucket(Set<ConflictBucketCandidate> ConflictBucketsSet,
+		Map<String, ConflictBucketCandidate> idToConflictBucketMap, AbstractOperation operation, boolean isMyOperation) {
 		Set<String> allInvolvedModelElements = extractStringSetFromIds(operation.getAllInvolvedModelElements());
-		Conflicting currentOperationsConflicting = null;
+		ConflictBucketCandidate currentOperationsConflictBucket = null;
 		for (String modelElementId : allInvolvedModelElements) {
-			Conflicting conflicting = idToConflictingMap.get(modelElementId.toString());
+			ConflictBucketCandidate ConflictBucket = idToConflictBucketMap.get(modelElementId.toString());
 
-			if (conflicting == null && currentOperationsConflicting == null) {
-				// no existing conflicting for id or current op => create new conflicting
-				currentOperationsConflicting = new Conflicting();
-				conflictingsSet.add(currentOperationsConflicting);
-				currentOperationsConflicting.addOp(operation, modelElementId, isMyOperation);
-				idToConflictingMap.put(modelElementId, currentOperationsConflicting);
+			if (ConflictBucket == null && currentOperationsConflictBucket == null) {
+				// no existing ConflictBucket for id or current op => create new ConflictBucket
+				currentOperationsConflictBucket = new ConflictBucketCandidate();
+				ConflictBucketsSet.add(currentOperationsConflictBucket);
+				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
+				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
+			} else if (ConflictBucket == currentOperationsConflictBucket) {
+				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
+				currentOperationsConflictBucket.addModelElementId(modelElementId);
+			} else if (ConflictBucket == null && currentOperationsConflictBucket != null) {
+				// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
+				// ConflictBucket
+				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
+				currentOperationsConflictBucket.addModelElementId(modelElementId);
 
-			} else if (conflicting == null && currentOperationsConflicting != null) {
-				// no existing conflicting for id but existing conflicting for operation => keep operations
-				// conflicting
-				idToConflictingMap.put(modelElementId, currentOperationsConflicting);
-				currentOperationsConflicting.involvedIds.add(modelElementId);
-
-			} else if (conflicting != null && currentOperationsConflicting == null) {
-				// existing conflicting for id but none for operation => keep id conflicting
-				currentOperationsConflicting = conflicting;
-				currentOperationsConflicting.addOp(operation, modelElementId, isMyOperation);
+			} else if (ConflictBucket != null && currentOperationsConflictBucket == null) {
+				// existing ConflictBucket for id but none for operation => keep id ConflictBucket
+				currentOperationsConflictBucket = ConflictBucket;
+				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
 
 			} else {
-				// existing conflicting for both id and operation => merge conflictings based on size
-				currentOperationsConflicting = mergeConflictings(conflictingsSet, idToConflictingMap,
-					currentOperationsConflicting, conflicting);
-				currentOperationsConflicting.involvedIds.add(modelElementId);
+				// existing ConflictBucket for both id and operation => merge ConflictBuckets based on size
+				currentOperationsConflictBucket = mergeConflictBuckets(ConflictBucketsSet, idToConflictBucketMap,
+					currentOperationsConflictBucket, ConflictBucket);
+				currentOperationsConflictBucket.addModelElementId(modelElementId);
 			}
 		}
 	}
 
-	private Conflicting mergeConflictings(Set<Conflicting> conflictingsSet,
-		Map<String, Conflicting> idToConflictingMap, Conflicting currentOperationsConflicting, Conflicting conflicting) {
-		if (conflicting.size() > currentOperationsConflicting.size()) {
-			conflicting.myOps.addAll(currentOperationsConflicting.myOps);
-			conflicting.theirOps.addAll(currentOperationsConflicting.theirOps);
-			conflicting.involvedIds.addAll(currentOperationsConflicting.involvedIds);
-			for (String id : currentOperationsConflicting.involvedIds) {
-				idToConflictingMap.put(id, conflicting);
-			}
-			conflictingsSet.remove(currentOperationsConflicting);
-			currentOperationsConflicting = conflicting;
-		} else {
-			currentOperationsConflicting.myOps.addAll(conflicting.myOps);
-			currentOperationsConflicting.theirOps.addAll(conflicting.theirOps);
-			currentOperationsConflicting.involvedIds.addAll(conflicting.involvedIds);
-			currentOperationsConflicting.myOp = conflicting.myOp;
-			currentOperationsConflicting.theirOp = conflicting.theirOp;
-			for (String id : conflicting.involvedIds) {
-				idToConflictingMap.put(id, currentOperationsConflicting);
-			}
-			conflictingsSet.remove(conflicting);
-			conflicting = currentOperationsConflicting;
+	private ConflictBucketCandidate mergeConflictBuckets(Set<ConflictBucketCandidate> ConflictBucketsSet,
+		Map<String, ConflictBucketCandidate> idToConflictBucketMap,
+		ConflictBucketCandidate currentOperationsConflictBucket, ConflictBucketCandidate ConflictBucket) {
+		ConflictBucketCandidate biggerBucket = currentOperationsConflictBucket;
+		ConflictBucketCandidate smallerBucket = ConflictBucket;
+
+		if (ConflictBucket.size() > currentOperationsConflictBucket.size()) {
+			biggerBucket = ConflictBucket;
+			smallerBucket = currentOperationsConflictBucket;
 		}
-		return currentOperationsConflicting;
+
+		biggerBucket.getMyOperations().addAll(smallerBucket.getMyOperations());
+		biggerBucket.getTheirOperations().addAll(smallerBucket.getTheirOperations());
+		biggerBucket.getInvolvedIds().addAll(smallerBucket.getInvolvedIds());
+		for (String id : smallerBucket.getInvolvedIds()) {
+			idToConflictBucketMap.put(id, biggerBucket);
+		}
+		ConflictBucketsSet.remove(smallerBucket);
+
+		return biggerBucket;
 	}
 
 	private Set<String> extractStringSetFromIds(Set<ModelElementId> allInvolvedModelElements) {
@@ -360,9 +372,9 @@ public class DecisionManager {
 	 */
 
 	// BEGIN COMPLEX CODE
-	private void createConflicts(ArrayList<Conflicting> conflicting) {
-		// Create Conflicts from Conflicting
-		for (Conflicting conf : conflicting) {
+	private void createConflicts(Set<ConflictBucket> ConflictBucket) {
+		// Create Conflicts from ConflictBucket
+		for (ConflictBucket conf : ConflictBucket) {
 			AbstractOperation my = conf.getMyOperation();
 			AbstractOperation their = conf.getTheirOperation();
 
@@ -459,7 +471,7 @@ public class DecisionManager {
 		}
 	}
 
-	private boolean checkRegisteredHandlers(Conflicting conf) {
+	private boolean checkRegisteredHandlers(ConflictBucket conf) {
 		for (ConflictHandler handler : this.conflictHandler) {
 			if (handler.canHandle(conf)) {
 				addConflict(handler.handle(this, conf));
@@ -477,72 +489,88 @@ public class DecisionManager {
 	}
 
 	// END COMPLEX CODE
-	private Conflict createMultiRefMultiSet(Conflicting conf) {
+	private Conflict createMultiRefMultiSet(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
-			return new MultiReferenceSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiReferenceSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSetConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createMultiSetSingle(Conflicting conf) {
+	private Conflict createMultiSetSingle(ConflictBucket conf) {
 		if (isMultiRefSet(conf.getMyOperation())) {
-			return new MultiReferenceSetSingleConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSetSingleConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiReferenceSetSingleConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSetSingleConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createMultiSingle(Conflicting conf) {
+	private Conflict createMultiSingle(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
-			return new MultiReferenceSingleConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceSingleConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiReferenceSingleConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiReferenceSingleConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createMultiRefSetSet(Conflicting conf) {
-		return new MultiReferenceSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this);
+	private Conflict createMultiRefSetSet(ConflictBucket conf) {
+		return new MultiReferenceSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
+			conf.getMyOperation(), conf.getTheirOperation(), this);
 	}
 
-	private Conflict createMultiAttSetSet(Conflicting conf) {
-		return new MultiAttributeSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this);
+	private Conflict createMultiAttSetSet(ConflictBucket conf) {
+		return new MultiAttributeSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
+			conf.getTheirOperation(), conf.getMyOperation(), this);
 	}
 
-	private Conflict createMultiAtt(Conflicting conf) {
+	private Conflict createMultiAtt(ConflictBucket conf) {
 		if (((MultiAttributeOperation) conf.getMyOperation()).isAdd()) {
-			return new MultiAttributeConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+				conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiAttributeConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 
 		}
 	}
 
-	private Conflict createMultiAttSet(Conflicting conf) {
+	private Conflict createMultiAttSet(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
-			return new MultiAttributeSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiAttributeSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeSetConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createMultiAttMove(Conflicting conf) {
+	private Conflict createMultiAttMove(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
-			return new MultiAttributeMoveConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeMoveConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiAttributeMoveConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeMoveConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createMultiAttMoveSet(Conflicting conf) {
+	private Conflict createMultiAttMoveSet(ConflictBucket conf) {
 		if (isMultiAttSet(conf.getMyOperation())) {
-			return new MultiAttributeMoveSetConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiAttributeMoveSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
+				conf.getMyOperation(), conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiAttributeMoveSetConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new MultiAttributeMoveSetConflict(conf.getTheirOperations(), conf.getMyOperations(),
+				conf.getTheirOperation(), conf.getMyOperation(), this, false);
 		}
 	}
 
-	private Conflict createReferenceCompVSSingleMulti(Conflicting conf) {
+	private Conflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
 		if (isCompositeRef(conf.getMyOperation())) {
 			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
 				Arrays.asList(conf.getTheirOperation()));
@@ -552,14 +580,14 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createReferenceConflict(Conflicting conf) {
+	private Conflict createReferenceConflict(ConflictBucket conf) {
 		EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
 		EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation()).getSubOperations();
 
 		return createRefFromSub(conf, myOperations, theirOperations);
 	}
 
-	private Conflict createRefFromSub(Conflicting conf, List<AbstractOperation> myOperations,
+	private Conflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations) {
 
 		for (AbstractOperation myOp : myOperations) {
@@ -568,12 +596,12 @@ public class DecisionManager {
 					if (isSingleRef(myOp)) {
 
 						return new ReferenceConflict(createSingleSingleConflict(myOp, theirOp), conf.getMyOperations(),
-							conf.getTheirOperations());
+							conf.getTheirOperations(), conf.getMyOperation(), conf.getTheirOperation());
 
 					} else if (isMultiRef(myOp)) {
 
 						return new ReferenceConflict(createMultiMultiConflict(myOp, theirOp), conf.getMyOperations(),
-							conf.getTheirOperations());
+							conf.getTheirOperations(), conf.getMyOperation(), conf.getTheirOperation());
 
 					} else {
 						return null;
@@ -584,51 +612,60 @@ public class DecisionManager {
 		return null;
 	}
 
-	private Conflict createAttributeAttributeDecision(Conflicting conflicting) {
-		return new AttributeConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+	private Conflict createAttributeAttributeDecision(ConflictBucket conf) {
+		return new AttributeConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+			conf.getTheirOperation(), this);
 	}
 
-	private Conflict createDiagramLayoutDecision(Conflicting conflicting) {
-		return new DiagramLayoutConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+	private Conflict createDiagramLayoutDecision(ConflictBucket conf) {
+		return new DiagramLayoutConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+			conf.getTheirOperation(), this);
 	}
 
-	private Conflict createSingleSingleConflict(Conflicting conflicting) {
-		return new SingleReferenceConflict(conflicting.getMyOperations(), conflicting.getTheirOperations(), this);
+	private Conflict createSingleSingleConflict(ConflictBucket conf) {
+		return new SingleReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+			conf.getTheirOperation(), this);
 	}
 
 	private Conflict createSingleSingleConflict(AbstractOperation my, AbstractOperation their) {
-		return new SingleReferenceConflict(Arrays.asList(my), Arrays.asList(their), this);
+		return new SingleReferenceConflict(Arrays.asList(my), Arrays.asList(their), my, their, this);
 	}
 
-	private Conflict createMultiMultiConflict(Conflicting conf) {
+	private Conflict createMultiMultiConflict(ConflictBucket conf) {
 		if (((MultiReferenceOperation) conf.getMyOperation()).isAdd()) {
-			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+				conf.getTheirOperation(), this, true);
 		} else {
-			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), this, false);
+			return new MultiReferenceConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+				conf.getTheirOperation(), this, false);
 		}
 	}
 
 	private Conflict createMultiMultiConflict(AbstractOperation my, AbstractOperation their) {
 		if (((MultiReferenceOperation) my).isAdd()) {
-			return new MultiReferenceConflict(Arrays.asList(my), Arrays.asList(their), this, true);
+			return new MultiReferenceConflict(Arrays.asList(my), Arrays.asList(their), my, their, this, true);
 		} else {
-			return new MultiReferenceConflict(Arrays.asList(their), Arrays.asList(my), this, false);
+			return new MultiReferenceConflict(Arrays.asList(their), Arrays.asList(my), their, my, this, false);
 		}
 	}
 
-	private Conflict createDeleteOtherConflict(Conflicting conf) {
+	private Conflict createDeleteOtherConflict(ConflictBucket conf) {
 		if (isDelete(conf.getMyOperation())) {
-			return new DeletionConflict(conf.getMyOperations(), conf.getTheirOperations(), true, this);
+			return new DeletionConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+				conf.getTheirOperation(), true, this);
 		} else {
-			return new DeletionConflict(conf.getTheirOperations(), conf.getMyOperations(), false, this);
+			return new DeletionConflict(conf.getTheirOperations(), conf.getMyOperations(), conf.getTheirOperation(),
+				conf.getMyOperation(), false, this);
 		}
 	}
 
-	private Conflict createCompositeConflict(Conflicting conf) {
+	private Conflict createCompositeConflict(ConflictBucket conf) {
 		if (isComposite(conf.getMyOperation())) {
-			return new CompositeConflict(conf.getMyOperations(), conf.getTheirOperations(), this, true);
+			return new CompositeConflict(conf.getMyOperations(), conf.getTheirOperations(), conf.getMyOperation(),
+				conf.getTheirOperation(), this, true);
 		} else {
-			return new CompositeConflict(conf.getTheirOperations(), conf.getMyOperations(), this, false);
+			return new CompositeConflict(conf.getTheirOperations(), conf.getMyOperations(), conf.getTheirOperation(),
+				conf.getMyOperation(), this, false);
 		}
 	}
 
@@ -920,103 +957,4 @@ public class DecisionManager {
 		}
 	}
 
-	/**
-	 * Container for connected, conflicting operations.
-	 * 
-	 * @author wesendon
-	 */
-	public class Conflicting {
-		private Set<String> involvedIds;
-		private Set<AbstractOperation> myOps;
-		private Set<AbstractOperation> theirOps;
-		private AbstractOperation myOp;
-		private AbstractOperation theirOp;
-
-		/**
-		 * Default constructor.
-		 * 
-		 * @param myOp
-		 *            my operations
-		 * @param theirOp
-		 *            their operations.
-		 */
-		public Conflicting() {
-			involvedIds = new HashSet<String>();
-			myOps = new HashSet<AbstractOperation>();
-			theirOps = new HashSet<AbstractOperation>();
-		}
-
-		public boolean isEmpty() {
-			return myOp == null || theirOp == null;
-		}
-
-		public int size() {
-			return theirOps.size() + myOps.size();
-		}
-
-		public void addOp(AbstractOperation operation, String id, boolean isMyOperation) {
-			if (operation == null) {
-				return;
-			}
-			involvedIds.add(id);
-
-			if (isMyOperation) {
-				if (myOp == null) {
-					myOp = operation;
-				}
-				myOps.add(operation);
-			} else {
-				if (theirOp == null) {
-					theirOp = operation;
-				}
-				theirOps.add(operation);
-			}
-		}
-
-		public Conflicting(AbstractOperation myOp, AbstractOperation theirOp) {
-			this.myOp = myOp;
-			this.theirOp = theirOp;
-			myOps = new HashSet<AbstractOperation>();
-			myOps.add(myOp);
-			theirOps = new HashSet<AbstractOperation>();
-			theirOps.add(theirOp);
-		}
-
-		/**
-		 * Returns first of their operations.
-		 * 
-		 * @return op
-		 */
-		public AbstractOperation getTheirOperation() {
-			return theirOp;
-		}
-
-		/**
-		 * Returns first of my operations.
-		 * 
-		 * @return op
-		 */
-		public AbstractOperation getMyOperation() {
-			return myOp;
-		}
-
-		/**
-		 * Returns all their operations.
-		 * 
-		 * @return ops
-		 */
-		public List<AbstractOperation> getTheirOperations() {
-			return new ArrayList<AbstractOperation>(theirOps);
-		}
-
-		/**
-		 * Returns all my operations.
-		 * 
-		 * @return ops
-		 */
-		public List<AbstractOperation> getMyOperations() {
-			return new ArrayList<AbstractOperation>(myOps);
-		}
-
-	}
 }

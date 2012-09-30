@@ -38,8 +38,10 @@ public class DeletionConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 */
 	public DeletionConflict(List<AbstractOperation> deletingOperation, List<AbstractOperation> deletedOperations,
-		boolean meCausingDelete, DecisionManager decisionManager) {
-		super(deletingOperation, deletedOperations, decisionManager, meCausingDelete, false);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, boolean meCausingDelete,
+		DecisionManager decisionManager) {
+		super(deletingOperation, deletedOperations, leftOperation, rightOperation, decisionManager, meCausingDelete,
+			false);
 		init();
 	}
 

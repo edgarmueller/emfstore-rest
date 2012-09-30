@@ -212,10 +212,10 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDelIndirectInSteps() {
-		final TestElement parent = getTestElement();
-		final TestElement child = getTestElement();
-		final TestElement child2 = getTestElement();
-		final TestElement child3 = getTestElement();
+		final TestElement parent = getTestElement("parent");
+		final TestElement child = getTestElement("child");
+		final TestElement child2 = getTestElement("child2");
+		final TestElement child3 = getTestElement("child3");
 		parent.getContainedElements().add(child);
 		child.getContainedElements().add(child2);
 		child2.getContainedElements().add(child3);

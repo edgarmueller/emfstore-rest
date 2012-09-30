@@ -38,8 +38,9 @@ public class CompositeConflict extends Conflict {
 	 * @param meCausing true, if composite caused by merging user
 	 */
 	public CompositeConflict(List<AbstractOperation> composite, List<AbstractOperation> other,
-		DecisionManager decisionManager, boolean meCausing) {
-		super(composite, other, decisionManager, meCausing, false);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean meCausing) {
+		super(composite, other, leftOperation, rightOperation, decisionManager, meCausing, false);
 		init();
 	}
 

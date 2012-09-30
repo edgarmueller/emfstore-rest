@@ -38,8 +38,9 @@ public class MultiReferenceSingleConflict extends Conflict {
 	 * @param multiLeft multi is lef
 	 */
 	public MultiReferenceSingleConflict(List<AbstractOperation> leftOperations,
-		List<AbstractOperation> rightOperations, DecisionManager decisionManager, boolean multiLeft) {
-		super(leftOperations, rightOperations, decisionManager, multiLeft, true);
+		List<AbstractOperation> rightOperations, AbstractOperation leftOperation, AbstractOperation rightOperation,
+		DecisionManager decisionManager, boolean multiLeft) {
+		super(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, multiLeft, true);
 	}
 
 	/**

@@ -54,9 +54,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace,
-			LogMessage logMessage, CommitCallback callback,
-			IProgressMonitor monitor) {
+	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, CommitCallback callback,
+		IProgressMonitor monitor) {
 		this(projectSpace, null, logMessage, callback, monitor);
 	}
 
@@ -77,13 +76,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace,
-			BranchVersionSpec branch, LogMessage logMessage,
-			CommitCallback callback, IProgressMonitor monitor) {
+	public CommitController(ProjectSpaceBase projectSpace, BranchVersionSpec branch, LogMessage logMessage,
+		CommitCallback callback, IProgressMonitor monitor) {
 		super(projectSpace);
 		this.branch = branch;
-		this.logMessage = (logMessage == null) ? createLogMessage()
-				: logMessage;
+		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;
 		this.callback = callback == null ? CommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
@@ -93,8 +90,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return commit(this.logMessage, this.branch);
 	}
 
-	private PrimaryVersionSpec commit(LogMessage logMessage,
-			final BranchVersionSpec branch) throws EmfStoreException {
+	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch) throws EmfStoreException {
 		getProgressMonitor().beginTask("Commiting Changes", 100);
 		getProgressMonitor().worked(1);
 
@@ -112,26 +108,22 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		if (branch != null) {
 			// TODO BRANCH
 			if (branch.getBranch().equals("")) {
-				throw new EmfStoreException(
-						"Empty branch name is not permitted.");
+				throw new EmfStoreException("Empty branch name is not permitted.");
 			}
 			try {
 				getProjectSpace().resolveVersionSpec(branch);
 				// TODO BRANCH merge should have own controller
 				// or maybe not
 				// is this a could API, rather return null?! discuss
-				throw new EmfStoreException(
-						"Branch already exists. You need to merge.");
+				throw new EmfStoreException("Branch already exists. You need to merge.");
 
 			} catch (InvalidVersionSpecException e) {
 				// branch doesn't exist, create.
 			}
 		} else {
 			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace()
-					.resolveVersionSpec(
-							Versions.createHEAD(getProjectSpace()
-									.getBaseVersion()));
+			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
+				Versions.createHEAD(getProjectSpace().getBaseVersion()));
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace())) {
 					throw new BaseVersionOutdatedException();
@@ -141,22 +133,18 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().worked(10);
 		getProgressMonitor().subTask("Gathering changes");
-		final ChangePackage changePackage = getProjectSpace()
-				.getLocalChangePackage();
+		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
-				.inspectChanges(getProjectSpace(), changePackage);
+		WorkspaceManager.getObserverBus().notify(CommitObserver.class).inspectChanges(getProjectSpace(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
-		if (!callback.inspectChanges(getProjectSpace(), changePackage)
-				|| getProgressMonitor().isCanceled()) {
+		if (!callback.inspectChanges(getProjectSpace(), changePackage) || getProgressMonitor().isCanceled()) {
 			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Sending files to server");
 		// TODO reimplement with ObserverBus and think about subtasks for commit
-		getProjectSpace().getFileTransferManager().uploadQueuedFiles(
-				getProgressMonitor());
+		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Sending changes to server");
@@ -164,27 +152,21 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// TODO BRANCH
 		// Branching case: branch specifier added
 		PrimaryVersionSpec newBaseVersion;
-		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
-				getProgressMonitor()) {
+		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
 			@Override
-			public PrimaryVersionSpec run(IProgressMonitor monitor)
-					throws EmfStoreException {
-				return getConnectionManager().createVersion(
-						getUsersession().getSessionId(),
-						getProjectSpace().getProjectId(),
-						getProjectSpace().getBaseVersion(), changePackage,
-						branch, getProjectSpace().getMergedVersion(),
-						changePackage.getLogMessage());
+			public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
+				return getConnectionManager().createVersion(getUsersession().getSessionId(),
+					getProjectSpace().getProjectId(), getProjectSpace().getBaseVersion(), changePackage, branch,
+					getProjectSpace().getMergedVersion(), changePackage.getLogMessage());
 			}
 		}.execute();
 		getProgressMonitor().worked(35);
 
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		getProgressMonitor().subTask("Sending files to server");
-		getProjectSpace().getFileTransferManager().uploadQueuedFiles(
-				getProgressMonitor());
+		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
-				.commitCompleted(getProjectSpace(), newBaseVersion);
+			.commitCompleted(getProjectSpace(), newBaseVersion);
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Finalizing commit");
@@ -202,9 +184,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	private LogMessage createLogMessage() {
 		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
 		String commiter = "UNKOWN";
-		if (getProjectSpace().getUsersession() != null
-				&& getProjectSpace().getUsersession().getACUser() != null
-				&& getProjectSpace().getUsersession().getACUser().getName() != null) {
+		if (getProjectSpace().getUsersession() != null && getProjectSpace().getUsersession().getACUser() != null
+			&& getProjectSpace().getUsersession().getACUser().getName() != null) {
 			commiter = getProjectSpace().getUsersession().getACUser().getName();
 		}
 		logMessage.setAuthor(commiter);

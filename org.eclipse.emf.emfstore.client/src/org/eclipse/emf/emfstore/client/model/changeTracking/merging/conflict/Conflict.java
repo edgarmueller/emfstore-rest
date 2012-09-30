@@ -46,6 +46,8 @@ public abstract class Conflict extends Observable {
 	private List<AbstractOperation> leftOperations;
 	private List<AbstractOperation> rightOperations;
 	private boolean leftIsMy;
+	private AbstractOperation rightOperation;
+	private AbstractOperation leftOperation;
 
 	/**
 	 * Default constructor for conflicts. Many conflicts only need one operation
@@ -63,8 +65,10 @@ public abstract class Conflict extends Observable {
 	 *            decision manager
 	 */
 	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager) {
-		this(leftOperations, rightOperations, decisionManager, true, true);
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		this(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, true, true);
+		this.leftOperation = leftOperation;
+		this.rightOperation = rightOperation;
 	}
 
 	/**
@@ -84,11 +88,15 @@ public abstract class Conflict extends Observable {
 	 *            otherwise.
 	 */
 	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager, boolean leftIsMy, boolean init) {
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean leftIsMy, boolean init) {
+		this.leftOperation = leftOperation;
+		this.rightOperation = rightOperation;
 		this.leftIsMy = leftIsMy;
 		this.leftOperations = leftOperations;
 		this.rightOperations = rightOperations;
 		this.decisionManager = decisionManager;
+
 		if (init) {
 			init();
 		}
@@ -354,7 +362,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getLeftOperation() {
-		return leftOperations.get(0);
+		return leftOperation;
 	}
 
 	/**
@@ -363,7 +371,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getRightOperation() {
-		return rightOperations.get(0);
+		return rightOperation;
 	}
 
 	/**
@@ -372,7 +380,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getMyOperation() {
-		return getMyOperations().get(0);
+		return ((leftIsMy) ? leftOperation : rightOperation);
 	}
 
 	/**
@@ -381,7 +389,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getTheirOperation() {
-		return getTheirOperations().get(0);
+		return ((!leftIsMy) ? leftOperation : rightOperation);
 	}
 
 	/**
