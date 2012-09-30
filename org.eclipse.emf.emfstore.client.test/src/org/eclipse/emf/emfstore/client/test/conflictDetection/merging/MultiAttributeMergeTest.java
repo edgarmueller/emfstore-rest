@@ -351,9 +351,9 @@ public class MultiAttributeMergeTest extends MergeTest {
 
 		mergeCase.hasConflict(MultiAttributeSetConflict.class)
 			// My first
-			.myIs(MultiAttributeOperation.class, 0).andReturns("isAdd", false)
+			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			// My Second
-			.myIs(MultiAttributeOperation.class, 1).andReturns("isAdd", false).andNoOtherMyOps()
+			.myOtherContains(MultiAttributeOperation.class).andReturns("isAdd", false).andNoOtherMyOps()
 			// Their
 			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "X")
 			.andNoOtherTheirOps();
@@ -388,7 +388,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		mergeCase
 			.hasConflict(MultiAttributeSetConflict.class)
 			// My first
-			.myIs(MultiAttributeOperation.class, 0).andReturns("isAdd", false)
+			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			.andReturns("getReferencedValues", asList("b", "c")).andNoOtherMyOps()
 			// Their
 			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "X")
@@ -421,14 +421,12 @@ public class MultiAttributeMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		mergeCase
-			.hasConflict(MultiAttributeSetConflict.class)
+		mergeCase.hasConflict(MultiAttributeSetConflict.class)
 			// My first
-			.myIs(MultiAttributeOperation.class, 0).andReturns("isAdd", false)
+			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			.andReturns("getReferencedValues", asList("a", "b")).andNoOtherMyOps()
 			// Their
-			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 2).andReturns("getNewValue", "X")
-			.andNoOtherTheirOps();
+			.theirsIs(MultiAttributeSetOperation.class).andReturns("getNewValue", "X").andNoOtherTheirOps();
 	}
 
 	/**
@@ -485,9 +483,9 @@ public class MultiAttributeMergeTest extends MergeTest {
 
 		mergeCase.hasConflict(MultiAttributeSetSetConflict.class)
 		// My
-			.myIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "Y")
+			.myIs(MultiAttributeSetOperation.class).andReturns("getNewValue", "Y")
 			// Theirs
-			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "X");
+			.theirsIs(MultiAttributeSetOperation.class).andReturns("getNewValue", "X");
 	}
 
 	@Test

@@ -27,7 +27,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 
 /**
  * Helper super class for merge tests.
@@ -211,14 +210,13 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T extends AbstractOperation> T getMy(Class<T> class1, int i) {
-			List<AbstractOperation> ops = currentConflict().getMyOperations();
-			assertTrue(ops.size() > i);
-			if (!class1.isInstance(ops.get(i))) {
+		public <T extends AbstractOperation> T getMy(Class<T> class1) {
+			AbstractOperation myOp = currentConflict().getMyOperation();
+			if (!class1.isInstance(myOp)) {
 				throw new AssertionError("Expected: " + class1.getName() + " but found: "
-					+ ((ops.get(i) == null) ? "null" : ops.get(i).getClass().getName()));
+					+ ((myOp == null) ? "null" : myOp.getClass().getName()));
 			}
-			return (T) ops.get(i);
+			return (T) myOp;
 		}
 
 		@SuppressWarnings("unchecked")
@@ -229,21 +227,31 @@ public class MergeTest extends ConflictDetectionTest {
 			return (T) ops.get(i);
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery myIs(Class<T> class1) {
-			return myIs(class1, 0);
+		@SuppressWarnings("unchecked")
+		public <T extends AbstractOperation> T getTheir(Class<T> class1) {
+			AbstractOperation theirOp = currentConflict().getTheirOperation();
+			assertTrue(class1.isInstance(theirOp));
+			return (T) theirOp;
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery myIs(Class<T> class1, int index) {
-			last(true, getMy(class1, index));
+		public <T extends AbstractOperation> MergeTestQuery myIs(Class<T> class1) {
+			last(true, getMy(class1));
 			return this;
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1) {
-			return theirsIs(class1, 0);
+		public <T extends AbstractOperation> MergeTestQuery myOtherContains(Class<T> class1) {
+			List<AbstractOperation> ops = currentConflict().getMyOperations();
+			for (AbstractOperation op : ops) {
+				if (class1.isInstance(op) && op != currentConflict().getMyOperation()) {
+					last(true, op);
+					return this;
+				}
+			}
+			throw new AssertionError("Expected: " + class1.getName() + " in other my operations but was not found");
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1, int index) {
-			last(false, getTheirs(class1, index));
+		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1) {
+			last(false, getTheir(class1));
 			return this;
 		}
 
@@ -285,13 +293,6 @@ public class MergeTest extends ConflictDetectionTest {
 			} catch (InvocationTargetException e) {
 			}
 			throw new AssertionError("No such method");
-		}
-
-		private int myCounter = 0;
-
-		public MergeTestQuery andMyIs(Class<AttributeOperation> class1) {
-			myIs(class1, ++myCounter);
-			return this;
 		}
 	}
 }
