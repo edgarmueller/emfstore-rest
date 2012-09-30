@@ -75,13 +75,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenc
  */
 public class DecisionManager {
 
+	private static final int MAX_BUCKET_SIZE = 1000000;
 	private final Project project;
 	private final List<ChangePackage> myChangePackages;
 	private final List<ChangePackage> theirChangePackages;
 	private ConflictDetector conflictDetector;
 
 	private ArrayList<Conflict> conflicts;
-	private ArrayList<AbstractOperation> notInvolvedInConflict;
+	private Set<AbstractOperation> notInvolvedInConflict;
 	private ArrayList<AbstractOperation> acceptedMine;
 	private ArrayList<AbstractOperation> rejectedTheirs;
 	private final PrimaryVersionSpec baseVersion;
@@ -169,7 +170,7 @@ public class DecisionManager {
 
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
-		notInvolvedInConflict = new ArrayList<AbstractOperation>();
+		notInvolvedInConflict = new HashSet<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
 		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new HashSet<ConflictBucketCandidate>();
@@ -243,7 +244,18 @@ public class DecisionManager {
 		Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
 		// check for conflicts WITHIN one ConflictBucket candidate
 		Set<ConflictBucket> conflictBucketsSet = new HashSet<ConflictBucket>();
+
 		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {
+
+			// if bucket is too large, it will not be checked manually
+			if (conflictBucketCandidate.getMyOperations().size() * conflictBucketCandidate.getTheirOperations().size() > MAX_BUCKET_SIZE) {
+				ConflictBucket newConflictBucket = new ConflictBucket(conflictBucketCandidate.getMyOperations(),
+					conflictBucketCandidate.getTheirOperations());
+				newConflictBucket.setMyOperation(conflictBucketCandidate.getMyOperations().iterator().next());
+				newConflictBucket.setTheirOperation(conflictBucketCandidate.getTheirOperations().iterator().next());
+				conflictBucketsSet.add(newConflictBucket);
+				continue;
+			}
 
 			Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new HashMap<AbstractOperation, ConflictBucket>();
 
@@ -277,7 +289,7 @@ public class DecisionManager {
 							myConflictBucket.getTheirOperationsSet()
 								.addAll(theirConflictBucket.getTheirOperationsSet());
 							for (AbstractOperation op : theirConflictBucket.getTheirOperationsSet()) {
-								operationToConflictBucketMap.put(op, theirConflictBucket);
+								operationToConflictBucketMap.put(op, myConflictBucket);
 							}
 
 							conflictBucketsSet.remove(theirConflictBucket);
@@ -288,8 +300,10 @@ public class DecisionManager {
 					// only not involved my operations have to be recorded
 					notInvolvedInConflict.add(myOperation);
 				}
+
 			}
 		}
+
 		return conflictBucketsSet;
 	}
 
@@ -807,6 +821,7 @@ public class DecisionManager {
 	 *            id of element.
 	 * @return modelelement
 	 */
+	// TODO: SLOW!
 	public EObject getModelElement(ModelElementId modelElementId) {
 		EObject modelElement = project.getModelElement(modelElementId);
 		if (modelElement == null) {

@@ -132,11 +132,11 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		for (AbstractOperation operationToReverse : getRejectedTheirs()) {
 			mergeResult.add(0, operationToReverse.reverse());
 		}
+
 		mergeResult.addAll(getAcceptedMine());
 		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
 		result.getOperations().addAll(mergeResult);
 
 		return result;
 	}
-
 }

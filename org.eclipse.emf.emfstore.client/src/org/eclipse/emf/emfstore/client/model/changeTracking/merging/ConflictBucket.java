@@ -21,6 +21,11 @@ public class ConflictBucket {
 		theirOperations.add(theirOperation);
 	}
 
+	public ConflictBucket(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations) {
+		this.myOperations = myOperations;
+		this.theirOperations = theirOperations;
+	}
+
 	public int size() {
 		return theirOperations.size() + myOperations.size();
 	}
