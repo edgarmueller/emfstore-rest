@@ -496,6 +496,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
 		Set<ModelElementId> result = new HashSet<ModelElementId>();
 		result.addAll(getEObjectToIdMap().values());
+		result.remove(getModelElementId());
 		for (ReferenceOperation operation : getSubOperations()) {
 			result.addAll(operation.getAllInvolvedModelElements());
 		}
