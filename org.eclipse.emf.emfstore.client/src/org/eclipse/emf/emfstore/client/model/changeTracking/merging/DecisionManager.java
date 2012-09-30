@@ -178,13 +178,12 @@ public class DecisionManager {
 		Set<ConflictBucket> conflictBucketsSet = scanForConflictsWithinCandidates(conflictBucketsCandidateSet);
 		conflictBucketsCandidateSet = null;
 
-		// sort operations in ConflictBuckets
-		sortOperationsinBucketsbyPriority(myOperations, theirOperations, conflictBucketsSet);
+		findLastOperationsinBucketsbyPriority(myOperations, theirOperations, conflictBucketsSet);
 
 		createConflicts(conflictBucketsSet);
 	}
 
-	private void sortOperationsinBucketsbyPriority(List<AbstractOperation> myOperations,
+	private void findLastOperationsinBucketsbyPriority(List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations, Set<ConflictBucket> conflictBucketsSet) {
 		Map<AbstractOperation, Integer> myOperationToPriorityMap = new HashMap<AbstractOperation, Integer>(
 			myOperations.size());
@@ -286,6 +285,7 @@ public class DecisionManager {
 					}
 				}
 				if (!involved) {
+					// only not involved my operations have to be recorded
 					notInvolvedInConflict.add(myOperation);
 				}
 			}
@@ -293,50 +293,50 @@ public class DecisionManager {
 		return conflictBucketsSet;
 	}
 
-	private void scanOperationIntoConflictBucket(Set<ConflictBucketCandidate> ConflictBucketsSet,
+	private void scanOperationIntoConflictBucket(Set<ConflictBucketCandidate> conflictBucketsSet,
 		Map<String, ConflictBucketCandidate> idToConflictBucketMap, AbstractOperation operation, boolean isMyOperation) {
 		Set<String> allInvolvedModelElements = extractStringSetFromIds(operation.getAllInvolvedModelElements());
 		ConflictBucketCandidate currentOperationsConflictBucket = null;
 		for (String modelElementId : allInvolvedModelElements) {
-			ConflictBucketCandidate ConflictBucket = idToConflictBucketMap.get(modelElementId.toString());
+			ConflictBucketCandidate conflictBucket = idToConflictBucketMap.get(modelElementId.toString());
 
-			if (ConflictBucket == null && currentOperationsConflictBucket == null) {
+			if (conflictBucket == null && currentOperationsConflictBucket == null) {
 				// no existing ConflictBucket for id or current op => create new ConflictBucket
 				currentOperationsConflictBucket = new ConflictBucketCandidate();
-				ConflictBucketsSet.add(currentOperationsConflictBucket);
+				conflictBucketsSet.add(currentOperationsConflictBucket);
 				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
 				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
-			} else if (ConflictBucket == currentOperationsConflictBucket) {
+			} else if (conflictBucket == currentOperationsConflictBucket) {
 				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
 				currentOperationsConflictBucket.addModelElementId(modelElementId);
-			} else if (ConflictBucket == null && currentOperationsConflictBucket != null) {
+			} else if (conflictBucket == null && currentOperationsConflictBucket != null) {
 				// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
 				// ConflictBucket
 				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
 				currentOperationsConflictBucket.addModelElementId(modelElementId);
 
-			} else if (ConflictBucket != null && currentOperationsConflictBucket == null) {
+			} else if (conflictBucket != null && currentOperationsConflictBucket == null) {
 				// existing ConflictBucket for id but none for operation => keep id ConflictBucket
-				currentOperationsConflictBucket = ConflictBucket;
+				currentOperationsConflictBucket = conflictBucket;
 				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
 
 			} else {
 				// existing ConflictBucket for both id and operation => merge ConflictBuckets based on size
-				currentOperationsConflictBucket = mergeConflictBuckets(ConflictBucketsSet, idToConflictBucketMap,
-					currentOperationsConflictBucket, ConflictBucket);
+				currentOperationsConflictBucket = mergeConflictBuckets(conflictBucketsSet, idToConflictBucketMap,
+					currentOperationsConflictBucket, conflictBucket);
 				currentOperationsConflictBucket.addModelElementId(modelElementId);
 			}
 		}
 	}
 
-	private ConflictBucketCandidate mergeConflictBuckets(Set<ConflictBucketCandidate> ConflictBucketsSet,
+	private ConflictBucketCandidate mergeConflictBuckets(Set<ConflictBucketCandidate> conflictBucketsSet,
 		Map<String, ConflictBucketCandidate> idToConflictBucketMap,
-		ConflictBucketCandidate currentOperationsConflictBucket, ConflictBucketCandidate ConflictBucket) {
+		ConflictBucketCandidate currentOperationsConflictBucket, ConflictBucketCandidate conflictBucket) {
 		ConflictBucketCandidate biggerBucket = currentOperationsConflictBucket;
-		ConflictBucketCandidate smallerBucket = ConflictBucket;
+		ConflictBucketCandidate smallerBucket = conflictBucket;
 
-		if (ConflictBucket.size() > currentOperationsConflictBucket.size()) {
-			biggerBucket = ConflictBucket;
+		if (conflictBucket.size() > currentOperationsConflictBucket.size()) {
+			biggerBucket = conflictBucket;
 			smallerBucket = currentOperationsConflictBucket;
 		}
 
@@ -346,7 +346,7 @@ public class DecisionManager {
 		for (String id : smallerBucket.getInvolvedIds()) {
 			idToConflictBucketMap.put(id, biggerBucket);
 		}
-		ConflictBucketsSet.remove(smallerBucket);
+		conflictBucketsSet.remove(smallerBucket);
 
 		return biggerBucket;
 	}
@@ -526,7 +526,7 @@ public class DecisionManager {
 
 	private Conflict createMultiAttSetSet(ConflictBucket conf) {
 		return new MultiAttributeSetSetConflict(conf.getMyOperations(), conf.getTheirOperations(),
-			conf.getTheirOperation(), conf.getMyOperation(), this);
+			conf.getMyOperation(), conf.getTheirOperation(), this);
 	}
 
 	private Conflict createMultiAtt(ConflictBucket conf) {
