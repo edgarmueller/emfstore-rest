@@ -825,7 +825,7 @@ public class DecisionManager {
 	public EObject getModelElement(ModelElementId modelElementId) {
 		EObject modelElement = project.getModelElement(modelElementId);
 		if (modelElement == null) {
-			for (ChangePackage cp : theirChangePackages) {
+			for (ChangePackage cp : myChangePackages) {
 				modelElement = searchForCreatedME(modelElementId, cp.getOperations());
 				if (modelElement != null) {
 					break;
