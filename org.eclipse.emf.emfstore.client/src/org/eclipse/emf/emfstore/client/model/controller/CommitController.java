@@ -125,7 +125,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
 				Versions.createHEAD(getProjectSpace().getBaseVersion()));
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
-				if (!callback.baseVersionOutOfDate(getProjectSpace())) {
+				if (!callback.baseVersionOutOfDate(getProjectSpace(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();
 				}
 			}
