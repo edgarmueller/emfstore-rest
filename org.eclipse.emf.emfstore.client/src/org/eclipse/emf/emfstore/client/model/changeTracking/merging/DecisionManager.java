@@ -24,8 +24,8 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -170,10 +170,10 @@ public class DecisionManager {
 
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
-		notInvolvedInConflict = new HashSet<AbstractOperation>();
+		notInvolvedInConflict = new LinkedHashSet<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
-		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new HashSet<ConflictBucketCandidate>();
+		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new LinkedHashSet<ConflictBucketCandidate>();
 		scanOperationsIntoCandidateBuckets(myOperations, theirOperations, conflictBucketsCandidateSet);
 
 		Set<ConflictBucket> conflictBucketsSet = scanForConflictsWithinCandidates(conflictBucketsCandidateSet);
@@ -186,7 +186,7 @@ public class DecisionManager {
 
 	private void findLastOperationsinBucketsbyPriority(List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations, Set<ConflictBucket> conflictBucketsSet) {
-		Map<AbstractOperation, Integer> myOperationToPriorityMap = new HashMap<AbstractOperation, Integer>(
+		Map<AbstractOperation, Integer> myOperationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>(
 			myOperations.size());
 		int counter = 0;
 		for (AbstractOperation myOperation : myOperations) {
@@ -207,7 +207,7 @@ public class DecisionManager {
 		}
 
 		counter = 0;
-		Map<AbstractOperation, Integer> theirOperationToPriorityMap = new HashMap<AbstractOperation, Integer>(
+		Map<AbstractOperation, Integer> theirOperationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>(
 			theirOperations.size());
 		for (AbstractOperation theirOperation : theirOperations) {
 			theirOperationToPriorityMap.put(theirOperation, counter);
@@ -229,7 +229,7 @@ public class DecisionManager {
 
 	private void scanOperationsIntoCandidateBuckets(List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations, Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
-		Map<String, ConflictBucketCandidate> idToConflictBucketMap = new HashMap<String, ConflictBucketCandidate>();
+		Map<String, ConflictBucketCandidate> idToConflictBucketMap = new LinkedHashMap<String, ConflictBucketCandidate>();
 
 		for (AbstractOperation myOperation : myOperations) {
 			scanOperationIntoConflictBucket(conflictBucketsCandidateSet, idToConflictBucketMap, myOperation, true);
@@ -243,7 +243,7 @@ public class DecisionManager {
 	private Set<ConflictBucket> scanForConflictsWithinCandidates(
 		Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
 		// check for conflicts WITHIN one ConflictBucket candidate
-		Set<ConflictBucket> conflictBucketsSet = new HashSet<ConflictBucket>();
+		Set<ConflictBucket> conflictBucketsSet = new LinkedHashSet<ConflictBucket>();
 
 		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {
 
@@ -257,7 +257,7 @@ public class DecisionManager {
 				continue;
 			}
 
-			Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new HashMap<AbstractOperation, ConflictBucket>();
+			Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new LinkedHashMap<AbstractOperation, ConflictBucket>();
 
 			for (AbstractOperation myOperation : conflictBucketCandidate.getMyOperations()) {
 
@@ -366,7 +366,7 @@ public class DecisionManager {
 	}
 
 	private Set<String> extractStringSetFromIds(Set<ModelElementId> allInvolvedModelElements) {
-		Set<String> result = new HashSet<String>(allInvolvedModelElements.size());
+		Set<String> result = new LinkedHashSet<String>(allInvolvedModelElements.size());
 		for (ModelElementId modelElementId : allInvolvedModelElements) {
 			result.add(modelElementId.getId());
 		}

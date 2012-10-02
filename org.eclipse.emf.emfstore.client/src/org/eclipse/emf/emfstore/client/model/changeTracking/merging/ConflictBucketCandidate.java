@@ -1,6 +1,6 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -12,9 +12,9 @@ public class ConflictBucketCandidate {
 	private Set<AbstractOperation> theirOperations;
 
 	public ConflictBucketCandidate() {
-		involvedIds = new HashSet<String>();
-		myOperations = new HashSet<AbstractOperation>();
-		theirOperations = new HashSet<AbstractOperation>();
+		involvedIds = new LinkedHashSet<String>();
+		myOperations = new LinkedHashSet<AbstractOperation>();
+		theirOperations = new LinkedHashSet<AbstractOperation>();
 	}
 
 	public void addOperation(AbstractOperation operation, String modelElementId, boolean isMyOperation) {

@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,9 +15,9 @@ public class ConflictBucket {
 	private AbstractOperation theirOperation;
 
 	public ConflictBucket(AbstractOperation myOperation, AbstractOperation theirOperation) {
-		myOperations = new HashSet<AbstractOperation>();
+		myOperations = new LinkedHashSet<AbstractOperation>();
 		myOperations.add(myOperation);
-		theirOperations = new HashSet<AbstractOperation>();
+		theirOperations = new LinkedHashSet<AbstractOperation>();
 		theirOperations.add(theirOperation);
 	}
 
