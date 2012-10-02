@@ -108,12 +108,12 @@ public class DescriptionComponent extends Composite {
 			if (split.length > 1) {
 				Object obj = conflict.getValues().get(split[0]);
 				String tmp = "";
-				if (obj instanceof EObject) {
-					tmp = DecisionUtil.getClassAndName((EObject) obj);
-					tmp = DecisionUtil.cutString(tmp, 45, true);
-				} else if (obj instanceof AbstractOperation) {
+				if (obj instanceof AbstractOperation) {
 					tmp = visualHelper.getDescription((AbstractOperation) obj);
 					visualHelper.dispose();
+				} else if (obj instanceof EObject) {
+					tmp = DecisionUtil.getClassAndName((EObject) obj);
+					tmp = DecisionUtil.cutString(tmp, 45, true);
 				} else if (obj != null) {
 					tmp = obj.toString();
 					tmp = UIDecisionUtil.cutString(tmp, 85, true);

@@ -99,7 +99,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IDisposable {
+	IApplyChangesCallback, IDisposable {
 
 	private FileTransferManager fileTransferManager;
 
@@ -169,6 +169,32 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * Helper method delegating the call to {@link #applyChangesIntern(PrimaryVersionSpec, List, ChangePackage)} to an
+	 * {@link IApplyChangesWrapper}. If no {@link IApplyChangesWrapper} is registered the
+	 * {@link #applyChangesIntern(PrimaryVersionSpec, List, ChangePackage)} method is called directly.
+	 * 
+	 * @param baseSpec
+	 *            new base version
+	 * @param incoming
+	 *            changes from the current branch
+	 * @param myChanges
+	 *            merged changes
+	 */
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
+
+		ExtensionElement wrapper = new ExtensionPoint("org.eclipse.emf.emfstore.client.wrapper.applychanges")
+			.setThrowException(false).getFirst();
+
+		if (wrapper != null) {
+			IApplyChangesWrapper applyChangesWrapper = wrapper.getClass("class", IApplyChangesWrapper.class);
+			applyChangesWrapper.wrapApplyChanges(this, baseSpec, incoming, myChanges);
+		} else {
+			applyChangesIntern(baseSpec, incoming, myChanges);
+		}
+
+	}
+
+	/**
 	 * Helper method which applies merged changes on the projectspace. This
 	 * method is used by merge mechanisms in update as well as branch merging.
 	 * 
@@ -179,7 +205,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @param myChanges
 	 *            merged changes
 	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
+	public void applyChangesIntern(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
 		// revert
 		revert();
 

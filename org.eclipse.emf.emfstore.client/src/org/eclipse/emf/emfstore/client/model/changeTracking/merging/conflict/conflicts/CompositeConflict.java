@@ -84,9 +84,14 @@ public class CompositeConflict extends Conflict {
 		theirOption.addOperations(getTheirOperations());
 
 		String composite = ((CompositeOperation) getLeftOperation()).getCompositeName();
-		String other = "Change related to "
-			+ DecisionUtil.getClassAndName(getDecisionManager()
-				.getModelElement(getRightOperation().getModelElementId()));
+		String other = null;
+		if (getRightOperation() instanceof CompositeOperation) {
+			other = ((CompositeOperation) getRightOperation()).getCompositeName();
+		} else {
+			other = "Change related to "
+				+ DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
+					getRightOperation().getModelElementId()));
+		}
 
 		if (isLeftMy()) {
 			myOption.setOptionLabel(composite);

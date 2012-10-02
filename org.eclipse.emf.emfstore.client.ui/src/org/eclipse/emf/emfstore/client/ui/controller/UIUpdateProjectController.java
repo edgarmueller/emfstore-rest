@@ -163,11 +163,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = RunInUI.WithException.runWithResult(new Callable<PrimaryVersionSpec>() {
-			public PrimaryVersionSpec call() throws Exception {
-				return projectSpace.update(version, UIUpdateProjectController.this, monitor);
-			}
-		});
+		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}
