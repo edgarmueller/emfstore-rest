@@ -14,7 +14,6 @@ import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
-import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -72,11 +71,9 @@ public class ShareController extends ServerCall<Void> {
 		ProjectInfo createdProject = null;
 
 		getProjectSpace().stopChangeRecording();
-		Configuration.setAutoSave(false);
 
 		getProgressMonitor().worked(10);
 		if (getProgressMonitor().isCanceled()) {
-			Configuration.setAutoSave(true);
 			getProjectSpace().save();
 			getProjectSpace().startChangeRecording();
 			getProgressMonitor().done();
@@ -109,7 +106,6 @@ public class ShareController extends ServerCall<Void> {
 		this.setUsersession(getUsersession());
 		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
 
-		Configuration.setAutoSave(Configuration.isAutoSaveEnabled());
 		getProjectSpace().save();
 		getProjectSpace().startChangeRecording();
 		getProjectSpace().setBaseVersion(createdProject.getVersion());
