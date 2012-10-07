@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -39,7 +40,7 @@ public class SingleReferenceConflict extends Conflict {
 	 * @param theirOperations list of their operations
 	 * @param decisionManager decisionmanager
 	 */
-	public SingleReferenceConflict(List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations,
+	public SingleReferenceConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
 		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
 	}

@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -37,7 +38,7 @@ public class CompositeConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 * @param meCausing true, if composite caused by merging user
 	 */
-	public CompositeConflict(List<AbstractOperation> composite, List<AbstractOperation> other,
+	public CompositeConflict(Set<AbstractOperation> composite, Set<AbstractOperation> other,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
 		boolean meCausing) {
 		super(composite, other, leftOperation, rightOperation, decisionManager, meCausing, false);

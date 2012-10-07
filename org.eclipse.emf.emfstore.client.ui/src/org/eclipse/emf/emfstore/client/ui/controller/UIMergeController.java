@@ -52,35 +52,28 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
 		if (!projectSpace.getOperations().isEmpty()) {
 			MessageDialog
-					.openError(
-							getShell(),
-							"Merge not possible",
-							"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
+				.openError(getShell(), "Merge not possible",
+					"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
 			return null;
 		}
 		PrimaryVersionSpec selectedSource = branchSelection(projectSpace);
 		if (selectedSource != null) {
-			((ProjectSpaceBase) projectSpace).mergeBranch(selectedSource,
-					new MergeProjectHandler(true));
+			((ProjectSpaceBase) projectSpace).mergeBranch(selectedSource, new MergeProjectHandler(true, null));
 		}
 		return null;
 	}
 
-	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace)
-			throws EmfStoreException {
+	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace) throws EmfStoreException {
 
-		List<BranchInfo> branches = ((ProjectSpaceBase) projectSpace)
-				.getBranches();
+		List<BranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches();
 		ListIterator<BranchInfo> iterator = branches.listIterator();
 		while (iterator.hasNext()) {
 			BranchInfo current = iterator.next();
-			if (current.getName().equals(
-					projectSpace.getBaseVersion().getBranch())) {
+			if (current.getName().equals(projectSpace.getBaseVersion().getBranch())) {
 				iterator.remove();
 			}
 		}
-		BranchSelectionDialog dialog = new BranchSelectionDialog(getShell(),
-				projectSpace.getBaseVersion(), branches);
+		BranchSelectionDialog dialog = new BranchSelectionDialog(getShell(), projectSpace.getBaseVersion(), branches);
 		dialog.setBlockOnOpen(true);
 
 		if (dialog.open() != Dialog.OK || dialog.getResult() == null) {

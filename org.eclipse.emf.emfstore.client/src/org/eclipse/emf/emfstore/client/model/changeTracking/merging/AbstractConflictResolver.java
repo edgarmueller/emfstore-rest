@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -29,6 +30,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	private List<AbstractOperation> acceptedMine;
 	private List<AbstractOperation> rejectedTheirs;
 	private final boolean isBranchMerge;
+	private ChangeConflictException conflictException;
 
 	/**
 	 * Default Constructor.
@@ -37,17 +39,11 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 *            specifies whether two branches are merged oppossed to changes
 	 *            from the same branch.
 	 */
-	public AbstractConflictResolver(boolean isBranchMerge) {
+	public AbstractConflictResolver(boolean isBranchMerge, ChangeConflictException conflictException) {
 		this.isBranchMerge = isBranchMerge;
+		this.conflictException = conflictException;
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
-	}
-
-	/**
-	 * Default constructor.
-	 */
-	public AbstractConflictResolver() {
-		this(false);
 	}
 
 	/**
@@ -82,7 +78,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		preDecisionManagerHook();
 
 		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
-			target, isBranchMerge);
+			target, isBranchMerge, conflictException);
 
 		if (decisionManager.isResolved()) {
 			setResults(decisionManager);

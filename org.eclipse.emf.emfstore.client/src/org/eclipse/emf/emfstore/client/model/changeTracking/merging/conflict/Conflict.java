@@ -11,8 +11,10 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -43,8 +45,8 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @see #Conflict(List, List, DecisionManager)
 	 */
-	private List<AbstractOperation> leftOperations;
-	private List<AbstractOperation> rightOperations;
+	private Set<AbstractOperation> leftOperations;
+	private Set<AbstractOperation> rightOperations;
 	private boolean leftIsMy;
 	private AbstractOperation rightOperation;
 	private AbstractOperation leftOperation;
@@ -64,7 +66,7 @@ public abstract class Conflict extends Observable {
 	 * @param decisionManager
 	 *            decision manager
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
+	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
 		this(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, true, true);
 		this.leftOperation = leftOperation;
@@ -87,7 +89,7 @@ public abstract class Conflict extends Observable {
 	 *            allows to deactivate initialization, has to be done manually
 	 *            otherwise.
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
+	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
 		boolean leftIsMy, boolean init) {
 		this.leftOperation = leftOperation;
@@ -275,12 +277,12 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of ops.
 	 */
-	public List<AbstractOperation> getRejectedTheirs() {
+	public Set<AbstractOperation> getRejectedTheirs() {
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
-			return new ArrayList<AbstractOperation>();
+			return Collections.emptySet();
 		} else {
 			for (ConflictOption options : getOptions()) {
 				if (options.getType() == OptionType.TheirOperation) {
@@ -298,12 +300,12 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of ops
 	 */
-	public List<AbstractOperation> getAcceptedMine() {
+	public Set<AbstractOperation> getAcceptedMine() {
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
-			return new ArrayList<AbstractOperation>();
+			return Collections.emptySet();
 		} else {
 			return solution.getOperations();
 		}
@@ -325,7 +327,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getMyOperations() {
+	public Set<AbstractOperation> getMyOperations() {
 		return ((leftIsMy) ? leftOperations : rightOperations);
 	}
 
@@ -334,7 +336,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getTheirOperations() {
+	public Set<AbstractOperation> getTheirOperations() {
 		return ((!leftIsMy) ? leftOperations : rightOperations);
 	}
 
@@ -343,7 +345,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getLeftOperations() {
+	public Set<AbstractOperation> getLeftOperations() {
 		return leftOperations;
 	}
 
@@ -352,7 +354,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getRightOperations() {
+	public Set<AbstractOperation> getRightOperations() {
 		return rightOperations;
 	}
 

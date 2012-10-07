@@ -1,12 +1,27 @@
-package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
+/*******************************************************************************
+ * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
+package org.eclipse.emf.emfstore.server.conflictDetection;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
+/**
+ * Represents a bucket of conflicting operations sets. In this context my operations are operations authored/owned by
+ * the current user while their operation are incomming operations from another user.
+ * 
+ * @author koegel
+ * 
+ */
 public class ConflictBucket {
 
 	private Set<AbstractOperation> myOperations;
@@ -14,6 +29,12 @@ public class ConflictBucket {
 	private AbstractOperation myOperation;
 	private AbstractOperation theirOperation;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param myOperation initial my operation
+	 * @param theirOperation initial their operation
+	 */
 	public ConflictBucket(AbstractOperation myOperation, AbstractOperation theirOperation) {
 		myOperations = new LinkedHashSet<AbstractOperation>();
 		myOperations.add(myOperation);
@@ -21,11 +42,21 @@ public class ConflictBucket {
 		theirOperations.add(theirOperation);
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param myOperations initial set of my operations
+	 * @param theirOperations initial set of their operations
+	 */
 	public ConflictBucket(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations) {
 		this.myOperations = myOperations;
 		this.theirOperations = theirOperations;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int size() {
 		return theirOperations.size() + myOperations.size();
 	}
@@ -38,12 +69,12 @@ public class ConflictBucket {
 		return theirOperations;
 	}
 
-	public List<AbstractOperation> getMyOperations() {
-		return new ArrayList<AbstractOperation>(myOperations);
+	public Set<AbstractOperation> getMyOperations() {
+		return myOperations;
 	}
 
-	public List<AbstractOperation> getTheirOperations() {
-		return new ArrayList<AbstractOperation>(theirOperations);
+	public Set<AbstractOperation> getTheirOperations() {
+		return theirOperations;
 	}
 
 	public AbstractOperation getMyOperation() {

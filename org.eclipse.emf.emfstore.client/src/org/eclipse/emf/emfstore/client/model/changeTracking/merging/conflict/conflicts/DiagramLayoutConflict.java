@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictDescription;
@@ -34,7 +35,7 @@ public class DiagramLayoutConflict extends AttributeConflict {
 	 * @param theirOperations list of their operations
 	 * @param decisionManager decisionmanager
 	 */
-	public DiagramLayoutConflict(List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations,
+	public DiagramLayoutConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
 		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
 	}

@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
@@ -20,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -79,7 +82,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	}
 
 	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EmfStoreException {
-		getProgressMonitor().beginTask("Updating Project", 100);
+		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
@@ -111,15 +114,19 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Checking for conflicts");
 
 		ConflictDetector conflictDetector = new ConflictDetector();
-		for (ChangePackage change : changes) {
-			if (conflictDetector.doConflict(change, localchanges)) {
-				if (callback
-					.conflictOccurred(new ChangeConflictException(changes, getProjectSpace(), conflictDetector))) {
-					return getProjectSpace().getBaseVersion();
-				} else {
-					throw new ChangeConflictException(changes, getProjectSpace(), conflictDetector);
-				}
+
+		Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.scanOperationsIntoCandidateBuckets(
+			Collections.singletonList(localchanges), changes);
+		boolean potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
+
+		if (potentialConflictsDetected) {
+			getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
+			ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(), localchanges,
+				changes, conflictBucketCandidates);
+			if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
+				return getProjectSpace().getBaseVersion();
 			}
+			throw conflictException;
 		}
 
 		getProgressMonitor().worked(15);

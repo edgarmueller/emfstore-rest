@@ -16,6 +16,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.co
 //
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -27,7 +28,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 
 public class MultiAttributeMoveSetConflict extends Conflict {
 
-	public MultiAttributeMoveSetConflict(List<AbstractOperation> opsA, List<AbstractOperation> opsB,
+	public MultiAttributeMoveSetConflict(Set<AbstractOperation> opsA, Set<AbstractOperation> opsB,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
 		boolean isMySet) {
 		super(opsA, opsB, leftOperation, rightOperation, decisionManager, isMySet, true);

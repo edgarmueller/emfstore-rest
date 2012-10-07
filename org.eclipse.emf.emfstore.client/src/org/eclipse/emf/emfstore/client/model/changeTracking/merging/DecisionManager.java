@@ -24,10 +24,9 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -50,12 +49,14 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.ReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
@@ -75,7 +76,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenc
  */
 public class DecisionManager {
 
-	private static final int MAX_BUCKET_SIZE = 1000000;
 	private final Project project;
 	private final List<ChangePackage> myChangePackages;
 	private final List<ChangePackage> theirChangePackages;
@@ -89,6 +89,7 @@ public class DecisionManager {
 	private final PrimaryVersionSpec targetVersion;
 	private List<ConflictHandler> conflictHandler;
 	private final boolean isBranchMerge;
+	private ChangeConflictException conflictException;
 
 	/**
 	 * Default constructor.
@@ -110,45 +111,17 @@ public class DecisionManager {
 	 */
 	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
 		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion,
-		boolean isBranchMerge) {
+		boolean isBranchMerge, ChangeConflictException conflictException) {
 		this.project = project;
 		this.myChangePackages = myChangePackages;
 		this.theirChangePackages = theirChangePackages;
 		this.baseVersion = baseVersion;
 		this.targetVersion = targetVersion;
 		this.isBranchMerge = isBranchMerge;
-		this.conflictDetector = initConflictDetector();
+		this.conflictException = conflictException;
 		this.conflictHandler = initConflictHandlers();
+		this.conflictDetector = new ConflictDetector();
 		init();
-	}
-
-	/**
-	 * Default constructor for merge on same branch.
-	 * 
-	 * @param project
-	 *            current project
-	 * @param myChangePackages
-	 *            my changes
-	 * @param theirChangePackages
-	 *            changes from repo
-	 * @param baseVersion
-	 *            current base version
-	 * @param targetVersion
-	 *            version to which is updated
-	 */
-	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion) {
-		this(project, myChangePackages, theirChangePackages, baseVersion, targetVersion, false);
-	}
-
-	private ConflictDetector initConflictDetector() {
-		ConflictDetectionStrategy strategy = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
-			ConflictDetectionStrategy.class);
-		if (strategy != null) {
-			return new ConflictDetector(strategy);
-		}
-		return new ConflictDetector();
 	}
 
 	private List<ConflictHandler> initConflictHandlers() {
@@ -165,220 +138,24 @@ public class DecisionManager {
 
 	private void init() {
 		// flatten operations
-		List<AbstractOperation> myOperations = flattenChangepackages(myChangePackages);
-		List<AbstractOperation> theirOperations = flattenChangepackages(theirChangePackages);
 
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
-		notInvolvedInConflict = new LinkedHashSet<AbstractOperation>();
 
 		conflicts = new ArrayList<Conflict>();
-		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new LinkedHashSet<ConflictBucketCandidate>();
-		scanOperationsIntoCandidateBuckets(myOperations, theirOperations, conflictBucketsCandidateSet);
+		notInvolvedInConflict = new LinkedHashSet<AbstractOperation>();
 
-		Set<ConflictBucket> conflictBucketsSet = scanForConflictsWithinCandidates(conflictBucketsCandidateSet);
-		conflictBucketsCandidateSet = null;
-
-		findLastOperationsinBucketsbyPriority(myOperations, theirOperations, conflictBucketsSet);
+		Set<ConflictBucketCandidate> conflictBucketCandidates;
+		if (conflictException != null) {
+			conflictBucketCandidates = conflictException.getConflictBucketCandidates();
+		} else {
+			conflictBucketCandidates = new ConflictDetector().scanOperationsIntoCandidateBuckets(myChangePackages,
+				theirChangePackages);
+		}
+		Set<ConflictBucket> conflictBucketsSet = conflictDetector.scanForConflictsWithinCandidates(
+			conflictBucketCandidates, notInvolvedInConflict);
 
 		createConflicts(conflictBucketsSet);
-	}
-
-	private void findLastOperationsinBucketsbyPriority(List<AbstractOperation> myOperations,
-		List<AbstractOperation> theirOperations, Set<ConflictBucket> conflictBucketsSet) {
-		Map<AbstractOperation, Integer> myOperationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>(
-			myOperations.size());
-		int counter = 0;
-		for (AbstractOperation myOperation : myOperations) {
-			myOperationToPriorityMap.put(myOperation, counter);
-			counter++;
-		}
-		for (ConflictBucket conflictBucket : conflictBucketsSet) {
-			Integer maxPriority = -1;
-			AbstractOperation maxOperation = null;
-			for (AbstractOperation myOperation : conflictBucket.getMyOperationsSet()) {
-				Integer currentPrio = myOperationToPriorityMap.get(myOperation);
-				if (currentPrio > maxPriority) {
-					maxPriority = currentPrio;
-					maxOperation = myOperation;
-				}
-			}
-			conflictBucket.setMyOperation(maxOperation);
-		}
-
-		counter = 0;
-		Map<AbstractOperation, Integer> theirOperationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>(
-			theirOperations.size());
-		for (AbstractOperation theirOperation : theirOperations) {
-			theirOperationToPriorityMap.put(theirOperation, counter);
-			counter++;
-		}
-		for (ConflictBucket conflictBucket : conflictBucketsSet) {
-			Integer maxPriority = -1;
-			AbstractOperation maxOperation = null;
-			for (AbstractOperation theirOperation : conflictBucket.getTheirOperationsSet()) {
-				Integer currentPrio = theirOperationToPriorityMap.get(theirOperation);
-				if (currentPrio > maxPriority) {
-					maxPriority = currentPrio;
-					maxOperation = theirOperation;
-				}
-			}
-			conflictBucket.setTheirOperation(maxOperation);
-		}
-	}
-
-	private void scanOperationsIntoCandidateBuckets(List<AbstractOperation> myOperations,
-		List<AbstractOperation> theirOperations, Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
-		Map<String, ConflictBucketCandidate> idToConflictBucketMap = new LinkedHashMap<String, ConflictBucketCandidate>();
-
-		for (AbstractOperation myOperation : myOperations) {
-			scanOperationIntoConflictBucket(conflictBucketsCandidateSet, idToConflictBucketMap, myOperation, true);
-		}
-
-		for (AbstractOperation theirOperation : theirOperations) {
-			scanOperationIntoConflictBucket(conflictBucketsCandidateSet, idToConflictBucketMap, theirOperation, false);
-		}
-	}
-
-	private Set<ConflictBucket> scanForConflictsWithinCandidates(
-		Set<ConflictBucketCandidate> conflictBucketsCandidateSet) {
-		// check for conflicts WITHIN one ConflictBucket candidate
-		Set<ConflictBucket> conflictBucketsSet = new LinkedHashSet<ConflictBucket>();
-
-		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {
-
-			// if bucket is too large, it will not be checked manually
-			if (conflictBucketCandidate.getMyOperations().size() * conflictBucketCandidate.getTheirOperations().size() > MAX_BUCKET_SIZE) {
-				ConflictBucket newConflictBucket = new ConflictBucket(conflictBucketCandidate.getMyOperations(),
-					conflictBucketCandidate.getTheirOperations());
-				newConflictBucket.setMyOperation(conflictBucketCandidate.getMyOperations().iterator().next());
-				newConflictBucket.setTheirOperation(conflictBucketCandidate.getTheirOperations().iterator().next());
-				conflictBucketsSet.add(newConflictBucket);
-				continue;
-			}
-
-			Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new LinkedHashMap<AbstractOperation, ConflictBucket>();
-
-			for (AbstractOperation myOperation : conflictBucketCandidate.getMyOperations()) {
-
-				boolean involved = false;
-
-				for (AbstractOperation theirOperation : conflictBucketCandidate.getTheirOperations()) {
-
-					if (conflictDetector.doConflict(myOperation, theirOperation)) {
-						involved = true;
-						ConflictBucket myConflictBucket = operationToConflictBucketMap.get(myOperation);
-						ConflictBucket theirConflictBucket = operationToConflictBucketMap.get(theirOperation);
-
-						if (myConflictBucket == null && theirConflictBucket == null) {
-							ConflictBucket newConflictBucket = new ConflictBucket(myOperation, theirOperation);
-							operationToConflictBucketMap.put(myOperation, newConflictBucket);
-							operationToConflictBucketMap.put(theirOperation, newConflictBucket);
-							conflictBucketsSet.add(newConflictBucket);
-						} else if (myConflictBucket != null && theirConflictBucket == null) {
-							myConflictBucket.getTheirOperationsSet().add(theirOperation);
-							operationToConflictBucketMap.put(theirOperation, myConflictBucket);
-						} else if (myConflictBucket == null && theirConflictBucket != null) {
-							theirConflictBucket.getMyOperationsSet().add(myOperation);
-							operationToConflictBucketMap.put(myOperation, theirConflictBucket);
-						} else {
-							myConflictBucket.getMyOperationsSet().addAll(theirConflictBucket.getMyOperationsSet());
-							for (AbstractOperation op : theirConflictBucket.getMyOperationsSet()) {
-								operationToConflictBucketMap.put(op, myConflictBucket);
-							}
-							myConflictBucket.getTheirOperationsSet()
-								.addAll(theirConflictBucket.getTheirOperationsSet());
-							for (AbstractOperation op : theirConflictBucket.getTheirOperationsSet()) {
-								operationToConflictBucketMap.put(op, myConflictBucket);
-							}
-
-							conflictBucketsSet.remove(theirConflictBucket);
-						}
-					}
-				}
-				if (!involved) {
-					// only not involved my operations have to be recorded
-					notInvolvedInConflict.add(myOperation);
-				}
-
-			}
-		}
-
-		return conflictBucketsSet;
-	}
-
-	private void scanOperationIntoConflictBucket(Set<ConflictBucketCandidate> conflictBucketsSet,
-		Map<String, ConflictBucketCandidate> idToConflictBucketMap, AbstractOperation operation, boolean isMyOperation) {
-		Set<String> allInvolvedModelElements = extractStringSetFromIds(operation.getAllInvolvedModelElements());
-		ConflictBucketCandidate currentOperationsConflictBucket = null;
-		for (String modelElementId : allInvolvedModelElements) {
-			ConflictBucketCandidate conflictBucket = idToConflictBucketMap.get(modelElementId.toString());
-
-			if (conflictBucket == null && currentOperationsConflictBucket == null) {
-				// no existing ConflictBucket for id or current op => create new ConflictBucket
-				currentOperationsConflictBucket = new ConflictBucketCandidate();
-				conflictBucketsSet.add(currentOperationsConflictBucket);
-				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
-				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
-			} else if (conflictBucket == currentOperationsConflictBucket) {
-				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
-				currentOperationsConflictBucket.addModelElementId(modelElementId);
-			} else if (conflictBucket == null && currentOperationsConflictBucket != null) {
-				// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
-				// ConflictBucket
-				idToConflictBucketMap.put(modelElementId, currentOperationsConflictBucket);
-				currentOperationsConflictBucket.addModelElementId(modelElementId);
-
-			} else if (conflictBucket != null && currentOperationsConflictBucket == null) {
-				// existing ConflictBucket for id but none for operation => keep id ConflictBucket
-				currentOperationsConflictBucket = conflictBucket;
-				currentOperationsConflictBucket.addOperation(operation, modelElementId, isMyOperation);
-
-			} else {
-				// existing ConflictBucket for both id and operation => merge ConflictBuckets based on size
-				currentOperationsConflictBucket = mergeConflictBuckets(conflictBucketsSet, idToConflictBucketMap,
-					currentOperationsConflictBucket, conflictBucket);
-				currentOperationsConflictBucket.addModelElementId(modelElementId);
-			}
-		}
-	}
-
-	private ConflictBucketCandidate mergeConflictBuckets(Set<ConflictBucketCandidate> conflictBucketsSet,
-		Map<String, ConflictBucketCandidate> idToConflictBucketMap,
-		ConflictBucketCandidate currentOperationsConflictBucket, ConflictBucketCandidate conflictBucket) {
-		ConflictBucketCandidate biggerBucket = currentOperationsConflictBucket;
-		ConflictBucketCandidate smallerBucket = conflictBucket;
-
-		if (conflictBucket.size() > currentOperationsConflictBucket.size()) {
-			biggerBucket = conflictBucket;
-			smallerBucket = currentOperationsConflictBucket;
-		}
-
-		biggerBucket.getMyOperations().addAll(smallerBucket.getMyOperations());
-		biggerBucket.getTheirOperations().addAll(smallerBucket.getTheirOperations());
-		biggerBucket.getInvolvedIds().addAll(smallerBucket.getInvolvedIds());
-		for (String id : smallerBucket.getInvolvedIds()) {
-			idToConflictBucketMap.put(id, biggerBucket);
-		}
-		conflictBucketsSet.remove(smallerBucket);
-
-		return biggerBucket;
-	}
-
-	private Set<String> extractStringSetFromIds(Set<ModelElementId> allInvolvedModelElements) {
-		Set<String> result = new LinkedHashSet<String>(allInvolvedModelElements.size());
-		for (ModelElementId modelElementId : allInvolvedModelElements) {
-			result.add(modelElementId.getId());
-		}
-		return result;
-	}
-
-	private List<AbstractOperation> flattenChangepackages(List<ChangePackage> cps) {
-		List<AbstractOperation> operations = new ArrayList<AbstractOperation>();
-		for (ChangePackage cp : cps) {
-			operations.addAll(cp.getOperations());
-		}
-		return operations;
 	}
 
 	/**
@@ -642,7 +419,7 @@ public class DecisionManager {
 	}
 
 	private Conflict createSingleSingleConflict(AbstractOperation my, AbstractOperation their) {
-		return new SingleReferenceConflict(Arrays.asList(my), Arrays.asList(their), my, their, this);
+		return new SingleReferenceConflict(Collections.singleton(my), Collections.singleton(their), my, their, this);
 	}
 
 	private Conflict createMultiMultiConflict(ConflictBucket conf) {
@@ -657,9 +434,11 @@ public class DecisionManager {
 
 	private Conflict createMultiMultiConflict(AbstractOperation my, AbstractOperation their) {
 		if (((MultiReferenceOperation) my).isAdd()) {
-			return new MultiReferenceConflict(Arrays.asList(my), Arrays.asList(their), my, their, this, true);
+			return new MultiReferenceConflict(Collections.singleton(my), Collections.singleton(their), my, their, this,
+				true);
 		} else {
-			return new MultiReferenceConflict(Arrays.asList(their), Arrays.asList(my), their, my, this, false);
+			return new MultiReferenceConflict(Collections.singleton(their), Collections.singleton(my), their, my, this,
+				false);
 		}
 	}
 
@@ -736,36 +515,34 @@ public class DecisionManager {
 		if (!isResolved()) {
 			return;
 		}
-		// collect my acknowledge operations
+
+		Set<AbstractOperation> accceptedMineSet = new LinkedHashSet<AbstractOperation>();
+		Set<AbstractOperation> rejectedTheirsSet = new LinkedHashSet<AbstractOperation>();
+
+		for (Conflict conflict : conflicts) {
+			accceptedMineSet.addAll(conflict.getAcceptedMine());
+			rejectedTheirsSet.addAll(conflict.getRejectedTheirs());
+		}
+
+		// collect my accepted operations
 		for (ChangePackage myChangePackage : myChangePackages) {
 			for (AbstractOperation myOp : myChangePackage.getOperations()) {
 				if (notInvolvedInConflict.contains(myOp)) {
 					acceptedMine.add(myOp);
-				} else {
-					for (Conflict conflict : conflicts) {
-						if (conflict.getAcceptedMine().contains(myOp)) {
-							acceptedMine.add(myOp);
-						}
-					}
+				} else if (accceptedMineSet.contains(myOp)) {
+					acceptedMine.add(myOp);
 				}
+				accceptedMineSet.remove(myOp);
 			}
 		}
 
-		// Collect other accepted, which were generated in the merge process
-		for (Conflict conflict : conflicts) {
-			for (AbstractOperation ao : conflict.getAcceptedMine()) {
-				if (!acceptedMine.contains(ao)) {
-					acceptedMine.add(ao);
-				}
-			}
-		}
+		// add all remaining operations in acceptedMineSet (they have been generated during merge)
+		acceptedMine.addAll(accceptedMineSet);
 
 		for (ChangePackage theirCP : theirChangePackages) {
 			for (AbstractOperation theirOp : theirCP.getOperations()) {
-				for (Conflict conflict : conflicts) {
-					if (conflict.getRejectedTheirs().contains(theirOp)) {
-						rejectedTheirs.add(theirOp);
-					}
+				if (rejectedTheirsSet.contains(theirOp)) {
+					rejectedTheirs.add(theirOp);
 				}
 			}
 		}

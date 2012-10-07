@@ -811,6 +811,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @param target
 	 *            target version
+	 * @param newChangePackages
 	 * @param conflictResolver
 	 *            a conflict resolver that will actually perform the conflict
 	 *            resolution
@@ -822,7 +823,8 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @generated NOT
 	 */
-	boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
+	boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage, List<ChangePackage> newChangePackages,
+		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
 	 * Removes a tag to the specified version of this project.

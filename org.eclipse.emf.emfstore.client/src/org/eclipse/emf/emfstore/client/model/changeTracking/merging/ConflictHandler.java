@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
 
 /**
  * Allows to hook in custom conflict treatment for group of conflicting changes.

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -24,6 +25,7 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -154,9 +156,11 @@ public class MergeTest extends ConflictDetectionTest {
 			ensureCopy();
 			PrimaryVersionSpec spec = Versions.createPRIMARY(23);
 
-			DecisionManager manager = new DecisionManager(getProject(), Arrays.asList(getProjectSpace()
-				.getLocalChangePackage(true)), Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true)), spec,
-				spec);
+			List<ChangePackage> myChangePackages = Arrays.asList(getProjectSpace().getLocalChangePackage(true));
+			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
+
+			DecisionManager manager = new DecisionManager(getProject(), myChangePackages, theirChangePackages, spec,
+				spec, false, null);
 
 			return manager;
 		}
@@ -220,14 +224,6 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T extends AbstractOperation> T getTheirs(Class<T> class1, int i) {
-			List<AbstractOperation> ops = currentConflict().getTheirOperations();
-			assertTrue(ops.size() > i);
-			assertTrue(class1.isInstance(ops.get(i)));
-			return (T) ops.get(i);
-		}
-
-		@SuppressWarnings("unchecked")
 		public <T extends AbstractOperation> T getTheir(Class<T> class1) {
 			AbstractOperation theirOp = currentConflict().getTheirOperation();
 			assertTrue(class1.isInstance(theirOp));
@@ -240,7 +236,7 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		public <T extends AbstractOperation> MergeTestQuery myOtherContains(Class<T> class1) {
-			List<AbstractOperation> ops = currentConflict().getMyOperations();
+			Set<AbstractOperation> ops = currentConflict().getMyOperations();
 			for (AbstractOperation op : ops) {
 				if (class1.isInstance(op) && op != currentConflict().getMyOperation()) {
 					last(true, op);

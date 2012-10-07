@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictContext;
@@ -35,7 +36,7 @@ public class ReferenceConflict extends Conflict {
 	 * @param myOps list of my operations
 	 * @param theirOps list of their operations
 	 */
-	public ReferenceConflict(Conflict conflict, List<AbstractOperation> myOps, List<AbstractOperation> theirOps,
+	public ReferenceConflict(Conflict conflict, Set<AbstractOperation> myOps, Set<AbstractOperation> theirOps,
 		AbstractOperation leftOperation, AbstractOperation rightOperation) {
 		super(myOps, theirOps, leftOperation, rightOperation, conflict.getDecisionManager(), conflict.isLeftMy(), false);
 		if (!(conflict instanceof SingleReferenceConflict || conflict instanceof MultiReferenceConflict)) {

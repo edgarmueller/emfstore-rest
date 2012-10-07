@@ -849,15 +849,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @return
 	 */
 	// TODO BRANCH rewrite
-	public boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
+	public boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage,
+		List<ChangePackage> newChangePackages, ConflictResolver conflictResolver, IProgressMonitor progressMonitor)
+		throws EmfStoreException {
 		// merge the conflicts
-		ChangePackage myCp = this.getLocalChangePackage(true);
-		List<ChangePackage> theirCps = this.getChanges(getBaseVersion(), target);
-		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myCp), theirCps, getBaseVersion(), target)) {
+		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myChangePackage), newChangePackages,
+			getBaseVersion(), target)) {
+			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, theirCps, mergedResult);
+			applyChanges(target, newChangePackages, mergedResult);
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**

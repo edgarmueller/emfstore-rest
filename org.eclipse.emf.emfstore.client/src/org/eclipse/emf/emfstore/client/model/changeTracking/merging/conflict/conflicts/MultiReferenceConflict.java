@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.co
 import static org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -41,7 +42,7 @@ public class MultiReferenceConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 * @param meAdding true, if merging user has adding multiref
 	 */
-	public MultiReferenceConflict(List<AbstractOperation> addingOperation, List<AbstractOperation> removingOperation,
+	public MultiReferenceConflict(Set<AbstractOperation> addingOperation, Set<AbstractOperation> removingOperation,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
 		boolean meAdding) {
 		super(addingOperation, removingOperation, leftOperation, rightOperation, decisionManager, meAdding, false);
