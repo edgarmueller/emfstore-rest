@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -88,7 +89,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
  * Project space base class that contains custom user methods.
@@ -99,7 +99,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IApplyChangesCallback, IDisposable {
+	IApplyChangesCallback, IApplyChangesWrapper, IDisposable {
 
 	private FileTransferManager fileTransferManager;
 
@@ -123,6 +123,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private ResourceSet resourceSet;
 
+	private IApplyChangesWrapper applyChangesWrapper;
+
 	/**
 	 * Constructor.
 	 */
@@ -130,6 +132,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		this.propertyMap = new HashMap<String, OrgUnitProperty>();
 		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
 		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
+
+		initApplyChangeWrapper();
+
+	}
+
+	private void initApplyChangeWrapper() {
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.wrapper.applychanges")
+			.setThrowException(false).getFirst();
+		if (extensionElement != null) {
+			applyChangesWrapper = extensionElement.getClass("class", IApplyChangesWrapper.class);
+		}
+		if (applyChangesWrapper == null) {
+			applyChangesWrapper = this;
+		}
 	}
 
 	/**
@@ -169,32 +185,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Helper method delegating the call to {@link #applyChangesIntern(PrimaryVersionSpec, List, ChangePackage)} to an
-	 * {@link IApplyChangesWrapper}. If no {@link IApplyChangesWrapper} is registered the
-	 * {@link #applyChangesIntern(PrimaryVersionSpec, List, ChangePackage)} method is called directly.
-	 * 
-	 * @param baseSpec
-	 *            new base version
-	 * @param incoming
-	 *            changes from the current branch
-	 * @param myChanges
-	 *            merged changes
-	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
-
-		ExtensionElement wrapper = new ExtensionPoint("org.eclipse.emf.emfstore.client.wrapper.applychanges")
-			.setThrowException(false).getFirst();
-
-		if (wrapper != null) {
-			IApplyChangesWrapper applyChangesWrapper = wrapper.getClass("class", IApplyChangesWrapper.class);
-			applyChangesWrapper.wrapApplyChanges(this, baseSpec, incoming, myChanges);
-		} else {
-			applyChangesIntern(baseSpec, incoming, myChanges);
-		}
-
-	}
-
-	/**
 	 * Helper method which applies merged changes on the projectspace. This
 	 * method is used by merge mechanisms in update as well as branch merging.
 	 * 
@@ -205,7 +195,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @param myChanges
 	 *            merged changes
 	 */
-	public void applyChangesIntern(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
 		// revert
 		revert();
 
@@ -221,31 +211,29 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will be
-	 * stopped meanwhile and the operations are added to the project space.
+	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesWrapper#wrapApplyChanges(org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback,
+	 *      org.eclipse.emf.emfstore.client.model.ProjectSpace, java.util.List)
 	 */
-	public void applyOperations(List<AbstractOperation> operations) {
-		applyOperations(operations, true);
+	public void wrapApplyChanges(IApplyChangesCallback callback, ProjectSpace projectSpace,
+		List<AbstractOperation> operations, boolean addOperations) {
+		// default implementation does not wrapping
+		this.applyChangesIntern(projectSpace, operations, addOperations);
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will be
-	 * stopped meanwhile.
+	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
 	 * 
+	 * {@inheritDoc}
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
-	 * @param addOperations
-	 *            whether the operations should be saved in project space
-	 * 
-	 * @see #applyOperationsWithRecording(List, boolean)
+	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback#applyChangesIntern(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      java.util.List, boolean)
 	 */
-	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
+	public void applyChangesIntern(ProjectSpace projectSpace, List<AbstractOperation> operations, boolean addOperations) {
 		stopChangeRecording();
-
 		try {
 			for (AbstractOperation operation : operations) {
 				try {
@@ -266,47 +254,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. This method is used by {@link #importLocalChanges(String)}. This
-	 * method redirects to {@link #applyOperationsWithRecording(List, boolean, boolean)}, using
-	 * false for semantic apply.
+	 * Applies a list of operations to the project. The change tracking will be
+	 * stopped meanwhile.
+	 * 
 	 * 
 	 * @param operations
 	 *            the list of operations to be applied upon the project space
-	 * @param force
-	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
-	 */
-	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force) {
-		applyOperationsWithRecording(operations, force, false);
-	}
-
-	/**
-	 * Applies a list of operations to the project. It is possible to force
-	 * import operations. Change tracking is not stopped while applying the
-	 * changes.
+	 * @param addOperations
+	 *            whether the operations should be saved in project space
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
-	 * @param force
-	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
-	 * @param semanticApply
-	 *            if true, performs a semanticApply, if possible (see {@link SemanticCompositeOperation})
+	 * @see #applyOperationsWithRecording(List, boolean)
 	 */
-	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force, boolean semanticApply) {
-		for (AbstractOperation operation : operations) {
-			try {
-				if (semanticApply && operation instanceof SemanticCompositeOperation) {
-					((SemanticCompositeOperation) operation).semanticApply(getProject());
-				} else {
-					operation.apply(getProject());
-				}
-			} catch (IllegalStateException e) {
-				if (!force) {
-					throw e;
-				}
-			}
-		}
+	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
+		applyChangesWrapper.wrapApplyChanges(this, this, operations, addOperations);
 	}
 
 	/**
@@ -592,7 +552,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		ChangePackage changePackage = (ChangePackage) directContents.get(0);
-		applyOperationsWithRecording(changePackage.getOperations(), true);
+		applyOperations(changePackage.getOperations(), true);
 	}
 
 	/**
@@ -1148,17 +1108,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		if (!this.getOperations().isEmpty()) {
 			List<AbstractOperation> operations = this.getOperations();
 			AbstractOperation lastOperation = operations.get(operations.size() - 1);
-			stopChangeRecording();
-			try {
-				lastOperation.reverse().apply(getProject());
-				operationManager.notifyOperationUndone(lastOperation);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException exception) {
-				// END SUPRESS CATCH EXCEPTION
-				WorkspaceUtil.handleException(exception);
-			} finally {
-				startChangeRecording();
-			}
+
+			applyOperations(Collections.singletonList(lastOperation.reverse()), false);
+			operationManager.notifyOperationUndone(lastOperation);
+
 			operations.remove(lastOperation);
 			undoLastOperations(--numberOfOperations);
 		}
