@@ -39,6 +39,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 	 * @param isBranchMerge
 	 *            specifies whether two branches are merged, rather then changes
 	 *            from the same branches.
+	 * @param conflictException an conflict exception with preliminary conflict results
 	 */
 	public MergeProjectHandler(boolean isBranchMerge, ChangeConflictException conflictException) {
 		super(isBranchMerge, conflictException);
@@ -46,6 +47,8 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 
 	/**
 	 * Default constructor.
+	 * 
+	 * @param conflictException an conflict exception with preliminary conflict results
 	 */
 	public MergeProjectHandler(ChangeConflictException conflictException) {
 		this(false, conflictException);

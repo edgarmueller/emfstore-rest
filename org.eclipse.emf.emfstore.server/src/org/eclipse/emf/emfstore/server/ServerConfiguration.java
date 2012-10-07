@@ -561,7 +561,6 @@ public final class ServerConfiguration {
 	 */
 	public static String getServerVersion() {
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		@SuppressWarnings("cast")
 		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
 			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;

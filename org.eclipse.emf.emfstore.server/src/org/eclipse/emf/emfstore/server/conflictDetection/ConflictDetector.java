@@ -75,6 +75,13 @@ public class ConflictDetector {
 		return conflictDetectionStrategy.doConflict(operation, otherOperation);
 	}
 
+	/**
+	 * Determine if the set of conflict bucket candidates contains conflicting buckets that can actually result in
+	 * conflicts.
+	 * 
+	 * @param conflictBucketCandidates the set of conflict candidate buckets
+	 * @return true if potentially conflicting buckets are found
+	 */
 	public boolean containsConflictingBuckets(Set<ConflictBucketCandidate> conflictBucketCandidates) {
 		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketCandidates) {
 			if (conflictBucketCandidate.isConflicting()) {
@@ -85,12 +92,13 @@ public class ConflictDetector {
 	}
 
 	/**
+	 * Calculate a set of conflict candidate buckets from a list of my and their change packages.
 	 * 
-	 * @param myOperations
-	 * @param theirOperations
-	 * @param conflictBucketsCandidateSet
+	 * @param myChangePackages their operations in a list of change packages
+	 * @param theirChangePackages their operations in a list of change packages
+	 * @return a set of buckets with potentially conflicting operations
 	 */
-	public Set<ConflictBucketCandidate> scanOperationsIntoCandidateBuckets(List<ChangePackage> myChangePackages,
+	public Set<ConflictBucketCandidate> calculateConflictCandidateBuckets(List<ChangePackage> myChangePackages,
 		List<ChangePackage> theirChangePackages) {
 
 		List<AbstractOperation> myOperations = flattenChangepackages(myChangePackages);
@@ -186,7 +194,16 @@ public class ConflictDetector {
 		return biggerBucket;
 	}
 
-	public Set<ConflictBucket> scanForConflictsWithinCandidates(
+	/**
+	 * Calculate a set of conflict buckets from an existing set of conflict candidate buckets. the resulting set may be
+	 * empty.
+	 * 
+	 * @param conflictBucketsCandidateSet a set of conflict candidate buckets
+	 * @param notInvolvedInConflict all my operations that are not involved in a conflict are collected in this
+	 *            transient parameter set
+	 * @return a set of conflict buckets
+	 */
+	public Set<ConflictBucket> calculateConflictBucketsFromConflictCandidateBuckets(
 		Set<ConflictBucketCandidate> conflictBucketsCandidateSet, Set<AbstractOperation> notInvolvedInConflict) {
 		Set<ConflictBucket> conflictBucketsSet = new LinkedHashSet<ConflictBucket>();
 		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {

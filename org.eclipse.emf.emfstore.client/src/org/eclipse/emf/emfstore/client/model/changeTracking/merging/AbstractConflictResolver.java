@@ -38,6 +38,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * @param isBranchMerge
 	 *            specifies whether two branches are merged oppossed to changes
 	 *            from the same branch.
+	 * @param conflictException a conflict exception with preliminary results
 	 */
 	public AbstractConflictResolver(boolean isBranchMerge, ChangeConflictException conflictException) {
 		this.isBranchMerge = isBranchMerge;

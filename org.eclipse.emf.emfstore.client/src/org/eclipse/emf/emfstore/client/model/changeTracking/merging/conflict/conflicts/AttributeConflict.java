@@ -34,6 +34,8 @@ public class AttributeConflict extends Conflict {
 	 * 
 	 * @param myOperations myOperations, with leading {@link AttributeOperation}
 	 * @param theirOperations theirOperations, with leading {@link AttributeOperation}
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 */
 	public AttributeConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,

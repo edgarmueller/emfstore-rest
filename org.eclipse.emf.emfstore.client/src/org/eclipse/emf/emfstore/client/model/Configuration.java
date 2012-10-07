@@ -232,7 +232,6 @@ public final class Configuration {
 	 * 
 	 * @return the client version number
 	 */
-	@SuppressWarnings("cast")
 	public static ClientVersionInfo getClientVersion() {
 		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
 			.createClientVersionInfo();

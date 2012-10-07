@@ -42,8 +42,10 @@ public class ChangeConflictException extends WorkspaceException {
 	/**
 	 * Constructor.
 	 * 
-	 * @param newPackages the list of change packages that caused the exception
+	 * 
 	 * @param projectSpace the ProjectSpace
+	 * @param myChangePackage my change package
+	 * @param newPackages the list of change packages that caused the exception
 	 * @param conflictBucketCandidates a set of conflict candidates
 	 */
 	public ChangeConflictException(ProjectSpace projectSpace, ChangePackage myChangePackage,
@@ -69,6 +71,9 @@ public class ChangeConflictException extends WorkspaceException {
 		return conflictBucketCandidates;
 	}
 
+	/**
+	 * @return my change package
+	 */
 	public ChangePackage getMyChangePackage() {
 		return myChangePackage;
 	}

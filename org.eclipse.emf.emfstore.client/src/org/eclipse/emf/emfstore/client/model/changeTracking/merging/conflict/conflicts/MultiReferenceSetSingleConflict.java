@@ -35,6 +35,8 @@ public class MultiReferenceSetSingleConflict extends Conflict {
 	 * 
 	 * @param leftOperations multi set ref
 	 * @param rightOperations single ref
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 * @param setLeft multi set ref is left
 	 */

@@ -39,6 +39,8 @@ public class MultiReferenceConflict extends Conflict {
 	 * 
 	 * @param addingOperation list of operations, with leading adding multiref operation
 	 * @param removingOperation list of operations, with leading removing multiref operation
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 * @param meAdding true, if merging user has adding multiref
 	 */

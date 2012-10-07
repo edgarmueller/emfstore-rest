@@ -33,6 +33,8 @@ public class DiagramLayoutConflict extends AttributeConflict {
 	 * 
 	 * @param myOperations list of my operations
 	 * @param theirOperations list of their operations
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 */
 	public DiagramLayoutConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,

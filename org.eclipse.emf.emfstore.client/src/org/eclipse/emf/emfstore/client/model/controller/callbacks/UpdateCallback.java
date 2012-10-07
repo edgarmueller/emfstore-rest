@@ -46,6 +46,7 @@ public interface UpdateCallback {
 	 * 
 	 * @param changeConflictException
 	 *            the exception that caused the conflict between the local and the remote changes
+	 * @param progressMonitor a progress monitor to report on progress
 	 * @return true, if the conflict has been resolved, false otherwise
 	 */
 	boolean conflictOccurred(ChangeConflictException changeConflictException, IProgressMonitor progressMonitor);

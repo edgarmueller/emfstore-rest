@@ -38,6 +38,8 @@ public class SingleReferenceConflict extends Conflict {
 	 * 
 	 * @param myOperations list of my operations
 	 * @param theirOperations list of their operations
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 */
 	public SingleReferenceConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,

@@ -108,6 +108,7 @@ public class DecisionManager {
 	 *            allows to specify whether two branches are merged, opposed to
 	 *            changes from the same branch. Has an effect on the wording of
 	 *            conflictions
+	 * @param conflictException a conflict exception with preliminary results
 	 */
 	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
 		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion,
@@ -149,10 +150,10 @@ public class DecisionManager {
 		if (conflictException != null) {
 			conflictBucketCandidates = conflictException.getConflictBucketCandidates();
 		} else {
-			conflictBucketCandidates = new ConflictDetector().scanOperationsIntoCandidateBuckets(myChangePackages,
+			conflictBucketCandidates = new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
 				theirChangePackages);
 		}
-		Set<ConflictBucket> conflictBucketsSet = conflictDetector.scanForConflictsWithinCandidates(
+		Set<ConflictBucket> conflictBucketsSet = conflictDetector.calculateConflictBucketsFromConflictCandidateBuckets(
 			conflictBucketCandidates, notInvolvedInConflict);
 
 		createConflicts(conflictBucketsSet);

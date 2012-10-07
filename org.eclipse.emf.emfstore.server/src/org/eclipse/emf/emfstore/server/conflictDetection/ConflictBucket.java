@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.conflictDetection;
 
@@ -20,6 +21,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * the current user while their operation are incomming operations from another user.
  * 
  * @author koegel
+ * 
+ */
+/**
+ * @author User
  * 
  */
 public class ConflictBucket {
@@ -54,41 +59,46 @@ public class ConflictBucket {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return the set of my operations
 	 */
-	public int size() {
-		return theirOperations.size() + myOperations.size();
-	}
-
-	public Set<AbstractOperation> getMyOperationsSet() {
-		return myOperations;
-	}
-
-	public Set<AbstractOperation> getTheirOperationsSet() {
-		return theirOperations;
-	}
-
 	public Set<AbstractOperation> getMyOperations() {
 		return myOperations;
 	}
 
+	/**
+	 * @return the set of their operations
+	 */
 	public Set<AbstractOperation> getTheirOperations() {
 		return theirOperations;
 	}
 
+	/**
+	 * @return one of my operations representing all my operations
+	 */
 	public AbstractOperation getMyOperation() {
 		return myOperation;
 	}
 
+	/**
+	 * Set one of my operations representing all my operations.
+	 * 
+	 * @param myOperation the operation
+	 */
 	public void setMyOperation(AbstractOperation myOperation) {
 		this.myOperation = myOperation;
 	}
 
+	/**
+	 * @return one of their operations representing all their operations
+	 */
 	public AbstractOperation getTheirOperation() {
 		return theirOperation;
 	}
 
+	/**
+	 * Set one of their operations representing all their operations.
+	 * * @param theirOperation the operation
+	 */
 	public void setTheirOperation(AbstractOperation theirOperation) {
 		this.theirOperation = theirOperation;
 	}

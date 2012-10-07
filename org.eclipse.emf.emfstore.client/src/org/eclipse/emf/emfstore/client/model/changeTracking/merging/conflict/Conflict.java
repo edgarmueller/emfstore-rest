@@ -63,6 +63,8 @@ public abstract class Conflict extends Observable {
 	 *            first list of operations (often: myOperations)
 	 * @param rightOperations
 	 *            second list of operations (often: theirOperations)
+	 * @param leftOperation an operation representing all left operations
+	 * @param rightOperation an operation representing all right operations
 	 * @param decisionManager
 	 *            decision manager
 	 */
@@ -81,6 +83,8 @@ public abstract class Conflict extends Observable {
 	 *            first list of operations (often: myOperations)
 	 * @param rightOperations
 	 *            second list of operations (often: theirOperations)
+	 * @param leftOperation an operation representing all left operations
+	 * @param rightOperation an operation representing all right operations
 	 * @param decisionManager
 	 *            decision manager
 	 * @param leftIsMy

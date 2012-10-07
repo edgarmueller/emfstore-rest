@@ -115,7 +115,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
-		Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.scanOperationsIntoCandidateBuckets(
+		Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
 			Collections.singletonList(localchanges), changes);
 		boolean potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 
