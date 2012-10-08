@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionConfig;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -145,6 +146,15 @@ public class MergeWizardPage extends WizardPage {
 		}
 
 		private void select() {
+			if (type.equals(OptionType.MyOperation)) {
+				boolean confirm = MessageDialog.openConfirm(getShell(), "Override changes of other users",
+					"Are you sure you want to override " + decisionManager.countTheirOperations()
+						+ " composite operations and " + decisionManager.countTheirLeafOperations()
+						+ " overall changes of other users by keeping your changes?");
+				if (!confirm) {
+					return;
+				}
+			}
 			for (DecisionBox box : decisionBoxes) {
 				for (ConflictOption option : box.getConflict().getOptions()) {
 					if (option.getType().equals(type)) {
