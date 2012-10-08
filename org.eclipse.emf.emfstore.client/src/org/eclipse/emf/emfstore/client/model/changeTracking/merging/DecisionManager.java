@@ -760,9 +760,27 @@ public class DecisionManager {
 	 */
 	public int countMyLeafOperations() {
 		if (myLeafOperationCount == null) {
-			myLeafOperationCount = ChangePackageImpl.countLeafOperations(myChangePackages);
+			countConflicts();
 		}
 		return myLeafOperationCount;
+	}
+
+	private void countConflicts() {
+		int myCount = 0;
+		int myLeafCount = 0;
+		int theirCount = 0;
+		int theirLeafCount = 0;
+		for (Conflict conflict : conflicts) {
+			myCount += conflict.getLeftOperations().size();
+			myLeafCount += ChangePackageImpl.countLeafOperations(conflict.getMyOperations());
+			theirCount += conflict.getRightOperations().size();
+			theirLeafCount += ChangePackageImpl.countLeafOperations(conflict.getTheirOperations());
+		}
+		myOperationCount = myCount;
+		myLeafOperationCount = myLeafCount;
+		theirOperationCount = theirCount;
+		theirLeafOperationCount = theirLeafCount;
+
 	}
 
 	private Integer theirLeafOperationCount;
@@ -774,7 +792,7 @@ public class DecisionManager {
 	 */
 	public int countTheirLeafOperations() {
 		if (theirLeafOperationCount == null) {
-			theirLeafOperationCount = ChangePackageImpl.countLeafOperations(theirChangePackages);
+			countConflicts();
 		}
 		return theirLeafOperationCount;
 	}
@@ -788,7 +806,7 @@ public class DecisionManager {
 	 */
 	public int countMyOperations() {
 		if (myOperationCount == null) {
-			myOperationCount = ChangePackageImpl.countOperations(myChangePackages);
+			countConflicts();
 		}
 		return myOperationCount;
 	}
@@ -802,7 +820,7 @@ public class DecisionManager {
 	 */
 	public int countTheirOperations() {
 		if (theirOperationCount == null) {
-			theirOperationCount = ChangePackageImpl.countOperations(theirChangePackages);
+			countConflicts();
 		}
 		return theirOperationCount;
 	}
