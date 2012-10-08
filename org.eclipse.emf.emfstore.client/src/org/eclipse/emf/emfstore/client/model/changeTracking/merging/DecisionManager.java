@@ -61,6 +61,7 @@ import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -748,6 +749,62 @@ public class DecisionManager {
 		public List<ChangePackage> getTheirChangePackages() {
 			return theirChangePackages;
 		}
+	}
+
+	private Integer myLeafOperationCount;
+
+	/**
+	 * Count my leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countMyLeafOperations() {
+		if (myLeafOperationCount == null) {
+			myLeafOperationCount = ChangePackageImpl.countLeafOperations(myChangePackages);
+		}
+		return myLeafOperationCount;
+	}
+
+	private Integer theirLeafOperationCount;
+
+	/**
+	 * Count their leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countTheirLeafOperations() {
+		if (theirLeafOperationCount == null) {
+			theirLeafOperationCount = ChangePackageImpl.countLeafOperations(theirChangePackages);
+		}
+		return theirLeafOperationCount;
+	}
+
+	private Integer myOperationCount;
+
+	/**
+	 * Count my leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countMyOperations() {
+		if (myOperationCount == null) {
+			myOperationCount = ChangePackageImpl.countOperations(myChangePackages);
+		}
+		return myOperationCount;
+	}
+
+	private Integer theirOperationCount;
+
+	/**
+	 * Count their leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countTheirOperations() {
+		if (theirOperationCount == null) {
+			theirOperationCount = ChangePackageImpl.countOperations(theirChangePackages);
+		}
+		return theirOperationCount;
 	}
 
 }

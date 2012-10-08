@@ -474,6 +474,14 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		return countLeafOperations(getOperations());
 	}
 
+	public static int countLeafOperations(List<ChangePackage> changePackages) {
+		int count = 0;
+		for (ChangePackage changePackage : changePackages) {
+			count += countLeafOperations(changePackage.getOperations());
+		}
+		return count;
+	}
+
 	public static int countLeafOperations(Collection<AbstractOperation> operations) {
 		int ret = 0;
 		for (AbstractOperation operation : operations) {
@@ -497,6 +505,14 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			}
 		}
 		return ret;
+	}
+
+	public static int countOperations(List<ChangePackage> changePackages) {
+		int count = 0;
+		for (ChangePackage changePackage : changePackages) {
+			count += changePackage.getOperations().size();
+		}
+		return count;
 	}
 
 } // ChangePackageImpl
