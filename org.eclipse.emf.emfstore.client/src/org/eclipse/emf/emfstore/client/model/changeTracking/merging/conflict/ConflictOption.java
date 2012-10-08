@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -26,7 +26,7 @@ public class ConflictOption {
 	private String option;
 	private OptionType type;
 	private String detailProvider;
-	private List<AbstractOperation> operations;
+	private Set<AbstractOperation> operations;
 
 	/**
 	 * Type of options.
@@ -49,7 +49,7 @@ public class ConflictOption {
 	public ConflictOption(String option, OptionType type) {
 		setOptionLabel(option);
 		this.type = type;
-		operations = new ArrayList<AbstractOperation>();
+		operations = new LinkedHashSet<AbstractOperation>();
 	}
 
 	/**
@@ -112,7 +112,10 @@ public class ConflictOption {
 	 * 
 	 * @param ops operations
 	 */
-	public void addOperations(List<AbstractOperation> ops) {
+	public void addOperations(Set<AbstractOperation> ops) {
+		if (operations.isEmpty()) {
+			operations = ops;
+		}
 		operations.addAll(ops);
 	}
 
@@ -121,7 +124,7 @@ public class ConflictOption {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getOperations() {
+	public Set<AbstractOperation> getOperations() {
 		return operations;
 	}
 

@@ -10,12 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
- * Callback interface for implementors that are interested in
- * influencing the actual commit behavior.
+ * Callback interface for implementors that are interested in influencing the
+ * actual commit behavior.
  * 
  * @author ovonwesen
  * @author emueller
@@ -23,18 +24,20 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 public interface CommitCallback {
 
 	/**
-	 * Called when the project space that should be updated is out of date.
-	 * A caller may veto against updating the project space by returning false.
+	 * Called when the project space that should be updated is out of date. A
+	 * caller may veto against updating the project space by returning false.
 	 * 
 	 * @param projectSpace
 	 *            the project space being out of date
-	 * @return true, if the caller is willing to update the project space, false otherwise
+	 * @param progressMonitor the currently used {@link IProgressMonitor}
+	 * @return true, if the caller is willing to update the project space, false
+	 *         otherwise
 	 */
-	boolean baseVersionOutOfDate(ProjectSpace projectSpace);
+	boolean baseVersionOutOfDate(ProjectSpace projectSpace, IProgressMonitor progressMonitor);
 
 	/**
-	 * Called right before the actual commit is performed.
-	 * Implementors may veto against the commit by returning false
+	 * Called right before the actual commit is performed. Implementors may veto
+	 * against the commit by returning false
 	 * 
 	 * @param projectSpace
 	 *            the project space with the local pending changes
@@ -53,10 +56,10 @@ public interface CommitCallback {
 	void noLocalChanges(ProjectSpace projectSpace);
 
 	/**
-	 * Default implementation of a callback interface for commit.
-	 * Does not veto against updating the project space in case it is out of date
-	 * and returns true for {@link #inspectChanges(ProjectSpace, ChangePackage)}, such that a
-	 * commit is always performed.
+	 * Default implementation of a callback interface for commit. Does not veto
+	 * against updating the project space in case it is out of date and returns
+	 * true for {@link #inspectChanges(ProjectSpace, ChangePackage)}, such that
+	 * a commit is always performed.
 	 */
 	CommitCallback NOCALLBACK = new CommitCallback() {
 
@@ -64,7 +67,7 @@ public interface CommitCallback {
 			return true;
 		}
 
-		public boolean baseVersionOutOfDate(ProjectSpace projectSpace) {
+		public boolean baseVersionOutOfDate(ProjectSpace projectSpace, IProgressMonitor progressMonitor) {
 			return false;
 		}
 

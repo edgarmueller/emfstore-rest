@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager.Conflicting;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
 
 /**
  * Allows to hook in custom conflict treatment for group of conflicting changes.
@@ -23,15 +23,14 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 public interface ConflictHandler {
 
 	/**
-	 * This method is always called before
-	 * {@link #handle(DecisionManager, Conflicting)} in order to check whether
+	 * This method is always called before {@link #handle(DecisionManager, Conflicting)} in order to check whether
 	 * this handler is relevant for the conflicting changes.
 	 * 
 	 * @param conflicting
 	 *            Conflicting bucket
 	 * @return true, if can handle
 	 */
-	boolean canHandle(Conflicting conflicting);
+	boolean canHandle(ConflictBucket conflicting);
 
 	/**
 	 * Is called when {@link #canHandle(Conflicting)} returned true. On basis of
@@ -44,5 +43,5 @@ public interface ConflictHandler {
 	 *            bucket
 	 * @return conflict
 	 */
-	Conflict handle(DecisionManager dm, Conflicting conflicting);
+	Conflict handle(DecisionManager dm, ConflictBucket conflicting);
 }

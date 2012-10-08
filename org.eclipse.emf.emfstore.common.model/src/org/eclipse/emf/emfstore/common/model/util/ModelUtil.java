@@ -287,6 +287,8 @@ public final class ModelUtil {
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
 			resourceSaveOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
+			resourceSaveOptions.put(XMLResource.OPTION_FLUSH_THRESHOLD, 100000);
+			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
 		}
 		return resourceSaveOptions;
 	}

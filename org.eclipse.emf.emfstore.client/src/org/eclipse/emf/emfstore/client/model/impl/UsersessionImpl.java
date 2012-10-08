@@ -587,6 +587,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		WorkspaceManager.getObserverBus().notify(LogoutObserver.class).logoutCompleted(this);
 	}
 
+	// end of custom code
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

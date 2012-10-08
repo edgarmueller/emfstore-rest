@@ -59,7 +59,7 @@ public class DirtyResourceSet {
 	 */
 	public void addDirtyResource(Resource resource) {
 		resources.add(resource);
-		//only fire dirty state change notification if set was previously empty
+		// only fire dirty state change notification if set was previously empty
 		if (resources.size() <= 1) {
 			fireDirtyStateChangedNotification();
 		}

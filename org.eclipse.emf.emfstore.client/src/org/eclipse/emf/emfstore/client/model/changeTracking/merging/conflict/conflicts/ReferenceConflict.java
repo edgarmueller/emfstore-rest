@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictContext;
@@ -34,9 +35,12 @@ public class ReferenceConflict extends Conflict {
 	 * @param conflict underlying conflict, {@link MultiReferenceConflict} or {@link SingleReferenceConflict}
 	 * @param myOps list of my operations
 	 * @param theirOps list of their operations
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 */
-	public ReferenceConflict(Conflict conflict, List<AbstractOperation> myOps, List<AbstractOperation> theirOps) {
-		super(myOps, theirOps, conflict.getDecisionManager(), conflict.isLeftMy(), false);
+	public ReferenceConflict(Conflict conflict, Set<AbstractOperation> myOps, Set<AbstractOperation> theirOps,
+		AbstractOperation leftOperation, AbstractOperation rightOperation) {
+		super(myOps, theirOps, leftOperation, rightOperation, conflict.getDecisionManager(), conflict.isLeftMy(), false);
 		if (!(conflict instanceof SingleReferenceConflict || conflict instanceof MultiReferenceConflict)) {
 			throw new IllegalStateException("Only reference conflicts allowed.");
 		}

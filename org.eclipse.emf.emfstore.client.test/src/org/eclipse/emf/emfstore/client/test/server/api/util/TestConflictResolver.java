@@ -10,7 +10,7 @@ public class TestConflictResolver extends AbstractConflictResolver {
 	private final int expectedConflicts;
 
 	public TestConflictResolver(boolean isBranchMerge, int expectedConflicts) {
-		super(isBranchMerge);
+		super(isBranchMerge, null);
 		this.expectedConflicts = expectedConflicts;
 	}
 

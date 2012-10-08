@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -240,29 +241,27 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
 			allModelElements);
 
-		// clean up already existing references when collection already contained the object
-		if (removedElements.contains(modelElement)) {
-			List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
-			if (savedSettings != null) {
-				List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
-				for (SettingWithReferencedElement setting : savedSettings) {
-					for (SettingWithReferencedElement newSetting : crossReferences) {
-						if (setting.getSetting().getEStructuralFeature()
-							.equals(newSetting.getSetting().getEStructuralFeature())
-							&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
-							toRemove.add(newSetting);
-						}
-					}
-				}
-
-				crossReferences.removeAll(toRemove);
-			}
-		}
-
 		// collect in-going cross-reference for containment tree of modelElement
 		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
 			allModelElements);
 		crossReferences.addAll(ingoingCrossReferences);
+
+		// clean up already existing references when collection already contained the object
+		List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
+		if (savedSettings != null) {
+			List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
+			for (SettingWithReferencedElement setting : savedSettings) {
+				for (SettingWithReferencedElement newSetting : crossReferences) {
+					if (setting.getSetting().getEStructuralFeature()
+						.equals(newSetting.getSetting().getEStructuralFeature())
+						&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
+						toRemove.add(newSetting);
+					}
+				}
+			}
+
+			crossReferences.removeAll(toRemove);
+		}
 
 		// collect recorded operations and add to create operation
 		List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
@@ -516,8 +515,16 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			Set<EObject> allModelElements = new HashSet<EObject>();
 			allModelElements.add(modelElement);
 			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
-			removedElementsToReferenceSettings.put(modelElement,
-				ModelUtil.collectOutgoingCrossReferences(collection, allModelElements));
+			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+				allModelElements);
+			List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+				allModelElements);
+			crossReferences.addAll(ingoingCrossReferences);
+			if (crossReferences.size() != 0) {
+				for (EObject eObject : allModelElements) {
+					removedElementsToReferenceSettings.put(eObject, crossReferences);
+				}
+			}
 		}
 	}
 
@@ -605,53 +612,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				if (Map.Entry.class.isAssignableFrom(eType.getInstanceClass()) && reference.isContainment()
 					&& reference.isChangeable()) {
 
-					EClass mapEntryEClass = (EClass) eType;
-					EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
-
-					// key references seems to be containment, skip loop
-					if (nonContainmentKeyReference == null) {
-						continue;
-					}
-
-					@SuppressWarnings("unchecked")
-					List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
-					boolean outgoingKeyReferenceFound = false;
-
-					// check key reference of all map entries if they reference one of the objects in the containment
-					// tree
-					for (EObject eObject : mapEntriesEList) {
-
-						Object eGet = eObject.eGet(nonContainmentKeyReference);
-
-						if (!allEObjects.contains(eGet)) {
-							outgoingKeyReferenceFound = true;
-							break;
-						}
-					}
-
-					if (!outgoingKeyReferenceFound) {
-						// no bad reference found, skip special treatment
-						continue;
-					}
-
-					// copy list before clearing reference
-					// TODO is this really the underlying list
-					List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
-
-					// the reference is a containment map feature and its referenced entries do have at least one
-					// non-containment key crossreference that goes to an element outside of
-					// the containment tree, therefore we
-					// delete the map entries
-					// instead of waiting for the referenced key element to be cut off from the map entry
-					// in the children recursion
-					// since cutting off a key reference will render the map into an invalid state on deserialization
-					// which can
-					// result in unresolved proxies
-					EcoreUtil.resolveAll(modelElement);
-					modelElement.eUnset(reference);
-					for (EObject mapEntry : mapEntries) {
-						handleElementDelete(mapEntry);
-					}
+					handleMapEntryDeletion(modelElement, eType, reference, allEObjects);
 					continue;
 				}
 
@@ -680,6 +641,58 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 			}
 		}
+	}
+
+	private void handleMapEntryDeletion(EObject modelElement, EClassifier eType, EReference reference,
+		Set<EObject> allEObjects) {
+		EClass mapEntryEClass = (EClass) eType;
+		EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
+
+		// key references seems to be containment, skip loop
+		if (nonContainmentKeyReference == null) {
+			return;
+		}
+
+		@SuppressWarnings("unchecked")
+		List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
+		boolean outgoingKeyReferenceFound = false;
+
+		// check key reference of all map entries if they reference one of the objects in the containment
+		// tree
+		for (EObject eObject : mapEntriesEList) {
+
+			Object eGet = eObject.eGet(nonContainmentKeyReference);
+
+			if (!allEObjects.contains(eGet)) {
+				outgoingKeyReferenceFound = true;
+				break;
+			}
+		}
+
+		if (!outgoingKeyReferenceFound) {
+			// no bad reference found, skip special treatment
+			return;
+		}
+
+		// copy list before clearing reference
+		// TODO is this really the underlying list
+		List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
+
+		// the reference is a containment map feature and its referenced entries do have at least one
+		// non-containment key crossreference that goes to an element outside of
+		// the containment tree, therefore we
+		// delete the map entries
+		// instead of waiting for the referenced key element to be cut off from the map entry
+		// in the children recursion
+		// since cutting off a key reference will render the map into an invalid state on deserialization
+		// which can
+		// result in unresolved proxies
+		EcoreUtil.resolveAll(modelElement);
+		modelElement.eUnset(reference);
+		for (EObject mapEntry : mapEntries) {
+			handleElementDelete(mapEntry);
+		}
+
 	}
 
 	private EReference getNonContainmentKeyReference(EClass eClass) {
@@ -923,15 +936,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// AbstractOperation lastOp = compositeOperation.getSubOperations().get(
 		// compositeOperation.getSubOperations().size() - 1);
 
-		stopChangeRecording();
-		try {
-			compositeOperation.reverse().apply(getCollection());
-			// operations.remove(operations.size() - 1);
-		} finally {
-			startChangeRecording();
-		}
+		projectSpace.applyOperations(Collections.singletonList(compositeOperation.reverse()), false);
+
 		this.removedElements.clear();
-		// }
 		notificationRecorder.stopRecording();
 
 		compositeOperation = null;
@@ -948,12 +955,12 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
-		// filter unwanted notifications
-		if (FilterStack.DEFAULT.check(new NotificationInfo(notification), collection)) {
+		if (!isRecording) {
 			return;
 		}
 
-		if (!isRecording) {
+		// filter unwanted notifications
+		if (FilterStack.DEFAULT.check(new NotificationInfo(notification), collection)) {
 			return;
 		}
 

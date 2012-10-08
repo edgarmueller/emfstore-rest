@@ -50,18 +50,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 	 * Undo the last operation of the projectSpace.
 	 */
 	public void undoLastOperation() {
-		if (!projectSpace.getOperations().isEmpty()) {
-			List<AbstractOperation> operations = projectSpace.getOperations();
-			AbstractOperation lastOperation = operations.get(operations.size() - 1);
-			operationRecorder.stopChangeRecording();
-			try {
-				lastOperation.reverse().apply(operationRecorder.getCollection());
-				notifyOperationUndone(lastOperation);
-			} finally {
-				operationRecorder.startChangeRecording();
-			}
-			operations.remove(lastOperation);
-		}
+		projectSpace.undoLastOperations(1);
 	}
 
 	/**

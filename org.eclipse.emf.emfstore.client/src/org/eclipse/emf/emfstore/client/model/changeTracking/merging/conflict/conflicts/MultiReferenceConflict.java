@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.co
 import static org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -38,12 +39,15 @@ public class MultiReferenceConflict extends Conflict {
 	 * 
 	 * @param addingOperation list of operations, with leading adding multiref operation
 	 * @param removingOperation list of operations, with leading removing multiref operation
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 * @param meAdding true, if merging user has adding multiref
 	 */
-	public MultiReferenceConflict(List<AbstractOperation> addingOperation, List<AbstractOperation> removingOperation,
-		DecisionManager decisionManager, boolean meAdding) {
-		super(addingOperation, removingOperation, decisionManager, meAdding, false);
+	public MultiReferenceConflict(Set<AbstractOperation> addingOperation, Set<AbstractOperation> removingOperation,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean meAdding) {
+		super(addingOperation, removingOperation, leftOperation, rightOperation, decisionManager, meAdding, false);
 		containmentConflict = getMyOperation(MultiReferenceOperation.class).isAdd()
 			&& getTheirOperation(MultiReferenceOperation.class).isAdd();
 		init();

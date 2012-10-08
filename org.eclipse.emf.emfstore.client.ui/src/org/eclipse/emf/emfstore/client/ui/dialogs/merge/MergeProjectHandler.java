@@ -10,11 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -25,8 +29,7 @@ import org.eclipse.swt.widgets.Display;
  * 
  * @author wesendon
  */
-public class MergeProjectHandler extends AbstractConflictResolver implements
-		ConflictResolver {
+public class MergeProjectHandler extends AbstractConflictResolver implements ConflictResolver {
 
 	private DefaultMergeLabelProvider labelProvider;
 
@@ -36,38 +39,44 @@ public class MergeProjectHandler extends AbstractConflictResolver implements
 	 * @param isBranchMerge
 	 *            specifies whether two branches are merged, rather then changes
 	 *            from the same branches.
+	 * @param conflictException an conflict exception with preliminary conflict results
 	 */
-	public MergeProjectHandler(boolean isBranchMerge) {
-		super(isBranchMerge);
+	public MergeProjectHandler(boolean isBranchMerge, ChangeConflictException conflictException) {
+		super(isBranchMerge, conflictException);
 	}
 
 	/**
 	 * Default constructor.
+	 * 
+	 * @param conflictException an conflict exception with preliminary conflict results
 	 */
-	public MergeProjectHandler() {
-		super();
+	public MergeProjectHandler(ChangeConflictException conflictException) {
+		this(false, conflictException);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void preDecisionManagerHook() {
 		labelProvider = new DefaultMergeLabelProvider();
-		WorkspaceManager.getObserverBus().register(labelProvider,
-				MergeLabelProvider.class);
+		WorkspaceManager.getObserverBus().register(labelProvider, MergeLabelProvider.class);
 	}
 
 	@Override
-	protected boolean controlDecisionManager(DecisionManager decisionManager) {
-		MergeWizard wizard = new MergeWizard(decisionManager);
-		WizardDialog dialog = new WizardDialog(Display.getCurrent()
-				.getActiveShell(), wizard);
-		dialog.setPageSize(1000, 500);
-		dialog.setBlockOnOpen(true);
-		dialog.create();
+	protected boolean controlDecisionManager(final DecisionManager decisionManager) {
+		return RunInUI.runWithResult(new Callable<Boolean>() {
 
-		int open = dialog.open();
+			public Boolean call() {
+				MergeWizard wizard = new MergeWizard(decisionManager);
+				WizardDialog dialog = new WizardDialog(Display.getCurrent().getActiveShell(), wizard);
+				dialog.setPageSize(1000, 500);
+				dialog.setBlockOnOpen(true);
+				dialog.create();
 
-		labelProvider.dispose();
-		return (open == Dialog.OK);
+				int open = dialog.open();
+
+				labelProvider.dispose();
+				return (open == Dialog.OK);
+			}
+		});
 	}
 }
