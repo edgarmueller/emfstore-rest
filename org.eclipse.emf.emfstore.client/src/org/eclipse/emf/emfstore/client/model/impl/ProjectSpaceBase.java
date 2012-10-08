@@ -123,6 +123,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private ResourceSet resourceSet;
 
+	private boolean disposed;
+
 	/**
 	 * Constructor.
 	 */
@@ -1184,6 +1186,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {
+
+		if (disposed) {
+			return;
+		}
+
 		stopChangeRecording();
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 
@@ -1205,6 +1212,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);
+
+		disposed = true;
 	}
 
 	/**
