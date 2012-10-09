@@ -84,7 +84,6 @@ public class OptionComponent {
 				+ ": ";
 			break;
 		case TheirOperation:
-			String theirCount;
 			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change" + countInfo
 				+ ": ";
 			break;
