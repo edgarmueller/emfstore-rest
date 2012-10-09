@@ -166,10 +166,8 @@ public class ConflictBucketCandidate {
 		// if bucket is too large, it will not be checked manually
 		if (bucketIsTooLarge()) {
 			ConflictBucket newConflictBucket = new ConflictBucket(getMyOperations(), getTheirOperations());
-			newConflictBucket.setMyOperation(getMyOperations().iterator().next());
-			newConflictBucket.setTheirOperation(getTheirOperations().iterator().next());
 			conflictBucketsSet.add(newConflictBucket);
-			return conflictBucketsSet;
+			return selectMyandTheirOperation(conflictBucketsSet);
 		}
 
 		Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new LinkedHashMap<AbstractOperation, ConflictBucket>();
