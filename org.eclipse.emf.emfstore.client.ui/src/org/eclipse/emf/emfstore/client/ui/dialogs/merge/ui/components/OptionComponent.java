@@ -73,12 +73,17 @@ public class OptionComponent {
 
 	private String generatePrefix(ConflictOption option) {
 		String result = "";
+		int operationCount = option.getOperations().size();
+		String countInfo = (operationCount > 1) ? "s (" + operationCount + ")" : "";
 		switch (option.getType()) {
 		case MyOperation:
-			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change: ";
+			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change" + countInfo
+				+ ": ";
 			break;
 		case TheirOperation:
-			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change: ";
+			String theirCount;
+			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change" + countInfo
+				+ ": ";
 			break;
 		case Custom:
 			if (option instanceof CustomConflictOption) {

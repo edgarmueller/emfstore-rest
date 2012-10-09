@@ -61,6 +61,7 @@ import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -748,6 +749,80 @@ public class DecisionManager {
 		public List<ChangePackage> getTheirChangePackages() {
 			return theirChangePackages;
 		}
+	}
+
+	private Integer myLeafOperationCount;
+
+	/**
+	 * Count my leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countMyLeafOperations() {
+		if (myLeafOperationCount == null) {
+			countConflicts();
+		}
+		return myLeafOperationCount;
+	}
+
+	private void countConflicts() {
+		int myCount = 0;
+		int myLeafCount = 0;
+		int theirCount = 0;
+		int theirLeafCount = 0;
+		for (Conflict conflict : conflicts) {
+			myCount += conflict.getLeftOperations().size();
+			myLeafCount += ChangePackageImpl.countLeafOperations(conflict.getMyOperations());
+			theirCount += conflict.getRightOperations().size();
+			theirLeafCount += ChangePackageImpl.countLeafOperations(conflict.getTheirOperations());
+		}
+		myOperationCount = myCount;
+		myLeafOperationCount = myLeafCount;
+		theirOperationCount = theirCount;
+		theirLeafOperationCount = theirLeafCount;
+
+	}
+
+	private Integer theirLeafOperationCount;
+
+	/**
+	 * Count their leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countTheirLeafOperations() {
+		if (theirLeafOperationCount == null) {
+			countConflicts();
+		}
+		return theirLeafOperationCount;
+	}
+
+	private Integer myOperationCount;
+
+	/**
+	 * Count my leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countMyOperations() {
+		if (myOperationCount == null) {
+			countConflicts();
+		}
+		return myOperationCount;
+	}
+
+	private Integer theirOperationCount;
+
+	/**
+	 * Count their leaf operations.
+	 * 
+	 * @return the number of leaf operations
+	 */
+	public int countTheirOperations() {
+		if (theirOperationCount == null) {
+			countConflicts();
+		}
+		return theirOperationCount;
 	}
 
 }
