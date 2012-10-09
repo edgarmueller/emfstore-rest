@@ -98,13 +98,9 @@ public class CompositeConflict extends Conflict {
 
 		if (isLeftMy()) {
 			myOption.setOptionLabel(composite);
-
 			theirOption.setOptionLabel(other);
-			theirOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
 		} else {
 			myOption.setOptionLabel(other);
-			myOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
-
 			theirOption.setOptionLabel(composite);
 		}
 		options.add(myOption);

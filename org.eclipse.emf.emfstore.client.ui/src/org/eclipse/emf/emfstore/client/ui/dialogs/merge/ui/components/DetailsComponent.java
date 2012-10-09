@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.MergeTextWidget;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.OtherInvolvedWidget;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.swt.SWT;
@@ -83,8 +82,6 @@ public class DetailsComponent extends Section {
 					multiWidget = new MergeTextWidget(decisionBox, this);
 				}
 				multiWidget.addOption(option);
-			} else if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_OTHERINVOLVED)) {
-				new OtherInvolvedWidget(client, decisionBox.getDecisionManager(), option);
 			}
 
 			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.detailwidget")
