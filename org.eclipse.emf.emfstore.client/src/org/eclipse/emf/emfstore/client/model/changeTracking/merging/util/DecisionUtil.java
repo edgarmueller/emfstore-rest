@@ -60,11 +60,6 @@ public final class DecisionUtil {
 	public static final String WIDGET_MULTILINE_EDITABLE = WIDGET_MULTILINE + SEPERATOR + EDITABLE;
 
 	/**
-	 * Option for other involved detail provider.
-	 */
-	public static final String WIDGET_OTHERINVOLVED = "org.eclipse.emf.emfstore.client.ui.merge.widget.otherinvolved";
-
-	/**
 	 * Cuts a text to certain length and adds "..." at the end if needed.
 	 * 
 	 * @param str
@@ -141,8 +136,6 @@ public final class DecisionUtil {
 				if (option.getOptionLabel().length() > DecisionUtil.OPTION_LENGTH) {
 					return true;
 				}
-			} else {
-				return true;
 			}
 		}
 		return false;

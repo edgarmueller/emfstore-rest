@@ -97,10 +97,8 @@ public class DeletionConflict extends Conflict {
 		if (isLeftMy()) {
 			myOption.setOptionLabel(deleteMsg());
 			theirOption.setOptionLabel(keepMsg());
-			theirOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
 		} else {
 			myOption.setOptionLabel(keepMsg());
-			myOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
 			theirOption.setOptionLabel(deleteMsg());
 		}
 
