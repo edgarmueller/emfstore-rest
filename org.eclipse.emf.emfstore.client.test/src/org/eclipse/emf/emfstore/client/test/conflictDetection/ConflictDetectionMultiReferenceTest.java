@@ -1292,7 +1292,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> hardConflicts = cd.getConflicting(ops1, ops2);
 		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
 
-		assertEquals(0, hardConflicts.size());
+		assertEquals(1, hardConflicts.size());
 
 	}
 
