@@ -280,6 +280,6 @@ public class MultiReferenceContainmentMergeTest extends MergeTest {
 		}.run(false);
 
 		// false negative
-		mc.hasConflict(DeletionConflict.class, 2);
+		mc.hasConflict(DeletionConflict.class, 1);
 	}
 }

@@ -45,7 +45,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -92,7 +92,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -140,7 +140,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);

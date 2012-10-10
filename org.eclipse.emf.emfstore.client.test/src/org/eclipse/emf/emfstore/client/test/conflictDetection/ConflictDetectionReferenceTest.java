@@ -56,7 +56,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -110,7 +110,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -166,7 +166,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(task);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -221,7 +221,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(solution1);
 				getProject().addModelElement(solution2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -272,7 +272,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(issue);
 				getProject().addModelElement(solution);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -326,7 +326,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(solution);
 				getProject().addModelElement(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -380,7 +380,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -435,7 +435,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -490,7 +490,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(useCase);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -543,7 +543,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(solution1);
 				getProject().addModelElement(solution2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -598,7 +598,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(solution1);
 				getProject().addModelElement(solution2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -654,7 +654,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(solution1);
 				getProject().addModelElement(solution2);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -709,7 +709,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -764,7 +764,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section2);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -818,7 +818,7 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(useCase);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
