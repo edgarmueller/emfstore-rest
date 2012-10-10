@@ -45,7 +45,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -153,7 +153,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(dummy);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -206,7 +206,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -260,7 +260,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -317,7 +317,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -376,7 +376,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -436,7 +436,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -497,7 +497,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -556,7 +556,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -611,7 +611,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -669,7 +669,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -726,7 +726,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(actor);
 				getProject().addModelElement(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -781,7 +781,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -839,7 +839,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -898,7 +898,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -958,7 +958,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1018,7 +1018,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1075,7 +1075,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1130,7 +1130,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1190,7 +1190,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				getProject().addModelElement(otherSection);
 				getProject().addModelElement(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1316,7 +1316,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				actor.setLeafSection(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1377,7 +1377,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				actor.setLeafSection(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1506,7 +1506,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				actor.setLeafSection(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -1567,7 +1567,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				actor.setLeafSection(section);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -2127,7 +2127,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2191,7 +2191,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2256,7 +2256,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2316,7 +2316,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2377,7 +2377,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2439,7 +2439,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2504,7 +2504,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2571,7 +2571,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(otherDummy);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 		ProjectSpace ps2 = cloneProjectSpace(getProjectSpace());
@@ -2638,7 +2638,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2704,7 +2704,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2771,7 +2771,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2840,7 +2840,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2909,7 +2909,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -2978,7 +2978,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				section.getModelElements().add(actor);
 				section.getModelElements().add(dummy);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);

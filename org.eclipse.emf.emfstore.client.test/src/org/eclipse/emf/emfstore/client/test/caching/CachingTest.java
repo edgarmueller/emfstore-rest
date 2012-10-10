@@ -85,7 +85,7 @@ public abstract class CachingTest {
 	 * Clear all operations from project space.
 	 */
 	protected void clearOperations() {
-		getProjectSpace().getOperations().clear();
+		clearOperations();
 	}
 
 }

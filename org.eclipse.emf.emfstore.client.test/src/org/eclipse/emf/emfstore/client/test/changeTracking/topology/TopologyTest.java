@@ -80,7 +80,7 @@ public abstract class TopologyTest {
 	 * Clear all operations from project space.
 	 */
 	protected void clearOperations() {
-		getProjectSpace().getOperations().clear();
+		clearOperations();
 	}
 
 }

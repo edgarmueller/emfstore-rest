@@ -394,7 +394,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 
 			@Override
 			protected void doRun() {
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
 				actor.setName("name");
@@ -910,7 +910,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 				getProject().addModelElement(section);
 				getProject().addModelElement(section2);

@@ -51,7 +51,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -100,7 +100,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -146,7 +146,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(section);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
@@ -194,7 +194,7 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				getProject().addModelElement(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);
