@@ -68,6 +68,8 @@ public final class ModelUtil {
 
 	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
 
+	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
+
 	/**
 	 * Text marker for the begin of the plaintext in rich text attributes.
 	 */
@@ -89,6 +91,8 @@ public final class ModelUtil {
 	private static Set<SingletonIdResolver> singletonIdResolvers;
 	private static HashMap<Object, Object> resourceLoadOptions;
 	private static HashMap<Object, Object> resourceSaveOptions;
+
+	private static Boolean discardDanglingHREFs;
 
 	/**
 	 * Private constructor.
@@ -282,15 +286,34 @@ public final class ModelUtil {
 	 * @return map of options for {@link XMIResource} or {@link XMLResource}.
 	 */
 	public static synchronized Map<Object, Object> getResourceSaveOptions() {
+
 		if (resourceSaveOptions == null) {
+
 			resourceSaveOptions = new HashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
 			resourceSaveOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
 			resourceSaveOptions.put(XMLResource.OPTION_FLUSH_THRESHOLD, 100000);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
+
+			if (isDiscardDanglingHREFs()) {
+				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+			}
 		}
 		return resourceSaveOptions;
+	}
+
+	private static boolean isDiscardDanglingHREFs() {
+
+		if (discardDanglingHREFs == null) {
+			ExtensionPoint extensionPoint = new ExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL
+				+ ".resourceoptions");
+			discardDanglingHREFs = extensionPoint.getBoolean("discardDanglingHREFs",
+				OPTION_DISCARD_DANGLING_HREF_DEFAULT);
+		}
+
+		return discardDanglingHREFs;
 	}
 
 	private static boolean canHaveInstances(EClass eClass) {
