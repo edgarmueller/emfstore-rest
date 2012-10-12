@@ -243,6 +243,12 @@ public class OptionComponent {
 				break;
 
 			case SWT.MouseUp:
+
+				// do not set selection in case the details button has been clicked
+				if (event.widget instanceof Button) {
+					return;
+				}
+
 				if (composite.getOption().hasExtraOptionAction()) {
 					extraAction(composite);
 				}
