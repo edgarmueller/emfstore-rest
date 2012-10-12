@@ -175,7 +175,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		String branch = versionSpec.getBranch();
 		int versions = projectHistory.getVersions().size();
 		if (0 > index || index >= versions || branch == null) {
-			throw new InvalidVersionSpecException();
+			throw new InvalidVersionSpecException("Invalid version requested. Version " + index
+				+ " does not exist on server.");
 		}
 
 		if (branch.equals(VersionSpec.GLOBAL)) {
@@ -317,11 +318,10 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				} catch (FatalEmfStoreException e) {
 					// try to roll back
 					baseVersion.setNextVersion(null);
+					baseBranch.setHead(ModelUtil.clone(baseVersion.getPrimarySpec()));
 					projectHistory.getVersions().remove(newVersion);
-					// TODO: OW: why do we need to save here, can we remove? do
-					// test!!
-					save(baseVersion);
-					save(projectHistory);
+					// TODO: delete obsolete project, changepackage and version files
+					// TODO: roll back branch
 					throw new StorageException(StorageException.NOSAVE, e);
 				}
 
