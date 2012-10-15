@@ -79,11 +79,9 @@ public class ReferenceConflict extends Conflict {
 	protected void initConflictOptions(List<ConflictOption> options) {
 		for (ConflictOption option : conflict.getOptions()) {
 			if (option.getType() == OptionType.MyOperation) {
-				option.getOperations().clear();
-				option.getOperations().addAll(getLeftOperations());
+				option.addOperations(getLeftOperations());
 			} else if (option.getType() == OptionType.TheirOperation) {
-				option.getOperations().clear();
-				option.getOperations().addAll(getRightOperations());
+				option.addOperations(getRightOperations());
 			}
 			options.add(option);
 		}
