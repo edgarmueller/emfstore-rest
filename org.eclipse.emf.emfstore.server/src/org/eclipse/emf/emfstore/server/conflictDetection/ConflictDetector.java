@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.server.Activator;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -297,22 +298,18 @@ public class ConflictDetector {
 	}
 
 	private static Set<String> initExcludedFeatureNameSet() {
-		Set<String> result = new LinkedHashSet<String>();
-		// folder pseudo-containment
-		result.add("parent");
-		result.add("children");
-		// containment children of configuration
-		result.add("elementTypes");
-		result.add("folders");
-		result.add("connectionTypes");
-		result.add("visualConfigurations");
-		result.add("masterFormats");
-		result.add("matrixConfigurations");
-		result.add("tableConfigurations");
-		result.add("ganttConfigurations");
-		result.add("windowArrangements");
 
-		return result;
+		Set<String> excludedFeatures = new LinkedHashSet<String>();
+		ExtensionPoint extensionPoint = new ExtensionPoint(Activator.PLUGIN_ID + ".conflictdetection.excludedfeatures");
+
+		IExcludedFeaturesProvider excludingFeaturesProvider = extensionPoint.getClass("class",
+			IExcludedFeaturesProvider.class);
+
+		if (excludingFeaturesProvider != null) {
+			excludedFeatures.addAll(excludingFeaturesProvider.getExcludedFeatures());
+		}
+
+		return excludedFeatures;
 	}
 
 	/**
