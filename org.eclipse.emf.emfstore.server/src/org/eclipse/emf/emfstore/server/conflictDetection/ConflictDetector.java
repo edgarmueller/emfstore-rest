@@ -23,11 +23,10 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 
 /**
  * Detects conflicts with a given {@link ConflictDetectionStrategy}.
@@ -261,11 +260,16 @@ public class ConflictDetector {
 		String featureName = featureOperation.getFeatureName();
 		if (featureOperation instanceof ReferenceOperation) {
 			ReferenceOperation referenceOperation = (ReferenceOperation) featureOperation;
-			if (isRemovingReferencesOnly(referenceOperation)) {
-				return;
-			}
+			// if (isRemovingReferencesOnly(referenceOperation)) {
+			// return;
+			// }
 			for (ModelElementId otherModelElement : referenceOperation.getOtherInvolvedModelElements()) {
-				modelElementIdToFeatureSetMap.addRequired(otherModelElement.getId());
+				if (referenceOperation.getContainmentType().equals(ContainmentType.CONTAINMENT)
+					&& !referenceOperation.isBidirectional()) {
+					modelElementIdToFeatureSetMap.addForContainerFeature(otherModelElement.getId());
+				} else {
+					modelElementIdToFeatureSetMap.addRequired(otherModelElement.getId());
+				}
 			}
 		}
 		if (isExcludedFeature(featureName)) {
@@ -275,16 +279,16 @@ public class ConflictDetector {
 		return;
 	}
 
-	private boolean isRemovingReferencesOnly(ReferenceOperation referenceOperation) {
-		if (referenceOperation instanceof MultiReferenceOperation) {
-			return !((MultiReferenceOperation) referenceOperation).isAdd();
-		}
-		if (referenceOperation instanceof SingleReferenceOperation) {
-			return ((SingleReferenceOperation) referenceOperation).getNewValue() == null;
-		}
-
-		return false;
-	}
+	// private boolean isRemovingReferencesOnly(ReferenceOperation referenceOperation) {
+	// if (referenceOperation instanceof MultiReferenceOperation) {
+	// return !((MultiReferenceOperation) referenceOperation).isAdd();
+	// }
+	// if (referenceOperation instanceof SingleReferenceOperation) {
+	// return ((SingleReferenceOperation) referenceOperation).getNewValue() == null;
+	// }
+	//
+	// return false;
+	// }
 
 	private static final Set<String> excludedFeatureNameSet = initExcludedFeatureNameSet();
 
