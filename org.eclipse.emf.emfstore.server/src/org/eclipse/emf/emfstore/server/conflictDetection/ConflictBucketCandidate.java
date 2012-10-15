@@ -49,7 +49,7 @@ public class ConflictBucketCandidate {
 	}
 
 	private static Integer initMaxBucketSize() {
-		int result = 0;
+		int result = 1000;
 		String startArgument = ServerConfiguration.getStartArgument(MAX_BUCKET_SIZE);
 		if (startArgument != null) {
 			try {
