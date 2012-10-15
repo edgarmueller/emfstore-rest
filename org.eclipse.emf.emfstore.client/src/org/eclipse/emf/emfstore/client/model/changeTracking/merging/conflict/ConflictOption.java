@@ -115,6 +115,7 @@ public class ConflictOption {
 	public void addOperations(Set<AbstractOperation> ops) {
 		if (operations.isEmpty()) {
 			operations = ops;
+			return;
 		}
 		operations.addAll(ops);
 	}
