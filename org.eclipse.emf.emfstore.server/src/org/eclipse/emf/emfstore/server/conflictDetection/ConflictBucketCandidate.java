@@ -33,7 +33,7 @@ public class ConflictBucketCandidate {
 
 	private static Integer maxBucketSize = initMaxBucketSize();
 	private static final String MAX_BUCKET_SIZE = "-ConflictDetectionMaxBucketSize";
-	private Set<String> involvedIds;
+	private ModelElementIdToFeatureSetMapping involvedIdsAndFeatures;
 	private Set<AbstractOperation> myOperations;
 	private Set<AbstractOperation> theirOperations;
 	private Map<AbstractOperation, Integer> operationToPriorityMap;
@@ -42,14 +42,14 @@ public class ConflictBucketCandidate {
 	 * Default constructor.
 	 */
 	public ConflictBucketCandidate() {
-		involvedIds = new LinkedHashSet<String>();
+		involvedIdsAndFeatures = new ModelElementIdToFeatureSetMapping();
 		myOperations = new LinkedHashSet<AbstractOperation>();
 		theirOperations = new LinkedHashSet<AbstractOperation>();
 		operationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>();
 	}
 
 	private static Integer initMaxBucketSize() {
-		int result = 1000;
+		int result = 0;
 		String startArgument = ServerConfiguration.getStartArgument(MAX_BUCKET_SIZE);
 		if (startArgument != null) {
 			try {
@@ -62,18 +62,20 @@ public class ConflictBucketCandidate {
 	}
 
 	/**
-	 * Add an operation and a model element id to the bucket.
+	 * Add an operation for a model element id and its feature to the bucket.
 	 * 
 	 * @param operation the operation
 	 * @param modelElementId the model element id
+	 * @param featureName the name of the feature
 	 * @param isMyOperation a boolean to determine if the operation is to be added to mz or their operations
 	 * @param priority the global priority of the operation
 	 */
-	public void addOperation(AbstractOperation operation, String modelElementId, boolean isMyOperation, int priority) {
+	public void addOperation(AbstractOperation operation, String modelElementId, String featureName,
+		boolean isMyOperation, int priority) {
 		if (operation == null) {
 			return;
 		}
-		involvedIds.add(modelElementId);
+		involvedIdsAndFeatures.add(modelElementId, featureName);
 		operationToPriorityMap.put(operation, priority);
 		if (isMyOperation) {
 			myOperations.add(operation);
@@ -95,17 +97,18 @@ public class ConflictBucketCandidate {
 
 		myOperations.addAll(otherBucket.getMyOperations());
 		theirOperations.addAll(otherBucket.getTheirOperations());
-		involvedIds.addAll(otherBucket.getInvolvedIds());
+		involvedIdsAndFeatures.merge(otherBucket.involvedIdsAndFeatures);
 		operationToPriorityMap.putAll(otherBucket.operationToPriorityMap);
 	}
 
 	/**
-	 * Add an involved model element id to the bucket.
+	 * Add an involved model element id and its feature to the bucket.
 	 * 
 	 * @param modelElementId the id as String
+	 * @param featureName the feature name
 	 */
-	public void addModelElementId(String modelElementId) {
-		involvedIds.add(modelElementId);
+	public void addModelElementId(String modelElementId, String featureName) {
+		involvedIdsAndFeatures.add(modelElementId, featureName);
 	}
 
 	/**
@@ -125,8 +128,8 @@ public class ConflictBucketCandidate {
 	/**
 	 * @return a set of involved model element ids
 	 */
-	public Set<String> getInvolvedIds() {
-		return involvedIds;
+	public ModelElementIdToFeatureSetMapping getInvolvedIdsandFeatures() {
+		return involvedIdsAndFeatures;
 	}
 
 	/**
@@ -149,7 +152,8 @@ public class ConflictBucketCandidate {
 	 * the candidate bucket.
 	 * 
 	 * @param detector the conflict detector
-	 * @param myOperationsNonConflictingOperations a transient set where all non conflicting my operations are added to
+	 * @param myOperationsNonConflictingOperations a transient set where all non conflicting my operations are added
+	 *            to
 	 *            during this operation
 	 * @return a set of conflict buckets
 	 */
@@ -217,7 +221,7 @@ public class ConflictBucketCandidate {
 	}
 
 	private boolean bucketIsTooLarge() {
-		if (getInvolvedIds().size() > maxBucketSize) {
+		if (getInvolvedIdsandFeatures().size() > maxBucketSize) {
 			return true;
 		}
 		int myOperationsSize = ChangePackageImpl.countLeafOperations(myOperations);
@@ -257,5 +261,15 @@ public class ConflictBucketCandidate {
 		}
 
 		return conflictBucketsSet;
+	}
+
+	/**
+	 * Get a mapping from model elements involved in the conflict candidate to the involved features of the the model.
+	 * element
+	 * 
+	 * @return the mapping
+	 */
+	public ModelElementIdToFeatureSetMapping getInvolvedModelElementIdToFeatureSetMapping() {
+		return involvedIdsAndFeatures;
 	}
 }
