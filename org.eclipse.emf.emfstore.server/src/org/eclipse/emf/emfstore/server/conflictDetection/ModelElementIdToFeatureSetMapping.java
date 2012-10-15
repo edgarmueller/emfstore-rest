@@ -31,12 +31,17 @@ import java.util.Set;
 public class ModelElementIdToFeatureSetMapping {
 
 	/**
+	 * Magic feature name referring to container feature of a model element.
+	 */
+	public static final String CONTAINER_FEATURE_NAME = "+ContainerFeature";
+
+	/**
 	 * Magic feature name referring to all features of a model element.
 	 */
 	public static final String ALL_FEATURES_NAME = "+AllFeatures";
 
 	/**
-	 * Immutable singleton set representing the set of all features of a model element without exlicetly containing
+	 * Immutable singleton set representing the set of all features of a model element without explicitly containing
 	 * them.
 	 * The set only contains the magic feature name representing all features
 	 * {@link ModelElementIdToFeatureSetMapping#ALL_FEATURES_NAME}.
@@ -92,6 +97,10 @@ public class ModelElementIdToFeatureSetMapping {
 	 */
 	public void add(String modelElementId) {
 		modelElementToFeatureSetMap.put(modelElementId, ALL_FEATURE_NAME_SET);
+	}
+
+	public void addForContainerFeature(String id) {
+		add(id, CONTAINER_FEATURE_NAME);
 	}
 
 	/**
