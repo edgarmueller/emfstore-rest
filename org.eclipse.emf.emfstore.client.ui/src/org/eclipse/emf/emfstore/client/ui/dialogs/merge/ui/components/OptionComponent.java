@@ -171,10 +171,11 @@ public class OptionComponent {
 			styledText.setEditable(false);
 			styledText.setEnabled(false);
 			styledText.setBackground(getBackground());
+			styledText.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
 			setText();
 
 			Button detailsButton = new Button(this, SWT.NONE);
-			detailsButton.setText("Details...");
+			detailsButton.setText("Details");
 			detailsButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false));
 			detailsButton.addSelectionListener(new SelectionListener() {
 
