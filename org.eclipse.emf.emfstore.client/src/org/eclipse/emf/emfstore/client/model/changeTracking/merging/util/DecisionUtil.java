@@ -37,7 +37,7 @@ public final class DecisionUtil {
 	/**
 	 * Length of option label.
 	 */
-	public static final int OPTION_LENGTH = 50;
+	public static final int OPTION_LENGTH = 45;
 
 	/**
 	 * Seperator symbol for detail proivder.
