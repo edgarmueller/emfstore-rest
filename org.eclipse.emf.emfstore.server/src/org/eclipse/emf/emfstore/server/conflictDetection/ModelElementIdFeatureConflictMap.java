@@ -34,6 +34,9 @@ public class ModelElementIdFeatureConflictMap {
 	// Mapping from modelElementId to a set of feature names
 	private ModelElementIdToFeatureSetMapping modelElementIdToFeatureSetMapping;
 
+	// map from model elementid to buckets requiring its existence
+	private LinkedHashMap<String, Set<ConflictBucketCandidate>> modelElementExistenceToConflictBucketSetMap;
+
 	/**
 	 * Default constructor.
 	 */
@@ -41,6 +44,7 @@ public class ModelElementIdFeatureConflictMap {
 		modelElementIdAndFeatureToConflictMap = new LinkedHashMap<String, ConflictBucketCandidate>();
 		modelElementsWithAllFeaturesToConflictMap = new LinkedHashMap<String, ConflictBucketCandidate>();
 		modelElementIdToFeatureSetMapping = new ModelElementIdToFeatureSetMapping();
+		modelElementExistenceToConflictBucketSetMap = new LinkedHashMap<String, Set<ConflictBucketCandidate>>();
 	}
 
 	/**
@@ -65,11 +69,18 @@ public class ModelElementIdFeatureConflictMap {
 		if (featureName == ModelElementIdToFeatureSetMapping.ALL_FEATURES_NAME) {
 			Set<String> featureSet = modelElementIdToFeatureSetMapping.get(modelElementId);
 			Set<ConflictBucketCandidate> buckets = new LinkedHashSet<ConflictBucketCandidate>();
+			// get all buckets that already blocked features for this model element
 			for (String feature : featureSet) {
 				ConflictBucketCandidate subBucket = modelElementIdAndFeatureToConflictMap.get(modelElementId + feature);
 				if (subBucket != null) {
 					buckets.add(subBucket);
 				}
+			}
+			// get all buckets that require existence of this element
+			Set<ConflictBucketCandidate> existenceRequiringSet = modelElementExistenceToConflictBucketSetMap
+				.get(modelElementId);
+			if (existenceRequiringSet != null) {
+				buckets.addAll(existenceRequiringSet);
 			}
 			return buckets;
 		}
@@ -109,13 +120,20 @@ public class ModelElementIdFeatureConflictMap {
 			return;
 		}
 		conflictBucketCandidate = modelElementIdAndFeatureToConflictMap.get(modelElementId + featureName);
-		if (conflictBucketCandidate != null && currentOperationsConflictBucket != conflictBucketCandidate && !replace) {
+		if (conflictBucketCandidate != null && currentOperationsConflictBucket != conflictBucketCandidate && !replace
+			&& featureName != ModelElementIdToFeatureSetMapping.EXISTENCE_FEATURE_NAME) {
 			throw new IllegalStateException("Bucket is already taken!");
+		}
+		if (featureName == ModelElementIdToFeatureSetMapping.EXISTENCE_FEATURE_NAME) {
+			Set<ConflictBucketCandidate> existingSet = modelElementExistenceToConflictBucketSetMap.get(modelElementId);
+			if (existingSet == null) {
+				existingSet = new LinkedHashSet<ConflictBucketCandidate>();
+				modelElementExistenceToConflictBucketSetMap.put(modelElementId, existingSet);
+			}
+			existingSet.add(currentOperationsConflictBucket);
 		}
 		modelElementIdAndFeatureToConflictMap.put(modelElementId + featureName, currentOperationsConflictBucket);
 		modelElementIdToFeatureSetMapping.add(modelElementId, featureName);
-		// if (featureName == ModelElementIdToFeatureSetMapping.EXISTENCE_REQUIRED) {
-		// modelElementIdWithExistenceFeatureToConflictMap.put(modelElementId, currentOperationsConflictBucket);
-		// }
+
 	}
 }
