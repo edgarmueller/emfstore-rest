@@ -24,7 +24,6 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -421,7 +420,13 @@ public class DecisionManager {
 	}
 
 	private Conflict createSingleSingleConflict(AbstractOperation my, AbstractOperation their) {
-		return new SingleReferenceConflict(Collections.singleton(my), Collections.singleton(their), my, their, this);
+		return new SingleReferenceConflict(set(my), set(their), my, their, this);
+	}
+
+	private <T> Set<T> set(T object) {
+		Set<T> set = new LinkedHashSet<T>();
+		set.add(object);
+		return set;
 	}
 
 	private Conflict createMultiMultiConflict(ConflictBucket conf) {
@@ -436,11 +441,9 @@ public class DecisionManager {
 
 	private Conflict createMultiMultiConflict(AbstractOperation my, AbstractOperation their) {
 		if (((MultiReferenceOperation) my).isAdd()) {
-			return new MultiReferenceConflict(Collections.singleton(my), Collections.singleton(their), my, their, this,
-				true);
+			return new MultiReferenceConflict(set(my), set(their), my, their, this, true);
 		} else {
-			return new MultiReferenceConflict(Collections.singleton(their), Collections.singleton(my), their, my, this,
-				false);
+			return new MultiReferenceConflict(set(their), set(my), their, my, this, false);
 		}
 	}
 
