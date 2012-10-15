@@ -115,18 +115,20 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
-		Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
-			Collections.singletonList(localchanges), changes);
-		boolean potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
-
-		if (potentialConflictsDetected) {
-			getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
-			ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(), localchanges,
-				changes, conflictBucketCandidates);
-			if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
-				return getProjectSpace().getBaseVersion();
+		boolean potentialConflictsDetected = false;
+		if (getProjectSpace().getOperations().size() > 0) {
+			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
+				Collections.singletonList(localchanges), changes);
+			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
+			if (potentialConflictsDetected) {
+				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
+				ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(),
+					localchanges, changes, conflictBucketCandidates);
+				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
+					return getProjectSpace().getBaseVersion();
+				}
+				throw conflictException;
 			}
-			throw conflictException;
 		}
 
 		getProgressMonitor().worked(15);
