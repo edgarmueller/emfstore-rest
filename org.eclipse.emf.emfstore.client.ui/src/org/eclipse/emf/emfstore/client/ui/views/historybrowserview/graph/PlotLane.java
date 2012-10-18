@@ -1,6 +1,16 @@
 /*******************************************************************************
- * Copyright (C) 2008, Shawn O. Pearce <spearce@spearce.org>
- * Copyright (C) 2012, Alexander Aumann <alexander.f.aumann@gmail.com>
+ * Copyright 2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
+/*******************************************************************************
+ * Copyright 2008, Shawn O. Pearce <spearce@spearce.org>
+ * Copyright 2012, Alexander Aumann <alexander.f.aumann@gmail.com>
  * and other copyright owners as documented in the project's IP log.
  * This program and the accompanying materials are made available
  * under the terms of the Eclipse Distribution License v1.0 which
