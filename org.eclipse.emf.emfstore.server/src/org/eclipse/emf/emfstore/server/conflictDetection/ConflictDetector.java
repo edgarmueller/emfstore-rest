@@ -170,7 +170,7 @@ public class ConflictDetector {
 						priority);
 					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
 				} else if (conflictBucket == currentOperationsConflictBucket) {
-					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
+					// conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
 					currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
 				} else if (conflictBucket == null && currentOperationsConflictBucket != null) {
 					// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
