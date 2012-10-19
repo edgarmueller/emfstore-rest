@@ -1,8 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 Chair for Applied Software Engineering,
+ * Copyright 2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
+
 /**
  * The Class UIRegisterEPackageController.
  * 
@@ -49,7 +50,8 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 	 * @throws EmfStoreException if any error in the EmfStore occurs
 	 */
 	public void registerEPackage(ServerInfo serverInfo) throws EmfStoreException {
-		EPackageTreeSelectionDialog dialog = new EPackageTreeSelectionDialog(EPackageRegistryHelper.getAvailablePackages(true));
+		EPackageTreeSelectionDialog dialog = new EPackageTreeSelectionDialog(
+			EPackageRegistryHelper.getAvailablePackages(true));
 		dialog.open();
 		final EPackage pkg = dialog.getSelectedEPackage();
 		if (pkg != null) {
@@ -68,14 +70,14 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 		try {
 			this.registerEPackage(serverInfo);
 		} catch (final EmfStoreException e) {
-				RunInUI.run(new Callable<Void>() {
-					
-					public Void call() throws Exception {
-						WorkspaceUtil.logException(e.getMessage(), e);
-						MessageDialog.openError(getShell(),"Registration failed",e.getMessage());
-						return null;
-					}
-				});
+			RunInUI.run(new Callable<Void>() {
+
+				public Void call() throws Exception {
+					WorkspaceUtil.logException(e.getMessage(), e);
+					MessageDialog.openError(getShell(), "Registration failed", e.getMessage());
+					return null;
+				}
+			});
 		}
 		return null;
 	}

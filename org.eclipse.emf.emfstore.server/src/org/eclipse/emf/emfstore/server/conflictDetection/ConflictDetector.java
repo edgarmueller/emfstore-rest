@@ -1,8 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Copyright 2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
@@ -170,7 +170,7 @@ public class ConflictDetector {
 						priority);
 					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
 				} else if (conflictBucket == currentOperationsConflictBucket) {
-					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
+					// conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
 					currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
 				} else if (conflictBucket == null && currentOperationsConflictBucket != null) {
 					// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
