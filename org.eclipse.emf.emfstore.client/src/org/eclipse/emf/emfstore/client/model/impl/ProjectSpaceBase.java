@@ -124,8 +124,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private ResourceSet resourceSet;
 
 	private IApplyChangesWrapper applyChangesWrapper;
-	
-private boolean disposed;
+
 	/**
 	 * Constructor.
 	 */
@@ -470,7 +469,7 @@ private boolean disposed;
 
 	private void migrateOperations(ChangePackage localChangePackage) {
 
-		if (getLocalOperations() == null || isTransient()) {
+		if (getLocalOperations() == null || getLocalOperations().getOperations().size() == 0 || isTransient()) {
 			return;
 		}
 
@@ -479,6 +478,7 @@ private boolean disposed;
 		Resource eResource = getLocalOperations().eResource();
 		// if for some reason the resource of project space and operations
 		// are not different, then reinitialize operations URI
+		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
 			String localChangePackageFileName = Configuration.getWorkspaceDirectory()
 				+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
