@@ -348,21 +348,20 @@ public final class ModelUtil {
 			// rethrow exception
 			throw e;
 		} finally {
-
-			if (resource.getWarnings().size() > 0) {
-				for (Diagnostic diagnostic : resource.getErrors()) {
-					logger.logWarning(logDiagnostic(diagnostic).toString());
-				}
-			}
-
-			if (resource.getErrors().size() > 0) {
-				for (Diagnostic diagnostic : resource.getErrors()) {
-					logger.logError(logDiagnostic(diagnostic).toString());
-				}
-			}
+			logWarningsAndErrors(resource, logger);
 		}
 	}
 
+	/**
+	 * Loads a given resource and logs any warning and/or errors.
+	 * 
+	 * @param resource
+	 *            the resource to be loaded
+	 * @param logger
+	 *            a logger instance which will be used to log warnings and errors on resources
+	 * @throws IOException
+	 *             in case an exception occurs during load
+	 */
 	public static void loadResource(Resource resource, IResourceLogger logger) throws IOException {
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
@@ -370,19 +369,24 @@ public final class ModelUtil {
 			// rethrow exception
 			throw e;
 		} finally {
+			logWarningsAndErrors(resource, logger);
+		}
+	}
 
-			if (resource.getWarnings().size() > 0) {
-				for (Diagnostic diagnostic : resource.getErrors()) {
-					logger.logWarning(logDiagnostic(diagnostic).toString());
-				}
-			}
+	private static void logWarningsAndErrors(Resource resource, IResourceLogger logger) {
 
-			if (resource.getErrors().size() > 0) {
-				for (Diagnostic diagnostic : resource.getErrors()) {
-					logger.logError(logDiagnostic(diagnostic).toString());
-				}
+		if (resource.getWarnings().size() > 0) {
+			for (Diagnostic diagnostic : resource.getErrors()) {
+				logger.logWarning(logDiagnostic(diagnostic).toString());
 			}
 		}
+
+		if (resource.getErrors().size() > 0) {
+			for (Diagnostic diagnostic : resource.getErrors()) {
+				logger.logError(logDiagnostic(diagnostic).toString());
+			}
+		}
+
 	}
 
 	private static StringWriter logDiagnostic(Diagnostic diagnostic) {
