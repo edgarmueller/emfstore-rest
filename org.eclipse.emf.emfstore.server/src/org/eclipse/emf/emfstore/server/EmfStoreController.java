@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +38,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
@@ -246,13 +249,37 @@ public class EmfStoreController implements IApplication, Runnable {
 	}
 
 	private void copyFileToWorkspace(String target, String source, String failure, String success) {
-		File keyStore = new File(target);
-		if (!keyStore.exists()) {
-			try {
-				FileUtil.copyFile(getClass().getResourceAsStream(source), keyStore);
-			} catch (IOException e) {
-				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+
+		File targetFile = new File(target);
+
+		if (!targetFile.exists()) {
+			// check if the custom configuration resources are provided and if,
+			// copy them to place
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emfstore.server.configurationresource");
+			ExtensionElement element = extensionPoint.getFirst();
+
+			if (element != null) {
+
+				String attribute = element.getAttribute(targetFile.getName());
+
+				if (attribute != null) {
+					try {
+						FileUtil.copyFile(new URL("platform:/plugin/"
+							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute)
+							.openConnection().getInputStream(), targetFile);
+						return;
+					} catch (IOException e) {
+						ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+					}
+				}
 			}
+		}
+
+		// Guess not, lets copy the default configuration resources
+		try {
+			FileUtil.copyFile(getClass().getResourceAsStream(source), targetFile);
+		} catch (IOException e) {
+			ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
 		}
 	}
 
