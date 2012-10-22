@@ -536,20 +536,26 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		}
 
 		for (EObject modelElement : getModelElements()) {
-			// put model element into cache
-			ModelElementId modelElementId = getIdForModelElement(modelElement);
-			putIntoCaches(modelElement, modelElementId.getId());
-
-			// put children of model element into cache
-			TreeIterator<EObject> it = modelElement.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				ModelElementId id = getIdForModelElement(obj);
-				putIntoCaches(obj, id.getId());
-			}
+			putModelElementIntoCache(modelElement);
 		}
 
 		cachesInitialized = true;
+	}
+
+	protected void putModelElementIntoCache(EObject modelElement) {
+
+		// put model element into cache
+		ModelElementId modelElementId = getIdForModelElement(modelElement);
+		putIntoCaches(modelElement, modelElementId.getId());
+
+		// put children of model element into cache
+		TreeIterator<EObject> it = modelElement.eAllContents();
+
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			ModelElementId id = getIdForModelElement(obj);
+			putIntoCaches(obj, id.getId());
+		}
 	}
 
 	/**
