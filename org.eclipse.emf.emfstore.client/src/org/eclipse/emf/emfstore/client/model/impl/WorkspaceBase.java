@@ -207,7 +207,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 				sourceSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 				sourceSpec.setIdentifier(0);
 			}
-			projectSpace.eResource().save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
+
 		} catch (EmfStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 			// BEGIN SUPRESS CATCH EXCEPTION
@@ -676,14 +677,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 */
 	public void save() {
 		try {
-			this.eResource().save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(eResource(), ModelUtil.getResourceLogger());
 		} catch (IOException e) {
 			// MK Auto-generated catch block
 			// FIXME OW MK: also insert code for dangling href handling here
 		}
 	}
-
-	// BEGIN OF CUSTOM CODE
 
 	/**
 	 * 

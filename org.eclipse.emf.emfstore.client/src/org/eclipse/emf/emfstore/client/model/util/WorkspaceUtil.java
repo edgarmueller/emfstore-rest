@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.model.Activator;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
 import org.eclipse.emf.emfstore.common.CommonUtil;
+import org.eclipse.emf.emfstore.common.model.util.IResourceLogger;
 
 /**
  * Workspace utility class.
@@ -25,10 +26,33 @@ import org.eclipse.emf.emfstore.common.CommonUtil;
 public final class WorkspaceUtil {
 
 	/**
+	 * Resource logger instance.
+	 */
+	private static IResourceLogger resourceLogger = new IResourceLogger() {
+
+		public void logWarning(String msg) {
+			log(msg, Status.WARNING);
+		}
+
+		public void logError(String msg) {
+			log(msg, Status.ERROR);
+		}
+	};
+
+	/**
 	 * Private constructor.
 	 */
 	private WorkspaceUtil() {
 		// nothing to do
+	}
+
+	/**
+	 * Returns the resource logger.
+	 * 
+	 * @return the resource logger
+	 */
+	public static IResourceLogger getResourceLogger() {
+		return resourceLogger;
 	}
 
 	/**
@@ -68,6 +92,18 @@ public final class WorkspaceUtil {
 	}
 
 	/**
+	 * Log a message.
+	 * 
+	 * @param message the message
+	 * @param statusInt the status constant as defined in {@link IStatus}
+	 */
+	public static void log(String message, int statusInt) {
+		Activator activator = Activator.getDefault();
+		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), message);
+		activator.getLog().log(status);
+	}
+
+	/**
 	 * Handles the given exception by wrapping it in a {@link RuntimeException} and propagating it to all registered
 	 * exception handlers. If no exception handler did handle the exception
 	 * a the wrapped exception will be re-thrown.
@@ -102,5 +138,4 @@ public final class WorkspaceUtil {
 			throw runtimeException;
 		}
 	}
-
 }

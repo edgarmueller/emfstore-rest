@@ -282,7 +282,7 @@ public class ResourceHelper {
 	 */
 	public void save(EObject object) throws FatalEmfStoreException {
 		try {
-			object.eResource().save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(object.eResource(), ModelUtil.getResourceLogger());
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (Exception e) {
 			throw new FatalEmfStoreException(StorageException.NOSAVE, e);
@@ -300,7 +300,7 @@ public class ResourceHelper {
 		for (Resource res : serverSpace.eResource().getResourceSet().getResources()) {
 			if (res.isLoaded() && res.isModified()) {
 				try {
-					res.save(ModelUtil.getResourceSaveOptions());
+					ModelUtil.saveResource(res, ModelUtil.getResourceLogger());
 					// BEGIN SUPRESS CATCH EXCEPTION
 				} catch (Exception e) {
 					throw new FatalEmfStoreException(StorageException.NOSAVE, e);

@@ -42,7 +42,7 @@ public class XMLStorage implements ResourceStorage {
 		if (!serverFile.exists()) {
 			try {
 				Resource resource = resourceSet.createResource(fileURI);
-				resource.save(ModelUtil.getResourceSaveOptions());
+				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (IOException e) {
 				throw new FatalEmfStoreException("Could not init XMLRessource", e);
 			}

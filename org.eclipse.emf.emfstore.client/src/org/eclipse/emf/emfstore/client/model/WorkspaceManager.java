@@ -294,7 +294,7 @@ public final class WorkspaceManager implements IReinitializable {
 		modelVersion.setReleaseNumber(modelReleaseNumber);
 		versionResource.getContents().add(modelVersion);
 		try {
-			versionResource.save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
 				"Version stamping workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(),

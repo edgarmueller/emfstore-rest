@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.common.model.util;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
@@ -79,6 +81,22 @@ public final class ModelUtil {
 	 * URI used to serialize EObject with the model util.
 	 */
 	public static final URI VIRTUAL_URI = URI.createURI("virtualUri");
+
+	private static IResourceLogger resourceLogger = new IResourceLogger() {
+
+		public void logWarning(String msg) {
+			ModelUtil.logWarning(msg);
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.common.model.util.IResourceLogger#logError(java.lang.String)
+		 */
+		public void logError(String msg) {
+			ModelUtil.logError(msg);
+		}
+	};
 
 	/**
 	 * Contains the canonical names of classes which will be ignored.
@@ -180,6 +198,15 @@ public final class ModelUtil {
 		}
 		String result = stringWriter.toString();
 		return result;
+	}
+
+	/**
+	 * Returns the resource logger.
+	 * 
+	 * @return the resource logger
+	 */
+	public static IResourceLogger getResourceLogger() {
+		return resourceLogger;
 	}
 
 	/**
@@ -304,6 +331,76 @@ public final class ModelUtil {
 		return resourceSaveOptions;
 	}
 
+	/**
+	 * Saves a given resource and logs any warning and/or errors.
+	 * 
+	 * @param resource
+	 *            the resource to be saved
+	 * @param logger
+	 *            a logger instance which will be used to log warnings and errors on resources
+	 * @throws IOException
+	 *             in case an exception occurs during save
+	 */
+	public static void saveResource(Resource resource, IResourceLogger logger) throws IOException {
+		try {
+			resource.save(ModelUtil.getResourceSaveOptions());
+		} catch (IOException e) {
+			// rethrow exception
+			throw e;
+		} finally {
+
+			if (resource.getWarnings().size() > 0) {
+				for (Diagnostic diagnostic : resource.getErrors()) {
+					logger.logWarning(logDiagnostic(diagnostic).toString());
+				}
+			}
+
+			if (resource.getErrors().size() > 0) {
+				for (Diagnostic diagnostic : resource.getErrors()) {
+					logger.logError(logDiagnostic(diagnostic).toString());
+				}
+			}
+		}
+	}
+
+	public static void loadResource(Resource resource, IResourceLogger logger) throws IOException {
+		try {
+			resource.load(ModelUtil.getResourceLoadOptions());
+		} catch (IOException e) {
+			// rethrow exception
+			throw e;
+		} finally {
+
+			if (resource.getWarnings().size() > 0) {
+				for (Diagnostic diagnostic : resource.getErrors()) {
+					logger.logWarning(logDiagnostic(diagnostic).toString());
+				}
+			}
+
+			if (resource.getErrors().size() > 0) {
+				for (Diagnostic diagnostic : resource.getErrors()) {
+					logger.logError(logDiagnostic(diagnostic).toString());
+				}
+			}
+		}
+	}
+
+	private static StringWriter logDiagnostic(Diagnostic diagnostic) {
+
+		StringWriter error = new StringWriter();
+		error.append(diagnostic.getLocation() + "\n");
+		error.append(diagnostic.getMessage() + "\n");
+
+		if (diagnostic instanceof Exception) {
+			StringWriter stringWriter = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(stringWriter);
+			((Throwable) diagnostic).printStackTrace(printWriter);
+			error.append(stringWriter.toString() + "\n");
+		}
+
+		return error;
+	}
+
 	private static boolean isDiscardDanglingHREFs() {
 
 		if (discardDanglingHREFs == null) {
@@ -414,8 +511,7 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Log a warning to the platform log. This will NOT create a popup in the
-	 * ui.
+	 * Log a warning to the platform log. This will NOT create a popup in the UI.
 	 * 
 	 * @param message
 	 *            the message
@@ -427,14 +523,23 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Log a warning to the platform log. This will NOT create a popup in the
-	 * ui.
+	 * Log a warning to the platform log. This will NOT create a popup in the UI.
 	 * 
 	 * @param message
-	 *            the message
+	 *            the message being logged
 	 */
 	public static void logWarning(String message) {
 		log(message, null, IStatus.WARNING);
+	}
+
+	/**
+	 * Log a error to the platform log. This will NOT create a popup in the UI.
+	 * 
+	 * @param message
+	 *            the message being logged
+	 */
+	public static void logError(String message) {
+		log(message, null, IStatus.ERROR);
 	}
 
 	/**
@@ -531,7 +636,7 @@ public final class ModelUtil {
 			resource = resourceSet.getResource(resourceURI, true);
 		}
 
-		resource.load(getResourceLoadOptions());
+		loadResource(resource, resourceLogger);
 		EList<EObject> contents = resource.getContents();
 
 		if (checkConstraints) {

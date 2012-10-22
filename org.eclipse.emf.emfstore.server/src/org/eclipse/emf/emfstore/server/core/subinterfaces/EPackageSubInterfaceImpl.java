@@ -108,7 +108,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Resource resource = resourceSet.createResource(fileUri);
 			resource.getContents().add(ePackage);
 			try {
-				resource.save(ModelUtil.getResourceSaveOptions());
+				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (IOException e) {
 				if (e.getCause() instanceof DanglingHREFException) {
 					// Ignore, as the referenced elements were either stored earlier or can still be

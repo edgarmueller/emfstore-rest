@@ -162,7 +162,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			}
 
 			try {
-				resource.save(ModelUtil.getResourceSaveOptions());
+				ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 			} catch (IOException e) {
 				// ignore exception
 			}

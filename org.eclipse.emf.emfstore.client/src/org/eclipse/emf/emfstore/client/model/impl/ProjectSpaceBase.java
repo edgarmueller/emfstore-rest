@@ -686,7 +686,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// save all resources that have been created
 		for (Resource currentResource : resources) {
 			try {
-				currentResource.save(ModelUtil.getResourceSaveOptions());
+				ModelUtil.saveResource(currentResource, WorkspaceUtil.getResourceLogger());
 			} catch (IOException e) {
 				WorkspaceUtil.logException("Project Space resource init failed!", e);
 			}
@@ -973,7 +973,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				}
 				return;
 			}
-			resource.save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException("An error in the data was detected during save!"
 				+ " The safest way to deal with this problem is to delete this project and checkout again.", e);
