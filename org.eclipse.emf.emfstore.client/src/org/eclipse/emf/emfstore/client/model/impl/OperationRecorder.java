@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -763,7 +761,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		if (compositeOperation != null) {
 			compositeOperation.getSubOperations().add(deleteOperation);
-			saveResource(compositeOperation.eResource());
 		} else {
 			if (commandIsRunning) {
 				operations.add(deleteOperation);
@@ -975,8 +972,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			// add resulting operations as sub-operations to composite or top-level operations
 			if (compositeOperation != null) {
 				compositeOperation.getSubOperations().addAll(ops);
-				// FIXME: ugly hack for recording of create operation cross references
-				saveResource(compositeOperation.eResource());
 				return;
 			}
 
@@ -1025,27 +1020,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void emitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
 		this.emitOperationsWhenCommandCompleted = emitOperationsImmediately;
-	}
-
-	/**
-	 * Saves the given resource.
-	 * If the passed resource is null, this method has no effect
-	 * 
-	 * @param resource
-	 *            the resource to be saved
-	 */
-	private void saveResource(Resource resource) {
-
-		if (resource == null) {
-			return;
-		}
-
-		try {
-			resource.save(ModelUtil.getResourceSaveOptions());
-		} catch (IOException e) {
-			String message = String.format("Resource %s could not be saved!", resource.getURI());
-			WorkspaceUtil.logWarning(message, null);
-		}
 	}
 
 	/**

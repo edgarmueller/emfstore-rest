@@ -117,13 +117,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private HashMap<String, OrgUnitProperty> propertyMap;
 
-	private StatePersister statePersister;
-	private OperationPersister operationPersister;
+	private ResourcePersister resourcePersister;
 	private ECrossReferenceAdapter crossReferenceAdapter;
 
 	private ResourceSet resourceSet;
 
 	private IApplyChangesWrapper applyChangesWrapper;
+
+	private boolean disposed;
 
 	/**
 	 * Constructor.
@@ -196,7 +197,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            merged changes
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
-		// revert
+
+		// revert local changes
 		revert();
 
 		// apply changes from repo. incoming (aka theirs)
@@ -587,23 +589,25 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		operationManager.addOperationListener(modifiedModelElementsCache);
 		operationRecorder.addOperationRecorderListener(operationManager);
 
-		statePersister = new StatePersister(
-			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()),
-			(IdEObjectCollectionImpl) this.getProject());
-		statePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
-		operationPersister = new OperationPersister(this);
+		resourcePersister = new ResourcePersister((IdEObjectCollectionImpl) getProject());
+
+		if (!isTransient) {
+			resourcePersister.addResource(this.eResource());
+			resourcePersister.addResource(getLocalChangePackage().eResource());
+			resourcePersister.addResource(getProject().eResource());
+			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+		}
 
 		commandStack.addCommandStackObserver(operationRecorder);
-		commandStack.addCommandStackObserver(statePersister);
-		commandStack.addCommandStackObserver(operationPersister);
+		commandStack.addCommandStackObserver(resourcePersister);
 
 		// initialization order is important!
 		getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
-		getProject().addIdEObjectCollectionChangeObserver(statePersister);
+		getProject().addIdEObjectCollectionChangeObserver(resourcePersister);
 
 		if (getProject() instanceof ProjectImpl) {
 			((ProjectImpl) this.getProject()).setUndetachable(operationRecorder);
-			((ProjectImpl) this.getProject()).setUndetachable(statePersister);
+			((ProjectImpl) this.getProject()).setUndetachable(resourcePersister);
 		}
 
 		if (getUsersession() != null) {
@@ -935,7 +939,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void save() {
 		saveProjectSpaceOnly();
 		saveChangePackage();
-		statePersister.saveDirtyResources(true);
+		resourcePersister.saveDirtyResources(true);
 	}
 
 	/**
@@ -944,7 +948,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasUnsavedChanges()
 	 */
 	public boolean hasUnsavedChanges() {
-		return statePersister.isDirty();
+		return resourcePersister.isDirty();
 	}
 
 	private void saveChangePackage() {
@@ -1184,11 +1188,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
 		commandStack.removeCommandStackObserver(operationRecorder);
-		commandStack.removeCommandStackObserver(statePersister);
-		commandStack.removeCommandStackObserver(operationPersister);
+		commandStack.removeCommandStackObserver(resourcePersister);
 
 		getProject().removeIdEObjectCollectionChangeObserver(operationRecorder);
-		getProject().removeIdEObjectCollectionChangeObserver(statePersister);
+		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
