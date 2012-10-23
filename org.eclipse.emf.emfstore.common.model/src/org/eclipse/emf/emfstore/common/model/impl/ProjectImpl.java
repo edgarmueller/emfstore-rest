@@ -244,15 +244,15 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl#initCaches()
+	 * @see org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl#initMapping()
 	 */
 	@Override
-	public void initCaches() {
+	public void initMapping() {
 
 		for (EObject modelElement : getCutElements()) {
 			putModelElementIntoCache(modelElement);
 		}
 
-		super.initCaches();
+		super.initMapping();
 	}
 }

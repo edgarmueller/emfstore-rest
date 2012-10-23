@@ -93,7 +93,7 @@ public class EObjectTypeParser extends ByteArrayParser {
 				idToEObjectMap.put(modelElementId, modelElement);
 			}
 
-			collection.initCaches(eObjectToIdMap, idToEObjectMap);
+			collection.initMapping(eObjectToIdMap, idToEObjectMap);
 		}
 
 		EcoreUtil.resolveAll(result);

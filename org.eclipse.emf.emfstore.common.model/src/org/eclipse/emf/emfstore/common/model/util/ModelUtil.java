@@ -671,7 +671,7 @@ public final class ModelUtil {
 				}
 			}
 
-			project.initCaches(eObjectToIdMap, idToEObjectMap);
+			project.initMapping(eObjectToIdMap, idToEObjectMap);
 		}
 
 		if (!(eClass.isInstance(eObject))) {

@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,14 +33,13 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TransientFilter;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.EMFStoreResource;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
- * Given a list of resources this
+ * 
  * 
  * @author koegel
  * @author emueller
@@ -59,21 +57,19 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 
 	private final Set<Resource> resources;
 
-	private final IdEObjectCollectionImpl collection;
+	private final IModelElementIdToEObjectMapping mapping;
 
 	private List<IDEObjectCollectionDirtyStateListener> listeners;
 
-	public ResourcePersister(IdEObjectCollectionImpl collection) {
-		this.collection = collection;
+	/**
+	 * Constructor.
+	 * 
+	 * @param mapping
+	 *            a mapping from model element to their respective IDs
+	 */
+	public ResourcePersister(IModelElementIdToEObjectMapping mapping) {
+		this.mapping = mapping;
 		this.resources = new LinkedHashSet<Resource>();
-		this.listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
-		this.filterStack = new FilterStack(new NotificationFilter[] { new TouchFilter(), new TransientFilter(),
-			new EmptyRemovalsFilter() });
-	}
-
-	public ResourcePersister(IdEObjectCollectionImpl collection, Resource... resources) {
-		this.collection = collection;
-		this.resources = new LinkedHashSet<Resource>(Arrays.asList(resources));
 		this.listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
 		this.filterStack = new FilterStack(new NotificationFilter[] { new TouchFilter(), new TransientFilter(),
 			new EmptyRemovalsFilter() });
@@ -112,18 +108,15 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	/**
-	 * Adds the given model element's resource to the set of dirty resources.
+	 * Adds the given resource to the set of resources which should be saved by the persister.
 	 * 
 	 * @param resource
-	 *            the resource which needs to be
-	 * @return
+	 *            the resource to be saved
 	 */
-	protected ResourcePersister addResource(Resource resource) {
+	protected void addResource(Resource resource) {
 		if (resource != null) {
 			resources.add(resource);
 		}
-
-		return this;
 	}
 
 	/**
@@ -151,8 +144,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			}
 
 			if (resource instanceof EMFStoreResource) {
-				((EMFStoreResource) resource).setIdToEObjectMap(collection.getIdToEObjectMap(),
-					collection.getEObjectToIdMap());
+				((EMFStoreResource) resource).setIdToEObjectMap(mapping.getIdToEObjectMapping(),
+					mapping.getEObjectToIdMapping());
 			} else {
 				Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
 
@@ -277,18 +270,12 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		ModelElementId modelElementId = getIDForEObject(modelElement);
-
-		String modelElementIdString = modelElementId.getId();
-		resource.setID(modelElement, modelElementIdString);
+		String modelElementId = getIDForEObject(modelElement);
+		resource.setID(modelElement, modelElementId);
 	}
 
-	private ModelElementId getIDForEObject(EObject modelElement) {
-		ModelElementId modelElementId = collection.getModelElementId(modelElement);
-
-		if (modelElementId == null) {
-			modelElementId = collection.getDeletedModelElementId(modelElement);
-		}
+	private String getIDForEObject(EObject modelElement) {
+		String modelElementId = mapping.getEObjectToIdMapping().get(modelElement);
 
 		if (modelElementId == null) {
 			WorkspaceUtil.handleException(new IllegalStateException("No ID for model element" + modelElement));

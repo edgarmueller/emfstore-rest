@@ -63,7 +63,6 @@ import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
@@ -568,15 +567,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		boolean useCrossReferenceAdapter = true;
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
-			.getExtensionElements()) {
-			useCrossReferenceAdapter &= element.getBoolean("activated");
-		}
-
-		if (useCrossReferenceAdapter) {
-			crossReferenceAdapter = new ECrossReferenceAdapter();
-			getProject().eAdapters().add(crossReferenceAdapter);
-		}
+		initCrossReferenceAdapter(useCrossReferenceAdapter);
 
 		EObjectChangeNotifier changeNotifier = getProject().getChangeNotifier();
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
@@ -589,14 +580,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		operationManager.addOperationListener(modifiedModelElementsCache);
 		operationRecorder.addOperationRecorderListener(operationManager);
 
-		resourcePersister = new ResourcePersister((IdEObjectCollectionImpl) getProject());
-
-		if (!isTransient) {
-			resourcePersister.addResource(this.eResource());
-			resourcePersister.addResource(getLocalChangePackage().eResource());
-			resourcePersister.addResource(getProject().eResource());
-			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
-		}
+		initResourcePersister();
 
 		commandStack.addCommandStackObserver(operationRecorder);
 		commandStack.addCommandStackObserver(resourcePersister);
@@ -610,6 +594,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			((ProjectImpl) this.getProject()).setUndetachable(resourcePersister);
 		}
 
+		initPropertyMap();
+
+		modifiedModelElementsCache.initializeCache();
+		startChangeRecording();
+		cleanCutElements();
+	}
+
+	private void initPropertyMap() {
+		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {
 			WorkspaceManager.getObserverBus().register(this, LoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
@@ -621,10 +614,30 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				}
 			}
 		}
+	}
 
-		modifiedModelElementsCache.initializeCache();
-		startChangeRecording();
-		cleanCutElements();
+	private void initCrossReferenceAdapter(boolean useCrossReferenceAdapter) {
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
+			.getExtensionElements()) {
+			useCrossReferenceAdapter &= element.getBoolean("activated");
+		}
+
+		if (useCrossReferenceAdapter) {
+			crossReferenceAdapter = new ECrossReferenceAdapter();
+			getProject().eAdapters().add(crossReferenceAdapter);
+		}
+	}
+
+	private void initResourcePersister() {
+
+		resourcePersister = new ResourcePersister(getProject());
+
+		if (!isTransient) {
+			resourcePersister.addResource(this.eResource());
+			resourcePersister.addResource(getLocalChangePackage().eResource());
+			resourcePersister.addResource(getProject().eResource());
+			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+		}
 	}
 
 	/**
