@@ -1118,11 +1118,15 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * Determine if the projectspace has unsave changes to any element in the project.
 	 * 
 	 * @return true if there is unsaved changes.
+	 * 
+	 * @generated NOT
 	 */
 	boolean hasUnsavedChanges();
 
 	/**
 	 * Saves the project space.
+	 * 
+	 * @generated NOT
 	 */
 	void save();
 
@@ -1130,6 +1134,9 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * Whether this project space has been shared.
 	 * 
 	 * @return true, if the project space has been shared, false otherwise
+	 * 
+	 * @generated NOt
 	 */
 	boolean isShared();
+
 } // ProjectContainer
