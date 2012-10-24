@@ -1,8 +1,8 @@
 /*******************************************************************************
- * Copyright 2011 Chair for Applied Software Engineering,
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
- * are made available under the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
@@ -61,7 +61,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -116,7 +116,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -149,7 +149,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -192,7 +192,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -221,7 +221,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -257,7 +257,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -276,7 +276,7 @@ public class BranchTests extends CoreServerTest {
 			ps.getProject().getModelElementId(testElement));
 
 		assertTrue(test2 != null);
-		assertEquals("J�rgen", test2.getName());
+		assertEquals("J?rgen", test2.getName());
 	}
 
 	@Test
@@ -294,7 +294,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -341,7 +341,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				branchElement.setName("J�rgen");
+				branchElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -350,7 +350,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				trunkElement.setName("G�nter");
+				trunkElement.setName("G?nter");
 			}
 		}.run(false);
 
@@ -359,7 +359,7 @@ public class BranchTests extends CoreServerTest {
 		mergeWithBranch(trunk, latestOnBranch, 1);
 
 		assertEquals(latestOnBranch, trunk.getMergedVersion());
-		assertEquals("J�rgen", trunkElement.getName());
+		assertEquals("J?rgen", trunkElement.getName());
 
 		// commit merged changes
 		PrimaryVersionSpec mergedToVersion = commit(trunk);
@@ -402,7 +402,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				branchElement.setName("J�rgen");
+				branchElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -411,7 +411,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				trunkElement.setName("G�nter");
+				trunkElement.setName("G?nter");
 			}
 		}.run(false);
 
@@ -465,7 +465,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				outterBranchElement.setName("J�rgen");
+				outterBranchElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -483,7 +483,7 @@ public class BranchTests extends CoreServerTest {
 		// merge
 		mergeWithBranch(innerBranch, latestOnBranch, 1);
 
-		assertEquals("J�rgen", innerBranchElement.getName());
+		assertEquals("J?rgen", innerBranchElement.getName());
 	}
 
 	@Test
@@ -497,7 +497,7 @@ public class BranchTests extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				testElement.setName("J�rgen");
+				testElement.setName("J?rgen");
 			}
 		}.run(false);
 
@@ -509,7 +509,7 @@ public class BranchTests extends CoreServerTest {
 			ps.getProject().getModelElementId(testElement));
 
 		assertTrue(test != null);
-		assertEquals("J�rgen", test.getName());
+		assertEquals("J?rgen", test.getName());
 		assertTrue(secondProjectSpace.getBaseVersion().equals(lastFromBranch));
 	}
 }

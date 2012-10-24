@@ -1,8 +1,8 @@
 /*******************************************************************************
- * Copyright 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
- * are made available under the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
@@ -29,7 +29,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
  * Configuration for the ModelMutator.
  * 
  * @author Eugen Neufeld
- * @author Stephan Köhler
+ * @author Stephan K?hler
  * @author Philip Achenbach
  * @author Julian Sommerfeldt
  */
