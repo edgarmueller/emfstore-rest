@@ -53,11 +53,11 @@ public class EObjectTypeParser extends ByteArrayParser {
 				resource.load(ris, ModelUtil.getResourceLoadOptions());
 				return getResultfromResource(resource);
 			} catch (UnsupportedEncodingException e) {
-				throw new XmlRpcException("Couldn't parse EObject", e);
+				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
 			} catch (IOException e) {
-				throw new XmlRpcException("Couldn't parse EObject", e);
+				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
 			} catch (SerializationException e) {
-				throw new XmlRpcException("Couldn't parse EObject", e);
+				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
 			} finally {
 				ris.close();
 			}

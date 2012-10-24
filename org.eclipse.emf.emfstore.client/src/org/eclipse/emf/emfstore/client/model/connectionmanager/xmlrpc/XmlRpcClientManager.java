@@ -165,7 +165,7 @@ public class XmlRpcClientManager {
 					.getException();
 				throw new org.eclipse.emf.emfstore.server.exceptions.SerializationException(serialE);
 			} else {
-				throw new ConnectionException(ConnectionManager.REMOTE, e);
+				throw new ConnectionException(ConnectionManager.REMOTE + e.getMessage(), e);
 			}
 		}
 	}

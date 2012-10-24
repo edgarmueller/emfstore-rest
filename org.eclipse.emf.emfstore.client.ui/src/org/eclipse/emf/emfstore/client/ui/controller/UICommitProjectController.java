@@ -160,7 +160,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 			WorkspaceUtil.logException(e.getMessage(), e);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					MessageDialog.openError(getShell(), "Commit failed", "Commit failed: " + e.getMessage());
+					MessageDialog.openError(getShell(), "Commit failed", e.getMessage());
 					return null;
 				}
 			});

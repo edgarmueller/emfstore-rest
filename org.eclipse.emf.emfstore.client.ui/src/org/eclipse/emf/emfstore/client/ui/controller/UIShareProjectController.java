@@ -69,8 +69,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 		} catch (final EmfStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					MessageDialog.openError(getShell(), "Share project failed",
-						"Share project failed: " + e.getMessage());
+					MessageDialog.openError(getShell(), "Share project failed", e.getMessage());
 					return null;
 				}
 			});

@@ -30,7 +30,7 @@ public interface ConnectionManager extends EmfStore {
 	/**
 	 * Connection related failure message.
 	 */
-	String REMOTE = "Server could not be reached.";
+	String REMOTE = "Server could not be reached.\n";
 
 	/**
 	 * Connection related failure message.
