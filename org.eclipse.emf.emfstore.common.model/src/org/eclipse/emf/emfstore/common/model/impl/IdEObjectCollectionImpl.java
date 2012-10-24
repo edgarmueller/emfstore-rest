@@ -58,8 +58,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public static final String MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE = "class";
 
 	// Caches
-	private Map<EObject, String> eObjectToIdCache;
-	private Map<String, EObject> idToEObjectCache;
+	private Map<EObject, String> eObjectToIdMap;
+	private Map<String, EObject> idToEObjectMap;
 
 	// These caches will be used to assign specific IDs to newly created EObjects.
 	// Additionally, IDs of deleted model elements will also be put into these caches, in case
@@ -80,8 +80,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * Constructor.
 	 */
 	public IdEObjectCollectionImpl() {
-		eObjectToIdCache = new LinkedHashMap<EObject, String>();
-		idToEObjectCache = new LinkedHashMap<String, EObject>();
+		eObjectToIdMap = new LinkedHashMap<EObject, String>();
+		idToEObjectMap = new LinkedHashMap<String, EObject>();
 		allocatedEObjectToIdMap = new LinkedHashMap<EObject, String>();
 		allocatedIdToEObjectMap = new LinkedHashMap<String, EObject>();
 
@@ -242,7 +242,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public ModelElementId getModelElementId(EObject eObject) {
 
-		if (!eObjectToIdCache.containsKey(eObject) && !isCacheInitialized()) {
+		if (!eObjectToIdMap.containsKey(eObject) && !isCacheInitialized()) {
 
 			// EObject contained in project, load ID from resource
 			try {
@@ -263,7 +263,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 					modelElementId.setId(id);
 				}
 
-				eObjectToIdCache.put(eObject, modelElementId.getId());
+				eObjectToIdMap.put(eObject, modelElementId.getId());
 				return modelElementId;
 
 			} catch (IOException e) {
@@ -271,7 +271,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			}
 		}
 
-		String id = eObjectToIdCache.get(eObject);
+		String id = eObjectToIdMap.get(eObject);
 		ModelElementId modelElementId = getNewModelElementID();
 		modelElementId.setId(id);
 
@@ -423,7 +423,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		return eObjectToIdCache.keySet();
+		return eObjectToIdMap.keySet();
 	}
 
 	/**
@@ -517,7 +517,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		return idToEObjectCache;
+		return idToEObjectMap;
 	}
 
 	/**
@@ -530,7 +530,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		return eObjectToIdCache.keySet();
+		return eObjectToIdMap.keySet();
 	}
 
 	/**
@@ -615,8 +615,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public void initMapping(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
 		cachesInitialized = true;
-		eObjectToIdCache = eObjectToIdMap;
-		idToEObjectCache = idToEObjectMap;
+		this.eObjectToIdMap = eObjectToIdMap;
+		this.idToEObjectMap = idToEObjectMap;
 	}
 
 	/**
@@ -628,8 +628,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 *            a {@link ModelElementId}
 	 */
 	protected void putIntoCaches(EObject modelElement, String modelElementId) {
-		eObjectToIdCache.put(modelElement, modelElementId);
-		idToEObjectCache.put(modelElementId, modelElement);
+		eObjectToIdMap.put(modelElement, modelElementId);
+		idToEObjectMap.put(modelElementId, modelElement);
 	}
 
 	/**
@@ -654,8 +654,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#dispose()
 	 */
 	public void dispose() {
-		eObjectToIdCache.clear();
-		idToEObjectCache.clear();
+		eObjectToIdMap.clear();
+		idToEObjectMap.clear();
 		clearVolatileCaches();
 		cachesInitialized = false;
 	}
@@ -702,16 +702,16 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#allocateModelElementIds(java.util.Map)
 	 */
-	public void allocateModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap) {
-		for (Map.Entry<EObject, ModelElementId> entry : eObjectToIdMap.entrySet()) {
+	public void allocateModelElementIds(Map<EObject, ModelElementId> eObjectToIdMapping) {
+		for (Map.Entry<EObject, ModelElementId> entry : eObjectToIdMapping.entrySet()) {
 			EObject modelElement = entry.getKey();
 			ModelElementId modelElementId = entry.getValue();
 
 			Boolean isAlreadyContained = getModelElement(modelElementId) != null;
 
 			if (isAlreadyContained) {
-				eObjectToIdCache.put(modelElement, modelElementId.getId());
-				idToEObjectCache.put(modelElementId.getId(), modelElement);
+				eObjectToIdMap.put(modelElement, modelElementId.getId());
+				idToEObjectMap.put(modelElementId.getId(), modelElement);
 			}
 
 			// do this even if the model element is already contained;
@@ -738,7 +738,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @return the ID/EObject mapping
 	 */
 	public Map<String, EObject> getIdToEObjectMapping() {
-		Map<String, EObject> mapping = new LinkedHashMap<String, EObject>(idToEObjectCache);
+		Map<String, EObject> mapping = new LinkedHashMap<String, EObject>(idToEObjectMap);
 		mapping.putAll(new LinkedHashMap<String, EObject>(allocatedIdToEObjectMap));
 		return mapping;
 	}
@@ -751,7 +751,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @return the EObject/ID mapping
 	 */
 	public Map<EObject, String> getEObjectToIdMapping() {
-		HashMap<EObject, String> mapping = new HashMap<EObject, String>(eObjectToIdCache);
+		HashMap<EObject, String> mapping = new HashMap<EObject, String>(eObjectToIdMap);
 		mapping.putAll(new LinkedHashMap<EObject, String>(allocatedEObjectToIdMap));
 		return mapping;
 	}

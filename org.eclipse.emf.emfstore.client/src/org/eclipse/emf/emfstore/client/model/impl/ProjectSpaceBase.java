@@ -565,9 +565,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	@SuppressWarnings("unchecked")
 	public void init() {
-		boolean useCrossReferenceAdapter = true;
-
-		initCrossReferenceAdapter(useCrossReferenceAdapter);
+		initCrossReferenceAdapter();
 
 		EObjectChangeNotifier changeNotifier = getProject().getChangeNotifier();
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
@@ -616,7 +614,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 	}
 
-	private void initCrossReferenceAdapter(boolean useCrossReferenceAdapter) {
+	private void initCrossReferenceAdapter() {
+
+		// default
+		boolean useCrossReferenceAdapter = true;
+
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
 			.getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
