@@ -110,8 +110,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private OperationManager operationManager;
 
-	private OperationRecorder operationRecorder;
-
 	private PropertyManager propertyManager;
 
 	private HashMap<String, OrgUnitProperty> propertyMap;
@@ -436,7 +434,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @return the recorder
 	 */
 	public NotificationRecorder getNotificationRecorder() {
-		return this.operationRecorder.getNotificationRecorder();
+		return this.operationManager.getNotificationRecorder();
 	}
 
 	/**
@@ -573,22 +571,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		initCompleted = true;
 		fileTransferManager = new FileTransferManager(this);
 
-		operationRecorder = new OperationRecorder(this, changeNotifier);
-		operationManager = new OperationManager(operationRecorder);
+		operationManager = new OperationManager(this, changeNotifier);
 		operationManager.addOperationListener(modifiedModelElementsCache);
-		operationRecorder.addOperationRecorderListener(operationManager);
 
 		initResourcePersister();
 
-		commandStack.addCommandStackObserver(operationRecorder);
+		commandStack.addCommandStackObserver(operationManager);
 		commandStack.addCommandStackObserver(resourcePersister);
 
 		// initialization order is important!
-		getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
+		getProject().addIdEObjectCollectionChangeObserver(operationManager);
 		getProject().addIdEObjectCollectionChangeObserver(resourcePersister);
 
 		if (getProject() instanceof ProjectImpl) {
-			((ProjectImpl) this.getProject()).setUndetachable(operationRecorder);
+			((ProjectImpl) this.getProject()).setUndetachable(operationManager);
 			((ProjectImpl) this.getProject()).setUndetachable(resourcePersister);
 		}
 
@@ -1059,7 +1055,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void startChangeRecording() {
-		this.operationRecorder.startChangeRecording();
+		operationManager.startChangeRecording();
 		updateDirtyState();
 	}
 
@@ -1070,8 +1066,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void stopChangeRecording() {
-		if (operationRecorder != null) {
-			this.operationRecorder.stopChangeRecording();
+		if (operationManager != null) {
+			operationManager.stopChangeRecording();
 		}
 	}
 
@@ -1202,10 +1198,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		operationManager = null;
 
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
-		commandStack.removeCommandStackObserver(operationRecorder);
+		commandStack.removeCommandStackObserver(operationManager);
 		commandStack.removeCommandStackObserver(resourcePersister);
 
-		getProject().removeIdEObjectCollectionChangeObserver(operationRecorder);
+		getProject().removeIdEObjectCollectionChangeObserver(operationManager);
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
