@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Version Property</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Property</b></em>'. <!-- end-user-doc
+ * -->
  * 
  * <p>
  * The following features are supported:
@@ -37,8 +37,7 @@ public interface VersionProperty extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -51,8 +50,7 @@ public interface VersionProperty extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getName
 	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -66,8 +64,8 @@ public interface VersionProperty extends EObject {
 	 * Returns the value of the '<em><b>Value</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -80,8 +78,7 @@ public interface VersionProperty extends EObject {
 	String getValue();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getValue
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getValue
 	 * <em>Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value

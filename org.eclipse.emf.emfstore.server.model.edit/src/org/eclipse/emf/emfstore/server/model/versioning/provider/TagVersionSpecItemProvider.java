@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class TagVersionSpecItemProvider extends VersionSpecItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class TagVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -71,15 +69,12 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TagVersionSpec_name_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TagVersionSpec_name_feature",
-						"_UI_TagVersionSpec_type"),
-				VersioningPackage.Literals.TAG_VERSION_SPEC__NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TagVersionSpec_name_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_TagVersionSpec_name_feature",
+				"_UI_TagVersionSpec_type"), VersioningPackage.Literals.TAG_VERSION_SPEC__NAME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -90,8 +85,7 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/TagVersionSpec"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TagVersionSpec"));
 	}
 
 	/**
@@ -104,7 +98,7 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider
 	public String getText(Object object) {
 		String label = ((TagVersionSpec) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_TagVersionSpec_type")
-				: getString("_UI_TagVersionSpec_type") + " " + label;
+			: getString("_UI_TagVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -121,8 +115,7 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider
 
 		switch (notification.getFeatureID(TagVersionSpec.class)) {
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -136,8 +129,7 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

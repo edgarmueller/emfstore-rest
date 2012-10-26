@@ -20,39 +20,41 @@ import org.eclipse.emf.ecore.EReference;
  * Basic extension of {@link FilteredAdapter} to print out the notifications.
  * 
  * @author Julian Sommerfeldt
- *
+ * 
  */
 public class LoggingAdapter extends FilteredAdapter {
-	
+
 	/**
 	 * @param toLogClasses The {@link EClass}es to log. If <code>null</code> every {@link EClass} is logged.
-	 * @param toLogReferences The {@link EReference}es of the toLogClasses to log. If <code>null</code> every {@link EReference} is logged.
+	 * @param toLogReferences The {@link EReference}es of the toLogClasses to log. If <code>null</code> every
+	 *            {@link EReference} is logged.
 	 * @param references Log reference changes?
 	 * @param attributes Log attribute changes?
 	 */
-	public LoggingAdapter(List<EClass> toLogClasses, List<EReference> toLogReferences, boolean references, boolean attributes) {
+	public LoggingAdapter(List<EClass> toLogClasses, List<EReference> toLogReferences, boolean references,
+		boolean attributes) {
 		super(toLogClasses, toLogReferences, references, attributes);
 	}
 
 	@Override
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
-		if(filter(notification)){
+		if (filter(notification)) {
 			return;
 		}
-		
+
 		System.out.println("NOTIFY:");
 		System.out.println(format(notification));
 		System.out.println();
 	}
-	
+
 	/**
 	 * Convert a {@link Notification} to a string.
 	 * 
 	 * @param notification The {@link Notification} to convert.
 	 * @return The string representing the {@link Notification}.
 	 */
-	protected String format(Notification notification){
+	protected String format(Notification notification) {
 		StringBuffer result = new StringBuffer();
 		result.append("Notifier:  " + notification.getNotifier());
 		result.append("\n");

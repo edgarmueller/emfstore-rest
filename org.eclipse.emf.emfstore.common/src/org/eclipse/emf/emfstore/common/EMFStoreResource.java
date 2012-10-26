@@ -19,20 +19,22 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**
  * EMFStore Resource, inherits from XMIResource and sets Intrinsic ID to EObjectMap optimization.
+ * 
  * @author User
- *
+ * 
  */
 public class EMFStoreResource extends XMIResourceImpl {
 
 	/**
 	 * Default constructor.
+	 * 
 	 * @param uri the uri
 	 */
 	public EMFStoreResource(URI uri) {
 		super(uri);
 		this.setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 	}
-	
+
 	/**
 	 * Initialize the id to Eobjects map and reverse map directly. The map must be consistent with each other.
 	 * 

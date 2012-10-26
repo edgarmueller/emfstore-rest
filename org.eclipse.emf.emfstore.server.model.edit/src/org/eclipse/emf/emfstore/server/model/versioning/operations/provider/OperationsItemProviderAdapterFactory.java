@@ -39,9 +39,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.util.Operatio
  * 
  * @generated
  */
-public class OperationsItemProviderAdapterFactory extends
-		OperationsAdapterFactory implements ComposeableAdapterFactory,
-		IChangeNotifier, IDisposable {
+public class OperationsItemProviderAdapterFactory extends OperationsAdapterFactory implements
+	ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -51,8 +50,7 @@ public class OperationsItemProviderAdapterFactory extends
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -60,8 +58,8 @@ public class OperationsItemProviderAdapterFactory extends
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -84,8 +82,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -93,16 +91,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation} . <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createCompositeOperationAdapter() {
 		if (compositeOperationItemProvider == null) {
-			compositeOperationItemProvider = new CompositeOperationItemProvider(
-					this);
+			compositeOperationItemProvider = new CompositeOperationItemProvider(this);
 		}
 
 		return compositeOperationItemProvider;
@@ -110,8 +107,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -119,16 +116,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation} . <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createCreateDeleteOperationAdapter() {
 		if (createDeleteOperationItemProvider == null) {
-			createDeleteOperationItemProvider = new CreateDeleteOperationItemProvider(
-					this);
+			createDeleteOperationItemProvider = new CreateDeleteOperationItemProvider(this);
 		}
 
 		return createDeleteOperationItemProvider;
@@ -136,8 +132,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -145,16 +141,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation} . <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createAttributeOperationAdapter() {
 		if (attributeOperationItemProvider == null) {
-			attributeOperationItemProvider = new AttributeOperationItemProvider(
-					this);
+			attributeOperationItemProvider = new AttributeOperationItemProvider(this);
 		}
 
 		return attributeOperationItemProvider;
@@ -162,8 +157,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -171,16 +166,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation} . <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiAttributeOperationAdapter() {
 		if (multiAttributeOperationItemProvider == null) {
-			multiAttributeOperationItemProvider = new MultiAttributeOperationItemProvider(
-					this);
+			multiAttributeOperationItemProvider = new MultiAttributeOperationItemProvider(this);
 		}
 
 		return multiAttributeOperationItemProvider;
@@ -188,8 +182,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -197,16 +191,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiAttributeSetOperationAdapter() {
 		if (multiAttributeSetOperationItemProvider == null) {
-			multiAttributeSetOperationItemProvider = new MultiAttributeSetOperationItemProvider(
-					this);
+			multiAttributeSetOperationItemProvider = new MultiAttributeSetOperationItemProvider(this);
 		}
 
 		return multiAttributeSetOperationItemProvider;
@@ -214,8 +207,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -223,16 +216,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiAttributeMoveOperationAdapter() {
 		if (multiAttributeMoveOperationItemProvider == null) {
-			multiAttributeMoveOperationItemProvider = new MultiAttributeMoveOperationItemProvider(
-					this);
+			multiAttributeMoveOperationItemProvider = new MultiAttributeMoveOperationItemProvider(this);
 		}
 
 		return multiAttributeMoveOperationItemProvider;
@@ -240,8 +232,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -249,16 +241,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createSingleReferenceOperationAdapter() {
 		if (singleReferenceOperationItemProvider == null) {
-			singleReferenceOperationItemProvider = new SingleReferenceOperationItemProvider(
-					this);
+			singleReferenceOperationItemProvider = new SingleReferenceOperationItemProvider(this);
 		}
 
 		return singleReferenceOperationItemProvider;
@@ -266,8 +257,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -275,16 +266,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiReferenceSetOperationAdapter() {
 		if (multiReferenceSetOperationItemProvider == null) {
-			multiReferenceSetOperationItemProvider = new MultiReferenceSetOperationItemProvider(
-					this);
+			multiReferenceSetOperationItemProvider = new MultiReferenceSetOperationItemProvider(this);
 		}
 
 		return multiReferenceSetOperationItemProvider;
@@ -292,8 +282,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -301,16 +291,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation} . <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiReferenceOperationAdapter() {
 		if (multiReferenceOperationItemProvider == null) {
-			multiReferenceOperationItemProvider = new MultiReferenceOperationItemProvider(
-					this);
+			multiReferenceOperationItemProvider = new MultiReferenceOperationItemProvider(this);
 		}
 
 		return multiReferenceOperationItemProvider;
@@ -318,8 +307,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -327,16 +316,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createMultiReferenceMoveOperationAdapter() {
 		if (multiReferenceMoveOperationItemProvider == null) {
-			multiReferenceMoveOperationItemProvider = new MultiReferenceMoveOperationItemProvider(
-					this);
+			multiReferenceMoveOperationItemProvider = new MultiReferenceMoveOperationItemProvider(this);
 		}
 
 		return multiReferenceMoveOperationItemProvider;
@@ -344,17 +332,16 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId} instances. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected OperationIdItemProvider operationIdItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId} .
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -369,16 +356,15 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup} instances. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected OperationGroupItemProvider operationGroupItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup}
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup}
 	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -394,8 +380,8 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -403,24 +389,23 @@ public class OperationsItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup} . <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createModelElementGroupAdapter() {
 		if (modelElementGroupItemProvider == null) {
-			modelElementGroupItemProvider = new ModelElementGroupItemProvider(
-					this);
+			modelElementGroupItemProvider = new ModelElementGroupItemProvider(this);
 		}
 
 		return modelElementGroupItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link java.util.Map.Entry} instances. <!-- begin-user-doc --> <!--
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -436,8 +421,7 @@ public class OperationsItemProviderAdapterFactory extends
 	@Override
 	public Adapter createEObjectToModelElementIdMapAdapter() {
 		if (eObjectToModelElementIdMapItemProvider == null) {
-			eObjectToModelElementIdMapItemProvider = new EObjectToModelElementIdMapItemProvider(
-					this);
+			eObjectToModelElementIdMapItemProvider = new EObjectToModelElementIdMapItemProvider(this);
 		}
 
 		return eObjectToModelElementIdMapItemProvider;
@@ -450,8 +434,7 @@ public class OperationsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -460,8 +443,7 @@ public class OperationsItemProviderAdapterFactory extends
 	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -495,8 +477,7 @@ public class OperationsItemProviderAdapterFactory extends
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -523,8 +504,8 @@ public class OperationsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

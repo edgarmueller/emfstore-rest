@@ -86,8 +86,7 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseModelElementUrlFragment(
-				ModelElementUrlFragment object) {
+		public Adapter caseModelElementUrlFragment(ModelElementUrlFragment object) {
 			return createModelElementUrlFragmentAdapter();
 		}
 
@@ -117,8 +116,7 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl
 	 * <em>Server Url</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -165,8 +163,7 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl
 	 * <em>Model Element Url</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

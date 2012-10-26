@@ -25,8 +25,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>AC User</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>AC User</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -133,9 +132,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 		String oldFirstName = firstName;
 		firstName = newFirstName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					AccesscontrolPackage.AC_USER__FIRST_NAME, oldFirstName,
-					firstName));
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_USER__FIRST_NAME,
+				oldFirstName, firstName));
 	}
 
 	/**
@@ -156,9 +154,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 		String oldLastName = lastName;
 		lastName = newLastName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					AccesscontrolPackage.AC_USER__LAST_NAME, oldLastName,
-					lastName));
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_USER__LAST_NAME, oldLastName,
+				lastName));
 	}
 
 	/**
@@ -168,9 +165,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	public EList<ACGroup> getEffectiveGroups() {
 		if (effectiveGroups == null) {
-			effectiveGroups = new EObjectContainmentEList.Resolving<ACGroup>(
-					ACGroup.class, this,
-					AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS);
+			effectiveGroups = new EObjectContainmentEList.Resolving<ACGroup>(ACGroup.class, this,
+				AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS);
 		}
 		return effectiveGroups;
 	}
@@ -181,12 +177,10 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
-			return ((InternalEList<?>) getEffectiveGroups()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getEffectiveGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,8 +220,7 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 			return;
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			getEffectiveGroups().clear();
-			getEffectiveGroups().addAll(
-					(Collection<? extends ACGroup>) newValue);
+			getEffectiveGroups().addAll((Collection<? extends ACGroup>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -263,11 +256,9 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
-			return FIRST_NAME_EDEFAULT == null ? firstName != null
-					: !FIRST_NAME_EDEFAULT.equals(firstName);
+			return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
 		case AccesscontrolPackage.AC_USER__LAST_NAME:
-			return LAST_NAME_EDEFAULT == null ? lastName != null
-					: !LAST_NAME_EDEFAULT.equals(lastName);
+			return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			return effectiveGroups != null && !effectiveGroups.isEmpty();
 		}

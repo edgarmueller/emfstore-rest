@@ -18,8 +18,7 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Server Url</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Url</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -112,8 +111,8 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 		String oldHostName = hostName;
 		hostName = newHostName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					UrlPackage.SERVER_URL__HOST_NAME, oldHostName, hostName));
+			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.SERVER_URL__HOST_NAME, oldHostName,
+				hostName));
 	}
 
 	/**
@@ -134,8 +133,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 		int oldPort = port;
 		port = newPort;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					UrlPackage.SERVER_URL__PORT, oldPort, port));
+			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.SERVER_URL__PORT, oldPort, port));
 	}
 
 	/**
@@ -199,8 +197,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case UrlPackage.SERVER_URL__HOST_NAME:
-			return HOST_NAME_EDEFAULT == null ? hostName != null
-					: !HOST_NAME_EDEFAULT.equals(hostName);
+			return HOST_NAME_EDEFAULT == null ? hostName != null : !HOST_NAME_EDEFAULT.equals(hostName);
 		case UrlPackage.SERVER_URL__PORT:
 			return port != PORT_EDEFAULT;
 		}

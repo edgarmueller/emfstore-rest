@@ -20,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Event</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Event</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -91,8 +90,8 @@ public class EventImpl extends EObjectImpl implements Event {
 		Date oldTimestamp = timestamp;
 		timestamp = newTimestamp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EventsPackage.EVENT__TIMESTAMP, oldTimestamp, timestamp));
+			eNotify(new ENotificationImpl(this, Notification.SET, EventsPackage.EVENT__TIMESTAMP, oldTimestamp,
+				timestamp));
 	}
 
 	/**
@@ -148,8 +147,7 @@ public class EventImpl extends EObjectImpl implements Event {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case EventsPackage.EVENT__TIMESTAMP:
-			return TIMESTAMP_EDEFAULT == null ? timestamp != null
-					: !TIMESTAMP_EDEFAULT.equals(timestamp);
+			return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -26,15 +26,13 @@ import org.eclipse.emf.emfstore.common.model.provider.UniqueIdentifierItemProvid
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.ProjectId} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectId} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ProjectIdItemProvider extends UniqueIdentifierItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectIdItemProvider extends UniqueIdentifierItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -67,8 +65,7 @@ public class ProjectIdItemProvider extends UniqueIdentifierItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ProjectId"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ProjectId"));
 	}
 
 	/**
@@ -80,8 +77,8 @@ public class ProjectIdItemProvider extends UniqueIdentifierItemProvider
 	@Override
 	public String getText(Object object) {
 		String label = ((ProjectId) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_ProjectId_type")
-				: getString("_UI_ProjectId_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ProjectId_type") : getString("_UI_ProjectId_type")
+			+ " " + label;
 	}
 
 	/**
@@ -106,8 +103,7 @@ public class ProjectIdItemProvider extends UniqueIdentifierItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

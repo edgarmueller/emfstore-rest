@@ -29,15 +29,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation} object. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class AttributeOperationItemProvider extends
-		FeatureOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class AttributeOperationItemProvider extends FeatureOperationItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -73,16 +71,12 @@ public class AttributeOperationItemProvider extends
 	 */
 	protected void addOldValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AttributeOperation_oldValue_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_AttributeOperation_oldValue_feature",
-						"_UI_AttributeOperation_type"),
-				OperationsPackage.Literals.ATTRIBUTE_OPERATION__OLD_VALUE,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_AttributeOperation_oldValue_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_oldValue_feature",
+				"_UI_AttributeOperation_type"), OperationsPackage.Literals.ATTRIBUTE_OPERATION__OLD_VALUE, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -93,16 +87,12 @@ public class AttributeOperationItemProvider extends
 	 */
 	protected void addNewValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AttributeOperation_newValue_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_AttributeOperation_newValue_feature",
-						"_UI_AttributeOperation_type"),
-				OperationsPackage.Literals.ATTRIBUTE_OPERATION__NEW_VALUE,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_AttributeOperation_newValue_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_newValue_feature",
+				"_UI_AttributeOperation_type"), OperationsPackage.Literals.ATTRIBUTE_OPERATION__NEW_VALUE, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	// begin of custom code
@@ -114,10 +104,7 @@ public class AttributeOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/AttributeOperation.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AttributeOperation.png"));
 	}
 
 	// end of custom code
@@ -136,32 +123,23 @@ public class AttributeOperationItemProvider extends
 			String oldValue;
 			String newValue;
 			if (op.getFeatureName().equals("description")) {
-				oldValue = (op.getOldValue() == null) ? null : ((String) op
-						.getOldValue());
-				newValue = (op.getNewValue() == null) ? null : ((String) op
-						.getNewValue());
+				oldValue = (op.getOldValue() == null) ? null : ((String) op.getOldValue());
+				newValue = (op.getNewValue() == null) ? null : ((String) op.getNewValue());
 			} else {
-				oldValue = (op.getOldValue() == null) ? null : op.getOldValue()
-						.toString();
-				newValue = (op.getNewValue() == null) ? null : op.getNewValue()
-						.toString();
+				oldValue = (op.getOldValue() == null) ? null : op.getOldValue().toString();
+				newValue = (op.getNewValue() == null) ? null : op.getNewValue().toString();
 			}
-			String elemNameAndClass = getModelElementClassAndName(op
-					.getModelElementId());
+			String elemNameAndClass = getModelElementClassAndName(op.getModelElementId());
 			if (oldValue == null && newValue == null) {
-				return "Unset " + op.getFeatureName() + " in "
-						+ elemNameAndClass;
+				return "Unset " + op.getFeatureName() + " in " + elemNameAndClass;
 			} else if (oldValue == null && newValue != null) {
-				return "Set " + op.getFeatureName() + " in " + elemNameAndClass
-						+ " to \"" + trim(newValue) + "\"";
+				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " to \"" + trim(newValue) + "\"";
 			} else if (oldValue != null && newValue == null) {
-				return "Unset " + op.getFeatureName() + " in "
-						+ elemNameAndClass + " from previous value \""
-						+ trim(oldValue) + "\"";
+				return "Unset " + op.getFeatureName() + " in " + elemNameAndClass + " from previous value \""
+					+ trim(oldValue) + "\"";
 			} else {
-				return "Set " + op.getFeatureName() + " in " + elemNameAndClass
-						+ " from \"" + trim(oldValue) + "\" to \""
-						+ trim(newValue) + "\"";
+				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " from \"" + trim(oldValue)
+					+ "\" to \"" + trim(newValue) + "\"";
 			}
 		}
 		return super.getText(object);
@@ -182,8 +160,7 @@ public class AttributeOperationItemProvider extends
 		switch (notification.getFeatureID(AttributeOperation.class)) {
 		case OperationsPackage.ATTRIBUTE_OPERATION__OLD_VALUE:
 		case OperationsPackage.ATTRIBUTE_OPERATION__NEW_VALUE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -197,8 +174,7 @@ public class AttributeOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

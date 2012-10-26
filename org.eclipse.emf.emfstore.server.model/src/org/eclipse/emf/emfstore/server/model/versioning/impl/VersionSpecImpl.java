@@ -18,8 +18,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -31,8 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public abstract class VersionSpecImpl extends EObjectImpl implements
-		VersionSpec {
+public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec {
 	/**
 	 * The default value of the '{@link #getBranch() <em>Branch</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -90,8 +88,8 @@ public abstract class VersionSpecImpl extends EObjectImpl implements
 		String oldBranch = branch;
 		branch = newBranch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.VERSION_SPEC__BRANCH, oldBranch, branch));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_SPEC__BRANCH, oldBranch,
+				branch));
 	}
 
 	/**
@@ -147,8 +145,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.VERSION_SPEC__BRANCH:
-			return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT
-					.equals(branch);
+			return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT.equals(branch);
 		}
 		return super.eIsSet(featureID);
 	}

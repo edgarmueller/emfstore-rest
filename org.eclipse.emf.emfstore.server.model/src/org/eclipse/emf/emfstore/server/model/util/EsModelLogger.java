@@ -37,12 +37,9 @@ public final class EsModelLogger {
 	 *            org.eclipse.core.runtime.Status class.
 	 */
 	public static void log(String message, Exception exception, int statusInt) {
-		Status status = new Status(statusInt, Platform.getBundle(
-				"org.eclipse.emf.ecp.model").getSymbolicName(), statusInt,
-				message, exception);
-		Platform.getLog(
-				Platform.getBundle("org.eclipse.emf.emfstore.server.model"))
-				.log(status);
+		Status status = new Status(statusInt, Platform.getBundle("org.eclipse.emf.ecp.model").getSymbolicName(),
+			statusInt, message, exception);
+		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.server.model")).log(status);
 	}
 
 	/**

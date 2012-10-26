@@ -29,15 +29,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class MultiAttributeMoveOperationItemProvider extends
-		FeatureOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class MultiAttributeMoveOperationItemProvider extends FeatureOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -73,19 +72,14 @@ public class MultiAttributeMoveOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addOldIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiAttributeMoveOperation_oldIndex_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_MultiAttributeMoveOperation_oldIndex_feature",
-								"_UI_MultiAttributeMoveOperation_type"),
-						OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX,
-						true, false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeMoveOperation_oldIndex_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeMoveOperation_oldIndex_feature",
+				"_UI_MultiAttributeMoveOperation_type"),
+			OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -95,19 +89,14 @@ public class MultiAttributeMoveOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addNewIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiAttributeMoveOperation_newIndex_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_MultiAttributeMoveOperation_newIndex_feature",
-								"_UI_MultiAttributeMoveOperation_type"),
-						OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX,
-						true, false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeMoveOperation_newIndex_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeMoveOperation_newIndex_feature",
+				"_UI_MultiAttributeMoveOperation_type"),
+			OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -117,19 +106,14 @@ public class MultiAttributeMoveOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addReferencedValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiAttributeMoveOperation_referencedValue_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_MultiAttributeMoveOperation_referencedValue_feature",
-								"_UI_MultiAttributeMoveOperation_type"),
-						OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeMoveOperation_referencedValue_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeMoveOperation_referencedValue_feature",
+				"_UI_MultiAttributeMoveOperation_type"),
+			OperationsPackage.Literals.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -140,10 +124,7 @@ public class MultiAttributeMoveOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/MultiAttributeMoveOperation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MultiAttributeMoveOperation"));
 	}
 
 	/**
@@ -156,8 +137,7 @@ public class MultiAttributeMoveOperationItemProvider extends
 	public String getText(Object object) {
 		String label = ((MultiAttributeMoveOperation) object).getFeatureName();
 		return label == null || label.length() == 0 ? getString("_UI_MultiAttributeMoveOperation_type")
-				: getString("_UI_MultiAttributeMoveOperation_type") + " "
-						+ label;
+			: getString("_UI_MultiAttributeMoveOperation_type") + " " + label;
 	}
 
 	/**
@@ -176,8 +156,7 @@ public class MultiAttributeMoveOperationItemProvider extends
 		case OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX:
 		case OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX:
 		case OperationsPackage.MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -191,8 +170,7 @@ public class MultiAttributeMoveOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

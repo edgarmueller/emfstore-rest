@@ -27,15 +27,13 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -69,8 +67,7 @@ public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ACOrgUnitId"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ACOrgUnitId"));
 	}
 
 	/**
@@ -83,7 +80,7 @@ public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider
 	public String getText(Object object) {
 		String label = ((ACOrgUnitId) object).getId();
 		return label == null || label.length() == 0 ? getString("_UI_ACOrgUnitId_type")
-				: getString("_UI_ACOrgUnitId_type") + " " + label;
+			: getString("_UI_ACOrgUnitId_type") + " " + label;
 	}
 
 	/**
@@ -108,8 +105,7 @@ public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

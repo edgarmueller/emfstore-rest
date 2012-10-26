@@ -35,15 +35,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class HistoryInfoItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -95,15 +93,12 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addPrimerySpecPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_HistoryInfo_primerySpec_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_HistoryInfo_primerySpec_feature",
-						"_UI_HistoryInfo_type"),
-				VersioningPackage.Literals.HISTORY_INFO__PRIMERY_SPEC, true,
-				false, true, null, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_HistoryInfo_primerySpec_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_HistoryInfo_primerySpec_feature",
+				"_UI_HistoryInfo_type"), VersioningPackage.Literals.HISTORY_INFO__PRIMERY_SPEC, true, false, true,
+			null, null, null));
 	}
 
 	/**
@@ -114,46 +109,33 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addLogMessagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_HistoryInfo_logMessage_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_HistoryInfo_logMessage_feature",
-						"_UI_HistoryInfo_type"),
-				VersioningPackage.Literals.HISTORY_INFO__LOG_MESSAGE, true,
-				false, true, null, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_HistoryInfo_logMessage_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_HistoryInfo_logMessage_feature",
+				"_UI_HistoryInfo_type"), VersioningPackage.Literals.HISTORY_INFO__LOG_MESSAGE, true, false, true, null,
+			null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES);
-			childrenFeatures
-					.add(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE);
 		}
 		return childrenFeatures;
 	}
@@ -181,8 +163,7 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/HistoryInfo.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/HistoryInfo.png"));
 	}
 
 	// end of custom code
@@ -218,8 +199,7 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements
 		case VersioningPackage.HISTORY_INFO__TAG_SPECS:
 		case VersioningPackage.HISTORY_INFO__VERSION_PROPERTIES:
 		case VersioningPackage.HISTORY_INFO__CHANGE_PACKAGE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -233,61 +213,50 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__MERGED_TO,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS,
-				VersioningFactory.eINSTANCE.createTagVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS,
+			VersioningFactory.eINSTANCE.createTagVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES,
-				VersioningFactory.eINSTANCE.createVersionProperty()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES,
+			VersioningFactory.eINSTANCE.createVersionProperty()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE,
-				VersioningFactory.eINSTANCE.createChangePackage()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE,
+			VersioningFactory.eINSTANCE.createChangePackage()));
 	}
 
 	/**
-	 * This returns the label text for
-	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
 		boolean qualify = childFeature == VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC
-				|| childFeature == VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC
-				|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM
-				|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_TO;
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM
+			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_TO;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
+				getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

@@ -58,7 +58,7 @@ public interface SemanticPackage extends EPackage {
 	 * @generated
 	 */
 	SemanticPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl
-			.init();
+		.init();
 
 	/**
 	 * The meta object id for the '
@@ -207,8 +207,7 @@ public interface SemanticPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl#getSemanticCompositeOperation()
 		 * @generated
 		 */
-		EClass SEMANTIC_COMPOSITE_OPERATION = eINSTANCE
-				.getSemanticCompositeOperation();
+		EClass SEMANTIC_COMPOSITE_OPERATION = eINSTANCE.getSemanticCompositeOperation();
 
 	}
 

@@ -25,8 +25,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Role</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Role</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -81,8 +80,7 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 			// the contains() method of EObjectEList uses reference equality ,
 			// because its useEquals() return false.
 			// we need to compare using equals method.
-			projects = new EObjectResolvingEList<ProjectId>(ProjectId.class,
-					this, RolesPackage.ROLE__PROJECTS) {
+			projects = new EObjectResolvingEList<ProjectId>(ProjectId.class, this, RolesPackage.ROLE__PROJECTS) {
 
 				@Override
 				protected boolean useEquals() {
@@ -160,12 +158,10 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case RolesPackage.ROLE__PROJECTS:
-			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,8 +169,7 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecore.impl.BasicEObjectImpl#eGet(int, boolean,
-	 *      boolean)
+	 * @see org.eclipse.emf.ecore.impl.BasicEObjectImpl#eGet(int, boolean, boolean)
 	 * @generated
 	 */
 	@Override

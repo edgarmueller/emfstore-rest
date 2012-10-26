@@ -35,15 +35,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class SemanticCompositeOperationItemProvider extends
-		CompositeOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class SemanticCompositeOperationItemProvider extends CompositeOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -79,8 +78,7 @@ public class SemanticCompositeOperationItemProvider extends
 	public String getText(Object object) {
 		String label = ((SemanticCompositeOperation) object).getCompositeName();
 		return label == null || label.length() == 0 ? getString("_UI_SemanticCompositeOperation_type")
-				: getString("_UI_SemanticCompositeOperation_type") + " "
-						+ label;
+			: getString("_UI_SemanticCompositeOperation_type") + " " + label;
 	}
 
 	/**
@@ -105,8 +103,7 @@ public class SemanticCompositeOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -135,24 +132,19 @@ public class SemanticCompositeOperationItemProvider extends
 			ArrayList<Object> result = new ArrayList<Object>();
 
 			OperationsFactory factory = OperationsFactory.eINSTANCE;
-			for (EStructuralFeature feature : operation.eClass()
-					.getEStructuralFeatures()) {
+			for (EStructuralFeature feature : operation.eClass().getEStructuralFeatures()) {
 				if (feature instanceof EReference) {
 					EReference reference = (EReference) feature;
 
-					ModelElementGroup referenceGroup = factory
-							.createModelElementGroup();
-					String key = "_UI_"
-							+ reference.getEContainingClass().getName() + "_"
-							+ reference.getName() + "_feature";
+					ModelElementGroup referenceGroup = factory.createModelElementGroup();
+					String key = "_UI_" + reference.getEContainingClass().getName() + "_" + reference.getName()
+						+ "_feature";
 					referenceGroup.setName(getString(key));
 					if (reference.isMany()) {
-						List<ModelElementId> value = (List<ModelElementId>) operation
-								.eGet(reference);
+						List<ModelElementId> value = (List<ModelElementId>) operation.eGet(reference);
 						referenceGroup.getModelElements().addAll(value);
 					} else {
-						ModelElementId value = (ModelElementId) operation
-								.eGet(reference);
+						ModelElementId value = (ModelElementId) operation.eGet(reference);
 						referenceGroup.getModelElements().add(value);
 					}
 					result.add(referenceGroup);

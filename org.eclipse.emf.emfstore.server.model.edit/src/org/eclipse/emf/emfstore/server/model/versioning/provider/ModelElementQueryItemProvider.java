@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ModelElementQueryItemProvider extends RangeQueryItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ModelElementQueryItemProvider extends RangeQueryItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -64,21 +62,17 @@ public class ModelElementQueryItemProvider extends RangeQueryItemProvider
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(VersioningPackage.Literals.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
+			childrenFeatures.add(VersioningPackage.Literals.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -105,8 +99,7 @@ public class ModelElementQueryItemProvider extends RangeQueryItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ModelElementQuery"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelElementQuery"));
 	}
 
 	/**
@@ -118,8 +111,7 @@ public class ModelElementQueryItemProvider extends RangeQueryItemProvider
 	@Override
 	public String getText(Object object) {
 		ModelElementQuery modelElementQuery = (ModelElementQuery) object;
-		return getString("_UI_ModelElementQuery_type") + " "
-				+ modelElementQuery.isIncludeChangePackages();
+		return getString("_UI_ModelElementQuery_type") + " " + modelElementQuery.isIncludeChangePackages();
 	}
 
 	/**
@@ -136,8 +128,7 @@ public class ModelElementQueryItemProvider extends RangeQueryItemProvider
 
 		switch (notification.getFeatureID(ModelElementQuery.class)) {
 		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -151,13 +142,11 @@ public class ModelElementQueryItemProvider extends RangeQueryItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS,
-				ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelElementId()));
 	}
 
 }

@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Model Element Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Model Element Query</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -36,8 +36,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class ModelElementQueryImpl extends RangeQueryImpl implements
-		ModelElementQuery {
+public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElementQuery {
 	/**
 	 * The cached value of the '{@link #getModelElements()
 	 * <em>Model Elements</em>}' containment reference list. <!-- begin-user-doc
@@ -75,9 +74,8 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements
 	 */
 	public EList<ModelElementId> getModelElements() {
 		if (modelElements == null) {
-			modelElements = new EObjectContainmentEList.Resolving<ModelElementId>(
-					ModelElementId.class, this,
-					VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
+			modelElements = new EObjectContainmentEList.Resolving<ModelElementId>(ModelElementId.class, this,
+				VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
 		}
 		return modelElements;
 	}
@@ -88,12 +86,10 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			return ((InternalEList<?>) getModelElements()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getModelElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -123,8 +119,7 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements
 		switch (featureID) {
 		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
 			getModelElements().clear();
-			getModelElements().addAll(
-					(Collection<? extends ModelElementId>) newValue);
+			getModelElements().addAll((Collection<? extends ModelElementId>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

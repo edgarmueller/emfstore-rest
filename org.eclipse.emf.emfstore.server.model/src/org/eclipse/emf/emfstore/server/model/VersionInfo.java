@@ -14,8 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Version Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Info</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -35,8 +34,8 @@ public interface VersionInfo extends EObject {
 	 * Returns the value of the '<em><b>Emf Store Version String</b></em>'
 	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Emf Store Version String</em>' attribute isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Emf Store Version String</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -49,8 +48,7 @@ public interface VersionInfo extends EObject {
 	String getEmfStoreVersionString();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -72,8 +70,7 @@ public interface VersionInfo extends EObject {
 	Version getEmfStoreVersion();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

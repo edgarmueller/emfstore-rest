@@ -25,8 +25,7 @@ public class ShowHistoryHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIShowHistoryController(getShell(), requireSelection(EObject.class))
-				.execute();
+		new UIShowHistoryController(getShell(), requireSelection(EObject.class)).execute();
 	}
 
 }

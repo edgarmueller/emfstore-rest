@@ -33,7 +33,6 @@ public interface DetailsPart {
 	 *            parent component to which the widget is added
 	 * @return control
 	 */
-	Control initialize(DecisionManager manager, ConflictOption option,
-			Composite parent);
+	Control initialize(DecisionManager manager, ConflictOption option, Composite parent);
 
 }

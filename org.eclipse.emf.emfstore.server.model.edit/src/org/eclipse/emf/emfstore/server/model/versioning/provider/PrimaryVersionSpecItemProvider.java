@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -71,16 +69,12 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	protected void addIdentifierPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_PrimaryVersionSpec_identifier_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_PrimaryVersionSpec_identifier_feature",
-						"_UI_PrimaryVersionSpec_type"),
-				VersioningPackage.Literals.PRIMARY_VERSION_SPEC__IDENTIFIER,
-				true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_PrimaryVersionSpec_identifier_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_identifier_feature",
+				"_UI_PrimaryVersionSpec_type"), VersioningPackage.Literals.PRIMARY_VERSION_SPEC__IDENTIFIER, true,
+			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -91,8 +85,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/PrimaryVersionSpec"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PrimaryVersionSpec"));
 	}
 
 	/**
@@ -105,7 +98,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
 	public String getText(Object object) {
 		String label = ((PrimaryVersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_PrimaryVersionSpec_type")
-				: getString("_UI_PrimaryVersionSpec_type") + " " + label;
+			: getString("_UI_PrimaryVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -122,8 +115,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
 
 		switch (notification.getFeatureID(PrimaryVersionSpec.class)) {
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -137,8 +129,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

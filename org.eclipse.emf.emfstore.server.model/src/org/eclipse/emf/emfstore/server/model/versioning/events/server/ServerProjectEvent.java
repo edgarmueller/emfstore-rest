@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.events.server;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Project Event</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Event</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -34,8 +33,8 @@ public interface ServerProjectEvent extends ServerEvent {
 	 * Returns the value of the '<em><b>Project Id</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Id</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

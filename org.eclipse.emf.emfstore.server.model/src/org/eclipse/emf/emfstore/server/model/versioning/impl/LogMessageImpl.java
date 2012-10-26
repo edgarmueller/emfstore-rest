@@ -20,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Log Message</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Log Message</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -160,8 +159,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 		String oldMessage = message;
 		message = newMessage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.LOG_MESSAGE__MESSAGE, oldMessage, message));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.LOG_MESSAGE__MESSAGE, oldMessage,
+				message));
 	}
 
 	/**
@@ -182,8 +181,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 		String oldAuthor = author;
 		author = newAuthor;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.LOG_MESSAGE__AUTHOR, oldAuthor, author));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.LOG_MESSAGE__AUTHOR, oldAuthor,
+				author));
 	}
 
 	/**
@@ -204,8 +203,7 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.LOG_MESSAGE__DATE, oldDate, date));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.LOG_MESSAGE__DATE, oldDate, date));
 	}
 
 	/**
@@ -226,9 +224,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 		Date oldClientDate = clientDate;
 		clientDate = newClientDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.LOG_MESSAGE__CLIENT_DATE, oldClientDate,
-					clientDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.LOG_MESSAGE__CLIENT_DATE,
+				oldClientDate, clientDate));
 	}
 
 	/**
@@ -308,17 +305,13 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.LOG_MESSAGE__AUTHOR:
-			return AUTHOR_EDEFAULT == null ? author != null : !AUTHOR_EDEFAULT
-					.equals(author);
+			return AUTHOR_EDEFAULT == null ? author != null : !AUTHOR_EDEFAULT.equals(author);
 		case VersioningPackage.LOG_MESSAGE__MESSAGE:
-			return MESSAGE_EDEFAULT == null ? message != null
-					: !MESSAGE_EDEFAULT.equals(message);
+			return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
 		case VersioningPackage.LOG_MESSAGE__DATE:
-			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT
-					.equals(date);
+			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 		case VersioningPackage.LOG_MESSAGE__CLIENT_DATE:
-			return CLIENT_DATE_EDEFAULT == null ? clientDate != null
-					: !CLIENT_DATE_EDEFAULT.equals(clientDate);
+			return CLIENT_DATE_EDEFAULT == null ? clientDate != null : !CLIENT_DATE_EDEFAULT.equals(clientDate);
 		}
 		return super.eIsSet(featureID);
 	}

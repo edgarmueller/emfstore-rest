@@ -15,8 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Version</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -66,8 +65,8 @@ public interface Version extends EObject {
 	 * Returns the value of the '<em><b>Project State</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project State</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Project State</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -80,8 +79,7 @@ public interface Version extends EObject {
 	Project getProjectState();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
 	 * <em>Project State</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -97,8 +95,8 @@ public interface Version extends EObject {
 	 * Returns the value of the '<em><b>Primary Spec</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Primary Spec</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Primary Spec</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -111,8 +109,7 @@ public interface Version extends EObject {
 	PrimaryVersionSpec getPrimarySpec();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
 	 * <em>Primary Spec</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -130,8 +127,8 @@ public interface Version extends EObject {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Tag Specs</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Tag Specs</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -148,8 +145,8 @@ public interface Version extends EObject {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
 	 * <em>Previous Version</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Next Version</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Next Version</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -163,8 +160,7 @@ public interface Version extends EObject {
 	Version getNextVersion();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
 	 * <em>Next Version</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -181,8 +177,8 @@ public interface Version extends EObject {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
 	 * <em>Next Version</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Previous Version</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Previous Version</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -196,8 +192,7 @@ public interface Version extends EObject {
 	Version getPreviousVersion();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
 	 * <em>Previous Version</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -212,8 +207,8 @@ public interface Version extends EObject {
 	 * Returns the value of the '<em><b>Changes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Changes</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Changes</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -226,8 +221,7 @@ public interface Version extends EObject {
 	ChangePackage getChanges();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
 	 * <em>Changes</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -242,8 +236,8 @@ public interface Version extends EObject {
 	 * Returns the value of the '<em><b>Log Message</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Log Message</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Log Message</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -256,8 +250,7 @@ public interface Version extends EObject {
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
 	 * <em>Log Message</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -275,8 +268,8 @@ public interface Version extends EObject {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getBranchedVersions
 	 * <em>Branched Versions</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ancestor Version</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Ancestor Version</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -290,8 +283,7 @@ public interface Version extends EObject {
 	Version getAncestorVersion();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
 	 * <em>Ancestor Version</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -304,14 +296,13 @@ public interface Version extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Branched Versions</b></em>' reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
 	 * bidirectional and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
 	 * <em>Ancestor Version</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Branched Versions</em>' reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Branched Versions</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -325,14 +316,13 @@ public interface Version extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Merged To Version</b></em>' reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
 	 * bidirectional and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedFromVersion
 	 * <em>Merged From Version</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Merged To Version</em>' reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Merged To Version</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -346,14 +336,13 @@ public interface Version extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Merged From Version</b></em>' reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
 	 * bidirectional and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedToVersion
 	 * <em>Merged To Version</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Merged From Version</em>' reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Merged From Version</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

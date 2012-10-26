@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 public final class CommonUtil {
 
 	private static boolean testing;
-	
+
 	/**
 	 * Private constructor since this is a utility class.
 	 */
@@ -233,6 +233,7 @@ public final class CommonUtil {
 
 	/**
 	 * Get all contained Eobjects not including transient containment features.
+	 * 
 	 * @param object the root
 	 * @return a set of contained elements not including root.
 	 */
@@ -366,7 +367,7 @@ public final class CommonUtil {
 
 		return result;
 	}
-	
+
 	/**
 	 * If we are running tests. In this case the workspace will be created in
 	 * USERHOME/.emfstore.test.
@@ -385,10 +386,10 @@ public final class CommonUtil {
 	public static boolean isTesting() {
 		return testing;
 	}
-	
 
 	/**
 	 * Returns the file encoding in use.
+	 * 
 	 * @return the file encoding
 	 */
 	public static String getEncoding() {

@@ -47,8 +47,7 @@ public class UpdateDialog extends TitleAreaDialog {
 	 * @param changes
 	 *            the list of changes
 	 */
-	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace,
-			List<ChangePackage> changes) {
+	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes) {
 		super(parentShell);
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
@@ -66,19 +65,16 @@ public class UpdateDialog extends TitleAreaDialog {
 
 		// changes tree
 		if (changes != null) {
-			TabbedChangesComposite changesComposite = new TabbedChangesComposite(
-					contents, SWT.BORDER, changes, projectSpace.getProject());
+			TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changes,
+				projectSpace.getProject());
 			// changesComposite.setReverseNodes(false);
-			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-					true, true, 2, 1));
+			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		}
 
 		String projectName = "";
 		// show number of changes on dialog title
-		if (projectSpace.getProjectName() != null
-				&& projectSpace.getProjectName().length() > 0) {
-			projectName = " for project \"" + projectSpace.getProjectName()
-					+ "\"";
+		if (projectSpace.getProjectName() != null && projectSpace.getProjectName().length() > 0) {
+			projectName = " for project \"" + projectSpace.getProjectName() + "\"";
 		}
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
@@ -87,9 +83,8 @@ public class UpdateDialog extends TitleAreaDialog {
 			rootCount += changePackage.getOperations().size();
 			operationCount += changePackage.getSize();
 		}
-		setMessage("Number of versions: " + changes.size()
-				+ ", Number of composite changes: " + rootCount
-				+ ", Number of overall changes: " + operationCount);
+		setMessage("Number of versions: " + changes.size() + ", Number of composite changes: " + rootCount
+			+ ", Number of overall changes: " + operationCount);
 		return contents;
 
 	}
@@ -101,8 +96,7 @@ public class UpdateDialog extends TitleAreaDialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Update");
-		updateImage = Activator.getImageDescriptor("icons/arrow_up.png")
-				.createImage();
+		updateImage = Activator.getImageDescriptor("icons/arrow_up.png").createImage();
 		newShell.setImage(updateImage);
 	}
 

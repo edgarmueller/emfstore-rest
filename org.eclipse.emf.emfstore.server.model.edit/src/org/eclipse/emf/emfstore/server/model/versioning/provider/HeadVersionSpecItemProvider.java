@@ -24,15 +24,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class HeadVersionSpecItemProvider extends VersionSpecItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class HeadVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -66,8 +64,7 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/HeadVersionSpec"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/HeadVersionSpec"));
 	}
 
 	/**
@@ -80,7 +77,7 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider
 	public String getText(Object object) {
 		String label = ((HeadVersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_HeadVersionSpec_type")
-				: getString("_UI_HeadVersionSpec_type") + " " + label;
+			: getString("_UI_HeadVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -105,8 +102,7 @@ public class HeadVersionSpecItemProvider extends VersionSpecItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

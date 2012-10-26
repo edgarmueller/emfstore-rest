@@ -283,9 +283,9 @@ public class ObserverBus {
 			for (IObserver observer : observers) {
 				try {
 					results.add(new Result(observer, method, method.invoke(observer, args)));
-				// BEGIN SUPRESS CATCH EXCEPTION
+					// BEGIN SUPRESS CATCH EXCEPTION
 				} catch (Throwable e) {
-				// END SUPRESS CATCH EXCEPTION
+					// END SUPRESS CATCH EXCEPTION
 					results.add(new Result(observer, e, method));
 				}
 			}

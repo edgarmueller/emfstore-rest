@@ -39,8 +39,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.util.Serve
  * 
  * @generated
  */
-public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
-		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ServerItemProviderAdapterFactory extends ServerAdapterFactory implements ComposeableAdapterFactory,
+	IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -50,8 +50,7 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -59,8 +58,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -83,8 +82,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -92,16 +91,15 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent} . <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createProjectUpdatedEventAdapter() {
 		if (projectUpdatedEventItemProvider == null) {
-			projectUpdatedEventItemProvider = new ProjectUpdatedEventItemProvider(
-					this);
+			projectUpdatedEventItemProvider = new ProjectUpdatedEventItemProvider(this);
 		}
 
 		return projectUpdatedEventItemProvider;
@@ -114,8 +112,7 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -124,8 +121,7 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -159,8 +155,7 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -187,8 +182,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

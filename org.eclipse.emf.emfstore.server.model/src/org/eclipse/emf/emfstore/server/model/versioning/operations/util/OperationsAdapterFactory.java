@@ -118,44 +118,37 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseMultiAttributeOperation(
-				MultiAttributeOperation object) {
+		public Adapter caseMultiAttributeOperation(MultiAttributeOperation object) {
 			return createMultiAttributeOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiAttributeSetOperation(
-				MultiAttributeSetOperation object) {
+		public Adapter caseMultiAttributeSetOperation(MultiAttributeSetOperation object) {
 			return createMultiAttributeSetOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiAttributeMoveOperation(
-				MultiAttributeMoveOperation object) {
+		public Adapter caseMultiAttributeMoveOperation(MultiAttributeMoveOperation object) {
 			return createMultiAttributeMoveOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseSingleReferenceOperation(
-				SingleReferenceOperation object) {
+		public Adapter caseSingleReferenceOperation(SingleReferenceOperation object) {
 			return createSingleReferenceOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceSetOperation(
-				MultiReferenceSetOperation object) {
+		public Adapter caseMultiReferenceSetOperation(MultiReferenceSetOperation object) {
 			return createMultiReferenceSetOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceOperation(
-				MultiReferenceOperation object) {
+		public Adapter caseMultiReferenceOperation(MultiReferenceOperation object) {
 			return createMultiReferenceOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceMoveOperation(
-				MultiReferenceMoveOperation object) {
+		public Adapter caseMultiReferenceMoveOperation(MultiReferenceMoveOperation object) {
 			return createMultiReferenceMoveOperationAdapter();
 		}
 
@@ -180,8 +173,7 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseEObjectToModelElementIdMap(
-				Map.Entry<EObject, ModelElementId> object) {
+		public Adapter caseEObjectToModelElementIdMap(Map.Entry<EObject, ModelElementId> object) {
 			return createEObjectToModelElementIdMapAdapter();
 		}
 
@@ -487,8 +479,7 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
 	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -503,8 +494,7 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
 	 * <em>Unique Identifier</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

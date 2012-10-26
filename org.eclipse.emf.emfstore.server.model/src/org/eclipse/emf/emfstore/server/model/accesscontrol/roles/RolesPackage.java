@@ -57,12 +57,10 @@ public interface RolesPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	RolesPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesPackageImpl
-			.init();
+	RolesPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl
 	 * <em>Role</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl
@@ -210,8 +208,7 @@ public interface RolesPackage extends EPackage {
 	int SERVER_ADMIN_FEATURE_COUNT = ROLE_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role
 	 * <em>Role</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Role</em>'.
@@ -225,8 +222,7 @@ public interface RolesPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role#getProjects
 	 * <em>Projects</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Projects</em>'.
+	 * @return the meta object for the containment reference list ' <em>Projects</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role#getProjects()
 	 * @see #getRole()
 	 * @generated
@@ -234,8 +230,7 @@ public interface RolesPackage extends EPackage {
 	EReference getRole_Projects();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole
 	 * <em>Reader Role</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Reader Role</em>'.
@@ -245,8 +240,7 @@ public interface RolesPackage extends EPackage {
 	EClass getReaderRole();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole
 	 * <em>Writer Role</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Writer Role</em>'.
@@ -268,8 +262,7 @@ public interface RolesPackage extends EPackage {
 	EClass getProjectAdminRole();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin
 	 * <em>Server Admin</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Server Admin</em>'.

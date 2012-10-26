@@ -39,8 +39,8 @@ import org.eclipse.emf.emfstore.server.model.util.ModelAdapterFactory;
  * 
  * @generated
  */
-public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
-		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory,
+	IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -50,8 +50,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -59,8 +58,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -82,8 +81,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectHistory} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -91,8 +90,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ProjectHistoryItemProvider projectHistoryItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -107,8 +105,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectInfo} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectInfo}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -116,8 +114,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ProjectInfoItemProvider projectInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -132,8 +129,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.SessionId} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.SessionId}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -141,8 +138,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected SessionIdItemProvider sessionIdItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.SessionId}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.SessionId}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -157,8 +153,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.ServerSpace} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ServerSpace}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -166,8 +162,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ServerSpaceItemProvider serverSpaceItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.ServerSpace}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ServerSpace}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -182,8 +177,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectId} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectId}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -191,8 +186,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ProjectIdItemProvider projectIdItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectId}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectId}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -207,8 +201,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.VersionInfo} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.VersionInfo}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -216,8 +210,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected VersionInfoItemProvider versionInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.VersionInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.VersionInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -232,8 +225,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}
 	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -241,8 +233,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected ClientVersionInfoItemProvider clientVersionInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -250,16 +241,15 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	@Override
 	public Adapter createClientVersionInfoAdapter() {
 		if (clientVersionInfoItemProvider == null) {
-			clientVersionInfoItemProvider = new ClientVersionInfoItemProvider(
-					this);
+			clientVersionInfoItemProvider = new ClientVersionInfoItemProvider(this);
 		}
 
 		return clientVersionInfoItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.FileIdentifier} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -267,8 +257,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	protected FileIdentifierItemProvider fileIdentifierItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -284,16 +273,15 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected AuthenticationInformationItemProvider authenticationInformationItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -301,8 +289,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	@Override
 	public Adapter createAuthenticationInformationAdapter() {
 		if (authenticationInformationItemProvider == null) {
-			authenticationInformationItemProvider = new AuthenticationInformationItemProvider(
-					this);
+			authenticationInformationItemProvider = new AuthenticationInformationItemProvider(this);
 		}
 
 		return authenticationInformationItemProvider;
@@ -315,8 +302,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -325,8 +311,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -360,8 +345,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -388,8 +372,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

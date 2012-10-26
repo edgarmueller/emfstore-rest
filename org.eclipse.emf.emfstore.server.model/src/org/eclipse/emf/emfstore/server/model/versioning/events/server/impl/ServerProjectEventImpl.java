@@ -20,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPack
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Project Event</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Project Event</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -33,8 +32,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  * 
  * @generated
  */
-public abstract class ServerProjectEventImpl extends ServerEventImpl implements
-		ServerProjectEvent {
+public abstract class ServerProjectEventImpl extends ServerEventImpl implements ServerProjectEvent {
 	/**
 	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}'
 	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -75,26 +73,17 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements
 			projectId = (ProjectId) eResolveProxy(oldProjectId);
 			if (projectId != oldProjectId) {
 				InternalEObject newProjectId = (InternalEObject) projectId;
-				NotificationChain msgs = oldProjectId
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-								null, null);
+				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, null);
 				if (newProjectId.eInternalContainer() == null) {
-					msgs = newProjectId
-							.eInverseAdd(
-									this,
-									EOPPOSITE_FEATURE_BASE
-											- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-									null, msgs);
+					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-							oldProjectId, projectId));
+						ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, oldProjectId, projectId));
 			}
 		}
 		return projectId;
@@ -114,15 +103,12 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetProjectId(ProjectId newProjectId,
-			NotificationChain msgs) {
+	public NotificationChain basicSetProjectId(ProjectId newProjectId, NotificationChain msgs) {
 		ProjectId oldProjectId = projectId;
 		projectId = newProjectId;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-					oldProjectId, newProjectId);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, oldProjectId, newProjectId);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -140,26 +126,17 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements
 		if (newProjectId != projectId) {
 			NotificationChain msgs = null;
 			if (projectId != null)
-				msgs = ((InternalEObject) projectId)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-								null, msgs);
+				msgs = ((InternalEObject) projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, msgs);
 			if (newProjectId != null)
-				msgs = ((InternalEObject) newProjectId)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-								null, msgs);
+				msgs = ((InternalEObject) newProjectId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, msgs);
 			msgs = basicSetProjectId(newProjectId, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
-					newProjectId, newProjectId));
+			eNotify(new ENotificationImpl(this, Notification.SET, ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID,
+				newProjectId, newProjectId));
 	}
 
 	/**
@@ -168,8 +145,7 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			return basicSetProjectId(null, msgs);

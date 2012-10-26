@@ -11,8 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Range Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Range Query</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -41,8 +40,8 @@ public interface RangeQuery extends HistoryQuery {
 	 * Returns the value of the '<em><b>Upper Limit</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Upper Limit</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Upper Limit</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -55,8 +54,7 @@ public interface RangeQuery extends HistoryQuery {
 	int getUpperLimit();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit
 	 * <em>Upper Limit</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -71,8 +69,8 @@ public interface RangeQuery extends HistoryQuery {
 	 * Returns the value of the '<em><b>Lower Limit</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Lower Limit</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Lower Limit</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -85,8 +83,7 @@ public interface RangeQuery extends HistoryQuery {
 	int getLowerLimit();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit
 	 * <em>Lower Limit</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -101,8 +98,8 @@ public interface RangeQuery extends HistoryQuery {
 	 * Returns the value of the '<em><b>Include Incoming</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Include Incoming</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Include Incoming</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -115,8 +112,7 @@ public interface RangeQuery extends HistoryQuery {
 	boolean isIncludeIncoming();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming
 	 * <em>Include Incoming</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -131,8 +127,8 @@ public interface RangeQuery extends HistoryQuery {
 	 * Returns the value of the '<em><b>Include Outgoing</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Include Outgoing</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Include Outgoing</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -145,8 +141,7 @@ public interface RangeQuery extends HistoryQuery {
 	boolean isIncludeOutgoing();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing
 	 * <em>Include Outgoing</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

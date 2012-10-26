@@ -15,15 +15,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Branch Version Spec</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Branch Version Spec</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class BranchVersionSpecImpl extends VersionSpecImpl implements
-		BranchVersionSpec {
+public class BranchVersionSpecImpl extends VersionSpecImpl implements BranchVersionSpec {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

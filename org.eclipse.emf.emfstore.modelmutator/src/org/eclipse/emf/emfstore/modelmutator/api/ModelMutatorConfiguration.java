@@ -51,7 +51,7 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean useEcoreUtilDelete;
-	
+
 	private EditingDomain editingDomain;
 
 	/**
@@ -60,7 +60,7 @@ public class ModelMutatorConfiguration {
 	public ModelMutatorConfiguration() {
 		this((EPackage) null, null, null);
 	}
-	
+
 	/**
 	 * The constructor for the configuration.
 	 * 
@@ -90,7 +90,7 @@ public class ModelMutatorConfiguration {
 		this.ignoreAndLog = false;
 
 		minObjectsCount = 100;
-		
+
 		useEcoreUtilDelete = false;
 	}
 
@@ -270,7 +270,7 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
-	
+
 	/**
 	 * @return How many objects should the mutation process delete maximal?
 	 */

@@ -31,34 +31,44 @@ public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements R
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI)
 	 */
 	public Factory getFactory(URI uri) {
 		return this;
 	}
 
-	/** {@inheritDoc}
-	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI, java.lang.String)
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI,
+	 *      java.lang.String)
 	 */
 	public Factory getFactory(URI uri, String contentType) {
 		return this;
 	}
 
-	/** {@inheritDoc}
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getProtocolToFactoryMap()
 	 */
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
 	}
 
-	/** {@inheritDoc}
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getExtensionToFactoryMap()
 	 */
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return null;
 	}
 
-	/** {@inheritDoc}
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getContentTypeToFactoryMap()
 	 */
 	public Map<String, Object> getContentTypeToFactoryMap() {

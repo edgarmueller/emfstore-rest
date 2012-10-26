@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Create Delete Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Create Delete Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -47,8 +47,8 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Delete</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Delete</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Delete</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -77,8 +77,8 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Model Element</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Element</em>' containment reference
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Model Element</em>' containment reference isn't clear, there really should be more of
+	 * a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -107,11 +107,10 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	/**
 	 * Returns the value of the '<em><b>Sub Operations</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation}
-	 * . <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation} . <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub Operations</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Sub Operations</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -129,8 +128,8 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * type {@link org.eclipse.emf.emfstore.common.model.ModelElementId}, <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EObject To Id Map</em>' map isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>EObject To Id Map</em>' map isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

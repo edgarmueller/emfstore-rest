@@ -59,7 +59,6 @@ public class ExtensionElement {
 		return getBoolean(name, false);
 	}
 
-
 	/**
 	 * Returns the value of the boolean attribute, if existing, or given defaultValue otherwise.
 	 * 
@@ -69,12 +68,12 @@ public class ExtensionElement {
 	 */
 	public Boolean getBoolean(String name, boolean defaultValue) {
 		String attribute = getAttribute(name);
-		if (attribute==null) {
+		if (attribute == null) {
 			return defaultValue;
 		}
 		return Boolean.parseBoolean(attribute);
 	}
-	
+
 	/**
 	 * Returns an Integer attribute.
 	 * 

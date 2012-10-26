@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Change Package</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -51,8 +50,8 @@ public interface ChangePackage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation} . <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Operations</em>' containment reference
 	 *         list.
@@ -64,12 +63,11 @@ public interface ChangePackage extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Events</em>' containment reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -84,8 +82,8 @@ public interface ChangePackage extends EObject {
 	 * Returns the value of the '<em><b>Log Message</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Log Message</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Log Message</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -98,8 +96,7 @@ public interface ChangePackage extends EObject {
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
 	 * <em>Log Message</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -117,8 +114,8 @@ public interface ChangePackage extends EObject {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Version Properties</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Version Properties</em>' containment reference list isn't clear, there really should
+	 * be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

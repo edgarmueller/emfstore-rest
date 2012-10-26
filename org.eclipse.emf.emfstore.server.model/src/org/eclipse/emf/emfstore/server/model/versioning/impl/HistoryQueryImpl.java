@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>History Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>History Query</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -40,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public abstract class HistoryQueryImpl extends EObjectImpl implements
-		HistoryQuery {
+public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}'
 	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -126,21 +124,17 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 			source = (PrimaryVersionSpec) eResolveProxy(oldSource);
 			if (source != oldSource) {
 				InternalEObject newSource = (InternalEObject) source;
-				NotificationChain msgs = oldSource.eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.HISTORY_QUERY__SOURCE,
-						null, null);
+				NotificationChain msgs = oldSource.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_QUERY__SOURCE, null, null);
 				if (newSource.eInternalContainer() == null) {
-					msgs = newSource.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-							- VersioningPackage.HISTORY_QUERY__SOURCE, null,
-							msgs);
+					msgs = newSource.eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - VersioningPackage.HISTORY_QUERY__SOURCE, null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							VersioningPackage.HISTORY_QUERY__SOURCE, oldSource,
-							source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.HISTORY_QUERY__SOURCE,
+						oldSource, source));
 			}
 		}
 		return source;
@@ -160,14 +154,12 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetSource(PrimaryVersionSpec newSource,
-			NotificationChain msgs) {
+	public NotificationChain basicSetSource(PrimaryVersionSpec newSource, NotificationChain msgs) {
 		PrimaryVersionSpec oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, VersioningPackage.HISTORY_QUERY__SOURCE,
-					oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.HISTORY_QUERY__SOURCE, oldSource, newSource);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -185,22 +177,17 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject) source).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.HISTORY_QUERY__SOURCE,
-						null, msgs);
+				msgs = ((InternalEObject) source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_QUERY__SOURCE, null, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject) newSource).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.HISTORY_QUERY__SOURCE,
-						null, msgs);
+				msgs = ((InternalEObject) newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.HISTORY_QUERY__SOURCE, null, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.HISTORY_QUERY__SOURCE, newSource,
-					newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.HISTORY_QUERY__SOURCE, newSource,
+				newSource));
 	}
 
 	/**
@@ -222,8 +209,8 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 		includeChangePackages = newIncludeChangePackages;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES,
-					oldIncludeChangePackages, includeChangePackages));
+				VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES, oldIncludeChangePackages,
+				includeChangePackages));
 	}
 
 	/**
@@ -245,8 +232,7 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 		includeAllVersions = newIncludeAllVersions;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS,
-					oldIncludeAllVersions, includeAllVersions));
+				VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS, oldIncludeAllVersions, includeAllVersions));
 	}
 
 	/**
@@ -255,8 +241,7 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case VersioningPackage.HISTORY_QUERY__SOURCE:
 			return basicSetSource(null, msgs);

@@ -16,15 +16,15 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Composite Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Composite Operation</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public abstract class SemanticCompositeOperationImpl extends
-		CompositeOperationImpl implements SemanticCompositeOperation {
+public abstract class SemanticCompositeOperationImpl extends CompositeOperationImpl implements
+	SemanticCompositeOperation {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

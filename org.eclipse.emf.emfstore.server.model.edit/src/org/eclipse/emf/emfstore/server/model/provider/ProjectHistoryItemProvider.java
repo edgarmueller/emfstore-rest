@@ -33,15 +33,13 @@ import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.ProjectHistory} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectHistory} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectHistoryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -77,16 +75,12 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addProjectNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ProjectHistory_projectName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ProjectHistory_projectName_feature",
-						"_UI_ProjectHistory_type"),
-				ModelPackage.Literals.PROJECT_HISTORY__PROJECT_NAME, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ProjectHistory_projectName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectName_feature",
+				"_UI_ProjectHistory_type"), ModelPackage.Literals.PROJECT_HISTORY__PROJECT_NAME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -97,41 +91,30 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addProjectDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ProjectHistory_projectDescription_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ProjectHistory_projectDescription_feature",
-						"_UI_ProjectHistory_type"),
-				ModelPackage.Literals.PROJECT_HISTORY__PROJECT_DESCRIPTION,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ProjectHistory_projectDescription_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectDescription_feature",
+				"_UI_ProjectHistory_type"), ModelPackage.Literals.PROJECT_HISTORY__PROJECT_DESCRIPTION, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID);
-			childrenFeatures
-					.add(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS);
-			childrenFeatures
-					.add(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES);
-			childrenFeatures
-					.add(ModelPackage.Literals.PROJECT_HISTORY__BRANCHES);
+			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID);
+			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS);
+			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES);
+			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__BRANCHES);
 		}
 		return childrenFeatures;
 	}
@@ -158,8 +141,7 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ProjectHistory"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ProjectHistory"));
 	}
 
 	/**
@@ -172,7 +154,7 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		String label = ((ProjectHistory) object).getProjectName();
 		return label == null || label.length() == 0 ? getString("_UI_ProjectHistory_type")
-				: getString("_UI_ProjectHistory_type") + " " + label;
+			: getString("_UI_ProjectHistory_type") + " " + label;
 	}
 
 	/**
@@ -190,15 +172,13 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(ProjectHistory.class)) {
 		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
 		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
 		case ModelPackage.PROJECT_HISTORY__VERSIONS:
 		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
 		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -212,26 +192,20 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID,
-				ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID,
+			ModelFactory.eINSTANCE.createProjectId()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT_HISTORY__VERSIONS,
-				VersioningFactory.eINSTANCE.createVersion()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS,
+			VersioningFactory.eINSTANCE.createVersion()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES,
-				org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-						.createEMFStoreProperty()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES,
+			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.PROJECT_HISTORY__BRANCHES,
-				VersioningFactory.eINSTANCE.createBranchInfo()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__BRANCHES,
+			VersioningFactory.eINSTANCE.createBranchInfo()));
 	}
 
 	/**

@@ -31,15 +31,13 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class AuthenticationInformationItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class AuthenticationInformationItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -67,23 +65,18 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ModelPackage.Literals.AUTHENTICATION_INFORMATION__SESSION_ID);
-			childrenFeatures
-					.add(ModelPackage.Literals.AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
+			childrenFeatures.add(ModelPackage.Literals.AUTHENTICATION_INFORMATION__SESSION_ID);
+			childrenFeatures.add(ModelPackage.Literals.AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
 		}
 		return childrenFeatures;
 	}
@@ -110,10 +103,7 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/AuthenticationInformation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AuthenticationInformation"));
 	}
 
 	/**
@@ -142,8 +132,7 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter
 		switch (notification.getFeatureID(AuthenticationInformation.class)) {
 		case ModelPackage.AUTHENTICATION_INFORMATION__SESSION_ID:
 		case ModelPackage.AUTHENTICATION_INFORMATION__RESOLVED_AC_USER:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -157,18 +146,15 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.AUTHENTICATION_INFORMATION__SESSION_ID,
-				ModelFactory.eINSTANCE.createSessionId()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.AUTHENTICATION_INFORMATION__SESSION_ID,
+			ModelFactory.eINSTANCE.createSessionId()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						ModelPackage.Literals.AUTHENTICATION_INFORMATION__RESOLVED_AC_USER,
-						AccesscontrolFactory.eINSTANCE.createACUser()));
+		newChildDescriptors.add(createChildParameter(
+			ModelPackage.Literals.AUTHENTICATION_INFORMATION__RESOLVED_AC_USER,
+			AccesscontrolFactory.eINSTANCE.createACUser()));
 	}
 
 	/**

@@ -26,15 +26,13 @@ import org.eclipse.emf.emfstore.common.model.provider.IdentifiableElementItemPro
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.server.model.FileIdentifier} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.server.model.FileIdentifier} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class FileIdentifierItemProvider extends IdentifiableElementItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class FileIdentifierItemProvider extends IdentifiableElementItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -68,8 +66,7 @@ public class FileIdentifierItemProvider extends IdentifiableElementItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/FileIdentifier"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FileIdentifier"));
 	}
 
 	/**
@@ -82,7 +79,7 @@ public class FileIdentifierItemProvider extends IdentifiableElementItemProvider
 	public String getText(Object object) {
 		String label = ((FileIdentifier) object).getIdentifier();
 		return label == null || label.length() == 0 ? getString("_UI_FileIdentifier_type")
-				: getString("_UI_FileIdentifier_type") + " " + label;
+			: getString("_UI_FileIdentifier_type") + " " + label;
 	}
 
 	/**
@@ -107,8 +104,7 @@ public class FileIdentifierItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

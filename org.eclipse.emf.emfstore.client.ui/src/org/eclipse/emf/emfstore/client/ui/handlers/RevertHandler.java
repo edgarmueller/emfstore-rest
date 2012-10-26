@@ -25,8 +25,7 @@ public class RevertHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIRevertOperationController(getShell(),
-				requireSelection(ProjectSpace.class)).execute();
+		new UIRevertOperationController(getShell(), requireSelection(ProjectSpace.class)).execute();
 	}
 
 }

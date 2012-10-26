@@ -18,8 +18,8 @@ import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Client Version Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Client Version Info</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -34,8 +34,7 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  * 
  * @generated
  */
-public class ClientVersionInfoImpl extends EObjectImpl implements
-		ClientVersionInfo {
+public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionInfo {
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -113,9 +112,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements
 		String oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.CLIENT_VERSION_INFO__VERSION, oldVersion,
-					version));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLIENT_VERSION_INFO__VERSION,
+				oldVersion, version));
 	}
 
 	/**
@@ -136,8 +134,7 @@ public class ClientVersionInfoImpl extends EObjectImpl implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.CLIENT_VERSION_INFO__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLIENT_VERSION_INFO__NAME, oldName, name));
 	}
 
 	/**
@@ -201,11 +198,9 @@ public class ClientVersionInfoImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
-			return VERSION_EDEFAULT == null ? version != null
-					: !VERSION_EDEFAULT.equals(version);
+			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ModelPackage.CLIENT_VERSION_INFO__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}

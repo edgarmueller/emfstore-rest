@@ -29,14 +29,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEven
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ServerEventItemProvider extends EventItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ServerEventItemProvider extends EventItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -73,7 +72,7 @@ public class ServerEventItemProvider extends EventItemProvider implements
 		Date labelValue = ((ServerEvent) object).getTimestamp();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_ServerEvent_type")
-				: getString("_UI_ServerEvent_type") + " " + label;
+			: getString("_UI_ServerEvent_type") + " " + label;
 	}
 
 	/**
@@ -98,8 +97,7 @@ public class ServerEventItemProvider extends EventItemProvider implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

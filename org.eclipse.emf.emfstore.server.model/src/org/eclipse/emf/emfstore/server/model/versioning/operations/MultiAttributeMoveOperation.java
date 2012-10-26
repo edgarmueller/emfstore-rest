@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Multi Attribute Move Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Multi Attribute Move Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -38,8 +38,8 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Old Index</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Old Index</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -68,8 +68,8 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>New Index</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>New Index</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -98,8 +98,8 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Referenced Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Referenced Value</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

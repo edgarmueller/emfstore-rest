@@ -57,12 +57,10 @@ public interface EventsPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	EventsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl
-			.init();
+	EventsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
 	 * <em>Event</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
@@ -90,8 +88,7 @@ public interface EventsPackage extends EPackage {
 	int EVENT_FEATURE_COUNT = 1;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
 	 * <em>Event</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Event</em>'.

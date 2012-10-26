@@ -29,8 +29,7 @@ public class UnkownFeatureException extends Exception {
 	 *            the missing features name
 	 */
 	public UnkownFeatureException(EClass eClass, String featureName) {
-		super("The feature \"" + featureName + " is unkown for EClass \""
-				+ eClass.getName());
+		super("The feature \"" + featureName + " is unkown for EClass \"" + eClass.getName());
 	}
 
 }

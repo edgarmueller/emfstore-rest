@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Multi Reference Set Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Multi Reference Set Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +40,8 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>Index</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Index</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Index</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -69,8 +69,8 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>Old Value</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Value</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Old Value</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -100,8 +100,8 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>New Value</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>New Value</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>New Value</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

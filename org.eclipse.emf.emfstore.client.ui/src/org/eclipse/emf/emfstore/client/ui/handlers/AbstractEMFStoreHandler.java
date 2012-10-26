@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-
 /**
  * Handlers are the top level abstraction that clients should use execute actions within the EMFStore
  * workspace. They are responsible for calling the UI controllers and therefore provide

@@ -39,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class VersioningFactoryImpl extends EFactoryImpl implements
-		VersioningFactory {
+public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFactory {
 	/**
 	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -50,7 +49,7 @@ public class VersioningFactoryImpl extends EFactoryImpl implements
 	public static VersioningFactory init() {
 		try {
 			VersioningFactory theVersioningFactory = (VersioningFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning");
 			if (theVersioningFactory != null) {
 				return theVersioningFactory;
 			}
@@ -109,8 +108,7 @@ public class VersioningFactoryImpl extends EFactoryImpl implements
 		case VersioningPackage.ANCESTOR_VERSION_SPEC:
 			return createAncestorVersionSpec();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 

@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Abstract Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Abstract Operation</b></em>'. <!-- end-user-doc
+ * -->
  * 
  * <p>
  * The following features are supported:
@@ -46,8 +46,8 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * Returns the value of the '<em><b>Model Element Id</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Element Id</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Model Element Id</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -78,8 +78,8 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * Returns the value of the '<em><b>Accepted</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Accepted</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Accepted</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -108,8 +108,8 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * Returns the value of the '<em><b>Client Date</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Client Date</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Client Date</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

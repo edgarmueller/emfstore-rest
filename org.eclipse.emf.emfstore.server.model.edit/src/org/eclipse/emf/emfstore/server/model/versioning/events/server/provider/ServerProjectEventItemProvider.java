@@ -30,14 +30,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent} object. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ServerProjectEventItemProvider extends ServerEventItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ServerProjectEventItemProvider extends ServerEventItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -65,21 +64,17 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID);
+			childrenFeatures.add(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID);
 		}
 		return childrenFeatures;
 	}
@@ -109,7 +104,7 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider
 		Date labelValue = ((ServerProjectEvent) object).getTimestamp();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_ServerProjectEvent_type")
-				: getString("_UI_ServerProjectEvent_type") + " " + label;
+			: getString("_UI_ServerProjectEvent_type") + " " + label;
 	}
 
 	/**
@@ -126,8 +121,7 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider
 
 		switch (notification.getFeatureID(ServerProjectEvent.class)) {
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -141,13 +135,11 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID,
-				ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors.add(createChildParameter(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID,
+			ModelFactory.eINSTANCE.createProjectId()));
 	}
 
 }

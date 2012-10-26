@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Single Reference Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Single Reference Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -37,8 +37,8 @@ public interface SingleReferenceOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>Old Value</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Value</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Old Value</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -68,8 +68,8 @@ public interface SingleReferenceOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>New Value</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>New Value</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>New Value</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

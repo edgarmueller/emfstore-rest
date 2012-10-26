@@ -18,7 +18,6 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	
 	/**
 	 * The plugin id.
 	 */
@@ -45,6 +44,7 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
+
 	// END SUPRESS CATCH EXCEPTION
 	/**
 	 * Returns the shared instance.

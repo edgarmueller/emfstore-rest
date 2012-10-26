@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Feature Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Feature Operation</b></em>'. <!-- end-user-doc
+ * -->
  * 
  * <p>
  * The following features are supported:
@@ -36,8 +36,8 @@ public interface FeatureOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Feature Name</b></em>' attribute. The
 	 * default value is <code>""</code>. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Feature Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Feature Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -73,8 +73,7 @@ public interface FeatureOperation extends AbstractOperation {
 	 *             if the feature can not be found in the eclass of the
 	 *             corresponding model element
 	 */
-	EStructuralFeature getFeature(Project project)
-			throws UnkownFeatureException;
+	EStructuralFeature getFeature(Project project) throws UnkownFeatureException;
 
 	/**
 	 * Get the feature from the eclass of the given model element.
@@ -86,7 +85,6 @@ public interface FeatureOperation extends AbstractOperation {
 	 *             if the feature can not be found in the eclass of the
 	 *             corresponding model element
 	 */
-	EStructuralFeature getFeature(EObject modelElement)
-			throws UnkownFeatureException;
+	EStructuralFeature getFeature(EObject modelElement) throws UnkownFeatureException;
 
 } // FeatureOperation

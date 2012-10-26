@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class PathQueryItemProvider extends HistoryQueryItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class PathQueryItemProvider extends HistoryQueryItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -64,17 +62,14 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VersioningPackage.Literals.PATH_QUERY__TARGET);
@@ -103,8 +98,7 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/PathQuery"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PathQuery"));
 	}
 
 	/**
@@ -116,8 +110,7 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements
 	@Override
 	public String getText(Object object) {
 		PathQuery pathQuery = (PathQuery) object;
-		return getString("_UI_PathQuery_type") + " "
-				+ pathQuery.isIncludeChangePackages();
+		return getString("_UI_PathQuery_type") + " " + pathQuery.isIncludeChangePackages();
 	}
 
 	/**
@@ -134,8 +127,7 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements
 
 		switch (notification.getFeatureID(PathQuery.class)) {
 		case VersioningPackage.PATH_QUERY__TARGET:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -149,13 +141,11 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.PATH_QUERY__TARGET,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.PATH_QUERY__TARGET,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 }

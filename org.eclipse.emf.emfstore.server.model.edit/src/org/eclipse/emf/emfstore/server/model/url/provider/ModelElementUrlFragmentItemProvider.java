@@ -33,15 +33,13 @@ import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -76,35 +74,27 @@ public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ModelElementUrlFragment_name_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ModelElementUrlFragment_name_feature",
-						"_UI_ModelElementUrlFragment_type"),
-				UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__NAME, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ModelElementUrlFragment_name_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ModelElementUrlFragment_name_feature",
+				"_UI_ModelElementUrlFragment_type"), UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__NAME, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID);
+			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID);
 		}
 		return childrenFeatures;
 	}
@@ -131,10 +121,7 @@ public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/ModelElementUrlFragment"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelElementUrlFragment"));
 	}
 
 	/**
@@ -147,7 +134,7 @@ public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
 	public String getText(Object object) {
 		String label = ((ModelElementUrlFragment) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_ModelElementUrlFragment_type")
-				: getString("_UI_ModelElementUrlFragment_type") + " " + label;
+			: getString("_UI_ModelElementUrlFragment_type") + " " + label;
 	}
 
 	/**
@@ -164,12 +151,10 @@ public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
 
 		switch (notification.getFeatureID(ModelElementUrlFragment.class)) {
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -183,14 +168,11 @@ public class ModelElementUrlFragmentItemProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID,
-						ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID,
+			ModelFactory.eINSTANCE.createModelElementId()));
 	}
 
 	/**

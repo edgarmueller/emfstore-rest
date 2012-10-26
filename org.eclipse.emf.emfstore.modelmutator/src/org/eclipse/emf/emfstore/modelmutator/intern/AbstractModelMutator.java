@@ -213,7 +213,7 @@ public abstract class AbstractModelMutator {
 		List<EObject> toDelete = new ArrayList<EObject>();
 		Random random = config.getRandom();
 		int maxDeleteCount = config.getMaxDeleteCount();
-		
+
 		// randomly select objects to delete
 		int deleted = 0;
 		for (TreeIterator<EObject> it = root.eAllContents(); it.hasNext();) {
@@ -233,7 +233,7 @@ public abstract class AbstractModelMutator {
 		if (config.isUseEcoreUtilDelete()) {
 			deleteModes.add(ModelMutatorUtil.DELETE_ECORE);
 		}
-		
+
 		// delete selected objects
 		int size = deleteModes.size();
 		for (EObject obj : new ArrayList<EObject>(toDelete)) {

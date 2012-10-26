@@ -58,12 +58,10 @@ public interface UrlPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	UrlPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlPackageImpl
-			.init();
+	UrlPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlPackageImpl.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl
 	 * <em>Server Url</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -101,8 +99,7 @@ public interface UrlPackage extends EPackage {
 	int SERVER_URL_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl
 	 * <em>Project Url Fragment</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -140,8 +137,7 @@ public interface UrlPackage extends EPackage {
 	int PROJECT_URL_FRAGMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl
 	 * <em>Model Element Url Fragment</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -170,8 +166,8 @@ public interface UrlPackage extends EPackage {
 	int MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID = 1;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Model Element Url Fragment</em>' class. <!-- begin-user-doc --> <!--
+	 * The number of structural features of the ' <em>Model Element Url Fragment</em>' class. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -180,8 +176,7 @@ public interface UrlPackage extends EPackage {
 	int MODEL_ELEMENT_URL_FRAGMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl
 	 * <em>Model Element Url</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -228,8 +223,7 @@ public interface UrlPackage extends EPackage {
 	int MODEL_ELEMENT_URL_FEATURE_COUNT = 3;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl
 	 * <em>Server Url</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Server Url</em>'.
@@ -251,8 +245,7 @@ public interface UrlPackage extends EPackage {
 	EAttribute getServerUrl_HostName();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort
 	 * <em>Port</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Port</em>'.
@@ -263,8 +256,7 @@ public interface UrlPackage extends EPackage {
 	EAttribute getServerUrl_Port();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment
 	 * <em>Project Url Fragment</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -291,8 +283,7 @@ public interface UrlPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getProjectId
 	 * <em>Project Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Project Id</em>'.
+	 * @return the meta object for the containment reference ' <em>Project Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getProjectId()
 	 * @see #getProjectUrlFragment()
 	 * @generated
@@ -300,8 +291,7 @@ public interface UrlPackage extends EPackage {
 	EReference getProjectUrlFragment_ProjectId();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment
 	 * <em>Model Element Url Fragment</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -329,8 +319,7 @@ public interface UrlPackage extends EPackage {
 	 * <em>Model Element Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Model Element Id</em>'.
+	 * @return the meta object for the containment reference ' <em>Model Element Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment#getModelElementId()
 	 * @see #getModelElementUrlFragment()
 	 * @generated
@@ -338,8 +327,7 @@ public interface UrlPackage extends EPackage {
 	EReference getModelElementUrlFragment_ModelElementId();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl
 	 * <em>Model Element Url</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -354,8 +342,7 @@ public interface UrlPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl
 	 * <em>Server Url</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Server Url</em>'.
+	 * @return the meta object for the containment reference ' <em>Server Url</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl()
 	 * @see #getModelElementUrl()
 	 * @generated
@@ -368,8 +355,7 @@ public interface UrlPackage extends EPackage {
 	 * <em>Project Url Fragment</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Project Url Fragment</em>'.
+	 * @return the meta object for the containment reference ' <em>Project Url Fragment</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getProjectUrlFragment()
 	 * @see #getModelElementUrl()
 	 * @generated
@@ -382,8 +368,7 @@ public interface UrlPackage extends EPackage {
 	 * <em>Model Element Url Fragment</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Model Element Url Fragment</em>'.
+	 * @return the meta object for the containment reference ' <em>Model Element Url Fragment</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getModelElementUrlFragment()
 	 * @see #getModelElementUrl()
 	 * @generated
@@ -414,8 +399,7 @@ public interface UrlPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl
 		 * <em>Server Url</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -459,8 +443,7 @@ public interface UrlPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute PROJECT_URL_FRAGMENT__NAME = eINSTANCE
-				.getProjectUrlFragment_Name();
+		EAttribute PROJECT_URL_FRAGMENT__NAME = eINSTANCE.getProjectUrlFragment_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Project Id</b></em>'
@@ -469,8 +452,7 @@ public interface UrlPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference PROJECT_URL_FRAGMENT__PROJECT_ID = eINSTANCE
-				.getProjectUrlFragment_ProjectId();
+		EReference PROJECT_URL_FRAGMENT__PROJECT_ID = eINSTANCE.getProjectUrlFragment_ProjectId();
 
 		/**
 		 * The meta object literal for the '
@@ -482,8 +464,7 @@ public interface UrlPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.url.impl.UrlPackageImpl#getModelElementUrlFragment()
 		 * @generated
 		 */
-		EClass MODEL_ELEMENT_URL_FRAGMENT = eINSTANCE
-				.getModelElementUrlFragment();
+		EClass MODEL_ELEMENT_URL_FRAGMENT = eINSTANCE.getModelElementUrlFragment();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute
@@ -491,8 +472,7 @@ public interface UrlPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MODEL_ELEMENT_URL_FRAGMENT__NAME = eINSTANCE
-				.getModelElementUrlFragment_Name();
+		EAttribute MODEL_ELEMENT_URL_FRAGMENT__NAME = eINSTANCE.getModelElementUrlFragment_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Model Element Id</b></em>'
@@ -501,12 +481,10 @@ public interface UrlPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID = eINSTANCE
-				.getModelElementUrlFragment_ModelElementId();
+		EReference MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID = eINSTANCE.getModelElementUrlFragment_ModelElementId();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl
 		 * <em>Model Element Url</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -523,28 +501,25 @@ public interface UrlPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference MODEL_ELEMENT_URL__SERVER_URL = eINSTANCE
-				.getModelElementUrl_ServerUrl();
+		EReference MODEL_ELEMENT_URL__SERVER_URL = eINSTANCE.getModelElementUrl_ServerUrl();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Url Fragment</b></em>
-		 * ' containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Project Url Fragment</b></em> ' containment reference feature. <!--
+		 * begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT = eINSTANCE
-				.getModelElementUrl_ProjectUrlFragment();
+		EReference MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT = eINSTANCE.getModelElementUrl_ProjectUrlFragment();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Model Element Url Fragment</b></em>' containment reference
+		 * The meta object literal for the ' <em><b>Model Element Url Fragment</b></em>' containment reference
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT = eINSTANCE
-				.getModelElementUrl_ModelElementUrlFragment();
+			.getModelElementUrl_ModelElementUrlFragment();
 
 	}
 

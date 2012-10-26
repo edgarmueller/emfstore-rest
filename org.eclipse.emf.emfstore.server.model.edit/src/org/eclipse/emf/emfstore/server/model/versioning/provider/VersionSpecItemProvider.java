@@ -31,15 +31,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class VersionSpecItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class VersionSpecItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -74,15 +72,11 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addBranchPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_VersionSpec_branch_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_VersionSpec_branch_feature",
-						"_UI_VersionSpec_type"),
-				VersioningPackage.Literals.VERSION_SPEC__BRANCH, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_VersionSpec_branch_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_VersionSpec_branch_feature", "_UI_VersionSpec_type"),
+			VersioningPackage.Literals.VERSION_SPEC__BRANCH, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -95,7 +89,7 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		String label = ((VersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_VersionSpec_type")
-				: getString("_UI_VersionSpec_type") + " " + label;
+			: getString("_UI_VersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -112,8 +106,7 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements
 
 		switch (notification.getFeatureID(VersionSpec.class)) {
 		case VersioningPackage.VERSION_SPEC__BRANCH:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -127,8 +120,7 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

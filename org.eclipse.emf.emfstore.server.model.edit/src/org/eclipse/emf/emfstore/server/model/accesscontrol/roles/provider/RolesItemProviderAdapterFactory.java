@@ -39,8 +39,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.util.RolesAdapt
  * 
  * @generated
  */
-public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
-		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class RolesItemProviderAdapterFactory extends RolesAdapterFactory implements ComposeableAdapterFactory,
+	IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -50,8 +50,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -59,8 +58,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -83,17 +82,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole} instances. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ReaderRoleItemProvider readerRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -108,17 +106,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole} instances. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected WriterRoleItemProvider writerRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -133,16 +130,15 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole} instances. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ProjectAdminRoleItemProvider projectAdminRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole}
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole}
 	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -150,8 +146,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	@Override
 	public Adapter createProjectAdminRoleAdapter() {
 		if (projectAdminRoleItemProvider == null) {
-			projectAdminRoleItemProvider = new ProjectAdminRoleItemProvider(
-					this);
+			projectAdminRoleItemProvider = new ProjectAdminRoleItemProvider(this);
 		}
 
 		return projectAdminRoleItemProvider;
@@ -159,17 +154,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin} instances. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ServerAdminItemProvider serverAdminItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin} .
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -189,8 +183,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -199,8 +192,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -234,8 +226,7 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -262,8 +253,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

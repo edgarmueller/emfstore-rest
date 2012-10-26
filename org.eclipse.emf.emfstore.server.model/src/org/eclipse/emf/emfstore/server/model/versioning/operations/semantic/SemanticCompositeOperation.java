@@ -14,8 +14,8 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Composite Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Composite Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticPackage#getSemanticCompositeOperation()

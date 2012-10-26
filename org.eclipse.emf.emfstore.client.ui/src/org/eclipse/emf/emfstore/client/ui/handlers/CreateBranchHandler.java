@@ -22,8 +22,7 @@ public class CreateBranchHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UICreateBranchController(getShell(),
-				requireSelection(ProjectSpace.class)).execute();
+		new UICreateBranchController(getShell(), requireSelection(ProjectSpace.class)).execute();
 	}
 
 }

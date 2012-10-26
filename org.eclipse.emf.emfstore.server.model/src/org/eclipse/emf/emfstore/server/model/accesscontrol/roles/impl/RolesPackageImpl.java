@@ -82,13 +82,12 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 	private EClass serverAdminEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory
-	 * method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!--
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
@@ -112,10 +111,9 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 	 * and for any others upon which it depends.
 	 * 
 	 * <p>
-	 * This method is used to initialize {@link RolesPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link RolesPackage#eINSTANCE} when that field is accessed. Clients should not
+	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -124,13 +122,11 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 	 */
 	public static RolesPackage init() {
 		if (isInited)
-			return (RolesPackage) EPackage.Registry.INSTANCE
-					.getEPackage(RolesPackage.eNS_URI);
+			return (RolesPackage) EPackage.Registry.INSTANCE.getEPackage(RolesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new RolesPackageImpl());
+		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
+			.get(eNS_URI) : new RolesPackageImpl());
 
 		isInited = true;
 
@@ -139,34 +135,29 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage_1 = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
-				: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
+			: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI)
-				: VersioningPackage.eINSTANCE);
+			.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(VersioningPackage.eNS_URI) : VersioningPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI)
-				: OperationsPackage.eINSTANCE);
+			.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI)
-				: SemanticPackage.eINSTANCE);
+			.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(SemanticPackage.eNS_URI) : SemanticPackage.eINSTANCE);
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
+			.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
+			.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI)
-				: AccesscontrolPackage.eINSTANCE);
-		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
+		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theRolesPackage.createPackageContents();
@@ -319,9 +310,8 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 
 		// Obtain other dependent packages
 		org.eclipse.emf.emfstore.server.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.server.model.ModelPackage) EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
-		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE
-				.getEPackage(ModelPackage.eNS_URI);
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
+		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -334,60 +324,43 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 		serverAdminEClass.getESuperTypes().add(this.getRole());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(roleEClass, Role.class, "Role", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRole_Projects(), theModelPackage_1.getProjectId(),
-				null, "projects", null, 0, -1, Role.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getRole_Projects().getEKeys().add(
-				theModelPackage.getUniqueIdentifier_Id());
+		initEClass(roleEClass, Role.class, "Role", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRole_Projects(), theModelPackage_1.getProjectId(), null, "projects", null, 0, -1, Role.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		getRole_Projects().getEKeys().add(theModelPackage.getUniqueIdentifier_Id());
 
-		EOperation op = addEOperation(roleEClass, ecorePackage.getEBoolean(),
-				"canAdministrate", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canAdministrate", 0, 1, IS_UNIQUE,
+			IS_ORDERED);
+		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canCreate",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canCreate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canDelete",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canDelete", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canModify",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canModify", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canRead",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(roleEClass, ecorePackage.getEBoolean(), "canRead", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theModelPackage_1.getProjectId(), "projectId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(readerRoleEClass, ReaderRole.class, "ReaderRole",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(readerRoleEClass, ReaderRole.class, "ReaderRole", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(writerRoleEClass, WriterRole.class, "WriterRole",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(writerRoleEClass, WriterRole.class, "WriterRole", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(projectAdminRoleEClass, ProjectAdminRole.class,
-				"ProjectAdminRole", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(projectAdminRoleEClass, ProjectAdminRole.class, "ProjectAdminRole", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(serverAdminEClass, ServerAdmin.class, "ServerAdmin",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(serverAdminEClass, ServerAdmin.class, "ServerAdmin", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } // RolesPackageImpl

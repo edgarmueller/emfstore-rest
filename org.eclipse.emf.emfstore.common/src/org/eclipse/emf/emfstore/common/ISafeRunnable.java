@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.common;
  * Interface for code which should run with the {@link SafeRunner}.
  * 
  * @author Julian Sommerfeldt
- *
+ * 
  */
 public interface ISafeRunnable {
 
@@ -22,12 +22,12 @@ public interface ISafeRunnable {
 	 * Contains the code to execute.
 	 */
 	void run();
-	
+
 	/**
 	 * Handles a exception if one occurs during execution.
 	 * 
 	 * @param exception the {@link Throwable} which occurred during execution.
 	 */
 	void handleException(Throwable exception);
-	
+
 }

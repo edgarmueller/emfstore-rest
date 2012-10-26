@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Branch Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +39,7 @@ public interface BranchInfo extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -54,8 +52,7 @@ public interface BranchInfo extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName
 	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -69,8 +66,8 @@ public interface BranchInfo extends EObject {
 	 * Returns the value of the '<em><b>Head</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Head</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Head</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -83,8 +80,7 @@ public interface BranchInfo extends EObject {
 	PrimaryVersionSpec getHead();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead
 	 * <em>Head</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -99,8 +95,8 @@ public interface BranchInfo extends EObject {
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Source</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -113,8 +109,7 @@ public interface BranchInfo extends EObject {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource
 	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

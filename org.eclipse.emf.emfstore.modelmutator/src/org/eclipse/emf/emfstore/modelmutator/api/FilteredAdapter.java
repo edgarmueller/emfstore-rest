@@ -95,36 +95,36 @@ public abstract class FilteredAdapter extends EContentAdapter {
 	 */
 	public static String getEventType(int eventType) {
 		switch (eventType) {
-			case Notification.SET: {
-				return "SET";
-			}
-			case Notification.UNSET: {
-				return "UNSET";
-			}
-			case Notification.ADD: {
-				return "ADD";
-			}
-			case Notification.ADD_MANY: {
-				return "ADD_MANY";
-			}
-			case Notification.REMOVE: {
-				return "REMOVE";
-			}
-			case Notification.REMOVE_MANY: {
-				return "REMOVE_MANY";
-			}
-			case Notification.MOVE: {
-				return "MOVE";
-			}
-			case Notification.REMOVING_ADAPTER: {
-				return "REMOVING_ADAPTER";
-			}
-			case Notification.RESOLVE: {
-				return "RESOLVE";
-			}
-			default: {
-				return String.valueOf(eventType);
-			}
+		case Notification.SET: {
+			return "SET";
+		}
+		case Notification.UNSET: {
+			return "UNSET";
+		}
+		case Notification.ADD: {
+			return "ADD";
+		}
+		case Notification.ADD_MANY: {
+			return "ADD_MANY";
+		}
+		case Notification.REMOVE: {
+			return "REMOVE";
+		}
+		case Notification.REMOVE_MANY: {
+			return "REMOVE_MANY";
+		}
+		case Notification.MOVE: {
+			return "MOVE";
+		}
+		case Notification.REMOVING_ADAPTER: {
+			return "REMOVING_ADAPTER";
+		}
+		case Notification.RESOLVE: {
+			return "RESOLVE";
+		}
+		default: {
+			return String.valueOf(eventType);
+		}
 		}
 	}
 }

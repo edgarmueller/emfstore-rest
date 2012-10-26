@@ -76,8 +76,7 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected SemanticSwitch<Adapter> modelSwitch = new SemanticSwitch<Adapter>() {
 		@Override
-		public Adapter caseSemanticCompositeOperation(
-				SemanticCompositeOperation object) {
+		public Adapter caseSemanticCompositeOperation(SemanticCompositeOperation object) {
 			return createSemanticCompositeOperationAdapter();
 		}
 
@@ -133,8 +132,7 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
 	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

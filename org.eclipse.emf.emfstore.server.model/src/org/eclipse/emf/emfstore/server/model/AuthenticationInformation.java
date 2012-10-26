@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Authentication Information</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Authentication Information</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -38,8 +38,8 @@ public interface AuthenticationInformation extends EObject {
 	 * Returns the value of the '<em><b>Session Id</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Session Id</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Session Id</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -52,8 +52,7 @@ public interface AuthenticationInformation extends EObject {
 	SessionId getSessionId();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
 	 * <em>Session Id</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -69,8 +68,8 @@ public interface AuthenticationInformation extends EObject {
 	 * Returns the value of the '<em><b>Resolved AC User</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Resolved AC User</em>' containment reference
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Resolved AC User</em>' containment reference isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -84,8 +83,7 @@ public interface AuthenticationInformation extends EObject {
 	ACUser getResolvedACUser();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
 	 * <em>Resolved AC User</em>}' containment reference. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
