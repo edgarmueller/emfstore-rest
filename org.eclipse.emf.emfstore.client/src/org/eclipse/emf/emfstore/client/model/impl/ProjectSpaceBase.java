@@ -65,7 +65,6 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -565,13 +564,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		initCrossReferenceAdapter();
 
-		EObjectChangeNotifier changeNotifier = getProject().getChangeNotifier();
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
 
 		initCompleted = true;
 		fileTransferManager = new FileTransferManager(this);
 
-		operationManager = new OperationManager(this, changeNotifier);
+		operationManager = new OperationManager(this);
 		operationManager.addOperationListener(modifiedModelElementsCache);
 
 		initResourcePersister();

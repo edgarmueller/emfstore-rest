@@ -23,7 +23,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recordi
 import org.eclipse.emf.emfstore.client.model.observers.OperationObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -47,10 +46,10 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * Constructor.
 	 * 
 	 * @param projectSpace
-	 * @param changeNotifier
+	 *            the project space the operation manager should be attached to
 	 */
-	public OperationManager(ProjectSpaceBase projectSpace, EObjectChangeNotifier changeNotifier) {
-		this.operationRecorder = new OperationRecorder(projectSpace, changeNotifier);
+	public OperationManager(ProjectSpaceBase projectSpace) {
+		this.operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
 		this.projectSpace = operationRecorder.getProjectSpace();
 		operationListeners = new ArrayList<OperationObserver>();
 		operationRecorder.addOperationRecorderListener(this);
