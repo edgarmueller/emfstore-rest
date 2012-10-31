@@ -12,19 +12,18 @@ package org.eclipse.emf.emfstore.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 
 /**
  * Tests if auto save is enabled.
  * 
  * @author mkoegel
- * 
+ * @author emueller
  */
 public class IsAutoSaveEnabledTester extends PropertyTester {
 
-	// TODO: think about a more elegant solution to prevent
-	// unconditional contribution of the save button to the toolbar,
-	// e.g. by means of parameters or the like
-	private static boolean isAutoSaveEnabledTesterEnabled = true;
+	private static boolean isAutoSaveEnabledTesterDisabled = initExtensionPoint();
 
 	/**
 	 * {@inheritDoc}
@@ -33,28 +32,18 @@ public class IsAutoSaveEnabledTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		return (expectedValue != null && expectedValue.equals(Configuration.isAutoSaveEnabled()
-			&& isAutoSaveEnabledTesterEnabled));
+		return (expectedValue != null && expectedValue.equals(Configuration.isAutoSaveEnabled()) && !isAutoSaveEnabledTesterDisabled);
 	}
 
-	/**
-	 * Whether the tester itself is enabled.
-	 * The tester may be disabled, if the the contribution of the save button
-	 * that is enabled when autosave is disabled, should be prevented.
-	 * 
-	 * @return whether the tester is enabled
-	 */
-	public static boolean isEnabled() {
-		return isAutoSaveEnabledTesterEnabled;
-	}
+	private static boolean initExtensionPoint() {
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disabledsavebutton");
+		ExtensionElement element = extensionPoint.getFirst();
 
-	/**
-	 * Enables or disables the tester.
-	 * 
-	 * @param value
-	 *            the enabled state of the tester
-	 */
-	public static void setEnabled(boolean value) {
-		isAutoSaveEnabledTesterEnabled = value;
+		if (element == null) {
+			// default
+			return false;
+		}
+
+		return element.getBoolean("enabled", false);
 	}
 }
