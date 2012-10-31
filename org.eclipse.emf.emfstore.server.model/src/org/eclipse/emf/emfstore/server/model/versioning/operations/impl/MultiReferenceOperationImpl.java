@@ -337,8 +337,15 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 							list.add(i, m);
 						}
 					} else {
-						// if index grows out of bounds, just append
-						list.add(m);
+						// index grows out of bounds
+						if (list.contains(m)) {
+							// if element already in list, move to the end
+							list.move(list.size() - 1, m);
+							i--;
+						} else {
+							// if element not in list, just append
+							list.add(m);
+						}
 					}
 
 					i++;
@@ -346,7 +353,15 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 				// list.addAll(getIndex(), referencedModelElements);
 			} else {
 				// if index is out of range ignore index
-				list.addAll(referencedModelElements);
+				for (EObject m : referencedModelElements) {
+					if (list.contains(m)) {
+						// move to end
+						list.move(list.size() - 1, m);
+					} else {
+						// append
+						list.add(m);
+					}
+				}
 			}
 		} else {
 			for (EObject me : referencedModelElements) {
