@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -29,7 +28,7 @@ public class ESBrowserLabelProvider extends AdapterFactoryLabelProvider {
 	 * Default constructor.
 	 */
 	public ESBrowserLabelProvider() {
-		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+		super(Activator.getAdapterFactory());
 	}
 
 	/**

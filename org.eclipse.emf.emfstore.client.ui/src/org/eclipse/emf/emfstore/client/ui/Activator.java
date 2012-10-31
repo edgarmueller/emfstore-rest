@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui;
 
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -27,6 +28,8 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
+	private static ComposedAdapterFactory adapterFactory;
+
 	/**
 	 * The constructor.
 	 */
@@ -41,6 +44,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 	}
 
 	/*
@@ -51,6 +55,7 @@ public class Activator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
+		getAdapterFactory().dispose();
 	}
 
 	// END SUPRESS CATCH EXCEPTION
@@ -74,4 +79,12 @@ public class Activator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
+	/**
+	 * Returns a composed adapter factory.
+	 * 
+	 * @return a composed adapter factory
+	 */
+	public static ComposedAdapterFactory getAdapterFactory() {
+		return adapterFactory;
+	}
 }

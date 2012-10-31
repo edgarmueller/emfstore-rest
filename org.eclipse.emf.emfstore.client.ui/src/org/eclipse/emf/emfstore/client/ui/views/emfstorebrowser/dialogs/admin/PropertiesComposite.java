@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -474,7 +473,7 @@ public abstract class PropertiesComposite extends Composite {
 	private class TableLabelProvider extends AdapterFactoryLabelProvider {
 
 		public TableLabelProvider() {
-			super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+			super(Activator.getAdapterFactory());
 		}
 
 		@Override
