@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 /**
  * Determines the version identifier of the client component.
  * 
- * @author emueller
+ * @author Edgar Mueller
  * 
  */
 public interface IClientVersionProvider {
