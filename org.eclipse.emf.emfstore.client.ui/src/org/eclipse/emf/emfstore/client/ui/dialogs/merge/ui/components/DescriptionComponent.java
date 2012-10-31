@@ -99,7 +99,6 @@ public class DescriptionComponent extends Composite {
 
 	private List<String> splitText(DecisionBox box, ConflictDescription conflict) {
 		String description = conflict.getDescription();
-		// for(String string : description.split("\\["+"[a-zA-Z]*"+"\\]")) {
 		ChangePackageVisualizationHelper visualHelper = UIDecisionUtil.getChangePackageVisualizationHelper(box
 			.getDecisionManager());
 		ArrayList<String> result = new ArrayList<String>();
@@ -112,8 +111,7 @@ public class DescriptionComponent extends Composite {
 					tmp = visualHelper.getDescription((AbstractOperation) obj);
 					visualHelper.dispose();
 				} else if (obj instanceof EObject) {
-					tmp = DecisionUtil.getClassAndName((EObject) obj);
-					tmp = DecisionUtil.cutString(tmp, 45, true);
+					tmp = DecisionUtil.getModelElementName((EObject) obj);
 				} else if (obj != null) {
 					tmp = obj.toString();
 					tmp = UIDecisionUtil.cutString(tmp, 85, true);

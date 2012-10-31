@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.util;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -196,6 +197,11 @@ public final class DecisionUtil {
 	 * @return name for element;
 	 */
 	public static String getModelElementName(EObject modelElement) {
+
+		if (modelElement == null) {
+			return StringUtils.EMPTY;
+		}
+
 		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus().notify(MergeLabelProvider.class, true);
 		if (labelProvider == null) {
 			return modelElement.toString();

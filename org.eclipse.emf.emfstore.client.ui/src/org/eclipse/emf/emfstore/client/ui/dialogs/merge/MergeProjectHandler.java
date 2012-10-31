@@ -20,6 +20,8 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLa
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
@@ -31,7 +33,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class MergeProjectHandler extends AbstractConflictResolver implements ConflictResolver {
 
-	private DefaultMergeLabelProvider labelProvider;
+	private static MergeLabelProvider labelProvider;
 
 	/**
 	 * Default constructor.
@@ -57,8 +59,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void preDecisionManagerHook() {
-		labelProvider = new DefaultMergeLabelProvider();
-		WorkspaceManager.getObserverBus().register(labelProvider, MergeLabelProvider.class);
+		WorkspaceManager.getObserverBus().register(getLabelProvider(), MergeLabelProvider.class);
 	}
 
 	@Override
@@ -74,9 +75,25 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 
 				int open = dialog.open();
 
-				labelProvider.dispose();
+				getLabelProvider().dispose();
 				return (open == Dialog.OK);
 			}
 		});
+	}
+
+	private MergeLabelProvider getLabelProvider() {
+
+		if (labelProvider == null) {
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
+			ExtensionElement element = extensionPoint.getElementWithHighestPriority();
+
+			if (element == null) {
+				labelProvider = new DefaultMergeLabelProvider();
+			} else {
+				labelProvider = element.getClass("class", MergeLabelProvider.class);
+			}
+		}
+
+		return labelProvider;
 	}
 }
