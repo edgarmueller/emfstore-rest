@@ -51,6 +51,7 @@ public class AttributeConflict extends Conflict {
 		description.setDescription(DecisionUtil.getDescription("attributeconflict", getDecisionManager()
 			.isBranchMerge()));
 		description.add("myvalue", getMyOperation(AttributeOperation.class).getNewValue());
+		description.add("oldvalue", getMyOperation(AttributeOperation.class).getOldValue());
 		description.add("theirvalue", getTheirOperation(AttributeOperation.class).getNewValue());
 		description.setImage("attribute.gif");
 
