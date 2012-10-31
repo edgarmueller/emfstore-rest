@@ -255,7 +255,7 @@ public class EmfStoreController implements IApplication, Runnable {
 		if (!targetFile.exists()) {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emfstore.server.configurationresource");
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.server.configurationresource");
 			ExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {

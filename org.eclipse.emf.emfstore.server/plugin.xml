@@ -6,7 +6,7 @@
    <extension-point id="org.eclipse.emf.emfstore.server.authenticationfactory" name="Authentication Factory" schema="schema/org.eclipse.emf.emfstore.server.authenticationfactory.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.server.locationprovider" name="Location Provider" schema="schema/org.eclipse.emf.emfstore.server.locationprovider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.server.conflictdetection.excludedfeatures" name="Conflict Detection Excluded Features" schema="schema/org.eclipse.emf.emfstore.server.conflictdetection.excludedfeatures.exsd"/>
-   <extension-point id="org.eclipse.emfstore.server.configurationresource" name="Server Configuration Resources" schema="schema/org.eclipse.emf.emfstore.server.configurationresource.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.server.configurationresource" name="Server Configuration Resources" schema="schema/org.eclipse.emf.emfstore.server.configurationresource.exsd"/>
    <extension
          id="application"
          name="EMFStore server"
