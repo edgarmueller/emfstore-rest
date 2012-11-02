@@ -30,7 +30,6 @@
    <extension-point id="org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy" name="Conflict Detector Strategy" schema="schema/org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.merge.conflictHandler" name="Conflict Handler" schema="schema/org.eclipse.emf.emfstore.client.merge.conflictHandler.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.wrapper.applychanges" name="Apply changes wrapper" schema="schema/org.eclipse.emf.emfstore.client.wrapper.applychanges.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.client.ignoredEClassesDuringMerging" name="Ignored EClasses during Merging" schema="schema/org.eclipse.emf.emfstore.client.ignoredEClassesDuringMerging.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
