@@ -633,6 +633,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resourcePersister.addResource(getLocalChangePackage().eResource());
 			resourcePersister.addResource(getProject().eResource());
 			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+			WorkspaceManager.getObserverBus().register(resourcePersister);
 		}
 	}
 
@@ -1202,6 +1203,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().removeIdEObjectCollectionChangeObserver(operationManager);
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
+		WorkspaceManager.getObserverBus().unregister(resourcePersister);
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);

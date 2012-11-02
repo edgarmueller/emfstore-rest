@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.EmptyRemovalsFilter;
@@ -31,12 +32,16 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TouchFilter;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.TransientFilter;
+import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
+import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * 
@@ -44,7 +49,8 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
  * @author koegel
  * @author emueller
  */
-public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver {
+public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, CommitObserver,
+	UpdateObserver {
 
 	private FilterStack filterStack;
 
@@ -288,5 +294,42 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 		for (IDEObjectCollectionDirtyStateListener listener : listeners) {
 			listener.notifyAboutDirtyStateChange();
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 */
+	public void updateCompleted(ProjectSpace projectSpace) {
+		saveDirtyResources(true);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
+	 */
+	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 */
+	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
+		saveDirtyResources(true);
 	}
 }

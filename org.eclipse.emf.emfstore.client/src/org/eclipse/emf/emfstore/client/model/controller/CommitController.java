@@ -165,19 +165,18 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		getProgressMonitor().subTask("Sending files to server");
 		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
-			.commitCompleted(getProjectSpace(), newBaseVersion);
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Finalizing commit");
+
 		getProjectSpace().setBaseVersion(newBaseVersion);
 		getProjectSpace().getOperations().clear();
-
 		getProjectSpace().setMergedVersion(null);
-
-		getProjectSpace().saveProjectSpaceOnly();
-
 		getProjectSpace().updateDirtyState();
+
+		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+			.commitCompleted(getProjectSpace(), newBaseVersion);
+
 		return newBaseVersion;
 	}
 
