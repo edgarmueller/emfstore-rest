@@ -658,7 +658,6 @@
             name="ECP">
       </category>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportChangesHandler"
             id="org.eclipse.emf.emfstore.client.ui.importChanges"
             name="Import Changes">
       </command>
