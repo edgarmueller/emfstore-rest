@@ -17,8 +17,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -121,6 +123,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private IApplyChangesWrapper applyChangesWrapper;
 
 	private boolean disposed;
+
+	private Set<String> ignoredClasses;
 
 	/**
 	 * Constructor.
@@ -827,6 +831,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		List<ChangePackage> newChangePackages, ConflictResolver conflictResolver, IProgressMonitor progressMonitor)
 		throws EmfStoreException {
 		// merge the conflicts
+
 		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myChangePackage), newChangePackages,
 			getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
@@ -1162,7 +1167,25 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public PrimaryVersionSpec update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
 		throws EmfStoreException {
-		return new UpdateController(this, version, callback, progress).execute();
+		return new UpdateController(this, version, callback, progress, getIgnoredEClassDuringMerging()).execute();
+	}
+
+	private Set<String> getIgnoredEClassDuringMerging() {
+
+		if (ignoredClasses != null) {
+			return ignoredClasses;
+		}
+
+		ExtensionPoint extensionPoint = new ExtensionPoint(
+			"org.eclipse.emf.emfstore.client.ignoredEClassesDuringMerging");
+		ignoredClasses = new LinkedHashSet<String>();
+
+		for (ExtensionElement element : extensionPoint.getExtensionElements()) {
+			String clazz = element.getAttribute("class");
+			ignoredClasses.add(clazz);
+		}
+
+		return ignoredClasses;
 	}
 
 	/**
