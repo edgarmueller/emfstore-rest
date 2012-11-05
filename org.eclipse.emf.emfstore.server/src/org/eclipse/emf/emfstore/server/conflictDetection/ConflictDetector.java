@@ -291,10 +291,10 @@ public class ConflictDetector {
 	// return false;
 	// }
 
-	private static final Set<String> excludedFeatureNameSet = initExcludedFeatureNameSet();
+	private static final Set<String> EXCLUDED_FEATURENAME_SET = initExcludedFeatureNameSet();
 
 	private boolean isExcludedFeature(String featureName) {
-		return excludedFeatureNameSet.contains(featureName);
+		return EXCLUDED_FEATURENAME_SET.contains(featureName);
 	}
 
 	private static Set<String> initExcludedFeatureNameSet() {

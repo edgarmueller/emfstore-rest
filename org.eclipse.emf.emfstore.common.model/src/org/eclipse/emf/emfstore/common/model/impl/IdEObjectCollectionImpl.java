@@ -552,6 +552,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		cachesInitialized = true;
 	}
 
+	/**
+	 * Puts the given model element into the collections' caches.
+	 * 
+	 * @param modelElement
+	 *            the model element which should be added to the caches
+	 */
 	protected void putModelElementIntoCache(EObject modelElement) {
 
 		// put model element into cache

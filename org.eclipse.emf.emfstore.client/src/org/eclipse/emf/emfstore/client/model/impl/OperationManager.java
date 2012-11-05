@@ -202,6 +202,11 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 		return operationRecorder.getModificator();
 	}
 
+	/**
+	 * Returns the notification recorder.
+	 * 
+	 * @return the notification recorder
+	 */
 	public NotificationRecorder getNotificationRecorder() {
 		return operationRecorder.getNotificationRecorder();
 	}
@@ -280,10 +285,16 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 		operationRecorder.collectionDeleted(collection);
 	}
 
+	/**
+	 * Starts change recording.
+	 */
 	public void startChangeRecording() {
 		operationRecorder.startChangeRecording();
 	}
 
+	/**
+	 * Stops change recording.
+	 */
 	public void stopChangeRecording() {
 		operationRecorder.stopChangeRecording();
 	}

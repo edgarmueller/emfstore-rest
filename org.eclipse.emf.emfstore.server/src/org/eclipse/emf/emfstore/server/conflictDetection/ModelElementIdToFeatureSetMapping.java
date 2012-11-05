@@ -99,8 +99,13 @@ public class ModelElementIdToFeatureSetMapping {
 		modelElementToFeatureSetMap.put(modelElementId, ALL_FEATURE_NAME_SET);
 	}
 
-	public void addForContainerFeature(String id) {
-		add(id, CONTAINER_FEATURE_NAME);
+	/**
+	 * Add a model element and as a container features to the mapping.
+	 * 
+	 * @param modelElementId the model element id
+	 */
+	public void addForContainerFeature(String modelElementId) {
+		add(modelElementId, CONTAINER_FEATURE_NAME);
 	}
 
 	/**

@@ -17,8 +17,6 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.junit.Test;
 
@@ -43,7 +41,7 @@ public class SampleAPITest extends CoreServerTest {
 		assertEquals(1, getServerSpace().getProjects().size());
 		ProjectHistory projectHistory = getServerSpace().getProjects().get(0);
 
-		Version version = projectHistory.getVersions().get(projectHistory.getVersions().size() - 1);
+		projectHistory.getVersions().get(projectHistory.getVersions().size() - 1);
 		assertEquals(1, project.getModelElements().size());
 		assertEquals("Horst", ((TestElement) project.getModelElements().get(0)).getName());
 	}
@@ -61,8 +59,7 @@ public class SampleAPITest extends CoreServerTest {
 					getProjectSpace().commit();
 
 					testElement.setName("2");
-					PrimaryVersionSpec branch = getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null,
-						null, null);
+					getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null, null, null);
 
 				} catch (EmfStoreException e) {
 				}

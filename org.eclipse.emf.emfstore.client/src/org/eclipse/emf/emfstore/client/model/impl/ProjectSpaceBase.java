@@ -560,7 +560,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#init()
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	public void init() {
 		initCrossReferenceAdapter();
 
@@ -593,6 +592,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		cleanCutElements();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initPropertyMap() {
 		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {

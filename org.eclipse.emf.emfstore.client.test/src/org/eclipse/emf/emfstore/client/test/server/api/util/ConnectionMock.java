@@ -48,6 +48,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 public class ConnectionMock implements ConnectionManager {
 
 	private final EmfStore emfStore;
+	// TODO: auth mock is never used locally
 	private final AuthControlMock authMock;
 	private HashSet<SessionId> sessions;
 
@@ -211,5 +212,9 @@ public class ConnectionMock implements ConnectionManager {
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException {
 		checkSessionId(sessionId);
 		emfStore.registerEPackage(ModelUtil.clone(sessionId), ModelUtil.clone(pkg));
+	}
+
+	protected AuthControlMock getAuthMock() {
+		return authMock;
 	}
 }

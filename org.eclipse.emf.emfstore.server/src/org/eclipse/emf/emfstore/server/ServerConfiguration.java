@@ -559,6 +559,7 @@ public final class ServerConfiguration {
 	 * 
 	 * @return the server version number
 	 */
+	@SuppressWarnings("cast")
 	public static String getServerVersion() {
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
 		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
