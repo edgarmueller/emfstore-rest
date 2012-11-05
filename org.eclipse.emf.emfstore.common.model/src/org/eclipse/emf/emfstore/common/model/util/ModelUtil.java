@@ -112,6 +112,8 @@ public final class ModelUtil {
 
 	private static Boolean discardDanglingHREFs;
 
+	private static XMLParserPoolImpl xmlParserPoolImpl;
+
 	/**
 	 * Private constructor.
 	 */
@@ -295,11 +297,12 @@ public final class ModelUtil {
 	@SuppressWarnings("rawtypes")
 	public static synchronized Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
+			// xmlParserPoolImpl = new XMLParserPoolImpl();
 			resourceLoadOptions = new HashMap<Object, Object>();
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.FALSE);
-			resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
+			// resourceLoadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, xmlParserPoolImpl);
 			resourceLoadOptions.put(XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap());
 			resourceLoadOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
