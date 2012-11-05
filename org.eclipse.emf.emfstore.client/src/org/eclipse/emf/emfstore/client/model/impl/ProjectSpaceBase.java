@@ -712,20 +712,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void delete() throws IOException {
-		dispose();
+
 		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
 			+ getIdentifier();
-		List<Resource> toDelete = new ArrayList<Resource>();
 
-		for (Resource resource : resourceSet.getResources()) {
-			if (resource.getURI().toFileString().startsWith(pathToProject)) {
-				toDelete.add(resource);
-			}
-		}
+		resourceSet.getResources().remove(getProject().eResource());
+		resourceSet.getResources().remove(eResource());
+		resourceSet.getResources().remove(getLocalChangePackage().eResource());
 
-		for (Resource resource : toDelete) {
-			resource.delete(null);
-		}
+		dispose();
 
 		// delete folder of project space
 		FileUtil.deleteDirectory(new File(pathToProject), true);
@@ -1187,14 +1182,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		stopChangeRecording();
-		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 
 		if (crossReferenceAdapter != null) {
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
-
-		operationManager.dispose();
-		operationManager = null;
 
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
 		commandStack.removeCommandStackObserver(operationManager);
@@ -1208,6 +1199,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);
 
+		operationManager.dispose();
 		disposed = true;
 	}
 
