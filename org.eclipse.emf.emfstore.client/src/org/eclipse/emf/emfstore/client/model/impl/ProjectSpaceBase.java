@@ -722,6 +722,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		dispose();
 
+		getProject().eResource().delete(null);
+		eResource().delete(null);
+		getLocalChangePackage().eResource().delete(null);
+
 		// delete folder of project space
 		FileUtil.deleteDirectory(new File(pathToProject), true);
 	}
@@ -1200,6 +1204,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().unregister(this);
 
 		operationManager.dispose();
+		resourcePersister.dispose();
 		disposed = true;
 	}
 

@@ -36,6 +36,7 @@ import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.EMFStoreResource;
+import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
@@ -50,7 +51,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * @author emueller
  */
 public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, CommitObserver,
-	UpdateObserver {
+	UpdateObserver, IDisposable {
 
 	private FilterStack filterStack;
 
@@ -61,9 +62,9 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 */
 	private boolean commandIsRunning;
 
-	private final Set<Resource> resources;
+	private Set<Resource> resources;
 
-	private final IModelElementIdToEObjectMapping mapping;
+	private IModelElementIdToEObjectMapping mapping;
 
 	private List<IDEObjectCollectionDirtyStateListener> listeners;
 
@@ -331,5 +332,17 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
 		saveDirtyResources(true);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 */
+	public void dispose() {
+		listeners = null;
+		resources = null;
+		mapping = null;
 	}
 }
