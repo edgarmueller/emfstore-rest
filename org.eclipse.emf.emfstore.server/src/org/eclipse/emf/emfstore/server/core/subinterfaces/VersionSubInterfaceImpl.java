@@ -574,7 +574,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				if (currentVersion.equals(sourceVersion)) {
 					break;
 				}
-				if (currentVersion.getPrimarySpec().compareTo(sourceVersion.getPrimarySpec()) == -1) {
+				if (currentVersion.getPrimarySpec().compareTo(sourceVersion.getPrimarySpec()) < 0) {
 					// walked too far, invalid path.
 					throw new InvalidVersionSpecException("Walked too far, invalid path.");
 				}
