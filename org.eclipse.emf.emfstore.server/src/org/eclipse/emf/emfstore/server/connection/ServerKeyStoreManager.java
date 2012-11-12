@@ -121,7 +121,9 @@ public final class ServerKeyStoreManager {
 				throw new ServerKeyStoreException(e);
 			} finally {
 				try {
-					fileInputStream.close();
+					if (fileInputStream != null) {
+						fileInputStream.close();
+					}
 				} catch (IOException e) {
 					throw new ServerKeyStoreException(e);
 				}

@@ -120,7 +120,9 @@ public final class FilePartitionerUtil {
 			throw new FileTransferException(COULD_NOT_READ_THE_FILE, e);
 		} finally {
 			try {
-				fileInputStream.close();
+				if (fileInputStream != null) {
+					fileInputStream.close();
+				}
 			} catch (IOException e) {
 				throw new FileTransferException(COULD_NOT_CLOSE_THE_FILE, e);
 			}

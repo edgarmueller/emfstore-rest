@@ -450,7 +450,9 @@ public class EmfStoreController implements IApplication, Runnable {
 			ModelUtil.logWarning("Property initialization failed, using default properties.", e);
 		} finally {
 			try {
-				fis.close();
+				if (fis != null) {
+					fis.close();
+				}
 			} catch (IOException e) {
 				ModelUtil.logWarning("Closing of properties file failed.", e);
 			}

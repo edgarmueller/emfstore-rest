@@ -570,6 +570,7 @@ public final class ModelMutatorUtil {
 				EStructuralFeature feature = eObject.eContainingFeature();
 				if (feature == null) {
 					EcoreUtil.delete(eObject, true);
+					return;
 				}
 
 				EObject eContainer = eObject.eContainer();
