@@ -24,7 +24,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEven
  * <b>TODO</b>: Don't allow listeners to block eventmanager (e.g. connection timeout)
  * 
  * @author wesendon
+ * @deprecated
  */
+@Deprecated
 public final class EventManager extends Thread {
 
 	/**

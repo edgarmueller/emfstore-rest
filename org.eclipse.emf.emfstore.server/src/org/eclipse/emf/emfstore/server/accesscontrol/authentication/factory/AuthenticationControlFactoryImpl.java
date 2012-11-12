@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidPropertyException;
  * 
  * @author wesendon
  */
+// TODO: internal
 public class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
 
 	/**

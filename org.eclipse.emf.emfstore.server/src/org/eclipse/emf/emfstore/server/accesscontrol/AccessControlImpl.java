@@ -49,6 +49,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin;
  * @author koegel
  * @author wesendonk
  */
+// TODO: internal
 public class AccessControlImpl implements AuthenticationControl, AuthorizationControl {
 
 	/**

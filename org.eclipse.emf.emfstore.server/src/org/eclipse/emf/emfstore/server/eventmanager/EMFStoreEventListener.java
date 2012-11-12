@@ -16,7 +16,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEven
  * Interface in order to listen to the {@link EventManager}.
  * 
  * @author wesendon
+ * @deprecated
  */
+@Deprecated
 public interface EMFStoreEventListener {
 
 	/**

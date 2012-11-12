@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDe
  * 
  * @author wesendon
  */
+// TODO: internal
 public class ResourceHelper {
 
 	private final ServerSpace serverSpace;

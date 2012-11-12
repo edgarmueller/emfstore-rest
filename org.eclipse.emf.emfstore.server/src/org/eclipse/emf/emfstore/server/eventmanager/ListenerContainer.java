@@ -18,7 +18,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  * Container for listener.
  * 
  * @author wesendon
+ * @deprecated
  */
+@Deprecated
 public class ListenerContainer {
 
 	private final EMFStoreEventListener listener;

@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
  * 
  * @param <T> the emfstore interface
  */
+// TODO: internal
 public abstract class InternalCommand<T extends AbstractEmfstoreInterface> {
 	private T theInterface;
 

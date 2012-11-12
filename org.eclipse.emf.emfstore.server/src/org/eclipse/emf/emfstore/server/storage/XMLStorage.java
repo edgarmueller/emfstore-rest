@@ -27,6 +27,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
  * 
  * @author koegel
  */
+// TODO: internal
 public class XMLStorage implements ResourceStorage {
 
 	/**

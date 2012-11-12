@@ -50,6 +50,7 @@ public final class CommonUtil {
 	 * @return EReference the Container
 	 * @param parent The EObject to get containment references from
 	 */
+	// TODO: javadoc
 	public static EReference getPossibleContainingReference(final EObject newMEInstance, EObject parent) {
 		// the value of the 'EAll Containments' reference list.
 		List<EReference> eallcontainments = parent.eClass().getEAllContainments();

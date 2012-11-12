@@ -37,6 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
  * 
  * @author wesendon
  */
+// TODO: internal
+
 public class EmfStoreValidator {
 
 	private final ServerSpace serverSpace;

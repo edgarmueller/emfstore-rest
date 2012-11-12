@@ -47,6 +47,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
  * @author Wesendonk
  */
 // TODO: bring this interface in new subinterface structure and refactor it
+// TODO: internal
 public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements AdminEmfStore {
 
 	/**

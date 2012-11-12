@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * 
  * @author koegel
  */
+// TODO: internal
+
 public class ConsoleProgressMonitor implements IProgressMonitor {
 
 	/**

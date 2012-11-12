@@ -16,7 +16,9 @@ import org.eclipse.emf.common.notify.Notification;
  * Abstract listener class for inner class declarations.
  * 
  * @author koegel
+ * @deprecated
  */
+@Deprecated
 public abstract class ModelElementChangeListenerImpl implements ModelElementChangeListener {
 
 	/**

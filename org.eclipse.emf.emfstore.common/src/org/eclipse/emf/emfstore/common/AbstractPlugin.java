@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.Plugin;
  * @author Koegel
  * 
  */
+// TODO: merge class into activator
 public abstract class AbstractPlugin extends Plugin {
 
 	private LogAdapter logAdapter;

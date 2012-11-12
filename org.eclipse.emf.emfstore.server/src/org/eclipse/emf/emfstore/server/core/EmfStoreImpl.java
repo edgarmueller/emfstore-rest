@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
  * @author wesendon
  * @see EmfStore
  */
+// TODO: internal
 public class EmfStoreImpl extends AbstractEmfstoreInterface implements InvocationHandler {
 
 	/**

@@ -39,6 +39,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
  * @author koegel
  * @author wesendon
  */
+// TODO: internal
 public class MigrationManager {
 
 	/**

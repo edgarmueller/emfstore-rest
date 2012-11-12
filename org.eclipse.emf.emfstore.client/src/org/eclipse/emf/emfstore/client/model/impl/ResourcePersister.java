@@ -140,7 +140,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		if (!isDirty) {
+		if (!isDirty && !force) {
 			return;
 		}
 

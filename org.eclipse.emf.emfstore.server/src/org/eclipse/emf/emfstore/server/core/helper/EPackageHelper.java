@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
  * 
  * @author Tobias Verhoeven
  */
+// TODO: internal
 public final class EPackageHelper {
 
 	private EPackageHelper() {

@@ -27,6 +27,8 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
  * 
  * @author wesendon
  */
+// TODO: internal
+
 public final class ExtensionManager {
 
 	private ExtensionManager() {

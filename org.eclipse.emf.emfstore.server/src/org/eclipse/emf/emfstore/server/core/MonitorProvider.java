@@ -17,6 +17,7 @@ import java.util.HashMap;
  * 
  * @author wesendon
  */
+// TODO: internal
 public final class MonitorProvider {
 
 	private static final String MAIN_MONITOR = "mainMonitor";

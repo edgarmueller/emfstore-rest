@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
  * @author User
  * 
  */
+// TODO: internal
 public class EMFStoreResource extends XMIResourceImpl {
 
 	/**

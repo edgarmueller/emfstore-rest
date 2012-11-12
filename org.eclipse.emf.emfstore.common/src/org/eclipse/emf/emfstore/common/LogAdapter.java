@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.Status;
  * @author koegel
  * 
  */
+// TODO: merge into activator
 public class LogAdapter implements ILog {
 
 	/**

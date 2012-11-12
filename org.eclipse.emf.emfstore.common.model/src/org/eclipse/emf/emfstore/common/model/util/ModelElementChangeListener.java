@@ -16,7 +16,9 @@ import org.eclipse.emf.common.notify.Notification;
  * Listens to changes on a single model element.
  * 
  * @author koegel
+ * @deprecated
  */
+@Deprecated
 public interface ModelElementChangeListener {
 
 	/**

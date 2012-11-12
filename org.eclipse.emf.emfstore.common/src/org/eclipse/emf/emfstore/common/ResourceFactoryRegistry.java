@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  * 
  * @author emueller
  */
+// TODO: internal
 public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements Resource.Factory.Registry {
 
 	@Override

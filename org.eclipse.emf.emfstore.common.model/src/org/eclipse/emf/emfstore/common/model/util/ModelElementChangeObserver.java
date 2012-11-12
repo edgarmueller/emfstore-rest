@@ -26,7 +26,9 @@ import org.eclipse.emf.emfstore.common.model.Project;
  * events, but of course you cannot override the classes own filtering methods.
  * 
  * @author andy
+ * @deprecated
  */
+@Deprecated
 public abstract class ModelElementChangeObserver implements IdEObjectCollectionChangeObserver {
 
 	/**
