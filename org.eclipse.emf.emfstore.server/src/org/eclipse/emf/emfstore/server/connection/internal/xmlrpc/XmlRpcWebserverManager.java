@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.connection.xmlrpc;
+package org.eclipse.emf.emfstore.server.connection.internal.xmlrpc;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.connection.ServerKeyStoreManager;
-import org.eclipse.emf.emfstore.server.connection.xmlrpc.util.EObjectTypeConverterFactory;
-import org.eclipse.emf.emfstore.server.connection.xmlrpc.util.EObjectTypeFactory;
+import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeConverterFactory;
+import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeFactory;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.ServerKeyStoreException;
 

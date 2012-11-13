@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.connection.xmlrpc.util;
+package org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

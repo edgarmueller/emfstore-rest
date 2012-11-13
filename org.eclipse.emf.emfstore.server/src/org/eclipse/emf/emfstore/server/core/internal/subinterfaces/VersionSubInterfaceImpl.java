@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.core.subinterfaces;
+package org.eclipse.emf.emfstore.server.core.internal.subinterfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
