@@ -25,8 +25,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 // TODO: internal
 public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements Resource.Factory.Registry {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Resource createResource(URI uri) {
+	public Resource createResource(final URI uri) {
 		return new EMFStoreResource(uri);
 	}
 
@@ -35,7 +38,7 @@ public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements R
 	 * 
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI)
 	 */
-	public Factory getFactory(URI uri) {
+	public Factory getFactory(final URI uri) {
 		return this;
 	}
 
@@ -45,7 +48,7 @@ public class ResourceFactoryRegistry extends XMIResourceFactoryImpl implements R
 	 * @see org.eclipse.emf.ecore.resource.Resource.Factory.Registry#getFactory(org.eclipse.emf.common.util.URI,
 	 *      java.lang.String)
 	 */
-	public Factory getFactory(URI uri, String contentType) {
+	public Factory getFactory(final URI uri, final String contentType) {
 		return this;
 	}
 

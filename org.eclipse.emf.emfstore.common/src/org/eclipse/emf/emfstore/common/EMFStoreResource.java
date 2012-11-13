@@ -18,31 +18,30 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**
- * EMFStore Resource, inherits from XMIResource and sets Intrinsic ID to EObjectMap optimization.
- * 
- * @author User
- * 
+ * EMFStore Resource, inherits from XMIResource and sets intrinsic ID to EObjectMap optimization.
  */
-// TODO: internal
 public class EMFStoreResource extends XMIResourceImpl {
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param uri the uri
+	 * @param uri 
+	 * 			the URI of the resource
 	 */
-	public EMFStoreResource(URI uri) {
+	public EMFStoreResource(final URI uri) {
 		super(uri);
 		this.setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 	}
 
 	/**
-	 * Initialize the id to Eobjects map and reverse map directly. The map must be consistent with each other.
+	 * Initialize the ID to EObjects map and reverse map directly. The map must be consistent with each other.
 	 * 
-	 * @param idToEObjectMap a map from ids to eobjects in the resource
-	 * @param eObjectToIdMap a map from eobjects to ids in the resource
+	 * @param idToEObjectMap
+	 * 		 a map from IDs to EObject in the resource
+	 * @param eObjectToIdMap 
+	 * 		 a map from EObjects to IDs in the resource
 	 */
-	public void setIdToEObjectMap(Map<String, EObject> idToEObjectMap, Map<EObject, String> eObjectToIdMap) {
+	public void setIdToEObjectMap(final Map<String, EObject> idToEObjectMap, final Map<EObject, String> eObjectToIdMap) {
 		this.idToEObjectMap = idToEObjectMap;
 		this.eObjectToIDMap = eObjectToIdMap;
 	}

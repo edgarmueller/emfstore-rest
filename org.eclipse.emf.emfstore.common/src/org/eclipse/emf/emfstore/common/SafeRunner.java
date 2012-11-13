@@ -29,7 +29,7 @@ public final class SafeRunner {
 	 * 
 	 * @param code The {@link ISafeRunnable} to execute.
 	 */
-	public static void run(ISafeRunnable code) {
+	public static void run(final ISafeRunnable code) {
 		Assert.isNotNull(code);
 		try {
 			code.run();
@@ -44,13 +44,13 @@ public final class SafeRunner {
 		}
 	}
 
-	private static void handleException(ISafeRunnable code, Throwable e) {
-		code.handleException(e);
+	private static void handleException(final ISafeRunnable code, final Throwable exception) {
+		code.handleException(exception);
 		if (CommonUtil.isTesting()) {
-			if (e instanceof RuntimeException) {
-				throw ((RuntimeException) e);
+			if (exception instanceof RuntimeException) {
+				throw ((RuntimeException) exception);
 			} else {
-				throw new RuntimeException(e);
+				throw new RuntimeException(exception);
 			}
 		}
 	}

@@ -9,10 +9,12 @@
  * Contributors:
  * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common;
+package org.eclipse.emf.emfstore.internal.common;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.emfstore.common.Activator;
+import org.eclipse.emf.emfstore.common.ILog;
 
 /**
  * Implements a log for EMFStore Common.
@@ -28,8 +30,8 @@ public class LogAdapter implements ILog {
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.ILog#log(java.lang.String, java.lang.Exception, int)
 	 */
-	public void log(String message, Exception exception, int statusInt) {
-		Status status = new Status(statusInt, Activator.getDefault().getBundle().getSymbolicName(), statusInt, message,
+	public void log(final String message, final Exception exception, final int statusInt) {
+		final Status status = new Status(statusInt, Activator.getDefault().getBundle().getSymbolicName(), statusInt, message,
 			exception);
 		Activator.getDefault().getLog().log(status);
 	}
@@ -39,8 +41,8 @@ public class LogAdapter implements ILog {
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.ILog#logException(java.lang.String, java.lang.Exception)
 	 */
-	public void logException(String message, Exception e) {
-		log(message, e, IStatus.ERROR);
+	public void logException(final String message, final Exception exception) {
+		log(message, exception, IStatus.ERROR);
 	}
 
 	/**
@@ -48,8 +50,8 @@ public class LogAdapter implements ILog {
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.ILog#logWarning(java.lang.String, java.lang.Exception)
 	 */
-	public void logWarning(String message, Exception e) {
-		log(message, e, IStatus.WARNING);
+	public void logWarning(final String message, final Exception exception) {
+		log(message, exception, IStatus.WARNING);
 	}
 
 }

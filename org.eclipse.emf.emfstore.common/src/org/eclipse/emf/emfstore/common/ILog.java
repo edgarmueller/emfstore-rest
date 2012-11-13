@@ -31,16 +31,16 @@ public interface ILog {
 	 * Log an exception as an error.
 	 * 
 	 * @param message the message
-	 * @param e the causing exception.
+	 * @param exception the causing exception.
 	 */
-	void logException(String message, Exception e);
+	void logException(String message, Exception exception);
 
 	/**
 	 * Log an exception as a warning.
 	 * 
 	 * @param message the message
-	 * @param e the causing exception
+	 * @param exception the causing exception
 	 */
-	void logWarning(String message, Exception e);
+	void logWarning(String message, Exception exception);
 
 }

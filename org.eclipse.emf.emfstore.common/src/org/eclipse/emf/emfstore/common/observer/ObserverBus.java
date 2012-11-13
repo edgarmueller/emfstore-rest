@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
@@ -100,7 +101,7 @@ public class ObserverBus {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private HashMap<Class<? extends IObserver>, List<IObserver>> observerMap;
+	private final transient Map<Class<? extends IObserver>, List<IObserver>> observerMap;
 
 	/**
 	 * Default constructor.
@@ -117,7 +118,7 @@ public class ObserverBus {
 	 * @param clazz class of observer
 	 * @return call object
 	 */
-	public <T extends IObserver> T notify(Class<T> clazz) {
+	public <T extends IObserver> T notify(final Class<T> clazz) {
 		return (T) notify(clazz, false);
 	}
 
@@ -130,7 +131,7 @@ public class ObserverBus {
 	 * 
 	 * @return call object
 	 */
-	public <T extends IObserver> T notify(Class<T> clazz, boolean prioritized) {
+	public <T extends IObserver> T notify(final Class<T> clazz, final boolean prioritized) {
 		if (clazz == null) {
 			return null;
 		}
@@ -142,7 +143,7 @@ public class ObserverBus {
 	 * 
 	 * @param observer observer object
 	 */
-	public void register(IObserver observer) {
+	public void register(final IObserver observer) {
 		register(observer, getObserverInterfaces(observer));
 	}
 
@@ -152,7 +153,7 @@ public class ObserverBus {
 	 * @param observer observer object
 	 * @param classes set of classes
 	 */
-	public void register(IObserver observer, Class<? extends IObserver>... classes) {
+	public void register(final IObserver observer, final Class<? extends IObserver>... classes) {
 		for (Class<? extends IObserver> iface : classes) {
 			if (iface.isInstance(observer)) {
 				addObserver(observer, iface);
@@ -165,7 +166,7 @@ public class ObserverBus {
 	 * 
 	 * @param observer observer object
 	 */
-	public void unregister(IObserver observer) {
+	public void unregister(final IObserver observer) {
 		unregister(observer, getObserverInterfaces(observer));
 	}
 
@@ -175,7 +176,7 @@ public class ObserverBus {
 	 * @param observer observer object
 	 * @param classes set of classes
 	 */
-	public void unregister(IObserver observer, Class<? extends IObserver>... classes) {
+	public void unregister(final IObserver observer, final Class<? extends IObserver>... classes) {
 		for (Class<? extends IObserver> iface : classes) {
 			if (iface.isInstance(observer)) {
 				removeObserver(observer, iface);
@@ -183,13 +184,13 @@ public class ObserverBus {
 		}
 	}
 
-	private void addObserver(IObserver observer, Class<? extends IObserver> iface) {
-		List<IObserver> observers = initObserverList(iface);
+	private void addObserver(IObserver observer, final Class<? extends IObserver> iface) {
+		final List<IObserver> observers = initObserverList(iface);
 		observers.add(observer);
 	}
 
 	private void removeObserver(IObserver observer, Class<? extends IObserver> iface) {
-		List<IObserver> observers = initObserverList(iface);
+		final List<IObserver> observers = initObserverList(iface);
 		observers.remove(observer);
 	}
 
@@ -226,7 +227,7 @@ public class ObserverBus {
 
 	@SuppressWarnings("unchecked")
 	private <T extends IObserver> T createProxy(Class<T> clazz, boolean prioritized) {
-		ProxyHandler handler = new ProxyHandler((Class<IObserver>) clazz, prioritized);
+		final ProxyHandler handler = new ProxyHandler((Class<IObserver>) clazz, prioritized);
 		return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[] { clazz, ObserverCall.class }, handler);
 
 	}
@@ -238,9 +239,9 @@ public class ObserverBus {
 	 */
 	private final class ProxyHandler implements InvocationHandler, ObserverCall {
 
-		private Class<IObserver> clazz;
+		private final Class<IObserver> clazz;
+		private final boolean prioritized;
 		private List<ObserverCall.Result> lastResults;
-		private boolean prioritized;
 
 		public ProxyHandler(Class<IObserver> clazz, boolean prioritized) {
 			this.clazz = clazz;
@@ -256,7 +257,7 @@ public class ObserverBus {
 				return accessObserverCall(method, args);
 			}
 
-			List<IObserver> observers = getObserverByClass(clazz);
+			final List<IObserver> observers = getObserverByClass(clazz);
 
 			if (prioritized && isPrioritizedObserver(clazz, method)) {
 				sortObservers(observers);
@@ -279,14 +280,14 @@ public class ObserverBus {
 		}
 
 		private List<ObserverCall.Result> notifiyObservers(List<IObserver> observers, Method method, Object[] args) {
-			List<ObserverCall.Result> results = new ArrayList<ObserverCall.Result>(observers.size());
+			final List<ObserverCall.Result> results = new ArrayList<ObserverCall.Result>(observers.size());
 			for (IObserver observer : observers) {
 				try {
 					results.add(new Result(observer, method, method.invoke(observer, args)));
 					// BEGIN SUPRESS CATCH EXCEPTION
-				} catch (Throwable e) {
+				} catch (Throwable throwable) {
 					// END SUPRESS CATCH EXCEPTION
-					results.add(new Result(observer, e, method));
+					results.add(new Result(observer, method, throwable));
 				}
 			}
 			return results;
@@ -306,9 +307,9 @@ public class ObserverBus {
 	 */
 	private void sortObservers(List<IObserver> observers) {
 		Collections.sort(observers, new Comparator<IObserver>() {
-			public int compare(IObserver o1, IObserver o2) {
-				int prio1 = ((PrioritizedIObserver) o1).getPriority();
-				int prio2 = ((PrioritizedIObserver) o2).getPriority();
+			public int compare(IObserver observer1, IObserver observer2) {
+				int prio1 = ((PrioritizedIObserver) observer1).getPriority();
+				int prio2 = ((PrioritizedIObserver) observer2).getPriority();
 				if (prio1 == prio2) {
 					return 0;
 				}
@@ -319,13 +320,13 @@ public class ObserverBus {
 
 	@SuppressWarnings("unchecked")
 	private Class<? extends IObserver>[] getObserverInterfaces(IObserver observer) {
-		HashSet<Class<? extends IObserver>> observerInterfacsFound = new HashSet<Class<? extends IObserver>>();
-		getClasses(observer.getClass(), observerInterfacsFound);
-		return observerInterfacsFound.toArray(new Class[observerInterfacsFound.size()]);
+		HashSet<Class<? extends IObserver>> observerIFacesFound = new HashSet<Class<? extends IObserver>>();
+		getClasses(observer.getClass(), observerIFacesFound);
+		return observerIFacesFound.toArray(new Class[observerIFacesFound.size()]);
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean getClasses(Class<?> clazz, HashSet<Class<? extends IObserver>> result) {
+	private boolean getClasses(Class<?> clazz, Set<Class<? extends IObserver>> result) {
 		for (Class<?> iface : getAllInterfaces(clazz, new HashSet<Class<?>>())) {
 			if (iface.equals(IObserver.class) && clazz.isInterface()) {
 				result.add((Class<? extends IObserver>) clazz);
@@ -353,7 +354,7 @@ public class ObserverBus {
 	}
 
 	/**
-	 * Pulls observers from an extensionpoint and registers them.
+	 * Pulls observers from an extension point and registers them.
 	 */
 	public void collectionExtensionPoints() {
 		for (ExtensionElement outer : new ExtensionPoint("org.eclipse.emf.emfstore.common.observer", true)

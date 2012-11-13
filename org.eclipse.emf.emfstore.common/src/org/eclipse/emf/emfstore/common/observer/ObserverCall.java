@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Optional;
+
 /**
  * ProxyObserver, returned by the {@link ObserverBus} when calling {@link ObserverBus#notify(Class))}, normally it has
  * the type of the class extending IObserver in order to call the observer interface with type safety.
@@ -36,21 +38,19 @@ public interface ObserverCall {
 
 	/**
 	 * This class represents an result from an observer call. It contains the observer, the called method and the result
-	 * or an exception, if occured.
-	 * 
+	 * or an throwable, if occurred.
 	 * 
 	 * @author wesendon
-	 * 
 	 */
-	public class Result {
+	class Result {
 
 		private final IObserver observer;
 		private final Method method;
-		private final Object result;
-		private final Throwable exception;
+		private final Optional<Object> result;
+		private final Optional<Throwable> throwable;
 
 		/**
-		 * This constructor is used if <b>NO</b> exception occurred.
+		 * This constructor is used if <b>NO</b> throwable occurred.
 		 * 
 		 * @param observer observer
 		 * @param method method
@@ -59,40 +59,40 @@ public interface ObserverCall {
 		public Result(IObserver observer, Method method, Object result) {
 			this.observer = observer;
 			this.method = method;
-			this.result = result;
-			this.exception = null;
+			this.result = Optional.of(result);
+			this.throwable = Optional.absent();
 		}
 
 		/**
-		 * This constructor is used if an exception <b>HAS</b> occurred.
+		 * This constructor is used if an throwable <b>HAS</b> occurred.
 		 * 
 		 * @param observer observer
-		 * @param e exception
+		 * @param throwable throwable
 		 * @param method method
 		 */
-		public Result(IObserver observer, Throwable e, Method method) {
+		public Result(IObserver observer, Method method, Throwable throwable) {
 			this.observer = observer;
-			this.exception = e;
 			this.method = method;
-			this.result = null;
+			this.result = Optional.absent();
+			this.throwable = Optional.of(throwable); 
 		}
 
 		/**
-		 * Specifies whether this Result contains an exception.
+		 * Specifies whether this Result contains an throwable.
 		 * 
 		 * @return boolean
 		 */
 		public boolean exceptionOccurred() {
-			return this.exception != null;
+			return throwable.isPresent();
 		}
 
 		/**
 		 * .
 		 * 
-		 * @return exception or null
+		 * @return throwable or null
 		 */
 		public Throwable getException() {
-			return this.exception;
+			return throwable.get();
 		}
 
 		/**
@@ -110,7 +110,7 @@ public interface ObserverCall {
 		 * @return the result or null
 		 */
 		public Object getResult() {
-			return this.result;
+			return this.result.get();
 		}
 
 		/**
@@ -127,27 +127,27 @@ public interface ObserverCall {
 		}
 
 		/**
-		 * Returns the default value for a given method. Which is null or the default primitive value.
+		 * Returns the default value for a given method, which is null or the default primitive value.
 		 * 
-		 * @param m method
+		 * @param method method
 		 * @return null or default primitive value
 		 */
-		public static Object getDefaultValue(Method m) {
-			if (m.getReturnType().isPrimitive()) {
-				return DEFAULTPRIMITIVEVALUES.get(m.getReturnType().getSimpleName());
+		public static Object getDefaultValue(Method method) {
+			if (method.getReturnType().isPrimitive()) {
+				return DEFAULT_VALUES.get(method.getReturnType().getSimpleName());
 			}
 			return null;
 		}
 
-		private static final Map<String, Object> DEFAULTPRIMITIVEVALUES = new HashMap<String, Object>();
+		private static final Map<String, Object> DEFAULT_VALUES = new HashMap<String, Object>();
 		static {
-			DEFAULTPRIMITIVEVALUES.put("int", new Integer(0));
-			DEFAULTPRIMITIVEVALUES.put("boolean", new Boolean(false));
-			DEFAULTPRIMITIVEVALUES.put("long", new Long(0));
-			DEFAULTPRIMITIVEVALUES.put("float", new Float(0));
-			DEFAULTPRIMITIVEVALUES.put("double", new Double(0));
-			DEFAULTPRIMITIVEVALUES.put("byte", Byte.MIN_VALUE);
-			DEFAULTPRIMITIVEVALUES.put("short", Short.MIN_VALUE);
+			DEFAULT_VALUES.put("int", Integer.valueOf(0));
+			DEFAULT_VALUES.put("boolean", Boolean.FALSE);
+			DEFAULT_VALUES.put("long", Long.valueOf(0));
+			DEFAULT_VALUES.put("float", new Float(0));
+			DEFAULT_VALUES.put("double", new Double(0));
+			DEFAULT_VALUES.put("byte", Byte.MIN_VALUE);
+			DEFAULT_VALUES.put("short", Short.MIN_VALUE);
 		}
 	}
 }

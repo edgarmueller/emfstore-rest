@@ -26,10 +26,10 @@ public class ExtensionPointException extends RuntimeException {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param e causing exception
+	 * @param exception causing exception
 	 */
-	public ExtensionPointException(Exception e) {
-		super(e);
+	public ExtensionPointException(final Exception exception) {
+		super(exception);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class ExtensionPointException extends RuntimeException {
 	 * 
 	 * @param string message
 	 */
-	public ExtensionPointException(String string) {
-		super(string);
+	public ExtensionPointException(final String message) {
+		super(message);
 	}
 }

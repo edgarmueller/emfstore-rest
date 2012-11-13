@@ -34,7 +34,7 @@ public class ExtensionElement {
 	 * 
 	 * @param element element to be wrapped
 	 */
-	public ExtensionElement(IConfigurationElement element) {
+	public ExtensionElement(final IConfigurationElement element) {
 		this(element, false);
 	}
 
@@ -44,7 +44,7 @@ public class ExtensionElement {
 	 * @param element element to be wrapped
 	 * @param throwExceptions if true exceptions are thrown instead of returning null
 	 */
-	public ExtensionElement(IConfigurationElement element, boolean throwExceptions) {
+	public ExtensionElement(final IConfigurationElement element, final boolean throwExceptions) {
 		this.element = element;
 		this.exceptionInsteadOfNull = throwExceptions;
 	}
@@ -55,7 +55,7 @@ public class ExtensionElement {
 	 * @param name attribute id
 	 * @return Boolean or an {@link ExtensionPointException} is thrown
 	 */
-	public Boolean getBoolean(String name) {
+	public Boolean getBoolean(final String name) {
 		return getBoolean(name, false);
 	}
 
@@ -66,8 +66,8 @@ public class ExtensionElement {
 	 * @param defaultValue the default value
 	 * @return Boolean or an {@link ExtensionPointException} is thrown
 	 */
-	public Boolean getBoolean(String name, boolean defaultValue) {
-		String attribute = getAttribute(name);
+	public Boolean getBoolean(final String name, final boolean defaultValue) {
+		final String attribute = getAttribute(name);
 		if (attribute == null) {
 			return defaultValue;
 		}
@@ -80,7 +80,7 @@ public class ExtensionElement {
 	 * @param name attribute id
 	 * @return Integer, null or an {@link ExtensionPointException} is thrown
 	 */
-	public Integer getInteger(String name) {
+	public Integer getInteger(final String name) {
 		try {
 			return Integer.parseInt(getAttribute(name));
 		} catch (NumberFormatException e) {
@@ -94,8 +94,8 @@ public class ExtensionElement {
 	 * @param name attribute id
 	 * @return String, null or an {@link ExtensionPointException} is thrown
 	 */
-	public String getAttribute(String name) {
-		String attribute = this.element.getAttribute(name);
+	public String getAttribute(final String name) {
+		final String attribute = this.element.getAttribute(name);
 		if (attribute == null) {
 			handleErrorOrNull(exceptionInsteadOfNull, null);
 		}
@@ -111,7 +111,7 @@ public class ExtensionElement {
 	 * @return Instance, null or a {@link ExtensionPointException} is thrown
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getClass(String classAttributeName, Class<T> returnType) {
+	public <T> T getClass(final String classAttributeName, final Class<T> returnType) {
 		try {
 			Object executableExtension = this.element.createExecutableExtension(classAttributeName);
 			if (returnType.isInstance(executableExtension)) {
