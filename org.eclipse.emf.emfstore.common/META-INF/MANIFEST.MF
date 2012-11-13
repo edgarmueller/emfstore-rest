@@ -14,10 +14,10 @@ Export-Package: org.apache.commons.io,
  org.apache.commons.lang,
  org.eclipse.emf.emfstore.common,
  org.eclipse.emf.emfstore.common.extensionpoint,
- org.eclipse.emf.emfstore.common.observer
+ org.eclipse.emf.emfstore.common.observer,
+ org.eclipse.emf.emfstore.internal.common;x-friends:="org.eclipse.emf.emfstore.client"
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lib/commons-io-2.0.1.jar,
  .,
- lib/org.apache.commons.lang_2.4.0.v201005080502.jar,
- lib/com.google.guava_10.0.1.v201203051515.jar
+ lib/org.apache.commons.lang_2.4.0.v201005080502.jar

@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Optional;
-
 /**
  * ProxyObserver, returned by the {@link ObserverBus} when calling {@link ObserverBus#notify(Class))}, normally it has
  * the type of the class extending IObserver in order to call the observer interface with type safety.
@@ -46,8 +44,8 @@ public interface ObserverCall {
 
 		private final IObserver observer;
 		private final Method method;
-		private final Optional<Object> result;
-		private final Optional<Throwable> throwable;
+		private final Object result;
+		private final Throwable throwable;
 
 		/**
 		 * This constructor is used if <b>NO</b> throwable occurred.
@@ -59,8 +57,8 @@ public interface ObserverCall {
 		public Result(IObserver observer, Method method, Object result) {
 			this.observer = observer;
 			this.method = method;
-			this.result = Optional.of(result);
-			this.throwable = Optional.absent();
+			this.result = result;
+			this.throwable = null;
 		}
 
 		/**
@@ -73,8 +71,8 @@ public interface ObserverCall {
 		public Result(IObserver observer, Method method, Throwable throwable) {
 			this.observer = observer;
 			this.method = method;
-			this.result = Optional.absent();
-			this.throwable = Optional.of(throwable); 
+			this.result = null;
+			this.throwable = throwable;
 		}
 
 		/**
@@ -83,7 +81,7 @@ public interface ObserverCall {
 		 * @return boolean
 		 */
 		public boolean exceptionOccurred() {
-			return throwable.isPresent();
+			return throwable != null;
 		}
 
 		/**
@@ -92,7 +90,7 @@ public interface ObserverCall {
 		 * @return throwable or null
 		 */
 		public Throwable getException() {
-			return throwable.get();
+			return throwable;
 		}
 
 		/**
@@ -110,7 +108,7 @@ public interface ObserverCall {
 		 * @return the result or null
 		 */
 		public Object getResult() {
-			return this.result.get();
+			return this.result;
 		}
 
 		/**

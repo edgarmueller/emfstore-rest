@@ -35,12 +35,12 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 

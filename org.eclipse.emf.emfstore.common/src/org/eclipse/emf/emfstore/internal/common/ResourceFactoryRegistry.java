@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common;
+package org.eclipse.emf.emfstore.internal.common;
 
 import java.util.Map;
 
