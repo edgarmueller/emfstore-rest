@@ -35,7 +35,8 @@ public class ExtensionPointException extends RuntimeException {
 	/**
 	 * Default configuration.
 	 * 
-	 * @param string message
+	 * @param message 
+	 * 			the exception message
 	 */
 	public ExtensionPointException(final String message) {
 		super(message);
