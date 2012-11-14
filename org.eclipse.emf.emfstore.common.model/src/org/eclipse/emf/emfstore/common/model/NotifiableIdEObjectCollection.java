@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.common.model;
 
 import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
-import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 
 /**
  * @author emueller

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.impl;
 
-import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollectionChangeObserver;
 
 /**
  * Command for notifying about changes of an EObject.

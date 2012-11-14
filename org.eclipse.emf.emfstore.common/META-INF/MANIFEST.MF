@@ -15,7 +15,7 @@ Export-Package: org.apache.commons.io,
  org.eclipse.emf.emfstore.common,
  org.eclipse.emf.emfstore.common.extensionpoint,
  org.eclipse.emf.emfstore.common.observer,
- org.eclipse.emf.emfstore.internal.common;x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.server"
+ org.eclipse.emf.emfstore.internal.common;x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.server,org.eclipse.emf.ecp.common.util"
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lib/commons-io-2.0.1.jar,

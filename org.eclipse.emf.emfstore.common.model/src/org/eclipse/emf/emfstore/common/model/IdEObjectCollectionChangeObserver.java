@@ -8,11 +8,10 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.model.util;
+package org.eclipse.emf.emfstore.common.model;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 
 /**
