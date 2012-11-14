@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.core;
+package org.eclipse.emf.emfstore.server.internal.core;
 
 import java.util.HashMap;
 

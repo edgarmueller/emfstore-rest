@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.eventmanager;
+package org.eclipse.emf.emfstore.server.internal.eventmanager;
 
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent;
 

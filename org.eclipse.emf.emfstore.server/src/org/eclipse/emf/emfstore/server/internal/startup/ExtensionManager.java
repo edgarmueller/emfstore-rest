@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.startup;
+package org.eclipse.emf.emfstore.server.internal.startup;
 
 import java.util.Set;
 
@@ -21,6 +21,8 @@ import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
+import org.eclipse.emf.emfstore.server.startup.PostStartupListener;
+import org.eclipse.emf.emfstore.server.startup.StartupListener;
 
 /**
  * This class calls the startup listeners, registered at the extension point.

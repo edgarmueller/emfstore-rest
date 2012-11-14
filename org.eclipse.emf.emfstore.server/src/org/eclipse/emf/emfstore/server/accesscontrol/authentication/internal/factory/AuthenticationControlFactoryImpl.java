@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory;
+package org.eclipse.emf.emfstore.server.accesscontrol.authentication.internal.factory;
 
 import java.util.Properties;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.server.accesscontrol.authentication.AbstractAuth
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.LDAPVerifier;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.SimplePropertyFileVerifier;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.VerifierChain;
+import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidPropertyException;
 

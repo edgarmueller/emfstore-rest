@@ -17,8 +17,8 @@ import java.util.EnumMap;
 
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.EMFStorePropertiesSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.EPackageSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.FileTransferSubInterfaceImpl;

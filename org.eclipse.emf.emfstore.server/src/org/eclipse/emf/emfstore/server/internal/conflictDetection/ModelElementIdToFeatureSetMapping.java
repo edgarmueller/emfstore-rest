@@ -9,7 +9,7 @@
  * Contributors:
  * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.conflictDetection;
+package org.eclipse.emf.emfstore.server.internal.conflictDetection;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

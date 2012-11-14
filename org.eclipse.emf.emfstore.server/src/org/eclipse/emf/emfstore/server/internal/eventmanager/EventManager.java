@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.eventmanager;
+package org.eclipse.emf.emfstore.server.internal.eventmanager;
 
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;

@@ -9,13 +9,15 @@
  * Contributors:
  * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.conflictDetection;
+package org.eclipse.emf.emfstore.server.internal.conflictDetection;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 
 /**
  * Map from modelelements and their features to conflict candidate buckets.

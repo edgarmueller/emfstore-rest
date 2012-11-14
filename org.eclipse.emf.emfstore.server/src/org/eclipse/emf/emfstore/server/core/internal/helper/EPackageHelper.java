@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.core.helper;
+package org.eclipse.emf.emfstore.server.core.internal.helper;
 
 import java.util.ArrayList;
 import java.util.List;

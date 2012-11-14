@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.connection;
+package org.eclipse.emf.emfstore.server.internal.connection;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

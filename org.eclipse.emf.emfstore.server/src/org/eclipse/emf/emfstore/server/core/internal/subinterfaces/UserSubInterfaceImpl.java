@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.server.core.internal.subinterfaces;
 
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;

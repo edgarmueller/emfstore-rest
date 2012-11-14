@@ -21,6 +21,8 @@ import java.util.Set;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.Activator;
+import org.eclipse.emf.emfstore.server.internal.conflictDetection.ModelElementIdFeatureConflictMap;
+import org.eclipse.emf.emfstore.server.internal.conflictDetection.ModelElementIdToFeatureSetMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;

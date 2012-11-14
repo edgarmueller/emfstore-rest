@@ -18,9 +18,8 @@ import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
-import org.eclipse.emf.emfstore.server.core.MonitorProvider;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileNotOnServerException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
@@ -28,6 +27,7 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.server.internal.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**

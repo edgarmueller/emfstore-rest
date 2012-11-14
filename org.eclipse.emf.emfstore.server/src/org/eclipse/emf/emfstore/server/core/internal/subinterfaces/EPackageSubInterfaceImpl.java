@@ -31,12 +31,12 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
-import org.eclipse.emf.emfstore.server.core.MonitorProvider;
-import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EPackageHelper;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.server.internal.core.MonitorProvider;
 
 /**
  * Subinterface for EPackage registration.

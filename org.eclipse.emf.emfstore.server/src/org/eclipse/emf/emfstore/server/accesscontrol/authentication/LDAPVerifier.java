@@ -21,8 +21,8 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.connection.ServerKeyStoreManager;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.server.internal.connection.ServerKeyStoreManager;
 
 /**
  * Verifies username/password using LDAP.

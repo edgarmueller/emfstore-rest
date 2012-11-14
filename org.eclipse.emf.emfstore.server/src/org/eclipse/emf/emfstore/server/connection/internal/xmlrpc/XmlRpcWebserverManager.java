@@ -27,11 +27,11 @@ import org.apache.xmlrpc.webserver.WebServer;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.connection.ServerKeyStoreManager;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeConverterFactory;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeFactory;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.ServerKeyStoreException;
+import org.eclipse.emf.emfstore.server.internal.connection.ServerKeyStoreManager;
 
 /**
  * Manages the webserver for XML RPC connections.
