@@ -17,7 +17,6 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
@@ -38,7 +37,7 @@ public abstract class ModelElementChangeObserver implements IdEObjectCollectionC
 	 * Notifies all model elements listeners since the deletion of a collection is also deleting all contained model
 	 * elements.
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollectionChangeObserver#collectionDeleted(IdEObjectCollection)
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(IdEObjectCollection)
 	 * @param collection the deleted {@link IdEObjectCollection}
 	 */
 	public final void collectionDeleted(IdEObjectCollection collection) {
