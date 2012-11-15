@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.internal.startup;
+package org.eclipse.emf.emfstore.common;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
