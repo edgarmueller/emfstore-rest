@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.internal.storage;
+package org.eclipse.emf.emfstore.server.storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
-import org.eclipse.emf.emfstore.server.storage.ResourceStorage;
 
 /**
  * Implementation of a {@link ResourceStorage} backed by an XMLResource.
