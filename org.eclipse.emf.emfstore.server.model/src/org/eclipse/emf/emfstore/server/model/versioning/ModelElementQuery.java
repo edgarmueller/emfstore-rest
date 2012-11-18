@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Model Element Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Query</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -33,12 +33,11 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 public interface ModelElementQuery extends RangeQuery {
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Elements</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Model Elements</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

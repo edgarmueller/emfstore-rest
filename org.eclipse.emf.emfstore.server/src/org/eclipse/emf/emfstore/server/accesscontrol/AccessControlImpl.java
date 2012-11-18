@@ -24,13 +24,13 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
-import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactoryImpl;
+import org.eclipse.emf.emfstore.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactoryImpl;
 import org.eclipse.emf.emfstore.server.core.MethodInvocation;
-import org.eclipse.emf.emfstore.server.core.MonitorProvider;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
+import org.eclipse.emf.emfstore.server.internal.core.MonitorProvider;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -49,6 +49,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin;
  * @author koegel
  * @author wesendonk
  */
+// TODO: internal
 public class AccessControlImpl implements AuthenticationControl, AuthorizationControl {
 
 	/**
@@ -66,8 +67,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		}
 		accessMap = new EnumMap<MethodId, AccessControlImpl.AccessLevel>(MethodId.class);
 		addAccessMapping(AccessLevel.PROJECT_READ, MethodId.GETPROJECT, MethodId.GETEMFPROPERTIES,
-			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK,
-			MethodId.GETBRANCHES);
+			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK);
 		addAccessMapping(AccessLevel.PROJECT_WRITE, MethodId.SETEMFPROPERTIES, MethodId.TRANSMITPROPERTY,
 			MethodId.UPLOADFILECHUNK, MethodId.CREATEVERSION);
 		addAccessMapping(AccessLevel.PROJECT_ADMIN, MethodId.REMOVETAG, MethodId.ADDTAG);

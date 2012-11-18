@@ -20,10 +20,13 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -73,12 +76,16 @@ public class OptionComponent {
 
 	private String generatePrefix(ConflictOption option) {
 		String result = "";
+		int operationCount = option.getOperations().size();
+		String countInfo = (operationCount > 1) ? "s (" + operationCount + ")" : "";
 		switch (option.getType()) {
 		case MyOperation:
-			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change: ";
+			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change" + countInfo
+				+ ": ";
 			break;
 		case TheirOperation:
-			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change: ";
+			result = dBox.getDecisionManager().isBranchMerge() ? "Current Branch: " : "Keep Their Change" + countInfo
+				+ ": ";
 			break;
 		case Custom:
 			if (option instanceof CustomConflictOption) {
@@ -151,24 +158,36 @@ public class OptionComponent {
 		private final ConflictOption option;
 		private StyledText styledText;
 
-		private OptionContainer(Conflict conflict, ConflictOption option) {
+		private OptionContainer(Conflict conflict, final ConflictOption option) {
 			super(group, SWT.BORDER | SWT.INHERIT_FORCE);
 			this.option = option;
-			GridLayout layout = new GridLayout();
+			GridLayout layout = new GridLayout(2, false);
 			layout.verticalSpacing = 1;
 			setLayout(layout);
 			setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 			styledText = new StyledText(this, SWT.READ_ONLY);
 			styledText.setCursor(new Cursor(this.getDisplay(), SWT.CURSOR_HAND));
-
-			// label = new Label(this, SWT.NONE);
-			// setText();
-
 			styledText.setEditable(false);
 			styledText.setEnabled(false);
 			styledText.setBackground(getBackground());
+			styledText.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
 			setText();
+
+			Button detailsButton = new Button(this, SWT.NONE);
+			detailsButton.setText("Details");
+			detailsButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false));
+			detailsButton.addSelectionListener(new SelectionListener() {
+
+				public void widgetSelected(SelectionEvent e) {
+					DetailsDialog detailsDialog = new DetailsDialog(getShell(), dBox.getDecisionManager(), option);
+					detailsDialog.open();
+				}
+
+				public void widgetDefaultSelected(SelectionEvent e) {
+
+				}
+			});
 
 			OptionMouseListener listener = new OptionMouseListener(this);
 			OptionComponent.this.addMouseListener(this, listener);
@@ -225,6 +244,12 @@ public class OptionComponent {
 				break;
 
 			case SWT.MouseUp:
+
+				// do not set selection in case the details button has been clicked
+				if (event.widget instanceof Button) {
+					return;
+				}
+
 				if (composite.getOption().hasExtraOptionAction()) {
 					extraAction(composite);
 				}

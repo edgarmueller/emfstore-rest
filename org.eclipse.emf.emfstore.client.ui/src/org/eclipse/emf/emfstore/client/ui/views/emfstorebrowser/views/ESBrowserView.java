@@ -172,7 +172,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		Menu menu = menuMgr.createContextMenu(control);
 		control.setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
-		
+
 		getSite().setSelectionProvider(viewer);
 		hookDoubleClickAction();
 

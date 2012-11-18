@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.eclipse.emf.emfstore.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class RoleItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class RoleItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -71,14 +69,10 @@ public class RoleItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addProjectsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_Role_projects_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_Role_projects_feature", "_UI_Role_type"),
-				RolesPackage.Literals.ROLE__PROJECTS, true, false, true, null,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_Role_projects_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_Role_projects_feature", "_UI_Role_type"),
+			RolesPackage.Literals.ROLE__PROJECTS, true, false, true, null, null, null));
 	}
 
 	/**
@@ -114,8 +108,7 @@ public class RoleItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

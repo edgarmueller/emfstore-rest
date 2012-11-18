@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -56,7 +56,8 @@ public class LoginDialogController implements ILoginDialogController {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
-				if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn() && !force) {
+				if (serverInfo != null && serverInfo.getLastUsersession() != null
+					&& serverInfo.getLastUsersession().isLoggedIn() && !force) {
 					return serverInfo.getLastUsersession();
 				}
 

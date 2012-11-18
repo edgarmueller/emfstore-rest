@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Org Unit Properties</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Org Unit Properties</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -44,8 +44,7 @@ public interface OrgUnitProperty extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -58,8 +57,7 @@ public interface OrgUnitProperty extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName
 	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -73,8 +71,8 @@ public interface OrgUnitProperty extends EObject {
 	 * Returns the value of the '<em><b>Value</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -87,8 +85,7 @@ public interface OrgUnitProperty extends EObject {
 	String getValue();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue
 	 * <em>Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -102,8 +99,8 @@ public interface OrgUnitProperty extends EObject {
 	 * Returns the value of the '<em><b>Project</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Project</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -116,8 +113,7 @@ public interface OrgUnitProperty extends EObject {
 	ProjectId getProject();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject
 	 * <em>Project</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

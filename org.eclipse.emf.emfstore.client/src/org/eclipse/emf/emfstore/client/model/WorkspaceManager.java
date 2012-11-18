@@ -39,7 +39,6 @@ import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.IReinitializable;
-import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
@@ -50,6 +49,7 @@ import org.eclipse.emf.emfstore.common.model.util.MalformedModelVersionException
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 import org.eclipse.emf.emfstore.common.observer.ObserverBus;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
 
@@ -294,7 +294,7 @@ public final class WorkspaceManager implements IReinitializable {
 		modelVersion.setReleaseNumber(modelReleaseNumber);
 		versionResource.getContents().add(modelVersion);
 		try {
-			versionResource.save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
 				"Version stamping workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(),

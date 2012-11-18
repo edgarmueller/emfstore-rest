@@ -30,15 +30,13 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ACUserItemProvider extends ACOrgUnitItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -74,14 +72,11 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 	 */
 	protected void addFirstNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ACUser_firstName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ACUser_firstName_feature", "_UI_ACUser_type"),
-				AccesscontrolPackage.Literals.AC_USER__FIRST_NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ACUser_firstName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ACUser_firstName_feature", "_UI_ACUser_type"),
+			AccesscontrolPackage.Literals.AC_USER__FIRST_NAME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -92,33 +87,26 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 	 */
 	protected void addLastNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ACUser_lastName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ACUser_lastName_feature", "_UI_ACUser_type"),
-				AccesscontrolPackage.Literals.AC_USER__LAST_NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ACUser_lastName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ACUser_lastName_feature", "_UI_ACUser_type"),
+			AccesscontrolPackage.Literals.AC_USER__LAST_NAME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS);
+			childrenFeatures.add(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -144,8 +132,7 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ACUser"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ACUser"));
 	}
 
 	/**
@@ -157,8 +144,8 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 	@Override
 	public String getText(Object object) {
 		String label = ((ACUser) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_ACUser_type")
-				: getString("_UI_ACUser_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ACUser_type") : getString("_UI_ACUser_type") + " "
+			+ label;
 	}
 
 	/**
@@ -176,12 +163,10 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 		switch (notification.getFeatureID(ACUser.class)) {
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 		case AccesscontrolPackage.AC_USER__LAST_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -195,13 +180,11 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS,
-				AccesscontrolFactory.eINSTANCE.createACGroup()));
+		newChildDescriptors.add(createChildParameter(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS,
+			AccesscontrolFactory.eINSTANCE.createACGroup()));
 	}
 
 }

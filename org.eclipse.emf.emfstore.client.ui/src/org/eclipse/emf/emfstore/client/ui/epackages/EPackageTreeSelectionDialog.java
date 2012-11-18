@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 Chair for Applied Software Engineering,
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -33,7 +33,8 @@ public class EPackageTreeSelectionDialog extends ElementTreeSelectionDialog {
 	 * @param modelElements the model elements
 	 */
 	public EPackageTreeSelectionDialog(Set<EPackage> modelElements) {
-		super(null, new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)), new EPackageTreeContentProvider());
+		super(null, new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE)), new EPackageTreeContentProvider());
 		setTitle("Select EPackage");
 		setMessage("Available EPackages");
 		this.setComparator(new ViewerComparator());
@@ -66,11 +67,11 @@ public class EPackageTreeSelectionDialog extends ElementTreeSelectionDialog {
 
 		private void extractRootPackages(Set<EPackage> packages) {
 			for (EPackage pkg : packages) {
-				extractAllSuperPackages(pkg,packages);
+				extractAllSuperPackages(pkg, packages);
 			}
 		}
 
-		private void extractAllSuperPackages(EPackage ePackage,Set<EPackage> packages) {
+		private void extractAllSuperPackages(EPackage ePackage, Set<EPackage> packages) {
 			EPackage eSuperPackage = ePackage.getESuperPackage();
 			if (eSuperPackage == null) {
 				if (packages.contains(ePackage)) {
@@ -78,7 +79,7 @@ public class EPackageTreeSelectionDialog extends ElementTreeSelectionDialog {
 				}
 				return;
 			}
-			extractAllSuperPackages(eSuperPackage,packages);
+			extractAllSuperPackages(eSuperPackage, packages);
 		}
 
 		/**

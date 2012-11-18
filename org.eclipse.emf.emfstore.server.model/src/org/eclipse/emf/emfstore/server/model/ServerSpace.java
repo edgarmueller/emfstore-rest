@@ -19,20 +19,16 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Server Space</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Space</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getGroups <em>
- * Groups</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getProjects <em>
- * Projects</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getGroups <em> Groups</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getProjects <em> Projects</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getOpenSessions
  * <em>Open Sessions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getUsers <em>
- * Users</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getUsers <em> Users</em>}</li>
  * </ul>
  * </p>
  * 
@@ -43,12 +39,11 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 public interface ServerSpace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Groups</b></em>' containment reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Groups</em>' containment reference list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Groups</em>' containment reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -61,12 +56,11 @@ public interface ServerSpace extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Projects</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}. <!--
+	 * list contents are of type {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Projects</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Projects</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -79,12 +73,11 @@ public interface ServerSpace extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Open Sessions</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.SessionId}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.SessionId}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Open Sessions</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Open Sessions</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -98,12 +91,11 @@ public interface ServerSpace extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Users</b></em>' containment reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Users</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Users</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

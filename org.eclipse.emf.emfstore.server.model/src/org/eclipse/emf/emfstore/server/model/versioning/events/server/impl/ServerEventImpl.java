@@ -16,8 +16,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEven
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Event</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Event</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 

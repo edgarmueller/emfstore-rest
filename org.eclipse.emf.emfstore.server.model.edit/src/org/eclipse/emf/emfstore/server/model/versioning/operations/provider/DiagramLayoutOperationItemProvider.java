@@ -25,15 +25,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayout
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayoutOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.DiagramLayoutOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class DiagramLayoutOperationItemProvider extends
-		AttributeOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class DiagramLayoutOperationItemProvider extends AttributeOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -67,10 +66,7 @@ public class DiagramLayoutOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/DiagramLayoutOperation.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DiagramLayoutOperation.png"));
 	}
 
 	/**
@@ -83,9 +79,8 @@ public class DiagramLayoutOperationItemProvider extends
 	public String getText(Object object) {
 		if (object instanceof DiagramLayoutOperation) {
 			DiagramLayoutOperation diagramLayoutOperation = (DiagramLayoutOperation) object;
-			return "Changed Layout of Diagram \""
-					+ getModelElementName(diagramLayoutOperation
-							.getModelElementId()) + "\"";
+			return "Changed Layout of Diagram \"" + getModelElementName(diagramLayoutOperation.getModelElementId())
+				+ "\"";
 		}
 		return super.getText(object);
 	}
@@ -112,8 +107,7 @@ public class DiagramLayoutOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

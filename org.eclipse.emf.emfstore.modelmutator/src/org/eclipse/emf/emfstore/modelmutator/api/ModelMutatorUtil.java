@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -62,7 +62,7 @@ import org.eclipse.emf.emfstore.modelmutator.intern.attribute.AttributeSetterESt
  * Util class for the ModelMutator.
  * 
  * @author Eugen Neufeld
- * @author Stephan Köhler
+ * @author Stephan K?hler
  * @author Philip Achenbach
  * @author Dmitry Litvinov
  * @author Julian Sommerfeldt
@@ -228,7 +228,7 @@ public final class ModelMutatorUtil {
 
 			EClass referenceType = reference.getEReferenceType();
 			if (EcorePackage.eINSTANCE.getEObject().equals(referenceType)) {
-				for(EPackage ePackage : config.getModelPackages()){
+				for (EPackage ePackage : config.getModelPackages()) {
 					list.addAll(getAllEClasses(ePackage));
 				}
 			}
@@ -307,15 +307,15 @@ public final class ModelMutatorUtil {
 		}
 		return allEClasses;
 	}
-	
+
 	/**
 	 * Get all {@link EClass}es in the {@link EPackage}s.
 	 * 
 	 * @param ePackages The {@link EPackage}s containg the {@link EClass}es.
 	 * @return The {@link EClass}es contained in the {@link EPackage}s.
 	 */
-	public List<EClass> getAllEClasses(Collection<EPackage> ePackages){
-		List<EClass> eClasses = new ArrayList<EClass>(); 
+	public List<EClass> getAllEClasses(Collection<EPackage> ePackages) {
+		List<EClass> eClasses = new ArrayList<EClass>();
 		for (EPackage ePackage : ePackages) {
 			eClasses.addAll(getAllEClasses(ePackage));
 		}
@@ -570,6 +570,7 @@ public final class ModelMutatorUtil {
 				EStructuralFeature feature = eObject.eContainingFeature();
 				if (feature == null) {
 					EcoreUtil.delete(eObject, true);
+					return;
 				}
 
 				EObject eContainer = eObject.eContainer();

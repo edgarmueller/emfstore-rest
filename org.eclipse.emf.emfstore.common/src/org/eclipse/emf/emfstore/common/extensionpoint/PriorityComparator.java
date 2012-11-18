@@ -39,7 +39,7 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	 * 
 	 * @param descending if true, priorities are sorted in descending order, ascending otherwise
 	 */
-	public PriorityComparator(boolean descending) {
+	public PriorityComparator(final boolean descending) {
 		this("priority", descending);
 	}
 
@@ -49,7 +49,7 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	 * @param fieldname the attribute id of the priority field
 	 * @param descending if true, priorities are sorted in descending order, ascending otherwise
 	 */
-	public PriorityComparator(String fieldname, boolean descending) {
+	public PriorityComparator(final String fieldname, final boolean descending) {
 		this.fieldname = fieldname;
 		this.desc = descending;
 
@@ -58,11 +58,11 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int compare(ExtensionElement o1, ExtensionElement o2) {
+	public int compare(ExtensionElement element1, ExtensionElement element2) {
 		try {
-			o1.setThrowException(true);
-			o2.setThrowException(true);
-			return o1.getInteger(this.fieldname).compareTo(o2.getInteger(this.fieldname)) * ((desc) ? -1 : 1);
+			element1.setThrowException(true);
+			element2.setThrowException(true);
+			return element1.getInteger(this.fieldname).compareTo(element2.getInteger(this.fieldname)) * ((desc) ? -1 : 1);
 		} catch (ExtensionPointException e) {
 			return 0;
 		}

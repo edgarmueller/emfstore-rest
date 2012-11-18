@@ -32,6 +32,7 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 public class OtherInvolvedWidget extends Composite {
 
 	private static final int COLUMNS = 1;
+	private static final int MAX_OPS_SIZE = 20;
 
 	/**
 	 * Default constructor.
@@ -61,16 +62,25 @@ public class OtherInvolvedWidget extends Composite {
 		ChangePackageVisualizationHelper visualizationHelper = UIDecisionUtil
 			.getChangePackageVisualizationHelper(decisionManager);
 
-		for (AbstractOperation ao : option.getOperations()) {
-			Image image = visualizationHelper.getImage(UIDecisionUtil.getAdapterFactory(), ao);
+		if (option.getOperations().size() <= MAX_OPS_SIZE) {
 
-			CLabel meLabel = new CLabel(this, SWT.WRAP);
-			if (image != null) {
-				meLabel.setImage(image);
+			for (AbstractOperation ao : option.getOperations()) {
+				CLabel meLabel = new CLabel(this, SWT.WRAP);
+				meLabel.setBackground(parent.getBackground());
+
+				Image image = visualizationHelper.getImage(UIDecisionUtil.getAdapterFactory(), ao);
+
+				if (image != null) {
+					meLabel.setImage(image);
+				}
+				meLabel.setText(visualizationHelper.getDescription(ao));
 			}
-			meLabel.setText(visualizationHelper.getDescription(ao));
+		} else {
+			CLabel meLabel = new CLabel(this, SWT.WRAP);
 			meLabel.setBackground(parent.getBackground());
+			meLabel.setText("More than " + MAX_OPS_SIZE + " other operations...");
 		}
+
 		visualizationHelper.dispose();
 	}
 }

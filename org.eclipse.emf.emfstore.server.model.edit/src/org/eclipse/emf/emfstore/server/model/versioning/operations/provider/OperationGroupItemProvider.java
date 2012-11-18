@@ -32,14 +32,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class OperationGroupItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class OperationGroupItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -86,15 +85,12 @@ public class OperationGroupItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_OperationGroup_name_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_OperationGroup_name_feature",
-						"_UI_OperationGroup_type"),
-				OperationsPackage.Literals.OPERATION_GROUP__NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_OperationGroup_name_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_OperationGroup_name_feature",
+				"_UI_OperationGroup_type"), OperationsPackage.Literals.OPERATION_GROUP__NAME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -105,15 +101,12 @@ public class OperationGroupItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addOperationsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_OperationGroup_operations_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_OperationGroup_operations_feature",
-						"_UI_OperationGroup_type"),
-				OperationsPackage.Literals.OPERATION_GROUP__OPERATIONS, true,
-				false, true, null, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_OperationGroup_operations_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_OperationGroup_operations_feature",
+				"_UI_OperationGroup_type"), OperationsPackage.Literals.OPERATION_GROUP__OPERATIONS, true, false, true,
+			null, null, null));
 	}
 
 	// BEGIN OF CUSTOM CODE
@@ -126,8 +119,7 @@ public class OperationGroupItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/OperationGroup.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationGroup.png"));
 	}
 
 	/**
@@ -159,8 +151,7 @@ public class OperationGroupItemProvider extends ItemProviderAdapter implements
 
 		switch (notification.getFeatureID(OperationGroup.class)) {
 		case OperationsPackage.OPERATION_GROUP__NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -174,8 +165,7 @@ public class OperationGroupItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

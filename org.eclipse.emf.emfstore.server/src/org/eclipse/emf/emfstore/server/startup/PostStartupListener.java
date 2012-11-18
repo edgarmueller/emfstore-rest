@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
  * 
  * @author Otto
  */
+// TODO: replace AccessControlImpl with AccesControl iface
 public interface PostStartupListener {
 
 	/**

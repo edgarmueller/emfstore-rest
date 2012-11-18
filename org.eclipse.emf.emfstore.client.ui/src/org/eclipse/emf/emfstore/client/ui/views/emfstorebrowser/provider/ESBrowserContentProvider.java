@@ -10,10 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.ui.Activator;
 
 /**
  * Content provider for the EMFStore Browser View.
@@ -27,7 +27,7 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 	 * Default constructor.
 	 */
 	public ESBrowserContentProvider() {
-		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+		super(Activator.getAdapterFactory());
 	}
 
 	@Override

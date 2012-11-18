@@ -30,9 +30,10 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * UI-dependent commit controller for committing pending changes on a {@link ProjectSpace}.<br/>
- * The controller presents the user a dialog will all changes made before he is able to confirm the commit.
- * If no changes have been made by the user a information dialog is presented that states that there are no
- * pending changes to be committed.
+ * The controller presents the user a dialog will all changes made before he is
+ * able to confirm the commit. If no changes have been made by the user a
+ * information dialog is presented that states that there are no pending changes
+ * to be committed.
  * 
  * @author ovonwesen
  * @author emueller
@@ -51,7 +52,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * @param shell
 	 *            the parent shell that will be used during commit
 	 * @param projectSpace
-	 *            the {@link ProjectSpace} that contains the pending changes that should get committed
+	 *            the {@link ProjectSpace} that contains the pending changes
+	 *            that should get committed
 	 */
 	public UICommitProjectController(Shell shell, ProjectSpace projectSpace) {
 		super(shell, true, true);
@@ -79,24 +81,25 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
-	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace) {
+	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace, IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
-		return RunInUI.runWithResult(new Callable<Boolean>() {
+		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
 
 			public Boolean call() throws Exception {
-				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
-				if (shouldUpdate) {
-					PrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
-					PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace).execute();
-					if (version.equals(baseVersion)) {
-						return false;
-					}
-
-				}
-				return shouldUpdate;
+				return MessageDialog.openConfirm(getShell(), "Confirmation", message);
 			}
 		});
+		if (shouldUpdate) {
+			PrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
+			PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
+				.executeSub(progressMonitor);
+			if (version.equals(baseVersion)) {
+				return false;
+			}
+
+		}
+		return shouldUpdate;
 
 	}
 
@@ -157,7 +160,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 			WorkspaceUtil.logException(e.getMessage(), e);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					MessageDialog.openError(getShell(), "Commit failed", "Commit failed: " + e.getMessage());
+					MessageDialog.openError(getShell(), "Commit failed", e.getMessage());
 					return null;
 				}
 			});

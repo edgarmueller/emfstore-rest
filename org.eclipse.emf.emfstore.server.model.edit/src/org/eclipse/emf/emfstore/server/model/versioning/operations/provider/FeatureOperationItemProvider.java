@@ -29,14 +29,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class FeatureOperationItemProvider extends AbstractOperationItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class FeatureOperationItemProvider extends AbstractOperationItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -71,16 +70,12 @@ public class FeatureOperationItemProvider extends AbstractOperationItemProvider
 	 */
 	protected void addFeatureNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_FeatureOperation_featureName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_FeatureOperation_featureName_feature",
-						"_UI_FeatureOperation_type"),
-				OperationsPackage.Literals.FEATURE_OPERATION__FEATURE_NAME,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_FeatureOperation_featureName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_FeatureOperation_featureName_feature",
+				"_UI_FeatureOperation_type"), OperationsPackage.Literals.FEATURE_OPERATION__FEATURE_NAME, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -91,8 +86,7 @@ public class FeatureOperationItemProvider extends AbstractOperationItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/FeatureOperation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FeatureOperation"));
 	}
 
 	/**
@@ -105,7 +99,7 @@ public class FeatureOperationItemProvider extends AbstractOperationItemProvider
 	public String getText(Object object) {
 		String label = ((FeatureOperation) object).getFeatureName();
 		return label == null || label.length() == 0 ? getString("_UI_FeatureOperation_type")
-				: getString("_UI_FeatureOperation_type") + " " + label;
+			: getString("_UI_FeatureOperation_type") + " " + label;
 	}
 
 	/**
@@ -122,8 +116,7 @@ public class FeatureOperationItemProvider extends AbstractOperationItemProvider
 
 		switch (notification.getFeatureID(FeatureOperation.class)) {
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -137,8 +130,7 @@ public class FeatureOperationItemProvider extends AbstractOperationItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

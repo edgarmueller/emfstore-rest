@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.server.model.accesscontrol;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>AC User</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC User</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +39,8 @@ public interface ACUser extends ACOrgUnit {
 	 * Returns the value of the '<em><b>First Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>First Name</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>First Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -54,8 +53,7 @@ public interface ACUser extends ACOrgUnit {
 	String getFirstName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName
 	 * <em>First Name</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -70,8 +68,8 @@ public interface ACUser extends ACOrgUnit {
 	 * Returns the value of the '<em><b>Last Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Last Name</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Last Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -84,8 +82,7 @@ public interface ACUser extends ACOrgUnit {
 	String getLastName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName
 	 * <em>Last Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -98,12 +95,12 @@ public interface ACUser extends ACOrgUnit {
 
 	/**
 	 * Returns the value of the '<em><b>Effective Groups</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}
+	 * . <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Effective Groups</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Effective Groups</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

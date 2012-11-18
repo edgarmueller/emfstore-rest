@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -33,11 +34,13 @@ public class AttributeConflict extends Conflict {
 	 * 
 	 * @param myOperations myOperations, with leading {@link AttributeOperation}
 	 * @param theirOperations theirOperations, with leading {@link AttributeOperation}
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 */
-	public AttributeConflict(List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations,
-		DecisionManager decisionManager) {
-		super(myOperations, theirOperations, decisionManager);
+	public AttributeConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
 	}
 
 	/**
@@ -48,6 +51,7 @@ public class AttributeConflict extends Conflict {
 		description.setDescription(DecisionUtil.getDescription("attributeconflict", getDecisionManager()
 			.isBranchMerge()));
 		description.add("myvalue", getMyOperation(AttributeOperation.class).getNewValue());
+		description.add("oldvalue", getMyOperation(AttributeOperation.class).getOldValue());
 		description.add("theirvalue", getTheirOperation(AttributeOperation.class).getNewValue());
 		description.setImage("attribute.gif");
 

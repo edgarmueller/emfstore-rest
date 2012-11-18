@@ -29,15 +29,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class MultiAttributeOperationItemProvider extends
-		FeatureOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class MultiAttributeOperationItemProvider extends FeatureOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -74,16 +73,12 @@ public class MultiAttributeOperationItemProvider extends
 	 */
 	protected void addAddPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_MultiAttributeOperation_add_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_MultiAttributeOperation_add_feature",
-						"_UI_MultiAttributeOperation_type"),
-				OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__ADD,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeOperation_add_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeOperation_add_feature",
+				"_UI_MultiAttributeOperation_type"), OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__ADD, true,
+			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -94,16 +89,12 @@ public class MultiAttributeOperationItemProvider extends
 	 */
 	protected void addIndexesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_MultiAttributeOperation_indexes_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_MultiAttributeOperation_indexes_feature",
-						"_UI_MultiAttributeOperation_type"),
-				OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__INDEXES,
-				true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeOperation_indexes_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeOperation_indexes_feature",
+				"_UI_MultiAttributeOperation_type"), OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__INDEXES,
+			true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -113,19 +104,14 @@ public class MultiAttributeOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addReferencedValuesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_MultiAttributeOperation_referencedValues_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_MultiAttributeOperation_referencedValues_feature",
-								"_UI_MultiAttributeOperation_type"),
-						OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiAttributeOperation_referencedValues_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiAttributeOperation_referencedValues_feature",
+				"_UI_MultiAttributeOperation_type"),
+			OperationsPackage.Literals.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -136,10 +122,7 @@ public class MultiAttributeOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/MultiAttributeOperation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MultiAttributeOperation"));
 	}
 
 	/**
@@ -152,7 +135,7 @@ public class MultiAttributeOperationItemProvider extends
 	public String getText(Object object) {
 		String label = ((MultiAttributeOperation) object).getFeatureName();
 		return label == null || label.length() == 0 ? getString("_UI_MultiAttributeOperation_type")
-				: getString("_UI_MultiAttributeOperation_type") + " " + label;
+			: getString("_UI_MultiAttributeOperation_type") + " " + label;
 	}
 
 	/**
@@ -171,8 +154,7 @@ public class MultiAttributeOperationItemProvider extends
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD:
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES:
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -186,8 +168,7 @@ public class MultiAttributeOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

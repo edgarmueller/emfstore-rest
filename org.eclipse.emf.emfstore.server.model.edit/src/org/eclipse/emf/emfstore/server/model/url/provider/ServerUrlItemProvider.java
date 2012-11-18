@@ -31,15 +31,13 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ServerUrlItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ServerUrlItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -74,18 +72,12 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addHostNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_ServerUrl_hostName_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_ServerUrl_hostName_feature",
-								"_UI_ServerUrl_type"),
-						UrlPackage.Literals.SERVER_URL__HOST_NAME, true, false,
-						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ServerUrl_hostName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ServerUrl_hostName_feature", "_UI_ServerUrl_type"),
+			UrlPackage.Literals.SERVER_URL__HOST_NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+			null, null));
 	}
 
 	/**
@@ -96,14 +88,11 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addPortPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ServerUrl_port_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ServerUrl_port_feature", "_UI_ServerUrl_type"),
-				UrlPackage.Literals.SERVER_URL__PORT, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ServerUrl_port_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ServerUrl_port_feature", "_UI_ServerUrl_type"),
+			UrlPackage.Literals.SERVER_URL__PORT, true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+			null, null));
 	}
 
 	/**
@@ -113,8 +102,7 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ServerUrl"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ServerUrl"));
 	}
 
 	/**
@@ -126,8 +114,8 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 	@Override
 	public String getText(Object object) {
 		String label = ((ServerUrl) object).getHostName();
-		return label == null || label.length() == 0 ? getString("_UI_ServerUrl_type")
-				: getString("_UI_ServerUrl_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ServerUrl_type") : getString("_UI_ServerUrl_type")
+			+ " " + label;
 	}
 
 	/**
@@ -145,8 +133,7 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(ServerUrl.class)) {
 		case UrlPackage.SERVER_URL__HOST_NAME:
 		case UrlPackage.SERVER_URL__PORT:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -160,8 +147,7 @@ public class ServerUrlItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

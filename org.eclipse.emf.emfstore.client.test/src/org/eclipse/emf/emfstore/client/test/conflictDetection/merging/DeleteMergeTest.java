@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -212,10 +222,10 @@ public class DeleteMergeTest extends MergeTest {
 
 	@Test
 	public void attVsDelIndirectInSteps() {
-		final TestElement parent = getTestElement();
-		final TestElement child = getTestElement();
-		final TestElement child2 = getTestElement();
-		final TestElement child3 = getTestElement();
+		final TestElement parent = getTestElement("parent");
+		final TestElement child = getTestElement("child");
+		final TestElement child2 = getTestElement("child2");
+		final TestElement child3 = getTestElement("child3");
 		parent.getContainedElements().add(child);
 		child.getContainedElements().add(child2);
 		child2.getContainedElements().add(child3);

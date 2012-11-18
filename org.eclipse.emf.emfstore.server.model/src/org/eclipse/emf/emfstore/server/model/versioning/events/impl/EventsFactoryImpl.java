@@ -35,7 +35,7 @@ public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 	public static EventsFactory init() {
 		try {
 			EventsFactory theEventsFactory = (EventsFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/events");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/events");
 			if (theEventsFactory != null) {
 				return theEventsFactory;
 			}
@@ -66,8 +66,7 @@ public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 		case EventsPackage.EVENT:
 			return createEvent();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 

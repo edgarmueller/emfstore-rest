@@ -135,11 +135,6 @@
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
-<!-- replaced with RegexpMultiline and RegexpSingleline and RegexpSinglelineJava in checkstyle 5.x
-    <module name="GenericIllegalRegexp">
-      <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>-->
     <module name="TodoComment">
       <property name="severity" value="ignore"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
@@ -182,11 +177,6 @@
       <property name="id" value="complexity"/>
       <property name="max" value="15"/>
     </module>
-<!-- replaced with JavadocPackage in checkstyle 5.x
-    <module name="PackageHtml">
-      <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>-->
   </module>
   <module name="FileLength">
     <property name="severity" value="info"/>

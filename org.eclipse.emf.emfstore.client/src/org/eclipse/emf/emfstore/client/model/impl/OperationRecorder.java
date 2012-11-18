@@ -10,11 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -109,6 +109,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private OperationModificator modificator;
 
+	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
+
 	/**
 	 * Constructor.
 	 * 
@@ -125,6 +127,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
 		removedElements = new ArrayList<EObject>();
+		removedElementsToReferenceSettings = new HashMap<EObject, List<SettingWithReferencedElement>>();
 
 		editingDomain = Configuration.getEditingDomain();
 
@@ -217,46 +220,77 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (this.getModelElementsFromClipboard().contains(modelElement)) {
 			return;
 		}
+		if (!isRecording) {
+			return;
+		}
 
-		if (isRecording) {
-			// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
-			stopChangeRecording();
-			WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
-			startChangeRecording();
+		checkCommandConstraints(modelElement);
 
-			Set<EObject> allModelElements = new HashSet<EObject>();
-			allModelElements.add(modelElement);
-			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+		// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
+		stopChangeRecording();
+		WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
+		startChangeRecording();
 
-			// collect in- and out-going cross-reference for containment tree of modelElement
-			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
-				allModelElements);
+		Set<EObject> allModelElements = new HashSet<EObject>();
+		allModelElements.add(modelElement);
+		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
-			List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
-				allModelElements);
-			crossReferences.addAll(ingoingCrossReferences);
+		// collect out-going cross-reference for containment tree of modelElement
+		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+			allModelElements);
 
-			// TODO: check if all cross-references are cut on copy
-			CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
+		// collect in-going cross-reference for containment tree of modelElement
+		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+			allModelElements);
+		crossReferences.addAll(ingoingCrossReferences);
 
-			// collect recorded operations and add to create operation
-			List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
-
-			createDeleteOperation.getSubOperations().addAll(recordedOperations);
-
-			if (this.compositeOperation != null) {
-				compositeOperation.getSubOperations().add(createDeleteOperation);
-			} else {
-				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
-					operations.add(createDeleteOperation);
-				} else if (!commandIsRunning && forceCommands) {
-					WorkspaceUtil.handleException("An element has been added without using a command!",
-						new MissingCommandException("Element " + modelElement
-							+ " has been added without using a command"));
-				} else {
-					operationRecorded(createDeleteOperation);
+		// clean up already existing references when collection already contained the object
+		List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
+		if (savedSettings != null) {
+			List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
+			for (SettingWithReferencedElement setting : savedSettings) {
+				for (SettingWithReferencedElement newSetting : crossReferences) {
+					if (setting.getSetting().getEStructuralFeature()
+						.equals(newSetting.getSetting().getEStructuralFeature())
+						&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
+						toRemove.add(newSetting);
+					}
 				}
 			}
+
+			crossReferences.removeAll(toRemove);
+		}
+
+		// collect recorded operations and add to create operation
+		List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
+
+		List<AbstractOperation> resultingOperations;
+
+		// check if create element has been deleted during running command, if so do not record a create operation
+		if (commandIsRunning && removedElements.contains(modelElement)) {
+			resultingOperations = new ArrayList<AbstractOperation>(recordedOperations);
+		} else {
+			CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
+			createDeleteOperation.getSubOperations().addAll(recordedOperations);
+			resultingOperations = new ArrayList<AbstractOperation>();
+			resultingOperations.add(createDeleteOperation);
+		}
+		if (this.compositeOperation != null) {
+			compositeOperation.getSubOperations().addAll(resultingOperations);
+			return;
+		}
+
+		if (commandIsRunning && emitOperationsWhenCommandCompleted) {
+			operations.addAll(resultingOperations);
+		} else {
+			operationsRecorded(resultingOperations);
+		}
+	}
+
+	private void checkCommandConstraints(EObject modelElement) {
+		if (!commandIsRunning && forceCommands) {
+			WorkspaceUtil.handleException("An element has been changed without using a command!",
+				new MissingCommandException("Element " + modelElement + " has been changed without using a command"));
 		}
 	}
 
@@ -475,6 +509,20 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public void modelElementRemoved(IdEObjectCollection project, EObject modelElement) {
 		if (isRecording) {
 			removedElements.add(modelElement);
+
+			Set<EObject> allModelElements = new HashSet<EObject>();
+			allModelElements.add(modelElement);
+			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
+			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+				allModelElements);
+			List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+				allModelElements);
+			crossReferences.addAll(ingoingCrossReferences);
+			if (crossReferences.size() != 0) {
+				for (EObject eObject : allModelElements) {
+					removedElementsToReferenceSettings.put(eObject, crossReferences);
+				}
+			}
 		}
 	}
 
@@ -562,53 +610,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				if (Map.Entry.class.isAssignableFrom(eType.getInstanceClass()) && reference.isContainment()
 					&& reference.isChangeable()) {
 
-					EClass mapEntryEClass = (EClass) eType;
-					EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
-
-					// key references seems to be containment, skip loop
-					if (nonContainmentKeyReference == null) {
-						continue;
-					}
-
-					@SuppressWarnings("unchecked")
-					List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
-					boolean outgoingKeyReferenceFound = false;
-
-					// check key reference of all map entries if they reference one of the objects in the containment
-					// tree
-					for (EObject eObject : mapEntriesEList) {
-
-						Object eGet = eObject.eGet(nonContainmentKeyReference);
-
-						if (!allEObjects.contains(eGet)) {
-							outgoingKeyReferenceFound = true;
-							break;
-						}
-					}
-
-					if (!outgoingKeyReferenceFound) {
-						// no bad reference found, skip special treatment
-						continue;
-					}
-
-					// copy list before clearing reference
-					// TODO is this really the underlying list
-					List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
-
-					// the reference is a containment map feature and its referenced entries do have at least one
-					// non-containment key crossreference that goes to an element outside of
-					// the containment tree, therefore we
-					// delete the map entries
-					// instead of waiting for the referenced key element to be cut off from the map entry
-					// in the children recursion
-					// since cutting off a key reference will render the map into an invalid state on deserialization
-					// which can
-					// result in unresolved proxies
-					EcoreUtil.resolveAll(modelElement);
-					modelElement.eUnset(reference);
-					for (EObject mapEntry : mapEntries) {
-						handleElementDelete(mapEntry);
-					}
+					handleMapEntryDeletion(modelElement, eType, reference, allEObjects);
 					continue;
 				}
 
@@ -637,6 +639,58 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 			}
 		}
+	}
+
+	private void handleMapEntryDeletion(EObject modelElement, EClassifier eType, EReference reference,
+		Set<EObject> allEObjects) {
+		EClass mapEntryEClass = (EClass) eType;
+		EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
+
+		// key references seems to be containment, skip loop
+		if (nonContainmentKeyReference == null) {
+			return;
+		}
+
+		@SuppressWarnings("unchecked")
+		List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
+		boolean outgoingKeyReferenceFound = false;
+
+		// check key reference of all map entries if they reference one of the objects in the containment
+		// tree
+		for (EObject eObject : mapEntriesEList) {
+
+			Object eGet = eObject.eGet(nonContainmentKeyReference);
+
+			if (!allEObjects.contains(eGet)) {
+				outgoingKeyReferenceFound = true;
+				break;
+			}
+		}
+
+		if (!outgoingKeyReferenceFound) {
+			// no bad reference found, skip special treatment
+			return;
+		}
+
+		// copy list before clearing reference
+		// TODO is this really the underlying list
+		List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
+
+		// the reference is a containment map feature and its referenced entries do have at least one
+		// non-containment key crossreference that goes to an element outside of
+		// the containment tree, therefore we
+		// delete the map entries
+		// instead of waiting for the referenced key element to be cut off from the map entry
+		// in the children recursion
+		// since cutting off a key reference will render the map into an invalid state on deserialization
+		// which can
+		// result in unresolved proxies
+		EcoreUtil.resolveAll(modelElement);
+		modelElement.eUnset(reference);
+		for (EObject mapEntry : mapEntries) {
+			handleElementDelete(mapEntry);
+		}
+
 	}
 
 	private EReference getNonContainmentKeyReference(EClass eClass) {
@@ -707,14 +761,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		if (compositeOperation != null) {
 			compositeOperation.getSubOperations().add(deleteOperation);
-			saveResource(compositeOperation.eResource());
 		} else {
 			if (commandIsRunning) {
 				operations.add(deleteOperation);
-			} else if (!commandIsRunning && forceCommands) {
-				WorkspaceUtil.handleException("An element has been deleted without using a command!",
-					new MissingCommandException("Element " + deletedElement
-						+ " has been deleted without using a command"));
 			} else {
 				operationRecorded(deleteOperation);
 			}
@@ -884,15 +933,9 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// AbstractOperation lastOp = compositeOperation.getSubOperations().get(
 		// compositeOperation.getSubOperations().size() - 1);
 
-		stopChangeRecording();
-		try {
-			compositeOperation.reverse().apply(getCollection());
-			// operations.remove(operations.size() - 1);
-		} finally {
-			startChangeRecording();
-		}
+		projectSpace.applyOperations(Collections.singletonList(compositeOperation.reverse()), false);
+
 		this.removedElements.clear();
-		// }
 		notificationRecorder.stopRecording();
 
 		compositeOperation = null;
@@ -909,28 +952,26 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
+		if (!isRecording) {
+			return;
+		}
+
 		// filter unwanted notifications
 		if (FilterStack.DEFAULT.check(new NotificationInfo(notification), collection)) {
 			return;
 		}
 
-		if (isRecording) {
-			notificationRecorder.record(notification);
-		}
+		checkCommandConstraints(modelElement);
+
+		notificationRecorder.record(notification);
 
 		if (notificationRecorder.isRecordingComplete()) {
-
-			if (!isRecording) {
-				return;
-			}
 
 			List<AbstractOperation> ops = recordingFinished();
 
 			// add resulting operations as sub-operations to composite or top-level operations
 			if (compositeOperation != null) {
 				compositeOperation.getSubOperations().addAll(ops);
-				// FIXME: ugly hack for recording of create operation cross references
-				saveResource(compositeOperation.eResource());
 				return;
 			}
 
@@ -943,10 +984,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
 					operations.add(op);
-				} else if (!commandIsRunning && forceCommands) {
-					WorkspaceUtil.handleException("CompositeOperation has been recorded without using a command!",
-						new MissingCommandException("CompositeOperation" + op.getModelElementId()
-							+ " has been recorded without using a command"));
 				} else {
 					operationRecorded(op);
 				}
@@ -983,27 +1020,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void emitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
 		this.emitOperationsWhenCommandCompleted = emitOperationsImmediately;
-	}
-
-	/**
-	 * Saves the given resource.
-	 * If the passed resource is null, this method has no effect
-	 * 
-	 * @param resource
-	 *            the resource to be saved
-	 */
-	private void saveResource(Resource resource) {
-
-		if (resource == null) {
-			return;
-		}
-
-		try {
-			resource.save(ModelUtil.getResourceSaveOptions());
-		} catch (IOException e) {
-			String message = String.format("Resource %s could not be saved!", resource.getURI());
-			WorkspaceUtil.logWarning(message, null);
-		}
 	}
 
 	/**

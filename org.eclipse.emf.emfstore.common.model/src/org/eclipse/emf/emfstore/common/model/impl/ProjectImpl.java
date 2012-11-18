@@ -240,4 +240,19 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	public void addCutElement(EObject eObject) {
 		getCutElements().add(eObject);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl#initMapping()
+	 */
+	@Override
+	public void initMapping() {
+
+		for (EObject modelElement : getCutElements()) {
+			putModelElementIntoCache(modelElement);
+		}
+
+		super.initMapping();
+	}
 }

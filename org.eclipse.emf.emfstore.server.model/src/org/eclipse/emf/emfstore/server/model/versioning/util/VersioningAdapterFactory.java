@@ -338,8 +338,7 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery
 	 * <em>Path Query</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -370,8 +369,7 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version
 	 * <em>Version</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc

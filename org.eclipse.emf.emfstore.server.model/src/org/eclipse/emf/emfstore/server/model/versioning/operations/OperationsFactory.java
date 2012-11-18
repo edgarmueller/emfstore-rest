@@ -27,7 +27,7 @@ public interface OperationsFactory extends EFactory {
 	 * @generated
 	 */
 	OperationsFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsFactoryImpl
-			.init();
+		.init();
 
 	/**
 	 * Returns a new object of class '<em>Composite Operation</em>'. <!--

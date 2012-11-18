@@ -15,8 +15,7 @@ import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Log Message</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Log Message</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -45,8 +44,8 @@ public interface LogMessage extends EObject {
 	 * Returns the value of the '<em><b>Message</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Message</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Message</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -59,8 +58,7 @@ public interface LogMessage extends EObject {
 	String getMessage();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage
 	 * <em>Message</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -75,8 +73,8 @@ public interface LogMessage extends EObject {
 	 * Returns the value of the '<em><b>Author</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Author</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Author</em>' reference isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -89,8 +87,7 @@ public interface LogMessage extends EObject {
 	String getAuthor();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor
 	 * <em>Author</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -105,8 +102,7 @@ public interface LogMessage extends EObject {
 	 * Returns the value of the '<em><b>Date</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Date</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Date</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -119,8 +115,7 @@ public interface LogMessage extends EObject {
 	Date getDate();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate
 	 * <em>Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -134,8 +129,8 @@ public interface LogMessage extends EObject {
 	 * Returns the value of the '<em><b>Client Date</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Client Date</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Client Date</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -148,8 +143,7 @@ public interface LogMessage extends EObject {
 	Date getClientDate();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
 	 * <em>Client Date</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

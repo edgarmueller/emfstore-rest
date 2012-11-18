@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Multi Reference Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Multi Reference Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -41,8 +41,7 @@ public interface MultiReferenceOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>Add</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Add</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Add</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -70,8 +69,8 @@ public interface MultiReferenceOperation extends ReferenceOperation {
 	 * Returns the value of the '<em><b>Index</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Index</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Index</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -101,9 +100,8 @@ public interface MultiReferenceOperation extends ReferenceOperation {
 	 * {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Model Elements</em>' containment
-	 * reference list isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Referenced Model Elements</em>' containment reference list isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

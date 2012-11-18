@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,6 @@
  * 
  * Contributors:
  ******************************************************************************/
-
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;

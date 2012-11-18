@@ -62,8 +62,7 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 	 * @return The customLabelProvider for the given operation or null if there
 	 *         is no customLabelProvider.
 	 */
-	public AbstractOperationCustomLabelProvider getCustomLabelProvider(
-			AbstractOperation operation) {
+	public AbstractOperationCustomLabelProvider getCustomLabelProvider(AbstractOperation operation) {
 
 		AbstractOperationCustomLabelProvider highestVisualizer = null;
 
@@ -84,18 +83,13 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 
 	private void collectExtensions() {
 		for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider",
-				true).getExtensionElements()) {
+			"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true).getExtensionElements()) {
 			try {
-				AbstractOperationCustomLabelProvider provider = element
-						.getClass("class",
-								AbstractOperationCustomLabelProvider.class);
+				AbstractOperationCustomLabelProvider provider = element.getClass("class",
+					AbstractOperationCustomLabelProvider.class);
 				list.add(provider);
 			} catch (ExtensionPointException e) {
-				ModelUtil
-						.logException(
-								"Exception occured while initializing custom label provider extensions!",
-								e);
+				ModelUtil.logException("Exception occured while initializing custom label provider extensions!", e);
 			}
 		}
 	}

@@ -56,7 +56,7 @@ public final class ResourceHelper {
 		if (options != null) {
 			resource.load(options);
 		} else {
-			resource.load(ModelUtil.getResourceLoadOptions());
+			ModelUtil.loadResource(resource, WorkspaceUtil.getResourceLogger());
 		}
 		EList<EObject> directContents = resource.getContents();
 
@@ -99,7 +99,7 @@ public final class ResourceHelper {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(element);
-		resource.save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public final class ResourceHelper {
 			}
 		}
 
-		resource.save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 	}
 
 	/**
@@ -157,6 +157,6 @@ public final class ResourceHelper {
 			}
 		}
 
-		resource.save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 	}
 }

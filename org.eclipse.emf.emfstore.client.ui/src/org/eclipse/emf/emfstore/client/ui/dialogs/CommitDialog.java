@@ -46,7 +46,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * This class shows a ChangesTreeComposite and a Text control to enter commit message.
+ * This class shows a ChangesTreeComposite and a Text control to enter commit
+ * message.
  * 
  * @author Hodaie
  * @author Shterev
@@ -60,19 +61,24 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	private ProjectSpace activeProjectSpace;
 	private HashMap<String, CommitDialogTray> trays;
 	private Image commitImage;
+	private int numberOfChanges;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param parentShell shell
-	 * @param changes the {@link ChangePackage} to be displayed
-	 * @param activeProjectSpace ProjectSpace that will be committed
+	 * @param parentShell
+	 *            shell
+	 * @param changes
+	 *            the {@link ChangePackage} to be displayed
+	 * @param activeProjectSpace
+	 *            ProjectSpace that will be committed
 	 */
 	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace) {
 		super(parentShell);
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
+		numberOfChanges = changes.getSize();
 		trays = new HashMap<String, CommitDialogTray>();
 
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
@@ -130,7 +136,8 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 			projectName = "of project \"" + activeProjectSpace.getProjectName() + "\" ";
 		}
 		setTitle("Commit your local changes " + projectName + "to the server");
-		setMessage("Don't forget the commit message!");
+		setMessage("Number of composite changes: " + changes.getOperations().size() + ", Number of overall changes: "
+			+ numberOfChanges);
 
 		// Log message
 		Label lblLogMsg = new Label(contents, SWT.NONE);

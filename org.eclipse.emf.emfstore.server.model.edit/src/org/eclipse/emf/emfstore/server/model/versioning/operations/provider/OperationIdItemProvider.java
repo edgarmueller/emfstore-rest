@@ -28,14 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId} object. <!-- begin-user-doc --> <!--
+ * end-user-doc -->
  * 
  * @generated
  */
-public class OperationIdItemProvider extends UniqueIdentifierItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class OperationIdItemProvider extends UniqueIdentifierItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -69,8 +68,7 @@ public class OperationIdItemProvider extends UniqueIdentifierItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/OperationId"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationId"));
 	}
 
 	/**
@@ -83,7 +81,7 @@ public class OperationIdItemProvider extends UniqueIdentifierItemProvider
 	public String getText(Object object) {
 		String label = ((OperationId) object).getId();
 		return label == null || label.length() == 0 ? getString("_UI_OperationId_type")
-				: getString("_UI_OperationId_type") + " " + label;
+			: getString("_UI_OperationId_type") + " " + label;
 	}
 
 	/**
@@ -108,8 +106,7 @@ public class OperationIdItemProvider extends UniqueIdentifierItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -29,15 +29,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation} object. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ReferenceOperationItemProvider extends
-		FeatureOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class ReferenceOperationItemProvider extends FeatureOperationItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -74,16 +72,12 @@ public class ReferenceOperationItemProvider extends
 	 */
 	protected void addBidirectionalPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ReferenceOperation_bidirectional_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ReferenceOperation_bidirectional_feature",
-						"_UI_ReferenceOperation_type"),
-				OperationsPackage.Literals.REFERENCE_OPERATION__BIDIRECTIONAL,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ReferenceOperation_bidirectional_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ReferenceOperation_bidirectional_feature",
+				"_UI_ReferenceOperation_type"), OperationsPackage.Literals.REFERENCE_OPERATION__BIDIRECTIONAL, true,
+			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -93,19 +87,13 @@ public class ReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addOppositeFeatureNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_ReferenceOperation_oppositeFeatureName_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_ReferenceOperation_oppositeFeatureName_feature",
-								"_UI_ReferenceOperation_type"),
-						OperationsPackage.Literals.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ReferenceOperation_oppositeFeatureName_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ReferenceOperation_oppositeFeatureName_feature",
+				"_UI_ReferenceOperation_type"), OperationsPackage.Literals.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME,
+			true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -115,19 +103,13 @@ public class ReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addContainmentTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_ReferenceOperation_containmentType_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_ReferenceOperation_containmentType_feature",
-								"_UI_ReferenceOperation_type"),
-						OperationsPackage.Literals.REFERENCE_OPERATION__CONTAINMENT_TYPE,
-						true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ReferenceOperation_containmentType_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ReferenceOperation_containmentType_feature",
+				"_UI_ReferenceOperation_type"), OperationsPackage.Literals.REFERENCE_OPERATION__CONTAINMENT_TYPE, true,
+			false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	// begin of custom code
@@ -139,10 +121,7 @@ public class ReferenceOperationItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/ReferenceOperation.png"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReferenceOperation.png"));
 	}
 
 	// end of custom code
@@ -157,7 +136,7 @@ public class ReferenceOperationItemProvider extends
 	public String getText(Object object) {
 		String label = ((ReferenceOperation) object).getFeatureName();
 		return label == null || label.length() == 0 ? getString("_UI_ReferenceOperation_type")
-				: getString("_UI_ReferenceOperation_type") + " " + label;
+			: getString("_UI_ReferenceOperation_type") + " " + label;
 	}
 
 	/**
@@ -176,8 +155,7 @@ public class ReferenceOperationItemProvider extends
 		case OperationsPackage.REFERENCE_OPERATION__BIDIRECTIONAL:
 		case OperationsPackage.REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME:
 		case OperationsPackage.REFERENCE_OPERATION__CONTAINMENT_TYPE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -191,8 +169,7 @@ public class ReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

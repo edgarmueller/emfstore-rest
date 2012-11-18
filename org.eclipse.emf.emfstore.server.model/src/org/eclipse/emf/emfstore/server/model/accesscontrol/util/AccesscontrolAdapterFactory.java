@@ -134,8 +134,7 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser
 	 * <em>AC User</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
@@ -214,8 +213,7 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
 	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -230,8 +228,7 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
 	 * <em>Unique Identifier</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

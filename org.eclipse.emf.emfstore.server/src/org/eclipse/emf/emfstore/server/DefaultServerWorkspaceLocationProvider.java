@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
  * 
  * @author wesendon
  */
+// TODO: split server/client configuration; discuss with Maximilian (see tickets)
 public class DefaultServerWorkspaceLocationProvider implements LocationProvider {
 
 	/**

@@ -19,7 +19,7 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiRefSet;
 import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isSingleRef;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -319,29 +319,30 @@ public class IndexSensitiveConflictDetectionStrategy implements ConflictDetectio
 		return true;
 	}
 
+	/**
+	 * @param opA
+	 * @param opB
+	 * @return
+	 */
 	private boolean doConflictHardCreateDelete(CreateDeleteOperation opA, AbstractOperation opB) {
-		// creates do not conflict with anything, by definition
-		if (isCreateOperation(opA)) {
-			return false;
-		}
-
-		if (isCreateOperation(opB)) {
-			return false;
-		}
-
-		// we have a delete here
-
 		// we need to check whether the other operation changes any of the deleted elements
 		if (opB instanceof CreateDeleteOperation) {
-			Set<ModelElementId> allDeletedElementsA = getAllDeletedElements(opA);
-			Set<ModelElementId> allDeletedElementsB = getAllDeletedElements((CreateDeleteOperation) opB);
-			boolean intersecting = allDeletedElementsA.removeAll(allDeletedElementsB);
-			if (intersecting && !allDeletedElementsA.isEmpty()) {
+			Set<ModelElementId> allCreatedOrDeletedElementsOfA = new LinkedHashSet<ModelElementId>(opA
+				.getEObjectToIdMap().values());
+			Set<ModelElementId> allCreatedOrDeletedElementsOfB = new LinkedHashSet<ModelElementId>(
+				((CreateDeleteOperation) opB).getEObjectToIdMap().values());
+			boolean intersecting = allCreatedOrDeletedElementsOfA.removeAll(allCreatedOrDeletedElementsOfB);
+			if (intersecting) {
 				return true;
 			}
-			return false;
+			// we need to check whether the cross reference change do conflict with the other op
+			for (ReferenceOperation referenceOperation : ((CreateDeleteOperation) opB).getSubOperations()) {
+				if (doConflictHard(referenceOperation, opA)) {
+					return true;
+				}
+			}
 		} else {
-			for (ModelElementId m : getAllDeletedElements(opA)) {
+			for (ModelElementId m : new LinkedHashSet<ModelElementId>(opA.getEObjectToIdMap().values())) {
 				if (changesModelElement(opB, m)) {
 					return true;
 				}
@@ -356,18 +357,6 @@ public class IndexSensitiveConflictDetectionStrategy implements ConflictDetectio
 		}
 
 		return false;
-	}
-
-	private Set<ModelElementId> getAllDeletedElements(CreateDeleteOperation op) {
-		// EObject element = op.getModelElement();
-		return new HashSet<ModelElementId>(op.getEObjectToIdMap().values());
-		// Set<EObject> allDeleteTreeElements = ModelUtil.getAllContainedModelElements(element, false);
-		// allDeleteTreeElements.add(op.getModelElement());
-		// Set<ModelElementId> result = new HashSet<ModelElementId>(allDeleteTreeElements.size());
-		// for (EObject modelElement : allDeleteTreeElements) {
-		// result.add(ModelUtil.getProject(modelElement).getModelElementId(modelElement));
-		// }
-		// return result;
 	}
 
 	private boolean doConflictHardMultiReferences(MultiReferenceOperation opA, MultiReferenceOperation opB) {
@@ -871,15 +860,6 @@ public class IndexSensitiveConflictDetectionStrategy implements ConflictDetectio
 			}
 		}
 		return result;
-	}
-
-	private static boolean isCreateOperation(AbstractOperation op) {
-
-		if (op instanceof CreateDeleteOperation) {
-			CreateDeleteOperation cdop = (CreateDeleteOperation) op;
-			return !cdop.isDelete();
-		}
-		return false;
 	}
 
 	private boolean containsId(Iterable<ModelElementId> list, ModelElementId id) {

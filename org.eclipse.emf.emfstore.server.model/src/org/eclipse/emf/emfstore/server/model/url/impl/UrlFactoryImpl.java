@@ -58,7 +58,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	public static UrlFactory init() {
 		try {
 			UrlFactory theUrlFactory = (UrlFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model/url");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/url");
 			if (theUrlFactory != null) {
 				return theUrlFactory;
 			}
@@ -95,8 +95,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 		case UrlPackage.MODEL_ELEMENT_URL:
 			return createModelElementUrl();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -135,8 +134,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ModelElementUrl createModelElementUrl(String url)
-			throws MalformedURLException {
+	public ModelElementUrl createModelElementUrl(String url) throws MalformedURLException {
 
 		ModelElementUrl modelURL = createModelElementUrl();
 
@@ -185,7 +183,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 				}
 				modelFragment.setName(string.substring(0, p));
 				ModelElementId modelElementId = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
-						.createModelElementId();
+					.createModelElementId();
 				modelElementId.setId(string.substring(p + 1));
 				modelFragment.setModelElementId(modelElementId);
 			}

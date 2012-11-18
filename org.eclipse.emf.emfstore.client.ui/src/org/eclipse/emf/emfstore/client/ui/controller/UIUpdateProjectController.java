@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -97,7 +97,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
 	 */
-	public boolean conflictOccurred(final ChangeConflictException conflictException) {
+	public boolean conflictOccurred(final ChangeConflictException conflictException,
+		final IProgressMonitor progressMonitor) {
 		final ProjectSpace projectSpace = conflictException.getProjectSpace();
 		boolean mergeSuccessful = false;
 		try {
@@ -105,13 +106,15 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
-			mergeSuccessful = RunInUI.WithException.runWithResult(new Callable<Boolean>() {
-				public Boolean call() throws Exception {
-					return projectSpace.merge(targetVersion, new MergeProjectHandler());
+			return projectSpace.merge(targetVersion, conflictException.getMyChangePackage(),
+				conflictException.getNewPackages(), new MergeProjectHandler(conflictException), progressMonitor);
+		} catch (final EmfStoreException e) {
+			RunInUI.run(new Callable<Void>() {
+				public Void call() throws Exception {
+					handleMergeException(projectSpace, e);
+					return null;
 				}
 			});
-		} catch (EmfStoreException e) {
-			handleMergeException(projectSpace, e);
 		}
 
 		return mergeSuccessful;
@@ -163,11 +166,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = RunInUI.WithException.runWithResult(new Callable<PrimaryVersionSpec>() {
-			public PrimaryVersionSpec call() throws Exception {
-				return projectSpace.update(version, UIUpdateProjectController.this, monitor);
-			}
-		});
+		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}

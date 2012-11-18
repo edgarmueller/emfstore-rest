@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -34,12 +35,15 @@ public class CompositeConflict extends Conflict {
 	 * 
 	 * @param composite list of operations, with leading conflicting {@link CompositeOperation}
 	 * @param other list operations which conflict with composite
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 * @param meCausing true, if composite caused by merging user
 	 */
-	public CompositeConflict(List<AbstractOperation> composite, List<AbstractOperation> other,
-		DecisionManager decisionManager, boolean meCausing) {
-		super(composite, other, decisionManager, meCausing, false);
+	public CompositeConflict(Set<AbstractOperation> composite, Set<AbstractOperation> other,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean meCausing) {
+		super(composite, other, leftOperation, rightOperation, decisionManager, meCausing, false);
 		init();
 	}
 
@@ -83,19 +87,20 @@ public class CompositeConflict extends Conflict {
 		theirOption.addOperations(getTheirOperations());
 
 		String composite = ((CompositeOperation) getLeftOperation()).getCompositeName();
-		String other = "Change related to "
-			+ DecisionUtil.getClassAndName(getDecisionManager()
-				.getModelElement(getRightOperation().getModelElementId()));
+		String other = null;
+		if (getRightOperation() instanceof CompositeOperation) {
+			other = ((CompositeOperation) getRightOperation()).getCompositeName();
+		} else {
+			other = "Change related to "
+				+ DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
+					getRightOperation().getModelElementId()));
+		}
 
 		if (isLeftMy()) {
 			myOption.setOptionLabel(composite);
-
 			theirOption.setOptionLabel(other);
-			theirOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
 		} else {
 			myOption.setOptionLabel(other);
-			myOption.setDetailProvider(DecisionUtil.WIDGET_OTHERINVOLVED);
-
 			theirOption.setOptionLabel(composite);
 		}
 		options.add(myOption);

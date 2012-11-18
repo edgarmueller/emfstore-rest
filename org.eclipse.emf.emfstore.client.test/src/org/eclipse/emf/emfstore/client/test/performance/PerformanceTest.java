@@ -1,8 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.performance;
 
 import static org.junit.Assert.assertNotNull;
@@ -19,10 +24,10 @@ import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.junit.After;
 import org.junit.AfterClass;

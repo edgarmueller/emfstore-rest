@@ -37,6 +37,12 @@ public class AccessControlHelper {
 		this.user = usersession.getACUser();
 	}
 
+	/**
+	 * Check if user has read access to given project id.
+	 * 
+	 * @param projectId the project id
+	 * @throws AccessControlException if access is not permitted.
+	 */
 	public void checkReadAccess(ProjectId projectId) throws AccessControlException {
 		for (Role role : user.getRoles()) {
 			if (role.canRead(projectId, null)) {

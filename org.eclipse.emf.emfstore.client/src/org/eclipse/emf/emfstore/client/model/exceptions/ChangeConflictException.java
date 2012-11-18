@@ -11,9 +11,10 @@
 package org.eclipse.emf.emfstore.client.model.exceptions;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
@@ -26,7 +27,8 @@ public class ChangeConflictException extends WorkspaceException {
 
 	private List<ChangePackage> newPackages;
 	private ProjectSpace projectSpace;
-	private ConflictDetector conflictDetector;
+	private Set<ConflictBucketCandidate> conflictBucketCandidates;
+	private ChangePackage myChangePackage;
 
 	/**
 	 * Retrieve the list of change packages that caused the exception.
@@ -40,23 +42,19 @@ public class ChangeConflictException extends WorkspaceException {
 	/**
 	 * Constructor.
 	 * 
-	 * @param newPackages the list of change packages that caused the exception
-	 * @param conflictDetector the ConflictDetector
+	 * 
 	 * @param projectSpace the ProjectSpace
+	 * @param myChangePackage my change package
+	 * @param newPackages the list of change packages that caused the exception
+	 * @param conflictBucketCandidates a set of conflict candidates
 	 */
-	public ChangeConflictException(List<ChangePackage> newPackages, ProjectSpace projectSpace,
-		ConflictDetector conflictDetector) {
+	public ChangeConflictException(ProjectSpace projectSpace, ChangePackage myChangePackage,
+		List<ChangePackage> newPackages, Set<ConflictBucketCandidate> conflictBucketCandidates) {
 		super("Conflict detected on update");
+		this.myChangePackage = myChangePackage;
 		this.newPackages = newPackages;
 		this.projectSpace = projectSpace;
-		this.conflictDetector = conflictDetector;
-	}
-
-	/**
-	 * @return the ConflictDetector.
-	 */
-	public ConflictDetector getConflictDetector() {
-		return conflictDetector;
+		this.conflictBucketCandidates = conflictBucketCandidates;
 	}
 
 	/**
@@ -65,4 +63,19 @@ public class ChangeConflictException extends WorkspaceException {
 	public ProjectSpace getProjectSpace() {
 		return projectSpace;
 	}
+
+	/**
+	 * @return the conflict candidates
+	 */
+	public Set<ConflictBucketCandidate> getConflictBucketCandidates() {
+		return conflictBucketCandidates;
+	}
+
+	/**
+	 * @return my change package
+	 */
+	public ChangePackage getMyChangePackage() {
+		return myChangePackage;
+	}
+
 }

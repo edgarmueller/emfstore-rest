@@ -43,7 +43,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public static ModelFactory init() {
 		try {
 			ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model");
 			if (theModelFactory != null) {
 				return theModelFactory;
 			}
@@ -90,8 +90,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		case ModelPackage.AUTHENTICATION_INFORMATION:
 			return createAuthenticationInformation();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 

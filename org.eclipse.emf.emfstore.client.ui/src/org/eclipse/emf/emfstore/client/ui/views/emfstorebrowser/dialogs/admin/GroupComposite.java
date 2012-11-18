@@ -237,4 +237,3 @@ public class GroupComposite extends PropertiesComposite {
 	}
 
 } // GroupComposite
-

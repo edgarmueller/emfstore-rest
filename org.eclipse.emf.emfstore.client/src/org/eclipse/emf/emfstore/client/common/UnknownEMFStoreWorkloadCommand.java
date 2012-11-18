@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -33,10 +33,10 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
  */
 public abstract class UnknownEMFStoreWorkloadCommand<T> {
 
-	private static final int DEFAULT_POLLING_INTERVAL = 500;
+	private static final int DEFAULT_POLLING_INTERVAL = 200;
 	private final IProgressMonitor monitor;
 	private int worked;
-	private int pollingInterval;
+	private double pollingInterval;
 
 	/**
 	 * Singleton.
@@ -58,20 +58,6 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 	}
 
 	/**
-	 * Constructor.
-	 * 
-	 * @param monitor
-	 *            the monitor that will be used to indicate that the command is in progress
-	 * @param pollingInterval
-	 *            at which rate the <code>monitor</code> should get incremented, measured in milliseconds
-	 */
-	public UnknownEMFStoreWorkloadCommand(IProgressMonitor monitor, int pollingInterval) {
-		this.monitor = monitor;
-		this.pollingInterval = pollingInterval;
-		worked = 0;
-	}
-
-	/**
 	 * Executes the command.
 	 * 
 	 * @return the return value as determined by the run method
@@ -80,6 +66,7 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 	 */
 	public T execute() throws EmfStoreException {
 
+		double factor = 1.05;
 		Future<T> future = SingletonHolder.EXECUTOR.submit(new Callable<T>() {
 			public T call() throws Exception {
 				return run(monitor);
@@ -92,7 +79,7 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 		while (!resultReceived) {
 
 			try {
-				result = future.get(pollingInterval, TimeUnit.MILLISECONDS);
+				result = future.get(new Double(pollingInterval).intValue(), TimeUnit.MILLISECONDS);
 				resultReceived = true;
 			} catch (InterruptedException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
@@ -103,7 +90,8 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 			} catch (TimeoutException e) {
 				// do nothing
 			}
-
+			pollingInterval = pollingInterval * factor;
+			factor += 0.002;
 			monitor.worked(1);
 			worked++;
 		}

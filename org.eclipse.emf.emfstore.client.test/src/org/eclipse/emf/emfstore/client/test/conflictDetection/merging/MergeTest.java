@@ -1,7 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering, Technische Universitaet Muenchen. All rights
- * reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public
- * License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
  * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -24,10 +29,10 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 
 /**
  * Helper super class for merge tests.
@@ -155,9 +160,11 @@ public class MergeTest extends ConflictDetectionTest {
 			ensureCopy();
 			PrimaryVersionSpec spec = Versions.createPRIMARY(23);
 
-			DecisionManager manager = new DecisionManager(getProject(), Arrays.asList(getProjectSpace()
-				.getLocalChangePackage(true)), Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true)), spec,
-				spec);
+			List<ChangePackage> myChangePackages = Arrays.asList(getProjectSpace().getLocalChangePackage(true));
+			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
+
+			DecisionManager manager = new DecisionManager(getProject(), myChangePackages, theirChangePackages, spec,
+				spec, false, null);
 
 			return manager;
 		}
@@ -211,39 +218,40 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T extends AbstractOperation> T getMy(Class<T> class1, int i) {
-			List<AbstractOperation> ops = currentConflict().getMyOperations();
-			assertTrue(ops.size() > i);
-			if (!class1.isInstance(ops.get(i))) {
+		public <T extends AbstractOperation> T getMy(Class<T> class1) {
+			AbstractOperation myOp = currentConflict().getMyOperation();
+			if (!class1.isInstance(myOp)) {
 				throw new AssertionError("Expected: " + class1.getName() + " but found: "
-					+ ((ops.get(i) == null) ? "null" : ops.get(i).getClass().getName()));
+					+ ((myOp == null) ? "null" : myOp.getClass().getName()));
 			}
-			return (T) ops.get(i);
+			return (T) myOp;
 		}
 
 		@SuppressWarnings("unchecked")
-		public <T extends AbstractOperation> T getTheirs(Class<T> class1, int i) {
-			List<AbstractOperation> ops = currentConflict().getTheirOperations();
-			assertTrue(ops.size() > i);
-			assertTrue(class1.isInstance(ops.get(i)));
-			return (T) ops.get(i);
+		public <T extends AbstractOperation> T getTheir(Class<T> class1) {
+			AbstractOperation theirOp = currentConflict().getTheirOperation();
+			assertTrue(class1.isInstance(theirOp));
+			return (T) theirOp;
 		}
 
 		public <T extends AbstractOperation> MergeTestQuery myIs(Class<T> class1) {
-			return myIs(class1, 0);
-		}
-
-		public <T extends AbstractOperation> MergeTestQuery myIs(Class<T> class1, int index) {
-			last(true, getMy(class1, index));
+			last(true, getMy(class1));
 			return this;
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1) {
-			return theirsIs(class1, 0);
+		public <T extends AbstractOperation> MergeTestQuery myOtherContains(Class<T> class1) {
+			Set<AbstractOperation> ops = currentConflict().getMyOperations();
+			for (AbstractOperation op : ops) {
+				if (class1.isInstance(op) && op != currentConflict().getMyOperation()) {
+					last(true, op);
+					return this;
+				}
+			}
+			throw new AssertionError("Expected: " + class1.getName() + " in other my operations but was not found");
 		}
 
-		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1, int index) {
-			last(false, getTheirs(class1, index));
+		public <T extends AbstractOperation> MergeTestQuery theirsIs(Class<T> class1) {
+			last(false, getTheir(class1));
 			return this;
 		}
 
@@ -285,13 +293,6 @@ public class MergeTest extends ConflictDetectionTest {
 			} catch (InvocationTargetException e) {
 			}
 			throw new AssertionError("No such method");
-		}
-
-		private int myCounter = 0;
-
-		public MergeTestQuery andMyIs(Class<AttributeOperation> class1) {
-			myIs(class1, ++myCounter);
-			return this;
 		}
 	}
 }

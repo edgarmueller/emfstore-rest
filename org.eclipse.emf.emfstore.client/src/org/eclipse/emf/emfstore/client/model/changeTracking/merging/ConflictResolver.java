@@ -48,10 +48,8 @@ public interface ConflictResolver {
 	 *            the version to which is updated
 	 * @return true if the merge can proceed, false if it has to be cancelled
 	 */
-	boolean resolveConflicts(Project project,
-			List<ChangePackage> myChangePackages,
-			List<ChangePackage> theirChangePackages,
-			PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
+	boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
 
 	/**
 	 * Get all operations that have been rejected in their changepackages.
@@ -68,8 +66,8 @@ public interface ConflictResolver {
 	List<AbstractOperation> getAcceptedMine();
 
 	/**
-	 * Calculates a ChangePackages containing all changes, on basis of
-	 * {@link #getRejectedTheirs()} and {@link #getAcceptedMine()}.
+	 * Calculates a ChangePackages containing all changes, on basis of {@link #getRejectedTheirs()} and
+	 * {@link #getAcceptedMine()}.
 	 * 
 	 * @return ChangePackage
 	 */

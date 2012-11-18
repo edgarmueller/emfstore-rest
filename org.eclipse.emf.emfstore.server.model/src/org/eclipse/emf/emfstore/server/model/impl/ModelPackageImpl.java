@@ -114,13 +114,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	private EClass authenticationInformationEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory
-	 * method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!--
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
@@ -144,10 +143,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * and for any others upon which it depends.
 	 * 
 	 * <p>
-	 * This method is used to initialize {@link ModelPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed. Clients should not
+	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -156,13 +154,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public static ModelPackage init() {
 		if (isInited)
-			return (ModelPackage) EPackage.Registry.INSTANCE
-					.getEPackage(ModelPackage.eNS_URI);
+			return (ModelPackage) EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new ModelPackageImpl());
+		ModelPackageImpl theModelPackage = (ModelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+			.get(eNS_URI) : new ModelPackageImpl());
 
 		isInited = true;
 
@@ -171,33 +167,28 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Obtain or create and register interdependencies
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI)
-				: VersioningPackage.eINSTANCE);
+			.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(VersioningPackage.eNS_URI) : VersioningPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI)
-				: OperationsPackage.eINSTANCE);
+			.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI)
-				: SemanticPackage.eINSTANCE);
+			.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(SemanticPackage.eNS_URI) : SemanticPackage.eINSTANCE);
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
+			.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
+			.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI)
-				: AccesscontrolPackage.eINSTANCE);
+			.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
-		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
+		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
@@ -244,8 +235,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectHistory_ProjectId() {
-		return (EReference) projectHistoryEClass.getEStructuralFeatures()
-				.get(0);
+		return (EReference) projectHistoryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -254,8 +244,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectHistory_Versions() {
-		return (EReference) projectHistoryEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) projectHistoryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -264,8 +253,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectHistory_ProjectName() {
-		return (EAttribute) projectHistoryEClass.getEStructuralFeatures()
-				.get(2);
+		return (EAttribute) projectHistoryEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -274,8 +262,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectHistory_ProjectDescription() {
-		return (EAttribute) projectHistoryEClass.getEStructuralFeatures()
-				.get(3);
+		return (EAttribute) projectHistoryEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -284,8 +271,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectHistory_SharedProperties() {
-		return (EReference) projectHistoryEClass.getEStructuralFeatures()
-				.get(4);
+		return (EReference) projectHistoryEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -294,8 +280,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getProjectHistory_Branches() {
-		return (EReference) projectHistoryEClass.getEStructuralFeatures()
-				.get(5);
+		return (EReference) projectHistoryEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -439,8 +424,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getClientVersionInfo_Version() {
-		return (EAttribute) clientVersionInfoEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) clientVersionInfoEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -449,8 +433,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getClientVersionInfo_Name() {
-		return (EAttribute) clientVersionInfoEClass.getEStructuralFeatures()
-				.get(1);
+		return (EAttribute) clientVersionInfoEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -477,8 +460,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getAuthenticationInformation_SessionId() {
-		return (EReference) authenticationInformationEClass
-				.getEStructuralFeatures().get(0);
+		return (EReference) authenticationInformationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -487,8 +469,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EReference getAuthenticationInformation_ResolvedACUser() {
-		return (EReference) authenticationInformationEClass
-				.getEStructuralFeatures().get(1);
+		return (EReference) authenticationInformationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -524,10 +505,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(projectHistoryEClass, PROJECT_HISTORY__PROJECT_ID);
 		createEReference(projectHistoryEClass, PROJECT_HISTORY__VERSIONS);
 		createEAttribute(projectHistoryEClass, PROJECT_HISTORY__PROJECT_NAME);
-		createEAttribute(projectHistoryEClass,
-				PROJECT_HISTORY__PROJECT_DESCRIPTION);
-		createEReference(projectHistoryEClass,
-				PROJECT_HISTORY__SHARED_PROPERTIES);
+		createEAttribute(projectHistoryEClass, PROJECT_HISTORY__PROJECT_DESCRIPTION);
+		createEReference(projectHistoryEClass, PROJECT_HISTORY__SHARED_PROPERTIES);
 		createEReference(projectHistoryEClass, PROJECT_HISTORY__BRANCHES);
 
 		projectInfoEClass = createEClass(PROJECT_INFO);
@@ -547,8 +526,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		projectIdEClass = createEClass(PROJECT_ID);
 
 		versionInfoEClass = createEClass(VERSION_INFO);
-		createEAttribute(versionInfoEClass,
-				VERSION_INFO__EMF_STORE_VERSION_STRING);
+		createEAttribute(versionInfoEClass, VERSION_INFO__EMF_STORE_VERSION_STRING);
 
 		clientVersionInfoEClass = createEClass(CLIENT_VERSION_INFO);
 		createEAttribute(clientVersionInfoEClass, CLIENT_VERSION_INFO__VERSION);
@@ -557,10 +535,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		fileIdentifierEClass = createEClass(FILE_IDENTIFIER);
 
 		authenticationInformationEClass = createEClass(AUTHENTICATION_INFORMATION);
-		createEReference(authenticationInformationEClass,
-				AUTHENTICATION_INFORMATION__SESSION_ID);
-		createEReference(authenticationInformationEClass,
-				AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
+		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__SESSION_ID);
+		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
 	}
 
 	/**
@@ -589,13 +565,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Obtain other dependent packages
 		VersioningPackage theVersioningPackage = (VersioningPackage) EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI);
+			.getEPackage(VersioningPackage.eNS_URI);
 		AccesscontrolPackage theAccesscontrolPackage = (AccesscontrolPackage) EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI);
-		UrlPackage theUrlPackage = (UrlPackage) EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI);
+			.getEPackage(AccesscontrolPackage.eNS_URI);
+		UrlPackage theUrlPackage = (UrlPackage) EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI);
 		org.eclipse.emf.emfstore.common.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.common.model.ModelPackage) EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.common.model.ModelPackage.eNS_URI);
+			.getEPackage(org.eclipse.emf.emfstore.common.model.ModelPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVersioningPackage);
@@ -607,135 +582,93 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		sessionIdEClass.getESuperTypes().add(
-				theModelPackage_1.getUniqueIdentifier());
-		projectIdEClass.getESuperTypes().add(
-				theModelPackage_1.getUniqueIdentifier());
-		fileIdentifierEClass.getESuperTypes().add(
-				theModelPackage_1.getIdentifiableElement());
+		sessionIdEClass.getESuperTypes().add(theModelPackage_1.getUniqueIdentifier());
+		projectIdEClass.getESuperTypes().add(theModelPackage_1.getUniqueIdentifier());
+		fileIdentifierEClass.getESuperTypes().add(theModelPackage_1.getIdentifiableElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(projectHistoryEClass, ProjectHistory.class,
-				"ProjectHistory", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProjectHistory_ProjectId(), this.getProjectId(),
-				null, "projectId", null, 0, 1, ProjectHistory.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getProjectHistory_Versions(),
-				theVersioningPackage.getVersion(), null, "versions", null, 1,
-				-1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProjectHistory_ProjectName(),
-				ecorePackage.getEString(), "projectName", null, 1, 1,
-				ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getProjectHistory_ProjectDescription(),
-				ecorePackage.getEString(), "projectDescription", null, 1, 1,
-				ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getProjectHistory_SharedProperties(),
-				theModelPackage_1.getEMFStoreProperty(), null,
-				"sharedProperties", null, 0, -1, ProjectHistory.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getProjectHistory_Branches(),
-				theVersioningPackage.getBranchInfo(), null, "branches", null,
-				0, -1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(projectHistoryEClass, ProjectHistory.class, "ProjectHistory", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProjectHistory_ProjectId(), this.getProjectId(), null, "projectId", null, 0, 1,
+			ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectHistory_Versions(), theVersioningPackage.getVersion(), null, "versions", null, 1, -1,
+			ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProjectHistory_ProjectName(), ecorePackage.getEString(), "projectName", null, 1, 1,
+			ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProjectHistory_ProjectDescription(), ecorePackage.getEString(), "projectDescription", null,
+			1, 1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectHistory_SharedProperties(), theModelPackage_1.getEMFStoreProperty(), null,
+			"sharedProperties", null, 0, -1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectHistory_Branches(), theVersioningPackage.getBranchInfo(), null, "branches", null, 0,
+			-1, ProjectHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(projectInfoEClass, ProjectInfo.class, "ProjectInfo",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProjectInfo_Name(), ecorePackage.getEString(),
-				"name", null, 1, 1, ProjectInfo.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProjectInfo_Description(), ecorePackage.getEString(),
-				"description", null, 0, 1, ProjectInfo.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectInfo_ProjectId(), this.getProjectId(), null,
-				"projectId", null, 1, 1, ProjectInfo.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectInfo_Version(),
-				theVersioningPackage.getPrimaryVersionSpec(), null, "version",
-				null, 1, 1, ProjectInfo.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(projectInfoEClass, ProjectInfo.class, "ProjectInfo", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProjectInfo_Name(), ecorePackage.getEString(), "name", null, 1, 1, ProjectInfo.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProjectInfo_Description(), ecorePackage.getEString(), "description", null, 0, 1,
+			ProjectInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectInfo_ProjectId(), this.getProjectId(), null, "projectId", null, 1, 1,
+			ProjectInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectInfo_Version(), theVersioningPackage.getPrimaryVersionSpec(), null, "version", null,
+			1, 1, ProjectInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sessionIdEClass, SessionId.class, "SessionId", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sessionIdEClass, SessionId.class, "SessionId", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(serverSpaceEClass, ServerSpace.class, "ServerSpace",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getServerSpace_Groups(),
-				theAccesscontrolPackage.getACGroup(), null, "groups", null, 0,
-				-1, ServerSpace.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getServerSpace_Projects(), this.getProjectHistory(),
-				null, "projects", null, 0, -1, ServerSpace.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getServerSpace_OpenSessions(), this.getSessionId(),
-				null, "openSessions", null, 0, -1, ServerSpace.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getServerSpace_Users(),
-				theAccesscontrolPackage.getACUser(), null, "users", null, 0,
-				-1, ServerSpace.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(serverSpaceEClass, ServerSpace.class, "ServerSpace", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getServerSpace_Groups(), theAccesscontrolPackage.getACGroup(), null, "groups", null, 0, -1,
+			ServerSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServerSpace_Projects(), this.getProjectHistory(), null, "projects", null, 0, -1,
+			ServerSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServerSpace_OpenSessions(), this.getSessionId(), null, "openSessions", null, 0, -1,
+			ServerSpace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getServerSpace_Users(), theAccesscontrolPackage.getACUser(), null, "users", null, 0, -1,
+			ServerSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(projectIdEClass, ProjectId.class, "ProjectId", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(projectIdEClass, ProjectId.class, "ProjectId", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(versionInfoEClass, VersionInfo.class, "VersionInfo",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVersionInfo_EmfStoreVersionString(),
-				ecorePackage.getEString(), "emfStoreVersionString", null, 0, 1,
-				VersionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(versionInfoEClass, VersionInfo.class, "VersionInfo", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVersionInfo_EmfStoreVersionString(), ecorePackage.getEString(), "emfStoreVersionString",
+			null, 0, 1, VersionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(clientVersionInfoEClass, ClientVersionInfo.class,
-				"ClientVersionInfo", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getClientVersionInfo_Version(),
-				ecorePackage.getEString(), "version", null, 0, 1,
-				ClientVersionInfo.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getClientVersionInfo_Name(), ecorePackage.getEString(),
-				"name", null, 0, 1, ClientVersionInfo.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(clientVersionInfoEClass, ClientVersionInfo.class, "ClientVersionInfo", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClientVersionInfo_Version(), ecorePackage.getEString(), "version", null, 0, 1,
+			ClientVersionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClientVersionInfo_Name(), ecorePackage.getEString(), "name", null, 0, 1,
+			ClientVersionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
-		initEClass(fileIdentifierEClass, FileIdentifier.class,
-				"FileIdentifier", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(fileIdentifierEClass, FileIdentifier.class, "FileIdentifier", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(authenticationInformationEClass,
-				AuthenticationInformation.class, "AuthenticationInformation",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAuthenticationInformation_SessionId(),
-				this.getSessionId(), null, "sessionId", null, 0, 1,
-				AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAuthenticationInformation_ResolvedACUser(),
-				theAccesscontrolPackage.getACUser(), null, "resolvedACUser",
-				null, 0, 1, AuthenticationInformation.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(authenticationInformationEClass, AuthenticationInformation.class, "AuthenticationInformation",
+			!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAuthenticationInformation_SessionId(), this.getSessionId(), null, "sessionId", null, 0, 1,
+			AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAuthenticationInformation_ResolvedACUser(), theAccesscontrolPackage.getACUser(), null,
+			"resolvedACUser", null, 0, 1, AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -45,9 +46,10 @@ public interface UpdateCallback {
 	 * 
 	 * @param changeConflictException
 	 *            the exception that caused the conflict between the local and the remote changes
+	 * @param progressMonitor a progress monitor to report on progress
 	 * @return true, if the conflict has been resolved, false otherwise
 	 */
-	boolean conflictOccurred(ChangeConflictException changeConflictException);
+	boolean conflictOccurred(ChangeConflictException changeConflictException, IProgressMonitor progressMonitor);
 
 	/**
 	 * A default implementation of an update callback that does nothing and default
@@ -62,7 +64,8 @@ public interface UpdateCallback {
 		public void noChangesOnServer() {
 		}
 
-		public boolean conflictOccurred(ChangeConflictException changeConflictException) {
+		public boolean conflictOccurred(ChangeConflictException changeConflictException,
+			IProgressMonitor progressMonitor) {
 			return false;
 		}
 	};

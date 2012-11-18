@@ -285,7 +285,7 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 * @generated NOT
 	 */
 	public void save() throws IOException {
-		this.resource.save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 	}
 
 	/**

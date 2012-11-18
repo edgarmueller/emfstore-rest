@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author emueller
  * 
  */
-public interface IdEObjectCollection extends EObject {
+public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMapping {
 
 	/**
 	 * Adds the given model element to the collection.
@@ -114,26 +114,6 @@ public interface IdEObjectCollection extends EObject {
 	Set<EObject> getAllModelElements();
 
 	/**
-	 * Initializes the ID caches of the collection, i.e. the collection will
-	 * call {@link IdEObjectCollection#getModelElements()} and for each model
-	 * element the {@link ModelElementId} is fetched via {@link IdEObjectCollection#getModelElementId(EObject)}. Then a
-	 * mapping
-	 * between the model element and its {@link ModelElementId} is created
-	 * within the cache.
-	 */
-	void initCaches();
-
-	/**
-	 * Initializes the ID caches of the project with the given mappings.
-	 * 
-	 * @param eObjectToIdMap
-	 *            a mapping from EObjects to IDs
-	 * @param idToEObjectMap
-	 *            the reverse mapping of <code>eObjectToIdMap</code>
-	 */
-	void initCaches(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap);
-
-	/**
 	 * Retrieve a list of all model elements of a certain type in the
 	 * collection.
 	 * 
@@ -191,5 +171,25 @@ public interface IdEObjectCollection extends EObject {
 	 * @param eObjectToIdMap
 	 *            a map containing the model elements and the IDs
 	 */
-	void preAssignModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
+	void allocateModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
+
+	/**
+	 * Initializes the ID caches of the project with the given mappings.
+	 * 
+	 * @param eObjectToIdMap
+	 *            a mapping from EObjects to IDs
+	 * @param idToEObjectMap
+	 *            the reverse mapping of <code>eObjectToIdMap</code>
+	 */
+	void initMapping(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap);
+
+	/**
+	 * Initializes the ID caches of the collection, i.e. the collection will
+	 * call {@link IdEObjectCollection#getModelElements()} and for each model
+	 * element the {@link ModelElementId} is fetched via {@link IdEObjectCollection#getModelElementId(EObject)}. Then a
+	 * mapping
+	 * between the model element and its {@link ModelElementId} is created
+	 * within the cache.
+	 */
+	void initMapping();
 }

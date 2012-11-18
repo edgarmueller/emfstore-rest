@@ -21,8 +21,8 @@ import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Project Url Fragment</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Project Url Fragment</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -37,8 +37,7 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * 
  * @generated
  */
-public class ProjectUrlFragmentImpl extends EObjectImpl implements
-		ProjectUrlFragment {
+public class ProjectUrlFragmentImpl extends EObjectImpl implements ProjectUrlFragment {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -106,8 +105,7 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					UrlPackage.PROJECT_URL_FRAGMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.PROJECT_URL_FRAGMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -121,24 +119,17 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 			projectId = (ProjectId) eResolveProxy(oldProjectId);
 			if (projectId != oldProjectId) {
 				InternalEObject newProjectId = (InternalEObject) projectId;
-				NotificationChain msgs = oldProjectId.eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
-						null, null);
+				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, null, null);
 				if (newProjectId.eInternalContainer() == null) {
-					msgs = newProjectId
-							.eInverseAdd(
-									this,
-									EOPPOSITE_FEATURE_BASE
-											- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
-									null, msgs);
+					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
-							oldProjectId, projectId));
+						UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, oldProjectId, projectId));
 			}
 		}
 		return projectId;
@@ -158,15 +149,12 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetProjectId(ProjectId newProjectId,
-			NotificationChain msgs) {
+	public NotificationChain basicSetProjectId(ProjectId newProjectId, NotificationChain msgs) {
 		ProjectId oldProjectId = projectId;
 		projectId = newProjectId;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, oldProjectId,
-					newProjectId);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, oldProjectId, newProjectId);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -184,22 +172,17 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 		if (newProjectId != projectId) {
 			NotificationChain msgs = null;
 			if (projectId != null)
-				msgs = ((InternalEObject) projectId).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
-						null, msgs);
+				msgs = ((InternalEObject) projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, null, msgs);
 			if (newProjectId != null)
-				msgs = ((InternalEObject) newProjectId).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
-						null, msgs);
+				msgs = ((InternalEObject) newProjectId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, null, msgs);
 			msgs = basicSetProjectId(newProjectId, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID, newProjectId,
-					newProjectId));
+			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID,
+				newProjectId, newProjectId));
 	}
 
 	/**
@@ -208,8 +191,7 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID:
 			return basicSetProjectId(null, msgs);
@@ -280,8 +262,7 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case UrlPackage.PROJECT_URL_FRAGMENT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case UrlPackage.PROJECT_URL_FRAGMENT__PROJECT_ID:
 			return projectId != null;
 		}

@@ -16,15 +16,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Operation Id</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Operation Id</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class OperationIdImpl extends UniqueIdentifierImpl implements
-		OperationId {
+public class OperationIdImpl extends UniqueIdentifierImpl implements OperationId {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

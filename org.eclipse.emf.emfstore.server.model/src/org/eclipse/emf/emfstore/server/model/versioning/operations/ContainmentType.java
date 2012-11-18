@@ -17,8 +17,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc --> A representation of the literals of the enumeration '
- * <em><b>Containment Type</b></em>', and utility methods for working with them.
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration ' <em><b>Containment Type</b></em>', and
+ * utility methods for working with them.
  * <!-- end-user-doc -->
  * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getContainmentType()
@@ -59,8 +59,8 @@ public enum ContainmentType implements Enumerator {
 	/**
 	 * The '<em><b>NONE</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -74,8 +74,8 @@ public enum ContainmentType implements Enumerator {
 	/**
 	 * The '<em><b>CONTAINER</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CONTAINER</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>CONTAINER</b></em>' literal object isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -89,8 +89,8 @@ public enum ContainmentType implements Enumerator {
 	/**
 	 * The '<em><b>CONTAINMENT</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CONTAINMENT</b></em>' literal object isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of '<em><b>CONTAINMENT</b></em>' literal object isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -107,8 +107,7 @@ public enum ContainmentType implements Enumerator {
 	 * 
 	 * @generated
 	 */
-	private static final ContainmentType[] VALUES_ARRAY = new ContainmentType[] {
-			NONE, CONTAINER, CONTAINMENT, };
+	private static final ContainmentType[] VALUES_ARRAY = new ContainmentType[] { NONE, CONTAINER, CONTAINMENT, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Containment Type</b></em>'
@@ -116,8 +115,7 @@ public enum ContainmentType implements Enumerator {
 	 * 
 	 * @generated
 	 */
-	public static final List<ContainmentType> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ContainmentType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Containment Type</b></em>' literal with the specified

@@ -40,9 +40,12 @@ public class UpdateDialog extends TitleAreaDialog {
 	/**
 	 * Constructor.
 	 * 
-	 * @param parentShell the parent shell
-	 * @param projectSpace the project space that should be updated
-	 * @param changes the list of changes
+	 * @param parentShell
+	 *            the parent shell
+	 * @param projectSpace
+	 *            the project space that should be updated
+	 * @param changes
+	 *            the list of changes
 	 */
 	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes) {
 		super(parentShell);
@@ -75,10 +78,13 @@ public class UpdateDialog extends TitleAreaDialog {
 		}
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
+		int rootCount = 0;
 		for (ChangePackage changePackage : changes) {
-			operationCount += changePackage.getOperations().size();
+			rootCount += changePackage.getOperations().size();
+			operationCount += changePackage.getSize();
 		}
-		setMessage(changes.size() + " version(s) " + " with a total of " + operationCount + " change(s)");
+		setMessage("Number of versions: " + changes.size() + ", Number of composite changes: " + rootCount
+			+ ", Number of overall changes: " + operationCount);
 		return contents;
 
 	}

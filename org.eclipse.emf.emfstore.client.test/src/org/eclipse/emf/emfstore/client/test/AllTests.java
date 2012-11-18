@@ -1,9 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
-
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
 import org.eclipse.emf.emfstore.client.test.caching.AllCachingTests;
@@ -12,6 +16,7 @@ import org.eclipse.emf.emfstore.client.test.common.observerbus.AllObserverBusTes
 import org.eclipse.emf.emfstore.client.test.conflictDetection.AllConflictDetectionTests;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.merging.AllMergeTests;
 import org.eclipse.emf.emfstore.client.test.persistence.PersistenceTest;
+import org.eclipse.emf.emfstore.client.test.persistence.ProjectCacheTest;
 import org.eclipse.emf.emfstore.client.test.server.AllServerTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,7 +30,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
 	AllServerTests.class,
 	// AllIntegrationTests.class,
-	AllObserverBusTests.class, AllMergeTests.class, PersistenceTest.class })
+	AllObserverBusTests.class, AllMergeTests.class, ProjectCacheTest.class, PersistenceTest.class })
 public class AllTests {
 
 }

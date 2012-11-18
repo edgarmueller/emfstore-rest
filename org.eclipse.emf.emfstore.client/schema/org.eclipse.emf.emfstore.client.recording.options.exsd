@@ -83,7 +83,7 @@
          <attribute name="denyAddCutElementsToModelElements" type="boolean">
             <annotation>
                <documentation>
-                  Should the operation recording automatically add elements, which are in the cut elements, to the model elements? If false, an exception will thrown if there are still objects in the cut elements at the end of the command.
+                  Operation recording automatically retains elements in the project (by adding them to the project´s model element containment reference), which are still referenced by other elements in the project, but have been removed from the project containment tree. If true, an exception will thrown instead of retaining the elements, default is false.
                </documentation>
             </annotation>
          </attribute>

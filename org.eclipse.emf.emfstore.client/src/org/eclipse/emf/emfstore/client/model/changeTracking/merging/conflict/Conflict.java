@@ -11,8 +11,10 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -43,9 +45,11 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @see #Conflict(List, List, DecisionManager)
 	 */
-	private List<AbstractOperation> leftOperations;
-	private List<AbstractOperation> rightOperations;
+	private Set<AbstractOperation> leftOperations;
+	private Set<AbstractOperation> rightOperations;
 	private boolean leftIsMy;
+	private AbstractOperation rightOperation;
+	private AbstractOperation leftOperation;
 
 	/**
 	 * Default constructor for conflicts. Many conflicts only need one operation
@@ -59,12 +63,16 @@ public abstract class Conflict extends Observable {
 	 *            first list of operations (often: myOperations)
 	 * @param rightOperations
 	 *            second list of operations (often: theirOperations)
+	 * @param leftOperation an operation representing all left operations
+	 * @param rightOperation an operation representing all right operations
 	 * @param decisionManager
 	 *            decision manager
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager) {
-		this(leftOperations, rightOperations, decisionManager, true, true);
+	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		this(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, true, true);
+		this.leftOperation = leftOperation;
+		this.rightOperation = rightOperation;
 	}
 
 	/**
@@ -75,6 +83,8 @@ public abstract class Conflict extends Observable {
 	 *            first list of operations (often: myOperations)
 	 * @param rightOperations
 	 *            second list of operations (often: theirOperations)
+	 * @param leftOperation an operation representing all left operations
+	 * @param rightOperation an operation representing all right operations
 	 * @param decisionManager
 	 *            decision manager
 	 * @param leftIsMy
@@ -83,12 +93,16 @@ public abstract class Conflict extends Observable {
 	 *            allows to deactivate initialization, has to be done manually
 	 *            otherwise.
 	 */
-	public Conflict(List<AbstractOperation> leftOperations, List<AbstractOperation> rightOperations,
-		DecisionManager decisionManager, boolean leftIsMy, boolean init) {
+	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean leftIsMy, boolean init) {
+		this.leftOperation = leftOperation;
+		this.rightOperation = rightOperation;
 		this.leftIsMy = leftIsMy;
 		this.leftOperations = leftOperations;
 		this.rightOperations = rightOperations;
 		this.decisionManager = decisionManager;
+
 		if (init) {
 			init();
 		}
@@ -267,12 +281,12 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of ops.
 	 */
-	public List<AbstractOperation> getRejectedTheirs() {
+	public Set<AbstractOperation> getRejectedTheirs() {
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
-			return new ArrayList<AbstractOperation>();
+			return Collections.emptySet();
 		} else {
 			for (ConflictOption options : getOptions()) {
 				if (options.getType() == OptionType.TheirOperation) {
@@ -290,12 +304,12 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of ops
 	 */
-	public List<AbstractOperation> getAcceptedMine() {
+	public Set<AbstractOperation> getAcceptedMine() {
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
 		if (solution.getType() == OptionType.TheirOperation) {
-			return new ArrayList<AbstractOperation>();
+			return Collections.emptySet();
 		} else {
 			return solution.getOperations();
 		}
@@ -317,7 +331,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getMyOperations() {
+	public Set<AbstractOperation> getMyOperations() {
 		return ((leftIsMy) ? leftOperations : rightOperations);
 	}
 
@@ -326,7 +340,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getTheirOperations() {
+	public Set<AbstractOperation> getTheirOperations() {
 		return ((!leftIsMy) ? leftOperations : rightOperations);
 	}
 
@@ -335,7 +349,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getLeftOperations() {
+	public Set<AbstractOperation> getLeftOperations() {
 		return leftOperations;
 	}
 
@@ -344,7 +358,7 @@ public abstract class Conflict extends Observable {
 	 * 
 	 * @return list of operations
 	 */
-	public List<AbstractOperation> getRightOperations() {
+	public Set<AbstractOperation> getRightOperations() {
 		return rightOperations;
 	}
 
@@ -354,7 +368,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getLeftOperation() {
-		return leftOperations.get(0);
+		return leftOperation;
 	}
 
 	/**
@@ -363,7 +377,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getRightOperation() {
-		return rightOperations.get(0);
+		return rightOperation;
 	}
 
 	/**
@@ -372,7 +386,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getMyOperation() {
-		return getMyOperations().get(0);
+		return ((leftIsMy) ? leftOperation : rightOperation);
 	}
 
 	/**
@@ -381,7 +395,7 @@ public abstract class Conflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getTheirOperation() {
-		return getTheirOperations().get(0);
+		return ((!leftIsMy) ? leftOperation : rightOperation);
 	}
 
 	/**

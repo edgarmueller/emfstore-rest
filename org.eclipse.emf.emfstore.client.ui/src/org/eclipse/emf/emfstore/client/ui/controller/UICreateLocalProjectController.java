@@ -8,7 +8,6 @@
  * 
  * Contributors:
  ******************************************************************************/
-
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;

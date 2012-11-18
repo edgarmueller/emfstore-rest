@@ -18,8 +18,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionProperty;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Version Property</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Version Property</b></em>'. <!-- end-user-doc
+ * -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -112,8 +112,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.VERSION_PROPERTY__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_PROPERTY__NAME, oldName,
+				name));
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.VERSION_PROPERTY__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_PROPERTY__VALUE, oldValue,
+				value));
 	}
 
 	/**
@@ -199,11 +199,9 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.VERSION_PROPERTY__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case VersioningPackage.VERSION_PROPERTY__VALUE:
-			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT
-					.equals(value);
+			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}

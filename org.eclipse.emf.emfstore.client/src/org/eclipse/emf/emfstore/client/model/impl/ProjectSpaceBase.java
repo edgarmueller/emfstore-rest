@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -62,10 +63,8 @@ import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -88,7 +87,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
  * Project space base class that contains custom user methods.
@@ -99,7 +97,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IDisposable {
+	IApplyChangesCallback, IApplyChangesWrapper, IDisposable {
 
 	private FileTransferManager fileTransferManager;
 
@@ -111,17 +109,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private OperationManager operationManager;
 
-	private OperationRecorder operationRecorder;
-
 	private PropertyManager propertyManager;
 
 	private HashMap<String, OrgUnitProperty> propertyMap;
 
-	private StatePersister statePersister;
-	private OperationPersister operationPersister;
+	private ResourcePersister resourcePersister;
 	private ECrossReferenceAdapter crossReferenceAdapter;
 
 	private ResourceSet resourceSet;
+
+	private IApplyChangesWrapper applyChangesWrapper;
+
+	private boolean disposed;
 
 	/**
 	 * Constructor.
@@ -130,6 +129,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		this.propertyMap = new HashMap<String, OrgUnitProperty>();
 		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
 		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
+
+		initApplyChangeWrapper();
+
+	}
+
+	private void initApplyChangeWrapper() {
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.wrapper.applychanges")
+			.setThrowException(false).getFirst();
+		if (extensionElement != null) {
+			applyChangesWrapper = extensionElement.getClass("class", IApplyChangesWrapper.class);
+		}
+		if (applyChangesWrapper == null) {
+			applyChangesWrapper = this;
+		}
 	}
 
 	/**
@@ -180,7 +193,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            merged changes
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
-		// revert
+
+		// revert local changes
 		revert();
 
 		// apply changes from repo. incoming (aka theirs)
@@ -195,31 +209,29 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will be
-	 * stopped meanwhile and the operations are added to the project space.
+	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesWrapper#wrapApplyChanges(org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback,
+	 *      org.eclipse.emf.emfstore.client.model.ProjectSpace, java.util.List)
 	 */
-	public void applyOperations(List<AbstractOperation> operations) {
-		applyOperations(operations, true);
+	public void wrapApplyChanges(IApplyChangesCallback callback, ProjectSpace projectSpace,
+		List<AbstractOperation> operations, boolean addOperations) {
+		// default implementation does not wrapping
+		this.applyChangesIntern(projectSpace, operations, addOperations);
 	}
 
 	/**
-	 * Applies a list of operations to the project. The change tracking will be
-	 * stopped meanwhile.
+	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
 	 * 
+	 * {@inheritDoc}
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
-	 * @param addOperations
-	 *            whether the operations should be saved in project space
-	 * 
-	 * @see #applyOperationsWithRecording(List, boolean)
+	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback#applyChangesIntern(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      java.util.List, boolean)
 	 */
-	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
+	public void applyChangesIntern(ProjectSpace projectSpace, List<AbstractOperation> operations, boolean addOperations) {
 		stopChangeRecording();
-
 		try {
 			for (AbstractOperation operation : operations) {
 				try {
@@ -240,47 +252,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Applies a list of operations to the project. This method is used by {@link #importLocalChanges(String)}. This
-	 * method redirects to {@link #applyOperationsWithRecording(List, boolean, boolean)}, using
-	 * false for semantic apply.
+	 * Applies a list of operations to the project. The change tracking will be
+	 * stopped meanwhile.
+	 * 
 	 * 
 	 * @param operations
 	 *            the list of operations to be applied upon the project space
-	 * @param force
-	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
-	 */
-	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force) {
-		applyOperationsWithRecording(operations, force, false);
-	}
-
-	/**
-	 * Applies a list of operations to the project. It is possible to force
-	 * import operations. Change tracking is not stopped while applying the
-	 * changes.
+	 * @param addOperations
+	 *            whether the operations should be saved in project space
 	 * 
-	 * @param operations
-	 *            the list of operations to be applied upon the project space
-	 * @param force
-	 *            if true, no exception is thrown if
-	 *            {@link AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)} fails
-	 * @param semanticApply
-	 *            if true, performs a semanticApply, if possible (see {@link SemanticCompositeOperation})
+	 * @see #applyOperationsWithRecording(List, boolean)
 	 */
-	public void applyOperationsWithRecording(List<AbstractOperation> operations, boolean force, boolean semanticApply) {
-		for (AbstractOperation operation : operations) {
-			try {
-				if (semanticApply && operation instanceof SemanticCompositeOperation) {
-					((SemanticCompositeOperation) operation).semanticApply(getProject());
-				} else {
-					operation.apply(getProject());
-				}
-			} catch (IllegalStateException e) {
-				if (!force) {
-					throw e;
-				}
-			}
-		}
+	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
+		applyChangesWrapper.wrapApplyChanges(this, this, operations, addOperations);
 	}
 
 	/**
@@ -449,7 +433,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @return the recorder
 	 */
 	public NotificationRecorder getNotificationRecorder() {
-		return this.operationRecorder.getNotificationRecorder();
+		return this.operationManager.getNotificationRecorder();
 	}
 
 	/**
@@ -483,7 +467,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void migrateOperations(ChangePackage localChangePackage) {
 
-		if (getLocalOperations() == null || isTransient()) {
+		if (getLocalOperations() == null || getLocalOperations().getOperations().size() == 0 || isTransient()) {
 			return;
 		}
 
@@ -492,6 +476,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		Resource eResource = getLocalOperations().eResource();
 		// if for some reason the resource of project space and operations
 		// are not different, then reinitialize operations URI
+		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
 			String localChangePackageFileName = Configuration.getWorkspaceDirectory()
 				+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
@@ -566,7 +551,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		ChangePackage changePackage = (ChangePackage) directContents.get(0);
-		applyOperationsWithRecording(changePackage.getOperations(), true);
+		applyOperations(changePackage.getOperations(), true);
 	}
 
 	/**
@@ -575,50 +560,41 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#init()
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	public void init() {
-		boolean useCrossReferenceAdapter = true;
+		initCrossReferenceAdapter();
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
-			.getExtensionElements()) {
-			useCrossReferenceAdapter &= element.getBoolean("activated");
-		}
-
-		if (useCrossReferenceAdapter) {
-			crossReferenceAdapter = new ECrossReferenceAdapter();
-			getProject().eAdapters().add(crossReferenceAdapter);
-		}
-
-		EObjectChangeNotifier changeNotifier = getProject().getChangeNotifier();
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
 
 		initCompleted = true;
 		fileTransferManager = new FileTransferManager(this);
 
-		operationRecorder = new OperationRecorder(this, changeNotifier);
-		operationManager = new OperationManager(operationRecorder);
+		operationManager = new OperationManager(this);
 		operationManager.addOperationListener(modifiedModelElementsCache);
-		operationRecorder.addOperationRecorderListener(operationManager);
 
-		statePersister = new StatePersister(
-			((EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack()),
-			(IdEObjectCollectionImpl) this.getProject());
-		statePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
-		operationPersister = new OperationPersister(this);
+		initResourcePersister();
 
-		commandStack.addCommandStackObserver(operationRecorder);
-		commandStack.addCommandStackObserver(statePersister);
-		commandStack.addCommandStackObserver(operationPersister);
+		commandStack.addCommandStackObserver(operationManager);
+		commandStack.addCommandStackObserver(resourcePersister);
 
 		// initialization order is important!
-		getProject().addIdEObjectCollectionChangeObserver(this.operationRecorder);
-		getProject().addIdEObjectCollectionChangeObserver(statePersister);
+		getProject().addIdEObjectCollectionChangeObserver(operationManager);
+		getProject().addIdEObjectCollectionChangeObserver(resourcePersister);
 
 		if (getProject() instanceof ProjectImpl) {
-			((ProjectImpl) this.getProject()).setUndetachable(operationRecorder);
-			((ProjectImpl) this.getProject()).setUndetachable(statePersister);
+			((ProjectImpl) this.getProject()).setUndetachable(operationManager);
+			((ProjectImpl) this.getProject()).setUndetachable(resourcePersister);
 		}
 
+		initPropertyMap();
+
+		modifiedModelElementsCache.initializeCache();
+		startChangeRecording();
+		cleanCutElements();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void initPropertyMap() {
+		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {
 			WorkspaceManager.getObserverBus().register(this, LoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
@@ -630,10 +606,35 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				}
 			}
 		}
+	}
 
-		modifiedModelElementsCache.initializeCache();
-		startChangeRecording();
-		cleanCutElements();
+	private void initCrossReferenceAdapter() {
+
+		// default
+		boolean useCrossReferenceAdapter = true;
+
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
+			.getExtensionElements()) {
+			useCrossReferenceAdapter &= element.getBoolean("activated");
+		}
+
+		if (useCrossReferenceAdapter) {
+			crossReferenceAdapter = new ECrossReferenceAdapter();
+			getProject().eAdapters().add(crossReferenceAdapter);
+		}
+	}
+
+	private void initResourcePersister() {
+
+		resourcePersister = new ResourcePersister(getProject());
+
+		if (!isTransient) {
+			resourcePersister.addResource(this.eResource());
+			resourcePersister.addResource(getLocalChangePackage().eResource());
+			resourcePersister.addResource(getProject().eResource());
+			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+			WorkspaceManager.getObserverBus().register(resourcePersister);
+		}
 	}
 
 	/**
@@ -695,7 +696,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// save all resources that have been created
 		for (Resource currentResource : resources) {
 			try {
-				currentResource.save(ModelUtil.getResourceSaveOptions());
+				ModelUtil.saveResource(currentResource, WorkspaceUtil.getResourceLogger());
 			} catch (IOException e) {
 				WorkspaceUtil.logException("Project Space resource init failed!", e);
 			}
@@ -711,20 +712,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void delete() throws IOException {
-		dispose();
+
 		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
 			+ getIdentifier();
-		List<Resource> toDelete = new ArrayList<Resource>();
 
-		for (Resource resource : resourceSet.getResources()) {
-			if (resource.getURI().toFileString().startsWith(pathToProject)) {
-				toDelete.add(resource);
-			}
-		}
+		resourceSet.getResources().remove(getProject().eResource());
+		resourceSet.getResources().remove(eResource());
+		resourceSet.getResources().remove(getLocalChangePackage().eResource());
 
-		for (Resource resource : toDelete) {
-			resource.delete(null);
-		}
+		dispose();
+
+		getProject().eResource().delete(null);
+		eResource().delete(null);
+		getLocalChangePackage().eResource().delete(null);
 
 		// delete folder of project space
 		FileUtil.deleteDirectory(new File(pathToProject), true);
@@ -823,15 +823,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @return
 	 */
 	// TODO BRANCH rewrite
-	public boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException {
+	public boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage,
+		List<ChangePackage> newChangePackages, ConflictResolver conflictResolver, IProgressMonitor progressMonitor)
+		throws EmfStoreException {
 		// merge the conflicts
-		ChangePackage myCp = this.getLocalChangePackage(true);
-		List<ChangePackage> theirCps = this.getChanges(getBaseVersion(), target);
-		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myCp), theirCps, getBaseVersion(), target)) {
+		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myChangePackage), newChangePackages,
+			getBaseVersion(), target)) {
+			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, theirCps, mergedResult);
+			applyChanges(target, newChangePackages, mergedResult);
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -945,7 +948,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void save() {
 		saveProjectSpaceOnly();
 		saveChangePackage();
-		statePersister.saveDirtyResources(true);
+		resourcePersister.saveDirtyResources(true);
 	}
 
 	/**
@@ -954,7 +957,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasUnsavedChanges()
 	 */
 	public boolean hasUnsavedChanges() {
-		return statePersister.isDirty();
+		return resourcePersister.isDirty();
 	}
 
 	private void saveChangePackage() {
@@ -979,7 +982,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				}
 				return;
 			}
-			resource.save(ModelUtil.getResourceSaveOptions());
+			ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException("An error in the data was detected during save!"
 				+ " The safest way to deal with this problem is to delete this project and checkout again.", e);
@@ -1050,7 +1053,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void startChangeRecording() {
-		this.operationRecorder.startChangeRecording();
+		operationManager.startChangeRecording();
 		updateDirtyState();
 	}
 
@@ -1061,8 +1064,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void stopChangeRecording() {
-		if (operationRecorder != null) {
-			this.operationRecorder.stopChangeRecording();
+		if (operationManager != null) {
+			operationManager.stopChangeRecording();
 		}
 	}
 
@@ -1119,17 +1122,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		if (!this.getOperations().isEmpty()) {
 			List<AbstractOperation> operations = this.getOperations();
 			AbstractOperation lastOperation = operations.get(operations.size() - 1);
-			stopChangeRecording();
-			try {
-				lastOperation.reverse().apply(getProject());
-				operationManager.notifyOperationUndone(lastOperation);
-				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException exception) {
-				// END SUPRESS CATCH EXCEPTION
-				WorkspaceUtil.handleException(exception);
-			} finally {
-				startChangeRecording();
-			}
+
+			applyOperations(Collections.singletonList(lastOperation.reverse()), false);
+			operationManager.notifyOperationUndone(lastOperation);
+
 			operations.remove(lastOperation);
 			undoLastOperations(--numberOfOperations);
 		}
@@ -1184,27 +1180,32 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {
+
+		if (disposed) {
+			return;
+		}
+
 		stopChangeRecording();
-		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 
 		if (crossReferenceAdapter != null) {
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
 
-		operationManager.dispose();
-		operationManager = null;
-
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
-		commandStack.removeCommandStackObserver(operationRecorder);
-		commandStack.removeCommandStackObserver(statePersister);
-		commandStack.removeCommandStackObserver(operationPersister);
+		commandStack.removeCommandStackObserver(operationManager);
+		commandStack.removeCommandStackObserver(resourcePersister);
 
-		getProject().removeIdEObjectCollectionChangeObserver(operationRecorder);
-		getProject().removeIdEObjectCollectionChangeObserver(statePersister);
+		getProject().removeIdEObjectCollectionChangeObserver(operationManager);
+		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
+		WorkspaceManager.getObserverBus().unregister(resourcePersister);
 		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);
+
+		operationManager.dispose();
+		resourcePersister.dispose();
+		disposed = true;
 	}
 
 	/**

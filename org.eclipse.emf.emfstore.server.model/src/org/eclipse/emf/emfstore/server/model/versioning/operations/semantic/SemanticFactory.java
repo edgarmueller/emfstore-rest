@@ -27,7 +27,7 @@ public interface SemanticFactory extends EFactory {
 	 * @generated
 	 */
 	SemanticFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticFactoryImpl
-			.init();
+		.init();
 
 	/**
 	 * Returns the package supported by this factory. <!-- begin-user-doc -->

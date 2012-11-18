@@ -1,8 +1,13 @@
-/**
- * <copyright> Copyright (c) 2008-2009 Jonas Helming, Maximilian Koegel. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
- */
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
 
 import static org.junit.Assert.assertEquals;
@@ -45,7 +50,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
 
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -92,7 +97,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 			}
 		}.run(false);
 
@@ -140,7 +145,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 				section.getModelElements().add(actor);
-				getProjectSpace().getOperations().clear();
+				clearOperations();
 
 			}
 		}.run(false);

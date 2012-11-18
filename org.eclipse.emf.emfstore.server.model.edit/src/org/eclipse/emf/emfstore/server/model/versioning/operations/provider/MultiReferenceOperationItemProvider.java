@@ -32,15 +32,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class MultiReferenceOperationItemProvider extends
-		ReferenceOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class MultiReferenceOperationItemProvider extends ReferenceOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -76,16 +75,12 @@ public class MultiReferenceOperationItemProvider extends
 	 */
 	protected void addAddPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_MultiReferenceOperation_add_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_MultiReferenceOperation_add_feature",
-						"_UI_MultiReferenceOperation_type"),
-				OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__ADD,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiReferenceOperation_add_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_add_feature",
+				"_UI_MultiReferenceOperation_type"), OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__ADD, true,
+			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -96,35 +91,27 @@ public class MultiReferenceOperationItemProvider extends
 	 */
 	protected void addIndexPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_MultiReferenceOperation_index_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_MultiReferenceOperation_index_feature",
-						"_UI_MultiReferenceOperation_type"),
-				OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__INDEX,
-				true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_MultiReferenceOperation_index_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_index_feature",
+				"_UI_MultiReferenceOperation_type"), OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__INDEX, true,
+			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
+			childrenFeatures.add(OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -168,32 +155,23 @@ public class MultiReferenceOperationItemProvider extends
 		if (object instanceof MultiReferenceOperation) {
 			MultiReferenceOperation op = (MultiReferenceOperation) object;
 
-			boolean containment = op.getContainmentType().equals(
-					ContainmentType.CONTAINMENT);
+			boolean containment = op.getContainmentType().equals(ContainmentType.CONTAINMENT);
 			String featureType = AbstractOperationItemProvider.REFERENCE_TYPE_TAG_SEPARATOR;
 
-			String elemNames = getModelElementClassesAndNames(
-					op.getReferencedModelElements(), featureType);
-			String elementNameAndClass = getModelElementClassAndName(op
-					.getModelElementId());
-			String children = op.getReferencedModelElements().size() > 1 ? "children"
-					: "child";
+			String elemNames = getModelElementClassesAndNames(op.getReferencedModelElements(), featureType);
+			String elementNameAndClass = getModelElementClassAndName(op.getModelElementId());
+			String children = op.getReferencedModelElements().size() > 1 ? "children" : "child";
 			if (op.isAdd()) {
 				if (containment) {
-					return "Added " + elemNames + " as " + children + " in "
-							+ elementNameAndClass;
+					return "Added " + elemNames + " as " + children + " in " + elementNameAndClass;
 				} else {
-					return "Added " + elemNames + " to " + op.getFeatureName()
-							+ " in " + elementNameAndClass;
+					return "Added " + elemNames + " to " + op.getFeatureName() + " in " + elementNameAndClass;
 				}
 			} else {
 				if (containment) {
-					return "Removed " + elemNames + " as " + children + " in "
-							+ elementNameAndClass;
+					return "Removed " + elemNames + " as " + children + " in " + elementNameAndClass;
 				} else {
-					return "Removed " + elemNames + " from "
-							+ op.getFeatureName() + " in "
-							+ elementNameAndClass;
+					return "Removed " + elemNames + " from " + op.getFeatureName() + " in " + elementNameAndClass;
 				}
 			}
 
@@ -216,12 +194,10 @@ public class MultiReferenceOperationItemProvider extends
 		switch (notification.getFeatureID(MultiReferenceOperation.class)) {
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -235,14 +211,12 @@ public class MultiReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS,
-						ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add(createChildParameter(
+			OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS,
+			ModelFactory.eINSTANCE.createModelElementId()));
 	}
 
 }

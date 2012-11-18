@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementG
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Model Element Group</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Model Element Group</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -39,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * 
  * @generated
  */
-public class ModelElementGroupImpl extends EObjectImpl implements
-		ModelElementGroup {
+public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGroup {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -109,8 +108,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.MODEL_ELEMENT_GROUP__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.MODEL_ELEMENT_GROUP__NAME, oldName,
+				name));
 	}
 
 	/**
@@ -120,9 +119,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements
 	 */
 	public EList<ModelElementId> getModelElements() {
 		if (modelElements == null) {
-			modelElements = new EObjectResolvingEList<ModelElementId>(
-					ModelElementId.class, this,
-					OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS);
+			modelElements = new EObjectResolvingEList<ModelElementId>(ModelElementId.class, this,
+				OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS);
 		}
 		return modelElements;
 	}
@@ -157,8 +155,7 @@ public class ModelElementGroupImpl extends EObjectImpl implements
 			return;
 		case OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS:
 			getModelElements().clear();
-			getModelElements().addAll(
-					(Collection<? extends ModelElementId>) newValue);
+			getModelElements().addAll((Collection<? extends ModelElementId>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,8 +188,7 @@ public class ModelElementGroupImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case OperationsPackage.MODEL_ELEMENT_GROUP__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS:
 			return modelElements != null && !modelElements.isEmpty();
 		}

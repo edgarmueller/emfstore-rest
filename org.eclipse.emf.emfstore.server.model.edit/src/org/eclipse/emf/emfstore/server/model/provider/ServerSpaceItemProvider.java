@@ -31,15 +31,13 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.ServerSpace} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ServerSpace} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ServerSpaceItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ServerSpaceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -67,23 +65,19 @@ public class ServerSpaceItemProvider extends ItemProviderAdapter implements
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ModelPackage.Literals.SERVER_SPACE__GROUPS);
 			childrenFeatures.add(ModelPackage.Literals.SERVER_SPACE__PROJECTS);
-			childrenFeatures
-					.add(ModelPackage.Literals.SERVER_SPACE__OPEN_SESSIONS);
+			childrenFeatures.add(ModelPackage.Literals.SERVER_SPACE__OPEN_SESSIONS);
 			childrenFeatures.add(ModelPackage.Literals.SERVER_SPACE__USERS);
 		}
 		return childrenFeatures;
@@ -111,8 +105,7 @@ public class ServerSpaceItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ServerSpace"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ServerSpace"));
 	}
 
 	/**
@@ -143,8 +136,7 @@ public class ServerSpaceItemProvider extends ItemProviderAdapter implements
 		case ModelPackage.SERVER_SPACE__PROJECTS:
 		case ModelPackage.SERVER_SPACE__OPEN_SESSIONS:
 		case ModelPackage.SERVER_SPACE__USERS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -158,25 +150,20 @@ public class ServerSpaceItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.SERVER_SPACE__GROUPS,
-				AccesscontrolFactory.eINSTANCE.createACGroup()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.SERVER_SPACE__GROUPS,
+			AccesscontrolFactory.eINSTANCE.createACGroup()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.SERVER_SPACE__PROJECTS,
-				ModelFactory.eINSTANCE.createProjectHistory()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.SERVER_SPACE__PROJECTS,
+			ModelFactory.eINSTANCE.createProjectHistory()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.SERVER_SPACE__OPEN_SESSIONS,
-				ModelFactory.eINSTANCE.createSessionId()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.SERVER_SPACE__OPEN_SESSIONS,
+			ModelFactory.eINSTANCE.createSessionId()));
 
-		newChildDescriptors.add(createChildParameter(
-				ModelPackage.Literals.SERVER_SPACE__USERS,
-				AccesscontrolFactory.eINSTANCE.createACUser()));
+		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.SERVER_SPACE__USERS,
+			AccesscontrolFactory.eINSTANCE.createACUser()));
 	}
 
 	/**

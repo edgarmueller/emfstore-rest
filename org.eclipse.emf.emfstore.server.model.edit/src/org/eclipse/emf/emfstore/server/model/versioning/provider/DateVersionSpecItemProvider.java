@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class DateVersionSpecItemProvider extends VersionSpecItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class DateVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -71,16 +69,12 @@ public class DateVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	protected void addDatePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_DateVersionSpec_date_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_DateVersionSpec_date_feature",
-						"_UI_DateVersionSpec_type"),
-				VersioningPackage.Literals.DATE_VERSION_SPEC__DATE, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_DateVersionSpec_date_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_DateVersionSpec_date_feature",
+				"_UI_DateVersionSpec_type"), VersioningPackage.Literals.DATE_VERSION_SPEC__DATE, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -91,8 +85,7 @@ public class DateVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/DateVersionSpec"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateVersionSpec"));
 	}
 
 	/**
@@ -105,7 +98,7 @@ public class DateVersionSpecItemProvider extends VersionSpecItemProvider
 	public String getText(Object object) {
 		String label = ((DateVersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_DateVersionSpec_type")
-				: getString("_UI_DateVersionSpec_type") + " " + label;
+			: getString("_UI_DateVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -122,8 +115,7 @@ public class DateVersionSpecItemProvider extends VersionSpecItemProvider
 
 		switch (notification.getFeatureID(DateVersionSpec.class)) {
 		case VersioningPackage.DATE_VERSION_SPEC__DATE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -137,8 +129,7 @@ public class DateVersionSpecItemProvider extends VersionSpecItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

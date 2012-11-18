@@ -27,7 +27,7 @@ public interface AccesscontrolFactory extends EFactory {
 	 * @generated
 	 */
 	AccesscontrolFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.impl.AccesscontrolFactoryImpl
-			.init();
+		.init();
 
 	/**
 	 * Returns a new object of class '<em>AC User</em>'. <!-- begin-user-doc -->

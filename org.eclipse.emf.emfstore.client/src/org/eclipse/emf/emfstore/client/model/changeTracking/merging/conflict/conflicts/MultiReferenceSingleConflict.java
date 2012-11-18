@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.co
 import static org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -34,12 +35,15 @@ public class MultiReferenceSingleConflict extends Conflict {
 	 * 
 	 * @param leftOperations multi ref
 	 * @param rightOperations single ref
+	 * @param leftOperation the operation representing all left operations
+	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decision maanger
 	 * @param multiLeft multi is lef
 	 */
-	public MultiReferenceSingleConflict(List<AbstractOperation> leftOperations,
-		List<AbstractOperation> rightOperations, DecisionManager decisionManager, boolean multiLeft) {
-		super(leftOperations, rightOperations, decisionManager, multiLeft, true);
+	public MultiReferenceSingleConflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+		boolean multiLeft) {
+		super(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, multiLeft, true);
 	}
 
 	/**

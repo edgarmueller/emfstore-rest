@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Multi Attribute Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Multi Attribute Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +40,7 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Add</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Add</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Add</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -70,8 +69,8 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * list contents are of type {@link java.lang.Integer}. <!-- begin-user-doc
 	 * -->
 	 * <p>
-	 * If the meaning of the '<em>Indexes</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Indexes</em>' attribute list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -87,8 +86,8 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * list. The list contents are of type {@link java.lang.Object}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Values</em>' attribute list isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Referenced Values</em>' attribute list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

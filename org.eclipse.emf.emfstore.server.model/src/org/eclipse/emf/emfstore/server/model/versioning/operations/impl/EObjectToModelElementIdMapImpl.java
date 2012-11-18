@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>EObject To Model Element Id Map</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>EObject To Model Element Id Map</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -39,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * 
  * @generated
  */
-public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
-		BasicEMap.Entry<EObject, ModelElementId> {
+public class EObjectToModelElementIdMapImpl extends EObjectImpl implements BasicEMap.Entry<EObject, ModelElementId> {
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -91,11 +90,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 			key = eResolveProxy(oldKey);
 			if (key != oldKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(
-							this,
-							Notification.RESOLVE,
-							OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY,
-							oldKey, key));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY, oldKey, key));
 			}
 		}
 		return key;
@@ -120,8 +116,7 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 		key = newKey;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY,
-					oldKey, key));
+				OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY, oldKey, key));
 	}
 
 	/**
@@ -135,28 +130,17 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 			value = (ModelElementId) eResolveProxy(oldValue);
 			if (value != oldValue) {
 				InternalEObject newValue = (InternalEObject) value;
-				NotificationChain msgs = oldValue
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-								null, null);
+				NotificationChain msgs = oldValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, null);
 				if (newValue.eInternalContainer() == null) {
-					msgs = newValue
-							.eInverseAdd(
-									this,
-									EOPPOSITE_FEATURE_BASE
-											- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-									null, msgs);
+					msgs = newValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(
-							this,
-							Notification.RESOLVE,
-							OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-							oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, oldValue, value));
 			}
 		}
 		return value;
@@ -176,15 +160,12 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetTypedValue(ModelElementId newValue,
-			NotificationChain msgs) {
+	public NotificationChain basicSetTypedValue(ModelElementId newValue, NotificationChain msgs) {
 		ModelElementId oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-					oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, oldValue, newValue);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -202,26 +183,17 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject) value)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject) newValue)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, msgs);
 			msgs = basicSetTypedValue(newValue, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE,
-					newValue, newValue));
+				OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -230,8 +202,7 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE:
 			return basicSetTypedValue(null, msgs);
@@ -386,9 +357,7 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements
 	@SuppressWarnings("unchecked")
 	public EMap<EObject, ModelElementId> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null
-				: (EMap<EObject, ModelElementId>) container
-						.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<EObject, ModelElementId>) container.eGet(eContainmentFeature());
 	}
 
 } // EObjectToModelElementIdMapImpl

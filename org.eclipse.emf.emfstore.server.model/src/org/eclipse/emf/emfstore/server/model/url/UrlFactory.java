@@ -29,8 +29,7 @@ public interface UrlFactory extends EFactory {
 	 * 
 	 * @generated
 	 */
-	UrlFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlFactoryImpl
-			.init();
+	UrlFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.url.impl.UrlFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Server Url</em>'. <!-- begin-user-doc
@@ -87,7 +86,6 @@ public interface UrlFactory extends EFactory {
 	 * @param url
 	 *            the url as a string.
 	 */
-	ModelElementUrl createModelElementUrl(String url)
-			throws MalformedURLException;
+	ModelElementUrl createModelElementUrl(String url) throws MalformedURLException;
 
 } // UrlFactory

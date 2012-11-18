@@ -1,6 +1,6 @@
 ^\/\*+$
-^ \* (\<copyright\>)?Copyright \(c\) \d\d\d\d(-\d\d\d\d)? (Chair for Applied Software Engineering\,)|(Florian Pirchner \(Vienna\, Austria\) and others\.)|(EclipseSource Muenchen GmbH\.)|$
-(^ \* Technische Universitaet Muenchen\.$)?
+^ \* Copyright( \(c\))? \d\d\d\d(-\d\d\d\d)? ((Chair for Applied Software Engineering\,)|(Florian Pirchner \(Vienna\, Austria\) and others\.)|(EclipseSource Muenchen GmbH\.))$
+^ \* ((Technische Universitaet Muenchen\.)|())$
 ^ \* All rights reserved\. This program and the accompanying materials$
 ^ \* are made available under the terms of the Eclipse Public License v1\.0$
 ^ \* which accompanies this distribution\, and is available at$

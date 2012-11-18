@@ -74,13 +74,12 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	private EClass modelElementUrlEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory
-	 * method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!--
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
@@ -104,10 +103,9 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * and for any others upon which it depends.
 	 * 
 	 * <p>
-	 * This method is used to initialize {@link UrlPackage#eINSTANCE} when that
-	 * field is accessed. Clients should not invoke it directly. Instead, they
-	 * should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link UrlPackage#eINSTANCE} when that field is accessed. Clients should not
+	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -116,13 +114,11 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 */
 	public static UrlPackage init() {
 		if (isInited)
-			return (UrlPackage) EPackage.Registry.INSTANCE
-					.getEPackage(UrlPackage.eNS_URI);
+			return (UrlPackage) EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI);
 
 		// Obtain or create and register package
-		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new UrlPackageImpl());
+		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
+			.get(eNS_URI) : new UrlPackageImpl());
 
 		isInited = true;
 
@@ -131,34 +127,30 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage_1 = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
-				: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
+			: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI)
-				: VersioningPackage.eINSTANCE);
+			.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(VersioningPackage.eNS_URI) : VersioningPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI)
-				: OperationsPackage.eINSTANCE);
+			.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SemanticPackage.eNS_URI)
-				: SemanticPackage.eINSTANCE);
+			.getEPackage(SemanticPackage.eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(SemanticPackage.eNS_URI) : SemanticPackage.eINSTANCE);
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
+			.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
+			.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI)
-				: AccesscontrolPackage.eINSTANCE);
+			.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
+			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theUrlPackage.createPackageContents();
@@ -232,8 +224,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EAttribute getProjectUrlFragment_Name() {
-		return (EAttribute) projectUrlFragmentEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) projectUrlFragmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -242,8 +233,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EReference getProjectUrlFragment_ProjectId() {
-		return (EReference) projectUrlFragmentEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) projectUrlFragmentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -261,8 +251,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EAttribute getModelElementUrlFragment_Name() {
-		return (EAttribute) modelElementUrlFragmentEClass
-				.getEStructuralFeatures().get(0);
+		return (EAttribute) modelElementUrlFragmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -271,8 +260,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EReference getModelElementUrlFragment_ModelElementId() {
-		return (EReference) modelElementUrlFragmentEClass
-				.getEStructuralFeatures().get(1);
+		return (EReference) modelElementUrlFragmentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -290,8 +278,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EReference getModelElementUrl_ServerUrl() {
-		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -300,8 +287,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EReference getModelElementUrl_ProjectUrlFragment() {
-		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(
-				1);
+		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -310,8 +296,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * @generated
 	 */
 	public EReference getModelElementUrl_ModelElementUrlFragment() {
-		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(
-				2);
+		return (EReference) modelElementUrlEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -349,21 +334,16 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 
 		projectUrlFragmentEClass = createEClass(PROJECT_URL_FRAGMENT);
 		createEAttribute(projectUrlFragmentEClass, PROJECT_URL_FRAGMENT__NAME);
-		createEReference(projectUrlFragmentEClass,
-				PROJECT_URL_FRAGMENT__PROJECT_ID);
+		createEReference(projectUrlFragmentEClass, PROJECT_URL_FRAGMENT__PROJECT_ID);
 
 		modelElementUrlFragmentEClass = createEClass(MODEL_ELEMENT_URL_FRAGMENT);
-		createEAttribute(modelElementUrlFragmentEClass,
-				MODEL_ELEMENT_URL_FRAGMENT__NAME);
-		createEReference(modelElementUrlFragmentEClass,
-				MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID);
+		createEAttribute(modelElementUrlFragmentEClass, MODEL_ELEMENT_URL_FRAGMENT__NAME);
+		createEReference(modelElementUrlFragmentEClass, MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID);
 
 		modelElementUrlEClass = createEClass(MODEL_ELEMENT_URL);
 		createEReference(modelElementUrlEClass, MODEL_ELEMENT_URL__SERVER_URL);
-		createEReference(modelElementUrlEClass,
-				MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT);
-		createEReference(modelElementUrlEClass,
-				MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT);
+		createEReference(modelElementUrlEClass, MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT);
+		createEReference(modelElementUrlEClass, MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT);
 	}
 
 	/**
@@ -392,9 +372,8 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 
 		// Obtain other dependent packages
 		org.eclipse.emf.emfstore.server.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.server.model.ModelPackage) EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
-		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE
-				.getEPackage(ModelPackage.eNS_URI);
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
+		ModelPackage theModelPackage = (ModelPackage) EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -403,65 +382,43 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(serverUrlEClass, ServerUrl.class, "ServerUrl", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getServerUrl_HostName(), ecorePackage.getEString(),
-				"hostName", null, 0, 1, ServerUrl.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getServerUrl_Port(), ecorePackage.getEInt(), "port",
-				null, 0, 1, ServerUrl.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(serverUrlEClass, ServerUrl.class, "ServerUrl", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getServerUrl_HostName(), ecorePackage.getEString(), "hostName", null, 0, 1, ServerUrl.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getServerUrl_Port(), ecorePackage.getEInt(), "port", null, 0, 1, ServerUrl.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(projectUrlFragmentEClass, ProjectUrlFragment.class,
-				"ProjectUrlFragment", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProjectUrlFragment_Name(), ecorePackage.getEString(),
-				"name", null, 0, 1, ProjectUrlFragment.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectUrlFragment_ProjectId(),
-				theModelPackage_1.getProjectId(), null, "projectId", null, 0,
-				1, ProjectUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getProjectUrlFragment_ProjectId().getEKeys().add(
-				theModelPackage.getUniqueIdentifier_Id());
+		initEClass(projectUrlFragmentEClass, ProjectUrlFragment.class, "ProjectUrlFragment", !IS_ABSTRACT,
+			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProjectUrlFragment_Name(), ecorePackage.getEString(), "name", null, 0, 1,
+			ProjectUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEReference(getProjectUrlFragment_ProjectId(), theModelPackage_1.getProjectId(), null, "projectId", null, 0,
+			1, ProjectUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getProjectUrlFragment_ProjectId().getEKeys().add(theModelPackage.getUniqueIdentifier_Id());
 
-		initEClass(modelElementUrlFragmentEClass,
-				ModelElementUrlFragment.class, "ModelElementUrlFragment",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModelElementUrlFragment_Name(),
-				ecorePackage.getEString(), "name", null, 0, 1,
-				ModelElementUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getModelElementUrlFragment_ModelElementId(),
-				theModelPackage.getModelElementId(), null, "modelElementId",
-				null, 0, 1, ModelElementUrlFragment.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(modelElementUrlFragmentEClass, ModelElementUrlFragment.class, "ModelElementUrlFragment",
+			!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModelElementUrlFragment_Name(), ecorePackage.getEString(), "name", null, 0, 1,
+			ModelElementUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElementUrlFragment_ModelElementId(), theModelPackage.getModelElementId(), null,
+			"modelElementId", null, 0, 1, ModelElementUrlFragment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelElementUrlEClass, ModelElementUrl.class,
-				"ModelElementUrl", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelElementUrl_ServerUrl(), this.getServerUrl(),
-				null, "serverUrl", null, 0, 1, ModelElementUrl.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getModelElementUrl_ProjectUrlFragment(),
-				this.getProjectUrlFragment(), null, "projectUrlFragment", null,
-				0, 1, ModelElementUrl.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelElementUrl_ModelElementUrlFragment(),
-				this.getModelElementUrlFragment(), null,
-				"modelElementUrlFragment", null, 0, 1, ModelElementUrl.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(modelElementUrlEClass, ModelElementUrl.class, "ModelElementUrl", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelElementUrl_ServerUrl(), this.getServerUrl(), null, "serverUrl", null, 0, 1,
+			ModelElementUrl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElementUrl_ProjectUrlFragment(), this.getProjectUrlFragment(), null,
+			"projectUrlFragment", null, 0, 1, ModelElementUrl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelElementUrl_ModelElementUrlFragment(), this.getModelElementUrlFragment(), null,
+			"modelElementUrlFragment", null, 0, 1, ModelElementUrl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } // UrlPackageImpl

@@ -17,8 +17,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Range Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Range Query</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -161,9 +160,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 		int oldUpperLimit = upperLimit;
 		upperLimit = newUpperLimit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.RANGE_QUERY__UPPER_LIMIT, oldUpperLimit,
-					upperLimit));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.RANGE_QUERY__UPPER_LIMIT,
+				oldUpperLimit, upperLimit));
 	}
 
 	/**
@@ -184,9 +182,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 		int oldLowerLimit = lowerLimit;
 		lowerLimit = newLowerLimit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.RANGE_QUERY__LOWER_LIMIT, oldLowerLimit,
-					lowerLimit));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.RANGE_QUERY__LOWER_LIMIT,
+				oldLowerLimit, lowerLimit));
 	}
 
 	/**
@@ -207,9 +204,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 		boolean oldIncludeIncoming = includeIncoming;
 		includeIncoming = newIncludeIncoming;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.RANGE_QUERY__INCLUDE_INCOMING,
-					oldIncludeIncoming, includeIncoming));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.RANGE_QUERY__INCLUDE_INCOMING,
+				oldIncludeIncoming, includeIncoming));
 	}
 
 	/**
@@ -230,9 +226,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 		boolean oldIncludeOutgoing = includeOutgoing;
 		includeOutgoing = newIncludeOutgoing;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.RANGE_QUERY__INCLUDE_OUTGOING,
-					oldIncludeOutgoing, includeOutgoing));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.RANGE_QUERY__INCLUDE_OUTGOING,
+				oldIncludeOutgoing, includeOutgoing));
 	}
 
 	/**

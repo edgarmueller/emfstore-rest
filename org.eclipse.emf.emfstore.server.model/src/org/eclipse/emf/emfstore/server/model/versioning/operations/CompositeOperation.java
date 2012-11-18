@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Composite Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Composite Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -45,11 +45,10 @@ public interface CompositeOperation extends AbstractOperation {
 	/**
 	 * Returns the value of the '<em><b>Sub Operations</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}
-	 * . <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation} . <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub Operations</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Sub Operations</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -65,8 +64,8 @@ public interface CompositeOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Main Operation</b></em>' reference. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Main Operation</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Main Operation</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -95,8 +94,8 @@ public interface CompositeOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Composite Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Composite Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Composite Name</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -125,8 +124,8 @@ public interface CompositeOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Composite Description</b></em>'
 	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Composite Description</em>' attribute isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Composite Description</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -156,8 +155,8 @@ public interface CompositeOperation extends AbstractOperation {
 	 * Returns the value of the '<em><b>Reversed</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Reversed</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Reversed</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

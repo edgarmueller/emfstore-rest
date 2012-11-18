@@ -26,8 +26,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Feature Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Feature Operation</b></em>'. <!-- end-user-doc
+ * -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -39,23 +39,21 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * 
  * @generated
  */
-public abstract class FeatureOperationImpl extends AbstractOperationImpl
-		implements FeatureOperation {
+public abstract class FeatureOperationImpl extends AbstractOperationImpl implements FeatureOperation {
 
 	@Override
 	protected void reverse(AbstractOperation abstractOperation) {
 		super.reverse(abstractOperation);
 		if (!(abstractOperation instanceof FeatureOperation)) {
-			throw new IllegalArgumentException(
-					"Given operation is not a feature operation.");
+			throw new IllegalArgumentException("Given operation is not a feature operation.");
 		}
 		FeatureOperation featureOperation = (FeatureOperation) abstractOperation;
 		featureOperation.setFeatureName(getFeatureName());
 	}
 
 	/**
-	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>} ' attribute. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getFeatureName()
 	 * @generated
@@ -109,9 +107,8 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl
 		String oldFeatureName = featureName;
 		featureName = newFeatureName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.FEATURE_OPERATION__FEATURE_NAME,
-					oldFeatureName, featureName));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.FEATURE_OPERATION__FEATURE_NAME,
+				oldFeatureName, featureName));
 	}
 
 	/**
@@ -167,8 +164,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
-			return FEATURE_NAME_EDEFAULT == null ? featureName != null
-					: !FEATURE_NAME_EDEFAULT.equals(featureName);
+			return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -196,12 +192,10 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.common.model.Project)
 	 * @generated NOT
 	 */
-	public EStructuralFeature getFeature(Project project)
-			throws UnkownFeatureException {
+	public EStructuralFeature getFeature(Project project) throws UnkownFeatureException {
 		EObject modelElement = project.getModelElement(getModelElementId());
 		if (modelElement == null) {
-			throw new IllegalArgumentException(
-					"Model Element is not in the given project");
+			throw new IllegalArgumentException("Model Element is not in the given project");
 		}
 		return getFeature(modelElement);
 	}
@@ -235,17 +229,14 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl
 	 * @generated NOT
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.common.model.ModelElement)
 	 */
-	public EStructuralFeature getFeature(EObject modelElement)
-			throws UnkownFeatureException {
-		EList<EStructuralFeature> features = modelElement.eClass()
-				.getEAllStructuralFeatures();
+	public EStructuralFeature getFeature(EObject modelElement) throws UnkownFeatureException {
+		EList<EStructuralFeature> features = modelElement.eClass().getEAllStructuralFeatures();
 		for (EStructuralFeature feature : features) {
 			if (feature.getName().equals(this.getFeatureName())) {
 				return feature;
 			}
 		}
-		throw new UnkownFeatureException(modelElement.eClass(),
-				getFeatureName());
+		throw new UnkownFeatureException(modelElement.eClass(), getFeatureName());
 	}
 
 } // FeatureOperationImpl

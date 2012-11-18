@@ -29,15 +29,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class SingleReferenceOperationItemProvider extends
-		ReferenceOperationItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class SingleReferenceOperationItemProvider extends ReferenceOperationItemProvider implements
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -72,18 +71,13 @@ public class SingleReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addOldValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_SingleReferenceOperation_oldValue_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_SingleReferenceOperation_oldValue_feature",
-								"_UI_SingleReferenceOperation_type"),
-						OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__OLD_VALUE,
-						true, false, true, null, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_SingleReferenceOperation_oldValue_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_SingleReferenceOperation_oldValue_feature",
+				"_UI_SingleReferenceOperation_type"), OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__OLD_VALUE,
+			true, false, true, null, null, null));
 	}
 
 	/**
@@ -93,18 +87,13 @@ public class SingleReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	protected void addNewValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_SingleReferenceOperation_newValue_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_SingleReferenceOperation_newValue_feature",
-								"_UI_SingleReferenceOperation_type"),
-						OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE,
-						true, false, true, null, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_SingleReferenceOperation_newValue_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_SingleReferenceOperation_newValue_feature",
+				"_UI_SingleReferenceOperation_type"), OperationsPackage.Literals.SINGLE_REFERENCE_OPERATION__NEW_VALUE,
+			true, false, true, null, null, null));
 	}
 
 	// begin of custom code
@@ -135,29 +124,23 @@ public class SingleReferenceOperationItemProvider extends
 			ModelElementId newElement = op.getNewValue();
 			String oldName = getModelElementClassAndName(op.getOldValue());
 			String newName = getModelElementClassAndName(op.getNewValue());
-			String elementName = getModelElementClassAndName(op
-					.getModelElementId());
+			String elementName = getModelElementClassAndName(op.getModelElementId());
 
-			boolean isContainer = op.getContainmentType().equals(
-					ContainmentType.CONTAINER);
+			boolean isContainer = op.getContainmentType().equals(ContainmentType.CONTAINER);
 
 			// changing containment means relocating the item
 			if (isContainer && oldElement != null && newElement != null) {
-				return "Moved " + elementName + " from " + oldName + " to "
-						+ newName;
+				return "Moved " + elementName + " from " + oldName + " to " + newName;
 			} else if (isContainer && newElement != null) {
 				return "Moved " + elementName + " to " + newName;
 			} else if (oldElement == null && newElement == null) {
 				return "Unset " + op.getFeatureName() + " in " + elementName;
 			} else if (oldElement == null && newElement != null) {
-				return "Set " + op.getFeatureName() + " in " + elementName
-						+ " to " + newName;
+				return "Set " + op.getFeatureName() + " in " + elementName + " to " + newName;
 			} else if (oldElement != null && newElement == null) {
-				return "Unset " + op.getFeatureName() + " in " + elementName
-						+ " from previous value " + oldName;
+				return "Unset " + op.getFeatureName() + " in " + elementName + " from previous value " + oldName;
 			} else {
-				return "Set " + op.getFeatureName() + " in " + elementName
-						+ " from " + oldName + " to " + newName;
+				return "Set " + op.getFeatureName() + " in " + elementName + " from " + oldName + " to " + newName;
 			}
 		}
 		return super.getText(object);
@@ -185,8 +168,7 @@ public class SingleReferenceOperationItemProvider extends
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Project Url Fragment</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Url Fragment</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -38,8 +38,7 @@ public interface ProjectUrlFragment extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -52,8 +51,7 @@ public interface ProjectUrlFragment extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getName
 	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -67,8 +65,8 @@ public interface ProjectUrlFragment extends EObject {
 	 * Returns the value of the '<em><b>Project Id</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Id</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -81,8 +79,7 @@ public interface ProjectUrlFragment extends EObject {
 	ProjectId getProjectId();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getProjectId
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment#getProjectId
 	 * <em>Project Id</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

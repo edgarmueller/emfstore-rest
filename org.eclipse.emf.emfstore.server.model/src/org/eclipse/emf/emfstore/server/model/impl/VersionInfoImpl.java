@@ -19,8 +19,7 @@ import org.eclipse.emf.emfstore.server.model.VersionInfo;
 import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Version Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Version Info</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -92,9 +91,8 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 		String oldEmfStoreVersionString = emfStoreVersionString;
 		emfStoreVersionString = newEmfStoreVersionString;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING,
-					oldEmfStoreVersionString, emfStoreVersionString));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING,
+				oldEmfStoreVersionString, emfStoreVersionString));
 	}
 
 	// begin of custom code
@@ -175,8 +173,7 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 		switch (featureID) {
 		case ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING:
 			return EMF_STORE_VERSION_STRING_EDEFAULT == null ? emfStoreVersionString != null
-					: !EMF_STORE_VERSION_STRING_EDEFAULT
-							.equals(emfStoreVersionString);
+				: !EMF_STORE_VERSION_STRING_EDEFAULT.equals(emfStoreVersionString);
 		}
 		return super.eIsSet(featureID);
 	}

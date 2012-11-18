@@ -54,7 +54,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the parent {@link Shell} that should be used during the creation of the branch
+	 *            the parent {@link Shell} that should be used during the
+	 *            creation of the branch
 	 * @param projectSpace
 	 *            the project space for which to create a branch for
 	 */
@@ -66,7 +67,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the parent {@link Shell} that should be used during the creation of the branch
+	 *            the parent {@link Shell} that should be used during the
+	 *            creation of the branch
 	 * @param projectSpace
 	 *            the project space for which to create a branch for
 	 * @param branch
@@ -99,7 +101,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
-	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace) {
+	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace, final IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before branching. Do you want to update now?";
 		return RunInUI.runWithResult(new Callable<Boolean>() {
@@ -108,7 +110,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
 					PrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace).execute();
+					PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
+						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
 					}

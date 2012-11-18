@@ -60,11 +60,10 @@ public interface AccesscontrolPackage extends EPackage {
 	 * @generated
 	 */
 	AccesscontrolPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.impl.AccesscontrolPackageImpl
-			.init();
+		.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl
 	 * <em>AC User</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl
@@ -74,8 +73,7 @@ public interface AccesscontrolPackage extends EPackage {
 	int AC_USER = 0;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl
 	 * <em>AC Org Unit</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -221,8 +219,7 @@ public interface AccesscontrolPackage extends EPackage {
 	int AC_USER_FEATURE_COUNT = AC_ORG_UNIT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACGroupImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACGroupImpl
 	 * <em>AC Group</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACGroupImpl
@@ -295,8 +292,7 @@ public interface AccesscontrolPackage extends EPackage {
 	int AC_GROUP_FEATURE_COUNT = AC_ORG_UNIT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitIdImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitIdImpl
 	 * <em>AC Org Unit Id</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -325,8 +321,7 @@ public interface AccesscontrolPackage extends EPackage {
 	int AC_ORG_UNIT_ID_FEATURE_COUNT = ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl
 	 * <em>Org Unit Property</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -373,8 +368,7 @@ public interface AccesscontrolPackage extends EPackage {
 	int ORG_UNIT_PROPERTY_FEATURE_COUNT = 3;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser
 	 * <em>AC User</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>AC User</em>'.
@@ -413,8 +407,7 @@ public interface AccesscontrolPackage extends EPackage {
 	 * <em>Effective Groups</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Effective Groups</em>'.
+	 * @return the meta object for the containment reference list ' <em>Effective Groups</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getEffectiveGroups()
 	 * @see #getACUser()
 	 * @generated
@@ -422,8 +415,7 @@ public interface AccesscontrolPackage extends EPackage {
 	EReference getACUser_EffectiveGroups();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit
 	 * <em>AC Org Unit</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>AC Org Unit</em>'.
@@ -449,8 +441,7 @@ public interface AccesscontrolPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getRoles
 	 * <em>Roles</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Roles</em>'.
+	 * @return the meta object for the containment reference list ' <em>Roles</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getRoles()
 	 * @see #getACOrgUnit()
 	 * @generated
@@ -474,8 +465,7 @@ public interface AccesscontrolPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getProperties
 	 * <em>Properties</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Properties</em>'.
+	 * @return the meta object for the containment reference list ' <em>Properties</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getProperties()
 	 * @see #getACOrgUnit()
 	 * @generated
@@ -483,8 +473,7 @@ public interface AccesscontrolPackage extends EPackage {
 	EReference getACOrgUnit_Properties();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup
 	 * <em>AC Group</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>AC Group</em>'.
@@ -506,8 +495,7 @@ public interface AccesscontrolPackage extends EPackage {
 	EReference getACGroup_Members();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId
 	 * <em>AC Org Unit Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>AC Org Unit Id</em>'.
@@ -517,8 +505,7 @@ public interface AccesscontrolPackage extends EPackage {
 	EClass getACOrgUnitId();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty
 	 * <em>Org Unit Property</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -588,8 +575,7 @@ public interface AccesscontrolPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl
 		 * <em>AC User</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
@@ -622,8 +608,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference AC_USER__EFFECTIVE_GROUPS = eINSTANCE
-				.getACUser_EffectiveGroups();
+		EReference AC_USER__EFFECTIVE_GROUPS = eINSTANCE.getACUser_EffectiveGroups();
 
 		/**
 		 * The meta object literal for the '
@@ -659,8 +644,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute AC_ORG_UNIT__DESCRIPTION = eINSTANCE
-				.getACOrgUnit_Description();
+		EAttribute AC_ORG_UNIT__DESCRIPTION = eINSTANCE.getACOrgUnit_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Properties</b></em>'
@@ -669,8 +653,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference AC_ORG_UNIT__PROPERTIES = eINSTANCE
-				.getACOrgUnit_Properties();
+		EReference AC_ORG_UNIT__PROPERTIES = eINSTANCE.getACOrgUnit_Properties();
 
 		/**
 		 * The meta object literal for the '
@@ -722,8 +705,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ORG_UNIT_PROPERTY__NAME = eINSTANCE
-				.getOrgUnitProperty_Name();
+		EAttribute ORG_UNIT_PROPERTY__NAME = eINSTANCE.getOrgUnitProperty_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute
@@ -731,8 +713,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ORG_UNIT_PROPERTY__VALUE = eINSTANCE
-				.getOrgUnitProperty_Value();
+		EAttribute ORG_UNIT_PROPERTY__VALUE = eINSTANCE.getOrgUnitProperty_Value();
 
 		/**
 		 * The meta object literal for the '<em><b>Project</b></em>' containment
@@ -740,8 +721,7 @@ public interface AccesscontrolPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference ORG_UNIT_PROPERTY__PROJECT = eINSTANCE
-				.getOrgUnitProperty_Project();
+		EReference ORG_UNIT_PROPERTY__PROJECT = eINSTANCE.getOrgUnitProperty_Project();
 
 	}
 

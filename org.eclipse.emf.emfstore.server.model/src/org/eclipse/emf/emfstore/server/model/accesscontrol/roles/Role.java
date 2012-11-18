@@ -15,8 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Role</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Role</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -34,12 +33,11 @@ import org.eclipse.emf.emfstore.server.model.ProjectId;
 public interface Role extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Projects</b></em>' containment reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectId}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.ProjectId}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Projects</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Projects</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

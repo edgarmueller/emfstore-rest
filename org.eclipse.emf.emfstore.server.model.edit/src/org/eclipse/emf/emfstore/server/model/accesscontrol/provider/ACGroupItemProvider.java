@@ -26,15 +26,13 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ACGroupItemProvider extends ACOrgUnitItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ACGroupItemProvider extends ACOrgUnitItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -69,14 +67,10 @@ public class ACGroupItemProvider extends ACOrgUnitItemProvider implements
 	 */
 	protected void addMembersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ACGroup_members_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ACGroup_members_feature", "_UI_ACGroup_type"),
-				AccesscontrolPackage.Literals.AC_GROUP__MEMBERS, true, false,
-				true, null, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ACGroup_members_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ACGroup_members_feature", "_UI_ACGroup_type"),
+			AccesscontrolPackage.Literals.AC_GROUP__MEMBERS, true, false, true, null, null, null));
 	}
 
 	/**
@@ -86,8 +80,7 @@ public class ACGroupItemProvider extends ACOrgUnitItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ACGroup"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ACGroup"));
 	}
 
 	/**
@@ -99,8 +92,8 @@ public class ACGroupItemProvider extends ACOrgUnitItemProvider implements
 	@Override
 	public String getText(Object object) {
 		String label = ((ACGroup) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_ACGroup_type")
-				: getString("_UI_ACGroup_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ACGroup_type") : getString("_UI_ACGroup_type")
+			+ " " + label;
 	}
 
 	/**
@@ -125,8 +118,7 @@ public class ACGroupItemProvider extends ACOrgUnitItemProvider implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

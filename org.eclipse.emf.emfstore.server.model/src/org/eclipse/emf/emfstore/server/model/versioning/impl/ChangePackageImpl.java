@@ -35,11 +35,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 import org.eclipse.emf.emfstore.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationsCanonizer;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Change Package</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc
+ * -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -133,9 +134,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	@SuppressWarnings("serial")
 	public EList<AbstractOperation> getOperations() {
 		if (operations == null) {
-			operations = new EObjectContainmentEList.Resolving<AbstractOperation>(
-					AbstractOperation.class, this,
-					VersioningPackage.CHANGE_PACKAGE__OPERATIONS) {
+			operations = new EObjectContainmentEList.Resolving<AbstractOperation>(AbstractOperation.class, this,
+				VersioningPackage.CHANGE_PACKAGE__OPERATIONS) {
 				@Override
 				protected boolean isUnique() {
 					return false;
@@ -154,8 +154,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList.Resolving<Event>(Event.class,
-					this, VersioningPackage.CHANGE_PACKAGE__EVENTS);
+			events = new EObjectContainmentEList.Resolving<Event>(Event.class, this,
+				VersioningPackage.CHANGE_PACKAGE__EVENTS);
 		}
 		return events;
 	}
@@ -171,26 +171,17 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			logMessage = (LogMessage) eResolveProxy(oldLogMessage);
 			if (logMessage != oldLogMessage) {
 				InternalEObject newLogMessage = (InternalEObject) logMessage;
-				NotificationChain msgs = oldLogMessage
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-								null, null);
+				NotificationChain msgs = oldLogMessage.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, null);
 				if (newLogMessage.eInternalContainer() == null) {
-					msgs = newLogMessage
-							.eInverseAdd(
-									this,
-									EOPPOSITE_FEATURE_BASE
-											- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-									null, msgs);
+					msgs = newLogMessage.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-							oldLogMessage, logMessage));
+						VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, logMessage));
 			}
 		}
 		return logMessage;
@@ -210,15 +201,12 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetLogMessage(LogMessage newLogMessage,
-			NotificationChain msgs) {
+	public NotificationChain basicSetLogMessage(LogMessage newLogMessage, NotificationChain msgs) {
 		LogMessage oldLogMessage = logMessage;
 		logMessage = newLogMessage;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-					oldLogMessage, newLogMessage);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, newLogMessage);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -236,26 +224,17 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		if (newLogMessage != logMessage) {
 			NotificationChain msgs = null;
 			if (logMessage != null)
-				msgs = ((InternalEObject) logMessage)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-								null, msgs);
+				msgs = ((InternalEObject) logMessage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 			if (newLogMessage != null)
-				msgs = ((InternalEObject) newLogMessage)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-								null, msgs);
+				msgs = ((InternalEObject) newLogMessage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 			msgs = basicSetLogMessage(newLogMessage, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
-					newLogMessage, newLogMessage));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
+				newLogMessage, newLogMessage));
 	}
 
 	/**
@@ -265,9 +244,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 */
 	public EList<VersionProperty> getVersionProperties() {
 		if (versionProperties == null) {
-			versionProperties = new EObjectContainmentEList.Resolving<VersionProperty>(
-					VersionProperty.class, this,
-					VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES);
+			versionProperties = new EObjectContainmentEList.Resolving<VersionProperty>(VersionProperty.class, this,
+				VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES);
 		}
 		return versionProperties;
 	}
@@ -281,11 +259,9 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * @generated NOT
 	 */
 	public ChangePackage reverse() {
-		ChangePackage changePackage = VersioningFactory.eINSTANCE
-				.createChangePackage();
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
 		// reverse subOperations and add in reverse order
-		EList<AbstractOperation> copiedSubOperations = changePackage
-				.getOperations();
+		EList<AbstractOperation> copiedSubOperations = changePackage.getOperations();
 		for (AbstractOperation abstractOperation : getOperations()) {
 			copiedSubOperations.add(0, abstractOperation.reverse());
 		}
@@ -337,19 +313,16 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-			return ((InternalEList<?>) getOperations()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getOperations()).basicRemove(otherEnd, msgs);
 		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
 			return ((InternalEList<?>) getEvents()).basicRemove(otherEnd, msgs);
 		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
 			return basicSetLogMessage(null, msgs);
 		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-			return ((InternalEList<?>) getVersionProperties()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getVersionProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -389,8 +362,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		switch (featureID) {
 		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
 			getOperations().clear();
-			getOperations().addAll(
-					(Collection<? extends AbstractOperation>) newValue);
+			getOperations().addAll((Collection<? extends AbstractOperation>) newValue);
 			return;
 		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
 			getEvents().clear();
@@ -401,8 +373,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			return;
 		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 			getVersionProperties().clear();
-			getVersionProperties().addAll(
-					(Collection<? extends VersionProperty>) newValue);
+			getVersionProperties().addAll((Collection<? extends VersionProperty>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -489,16 +460,59 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		return result;
 	}
 
-	public List<AbstractOperation> getTouchingOperations(
-			ModelElementId modelElementId) {
+	public List<AbstractOperation> getTouchingOperations(ModelElementId modelElementId) {
 		ArrayList<AbstractOperation> result = new ArrayList<AbstractOperation>();
 		for (AbstractOperation operation : getOperations()) {
-			if (operation.getAllInvolvedModelElements()
-					.contains(modelElementId)) {
+			if (operation.getAllInvolvedModelElements().contains(modelElementId)) {
 				result.add(operation);
 			}
 		}
 		return result;
+	}
+
+	public int getSize() {
+		return countLeafOperations(getOperations());
+	}
+
+	public static int countLeafOperations(List<ChangePackage> changePackages) {
+		int count = 0;
+		for (ChangePackage changePackage : changePackages) {
+			count += countLeafOperations(changePackage.getOperations());
+		}
+		return count;
+	}
+
+	public static int countLeafOperations(Collection<AbstractOperation> operations) {
+		int ret = 0;
+		for (AbstractOperation operation : operations) {
+			if (operation instanceof CompositeOperation) {
+				ret = ret + getSize((CompositeOperation) operation);
+			} else {
+				ret++;
+			}
+		}
+		return ret;
+	}
+
+	private static int getSize(CompositeOperation compositeOperation) {
+		int ret = 0;
+		EList<AbstractOperation> subOperations = compositeOperation.getSubOperations();
+		for (AbstractOperation abstractOperation : subOperations) {
+			if (abstractOperation instanceof CompositeOperation) {
+				ret = ret + getSize((CompositeOperation) abstractOperation);
+			} else {
+				ret++;
+			}
+		}
+		return ret;
+	}
+
+	public static int countOperations(List<ChangePackage> changePackages) {
+		int count = 0;
+		for (ChangePackage changePackage : changePackages) {
+			count += changePackage.getOperations().size();
+		}
+		return count;
 	}
 
 } // ChangePackageImpl

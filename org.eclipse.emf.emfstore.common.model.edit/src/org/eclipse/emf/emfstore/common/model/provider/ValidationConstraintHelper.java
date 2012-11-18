@@ -20,7 +20,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
  * Helps with validation of modelelements.
  * 
  * @author naughton
+ * @deprecated
  */
+@Deprecated
 public final class ValidationConstraintHelper {
 
 	private ValidationConstraintHelper() {

@@ -70,6 +70,13 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 		reset(null);
 	}
 
+	/**
+	 * Reset the state of the plot commit provider and refresh
+	 * it with the given history info.
+	 * 
+	 * @param infos
+	 *            the history info which is used to refresh the provider
+	 */
 	public void reset(List<HistoryInfo> infos) {
 		this.nextBranchColorIndex = 0;
 		this.freePositions = new TreeSet<Integer>();

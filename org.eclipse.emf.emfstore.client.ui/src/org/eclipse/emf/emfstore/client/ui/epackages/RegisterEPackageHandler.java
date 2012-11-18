@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 Chair for Applied Software Engineering,
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.epackages;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
+
 /**
  * RegisterEPackageHandler.
  * 
@@ -27,6 +28,6 @@ public class RegisterEPackageHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
-		new UIRegisterEPackageController(getShell(),serverInfo).execute();
+		new UIRegisterEPackageController(getShell(), serverInfo).execute();
 	}
 }

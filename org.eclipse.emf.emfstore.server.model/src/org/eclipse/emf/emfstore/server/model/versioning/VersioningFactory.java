@@ -26,8 +26,7 @@ public interface VersioningFactory extends EFactory {
 	 * 
 	 * @generated
 	 */
-	VersioningFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.impl.VersioningFactoryImpl
-			.init();
+	VersioningFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.impl.VersioningFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Tag Version Spec</em>'. <!--

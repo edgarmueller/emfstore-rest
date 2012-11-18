@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Operation Group</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Operation Group</b></em>'. <!-- end-user-doc
+ * -->
  * 
  * <p>
  * The following features are supported:
@@ -38,8 +38,7 @@ public interface OperationGroup extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
-	 * should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -65,12 +64,11 @@ public interface OperationGroup extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}
-	 * . <!-- begin-user-doc -->
+	 * list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation} .
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Operations</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

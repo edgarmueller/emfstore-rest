@@ -28,15 +28,13 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -64,23 +62,18 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET);
-			childrenFeatures
-					.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE);
+			childrenFeatures.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET);
+			childrenFeatures.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE);
 		}
 		return childrenFeatures;
 	}
@@ -107,8 +100,7 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/AncestorVersionSpec"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AncestorVersionSpec"));
 	}
 
 	/**
@@ -121,7 +113,7 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
 	public String getText(Object object) {
 		String label = ((AncestorVersionSpec) object).getBranch();
 		return label == null || label.length() == 0 ? getString("_UI_AncestorVersionSpec_type")
-				: getString("_UI_AncestorVersionSpec_type") + " " + label;
+			: getString("_UI_AncestorVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -139,8 +131,7 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
 		switch (notification.getFeatureID(AncestorVersionSpec.class)) {
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -154,39 +145,33 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(
-				VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE,
-				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE,
+			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 	/**
-	 * This returns the label text for
-	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
 		boolean qualify = childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET
-				|| childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE;
+			|| childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
+				getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

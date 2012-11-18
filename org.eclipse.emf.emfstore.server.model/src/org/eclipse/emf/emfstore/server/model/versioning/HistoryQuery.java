@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>History Query</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +39,8 @@ public interface HistoryQuery extends EObject {
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Source</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -54,8 +53,7 @@ public interface HistoryQuery extends EObject {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource
 	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -70,8 +68,8 @@ public interface HistoryQuery extends EObject {
 	 * Returns the value of the '<em><b>Include Change Packages</b></em>'
 	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Include Change Packages</em>' attribute isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Include Change Packages</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -101,8 +99,8 @@ public interface HistoryQuery extends EObject {
 	 * Returns the value of the '<em><b>Include All Versions</b></em>'
 	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Include All Versions</em>' attribute isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Include All Versions</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

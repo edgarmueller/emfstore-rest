@@ -18,7 +18,7 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	/** 
+	/**
 	 * The plug-in ID.
 	 */
 	public static final String PLUGIN_ID = "org.eclipse.emf.emfstore.emfperspective"; //$NON-NLS-1$
@@ -35,6 +35,7 @@ public class Activator extends AbstractUIPlugin {
 	// BEGIN SUPRESS CATCH EXCEPTION
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
@@ -44,14 +45,16 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
+
 	// END SUPRESS CATCH EXCEPTION
-	
+
 	/**
 	 * Returns the shared instance.
 	 * 

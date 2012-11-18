@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.util;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -37,7 +38,7 @@ public final class DecisionUtil {
 	/**
 	 * Length of option label.
 	 */
-	public static final int OPTION_LENGTH = 50;
+	public static final int OPTION_LENGTH = 45;
 
 	/**
 	 * Seperator symbol for detail proivder.
@@ -57,13 +58,7 @@ public final class DecisionUtil {
 	/**
 	 * Multiline editable widget detail provider.
 	 */
-	public static final String WIDGET_MULTILINE_EDITABLE = WIDGET_MULTILINE
-			+ SEPERATOR + EDITABLE;
-
-	/**
-	 * Option for other involved detail provider.
-	 */
-	public static final String WIDGET_OTHERINVOLVED = "org.eclipse.emf.emfstore.client.ui.merge.widget.otherinvolved";
+	public static final String WIDGET_MULTILINE_EDITABLE = WIDGET_MULTILINE + SEPERATOR + EDITABLE;
 
 	/**
 	 * Cuts a text to certain length and adds "..." at the end if needed.
@@ -114,8 +109,7 @@ public final class DecisionUtil {
 	 *            type
 	 * @return resulting option or null
 	 */
-	public static ConflictOption getConflictOptionByType(
-			List<ConflictOption> options, OptionType type) {
+	public static ConflictOption getConflictOptionByType(List<ConflictOption> options, OptionType type) {
 		for (ConflictOption option : options) {
 			if (option.getType().equals(type)) {
 				return option;
@@ -139,13 +133,10 @@ public final class DecisionUtil {
 			if (!option.isDetailsProvider()) {
 				continue;
 			}
-			if (option.getDetailProvider().startsWith(
-					DecisionUtil.WIDGET_MULTILINE)) {
+			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
 				if (option.getOptionLabel().length() > DecisionUtil.OPTION_LENGTH) {
 					return true;
 				}
-			} else {
-				return true;
 			}
 		}
 		return false;
@@ -154,8 +145,7 @@ public final class DecisionUtil {
 	private static DescriptionProvider descriptionProvider;
 
 	/**
-	 * Returns conflict descriptions on basis of the {@link DescriptionProvider}
-	 * .
+	 * Returns conflict descriptions on basis of the {@link DescriptionProvider} .
 	 * 
 	 * @param key
 	 *            key
@@ -182,8 +172,7 @@ public final class DecisionUtil {
 	 * @return obj.toString or unset
 	 */
 	public static String getLabel(Object obj, String unset) {
-		return (obj != null && obj.toString().length() > 0) ? obj.toString()
-				: unset;
+		return (obj != null && obj.toString().length() > 0) ? obj.toString() : unset;
 	}
 
 	/**
@@ -197,8 +186,7 @@ public final class DecisionUtil {
 		if (modelElement == null) {
 			return "";
 		}
-		return modelElement.eClass().getName() + " \""
-				+ getModelElementName(modelElement) + "\"";
+		return modelElement.eClass().getName() + " \"" + getModelElementName(modelElement) + "\"";
 	}
 
 	/**
@@ -209,8 +197,12 @@ public final class DecisionUtil {
 	 * @return name for element;
 	 */
 	public static String getModelElementName(EObject modelElement) {
-		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus()
-				.notify(MergeLabelProvider.class, true);
+
+		if (modelElement == null) {
+			return StringUtils.EMPTY;
+		}
+
+		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus().notify(MergeLabelProvider.class, true);
 		if (labelProvider == null) {
 			return modelElement.toString();
 		}

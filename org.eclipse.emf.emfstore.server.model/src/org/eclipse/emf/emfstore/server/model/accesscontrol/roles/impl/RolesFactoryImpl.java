@@ -38,7 +38,7 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	public static RolesFactory init() {
 		try {
 			RolesFactory theRolesFactory = (RolesFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model/roles");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/roles");
 			if (theRolesFactory != null) {
 				return theRolesFactory;
 			}
@@ -75,8 +75,7 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 		case RolesPackage.SERVER_ADMIN:
 			return createServerAdmin();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 

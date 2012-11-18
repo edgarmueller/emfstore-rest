@@ -18,6 +18,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.co
 import static org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -33,9 +34,9 @@ public class MultiReferenceSetSetConflict extends Conflict {
 
 	private boolean containmentConflict;
 
-	public MultiReferenceSetSetConflict(List<AbstractOperation> opsA, List<AbstractOperation> opsB,
-		DecisionManager decisionManager) {
-		super(opsA, opsB, decisionManager, true, false);
+	public MultiReferenceSetSetConflict(Set<AbstractOperation> opsA, Set<AbstractOperation> opsB,
+		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
+		super(opsA, opsB, leftOperation, rightOperation, decisionManager, true, false);
 		// is this rule enough?
 		containmentConflict = getMyOperation().getModelElementId().equals(getTheirOperation().getModelElementId());
 		init();

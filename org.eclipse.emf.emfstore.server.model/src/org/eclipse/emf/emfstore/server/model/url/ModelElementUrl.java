@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.url;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Model Element Url</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Url</b></em>'. <!-- end-user-doc
+ * -->
  * 
  * <p>
  * The following features are supported:
@@ -40,8 +40,8 @@ public interface ModelElementUrl extends EObject {
 	 * Returns the value of the '<em><b>Server Url</b></em>' containment
 	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Server Url</em>' containment reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Server Url</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -54,8 +54,7 @@ public interface ModelElementUrl extends EObject {
 	ServerUrl getServerUrl();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl
 	 * <em>Server Url</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -71,9 +70,8 @@ public interface ModelElementUrl extends EObject {
 	 * Returns the value of the '<em><b>Project Url Fragment</b></em>'
 	 * containment reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Url Fragment</em>' containment
-	 * reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Project Url Fragment</em>' containment reference isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -87,8 +85,7 @@ public interface ModelElementUrl extends EObject {
 	ProjectUrlFragment getProjectUrlFragment();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getProjectUrlFragment
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getProjectUrlFragment
 	 * <em>Project Url Fragment</em>}' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -104,9 +101,8 @@ public interface ModelElementUrl extends EObject {
 	 * Returns the value of the '<em><b>Model Element Url Fragment</b></em>'
 	 * containment reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Element Url Fragment</em>' containment
-	 * reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Model Element Url Fragment</em>' containment reference isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

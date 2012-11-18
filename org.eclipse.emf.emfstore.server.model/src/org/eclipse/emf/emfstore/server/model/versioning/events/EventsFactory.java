@@ -26,8 +26,7 @@ public interface EventsFactory extends EFactory {
 	 * 
 	 * @generated
 	 */
-	EventsFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsFactoryImpl
-			.init();
+	EventsFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Event</em>'. <!-- begin-user-doc -->

@@ -39,8 +39,8 @@ import org.eclipse.emf.emfstore.server.model.url.util.UrlAdapterFactory;
  * 
  * @generated
  */
-public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
-		ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements ComposeableAdapterFactory,
+	IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -50,8 +50,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -59,8 +58,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -82,8 +81,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -91,8 +90,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	protected ServerUrlItemProvider serverUrlItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -108,16 +106,15 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ProjectUrlFragmentItemProvider projectUrlFragmentItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -125,8 +122,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	@Override
 	public Adapter createProjectUrlFragmentAdapter() {
 		if (projectUrlFragmentItemProvider == null) {
-			projectUrlFragmentItemProvider = new ProjectUrlFragmentItemProvider(
-					this);
+			projectUrlFragmentItemProvider = new ProjectUrlFragmentItemProvider(this);
 		}
 
 		return projectUrlFragmentItemProvider;
@@ -134,25 +130,23 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ModelElementUrlFragmentItemProvider modelElementUrlFragmentItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment}
-	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment} . <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createModelElementUrlFragmentAdapter() {
 		if (modelElementUrlFragmentItemProvider == null) {
-			modelElementUrlFragmentItemProvider = new ModelElementUrlFragmentItemProvider(
-					this);
+			modelElementUrlFragmentItemProvider = new ModelElementUrlFragmentItemProvider(this);
 		}
 
 		return modelElementUrlFragmentItemProvider;
@@ -160,16 +154,15 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected ModelElementUrlItemProvider modelElementUrlItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -190,8 +183,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -200,8 +192,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	 * 
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -235,8 +226,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -263,8 +253,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

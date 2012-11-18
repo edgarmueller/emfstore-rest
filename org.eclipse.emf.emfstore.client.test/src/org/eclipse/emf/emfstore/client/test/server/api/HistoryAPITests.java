@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server.api;
 
 import static org.junit.Assert.assertEquals;
@@ -41,9 +51,10 @@ import org.junit.Test;
  */
 public class HistoryAPITests extends CoreServerTest {
 
-	final static public PrimaryVersionSpec[] versions = { Versions.createPRIMARY("trunk", 0), Versions.createPRIMARY("trunk", 1),
-		Versions.createPRIMARY("b1", 2), Versions.createPRIMARY("b2", 3), Versions.createPRIMARY("b1", 4), Versions.createPRIMARY("b2", 5),
-		Versions.createPRIMARY("b3", 6), Versions.createPRIMARY("b3", 7) };
+	final static public PrimaryVersionSpec[] versions = { Versions.createPRIMARY("trunk", 0),
+		Versions.createPRIMARY("trunk", 1), Versions.createPRIMARY("b1", 2), Versions.createPRIMARY("b2", 3),
+		Versions.createPRIMARY("b1", 4), Versions.createPRIMARY("b2", 5), Versions.createPRIMARY("b3", 6),
+		Versions.createPRIMARY("b3", 7) };
 
 	final static public String[] elementNames = { "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7" };
 

@@ -30,15 +30,13 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.ProjectInfo} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectInfo} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class ProjectInfoItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -75,18 +73,12 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_ProjectInfo_name_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_ProjectInfo_name_feature",
-								"_UI_ProjectInfo_type"),
-						ModelPackage.Literals.PROJECT_INFO__NAME, true, false,
-						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ProjectInfo_name_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_name_feature", "_UI_ProjectInfo_type"),
+			ModelPackage.Literals.PROJECT_INFO__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+			null, null));
 	}
 
 	/**
@@ -97,15 +89,12 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ProjectInfo_description_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ProjectInfo_description_feature",
-						"_UI_ProjectInfo_type"),
-				ModelPackage.Literals.PROJECT_INFO__DESCRIPTION, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_ProjectInfo_description_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_description_feature",
+				"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__DESCRIPTION, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -115,16 +104,14 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addProjectIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
+		itemPropertyDescriptors
+			.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_ProjectInfo_projectId_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ProjectInfo_projectId_feature",
-						"_UI_ProjectInfo_type"),
-				ModelPackage.Literals.PROJECT_INFO__PROJECT_ID, true, false,
-				true, null, null, null));
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_projectId_feature",
+					"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__PROJECT_ID, true, false, true, null,
+				null, null));
 	}
 
 	/**
@@ -135,15 +122,10 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_ProjectInfo_version_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ProjectInfo_version_feature",
-						"_UI_ProjectInfo_type"),
-				ModelPackage.Literals.PROJECT_INFO__VERSION, true, false, true,
-				null, null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+			getString("_UI_ProjectInfo_version_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_version_feature", "_UI_ProjectInfo_type"),
+			ModelPackage.Literals.PROJECT_INFO__VERSION, true, false, true, null, null, null));
 	}
 
 	/**
@@ -154,8 +136,7 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/ProjectInfo"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ProjectInfo"));
 	}
 
 	// begin of custom code
@@ -171,12 +152,10 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		ProjectInfo projectInfo = ((ProjectInfo) object);
 		String ret = "";
-		if (projectInfo.getName() == null
-				|| projectInfo.getName().length() == 0) {
+		if (projectInfo.getName() == null || projectInfo.getName().length() == 0) {
 			ret = getString("_UI_ProjectInfo_type");
 		} else {
-			ret = projectInfo.getName() + "[Revision: "
-					+ ((ProjectInfo) object).getVersion().getIdentifier() + "]";
+			ret = projectInfo.getName() + "[Revision: " + ((ProjectInfo) object).getVersion().getIdentifier() + "]";
 		}
 		return ret;
 	}
@@ -198,8 +177,7 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(ProjectInfo.class)) {
 		case ModelPackage.PROJECT_INFO__NAME:
 		case ModelPackage.PROJECT_INFO__DESCRIPTION:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -213,8 +191,7 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

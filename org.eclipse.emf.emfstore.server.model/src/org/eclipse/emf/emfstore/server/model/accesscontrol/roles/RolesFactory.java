@@ -26,8 +26,7 @@ public interface RolesFactory extends EFactory {
 	 * 
 	 * @generated
 	 */
-	RolesFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesFactoryImpl
-			.init();
+	RolesFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Reader Role</em>'. <!-- begin-user-doc

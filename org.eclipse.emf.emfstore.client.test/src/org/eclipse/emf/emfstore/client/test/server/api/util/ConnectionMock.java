@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server.api.util;
 
 import java.util.HashSet;
@@ -38,6 +48,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 public class ConnectionMock implements ConnectionManager {
 
 	private final EmfStore emfStore;
+	// TODO: auth mock is never used locally
 	private final AuthControlMock authMock;
 	private HashSet<SessionId> sessions;
 
@@ -201,5 +212,9 @@ public class ConnectionMock implements ConnectionManager {
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException {
 		checkSessionId(sessionId);
 		emfStore.registerEPackage(ModelUtil.clone(sessionId), ModelUtil.clone(pkg));
+	}
+
+	protected AuthControlMock getAuthMock() {
+		return authMock;
 	}
 }

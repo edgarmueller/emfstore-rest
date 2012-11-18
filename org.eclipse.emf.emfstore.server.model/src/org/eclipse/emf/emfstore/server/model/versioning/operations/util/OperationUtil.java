@@ -44,8 +44,7 @@ public final class OperationUtil {
 	 * @return true if correct
 	 */
 	public static boolean isComposite(AbstractOperation operation) {
-		return operation instanceof CompositeOperation
-				&& ((CompositeOperation) operation).getMainOperation() == null;
+		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() == null;
 	}
 
 	/**
@@ -56,8 +55,7 @@ public final class OperationUtil {
 	 * @return true if correct
 	 */
 	public static boolean isReference(AbstractOperation operation) {
-		return isSingleRef(operation) || isMultiRef(operation)
-				|| isCompositeRef(operation);
+		return isSingleRef(operation) || isMultiRef(operation) || isCompositeRef(operation);
 	}
 
 	/**
@@ -68,8 +66,7 @@ public final class OperationUtil {
 	 * @return true if correct
 	 */
 	public static boolean isCompositeRef(AbstractOperation operation) {
-		return operation instanceof CompositeOperation
-				&& ((CompositeOperation) operation).getMainOperation() != null;
+		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() != null;
 	}
 
 	/**
@@ -179,8 +176,7 @@ public final class OperationUtil {
 	 * @return true if correct
 	 */
 	public static boolean isCreate(AbstractOperation operation) {
-		return isCreateDelete(operation)
-				&& !((CreateDeleteOperation) operation).isDelete();
+		return isCreateDelete(operation) && !((CreateDeleteOperation) operation).isDelete();
 	}
 
 	/**
@@ -191,8 +187,7 @@ public final class OperationUtil {
 	 * @return true if correct
 	 */
 	public static boolean isDelete(AbstractOperation operation) {
-		return isCreateDelete(operation)
-				&& ((CreateDeleteOperation) operation).isDelete();
+		return isCreateDelete(operation) && ((CreateDeleteOperation) operation).isDelete();
 	}
 
 	/**

@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -110,7 +111,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(projectHistory);
-		resource.save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 	}
 
 	/**

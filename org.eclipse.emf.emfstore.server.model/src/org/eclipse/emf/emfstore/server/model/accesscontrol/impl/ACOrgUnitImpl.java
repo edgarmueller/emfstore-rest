@@ -29,8 +29,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>AC Org Unit</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>AC Org Unit</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -150,8 +149,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					AccesscontrolPackage.AC_ORG_UNIT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_ORG_UNIT__NAME, oldName, name));
 	}
 
 	/**
@@ -161,8 +159,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	public EList<Role> getRoles() {
 		if (roles == null) {
-			roles = new EObjectContainmentEList.Resolving<Role>(Role.class,
-					this, AccesscontrolPackage.AC_ORG_UNIT__ROLES);
+			roles = new EObjectContainmentEList.Resolving<Role>(Role.class, this,
+				AccesscontrolPackage.AC_ORG_UNIT__ROLES);
 		}
 		return roles;
 	}
@@ -177,11 +175,9 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	public ACOrgUnitId getId() {
 		if (this.identifier == null) {
-			throw new IllegalStateException(
-					"ACOrgunit does not have an identifier");
+			throw new IllegalStateException("ACOrgunit does not have an identifier");
 		}
-		ACOrgUnitId orgUnitId = AccesscontrolFactory.eINSTANCE
-				.createACOrgUnitId();
+		ACOrgUnitId orgUnitId = AccesscontrolFactory.eINSTANCE.createACOrgUnitId();
 		orgUnitId.setId(this.identifier);
 		return orgUnitId;
 	}
@@ -219,14 +215,12 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
 			return ((InternalEList<?>) getRoles()).basicRemove(otherEnd, msgs);
 		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-			return ((InternalEList<?>) getProperties()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -249,9 +243,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 		String oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION,
-					oldDescription, description));
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION,
+				oldDescription, description));
 	}
 
 	/**
@@ -261,9 +254,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	public EList<OrgUnitProperty> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(
-					OrgUnitProperty.class, this,
-					AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES);
+			properties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(OrgUnitProperty.class, this,
+				AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES);
 		}
 		return properties;
 	}
@@ -309,8 +301,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 			return;
 		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
 			getProperties().clear();
-			getProperties().addAll(
-					(Collection<? extends OrgUnitProperty>) newValue);
+			getProperties().addAll((Collection<? extends OrgUnitProperty>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -349,13 +340,11 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
 			return roles != null && !roles.isEmpty();
 		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
-			return DESCRIPTION_EDEFAULT == null ? description != null
-					: !DESCRIPTION_EDEFAULT.equals(description);
+			return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
 			return properties != null && !properties.isEmpty();
 		}
@@ -382,4 +371,3 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	}
 
 } // ACOrgUnitImpl
-

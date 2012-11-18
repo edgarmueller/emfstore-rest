@@ -54,4 +54,3 @@ public interface AssociationClassElement extends EObject {
 	List<EStructuralFeature> getAssociationFeatures();
 
 } // AssociationClassElement
-

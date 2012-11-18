@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Branch Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Branch Info</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -118,8 +117,7 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.BRANCH_INFO__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.BRANCH_INFO__NAME, oldName, name));
 	}
 
 	/**
@@ -133,19 +131,17 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 			head = (PrimaryVersionSpec) eResolveProxy(oldHead);
 			if (head != oldHead) {
 				InternalEObject newHead = (InternalEObject) head;
-				NotificationChain msgs = oldHead.eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__HEAD, null,
-						null);
+				NotificationChain msgs = oldHead.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__HEAD, null, null);
 				if (newHead.eInternalContainer() == null) {
-					msgs = newHead.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-							- VersioningPackage.BRANCH_INFO__HEAD, null, msgs);
+					msgs = newHead.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.BRANCH_INFO__HEAD,
+						null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							VersioningPackage.BRANCH_INFO__HEAD, oldHead, head));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.BRANCH_INFO__HEAD,
+						oldHead, head));
 			}
 		}
 		return head;
@@ -165,14 +161,12 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetHead(PrimaryVersionSpec newHead,
-			NotificationChain msgs) {
+	public NotificationChain basicSetHead(PrimaryVersionSpec newHead, NotificationChain msgs) {
 		PrimaryVersionSpec oldHead = head;
 		head = newHead;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, VersioningPackage.BRANCH_INFO__HEAD,
-					oldHead, newHead);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.BRANCH_INFO__HEAD, oldHead, newHead);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -190,21 +184,16 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 		if (newHead != head) {
 			NotificationChain msgs = null;
 			if (head != null)
-				msgs = ((InternalEObject) head).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__HEAD, null,
-						msgs);
+				msgs = ((InternalEObject) head).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__HEAD, null, msgs);
 			if (newHead != null)
-				msgs = ((InternalEObject) newHead).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__HEAD, null,
-						msgs);
+				msgs = ((InternalEObject) newHead).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__HEAD, null, msgs);
 			msgs = basicSetHead(newHead, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.BRANCH_INFO__HEAD, newHead, newHead));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.BRANCH_INFO__HEAD, newHead, newHead));
 	}
 
 	/**
@@ -218,22 +207,17 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 			source = (PrimaryVersionSpec) eResolveProxy(oldSource);
 			if (source != oldSource) {
 				InternalEObject newSource = (InternalEObject) source;
-				NotificationChain msgs = oldSource.eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__SOURCE, null,
-						null);
+				NotificationChain msgs = oldSource.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__SOURCE, null, null);
 				if (newSource.eInternalContainer() == null) {
-					msgs = newSource
-							.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-									- VersioningPackage.BRANCH_INFO__SOURCE,
-									null, msgs);
+					msgs = newSource.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.BRANCH_INFO__SOURCE,
+						null, msgs);
 				}
 				if (msgs != null)
 					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							VersioningPackage.BRANCH_INFO__SOURCE, oldSource,
-							source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.BRANCH_INFO__SOURCE,
+						oldSource, source));
 			}
 		}
 		return source;
@@ -253,14 +237,12 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetSource(PrimaryVersionSpec newSource,
-			NotificationChain msgs) {
+	public NotificationChain basicSetSource(PrimaryVersionSpec newSource, NotificationChain msgs) {
 		PrimaryVersionSpec oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, VersioningPackage.BRANCH_INFO__SOURCE,
-					oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.BRANCH_INFO__SOURCE, oldSource, newSource);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -278,21 +260,17 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject) source).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__SOURCE, null,
-						msgs);
+				msgs = ((InternalEObject) source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__SOURCE, null, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject) newSource).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- VersioningPackage.BRANCH_INFO__SOURCE, null,
-						msgs);
+				msgs = ((InternalEObject) newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.BRANCH_INFO__SOURCE, null, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.BRANCH_INFO__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.BRANCH_INFO__SOURCE, newSource,
+				newSource));
 	}
 
 	/**
@@ -301,8 +279,7 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case VersioningPackage.BRANCH_INFO__HEAD:
 			return basicSetHead(null, msgs);
@@ -385,8 +362,7 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case VersioningPackage.BRANCH_INFO__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case VersioningPackage.BRANCH_INFO__HEAD:
 			return head != null;
 		case VersioningPackage.BRANCH_INFO__SOURCE:

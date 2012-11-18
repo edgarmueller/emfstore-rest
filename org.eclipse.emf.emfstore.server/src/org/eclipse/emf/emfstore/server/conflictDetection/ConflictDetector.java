@@ -7,17 +7,29 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.conflictDetection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.server.Activator;
+import org.eclipse.emf.emfstore.server.internal.conflictDetection.ModelElementIdFeatureConflictMap;
+import org.eclipse.emf.emfstore.server.internal.conflictDetection.ModelElementIdToFeatureSetMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
 
 /**
  * Detects conflicts with a given {@link ConflictDetectionStrategy}.
@@ -26,15 +38,29 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  */
 public class ConflictDetector {
 
+	private static ConflictDetectionStrategy defaultStrategy;
+
 	private ConflictDetectionStrategy conflictDetectionStrategy;
 
 	/**
 	 * Constructor. Uses default conflict detection strategy
 	 */
 	public ConflictDetector() {
-		// this(new AlwaysFalseConflictDetectionStrategy());
-		// this(new FineGrainedConflictDetectionStrategy());
-		this(new IndexSensitiveConflictDetectionStrategy());
+		this(getStrategy());
+	}
+
+	private static ConflictDetectionStrategy getStrategy() {
+		if (defaultStrategy == null) {
+			ConflictDetectionStrategy strategy = new ExtensionPoint(
+				"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
+				ConflictDetectionStrategy.class);
+			if (strategy != null) {
+				defaultStrategy = strategy;
+			} else {
+				defaultStrategy = new IndexSensitiveConflictDetectionStrategy();
+			}
+		}
+		return defaultStrategy;
 	}
 
 	/**
@@ -44,24 +70,6 @@ public class ConflictDetector {
 	 */
 	public ConflictDetector(ConflictDetectionStrategy conflictDetectionStrategy) {
 		this.conflictDetectionStrategy = conflictDetectionStrategy;
-	}
-
-	/**
-	 * Determines if two change packages are conflicting.
-	 * 
-	 * @param changePackageA a changePackage
-	 * @param changePackageB another change package
-	 * @return true if the two packages conflict
-	 */
-	public boolean doConflict(ChangePackage changePackageA, ChangePackage changePackageB) {
-		for (AbstractOperation operation : changePackageA.getOperations()) {
-			for (AbstractOperation otherOperation : changePackageB.getOperations()) {
-				if (doConflict(operation, otherOperation)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -76,19 +84,252 @@ public class ConflictDetector {
 	}
 
 	/**
-	 * Determine if a change package conflicts with a list of change packages.
+	 * Determine if the set of conflict bucket candidates contains conflicting buckets that can actually result in
+	 * conflicts.
 	 * 
-	 * @param changePackage a change package
-	 * @param changePackageList a list of change package
-	 * @return true if the change package conflicts with any package in the list
+	 * @param conflictBucketCandidates the set of conflict candidate buckets
+	 * @return true if potentially conflicting buckets are found
 	 */
-	public boolean doConflict(ChangePackage changePackage, List<ChangePackage> changePackageList) {
-		for (ChangePackage b : changePackageList) {
-			if (doConflict(changePackage, b)) {
+	public boolean containsConflictingBuckets(Set<ConflictBucketCandidate> conflictBucketCandidates) {
+		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketCandidates) {
+			if (conflictBucketCandidate.isConflicting()) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Calculate a set of conflict candidate buckets from a list of my and their change packages.
+	 * 
+	 * @param myChangePackages their operations in a list of change packages
+	 * @param theirChangePackages their operations in a list of change packages
+	 * @return a set of buckets with potentially conflicting operations
+	 */
+	public Set<ConflictBucketCandidate> calculateConflictCandidateBuckets(List<ChangePackage> myChangePackages,
+		List<ChangePackage> theirChangePackages) {
+
+		List<AbstractOperation> myOperations = flattenChangepackages(myChangePackages);
+		List<AbstractOperation> theirOperations = flattenChangepackages(theirChangePackages);
+
+		Set<ConflictBucketCandidate> conflictBucketsCandidateSet = new LinkedHashSet<ConflictBucketCandidate>();
+		ModelElementIdFeatureConflictMap conflictMap = new ModelElementIdFeatureConflictMap();
+
+		int counter = 0;
+		for (AbstractOperation myOperation : myOperations) {
+			scanOperationIntoConflictBucketCandidates(conflictBucketsCandidateSet, conflictMap, myOperation, true,
+				counter);
+			counter++;
+		}
+
+		for (AbstractOperation theirOperation : theirOperations) {
+			scanOperationIntoConflictBucketCandidates(conflictBucketsCandidateSet, conflictMap, theirOperation, false,
+				counter);
+			counter++;
+		}
+		return conflictBucketsCandidateSet;
+	}
+
+	private List<AbstractOperation> flattenChangepackages(List<ChangePackage> cps) {
+		List<AbstractOperation> operations = new ArrayList<AbstractOperation>();
+		for (ChangePackage cp : cps) {
+			operations.addAll(cp.getOperations());
+		}
+		return operations;
+	}
+
+	private void scanOperationIntoConflictBucketCandidates(Set<ConflictBucketCandidate> conflictBucketsSet,
+		ModelElementIdFeatureConflictMap conflictMap, AbstractOperation operation, boolean isMyOperation,
+		Integer priority) {
+
+		// extract a modelelementId to feature map from the operation (including any sub operations)
+		ModelElementIdToFeatureSetMapping modelElementIdToFeatureSetMapping = new ModelElementIdToFeatureSetMapping();
+		extractModelElementIdFeatureMappings(operation, modelElementIdToFeatureSetMapping);
+
+		ConflictBucketCandidate currentOperationsConflictBucket = null;
+		for (String modelElementId : modelElementIdToFeatureSetMapping.keySet()) {
+
+			Set<String> featureSet = modelElementIdToFeatureSetMapping.get(modelElementId);
+
+			for (String featureName : featureSet) {
+
+				Set<ConflictBucketCandidate> conflictBuckets = conflictMap.get(modelElementId, featureName);
+				ConflictBucketCandidate conflictBucket;
+				if (conflictBuckets.size() == 0) {
+					conflictBucket = null;
+				} else if (conflictBuckets.size() == 1) {
+					conflictBucket = conflictBuckets.iterator().next();
+				} else {
+					conflictBucket = mergeAllBucketCandidates(conflictBuckets, conflictBucketsSet, conflictMap);
+				}
+
+				if (conflictBucket == null && currentOperationsConflictBucket == null) {
+					// no existing ConflictBucket for id and feature and no bucket for current op => create new
+					// ConflictBucket
+					currentOperationsConflictBucket = new ConflictBucketCandidate();
+					conflictBucketsSet.add(currentOperationsConflictBucket);
+					currentOperationsConflictBucket.addOperation(operation, modelElementId, featureName, isMyOperation,
+						priority);
+					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
+				} else if (conflictBucket == currentOperationsConflictBucket) {
+					// conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
+					currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
+				} else if (conflictBucket == null && currentOperationsConflictBucket != null) {
+					// no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
+					// ConflictBucket
+					conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
+					currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
+				} else if (conflictBucket != null && currentOperationsConflictBucket == null) {
+					// existing ConflictBucket for id but none for operation => keep id ConflictBucket
+					currentOperationsConflictBucket = conflictBucket;
+					currentOperationsConflictBucket.addOperation(operation, modelElementId, featureName, isMyOperation,
+						priority);
+				} else {
+					// existing ConflictBucket for both id and operation => merge ConflictBuckets
+					currentOperationsConflictBucket = mergeConflictBuckets(conflictBucketsSet, conflictMap,
+						currentOperationsConflictBucket, conflictBucket);
+					currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
+				}
+			}
+		}
+	}
+
+	private ConflictBucketCandidate mergeAllBucketCandidates(Set<ConflictBucketCandidate> conflictBuckets,
+		Set<ConflictBucketCandidate> conflictBucketsSet, ModelElementIdFeatureConflictMap conflictMap) {
+		Iterator<ConflictBucketCandidate> iterator = conflictBuckets.iterator();
+		ConflictBucketCandidate currentBucket = iterator.next();
+		while (iterator.hasNext()) {
+			currentBucket = mergeConflictBuckets(conflictBucketsSet, conflictMap, currentBucket, iterator.next());
+		}
+		return currentBucket;
+	}
+
+	private ConflictBucketCandidate mergeConflictBuckets(Set<ConflictBucketCandidate> conflictBucketsSet,
+		ModelElementIdFeatureConflictMap conflictMap, ConflictBucketCandidate currentOperationsConflictBucket,
+		ConflictBucketCandidate conflictBucket) {
+		ConflictBucketCandidate biggerBucket = currentOperationsConflictBucket;
+		ConflictBucketCandidate smallerBucket = conflictBucket;
+
+		if (conflictBucket.size() > currentOperationsConflictBucket.size()) {
+			biggerBucket = conflictBucket;
+			smallerBucket = currentOperationsConflictBucket;
+		}
+		biggerBucket.addConflictBucketCandidate(smallerBucket);
+
+		ModelElementIdToFeatureSetMapping idToFeatureSetMap = smallerBucket
+			.getInvolvedModelElementIdToFeatureSetMapping();
+		for (String id : idToFeatureSetMap.keySet()) {
+			for (String featureName : idToFeatureSetMap.get(id)) {
+				conflictMap.put(id, featureName, biggerBucket, true);
+			}
+		}
+		conflictBucketsSet.remove(smallerBucket);
+
+		return biggerBucket;
+
+	}
+
+	private void extractModelElementIdFeatureMappings(AbstractOperation operation,
+		ModelElementIdToFeatureSetMapping modelElementIdToFeatureSetMap) {
+
+		if (operation instanceof CompositeOperation) {
+			CompositeOperation compositeOperation = (CompositeOperation) operation;
+			for (AbstractOperation subOperation : compositeOperation.getSubOperations()) {
+				extractModelElementIdFeatureMappings(subOperation, modelElementIdToFeatureSetMap);
+			}
+			return;
+		} else if (operation instanceof CreateDeleteOperation) {
+			// handle containment tree
+			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+			for (ModelElementId createDeletedElement : createDeleteOperation.getEObjectToIdMap().values()) {
+				modelElementIdToFeatureSetMap.add(createDeletedElement.getId());
+			}
+			// handle suboperations
+			for (AbstractOperation subOperation : createDeleteOperation.getSubOperations()) {
+				extractModelElementIdFeatureMappings(subOperation, modelElementIdToFeatureSetMap);
+			}
+			return;
+		} else if (operation instanceof FeatureOperation) {
+			handleFeatureOperation(operation, modelElementIdToFeatureSetMap);
+			return;
+		}
+		throw new IllegalStateException("Unkown operation type: " + operation.getClass().getCanonicalName());
+	}
+
+	private void handleFeatureOperation(AbstractOperation operation,
+		ModelElementIdToFeatureSetMapping modelElementIdToFeatureSetMap) {
+		FeatureOperation featureOperation = (FeatureOperation) operation;
+		String modelElementId = featureOperation.getModelElementId().getId();
+		String featureName = featureOperation.getFeatureName();
+		if (featureOperation instanceof ReferenceOperation) {
+			ReferenceOperation referenceOperation = (ReferenceOperation) featureOperation;
+			// if (isRemovingReferencesOnly(referenceOperation)) {
+			// return;
+			// }
+			for (ModelElementId otherModelElement : referenceOperation.getOtherInvolvedModelElements()) {
+				if (referenceOperation.getContainmentType().equals(ContainmentType.CONTAINMENT)
+					&& !referenceOperation.isBidirectional()) {
+					modelElementIdToFeatureSetMap.addForContainerFeature(otherModelElement.getId());
+				} else {
+					modelElementIdToFeatureSetMap.addRequired(otherModelElement.getId());
+				}
+			}
+		}
+		if (isExcludedFeature(featureName)) {
+			return;
+		}
+		modelElementIdToFeatureSetMap.add(modelElementId, featureName);
+		return;
+	}
+
+	// private boolean isRemovingReferencesOnly(ReferenceOperation referenceOperation) {
+	// if (referenceOperation instanceof MultiReferenceOperation) {
+	// return !((MultiReferenceOperation) referenceOperation).isAdd();
+	// }
+	// if (referenceOperation instanceof SingleReferenceOperation) {
+	// return ((SingleReferenceOperation) referenceOperation).getNewValue() == null;
+	// }
+	//
+	// return false;
+	// }
+
+	private static final Set<String> EXCLUDED_FEATURENAME_SET = initExcludedFeatureNameSet();
+
+	private boolean isExcludedFeature(String featureName) {
+		return EXCLUDED_FEATURENAME_SET.contains(featureName);
+	}
+
+	private static Set<String> initExcludedFeatureNameSet() {
+
+		Set<String> excludedFeatures = new LinkedHashSet<String>();
+		ExtensionPoint extensionPoint = new ExtensionPoint(Activator.PLUGIN_ID + ".conflictdetection.excludedfeatures");
+
+		IExcludedFeaturesProvider excludingFeaturesProvider = extensionPoint.getClass("class",
+			IExcludedFeaturesProvider.class);
+
+		if (excludingFeaturesProvider != null) {
+			excludedFeatures.addAll(excludingFeaturesProvider.getExcludedFeatures());
+		}
+
+		return excludedFeatures;
+	}
+
+	/**
+	 * Calculate a set of conflict buckets from an existing set of conflict candidate buckets. the resulting set may be
+	 * empty.
+	 * 
+	 * @param conflictBucketsCandidateSet a set of conflict candidate buckets
+	 * @param notInvolvedInConflict all my operations that are not involved in a conflict are collected in this
+	 *            transient parameter set
+	 * @return a set of conflict buckets
+	 */
+	public Set<ConflictBucket> calculateConflictBucketsFromConflictCandidateBuckets(
+		Set<ConflictBucketCandidate> conflictBucketsCandidateSet, Set<AbstractOperation> notInvolvedInConflict) {
+		Set<ConflictBucket> conflictBucketsSet = new LinkedHashSet<ConflictBucket>();
+		for (ConflictBucketCandidate conflictBucketCandidate : conflictBucketsCandidateSet) {
+			conflictBucketsSet.addAll(conflictBucketCandidate.calculateConflictBuckets(this, notInvolvedInConflict));
+		}
+		return conflictBucketsSet;
 	}
 
 	/**
@@ -240,86 +481,6 @@ public class ConflictDetector {
 		requiring.remove(op);
 		// return the sub list of operations requiring op
 		return requiring;
-	}
-
-	/**
-	 * Return all operations that are involved in a conflict of the two lists.
-	 * 
-	 * @param operationListA a list of operations
-	 * @param operationListB another list of operations
-	 * @return a set of operations
-	 */
-	public Set<AbstractOperation> getAllConflictInvolvedOperations(List<AbstractOperation> operationListA,
-		List<AbstractOperation> operationListB) {
-		Set<AbstractOperation> result = new HashSet<AbstractOperation>();
-		for (AbstractOperation operationA : operationListA) {
-			if (result.contains(operationA)) {
-				continue;
-			}
-			List<AbstractOperation> reqAoperations = getRequiring(operationListA, operationA);
-			Set<AbstractOperation> conflicting = getConflicting(reqAoperations, operationListB);
-			if (conflicting.size() > 0) {
-				result.addAll(conflicting);
-				result.add(operationA);
-			}
-		}
-		for (AbstractOperation operationB : operationListB) {
-			if (result.contains(operationB)) {
-				continue;
-			}
-			List<AbstractOperation> reqAoperations = getRequiring(operationListB, operationB);
-			Set<AbstractOperation> conflicting = getConflicting(reqAoperations, operationListA);
-			if (conflicting.size() > 0) {
-				result.addAll(conflicting);
-				result.add(operationB);
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * Filter the change packages that only operations involved in a conflict remain. Empty ChangePackages are removed
-	 * from the list.
-	 * 
-	 * @param myChanges my local change package
-	 * @param theirChanges the change packages from the repository
-	 */
-	public void filterToConflictInvolved(ChangePackage myChanges, List<ChangePackage> theirChanges) {
-		List<AbstractOperation> theirOperations = new ArrayList<AbstractOperation>();
-		for (ChangePackage theirChangePackage : theirChanges) {
-			for (AbstractOperation theirOperation : theirChangePackage.getOperations()) {
-				theirOperations.add(theirOperation);
-			}
-		}
-		EList<AbstractOperation> myOperations = myChanges.getOperations();
-		Set<AbstractOperation> allConflictInvolvedOperations = getAllConflictInvolvedOperations(myOperations,
-			theirOperations);
-
-		// filter my change package
-		Set<AbstractOperation> myOperationsToRemove = new HashSet<AbstractOperation>();
-		for (AbstractOperation myOperation : myOperations) {
-			if (!allConflictInvolvedOperations.contains(myOperation)) {
-				myOperationsToRemove.add(myOperation);
-			}
-		}
-		myOperations.removeAll(myOperationsToRemove);
-
-		// filter their change package
-		List<ChangePackage> changePackagesToRemove = new ArrayList<ChangePackage>();
-		for (ChangePackage theirChangePackage : theirChanges) {
-			Set<AbstractOperation> theirOperationsToRemove = new HashSet<AbstractOperation>();
-			EList<AbstractOperation> theirOperations2 = theirChangePackage.getOperations();
-			for (AbstractOperation theirOperation : theirOperations2) {
-				if (!allConflictInvolvedOperations.contains(theirOperation)) {
-					theirOperationsToRemove.add(theirOperation);
-				}
-			}
-			theirOperations2.removeAll(theirOperationsToRemove);
-			if (theirOperations2.size() == 0) {
-				changePackagesToRemove.add(theirChangePackage);
-			}
-		}
-		theirChanges.removeAll(changePackagesToRemove);
 	}
 
 }

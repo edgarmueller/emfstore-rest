@@ -13,11 +13,11 @@ package org.eclipse.emf.emfstore.common;
 /**
  * Models an object that has a lifecycle.
  * 
- * @author emueller 
- *
+ * @author emueller
+ * 
  */
 public interface IReinitializable extends IDisposable {
-	
+
 	/**
 	 * Whether the object has been disposed.
 	 * 

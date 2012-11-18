@@ -37,8 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeatureException;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Multi Reference Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Reference Operation</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -56,8 +56,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * 
  * @generated
  */
-public class MultiReferenceOperationImpl extends ReferenceOperationImpl
-		implements MultiReferenceOperation {
+public class MultiReferenceOperationImpl extends ReferenceOperationImpl implements MultiReferenceOperation {
 
 	/**
 	 * The default value of the '{@link #isAdd() <em>Add</em>}' attribute. <!--
@@ -147,9 +146,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 		boolean oldAdd = add;
 		add = newAdd;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.MULTI_REFERENCE_OPERATION__ADD, oldAdd,
-					add));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.MULTI_REFERENCE_OPERATION__ADD,
+				oldAdd, add));
 	}
 
 	/**
@@ -170,9 +168,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 		int oldIndex = index;
 		index = newIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX,
-					oldIndex, index));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX,
+				oldIndex, index));
 	}
 
 	/**
@@ -182,10 +179,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 	 */
 	public EList<ModelElementId> getReferencedModelElements() {
 		if (referencedModelElements == null) {
-			referencedModelElements = new EObjectContainmentEList.Resolving<ModelElementId>(
-					ModelElementId.class,
-					this,
-					OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
+			referencedModelElements = new EObjectContainmentEList.Resolving<ModelElementId>(ModelElementId.class, this,
+				OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
 		}
 		return referencedModelElements;
 	}
@@ -196,12 +191,10 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS:
-			return ((InternalEList<?>) getReferencedModelElements())
-					.basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getReferencedModelElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -241,8 +234,7 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 			return;
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS:
 			getReferencedModelElements().clear();
-			getReferencedModelElements().addAll(
-					(Collection<? extends ModelElementId>) newValue);
+			getReferencedModelElements().addAll((Collection<? extends ModelElementId>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,8 +274,7 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX:
 			return index != INDEX_EDEFAULT;
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS:
-			return referencedModelElements != null
-					&& !referencedModelElements.isEmpty();
+			return referencedModelElements != null && !referencedModelElements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -316,11 +307,9 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 		EList<ModelElementId> referencedModelElementIds = getReferencedModelElements();
 		List<EObject> referencedModelElements = new ArrayList<EObject>();
 		for (ModelElementId refrencedModelElementId : referencedModelElementIds) {
-			EObject referencedME = project
-					.getModelElement(refrencedModelElementId);
+			EObject referencedME = project.getModelElement(refrencedModelElementId);
 			if (referencedME == null) {
-				referencedME = ((IdEObjectCollectionImpl) project)
-						.getDeletedModelElement(refrencedModelElementId);
+				referencedME = ((IdEObjectCollectionImpl) project).getDeletedModelElement(refrencedModelElementId);
 			}
 			if (referencedME != null) {
 				referencedModelElements.add(referencedME);
@@ -348,8 +337,15 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 							list.add(i, m);
 						}
 					} else {
-						// if index grows out of bounds, just append
-						list.add(m);
+						// index grows out of bounds
+						if (list.contains(m)) {
+							// if element already in list, move to the end
+							list.move(list.size() - 1, m);
+							i--;
+						} else {
+							// if element not in list, just append
+							list.add(m);
+						}
 					}
 
 					i++;
@@ -357,7 +353,15 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 				// list.addAll(getIndex(), referencedModelElements);
 			} else {
 				// if index is out of range ignore index
-				list.addAll(referencedModelElements);
+				for (EObject m : referencedModelElements) {
+					if (list.contains(m)) {
+						// move to end
+						list.move(list.size() - 1, m);
+					} else {
+						// append
+						list.add(m);
+					}
+				}
 			}
 		} else {
 			for (EObject me : referencedModelElements) {
@@ -375,12 +379,10 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl
 
 	@Override
 	public AbstractOperation reverse() {
-		MultiReferenceOperation multiReferenceOperation = OperationsFactory.eINSTANCE
-				.createMultiReferenceOperation();
+		MultiReferenceOperation multiReferenceOperation = OperationsFactory.eINSTANCE.createMultiReferenceOperation();
 		super.reverse(multiReferenceOperation);
 		multiReferenceOperation.setAdd(!isAdd());
-		EList<ModelElementId> copiedReferencedModelElements = multiReferenceOperation
-				.getReferencedModelElements();
+		EList<ModelElementId> copiedReferencedModelElements = multiReferenceOperation.getReferencedModelElements();
 		EList<ModelElementId> modelElements = getReferencedModelElements();
 		for (ModelElementId modelElementId : modelElements) {
 			copiedReferencedModelElements.add(ModelUtil.clone(modelElementId));

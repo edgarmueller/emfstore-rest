@@ -20,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>AC Group</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>AC Group</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -74,8 +73,8 @@ public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 	public EList<ACOrgUnit> getMembers() {
 		if (members == null) {
 			// see comment in RoleImpl.getProjects()
-			members = new EObjectResolvingEList<ACOrgUnit>(ACOrgUnit.class,
-					this, AccesscontrolPackage.AC_GROUP__MEMBERS) {
+			members = new EObjectResolvingEList<ACOrgUnit>(ACOrgUnit.class, this,
+				AccesscontrolPackage.AC_GROUP__MEMBERS) {
 
 				@Override
 				protected boolean useEquals() {

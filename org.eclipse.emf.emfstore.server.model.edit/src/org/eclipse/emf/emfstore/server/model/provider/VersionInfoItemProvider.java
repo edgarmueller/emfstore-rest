@@ -30,15 +30,13 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.VersionInfo;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.VersionInfo} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.VersionInfo} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class VersionInfoItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class VersionInfoItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -73,16 +71,12 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addEmfStoreVersionStringPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_VersionInfo_emfStoreVersionString_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_VersionInfo_emfStoreVersionString_feature",
-						"_UI_VersionInfo_type"),
-				ModelPackage.Literals.VERSION_INFO__EMF_STORE_VERSION_STRING,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_VersionInfo_emfStoreVersionString_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_VersionInfo_emfStoreVersionString_feature",
+				"_UI_VersionInfo_type"), ModelPackage.Literals.VERSION_INFO__EMF_STORE_VERSION_STRING, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -93,8 +87,7 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/VersionInfo"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VersionInfo"));
 	}
 
 	/**
@@ -107,7 +100,7 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		String label = ((VersionInfo) object).getEmfStoreVersionString();
 		return label == null || label.length() == 0 ? getString("_UI_VersionInfo_type")
-				: getString("_UI_VersionInfo_type") + " " + label;
+			: getString("_UI_VersionInfo_type") + " " + label;
 	}
 
 	/**
@@ -124,8 +117,7 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements
 
 		switch (notification.getFeatureID(VersionInfo.class)) {
 		case ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -139,8 +131,7 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

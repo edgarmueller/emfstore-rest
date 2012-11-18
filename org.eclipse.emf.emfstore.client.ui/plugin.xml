@@ -4,6 +4,8 @@
    <extension-point id="org.eclipse.emf.emfstore.client.ui.merge.customoption" name="customoption" schema="schema/org.eclipse.emf.emfstore.client.ui.customoption.exsd"/>
   <extension-point id="org.eclipse.emf.emfstore.client.ui.commitdialog.tray" name="org.eclipse.emf.emfstore.client.ui.commitdialog.tray" schema="schema/org.eclipse.emf.emfstore.client.ui.commitdialog.tray.exsd"/>
   <extension-point id="org.eclipse.emf.emfstore.client.ui.merge.detailwidget" name="Merge Detail Widget" schema="schema/org.eclipse.emf.emfstore.client.ui.merge.detailwidget.exsd"/>
+  <extension-point id="org.eclipse.emf.emfstore.client.ui.merge.labelprovider" name="Merge Label Provider" schema="schema/org.eclipse.emf.emfstore.client.ui.merge.labelprovider.exsd"/>
+  <extension-point id="org.eclipse.emf.emfstore.client.ui.disabledsavebutton" name="Disable Save Button" schema="schema/org.eclipse.emf.emfstore.client.ui.disabledsavebutton.exsd"/>
   <extension
         point="org.eclipse.ui.handlers">
       <handler
@@ -656,7 +658,6 @@
             name="ECP">
       </category>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.exportimport.ImportChangesHandler"
             id="org.eclipse.emf.emfstore.client.ui.importChanges"
             name="Import Changes">
       </command>

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -36,26 +37,35 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.emfstore.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
-import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcAdminConnectionHander;
-import org.eclipse.emf.emfstore.server.connection.xmlrpc.XmlRpcConnectionHandler;
+import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcAdminConnectionHander;
+import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
-import org.eclipse.emf.emfstore.server.core.helper.EPackageHelper;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EPackageHelper;
+import org.eclipse.emf.emfstore.server.core.internal.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
+import org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator;
+import org.eclipse.emf.emfstore.server.internal.startup.ExtensionManager;
+import org.eclipse.emf.emfstore.server.internal.startup.MigrationManager;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesFactory;
-import org.eclipse.emf.emfstore.server.startup.EmfStoreValidator;
-import org.eclipse.emf.emfstore.server.startup.ExtensionManager;
-import org.eclipse.emf.emfstore.server.startup.MigrationManager;
+import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.storage.ResourceStorage;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -127,6 +137,8 @@ public class EmfStoreController implements IApplication, Runnable {
 		new MigrationManager().migrateModel();
 		this.serverSpace = initServerSpace();
 
+		initializeBranchesIfRequired(serverSpace);
+
 		handleStartupListener();
 
 		accessControl = initAccessControl(serverSpace);
@@ -153,6 +165,22 @@ public class EmfStoreController implements IApplication, Runnable {
 			waitForTermination();
 		}
 
+	}
+
+	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalEmfStoreException {
+		for (ProjectHistory project : serverSpace.getProjects()) {
+			if (project.getBranches().size() == 0) {
+				// create branch information
+				BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
+				branchInfo.setName(VersionSpec.BRANCH_DEFAULT_NAME);
+
+				branchInfo.setHead(ModelUtil.clone(project.getLastVersion().getPrimarySpec()));
+				// set branch source to 0 since no branches can have existed
+				branchInfo.setSource(ModelUtil.clone(Versions.createPRIMARY(VersionSpec.BRANCH_DEFAULT_NAME, 0)));
+				project.getBranches().add(branchInfo);
+				new ResourceHelper(serverSpace).save(project);
+			}
+		}
 	}
 
 	// loads the ".ecore"-files from the dynamic-models-folder
@@ -222,13 +250,37 @@ public class EmfStoreController implements IApplication, Runnable {
 	}
 
 	private void copyFileToWorkspace(String target, String source, String failure, String success) {
-		File keyStore = new File(target);
-		if (!keyStore.exists()) {
-			try {
-				FileUtil.copyFile(getClass().getResourceAsStream(source), keyStore);
-			} catch (IOException e) {
-				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+
+		File targetFile = new File(target);
+
+		if (!targetFile.exists()) {
+			// check if the custom configuration resources are provided and if,
+			// copy them to place
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.server.configurationresource");
+			ExtensionElement element = extensionPoint.getFirst();
+
+			if (element != null) {
+
+				String attribute = element.getAttribute(targetFile.getName());
+
+				if (attribute != null) {
+					try {
+						FileUtil.copyFile(new URL("platform:/plugin/"
+							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute)
+							.openConnection().getInputStream(), targetFile);
+						return;
+					} catch (IOException e) {
+						ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+					}
+				}
 			}
+		}
+
+		// Guess not, lets copy the default configuration resources
+		try {
+			FileUtil.copyFile(getClass().getResourceAsStream(source), targetFile);
+		} catch (IOException e) {
+			ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
 		}
 	}
 
@@ -399,7 +451,9 @@ public class EmfStoreController implements IApplication, Runnable {
 			ModelUtil.logWarning("Property initialization failed, using default properties.", e);
 		} finally {
 			try {
-				fis.close();
+				if (fis != null) {
+					fis.close();
+				}
 			} catch (IOException e) {
 				ModelUtil.logWarning("Closing of properties file failed.", e);
 			}

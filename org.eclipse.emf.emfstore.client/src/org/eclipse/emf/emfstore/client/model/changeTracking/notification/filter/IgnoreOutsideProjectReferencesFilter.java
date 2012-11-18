@@ -34,7 +34,7 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 	 */
 	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
 
-		// if notification is from an element disconnected from the project´s containment tree we will not try to filter
+		// if notification is from an element disconnected from the project?s containment tree we will not try to filter
 		// since we cannot derive the project then
 		if (collection == null) {
 			return false;

@@ -29,8 +29,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  * 
  * @generated
  */
-public class AccesscontrolFactoryImpl extends EFactoryImpl implements
-		AccesscontrolFactory {
+public class AccesscontrolFactoryImpl extends EFactoryImpl implements AccesscontrolFactory {
 	/**
 	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -40,7 +39,7 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements
 	public static AccesscontrolFactory init() {
 		try {
 			AccesscontrolFactory theAccesscontrolFactory = (AccesscontrolFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://eclipse.org/emf/emfstore/server/model/accesscontrol");
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/accesscontrol");
 			if (theAccesscontrolFactory != null) {
 				return theAccesscontrolFactory;
 			}
@@ -79,8 +78,7 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements
 		case AccesscontrolPackage.ORG_UNIT_PROPERTY:
 			return createOrgUnitProperty();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 

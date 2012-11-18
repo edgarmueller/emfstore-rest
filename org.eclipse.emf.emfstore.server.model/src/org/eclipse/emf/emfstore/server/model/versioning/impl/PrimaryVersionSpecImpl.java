@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Primary Version Spec</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Primary Version Spec</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -30,8 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * 
  * @generated
  */
-public class PrimaryVersionSpecImpl extends VersionSpecImpl implements
-		PrimaryVersionSpec {
+public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVersionSpec {
 	/**
 	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -89,9 +88,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements
 		int oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
-					oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
+				oldIdentifier, identifier));
 	}
 
 	/**
@@ -173,10 +171,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements
 	public boolean equals(Object object) {
 		if (object instanceof PrimaryVersionSpec) {
 			PrimaryVersionSpec otherPrimaryVersionSpec = (PrimaryVersionSpec) object;
-			return this.getIdentifier() == otherPrimaryVersionSpec
-					.getIdentifier()
-					&& (this.getBranch() != null && this.getBranch().equals(
-							otherPrimaryVersionSpec.getBranch()));
+			return this.getIdentifier() == otherPrimaryVersionSpec.getIdentifier()
+				&& (this.getBranch() != null && this.getBranch().equals(otherPrimaryVersionSpec.getBranch()));
 		} else {
 			return false;
 		}

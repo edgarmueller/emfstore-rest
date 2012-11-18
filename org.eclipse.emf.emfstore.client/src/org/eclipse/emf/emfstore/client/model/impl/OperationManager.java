@@ -13,10 +13,17 @@ package org.eclipse.emf.emfstore.client.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
+import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.observers.OperationObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
@@ -28,7 +35,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * @author koegel
  * @author emueller
  */
-public class OperationManager implements OperationRecorderListener, IDisposable {
+public class OperationManager implements OperationRecorderListener, IDisposable, CommandObserver,
+	IdEObjectCollectionChangeObserver {
 
 	private OperationRecorder operationRecorder;
 	private List<OperationObserver> operationListeners;
@@ -37,31 +45,21 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 	/**
 	 * Constructor.
 	 * 
-	 * @param operationRecorder
-	 *            the operation recorder that should get wrapped
+	 * @param projectSpace
+	 *            the project space the operation manager should be attached to
 	 */
-	public OperationManager(OperationRecorder operationRecorder) {
-		this.operationRecorder = operationRecorder;
+	public OperationManager(ProjectSpaceBase projectSpace) {
+		this.operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
 		this.projectSpace = operationRecorder.getProjectSpace();
 		operationListeners = new ArrayList<OperationObserver>();
+		operationRecorder.addOperationRecorderListener(this);
 	}
 
 	/**
 	 * Undo the last operation of the projectSpace.
 	 */
 	public void undoLastOperation() {
-		if (!projectSpace.getOperations().isEmpty()) {
-			List<AbstractOperation> operations = projectSpace.getOperations();
-			AbstractOperation lastOperation = operations.get(operations.size() - 1);
-			operationRecorder.stopChangeRecording();
-			try {
-				lastOperation.reverse().apply(operationRecorder.getCollection());
-				notifyOperationUndone(lastOperation);
-			} finally {
-				operationRecorder.startChangeRecording();
-			}
-			operations.remove(lastOperation);
-		}
+		projectSpace.undoLastOperations(1);
 	}
 
 	/**
@@ -202,5 +200,102 @@ public class OperationManager implements OperationRecorderListener, IDisposable 
 	 */
 	public OperationModificator getOperationModificator() {
 		return operationRecorder.getModificator();
+	}
+
+	/**
+	 * Returns the notification recorder.
+	 * 
+	 * @return the notification recorder
+	 */
+	public NotificationRecorder getNotificationRecorder() {
+		return operationRecorder.getNotificationRecorder();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 */
+	public void commandStarted(Command command) {
+		operationRecorder.commandStarted(command);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 */
+	public void commandCompleted(Command command) {
+		operationRecorder.commandCompleted(command);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 *      java.lang.Exception)
+	 */
+	public void commandFailed(Command command, Exception exception) {
+		operationRecorder.commandFailed(command, exception);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
+	 */
+	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
+		operationRecorder.notify(notification, collection, modelElement);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.common.model.IdEObjectCollection,
+	 *      org.eclipse.emf.ecore.EObject)
+	 */
+	public void modelElementAdded(IdEObjectCollection collection, EObject modelElement) {
+		operationRecorder.modelElementAdded(collection, modelElement);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.common.model.IdEObjectCollection,
+	 *      org.eclipse.emf.ecore.EObject)
+	 */
+	public void modelElementRemoved(IdEObjectCollection collection, EObject modelElement) {
+		operationRecorder.modelElementRemoved(collection, modelElement);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)
+	 */
+	public void collectionDeleted(IdEObjectCollection collection) {
+		operationRecorder.collectionDeleted(collection);
+	}
+
+	/**
+	 * Starts change recording.
+	 */
+	public void startChangeRecording() {
+		operationRecorder.startChangeRecording();
+	}
+
+	/**
+	 * Stops change recording.
+	 */
+	public void stopChangeRecording() {
+		operationRecorder.stopChangeRecording();
 	}
 }

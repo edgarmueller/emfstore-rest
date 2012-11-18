@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionConfig;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -57,7 +58,13 @@ public class MergeWizardPage extends WizardPage {
 		super(PAGE_NAME);
 		this.decisionManager = decisionManager;
 		setTitle("Merge Conflicts");
-		setDescription("Some of your changes conflict with changes from the repository."
+		int countMyOperations = decisionManager.countMyOperations();
+		int countTheirOperations = decisionManager.countTheirOperations();
+		int countMyLeafOperations = decisionManager.countMyOperations();
+		int countTheirLeafOperations = decisionManager.countTheirOperations();
+		setDescription("Some of your " + countMyOperations + " composite changes and " + countMyLeafOperations
+			+ " overall changes conflict with " + countTheirOperations + " composite changes and "
+			+ countTheirLeafOperations + " overall changes from the repository."
 			+ "\nIn order to resolve these issues, select an option for every conflict.");
 	}
 
@@ -65,7 +72,10 @@ public class MergeWizardPage extends WizardPage {
 	 * {@inheritDoc}
 	 */
 	public void createControl(final Composite parent) {
+		parent.setLayout(new GridLayout());
 
+		Composite topBar = createTopBar(parent);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(topBar);
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
@@ -83,31 +93,10 @@ public class MergeWizardPage extends WizardPage {
 			decisionBoxes.add(new DecisionBox(client, decisionManager, colorSwitcher.getColor(), conflict));
 		}
 
-		// debugButton(client);
-
 		scrolledComposite.setContent(client);
 
 		Point computeSize = calcParentSize(parent);
 		scrolledComposite.setMinSize(computeSize);
-		// scrolledComposite.addControlListener(new ControlAdapter() {
-		// @Override
-		// public void controlResized(ControlEvent e) {
-		// scrolledComposite.setMinSize(calcParentSize(parent));
-		// }
-		// });
-
-		// scrolledComposite.addControlListener(new ControlListener() {
-		// public void controlResized(ControlEvent e) {
-		// Point computeSize = scrolledComposite.computeSize(SWT.DEFAULT,
-		// SWT.DEFAULT);
-		// computeSize.x = parent.getBounds().width;
-		// scrolledComposite.setMinSize(computeSize);
-		// }
-		// public void controlMoved(ControlEvent e) {
-		//
-		// }
-		// });
-
 		setControl(scrolledComposite);
 	}
 
@@ -131,9 +120,6 @@ public class MergeWizardPage extends WizardPage {
 		Button accecptTheirs = new Button(composite, SWT.PUSH);
 		accecptTheirs.setText("Keep All Their Changes");
 		accecptTheirs.addSelectionListener(new SelectAllSelectionListener(OptionType.TheirOperation));
-
-		// ProgressBar progressBar = new ProgressBar(composite, SWT.SMOOTH);
-		// progressBar.setSelection(0);
 
 		return composite;
 	}
@@ -160,6 +146,15 @@ public class MergeWizardPage extends WizardPage {
 		}
 
 		private void select() {
+			if (type.equals(OptionType.MyOperation)) {
+				boolean confirm = MessageDialog.openConfirm(getShell(), "Override changes of other users",
+					"Are you sure you want to override " + decisionManager.countTheirOperations()
+						+ " composite operations and " + decisionManager.countTheirLeafOperations()
+						+ " overall changes of other users by keeping your changes?");
+				if (!confirm) {
+					return;
+				}
+			}
 			for (DecisionBox box : decisionBoxes) {
 				for (ConflictOption option : box.getConflict().getOptions()) {
 					if (option.getType().equals(type)) {
@@ -167,11 +162,6 @@ public class MergeWizardPage extends WizardPage {
 						break;
 					}
 				}
-			}
-			if (type.equals(OptionType.MyOperation)) {
-				// decisionManager.getEventLogger().selectedAllMine();
-			} else if (type.equals(OptionType.TheirOperation)) {
-				// decisionManager.getEventLogger().selectedAllTheirs();
 			}
 		}
 	}
@@ -193,101 +183,4 @@ public class MergeWizardPage extends WizardPage {
 			return (color) ? UIDecisionConfig.getFirstDecisionBoxColor() : UIDecisionConfig.getSecondDecisionBoxColor();
 		}
 	}
-
-	//
-	// DEBUG
-	//
-
-	// private void debugButton(final Composite composite) {
-	// Composite debugBox = new Composite(composite, SWT.BORDER_SOLID);
-	// debugBox.setLayout(new GridLayout());
-	// Label label = new Label(debugBox, SWT.NONE);
-	// label.setText("Open Debug");
-	// Button button = new Button(debugBox, SWT.NONE);
-	// button.setText("Open");
-	// button.addSelectionListener(new SelectionListener() {
-	// public void widgetSelected(SelectionEvent e) {
-	// new DebugView(composite.getShell()).open();
-	// }
-	//
-	// public void widgetDefaultSelected(SelectionEvent e) {
-	// new DebugView(composite.getShell()).open();
-	// }
-	// });
-	// }
-	//
-	// private final class DebugView extends TitleAreaDialog {
-	//
-	// public DebugView(Shell shell) {
-	// super(shell);
-	// setShellStyle(this.getShellStyle() | SWT.RESIZE);
-	//
-	// }
-	//
-	// @Override
-	// protected Control createDialogArea(Composite parent) {
-	// super.setTitle("adsgfpaidfhg adogh a?odhf gahfd g");
-	// Composite composite = new Composite(parent, SWT.NONE);
-	// composite.setLayout(new GridLayout(2, true));
-	// composite
-	// .setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-	//
-	// ListViewer listViewer = new ListViewer(composite, SWT.SINGLE
-	// | SWT.V_SCROLL | SWT.H_SCROLL);
-	// listViewer.getList().setLayoutData(
-	// new GridData(SWT.FILL, SWT.FILL, true, true));
-	// listViewer.setContentProvider(new DebugContentProvider());
-	// listViewer.setLabelProvider(new DebugLabelProvider(true));
-	// listViewer.setInput(new Object());
-	//
-	// ListViewer listViewer2 = new ListViewer(composite, SWT.SINGLE
-	// | SWT.V_SCROLL | SWT.H_SCROLL);
-	// listViewer2.getList().setLayoutData(
-	// new GridData(SWT.FILL, SWT.FILL, true, true));
-	// listViewer2.setContentProvider(new DebugContentProvider());
-	//
-	// listViewer2.setLabelProvider(new DebugLabelProvider(false));
-	// listViewer2.setInput(new Object());
-	//
-	// return parent;
-	// }
-	//
-	// private final class DebugLabelProvider extends LabelProvider {
-	// private final boolean myOp;
-	//
-	// public DebugLabelProvider(boolean b) {
-	// super();
-	// this.myOp = b;
-	// }
-	//
-	// @Override
-	// public String getText(Object element) {
-	// String res = "";
-	// if (element instanceof Conflict) {
-	// if (myOp) {
-	// // res = ((Conflict)
-	// // element).getTheirOperation().toString();
-	// } else {
-	// // res = ((Conflict)
-	// // element).getMyOperation().toString();
-	// }
-	// }
-	// return res;
-	// }
-	// }
-	//
-	// private final class DebugContentProvider implements
-	// IStructuredContentProvider {
-	// public Object[] getElements(Object inputElement) {
-	// return decisionManager.getConflicts().toArray();
-	// }
-	//
-	// public void dispose() {
-	// }
-	//
-	// public void inputChanged(Viewer viewer, Object oldInput,
-	// Object newInput) {
-	// }
-	// }
-	// }
 }

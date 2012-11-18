@@ -10,9 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -50,6 +52,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IdEObjectCollection collection;
 	private List<ChangePackage> changePackages;
+	private Map<String, EObject> idToEObjectMapofChangePackages;
 
 	/**
 	 * Constructor.
@@ -256,19 +259,24 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	}
 
 	private EObject getMeFromOpsList(ModelElementId modelElementId, List<AbstractOperation> operations) {
+		if (idToEObjectMapofChangePackages == null) {
+			idToEObjectMapofChangePackages = new LinkedHashMap<String, EObject>();
+			scanOperationsIntoCache(operations);
+		}
+		return idToEObjectMapofChangePackages.get(modelElementId.getId());
+	}
+
+	private void scanOperationsIntoCache(List<AbstractOperation> operations) {
 		for (AbstractOperation op : operations) {
 			if (op instanceof CreateDeleteOperation) {
-				if (modelElementId.equals(op.getModelElementId())) {
-					return ((CreateDeleteOperation) op).getModelElement();
+				EMap<EObject, ModelElementId> eObjectToIdMap = ((CreateDeleteOperation) op).getEObjectToIdMap();
+				for (EObject eObject : eObjectToIdMap.keySet()) {
+					idToEObjectMapofChangePackages.put(eObjectToIdMap.get(eObject).getId(), eObject);
 				}
 			} else if (op instanceof CompositeOperation) {
-				EObject me = getMeFromOpsList(modelElementId, ((CompositeOperation) op).getSubOperations());
-				if (me != null) {
-					return me;
-				}
+				scanOperationsIntoCache(((CompositeOperation) op).getSubOperations());
 			}
 		}
-		return null;
 	}
 
 	/**

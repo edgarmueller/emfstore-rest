@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,8 +20,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
  * 
  * @author wesendon
  */
-public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements
-		IHandler {
+public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements IHandler {
 
 	@Override
 	public void handle() {
@@ -33,9 +32,7 @@ public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements
 		}
 
 		// FIXME: eContainer call
-		new UICheckoutController(getShell(),
-				((ServerInfo) projectInfo.eContainer()), projectInfo, true)
-				.execute();
+		new UICheckoutController(getShell(), ((ServerInfo) projectInfo.eContainer()), projectInfo, true).execute();
 	}
 
 }

@@ -123,8 +123,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseAuthenticationInformation(
-				AuthenticationInformation object) {
+		public Adapter caseAuthenticationInformation(AuthenticationInformation object) {
 			return createAuthenticationInformationAdapter();
 		}
 
@@ -159,8 +158,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectHistory
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectHistory
 	 * <em>Project History</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -175,8 +173,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectInfo
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectInfo
 	 * <em>Project Info</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -191,8 +188,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.SessionId
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.SessionId
 	 * <em>Session Id</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -207,8 +203,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.ServerSpace
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ServerSpace
 	 * <em>Server Space</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -223,8 +218,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.ProjectId
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectId
 	 * <em>Project Id</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -239,8 +233,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.VersionInfo
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.VersionInfo
 	 * <em>Version Info</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -255,8 +248,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo
 	 * <em>Client Version Info</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -271,8 +263,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.FileIdentifier
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.FileIdentifier
 	 * <em>File Identifier</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -303,8 +294,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
 	 * <em>Unique Identifier</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -319,8 +309,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
 	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

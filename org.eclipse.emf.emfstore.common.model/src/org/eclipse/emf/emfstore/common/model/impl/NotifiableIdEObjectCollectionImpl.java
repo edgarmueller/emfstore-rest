@@ -8,7 +8,6 @@
  * 
  * Contributors:
  ******************************************************************************/
-
 package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.io.IOException;
@@ -165,8 +164,8 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	@Override
-	public void initCaches() {
-		super.initCaches();
+	public void initMapping() {
+		super.initMapping();
 		if (changeNotifier == null) {
 			changeNotifier = new EObjectChangeNotifier(this, this);
 		}
@@ -178,8 +177,8 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 * @see org.eclipse.emf.emfstore.common.model.Project#initCaches(java.util.Map, java.util.Map)
 	 */
 	@Override
-	public void initCaches(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
-		super.initCaches(eObjectToIdMap, idToEObjectMap);
+	public void initMapping(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
+		super.initMapping(eObjectToIdMap, idToEObjectMap);
 		if (changeNotifier == null) {
 			changeNotifier = new EObjectChangeNotifier(this, this);
 		}
@@ -217,7 +216,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 */
 	public synchronized void addIdEObjectCollectionChangeObserver(
 		IdEObjectCollectionChangeObserver eObjectChangeObserver) {
-		initCaches();
+		initMapping();
 
 		if (isNotifiying) {
 			observersToAttach.add(eObjectChangeObserver);

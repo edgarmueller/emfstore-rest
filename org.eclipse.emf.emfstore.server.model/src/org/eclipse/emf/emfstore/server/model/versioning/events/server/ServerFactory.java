@@ -27,7 +27,7 @@ public interface ServerFactory extends EFactory {
 	 * @generated
 	 */
 	ServerFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerFactoryImpl
-			.init();
+		.init();
 
 	/**
 	 * Returns a new object of class '<em>Project Updated Event</em>'. <!--

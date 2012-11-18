@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.core;
 
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 

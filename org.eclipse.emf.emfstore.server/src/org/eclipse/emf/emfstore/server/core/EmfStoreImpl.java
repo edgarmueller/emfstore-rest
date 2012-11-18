@@ -17,16 +17,16 @@ import java.util.EnumMap;
 
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod;
-import org.eclipse.emf.emfstore.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.EMFStorePropertiesSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.EPackageSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.FileTransferSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.HistorySubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.ProjectPropertiesSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.ProjectSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.UserSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.core.subinterfaces.VersionSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
+import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.EMFStorePropertiesSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.EPackageSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.FileTransferSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.HistorySubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.ProjectPropertiesSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.ProjectSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.UserSubInterfaceImpl;
+import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.VersionSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
  * @author wesendon
  * @see EmfStore
  */
+// TODO: internal
 public class EmfStoreImpl extends AbstractEmfstoreInterface implements InvocationHandler {
 
 	/**

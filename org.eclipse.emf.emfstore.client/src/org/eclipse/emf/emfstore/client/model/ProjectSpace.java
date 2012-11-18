@@ -811,9 +811,13 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @param target
 	 *            target version
+	 * @param myChangePackage my change package
+	 * @param incomingChangePackages incoming change packages
 	 * @param conflictResolver
 	 *            a conflict resolver that will actually perform the conflict
 	 *            resolution
+	 * @param progressMonitor a progress monitor to report on progress
+	 * 
 	 * 
 	 * 
 	 * @throws EmfStoreException
@@ -822,7 +826,8 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @generated NOT
 	 */
-	boolean merge(PrimaryVersionSpec target, ConflictResolver conflictResolver) throws EmfStoreException;
+	boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage, List<ChangePackage> incomingChangePackages,
+		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
 	 * Removes a tag to the specified version of this project.
@@ -1113,11 +1118,15 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * Determine if the projectspace has unsave changes to any element in the project.
 	 * 
 	 * @return true if there is unsaved changes.
+	 * 
+	 * @generated NOT
 	 */
 	boolean hasUnsavedChanges();
 
 	/**
 	 * Saves the project space.
+	 * 
+	 * @generated NOT
 	 */
 	void save();
 
@@ -1125,6 +1134,9 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * Whether this project space has been shared.
 	 * 
 	 * @return true, if the project space has been shared, false otherwise
+	 * 
+	 * @generated NOt
 	 */
 	boolean isShared();
+
 } // ProjectContainer

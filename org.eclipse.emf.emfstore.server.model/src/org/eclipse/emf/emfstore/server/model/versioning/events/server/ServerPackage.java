@@ -59,7 +59,7 @@ public interface ServerPackage extends EPackage {
 	 * @generated
 	 */
 	ServerPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerPackageImpl
-			.init();
+		.init();
 
 	/**
 	 * The meta object id for the '
@@ -204,8 +204,7 @@ public interface ServerPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId
 	 * <em>Project Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Project Id</em>'.
+	 * @return the meta object for the containment reference ' <em>Project Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId()
 	 * @see #getServerProjectEvent()
 	 * @generated
@@ -229,8 +228,7 @@ public interface ServerPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion
 	 * <em>New Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>New Version</em>'.
+	 * @return the meta object for the containment reference ' <em>New Version</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion()
 	 * @see #getProjectUpdatedEvent()
 	 * @generated
@@ -290,8 +288,7 @@ public interface ServerPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference SERVER_PROJECT_EVENT__PROJECT_ID = eINSTANCE
-				.getServerProjectEvent_ProjectId();
+		EReference SERVER_PROJECT_EVENT__PROJECT_ID = eINSTANCE.getServerProjectEvent_ProjectId();
 
 		/**
 		 * The meta object literal for the '
@@ -312,8 +309,7 @@ public interface ServerPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference PROJECT_UPDATED_EVENT__NEW_VERSION = eINSTANCE
-				.getProjectUpdatedEvent_NewVersion();
+		EReference PROJECT_UPDATED_EVENT__NEW_VERSION = eINSTANCE.getProjectUpdatedEvent_NewVersion();
 
 	}
 

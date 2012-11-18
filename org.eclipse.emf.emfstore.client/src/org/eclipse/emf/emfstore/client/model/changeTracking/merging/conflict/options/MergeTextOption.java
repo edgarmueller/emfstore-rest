@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.op
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
@@ -84,20 +85,20 @@ public class MergeTextOption extends ConflictOption {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AbstractOperation> getOperations() {
+	public Set<AbstractOperation> getOperations() {
 		if (text != null) {
 			for (ConflictOption option : list) {
 				if (option.getType().equals(OptionType.MyOperation)) {
 					if (option.getOperations().size() == 0) {
 						continue;
 					}
-					AbstractOperation tmp = option.getOperations().get(0);
+					AbstractOperation tmp = option.getOperations().iterator().next();
 					if (tmp instanceof AttributeOperation) {
-						option.getOperations().remove(0);
+						option.getOperations().remove(tmp);
 						AttributeOperation mergedOp = (AttributeOperation) ModelUtil.clone(tmp);
 						mergedOp.setIdentifier(EcoreUtil.generateUUID());
 						mergedOp.setNewValue(text);
-						option.getOperations().add(0, mergedOp);
+						option.getOperations().add(mergedOp);
 						return option.getOperations();
 					}
 				}

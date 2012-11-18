@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
@@ -95,7 +96,7 @@ public class ImportProjectController implements IExportImportController {
 		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
 		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
 		projectSpace.setProjectName(projectName);
-		projectSpace.eResource().save(ModelUtil.getResourceSaveOptions());
+		ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
 	}
 
 	/**

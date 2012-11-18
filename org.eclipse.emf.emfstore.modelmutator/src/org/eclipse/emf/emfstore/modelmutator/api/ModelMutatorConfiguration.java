@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -29,7 +29,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
  * Configuration for the ModelMutator.
  * 
  * @author Eugen Neufeld
- * @author Stephan Köhler
+ * @author Stephan K?hler
  * @author Philip Achenbach
  * @author Julian Sommerfeldt
  */
@@ -51,7 +51,7 @@ public class ModelMutatorConfiguration {
 
 	private boolean doNotGenerateRoot;
 	private boolean useEcoreUtilDelete;
-	
+
 	private EditingDomain editingDomain;
 
 	/**
@@ -60,7 +60,7 @@ public class ModelMutatorConfiguration {
 	public ModelMutatorConfiguration() {
 		this((EPackage) null, null, null);
 	}
-	
+
 	/**
 	 * The constructor for the configuration.
 	 * 
@@ -90,7 +90,7 @@ public class ModelMutatorConfiguration {
 		this.ignoreAndLog = false;
 
 		minObjectsCount = 100;
-		
+
 		useEcoreUtilDelete = false;
 	}
 
@@ -270,7 +270,7 @@ public class ModelMutatorConfiguration {
 	public void setUseEcoreUtilDelete(boolean useEcoreUtilDelete) {
 		this.useEcoreUtilDelete = useEcoreUtilDelete;
 	}
-	
+
 	/**
 	 * @return How many objects should the mutation process delete maximal?
 	 */

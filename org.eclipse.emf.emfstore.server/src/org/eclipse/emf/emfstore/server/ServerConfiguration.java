@@ -243,9 +243,9 @@ public final class ServerConfiguration {
 
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the values
-	 * {@link org.eclipse.emf.emfstore.server.startup.EmfStoreValidator#RESOLVEALL},
-	 * {@link org.eclipse.emf.emfstore.server.startup.EmfStoreValidator#MODELELEMENTID} and
-	 * {@link org.eclipse.emf.emfstore.server.startup.EmfStoreValidator#PROJECTGENERATION}. E.g.: If you want to resolve
+	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#RESOLVEALL},
+	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#MODELELEMENTID} and
+	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}. E.g.: If you want to resolve
 	 * all elements and check use the modelelement id validation, you have to set the level to <code>1 | 2</code>, which
 	 * is 3.
 	 */
@@ -559,9 +559,9 @@ public final class ServerConfiguration {
 	 * 
 	 * @return the server version number
 	 */
+	@SuppressWarnings("cast")
 	public static String getServerVersion() {
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		@SuppressWarnings("cast")
 		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
 			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;

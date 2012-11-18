@@ -61,7 +61,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 */
 	OperationsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl
-			.init();
+		.init();
 
 	/**
 	 * The meta object id for the '
@@ -373,8 +373,7 @@ public interface OperationsPackage extends EPackage {
 	int CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP = ABSTRACT_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Create Delete Operation</em>' class. <!-- begin-user-doc --> <!--
+	 * The number of structural features of the ' <em>Create Delete Operation</em>' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -551,8 +550,8 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES = FEATURE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Attribute Operation</em>' class. <!-- begin-user-doc --> <!--
+	 * The number of structural features of the ' <em>Multi Attribute Operation</em>' class. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -645,8 +644,7 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE = FEATURE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Attribute Set Operation</em>' class. <!-- begin-user-doc -->
+	 * The number of structural features of the ' <em>Multi Attribute Set Operation</em>' class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -739,8 +737,8 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE = FEATURE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Attribute Move Operation</em>' class. <!-- begin-user-doc -->
+	 * The number of structural features of the ' <em>Multi Attribute Move Operation</em>' class. <!-- begin-user-doc
+	 * -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -944,8 +942,8 @@ public interface OperationsPackage extends EPackage {
 	int SINGLE_REFERENCE_OPERATION__NEW_VALUE = REFERENCE_OPERATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Single Reference Operation</em>' class. <!-- begin-user-doc --> <!--
+	 * The number of structural features of the ' <em>Single Reference Operation</em>' class. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -1077,8 +1075,7 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_REFERENCE_SET_OPERATION__NEW_VALUE = REFERENCE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Reference Set Operation</em>' class. <!-- begin-user-doc -->
+	 * The number of structural features of the ' <em>Multi Reference Set Operation</em>' class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -1186,8 +1183,8 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS = REFERENCE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Reference Operation</em>' class. <!-- begin-user-doc --> <!--
+	 * The number of structural features of the ' <em>Multi Reference Operation</em>' class. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -1280,8 +1277,8 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID = FEATURE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>Multi Reference Move Operation</em>' class. <!-- begin-user-doc -->
+	 * The number of structural features of the ' <em>Multi Reference Move Operation</em>' class. <!-- begin-user-doc
+	 * -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -1428,8 +1425,8 @@ public interface OperationsPackage extends EPackage {
 	int EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '
-	 * <em>EObject To Model Element Id Map</em>' class. <!-- begin-user-doc -->
+	 * The number of structural features of the ' <em>EObject To Model Element Id Map</em>' class. <!-- begin-user-doc
+	 * -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -1438,8 +1435,7 @@ public interface OperationsPackage extends EPackage {
 	int EOBJECT_TO_MODEL_ELEMENT_ID_MAP_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
 	 * <em>Containment Type</em>}' enum. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -1467,8 +1463,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Model Element Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Model Element Id</em>'.
+	 * @return the meta object for the containment reference ' <em>Model Element Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId()
 	 * @see #getAbstractOperation()
 	 * @generated
@@ -1516,8 +1511,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getSubOperations
 	 * <em>Sub Operations</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Sub Operations</em>'.
+	 * @return the meta object for the containment reference list ' <em>Sub Operations</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getSubOperations()
 	 * @see #getCompositeOperation()
 	 * @generated
@@ -1554,8 +1548,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Composite Description</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Composite Description</em>
-	 *         '.
+	 * @return the meta object for the attribute '<em>Composite Description</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getCompositeDescription()
 	 * @see #getCompositeOperation()
 	 * @generated
@@ -1627,8 +1620,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement
 	 * <em>Model Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Model Element</em>'.
+	 * @return the meta object for the containment reference ' <em>Model Element</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
@@ -1640,8 +1632,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getSubOperations
 	 * <em>Sub Operations</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Sub Operations</em>'.
+	 * @return the meta object for the containment reference list ' <em>Sub Operations</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getSubOperations()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
@@ -1739,8 +1730,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Referenced Values</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @return the meta object for the attribute list '
-	 *         <em>Referenced Values</em>'.
+	 * @return the meta object for the attribute list ' <em>Referenced Values</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues()
 	 * @see #getMultiAttributeOperation()
 	 * @generated
@@ -1753,8 +1743,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Multi Attribute Set Operation</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for class '<em>Multi Attribute Set Operation</em>
-	 *         '.
+	 * @return the meta object for class '<em>Multi Attribute Set Operation</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation
 	 * @generated
 	 */
@@ -1802,8 +1791,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Multi Attribute Move Operation</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for class '
-	 *         <em>Multi Attribute Move Operation</em>'.
+	 * @return the meta object for class ' <em>Multi Attribute Move Operation</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation
 	 * @generated
 	 */
@@ -1863,8 +1851,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue
 	 * <em>Old Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>Old Value</em>
-	 *         '.
+	 * @return the meta object for the containment reference '<em>Old Value</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue()
 	 * @see #getSingleReferenceOperation()
 	 * @generated
@@ -1876,8 +1863,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue
 	 * <em>New Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>New Value</em>
-	 *         '.
+	 * @return the meta object for the containment reference '<em>New Value</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue()
 	 * @see #getSingleReferenceOperation()
 	 * @generated
@@ -1926,8 +1912,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Referenced Model Elements</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Referenced Model Elements</em>'.
+	 * @return the meta object for the containment reference list ' <em>Referenced Model Elements</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements()
 	 * @see #getMultiReferenceOperation()
 	 * @generated
@@ -1940,8 +1925,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Multi Reference Set Operation</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for class '<em>Multi Reference Set Operation</em>
-	 *         '.
+	 * @return the meta object for class '<em>Multi Reference Set Operation</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation
 	 * @generated
 	 */
@@ -1964,8 +1948,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue
 	 * <em>Old Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>Old Value</em>
-	 *         '.
+	 * @return the meta object for the containment reference '<em>Old Value</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue()
 	 * @see #getMultiReferenceSetOperation()
 	 * @generated
@@ -1977,8 +1960,7 @@ public interface OperationsPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue
 	 * <em>New Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '<em>New Value</em>
-	 *         '.
+	 * @return the meta object for the containment reference '<em>New Value</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue()
 	 * @see #getMultiReferenceSetOperation()
 	 * @generated
@@ -1991,8 +1973,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Multi Reference Move Operation</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for class '
-	 *         <em>Multi Reference Move Operation</em>'.
+	 * @return the meta object for class ' <em>Multi Reference Move Operation</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation
 	 * @generated
 	 */
@@ -2028,8 +2009,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Referenced Model Element Id</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Referenced Model Element Id</em>'.
+	 * @return the meta object for the containment reference ' <em>Referenced Model Element Id</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId()
 	 * @see #getMultiReferenceMoveOperation()
 	 * @generated
@@ -2066,8 +2046,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>Opposite Feature Name</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Opposite Feature Name</em>
-	 *         '.
+	 * @return the meta object for the attribute '<em>Opposite Feature Name</em> '.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getOppositeFeatureName()
 	 * @see #getReferenceOperation()
 	 * @generated
@@ -2174,8 +2153,7 @@ public interface OperationsPackage extends EPackage {
 	 * <em>EObject To Model Element Id Map</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for class '
-	 *         <em>EObject To Model Element Id Map</em>'.
+	 * @return the meta object for class ' <em>EObject To Model Element Id Map</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="org.eclipse.emf.ecore.EObject"
 	 *        valueType="org.eclipse.emf.emfstore.common.model.ModelElementId"
@@ -2196,8 +2174,8 @@ public interface OperationsPackage extends EPackage {
 	EReference getEObjectToModelElementIdMap_Key();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference ' {@link java.util.Map.Entry <em>Value</em>}'. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
@@ -2261,8 +2239,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference ABSTRACT_OPERATION__MODEL_ELEMENT_ID = eINSTANCE
-				.getAbstractOperation_ModelElementId();
+		EReference ABSTRACT_OPERATION__MODEL_ELEMENT_ID = eINSTANCE.getAbstractOperation_ModelElementId();
 
 		/**
 		 * The meta object literal for the '<em><b>Accepted</b></em>' attribute
@@ -2270,8 +2247,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OPERATION__ACCEPTED = eINSTANCE
-				.getAbstractOperation_Accepted();
+		EAttribute ABSTRACT_OPERATION__ACCEPTED = eINSTANCE.getAbstractOperation_Accepted();
 
 		/**
 		 * The meta object literal for the '<em><b>Client Date</b></em>'
@@ -2279,8 +2255,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ABSTRACT_OPERATION__CLIENT_DATE = eINSTANCE
-				.getAbstractOperation_ClientDate();
+		EAttribute ABSTRACT_OPERATION__CLIENT_DATE = eINSTANCE.getAbstractOperation_ClientDate();
 
 		/**
 		 * The meta object literal for the '
@@ -2301,8 +2276,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference COMPOSITE_OPERATION__SUB_OPERATIONS = eINSTANCE
-				.getCompositeOperation_SubOperations();
+		EReference COMPOSITE_OPERATION__SUB_OPERATIONS = eINSTANCE.getCompositeOperation_SubOperations();
 
 		/**
 		 * The meta object literal for the '<em><b>Main Operation</b></em>'
@@ -2310,8 +2284,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference COMPOSITE_OPERATION__MAIN_OPERATION = eINSTANCE
-				.getCompositeOperation_MainOperation();
+		EReference COMPOSITE_OPERATION__MAIN_OPERATION = eINSTANCE.getCompositeOperation_MainOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Composite Name</b></em>'
@@ -2319,18 +2292,15 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute COMPOSITE_OPERATION__COMPOSITE_NAME = eINSTANCE
-				.getCompositeOperation_CompositeName();
+		EAttribute COMPOSITE_OPERATION__COMPOSITE_NAME = eINSTANCE.getCompositeOperation_CompositeName();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Composite Description</b></em>' attribute feature. <!--
+		 * The meta object literal for the ' <em><b>Composite Description</b></em>' attribute feature. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EAttribute COMPOSITE_OPERATION__COMPOSITE_DESCRIPTION = eINSTANCE
-				.getCompositeOperation_CompositeDescription();
+		EAttribute COMPOSITE_OPERATION__COMPOSITE_DESCRIPTION = eINSTANCE.getCompositeOperation_CompositeDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>Reversed</b></em>' attribute
@@ -2338,8 +2308,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute COMPOSITE_OPERATION__REVERSED = eINSTANCE
-				.getCompositeOperation_Reversed();
+		EAttribute COMPOSITE_OPERATION__REVERSED = eINSTANCE.getCompositeOperation_Reversed();
 
 		/**
 		 * The meta object literal for the '
@@ -2359,8 +2328,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute FEATURE_OPERATION__FEATURE_NAME = eINSTANCE
-				.getFeatureOperation_FeatureName();
+		EAttribute FEATURE_OPERATION__FEATURE_NAME = eINSTANCE.getFeatureOperation_FeatureName();
 
 		/**
 		 * The meta object literal for the '
@@ -2380,8 +2348,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute CREATE_DELETE_OPERATION__DELETE = eINSTANCE
-				.getCreateDeleteOperation_Delete();
+		EAttribute CREATE_DELETE_OPERATION__DELETE = eINSTANCE.getCreateDeleteOperation_Delete();
 
 		/**
 		 * The meta object literal for the '<em><b>Model Element</b></em>'
@@ -2390,8 +2357,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference CREATE_DELETE_OPERATION__MODEL_ELEMENT = eINSTANCE
-				.getCreateDeleteOperation_ModelElement();
+		EReference CREATE_DELETE_OPERATION__MODEL_ELEMENT = eINSTANCE.getCreateDeleteOperation_ModelElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Sub Operations</b></em>'
@@ -2400,8 +2366,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference CREATE_DELETE_OPERATION__SUB_OPERATIONS = eINSTANCE
-				.getCreateDeleteOperation_SubOperations();
+		EReference CREATE_DELETE_OPERATION__SUB_OPERATIONS = eINSTANCE.getCreateDeleteOperation_SubOperations();
 
 		/**
 		 * The meta object literal for the '<em><b>EObject To Id Map</b></em>'
@@ -2409,8 +2374,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP = eINSTANCE
-				.getCreateDeleteOperation_EObjectToIdMap();
+		EReference CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP = eINSTANCE.getCreateDeleteOperation_EObjectToIdMap();
 
 		/**
 		 * The meta object literal for the '
@@ -2430,8 +2394,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_OPERATION__OLD_VALUE = eINSTANCE
-				.getAttributeOperation_OldValue();
+		EAttribute ATTRIBUTE_OPERATION__OLD_VALUE = eINSTANCE.getAttributeOperation_OldValue();
 
 		/**
 		 * The meta object literal for the '<em><b>New Value</b></em>' attribute
@@ -2439,8 +2402,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute ATTRIBUTE_OPERATION__NEW_VALUE = eINSTANCE
-				.getAttributeOperation_NewValue();
+		EAttribute ATTRIBUTE_OPERATION__NEW_VALUE = eINSTANCE.getAttributeOperation_NewValue();
 
 		/**
 		 * The meta object literal for the '
@@ -2452,8 +2414,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeOperation()
 		 * @generated
 		 */
-		EClass MULTI_ATTRIBUTE_OPERATION = eINSTANCE
-				.getMultiAttributeOperation();
+		EClass MULTI_ATTRIBUTE_OPERATION = eINSTANCE.getMultiAttributeOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Add</b></em>' attribute
@@ -2461,8 +2422,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_OPERATION__ADD = eINSTANCE
-				.getMultiAttributeOperation_Add();
+		EAttribute MULTI_ATTRIBUTE_OPERATION__ADD = eINSTANCE.getMultiAttributeOperation_Add();
 
 		/**
 		 * The meta object literal for the '<em><b>Indexes</b></em>' attribute
@@ -2470,8 +2430,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_OPERATION__INDEXES = eINSTANCE
-				.getMultiAttributeOperation_Indexes();
+		EAttribute MULTI_ATTRIBUTE_OPERATION__INDEXES = eINSTANCE.getMultiAttributeOperation_Indexes();
 
 		/**
 		 * The meta object literal for the '<em><b>Referenced Values</b></em>'
@@ -2480,7 +2439,7 @@ public interface OperationsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES = eINSTANCE
-				.getMultiAttributeOperation_ReferencedValues();
+			.getMultiAttributeOperation_ReferencedValues();
 
 		/**
 		 * The meta object literal for the '
@@ -2492,8 +2451,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeSetOperation()
 		 * @generated
 		 */
-		EClass MULTI_ATTRIBUTE_SET_OPERATION = eINSTANCE
-				.getMultiAttributeSetOperation();
+		EClass MULTI_ATTRIBUTE_SET_OPERATION = eINSTANCE.getMultiAttributeSetOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Index</b></em>' attribute
@@ -2501,8 +2459,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__INDEX = eINSTANCE
-				.getMultiAttributeSetOperation_Index();
+		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__INDEX = eINSTANCE.getMultiAttributeSetOperation_Index();
 
 		/**
 		 * The meta object literal for the '<em><b>Old Value</b></em>' attribute
@@ -2510,8 +2467,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__OLD_VALUE = eINSTANCE
-				.getMultiAttributeSetOperation_OldValue();
+		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__OLD_VALUE = eINSTANCE.getMultiAttributeSetOperation_OldValue();
 
 		/**
 		 * The meta object literal for the '<em><b>New Value</b></em>' attribute
@@ -2519,8 +2475,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE = eINSTANCE
-				.getMultiAttributeSetOperation_NewValue();
+		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE = eINSTANCE.getMultiAttributeSetOperation_NewValue();
 
 		/**
 		 * The meta object literal for the '
@@ -2532,8 +2487,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeMoveOperation()
 		 * @generated
 		 */
-		EClass MULTI_ATTRIBUTE_MOVE_OPERATION = eINSTANCE
-				.getMultiAttributeMoveOperation();
+		EClass MULTI_ATTRIBUTE_MOVE_OPERATION = eINSTANCE.getMultiAttributeMoveOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Old Index</b></em>' attribute
@@ -2541,8 +2495,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX = eINSTANCE
-				.getMultiAttributeMoveOperation_OldIndex();
+		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__OLD_INDEX = eINSTANCE.getMultiAttributeMoveOperation_OldIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>New Index</b></em>' attribute
@@ -2550,8 +2503,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX = eINSTANCE
-				.getMultiAttributeMoveOperation_NewIndex();
+		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__NEW_INDEX = eINSTANCE.getMultiAttributeMoveOperation_NewIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>Referenced Value</b></em>'
@@ -2560,7 +2512,7 @@ public interface OperationsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE = eINSTANCE
-				.getMultiAttributeMoveOperation_ReferencedValue();
+			.getMultiAttributeMoveOperation_ReferencedValue();
 
 		/**
 		 * The meta object literal for the '
@@ -2572,8 +2524,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getSingleReferenceOperation()
 		 * @generated
 		 */
-		EClass SINGLE_REFERENCE_OPERATION = eINSTANCE
-				.getSingleReferenceOperation();
+		EClass SINGLE_REFERENCE_OPERATION = eINSTANCE.getSingleReferenceOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Old Value</b></em>'
@@ -2582,8 +2533,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference SINGLE_REFERENCE_OPERATION__OLD_VALUE = eINSTANCE
-				.getSingleReferenceOperation_OldValue();
+		EReference SINGLE_REFERENCE_OPERATION__OLD_VALUE = eINSTANCE.getSingleReferenceOperation_OldValue();
 
 		/**
 		 * The meta object literal for the '<em><b>New Value</b></em>'
@@ -2592,8 +2542,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference SINGLE_REFERENCE_OPERATION__NEW_VALUE = eINSTANCE
-				.getSingleReferenceOperation_NewValue();
+		EReference SINGLE_REFERENCE_OPERATION__NEW_VALUE = eINSTANCE.getSingleReferenceOperation_NewValue();
 
 		/**
 		 * The meta object literal for the '
@@ -2605,8 +2554,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceOperation()
 		 * @generated
 		 */
-		EClass MULTI_REFERENCE_OPERATION = eINSTANCE
-				.getMultiReferenceOperation();
+		EClass MULTI_REFERENCE_OPERATION = eINSTANCE.getMultiReferenceOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Add</b></em>' attribute
@@ -2614,8 +2562,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_REFERENCE_OPERATION__ADD = eINSTANCE
-				.getMultiReferenceOperation_Add();
+		EAttribute MULTI_REFERENCE_OPERATION__ADD = eINSTANCE.getMultiReferenceOperation_Add();
 
 		/**
 		 * The meta object literal for the '<em><b>Index</b></em>' attribute
@@ -2623,18 +2570,16 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_REFERENCE_OPERATION__INDEX = eINSTANCE
-				.getMultiReferenceOperation_Index();
+		EAttribute MULTI_REFERENCE_OPERATION__INDEX = eINSTANCE.getMultiReferenceOperation_Index();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Referenced Model Elements</b></em>' containment reference list
+		 * The meta object literal for the ' <em><b>Referenced Model Elements</b></em>' containment reference list
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS = eINSTANCE
-				.getMultiReferenceOperation_ReferencedModelElements();
+			.getMultiReferenceOperation_ReferencedModelElements();
 
 		/**
 		 * The meta object literal for the '
@@ -2646,8 +2591,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceSetOperation()
 		 * @generated
 		 */
-		EClass MULTI_REFERENCE_SET_OPERATION = eINSTANCE
-				.getMultiReferenceSetOperation();
+		EClass MULTI_REFERENCE_SET_OPERATION = eINSTANCE.getMultiReferenceSetOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Index</b></em>' attribute
@@ -2655,8 +2599,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_REFERENCE_SET_OPERATION__INDEX = eINSTANCE
-				.getMultiReferenceSetOperation_Index();
+		EAttribute MULTI_REFERENCE_SET_OPERATION__INDEX = eINSTANCE.getMultiReferenceSetOperation_Index();
 
 		/**
 		 * The meta object literal for the '<em><b>Old Value</b></em>'
@@ -2665,8 +2608,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference MULTI_REFERENCE_SET_OPERATION__OLD_VALUE = eINSTANCE
-				.getMultiReferenceSetOperation_OldValue();
+		EReference MULTI_REFERENCE_SET_OPERATION__OLD_VALUE = eINSTANCE.getMultiReferenceSetOperation_OldValue();
 
 		/**
 		 * The meta object literal for the '<em><b>New Value</b></em>'
@@ -2675,8 +2617,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference MULTI_REFERENCE_SET_OPERATION__NEW_VALUE = eINSTANCE
-				.getMultiReferenceSetOperation_NewValue();
+		EReference MULTI_REFERENCE_SET_OPERATION__NEW_VALUE = eINSTANCE.getMultiReferenceSetOperation_NewValue();
 
 		/**
 		 * The meta object literal for the '
@@ -2688,8 +2629,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceMoveOperation()
 		 * @generated
 		 */
-		EClass MULTI_REFERENCE_MOVE_OPERATION = eINSTANCE
-				.getMultiReferenceMoveOperation();
+		EClass MULTI_REFERENCE_MOVE_OPERATION = eINSTANCE.getMultiReferenceMoveOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Old Index</b></em>' attribute
@@ -2697,8 +2637,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX = eINSTANCE
-				.getMultiReferenceMoveOperation_OldIndex();
+		EAttribute MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX = eINSTANCE.getMultiReferenceMoveOperation_OldIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>New Index</b></em>' attribute
@@ -2706,18 +2645,16 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX = eINSTANCE
-				.getMultiReferenceMoveOperation_NewIndex();
+		EAttribute MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX = eINSTANCE.getMultiReferenceMoveOperation_NewIndex();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Referenced Model Element Id</b></em>' containment reference
+		 * The meta object literal for the ' <em><b>Referenced Model Element Id</b></em>' containment reference
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID = eINSTANCE
-				.getMultiReferenceMoveOperation_ReferencedModelElementId();
+			.getMultiReferenceMoveOperation_ReferencedModelElementId();
 
 		/**
 		 * The meta object literal for the '
@@ -2737,18 +2674,15 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute REFERENCE_OPERATION__BIDIRECTIONAL = eINSTANCE
-				.getReferenceOperation_Bidirectional();
+		EAttribute REFERENCE_OPERATION__BIDIRECTIONAL = eINSTANCE.getReferenceOperation_Bidirectional();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Opposite Feature Name</b></em>' attribute feature. <!--
+		 * The meta object literal for the ' <em><b>Opposite Feature Name</b></em>' attribute feature. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EAttribute REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME = eINSTANCE
-				.getReferenceOperation_OppositeFeatureName();
+		EAttribute REFERENCE_OPERATION__OPPOSITE_FEATURE_NAME = eINSTANCE.getReferenceOperation_OppositeFeatureName();
 
 		/**
 		 * The meta object literal for the '<em><b>Containment Type</b></em>'
@@ -2756,8 +2690,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute REFERENCE_OPERATION__CONTAINMENT_TYPE = eINSTANCE
-				.getReferenceOperation_ContainmentType();
+		EAttribute REFERENCE_OPERATION__CONTAINMENT_TYPE = eINSTANCE.getReferenceOperation_ContainmentType();
 
 		/**
 		 * The meta object literal for the '
@@ -2797,8 +2730,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference OPERATION_GROUP__OPERATIONS = eINSTANCE
-				.getOperationGroup_Operations();
+		EReference OPERATION_GROUP__OPERATIONS = eINSTANCE.getOperationGroup_Operations();
 
 		/**
 		 * The meta object literal for the '
@@ -2818,8 +2750,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EAttribute MODEL_ELEMENT_GROUP__NAME = eINSTANCE
-				.getModelElementGroup_Name();
+		EAttribute MODEL_ELEMENT_GROUP__NAME = eINSTANCE.getModelElementGroup_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Model Elements</b></em>'
@@ -2827,8 +2758,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference MODEL_ELEMENT_GROUP__MODEL_ELEMENTS = eINSTANCE
-				.getModelElementGroup_ModelElements();
+		EReference MODEL_ELEMENT_GROUP__MODEL_ELEMENTS = eINSTANCE.getModelElementGroup_ModelElements();
 
 		/**
 		 * The meta object literal for the '
@@ -2840,8 +2770,7 @@ public interface OperationsPackage extends EPackage {
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getEObjectToModelElementIdMap()
 		 * @generated
 		 */
-		EClass EOBJECT_TO_MODEL_ELEMENT_ID_MAP = eINSTANCE
-				.getEObjectToModelElementIdMap();
+		EClass EOBJECT_TO_MODEL_ELEMENT_ID_MAP = eINSTANCE.getEObjectToModelElementIdMap();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' reference
@@ -2849,8 +2778,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY = eINSTANCE
-				.getEObjectToModelElementIdMap_Key();
+		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY = eINSTANCE.getEObjectToModelElementIdMap_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment
@@ -2858,8 +2786,7 @@ public interface OperationsPackage extends EPackage {
 		 * 
 		 * @generated
 		 */
-		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE = eINSTANCE
-				.getEObjectToModelElementIdMap_Value();
+		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE = eINSTANCE.getEObjectToModelElementIdMap_Value();
 
 		/**
 		 * The meta object literal for the '

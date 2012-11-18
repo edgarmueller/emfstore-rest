@@ -12,14 +12,18 @@ package org.eclipse.emf.emfstore.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 
 /**
  * Tests if auto save is enabled.
  * 
  * @author mkoegel
- * 
+ * @author emueller
  */
 public class IsAutoSaveEnabledTester extends PropertyTester {
+
+	private static boolean isAutoSaveEnabledTesterDisabled = initExtensionPoint();
 
 	/**
 	 * {@inheritDoc}
@@ -28,7 +32,18 @@ public class IsAutoSaveEnabledTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		return (expectedValue != null && expectedValue.equals(Configuration.isAutoSaveEnabled()));
+		return (expectedValue != null && expectedValue.equals(Configuration.isAutoSaveEnabled()) && !isAutoSaveEnabledTesterDisabled);
 	}
 
+	private static boolean initExtensionPoint() {
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disabledsavebutton");
+		ExtensionElement element = extensionPoint.getFirst();
+
+		if (element == null) {
+			// default
+			return false;
+		}
+
+		return element.getBoolean("enabled", false);
+	}
 }

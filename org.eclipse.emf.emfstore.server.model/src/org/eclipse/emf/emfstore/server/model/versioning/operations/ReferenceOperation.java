@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Reference Operation</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Reference Operation</b></em>'. <!--
+ * end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -38,8 +38,8 @@ public interface ReferenceOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Bidirectional</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bidirectional</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Bidirectional</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -68,8 +68,8 @@ public interface ReferenceOperation extends FeatureOperation {
 	 * Returns the value of the '<em><b>Opposite Feature Name</b></em>'
 	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Opposite Feature Name</em>' attribute isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Opposite Feature Name</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -98,11 +98,10 @@ public interface ReferenceOperation extends FeatureOperation {
 	/**
 	 * Returns the value of the '<em><b>Containment Type</b></em>' attribute.
 	 * The literals are from the enumeration
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType}
-	 * . <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType} . <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Containment Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Containment Type</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 

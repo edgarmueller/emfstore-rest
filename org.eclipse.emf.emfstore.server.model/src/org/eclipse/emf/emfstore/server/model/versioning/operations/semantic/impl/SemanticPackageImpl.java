@@ -39,8 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * 
  * @generated
  */
-public class SemanticPackageImpl extends EPackageImpl implements
-		SemanticPackage {
+public class SemanticPackageImpl extends EPackageImpl implements SemanticPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -49,13 +48,12 @@ public class SemanticPackageImpl extends EPackageImpl implements
 	private EClass semanticCompositeOperationEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory
-	 * method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!--
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
@@ -79,10 +77,9 @@ public class SemanticPackageImpl extends EPackageImpl implements
 	 * and for any others upon which it depends.
 	 * 
 	 * <p>
-	 * This method is used to initialize {@link SemanticPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link SemanticPackage#eINSTANCE} when that field is accessed. Clients should
+	 * not invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -91,13 +88,11 @@ public class SemanticPackageImpl extends EPackageImpl implements
 	 */
 	public static SemanticPackage init() {
 		if (isInited)
-			return (SemanticPackage) EPackage.Registry.INSTANCE
-					.getEPackage(SemanticPackage.eNS_URI);
+			return (SemanticPackage) EPackage.Registry.INSTANCE.getEPackage(SemanticPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new SemanticPackageImpl());
+		SemanticPackageImpl theSemanticPackage = (SemanticPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SemanticPackageImpl ? EPackage.Registry.INSTANCE
+			.get(eNS_URI) : new SemanticPackageImpl());
 
 		isInited = true;
 
@@ -106,33 +101,29 @@ public class SemanticPackageImpl extends EPackageImpl implements
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage_1 = (ModelPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
-				: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI)
+			: org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE);
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(VersioningPackage.eNS_URI)
-				: VersioningPackage.eINSTANCE);
+			.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(VersioningPackage.eNS_URI) : VersioningPackage.eINSTANCE);
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI)
-				: OperationsPackage.eINSTANCE);
+			.getEPackage(OperationsPackage.eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(OperationsPackage.eNS_URI) : OperationsPackage.eINSTANCE);
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
+			.getEPackage(EventsPackage.eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(EventsPackage.eNS_URI) : EventsPackage.eINSTANCE);
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
+			.getEPackage(ServerPackage.eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(ServerPackage.eNS_URI) : ServerPackage.eINSTANCE);
 		AccesscontrolPackageImpl theAccesscontrolPackage = (AccesscontrolPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(AccesscontrolPackage.eNS_URI)
-				: AccesscontrolPackage.eINSTANCE);
+			.getEPackage(AccesscontrolPackage.eNS_URI) instanceof AccesscontrolPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(AccesscontrolPackage.eNS_URI) : AccesscontrolPackage.eINSTANCE);
 		RolesPackageImpl theRolesPackage = (RolesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
-		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
+		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
+			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSemanticPackage.createPackageContents();
@@ -160,8 +151,7 @@ public class SemanticPackageImpl extends EPackageImpl implements
 		theSemanticPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(SemanticPackage.eNS_URI,
-				theSemanticPackage);
+		EPackage.Registry.INSTANCE.put(SemanticPackage.eNS_URI, theSemanticPackage);
 		return theSemanticPackage;
 	}
 
@@ -232,20 +222,18 @@ public class SemanticPackageImpl extends EPackageImpl implements
 
 		// Obtain other dependent packages
 		OperationsPackage theOperationsPackage = (OperationsPackage) EPackage.Registry.INSTANCE
-				.getEPackage(OperationsPackage.eNS_URI);
+			.getEPackage(OperationsPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		semanticCompositeOperationEClass.getESuperTypes().add(
-				theOperationsPackage.getCompositeOperation());
+		semanticCompositeOperationEClass.getESuperTypes().add(theOperationsPackage.getCompositeOperation());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(semanticCompositeOperationEClass,
-				SemanticCompositeOperation.class, "SemanticCompositeOperation",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(semanticCompositeOperationEClass, SemanticCompositeOperation.class, "SemanticCompositeOperation",
+			IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } // SemanticPackageImpl

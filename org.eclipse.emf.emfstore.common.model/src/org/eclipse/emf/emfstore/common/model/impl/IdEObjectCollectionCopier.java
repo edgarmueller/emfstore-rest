@@ -48,7 +48,7 @@ public class IdEObjectCollectionCopier extends Copier {
 		if (copiedEObject instanceof Project) {
 			// TODO: PlainEObjectMode, make sure that project is really returned as the last element
 			copiedProject = (ProjectImpl) copiedEObject;
-			copiedProject.initCaches(eObjectToIdMap, idToEObjectMap);
+			copiedProject.initMapping(eObjectToIdMap, idToEObjectMap);
 			return copiedProject;
 		}
 

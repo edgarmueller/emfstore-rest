@@ -14,27 +14,28 @@ import org.eclipse.core.runtime.Assert;
 
 /**
  * Utility class to run {@link ISafeRunnable}s.
- * If {@link CommonUtil#isTesting()} is true, a possible exception is thrown. 
+ * If {@link CommonUtil#isTesting()} is true, a possible exception is thrown.
  * 
  * @author Julian Sommerfeldt
- *
+ * 
  */
 public final class SafeRunner {
-	
-	private SafeRunner(){}
-	
+
+	private SafeRunner() {
+	}
+
 	/**
 	 * Runs a {@link ISafeRunnable} and handles exceptions.
 	 * 
 	 * @param code The {@link ISafeRunnable} to execute.
 	 */
-	public static void run(ISafeRunnable code) {
+	public static void run(final ISafeRunnable code) {
 		Assert.isNotNull(code);
 		try {
 			code.run();
-		// BEGIN SUPRESS CATCH EXCEPTION
+			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (Exception e) {
-	    // END SUPRESS CATCH EXCEPTION
+			// END SUPRESS CATCH EXCEPTION
 			handleException(code, e);
 		} catch (LinkageError e) {
 			handleException(code, e);
@@ -43,13 +44,13 @@ public final class SafeRunner {
 		}
 	}
 
-	private static void handleException(ISafeRunnable code, Throwable e) {		
-		code.handleException(e);
-		if(CommonUtil.isTesting()){
-			if(e instanceof RuntimeException){
-				throw ((RuntimeException) e);
+	private static void handleException(final ISafeRunnable code, final Throwable exception) {
+		code.handleException(exception);
+		if (CommonUtil.isTesting()) {
+			if (exception instanceof RuntimeException) {
+				throw ((RuntimeException) exception);
 			} else {
-				throw new RuntimeException(e);
+				throw new RuntimeException(exception);
 			}
 		}
 	}
