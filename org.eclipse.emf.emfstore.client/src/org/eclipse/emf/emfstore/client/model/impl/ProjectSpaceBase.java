@@ -119,6 +119,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private ResourceSet resourceSet;
 
 	private IApplyChangesWrapper applyChangesWrapper;
+	private List<IMergeCallback> mergeCallbacks;
 
 	private boolean disposed;
 
@@ -131,7 +132,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
 
 		initApplyChangeWrapper();
-
+		initMergeCallbacks();
 	}
 
 	private void initApplyChangeWrapper() {
@@ -142,6 +143,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 		if (applyChangesWrapper == null) {
 			applyChangesWrapper = this;
+		}
+	}
+
+	private void initMergeCallbacks() {
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.merge.callback")
+			.setThrowException(false);
+
+		for (ExtensionElement extensionElement : extensionPoint.getExtensionElements()) {
+			if (extensionElement != null) {
+				IMergeCallback callback = extensionElement.getClass("class", IMergeCallback.class);
+				mergeCallbacks.add(callback);
+			}
 		}
 	}
 
@@ -195,14 +208,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
 
 		// revert local changes
+		notifyPreRevertMyChanges(myChanges);
 		revert();
+		notifyPostRevertMyChanges(myChanges);
 
 		// apply changes from repo. incoming (aka theirs)
 		for (ChangePackage change : incoming) {
 			applyOperations(change.getCopyOfOperations(), false);
 		}
+		notifyPostApplyTheirChanges(incoming);
+
 		// reapply local changes
 		applyOperations(myChanges.getCopyOfOperations(), true);
+		notifyPostReapplyMyChanges(myChanges);
 
 		setBaseVersion(baseSpec);
 		saveProjectSpaceOnly();
@@ -720,6 +738,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		resourceSet.getResources().remove(eResource());
 		resourceSet.getResources().remove(getLocalChangePackage().eResource());
 
+		// TODO: remove project space from workspace, this is not the case if delete
+		// is performed via Workspace#deleteProjectSpace
+		WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().remove(this);
+
 		dispose();
 
 		getProject().eResource().delete(null);
@@ -1216,5 +1238,29 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public boolean isShared() {
 		return getUsersession() != null;
+	}
+
+	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
+		for (IMergeCallback callback : mergeCallbacks) {
+			callback.preRevertMyChanges(this, changePackage);
+		}
+	}
+
+	private void notifyPostRevertMyChanges(final ChangePackage changePackage) {
+		for (IMergeCallback callback : mergeCallbacks) {
+			callback.postRevertMyChanges(this, changePackage);
+		}
+	}
+
+	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
+		for (IMergeCallback callback : mergeCallbacks) {
+			callback.postApplyTheirChanges(this, theirChangePackages);
+		}
+	}
+
+	private void notifyPostReapplyMyChanges(ChangePackage changePackage) {
+		for (IMergeCallback callback : mergeCallbacks) {
+			callback.postReapplyMyChanges(this, changePackage);
+		}
 	}
 }
