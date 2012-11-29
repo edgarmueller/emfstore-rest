@@ -147,6 +147,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initMergeCallbacks() {
+		mergeCallbacks = new ArrayList<IMergeCallback>();
 		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.merge.callback")
 			.setThrowException(false);
 
