@@ -274,14 +274,14 @@ public class EmfStoreController implements IApplication, Runnable {
 					}
 				}
 			}
+			// Guess not, lets copy the default configuration resources
+			try {
+				FileUtil.copyFile(getClass().getResourceAsStream(source), targetFile);
+			} catch (IOException e) {
+				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+			}
 		}
 
-		// Guess not, lets copy the default configuration resources
-		try {
-			FileUtil.copyFile(getClass().getResourceAsStream(source), targetFile);
-		} catch (IOException e) {
-			ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
-		}
 	}
 
 	private Set<ConnectionHandler<? extends EmfStoreInterface>> initConnectionHandlers() throws FatalEmfStoreException {
