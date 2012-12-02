@@ -125,7 +125,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	// TODO BRANCH
 	public ProjectSpace checkout(final Usersession usersession, final ProjectInfo projectInfo,
 		IProgressMonitor progressMonitor) throws EmfStoreException {
 		PrimaryVersionSpec targetSpec = this.connectionManager.resolveVersionSpec(usersession.getSessionId(),
@@ -192,7 +191,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		parent.worked(10);
 
 		// retrieve recent changes
-		// TODO BRANCH why are we doing this?? And why HERE?
+		// TODO why are we doing this?? And why HERE?
 		parent.subTask("Retrieving recent changes...");
 		try {
 			DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();

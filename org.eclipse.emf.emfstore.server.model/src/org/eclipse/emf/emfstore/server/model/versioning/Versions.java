@@ -23,7 +23,7 @@ public final class Versions {
 	}
 
 	/**
-	 * Creates a HEAD revisino for the branch "trunk".
+	 * Creates a HEAD revision for the branch "trunk".
 	 * 
 	 * @return head version
 	 */

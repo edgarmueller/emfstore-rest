@@ -845,7 +845,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @return
 	 */
-	// TODO BRANCH rewrite
 	public boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage,
 		List<ChangePackage> newChangePackages, ConflictResolver conflictResolver, IProgressMonitor progressMonitor)
 		throws EmfStoreException {
@@ -863,7 +862,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	// TODO BRANCH
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver)
 		throws EmfStoreException {
 		new ServerCall<Void>(this) {

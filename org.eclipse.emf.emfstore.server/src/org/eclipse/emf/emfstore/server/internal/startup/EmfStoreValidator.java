@@ -168,9 +168,12 @@ public class EmfStoreValidator {
 	}
 
 	/**
+	 * Note: This validation has been deactivated since the introduction of branch support. With branches this can't be
+	 * done effciently anymore, we have to discuss alternatives.
+	 * 
 	 * {@value #PROJECTGENERATION}.
 	 */
-	// TODO BRANCH fix
+	@SuppressWarnings("unused")
 	private boolean validateProjectGeneration() {
 		start("Project generation compare ...");
 		List<String> errors = new ArrayList<String>();

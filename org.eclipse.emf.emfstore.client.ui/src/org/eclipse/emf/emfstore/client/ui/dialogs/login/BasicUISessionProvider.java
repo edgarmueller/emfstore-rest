@@ -76,7 +76,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @throws EmfStoreException in case of an exception
 	 */
 	protected Usersession loginServerInfo(ServerInfo serverInfo) throws EmfStoreException {
-		// TODO BRANCH Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
+		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
 		if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn()) {
 			return serverInfo.getLastUsersession();

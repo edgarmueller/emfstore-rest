@@ -76,16 +76,19 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	public boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
 		List<ChangePackage> theirChangePackages, PrimaryVersionSpec base, PrimaryVersionSpec target) {
 
+		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
 		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
 			target, isBranchMerge, conflictException);
 
+		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {
 			setResults(decisionManager);
 			return true;
 		}
 
+		// handle conflicts, most likely using the MergeWizard
 		boolean resolved = controlDecisionManager(decisionManager);
 		if (resolved) {
 			if (!decisionManager.isResolved()) {

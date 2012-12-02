@@ -76,7 +76,7 @@ public class DetailsComponent extends Section {
 			if (!option.isDetailsProvider() || option.getDetailProvider() == null) {
 				continue;
 			}
-			// TODO BRANCH hardcoded behavior, maybe generalize in later iteration
+			// TODO Hardcoded behavior, maybe generalize in later iteration.
 			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
 				if (multiWidget == null) {
 					multiWidget = new MergeTextWidget(decisionBox, this);
