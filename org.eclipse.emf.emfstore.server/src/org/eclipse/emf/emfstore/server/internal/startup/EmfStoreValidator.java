@@ -91,9 +91,10 @@ public class EmfStoreValidator {
 		if ((options & MODELELEMENTID) == MODELELEMENTID) {
 			errors = validateModelelementId() && errors;
 		}
-		if ((options & PROJECTGENERATION) == PROJECTGENERATION) {
-			errors = validateProjectGeneration() && errors;
-		}
+		// Not effieciently possible with branches
+		// if ((options & PROJECTGENERATION) == PROJECTGENERATION) {
+		// errors = validateProjectGeneration() && errors;
+		// }
 
 		if (!errors && throwException) {
 			throw new FatalEmfStoreException("Validation failed.");
