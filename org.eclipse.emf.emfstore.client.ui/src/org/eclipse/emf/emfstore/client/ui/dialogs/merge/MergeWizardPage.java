@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -89,7 +90,17 @@ public class MergeWizardPage extends WizardPage {
 		ColorSwitcher colorSwitcher = new ColorSwitcher();
 
 		decisionBoxes = new ArrayList<DecisionBox>();
+
+		// show only unresolved conflicts
+		// TODO: provide configuration option via ext. point to show pre-selected selection in the merge dialog
+		List<Conflict> unresolvedConflicts = new ArrayList<Conflict>();
 		for (Conflict conflict : decisionManager.getConflicts()) {
+			if (!conflict.isResolved()) {
+				unresolvedConflicts.add(conflict);
+			}
+		}
+
+		for (Conflict conflict : unresolvedConflicts) {
 			decisionBoxes.add(new DecisionBox(client, decisionManager, colorSwitcher.getColor(), conflict));
 		}
 
