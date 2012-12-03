@@ -77,7 +77,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 *            the {@link ProjectInfo} that is used to determine the project
 	 *            that should get checked out
 	 * @param askForBranch
-	 *            if true and the version spec is null, a branch selectino
+	 *            if true and the version spec is null, a branch selection
 	 *            dialog is triggered. This is used to checkout branched
 	 *            versions
 	 */

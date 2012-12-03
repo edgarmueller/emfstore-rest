@@ -23,6 +23,8 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
  * Class offering common methods for the merge dialog.
  * 
  * @author wesendon
+ * 
+ *         TODO BRANCH some of this stuff is UI related and isn't supposed to be defined here.
  */
 public final class DecisionUtil {
 

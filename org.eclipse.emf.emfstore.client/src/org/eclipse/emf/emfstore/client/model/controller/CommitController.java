@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.controller;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -96,7 +97,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Checking changes");
 
-		// check if there are any changes. Branch committs are allowed with no changes, whereas normal committs are not.
+		// check if there are any changes. Branch commits are allowed with no changes, whereas normal committs are not.
 		if (!getProjectSpace().isDirty() && branch == null) {
 			callback.noLocalChanges(getProjectSpace());
 			return getProjectSpace().getBaseVersion();
@@ -107,7 +108,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		if (branch != null) {
 			// check branch conditions
-			if (branch.getBranch().equals("")) {
+			if (StringUtils.isEmpty(branch.getBranch())) {
 				throw new InvalidVersionSpecException("Empty branch name is not permitted.");
 			}
 			PrimaryVersionSpec potentialBranch = null;
