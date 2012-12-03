@@ -136,7 +136,6 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			throw new InvalidVersionSpecException("Specified source and/or target version invalid.");
 		}
 
-		// TODO BRANCH
 		// The goal is to find the common ancestor version of the source and
 		// target version from different branches. In
 		// order to find the ancestor the algorithm starts at the specified
@@ -152,9 +151,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			}
 
 			// Shortcut for most common merge usecase: If you have 2 parallel
-			// branches and merge several times
-			// from the one branch into the another. This case is also supported
-			// by #getVersions
+			// branches, only seperated by one level and merge several times from the one branch into the another.
+			// This case is also supported by #getVersions
 			if (currentSource.getMergedFromVersion().contains(currentTarget)) {
 				return currentTarget.getPrimarySpec();
 			}
@@ -257,20 +255,21 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		ACUser user = getAuthorizationControl().resolveUser(sessionId);
 		sanityCheckObjects(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
 		synchronized (getMonitor()) {
+
 			long currentTimeMillis = System.currentTimeMillis();
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			// Find branch
 			BranchInfo baseBranch = getBranchInfo(projectHistory, baseVersionSpec);
 			Version baseVersion = getVersion(projectHistory, baseVersionSpec);
-			// TODO BRANCH
+
 			if (baseVersion == null || baseBranch == null) {
-				// TODO BRANCH custom exception
-				throw new EmfStoreException("Branch doesn't exist.");
+				throw new InvalidVersionSpecException("Branch and/or version doesn't exist.");
 			}
 
 			// defined here fore scoping reasons
 			Version newVersion = null;
+			BranchInfo newBranch = null;
 
 			// normal commit
 			if (targetBranch == null || (baseVersion.getPrimarySpec().getBranch().equals(targetBranch.getBranch()))) {
@@ -284,29 +283,30 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				newVersion.setPreviousVersion(baseVersion);
 				baseBranch.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
 
+				// case for new branch creation
 			} else if (getBranchInfo(projectHistory, targetBranch) == null) {
 				if (targetBranch.getBranch().equals("")) {
-					throw new EmfStoreException("Empty branch name is not permitted.");
+					throw new InvalidVersionSpecException("Empty branch name is not permitted.");
 				}
 				if (targetBranch.getBranch().equals(VersionSpec.GLOBAL)) {
-					throw new EmfStoreException("Reserved branch name.");
+					throw new InvalidVersionSpecException("Reserved branch name '" + VersionSpec.GLOBAL
+						+ "' must not be used.");
 				}
 				// when branch does NOT exist, create new branch
 				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
-				createNewBranch(projectHistory, baseVersion.getPrimarySpec(), newVersion.getPrimarySpec(), targetBranch);
+				newBranch = createNewBranch(projectHistory, baseVersion.getPrimarySpec(), newVersion.getPrimarySpec(),
+					targetBranch);
 				newVersion.setAncestorVersion(baseVersion);
 
 			} else {
-				// TODO BRANCH custom exception
-				throw new EmfStoreException("invalid.");
+				// This point only can be reached with invalid input
+				throw new IllegalStateException("The combination of targetSpec and/or branch are invalid.");
 			}
 
-			// TODO BRANCH review
 			if (sourceVersion != null) {
 				newVersion.getMergedFromVersion().add(getVersion(projectHistory, sourceVersion));
 			}
 
-			// TODO BRANCH fix in memory first, then persistence
 			// try to save
 			try {
 				try {
@@ -316,12 +316,20 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 						projectId);
 					getResourceHelper().createResourceForVersion(newVersion, projectHistory.getProjectId());
 				} catch (FatalEmfStoreException e) {
-					// try to roll back
-					baseVersion.setNextVersion(null);
-					baseBranch.setHead(ModelUtil.clone(baseVersion.getPrimarySpec()));
+					// try to roll back. removing version is necessary in all cases
 					projectHistory.getVersions().remove(newVersion);
+
+					// normal commit
+					if (newBranch == null) {
+						baseVersion.setNextVersion(null);
+						baseBranch.setHead(ModelUtil.clone(baseVersion.getPrimarySpec()));
+
+						// branch commit
+					} else {
+						baseVersion.getBranchedVersions().remove(newVersion);
+						projectHistory.getBranches().remove(newBranch);
+					}
 					// TODO: delete obsolete project, changepackage and version files
-					// TODO: roll back branch
 					throw new StorageException(StorageException.NOSAVE, e);
 				}
 
@@ -331,7 +339,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				if (newVersion.getAncestorVersion() == null && baseVersion.getProjectState() != null) {
 					// delete projectstate from last revision depending on
 					// persistence policy
-					handleOldProjectState(projectId, baseVersion);
+					deleteOldProjectSpaceAccordingToOptions(projectId, baseVersion);
 				}
 
 				save(baseVersion);
@@ -348,11 +356,10 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	private void createNewBranch(ProjectHistory projectHistory, PrimaryVersionSpec baseSpec,
+	private BranchInfo createNewBranch(ProjectHistory projectHistory, PrimaryVersionSpec baseSpec,
 		PrimaryVersionSpec primarySpec, BranchVersionSpec branch) {
 		primarySpec.setBranch(branch.getBranch());
 
-		// TODO BRANCH make sure branch name is not null
 		BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
 		branchInfo.setName(branch.getBranch());
 		branchInfo.setSource(ModelUtil.clone(baseSpec));
@@ -360,6 +367,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		projectHistory.getBranches().add(branchInfo);
 
+		return branchInfo;
 	}
 
 	private Version createVersion(ProjectHistory projectHistory, ChangePackage changePackage, LogMessage logMessage,
@@ -419,6 +427,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
+	@EmfStoreMethod(MethodId.GETBRANCHES)
 	public List<BranchInfo> getBranches(ProjectId projectId) throws EmfStoreException {
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
@@ -438,7 +447,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param previousHeadVersion
 	 *            last head version
 	 */
-	private void handleOldProjectState(ProjectId projectId, Version previousHeadVersion) {
+	private void deleteOldProjectSpaceAccordingToOptions(ProjectId projectId, Version previousHeadVersion) {
 		String property = ServerConfiguration.getProperties().getProperty(
 			ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE,
 			ServerConfiguration.PROJECTSPACE_VERSION_PERSISTENCE_DEFAULT);
@@ -565,7 +574,6 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			}
 			List<Version> result = new ArrayList<Version>();
 
-			// TODO BRANCH
 			// since the introduction of branches the versions are collected
 			// in different order.
 			Version currentVersion = targetVersion;
@@ -590,6 +598,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 				currentVersion = findNextVersion(currentVersion);
 			}
+			// versions are collected in descending order, so the result has to be reversed.
 			Collections.reverse(result);
 			return result;
 		} else {
@@ -599,7 +608,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	/**
 	 * Helper method which retrieves the next version in the history tree. This
-	 * method must be used in reversed order. TODO better documentation
+	 * method must be used in reversed order. With the introduction of branches, the versions are organized in a tree
+	 * structure. Therefore, next versions are always searched for walking up the tree.
 	 * 
 	 * @param currentVersion
 	 *            current version

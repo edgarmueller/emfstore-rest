@@ -84,7 +84,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
-			// TODO BRANCH
+
 			// stamp branch instead of throwing an exception
 			tag.setBranch(versionSpec.getBranch());
 

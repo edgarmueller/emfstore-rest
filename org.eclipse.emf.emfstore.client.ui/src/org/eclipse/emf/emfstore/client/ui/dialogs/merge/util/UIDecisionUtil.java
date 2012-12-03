@@ -117,7 +117,6 @@ public final class UIDecisionUtil {
 		return fontRegistry;
 	}
 
-	// TODO BRANCH
 	/**
 	 * Returns the visualizationhelper.
 	 * 

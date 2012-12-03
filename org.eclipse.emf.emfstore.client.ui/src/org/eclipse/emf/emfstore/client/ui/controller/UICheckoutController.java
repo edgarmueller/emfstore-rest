@@ -81,7 +81,6 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	 *            dialog is triggered. This is used to checkout branched
 	 *            versions
 	 */
-	// TODO BRANCH quick hack, ask eddy how to solve correctly
 	public UICheckoutController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo, boolean askForBranch) {
 		super(shell, true, true);
 		this.serverInfo = serverInfo;

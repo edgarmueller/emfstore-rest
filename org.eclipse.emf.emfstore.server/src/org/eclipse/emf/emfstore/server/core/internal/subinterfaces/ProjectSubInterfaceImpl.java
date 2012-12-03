@@ -98,16 +98,16 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	// TODO BRANCH change
 	@EmfStoreMethod(MethodId.GETPROJECT)
 	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
 		sanityCheckObjects(projectId, versionSpec);
-
 		synchronized (getMonitor()) {
+
 			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class).resolveVersionSpec(
 				projectId, versionSpec);
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, resolvedVersion);
 			return getProject(version);
+
 		}
 	}
 
@@ -117,7 +117,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	protected Project getProject(Version version) throws InvalidVersionSpecException, EmfStoreException {
 		if (version.getProjectState() == null) {
 
-			// TODO BRANCH review. performance optimization by searching state in both directions
+			// TODO BRANCH Review potential performance optimization by searching state in both directions
 			ArrayList<Version> versions = new ArrayList<Version>();
 			Version currentVersion = version;
 			while (currentVersion.getProjectState() == null) {
@@ -125,10 +125,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				currentVersion = VersionSubInterfaceImpl.findNextVersion(currentVersion);
 			}
 			if (currentVersion.getProjectState() == null) {
-				// TODO: nicer exception.
-				// is this null check necessary anyway? (there were problems
-				// in past, because
-				// the xml files were inconsistent.
+				// TODO: nicer exception. Is this null check necessary anyway? (there were problems
+				// in past, because the xml files were inconsistent.
 				throw new EmfStoreException("Couldn't find project state.");
 			}
 			Project projectState = ModelUtil.clone(currentVersion.getProjectState());

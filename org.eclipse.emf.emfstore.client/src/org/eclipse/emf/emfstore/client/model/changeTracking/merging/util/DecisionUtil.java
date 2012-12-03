@@ -31,11 +31,6 @@ public final class DecisionUtil {
 	}
 
 	/**
-	 * TODO BRANCH some of this stuff is UI related and isn't supposed to be
-	 * defined here.
-	 */
-
-	/**
 	 * Length of option label.
 	 */
 	public static final int OPTION_LENGTH = 45;

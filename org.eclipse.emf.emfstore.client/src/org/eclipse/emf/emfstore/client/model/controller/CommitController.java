@@ -95,8 +95,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().worked(1);
 
 		getProgressMonitor().subTask("Checking changes");
-		// check if there are any changes
-		// TODO BRANCH review
+
+		// check if there are any changes. Branch committs are allowed with no changes, whereas normal committs are not.
 		if (!getProjectSpace().isDirty() && branch == null) {
 			callback.noLocalChanges(getProjectSpace());
 			return getProjectSpace().getBaseVersion();
@@ -106,20 +106,20 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Resolving new version");
 
 		if (branch != null) {
-			// TODO BRANCH
+			// check branch conditions
 			if (branch.getBranch().equals("")) {
-				throw new EmfStoreException("Empty branch name is not permitted.");
+				throw new InvalidVersionSpecException("Empty branch name is not permitted.");
 			}
+			PrimaryVersionSpec potentialBranch = null;
 			try {
-				getProjectSpace().resolveVersionSpec(branch);
-				// TODO BRANCH merge should have own controller
-				// or maybe not
-				// is this a could API, rather return null?! discuss
-				throw new EmfStoreException("Branch already exists. You need to merge.");
-
+				potentialBranch = getProjectSpace().resolveVersionSpec(branch);
 			} catch (InvalidVersionSpecException e) {
 				// branch doesn't exist, create.
 			}
+			if (potentialBranch != null) {
+				throw new InvalidVersionSpecException("Branch already exists. You need to merge.");
+			}
+
 		} else {
 			// check if we need to update first
 			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
@@ -149,7 +149,6 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Sending changes to server");
 
-		// TODO BRANCH
 		// Branching case: branch specifier added
 		PrimaryVersionSpec newBaseVersion;
 		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
