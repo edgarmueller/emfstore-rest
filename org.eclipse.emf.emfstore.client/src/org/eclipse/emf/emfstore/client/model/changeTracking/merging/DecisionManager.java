@@ -28,6 +28,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
@@ -49,6 +50,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -167,110 +169,81 @@ public class DecisionManager {
 	private void createConflicts(Set<ConflictBucket> ConflictBucket) {
 		// Create Conflicts from ConflictBucket
 		for (ConflictBucket conf : ConflictBucket) {
+
 			AbstractOperation my = conf.getMyOperation();
 			AbstractOperation their = conf.getTheirOperation();
+			Conflict conflict = null;
 
-			// #checkRegistedHandlers adds Conflicts on its own
-			if (checkRegisteredHandlers(conf)) {
-				continue;
-
-			} else if (isDiagramLayout(my) && isDiagramLayout(their)) {
-
-				addConflict(createDiagramLayoutDecision(conf));
-				continue;
+			if (isDiagramLayout(my) && isDiagramLayout(their)) {
+				conflict = createDiagramLayoutDecision(conf);
 
 			} else if (isAttribute(my) && isAttribute(their)) {
-
-				addConflict(createAttributeAttributeDecision(conf));
-				continue;
+				conflict = createAttributeAttributeDecision(conf);
 
 			} else if (isSingleRef(my) && isSingleRef(their)) {
-
-				addConflict(createSingleSingleConflict(conf));
-				continue;
+				conflict = createSingleSingleConflict(conf);
 
 			} else if (isMultiRef(my) && isMultiRef(their)) {
-
-				addConflict(createMultiMultiConflict(conf));
-				continue;
+				conflict = createMultiMultiConflict(conf);
 
 			} else if ((isMultiRef(my) && isSingleRef(their)) || (isMultiRef(their) && isSingleRef(my))) {
-
-				addConflict(createMultiSingle(conf));
-				continue;
+				conflict = createMultiSingle(conf);
 
 			} else if (isCompositeRef(my) && isCompositeRef(their)) {
-
-				addConflict(createReferenceConflict(conf));
-				continue;
+				conflict = createReferenceConflict(conf);
 
 			} else if ((isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their)))
 				|| ((isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their))) {
-
-				addConflict(createReferenceCompVSSingleMulti(conf));
-				continue;
+				conflict = createReferenceCompVSSingleMulti(conf);
 
 			} else if ((isMultiRef(my) && isMultiRefSet(their)) || (isMultiRef(their) && isMultiRefSet(my))) {
-
-				addConflict(createMultiRefMultiSet(conf));
-				continue;
+				conflict = createMultiRefMultiSet(conf);
 
 			} else if (isMultiRefSet(my) && isMultiRefSet(their)) {
-
-				addConflict(createMultiRefSetSet(conf));
-				continue;
+				conflict = createMultiRefSetSet(conf);
 
 			} else if ((isMultiRefSet(my) && isSingleRef(their)) || (isMultiRefSet(their) && isSingleRef(my))) {
-
-				addConflict(createMultiSetSingle(conf));
-				continue;
+				conflict = createMultiSetSingle(conf);
 
 			} else if (isMultiAtt(my) && isMultiAtt(their)) {
-
-				addConflict(createMultiAtt(conf));
-				continue;
+				conflict = createMultiAtt(conf);
 
 			} else if ((isMultiAtt(my) && isMultiAttSet(their)) || (isMultiAtt(their) && isMultiAttSet(my))) {
-
-				addConflict(createMultiAttSet(conf));
-				continue;
+				conflict = createMultiAttSet(conf);
 
 			} else if ((isMultiAtt(my) && isMultiAttMove(their)) || (isMultiAtt(their) && isMultiAttMove(my))) {
-
-				addConflict(createMultiAttMove(conf));
-				continue;
+				conflict = createMultiAttMove(conf);
 
 			} else if ((isMultiAttSet(my) && isMultiAttMove(their)) || (isMultiAttSet(their) && isMultiAttMove(my))) {
-
-				addConflict(createMultiAttMoveSet(conf));
-				continue;
+				conflict = createMultiAttMoveSet(conf);
 
 			} else if (isMultiAttSet(my) && isMultiAttSet(their)) {
-
-				addConflict(createMultiAttSetSet(conf));
-				continue;
+				conflict = createMultiAttSetSet(conf);
 
 			} else if (isComposite(my) || isComposite(their)) {
-
-				addConflict(createCompositeConflict(conf));
-				continue;
+				conflict = createCompositeConflict(conf);
 
 			} else if (isDelete(my) || isDelete(their)) {
+				conflict = createDeleteOtherConflict(conf);
+			}
 
-				addConflict(createDeleteOtherConflict(conf));
-
+			if (conflict != null) {
+				conflict = notifyConflictHandlers(conflict);
+				addConflict(conflict);
+			} else {
+				WorkspaceUtil.log(
+					"A created conflict has been ignored (does not apply to any existing conflict rule).",
+					IStatus.WARNING);
 			}
 		}
 	}
 
-	private boolean checkRegisteredHandlers(ConflictBucket conf) {
+	private Conflict notifyConflictHandlers(Conflict conflict) {
+		// pass conflict through all handlers
 		for (ConflictHandler handler : this.conflictHandler) {
-			if (handler.canHandle(conf)) {
-				addConflict(handler.handle(this, conf));
-				return true;
-			}
+			conflict = handler.handle(conflict);
 		}
-		return false;
+		return conflict;
 	}
 
 	private void addConflict(Conflict conflict) {

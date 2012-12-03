@@ -11,10 +11,9 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
 
 /**
- * Allows to hook in custom conflict treatment for group of conflicting changes.
+ * Allows to hook in for custom conflict treatment.
  * Conflicting changes are determined by the ConflictDetector, which can be
  * exchanged as well.
  * 
@@ -23,25 +22,14 @@ import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
 public interface ConflictHandler {
 
 	/**
-	 * This method is always called before {@link #handle(DecisionManager, Conflicting)} in order to check whether
-	 * this handler is relevant for the conflicting changes.
+	 * Called after a conflict has been created and before it is
+	 * added to list of all existing conflicts.
 	 * 
-	 * @param conflicting
-	 *            Conflicting bucket
-	 * @return true, if can handle
-	 */
-	boolean canHandle(ConflictBucket conflicting);
-
-	/**
-	 * Is called when {@link #canHandle(Conflicting)} returned true. On basis of
-	 * the decisionManager and the confliciting bucket, this method should
-	 * return a {@link Conflict} instance.
+	 * @param conflict
+	 *            a {@link Conflict} instance that has been created by a {@link DecisionManager}
 	 * 
-	 * @param dm
-	 *            {@link DecisionManager}
-	 * @param conflicting
-	 *            bucket
-	 * @return conflict
+	 * @return the possibly modified conflict instance that will be
+	 *         added to the list of conflicts
 	 */
-	Conflict handle(DecisionManager dm, ConflictBucket conflicting);
+	Conflict handle(Conflict conflict);
 }
