@@ -30,7 +30,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
 	AllServerTests.class,
 	// AllIntegrationTests.class,
-	AllObserverBusTests.class, AllMergeTests.class, ProjectCacheTest.class, PersistenceTest.class })
+	AllObserverBusTests.class, ProjectCacheTest.class, PersistenceTest.class })
 public class AllTests {
 
 }

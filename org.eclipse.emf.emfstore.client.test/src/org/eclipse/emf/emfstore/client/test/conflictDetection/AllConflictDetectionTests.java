@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
 
+import org.eclipse.emf.emfstore.client.test.conflictDetection.merging.AllMergeTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -22,7 +23,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ AttributeConflictTest.class, ConflictDetectionAttributeTest.class,
 	ConflictDetectionReferenceTest.class, ConflictDetectionDeleteTest.class, ConflictDetectionMultiReferenceTest.class,
 	ConflictDetectionRequiredRelationTest.class, ConflictDetectionMultiAttributeTest.class,
-	ConflictDetectionSelectiveCommitSpecialCases.class
+	ConflictDetectionSelectiveCommitSpecialCases.class, AllMergeTests.class
 
 })
 public class AllConflictDetectionTests {
