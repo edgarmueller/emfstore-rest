@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.internal.conflictDetection.ModelElementIdToFeatureSetMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
@@ -34,16 +33,15 @@ public class ConflictBucketCandidate {
 
 	private static Integer maxBucketSize = initMaxBucketSize();
 	private static final String MAX_BUCKET_SIZE = "-ConflictDetectionMaxBucketSize";
-	private ModelElementIdToFeatureSetMapping involvedIdsAndFeatures;
 	private Set<AbstractOperation> myOperations;
 	private Set<AbstractOperation> theirOperations;
 	private Map<AbstractOperation, Integer> operationToPriorityMap;
+	public boolean merged;
 
 	/**
 	 * Default constructor.
 	 */
 	public ConflictBucketCandidate() {
-		involvedIdsAndFeatures = new ModelElementIdToFeatureSetMapping();
 		myOperations = new LinkedHashSet<AbstractOperation>();
 		theirOperations = new LinkedHashSet<AbstractOperation>();
 		operationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>();
@@ -71,12 +69,10 @@ public class ConflictBucketCandidate {
 	 * @param isMyOperation a boolean to determine if the operation is to be added to mz or their operations
 	 * @param priority the global priority of the operation
 	 */
-	public void addOperation(AbstractOperation operation, String modelElementId, String featureName,
-		boolean isMyOperation, int priority) {
+	public void addOperation(AbstractOperation operation, boolean isMyOperation, int priority) {
 		if (operation == null) {
 			return;
 		}
-		involvedIdsAndFeatures.add(modelElementId, featureName);
 		operationToPriorityMap.put(operation, priority);
 		if (isMyOperation) {
 			myOperations.add(operation);
@@ -98,18 +94,7 @@ public class ConflictBucketCandidate {
 
 		myOperations.addAll(otherBucket.getMyOperations());
 		theirOperations.addAll(otherBucket.getTheirOperations());
-		involvedIdsAndFeatures.merge(otherBucket.involvedIdsAndFeatures);
 		operationToPriorityMap.putAll(otherBucket.operationToPriorityMap);
-	}
-
-	/**
-	 * Add an involved model element id and its feature to the bucket.
-	 * 
-	 * @param modelElementId the id as String
-	 * @param featureName the feature name
-	 */
-	public void addModelElementId(String modelElementId, String featureName) {
-		involvedIdsAndFeatures.add(modelElementId, featureName);
 	}
 
 	/**
@@ -124,13 +109,6 @@ public class ConflictBucketCandidate {
 	 */
 	public boolean isConflicting() {
 		return theirOperations.size() > 0 && myOperations.size() > 0;
-	}
-
-	/**
-	 * @return a set of involved model element ids
-	 */
-	public ModelElementIdToFeatureSetMapping getInvolvedIdsandFeatures() {
-		return involvedIdsAndFeatures;
 	}
 
 	/**
@@ -222,9 +200,6 @@ public class ConflictBucketCandidate {
 	}
 
 	private boolean bucketIsTooLarge() {
-		if (getInvolvedIdsandFeatures().size() > maxBucketSize) {
-			return true;
-		}
 		int myOperationsSize = ChangePackageImpl.countLeafOperations(myOperations);
 		int theirOperationSize = ChangePackageImpl.countLeafOperations(theirOperations);
 		if (myOperationsSize > maxBucketSize || theirOperationSize > maxBucketSize) {
@@ -262,15 +237,5 @@ public class ConflictBucketCandidate {
 		}
 
 		return conflictBucketsSet;
-	}
-
-	/**
-	 * Get a mapping from model elements involved in the conflict candidate to the involved features of the the model.
-	 * element
-	 * 
-	 * @return the mapping
-	 */
-	public ModelElementIdToFeatureSetMapping getInvolvedModelElementIdToFeatureSetMapping() {
-		return involvedIdsAndFeatures;
 	}
 }
