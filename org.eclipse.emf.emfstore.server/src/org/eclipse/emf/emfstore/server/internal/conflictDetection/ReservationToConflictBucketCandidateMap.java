@@ -11,7 +11,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.internal.conflictDetection;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -46,12 +48,14 @@ public class ReservationToConflictBucketCandidateMap {
 	// // map from model elementid to buckets requiring its existence
 	// private LinkedHashMap<String, Set<ConflictBucketCandidate>> modelElementExistenceToConflictBucketSetMap;
 	private ReservationSet reservationToConflictMap;
+	private Set<ConflictBucketCandidate> conflictBucketCandidates;
 
 	/**
 	 * Default constructor.
 	 */
 	public ReservationToConflictBucketCandidateMap() {
 		reservationToConflictMap = new ReservationSet();
+		conflictBucketCandidates = new LinkedHashSet<ConflictBucketCandidate>();
 	}
 
 	/**
@@ -190,13 +194,11 @@ public class ReservationToConflictBucketCandidateMap {
 
 	private ConflictBucketCandidate mergeConflictBucketCandidates(Set<ConflictBucketCandidate> existingBuckets,
 		ConflictBucketCandidate currentBucket) {
+		ConflictBucketCandidate rootBucket = currentBucket.getRootConflictBucketCandidate();
 		for (ConflictBucketCandidate otherBucket : existingBuckets) {
-			currentBucket.addConflictBucketCandidate(otherBucket);
+			otherBucket.getRootConflictBucketCandidate().setParentConflictBucketCandidate(rootBucket);
 		}
-		for (ConflictBucketCandidate candidate : existingBuckets) {
-			candidate.merged = true;
-		}
-		return currentBucket;
+		return rootBucket;
 	}
 
 	// /**
@@ -212,6 +214,7 @@ public class ReservationToConflictBucketCandidateMap {
 
 		ReservationSet reservationSet = extractReservationFromOperation(operation, new ReservationSet());
 		ConflictBucketCandidate conflictBucketCandidate = new ConflictBucketCandidate();
+		conflictBucketCandidates.add(conflictBucketCandidate);
 		conflictBucketCandidate.addOperation(operation, isMyOperation, priority);
 		joinReservationSet(reservationSet, conflictBucketCandidate);
 	}
@@ -310,18 +313,21 @@ public class ReservationToConflictBucketCandidateMap {
 	}
 
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates() {
-		Set<ConflictBucketCandidate> result = new LinkedHashSet<ConflictBucketCandidate>();
-		for (String modelElement : reservationToConflictMap.getAllModelElements()) {
-			Set<ConflictBucketCandidate> conflictBucketCandidates = reservationToConflictMap
-				.getConflictBucketCandidates(modelElement);
-			for (ConflictBucketCandidate candidate : conflictBucketCandidates) {
-				if (candidate.merged) {
-					continue;
-				} else {
-					result.add(candidate);
-				}
+		Map<ConflictBucketCandidate, Set<ConflictBucketCandidate>> rootToBucketMergeSetMap = new LinkedHashMap<ConflictBucketCandidate, Set<ConflictBucketCandidate>>();
+		for (ConflictBucketCandidate candidate : conflictBucketCandidates) {
+			ConflictBucketCandidate root = candidate.getRootConflictBucketCandidate();
+			Set<ConflictBucketCandidate> bucketMergeSet = rootToBucketMergeSetMap.get(root);
+			if (bucketMergeSet == null) {
+				bucketMergeSet = new LinkedHashSet<ConflictBucketCandidate>();
+				rootToBucketMergeSetMap.put(root, bucketMergeSet);
+			}
+			bucketMergeSet.add(candidate);
+		}
+		for (ConflictBucketCandidate root : rootToBucketMergeSetMap.keySet()) {
+			for (ConflictBucketCandidate sibling : rootToBucketMergeSetMap.get(root)) {
+				root.addConflictBucketCandidate(sibling);
 			}
 		}
-		return result;
+		return rootToBucketMergeSetMap.keySet();
 	}
 }

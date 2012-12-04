@@ -11,8 +11,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.conflictDetection;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,7 +38,7 @@ public class ConflictBucketCandidate {
 	private Set<AbstractOperation> myOperations;
 	private Set<AbstractOperation> theirOperations;
 	private Map<AbstractOperation, Integer> operationToPriorityMap;
-	public boolean merged;
+	private ConflictBucketCandidate parentConflictBucketCandidate;
 
 	/**
 	 * Default constructor.
@@ -95,6 +97,34 @@ public class ConflictBucketCandidate {
 		myOperations.addAll(otherBucket.getMyOperations());
 		theirOperations.addAll(otherBucket.getTheirOperations());
 		operationToPriorityMap.putAll(otherBucket.operationToPriorityMap);
+	}
+
+	public ConflictBucketCandidate getRootConflictBucketCandidate() {
+		if (parentConflictBucketCandidate == null) {
+			return this;
+		}
+		return getParentConflictBucketCandidate(new ArrayList<ConflictBucketCandidate>());
+	}
+
+	private ConflictBucketCandidate getParentConflictBucketCandidate(List<ConflictBucketCandidate> pathToRoot) {
+		if (parentConflictBucketCandidate == null) {
+			// this is root, compress path
+			for (ConflictBucketCandidate conflictBucketCandidate : pathToRoot) {
+				conflictBucketCandidate.setParentConflictBucketCandidate(this);
+			}
+			return this;
+		}
+		// root not yet found
+		pathToRoot.add(this);
+		return parentConflictBucketCandidate.getParentConflictBucketCandidate(pathToRoot);
+	}
+
+	public void setParentConflictBucketCandidate(ConflictBucketCandidate parentConflictBucketCandidate) {
+		// disallow loops
+		if (this == parentConflictBucketCandidate) {
+			return;
+		}
+		this.parentConflictBucketCandidate = parentConflictBucketCandidate;
 	}
 
 	/**
