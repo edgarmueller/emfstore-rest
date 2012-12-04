@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.server.Activator;
 import org.eclipse.emf.emfstore.server.internal.conflictDetection.ReservationToConflictBucketCandidateMap;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -31,7 +30,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 public class ConflictDetector {
 
 	private static ConflictDetectionStrategy defaultStrategy;
-
 	private ConflictDetectionStrategy conflictDetectionStrategy;
 
 	/**
@@ -65,11 +63,13 @@ public class ConflictDetector {
 	}
 
 	/**
-	 * Determines if two changepackages are conflicting.
+	 * Determines if two operations are conflicting.
 	 * 
-	 * @param operation operation
-	 * @param otherOperation otheroperation
-	 * @return true, if conflicting
+	 * @param operation
+	 *            an operation
+	 * @param otherOperation
+	 *            the other operation the first operation should be compared against
+	 * @return true, if conflicting, false otherwise
 	 */
 	public boolean doConflict(AbstractOperation operation, AbstractOperation otherOperation) {
 		return conflictDetectionStrategy.doConflict(operation, otherOperation);
@@ -126,94 +126,6 @@ public class ConflictDetector {
 			operations.addAll(cp.getOperations());
 		}
 		return operations;
-	}
-
-	// private void scanOperationIntoConflictBucketCandidates(Set<ConflictBucketCandidate> conflictBucketsSet,
-	// ReservationToConflictBucketCandidateMap conflictMap, AbstractOperation operation, boolean isMyOperation,
-	// Integer priority) {
-	//
-	// // extract a modelelementId to feature map from the operation (including any sub operations)
-	// ReservationSet modelElementIdToFeatureSetMapping = new ReservationSet();
-	// extractModelElementIdFeatureMappings(operation, modelElementIdToFeatureSetMapping);
-	//
-	// ConflictBucketCandidate currentOperationsConflictBucket = null;
-	// for (String modelElementId : modelElementIdToFeatureSetMapping.keySet()) {
-	//
-	// Set<String> featureSet = modelElementIdToFeatureSetMapping.get(modelElementId);
-	//
-	// for (String featureName : featureSet) {
-	//
-	// Set<ConflictBucketCandidate> conflictBuckets = conflictMap.get(modelElementId, featureName);
-	// ConflictBucketCandidate conflictBucket;
-	// if (conflictBuckets.size() == 0) {
-	// conflictBucket = null;
-	// } else if (conflictBuckets.size() == 1) {
-	// conflictBucket = conflictBuckets.iterator().next();
-	// } else {
-	// conflictBucket = mergeAllBucketCandidates(conflictBuckets, conflictBucketsSet, conflictMap);
-	// }
-	//
-	// if (conflictBucket == null && currentOperationsConflictBucket == null) {
-	// // no existing ConflictBucket for id and feature and no bucket for current op => create new
-	// // ConflictBucket
-	// currentOperationsConflictBucket = new ConflictBucketCandidate();
-	// conflictBucketsSet.add(currentOperationsConflictBucket);
-	// currentOperationsConflictBucket.addOperation(operation, modelElementId, featureName, isMyOperation,
-	// priority);
-	// conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
-	// } else if (conflictBucket == currentOperationsConflictBucket) {
-	// // special case: both buckets are the same, only register model element and feature for the bucket
-	// currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
-	// } else if (conflictBucket == null && currentOperationsConflictBucket != null) {
-	// // no existing ConflictBucket for id but existing ConflictBucket for operation => keep operations
-	// // ConflictBucket
-	// conflictMap.put(modelElementId, featureName, currentOperationsConflictBucket, false);
-	// currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
-	// } else if (conflictBucket != null && currentOperationsConflictBucket == null) {
-	// // existing ConflictBucket for id but none for operation => keep id ConflictBucket
-	// currentOperationsConflictBucket = conflictBucket;
-	// currentOperationsConflictBucket.addOperation(operation, modelElementId, featureName, isMyOperation,
-	// priority);
-	// } else {
-	// // existing ConflictBucket for both id and operation => merge ConflictBuckets
-	// currentOperationsConflictBucket = mergeConflictBuckets(conflictBucketsSet, conflictMap,
-	// currentOperationsConflictBucket, conflictBucket);
-	// currentOperationsConflictBucket.addModelElementId(modelElementId, featureName);
-	// }
-	// }
-	// }
-	// }
-
-	// private boolean isRemovingReferencesOnly(ReferenceOperation referenceOperation) {
-	// if (referenceOperation instanceof MultiReferenceOperation) {
-	// return !((MultiReferenceOperation) referenceOperation).isAdd();
-	// }
-	// if (referenceOperation instanceof SingleReferenceOperation) {
-	// return ((SingleReferenceOperation) referenceOperation).getNewValue() == null;
-	// }
-	//
-	// return false;
-	// }
-
-	private static final Set<String> EXCLUDED_FEATURENAME_SET = initExcludedFeatureNameSet();
-
-	private boolean isExcludedFeature(String featureName) {
-		return EXCLUDED_FEATURENAME_SET.contains(featureName);
-	}
-
-	private static Set<String> initExcludedFeatureNameSet() {
-
-		Set<String> excludedFeatures = new LinkedHashSet<String>();
-		ExtensionPoint extensionPoint = new ExtensionPoint(Activator.PLUGIN_ID + ".conflictdetection.excludedfeatures");
-
-		IExcludedFeaturesProvider excludingFeaturesProvider = extensionPoint.getClass("class",
-			IExcludedFeaturesProvider.class);
-
-		if (excludingFeaturesProvider != null) {
-			excludedFeatures.addAll(excludingFeaturesProvider.getExcludedFeatures());
-		}
-
-		return excludedFeatures;
 	}
 
 	/**
