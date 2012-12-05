@@ -764,11 +764,6 @@
             name="Branch Checkout">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.ProjectInfoPropertiesHandler"
-            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
-            name="ProjectInfo Properties">
-      </command>
-      <command
             defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.CheckoutRevisionHandler"
             id="org.eclipse.emf.emfstore.client.ui.historybrowserview.checkout"
             name="CheckoutRevision">
