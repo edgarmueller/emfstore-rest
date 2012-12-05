@@ -66,8 +66,6 @@ public class ConflictBucketCandidate {
 	 * Add an operation for a model element id and its feature to the bucket.
 	 * 
 	 * @param operation the operation
-	 * @param modelElementId the model element id
-	 * @param featureName the name of the feature
 	 * @param isMyOperation a boolean to determine if the operation is to be added to mz or their operations
 	 * @param priority the global priority of the operation
 	 */
@@ -99,6 +97,11 @@ public class ConflictBucketCandidate {
 		operationToPriorityMap.putAll(otherBucket.operationToPriorityMap);
 	}
 
+	/**
+	 * Returns the root conflict bucket this bucket belongs to.
+	 * 
+	 * @return the root conflict bucket
+	 */
 	public ConflictBucketCandidate getRootConflictBucketCandidate() {
 		if (parentConflictBucketCandidate == null) {
 			return this;
@@ -119,6 +122,12 @@ public class ConflictBucketCandidate {
 		return parentConflictBucketCandidate.getParentConflictBucketCandidate(pathToRoot);
 	}
 
+	/**
+	 * Sets the parent conflict bucket of this bucket.
+	 * 
+	 * @param parentConflictBucketCandidate
+	 *            the parent bucket of this bucket
+	 */
 	public void setParentConflictBucketCandidate(ConflictBucketCandidate parentConflictBucketCandidate) {
 		// disallow loops
 		if (this == parentConflictBucketCandidate) {
