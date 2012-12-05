@@ -978,7 +978,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasUnsavedChanges()
 	 */
 	public boolean hasUnsavedChanges() {
-		return resourcePersister.isDirty();
+
+		if (resourcePersister != null) {
+			return resourcePersister.isDirty();
+		}
+
+		// in case the project space has not been initialized yet
+		return false;
 	}
 
 	private void saveChangePackage() {

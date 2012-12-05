@@ -24,8 +24,10 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
@@ -92,6 +94,8 @@ public class DecisionManager {
 	private List<ConflictHandler> conflictHandler;
 	private final boolean isBranchMerge;
 	private ChangeConflictException conflictException;
+	// TODO: extract mapping to its own class
+	private Map<ModelElementId, EObject> idToEObjectMapping;
 
 	/**
 	 * Default constructor.
@@ -124,7 +128,39 @@ public class DecisionManager {
 		this.conflictException = conflictException;
 		this.conflictHandler = initConflictHandlers();
 		this.conflictDetector = new ConflictDetector();
+		this.idToEObjectMapping = new LinkedHashMap<ModelElementId, EObject>();
+		initMapping(myChangePackages, theirChangePackages);
 		init();
+	}
+
+	private void initMapping(List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages) {
+
+		for (ChangePackage changePackage : myChangePackages) {
+			addToIdToEObjectMapping(changePackage.getCopyOfOperations());
+		}
+
+		for (ChangePackage changePackage : theirChangePackages) {
+			addToIdToEObjectMapping(changePackage.getCopyOfOperations());
+		}
+	}
+
+	private void addToIdToEObjectMapping(List<AbstractOperation> operations) {
+		for (AbstractOperation op : operations) {
+
+			if (op instanceof CompositeOperation) {
+				addToIdToEObjectMapping(((CompositeOperation) op).getSubOperations());
+				continue;
+			}
+
+			if (!(op instanceof CreateDeleteOperation)) {
+				continue;
+			}
+
+			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) op;
+			for (Map.Entry<EObject, ModelElementId> entry : createDeleteOperation.getEObjectToIdMap()) {
+				idToEObjectMapping.put(entry.getValue(), entry.getKey());
+			}
+		}
 	}
 
 	private List<ConflictHandler> initConflictHandlers() {
@@ -241,7 +277,7 @@ public class DecisionManager {
 	private Conflict notifyConflictHandlers(Conflict conflict) {
 		// pass conflict through all handlers
 		for (ConflictHandler handler : this.conflictHandler) {
-			conflict = handler.handle(conflict);
+			conflict = handler.handle(conflict, idToEObjectMapping);
 		}
 		return conflict;
 	}
