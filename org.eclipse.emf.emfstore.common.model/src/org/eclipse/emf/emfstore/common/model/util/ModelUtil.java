@@ -1038,6 +1038,10 @@ public final class ModelUtil {
 			if (eStructuralFeature.isMany()) {
 				((EList<?>) opposite.eGet(eStructuralFeature)).remove(modelElement);
 			} else {
+				if (opposite instanceof Map.Entry<?, ?> && eStructuralFeature.getName().equals("key")) {
+					logWarning("Incoming cross reference for model element " + modelElement + " is a map key.");
+				}
+
 				opposite.eUnset(eStructuralFeature);
 			}
 		}
