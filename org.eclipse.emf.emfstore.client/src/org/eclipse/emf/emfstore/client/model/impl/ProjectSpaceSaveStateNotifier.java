@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
 /**
  * Notifies SaveStateChangedObservers about changes of the project space save state.
  * 
- * @author User
+ * @author mkoegel
  * 
  */
 public class ProjectSpaceSaveStateNotifier implements IDEObjectCollectionDirtyStateListener {
