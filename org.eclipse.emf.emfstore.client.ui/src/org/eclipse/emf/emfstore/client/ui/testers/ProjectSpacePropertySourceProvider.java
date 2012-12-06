@@ -19,6 +19,8 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.AbstractSourceProvider;
@@ -45,6 +47,8 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 
 	private Map<String, Boolean> currentSaveStates;
 
+	private boolean saveDisabled;
+
 	/**
 	 * Default constructor.
 	 */
@@ -62,6 +66,9 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		PlatformUI.getWorkbench().addWorkbenchListener(new IWorkbenchListener() {
 
 			public boolean preShutdown(IWorkbench workbench, boolean forced) {
+				if (saveDisabled) {
+					return true;
+				}
 				return handlePreShutdownOfWorkbench();
 			}
 
@@ -69,6 +76,21 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 				// do nothing
 			}
 		});
+		saveDisabled = initExtensionPoint();
+	}
+
+	// TODO: quick fix, duplicate code in IsAutoSaveEnabledTester
+	// TODO: provide extension point registry? discuss
+	private static boolean initExtensionPoint() {
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disabledSaveControls");
+		ExtensionElement element = extensionPoint.getFirst();
+
+		if (element == null) {
+			// default
+			return false;
+		}
+
+		return element.getBoolean("enabled", false);
 	}
 
 	private boolean handlePreShutdownOfWorkbench() {

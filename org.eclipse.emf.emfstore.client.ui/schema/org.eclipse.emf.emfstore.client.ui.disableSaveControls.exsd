@@ -3,11 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client.ui" id="org.eclipse.emf.emfstore.client.ui.disabledsavebutton" name="Disable Save Button"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client.ui" id="org.eclipse.emf.emfstore.client.ui.disableSaveControls" name="Disable Save Controls"/>
       </appInfo>
       <documentation>
-         Enables to disable the save button in case Configuration.isAutoSaveEnabled returns false.
-This may be the case, for instance, if save functionality has to be customized and one does not want to contribute two save buttons to the workbench.
+         
       </documentation>
    </annotation>
 
@@ -19,7 +18,7 @@ This may be the case, for instance, if save functionality has to be customized a
       </annotation>
       <complexType>
          <sequence>
-            <element ref="autosave"/>
+            <element ref="disableControls"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -48,9 +47,9 @@ This may be the case, for instance, if save functionality has to be customized a
       </complexType>
    </element>
 
-   <element name="autosave">
+   <element name="disableControls">
       <complexType>
-         <attribute name="enabled" type="boolean" use="default" value="true">
+         <attribute name="enabled" type="boolean" use="default" value="false">
             <annotation>
                <documentation>
                   

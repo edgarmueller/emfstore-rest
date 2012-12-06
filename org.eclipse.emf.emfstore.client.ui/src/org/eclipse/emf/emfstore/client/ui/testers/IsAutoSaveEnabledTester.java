@@ -36,7 +36,7 @@ public class IsAutoSaveEnabledTester extends PropertyTester {
 	}
 
 	private static boolean initExtensionPoint() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disabledsavebutton");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disableSaveControls");
 		ExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {
