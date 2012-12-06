@@ -124,9 +124,9 @@ public class MergeWizardPage extends WizardPage {
 		composite.setLayout(new RowLayout(SWT.HORIZONTAL));
 		composite.setSize(SWT.DEFAULT, 200);
 
-		Button accecptMine = new Button(composite, SWT.PUSH);
-		accecptMine.setText("Keep All My Changes");
-		accecptMine.addSelectionListener(new SelectAllSelectionListener(OptionType.MyOperation));
+		Button acceptMine = new Button(composite, SWT.PUSH);
+		acceptMine.setText("Keep All My Changes");
+		acceptMine.addSelectionListener(new SelectAllSelectionListener(OptionType.MyOperation));
 
 		Button accecptTheirs = new Button(composite, SWT.PUSH);
 		accecptTheirs.setText("Keep All Their Changes");

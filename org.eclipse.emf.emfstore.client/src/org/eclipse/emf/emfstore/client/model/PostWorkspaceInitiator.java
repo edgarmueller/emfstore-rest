@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.client.model;
 
 /**
- * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginng. It often
- * is used to register Listeners.
+ * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginning.
+ * It often is used to register Listeners.
  * 
  * @author emueller
  * @author wesendon
