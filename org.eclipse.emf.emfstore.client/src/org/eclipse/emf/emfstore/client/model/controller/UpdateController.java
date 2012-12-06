@@ -115,6 +115,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
+		// TODO ASYNC review this cancel
+		if (getProgressMonitor().isCanceled() || !callback.inspectChanges(getProjectSpace(), changes)) {
+			return getProjectSpace().getBaseVersion();
+		}
+
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
 			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
@@ -126,16 +131,13 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 					localchanges, changes, conflictBucketCandidates);
 				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
 					return getProjectSpace().getBaseVersion();
+				} else {
+					throw conflictException;
 				}
-				throw conflictException;
 			}
 		}
 
 		getProgressMonitor().worked(15);
-		// TODO ASYNC review this cancel
-		if (getProgressMonitor().isCanceled() || !callback.inspectChanges(getProjectSpace(), changes)) {
-			return getProjectSpace().getBaseVersion();
-		}
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
 
