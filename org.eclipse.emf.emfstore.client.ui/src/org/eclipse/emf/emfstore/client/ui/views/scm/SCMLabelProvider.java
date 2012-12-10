@@ -33,6 +33,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -110,7 +111,13 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			ChangePackage changePackage = (ChangePackage) element;
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
+			// TODO: rather reference virtual node directly??
 			ret = adapterFactoryLabelProvider.getText(element);
+		} else if (element instanceof TreeNode) {
+			TreeNode node = (TreeNode) element;
+			if (node.getValue() != null) {
+				return (String) node.getValue();
+			}
 		} else {
 			ret = super.getText(element);
 		}
@@ -236,6 +243,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			if (text.equals(ELEMENT_NOT_FOUND)) {
 				return italic;
 			}
+		} else if (element instanceof TreeNode) {
+			return italic;
 		}
 		if (element instanceof EObject && ((EObject) element).eContainer() instanceof AbstractOperation) {
 			AbstractOperation op = (AbstractOperation) ((EObject) element).eContainer();

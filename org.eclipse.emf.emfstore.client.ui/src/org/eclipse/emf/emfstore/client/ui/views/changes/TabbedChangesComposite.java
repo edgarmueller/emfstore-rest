@@ -59,7 +59,7 @@ public class TabbedChangesComposite extends Composite {
 		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
 
-		contentProvider = new SCMContentProvider();
+		contentProvider = new SCMContentProvider(project);
 		contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
 		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(project,

@@ -17,12 +17,15 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.emfstore.client.ui.common.EClassFilter;
+import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * Content provider for the scm views.
@@ -33,6 +36,9 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 	private boolean showRootNodes = true;
 	private boolean reverseNodes = true;
+	private TreeNode virtualFilterNode;
+	private IdEObjectCollection collection;
+	private List<AbstractOperation> filteredOperations;
 
 	/**
 	 * Default constructor.
@@ -40,6 +46,13 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	 */
 	public SCMContentProvider() {
 		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+	}
+
+	public SCMContentProvider(IdEObjectCollection collection) {
+		this();
+		this.virtualFilterNode = new TreeNode(EClassFilter.INSTANCE.getFilterLabel());
+		this.collection = collection;
+		this.filteredOperations = new ArrayList<AbstractOperation>();
 	}
 
 	/**
@@ -66,7 +79,26 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	@Override
 	public Object[] getElements(Object object) {
 		if (object instanceof List<?> && showRootNodes) {
-			return ((List<?>) object).toArray();
+
+			List<?> list = (List<?>) object;
+			List<Object> result = new ArrayList<Object>(list.size());
+
+			result.addAll(list);
+
+			if (eClassFilterEnabled()) {
+				result.add(virtualFilterNode);
+
+				for (Object o : list) {
+					if (o instanceof AbstractOperation
+						&& EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(collection, (AbstractOperation) o)) {
+						filteredOperations.add((AbstractOperation) o);
+						result.remove(o);
+					}
+				}
+			}
+
+			return ((List<?>) result).toArray();
+
 		} else if (object instanceof List<?>) {
 			// valid inputs are a list of HistoryInfos as well as a list
 			// of ChangePackage
@@ -76,7 +108,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 				return list.toArray();
 			}
 
-			List<AbstractOperation> result = new ArrayList<AbstractOperation>(list.size());
+			List<Object> result = new ArrayList<Object>(list.size());
 
 			if (isListOf(list, HistoryInfo.class)) {
 				for (HistoryInfo info : (List<HistoryInfo>) list) {
@@ -90,12 +122,21 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 				}
 			}
 
+			if (eClassFilterEnabled()) {
+				result.add(virtualFilterNode);
+			}
+
 			return result.toArray();
+
 		} else if (object instanceof EObject) {
-			return new Object[] { object };
+			return new Object[] { object, virtualFilterNode };
 		}
 
 		return super.getElements(object);
+	}
+
+	private boolean eClassFilterEnabled() {
+		return EClassFilter.INSTANCE.isEnabled() && virtualFilterNode != null;
 	}
 
 	private List<AbstractOperation> getReversedOperations(ChangePackage changePackage) {
@@ -113,12 +154,29 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	private Object[] filter(Object[] input, Class<? extends EObject> clazz) {
 		List<Object> result = new ArrayList<Object>(input.length);
 		for (Object object : input) {
-			if (!clazz.isInstance(object)) {
+
+			if (clazz.isInstance(object)) {
+				continue;
+			}
+
+			if (object instanceof AbstractOperation) {
+				AbstractOperation operation = (AbstractOperation) object;
+				if (eClassFilterEnabled() && EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(collection, operation)) {
+					filteredOperations.add(operation);
+				} else {
+					result.add(operation);
+				}
+			} else {
 				result.add(object);
 			}
 		}
 
 		return result.toArray();
+	}
+
+	@Override
+	public boolean hasChildren(Object object) {
+		return getChildren(object).length > 0;
 	}
 
 	@Override
@@ -129,6 +187,12 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			return getChildren(historyInfo.getChangePackage());
 		} else if (object instanceof ChangePackage) {
 			return filter(super.getChildren(object), LogMessage.class);
+		} else if (object == virtualFilterNode) {
+			if (filteredOperations.size() > 0) {
+				return filteredOperations.toArray();
+			} else {
+				return new Object[] { new TreeNode("<No operations were filtered>") };
+			}
 		} else if (object instanceof CompositeOperation) {
 			return ((CompositeOperation) object).getSubOperations().toArray();
 		}

@@ -82,7 +82,7 @@ public class DetailsDialog extends TitleAreaDialog {
 		TreeViewer tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
 
-		SCMContentProvider contentProvider = new SCMContentProvider();
+		SCMContentProvider contentProvider = new SCMContentProvider(decisionManager.getProject());
 		contentProvider.setShowRootNodes(true);
 
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(decisionManager.getProject());
