@@ -133,8 +133,12 @@ public class ProjectComposite extends PropertiesComposite {
 		EList<ACOrgUnit> participants = new BasicEList<ACOrgUnit>();
 
 		try {
+
 			allOrgUnits.addAll(getAdminBroker().getOrgUnits());
-			allOrgUnits.removeAll(getAdminBroker().getParticipants(projectInfo.getProjectId()));
+
+			if (projectInfo != null) {
+				allOrgUnits.removeAll(getAdminBroker().getParticipants(projectInfo.getProjectId()));
+			}
 
 			Object[] result = showDialog(allOrgUnits, "Select a participant");
 
@@ -146,6 +150,7 @@ public class ProjectComposite extends PropertiesComposite {
 		} catch (EmfStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
+
 		return participants;
 
 	}
@@ -155,9 +160,7 @@ public class ProjectComposite extends PropertiesComposite {
 	 */
 	@Override
 	protected void createTableGroup() {
-
 		super.createTableGroup("Participants");
-
 	}
 
 	/**
