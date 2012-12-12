@@ -11,8 +11,11 @@
 package org.eclipse.emf.emfstore.client.ui.views.scm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -36,9 +39,9 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 	private boolean showRootNodes = true;
 	private boolean reverseNodes = true;
-	private TreeNode virtualFilterNode;
+	private Map<ChangePackage, TreeNode> virtualFilteredNodes;
+	private Map<TreeNode, List<AbstractOperation>> filteredOperations;
 	private IdEObjectCollection collection;
-	private List<AbstractOperation> filteredOperations;
 
 	/**
 	 * Default constructor.
@@ -46,13 +49,13 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	 */
 	public SCMContentProvider() {
 		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+		this.virtualFilteredNodes = new LinkedHashMap<ChangePackage, TreeNode>();
+		this.filteredOperations = new LinkedHashMap<TreeNode, List<AbstractOperation>>();
 	}
 
 	public SCMContentProvider(IdEObjectCollection collection) {
 		this();
-		this.virtualFilterNode = new TreeNode(EClassFilter.INSTANCE.getFilterLabel());
 		this.collection = collection;
-		this.filteredOperations = new ArrayList<AbstractOperation>();
 	}
 
 	/**
@@ -78,25 +81,12 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] getElements(Object object) {
+
 		if (object instanceof List<?> && showRootNodes) {
 
 			List<?> list = (List<?>) object;
 			List<Object> result = new ArrayList<Object>(list.size());
-
 			result.addAll(list);
-
-			if (eClassFilterEnabled()) {
-				result.add(virtualFilterNode);
-
-				for (Object o : list) {
-					if (o instanceof AbstractOperation
-						&& EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(collection, (AbstractOperation) o)) {
-						filteredOperations.add((AbstractOperation) o);
-						result.remove(o);
-					}
-				}
-			}
-
 			return ((List<?>) result).toArray();
 
 		} else if (object instanceof List<?>) {
@@ -122,21 +112,17 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 				}
 			}
 
-			if (eClassFilterEnabled()) {
-				result.add(virtualFilterNode);
-			}
-
 			return result.toArray();
 
 		} else if (object instanceof EObject) {
-			return new Object[] { object, virtualFilterNode };
+			return new Object[] { object };
 		}
 
 		return super.getElements(object);
 	}
 
 	private boolean eClassFilterEnabled() {
-		return EClassFilter.INSTANCE.isEnabled() && virtualFilterNode != null;
+		return EClassFilter.INSTANCE.isEnabled() && collection != null;
 	}
 
 	private List<AbstractOperation> getReversedOperations(ChangePackage changePackage) {
@@ -151,7 +137,8 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return clazz.isInstance(firstElement);
 	}
 
-	private Object[] filter(Object[] input, Class<? extends EObject> clazz) {
+	private Object[] filter(ChangePackage changePackage, Object[] input, Class<? extends EObject> clazz) {
+
 		List<Object> result = new ArrayList<Object>(input.length);
 		for (Object object : input) {
 
@@ -161,8 +148,21 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 			if (object instanceof AbstractOperation) {
 				AbstractOperation operation = (AbstractOperation) object;
+
 				if (eClassFilterEnabled() && EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(collection, operation)) {
-					filteredOperations.add(operation);
+
+					if (!virtualFilteredNodes.containsKey(changePackage)) {
+						TreeNode node = new TreeNode(changePackage);
+						virtualFilteredNodes.put(changePackage, node);
+						filteredOperations.put(node, new ArrayList<AbstractOperation>());
+					}
+
+					TreeNode node = virtualFilteredNodes.get(changePackage);
+					List<AbstractOperation> alreadyFilteredOperations = filteredOperations.get(node);
+					// filter might get called multiple times
+					if (!alreadyFilteredOperations.contains(operation)) {
+						alreadyFilteredOperations.add(operation);
+					}
 				} else {
 					result.add(operation);
 				}
@@ -186,13 +186,18 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			HistoryInfo historyInfo = (HistoryInfo) object;
 			return getChildren(historyInfo.getChangePackage());
 		} else if (object instanceof ChangePackage) {
-			return filter(super.getChildren(object), LogMessage.class);
-		} else if (object == virtualFilterNode) {
-			if (filteredOperations.size() > 0) {
-				return filteredOperations.toArray();
-			} else {
-				return new Object[] { new TreeNode("<No operations were filtered>") };
+			Object[] filtered = filter((ChangePackage) object, super.getChildren(object), LogMessage.class);
+
+			if (virtualFilteredNodes.containsKey(object)) {
+				List<Object> result = new ArrayList<Object>(filtered.length + 1);
+				result.addAll(Arrays.asList(filtered));
+				result.add(virtualFilteredNodes.get(object));
+				return result.toArray();
 			}
+
+			return filtered;
+		} else if (object instanceof TreeNode) {
+			return filteredOperations.get(object).toArray();
 		} else if (object instanceof CompositeOperation) {
 			return ((CompositeOperation) object).getSubOperations().toArray();
 		}

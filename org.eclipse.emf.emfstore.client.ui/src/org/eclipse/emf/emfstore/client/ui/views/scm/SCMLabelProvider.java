@@ -20,6 +20,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.client.ui.common.EClassFilter;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -115,8 +116,9 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			ret = adapterFactoryLabelProvider.getText(element);
 		} else if (element instanceof TreeNode) {
 			TreeNode node = (TreeNode) element;
-			if (node.getValue() != null) {
-				return (String) node.getValue();
+			// must be node containing filtered operations
+			if (node.getValue() instanceof ChangePackage) {
+				return EClassFilter.INSTANCE.getFilterLabel();
 			}
 		} else {
 			ret = super.getText(element);
