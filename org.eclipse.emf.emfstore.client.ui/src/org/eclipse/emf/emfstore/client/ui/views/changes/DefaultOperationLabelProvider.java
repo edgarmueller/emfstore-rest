@@ -30,11 +30,6 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 */
 	protected static final String UNKOWN_ELEMENT = "(Unkown Element)";
 
-	/**
-	 * The max amount of characters a name may consist of.
-	 */
-	protected static final int MAX_NAME_LENGTH = 30;
-
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
 	private ComposedAdapterFactory adapterFactory;
 
@@ -112,10 +107,6 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 
 		if (result.length() == 0) {
 			return "(empty name)";
-		}
-
-		if (result.length() > MAX_NAME_LENGTH) {
-			return result.substring(0, MAX_NAME_LENGTH) + "...";
 		}
 
 		return result;

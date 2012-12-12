@@ -280,20 +280,19 @@ public class AbstractOperationItemProvider extends IdentifiableElementItemProvid
 		return sb.toString();
 	}
 
-	private static final int MAX_NAME_SIZE = 30;
-
 	protected String trim(Object object) {
+
 		if (object == null) {
 			return "(null)";
 		}
+
 		String string = object.toString();
 		String result = string.trim();
-		if (result.length() > MAX_NAME_SIZE) {
-			return result.substring(0, MAX_NAME_SIZE) + "...";
-		}
+
 		if (result.length() == 0) {
 			return "(empty)";
 		}
+
 		return result;
 	}
 
