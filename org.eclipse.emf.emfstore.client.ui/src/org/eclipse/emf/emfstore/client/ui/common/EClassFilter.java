@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -126,7 +127,7 @@ public final class EClassFilter {
 		EObject modelElement = collection.getModelElement(id);
 
 		if (modelElement == null) {
-			modelElement = collection.getIdToEObjectMapping().get(id);
+			modelElement = ((IdEObjectCollectionImpl) collection).getDeletedModelElement(id);
 		}
 
 		if (modelElement != null && !filteredEClasses.contains(modelElement.eClass())) {

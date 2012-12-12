@@ -40,6 +40,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	private boolean showRootNodes = true;
 	private boolean reverseNodes = true;
 	private Map<ChangePackage, TreeNode> virtualFilteredNodes;
+	private Map<ChangePackage, List<Object>> nonFilteredChildren;
 	private Map<TreeNode, List<AbstractOperation>> filteredOperations;
 	private IdEObjectCollection collection;
 
@@ -51,6 +52,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		this.virtualFilteredNodes = new LinkedHashMap<ChangePackage, TreeNode>();
 		this.filteredOperations = new LinkedHashMap<TreeNode, List<AbstractOperation>>();
+		this.nonFilteredChildren = new LinkedHashMap<ChangePackage, List<Object>>();
 	}
 
 	public SCMContentProvider(IdEObjectCollection collection) {
@@ -139,7 +141,12 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 	private Object[] filter(ChangePackage changePackage, Object[] input, Class<? extends EObject> clazz) {
 
+		if (nonFilteredChildren.containsKey(changePackage)) {
+			return nonFilteredChildren.get(changePackage).toArray();
+		}
+
 		List<Object> result = new ArrayList<Object>(input.length);
+
 		for (Object object : input) {
 
 			if (clazz.isInstance(object)) {
@@ -159,10 +166,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 					TreeNode node = virtualFilteredNodes.get(changePackage);
 					List<AbstractOperation> alreadyFilteredOperations = filteredOperations.get(node);
-					// filter might get called multiple times
-					if (!alreadyFilteredOperations.contains(operation)) {
-						alreadyFilteredOperations.add(operation);
-					}
+					alreadyFilteredOperations.add(operation);
 				} else {
 					result.add(operation);
 				}
@@ -171,6 +175,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			}
 		}
 
+		nonFilteredChildren.put(changePackage, result);
 		return result.toArray();
 	}
 
@@ -186,10 +191,11 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			HistoryInfo historyInfo = (HistoryInfo) object;
 			return getChildren(historyInfo.getChangePackage());
 		} else if (object instanceof ChangePackage) {
+
 			Object[] filtered = filter((ChangePackage) object, super.getChildren(object), LogMessage.class);
 
 			if (virtualFilteredNodes.containsKey(object)) {
-				List<Object> result = new ArrayList<Object>(filtered.length + 1);
+				List<Object> result = new ArrayList<Object>();
 				result.addAll(Arrays.asList(filtered));
 				result.add(virtualFilteredNodes.get(object));
 				return result.toArray();
