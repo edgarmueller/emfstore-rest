@@ -194,7 +194,7 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			String description;
 
 			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(modelElement.eClass().getName());
+			// stringBuilder.append(modelElement.eClass().getName());
 			stringBuilder.append(getModelElementName(op.getModelElementId()));
 			String elementClassAndName = stringBuilder.toString();
 			if (op.isDelete()) {
@@ -211,8 +211,7 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			if (op.isDelete() && subOperationCount > 0) {
 				ReferenceOperation referenceOperation = subOperations.get(subOperationCount - 1);
 				if (referenceOperation.getContainmentType().equals(ContainmentType.CONTAINMENT)) {
-					description += " from its parent "
-						+ getModelElementClassAndName(referenceOperation.getModelElementId());
+					description += " from " + getModelElementClassAndName(referenceOperation.getModelElementId());
 				}
 			}
 			return description;

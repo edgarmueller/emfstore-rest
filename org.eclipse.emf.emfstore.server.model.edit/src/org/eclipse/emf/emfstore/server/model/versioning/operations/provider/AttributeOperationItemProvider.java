@@ -133,13 +133,13 @@ public class AttributeOperationItemProvider extends FeatureOperationItemProvider
 			if (oldValue == null && newValue == null) {
 				return "Unset " + op.getFeatureName() + " in " + elemNameAndClass;
 			} else if (oldValue == null && newValue != null) {
-				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " to \"" + trim(newValue) + "\"";
+				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " to '" + trim(newValue) + "'";
 			} else if (oldValue != null && newValue == null) {
-				return "Unset " + op.getFeatureName() + " in " + elemNameAndClass + " from previous value \""
-					+ trim(oldValue) + "\"";
+				return "Unset " + op.getFeatureName() + " in " + elemNameAndClass + " from previous value '"
+					+ trim(oldValue) + "'";
 			} else {
-				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " from \"" + trim(oldValue)
-					+ "\" to \"" + trim(newValue) + "\"";
+				return "Set " + op.getFeatureName() + " in " + elemNameAndClass + " from '" + trim(oldValue) + "' to '"
+					+ trim(newValue) + "'";
 			}
 		}
 		return super.getText(object);
