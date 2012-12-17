@@ -117,6 +117,8 @@ public final class EClassFilter {
 			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
 				if (modelElement != null && !filteredEClasses.contains(modelElement.eClass())) {
 					return false;
+				} else if (modelElement == null) {
+					return false;
 				}
 			}
 
@@ -130,7 +132,11 @@ public final class EClassFilter {
 			modelElement = ((IdEObjectCollectionImpl) collection).getDeletedModelElement(id);
 		}
 
-		if (modelElement != null && !filteredEClasses.contains(modelElement.eClass())) {
+		if (modelElement == null) {
+			return false;
+		}
+
+		if (!filteredEClasses.contains(modelElement.eClass())) {
 			return false;
 		}
 
