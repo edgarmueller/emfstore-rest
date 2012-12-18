@@ -106,8 +106,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(conflictException),
-				progressMonitor);
+			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(), progressMonitor);
 		} catch (final EmfStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {

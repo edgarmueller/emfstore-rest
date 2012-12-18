@@ -30,7 +30,6 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	private List<AbstractOperation> acceptedMine;
 	private List<AbstractOperation> rejectedTheirs;
 	private final boolean isBranchMerge;
-	private ChangeConflictException conflictException;
 
 	/**
 	 * Default Constructor.
@@ -38,11 +37,9 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * @param isBranchMerge
 	 *            specifies whether two branches are merged oppossed to changes
 	 *            from the same branch.
-	 * @param conflictException a conflict exception with preliminary results
 	 */
-	public AbstractConflictResolver(boolean isBranchMerge, ChangeConflictException conflictException) {
+	public AbstractConflictResolver(boolean isBranchMerge) {
 		this.isBranchMerge = isBranchMerge;
-		this.conflictException = conflictException;
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
 	}
@@ -79,8 +76,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, conflictException, base,
-			target, isBranchMerge);
+		DecisionManager decisionManager = new DecisionManager(project, conflictException, base, target, isBranchMerge);
 
 		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {
