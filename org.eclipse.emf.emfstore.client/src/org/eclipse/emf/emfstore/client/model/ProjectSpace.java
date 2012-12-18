@@ -812,23 +812,43 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @param target
 	 *            target version
-	 * @param myChangePackage my change package
-	 * @param incomingChangePackages incoming change packages
+	 * @param conflictException
+	 *            a {@link ChangeConflictException} containg the changes to be merged
 	 * @param conflictResolver
 	 *            a conflict resolver that will actually perform the conflict
 	 *            resolution
 	 * @param progressMonitor a progress monitor to report on progress
 	 * 
-	 * 
-	 * 
 	 * @throws EmfStoreException
 	 *             if the connection to the server fails
-	 * @return true if merge was succesful
+	 * @return true if merge was successful
 	 * 
 	 * @generated NOT
 	 */
 	boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
 		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException;
+
+	/**
+	 * Merge the changes from current base version to given target version with
+	 * the local operations.
+	 * 
+	 * @param target
+	 *            target version
+	 * @param myChangePackage my change package
+	 * @param incomingChangePackages incoming change packages
+	 * @param conflictResolver
+	 *            a conflict resolver that will actually perform the conflict
+	 *            resolution
+	 * @param monitor a progress monitor to report on progress
+	 * 
+	 * @throws EmfStoreException
+	 *             if the connection to the server fails
+	 * @return true if merge was successful
+	 * 
+	 * @generated NOT
+	 */
+	boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage, List<ChangePackage> incomingChangePackages,
+		ConflictResolver conflictResolver, IProgressMonitor monitor) throws EmfStoreException;
 
 	/**
 	 * Removes a tag to the specified version of this project.

@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,6 +69,7 @@ import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -391,7 +393,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		final ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
-			sourceVersion, targetVersion);
+																	sourceVersion, targetVersion);
 		return changes;
 	}
 
@@ -860,6 +862,24 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return false;
 	}
 
+	public boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage,
+		List<ChangePackage> incomingChangePackages, ConflictResolver conflictResolver, IProgressMonitor monitor)
+		throws EmfStoreException {
+		List<ChangePackage> myChangePackages = Arrays.asList(myChangePackage);
+
+		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
+		idToEObjectMapping.put(myChangePackage);
+		for (ChangePackage changePackage : incomingChangePackages) {
+			idToEObjectMapping.put(changePackage);
+		}
+
+		ChangeConflictException changeConflictException = new ChangeConflictException(this, myChangePackages,
+			incomingChangePackages,
+			new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
+																		incomingChangePackages), idToEObjectMapping);
+		return merge(target, changeConflictException, conflictResolver, monitor);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -875,7 +895,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
-					branchSpec));
+																								branchSpec));
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
@@ -1012,7 +1032,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			if (resource == null) {
 				if (!isTransient) {
 					WorkspaceUtil.logException("Resources of project space are not properly initialized!",
-						new IllegalProjectSpaceStateException("Resource to save is null"));
+												new IllegalProjectSpaceStateException("Resource to save is null"));
 				}
 				return;
 			}
@@ -1123,7 +1143,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					.getInstance()
 					.getConnectionManager()
 					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
-						getProjectId());
+										getProjectId());
 				iterator.remove();
 			} catch (EmfStoreException e) {
 				WorkspaceUtil.logException("Transmission of properties failed with exception", e);

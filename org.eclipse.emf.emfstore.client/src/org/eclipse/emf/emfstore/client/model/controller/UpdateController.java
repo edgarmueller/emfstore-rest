@@ -10,15 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller;
 
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -26,8 +23,7 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
-import org.eclipse.emf.emfstore.common.model.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -35,9 +31,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 
 /**
  * Controller class for updating a project space.
@@ -116,12 +109,12 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}.execute();
 
 		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
-		idToEObjectMapping.putAll(getIdToEObjectMappingFromChangePackage(localChanges));
+		idToEObjectMapping.put(localChanges);
+		idToEObjectMapping.putAll(getProjectSpace().getProject());
 
 		for (ChangePackage changePackage : changes) {
-			idToEObjectMapping.putAll(getIdToEObjectMappingFromChangePackage(changePackage));
+			idToEObjectMapping.put(changePackage);
 		}
-		idToEObjectMapping.putAll(getProjectSpace().getProject());
 
 		getProgressMonitor().worked(65);
 
@@ -170,35 +163,4 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		return getProjectSpace().getBaseVersion();
 	}
 
-	private IModelElementIdToEObjectMapping getIdToEObjectMappingFromChangePackage(ChangePackage changePackage) {
-
-		BasicModelElementIdToEObjectMapping changePackageMapping = new BasicModelElementIdToEObjectMapping();
-
-		for (AbstractOperation op : changePackage.getCopyOfOperations()) {
-			BasicModelElementIdToEObjectMapping operationMapping = new BasicModelElementIdToEObjectMapping();
-			getIdToEObjectMappingFromOperation(op, operationMapping);
-			changePackageMapping.putAll(operationMapping);
-		}
-
-		return changePackageMapping;
-	}
-
-	private void getIdToEObjectMappingFromOperation(AbstractOperation operation,
-		BasicModelElementIdToEObjectMapping idToEObjectMapping) {
-
-		if (operation instanceof CompositeOperation) {
-			CompositeOperation composite = (CompositeOperation) operation;
-			for (AbstractOperation subOp : composite.getSubOperations()) {
-				getIdToEObjectMappingFromOperation(subOp, idToEObjectMapping);
-			}
-		}
-
-		if (isCreateDelete(operation)) {
-			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-
-			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
-				idToEObjectMapping.put(modelElement, createDeleteOperation.getEObjectToIdMap().get(modelElement));
-			}
-		}
-	}
 }

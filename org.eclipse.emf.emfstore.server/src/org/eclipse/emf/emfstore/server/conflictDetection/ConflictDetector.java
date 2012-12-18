@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.internal.conflictDetection.ReservationToConflictBucketCandidateMap;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;

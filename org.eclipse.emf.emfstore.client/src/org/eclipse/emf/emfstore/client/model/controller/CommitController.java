@@ -10,21 +10,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller;
 
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
-
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
-import org.eclipse.emf.emfstore.common.model.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -34,9 +30,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 
 /**
  * The controller responsible for performing a commit.
@@ -148,7 +141,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		WorkspaceManager.getObserverBus().notify(CommitObserver.class).inspectChanges(getProjectSpace(), changePackage);
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
-		idToEObjectMapping.putAll(getIdToEObjectMappingFromChangePackage(changePackage));
+		idToEObjectMapping.put(changePackage);
 		idToEObjectMapping.putAll(getProjectSpace().getProject());
 
 		getProgressMonitor().subTask("Presenting Changes");
@@ -211,38 +204,4 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		logMessage.setMessage("");
 		return logMessage;
 	}
-
-	// TODO: duplicate code
-	private IModelElementIdToEObjectMapping getIdToEObjectMappingFromChangePackage(ChangePackage changePackage) {
-
-		BasicModelElementIdToEObjectMapping changePackageMapping = new BasicModelElementIdToEObjectMapping();
-
-		for (AbstractOperation op : changePackage.getCopyOfOperations()) {
-			BasicModelElementIdToEObjectMapping operationMapping = new BasicModelElementIdToEObjectMapping();
-			getIdToEObjectMappingFromOperation(op, operationMapping);
-			changePackageMapping.putAll(operationMapping);
-		}
-
-		return changePackageMapping;
-	}
-
-	private void getIdToEObjectMappingFromOperation(AbstractOperation operation,
-		BasicModelElementIdToEObjectMapping idToEObjectMapping) {
-
-		if (operation instanceof CompositeOperation) {
-			CompositeOperation composite = (CompositeOperation) operation;
-			for (AbstractOperation subOp : composite.getSubOperations()) {
-				getIdToEObjectMappingFromOperation(subOp, idToEObjectMapping);
-			}
-		}
-
-		if (isCreateDelete(operation)) {
-			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-
-			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
-				idToEObjectMapping.put(modelElement, createDeleteOperation.getEObjectToIdMap().get(modelElement));
-			}
-		}
-	}
-
 }
