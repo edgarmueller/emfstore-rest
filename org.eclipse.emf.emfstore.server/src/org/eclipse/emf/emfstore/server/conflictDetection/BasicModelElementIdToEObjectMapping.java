@@ -68,7 +68,7 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 
 		BasicModelElementIdToEObjectMapping changePackageMapping = new BasicModelElementIdToEObjectMapping();
 
-		for (AbstractOperation op : changePackage.getCopyOfOperations()) {
+		for (AbstractOperation op : changePackage.getOperations()) {
 			BasicModelElementIdToEObjectMapping operationMapping = new BasicModelElementIdToEObjectMapping();
 			getIdToEObjectMappingFromOperation(op, operationMapping);
 			changePackageMapping.putAll(operationMapping);
