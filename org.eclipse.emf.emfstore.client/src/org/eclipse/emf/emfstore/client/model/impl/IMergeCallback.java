@@ -48,10 +48,8 @@ public interface IMergeCallback {
 	 * 
 	 * @param projectSpace
 	 *            the project space upon local changes have been reverted
-	 * @param changePackage
-	 *            the {@link ChangePackage} containing the reverted operations
 	 */
-	void postRevertMyChanges(ProjectSpace projectSpace, ChangePackage changePackage);
+	void postRevertMyChanges(ProjectSpace projectSpace);
 
 	/**
 	 * Called after incoming changes have been applied upon the {@link ProjectSpace} and before
@@ -66,7 +64,7 @@ public interface IMergeCallback {
 	void postApplyTheirChanges(ProjectSpace projectSpace, List<ChangePackage> theirChangePackages);
 
 	/**
-	 * Called after my changes have been re-applied, i.e. after the incoming changes
+	 * Called after merge result has been re-applied, i.e. after the incoming changes
 	 * from other parties have been applied upon the given project space.
 	 * 
 	 * @param projectSpace
@@ -74,5 +72,5 @@ public interface IMergeCallback {
 	 * @param changePackage
 	 *            the change package containing the changes to be applied upon the project space
 	 */
-	void postReapplyMyChanges(ProjectSpace projectSpace, ChangePackage changePackage);
+	void postApplyMergedChanges(ProjectSpace projectSpace, ChangePackage changePackage);
 }

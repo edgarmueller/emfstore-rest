@@ -214,19 +214,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
 
 		// revert local changes
-		notifyPreRevertMyChanges(myChanges);
+		notifyPreRevertMyChanges(getLocalChangePackage());
 		revert();
-		notifyPostRevertMyChanges(myChanges);
+		notifyPostRevertMyChanges();
 
 		// apply changes from repo. incoming (aka theirs)
 		for (ChangePackage change : incoming) {
-			applyOperations(change.getCopyOfOperations(), false);
+			applyOperations(change.getOperations(), false);
 		}
 		notifyPostApplyTheirChanges(incoming);
 
 		// reapply local changes
-		applyOperations(myChanges.getCopyOfOperations(), true);
-		notifyPostReapplyMyChanges(myChanges);
+		applyOperations(myChanges.getOperations(), true);
+		notifyPostApplyMergedChanges(myChanges);
 
 		setBaseVersion(baseSpec);
 		saveProjectSpaceOnly();
@@ -1285,9 +1285,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 	}
 
-	private void notifyPostRevertMyChanges(final ChangePackage changePackage) {
+	private void notifyPostRevertMyChanges() {
 		for (IMergeCallback callback : mergeCallbacks) {
-			callback.postRevertMyChanges(this, changePackage);
+			callback.postRevertMyChanges(this);
 		}
 	}
 
@@ -1297,9 +1297,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 	}
 
-	private void notifyPostReapplyMyChanges(ChangePackage changePackage) {
+	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
 		for (IMergeCallback callback : mergeCallbacks) {
-			callback.postReapplyMyChanges(this, changePackage);
+			callback.postApplyMergedChanges(this, changePackage);
 		}
 	}
 }
