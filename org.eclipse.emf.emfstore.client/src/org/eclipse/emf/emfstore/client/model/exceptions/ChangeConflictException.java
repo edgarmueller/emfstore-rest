@@ -45,10 +45,18 @@ public class ChangeConflictException extends WorkspaceException {
 	 * Constructor.
 	 * 
 	 * 
-	 * @param projectSpace the ProjectSpace
-	 * @param myChangePackage my change package
-	 * @param newPackages the list of change packages that caused the exception
-	 * @param conflictBucketCandidates a set of conflict candidates
+	 * @param projectSpace
+	 *            the ProjectSpace
+	 * @param myChangePackages
+	 *            my change package
+	 * @param newPackages
+	 *            the list of change packages that caused the exception
+	 * @param conflictBucketCandidates
+	 *            a set of conflict candidates
+	 * @param idToEObjectMapping
+	 *            a mapping from IDs to EObjects and vice versa.<br/>
+	 *            Contains all IDs of model elements involved in the {@link ChangePackage}s
+	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 */
 	public ChangeConflictException(ProjectSpace projectSpace, List<ChangePackage> myChangePackages,
 		List<ChangePackage> newPackages, Set<ConflictBucketCandidate> conflictBucketCandidates,
@@ -82,6 +90,13 @@ public class ChangeConflictException extends WorkspaceException {
 		return myChangePackages;
 	}
 
+	/**
+	 * Returns the mapping from IDs to EObjects and vice versa.<br/>
+	 * The mapping contains all IDs of model elements involved in the {@link ChangePackage}s
+	 * as well as those contained by the project in the {@link ProjectSpace}
+	 * 
+	 * @return the mapping from IDs to EObjects and vice versa
+	 */
 	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return idToEObjectMapping;
 	}

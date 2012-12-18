@@ -44,6 +44,10 @@ public interface CommitCallback {
 	 *            the project space with the local pending changes
 	 * @param changePackage
 	 *            the actual changes
+	 * @param idToEObjectMapping
+	 *            a mapping from IDs to EObjects and vice versa.<br/>
+	 *            Contains all IDs of model elements involved in the {@link ChangePackage}s
+	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the commit should continue, false otherwise
 	 */
 	boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,

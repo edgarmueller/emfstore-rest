@@ -33,6 +33,10 @@ public interface UpdateCallback {
 	 *            the {@link ProjectSpace} being updated
 	 * @param changes
 	 *            the changes that will get applied upon the project space
+	 * @param idToEObjectMapping
+	 *            a mapping from IDs to EObjects and vice versa. Contains
+	 *            all IDs of model elements involved in the {@link ChangePackage}s
+	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
 	boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
