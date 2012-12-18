@@ -18,6 +18,25 @@ package org.eclipse.emf.emfstore.client.model.util;
 public abstract class EMFStoreCommand extends AbstractEMFStoreCommand {
 
 	/**
+	 * Constructor.
+	 * 
+	 * @param label the commands label.
+	 */
+	public EMFStoreCommand(String label) {
+		this();
+		setLabel(label);
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param label the commands label.
+	 */
+	public EMFStoreCommand() {
+		super();
+	}
+
+	/**
 	 * The actual action that is being executed.
 	 */
 	protected abstract void doRun();
