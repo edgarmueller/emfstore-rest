@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -36,6 +37,7 @@ public class UpdateDialog extends TitleAreaDialog {
 	private List<ChangePackage> changes;
 	private ProjectSpace projectSpace;
 	private Image updateImage;
+	private final IModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -47,8 +49,10 @@ public class UpdateDialog extends TitleAreaDialog {
 	 * @param changes
 	 *            the list of changes
 	 */
-	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes) {
+	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes,
+		IModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parentShell);
+		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
 		this.projectSpace = projectSpace;
@@ -66,7 +70,7 @@ public class UpdateDialog extends TitleAreaDialog {
 		// changes tree
 		if (changes != null) {
 			TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changes,
-				projectSpace.getProject());
+				projectSpace.getProject(), idToEObjectMapping);
 			// changesComposite.setReverseNodes(false);
 			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		}

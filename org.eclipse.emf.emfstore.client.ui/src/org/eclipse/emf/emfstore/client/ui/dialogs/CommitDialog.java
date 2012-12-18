@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -62,6 +63,7 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	private HashMap<String, CommitDialogTray> trays;
 	private Image commitImage;
 	private int numberOfChanges;
+	private final IModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -73,8 +75,10 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	 * @param activeProjectSpace
 	 *            ProjectSpace that will be committed
 	 */
-	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace) {
+	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace,
+		IModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parentShell);
+		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
@@ -192,7 +196,7 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		ArrayList<ChangePackage> changePackages = new ArrayList<ChangePackage>();
 		changePackages.add(changes);
 		TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changePackages,
-			getActiveProjectSpace().getProject());
+			getActiveProjectSpace().getProject(), idToEObjectMapping);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
 
 		return contents;

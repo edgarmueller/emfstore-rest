@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -110,7 +111,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
+		IModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		if (changePackage.getOperations().isEmpty()) {
 			RunInUI.run(new Callable<Void>() {
@@ -125,7 +127,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 			return false;
 		}
 
-		final CommitDialog commitDialog = new CommitDialog(getShell(), changePackage, projectSpace);
+		final CommitDialog commitDialog = new CommitDialog(getShell(), changePackage, projectSpace, idToEObjectMapping);
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {

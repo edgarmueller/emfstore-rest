@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
@@ -826,7 +827,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * 
 	 * @generated NOT
 	 */
-	boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage, List<ChangePackage> incomingChangePackages,
+	boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
 		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**

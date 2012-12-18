@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -48,8 +49,8 @@ public interface ConflictResolver {
 	 *            the version to which is updated
 	 * @return true if the merge can proceed, false if it has to be cancelled
 	 */
-	boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
+	boolean resolveConflicts(Project project, ChangeConflictException conflictException,
+		PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion);
 
 	/**
 	 * Get all operations that have been rejected in their changepackages.

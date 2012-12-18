@@ -10,11 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 
 /**
  * Allows to hook in for custom conflict treatment.
@@ -32,12 +29,10 @@ public interface ConflictHandler {
 	 * @param conflict
 	 *            a {@link Conflict} instance that has been created by a {@link DecisionManager}
 	 * @param idToEObjectMapping
-	 *            a mapping from {@link ModelElementId}s to {@link EObject}s. Contains all
-	 *            model elements and their IDs that have been created during conflict detection and
-	 *            resolution
+	 *            mapping from IDs to EObjects
 	 * 
 	 * @return the possibly modified conflict instance that will be
 	 *         added to the list of conflicts
 	 */
-	Conflict handle(Conflict conflict, Map<ModelElementId, EObject> idToEObjectMapping);
+	Conflict handle(Conflict conflict, IModelElementIdToEObjectMapping idToEObjectMapping);
 }

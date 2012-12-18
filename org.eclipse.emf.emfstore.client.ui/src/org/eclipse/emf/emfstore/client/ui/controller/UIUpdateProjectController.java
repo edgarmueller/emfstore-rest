@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -105,8 +106,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion, conflictException.getMyChangePackage(),
-				conflictException.getNewPackages(), new MergeProjectHandler(conflictException), progressMonitor);
+			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(conflictException),
+				progressMonitor);
 		} catch (final EmfStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -132,10 +133,12 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      java.util.List)
 	 */
-	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages) {
+	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages,
+		final IModelElementIdToEObjectMapping idToEObjectMapping) {
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
-				UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages);
+				UpdateDialog updateDialog = new UpdateDialog(getShell(), projectSpace, changePackages,
+					idToEObjectMapping);
 				if (updateDialog.open() == Window.OK) {
 					return true;
 				}

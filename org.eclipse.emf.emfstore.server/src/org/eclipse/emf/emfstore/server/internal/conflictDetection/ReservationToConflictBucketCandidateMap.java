@@ -16,6 +16,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.common.model.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -49,6 +51,7 @@ public class ReservationToConflictBucketCandidateMap {
 	// private LinkedHashMap<String, Set<ConflictBucketCandidate>> modelElementExistenceToConflictBucketSetMap;
 	private ReservationSet reservationToConflictMap;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
+	private BasicModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Default constructor.
@@ -56,6 +59,7 @@ public class ReservationToConflictBucketCandidateMap {
 	public ReservationToConflictBucketCandidateMap() {
 		reservationToConflictMap = new ReservationSet();
 		conflictBucketCandidates = new LinkedHashSet<ConflictBucketCandidate>();
+		idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
 	}
 
 	/**
@@ -229,9 +233,11 @@ public class ReservationToConflictBucketCandidateMap {
 		} else if (operation instanceof CreateDeleteOperation) {
 			// handle containment tree
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-			for (ModelElementId createDeletedElement : createDeleteOperation.getEObjectToIdMap().values()) {
-				reservationSet.addFullReservation(createDeletedElement.getId());
+			for (ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
+				reservationSet.addFullReservation(modelElementId.getId());
+				idToEObjectMapping.put(createDeleteOperation.getEObjectToIdMap().get(modelElementId), modelElementId);
 			}
+
 			// handle suboperations
 			for (AbstractOperation subOperation : createDeleteOperation.getSubOperations()) {
 				extractReservationFromOperation(subOperation, reservationSet);
@@ -329,5 +335,9 @@ public class ReservationToConflictBucketCandidateMap {
 			}
 		}
 		return rootToBucketMergeSetMap.keySet();
+	}
+
+	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+		return idToEObjectMapping;
 	}
 }

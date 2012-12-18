@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -99,12 +99,13 @@ public final class EClassFilter {
 	 *            the operations to check
 	 * @return true, if the operation only involves types that are considered to be filtered
 	 */
-	public boolean involvesOnlyFilteredEClasses(IdEObjectCollection collection, AbstractOperation operation) {
+	public boolean involvesOnlyFilteredEClasses(IModelElementIdToEObjectMapping idToEObjectMapping,
+		AbstractOperation operation) {
 
 		if (operation instanceof CompositeOperation) {
 			CompositeOperation composite = (CompositeOperation) operation;
 			for (AbstractOperation op : composite.getSubOperations()) {
-				if (!involvesOnlyFilteredEClasses(collection, op)) {
+				if (!involvesOnlyFilteredEClasses(idToEObjectMapping, op)) {
 					return false;
 				}
 			}
@@ -115,7 +116,7 @@ public final class EClassFilter {
 		if (isCreateDelete(operation)) {
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
 			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
-				if (modelElement != null && !filteredEClasses.contains(modelElement.eClass())) {
+				if (modelElement != null && !isFilteredEClass(modelElement.eClass())) {
 					return false;
 				} else if (modelElement == null) {
 					return false;
@@ -126,17 +127,13 @@ public final class EClassFilter {
 		}
 
 		ModelElementId id = operation.getModelElementId();
-		EObject modelElement = collection.getModelElement(id);
-
-		if (modelElement == null) {
-			modelElement = ((IdEObjectCollectionImpl) collection).getDeletedModelElement(id);
-		}
+		EObject modelElement = idToEObjectMapping.getIdToEObjectMapping().get(id.getId());
 
 		if (modelElement == null) {
 			return false;
 		}
 
-		if (!filteredEClasses.contains(modelElement.eClass())) {
+		if (!isFilteredEClass(modelElement.eClass())) {
 			return false;
 		}
 

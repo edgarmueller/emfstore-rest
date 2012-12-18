@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.emfstore.client.ui.common.EClassFilter;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
@@ -42,7 +42,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	private Map<ChangePackage, TreeNode> virtualFilteredNodes;
 	private Map<ChangePackage, List<Object>> nonFilteredChildren;
 	private Map<TreeNode, List<AbstractOperation>> filteredOperations;
-	private IdEObjectCollection collection;
+	private IModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Default constructor.
@@ -55,9 +55,9 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		this.nonFilteredChildren = new LinkedHashMap<ChangePackage, List<Object>>();
 	}
 
-	public SCMContentProvider(IdEObjectCollection collection) {
+	public SCMContentProvider(IModelElementIdToEObjectMapping idToEObjectMapping) {
 		this();
-		this.collection = collection;
+		this.idToEObjectMapping = idToEObjectMapping;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	}
 
 	private boolean eClassFilterEnabled() {
-		return EClassFilter.INSTANCE.isEnabled() && collection != null;
+		return EClassFilter.INSTANCE.isEnabled() && idToEObjectMapping != null;
 	}
 
 	private List<AbstractOperation> getReversedOperations(ChangePackage changePackage) {
@@ -156,7 +156,8 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			if (object instanceof AbstractOperation) {
 				AbstractOperation operation = (AbstractOperation) object;
 
-				if (eClassFilterEnabled() && EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(collection, operation)) {
+				if (eClassFilterEnabled()
+					&& EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(idToEObjectMapping, operation)) {
 
 					if (!virtualFilteredNodes.containsKey(changePackage)) {
 						TreeNode node = new TreeNode(changePackage);

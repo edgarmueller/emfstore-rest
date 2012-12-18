@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.client.model.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -48,6 +48,7 @@ import org.eclipse.emf.emfstore.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundException;
@@ -67,6 +68,8 @@ import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
@@ -845,15 +848,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @return
 	 */
-	public boolean merge(PrimaryVersionSpec target, ChangePackage myChangePackage,
-		List<ChangePackage> newChangePackages, ConflictResolver conflictResolver, IProgressMonitor progressMonitor)
-		throws EmfStoreException {
+	public boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
+		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException {
 		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), Arrays.asList(myChangePackage), newChangePackages,
-			getBaseVersion(), target)) {
+		if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, newChangePackages, mergedResult);
+			applyChanges(target, conflictException.getNewPackages(), mergedResult);
 			return true;
 		}
 		return false;
@@ -875,14 +876,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
 					branchSpec));
-
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
-				if (conflictResolver.resolveConflicts(getProject(), branchChanges, baseChanges, getBaseVersion(), null)) {
+				Set<ConflictBucketCandidate> calculateConflictCandidateBuckets = new ConflictDetector()
+					.calculateConflictCandidateBuckets(branchChanges, baseChanges);
+
+				ChangeConflictException conflictException = new ChangeConflictException(ProjectSpaceBase.this,
+					branchChanges, baseChanges, calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
+
+				if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), null)) {
 					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
 					setMergedVersion(ModelUtil.clone(branchSpec));
 				}
+
 				return null;
 			}
 		}.execute();

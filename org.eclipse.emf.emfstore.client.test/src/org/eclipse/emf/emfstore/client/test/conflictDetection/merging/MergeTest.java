@@ -25,10 +25,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -163,8 +166,12 @@ public class MergeTest extends ConflictDetectionTest {
 			List<ChangePackage> myChangePackages = Arrays.asList(getProjectSpace().getLocalChangePackage(true));
 			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
 
-			DecisionManager manager = new DecisionManager(getProject(), myChangePackages, theirChangePackages, spec,
-				spec, false, null);
+			Set<ConflictBucketCandidate> conflictCandidateBuckets = new ConflictDetector()
+				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages);
+			ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(),
+				myChangePackages, theirChangePackages, conflictCandidateBuckets, getProject());
+
+			DecisionManager manager = new DecisionManager(getProject(), conflictException, spec, spec, false);
 
 			return manager;
 		}

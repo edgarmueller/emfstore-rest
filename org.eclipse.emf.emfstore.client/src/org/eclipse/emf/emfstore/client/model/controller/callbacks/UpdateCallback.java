@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
@@ -34,7 +35,8 @@ public interface UpdateCallback {
 	 *            the changes that will get applied upon the project space
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
-	boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes);
+	boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
+		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
 	 * Called when no remote changes are available.
@@ -57,7 +59,8 @@ public interface UpdateCallback {
 	 * {@link UpdateCallback#inspectChanges(ProjectSpace, List)} to true.
 	 */
 	UpdateCallback NOCALLBACK = new UpdateCallback() {
-		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes) {
+		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
+			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 

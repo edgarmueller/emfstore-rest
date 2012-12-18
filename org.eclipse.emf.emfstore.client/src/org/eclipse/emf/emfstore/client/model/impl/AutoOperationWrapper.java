@@ -34,9 +34,16 @@ public class AutoOperationWrapper implements OperationModificator {
 	 *      org.eclipse.emf.common.command.Command)
 	 */
 	public List<AbstractOperation> modify(List<AbstractOperation> operations, Command command) {
-		if (operations.size() < 2) {
+
+		if (operations.size() < 1) {
 			return operations;
+		} else if (operations.size() == 1 && operations.get(0) instanceof CompositeOperation) {
+			CompositeOperation compositeOperation = (CompositeOperation) operations.get(0);
+			if (compositeOperation.getMainOperation() == null) {
+				return operations;
+			}
 		}
+
 		CompositeOperation compositeOperation = OperationsFactory.eINSTANCE.createCompositeOperation();
 		compositeOperation.setClientDate(new Date());
 		compositeOperation.setCompositeName(getText(command.getLabel()));

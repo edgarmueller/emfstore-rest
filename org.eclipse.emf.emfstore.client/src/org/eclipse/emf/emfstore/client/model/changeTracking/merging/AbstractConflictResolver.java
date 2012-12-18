@@ -73,14 +73,14 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public boolean resolveConflicts(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec base, PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project, ChangeConflictException conflictException,
+		PrimaryVersionSpec base, PrimaryVersionSpec target) {
 
 		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, myChangePackages, theirChangePackages, base,
-			target, isBranchMerge, conflictException);
+		DecisionManager decisionManager = new DecisionManager(project, conflictException, base,
+			target, isBranchMerge);
 
 		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {

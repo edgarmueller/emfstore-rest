@@ -54,7 +54,6 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 */
 	protected static final String LOCAL_REVISION = "Local revision";
 
-	private Project project;
 	private List<OperationId> highlighted;
 
 	private ChangePackageVisualizationHelper changePackageVisualizationHelper;
@@ -65,11 +64,12 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	private ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
 		ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+	private Project project;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param project
+	 * @param idToEObjectMapping
 	 *            the project.
 	 */
 	public SCMLabelProvider(Project project) {
@@ -160,7 +160,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project).getBaseVersion()
+		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project)
+			.getBaseVersion()
 			.getIdentifier()) {
 			baseVersion = "*";
 		}
@@ -286,7 +287,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		}
 		if (element instanceof CompositeOperation && ((CompositeOperation) element).getMainOperation() != null) {
 			return changePackageVisualizationHelper.getImage(adapterFactoryLabelProvider,
-				((CompositeOperation) element).getMainOperation());
+																((CompositeOperation) element).getMainOperation());
 		}
 
 		if (element instanceof AbstractOperation) {
@@ -353,12 +354,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		return project;
 	}
 
-	/**
-	 * Set the active project.
-	 * 
-	 * @param project project
-	 */
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProject(Project newProject) {
+		project = newProject;
 	}
 }

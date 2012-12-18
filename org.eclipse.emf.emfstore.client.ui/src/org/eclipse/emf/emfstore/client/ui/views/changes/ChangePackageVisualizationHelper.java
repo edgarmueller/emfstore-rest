@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
@@ -50,21 +51,22 @@ import org.eclipse.swt.graphics.Image;
 public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
-	private IdEObjectCollection collection;
+	private IModelElementIdToEObjectMapping idToEObjectMapping;
 	private List<ChangePackage> changePackages;
 	private Map<String, EObject> idToEObjectMapofChangePackages;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param collection
+	 * @param idToEObjectMapping
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
 	 * @param changePackages add changepackages in order to find deleted elements
 	 */
-	public ChangePackageVisualizationHelper(IdEObjectCollection collection, List<ChangePackage> changePackages) {
+	public ChangePackageVisualizationHelper(IModelElementIdToEObjectMapping idToEObjectMapping,
+		List<ChangePackage> changePackages) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
-		this.collection = collection;
+		this.idToEObjectMapping = idToEObjectMapping;
 		this.changePackages = changePackages;
 	}
 
@@ -180,9 +182,9 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private String decorate(AbstractOperationCustomLabelProvider labelProvider, AbstractOperation op) {
 		String namesResolved = resolveIds(labelProvider, labelProvider.getDescription(op),
-			AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
+											AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
 		String allResolved = resolveIds(labelProvider, namesResolved,
-			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
+										AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
@@ -241,7 +243,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		EObject modelElement = collection.getModelElement(modelElementId);
+		EObject modelElement = idToEObjectMapping.getIdToEObjectMapping().get(modelElementId);
 		if (modelElement == null && modelElementId != null) {
 			modelElement = getMeFromChangePackage(modelElementId);
 		}
@@ -287,6 +289,6 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 */
 	public void dispose() {
 		defaultOperationLabelProvider.dispose();
-		collection = null;
+		idToEObjectMapping = null;
 	}
 }

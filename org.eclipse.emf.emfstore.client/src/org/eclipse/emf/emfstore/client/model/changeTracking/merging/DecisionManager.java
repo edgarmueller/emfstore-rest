@@ -24,10 +24,8 @@ import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.O
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
@@ -55,9 +53,9 @@ import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
@@ -67,7 +65,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
 
@@ -80,87 +77,53 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenc
  */
 public class DecisionManager {
 
-	private final Project project;
 	private final List<ChangePackage> myChangePackages;
 	private final List<ChangePackage> theirChangePackages;
-	private ConflictDetector conflictDetector;
+	private List<ConflictHandler> conflictHandler;
 
 	private ArrayList<Conflict> conflicts;
-	private Set<AbstractOperation> notInvolvedInConflict;
 	private ArrayList<AbstractOperation> acceptedMine;
 	private ArrayList<AbstractOperation> rejectedTheirs;
+
 	private final PrimaryVersionSpec baseVersion;
 	private final PrimaryVersionSpec targetVersion;
-	private List<ConflictHandler> conflictHandler;
-	private final boolean isBranchMerge;
+
+	private ConflictDetector conflictDetector;
 	private ChangeConflictException conflictException;
-	// TODO: extract mapping to its own class
-	private Map<ModelElementId, EObject> idToEObjectMapping;
+	private Set<AbstractOperation> notInvolvedInConflict;
+	private IModelElementIdToEObjectMapping mapping;
+	private final boolean isBranchMerge;
+	private final Project project;
 
 	/**
 	 * Default constructor.
 	 * 
 	 * @param project
 	 *            the related project
-	 * @param myChangePackages
-	 *            my changes
-	 * @param theirChangePackages
-	 *            incoming changes
+	 * @param conflictException
+	 *            the {@link ChangeConflictException} containing the changes leading to a potential conflict
 	 * @param baseVersion
-	 *            baseversion
+	 *            the base version
 	 * @param targetVersion
 	 *            new target version
 	 * @param isBranchMerge
 	 *            allows to specify whether two branches are merged, opposed to
 	 *            changes from the same branch. Has an effect on the wording of
-	 *            conflictions
-	 * @param conflictException a conflict exception with preliminary results
+	 *            conflicts
 	 */
-	public DecisionManager(Project project, List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages, PrimaryVersionSpec baseVersion, PrimaryVersionSpec targetVersion,
-		boolean isBranchMerge, ChangeConflictException conflictException) {
+	public DecisionManager(Project project, ChangeConflictException conflictException, PrimaryVersionSpec baseVersion,
+		PrimaryVersionSpec targetVersion, boolean isBranchMerge) {
 		this.project = project;
-		this.myChangePackages = myChangePackages;
-		this.theirChangePackages = theirChangePackages;
+		this.myChangePackages = conflictException.getMyChangePackages();
+		this.theirChangePackages = conflictException.getNewPackages();
+		this.mapping = conflictException.getIdToEObjectMapping();
 		this.baseVersion = baseVersion;
 		this.targetVersion = targetVersion;
 		this.isBranchMerge = isBranchMerge;
 		this.conflictException = conflictException;
 		this.conflictHandler = initConflictHandlers();
 		this.conflictDetector = new ConflictDetector();
-		this.idToEObjectMapping = new LinkedHashMap<ModelElementId, EObject>();
-		initMapping(myChangePackages, theirChangePackages);
 		init();
-	}
-
-	private void initMapping(List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages) {
-
-		for (ChangePackage changePackage : myChangePackages) {
-			addToIdToEObjectMapping(changePackage.getCopyOfOperations());
-		}
-
-		for (ChangePackage changePackage : theirChangePackages) {
-			addToIdToEObjectMapping(changePackage.getCopyOfOperations());
-		}
-	}
-
-	private void addToIdToEObjectMapping(List<AbstractOperation> operations) {
-		for (AbstractOperation op : operations) {
-
-			if (op instanceof CompositeOperation) {
-				addToIdToEObjectMapping(((CompositeOperation) op).getSubOperations());
-				continue;
-			}
-
-			if (!(op instanceof CreateDeleteOperation)) {
-				continue;
-			}
-
-			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) op;
-			for (Map.Entry<EObject, ModelElementId> entry : createDeleteOperation.getEObjectToIdMap()) {
-				idToEObjectMapping.put(entry.getValue(), entry.getKey());
-			}
-		}
 	}
 
 	private List<ConflictHandler> initConflictHandlers() {
@@ -177,7 +140,6 @@ public class DecisionManager {
 
 	private void init() {
 		// flatten operations
-
 		acceptedMine = new ArrayList<AbstractOperation>();
 		rejectedTheirs = new ArrayList<AbstractOperation>();
 
@@ -185,12 +147,14 @@ public class DecisionManager {
 		notInvolvedInConflict = new LinkedHashSet<AbstractOperation>();
 
 		Set<ConflictBucketCandidate> conflictBucketCandidates;
+
 		if (conflictException != null) {
 			conflictBucketCandidates = conflictException.getConflictBucketCandidates();
 		} else {
 			conflictBucketCandidates = new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
 				theirChangePackages);
 		}
+
 		Set<ConflictBucket> conflictBucketsSet = conflictDetector.calculateConflictBucketsFromConflictCandidateBuckets(
 			conflictBucketCandidates, notInvolvedInConflict);
 
@@ -277,7 +241,7 @@ public class DecisionManager {
 	private Conflict notifyConflictHandlers(Conflict conflict) {
 		// pass conflict through all handlers
 		for (ConflictHandler handler : this.conflictHandler) {
-			conflict = handler.handle(conflict, idToEObjectMapping);
+			conflict = handler.handle(conflict, mapping);
 		}
 		return conflict;
 	}
@@ -605,69 +569,15 @@ public class DecisionManager {
 	}
 
 	/**
-	 * Returns the modelelement. Therefore the project as well as creation and
+	 * Returns the model element. Therefore the project as well as creation and
 	 * deletion operations are searched.
 	 * 
 	 * @param modelElementId
-	 *            id of element.
-	 * @return modelelement
+	 *            the id of an element
+	 * @return the model element with the given ID or <code>null</code> if no such model element has been found
 	 */
-	// TODO: SLOW!
 	public EObject getModelElement(ModelElementId modelElementId) {
-		EObject modelElement = project.getModelElement(modelElementId);
-		if (modelElement == null) {
-			for (ChangePackage cp : myChangePackages) {
-				modelElement = searchForCreatedME(modelElementId, cp.getOperations());
-				if (modelElement != null) {
-					break;
-				}
-			}
-			if (modelElement == null) {
-				for (ChangePackage cp : theirChangePackages) {
-					modelElement = searchForCreatedME(modelElementId, cp.getOperations());
-					if (modelElement != null) {
-						break;
-					}
-				}
-			}
-		}
-		return modelElement;
-	}
-
-	private EObject searchForCreatedME(ModelElementId modelElementId, List<AbstractOperation> operations) {
-		for (AbstractOperation operation : operations) {
-			EObject result = null;
-			if (operation instanceof CreateDeleteOperation) {
-				result = searchCreateAndDelete((CreateDeleteOperation) operation, modelElementId);
-
-			} else if (operation instanceof CompositeOperation) {
-				EList<AbstractOperation> subOperations = ((CompositeOperation) operation).getSubOperations();
-				result = searchForCreatedME(modelElementId, subOperations);
-			} else {
-				continue;
-			}
-			if (result != null) {
-				return result;
-			}
-		}
-		return null;
-	}
-
-	private EObject searchCreateAndDelete(CreateDeleteOperation cdo, ModelElementId modelElementId) {
-		EObject modelElement = cdo.getModelElement();
-		if (modelElement == null) {
-			return null;
-		}
-		Set<EObject> containedModelElements = ModelUtil.getAllContainedModelElements(modelElement, false);
-		containedModelElements.add(modelElement);
-
-		for (EObject child : containedModelElements) {
-			ModelElementId childId = ModelUtil.clone(cdo.getEObjectToIdMap().get(child));
-			if (childId != null && childId.equals(modelElementId)) {
-				return child;
-			}
-		}
-		return null;
+		return mapping.getIdToEObjectMapping().get(modelElementId.getId());
 	}
 
 	/**
@@ -701,15 +611,6 @@ public class DecisionManager {
 			}
 		}
 		return "";
-	}
-
-	/**
-	 * Return the related project.
-	 * 
-	 * @return project
-	 */
-	public Project getProject() {
-		return project;
 	}
 
 	/**
@@ -835,6 +736,14 @@ public class DecisionManager {
 			countConflicts();
 		}
 		return theirOperationCount;
+	}
+
+	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+		return mapping;
+	}
+
+	public Project getProject() {
+		return project;
 	}
 
 }

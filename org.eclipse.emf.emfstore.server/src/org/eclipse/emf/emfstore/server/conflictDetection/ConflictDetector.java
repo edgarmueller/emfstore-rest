@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.model.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.internal.conflictDetection.ReservationToConflictBucketCandidateMap;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -31,19 +33,22 @@ public class ConflictDetector {
 
 	private static ConflictDetectionStrategy defaultStrategy;
 	private ConflictDetectionStrategy conflictDetectionStrategy;
+	private BasicModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Constructor. Uses default conflict detection strategy
 	 */
 	public ConflictDetector() {
 		this(getStrategy());
+		idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
 	}
 
 	private static ConflictDetectionStrategy getStrategy() {
 		if (defaultStrategy == null) {
 			ConflictDetectionStrategy strategy = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
-				ConflictDetectionStrategy.class);
+				"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy")
+				.getClass("class",
+							ConflictDetectionStrategy.class);
 			if (strategy != null) {
 				defaultStrategy = strategy;
 			} else {
@@ -116,6 +121,8 @@ public class ConflictDetector {
 			conflictMap.scanOperationReservations(theirOperation, counter, false);
 			counter++;
 		}
+
+		idToEObjectMapping.putAll(conflictMap.getIdToEObjectMapping());
 
 		return conflictMap.getConflictBucketCandidates();
 	}
@@ -301,4 +308,7 @@ public class ConflictDetector {
 		return requiring;
 	}
 
+	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+		return idToEObjectMapping;
+	}
 }

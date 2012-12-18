@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
@@ -45,7 +46,8 @@ public interface CommitCallback {
 	 *            the actual changes
 	 * @return true, if the commit should continue, false otherwise
 	 */
-	boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage);
+	boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
+		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
 	 * Called when there are no changes on the given project space.
@@ -63,7 +65,8 @@ public interface CommitCallback {
 	 */
 	CommitCallback NOCALLBACK = new CommitCallback() {
 
-		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
+			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 

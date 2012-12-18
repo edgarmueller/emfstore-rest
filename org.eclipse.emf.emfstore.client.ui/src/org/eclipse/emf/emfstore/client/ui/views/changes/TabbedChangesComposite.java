@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -46,7 +47,8 @@ public class TabbedChangesComposite extends Composite {
 	 * @param changePackages the input of change packages as a list
 	 * @param project the project
 	 */
-	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project) {
+	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project,
+		IModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parent, style);
 
 		setLayout(new GridLayout());
@@ -59,7 +61,7 @@ public class TabbedChangesComposite extends Composite {
 		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
 
-		contentProvider = new SCMContentProvider(project);
+		contentProvider = new SCMContentProvider(idToEObjectMapping);
 		contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
 		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(project,
