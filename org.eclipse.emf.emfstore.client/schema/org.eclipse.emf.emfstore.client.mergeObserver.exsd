@@ -3,16 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.merge.callback" name="Provides callback facilities during the merge process"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.mergeObserver" name="Merge Observer"/>
       </appInfo>
       <documentation>
-         Provides a callback that is called during the merge process. The merge process can be divided into three parts:
-&lt;li&gt;
-&lt;ul&gt;First all local changes are reverted&lt;/ul&gt;
-&lt;ul&gt;Then all incoming changes are applied onto a project space&lt;/ul&gt;
-&lt;ul&gt;The final step is to reapply all local changes&lt;/ul&gt;
-&lt;/li&gt;
-For each of these steps the extension point provides notifications methods enabling you to modify the merge process.
+         [Enter description of this extension point.]
       </documentation>
    </annotation>
 
@@ -23,8 +17,8 @@ For each of these steps the extension point provides notifications methods enabl
          </appInfo>
       </annotation>
       <complexType>
-         <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="callback"/>
+         <sequence>
+            <element ref="observer" minOccurs="1" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -53,15 +47,15 @@ For each of these steps the extension point provides notifications methods enabl
       </complexType>
    </element>
 
-   <element name="callback">
+   <element name="observer">
       <complexType>
-         <attribute name="class" type="string" use="required">
+         <attribute name="mergeObserver" type="string">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.impl.IAppliedChangesCallback"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.impl.MergeObserver"/>
                </appInfo>
             </annotation>
          </attribute>
