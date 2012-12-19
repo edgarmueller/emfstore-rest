@@ -587,7 +587,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// remove all deleted elements
 		newElementsOnClipboardAfterCommand.removeAll(deletedElements);
 
-		collection.clearVolatileCaches();
+		collection.clearAllocatedCaches();
 	}
 
 	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {

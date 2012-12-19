@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -65,17 +66,25 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  */
 public class CreateDeleteOperationImpl extends AbstractOperationImpl implements CreateDeleteOperation {
 
-	public void apply(IdEObjectCollection project) {
+	public void apply(IdEObjectCollection collection) {
 		if (isDelete()) {
-			if (!project.contains(getModelElementId())) {
+			if (!collection.contains(getModelElementId())) {
 				// silently fail
 				return;
 			}
 
-			EObject localModelElement = project.getModelElement(getModelElementId());
+			Set<ModelElementId> disallocatedIds = new LinkedHashSet<ModelElementId>();
+			EObject localModelElement = collection.getModelElement(getModelElementId());
+			List<EObject> allContainedModelElements =
+				ModelUtil.getAllContainedModelElementsAsList(localModelElement, false);
+			allContainedModelElements.add(localModelElement);
+
+			for (EObject modelElement : allContainedModelElements) {
+				disallocatedIds.add(collection.getModelElementId(modelElement));
+			}
 
 			for (AbstractOperation op : getSubOperations()) {
-				op.apply(project);
+				op.apply(collection);
 			}
 
 			// remove model element from its parent, this should only apply if
@@ -88,8 +97,10 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 					localModelElement.eContainer().eSet(eContainmentFeature, null);
 				}
 			}
+
+			collection.disallocateModelElementIds(disallocatedIds);
 		} else {
-			if (project.contains(getModelElementId())) {
+			if (collection.contains(getModelElementId())) {
 				// silently fail
 				return;
 			}
@@ -102,7 +113,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 			allContainedModelElements.add(element);
 			EObject copiedElement = ModelUtil.clone(element);
 			List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
-				false);
+																											false);
 			copiedAllContainedModelElements.add(copiedElement);
 			clone.getEObjectToIdMap().clear();
 
@@ -121,10 +132,11 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 				clone.getEObjectToIdMap().put(copiedChild, childId);
 			}
 
-			project.addModelElement(clone.getModelElement(), clone.getEObjectToIdMap().map());
+			collection.allocateModelElementIds(clone.getEObjectToIdMap().map());
+			collection.addModelElement(clone.getModelElement());
 
 			for (ReferenceOperation operation : getSubOperations()) {
-				operation.apply(project);
+				operation.apply(collection);
 			}
 		}
 	}
@@ -144,7 +156,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 		createDeleteOperation.setModelElement(copiedElement);
 		createDeleteOperation.setModelElementId(ModelUtil.clone(this.getModelElementId()));
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
-			false);
+																										false);
 		copiedAllContainedModelElements.add(copiedElement);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {

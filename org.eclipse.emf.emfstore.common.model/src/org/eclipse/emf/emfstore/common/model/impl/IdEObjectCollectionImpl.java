@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.impl;
 
@@ -50,7 +51,8 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * The extension point id to configure the {@link ModelElementIdGenerator}.
 	 */
-	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
+	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT =
+		"org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
 
 	/**
 	 * The attribute identifying the class of the {@link ModelElementIdGenerator} extension point.
@@ -63,9 +65,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 	// These caches will be used to assign specific IDs to newly created EObjects.
 	// Additionally, IDs of deleted model elements will also be put into these caches, in case
-	// the deleted elements will be restored, e.g. by means of an undo operation.
-	// private Map<EObject, ModelElementId> allocatedEObjectToIdMap;
-	// private Map<ModelElementId, EObject> allocatedIdToEObjectMap;
+	// the deleted elements will be restored during a command.
 	private Map<EObject, String> allocatedEObjectToIdMap;
 	private Map<String, EObject> allocatedIdToEObjectMap;
 
@@ -89,7 +89,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,
-				ModelElementIdGenerator.class);
+														ModelElementIdGenerator.class);
 		}
 	}
 
@@ -173,19 +173,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public void addModelElement(EObject eObject) {
 		getModelElements().add(eObject);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#addModelElement(org.eclipse.emf.ecore.EObject,
-	 *      java.util.Map)
-	 */
-	public void addModelElement(EObject newModelElement, Map<EObject, ModelElementId> map) {
-
-		allocateModelElementIds(map);
-		getModelElements().add(newModelElement);
 	}
 
 	/**
@@ -662,7 +649,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public void dispose() {
 		eObjectToIdMap.clear();
 		idToEObjectMap.clear();
-		clearVolatileCaches();
+		clearAllocatedCaches();
 		cachesInitialized = false;
 	}
 
@@ -729,9 +716,22 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	}
 
 	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#disallocateModelElementIds(java.util.Set)
+	 */
+	public void disallocateModelElementIds(Set<ModelElementId> modelElementIds) {
+		for (ModelElementId modelElementId : modelElementIds) {
+			allocatedIdToEObjectMap.remove(modelElementId.getId());
+			allocatedEObjectToIdMap.values().remove(modelElementId.getId());
+		}
+	}
+
+	/**
 	 * Clear all caches.
 	 */
-	public void clearVolatileCaches() {
+	public void clearAllocatedCaches() {
 		allocatedEObjectToIdMap.clear();
 		allocatedIdToEObjectMap.clear();
 	}

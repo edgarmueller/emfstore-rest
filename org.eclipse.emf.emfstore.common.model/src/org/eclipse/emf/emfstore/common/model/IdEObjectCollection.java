@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
@@ -37,17 +38,24 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	void addModelElement(EObject modelElement);
 
 	/**
-	 * Adds the given model element to the collection. An additional map may be
-	 * passed in, in order to assign the model element and any of its children
-	 * already determined {@link ModelElementId}s.
+	 * Allocates certain IDs for the given model elements in the mapping.
+	 * If any {@link EObject} contained in the mapping is added to this collection
+	 * its {@link ModelElementId} will be determined using the ID in the mapping.
 	 * 
-	 * @param modelElement
-	 *            the model element that should get added to the collection
 	 * @param modelElementToIdMap
 	 *            A map containing {@link ModelElementId}s for the model element
 	 *            and its children
 	 */
-	void addModelElement(EObject modelElement, Map<EObject, ModelElementId> modelElementToIdMap);
+	void allocateModelElementIds(Map<EObject, ModelElementId> modelElementToIdMap);
+
+	/**
+	 * Removes any allocated ID entries from this collection that are contained
+	 * in the given set of {@link ModelElementId}s.
+	 * 
+	 * @param modelElementIds
+	 *            the set of model element IDs to be released
+	 */
+	void disallocateModelElementIds(Set<ModelElementId> modelElementIds);
 
 	/**
 	 * Checks whether a given model element is contained in the collection.
@@ -162,18 +170,7 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	<T extends EObject> EList<T> getModelElementsByClass(EClass modelElementClass, EList<T> list);
 
 	/**
-	 * Assigns all EObjects that are contained in the collection and as keys in
-	 * the given map the respective {@link ModelElementId}s.<br/>
-	 * <br/>
-	 * If the EObjects in the map are not yet contained in the collection the
-	 * IDs will be cached until the objects are eventually added.
-	 * 
-	 * @param eObjectToIdMap
-	 *            a map containing the model elements and the IDs
-	 */
-	void allocateModelElementIds(Map<EObject, ModelElementId> eObjectToIdMap);
-
-	/**
+	 * /**
 	 * Initializes the ID caches of the project with the given mappings.
 	 * 
 	 * @param eObjectToIdMap
