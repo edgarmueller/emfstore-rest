@@ -82,7 +82,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	// TODO: quick fix, duplicate code in IsAutoSaveEnabledTester
 	// TODO: provide extension point registry? discuss
 	private static boolean initExtensionPoint() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disabledSaveControls");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disableSaveControls");
 		ExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {
