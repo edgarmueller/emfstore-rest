@@ -17,6 +17,7 @@ package org.eclipse.emf.emfstore.client.model;
  * @author emueller
  * @author wesendon
  */
+// TODO: check whether we can re-use the ObserverBus
 public interface PostWorkspaceInitiator {
 
 	/**
