@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observers;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -35,23 +36,27 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 
 	/**
 	 * {@inheritDoc} When a project is committed all operations in project space are cleared and there are no modified
-	 * model elements. This is of interest for GUI elements to updated their state. Note: in this case the operation is
-	 * NULL!
+	 * model elements. This is of interest for GUI elements to updated their state. <br/>
+	 * <b>Note</b>: in this case the operation is NULL!
+	 * 
+	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
+	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision, IProgressMonitor monitor) {
 		operationPerformed(null);
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
+	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage, IProgressMonitor monitor) {
 		return true;
 	}
 

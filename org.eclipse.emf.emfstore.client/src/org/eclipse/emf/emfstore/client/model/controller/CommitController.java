@@ -138,7 +138,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Gathering changes");
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class).inspectChanges(getProjectSpace(), changePackage);
+		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
 		idToEObjectMapping.put(changePackage);
@@ -187,7 +188,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().updateDirtyState();
 
 		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
-			.commitCompleted(getProjectSpace(), newBaseVersion);
+			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;
 	}

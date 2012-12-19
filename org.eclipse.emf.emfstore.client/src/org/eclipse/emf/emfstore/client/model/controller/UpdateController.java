@@ -131,6 +131,8 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			|| !callback.inspectChanges(getProjectSpace(), changes, idToEObjectMapping)) {
 			return getProjectSpace().getBaseVersion();
 		}
+		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+			.inspectChanges(getProjectSpace(), changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
@@ -152,13 +154,12 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().worked(15);
 
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).inspectChanges(getProjectSpace(), changes);
-
 		getProgressMonitor().subTask("Applying changes");
 
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges);
 
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class).updateCompleted(getProjectSpace());
+		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+			.updateCompleted(getProjectSpace(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();
 	}

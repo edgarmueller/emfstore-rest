@@ -18,6 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -152,7 +153,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 
 			if (resource instanceof EMFStoreResource) {
 				((EMFStoreResource) resource).setIdToEObjectMap(mapping.getIdToEObjectMapping(),
-					mapping.getEObjectToIdMapping());
+																mapping.getEObjectToIdMapping());
 			} else {
 				Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
 
@@ -298,18 +299,26 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages) {
+	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages,
+		IProgressMonitor monitor) {
+		saveDirtyResources(true);
 		return true;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void updateCompleted(ProjectSpace projectSpace) {
+	public void updateCompleted(ProjectSpace projectSpace, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 
@@ -318,9 +327,10 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
+	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage) {
+	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage, IProgressMonitor monitor) {
+		saveDirtyResources(true);
 		return true;
 	}
 
@@ -330,7 +340,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision) {
+	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision,
+		IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 

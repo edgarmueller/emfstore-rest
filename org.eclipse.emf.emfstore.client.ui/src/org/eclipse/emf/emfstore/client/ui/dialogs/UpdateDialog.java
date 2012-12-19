@@ -17,7 +17,6 @@ import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -32,7 +31,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Hodaie
  */
 
-public class UpdateDialog extends TitleAreaDialog {
+public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 	private List<ChangePackage> changes;
 	private ProjectSpace projectSpace;
@@ -89,6 +88,7 @@ public class UpdateDialog extends TitleAreaDialog {
 		}
 		setMessage("Number of versions: " + changes.size() + ", Number of composite changes: " + rootCount
 			+ ", Number of overall changes: " + operationCount);
+
 		return contents;
 
 	}

@@ -26,7 +26,6 @@ import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -53,7 +52,7 @@ import org.eclipse.swt.widgets.Text;
  * @author Hodaie
  * @author Shterev
  */
-public class CommitDialog extends TitleAreaDialog implements KeyListener {
+public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener {
 
 	private Text txtLogMsg;
 	private String logMsg = "";
@@ -74,16 +73,19 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 	 *            the {@link ChangePackage} to be displayed
 	 * @param activeProjectSpace
 	 *            ProjectSpace that will be committed
+	 * @param idToEObjectMapping
+	 *            a mapping between ModelElementIds and EObjects. This is needed
+	 *            correctly infer information about deleted model elements
 	 */
 	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parentShell);
-		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
+		this.idToEObjectMapping = idToEObjectMapping;
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
-		numberOfChanges = changes.getSize();
-		trays = new HashMap<String, CommitDialogTray>();
+		this.numberOfChanges = changes.getSize();
+		this.trays = new HashMap<String, CommitDialogTray>();
 
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
@@ -98,6 +100,12 @@ public class CommitDialog extends TitleAreaDialog implements KeyListener {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreTitleAreaDialog#configureShell(org.eclipse.swt.widgets.Shell)
+	 */
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);

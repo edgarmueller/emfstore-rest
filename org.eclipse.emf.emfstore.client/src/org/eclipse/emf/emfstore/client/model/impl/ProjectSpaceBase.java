@@ -104,16 +104,14 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
 	IApplyChangesCallback, IApplyChangesWrapper, IDisposable {
 
-	private FileTransferManager fileTransferManager;
-
 	private boolean initCompleted;
-
 	private boolean isTransient;
+	private boolean disposed;
 
 	private ModifiedModelElementsCache modifiedModelElementsCache;
 
+	private FileTransferManager fileTransferManager;
 	private OperationManager operationManager;
-
 	private PropertyManager propertyManager;
 
 	private HashMap<String, OrgUnitProperty> propertyMap;
@@ -124,9 +122,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private ResourceSet resourceSet;
 
 	private IApplyChangesWrapper applyChangesWrapper;
-	private List<IMergeCallback> mergeCallbacks;
-
-	private boolean disposed;
 
 	/**
 	 * Constructor.
@@ -137,7 +132,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
 
 		initApplyChangeWrapper();
-		initMergeCallbacks();
 	}
 
 	private void initApplyChangeWrapper() {
@@ -148,19 +142,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 		if (applyChangesWrapper == null) {
 			applyChangesWrapper = this;
-		}
-	}
-
-	private void initMergeCallbacks() {
-		mergeCallbacks = new ArrayList<IMergeCallback>();
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.merge.callback")
-			.setThrowException(false);
-
-		for (ExtensionElement extensionElement : extensionPoint.getExtensionElements()) {
-			if (extensionElement != null) {
-				IMergeCallback callback = extensionElement.getClass("class", IMergeCallback.class);
-				mergeCallbacks.add(callback);
-			}
 		}
 	}
 
@@ -393,7 +374,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		final ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
 
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
-			sourceVersion, targetVersion);
+																	sourceVersion, targetVersion);
 		return changes;
 	}
 
@@ -882,8 +863,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		ChangeConflictException changeConflictException = new ChangeConflictException(this, myChangePackages,
-			incomingChangePackages, new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
-				incomingChangePackages), idToEObjectMapping);
+			incomingChangePackages,
+			new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
+																		incomingChangePackages), idToEObjectMapping);
 		return merge(target, changeConflictException, conflictResolver, monitor);
 	}
 
@@ -902,7 +884,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
-					branchSpec));
+																								branchSpec));
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
@@ -1039,7 +1021,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			if (resource == null) {
 				if (!isTransient) {
 					WorkspaceUtil.logException("Resources of project space are not properly initialized!",
-						new IllegalProjectSpaceStateException("Resource to save is null"));
+												new IllegalProjectSpaceStateException("Resource to save is null"));
 				}
 				return;
 			}
@@ -1150,7 +1132,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					.getInstance()
 					.getConnectionManager()
 					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
-						getProjectId());
+										getProjectId());
 				iterator.remove();
 			} catch (EmfStoreException e) {
 				WorkspaceUtil.logException("Transmission of properties failed with exception", e);
@@ -1280,26 +1262,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
-		for (IMergeCallback callback : mergeCallbacks) {
-			callback.preRevertMyChanges(this, changePackage);
-		}
+		WorkspaceManager.getObserverBus().notify(MergeObserver.class).preRevertMyChanges(this, changePackage);
 	}
 
 	private void notifyPostRevertMyChanges() {
-		for (IMergeCallback callback : mergeCallbacks) {
-			callback.postRevertMyChanges(this);
-		}
+		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postRevertMyChanges(this);
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
-		for (IMergeCallback callback : mergeCallbacks) {
-			callback.postApplyTheirChanges(this, theirChangePackages);
-		}
+		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this, theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
-		for (IMergeCallback callback : mergeCallbacks) {
-			callback.postApplyMergedChanges(this, changePackage);
-		}
+		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
 	}
 }
