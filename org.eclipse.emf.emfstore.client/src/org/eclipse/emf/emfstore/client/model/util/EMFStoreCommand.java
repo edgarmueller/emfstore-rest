@@ -28,9 +28,8 @@ public abstract class EMFStoreCommand extends AbstractEMFStoreCommand {
 	}
 
 	/**
-	 * Constructor.
+	 * Default Constructor.
 	 * 
-	 * @param label the commands label.
 	 */
 	public EMFStoreCommand() {
 		super();
