@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,7 +48,7 @@ public class ModifiedModelElementsCache implements OperationObserver, CommitObse
 	 * Maps child to parent elements to be able to retrieve hierarchies already
 	 * deconstructed in the project space.
 	 */
-	private HashMap<String, String> childParentMapping;
+	private Map<String, String> childParentMapping;
 
 	/**
 	 * The project space.
@@ -63,9 +63,9 @@ public class ModifiedModelElementsCache implements OperationObserver, CommitObse
 	 */
 	public ModifiedModelElementsCache(ProjectSpace projectSpace) {
 		this.projectSpace = projectSpace;
-		modifiedModelElements = new HashMap<String, List<AbstractOperation>>();
-		modifiedModelElementParents = new HashMap<String, Integer>();
-		childParentMapping = new HashMap<String, String>();
+		modifiedModelElements = new LinkedHashMap<String, List<AbstractOperation>>();
+		modifiedModelElementParents = new LinkedHashMap<String, Integer>();
+		childParentMapping = new LinkedHashMap<String, String>();
 	}
 
 	/**

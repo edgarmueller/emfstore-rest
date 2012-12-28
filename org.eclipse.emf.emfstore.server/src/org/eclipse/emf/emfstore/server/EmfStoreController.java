@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -285,7 +285,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	}
 
 	private Set<ConnectionHandler<? extends EmfStoreInterface>> initConnectionHandlers() throws FatalEmfStoreException {
-		Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers = new HashSet<ConnectionHandler<? extends EmfStoreInterface>>();
+		Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers = new LinkedHashSet<ConnectionHandler<? extends EmfStoreInterface>>();
 
 		// crate XML RPC connection handlers
 		XmlRpcConnectionHandler xmlRpcConnectionHander = new XmlRpcConnectionHandler();

@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -272,7 +272,7 @@ public final class ModelUtil {
 	public static synchronized boolean isIgnoredDatatype(EObject eObject) {
 
 		if (ignoredDataTypes == null) {
-			ignoredDataTypes = new HashSet<String>();
+			ignoredDataTypes = new LinkedHashSet<String>();
 			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoredatatype",
 				true).getExtensionElements()) {
 				try {
@@ -295,7 +295,7 @@ public final class ModelUtil {
 	@SuppressWarnings("rawtypes")
 	public static synchronized Map<Object, Object> getResourceLoadOptions() {
 		if (resourceLoadOptions == null) {
-			resourceLoadOptions = new HashMap<Object, Object>();
+			resourceLoadOptions = new LinkedHashMap<Object, Object>();
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
 			resourceLoadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.FALSE);
@@ -316,7 +316,7 @@ public final class ModelUtil {
 
 		if (resourceSaveOptions == null) {
 
-			resourceSaveOptions = new HashMap<Object, Object>();
+			resourceSaveOptions = new LinkedHashMap<Object, Object>();
 			resourceSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
 			resourceSaveOptions.put(XMLResource.OPTION_ENCODING, CommonUtil.getEncoding());
@@ -432,7 +432,7 @@ public final class ModelUtil {
 	 */
 	public static Set<EClass> getNonAbstractMETypes(EPackage ePackage) {
 
-		Set<EClass> nonAbstractMETypes = new HashSet<EClass>();
+		Set<EClass> nonAbstractMETypes = new LinkedHashSet<EClass>();
 		Set<EClass> allMETypes = getAllMETypes(ePackage);
 
 		Iterator<EClass> iterator = allMETypes.iterator();
@@ -459,7 +459,7 @@ public final class ModelUtil {
 	 *         sub-packages.
 	 */
 	public static Set<EClass> getAllMETypes(EPackage ePackage) {
-		Set<EClass> meTypes = new HashSet<EClass>();
+		Set<EClass> meTypes = new LinkedHashSet<EClass>();
 
 		for (EObject eObject : ePackage.eContents()) {
 			if (eObject instanceof EClass) {
@@ -658,8 +658,8 @@ public final class ModelUtil {
 		if (eObject instanceof Project && resource instanceof XMIResource) {
 			XMIResource xmiResource = (XMIResource) resource;
 			Project project = (Project) eObject;
-			Map<EObject, String> eObjectToIdMap = new HashMap<EObject, String>();
-			Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>();
+			Map<EObject, String> eObjectToIdMap = new LinkedHashMap<EObject, String>();
+			Map<String, EObject> idToEObjectMap = new LinkedHashMap<String, EObject>();
 
 			TreeIterator<EObject> it = project.eAllContents();
 			while (it.hasNext()) {
@@ -806,7 +806,7 @@ public final class ModelUtil {
 	 * @return the project or null if the element is not contained in a project.
 	 */
 	public static Project getProject(EObject modelElement) {
-		Set<EObject> seenModelElements = new HashSet<EObject>();
+		Set<EObject> seenModelElements = new LinkedHashSet<EObject>();
 		seenModelElements.add(modelElement);
 		return getParent(Project.class, modelElement, seenModelElements);
 	}
@@ -839,7 +839,7 @@ public final class ModelUtil {
 	 * @return the container
 	 */
 	public static <T extends EObject> T getParent(Class<T> parent, EObject child) {
-		Set<EObject> seenModelElements = new HashSet<EObject>();
+		Set<EObject> seenModelElements = new LinkedHashSet<EObject>();
 		seenModelElements.add(child);
 		return getParent(parent, child, seenModelElements);
 	}
@@ -1055,7 +1055,7 @@ public final class ModelUtil {
 	 *            the model element
 	 */
 	public static void deleteOutgoingCrossReferences(IdEObjectCollection collection, EObject modelElement) {
-		Set<EObject> allModelElements = new HashSet<EObject>();
+		Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 		allModelElements.add(modelElement);
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
@@ -1218,7 +1218,7 @@ public final class ModelUtil {
 	private static synchronized void initSingletonIdResolvers() {
 		if (singletonIdResolvers == null) {
 			// collect singleton ID resolvers
-			singletonIdResolvers = new HashSet<SingletonIdResolver>();
+			singletonIdResolvers = new LinkedHashSet<SingletonIdResolver>();
 
 			for (ExtensionElement element : new ExtensionPoint(
 				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
@@ -1240,7 +1240,7 @@ public final class ModelUtil {
 	 */
 	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
 
-		Map<EObject, ModelElementId> idMap = new HashMap<EObject, ModelElementId>();
+		Map<EObject, ModelElementId> idMap = new LinkedHashMap<EObject, ModelElementId>();
 
 		Project project = getProject(originalObject);
 		if (project == null) {

@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -391,7 +392,7 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		HashSet<ModelElementId> result = new HashSet<ModelElementId>();
+		HashSet<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		ModelElementId newValue = getNewValue();
 		if (newValue != null) {
 			result.add(newValue);

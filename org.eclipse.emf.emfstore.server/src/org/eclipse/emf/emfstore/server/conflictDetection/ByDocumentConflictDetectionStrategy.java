@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.conflictDetection;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -46,8 +46,8 @@ public class ByDocumentConflictDetectionStrategy implements ConflictDetectionStr
 	public boolean doConflict(AbstractOperation operationA, AbstractOperation operationB) {
 		Set<ModelElementId> allInvolvedModelElementsA = operationA.getAllInvolvedModelElements();
 		Set<ModelElementId> allInvolvedModelElementsB = operationB.getAllInvolvedModelElements();
-		Set<EObject> allInvolvedRootElementsA = new HashSet<EObject>();
-		Set<EObject> allInvolvedRootElementsB = new HashSet<EObject>();
+		Set<EObject> allInvolvedRootElementsA = new LinkedHashSet<EObject>();
+		Set<EObject> allInvolvedRootElementsB = new LinkedHashSet<EObject>();
 		for (ModelElementId modelElementId : allInvolvedModelElementsA) {
 			EObject modelElement = project.getModelElement(modelElementId);
 			if (modelElement == null) {

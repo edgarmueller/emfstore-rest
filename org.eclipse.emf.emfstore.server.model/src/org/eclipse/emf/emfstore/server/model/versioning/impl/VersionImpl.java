@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning.impl;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -267,7 +267,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 					(XMIResource) resource);
 
 				// create reverse mapping
-				Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>(eObjectToIdMap.size());
+				Map<String, EObject> idToEObjectMap = new LinkedHashMap<String, EObject>(eObjectToIdMap.size());
 
 				for (Map.Entry<EObject, String> entry : eObjectToIdMap.entrySet()) {
 					idToEObjectMap.put(entry.getValue(), entry.getKey());

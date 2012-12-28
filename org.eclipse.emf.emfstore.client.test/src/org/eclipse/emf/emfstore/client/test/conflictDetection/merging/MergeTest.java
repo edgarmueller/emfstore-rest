@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -205,8 +206,8 @@ public class MergeTest extends ConflictDetectionTest {
 
 		public MergeTestQuery(DecisionManager manager) {
 			this.manager = manager;
-			mySeen = new HashSet<AbstractOperation>();
-			theirSeen = new HashSet<AbstractOperation>();
+			mySeen = new LinkedHashSet<AbstractOperation>();
+			theirSeen = new LinkedHashSet<AbstractOperation>();
 		}
 
 		public <T extends Conflict> MergeTestQuery hasConflict(Class<T> clazz, int i) {
@@ -272,14 +273,15 @@ public class MergeTest extends ConflictDetectionTest {
 		}
 
 		public MergeTestQuery andNoOtherMyOps() {
-			HashSet<AbstractOperation> my = new HashSet<AbstractOperation>(currentConflict().getMyOperations());
+			HashSet<AbstractOperation> my = new LinkedHashSet<AbstractOperation>(currentConflict().getMyOperations());
 			my.removeAll(mySeen);
 			assertEquals(0, my.size());
 			return this;
 		}
 
 		public MergeTestQuery andNoOtherTheirOps() {
-			HashSet<AbstractOperation> theirs = new HashSet<AbstractOperation>(currentConflict().getTheirOperations());
+			HashSet<AbstractOperation> theirs = new LinkedHashSet<AbstractOperation>(currentConflict()
+				.getTheirOperations());
 			theirs.removeAll(theirSeen);
 			assertEquals(theirs.size(), 0);
 			return this;

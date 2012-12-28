@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +44,10 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	private TreeSet<Integer> freePositions;
 	private HashSet<PlotLane> activeLanes;
 	private int positionsAllocated;
-	private Map<HistoryInfo, IPlotCommit> commitForHistory = new HashMap<HistoryInfo, IPlotCommit>();
+	private Map<HistoryInfo, IPlotCommit> commitForHistory = new LinkedHashMap<HistoryInfo, IPlotCommit>();
 	private Map<Integer, IPlotCommit> commitForID;
 	private int nextBranchColorIndex;
-	private Map<String, Integer> colorForBranch = new HashMap<String, Integer>();
+	private Map<String, Integer> colorForBranch = new LinkedHashMap<String, Integer>();
 
 	private static List<Color> createdSaturatedColors = new LinkedList<Color>();
 	private static List<Color> createdLightColors = new LinkedList<Color>();
@@ -80,8 +81,8 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	public void reset(List<HistoryInfo> infos) {
 		this.nextBranchColorIndex = 0;
 		this.freePositions = new TreeSet<Integer>();
-		this.activeLanes = new HashSet<PlotLane>(32);
-		this.commitForHistory = new HashMap<HistoryInfo, IPlotCommit>();
+		this.activeLanes = new LinkedHashSet<PlotLane>(32);
+		this.commitForHistory = new LinkedHashMap<HistoryInfo, IPlotCommit>();
 		if (infos != null) {
 			refresh(infos);
 		}
@@ -150,7 +151,7 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	}
 
 	private void setupCommitIdLookUp() {
-		commitForID = new HashMap<Integer, IPlotCommit>();
+		commitForID = new LinkedHashMap<Integer, IPlotCommit>();
 		for (IPlotCommit commit : commits) {
 			commitForID.put(commit.getId(), commit);
 		}
@@ -427,7 +428,7 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 		return comForInfo;
 	}
 
-	private Map<Integer, IPlotCommit> dummyParentForId = new HashMap<Integer, IPlotCommit>();
+	private Map<Integer, IPlotCommit> dummyParentForId = new LinkedHashMap<Integer, IPlotCommit>();
 
 	private IPlotCommit getDummyParent(int id, String parentBranch) {
 		if (!dummyParentForId.containsKey(id)) {

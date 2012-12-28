@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -393,7 +393,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
 	 */
 	public void init() {
-		projectToProjectSpaceMap = new HashMap<Project, ProjectSpace>();
+		projectToProjectSpaceMap = new LinkedHashMap<Project, ProjectSpace>();
 		// initialize all projectSpaces
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
 			projectSpace.init();

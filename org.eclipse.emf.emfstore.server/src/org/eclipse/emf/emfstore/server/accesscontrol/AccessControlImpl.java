@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.server.accesscontrol;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -99,7 +99,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	 *             an exception
 	 */
 	public AccessControlImpl(ServerSpace serverSpace) throws FatalEmfStoreException {
-		this.sessionUserMap = new HashMap<SessionId, ACUserContainer>();
+		this.sessionUserMap = new LinkedHashMap<SessionId, ACUserContainer>();
 		this.serverSpace = serverSpace;
 
 		authenticationControl = getAuthenticationFactory().createAuthenticationControl();

@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +127,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
 		removedElements = new ArrayList<EObject>();
-		removedElementsToReferenceSettings = new HashMap<EObject, List<SettingWithReferencedElement>>();
+		removedElementsToReferenceSettings = new LinkedHashMap<EObject, List<SettingWithReferencedElement>>();
 
 		editingDomain = Configuration.getEditingDomain();
 
@@ -192,7 +192,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	private Set<EObject> getModelElementsFromClipboard() {
-		Set<EObject> result = new HashSet<EObject>();
+		Set<EObject> result = new LinkedHashSet<EObject>();
 		if (editingDomain == null) {
 			return result;
 		}
@@ -231,7 +231,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		WorkspaceManager.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
 		startChangeRecording();
 
-		Set<EObject> allModelElements = new HashSet<EObject>();
+		Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 		allModelElements.add(modelElement);
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
@@ -510,7 +510,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (isRecording) {
 			removedElements.add(modelElement);
 
-			Set<EObject> allModelElements = new HashSet<EObject>();
+			Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 			allModelElements.add(modelElement);
 			allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 			List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
@@ -773,7 +773,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	@SuppressWarnings("unchecked")
 	private List<ReferenceOperation> extractReferenceOperationsForDelete(EObject deletedElement,
 		List<CompositeOperation> compositeOperationsToDelete) {
-		Set<ModelElementId> allDeletedElementsIds = new HashSet<ModelElementId>();
+		Set<ModelElementId> allDeletedElementsIds = new LinkedHashSet<ModelElementId>();
 		for (EObject child : ModelUtil.getAllContainedModelElements(deletedElement, false)) {
 			ModelElementId childId = collection.getDeletedModelElementId(child);
 			allDeletedElementsIds.add(childId);

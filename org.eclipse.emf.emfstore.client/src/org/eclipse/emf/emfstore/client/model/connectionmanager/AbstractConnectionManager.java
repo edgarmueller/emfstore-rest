@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
@@ -31,7 +31,7 @@ public abstract class AbstractConnectionManager<T> {
 	 * Default constructor.
 	 */
 	public AbstractConnectionManager() {
-		map = new HashMap<SessionId, T>();
+		map = new LinkedHashMap<SessionId, T>();
 	}
 
 	/**

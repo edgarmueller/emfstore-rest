@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -43,7 +43,7 @@ public class CompositeOperationHandle {
 	 */
 	public CompositeOperationHandle(OperationRecorder operationRecorder, CompositeOperation compositeOperation) {
 		this.operationRecorder = operationRecorder;
-		removedElements = new HashSet<EObject>();
+		removedElements = new LinkedHashSet<EObject>();
 		removedElements.addAll(operationRecorder.getRemovedElements());
 		this.compositeOperation = compositeOperation;
 		isValid = true;

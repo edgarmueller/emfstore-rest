@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -398,7 +398,7 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		Set<ModelElementId> set = new HashSet<ModelElementId>();
+		Set<ModelElementId> set = new LinkedHashSet<ModelElementId>();
 		set.addAll(getReferencedModelElements());
 		return set;
 	}

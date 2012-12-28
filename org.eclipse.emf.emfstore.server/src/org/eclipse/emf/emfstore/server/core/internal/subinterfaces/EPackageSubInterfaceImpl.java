@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.core.internal.subinterfaces;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -69,7 +69,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	public void registerEPackage(EPackage ePackage) throws EmfStoreException {
 		synchronized (MonitorProvider.getInstance().getMonitor(E_PACKAGE_REGISTRATION)) {
 			List<EPackage> packages = EPackageHelper.getAllSubPackages(ePackage);
-			Set<EPackage> rmPackages = new HashSet<EPackage>();
+			Set<EPackage> rmPackages = new LinkedHashSet<EPackage>();
 			packages.add(ePackage);
 
 			// check for subpackages that are already registered

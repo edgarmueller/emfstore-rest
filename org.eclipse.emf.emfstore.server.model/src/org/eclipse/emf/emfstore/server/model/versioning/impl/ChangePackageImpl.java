@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -453,7 +453,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getAllInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getAllInvolvedModelElements() {
-		Set<ModelElementId> result = new HashSet<ModelElementId>();
+		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		for (AbstractOperation operation : getOperations()) {
 			result.addAll(operation.getAllInvolvedModelElements());
 		}

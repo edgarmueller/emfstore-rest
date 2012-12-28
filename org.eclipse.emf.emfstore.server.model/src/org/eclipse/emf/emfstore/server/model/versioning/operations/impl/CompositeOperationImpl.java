@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,7 +67,7 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		Set<ModelElementId> result = new HashSet<ModelElementId>();
+		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		for (AbstractOperation operation : getSubOperations()) {
 			Set<ModelElementId> allInvolvedModelElements = operation.getAllInvolvedModelElements();
 			result.addAll(allInvolvedModelElements);

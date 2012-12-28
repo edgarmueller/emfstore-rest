@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.test.server;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -157,7 +158,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	protected static void initArguments() {
-		arguments = new HashMap<Class<?>, Object>();
+		arguments = new LinkedHashMap<Class<?>, Object>();
 		arguments.put(boolean.class, false);
 		arguments.put(String.class, new String());
 		arguments.put(SessionId.class, ModelUtil.clone(getSessionId()));

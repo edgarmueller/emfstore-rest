@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.server.core.internal.subinterfaces;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,7 +50,7 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	 */
 	public EMFStorePropertiesSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
 		super(parentInterface);
-		cache = new HashMap<ProjectHistory, Map<String, EMFStoreProperty>>();
+		cache = new LinkedHashMap<ProjectHistory, Map<String, EMFStoreProperty>>();
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 			}
 
 			EList<EMFStoreProperty> sharedProperties = history.getSharedProperties();
-			Set<EMFStoreProperty> replacedProperties = new HashSet<EMFStoreProperty>();
+			Set<EMFStoreProperty> replacedProperties = new LinkedHashSet<EMFStoreProperty>();
 
 			for (EMFStoreProperty property : properties) {
 				EMFStoreProperty foundProperty = findProperty(history, property.getKey());
@@ -196,7 +196,7 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 		Map<String, EMFStoreProperty> propertiesMap = cache.get(projectHistory);
 
 		if (propertiesMap == null) {
-			propertiesMap = new HashMap<String, EMFStoreProperty>();
+			propertiesMap = new LinkedHashMap<String, EMFStoreProperty>();
 			for (EMFStoreProperty prop : projectHistory.getSharedProperties()) {
 				propertiesMap.put(prop.getKey(), prop);
 			}

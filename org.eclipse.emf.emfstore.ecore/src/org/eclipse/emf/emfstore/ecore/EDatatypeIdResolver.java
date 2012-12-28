@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.ecore;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EDataType;
@@ -28,7 +29,7 @@ import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
  */
 public class EDatatypeIdResolver implements SingletonIdResolver {
 
-	private Map<String, EDataType> datatypes = new HashMap<String, EDataType>();
+	private Map<String, EDataType> datatypes = new LinkedHashMap<String, EDataType>();
 
 	/**
 	 * Default constructor.

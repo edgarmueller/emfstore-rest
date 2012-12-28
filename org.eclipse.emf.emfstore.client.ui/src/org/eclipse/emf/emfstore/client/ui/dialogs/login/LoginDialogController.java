@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
@@ -43,7 +44,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
 	 */
 	public Usersession[] getKnownUsersessions() {
-		HashSet<Object> set = new HashSet<Object>();
+		HashSet<Object> set = new LinkedHashSet<Object>();
 		for (Usersession session : WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions()) {
 			if (getServerInfo().equals(session.getServerInfo())) {
 				set.add(session);

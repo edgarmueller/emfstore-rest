@@ -16,7 +16,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.ws.commons.util.Base64;
@@ -138,7 +138,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 		}
 		EObject root = resource.getContents().get(0);
 		Set<EObject> allChildEObjects = CommonUtil.getNonTransientContents(root);
-		Set<EObject> allEObjects = new HashSet<EObject>(allChildEObjects);
+		Set<EObject> allEObjects = new LinkedHashSet<EObject>(allChildEObjects);
 		allEObjects.add(root);
 		for (EObject eObject : allEObjects) {
 			if (resource != eObject.eResource()) {

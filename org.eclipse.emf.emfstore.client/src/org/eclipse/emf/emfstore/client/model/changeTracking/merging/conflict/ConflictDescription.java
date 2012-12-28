@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -39,7 +39,7 @@ public class ConflictDescription {
 	 */
 	public ConflictDescription(String description) {
 		this.description = description;
-		values = new HashMap<String, Object>();
+		values = new LinkedHashMap<String, Object>();
 	}
 
 	/**

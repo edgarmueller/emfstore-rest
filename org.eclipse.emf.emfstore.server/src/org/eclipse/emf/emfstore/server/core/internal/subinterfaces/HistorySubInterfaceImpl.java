@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -346,7 +346,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (historyInfo.getChangePackage() == null || historyInfo.getChangePackage().getOperations() == null) {
 			return;
 		}
-		Set<AbstractOperation> operationsToRemove = new HashSet<AbstractOperation>();
+		Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
 		EList<AbstractOperation> operations = historyInfo.getChangePackage().getOperations();
 		for (AbstractOperation operation : operations) {
 			for (ModelElementId id : ids) {

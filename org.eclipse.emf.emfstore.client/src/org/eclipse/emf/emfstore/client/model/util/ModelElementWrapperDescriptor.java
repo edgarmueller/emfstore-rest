@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +58,7 @@ public class ModelElementWrapperDescriptor {
 			return factoriesMap;
 		}
 
-		factoriesMap = new HashMap<String, List<IModelElementWrapperFactory>>();
+		factoriesMap = new LinkedHashMap<String, List<IModelElementWrapperFactory>>();
 
 		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(EP_ID).getExtensions();
 		for (int i = 0; i < extensions.length; i++) {

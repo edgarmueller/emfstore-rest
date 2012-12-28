@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -388,7 +388,7 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getAllInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getAllInvolvedModelElements() {
-		Set<ModelElementId> result = new HashSet<ModelElementId>();
+		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		if (getModelElementId() != null) {
 			result.add(getModelElementId());
 		}
@@ -402,7 +402,7 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getOtherInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		return new HashSet<ModelElementId>();
+		return new LinkedHashSet<ModelElementId>();
 	}
 
 } // AbstractOperationImpl

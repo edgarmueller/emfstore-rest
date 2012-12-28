@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -437,7 +437,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	private Map<Project, ProjectSpace> getProjectToProjectSpaceMap() {
 
 		if (projectToProjectSpaceMap == null) {
-			projectToProjectSpaceMap = new HashMap<Project, ProjectSpace>();
+			projectToProjectSpaceMap = new LinkedHashMap<Project, ProjectSpace>();
 		}
 
 		return projectToProjectSpaceMap;

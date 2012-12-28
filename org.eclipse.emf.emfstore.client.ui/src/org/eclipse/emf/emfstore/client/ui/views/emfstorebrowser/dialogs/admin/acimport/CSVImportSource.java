@@ -17,7 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
@@ -39,7 +40,7 @@ public class CSVImportSource extends ImportSource {
 
 	private static final String CSV_IMPORT_SOURCE_PATH = "org.eclipse.emf.emfstore.client.ui.CSVImportSourcePath";
 
-	private HashMap<String, ImportItemWrapper> groupMap = new HashMap<String, ImportItemWrapper>();
+	private Map<String, ImportItemWrapper> groupMap = new LinkedHashMap<String, ImportItemWrapper>();
 
 	private ArrayList<ImportItemWrapper> groups;
 	private ArrayList<ImportItemWrapper> users;

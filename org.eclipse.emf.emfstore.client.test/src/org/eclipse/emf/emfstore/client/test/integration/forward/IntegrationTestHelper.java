@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -348,7 +348,7 @@ public final class IntegrationTestHelper {
 		// + "\" is not a subtype of EClass ModelElement");
 		// }
 
-		Set<EClass> ret = new HashSet<EClass>();
+		Set<EClass> ret = new LinkedHashSet<EClass>();
 		for (EPackage ePackage : getAllModelPackages()) {
 			getSubclasses(clazz, ret, ePackage, includeAbstractClassesAndInterfaces);
 		}
@@ -383,7 +383,7 @@ public final class IntegrationTestHelper {
 	 * @return a set of EPackages
 	 */
 	public static Set<EPackage> getAllModelPackages() {
-		Set<EPackage> result = new HashSet<EPackage>();
+		Set<EPackage> result = new LinkedHashSet<EPackage>();
 		Registry registry = EPackage.Registry.INSTANCE;
 
 		for (Entry<String, Object> entry : registry.entrySet()) {

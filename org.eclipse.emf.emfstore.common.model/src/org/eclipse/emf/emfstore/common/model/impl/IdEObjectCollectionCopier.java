@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -34,8 +35,8 @@ public class IdEObjectCollectionCopier extends Copier {
 	 * Default constructor.
 	 */
 	public IdEObjectCollectionCopier() {
-		eObjectToIdMap = new HashMap<EObject, String>();
-		idToEObjectMap = new HashMap<String, EObject>();
+		eObjectToIdMap = new LinkedHashMap<EObject, String>();
+		idToEObjectMap = new LinkedHashMap<String, EObject>();
 	}
 
 	@Override

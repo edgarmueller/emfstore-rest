@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -109,7 +109,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	private MenuManager menuMgr;
 	private AdapterImpl workspaceAdapter;
 
-	private Map<ServerInfo, AdapterImpl> serverInfoAdapterMap = new HashMap<ServerInfo, AdapterImpl>();
+	private Map<ServerInfo, AdapterImpl> serverInfoAdapterMap = new LinkedHashMap<ServerInfo, AdapterImpl>();
 
 	/**
 	 * The constructor.

@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -107,7 +108,7 @@ public class ObserverBus {
 	 * Default constructor.
 	 */
 	public ObserverBus() {
-		observerMap = new HashMap<Class<? extends IObserver>, List<IObserver>>();
+		observerMap = new LinkedHashMap<Class<? extends IObserver>, List<IObserver>>();
 		collectionExtensionPoints();
 	}
 

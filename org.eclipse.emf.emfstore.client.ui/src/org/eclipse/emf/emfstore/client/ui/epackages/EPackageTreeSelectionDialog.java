@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.epackages;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -89,7 +89,7 @@ public class EPackageTreeSelectionDialog extends ElementTreeSelectionDialog {
 		@Override
 		public Object[] getElements(Object inputElement) {
 			if (rootPackages == null) {
-				rootPackages = new HashSet<EPackage>();
+				rootPackages = new LinkedHashSet<EPackage>();
 				this.extractRootPackages((Set<EPackage>) inputElement);
 			}
 			return rootPackages.toArray();

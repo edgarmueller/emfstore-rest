@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.core;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -55,7 +56,7 @@ public abstract class AbstractEmfstoreInterface {
 		}
 		this.authorizationControl = authorizationControl;
 		accessControlDisabled = false;
-		subInterfaces = new HashMap<Class<? extends AbstractSubEmfstoreInterface>, AbstractSubEmfstoreInterface>();
+		subInterfaces = new LinkedHashMap<Class<? extends AbstractSubEmfstoreInterface>, AbstractSubEmfstoreInterface>();
 		initSubInterfaces();
 		for (AbstractSubEmfstoreInterface subInterface : subInterfaces.values()) {
 			subInterface.initSubInterface();

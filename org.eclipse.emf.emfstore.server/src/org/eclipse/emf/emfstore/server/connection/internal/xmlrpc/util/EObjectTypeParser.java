@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.xmlrpc.XmlRpcException;
@@ -71,8 +72,8 @@ public class EObjectTypeParser extends ByteArrayParser {
 
 		if (result instanceof IdEObjectCollection) {
 			IdEObjectCollection collection = (IdEObjectCollection) result;
-			Map<EObject, String> eObjectToIdMap = new HashMap<EObject, String>();
-			Map<String, EObject> idToEObjectMap = new HashMap<String, EObject>();
+			Map<EObject, String> eObjectToIdMap = new LinkedHashMap<EObject, String>();
+			Map<String, EObject> idToEObjectMap = new LinkedHashMap<String, EObject>();
 
 			for (EObject modelElement : collection.getAllModelElements()) {
 				String modelElementId;

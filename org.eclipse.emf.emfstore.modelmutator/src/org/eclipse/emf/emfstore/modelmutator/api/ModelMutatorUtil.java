@@ -295,7 +295,7 @@ public final class ModelMutatorUtil {
 			allEClasses = new ArrayList<EClass>();
 			Registry registry = EPackage.Registry.INSTANCE;
 			// for all registered EPackages
-			for (Entry<String, Object> entry : new HashSet<Entry<String, Object>>(registry.entrySet())) {
+			for (Entry<String, Object> entry : new LinkedHashSet<Entry<String, Object>>(registry.entrySet())) {
 				EPackage ePackage = registry.getEPackage(entry.getKey());
 				for (EClass eClass : getAllEClasses(ePackage)) {
 					// no abstracts or interfaces

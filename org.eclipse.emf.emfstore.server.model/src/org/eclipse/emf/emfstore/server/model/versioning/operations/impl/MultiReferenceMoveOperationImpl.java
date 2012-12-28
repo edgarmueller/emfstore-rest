@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -400,7 +400,7 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		Set<ModelElementId> result = new HashSet<ModelElementId>();
+		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		result.add(getReferencedModelElementId());
 		return result;
 	}

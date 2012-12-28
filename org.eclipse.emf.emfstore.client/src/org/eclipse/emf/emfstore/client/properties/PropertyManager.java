@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.properties;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -365,7 +365,7 @@ public final class PropertyManager {
 	 *            be contained in the map
 	 */
 	private Map<String, EMFStoreProperty> createMap(EMFStorePropertyType type) {
-		Map<String, EMFStoreProperty> map = new HashMap<String, EMFStoreProperty>();
+		Map<String, EMFStoreProperty> map = new LinkedHashMap<String, EMFStoreProperty>();
 		EList<EMFStoreProperty> properties = this.projectSpace.getProperties();
 
 		for (EMFStoreProperty prop : properties) {

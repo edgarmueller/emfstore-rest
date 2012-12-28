@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.internal.core;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Holds the monitor objects for synchronizing the access on the serverspace. It's implemented as a singleton.
@@ -45,7 +46,7 @@ public final class MonitorProvider {
 	 * Private constructor.
 	 */
 	private MonitorProvider() {
-		monitors = new HashMap<String, Object>();
+		monitors = new LinkedHashMap<String, Object>();
 		monitor = new Object();
 		monitors.put(MAIN_MONITOR, monitor);
 	}

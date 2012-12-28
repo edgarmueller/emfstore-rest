@@ -12,8 +12,9 @@ package org.eclipse.emf.emfstore.client.ui.dialogs;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
@@ -59,7 +60,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	private ChangePackage changes;
 	private EList<String> oldLogMessages;
 	private ProjectSpace activeProjectSpace;
-	private HashMap<String, CommitDialogTray> trays;
+	private Map<String, CommitDialogTray> trays;
 	private Image commitImage;
 	private int numberOfChanges;
 	private final IModelElementIdToEObjectMapping idToEObjectMapping;
@@ -85,7 +86,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		this.changes = changes;
 		this.activeProjectSpace = activeProjectSpace;
 		this.numberOfChanges = changes.getSize();
-		this.trays = new HashMap<String, CommitDialogTray>();
+		this.trays = new LinkedHashMap<String, CommitDialogTray>();
 
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {

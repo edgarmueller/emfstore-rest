@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.internal.conflictDetection;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
@@ -33,7 +33,7 @@ public class FeatureNameReservationMap extends LinkedHashMapWithConflictBucketCa
 
 	@Override
 	public Set<ConflictBucketCandidate> getAllConflictBucketCandidates() {
-		Set<ConflictBucketCandidate> result = new HashSet<ConflictBucketCandidate>();
+		Set<ConflictBucketCandidate> result = new LinkedHashSet<ConflictBucketCandidate>();
 		if (isAllFeatures) {
 			if (getConflictBucketCandidate() != null) {
 				result.add(getConflictBucketCandidate());
@@ -56,7 +56,7 @@ public class FeatureNameReservationMap extends LinkedHashMapWithConflictBucketCa
 	}
 
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String featureName) {
-		Set<ConflictBucketCandidate> result = new HashSet<ConflictBucketCandidate>();
+		Set<ConflictBucketCandidate> result = new LinkedHashSet<ConflictBucketCandidate>();
 		if (isAllFeatures()) {
 			result.add(getConflictBucketCandidate());
 			return result;
@@ -69,7 +69,7 @@ public class FeatureNameReservationMap extends LinkedHashMapWithConflictBucketCa
 	}
 
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String featureName, String oppositeModelElement) {
-		Set<ConflictBucketCandidate> result = new HashSet<ConflictBucketCandidate>();
+		Set<ConflictBucketCandidate> result = new LinkedHashSet<ConflictBucketCandidate>();
 		if (isAllFeatures()) {
 			result.add(getConflictBucketCandidate());
 			return result;

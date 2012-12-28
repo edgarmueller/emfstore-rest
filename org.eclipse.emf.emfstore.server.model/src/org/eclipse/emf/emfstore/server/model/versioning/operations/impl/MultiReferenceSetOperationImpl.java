@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -452,7 +453,7 @@ public class MultiReferenceSetOperationImpl extends ReferenceOperationImpl imple
 
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		HashSet<ModelElementId> result = new HashSet<ModelElementId>();
+		HashSet<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		result.add(getNewValue());
 		result.add(getOldValue());
 		return result;

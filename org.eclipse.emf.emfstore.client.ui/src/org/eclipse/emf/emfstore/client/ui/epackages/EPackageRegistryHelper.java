@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.epackages;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -38,9 +39,9 @@ public final class EPackageRegistryHelper {
 	 */
 	public static Set<EPackage> getAvailablePackages(boolean filterKnown) {
 		Registry registry = EPackage.Registry.INSTANCE;
-		HashSet<Entry<String, Object>> entries = new HashSet<Entry<String, Object>>(registry.entrySet());
+		HashSet<Entry<String, Object>> entries = new LinkedHashSet<Entry<String, Object>>(registry.entrySet());
 
-		Set<EPackage> packages = new HashSet<EPackage>();
+		Set<EPackage> packages = new LinkedHashSet<EPackage>();
 		for (Entry<String, Object> entry : entries) {
 			if (!filterKnown || !isKnownPackage(entry.getKey())) {
 				try {
@@ -76,7 +77,7 @@ public final class EPackageRegistryHelper {
 	}
 
 	/** The known packages. */
-	private static Set<String> knownPackages = new HashSet<String>(Arrays.asList(new String[] {
+	private static Set<String> knownPackages = new LinkedHashSet<String>(Arrays.asList(new String[] {
 		"http://www.eclipse.org/m2t/xpand/Trace", "http://www.eclipse.org/emf/eef/mapping/filters/1.0.0",
 		"http://www.cs.tum.edu/cope/history/0.1.42", "http://www.eclipse.org/acceleo/profiler/3.0",
 		"http://www.eclipse.org/emf/compare/epatch/0.1", "http://www.eclipse.org/ocl/1.1.0/UML",

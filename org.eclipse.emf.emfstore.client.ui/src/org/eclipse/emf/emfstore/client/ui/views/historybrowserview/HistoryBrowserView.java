@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -337,7 +337,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			// filter for modelelement, do additional sanity check as the
 			// project space could've been also selected
 			if (modelElement != null && projectSpace.getProject().containsInstance(modelElement)) {
-				Set<AbstractOperation> operationsToRemove = new HashSet<AbstractOperation>();
+				Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
 				for (AbstractOperation ao : changePackage.getOperations()) {
 					if (!ao.getAllInvolvedModelElements().contains(
 						ModelUtil.getProject(modelElement).getModelElementId(modelElement))) {

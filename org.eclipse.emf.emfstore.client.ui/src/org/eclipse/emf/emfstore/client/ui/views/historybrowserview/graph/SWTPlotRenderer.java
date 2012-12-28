@@ -21,7 +21,7 @@
  *******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.swt.SWT;
@@ -73,7 +73,7 @@ public class SWTPlotRenderer extends AbstractPlotRenderer {
 
 	private final Color commitDotOutline;
 
-	private final Map<String, Point> labelCoordinates = new HashMap<String, Point>();
+	private final Map<String, Point> labelCoordinates = new LinkedHashMap<String, Point>();
 
 	private int textHeight;
 

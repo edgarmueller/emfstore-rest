@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.server.api.util;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -55,7 +56,7 @@ public class ConnectionMock implements ConnectionManager {
 	public ConnectionMock(EmfStore emfStore, AuthControlMock authMock) {
 		this.emfStore = emfStore;
 		this.authMock = authMock;
-		sessions = new HashSet<SessionId>();
+		sessions = new LinkedHashSet<SessionId>();
 	}
 
 	public AuthenticationInformation logIn(String username, String password, ServerInfo severInfo,

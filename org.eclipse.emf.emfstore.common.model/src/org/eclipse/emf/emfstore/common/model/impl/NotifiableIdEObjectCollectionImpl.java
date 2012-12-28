@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -83,10 +83,10 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	 */
 	private void initObservers() {
 		observers = new ArrayList<IdEObjectCollectionChangeObserver>();
-		observersToRemove = new HashSet<IdEObjectCollectionChangeObserver>();
-		exceptionThrowingObservers = new HashSet<IdEObjectCollectionChangeObserver>();
-		undetachableObservers = new HashSet<IdEObjectCollectionChangeObserver>();
-		observersToAttach = new HashSet<IdEObjectCollectionChangeObserver>();
+		observersToRemove = new LinkedHashSet<IdEObjectCollectionChangeObserver>();
+		exceptionThrowingObservers = new LinkedHashSet<IdEObjectCollectionChangeObserver>();
+		undetachableObservers = new LinkedHashSet<IdEObjectCollectionChangeObserver>();
+		observersToAttach = new LinkedHashSet<IdEObjectCollectionChangeObserver>();
 	}
 
 	/**

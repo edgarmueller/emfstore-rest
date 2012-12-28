@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,8 +74,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 
 			Set<ModelElementId> disallocatedIds = new LinkedHashSet<ModelElementId>();
 			EObject localModelElement = collection.getModelElement(getModelElementId());
-			List<EObject> allContainedModelElements =
-				ModelUtil.getAllContainedModelElementsAsList(localModelElement, false);
+			List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(localModelElement,
+				false);
 			allContainedModelElements.add(localModelElement);
 
 			for (EObject modelElement : allContainedModelElements) {
@@ -113,7 +112,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 			allContainedModelElements.add(element);
 			EObject copiedElement = ModelUtil.clone(element);
 			List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
-																											false);
+				false);
 			copiedAllContainedModelElements.add(copiedElement);
 			clone.getEObjectToIdMap().clear();
 
@@ -156,7 +155,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 		createDeleteOperation.setModelElement(copiedElement);
 		createDeleteOperation.setModelElementId(ModelUtil.clone(this.getModelElementId()));
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
-																										false);
+			false);
 		copiedAllContainedModelElements.add(copiedElement);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
@@ -506,7 +505,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
-		Set<ModelElementId> result = new HashSet<ModelElementId>();
+		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
 		result.addAll(getEObjectToIdMap().values());
 		result.remove(getModelElementId());
 		for (ReferenceOperation operation : getSubOperations()) {
@@ -514,23 +513,6 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 		}
 		return result;
 	}
-
-	// public Set<ModelElementId> getAllDeletedModelElements() {
-	// Set<ModelElementId> result = new HashSet<ModelElementId>();
-	// for (EObject modelElement :
-	// ModelUtil.getAllContainedModelElements(getModelElement(), false)) {
-	//
-	// Project p = ModelUtil.getProject(modelElement);
-	// if (p != null) {
-	// result.add(p.getModelElementId(modelElement));
-	// }
-	//
-	// }
-	// for (ModelElementId id : getEobjectsIdMap().values()) {
-	// result.add(id);
-	// }
-	// return result;
-	// }
 
 	/**
 	 * {@inheritDoc}

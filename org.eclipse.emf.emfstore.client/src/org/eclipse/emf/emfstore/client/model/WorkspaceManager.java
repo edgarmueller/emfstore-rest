@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -184,7 +184,7 @@ public final class WorkspaceManager implements IReinitializable {
 
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		((ResourceSetImpl) resourceSet).setURIResourceMap(new HashMap<URI, Resource>());
+		((ResourceSetImpl) resourceSet).setURIResourceMap(new LinkedHashMap<URI, Resource>());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
 		// register an editing domain on the resource
