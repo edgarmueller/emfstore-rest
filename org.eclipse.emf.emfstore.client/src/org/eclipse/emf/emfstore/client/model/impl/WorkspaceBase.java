@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -598,7 +598,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#resolve(org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment)
 	 */
 	public Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException {
-		Set<ProjectSpace> result = new HashSet<ProjectSpace>();
+		Set<ProjectSpace> result = new LinkedHashSet<ProjectSpace>();
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
 			if (projectSpace.getProjectId().equals(projectUrlFragment.getProjectId())) {
 				result.add(projectSpace);
@@ -616,7 +616,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#resolve(org.eclipse.emf.emfstore.server.model.url.ServerUrl)
 	 */
 	public Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException {
-		Set<ServerInfo> result = new HashSet<ServerInfo>();
+		Set<ServerInfo> result = new LinkedHashSet<ServerInfo>();
 		for (ServerInfo serverInfo : getServerInfos()) {
 			boolean matchingHostname = serverInfo.getUrl().equals(serverUrl.getHostName());
 			boolean matchingPort = serverInfo.getPort() == serverUrl.getPort();

@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -321,14 +322,14 @@ public class ObserverBus {
 
 	@SuppressWarnings("unchecked")
 	private Class<? extends IObserver>[] getObserverInterfaces(IObserver observer) {
-		HashSet<Class<? extends IObserver>> observerIFacesFound = new HashSet<Class<? extends IObserver>>();
+		HashSet<Class<? extends IObserver>> observerIFacesFound = new LinkedHashSet<Class<? extends IObserver>>();
 		getClasses(observer.getClass(), observerIFacesFound);
 		return observerIFacesFound.toArray(new Class[observerIFacesFound.size()]);
 	}
 
 	@SuppressWarnings("unchecked")
 	private boolean getClasses(Class<?> clazz, Set<Class<? extends IObserver>> result) {
-		for (Class<?> iface : getAllInterfaces(clazz, new HashSet<Class<?>>())) {
+		for (Class<?> iface : getAllInterfaces(clazz, new LinkedHashSet<Class<?>>())) {
 			if (iface.equals(IObserver.class) && clazz.isInterface()) {
 				result.add((Class<? extends IObserver>) clazz);
 				return true;

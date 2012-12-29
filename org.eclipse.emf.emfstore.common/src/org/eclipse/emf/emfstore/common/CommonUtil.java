@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.common;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -86,7 +87,7 @@ public final class CommonUtil {
 	public static Set<EClass> getAllEContainments(final EClass eClass) {
 		
 		final List<EReference> containments = eClass.getEAllContainments();
-		final Set<EClass> eClasses = new HashSet<EClass>();
+		final Set<EClass> eClasses = new LinkedHashSet<EClass>();
 		
 		for (EReference ref : containments) {
 			final EClass eReferenceType = ref.getEReferenceType();
@@ -111,7 +112,7 @@ public final class CommonUtil {
 			return allEClasses;
 		}
 		
-		final Set<EClass> result = new HashSet<EClass>();
+		final Set<EClass> result = new LinkedHashSet<EClass>();
 		
 		for (EClass subClass : allEClasses) {
 			final boolean isSuperTypeOf = eClass.isSuperTypeOf(subClass)
@@ -131,13 +132,13 @@ public final class CommonUtil {
 	public static Set<EClass> getAllModelElementEClasses() {
 		
 		if (registryEClasses != null) {
-			return new HashSet<EClass>(registryEClasses);
+			return new LinkedHashSet<EClass>(registryEClasses);
 		}
 		
-		final Set<EClass> result = new HashSet<EClass>();
+		final Set<EClass> result = new LinkedHashSet<EClass>();
 		final Registry registry = EPackage.Registry.INSTANCE;
 
-		for (Entry<String, Object> entry : new HashSet<Entry<String, Object>>(registry.entrySet())) {
+		for (Entry<String, Object> entry : new LinkedHashSet<Entry<String, Object>>(registry.entrySet())) {
 			try {
 				final EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(entry.getKey());
 				result.addAll(getAllModelElementEClasses(ePackage));
@@ -162,7 +163,7 @@ public final class CommonUtil {
 	 * @return a set of EClasses found in the given EPackage
 	 */
 	private static Set<EClass> getAllModelElementEClasses(final EPackage ePackage) {
-		final Set<EClass> result = new HashSet<EClass>();
+		final Set<EClass> result = new LinkedHashSet<EClass>();
 		for (EPackage subPackage : ePackage.getESubpackages()) {
 			result.addAll(getAllModelElementEClasses(subPackage));
 		}
@@ -184,7 +185,7 @@ public final class CommonUtil {
 	 * @return the container
 	 */
 	public static <T extends EObject> T getParent(final Class<T> parent, final EObject child) {
-		final Set<EObject> seenModelElements = new HashSet<EObject>();
+		final Set<EObject> seenModelElements = new LinkedHashSet<EObject>();
 		seenModelElements.add(child);
 		return getParent(parent, child, seenModelElements);
 	}
@@ -231,7 +232,7 @@ public final class CommonUtil {
 	 */
 	public static boolean isSelfContained(final EObject eObject, final boolean ignoreContainer) {
 		final Set<EObject> allChildEObjects = getNonTransientContents(eObject);
-		final Set<EObject> allEObjects = new HashSet<EObject>(allChildEObjects);
+		final Set<EObject> allEObjects = new LinkedHashSet<EObject>(allChildEObjects);
 		allEObjects.add(eObject);
 
 		final Set<EObject> nonTransientReferences = getNonTransientCrossReferences(eObject);
@@ -260,7 +261,7 @@ public final class CommonUtil {
 	 * @return a set of contained elements not including root (the passed EObject itself)
 	 */
 	public static Set<EObject> getNonTransientContents(final EObject eObject) {
-		final Set<EObject> result = new HashSet<EObject>();
+		final Set<EObject> result = new LinkedHashSet<EObject>();
 		if (eObject == null) {
 			return result;
 		}
@@ -289,7 +290,7 @@ public final class CommonUtil {
 
 	@SuppressWarnings("unchecked")
 	private static Set<EObject> getNonTransientCrossReferences(final EObject object) {
-		final Set<EObject> result = new HashSet<EObject>();
+		final Set<EObject> result = new LinkedHashSet<EObject>();
 		if (object == null) {
 			return result;
 		}
@@ -345,8 +346,8 @@ public final class CommonUtil {
 	 * @return Set with the loaded an valid EObjects
 	 */
 	private static Set<EObject> validation(final Resource resource, final List<String> errorStrings) {
-		final Set<EObject> childrenSet = new HashSet<EObject>();
-		final Set<EObject> rootNodes = new HashSet<EObject>();
+		final Set<EObject> childrenSet = new LinkedHashSet<EObject>();
+		final Set<EObject> rootNodes = new LinkedHashSet<EObject>();
 
 		TreeIterator<EObject> contents = resource.getAllContents();
 
@@ -370,7 +371,7 @@ public final class CommonUtil {
 		}
 
 		// 3. Check if RootNodes are SelfContained -- yes: import -- no: error
-		Set<EObject> notSelfContained = new HashSet<EObject>();
+		Set<EObject> notSelfContained = new LinkedHashSet<EObject>();
 		for (EObject rootNode : rootNodes) {
 			if (!CommonUtil.isSelfContained(rootNode)) {
 				errorStrings.add(rootNode + " is not self contained\n");
