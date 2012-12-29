@@ -16,9 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -38,20 +36,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
  */
 public class ReservationToConflictBucketCandidateMap {
 
-	// // map from concatination of modelelement ID and feature name to conflict bucket candidate
-	// private Map<String, ConflictBucketCandidate> modelElementIdAndFeatureToConflictMap;
-	//
-	// // map from modelelement ID to conflict bucket candidate
-	// private Map<String, ConflictBucketCandidate> modelElementsWithAllFeaturesToConflictMap;
-	//
-	// // Mapping from modelElementId to a set of feature names
-	// private ReservationSet modelElementIdToFeatureSetMapping;
-	//
-	// // map from model elementid to buckets requiring its existence
-	// private LinkedHashMap<String, Set<ConflictBucketCandidate>> modelElementExistenceToConflictBucketSetMap;
 	private ReservationSet reservationToConflictMap;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
-	private BasicModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Default constructor.
@@ -59,56 +45,7 @@ public class ReservationToConflictBucketCandidateMap {
 	public ReservationToConflictBucketCandidateMap() {
 		reservationToConflictMap = new ReservationSet();
 		conflictBucketCandidates = new LinkedHashSet<ConflictBucketCandidate>();
-		idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
 	}
-
-	/**
-	 * Retrieve currently assigned candidate buckets for the requested model element and feature. The magic feature
-	 * names {@link ReservationSet#EXISTENCE_FEATURE_NAME} and {@link ReservationSet#ALL_FEATURES_NAME} are also valid
-	 * inputs.
-	 * If get is called with {@link ReservationSet#ALL_FEATURES_NAME} it will collect all buckets
-	 * that block any feature of the given model element.
-	 * If get is called with {@link ReservationSet#EXISTENCE_FEATURE_NAME}, it will only collect
-	 * buckets
-	 * which requested {@link ReservationSet#ALL_FEATURES_NAME}.
-	 * 
-	 * @param modelElementId the model element id
-	 * @param featureName the feature name including magic names as stated above
-	 * @return a set of buckets that conflict with the given model element and feature, the set may be empty
-	 */
-	// public Set<ConflictBucketCandidate> get(String modelElementId, String featureName) {
-	// ConflictBucketCandidate conflictBucketCandidate = modelElementsWithAllFeaturesToConflictMap.get(modelElementId);
-	// if (conflictBucketCandidate != null) {
-	// return Collections.singleton(conflictBucketCandidate);
-	// }
-	// if (featureName == ReservationSet.ALL_FEATURES_NAME) {
-	// Set<String> featureSet = modelElementIdToFeatureSetMapping.get(modelElementId);
-	// Set<ConflictBucketCandidate> buckets = new LinkedHashSet<ConflictBucketCandidate>();
-	// // get all buckets that already blocked features for this model element
-	// for (String feature : featureSet) {
-	// ConflictBucketCandidate subBucket = modelElementIdAndFeatureToConflictMap.get(modelElementId + feature);
-	// if (subBucket != null) {
-	// buckets.add(subBucket);
-	// }
-	// }
-	// // get all buckets that require existence of this element
-	// Set<ConflictBucketCandidate> existenceRequiringSet = modelElementExistenceToConflictBucketSetMap
-	// .get(modelElementId);
-	// if (existenceRequiringSet != null) {
-	// buckets.addAll(existenceRequiringSet);
-	// }
-	// return buckets;
-	// }
-	// // normal feature collisions including existence
-	// ConflictBucketCandidate bucketCandidate = modelElementIdAndFeatureToConflictMap.get(modelElementId
-	// + featureName);
-	// // if we find a conflicting bucket for the given feature and it is not just an Existence feature
-	// if (bucketCandidate != null && featureName != ReservationSet.EXISTENCE_FEATURE_NAME) {
-	// return Collections.singleton(bucketCandidate);
-	// }
-	// // in any other case return not found buckets
-	// return Collections.emptySet();
-	// }
 
 	private void joinReservationSet(ReservationSet reservationSet,
 		ConflictBucketCandidate currentConflictBucketCandidate) {
@@ -231,11 +168,16 @@ public class ReservationToConflictBucketCandidateMap {
 			}
 			return reservationSet;
 		} else if (operation instanceof CreateDeleteOperation) {
-			// handle containment tree
+
+			// skip create operations, they can not conflict
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+			if (!createDeleteOperation.isDelete()) {
+				return reservationSet;
+			}
+
+			// handle containment tree
 			for (ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
 				reservationSet.addFullReservation(modelElementId.getId());
-				idToEObjectMapping.put(createDeleteOperation.getEObjectToIdMap().get(modelElementId), modelElementId);
 			}
 
 			// handle suboperations
@@ -249,43 +191,6 @@ public class ReservationToConflictBucketCandidateMap {
 		}
 		throw new IllegalStateException("Unkown operation type: " + operation.getClass().getCanonicalName());
 	}
-
-	//
-	//
-	// 1. extractReservationFromOperation
-	// 2. create bucket for op and add to reservationSet
-	// 3. join set with existing map
-	//
-	// ConflictBucketCandidate conflictBucketCandidate = modelElementsWithAllFeaturesToConflictMap.get(modelElementId);
-	// if (conflictBucketCandidate != null && currentOperationsConflictBucket != conflictBucketCandidate && !replace) {
-	// throw new IllegalStateException("Bucket is already taken!");
-	// }
-	//
-	// if (featureName == ReservationSet.ALL_FEATURES_NAME) {
-	// modelElementsWithAllFeaturesToConflictMap.put(modelElementId, currentOperationsConflictBucket);
-	// return;
-	// }
-	// // feature is a normal feature
-	// if (replace && conflictBucketCandidate != null) {
-	// return;
-	// }
-	// conflictBucketCandidate = modelElementIdAndFeatureToConflictMap.get(modelElementId + featureName);
-	// if (conflictBucketCandidate != null && currentOperationsConflictBucket != conflictBucketCandidate && !replace
-	// && featureName != ReservationSet.EXISTENCE_FEATURE_NAME) {
-	// throw new IllegalStateException("Bucket is already taken!");
-	// }
-	// if (featureName == ReservationSet.EXISTENCE_FEATURE_NAME) {
-	// Set<ConflictBucketCandidate> existingSet = modelElementExistenceToConflictBucketSetMap.get(modelElementId);
-	// if (existingSet == null) {
-	// existingSet = new LinkedHashSet<ConflictBucketCandidate>();
-	// modelElementExistenceToConflictBucketSetMap.put(modelElementId, existingSet);
-	// }
-	// existingSet.add(currentOperationsConflictBucket);
-	// }
-	// modelElementIdAndFeatureToConflictMap.put(modelElementId + featureName, currentOperationsConflictBucket);
-	// modelElementIdToFeatureSetMapping.add(modelElementId, featureName);
-	//
-	// }
 
 	private void handleFeatureOperation(AbstractOperation operation, ReservationSet reservationSet) {
 		FeatureOperation featureOperation = (FeatureOperation) operation;
@@ -318,6 +223,11 @@ public class ReservationToConflictBucketCandidateMap {
 
 	}
 
+	/**
+	 * Get all Conflict Buckets that are part of the map.
+	 * 
+	 * @return a set of conflict bucket candidates
+	 */
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates() {
 		Map<ConflictBucketCandidate, Set<ConflictBucketCandidate>> rootToBucketMergeSetMap = new LinkedHashMap<ConflictBucketCandidate, Set<ConflictBucketCandidate>>();
 		for (ConflictBucketCandidate candidate : conflictBucketCandidates) {
@@ -337,7 +247,4 @@ public class ReservationToConflictBucketCandidateMap {
 		return rootToBucketMergeSetMap.keySet();
 	}
 
-	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
-		return idToEObjectMapping;
-	}
 }
