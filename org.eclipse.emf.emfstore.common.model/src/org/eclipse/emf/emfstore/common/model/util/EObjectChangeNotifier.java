@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
+import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -192,6 +193,9 @@ public class EObjectChangeNotifier extends EContentAdapter {
 				if (!collection.containsInstance(newEObject)) {
 					collection.addCutElement(newEObject);
 				}
+				// FIXME: handle multirefs here
+			} else if (newValue instanceof List<?>) {
+				// iterate new values
 			}
 		}
 
