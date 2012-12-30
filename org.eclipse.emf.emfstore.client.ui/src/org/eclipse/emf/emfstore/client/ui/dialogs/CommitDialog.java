@@ -205,7 +205,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		ArrayList<ChangePackage> changePackages = new ArrayList<ChangePackage>();
 		changePackages.add(changes);
 		TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changePackages,
-			getActiveProjectSpace().getProject(), idToEObjectMapping);
+			getActiveProjectSpace().getProject(), idToEObjectMapping, true);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
 
 		return contents;

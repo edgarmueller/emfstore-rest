@@ -48,7 +48,7 @@ public class TabbedChangesComposite extends Composite {
 	 * @param project the project
 	 */
 	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project,
-		IModelElementIdToEObjectMapping idToEObjectMapping) {
+		IModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
 		super(parent, style);
 
 		setLayout(new GridLayout());
@@ -62,7 +62,7 @@ public class TabbedChangesComposite extends Composite {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
 
 		contentProvider = new SCMContentProvider(idToEObjectMapping);
-		contentProvider.setShowRootNodes(true);
+		contentProvider.setShowRootNodes(showRootNodes);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
 		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
 			idToEObjectMapping));

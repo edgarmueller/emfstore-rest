@@ -69,7 +69,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 		// changes tree
 		if (changes != null) {
 			TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changes,
-				projectSpace.getProject(), idToEObjectMapping);
+				projectSpace.getProject(), idToEObjectMapping, true);
 			// changesComposite.setReverseNodes(false);
 			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		}
