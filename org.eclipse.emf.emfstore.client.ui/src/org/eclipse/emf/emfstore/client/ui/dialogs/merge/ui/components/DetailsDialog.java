@@ -11,18 +11,17 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
-import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
-import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
+import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -79,20 +78,12 @@ public class DetailsDialog extends TitleAreaDialog {
 
 		GridLayoutFactory.fillDefaults().applyTo(tabComposite);
 
-		TreeViewer tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(operations);
 
-		SCMContentProvider contentProvider = new SCMContentProvider(decisionManager.getIdToEObjectMapping());
-		contentProvider.setShowRootNodes(true);
-
-		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(decisionManager.getProject());
-		detailedLabelProvider.setChangePackageVisualizationHelper(UIDecisionUtil
-			.getChangePackageVisualizationHelper(decisionManager));
-
-		tabTreeViewer.setContentProvider(contentProvider);
-		tabTreeViewer.setLabelProvider(detailedLabelProvider);
-		tabTreeViewer.setInput(operations);
-		tabTreeViewer.expandToLevel(1);
+		TabbedChangesComposite changesComposite = new TabbedChangesComposite(tabComposite, SWT.BORDER, Arrays
+			.asList(changePackage), decisionManager.getProject(), decisionManager.getIdToEObjectMapping(), false);
+		changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
 		return tabComposite;
 	}
