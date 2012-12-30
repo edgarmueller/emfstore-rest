@@ -37,7 +37,6 @@ import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -65,18 +64,18 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 
 	private Set<Resource> resources;
 
-	private IModelElementIdToEObjectMapping mapping;
+	private IdEObjectCollection collection;
 
 	private List<IDEObjectCollectionDirtyStateListener> listeners;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param mapping
-	 *            a mapping from model element to their respective IDs
+	 * @param collection
+	 *            a collection of EObjects
 	 */
-	public ResourcePersister(IModelElementIdToEObjectMapping mapping) {
-		this.mapping = mapping;
+	public ResourcePersister(IdEObjectCollection collection) {
+		this.collection = collection;
 		this.resources = new LinkedHashSet<Resource>();
 		this.listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
 		this.filterStack = new FilterStack(new NotificationFilter[] { new TouchFilter(), new TransientFilter(),
@@ -152,8 +151,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			}
 
 			if (resource instanceof EMFStoreResource) {
-				((EMFStoreResource) resource).setIdToEObjectMap(mapping.getIdToEObjectMapping(),
-																mapping.getEObjectToIdMapping());
+				((EMFStoreResource) resource).setIdToEObjectMap(collection.getIdToEObjectMapping(),
+					collection.getEObjectToIdMapping());
 			} else {
 				Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
 
@@ -283,7 +282,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	private String getIDForEObject(EObject modelElement) {
-		String modelElementId = mapping.getEObjectToIdMapping().get(modelElement);
+		String modelElementId = collection.getModelElementId(modelElement).toString();
 
 		if (modelElementId == null) {
 			WorkspaceUtil.handleException(new IllegalStateException("No ID for model element" + modelElement));
@@ -340,8 +339,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision,
-		IProgressMonitor monitor) {
+	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 
@@ -354,6 +352,6 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	public void dispose() {
 		listeners = null;
 		resources = null;
-		mapping = null;
+		collection = null;
 	}
 }

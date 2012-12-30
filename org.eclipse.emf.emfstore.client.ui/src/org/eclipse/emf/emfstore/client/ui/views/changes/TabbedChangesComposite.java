@@ -64,8 +64,8 @@ public class TabbedChangesComposite extends Composite {
 		contentProvider = new SCMContentProvider(idToEObjectMapping);
 		contentProvider.setShowRootNodes(true);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
-		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(project,
-			changePackages));
+		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
+			idToEObjectMapping));
 		tabTreeViewer.setContentProvider(contentProvider);
 		tabTreeViewer.setLabelProvider(detailedLabelProvider);
 		tabTreeViewer.setInput(changePackages);
@@ -75,5 +75,4 @@ public class TabbedChangesComposite extends Composite {
 		opTab.setText("Operations");
 		opTab.setControl(tabComposite);
 	}
-
 }

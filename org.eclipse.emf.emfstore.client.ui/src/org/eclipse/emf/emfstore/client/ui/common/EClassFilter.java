@@ -127,7 +127,7 @@ public final class EClassFilter {
 		}
 
 		ModelElementId id = operation.getModelElementId();
-		EObject modelElement = idToEObjectMapping.getIdToEObjectMapping().get(id.getId());
+		EObject modelElement = idToEObjectMapping.get(id);
 
 		if (modelElement == null) {
 			return false;

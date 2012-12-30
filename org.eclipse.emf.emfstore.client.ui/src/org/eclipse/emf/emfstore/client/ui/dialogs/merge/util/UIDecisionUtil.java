@@ -128,7 +128,7 @@ public final class UIDecisionUtil {
 		ArrayList<ChangePackage> list = new ArrayList<ChangePackage>();
 		list.addAll(decisionManager.Internal.getMyChangePackages());
 		list.addAll(decisionManager.Internal.getTheirChangePackages());
-		return new ChangePackageVisualizationHelper(decisionManager.getProject(), list);
+		return new ChangePackageVisualizationHelper(decisionManager.getIdToEObjectMapping());
 	}
 
 	/**

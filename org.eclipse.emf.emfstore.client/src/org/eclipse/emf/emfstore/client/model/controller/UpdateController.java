@@ -42,7 +42,6 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 	private VersionSpec version;
 	private UpdateCallback callback;
-	private final BasicModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -70,7 +69,6 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		this.version = version;
 		this.callback = callback;
-		this.idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
 		setProgressMonitor(progress);
 	}
 
@@ -104,17 +102,16 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws EmfStoreException {
 				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
-															getProjectSpace().getBaseVersion(), resolvedVersion);
+					getProjectSpace().getBaseVersion(), resolvedVersion);
 			}
 		}.execute();
 
 		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
-		idToEObjectMapping.put(localChanges);
-		idToEObjectMapping.putAll(getProjectSpace().getProject());
 
-		for (ChangePackage changePackage : changes) {
-			idToEObjectMapping.put(changePackage);
-		}
+		// build a mapping including deleted and create model elements in local and incoming change packages
+		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
+			getProjectSpace().getProject(), changes);
+		idToEObjectMapping.put(localChanges);
 
 		getProgressMonitor().worked(65);
 
@@ -136,9 +133,8 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
-			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector
-				.calculateConflictCandidateBuckets(
-													Collections.singletonList(localChanges), changes);
+			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
+				Collections.singletonList(localChanges), changes);
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");

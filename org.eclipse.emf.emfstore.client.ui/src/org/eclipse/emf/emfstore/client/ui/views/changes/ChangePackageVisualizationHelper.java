@@ -10,11 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.changes;
 
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -26,7 +23,6 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.provider.AbstractOperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.server.model.provider.CustomOperationLabelProviderManager;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -52,8 +48,6 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IModelElementIdToEObjectMapping idToEObjectMapping;
-	private List<ChangePackage> changePackages;
-	private Map<String, EObject> idToEObjectMapofChangePackages;
 
 	/**
 	 * Constructor.
@@ -61,13 +55,10 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @param idToEObjectMapping
 	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
-	 * @param changePackages add changepackages in order to find deleted elements
 	 */
-	public ChangePackageVisualizationHelper(IModelElementIdToEObjectMapping idToEObjectMapping,
-		List<ChangePackage> changePackages) {
+	public ChangePackageVisualizationHelper(IModelElementIdToEObjectMapping idToEObjectMapping) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.idToEObjectMapping = idToEObjectMapping;
-		this.changePackages = changePackages;
 	}
 
 	/**
@@ -182,12 +173,16 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 
 	private String decorate(AbstractOperationCustomLabelProvider labelProvider, AbstractOperation op) {
 		String namesResolved = resolveIds(labelProvider, labelProvider.getDescription(op),
-											AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
+			AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
 		String allResolved = resolveIds(labelProvider, namesResolved,
-										AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
+			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
+		if (op instanceof CompositeOperation && ((CompositeOperation) op).getMainOperation() != null) {
+			return resolveTypes(allResolved, (ReferenceOperation) ((CompositeOperation) op).getMainOperation());
+		}
+
 		return allResolved;
 	}
 
@@ -243,42 +238,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		EObject modelElement = idToEObjectMapping.getIdToEObjectMapping().get(modelElementId);
-		if (modelElement == null && modelElementId != null) {
-			modelElement = getMeFromChangePackage(modelElementId);
-		}
-		return modelElement;
-	}
-
-	private EObject getMeFromChangePackage(ModelElementId modelElementId) {
-		for (ChangePackage cp : changePackages) {
-			EObject me = getMeFromOpsList(modelElementId, cp.getOperations());
-			if (me != null) {
-				return me;
-			}
-		}
-		return null;
-	}
-
-	private EObject getMeFromOpsList(ModelElementId modelElementId, List<AbstractOperation> operations) {
-		if (idToEObjectMapofChangePackages == null) {
-			idToEObjectMapofChangePackages = new LinkedHashMap<String, EObject>();
-			scanOperationsIntoCache(operations);
-		}
-		return idToEObjectMapofChangePackages.get(modelElementId.getId());
-	}
-
-	private void scanOperationsIntoCache(List<AbstractOperation> operations) {
-		for (AbstractOperation op : operations) {
-			if (op instanceof CreateDeleteOperation) {
-				EMap<EObject, ModelElementId> eObjectToIdMap = ((CreateDeleteOperation) op).getEObjectToIdMap();
-				for (EObject eObject : eObjectToIdMap.keySet()) {
-					idToEObjectMapofChangePackages.put(eObjectToIdMap.get(eObject).getId(), eObject);
-				}
-			} else if (op instanceof CompositeOperation) {
-				scanOperationsIntoCache(((CompositeOperation) op).getSubOperations());
-			}
-		}
+		return idToEObjectMapping.get(modelElementId);
 	}
 
 	/**

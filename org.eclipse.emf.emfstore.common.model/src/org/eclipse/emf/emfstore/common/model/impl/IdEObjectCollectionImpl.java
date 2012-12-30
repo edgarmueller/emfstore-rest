@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.common.model.impl;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -51,8 +51,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * The extension point id to configure the {@link ModelElementIdGenerator}.
 	 */
-	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT =
-		"org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
+	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
 
 	/**
 	 * The attribute identifying the class of the {@link ModelElementIdGenerator} extension point.
@@ -89,7 +88,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,
-														ModelElementIdGenerator.class);
+				ModelElementIdGenerator.class);
 		}
 	}
 
@@ -569,7 +568,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	protected void addModelElementAndChildrenToCache(EObject modelElement) {
 
-		HashSet<String> removableIds = new HashSet<String>();
+		HashSet<String> removableIds = new LinkedHashSet<String>();
 
 		Set<EObject> containedModelElements = ModelUtil.getAllContainedModelElements(modelElement, false);
 		containedModelElements.add(modelElement);
@@ -737,32 +736,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	}
 
 	/**
-	 * Returns a copy of the ID/EObject mapping where IDs are represented as strings.
-	 * This method is mainly provided for convenience and performance reasons,
-	 * where the ID must be a string.
-	 * 
-	 * @return the ID/EObject mapping
-	 */
-	public Map<String, EObject> getIdToEObjectMapping() {
-		Map<String, EObject> mapping = new LinkedHashMap<String, EObject>(idToEObjectMap);
-		mapping.putAll(new LinkedHashMap<String, EObject>(allocatedIdToEObjectMap));
-		return mapping;
-	}
-
-	/**
-	 * Returns a copy of the EObject/ID mapping where IDs are represented as strings.
-	 * This method is mainly provided for convenience and performance reasons,
-	 * where the ID must be a string.
-	 * 
-	 * @return the EObject/ID mapping
-	 */
-	public Map<EObject, String> getEObjectToIdMapping() {
-		HashMap<EObject, String> mapping = new HashMap<EObject, String>(eObjectToIdMap);
-		mapping.putAll(new LinkedHashMap<EObject, String>(allocatedEObjectToIdMap));
-		return mapping;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#getEObjectId(org.eclipse.emf.ecore.EObject)
@@ -786,4 +759,40 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		// else create it via ModelFactory
 		return ModelFactory.eINSTANCE.createModelElementId();
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 */
+	public EObject get(ModelElementId modelElementId) {
+		EObject modelElement = getModelElement(modelElementId);
+		if (modelElement != null) {
+			return modelElement;
+		}
+		return getDeletedModelElement(modelElementId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getIdToEObjectMapping()
+	 */
+	public Map<String, EObject> getIdToEObjectMapping() {
+		Map<String, EObject> mapping = new LinkedHashMap<String, EObject>(idToEObjectMap);
+		mapping.putAll(new LinkedHashMap<String, EObject>(allocatedIdToEObjectMap));
+		return mapping;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getEObjectToIdMapping()
+	 */
+	public Map<EObject, String> getEObjectToIdMapping() {
+		Map<EObject, String> mapping = new LinkedHashMap<EObject, String>(eObjectToIdMap);
+		mapping.putAll(new LinkedHashMap<EObject, String>(allocatedEObjectToIdMap));
+		return mapping;
+	}
+
 }

@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.SWTPlot
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
@@ -369,8 +370,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			}
 		}
 
-		ChangePackageVisualizationHelper newHelper = new ChangePackageVisualizationHelper(projectSpace.getProject(),
-			cps);
+		ChangePackageVisualizationHelper newHelper = new ChangePackageVisualizationHelper(
+			new BasicModelElementIdToEObjectMapping(projectSpace.getProject(), cps));
 		changeLabel.setProject(projectSpace.getProject());
 		changeLabel.setChangePackageVisualizationHelper(newHelper);
 		commitLabel.setProject(projectSpace.getProject());

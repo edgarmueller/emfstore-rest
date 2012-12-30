@@ -8,6 +8,7 @@ package org.eclipse.emf.emfstore.server.conflictDetection;
 import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,74 +26,57 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteO
 public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEObjectMapping {
 
 	private Map<String, EObject> idToEObjectMapping;
-	private Map<EObject, String> eObjectToIdMapping;
+	private IModelElementIdToEObjectMapping delegateMapping;
 
-	public BasicModelElementIdToEObjectMapping() {
+	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping) {
+		this.delegateMapping = mapping;
 		idToEObjectMapping = new LinkedHashMap<String, EObject>();
-		eObjectToIdMapping = new LinkedHashMap<EObject, String>();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#getIdToEObjectMapping()
-	 */
-	public Map<String, EObject> getIdToEObjectMapping() {
-		return idToEObjectMapping;
+	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping,
+		List<ChangePackage> changePackages) {
+		this(mapping);
+		for (ChangePackage changePackage : changePackages) {
+			this.put(changePackage);
+		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#getEObjectToIdMapping()
-	 */
-	public Map<EObject, String> getEObjectToIdMapping() {
-		return eObjectToIdMapping;
-	}
-
-	public void put(EObject eObject, ModelElementId id) {
-		eObjectToIdMapping.put(eObject, id.getId());
-		idToEObjectMapping.put(id.getId(), eObject);
-	}
-
-	public void putAll(IModelElementIdToEObjectMapping otherIdToEObjectMapping) {
-		eObjectToIdMapping.putAll(otherIdToEObjectMapping.getEObjectToIdMapping());
-		idToEObjectMapping.putAll(otherIdToEObjectMapping.getIdToEObjectMapping());
+	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping, ChangePackage changePackage) {
+		this(mapping);
+		this.put(changePackage);
 	}
 
 	public void put(ChangePackage changePackage) {
-		putAll(getIdToEObjectMappingFromChangePackage(changePackage));
-	}
-
-	private IModelElementIdToEObjectMapping getIdToEObjectMappingFromChangePackage(ChangePackage changePackage) {
-
-		BasicModelElementIdToEObjectMapping changePackageMapping = new BasicModelElementIdToEObjectMapping();
-
 		for (AbstractOperation op : changePackage.getOperations()) {
-			BasicModelElementIdToEObjectMapping operationMapping = new BasicModelElementIdToEObjectMapping();
-			getIdToEObjectMappingFromOperation(op, operationMapping);
-			changePackageMapping.putAll(operationMapping);
+			scanOperationIntoMapping(op);
 		}
-
-		return changePackageMapping;
 	}
 
-	private void getIdToEObjectMappingFromOperation(AbstractOperation operation,
-		BasicModelElementIdToEObjectMapping idToEObjectMapping) {
+	private void scanOperationIntoMapping(AbstractOperation operation) {
 
 		if (operation instanceof CompositeOperation) {
 			CompositeOperation composite = (CompositeOperation) operation;
 			for (AbstractOperation subOp : composite.getSubOperations()) {
-				getIdToEObjectMappingFromOperation(subOp, idToEObjectMapping);
+				scanOperationIntoMapping(subOp);
 			}
+			return;
 		}
 
 		if (isCreateDelete(operation)) {
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-
 			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
-				idToEObjectMapping.put(modelElement, createDeleteOperation.getEObjectToIdMap().get(modelElement));
+				idToEObjectMapping.put(createDeleteOperation.getEObjectToIdMap().get(modelElement).toString(),
+					modelElement);
 			}
 		}
+	}
+
+	public EObject get(ModelElementId modelElementId) {
+		EObject eObject = delegateMapping.get(modelElementId);
+		if (eObject != null) {
+			return eObject;
+		}
+		return idToEObjectMapping.get(modelElementId.toString());
+
 	}
 }

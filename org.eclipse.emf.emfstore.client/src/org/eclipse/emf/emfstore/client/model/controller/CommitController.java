@@ -124,9 +124,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		} else {
 			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace()
-				.resolveVersionSpec(
-									Versions.createHEAD(getProjectSpace().getBaseVersion()));
+			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
+				Versions.createHEAD(getProjectSpace().getBaseVersion()));
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();
@@ -141,9 +140,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
 			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
 
-		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping();
-		idToEObjectMapping.put(changePackage);
-		idToEObjectMapping.putAll(getProjectSpace().getProject());
+		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
+			getProjectSpace().getProject(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
 		if (!callback.inspectChanges(getProjectSpace(), changePackage, idToEObjectMapping)
@@ -163,14 +161,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
 			@Override
 			public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
-				return getConnectionManager().createVersion(
-															getUsersession().getSessionId(),
-															getProjectSpace().getProjectId(),
-															getProjectSpace().getBaseVersion(),
-															changePackage,
-															branch,
-															getProjectSpace().getMergedVersion(),
-															changePackage.getLogMessage());
+				return getConnectionManager().createVersion(getUsersession().getSessionId(),
+					getProjectSpace().getProjectId(), getProjectSpace().getBaseVersion(), changePackage, branch,
+					getProjectSpace().getMergedVersion(), changePackage.getLogMessage());
 			}
 		}.execute();
 		getProgressMonitor().worked(35);

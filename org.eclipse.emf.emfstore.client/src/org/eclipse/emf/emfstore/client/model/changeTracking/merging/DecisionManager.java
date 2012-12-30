@@ -577,7 +577,7 @@ public class DecisionManager {
 	 * @return the model element with the given ID or <code>null</code> if no such model element has been found
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return mapping.getIdToEObjectMapping().get(modelElementId.getId());
+		return mapping.get(modelElementId);
 	}
 
 	/**

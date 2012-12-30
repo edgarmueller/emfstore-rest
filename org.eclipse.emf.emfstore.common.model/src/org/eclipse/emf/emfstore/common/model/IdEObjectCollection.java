@@ -189,4 +189,22 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 * within the cache.
 	 */
 	void initMapping();
+
+	/**
+	 * Returns a copy of the ID/EObject mapping where IDs are represented as strings.
+	 * This method is mainly provided for convenience and performance reasons,
+	 * where the ID must be a string.
+	 * 
+	 * @return the ID/EObject mapping
+	 */
+	Map<String, EObject> getIdToEObjectMapping();
+
+	/**
+	 * Returns a copy of the EObject/ID mapping where IDs are represented as strings.
+	 * This method is mainly provided for convenience and performance reasons,
+	 * where the ID must be a string.
+	 * 
+	 * @return the EObject/ID mapping
+	 */
+	Map<EObject, String> getEObjectToIdMapping();
 }

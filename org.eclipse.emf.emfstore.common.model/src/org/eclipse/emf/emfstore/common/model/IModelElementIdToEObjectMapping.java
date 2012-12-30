@@ -11,8 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -23,16 +21,11 @@ import org.eclipse.emf.ecore.EObject;
 public interface IModelElementIdToEObjectMapping {
 
 	/**
-	 * Retrieves the complete mapping from model element IDs to model elements.
+	 * Get the EObject for the given ModelElementID if any.
 	 * 
-	 * @return the mapping from model element IDs to EObjects
+	 * @param modelElementId the ID
+	 * @return the ID or null if no EObject for the ID is found
 	 */
-	Map<String, EObject> getIdToEObjectMapping();
+	EObject get(ModelElementId modelElementId);
 
-	/**
-	 * Retrieves the complete reverse mapping from model elements to their respective model element IDs.
-	 * 
-	 * @return the mapping from EObjects to model element IDs
-	 */
-	Map<EObject, String> getEObjectToIdMapping();
 }
