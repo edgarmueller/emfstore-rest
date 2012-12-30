@@ -107,31 +107,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Resolving new version");
 
-		if (branch != null) {
-			// check branch conditions
-			if (StringUtils.isEmpty(branch.getBranch())) {
-				throw new InvalidVersionSpecException("Empty branch name is not permitted.");
-			}
-			PrimaryVersionSpec potentialBranch = null;
-			try {
-				potentialBranch = getProjectSpace().resolveVersionSpec(branch);
-			} catch (InvalidVersionSpecException e) {
-				// branch doesn't exist, create.
-			}
-			if (potentialBranch != null) {
-				throw new InvalidVersionSpecException("Branch already exists. You need to merge.");
-			}
-
-		} else {
-			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
-				Versions.createHEAD(getProjectSpace().getBaseVersion()));
-			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
-				if (!callback.baseVersionOutOfDate(getProjectSpace(), getProgressMonitor())) {
-					throw new BaseVersionOutdatedException();
-				}
-			}
-		}
+		checkForCommitPreconditions(branch);
 
 		getProgressMonitor().worked(10);
 		getProgressMonitor().subTask("Gathering changes");
@@ -155,6 +131,17 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Sending changes to server");
+
+		// check again if an update is required
+		boolean updatePerformed = checkForCommitPreconditions(branch);
+		// present changes again if update was performed
+		if (updatePerformed) {
+			getProgressMonitor().subTask("Presenting Changes");
+			if (!callback.inspectChanges(getProjectSpace(), changePackage, idToEObjectMapping)
+				|| getProgressMonitor().isCanceled()) {
+				return getProjectSpace().getBaseVersion();
+			}
+		}
 
 		// Branching case: branch specifier added
 		PrimaryVersionSpec newBaseVersion;
@@ -184,6 +171,37 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;
+	}
+
+	private boolean checkForCommitPreconditions(final BranchVersionSpec branch) throws InvalidVersionSpecException,
+		EmfStoreException, BaseVersionOutdatedException {
+		if (branch != null) {
+			// check branch conditions
+			if (StringUtils.isEmpty(branch.getBranch())) {
+				throw new InvalidVersionSpecException("Empty branch name is not permitted.");
+			}
+			PrimaryVersionSpec potentialBranch = null;
+			try {
+				potentialBranch = getProjectSpace().resolveVersionSpec(branch);
+			} catch (InvalidVersionSpecException e) {
+				// branch doesn't exist, create.
+			}
+			if (potentialBranch != null) {
+				throw new InvalidVersionSpecException("Branch already exists. You need to merge.");
+			}
+
+		} else {
+			// check if we need to update first
+			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
+				Versions.createHEAD(getProjectSpace().getBaseVersion()));
+			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
+				if (!callback.baseVersionOutOfDate(getProjectSpace(), getProgressMonitor())) {
+					throw new BaseVersionOutdatedException();
+				}
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private LogMessage createLogMessage() {
