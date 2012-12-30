@@ -169,15 +169,13 @@ public class ReservationToConflictBucketCandidateMap {
 			return reservationSet;
 		} else if (operation instanceof CreateDeleteOperation) {
 
-			// skip create operations, they can not conflict
+			// add full reservations only for delete operations and their deleted elements
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-			if (!createDeleteOperation.isDelete()) {
-				return reservationSet;
-			}
-
-			// handle containment tree
-			for (ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
-				reservationSet.addFullReservation(modelElementId.getId());
+			if (createDeleteOperation.isDelete()) {
+				// handle containment tree
+				for (ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
+					reservationSet.addFullReservation(modelElementId.getId());
+				}
 			}
 
 			// handle suboperations
