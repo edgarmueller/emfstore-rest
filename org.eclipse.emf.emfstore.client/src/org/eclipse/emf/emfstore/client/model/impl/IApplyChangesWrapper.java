@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * Wraps a call to apply operations on a project space. Ususally used to wrap model changes into Display.syncExec calls
+ * Wraps a call to apply operations on a project space. Usually used to wrap model changes into Display.syncExec calls
  * to avoid bad editors throwing exceptions if an update is not executed within the UI Thread.
  * 
  * @author koegel
