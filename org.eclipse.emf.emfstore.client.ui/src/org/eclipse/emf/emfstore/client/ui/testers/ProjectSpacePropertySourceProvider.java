@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.testers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.AbstractSourceProvider;
@@ -53,7 +54,17 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	 * Default constructor.
 	 */
 	public ProjectSpacePropertySourceProvider() {
-		currentSaveStates = new HashMap<String, Boolean>();
+
+		currentSaveStates = new LinkedHashMap<String, Boolean>();
+		// check if workspace can init, exit otherwise
+		try {
+			WorkspaceManager.init();
+		} catch (RuntimeException exception) {
+			ModelUtil.logException(
+				"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
+				exception);
+			return;
+		}
 		saveStateChangedObserver = new SaveStateChangedObserver() {
 			public void saveStateChanged(ProjectSpace projectSpace, boolean hasUnsavedChangesNow) {
 				Boolean newValue = new Boolean(hasUnsavedChangesNow);
@@ -131,7 +142,9 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	 * @see org.eclipse.ui.ISourceProvider#dispose()
 	 */
 	public void dispose() {
-		WorkspaceManager.getObserverBus().unregister(saveStateChangedObserver);
+		if (saveStateChangedObserver != null) {
+			WorkspaceManager.getObserverBus().unregister(saveStateChangedObserver);
+		}
 
 	}
 
@@ -141,7 +154,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	 * @see org.eclipse.ui.ISourceProvider#getCurrentState()
 	 */
 	public Map<String, Object> getCurrentState() {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put(CURRENT_SAVE_STATE_PROPERTY, currentSaveStates);
 		return map;
 	}
