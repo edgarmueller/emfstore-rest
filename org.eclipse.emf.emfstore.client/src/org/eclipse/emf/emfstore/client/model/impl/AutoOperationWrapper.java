@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -37,6 +38,8 @@ public class AutoOperationWrapper implements OperationModificator {
 
 		if (operations.size() < 1) {
 			return operations;
+		} else if (operations.size() == 1 && command instanceof AbstractOverrideableCommand) {
+			return operations;
 		} else if (operations.size() == 1 && operations.get(0) instanceof CompositeOperation) {
 			CompositeOperation compositeOperation = (CompositeOperation) operations.get(0);
 			if (compositeOperation.getMainOperation() == null) {
@@ -50,8 +53,6 @@ public class AutoOperationWrapper implements OperationModificator {
 		compositeOperation.setCompositeDescription(getText(command.getDescription()));
 		compositeOperation.setModelElementId(ModelUtil.clone(operations.get(0).getModelElementId()));
 		compositeOperation.getSubOperations().addAll(operations);
-		// compositeOperation.setMainOperation(operations.get(operations.size() - 1));
-
 		ArrayList<AbstractOperation> result = new ArrayList<AbstractOperation>();
 		result.add(compositeOperation);
 		return result;
