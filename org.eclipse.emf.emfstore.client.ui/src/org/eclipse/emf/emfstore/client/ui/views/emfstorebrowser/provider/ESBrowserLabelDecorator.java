@@ -19,8 +19,8 @@ import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * @see ILightweightLabelDecorator
@@ -91,7 +91,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	public void loginCompleted(Usersession session) {
-		update();
+		update(session);
 	}
 
 	/**
@@ -101,14 +101,14 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	public void logoutCompleted(Usersession session) {
-		update();
+		update(session);
 	}
 
-	private void update() {
+	private void update(final Usersession usersession) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				PlatformUI.getWorkbench().getDecoratorManager()
-					.update("org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.LoginDecorator");
+				fireLabelProviderChanged(new LabelProviderChangedEvent(ESBrowserLabelDecorator.this, usersession
+					.getServerInfo()));
 			}
 		});
 	}
