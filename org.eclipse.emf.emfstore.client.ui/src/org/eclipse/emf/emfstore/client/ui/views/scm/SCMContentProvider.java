@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.ui.views.scm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,7 +19,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.emfstore.client.ui.common.EClassFilter;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
@@ -28,7 +26,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.TreeNode;
 
 /**
  * Content provider for the scm views.
@@ -39,9 +36,8 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 
 	private boolean showRootNodes = true;
 	private boolean reverseNodes = true;
-	private Map<ChangePackage, TreeNode> virtualFilteredNodes;
-	private Map<ChangePackage, List<Object>> nonFilteredChildren;
-	private Map<TreeNode, List<AbstractOperation>> filteredOperations;
+	private Map<ChangePackage, VirtualNode<AbstractOperation>> changePackageToFilteredMapping;
+	private Map<ChangePackage, List<Object>> changePackageToNonFilteredMapping;
 	private IModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
@@ -50,11 +46,15 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	 */
 	public SCMContentProvider() {
 		super(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
-		this.virtualFilteredNodes = new LinkedHashMap<ChangePackage, TreeNode>();
-		this.filteredOperations = new LinkedHashMap<TreeNode, List<AbstractOperation>>();
-		this.nonFilteredChildren = new LinkedHashMap<ChangePackage, List<Object>>();
+		this.changePackageToFilteredMapping = new LinkedHashMap<ChangePackage, VirtualNode<AbstractOperation>>();
+		this.changePackageToNonFilteredMapping = new LinkedHashMap<ChangePackage, List<Object>>();
 	}
 
+	/**
+	 * @param idToEObjectMapping
+	 *            a mapping from IDs to EObjects that is necessary to resolve
+	 *            deleted EObjects
+	 */
 	public SCMContentProvider(IModelElementIdToEObjectMapping idToEObjectMapping) {
 		this();
 		this.idToEObjectMapping = idToEObjectMapping;
@@ -92,8 +92,9 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			return ((List<?>) result).toArray();
 
 		} else if (object instanceof List<?>) {
-			// valid inputs are a list of HistoryInfos as well as a list
-			// of ChangePackage
+			// valid inputs are a list of HistoryInfos,
+			// a list of operations as well as a list
+			// of ChangePackages
 			List<?> list = (List<?>) object;
 
 			if (list.size() == 0) {
@@ -107,6 +108,17 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 					if (info.getChangePackage() != null) {
 						result.addAll(getReversedOperations(info.getChangePackage()));
 					}
+				}
+			} else if (isListOf(list, AbstractOperation.class)) {
+				FilteredOperationsResult filteredOpsResult = new FilterOperations(idToEObjectMapping).filter(list
+					.toArray());
+
+				result.addAll(filteredOpsResult.getNonFiltered());
+
+				if (filteredOpsResult.getFilteredOperations().size() > 0) {
+					VirtualNode<AbstractOperation> node = new VirtualNode<AbstractOperation>(
+						filteredOpsResult.getFilteredOperations());
+					result.add(node);
 				}
 			} else {
 				for (ChangePackage changePackage : (List<ChangePackage>) list) {
@@ -123,10 +135,6 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return super.getElements(object);
 	}
 
-	private boolean eClassFilterEnabled() {
-		return EClassFilter.INSTANCE.isEnabled() && idToEObjectMapping != null;
-	}
-
 	private List<AbstractOperation> getReversedOperations(ChangePackage changePackage) {
 		List<AbstractOperation> ops = new ArrayList<AbstractOperation>(changePackage.getOperations());
 		Collections.reverse(ops);
@@ -139,45 +147,21 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		return clazz.isInstance(firstElement);
 	}
 
-	private Object[] filter(ChangePackage changePackage, Object[] input, Class<? extends EObject> clazz) {
+	private void filter(ChangePackage changePackage, Object[] input, Class<? extends EObject> clazz) {
 
-		if (nonFilteredChildren.containsKey(changePackage)) {
-			return nonFilteredChildren.get(changePackage).toArray();
+		// check whether we already filtered this change package
+		if (changePackageHasBeenFiltered(changePackage)) {
+			return;
 		}
 
-		List<Object> result = new ArrayList<Object>(input.length);
+		FilteredOperationsResult result = new FilterOperations(idToEObjectMapping, clazz).filter(input);
+		VirtualNode<AbstractOperation> node = new VirtualNode<AbstractOperation>(result.getFilteredOperations());
+		changePackageToNonFilteredMapping.put(changePackage, result.getNonFiltered());
+		changePackageToFilteredMapping.put(changePackage, node);
+	}
 
-		for (Object object : input) {
-
-			if (clazz.isInstance(object)) {
-				continue;
-			}
-
-			if (object instanceof AbstractOperation) {
-				AbstractOperation operation = (AbstractOperation) object;
-
-				if (eClassFilterEnabled()
-					&& EClassFilter.INSTANCE.involvesOnlyFilteredEClasses(idToEObjectMapping, operation)) {
-
-					if (!virtualFilteredNodes.containsKey(changePackage)) {
-						TreeNode node = new TreeNode(changePackage);
-						virtualFilteredNodes.put(changePackage, node);
-						filteredOperations.put(node, new ArrayList<AbstractOperation>());
-					}
-
-					TreeNode node = virtualFilteredNodes.get(changePackage);
-					List<AbstractOperation> alreadyFilteredOperations = filteredOperations.get(node);
-					alreadyFilteredOperations.add(operation);
-				} else {
-					result.add(operation);
-				}
-			} else {
-				result.add(object);
-			}
-		}
-
-		nonFilteredChildren.put(changePackage, result);
-		return result.toArray();
+	private boolean changePackageHasBeenFiltered(ChangePackage changePackage) {
+		return changePackageToNonFilteredMapping.containsKey(changePackage);
 	}
 
 	@Override
@@ -193,18 +177,22 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 			return getChildren(historyInfo.getChangePackage());
 		} else if (object instanceof ChangePackage) {
 
-			Object[] filtered = filter((ChangePackage) object, super.getChildren(object), LogMessage.class);
+			ChangePackage changePackage = (ChangePackage) object;
 
-			if (virtualFilteredNodes.containsKey(object)) {
-				List<Object> result = new ArrayList<Object>();
-				result.addAll(Arrays.asList(filtered));
-				result.add(virtualFilteredNodes.get(object));
-				return result.toArray();
+			filter(changePackage, super.getChildren(object), LogMessage.class);
+
+			List<Object> result = new ArrayList<Object>();
+			result.addAll(changePackageToNonFilteredMapping.get(changePackage));
+			VirtualNode<AbstractOperation> node = changePackageToFilteredMapping.get(changePackage);
+
+			if (node.getContent().size() > 0) {
+				result.add(node);
 			}
 
-			return filtered;
-		} else if (object instanceof TreeNode) {
-			return filteredOperations.get(object).toArray();
+			return result.toArray();
+
+		} else if (object instanceof VirtualNode<?>) {
+			return ((VirtualNode<?>) object).getContent().toArray();
 		} else if (object instanceof CompositeOperation) {
 			return ((CompositeOperation) object).getSubOperations().toArray();
 		}
