@@ -11,14 +11,11 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -55,9 +52,7 @@ public class DetailsDialog extends TitleAreaDialog {
 		super(parentShell);
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.decisionManager = decisionManager;
-		ArrayList<AbstractOperation> ops = new ArrayList<AbstractOperation>();
-		ops.addAll(option.getOperations());
-		this.operations = ops;
+		this.operations = new ArrayList<AbstractOperation>(option.getOperations());
 	}
 
 	@Override
@@ -78,11 +73,8 @@ public class DetailsDialog extends TitleAreaDialog {
 
 		GridLayoutFactory.fillDefaults().applyTo(tabComposite);
 
-		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
-		changePackage.getOperations().addAll(operations);
-
-		TabbedChangesComposite changesComposite = new TabbedChangesComposite(tabComposite, SWT.BORDER, Arrays
-			.asList(changePackage), decisionManager.getProject(), decisionManager.getIdToEObjectMapping(), false);
+		TabbedChangesComposite changesComposite = new TabbedChangesComposite(tabComposite, SWT.BORDER,
+			decisionManager.getProject(), operations, decisionManager.getIdToEObjectMapping(), false);
 		changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
 		return tabComposite;

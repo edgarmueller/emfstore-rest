@@ -179,7 +179,8 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
-		if (op instanceof CompositeOperation && ((CompositeOperation) op).getMainOperation() != null) {
+		if (op instanceof CompositeOperation && ((CompositeOperation) op).getMainOperation() != null
+			&& ((CompositeOperation) op).getMainOperation() instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) ((CompositeOperation) op).getMainOperation());
 		}
 

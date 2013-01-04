@@ -34,7 +34,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -69,8 +68,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param idToEObjectMapping
-	 *            the project.
+	 * @param project
+	 *            the project that is used to resolve revision numbers
 	 */
 	public SCMLabelProvider(Project project) {
 		super();
@@ -114,12 +113,12 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		} else if (element instanceof EObject) {
 			// TODO: rather reference virtual node directly??
 			ret = adapterFactoryLabelProvider.getText(element);
-		} else if (element instanceof TreeNode) {
-			TreeNode node = (TreeNode) element;
+		} else if (element instanceof VirtualNode<?>) {
+			// TreeNode node = (TreeNode) element;
 			// must be node containing filtered operations
-			if (node.getValue() instanceof ChangePackage) {
-				return EClassFilter.INSTANCE.getFilterLabel();
-			}
+			// if (node.getValue() instanceof ChangePackage) {
+			return EClassFilter.INSTANCE.getFilterLabel();
+			// }
 		} else {
 			ret = super.getText(element);
 		}
@@ -160,8 +159,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project)
-			.getBaseVersion()
+		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(project).getBaseVersion()
 			.getIdentifier()) {
 			baseVersion = "*";
 		}
@@ -246,7 +244,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			if (text.equals(ELEMENT_NOT_FOUND)) {
 				return italic;
 			}
-		} else if (element instanceof TreeNode) {
+		} else if (element instanceof VirtualNode<?>) {
 			return italic;
 		}
 		if (element instanceof EObject && ((EObject) element).eContainer() instanceof AbstractOperation) {
@@ -287,7 +285,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		}
 		if (element instanceof CompositeOperation && ((CompositeOperation) element).getMainOperation() != null) {
 			return changePackageVisualizationHelper.getImage(adapterFactoryLabelProvider,
-																((CompositeOperation) element).getMainOperation());
+				((CompositeOperation) element).getMainOperation());
 		}
 
 		if (element instanceof AbstractOperation) {
@@ -354,6 +352,13 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		return project;
 	}
 
+	/**
+	 * Sets the project that is used to resolve revision numbers that
+	 * are possibly used within the labels.
+	 * 
+	 * @param newProject
+	 *            the project to be set
+	 */
 	public void setProject(Project newProject) {
 		project = newProject;
 	}
