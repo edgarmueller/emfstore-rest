@@ -111,6 +111,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
 
+	private boolean rollBackInCaseOfCommandFailure;
+
 	/**
 	 * Constructor.
 	 * 
@@ -119,6 +121,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * @param changeNotifier
 	 *            a change notifier that informs clients about changes in the collection
 	 */
+	// TODO: provide ext. point for rollBackInCaseOfCommandFailure
 	public OperationRecorder(ProjectSpaceBase projectSpace, EObjectChangeNotifier changeNotifier) {
 		this.projectSpace = projectSpace;
 		this.collection = (IdEObjectCollectionImpl) projectSpace.getProject();
@@ -142,6 +145,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			"org.eclipse.emf.emfstore.client.recording.options", "denyAddCutElementsToModelElements", false);
 
 		emitOperationsWhenCommandCompleted = true;
+		rollBackInCaseOfCommandFailure = false;
 
 		setModificator(initOperationModificator());
 	}
@@ -552,14 +556,18 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// newElementsOnClipboardAfterCommand.removeAll(currentClipboard);
 
 		// handle deleted elements => cut command
-		for (EObject deletedElement : deletedElements) {
+		for (final EObject deletedElement : deletedElements) {
 			if (newElementsOnClipboardAfterCommand.contains(deletedElement)) {
 				// TODO: EM, where to put cut elements?
 				// element was cut
 				// projectSpace.getProject().getCutElements().add(deletedElement);
 			} else {
 				// element was deleted
-				handleElementDelete(deletedElement);
+				projectSpace.executeRunnable(new Runnable() {
+					public void run() {
+						handleElementDelete(deletedElement);
+					}
+				});
 			}
 		}
 
@@ -853,6 +861,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			for (int i = compositeOperation.getSubOperations().size() - 1; i >= currentOperationListSize; i--) {
 				compositeOperation.getSubOperations().remove(i);
 			}
+		}
+
+		if (rollBackInCaseOfCommandFailure) {
+			for (int i = operations.size() - 1; i >= 0; i--) {
+				operations.get(i).reverse().apply(collection);
+			}
+		} else {
+			commandCompleted(command);
 		}
 	}
 
