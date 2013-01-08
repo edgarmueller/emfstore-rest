@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModifiedModelElementsCache;
@@ -101,7 +102,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IApplyChangesCallback, IApplyChangesWrapper, IDisposable {
+	IDisposable {
 
 	private boolean initCompleted;
 	private boolean isTransient;
@@ -120,7 +121,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private ResourceSet resourceSet;
 
-	private IApplyChangesWrapper applyChangesWrapper;
+	private IRunnableContext runnableContext;
 
 	/**
 	 * Constructor.
@@ -130,17 +131,16 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
 		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
 
-		initApplyChangeWrapper();
+		initRunnableContext();
 	}
 
-	private void initApplyChangeWrapper() {
-		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.wrapper.applychanges")
+	private void initRunnableContext() {
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableContext")
 			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
-			applyChangesWrapper = extensionElement.getClass("class", IApplyChangesWrapper.class);
-		}
-		if (applyChangesWrapper == null) {
-			applyChangesWrapper = this;
+			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
+		} else {
+			runnableContext = new DefaultRunnableContext();
 		}
 	}
 
@@ -213,49 +213,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesWrapper#wrapApplyChanges(org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback,
-	 *      org.eclipse.emf.emfstore.client.model.ProjectSpace, java.util.List)
-	 */
-	public void wrapApplyChanges(IApplyChangesCallback callback, ProjectSpace projectSpace,
-		List<AbstractOperation> operations, boolean addOperations) {
-		// default implementation does not wrapping
-		this.applyChangesIntern(projectSpace, operations, addOperations);
-	}
-
-	/**
-	 * Do *NOT* call this method directly, instead use {@link ProjectSpaceBase#applyOperations(List, boolean) instead.
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.impl.IApplyChangesCallback#applyChangesIntern(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      java.util.List, boolean)
-	 */
-	public void applyChangesIntern(ProjectSpace projectSpace, List<AbstractOperation> operations, boolean addOperations) {
-		stopChangeRecording();
-		try {
-			for (AbstractOperation operation : operations) {
-				try {
-					operation.apply(getProject());
-					// BEGIN SUPRESS CATCH EXCEPTION
-				} catch (RuntimeException e) {
-					WorkspaceUtil.handleException(e);
-				}
-				// END SUPRESS CATCH EXCEPTION
-			}
-
-			if (addOperations) {
-				addOperations(operations);
-			}
-		} finally {
-			startChangeRecording();
-		}
-	}
-
-	/**
 	 * Applies a list of operations to the project. The change tracking will be
 	 * stopped meanwhile.
 	 * 
@@ -268,7 +225,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see #applyOperationsWithRecording(List, boolean)
 	 */
 	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
-		applyChangesWrapper.wrapApplyChanges(this, this, operations, addOperations);
+		executeRunnable(new ApplyOperationsRunnable(this, operations, addOperations));
+	}
+
+	/**
+	 * Executes a given {@link Runnable} in the context of this {@link ProjectSpace}.<br>
+	 * The {@link Runnable} usually modifies the Project contained in the {@link ProjectSpace}.
+	 * 
+	 * @param runnable
+	 *            the {@link Runnable} to be executed in the context of this {@link ProjectSpace}
+	 */
+	public void executeRunnable(Runnable runnable) {
+		runnableContext.executeRunnable(runnable);
 	}
 
 	/**
@@ -1249,4 +1217,5 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
 		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
 	}
+
 }
