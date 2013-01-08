@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.common;
 
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Display;
 
@@ -86,10 +87,10 @@ public final class RunInUI {
 	}
 
 	/**
-	 * Executes the given callable and returns the result.
+	 * Executes the given {@link Callable} and returns the result.
 	 * 
 	 * @param callable
-	 *            the callable to be execued
+	 *            the {@link Callable} to be executed
 	 */
 	public static void run(final Callable<Void> callable) {
 		try {
@@ -107,7 +108,7 @@ public final class RunInUI {
 				}
 			}.execute();
 		} catch (EmfStoreException e) {
-			// ignore
+			WorkspaceUtil.handleException(e);
 		}
 	}
 
