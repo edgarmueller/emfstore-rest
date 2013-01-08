@@ -132,6 +132,8 @@ public class EmfStoreController implements IApplication, Runnable {
 
 		properties = initProperties();
 
+		logGeneralInformation();
+
 		this.loadDynamicModels();
 
 		new MigrationManager().migrateModel();
@@ -165,6 +167,11 @@ public class EmfStoreController implements IApplication, Runnable {
 			waitForTermination();
 		}
 
+	}
+
+	private void logGeneralInformation() {
+		ModelUtil.logInfo("Server data home location: " + ServerConfiguration.getServerHome());
+		ModelUtil.logInfo("JVM Max Memory: " + Runtime.getRuntime().maxMemory() / 1000000 + " MByte");
 	}
 
 	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalEmfStoreException {
