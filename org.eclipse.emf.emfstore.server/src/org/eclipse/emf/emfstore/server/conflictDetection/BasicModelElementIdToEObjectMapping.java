@@ -76,6 +76,9 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 		if (eObject != null) {
 			return eObject;
 		}
+		if (modelElementId == null) {
+			return null;
+		}
 		return idToEObjectMapping.get(modelElementId.toString());
 
 	}
