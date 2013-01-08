@@ -216,6 +216,14 @@ public class CompositeOperationItemProvider extends AbstractOperationItemProvide
 	 */
 	@Override
 	public String getText(Object object) {
+		if (object instanceof CompositeOperation) {
+			CompositeOperation compositeOperation = (CompositeOperation) object;
+			if (compositeOperation.isReversed()) {
+				return "Undo of " + compositeOperation.getCompositeName();
+			} else {
+				return compositeOperation.getCompositeName();
+			}
+		}
 		return super.getText(object);
 	}
 
