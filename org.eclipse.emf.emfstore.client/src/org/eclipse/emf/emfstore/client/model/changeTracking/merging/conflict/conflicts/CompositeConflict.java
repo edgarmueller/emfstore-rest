@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Con
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil;
 
 /**
  * Conflict {@link CompositeOperation} involved.
@@ -60,7 +61,12 @@ public class CompositeConflict extends Conflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		if (isLeftMy()) {
+		if (OperationUtil.isComposite(getMyOperation()) && OperationUtil.isComposite(getTheirOperation())) {
+			description.setDescription(DecisionUtil.getDescription("compositeconflict.both", getDecisionManager()
+				.isBranchMerge()));
+			description.add("localcompdescription", getLeftOperation());
+			description.add("incomingcompdescription", getRightOperation());
+		} else if (isLeftMy()) {
 			description.setDescription(DecisionUtil.getDescription("compositeconflict.my", getDecisionManager()
 				.isBranchMerge()));
 		} else {
