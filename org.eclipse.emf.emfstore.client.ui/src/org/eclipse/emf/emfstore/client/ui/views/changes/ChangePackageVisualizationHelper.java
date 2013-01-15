@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -53,7 +52,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * Constructor.
 	 * 
 	 * @param idToEObjectMapping
-	 *            the {@link IdEObjectCollection} that is holding the EObjects that are going to be visualized
+	 *            the ID to EObject mapping that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
 	 */
 	public ChangePackageVisualizationHelper(IModelElementIdToEObjectMapping idToEObjectMapping) {

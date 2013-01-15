@@ -127,4 +127,12 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 		}
 	}
 
+	/**
+	 * Returns the label provider.
+	 * 
+	 * @return the label provider
+	 */
+	protected AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
+		return adapterFactoryLabelProvider;
+	}
 }
