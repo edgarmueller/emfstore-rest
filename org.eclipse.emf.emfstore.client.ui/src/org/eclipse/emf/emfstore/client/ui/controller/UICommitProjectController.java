@@ -119,7 +119,9 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "No local changes",
-						"Your local changes were mutually exclusive.\n" + "There are no changes pending for commit.");
+						"No need to commit any more, there are no more changes pending for commit.\n"
+							+ "This may have happened because you rejected your changes in favor for changes "
+							+ "of other users in a merge.");
 					return null;
 				}
 			});
