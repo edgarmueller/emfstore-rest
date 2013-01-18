@@ -59,10 +59,13 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		// check if workspace can init, exit otherwise
 		try {
 			WorkspaceManager.init();
+			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException exception) {
-			ModelUtil.logException(
-				"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
-				exception);
+			// END SUPRESS CATCH EXCEPTION
+			ModelUtil
+				.logException(
+								"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
+								exception);
 			return;
 		}
 		saveStateChangedObserver = new SaveStateChangedObserver() {

@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -92,8 +91,8 @@ public final class EClassFilter {
 	/**
 	 * Whether the given operation only involves types that are considered to be filtered.
 	 * 
-	 * @param collection
-	 *            an {@link IdEObjectCollection} that is used to resolve the {@link EObject}s
+	 * @param idToEObjectMapping
+	 *            a mapping that is used to resolve the {@link EObject}s
 	 *            contained in the operation
 	 * @param operation
 	 *            the operations to check
