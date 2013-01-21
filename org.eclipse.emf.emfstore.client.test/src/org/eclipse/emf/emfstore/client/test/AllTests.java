@@ -14,7 +14,6 @@ import org.eclipse.emf.emfstore.client.test.caching.AllCachingTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.AllChangeTrackingTests;
 import org.eclipse.emf.emfstore.client.test.common.observerbus.AllObserverBusTests;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.AllConflictDetectionTests;
-import org.eclipse.emf.emfstore.client.test.conflictDetection.merging.AllMergeTests;
 import org.eclipse.emf.emfstore.client.test.persistence.PersistenceTest;
 import org.eclipse.emf.emfstore.client.test.persistence.ProjectCacheTest;
 import org.eclipse.emf.emfstore.client.test.server.AllServerTests;
