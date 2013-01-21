@@ -7,6 +7,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
+ * Edgar Mueller
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
@@ -65,22 +68,24 @@ import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
  * Utility class for ModelElements.
  * 
  * @author koegel
+ * @author emueller
+ * @author ottovonwesen
  */
 public final class ModelUtil {
 
-	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
-
-	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
-
 	/**
-	 * Text marker for the begin of the plaintext in rich text attributes.
+	 * Constant that may be used in case no checksum computation has taken place.
 	 */
-	public static final String BEGINTEXT_TOKEN = "%BEGINNTEXT%";
+	public static final long NO_CHECKSUM = -1;
 
 	/**
 	 * URI used to serialize EObject with the model util.
 	 */
 	public static final URI VIRTUAL_URI = URI.createURI("virtualUri");
+
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
+
+	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
 
 	private static IResourceLogger resourceLogger = new IResourceLogger() {
 
@@ -133,27 +138,34 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Compares two EObject by checking whether the string representations of
+	 * Compares two {@link EObject}s by checking whether the string representations of
 	 * the EObjects are equal.
 	 * 
-	 * @param eobjectA
+	 * @param eObjectA
 	 *            the first EObject
-	 * @param eobjectB
+	 * @param eObjectB
 	 *            the second EObject
-	 * @return true if the two objects are equal
+	 * @return true if the two objects are equal, false otherwise
 	 */
-	public static boolean areEqual(EObject eobjectA, EObject eobjectB) {
-		String stringA;
-		String stringB;
+	public static boolean areEqual(EObject eObjectA, EObject eObjectB) {
+		long a;
+		long b;
 
 		try {
-			stringA = eObjectToString(eobjectA);
-			stringB = eObjectToString(eobjectB);
+			// collections are treated specially because the order
+			// of root elements should not matter
+			if (eObjectA instanceof IdEObjectCollection) {
+				a = computeChecksum((IdEObjectCollection) eObjectA);
+				b = computeChecksum((IdEObjectCollection) eObjectB);
+			} else {
+				a = computeChecksum(eObjectA);
+				b = computeChecksum(eObjectB);
+			}
 		} catch (SerializationException e) {
 			return false;
 		}
-		return stringA.equals(stringB);
 
+		return a == b;
 	}
 
 	/**
@@ -198,6 +210,60 @@ public final class ModelUtil {
 		}
 		String result = stringWriter.toString();
 		return result;
+	}
+
+	/**
+	 * Computes the checksum for a given {@link EObject}.
+	 * 
+	 * @param eObject
+	 *            the EObject for which to compute a checksum
+	 * @return the computed checksum
+	 * 
+	 * @throws SerializationException
+	 *             in case any errors occur during computation of the checksum
+	 */
+	public static long computeChecksum(EObject eObject) throws SerializationException {
+		String eObjectString = eObjectToString(eObject);
+
+		long h = 1125899906842597L; // prime
+		int len = eObjectString.length();
+
+		for (int i = 0; i < len; i++) {
+			h = 31 * h + eObjectString.charAt(i);
+		}
+
+		return h;
+	}
+
+	/**
+	 * Computes the checksum for a given {@link IdEObjectCollection}.
+	 * The checksum for a collection is independent of the order of the
+	 * collection's elements at the root level.
+	 * 
+	 * @param collection
+	 *            the collection for which to compute a checksum
+	 * @return the computed checksum
+	 * 
+	 * @throws SerializationException
+	 *             in case any errors occur during computation of the checksum
+	 */
+	public static long computeChecksum(IdEObjectCollection collection) throws SerializationException {
+
+		if (collection.getModelElements().size() > 0) {
+			long checksum = NO_CHECKSUM;
+
+			for (EObject eObject : collection.getModelElements()) {
+				if (checksum == 0) {
+					checksum = computeChecksum(eObject);
+				} else {
+					checksum ^= computeChecksum(eObject);
+				}
+			}
+
+			return checksum;
+		}
+
+		return computeChecksum(collection);
 	}
 
 	/**
