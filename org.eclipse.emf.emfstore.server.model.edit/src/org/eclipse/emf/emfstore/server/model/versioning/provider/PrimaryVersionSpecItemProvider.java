@@ -29,7 +29,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
@@ -57,6 +58,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 			super.getPropertyDescriptors(object);
 
 			addIdentifierPropertyDescriptor(object);
+			addProjectStateChecksumPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -78,7 +80,26 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	}
 
 	/**
-	 * This returns PrimaryVersionSpec.gif. <!-- begin-user-doc --> <!--
+	 * This adds a property descriptor for the Project State Checksum feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addProjectStateChecksumPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_PrimaryVersionSpec_projectStateChecksum_feature"),
+			getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_projectStateChecksum_feature",
+				"_UI_PrimaryVersionSpec_type"),
+			VersioningPackage.Literals.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This returns PrimaryVersionSpec.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -89,7 +110,8 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,9 +124,9 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -115,6 +137,7 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 
 		switch (notification.getFeatureID(PrimaryVersionSpec.class)) {
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

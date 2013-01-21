@@ -26,12 +26,9 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl#getModelElementId
- * <em>Model Element Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlFragmentImpl#getModelElementId <em>Model
+ * Element Id</em>}</li>
  * </ul>
  * </p>
  * 
@@ -59,8 +56,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getModelElementId()
-	 * <em>Model Element Id</em>}' containment reference. <!-- begin-user-doc
+	 * The cached value of the '{@link #getModelElementId() <em>Model Element Id</em>}' containment reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getModelElementId()

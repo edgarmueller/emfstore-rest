@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface RolesFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -29,7 +30,8 @@ public interface RolesFactory extends EFactory {
 	RolesFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RolesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Reader Role</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Reader Role</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Reader Role</em>'.
@@ -38,7 +40,8 @@ public interface RolesFactory extends EFactory {
 	ReaderRole createReaderRole();
 
 	/**
-	 * Returns a new object of class '<em>Writer Role</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Writer Role</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Writer Role</em>'.
@@ -65,7 +68,8 @@ public interface RolesFactory extends EFactory {
 	ServerAdmin createServerAdmin();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.

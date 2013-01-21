@@ -52,8 +52,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  */
 public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implements MultiReferenceMoveOperation {
 	/**
-	 * The default value of the '{@link #getOldIndex() <em>Old Index</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getOldIndex() <em>Old Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldIndex()
 	 * @generated
@@ -62,8 +62,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	protected static final int OLD_INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getOldIndex() <em>Old Index</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldIndex() <em>Old Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldIndex()
 	 * @generated
@@ -72,8 +72,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	protected int oldIndex = OLD_INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNewIndex() <em>New Index</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getNewIndex() <em>New Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewIndex()
 	 * @generated
@@ -82,8 +82,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	protected static final int NEW_INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getNewIndex() <em>New Index</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewIndex() <em>New Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewIndex()
 	 * @generated

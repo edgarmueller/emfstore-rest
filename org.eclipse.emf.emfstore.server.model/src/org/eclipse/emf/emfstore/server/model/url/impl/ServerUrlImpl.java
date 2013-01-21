@@ -22,12 +22,8 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getHostName
- * <em>Host Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getPort
- * <em>Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getHostName <em>Host Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
  * 
@@ -35,8 +31,8 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  */
 public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
-	 * The default value of the '{@link #getHostName() <em>Host Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getHostName() <em>Host Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getHostName()
 	 * @generated
@@ -45,8 +41,8 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	protected static final String HOST_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getHostName() <em>Host Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getHostName() <em>Host Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getHostName()
 	 * @generated

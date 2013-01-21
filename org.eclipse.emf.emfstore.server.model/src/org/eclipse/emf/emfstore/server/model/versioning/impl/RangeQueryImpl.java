@@ -21,18 +21,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getUpperLimit
- * <em>Upper Limit</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getLowerLimit
- * <em>Lower Limit</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeIncoming
- * <em>Include Incoming</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeOutgoing
- * <em>Include Outgoing</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getUpperLimit <em>Upper Limit</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getLowerLimit <em>Lower Limit</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeIncoming <em>Include
+ * Incoming</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeOutgoing <em>Include
+ * Outgoing</em>}</li>
  * </ul>
  * </p>
  * 
@@ -40,8 +34,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	/**
-	 * The default value of the '{@link #getUpperLimit() <em>Upper Limit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getUpperLimit() <em>Upper Limit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUpperLimit()
 	 * @generated
@@ -50,8 +44,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected static final int UPPER_LIMIT_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getUpperLimit() <em>Upper Limit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getUpperLimit() <em>Upper Limit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUpperLimit()
 	 * @generated
@@ -60,8 +54,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected int upperLimit = UPPER_LIMIT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLowerLimit() <em>Lower Limit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getLowerLimit() <em>Lower Limit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLowerLimit()
 	 * @generated
@@ -70,8 +64,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected static final int LOWER_LIMIT_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getLowerLimit() <em>Lower Limit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLowerLimit() <em>Lower Limit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLowerLimit()
 	 * @generated
@@ -80,8 +74,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected int lowerLimit = LOWER_LIMIT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIncludeIncoming()
-	 * <em>Include Incoming</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isIncludeIncoming() <em>Include Incoming</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeIncoming()
@@ -91,8 +85,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected static final boolean INCLUDE_INCOMING_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIncludeIncoming()
-	 * <em>Include Incoming</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isIncludeIncoming() <em>Include Incoming</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeIncoming()
@@ -102,8 +96,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected boolean includeIncoming = INCLUDE_INCOMING_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIncludeOutgoing()
-	 * <em>Include Outgoing</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isIncludeOutgoing() <em>Include Outgoing</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeOutgoing()
@@ -113,8 +107,8 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 	protected static final boolean INCLUDE_OUTGOING_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIncludeOutgoing()
-	 * <em>Include Outgoing</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isIncludeOutgoing() <em>Include Outgoing</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeOutgoing()

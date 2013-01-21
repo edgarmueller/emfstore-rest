@@ -31,28 +31,32 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  */
 public interface SemanticPackage extends EPackage {
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNAME = "semantic";
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic";
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.operations.semantic";
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -63,7 +67,8 @@ public interface SemanticPackage extends EPackage {
 	/**
 	 * The meta object id for the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
-	 * <em>Composite Operation</em>}' class. <!-- begin-user-doc --> <!--
+	 * <em>Composite Operation</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
@@ -82,8 +87,8 @@ public interface SemanticPackage extends EPackage {
 	int SEMANTIC_COMPOSITE_OPERATION__IDENTIFIER = OperationsPackage.COMPOSITE_OPERATION__IDENTIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Model Element Id</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Model Element Id</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -109,8 +114,8 @@ public interface SemanticPackage extends EPackage {
 	int SEMANTIC_COMPOSITE_OPERATION__CLIENT_DATE = OperationsPackage.COMPOSITE_OPERATION__CLIENT_DATE;
 
 	/**
-	 * The feature id for the '<em><b>Sub Operations</b></em>' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Sub Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -154,8 +159,8 @@ public interface SemanticPackage extends EPackage {
 	int SEMANTIC_COMPOSITE_OPERATION__REVERSED = OperationsPackage.COMPOSITE_OPERATION__REVERSED;
 
 	/**
-	 * The number of structural features of the '<em>Composite Operation</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Composite Operation</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -200,7 +205,8 @@ public interface SemanticPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
-		 * <em>Composite Operation</em>}' class. <!-- begin-user-doc --> <!--
+		 * <em>Composite Operation</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl

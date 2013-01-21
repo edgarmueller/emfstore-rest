@@ -33,15 +33,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getModelElementId
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getModelElementId
  * <em>Model Element Id</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#isAccepted
- * <em>Accepted</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getClientDate
- * <em>Client Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#isAccepted <em>
+ * Accepted</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getClientDate <em>
+ * Client Date</em>}</li>
  * </ul>
  * </p>
  * 
@@ -49,8 +46,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  */
 public abstract class AbstractOperationImpl extends IdentifiableElementImpl implements AbstractOperation {
 	/**
-	 * The cached value of the '{@link #getModelElementId()
-	 * <em>Model Element Id</em>}' containment reference. <!-- begin-user-doc
+	 * The cached value of the '{@link #getModelElementId() <em>Model Element Id</em>}' containment reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getModelElementId()
@@ -60,8 +57,8 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	protected ModelElementId modelElementId;
 
 	/**
-	 * The default value of the '{@link #isAccepted() <em>Accepted</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isAccepted() <em>Accepted</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #isAccepted()
 	 * @generated
@@ -69,8 +66,8 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	 */
 	protected static final boolean ACCEPTED_EDEFAULT = false;
 	/**
-	 * The cached value of the '{@link #isAccepted() <em>Accepted</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #isAccepted() <em>Accepted</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #isAccepted()
 	 * @generated
@@ -79,8 +76,8 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	protected boolean accepted = ACCEPTED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getClientDate() <em>Client Date</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getClientDate() <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getClientDate()
 	 * @generated
@@ -88,8 +85,8 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	 */
 	protected static final Date CLIENT_DATE_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getClientDate() <em>Client Date</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getClientDate() <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getClientDate()
 	 * @generated

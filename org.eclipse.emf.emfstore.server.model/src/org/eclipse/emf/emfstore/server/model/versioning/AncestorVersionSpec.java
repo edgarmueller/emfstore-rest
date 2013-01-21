@@ -17,12 +17,8 @@ package org.eclipse.emf.emfstore.server.model.versioning;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
- * <em>Target</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
- * <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  * 
@@ -49,12 +45,12 @@ public interface AncestorVersionSpec extends VersionSpec {
 	PrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
-	 * <em>Target</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
+	 * <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Target</em>' containment reference.
+	 * @param value the new value of the '<em>Target</em>' containment reference.
 	 * @see #getTarget()
 	 * @generated
 	 */
@@ -78,12 +74,12 @@ public interface AncestorVersionSpec extends VersionSpec {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
-	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
+	 * <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Source</em>' containment reference.
+	 * @param value the new value of the '<em>Source</em>' containment reference.
 	 * @see #getSource()
 	 * @generated
 	 */

@@ -20,9 +20,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements
- * <em>Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements <em>Model Elements
+ * </em>}</li>
  * </ul>
  * </p>
  * 

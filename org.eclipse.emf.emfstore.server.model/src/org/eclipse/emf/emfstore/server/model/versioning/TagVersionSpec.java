@@ -45,11 +45,11 @@ public interface TagVersionSpec extends VersionSpec {
 	String getName();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
-	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
+	 * <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Name</em>' attribute.
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */

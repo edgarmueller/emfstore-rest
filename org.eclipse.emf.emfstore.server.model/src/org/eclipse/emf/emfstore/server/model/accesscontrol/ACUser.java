@@ -18,15 +18,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName
- * <em>First Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName
- * <em>Last Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getEffectiveGroups
- * <em>Effective Groups</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName <em>Last Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getEffectiveGroups <em>Effective Groups</em>}</li>
  * </ul>
  * </p>
  * 
@@ -53,12 +47,12 @@ public interface ACUser extends ACOrgUnit {
 	String getFirstName();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName
-	 * <em>First Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName
+	 * <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>First Name</em>' attribute.
+	 * @param value the new value of the '<em>First Name</em>' attribute.
 	 * @see #getFirstName()
 	 * @generated
 	 */

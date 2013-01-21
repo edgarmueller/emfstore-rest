@@ -50,7 +50,8 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	private static final String EXCEPTION_MESSAGE = "Invalid EMFStore URL!";
 
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -69,7 +70,8 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

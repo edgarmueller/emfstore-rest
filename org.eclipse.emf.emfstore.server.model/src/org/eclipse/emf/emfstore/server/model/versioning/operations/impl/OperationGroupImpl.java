@@ -61,8 +61,8 @@ public class OperationGroupImpl extends EObjectImpl implements OperationGroup {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOperations()
 	 * @generated

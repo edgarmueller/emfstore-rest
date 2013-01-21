@@ -37,14 +37,16 @@ import org.eclipse.emf.emfstore.server.model.VersionInfo;
  */
 public class ModelAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected static ModelPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -144,11 +146,11 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
@@ -158,8 +160,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectHistory
-	 * <em>Project History</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory
+	 * <em>Project History</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -173,8 +176,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectInfo
-	 * <em>Project Info</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectInfo
+	 * <em>Project Info</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -188,8 +192,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.SessionId
-	 * <em>Session Id</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.SessionId
+	 * <em>Session Id</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -203,8 +208,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ServerSpace
-	 * <em>Server Space</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ServerSpace
+	 * <em>Server Space</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -218,8 +224,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ProjectId
-	 * <em>Project Id</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectId
+	 * <em>Project Id</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -233,8 +240,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.VersionInfo
-	 * <em>Version Info</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.VersionInfo
+	 * <em>Version Info</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -248,8 +256,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo
-	 * <em>Client Version Info</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo
+	 * <em>Client Version Info</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -263,8 +272,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.FileIdentifier
-	 * <em>File Identifier</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.FileIdentifier
+	 * <em>File Identifier</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -279,8 +289,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation
-	 * <em>Authentication Information</em>}'. <!-- begin-user-doc --> This
+	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation <em>Authentication Information</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -294,8 +304,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
-	 * <em>Unique Identifier</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * <em>Unique Identifier</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -309,8 +320,9 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
-	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * <em>Identifiable Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -324,7 +336,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.

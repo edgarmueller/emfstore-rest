@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface EventsFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -29,7 +30,8 @@ public interface EventsFactory extends EFactory {
 	EventsFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Event</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Event</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Event</em>'.
@@ -38,7 +40,8 @@ public interface EventsFactory extends EFactory {
 	Event createEvent();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.

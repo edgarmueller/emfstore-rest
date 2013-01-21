@@ -81,7 +81,8 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -97,7 +98,8 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This returns ClientVersionInfo.gif. <!-- begin-user-doc --> <!--
+	 * This returns ClientVersionInfo.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -108,7 +110,8 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -121,9 +124,9 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

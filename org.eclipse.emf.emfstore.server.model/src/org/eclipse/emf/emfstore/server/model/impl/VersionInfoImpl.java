@@ -23,9 +23,8 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.VersionInfoImpl#getEmfStoreVersionString
- * <em>Emf Store Version String</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.VersionInfoImpl#getEmfStoreVersionString <em>Emf Store Version
+ * String</em>}</li>
  * </ul>
  * </p>
  * 
@@ -33,8 +32,8 @@ import org.osgi.framework.Version;
  */
 public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 	/**
-	 * The default value of the '{@link #getEmfStoreVersionString()
-	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #getEmfStoreVersionString() <em>Emf Store Version String</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getEmfStoreVersionString()
@@ -44,8 +43,8 @@ public class VersionInfoImpl extends EObjectImpl implements VersionInfo {
 	protected static final String EMF_STORE_VERSION_STRING_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEmfStoreVersionString()
-	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getEmfStoreVersionString() <em>Emf Store Version String</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getEmfStoreVersionString()

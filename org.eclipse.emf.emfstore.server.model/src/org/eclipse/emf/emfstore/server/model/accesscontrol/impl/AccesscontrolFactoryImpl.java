@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  */
 public class AccesscontrolFactoryImpl extends EFactoryImpl implements AccesscontrolFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -50,7 +51,8 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements Accesscont
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

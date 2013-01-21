@@ -24,8 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional
  * <em>Bidirectional</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#getOppositeFeatureName
@@ -40,8 +39,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
  */
 public abstract class ReferenceOperationImpl extends FeatureOperationImpl implements ReferenceOperation {
 	/**
-	 * The default value of the '{@link #isBidirectional()
-	 * <em>Bidirectional</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isBidirectional() <em>Bidirectional</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isBidirectional()
@@ -51,8 +50,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final boolean BIDIRECTIONAL_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isBidirectional()
-	 * <em>Bidirectional</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isBidirectional() <em>Bidirectional</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isBidirectional()
@@ -74,8 +73,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	}
 
 	/**
-	 * The default value of the '{@link #getOppositeFeatureName()
-	 * <em>Opposite Feature Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getOppositeFeatureName() <em>Opposite Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getOppositeFeatureName()
@@ -85,8 +84,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final String OPPOSITE_FEATURE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOppositeFeatureName()
-	 * <em>Opposite Feature Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getOppositeFeatureName() <em>Opposite Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getOppositeFeatureName()
@@ -96,8 +95,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected String oppositeFeatureName = OPPOSITE_FEATURE_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getContainmentType()
-	 * <em>Containment Type</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getContainmentType() <em>Containment Type</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getContainmentType()
@@ -107,8 +106,8 @@ public abstract class ReferenceOperationImpl extends FeatureOperationImpl implem
 	protected static final ContainmentType CONTAINMENT_TYPE_EDEFAULT = ContainmentType.NONE;
 
 	/**
-	 * The cached value of the '{@link #getContainmentType()
-	 * <em>Containment Type</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getContainmentType() <em>Containment Type</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getContainmentType()

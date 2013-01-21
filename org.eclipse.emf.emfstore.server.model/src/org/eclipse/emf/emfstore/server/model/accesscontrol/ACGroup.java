@@ -18,9 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup#getMembers
- * <em>Members</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  * 
@@ -30,8 +28,8 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ACGroup extends ACOrgUnit {
 	/**
-	 * Returns the value of the '<em><b>Members</b></em>' reference list. The
-	 * list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit}.
+	 * Returns the value of the '<em><b>Members</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Members</em>' reference list isn't clear, there really should be more of a description

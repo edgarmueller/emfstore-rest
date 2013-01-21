@@ -24,9 +24,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACGroupImpl#getMembers
- * <em>Members</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACGroupImpl#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,8 +32,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  */
 public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 	/**
-	 * The cached value of the '{@link #getMembers() <em>Members</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getMembers() <em>Members</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMembers()
 	 * @generated

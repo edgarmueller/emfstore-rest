@@ -31,14 +31,16 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole;
  */
 public class RolesAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected static RolesPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -108,11 +110,11 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 	};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
@@ -139,8 +141,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole
-	 * <em>Reader Role</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ReaderRole <em>Reader Role</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -155,8 +157,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole
-	 * <em>Writer Role</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole <em>Writer Role</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -171,8 +173,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole
-	 * <em>Project Admin Role</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole <em>Project Admin Role</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -187,8 +189,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin
-	 * <em>Server Admin</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ServerAdmin <em>Server Admin</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -202,7 +204,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.

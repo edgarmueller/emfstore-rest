@@ -24,9 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.PathQueryImpl#getTarget
- * <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PathQueryImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,8 +32,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class PathQueryImpl extends HistoryQueryImpl implements PathQuery {
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTarget()
 	 * @generated

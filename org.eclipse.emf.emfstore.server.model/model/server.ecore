@@ -66,6 +66,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="PrimaryVersionSpec" eSuperTypes="#//versioning/VersionSpec">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectStateChecksum"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VersionSpec" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -89,6 +91,8 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="versionProperties" upperBound="-1"
           eType="#//versioning/VersionProperty" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectStateChecksum"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HistoryInfo">
       <eStructuralFeatures xsi:type="ecore:EReference" name="primerySpec" lowerBound="1"

@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface ModelFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -47,7 +48,8 @@ public interface ModelFactory extends EFactory {
 	ProjectInfo createProjectInfo();
 
 	/**
-	 * Returns a new object of class '<em>Session Id</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Session Id</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Session Id</em>'.
@@ -65,7 +67,8 @@ public interface ModelFactory extends EFactory {
 	ServerSpace createServerSpace();
 
 	/**
-	 * Returns a new object of class '<em>Project Id</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Project Id</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Project Id</em>'.
@@ -110,7 +113,8 @@ public interface ModelFactory extends EFactory {
 	AuthenticationInformation createAuthenticationInformation();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.

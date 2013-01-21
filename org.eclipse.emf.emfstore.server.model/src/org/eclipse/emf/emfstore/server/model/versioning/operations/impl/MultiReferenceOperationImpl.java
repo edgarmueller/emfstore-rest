@@ -42,12 +42,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#isAdd
- * <em>Add</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getIndex
- * <em>Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#isAdd <em>Add
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getIndex <em>
+ * Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getReferencedModelElements
  * <em>Referenced Model Elements</em>}</li>

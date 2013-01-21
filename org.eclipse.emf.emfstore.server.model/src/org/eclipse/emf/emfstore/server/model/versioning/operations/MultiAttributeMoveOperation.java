@@ -17,12 +17,10 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex
- * <em>Old Index</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex
- * <em>New Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>
+ * Old Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>
+ * New Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
  * <em>Referenced Value</em>}</li>
@@ -114,11 +112,11 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
-	 * <em>Referenced Value</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * <em>Referenced Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Referenced Value</em>' attribute.
+	 * @param value the new value of the '<em>Referenced Value</em>' attribute.
 	 * @see #getReferencedValue()
 	 * @generated
 	 */

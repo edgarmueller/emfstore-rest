@@ -20,12 +20,9 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
- * <em>Session Id</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
- * <em>Resolved AC User</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC User
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -35,8 +32,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  */
 public interface AuthenticationInformation extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Session Id</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Session Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Session Id</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
@@ -52,29 +49,27 @@ public interface AuthenticationInformation extends EObject {
 	SessionId getSessionId();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
-	 * <em>Session Id</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
+	 * <em>Session Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Session Id</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Session Id</em>' containment reference.
 	 * @see #getSessionId()
 	 * @generated
 	 */
 	void setSessionId(SessionId value);
 
 	/**
-	 * Returns the value of the '<em><b>Resolved AC User</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Resolved AC User</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resolved AC User</em>' containment reference isn't clear, there really should be more
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Resolved AC User</em>' containment
-	 *         reference.
+	 * @return the value of the '<em>Resolved AC User</em>' containment reference.
 	 * @see #setResolvedACUser(ACUser)
 	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
 	 * @model containment="true" resolveProxies="true"
@@ -83,13 +78,12 @@ public interface AuthenticationInformation extends EObject {
 	ACUser getResolvedACUser();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
-	 * <em>Resolved AC User</em>}' containment reference. <!-- begin-user-doc
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
+	 * <em>Resolved AC User</em>}' containment reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Resolved AC User</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Resolved AC User</em>' containment reference.
 	 * @see #getResolvedACUser()
 	 * @generated
 	 */

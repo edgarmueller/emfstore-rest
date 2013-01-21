@@ -25,12 +25,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getTarget
- * <em>Target</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getSource
- * <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  * 
@@ -38,8 +34,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class AncestorVersionSpecImpl extends VersionSpecImpl implements AncestorVersionSpec {
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTarget()
 	 * @generated
@@ -48,8 +44,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	protected PrimaryVersionSpec target;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSource()
 	 * @generated

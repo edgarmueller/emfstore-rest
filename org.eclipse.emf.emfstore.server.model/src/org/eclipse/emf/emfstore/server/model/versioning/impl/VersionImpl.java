@@ -45,39 +45,22 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getProjectState
- * <em>Project State</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getPrimarySpec
- * <em>Primary Spec</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getTagSpecs
- * <em>Tag Specs</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getNextVersion
- * <em>Next Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getPreviousVersion
- * <em>Previous Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getChanges
- * <em>Changes</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getLogMessage
- * <em>Log Message</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getAncestorVersion
- * <em>Ancestor Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getBranchedVersions
- * <em>Branched Versions</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getMergedToVersion
- * <em>Merged To Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getMergedFromVersion
- * <em>Merged From Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getProjectState <em>Project State</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getPrimarySpec <em>Primary Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getTagSpecs <em>Tag Specs</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getNextVersion <em>Next Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getPreviousVersion <em>Previous Version
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getChanges <em>Changes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getLogMessage <em>Log Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getAncestorVersion <em>Ancestor Version
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getBranchedVersions <em>Branched
+ * Versions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getMergedToVersion <em>Merged To Version
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl#getMergedFromVersion <em>Merged From
+ * Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -85,8 +68,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class VersionImpl extends EObjectImpl implements Version {
 	/**
-	 * The cached value of the '{@link #getProjectState()
-	 * <em>Project State</em>}' containment reference. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getProjectState() <em>Project State</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectState()
@@ -96,8 +79,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected Project projectState;
 
 	/**
-	 * The cached value of the '{@link #getPrimarySpec() <em>Primary Spec</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPrimarySpec() <em>Primary Spec</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getPrimarySpec()
 	 * @generated
@@ -106,8 +89,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected PrimaryVersionSpec primarySpec;
 
 	/**
-	 * The cached value of the '{@link #getTagSpecs() <em>Tag Specs</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTagSpecs() <em>Tag Specs</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTagSpecs()
 	 * @generated
@@ -116,8 +99,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected EList<TagVersionSpec> tagSpecs;
 
 	/**
-	 * The cached value of the '{@link #getNextVersion() <em>Next Version</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNextVersion() <em>Next Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNextVersion()
 	 * @generated
@@ -126,8 +109,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected Version nextVersion;
 
 	/**
-	 * The cached value of the '{@link #getPreviousVersion()
-	 * <em>Previous Version</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getPreviousVersion() <em>Previous Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getPreviousVersion()
@@ -137,8 +120,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected Version previousVersion;
 
 	/**
-	 * The cached value of the '{@link #getChanges() <em>Changes</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getChanges() <em>Changes</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getChanges()
 	 * @generated
@@ -147,8 +130,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected ChangePackage changes;
 
 	/**
-	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLogMessage()
 	 * @generated
@@ -157,8 +140,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected LogMessage logMessage;
 
 	/**
-	 * The cached value of the '{@link #getAncestorVersion()
-	 * <em>Ancestor Version</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getAncestorVersion() <em>Ancestor Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getAncestorVersion()
@@ -168,8 +151,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected Version ancestorVersion;
 
 	/**
-	 * The cached value of the '{@link #getBranchedVersions()
-	 * <em>Branched Versions</em>}' reference list. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getBranchedVersions() <em>Branched Versions</em>}' reference list.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getBranchedVersions()
@@ -179,8 +162,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected EList<Version> branchedVersions;
 
 	/**
-	 * The cached value of the '{@link #getMergedToVersion()
-	 * <em>Merged To Version</em>}' reference list. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getMergedToVersion() <em>Merged To Version</em>}' reference list.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getMergedToVersion()
@@ -190,8 +173,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	protected EList<Version> mergedToVersion;
 
 	/**
-	 * The cached value of the '{@link #getMergedFromVersion()
-	 * <em>Merged From Version</em>}' reference list. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMergedFromVersion() <em>Merged From Version</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getMergedFromVersion()

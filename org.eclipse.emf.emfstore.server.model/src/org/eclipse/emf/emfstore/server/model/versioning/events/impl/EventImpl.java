@@ -24,9 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl#getTimestamp
- * <em>Timestamp</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl#getTimestamp <em>Timestamp</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,8 +32,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  */
 public class EventImpl extends EObjectImpl implements Event {
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTimestamp()
 	 * @generated
@@ -44,8 +42,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	protected static final Date TIMESTAMP_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTimestamp()
 	 * @generated

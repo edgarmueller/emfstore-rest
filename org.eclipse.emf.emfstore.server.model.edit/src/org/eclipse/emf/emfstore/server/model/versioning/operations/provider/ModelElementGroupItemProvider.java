@@ -32,7 +32,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup} object. <!-- begin-user-doc -->
+ * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * 
  * @generated
@@ -67,7 +68,8 @@ public class ModelElementGroupItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -140,9 +142,9 @@ public class ModelElementGroupItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

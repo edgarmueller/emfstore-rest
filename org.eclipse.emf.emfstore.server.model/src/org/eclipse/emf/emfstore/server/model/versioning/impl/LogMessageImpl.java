@@ -24,18 +24,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getAuthor
- * <em>Author</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getMessage
- * <em>Message</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getDate
- * <em>Date</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getClientDate
- * <em>Client Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getAuthor <em>Author</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getMessage <em>Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getDate <em>Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getClientDate <em>Client Date</em>}</li>
  * </ul>
  * </p>
  * 
@@ -43,8 +35,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	/**
-	 * The default value of the '{@link #getAuthor() <em>Author</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getAuthor() <em>Author</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getAuthor()
 	 * @generated
@@ -63,8 +55,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	protected String author = AUTHOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMessage() <em>Message</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getMessage() <em>Message</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMessage()
 	 * @generated
@@ -73,8 +65,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	protected static final String MESSAGE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getMessage() <em>Message</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMessage()
 	 * @generated
@@ -103,8 +95,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	protected Date date = DATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getClientDate() <em>Client Date</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getClientDate() <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getClientDate()
 	 * @generated
@@ -113,8 +105,8 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	protected static final Date CLIENT_DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getClientDate() <em>Client Date</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getClientDate() <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getClientDate()
 	 * @generated

@@ -28,11 +28,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getModelElements
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getName <em>Name
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getModelElements
  * <em>Model Elements</em>}</li>
  * </ul>
  * </p>
@@ -61,8 +59,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getModelElements()
-	 * <em>Model Elements</em>}' reference list. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getModelElements() <em>Model Elements</em>}' reference list.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getModelElements()

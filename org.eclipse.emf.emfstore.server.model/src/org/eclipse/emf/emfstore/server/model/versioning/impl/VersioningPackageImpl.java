@@ -203,8 +203,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model,
-	 * and for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
 	 * <p>
 	 * This method is used to initialize {@link VersioningPackage#eINSTANCE} when that field is accessed. Clients should
@@ -340,6 +339,16 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getPrimaryVersionSpec_ProjectStateChecksum() {
+		return (EAttribute) primaryVersionSpecEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -445,6 +454,16 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 */
 	public EReference getChangePackage_VersionProperties() {
 		return (EReference) changePackageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getChangePackage_ProjectStateChecksum() {
+		return (EAttribute) changePackageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -887,8 +906,9 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package. This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -907,6 +927,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		primaryVersionSpecEClass = createEClass(PRIMARY_VERSION_SPEC);
 		createEAttribute(primaryVersionSpecEClass, PRIMARY_VERSION_SPEC__IDENTIFIER);
+		createEAttribute(primaryVersionSpecEClass, PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM);
 
 		versionSpecEClass = createEClass(VERSION_SPEC);
 		createEAttribute(versionSpecEClass, VERSION_SPEC__BRANCH);
@@ -922,6 +943,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		createEReference(changePackageEClass, CHANGE_PACKAGE__EVENTS);
 		createEReference(changePackageEClass, CHANGE_PACKAGE__LOG_MESSAGE);
 		createEReference(changePackageEClass, CHANGE_PACKAGE__VERSION_PROPERTIES);
+		createEAttribute(changePackageEClass, CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM);
 
 		historyInfoEClass = createEClass(HISTORY_INFO);
 		createEReference(historyInfoEClass, HISTORY_INFO__PRIMERY_SPEC);
@@ -1047,6 +1069,9 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		initEAttribute(getPrimaryVersionSpec_Identifier(), ecorePackage.getEInt(), "identifier", null, 1, 1,
 			PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimaryVersionSpec_ProjectStateChecksum(), ecorePackage.getELong(), "projectStateChecksum",
+			null, 0, 1, PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(versionSpecEClass, VersionSpec.class, "VersionSpec", IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
@@ -1078,6 +1103,9 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		initEReference(getChangePackage_VersionProperties(), this.getVersionProperty(), null, "versionProperties",
 			null, 0, -1, ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChangePackage_ProjectStateChecksum(), ecorePackage.getELong(), "projectStateChecksum", null,
+			0, 1, ChangePackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
 
 		initEClass(historyInfoEClass, HistoryInfo.class, "HistoryInfo", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);

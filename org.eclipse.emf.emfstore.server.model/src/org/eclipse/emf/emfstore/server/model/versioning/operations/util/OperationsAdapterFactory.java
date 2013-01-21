@@ -47,14 +47,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
  */
 public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected static OperationsPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -194,11 +196,11 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
@@ -209,8 +211,9 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation
-	 * <em>Abstract Operation</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation <em>Abstract Operation</em>}
+	 * '.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -226,7 +229,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation
-	 * <em>Composite Operation</em>}'. <!-- begin-user-doc --> This default
+	 * <em>Composite Operation</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -241,8 +245,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation
-	 * <em>Feature Operation</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation <em>Feature Operation</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -258,7 +262,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation
-	 * <em>Create Delete Operation</em>}'. <!-- begin-user-doc --> This default
+	 * <em>Create Delete Operation</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -274,7 +279,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation
-	 * <em>Attribute Operation</em>}'. <!-- begin-user-doc --> This default
+	 * <em>Attribute Operation</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -290,7 +296,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation
-	 * <em>Multi Attribute Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Attribute Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -306,7 +313,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation
-	 * <em>Multi Attribute Set Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Attribute Set Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -322,7 +330,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation
-	 * <em>Multi Attribute Move Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Attribute Move Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -338,7 +347,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation
-	 * <em>Single Reference Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Single Reference Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -354,7 +364,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation
-	 * <em>Multi Reference Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Reference Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -370,7 +381,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation
-	 * <em>Multi Reference Set Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Reference Set Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -386,7 +398,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation
-	 * <em>Multi Reference Move Operation</em>}'. <!-- begin-user-doc --> This
+	 * <em>Multi Reference Move Operation</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -402,7 +415,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation
-	 * <em>Reference Operation</em>}'. <!-- begin-user-doc --> This default
+	 * <em>Reference Operation</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -417,8 +431,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId
-	 * <em>Operation Id</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId <em>Operation Id</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -433,8 +447,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup
-	 * <em>Operation Group</em>}'. <!-- begin-user-doc --> This default
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup <em>Operation Group</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -450,7 +464,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup
-	 * <em>Model Element Group</em>}'. <!-- begin-user-doc --> This default
+	 * <em>Model Element Group</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -465,7 +480,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
-	 * <em>EObject To Model Element Id Map</em>}'. <!-- begin-user-doc --> This
+	 * <em>EObject To Model Element Id Map</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
@@ -479,8 +495,9 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
-	 * <em>Identifiable Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * <em>Identifiable Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -494,8 +511,9 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
-	 * <em>Unique Identifier</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * <em>Unique Identifier</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
@@ -509,7 +527,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.

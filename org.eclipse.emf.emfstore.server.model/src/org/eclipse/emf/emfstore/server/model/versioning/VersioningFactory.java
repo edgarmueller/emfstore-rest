@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface VersioningFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -56,7 +57,8 @@ public interface VersioningFactory extends EFactory {
 	PrimaryVersionSpec createPrimaryVersionSpec();
 
 	/**
-	 * Returns a new object of class '<em>Log Message</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Log Message</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Log Message</em>'.
@@ -83,7 +85,8 @@ public interface VersioningFactory extends EFactory {
 	HistoryInfo createHistoryInfo();
 
 	/**
-	 * Returns a new object of class '<em>Range Query</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Range Query</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Range Query</em>'.
@@ -92,7 +95,8 @@ public interface VersioningFactory extends EFactory {
 	RangeQuery createRangeQuery();
 
 	/**
-	 * Returns a new object of class '<em>Path Query</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Path Query</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Path Query</em>'.
@@ -110,7 +114,8 @@ public interface VersioningFactory extends EFactory {
 	ModelElementQuery createModelElementQuery();
 
 	/**
-	 * Returns a new object of class '<em>Version</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Version</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Version</em>'.
@@ -146,7 +151,8 @@ public interface VersioningFactory extends EFactory {
 	BranchVersionSpec createBranchVersionSpec();
 
 	/**
-	 * Returns a new object of class '<em>Branch Info</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Branch Info</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>Branch Info</em>'.
@@ -164,7 +170,8 @@ public interface VersioningFactory extends EFactory {
 	AncestorVersionSpec createAncestorVersionSpec();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.

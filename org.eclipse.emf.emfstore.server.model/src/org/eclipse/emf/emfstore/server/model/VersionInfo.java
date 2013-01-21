@@ -19,9 +19,8 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
- * <em>Emf Store Version String</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString <em>Emf Store Version String
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -31,8 +30,8 @@ import org.osgi.framework.Version;
  */
 public interface VersionInfo extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Emf Store Version String</b></em>'
-	 * attribute. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Emf Store Version String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Emf Store Version String</em>' attribute isn't clear, there really should be more of a
 	 * description here...
@@ -48,13 +47,12 @@ public interface VersionInfo extends EObject {
 	String getEmfStoreVersionString();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
-	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.VersionInfo#getEmfStoreVersionString
+	 * <em>Emf Store Version String</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Emf Store Version String</em>'
-	 *            attribute.
+	 * @param value the new value of the '<em>Emf Store Version String</em>' attribute.
 	 * @see #getEmfStoreVersionString()
 	 * @generated
 	 */

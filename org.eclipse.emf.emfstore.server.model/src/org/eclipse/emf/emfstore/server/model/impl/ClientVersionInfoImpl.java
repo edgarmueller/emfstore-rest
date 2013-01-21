@@ -23,12 +23,8 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getVersion
- * <em>Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getName
- * <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  * 
@@ -36,8 +32,8 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  */
 public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionInfo {
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated
@@ -46,8 +42,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionI
 	protected static final String VERSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated

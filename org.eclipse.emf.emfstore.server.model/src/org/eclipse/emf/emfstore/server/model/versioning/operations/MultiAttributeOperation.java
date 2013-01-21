@@ -19,14 +19,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd
- * <em>Add</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getIndexes
- * <em>Indexes</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getIndexes <em>Indexes
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues
  * <em>Referenced Values</em>}</li>
  * </ul>
  * </p>
@@ -54,19 +50,20 @@ public interface MultiAttributeOperation extends FeatureOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd
-	 * <em>Add</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Add</em>' attribute.
+	 * @param value the new value of the '<em>Add</em>' attribute.
 	 * @see #isAdd()
 	 * @generated
 	 */
 	void setAdd(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Indexes</b></em>' attribute list. The
-	 * list contents are of type {@link java.lang.Integer}. <!-- begin-user-doc
+	 * Returns the value of the '<em><b>Indexes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Integer}.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of the '<em>Indexes</em>' attribute list isn't clear, there really should be more of a description

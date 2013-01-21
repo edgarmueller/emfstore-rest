@@ -29,8 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex
  * <em>Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getOldValue
@@ -65,8 +64,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected int index = INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -75,8 +74,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected static final Object OLD_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -85,8 +84,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected Object oldValue = OLD_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNewValue() <em>New Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated
@@ -95,8 +94,8 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	protected static final Object NEW_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated

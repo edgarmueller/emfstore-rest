@@ -32,7 +32,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
@@ -64,10 +65,10 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter i
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -88,15 +89,15 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter i
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns AuthenticationInformation.gif. <!-- begin-user-doc --> <!--
+	 * This returns AuthenticationInformation.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -107,7 +108,8 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter i
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -118,9 +120,9 @@ public class AuthenticationInformationItemProvider extends ItemProviderAdapter i
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

@@ -19,12 +19,10 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex
- * <em>Old Index</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex
- * <em>New Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex <em>
+ * Old Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex <em>
+ * New Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId
  * <em>Referenced Model Element Id</em>}</li>
@@ -97,16 +95,15 @@ public interface MultiReferenceMoveOperation extends FeatureOperation {
 	void setNewIndex(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Referenced Model Element Id</b></em>'
-	 * containment reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Referenced Model Element Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Model Element Id</em>' reference isn't clear, there really should be more
 	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Referenced Model Element Id</em>'
-	 *         containment reference.
+	 * @return the value of the '<em>Referenced Model Element Id</em>' containment reference.
 	 * @see #setReferencedModelElementId(ModelElementId)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceMoveOperation_ReferencedModelElementId()
 	 * @model containment="true" resolveProxies="true"

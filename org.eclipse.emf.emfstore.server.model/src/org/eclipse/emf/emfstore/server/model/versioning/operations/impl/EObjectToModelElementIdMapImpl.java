@@ -51,8 +51,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	protected EObject key;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTypedValue()
 	 * @generated

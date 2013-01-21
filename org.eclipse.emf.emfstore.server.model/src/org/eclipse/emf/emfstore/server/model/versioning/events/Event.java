@@ -20,9 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp
- * <em>Timestamp</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}</li>
  * </ul>
  * </p>
  * 

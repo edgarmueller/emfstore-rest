@@ -24,11 +24,10 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getGroups <em> Groups</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getProjects <em> Projects</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getOpenSessions
- * <em>Open Sessions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getUsers <em> Users</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getGroups <em>Groups</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getProjects <em>Projects</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getOpenSessions <em>Open Sessions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.ServerSpace#getUsers <em>Users</em>}</li>
  * </ul>
  * </p>
  * 

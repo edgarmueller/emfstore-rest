@@ -32,28 +32,32 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface VersioningPackage extends EPackage {
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNAME = "versioning";
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://eclipse.org/emf/emfstore/server/model/versioning";
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning";
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -90,8 +94,9 @@ public interface VersioningPackage extends EPackage {
 	int VERSION_SPEC_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl
-	 * <em>Tag Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl
+	 * <em>Tag Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl
@@ -119,8 +124,8 @@ public interface VersioningPackage extends EPackage {
 	int TAG_VERSION_SPEC__NAME = VERSION_SPEC_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Tag Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Tag Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -128,8 +133,9 @@ public interface VersioningPackage extends EPackage {
 	int TAG_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl
-	 * <em>Date Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl
+	 * <em>Date Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl
@@ -157,8 +163,8 @@ public interface VersioningPackage extends EPackage {
 	int DATE_VERSION_SPEC__DATE = VERSION_SPEC_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Date Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Date Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -166,8 +172,9 @@ public interface VersioningPackage extends EPackage {
 	int DATE_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl
-	 * <em>Primary Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl
+	 * <em>Primary Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl
@@ -195,13 +202,23 @@ public interface VersioningPackage extends EPackage {
 	int PRIMARY_VERSION_SPEC__IDENTIFIER = VERSION_SPEC_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Primary Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Project State Checksum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMARY_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 1;
+	int PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM = VERSION_SPEC_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Primary Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMARY_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl
@@ -260,8 +277,9 @@ public interface VersioningPackage extends EPackage {
 	int LOG_MESSAGE_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl
-	 * <em>Change Package</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl
+	 * <em>Change Package</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl
@@ -271,8 +289,8 @@ public interface VersioningPackage extends EPackage {
 	int CHANGE_PACKAGE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -280,8 +298,8 @@ public interface VersioningPackage extends EPackage {
 	int CHANGE_PACKAGE__OPERATIONS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Events</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -289,8 +307,8 @@ public interface VersioningPackage extends EPackage {
 	int CHANGE_PACKAGE__EVENTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Log Message</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Log Message</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -298,13 +316,23 @@ public interface VersioningPackage extends EPackage {
 	int CHANGE_PACKAGE__LOG_MESSAGE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Version Properties</b></em>' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Version Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CHANGE_PACKAGE__VERSION_PROPERTIES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Project State Checksum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM = 4;
 
 	/**
 	 * The number of structural features of the '<em>Change Package</em>' class.
@@ -313,7 +341,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_PACKAGE_FEATURE_COUNT = 4;
+	int CHANGE_PACKAGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl
@@ -327,8 +355,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO = 6;
 
 	/**
-	 * The feature id for the '<em><b>Primery Spec</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Primery Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -336,8 +364,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__PRIMERY_SPEC = 0;
 
 	/**
-	 * The feature id for the '<em><b>Next Spec</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Next Spec</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -345,8 +373,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__NEXT_SPEC = 1;
 
 	/**
-	 * The feature id for the '<em><b>Previous Spec</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Previous Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -354,8 +382,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__PREVIOUS_SPEC = 2;
 
 	/**
-	 * The feature id for the '<em><b>Merged From</b></em>' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Merged From</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -363,8 +391,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__MERGED_FROM = 3;
 
 	/**
-	 * The feature id for the '<em><b>Merged To</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Merged To</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -372,8 +400,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__MERGED_TO = 4;
 
 	/**
-	 * The feature id for the '<em><b>Log Message</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Log Message</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -381,8 +409,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__LOG_MESSAGE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag Specs</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Tag Specs</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -390,8 +418,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__TAG_SPECS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Version Properties</b></em>' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Version Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -399,8 +427,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_INFO__VERSION_PROPERTIES = 7;
 
 	/**
-	 * The feature id for the '<em><b>Change Package</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Change Package</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -437,8 +465,8 @@ public interface VersioningPackage extends EPackage {
 	int HISTORY_QUERY__SOURCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Include Change Packages</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Include Change Packages</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -484,8 +512,8 @@ public interface VersioningPackage extends EPackage {
 	int RANGE_QUERY__SOURCE = HISTORY_QUERY__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Include Change Packages</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Include Change Packages</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -567,8 +595,8 @@ public interface VersioningPackage extends EPackage {
 	int PATH_QUERY__SOURCE = HISTORY_QUERY__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Include Change Packages</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Include Change Packages</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -603,8 +631,9 @@ public interface VersioningPackage extends EPackage {
 	int PATH_QUERY_FEATURE_COUNT = HISTORY_QUERY_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl
-	 * <em>Model Element Query</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl
+	 * <em>Model Element Query</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl
@@ -623,8 +652,8 @@ public interface VersioningPackage extends EPackage {
 	int MODEL_ELEMENT_QUERY__SOURCE = RANGE_QUERY__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Include Change Packages</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Include Change Packages</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -677,8 +706,8 @@ public interface VersioningPackage extends EPackage {
 	int MODEL_ELEMENT_QUERY__INCLUDE_OUTGOING = RANGE_QUERY__INCLUDE_OUTGOING;
 
 	/**
-	 * The feature id for the '<em><b>Model Elements</b></em>' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Model Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -686,8 +715,8 @@ public interface VersioningPackage extends EPackage {
 	int MODEL_ELEMENT_QUERY__MODEL_ELEMENTS = RANGE_QUERY_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Model Element Query</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Model Element Query</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -695,8 +724,9 @@ public interface VersioningPackage extends EPackage {
 	int MODEL_ELEMENT_QUERY_FEATURE_COUNT = RANGE_QUERY_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl
-	 * <em>Version</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl
+	 * <em>Version</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.VersionImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.VersioningPackageImpl#getVersion()
@@ -705,8 +735,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION = 11;
 
 	/**
-	 * The feature id for the '<em><b>Project State</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Project State</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -714,8 +744,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__PROJECT_STATE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Primary Spec</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Primary Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -723,8 +753,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__PRIMARY_SPEC = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag Specs</b></em>' containment reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Tag Specs</b></em>' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -759,8 +789,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__CHANGES = 5;
 
 	/**
-	 * The feature id for the '<em><b>Log Message</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Log Message</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -777,8 +807,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__ANCESTOR_VERSION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Branched Versions</b></em>' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Branched Versions</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -786,8 +816,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__BRANCHED_VERSIONS = 8;
 
 	/**
-	 * The feature id for the '<em><b>Merged To Version</b></em>' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Merged To Version</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -795,8 +825,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION__MERGED_TO_VERSION = 9;
 
 	/**
-	 * The feature id for the '<em><b>Merged From Version</b></em>' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Merged From Version</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -813,8 +843,9 @@ public interface VersioningPackage extends EPackage {
 	int VERSION_FEATURE_COUNT = 11;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl
-	 * <em>Head Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl
+	 * <em>Head Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl
@@ -833,8 +864,8 @@ public interface VersioningPackage extends EPackage {
 	int HEAD_VERSION_SPEC__BRANCH = VERSION_SPEC__BRANCH;
 
 	/**
-	 * The number of structural features of the '<em>Head Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Head Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -842,8 +873,9 @@ public interface VersioningPackage extends EPackage {
 	int HEAD_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl
-	 * <em>Version Property</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl
+	 * <em>Version Property</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl
@@ -871,8 +903,8 @@ public interface VersioningPackage extends EPackage {
 	int VERSION_PROPERTY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Version Property</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Version Property</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -880,8 +912,9 @@ public interface VersioningPackage extends EPackage {
 	int VERSION_PROPERTY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchVersionSpecImpl
-	 * <em>Branch Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchVersionSpecImpl
+	 * <em>Branch Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.BranchVersionSpecImpl
@@ -900,8 +933,8 @@ public interface VersioningPackage extends EPackage {
 	int BRANCH_VERSION_SPEC__BRANCH = VERSION_SPEC__BRANCH;
 
 	/**
-	 * The number of structural features of the '<em>Branch Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Branch Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -956,9 +989,9 @@ public interface VersioningPackage extends EPackage {
 	int BRANCH_INFO_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl
-	 * <em>Ancestor Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl
+	 * <em>Ancestor Version Spec</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl
@@ -995,8 +1028,8 @@ public interface VersioningPackage extends EPackage {
 	int ANCESTOR_VERSION_SPEC__SOURCE = VERSION_SPEC_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Ancestor Version Spec</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Ancestor Version Spec</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
@@ -1016,8 +1049,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
-	 * <em>Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName()
@@ -1039,8 +1072,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
-	 * <em>Date</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Date</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate()
@@ -1050,8 +1083,9 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getDateVersionSpec_Date();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec
-	 * <em>Primary Version Spec</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec
+	 * <em>Primary Version Spec</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Primary Version Spec</em>'.
@@ -1062,8 +1096,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier
-	 * <em>Identifier</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Identifier</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier()
@@ -1073,8 +1107,23 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getPrimaryVersionSpec_Identifier();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec
-	 * <em>Version Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum
+	 * <em>Project State Checksum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Project State Checksum</em>'.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum()
+	 * @see #getPrimaryVersionSpec()
+	 * @generated
+	 */
+	EAttribute getPrimaryVersionSpec_ProjectStateChecksum();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec
+	 * <em>Version Spec</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Version Spec</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionSpec
@@ -1084,8 +1133,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
-	 * <em>Branch</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Branch</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch()
@@ -1095,8 +1144,9 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getVersionSpec_Branch();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage
-	 * <em>Log Message</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage
+	 * <em>Log Message</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Log Message</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage
@@ -1106,8 +1156,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage
-	 * <em>Message</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Message</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage()
@@ -1118,8 +1168,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate
-	 * <em>Date</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Date</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate()
@@ -1130,8 +1180,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
-	 * <em>Client Date</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate <em>Client Date</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Client Date</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate()
@@ -1142,8 +1192,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor
-	 * <em>Author</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor <em>Author</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Author</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor()
@@ -1153,8 +1203,9 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getLogMessage_Author();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage
-	 * <em>Change Package</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage
+	 * <em>Change Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Change Package</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage
@@ -1164,10 +1215,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations
-	 * <em>Operations</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Operations</em>'.
+	 * @return the meta object for the containment reference list '<em>Operations</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getOperations()
 	 * @see #getChangePackage()
 	 * @generated
@@ -1176,10 +1227,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents
-	 * <em>Events</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents <em>Events</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Events</em>'.
+	 * @return the meta object for the containment reference list '<em>Events</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getEvents()
 	 * @see #getChangePackage()
 	 * @generated
@@ -1188,10 +1239,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage
-	 * <em>Log Message</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage <em>Log Message</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Log Message</em>'.
+	 * @return the meta object for the containment reference '<em>Log Message</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getLogMessage()
 	 * @see #getChangePackage()
 	 * @generated
@@ -1212,8 +1263,23 @@ public interface VersioningPackage extends EPackage {
 	EReference getChangePackage_VersionProperties();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo
-	 * <em>History Info</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getProjectStateChecksum
+	 * <em>Project State Checksum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Project State Checksum</em>'.
+	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getProjectStateChecksum()
+	 * @see #getChangePackage()
+	 * @generated
+	 */
+	EAttribute getChangePackage_ProjectStateChecksum();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo
+	 * <em>History Info</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>History Info</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo
@@ -1223,10 +1289,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec
-	 * <em>Primery Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery Spec</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Primery Spec</em>'.
+	 * @return the meta object for the containment reference '<em>Primery Spec</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1235,10 +1301,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getNextSpec
-	 * <em>Next Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getNextSpec <em>Next Spec</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Next Spec</em>'.
+	 * @return the meta object for the containment reference list '<em>Next Spec</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getNextSpec()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1247,10 +1313,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec
-	 * <em>Previous Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec <em>Previous Spec</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Previous Spec</em>'.
+	 * @return the meta object for the containment reference '<em>Previous Spec</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1259,10 +1325,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedFrom
-	 * <em>Merged From</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedFrom <em>Merged From</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Merged From</em>'.
+	 * @return the meta object for the containment reference list '<em>Merged From</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedFrom()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1271,10 +1337,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedTo
-	 * <em>Merged To</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedTo <em>Merged To</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Merged To</em>'.
+	 * @return the meta object for the containment reference list '<em>Merged To</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedTo()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1283,10 +1349,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage
-	 * <em>Log Message</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage <em>Log Message</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Log Message</em>'.
+	 * @return the meta object for the containment reference '<em>Log Message</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1295,10 +1361,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getTagSpecs
-	 * <em>Tag Specs</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getTagSpecs <em>Tag Specs</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Tag Specs</em>'.
+	 * @return the meta object for the containment reference list '<em>Tag Specs</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getTagSpecs()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1320,10 +1386,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getChangePackage
-	 * <em>Change Package</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getChangePackage <em>Change Package</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Change Package</em>'.
+	 * @return the meta object for the containment reference '<em>Change Package</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getChangePackage()
 	 * @see #getHistoryInfo()
 	 * @generated
@@ -1331,8 +1397,9 @@ public interface VersioningPackage extends EPackage {
 	EReference getHistoryInfo_ChangePackage();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery
-	 * <em>History Query</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery
+	 * <em>History Query</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>History Query</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery
@@ -1342,8 +1409,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource
-	 * <em>Source</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Source</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource()
@@ -1355,10 +1422,11 @@ public interface VersioningPackage extends EPackage {
 	/**
 	 * Returns the meta object for the attribute '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages
-	 * <em>Include Change Packages</em>}'. <!-- begin-user-doc --> <!--
+	 * <em>Include Change Packages</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute ' <em>Include Change Packages</em>'.
+	 * @return the meta object for the attribute '<em>Include Change Packages</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages()
 	 * @see #getHistoryQuery()
 	 * @generated
@@ -1368,10 +1436,11 @@ public interface VersioningPackage extends EPackage {
 	/**
 	 * Returns the meta object for the attribute '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions
-	 * <em>Include All Versions</em>}'. <!-- begin-user-doc --> <!--
+	 * <em>Include All Versions</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Include All Versions</em> '.
+	 * @return the meta object for the attribute '<em>Include All Versions</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions()
 	 * @see #getHistoryQuery()
 	 * @generated
@@ -1379,8 +1448,9 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getHistoryQuery_IncludeAllVersions();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery
-	 * <em>Range Query</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery
+	 * <em>Range Query</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Range Query</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.RangeQuery
@@ -1390,8 +1460,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit
-	 * <em>Upper Limit</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit <em>Upper Limit</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Upper Limit</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit()
@@ -1402,8 +1472,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit
-	 * <em>Lower Limit</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit <em>Lower Limit</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Lower Limit</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit()
@@ -1439,8 +1509,9 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getRangeQuery_IncludeOutgoing();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery
-	 * <em>Path Query</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery
+	 * <em>Path Query</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Path Query</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.PathQuery
@@ -1450,8 +1521,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget
-	 * <em>Target</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Target</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget()
@@ -1474,9 +1545,10 @@ public interface VersioningPackage extends EPackage {
 	/**
 	 * Returns the meta object for the containment reference list '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements
-	 * <em>Model Elements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Model Elements</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Model Elements</em>'.
+	 * @return the meta object for the containment reference list '<em>Model Elements</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements()
 	 * @see #getModelElementQuery()
 	 * @generated
@@ -1484,8 +1556,9 @@ public interface VersioningPackage extends EPackage {
 	EReference getModelElementQuery_ModelElements();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version
-	 * <em>Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.Version
+	 * <em>Version</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Version</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version
@@ -1495,10 +1568,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
-	 * <em>Project State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState <em>Project State</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Project State</em>'.
+	 * @return the meta object for the containment reference '<em>Project State</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState()
 	 * @see #getVersion()
 	 * @generated
@@ -1507,10 +1580,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
-	 * <em>Primary Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec <em>Primary Spec</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Primary Spec</em>'.
+	 * @return the meta object for the containment reference '<em>Primary Spec</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec()
 	 * @see #getVersion()
 	 * @generated
@@ -1519,10 +1592,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getTagSpecs
-	 * <em>Tag Specs</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getTagSpecs <em>Tag Specs</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list ' <em>Tag Specs</em>'.
+	 * @return the meta object for the containment reference list '<em>Tag Specs</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getTagSpecs()
 	 * @see #getVersion()
 	 * @generated
@@ -1531,8 +1604,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
-	 * <em>Next Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion <em>Next Version</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Next Version</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion()
@@ -1556,8 +1629,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
-	 * <em>Changes</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges <em>Changes</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Changes</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges()
@@ -1568,10 +1641,10 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
-	 * <em>Log Message</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage <em>Log Message</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference ' <em>Log Message</em>'.
+	 * @return the meta object for the containment reference '<em>Log Message</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage()
 	 * @see #getVersion()
 	 * @generated
@@ -1654,8 +1727,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getName
-	 * <em>Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getName()
@@ -1666,8 +1739,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getValue
-	 * <em>Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionProperty#getValue()
@@ -1688,8 +1761,9 @@ public interface VersioningPackage extends EPackage {
 	EClass getBranchVersionSpec();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
-	 * <em>Branch Info</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
+	 * <em>Branch Info</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Branch Info</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
@@ -1699,8 +1773,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName
-	 * <em>Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName()
@@ -1711,8 +1785,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead
-	 * <em>Head</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead <em>Head</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Head</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead()
@@ -1723,8 +1797,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource
-	 * <em>Source</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Source</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource()
@@ -1734,8 +1808,9 @@ public interface VersioningPackage extends EPackage {
 	EReference getBranchInfo_Source();
 
 	/**
-	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec
-	 * <em>Ancestor Version Spec</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec
+	 * <em>Ancestor Version Spec</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Ancestor Version Spec</em>'.
@@ -1746,8 +1821,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
-	 * <em>Target</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Target</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget()
@@ -1758,8 +1833,8 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
-	 * <em>Source</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Source</em>'.
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource()
@@ -1793,8 +1868,9 @@ public interface VersioningPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl
-		 * <em>Tag Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl <em>Tag Version Spec</em>}'
+		 * class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl
@@ -1804,8 +1880,8 @@ public interface VersioningPackage extends EPackage {
 		EClass TAG_VERSION_SPEC = eINSTANCE.getTagVersionSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -1813,8 +1889,9 @@ public interface VersioningPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl
-		 * <em>Date Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl <em>Date Version Spec</em>}'
+		 * class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl
@@ -1824,8 +1901,8 @@ public interface VersioningPackage extends EPackage {
 		EClass DATE_VERSION_SPEC = eINSTANCE.getDateVersionSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Date</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -1834,7 +1911,8 @@ public interface VersioningPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl
-		 * <em>Primary Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * <em>Primary Version Spec</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl
@@ -1844,17 +1922,27 @@ public interface VersioningPackage extends EPackage {
 		EClass PRIMARY_VERSION_SPEC = eINSTANCE.getPrimaryVersionSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Identifier</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute PRIMARY_VERSION_SPEC__IDENTIFIER = eINSTANCE.getPrimaryVersionSpec_Identifier();
 
 		/**
+		 * The meta object literal for the '<em><b>Project State Checksum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM = eINSTANCE
+			.getPrimaryVersionSpec_ProjectStateChecksum();
+
+		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl
-		 * <em>Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl <em>Version Spec</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl
@@ -1864,17 +1952,17 @@ public interface VersioningPackage extends EPackage {
 		EClass VERSION_SPEC = eINSTANCE.getVersionSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Branch</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Branch</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute VERSION_SPEC__BRANCH = eINSTANCE.getVersionSpec_Branch();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl
-		 * <em>Log Message</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl
+		 * <em>Log Message</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl
@@ -1884,32 +1972,32 @@ public interface VersioningPackage extends EPackage {
 		EClass LOG_MESSAGE = eINSTANCE.getLogMessage();
 
 		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute LOG_MESSAGE__MESSAGE = eINSTANCE.getLogMessage_Message();
 
 		/**
-		 * The meta object literal for the '<em><b>Date</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute LOG_MESSAGE__DATE = eINSTANCE.getLogMessage_Date();
 
 		/**
-		 * The meta object literal for the '<em><b>Client Date</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Client Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute LOG_MESSAGE__CLIENT_DATE = eINSTANCE.getLogMessage_ClientDate();
 
 		/**
-		 * The meta object literal for the '<em><b>Author</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Author</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -1917,8 +2005,9 @@ public interface VersioningPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl
-		 * <em>Change Package</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl <em>Change Package</em>}'
+		 * class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl
@@ -1928,8 +2017,8 @@ public interface VersioningPackage extends EPackage {
 		EClass CHANGE_PACKAGE = eINSTANCE.getChangePackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Operations</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -1937,16 +2026,16 @@ public interface VersioningPackage extends EPackage {
 		EReference CHANGE_PACKAGE__OPERATIONS = eINSTANCE.getChangePackage_Operations();
 
 		/**
-		 * The meta object literal for the '<em><b>Events</b></em>' containment
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference CHANGE_PACKAGE__EVENTS = eINSTANCE.getChangePackage_Events();
 
 		/**
-		 * The meta object literal for the '<em><b>Log Message</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Log Message</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -1954,8 +2043,8 @@ public interface VersioningPackage extends EPackage {
 		EReference CHANGE_PACKAGE__LOG_MESSAGE = eINSTANCE.getChangePackage_LogMessage();
 
 		/**
-		 * The meta object literal for the '<em><b>Version Properties</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Version Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -1963,9 +2052,18 @@ public interface VersioningPackage extends EPackage {
 		EReference CHANGE_PACKAGE__VERSION_PROPERTIES = eINSTANCE.getChangePackage_VersionProperties();
 
 		/**
+		 * The meta object literal for the '<em><b>Project State Checksum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM = eINSTANCE.getChangePackage_ProjectStateChecksum();
+
+		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl
-		 * <em>History Info</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl <em>History Info</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl
@@ -1975,8 +2073,8 @@ public interface VersioningPackage extends EPackage {
 		EClass HISTORY_INFO = eINSTANCE.getHistoryInfo();
 
 		/**
-		 * The meta object literal for the '<em><b>Primery Spec</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Primery Spec</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -1984,8 +2082,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__PRIMERY_SPEC = eINSTANCE.getHistoryInfo_PrimerySpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Next Spec</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Next Spec</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -1993,8 +2091,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__NEXT_SPEC = eINSTANCE.getHistoryInfo_NextSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Previous Spec</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Previous Spec</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2002,8 +2100,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__PREVIOUS_SPEC = eINSTANCE.getHistoryInfo_PreviousSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Merged From</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Merged From</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2011,8 +2109,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__MERGED_FROM = eINSTANCE.getHistoryInfo_MergedFrom();
 
 		/**
-		 * The meta object literal for the '<em><b>Merged To</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Merged To</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2020,8 +2118,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__MERGED_TO = eINSTANCE.getHistoryInfo_MergedTo();
 
 		/**
-		 * The meta object literal for the '<em><b>Log Message</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Log Message</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2029,8 +2127,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__LOG_MESSAGE = eINSTANCE.getHistoryInfo_LogMessage();
 
 		/**
-		 * The meta object literal for the '<em><b>Tag Specs</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Tag Specs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2038,8 +2136,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__TAG_SPECS = eINSTANCE.getHistoryInfo_TagSpecs();
 
 		/**
-		 * The meta object literal for the '<em><b>Version Properties</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Version Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2047,8 +2145,8 @@ public interface VersioningPackage extends EPackage {
 		EReference HISTORY_INFO__VERSION_PROPERTIES = eINSTANCE.getHistoryInfo_VersionProperties();
 
 		/**
-		 * The meta object literal for the '<em><b>Change Package</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Change Package</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2057,8 +2155,8 @@ public interface VersioningPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl
-		 * <em>History Query</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl <em>History Query</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl
@@ -2068,8 +2166,8 @@ public interface VersioningPackage extends EPackage {
 		EClass HISTORY_QUERY = eINSTANCE.getHistoryQuery();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -2092,9 +2190,9 @@ public interface VersioningPackage extends EPackage {
 		EAttribute HISTORY_QUERY__INCLUDE_ALL_VERSIONS = eINSTANCE.getHistoryQuery_IncludeAllVersions();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl
-		 * <em>Range Query</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl
+		 * <em>Range Query</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl
@@ -2104,40 +2202,41 @@ public interface VersioningPackage extends EPackage {
 		EClass RANGE_QUERY = eINSTANCE.getRangeQuery();
 
 		/**
-		 * The meta object literal for the '<em><b>Upper Limit</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Upper Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute RANGE_QUERY__UPPER_LIMIT = eINSTANCE.getRangeQuery_UpperLimit();
 
 		/**
-		 * The meta object literal for the '<em><b>Lower Limit</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Lower Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute RANGE_QUERY__LOWER_LIMIT = eINSTANCE.getRangeQuery_LowerLimit();
 
 		/**
-		 * The meta object literal for the '<em><b>Include Incoming</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Include Incoming</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute RANGE_QUERY__INCLUDE_INCOMING = eINSTANCE.getRangeQuery_IncludeIncoming();
 
 		/**
-		 * The meta object literal for the '<em><b>Include Outgoing</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Include Outgoing</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute RANGE_QUERY__INCLUDE_OUTGOING = eINSTANCE.getRangeQuery_IncludeOutgoing();
 
 		/**
-		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.PathQueryImpl
-		 * <em>Path Query</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PathQueryImpl
+		 * <em>Path Query</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.PathQueryImpl
@@ -2147,8 +2246,8 @@ public interface VersioningPackage extends EPackage {
 		EClass PATH_QUERY = eINSTANCE.getPathQuery();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -2157,7 +2256,8 @@ public interface VersioningPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl
-		 * <em>Model Element Query</em>}' class. <!-- begin-user-doc --> <!--
+		 * <em>Model Element Query</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl
@@ -2167,8 +2267,8 @@ public interface VersioningPackage extends EPackage {
 		EClass MODEL_ELEMENT_QUERY = eINSTANCE.getModelElementQuery();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Elements</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Model Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2187,8 +2287,8 @@ public interface VersioningPackage extends EPackage {
 		EClass VERSION = eINSTANCE.getVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Project State</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Project State</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2196,8 +2296,8 @@ public interface VersioningPackage extends EPackage {
 		EReference VERSION__PROJECT_STATE = eINSTANCE.getVersion_ProjectState();
 
 		/**
-		 * The meta object literal for the '<em><b>Primary Spec</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Primary Spec</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2205,8 +2305,8 @@ public interface VersioningPackage extends EPackage {
 		EReference VERSION__PRIMARY_SPEC = eINSTANCE.getVersion_PrimarySpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Tag Specs</b></em>'
-		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Tag Specs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2214,32 +2314,32 @@ public interface VersioningPackage extends EPackage {
 		EReference VERSION__TAG_SPECS = eINSTANCE.getVersion_TagSpecs();
 
 		/**
-		 * The meta object literal for the '<em><b>Next Version</b></em>'
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Next Version</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__NEXT_VERSION = eINSTANCE.getVersion_NextVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Previous Version</b></em>'
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Previous Version</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__PREVIOUS_VERSION = eINSTANCE.getVersion_PreviousVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Changes</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Changes</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__CHANGES = eINSTANCE.getVersion_Changes();
 
 		/**
-		 * The meta object literal for the '<em><b>Log Message</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Log Message</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @generated
@@ -2247,32 +2347,32 @@ public interface VersioningPackage extends EPackage {
 		EReference VERSION__LOG_MESSAGE = eINSTANCE.getVersion_LogMessage();
 
 		/**
-		 * The meta object literal for the '<em><b>Ancestor Version</b></em>'
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Ancestor Version</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__ANCESTOR_VERSION = eINSTANCE.getVersion_AncestorVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Branched Versions</b></em>'
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Branched Versions</b></em>' reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__BRANCHED_VERSIONS = eINSTANCE.getVersion_BranchedVersions();
 
 		/**
-		 * The meta object literal for the '<em><b>Merged To Version</b></em>'
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Merged To Version</b></em>' reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference VERSION__MERGED_TO_VERSION = eINSTANCE.getVersion_MergedToVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Merged From Version</b></em>'
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Merged From Version</b></em>' reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -2280,8 +2380,9 @@ public interface VersioningPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl
-		 * <em>Head Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl <em>Head Version Spec</em>}'
+		 * class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.HeadVersionSpecImpl
@@ -2292,8 +2393,9 @@ public interface VersioningPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl
-		 * <em>Version Property</em>}' class. <!-- begin-user-doc --> <!--
+		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl <em>Version Property</em>}'
+		 * class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl
@@ -2303,16 +2405,16 @@ public interface VersioningPackage extends EPackage {
 		EClass VERSION_PROPERTY = eINSTANCE.getVersionProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute VERSION_PROPERTY__NAME = eINSTANCE.getVersionProperty_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -2321,7 +2423,8 @@ public interface VersioningPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchVersionSpecImpl
-		 * <em>Branch Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * <em>Branch Version Spec</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.BranchVersionSpecImpl
@@ -2331,9 +2434,9 @@ public interface VersioningPackage extends EPackage {
 		EClass BRANCH_VERSION_SPEC = eINSTANCE.getBranchVersionSpec();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl
-		 * <em>Branch Info</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl
+		 * <em>Branch Info</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl
@@ -2343,24 +2446,24 @@ public interface VersioningPackage extends EPackage {
 		EClass BRANCH_INFO = eINSTANCE.getBranchInfo();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute BRANCH_INFO__NAME = eINSTANCE.getBranchInfo_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Head</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference BRANCH_INFO__HEAD = eINSTANCE.getBranchInfo_Head();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
@@ -2369,7 +2472,8 @@ public interface VersioningPackage extends EPackage {
 		/**
 		 * The meta object literal for the '
 		 * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl
-		 * <em>Ancestor Version Spec</em>}' class. <!-- begin-user-doc --> <!--
+		 * <em>Ancestor Version Spec</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl
@@ -2379,16 +2483,16 @@ public interface VersioningPackage extends EPackage {
 		EClass ANCESTOR_VERSION_SPEC = eINSTANCE.getAncestorVersionSpec();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference ANCESTOR_VERSION_SPEC__TARGET = eINSTANCE.getAncestorVersionSpec_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */

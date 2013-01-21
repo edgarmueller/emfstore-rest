@@ -46,8 +46,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	private static final String EMFSTORE_PROTOCOL_PREFIX = "emfstore://";
 
 	/**
-	 * The cached value of the '{@link #getServerUrl() <em>Server Url</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getServerUrl() <em>Server Url</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getServerUrl()
 	 * @generated

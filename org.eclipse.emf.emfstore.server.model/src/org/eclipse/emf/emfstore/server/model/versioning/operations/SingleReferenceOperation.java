@@ -19,12 +19,10 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue
- * <em>Old Value</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue
- * <em>New Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue <em>Old
+ * Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue <em>New
+ * Value</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,8 +32,8 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  */
 public interface SingleReferenceOperation extends ReferenceOperation {
 	/**
-	 * Returns the value of the '<em><b>Old Value</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Old Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Old Value</em>' reference isn't clear, there really should be more of a description
 	 * here...
@@ -53,20 +51,19 @@ public interface SingleReferenceOperation extends ReferenceOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue
-	 * <em>Old Value</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * <em>Old Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Old Value</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Old Value</em>' containment reference.
 	 * @see #getOldValue()
 	 * @generated
 	 */
 	void setOldValue(ModelElementId value);
 
 	/**
-	 * Returns the value of the '<em><b>New Value</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>New Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>New Value</em>' reference isn't clear, there really should be more of a description
 	 * here...
@@ -84,12 +81,11 @@ public interface SingleReferenceOperation extends ReferenceOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue
-	 * <em>New Value</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * <em>New Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>New Value</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>New Value</em>' containment reference.
 	 * @see #getNewValue()
 	 * @generated
 	 */

@@ -24,8 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl#getProjectId
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl#getProjectId
  * <em>Project Id</em>}</li>
  * </ul>
  * </p>
@@ -34,8 +33,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  */
 public abstract class ServerProjectEventImpl extends ServerEventImpl implements ServerProjectEvent {
 	/**
-	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectId()
 	 * @generated

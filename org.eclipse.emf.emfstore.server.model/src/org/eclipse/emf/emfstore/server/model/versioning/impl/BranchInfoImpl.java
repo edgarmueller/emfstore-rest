@@ -25,15 +25,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getHead
- * <em>Head</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getSource
- * <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getHead <em>Head</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  * 
@@ -61,8 +55,8 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHead() <em>Head</em>}' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getHead() <em>Head</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getHead()
 	 * @generated
@@ -71,8 +65,8 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	protected PrimaryVersionSpec head;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSource()
 	 * @generated

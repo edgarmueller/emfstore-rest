@@ -27,18 +27,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getDescription
- * <em>Description</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getProjectId
- * <em>Project Id</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getVersion
- * <em>Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getDescription <em>Description</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getProjectId <em>Project Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.ProjectInfoImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -66,8 +58,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDescription()
 	 * @generated
@@ -76,8 +68,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDescription()
 	 * @generated
@@ -86,8 +78,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectId()
 	 * @generated
@@ -96,8 +88,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	protected ProjectId projectId;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated

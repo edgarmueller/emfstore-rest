@@ -30,7 +30,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.WriterRole;
  */
 public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -49,7 +50,8 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

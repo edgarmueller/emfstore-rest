@@ -52,7 +52,8 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	}
 
 	/**
-	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>} ' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getFeatureName()
@@ -61,8 +62,8 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 */
 	protected static final String FEATURE_NAME_EDEFAULT = "";
 	/**
-	 * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getFeatureName()
 	 * @generated

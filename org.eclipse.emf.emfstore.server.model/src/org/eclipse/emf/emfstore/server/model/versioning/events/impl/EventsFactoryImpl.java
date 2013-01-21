@@ -27,7 +27,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  */
 public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -46,7 +47,8 @@ public class EventsFactoryImpl extends EFactoryImpl implements EventsFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

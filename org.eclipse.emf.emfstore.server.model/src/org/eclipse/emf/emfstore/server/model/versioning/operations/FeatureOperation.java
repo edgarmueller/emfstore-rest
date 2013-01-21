@@ -33,8 +33,9 @@ import org.eclipse.emf.emfstore.common.model.Project;
  */
 public interface FeatureOperation extends AbstractOperation {
 	/**
-	 * Returns the value of the '<em><b>Feature Name</b></em>' attribute. The
-	 * default value is <code>""</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Feature Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Feature Name</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -52,11 +53,11 @@ public interface FeatureOperation extends AbstractOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeatureName
-	 * <em>Feature Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * <em>Feature Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Feature Name</em>' attribute.
+	 * @param value the new value of the '<em>Feature Name</em>' attribute.
 	 * @see #getFeatureName()
 	 * @generated
 	 */

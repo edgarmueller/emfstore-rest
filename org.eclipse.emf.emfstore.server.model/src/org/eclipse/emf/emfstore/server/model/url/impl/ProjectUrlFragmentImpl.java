@@ -26,12 +26,8 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getProjectId
- * <em>Project Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getProjectId <em>Project Id</em>}</li>
  * </ul>
  * </p>
  * 
@@ -59,8 +55,8 @@ public class ProjectUrlFragmentImpl extends EObjectImpl implements ProjectUrlFra
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectId()
 	 * @generated

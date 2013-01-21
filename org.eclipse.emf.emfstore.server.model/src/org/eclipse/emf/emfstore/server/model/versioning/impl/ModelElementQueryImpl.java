@@ -28,9 +28,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl#getModelElements
- * <em>Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl#getModelElements <em>Model
+ * Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -38,8 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElementQuery {
 	/**
-	 * The cached value of the '{@link #getModelElements()
-	 * <em>Model Elements</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getModelElements() <em>Model Elements</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getModelElements()

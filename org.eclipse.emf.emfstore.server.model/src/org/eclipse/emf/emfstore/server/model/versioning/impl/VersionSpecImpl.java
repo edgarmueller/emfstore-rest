@@ -22,9 +22,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl#getBranch
- * <em>Branch</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionSpecImpl#getBranch <em>Branch</em>}</li>
  * </ul>
  * </p>
  * 
@@ -32,8 +30,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec {
 	/**
-	 * The default value of the '{@link #getBranch() <em>Branch</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getBranch() <em>Branch</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getBranch()
 	 * @generated

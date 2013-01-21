@@ -17,15 +17,12 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex
- * <em>Index</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue
- * <em>Old Value</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue
- * <em>New Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue <em>Old
+ * Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue <em>New
+ * Value</em>}</li>
  * </ul>
  * </p>
  * 
@@ -54,10 +51,10 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex
-	 * <em>Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Index</em>' attribute.
+	 * @param value the new value of the '<em>Index</em>' attribute.
 	 * @see #getIndex()
 	 * @generated
 	 */

@@ -36,8 +36,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getIndex
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getIndex
  * <em>Index</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getOldValue
@@ -72,8 +71,8 @@ public class MultiReferenceSetOperationImpl extends ReferenceOperationImpl imple
 	protected int index = INDEX_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -82,8 +81,8 @@ public class MultiReferenceSetOperationImpl extends ReferenceOperationImpl imple
 	protected ModelElementId oldValue;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated

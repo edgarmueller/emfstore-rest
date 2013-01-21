@@ -16,9 +16,7 @@ package org.eclipse.emf.emfstore.server.model.versioning;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget
- * <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  * 
@@ -45,12 +43,12 @@ public interface PathQuery extends HistoryQuery {
 	PrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget
-	 * <em>Target</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget
+	 * <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Target</em>' containment reference.
+	 * @param value the new value of the '<em>Target</em>' containment reference.
 	 * @see #getTarget()
 	 * @generated
 	 */

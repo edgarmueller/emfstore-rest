@@ -37,11 +37,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getOldValue
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getOldValue
  * <em>Old Value</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getNewValue
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getNewValue
  * <em>New Value</em>}</li>
  * </ul>
  * </p>
@@ -50,8 +48,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  */
 public class SingleReferenceOperationImpl extends ReferenceOperationImpl implements SingleReferenceOperation {
 	/**
-	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOldValue()
 	 * @generated
@@ -60,8 +58,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	protected ModelElementId oldValue;
 
 	/**
-	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNewValue()
 	 * @generated

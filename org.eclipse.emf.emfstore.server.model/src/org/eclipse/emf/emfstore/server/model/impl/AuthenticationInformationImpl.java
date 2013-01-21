@@ -27,12 +27,10 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl#getSessionId
- * <em>Session Id</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl#getResolvedACUser
- * <em>Resolved AC User</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl#getSessionId <em>Session Id</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.impl.AuthenticationInformationImpl#getResolvedACUser <em>Resolved AC
+ * User</em>}</li>
  * </ul>
  * </p>
  * 
@@ -40,8 +38,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  */
 public class AuthenticationInformationImpl extends EObjectImpl implements AuthenticationInformation {
 	/**
-	 * The cached value of the '{@link #getSessionId() <em>Session Id</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSessionId() <em>Session Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSessionId()
 	 * @generated
@@ -50,8 +48,8 @@ public class AuthenticationInformationImpl extends EObjectImpl implements Authen
 	protected SessionId sessionId;
 
 	/**
-	 * The cached value of the '{@link #getResolvedACUser()
-	 * <em>Resolved AC User</em>}' containment reference. <!-- begin-user-doc
+	 * The cached value of the '{@link #getResolvedACUser() <em>Resolved AC User</em>}' containment reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getResolvedACUser()

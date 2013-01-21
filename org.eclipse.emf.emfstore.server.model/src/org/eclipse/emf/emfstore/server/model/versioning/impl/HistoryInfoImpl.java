@@ -34,33 +34,19 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec
- * <em>Primery Spec</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getNextSpec
- * <em>Next Spec</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec
- * <em>Previous Spec</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom
- * <em>Merged From</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedTo
- * <em>Merged To</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getLogMessage
- * <em>Log Message</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs
- * <em>Tag Specs</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties
- * <em>Version Properties</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getChangePackage
- * <em>Change Package</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery Spec
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>Previous Spec
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged From</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>Version
+ * Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getChangePackage <em>Change Package
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -68,8 +54,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	/**
-	 * The cached value of the '{@link #getPrimerySpec() <em>Primery Spec</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPrimerySpec() <em>Primery Spec</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getPrimerySpec()
 	 * @generated
@@ -78,8 +64,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected PrimaryVersionSpec primerySpec;
 
 	/**
-	 * The cached value of the '{@link #getNextSpec() <em>Next Spec</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNextSpec() <em>Next Spec</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getNextSpec()
 	 * @generated
@@ -88,8 +74,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected EList<PrimaryVersionSpec> nextSpec;
 
 	/**
-	 * The cached value of the '{@link #getPreviousSpec()
-	 * <em>Previous Spec</em>}' containment reference. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPreviousSpec() <em>Previous Spec</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getPreviousSpec()
@@ -99,8 +85,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected PrimaryVersionSpec previousSpec;
 
 	/**
-	 * The cached value of the '{@link #getMergedFrom() <em>Merged From</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getMergedFrom() <em>Merged From</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMergedFrom()
 	 * @generated
@@ -109,8 +95,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected EList<PrimaryVersionSpec> mergedFrom;
 
 	/**
-	 * The cached value of the '{@link #getMergedTo() <em>Merged To</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getMergedTo() <em>Merged To</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMergedTo()
 	 * @generated
@@ -119,8 +105,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected EList<PrimaryVersionSpec> mergedTo;
 
 	/**
-	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLogMessage()
 	 * @generated
@@ -129,8 +115,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected LogMessage logMessage;
 
 	/**
-	 * The cached value of the '{@link #getTagSpecs() <em>Tag Specs</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTagSpecs() <em>Tag Specs</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTagSpecs()
 	 * @generated
@@ -150,8 +136,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	protected EList<VersionProperty> versionProperties;
 
 	/**
-	 * The cached value of the '{@link #getChangePackage()
-	 * <em>Change Package</em>}' containment reference. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getChangePackage() <em>Change Package</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getChangePackage()

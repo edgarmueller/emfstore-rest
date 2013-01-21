@@ -20,9 +20,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role#getProjects
- * <em>Projects</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role#getProjects <em>Projects</em>}</li>
  * </ul>
  * </p>
  * 

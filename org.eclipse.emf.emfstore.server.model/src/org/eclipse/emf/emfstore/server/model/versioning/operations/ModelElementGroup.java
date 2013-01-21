@@ -21,12 +21,9 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements
- * <em>Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model
+ * Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -53,11 +50,11 @@ public interface ModelElementGroup extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName
-	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Name</em>' attribute.
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */

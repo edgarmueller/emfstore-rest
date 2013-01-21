@@ -29,9 +29,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl#getProjects
- * <em>Projects</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.impl.RoleImpl#getProjects <em>Projects</em>}</li>
  * </ul>
  * </p>
  * 
@@ -39,8 +37,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
  */
 public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjects()
 	 * @generated

@@ -117,7 +117,8 @@ public class MultiAttributeSetOperationItemProvider extends FeatureOperationItem
 	}
 
 	/**
-	 * This returns MultiAttributeSetOperation.gif. <!-- begin-user-doc --> <!--
+	 * This returns MultiAttributeSetOperation.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -128,7 +129,8 @@ public class MultiAttributeSetOperationItemProvider extends FeatureOperationItem
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -141,9 +143,9 @@ public class MultiAttributeSetOperationItemProvider extends FeatureOperationItem
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

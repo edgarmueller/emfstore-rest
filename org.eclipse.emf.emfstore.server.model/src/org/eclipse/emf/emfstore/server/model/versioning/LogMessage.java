@@ -20,18 +20,10 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor
- * <em>Author</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage
- * <em>Message</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate
- * <em>Date</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
- * <em>Client Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor <em>Author</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage <em>Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate <em>Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate <em>Client Date</em>}</li>
  * </ul>
  * </p>
  * 
@@ -115,11 +107,11 @@ public interface LogMessage extends EObject {
 	Date getDate();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate
-	 * <em>Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate <em>Date</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Date</em>' attribute.
+	 * @param value the new value of the '<em>Date</em>' attribute.
 	 * @see #getDate()
 	 * @generated
 	 */
@@ -143,12 +135,12 @@ public interface LogMessage extends EObject {
 	Date getClientDate();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
-	 * <em>Client Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
+	 * <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Client Date</em>' attribute.
+	 * @param value the new value of the '<em>Client Date</em>' attribute.
 	 * @see #getClientDate()
 	 * @generated
 	 */

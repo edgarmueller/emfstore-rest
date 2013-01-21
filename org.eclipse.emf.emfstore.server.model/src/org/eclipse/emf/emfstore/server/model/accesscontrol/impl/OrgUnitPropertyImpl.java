@@ -29,15 +29,9 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getValue
- * <em>Value</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getProject
- * <em>Project</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getValue <em>Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  * 
@@ -85,8 +79,8 @@ public class OrgUnitPropertyImpl extends EObjectImpl implements OrgUnitProperty 
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProject() <em>Project</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProject()
 	 * @generated

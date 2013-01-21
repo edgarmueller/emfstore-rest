@@ -20,12 +20,9 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd
- * <em>Add</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getIndex
- * <em>Index</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd <em>Add</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getIndex <em>Index
+ * </em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements
  * <em>Referenced Model Elements</em>}</li>
@@ -55,11 +52,11 @@ public interface MultiReferenceOperation extends ReferenceOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd
-	 * <em>Add</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd <em>Add</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Add</em>' attribute.
+	 * @param value the new value of the '<em>Add</em>' attribute.
 	 * @see #isAdd()
 	 * @generated
 	 */
@@ -85,10 +82,10 @@ public interface MultiReferenceOperation extends ReferenceOperation {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getIndex
-	 * <em>Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Index</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Index</em>' attribute.
+	 * @param value the new value of the '<em>Index</em>' attribute.
 	 * @see #getIndex()
 	 * @generated
 	 */

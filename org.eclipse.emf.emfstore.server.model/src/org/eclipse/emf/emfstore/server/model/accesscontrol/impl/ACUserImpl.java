@@ -29,15 +29,10 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getFirstName
- * <em>First Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getLastName
- * <em>Last Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups
- * <em>Effective Groups</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getFirstName <em>First Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getLastName <em>Last Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups <em>Effective
+ * Groups</em>}</li>
  * </ul>
  * </p>
  * 
@@ -45,8 +40,8 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  */
 public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	/**
-	 * The default value of the '{@link #getFirstName() <em>First Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getFirstName()
 	 * @generated
@@ -55,8 +50,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	protected static final String FIRST_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFirstName() <em>First Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getFirstName()
 	 * @generated
@@ -65,8 +60,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	protected String firstName = FIRST_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLastName() <em>Last Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getLastName() <em>Last Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLastName()
 	 * @generated
@@ -75,8 +70,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	protected static final String LAST_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLastName() <em>Last Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLastName() <em>Last Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLastName()
 	 * @generated

@@ -46,9 +46,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#isDelete
- * <em>Delete</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#isDelete <em>
+ * Delete</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getModelElement
  * <em>Model Element</em>}</li>
@@ -193,8 +192,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	protected boolean delete = DELETE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getModelElement()
-	 * <em>Model Element</em>}' containment reference. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getModelElement() <em>Model Element</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getModelElement()
@@ -204,8 +203,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	protected EObject modelElement;
 
 	/**
-	 * The cached value of the '{@link #getSubOperations()
-	 * <em>Sub Operations</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getSubOperations() <em>Sub Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSubOperations()
@@ -215,8 +214,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	protected EList<ReferenceOperation> subOperations;
 
 	/**
-	 * The cached value of the '{@link #getEObjectToIdMap()
-	 * <em>EObject To Id Map</em>}' map. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getEObjectToIdMap() <em>EObject To Id Map</em>}' map.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getEObjectToIdMap()

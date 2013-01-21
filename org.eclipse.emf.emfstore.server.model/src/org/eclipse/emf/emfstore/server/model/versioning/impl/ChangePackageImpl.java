@@ -63,8 +63,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.util.Operatio
  */
 public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOperations()
 	 * @generated
@@ -73,8 +73,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	protected EList<AbstractOperation> operations;
 
 	/**
-	 * The cached value of the '{@link #getEvents() <em>Events</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getEvents()
 	 * @generated
@@ -83,8 +83,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	protected EList<Event> events;
 
 	/**
-	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getLogMessage()
 	 * @generated
@@ -102,6 +102,28 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * @ordered
 	 */
 	protected EList<VersionProperty> versionProperties;
+
+	/**
+	 * The default value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getProjectStateChecksum()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long PROJECT_STATE_CHECKSUM_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getProjectStateChecksum()
+	 * @generated
+	 * @ordered
+	 */
+	protected long projectStateChecksum = PROJECT_STATE_CHECKSUM_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -250,6 +272,30 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		return versionProperties;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public long getProjectStateChecksum() {
+		return projectStateChecksum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setProjectStateChecksum(long newProjectStateChecksum) {
+		long oldProjectStateChecksum = projectStateChecksum;
+		projectStateChecksum = newProjectStateChecksum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM, oldProjectStateChecksum, projectStateChecksum));
+	}
+
 	// begin of custom code
 	/**
 	 * <!-- begin-user-doc --> Reverse the change package. That applying the
@@ -347,6 +393,8 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			return basicGetLogMessage();
 		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 			return getVersionProperties();
+		case VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM:
+			return getProjectStateChecksum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -375,6 +423,9 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			getVersionProperties().clear();
 			getVersionProperties().addAll((Collection<? extends VersionProperty>) newValue);
 			return;
+		case VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM:
+			setProjectStateChecksum((Long) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -399,6 +450,9 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 			getVersionProperties().clear();
 			return;
+		case VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM:
+			setProjectStateChecksum(PROJECT_STATE_CHECKSUM_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -419,8 +473,28 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			return logMessage != null;
 		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
 			return versionProperties != null && !versionProperties.isEmpty();
+		case VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM:
+			return projectStateChecksum != PROJECT_STATE_CHECKSUM_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (projectStateChecksum: ");
+		result.append(projectStateChecksum);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**

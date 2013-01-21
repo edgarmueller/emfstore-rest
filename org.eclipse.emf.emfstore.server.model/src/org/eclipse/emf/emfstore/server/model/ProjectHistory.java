@@ -47,8 +47,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.Version;
  */
 public interface ProjectHistory extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Project Id</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
@@ -64,13 +64,12 @@ public interface ProjectHistory extends EObject {
 	ProjectId getProjectId();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectId
-	 * <em>Project Id</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectId
+	 * <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Id</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Project Id</em>' containment reference.
 	 * @see #getProjectId()
 	 * @generated
 	 */
@@ -119,12 +118,12 @@ public interface ProjectHistory extends EObject {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectName
-	 * <em>Project Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectName
+	 * <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Name</em>' attribute.
+	 * @param value the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
 	 */
@@ -148,12 +147,12 @@ public interface ProjectHistory extends EObject {
 	String getProjectDescription();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectDescription
-	 * <em>Project Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory#getProjectDescription
+	 * <em>Project Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Description</em>' attribute.
+	 * @param value the new value of the '<em>Project Description</em>' attribute.
 	 * @see #getProjectDescription()
 	 * @generated
 	 */

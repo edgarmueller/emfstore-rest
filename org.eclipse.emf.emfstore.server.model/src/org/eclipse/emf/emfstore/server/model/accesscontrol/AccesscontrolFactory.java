@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface AccesscontrolFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -30,7 +31,8 @@ public interface AccesscontrolFactory extends EFactory {
 		.init();
 
 	/**
-	 * Returns a new object of class '<em>AC User</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>AC User</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>AC User</em>'.
@@ -39,7 +41,8 @@ public interface AccesscontrolFactory extends EFactory {
 	ACUser createACUser();
 
 	/**
-	 * Returns a new object of class '<em>AC Org Unit</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>AC Org Unit</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>AC Org Unit</em>'.
@@ -48,7 +51,8 @@ public interface AccesscontrolFactory extends EFactory {
 	ACOrgUnit createACOrgUnit();
 
 	/**
-	 * Returns a new object of class '<em>AC Group</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>AC Group</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return a new object of class '<em>AC Group</em>'.
@@ -75,7 +79,8 @@ public interface AccesscontrolFactory extends EFactory {
 	OrgUnitProperty createOrgUnitProperty();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the package supported by this factory.

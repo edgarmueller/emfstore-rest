@@ -33,18 +33,11 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles
- * <em>Roles</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription
- * <em>Description</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties
- * <em>Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles <em>Roles</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription <em>Description
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  * 
@@ -73,8 +66,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getRoles()
 	 * @generated
@@ -83,8 +76,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	protected EList<Role> roles;
 
 	/**
-	 * The default value of the '{@link #getDescription() <em>Description</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDescription()
 	 * @generated
@@ -93,8 +86,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDescription()
 	 * @generated
@@ -103,8 +96,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProperties()
 	 * @generated

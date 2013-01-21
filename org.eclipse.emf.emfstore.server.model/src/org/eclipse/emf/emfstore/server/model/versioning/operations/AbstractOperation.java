@@ -43,16 +43,15 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  */
 public interface AbstractOperation extends IdentifiableElement {
 	/**
-	 * Returns the value of the '<em><b>Model Element Id</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Model Element Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model Element Id</em>' reference isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Model Element Id</em>' containment
-	 *         reference.
+	 * @return the value of the '<em>Model Element Id</em>' containment reference.
 	 * @see #setModelElementId(ModelElementId)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getAbstractOperation_ModelElementId()
 	 * @model containment="true" resolveProxies="true"
@@ -63,12 +62,11 @@ public interface AbstractOperation extends IdentifiableElement {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId
-	 * <em>Model Element Id</em>}' containment reference. <!-- begin-user-doc
+	 * <em>Model Element Id</em>}' containment reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Model Element Id</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Model Element Id</em>' containment reference.
 	 * @see #getModelElementId()
 	 * @generated
 	 */
@@ -124,11 +122,11 @@ public interface AbstractOperation extends IdentifiableElement {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getClientDate
-	 * <em>Client Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * <em>Client Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Client Date</em>' attribute.
+	 * @param value the new value of the '<em>Client Date</em>' attribute.
 	 * @see #getClientDate()
 	 * @generated
 	 */

@@ -59,8 +59,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.Version;
  */
 public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	/**
-	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectId()
 	 * @generated
@@ -69,8 +69,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected ProjectId projectId;
 
 	/**
-	 * The cached value of the '{@link #getVersions() <em>Versions</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersions() <em>Versions</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersions()
 	 * @generated
@@ -79,7 +79,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected EList<Version> versions;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>} ' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectName()
@@ -89,8 +90,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected static final String PROJECT_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectName()
 	 * @generated
@@ -99,8 +100,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected String projectName = PROJECT_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectDescription()
-	 * <em>Project Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getProjectDescription() <em>Project Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getProjectDescription()
@@ -110,8 +111,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected static final String PROJECT_DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getProjectDescription()
-	 * <em>Project Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getProjectDescription() <em>Project Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getProjectDescription()
@@ -132,8 +133,8 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	protected EList<EMFStoreProperty> sharedProperties;
 
 	/**
-	 * The cached value of the '{@link #getBranches() <em>Branches</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getBranches()
 	 * @generated

@@ -38,21 +38,17 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getSubOperations
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getSubOperations
  * <em>Sub Operations</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getMainOperation
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getMainOperation
  * <em>Main Operation</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeName
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeName
  * <em>Composite Name</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeDescription
  * <em>Composite Description</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#isReversed
- * <em>Reversed</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#isReversed <em>
+ * Reversed</em>}</li>
  * </ul>
  * </p>
  * 
@@ -76,8 +72,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	}
 
 	/**
-	 * The cached value of the '{@link #getSubOperations()
-	 * <em>Sub Operations</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getSubOperations() <em>Sub Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSubOperations()
@@ -87,8 +83,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	protected EList<AbstractOperation> subOperations;
 
 	/**
-	 * The cached value of the '{@link #getMainOperation()
-	 * <em>Main Operation</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getMainOperation() <em>Main Operation</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getMainOperation()
@@ -98,8 +94,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	protected AbstractOperation mainOperation;
 
 	/**
-	 * The default value of the '{@link #getCompositeName()
-	 * <em>Composite Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getCompositeName() <em>Composite Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getCompositeName()
@@ -108,8 +104,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	protected static final String COMPOSITE_NAME_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getCompositeName()
-	 * <em>Composite Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getCompositeName() <em>Composite Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getCompositeName()
@@ -118,8 +114,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	protected String compositeName = COMPOSITE_NAME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getCompositeDescription()
-	 * <em>Composite Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getCompositeDescription() <em>Composite Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getCompositeDescription()
@@ -128,8 +124,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	protected static final String COMPOSITE_DESCRIPTION_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getCompositeDescription()
-	 * <em>Composite Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getCompositeDescription() <em>Composite Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #getCompositeDescription()
@@ -139,8 +135,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	protected String compositeDescription = COMPOSITE_DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isReversed() <em>Reversed</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isReversed() <em>Reversed</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #isReversed()
 	 * @generated
@@ -149,8 +145,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	protected static final boolean REVERSED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isReversed() <em>Reversed</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #isReversed() <em>Reversed</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #isReversed()
 	 * @generated

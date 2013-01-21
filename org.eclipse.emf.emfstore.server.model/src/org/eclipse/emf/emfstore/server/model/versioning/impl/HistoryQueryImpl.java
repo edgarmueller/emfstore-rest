@@ -25,15 +25,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#getSource
- * <em>Source</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeChangePackages
- * <em>Include Change Packages</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeAllVersions
- * <em>Include All Versions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeChangePackages <em>Include
+ * Change Packages</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeAllVersions <em>Include
+ * All Versions</em>}</li>
  * </ul>
  * </p>
  * 
@@ -41,8 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  */
 public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQuery {
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSource()
 	 * @generated
@@ -51,8 +47,8 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	protected PrimaryVersionSpec source;
 
 	/**
-	 * The default value of the '{@link #isIncludeChangePackages()
-	 * <em>Include Change Packages</em>}' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #isIncludeChangePackages() <em>Include Change Packages</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #isIncludeChangePackages()
@@ -62,8 +58,8 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	protected static final boolean INCLUDE_CHANGE_PACKAGES_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIncludeChangePackages()
-	 * <em>Include Change Packages</em>}' attribute. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isIncludeChangePackages() <em>Include Change Packages</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #isIncludeChangePackages()
@@ -73,8 +69,8 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	protected boolean includeChangePackages = INCLUDE_CHANGE_PACKAGES_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIncludeAllVersions()
-	 * <em>Include All Versions</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isIncludeAllVersions() <em>Include All Versions</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeAllVersions()
@@ -84,8 +80,8 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	protected static final boolean INCLUDE_ALL_VERSIONS_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIncludeAllVersions()
-	 * <em>Include All Versions</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isIncludeAllVersions() <em>Include All Versions</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @see #isIncludeAllVersions()

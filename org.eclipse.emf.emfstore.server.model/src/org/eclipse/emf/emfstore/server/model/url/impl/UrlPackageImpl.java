@@ -99,8 +99,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model,
-	 * and for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
 	 * <p>
 	 * This method is used to initialize {@link UrlPackage#eINSTANCE} when that field is accessed. Clients should not
@@ -316,8 +315,9 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package. This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated

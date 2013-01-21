@@ -19,9 +19,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion
- * <em>New Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion <em>New
+ * Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -31,8 +30,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  */
 public interface ProjectUpdatedEvent extends ServerProjectEvent {
 	/**
-	 * Returns the value of the '<em><b>New Version</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>New Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>New Version</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
@@ -50,12 +49,11 @@ public interface ProjectUpdatedEvent extends ServerProjectEvent {
 	/**
 	 * Sets the value of the '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion
-	 * <em>New Version</em>}' containment reference. <!-- begin-user-doc -->
+	 * <em>New Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>New Version</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>New Version</em>' containment reference.
 	 * @see #getNewVersion()
 	 * @generated
 	 */

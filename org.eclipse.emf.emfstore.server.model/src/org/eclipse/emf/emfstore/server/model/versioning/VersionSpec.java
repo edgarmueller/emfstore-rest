@@ -18,9 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
- * <em>Branch</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
  * </ul>
  * </p>
  * 
@@ -31,8 +29,9 @@ import org.eclipse.emf.ecore.EObject;
 public interface VersionSpec extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Branch</b></em>' attribute. The default
-	 * value is <code>"trunk"</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Branch</b></em>' attribute.
+	 * The default value is <code>"trunk"</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Branch</em>' attribute isn't clear, there really should be more of a description
 	 * here...

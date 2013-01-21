@@ -18,9 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName
- * <em>Host Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em> Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
  * 
@@ -75,11 +74,11 @@ public interface ServerUrl extends EObject {
 	int getPort();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort
-	 * <em>Port</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Port</em>' attribute.
+	 * @param value the new value of the '<em>Port</em>' attribute.
 	 * @see #getPort()
 	 * @generated
 	 */

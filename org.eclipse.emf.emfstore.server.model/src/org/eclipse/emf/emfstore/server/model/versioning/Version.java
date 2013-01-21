@@ -20,39 +20,18 @@ import org.eclipse.emf.emfstore.common.model.Project;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
- * <em>Project State</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
- * <em>Primary Spec</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getTagSpecs
- * <em>Tag Specs</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
- * <em>Next Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
- * <em>Previous Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
- * <em>Changes</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
- * <em>Log Message</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
- * <em>Ancestor Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getBranchedVersions
- * <em>Branched Versions</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedToVersion
- * <em>Merged To Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedFromVersion
- * <em>Merged From Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState <em>Project State</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec <em>Primary Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getTagSpecs <em>Tag Specs</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion <em>Next Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion <em>Previous Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges <em>Changes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage <em>Log Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion <em>Ancestor Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getBranchedVersions <em>Branched Versions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedToVersion <em>Merged To Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedFromVersion <em>Merged From Version
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -62,8 +41,8 @@ import org.eclipse.emf.emfstore.common.model.Project;
  */
 public interface Version extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Project State</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project State</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project State</em>' reference isn't clear, there really should be more of a
 	 * description here...
@@ -79,21 +58,20 @@ public interface Version extends EObject {
 	Project getProjectState();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
-	 * <em>Project State</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getProjectState
+	 * <em>Project State</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project State</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Project State</em>' containment reference.
 	 * @see #getProjectState()
 	 * @generated
 	 */
 	void setProjectState(Project value);
 
 	/**
-	 * Returns the value of the '<em><b>Primary Spec</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Primary Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Primary Spec</em>' reference isn't clear, there really should be more of a description
 	 * here...
@@ -109,22 +87,20 @@ public interface Version extends EObject {
 	PrimaryVersionSpec getPrimarySpec();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
-	 * <em>Primary Spec</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPrimarySpec
+	 * <em>Primary Spec</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Primary Spec</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Primary Spec</em>' containment reference.
 	 * @see #getPrimarySpec()
 	 * @generated
 	 */
 	void setPrimarySpec(PrimaryVersionSpec value);
 
 	/**
-	 * Returns the value of the '<em><b>Tag Specs</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}.
+	 * Returns the value of the '<em><b>Tag Specs</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tag Specs</em>' reference list isn't clear, there really should be more of a
@@ -140,10 +116,10 @@ public interface Version extends EObject {
 	EList<TagVersionSpec> getTagSpecs();
 
 	/**
-	 * Returns the value of the '<em><b>Next Version</b></em>' reference. It is
-	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
-	 * <em>Previous Version</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Next Version</b></em>' reference.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion <em>Previous Version</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Next Version</em>' reference isn't clear, there really should be more of a description
 	 * here...
@@ -160,22 +136,22 @@ public interface Version extends EObject {
 	Version getNextVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
-	 * <em>Next Version</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
+	 * <em>Next Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Next Version</em>' reference.
+	 * @param value the new value of the '<em>Next Version</em>' reference.
 	 * @see #getNextVersion()
 	 * @generated
 	 */
 	void setNextVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Previous Version</b></em>' reference. It
-	 * is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion
-	 * <em>Next Version</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Previous Version</b></em>' reference.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getNextVersion <em>Next Version</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Previous Version</em>' reference isn't clear, there really should be more of a
 	 * description here...
@@ -192,12 +168,12 @@ public interface Version extends EObject {
 	Version getPreviousVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
-	 * <em>Previous Version</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getPreviousVersion
+	 * <em>Previous Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Previous Version</em>' reference.
+	 * @param value the new value of the '<em>Previous Version</em>' reference.
 	 * @see #getPreviousVersion()
 	 * @generated
 	 */
@@ -221,20 +197,20 @@ public interface Version extends EObject {
 	ChangePackage getChanges();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
-	 * <em>Changes</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getChanges
+	 * <em>Changes</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Changes</em>' containment reference.
+	 * @param value the new value of the '<em>Changes</em>' containment reference.
 	 * @see #getChanges()
 	 * @generated
 	 */
 	void setChanges(ChangePackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Log Message</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Log Message</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Log Message</em>' reference isn't clear, there really should be more of a description
 	 * here...
@@ -250,23 +226,22 @@ public interface Version extends EObject {
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
-	 * <em>Log Message</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getLogMessage
+	 * <em>Log Message</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Log Message</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Log Message</em>' containment reference.
 	 * @see #getLogMessage()
 	 * @generated
 	 */
 	void setLogMessage(LogMessage value);
 
 	/**
-	 * Returns the value of the '<em><b>Ancestor Version</b></em>' reference. It
-	 * is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getBranchedVersions
-	 * <em>Branched Versions</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Ancestor Version</b></em>' reference.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getBranchedVersions <em>Branched Versions</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ancestor Version</em>' reference isn't clear, there really should be more of a
 	 * description here...
@@ -283,23 +258,23 @@ public interface Version extends EObject {
 	Version getAncestorVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
-	 * <em>Ancestor Version</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
+	 * <em>Ancestor Version</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Ancestor Version</em>' reference.
+	 * @param value the new value of the '<em>Ancestor Version</em>' reference.
 	 * @see #getAncestorVersion()
 	 * @generated
 	 */
 	void setAncestorVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Branched Versions</b></em>' reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
-	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion
-	 * <em>Ancestor Version</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Branched Versions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getAncestorVersion <em>Ancestor Version</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Branched Versions</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -315,11 +290,12 @@ public interface Version extends EObject {
 	EList<Version> getBranchedVersions();
 
 	/**
-	 * Returns the value of the '<em><b>Merged To Version</b></em>' reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
-	 * bidirectional and its opposite is '
+	 * Returns the value of the '<em><b>Merged To Version</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}.
+	 * It is bidirectional and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedFromVersion
-	 * <em>Merged From Version</em>}'. <!-- begin-user-doc -->
+	 * <em>Merged From Version</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merged To Version</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -335,11 +311,11 @@ public interface Version extends EObject {
 	EList<Version> getMergedToVersion();
 
 	/**
-	 * Returns the value of the '<em><b>Merged From Version</b></em>' reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. It is
-	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedToVersion
-	 * <em>Merged To Version</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Merged From Version</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.Version}.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.Version#getMergedToVersion <em>Merged To Version</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merged From Version</em>' reference list isn't clear, there really should be more of a
 	 * description here...
