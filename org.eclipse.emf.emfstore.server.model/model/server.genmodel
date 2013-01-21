@@ -55,7 +55,6 @@
       </genClasses>
       <genClasses ecoreClass="server.ecore#//versioning/PrimaryVersionSpec">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//versioning/PrimaryVersionSpec/identifier"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//versioning/PrimaryVersionSpec/projectStateChecksum"/>
       </genClasses>
       <genClasses image="false" ecoreClass="server.ecore#//versioning/VersionSpec">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//versioning/VersionSpec/branch"/>

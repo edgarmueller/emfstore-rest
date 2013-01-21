@@ -58,7 +58,6 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 			super.getPropertyDescriptors(object);
 
 			addIdentifierPropertyDescriptor(object);
-			addProjectStateChecksumPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -77,24 +76,6 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 			getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_identifier_feature",
 				"_UI_PrimaryVersionSpec_type"), VersioningPackage.Literals.PRIMARY_VERSION_SPEC__IDENTIFIER, true,
 			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Project State Checksum feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addProjectStateChecksumPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_PrimaryVersionSpec_projectStateChecksum_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_projectStateChecksum_feature",
-				"_UI_PrimaryVersionSpec_type"),
-			VersioningPackage.Literals.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM, true, false, false,
-			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -137,7 +118,6 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 
 		switch (notification.getFeatureID(PrimaryVersionSpec.class)) {
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

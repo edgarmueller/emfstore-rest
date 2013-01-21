@@ -202,23 +202,13 @@ public interface VersioningPackage extends EPackage {
 	int PRIMARY_VERSION_SPEC__IDENTIFIER = VERSION_SPEC_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Project State Checksum</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM = VERSION_SPEC_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Primary Version Spec</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMARY_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 2;
+	int PRIMARY_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl
@@ -1107,20 +1097,6 @@ public interface VersioningPackage extends EPackage {
 	EAttribute getPrimaryVersionSpec_Identifier();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum
-	 * <em>Project State Checksum</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Project State Checksum</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum()
-	 * @see #getPrimaryVersionSpec()
-	 * @generated
-	 */
-	EAttribute getPrimaryVersionSpec_ProjectStateChecksum();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec
 	 * <em>Version Spec</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1928,16 +1904,6 @@ public interface VersioningPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PRIMARY_VERSION_SPEC__IDENTIFIER = eINSTANCE.getPrimaryVersionSpec_Identifier();
-
-		/**
-		 * The meta object literal for the '<em><b>Project State Checksum</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EAttribute PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM = eINSTANCE
-			.getPrimaryVersionSpec_ProjectStateChecksum();
 
 		/**
 		 * The meta object literal for the '

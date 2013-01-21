@@ -339,16 +339,6 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EAttribute getPrimaryVersionSpec_ProjectStateChecksum() {
-		return (EAttribute) primaryVersionSpecEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -927,7 +917,6 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		primaryVersionSpecEClass = createEClass(PRIMARY_VERSION_SPEC);
 		createEAttribute(primaryVersionSpecEClass, PRIMARY_VERSION_SPEC__IDENTIFIER);
-		createEAttribute(primaryVersionSpecEClass, PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM);
 
 		versionSpecEClass = createEClass(VERSION_SPEC);
 		createEAttribute(versionSpecEClass, VERSION_SPEC__BRANCH);
@@ -1069,9 +1058,6 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		initEAttribute(getPrimaryVersionSpec_Identifier(), ecorePackage.getEInt(), "identifier", null, 1, 1,
 			PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPrimaryVersionSpec_ProjectStateChecksum(), ecorePackage.getELong(), "projectStateChecksum",
-			null, 0, 1, PrimaryVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(versionSpecEClass, VersionSpec.class, "VersionSpec", IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
