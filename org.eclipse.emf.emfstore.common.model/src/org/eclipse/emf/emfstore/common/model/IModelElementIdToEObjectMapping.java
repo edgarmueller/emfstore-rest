@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface IModelElementIdToEObjectMapping {
 
 	/**
-	 * Get the EObject for the given ModelElementID if any.
+	 * Get the {@link EObject} for the given {@link ModelElementId}, if any.
 	 * 
 	 * @param modelElementId the ID
 	 * @return the ID or null if no EObject for the ID is found
