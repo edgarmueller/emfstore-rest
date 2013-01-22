@@ -60,7 +60,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 	/**
 	 * Aborts execution of the caller.
 	 */
-	ABORT {
+	CANCEL {
 
 		@Override
 		public String toString() {

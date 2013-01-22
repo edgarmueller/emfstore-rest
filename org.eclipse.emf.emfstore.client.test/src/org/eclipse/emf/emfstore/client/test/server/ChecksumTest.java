@@ -39,7 +39,7 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void reCheckout() throws EmfStoreException, SerializationException {
+	public void testAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
@@ -77,11 +77,11 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void abort() throws EmfStoreException, SerializationException {
+	public void testCancelErrorHandler() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.ABORT);
+		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
@@ -101,7 +101,7 @@ public class ChecksumTest extends CoreServerTest {
 		testElement.setName("B");
 		getProjectSpace().getOperationManager().startChangeRecording();
 
-		// abort should be triggered
+		// cancel should be triggered
 		PrimaryVersionSpec commit = getProjectSpace().commit();
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
@@ -114,11 +114,11 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void abortAfterOneCommit() throws EmfStoreException, SerializationException {
+	public void testCancelErrorHandlerAfterOneCommit() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.ABORT);
+		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
@@ -139,10 +139,10 @@ public class ChecksumTest extends CoreServerTest {
 		testElement.setName("B");
 		getProjectSpace().getOperationManager().startChangeRecording();
 
-		// abort should be triggered
+		// cancel should be triggered
 		PrimaryVersionSpec commit = getProjectSpace().commit();
 
-		// assert returned checksum after commit has been aborted is the same as before the 1st commit
+		// assert returned checksum after commit has been canceled is the same as before the 1st commit
 		Assert.assertEquals(expectedChecksum, commit.getProjectStateChecksum());
 	}
 }
