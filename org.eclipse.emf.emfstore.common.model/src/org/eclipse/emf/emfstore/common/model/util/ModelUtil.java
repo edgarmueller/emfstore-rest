@@ -263,7 +263,7 @@ public final class ModelUtil {
 			return checksum;
 		}
 
-		return computeChecksum(collection);
+		return computeChecksum((EObject) collection);
 	}
 
 	/**
