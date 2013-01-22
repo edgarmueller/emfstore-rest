@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Zardosht Hoiaie
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs;
 
@@ -29,8 +31,8 @@ import org.eclipse.swt.widgets.Shell;
  * This is the update dialog. It shows just a ChangesTreeComposite.
  * 
  * @author Hodaie
+ * @author emueller
  */
-
 public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 	private List<ChangePackage> changes;
@@ -47,6 +49,8 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 *            the project space that should be updated
 	 * @param changes
 	 *            the list of changes
+	 * @param idToEObjectMapping
+	 *            a mapping of EObjects to their respective IDs
 	 */
 	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {

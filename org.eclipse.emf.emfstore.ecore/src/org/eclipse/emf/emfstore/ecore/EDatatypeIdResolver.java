@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.ecore;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
