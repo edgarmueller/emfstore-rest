@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
 
@@ -23,7 +22,7 @@ public class ImportProjectSpaceHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIImportController(getShell()).importProjectSpace(requireSelection(ProjectSpace.class));
+		new UIImportController(getShell()).importProjectSpace();
 	}
 
 }

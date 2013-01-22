@@ -79,12 +79,9 @@ public class UIImportController {
 
 	/**
 	 * Imports the given project space.
-	 * 
-	 * @param projectSpace
-	 *            the project space that should get imported
 	 */
-	public void importProjectSpace(ProjectSpace projectSpace) {
+	public void importProjectSpace() {
 		new UIGenericExportImportController(shell,
-			ExportImportControllerFactory.Import.getImportProjectSpaceController(projectSpace)).execute();
+			ExportImportControllerFactory.Import.getImportProjectSpaceController()).execute();
 	}
 }
