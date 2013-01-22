@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
-import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcAdminConnectionHander;
+import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcAdminConnectionHandler;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -40,7 +40,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void initConnection(ServerInfo serverInfo, SessionId id) throws ConnectionException {
-		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcAdminConnectionHander.ADMINEMFSTORE);
+		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcAdminConnectionHandler.ADMINEMFSTORE);
 		clientManager.initConnection(serverInfo);
 		addConnectionProxy(id, clientManager);
 	}

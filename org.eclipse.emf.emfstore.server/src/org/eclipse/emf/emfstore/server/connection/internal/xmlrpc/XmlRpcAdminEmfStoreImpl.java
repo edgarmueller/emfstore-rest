@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 
 	private AdminEmfStore getAdminEmfStore() {
-		return XmlRpcAdminConnectionHander.getAdminEmfStore();
+		return XmlRpcAdminConnectionHandler.getAdminEmfStore();
 	}
 
 	/**

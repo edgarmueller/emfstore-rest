@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
  * 
  * @author wesendon
  */
-public class XmlRpcAdminConnectionHander implements ConnectionHandler<AdminEmfStore> {
+public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfStore> {
 
 	/**
 	 * String interface identifier.
