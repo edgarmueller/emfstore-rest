@@ -60,6 +60,7 @@ import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.IDisposable;
@@ -70,6 +71,7 @@ import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -203,6 +205,27 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			applyOperations(change.getOperations(), false);
 		}
 		notifyPostApplyTheirChanges(incoming);
+
+		long computedChecksum = ModelUtil.NO_CHECKSUM;
+		long expectedChecksum = baseSpec.getProjectStateChecksum();
+
+		if (Configuration.isChecksumCheckActive()) {
+			try {
+				computedChecksum = ModelUtil.computeChecksum(getProject());
+
+				if (expectedChecksum != computedChecksum) {
+					IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+					checksumErrorHandler.execute(this);
+					if (!checksumErrorHandler.shouldContinue()) {
+						return;
+					}
+				}
+			} catch (EmfStoreException e) {
+				WorkspaceUtil.logWarning("Error occurred while executing checksum error handling in applyChanges.", e);
+			} catch (SerializationException e) {
+				WorkspaceUtil.logWarning("Could not compute checksum while applying changes.", e);
+			}
+		}
 
 		// reapply local changes
 		applyOperations(myChanges.getOperations(), true);
@@ -523,6 +546,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 
 		ChangePackage changePackage = (ChangePackage) directContents.get(0);
+
+		if (!initCompleted) {
+			init();
+		}
+
 		applyOperations(changePackage.getOperations(), true);
 	}
 
@@ -537,7 +565,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
 
-		initCompleted = true;
 		fileTransferManager = new FileTransferManager(this);
 
 		operationManager = new OperationManager(this);
@@ -562,6 +589,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		modifiedModelElementsCache.initializeCache();
 		startChangeRecording();
 		cleanCutElements();
+
+		initCompleted = true;
 	}
 
 	@SuppressWarnings("unchecked")

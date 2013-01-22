@@ -14,8 +14,7 @@ import org.eclipse.emf.emfstore.client.test.caching.AllCachingTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.AllChangeTrackingTests;
 import org.eclipse.emf.emfstore.client.test.common.AllCommonTests;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.AllConflictDetectionTests;
-import org.eclipse.emf.emfstore.client.test.persistence.PersistenceTest;
-import org.eclipse.emf.emfstore.client.test.persistence.ProjectCacheTest;
+import org.eclipse.emf.emfstore.client.test.persistence.AllPersistenceTests;
 import org.eclipse.emf.emfstore.client.test.server.AllServerTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -29,7 +28,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
 	AllServerTests.class,
 	// AllIntegrationTests.class,
-	AllCommonTests.class, ProjectCacheTest.class, PersistenceTest.class })
+	AllCommonTests.class, AllPersistenceTests.class })
 public class AllTests {
 
 }
