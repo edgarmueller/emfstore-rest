@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.importexport;
 
@@ -127,11 +128,9 @@ public class ExportImportControllerFactory {
 		/**
 		 * Returns a controller for import the given project space.
 		 * 
-		 * @param projectSpace
-		 *            the project space to be imported
 		 * @return a controller for importing the given project space
 		 */
-		public static IExportImportController getImportProjectSpaceController(ProjectSpace projectSpace) {
+		public static IExportImportController getImportProjectSpaceController() {
 			return new ImportProjectSpaceController();
 		}
 	}
