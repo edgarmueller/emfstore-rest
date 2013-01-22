@@ -91,6 +91,9 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 
 	@Override
 	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
+		if (!usersession.isLoggedIn()) {
+			usersession.logIn();
+		}
 		return usersession;
 	}
 
