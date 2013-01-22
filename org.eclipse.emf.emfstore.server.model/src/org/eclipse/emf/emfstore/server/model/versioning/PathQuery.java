@@ -12,14 +12,14 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Path Query</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getPathQuery()
  * @model
  * @generated
@@ -33,7 +33,6 @@ public interface PathQuery extends HistoryQuery {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getPathQuery_Target()
@@ -43,11 +42,9 @@ public interface PathQuery extends HistoryQuery {
 	PrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget
-	 * <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery#getTarget <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Target</em>' containment reference.
 	 * @see #getTarget()
 	 * @generated

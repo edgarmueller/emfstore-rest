@@ -15,11 +15,14 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
+import org.eclipse.emf.emfstore.client.model.Configuration;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -113,6 +116,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Gathering changes");
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
+
 		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
 			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
 
@@ -159,6 +163,18 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Sending files to server");
 		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		getProgressMonitor().worked(30);
+
+		getProgressMonitor().subTask("Performing checksum check");
+		if (Configuration.isChecksumCheckActive()) {
+			long computedChecksum = changePackage.getProjectStateChecksum();
+			if (computedChecksum != newBaseVersion.getProjectStateChecksum()) {
+				IChecksumErrorHandler checksumFailureAction = Configuration.getChecksumErrorHandler();
+				ProjectSpace execute = checksumFailureAction.execute(getProjectSpace());
+				if (!checksumFailureAction.shouldContinue()) {
+					return execute.getBaseVersion();
+				}
+			}
+		}
 
 		getProgressMonitor().subTask("Finalizing commit");
 

@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'. <!--
  * end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getBranchVersionSpec()
  * @model
  * @generated

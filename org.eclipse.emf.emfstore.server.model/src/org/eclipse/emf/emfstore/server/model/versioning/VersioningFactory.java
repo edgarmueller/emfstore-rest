@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
- * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage
  * @generated
  */
@@ -24,7 +23,6 @@ public interface VersioningFactory extends EFactory {
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	VersioningFactory eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.impl.VersioningFactoryImpl.init();
@@ -60,7 +58,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns a new object of class '<em>Log Message</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Log Message</em>'.
 	 * @generated
 	 */
@@ -88,7 +85,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns a new object of class '<em>Range Query</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Range Query</em>'.
 	 * @generated
 	 */
@@ -98,7 +94,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns a new object of class '<em>Path Query</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Path Query</em>'.
 	 * @generated
 	 */
@@ -117,7 +112,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns a new object of class '<em>Version</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Version</em>'.
 	 * @generated
 	 */
@@ -154,7 +148,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns a new object of class '<em>Branch Info</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Branch Info</em>'.
 	 * @generated
 	 */
@@ -173,7 +166,6 @@ public interface VersioningFactory extends EFactory {
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

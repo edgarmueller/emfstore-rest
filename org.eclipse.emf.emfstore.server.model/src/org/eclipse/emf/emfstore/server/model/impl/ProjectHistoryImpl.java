@@ -61,7 +61,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	/**
 	 * The cached value of the '{@link #getProjectId() <em>Project Id</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getProjectId()
 	 * @generated
 	 * @ordered
@@ -71,7 +70,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	/**
 	 * The cached value of the '{@link #getVersions() <em>Versions</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersions()
 	 * @generated
 	 * @ordered
@@ -82,7 +80,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -92,7 +89,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	/**
 	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -103,7 +99,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	 * The default value of the '{@link #getProjectDescription() <em>Project Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getProjectDescription()
 	 * @generated
 	 * @ordered
@@ -114,7 +109,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	 * The cached value of the '{@link #getProjectDescription() <em>Project Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getProjectDescription()
 	 * @generated
 	 * @ordered
@@ -135,7 +129,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 	/**
 	 * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getBranches()
 	 * @generated
 	 * @ordered
@@ -144,7 +137,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ProjectHistoryImpl() {
@@ -153,7 +145,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -163,26 +154,21 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ProjectId getProjectId() {
 		if (projectId != null && projectId.eIsProxy()) {
-			InternalEObject oldProjectId = (InternalEObject) projectId;
-			projectId = (ProjectId) eResolveProxy(oldProjectId);
+			InternalEObject oldProjectId = (InternalEObject)projectId;
+			projectId = (ProjectId)eResolveProxy(oldProjectId);
 			if (projectId != oldProjectId) {
-				InternalEObject newProjectId = (InternalEObject) projectId;
-				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, null);
+				InternalEObject newProjectId = (InternalEObject)projectId;
+				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, null);
 				if (newProjectId.eInternalContainer() == null) {
-					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
+					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
 				}
-				if (msgs != null)
-					msgs.dispatch();
+				if (msgs != null) msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PROJECT_HISTORY__PROJECT_ID,
-						oldProjectId, projectId));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PROJECT_HISTORY__PROJECT_ID, oldProjectId, projectId));
 			}
 		}
 		return projectId;
@@ -190,7 +176,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ProjectId basicGetProjectId() {
@@ -199,54 +184,43 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetProjectId(ProjectId newProjectId, NotificationChain msgs) {
 		ProjectId oldProjectId = projectId;
 		projectId = newProjectId;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				ModelPackage.PROJECT_HISTORY__PROJECT_ID, oldProjectId, newProjectId);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_ID, oldProjectId, newProjectId);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setProjectId(ProjectId newProjectId) {
 		if (newProjectId != projectId) {
 			NotificationChain msgs = null;
 			if (projectId != null)
-				msgs = ((InternalEObject) projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
+				msgs = ((InternalEObject)projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
 			if (newProjectId != null)
-				msgs = ((InternalEObject) newProjectId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
+				msgs = ((InternalEObject)newProjectId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PROJECT_HISTORY__PROJECT_ID, null, msgs);
 			msgs = basicSetProjectId(newProjectId, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_ID,
-				newProjectId, newProjectId));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_ID, newProjectId, newProjectId));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Version> getVersions() {
 		if (versions == null) {
-			versions = new EObjectContainmentEList.Resolving<Version>(Version.class, this,
-				ModelPackage.PROJECT_HISTORY__VERSIONS);
+			versions = new EObjectContainmentEList.Resolving<Version>(Version.class, this, ModelPackage.PROJECT_HISTORY__VERSIONS);
 		}
 		return versions;
 	}
@@ -266,7 +240,6 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -275,20 +248,17 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setProjectName(String newProjectName) {
 		String oldProjectName = projectName;
 		projectName = newProjectName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_NAME,
-				oldProjectName, projectName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_NAME, oldProjectName, projectName));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getProjectDescription() {
@@ -297,187 +267,172 @@ public class ProjectHistoryImpl extends EObjectImpl implements ProjectHistory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setProjectDescription(String newProjectDescription) {
 		String oldProjectDescription = projectDescription;
 		projectDescription = newProjectDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION,
-				oldProjectDescription, projectDescription));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION, oldProjectDescription, projectDescription));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<EMFStoreProperty> getSharedProperties() {
 		if (sharedProperties == null) {
-			sharedProperties = new EObjectContainmentEList.Resolving<EMFStoreProperty>(EMFStoreProperty.class, this,
-				ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES);
+			sharedProperties = new EObjectContainmentEList.Resolving<EMFStoreProperty>(EMFStoreProperty.class, this, ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES);
 		}
 		return sharedProperties;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<BranchInfo> getBranches() {
 		if (branches == null) {
-			branches = new EObjectContainmentEList.Resolving<BranchInfo>(BranchInfo.class, this,
-				ModelPackage.PROJECT_HISTORY__BRANCHES);
+			branches = new EObjectContainmentEList.Resolving<BranchInfo>(BranchInfo.class, this, ModelPackage.PROJECT_HISTORY__BRANCHES);
 		}
 		return branches;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
-			return basicSetProjectId(null, msgs);
-		case ModelPackage.PROJECT_HISTORY__VERSIONS:
-			return ((InternalEList<?>) getVersions()).basicRemove(otherEnd, msgs);
-		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-			return ((InternalEList<?>) getSharedProperties()).basicRemove(otherEnd, msgs);
-		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			return ((InternalEList<?>) getBranches()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
+				return basicSetProjectId(null, msgs);
+			case ModelPackage.PROJECT_HISTORY__VERSIONS:
+				return ((InternalEList<?>)getVersions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
+				return ((InternalEList<?>)getSharedProperties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PROJECT_HISTORY__BRANCHES:
+				return ((InternalEList<?>)getBranches()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
-			if (resolve)
-				return getProjectId();
-			return basicGetProjectId();
-		case ModelPackage.PROJECT_HISTORY__VERSIONS:
-			return getVersions();
-		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
-			return getProjectName();
-		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
-			return getProjectDescription();
-		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-			return getSharedProperties();
-		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			return getBranches();
+			case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
+				if (resolve) return getProjectId();
+				return basicGetProjectId();
+			case ModelPackage.PROJECT_HISTORY__VERSIONS:
+				return getVersions();
+			case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
+				return getProjectName();
+			case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
+				return getProjectDescription();
+			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
+				return getSharedProperties();
+			case ModelPackage.PROJECT_HISTORY__BRANCHES:
+				return getBranches();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
-			setProjectId((ProjectId) newValue);
-			return;
-		case ModelPackage.PROJECT_HISTORY__VERSIONS:
-			getVersions().clear();
-			getVersions().addAll((Collection<? extends Version>) newValue);
-			return;
-		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
-			setProjectName((String) newValue);
-			return;
-		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
-			setProjectDescription((String) newValue);
-			return;
-		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-			getSharedProperties().clear();
-			getSharedProperties().addAll((Collection<? extends EMFStoreProperty>) newValue);
-			return;
-		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			getBranches().clear();
-			getBranches().addAll((Collection<? extends BranchInfo>) newValue);
-			return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
+				setProjectId((ProjectId)newValue);
+				return;
+			case ModelPackage.PROJECT_HISTORY__VERSIONS:
+				getVersions().clear();
+				getVersions().addAll((Collection<? extends Version>)newValue);
+				return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
+				setProjectName((String)newValue);
+				return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
+				setProjectDescription((String)newValue);
+				return;
+			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
+				getSharedProperties().clear();
+				getSharedProperties().addAll((Collection<? extends EMFStoreProperty>)newValue);
+				return;
+			case ModelPackage.PROJECT_HISTORY__BRANCHES:
+				getBranches().clear();
+				getBranches().addAll((Collection<? extends BranchInfo>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
-			setProjectId((ProjectId) null);
-			return;
-		case ModelPackage.PROJECT_HISTORY__VERSIONS:
-			getVersions().clear();
-			return;
-		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
-			setProjectName(PROJECT_NAME_EDEFAULT);
-			return;
-		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
-			setProjectDescription(PROJECT_DESCRIPTION_EDEFAULT);
-			return;
-		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-			getSharedProperties().clear();
-			return;
-		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			getBranches().clear();
-			return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
+				setProjectId((ProjectId)null);
+				return;
+			case ModelPackage.PROJECT_HISTORY__VERSIONS:
+				getVersions().clear();
+				return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
+				setProjectName(PROJECT_NAME_EDEFAULT);
+				return;
+			case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
+				setProjectDescription(PROJECT_DESCRIPTION_EDEFAULT);
+				return;
+			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
+				getSharedProperties().clear();
+				return;
+			case ModelPackage.PROJECT_HISTORY__BRANCHES:
+				getBranches().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
-			return projectId != null;
-		case ModelPackage.PROJECT_HISTORY__VERSIONS:
-			return versions != null && !versions.isEmpty();
-		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
-			return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
-		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
-			return PROJECT_DESCRIPTION_EDEFAULT == null ? projectDescription != null : !PROJECT_DESCRIPTION_EDEFAULT
-				.equals(projectDescription);
-		case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
-			return sharedProperties != null && !sharedProperties.isEmpty();
-		case ModelPackage.PROJECT_HISTORY__BRANCHES:
-			return branches != null && !branches.isEmpty();
+			case ModelPackage.PROJECT_HISTORY__PROJECT_ID:
+				return projectId != null;
+			case ModelPackage.PROJECT_HISTORY__VERSIONS:
+				return versions != null && !versions.isEmpty();
+			case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
+				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
+			case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
+				return PROJECT_DESCRIPTION_EDEFAULT == null ? projectDescription != null : !PROJECT_DESCRIPTION_EDEFAULT.equals(projectDescription);
+			case ModelPackage.PROJECT_HISTORY__SHARED_PROPERTIES:
+				return sharedProperties != null && !sharedProperties.isEmpty();
+			case ModelPackage.PROJECT_HISTORY__BRANCHES:
+				return branches != null && !branches.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (projectName: ");

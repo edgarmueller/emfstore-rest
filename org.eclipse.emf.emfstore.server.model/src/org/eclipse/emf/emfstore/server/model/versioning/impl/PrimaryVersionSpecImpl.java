@@ -22,18 +22,17 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier
- * </em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getProjectStateChecksum <em>Project State Checksum</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVersionSpec {
 	/**
 	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getIdentifier()
 	 * @generated
 	 * @ordered
@@ -43,7 +42,6 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	/**
 	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getIdentifier()
 	 * @generated
 	 * @ordered
@@ -51,8 +49,27 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	protected int identifier = IDENTIFIER_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProjectStateChecksum()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long PROJECT_STATE_CHECKSUM_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProjectStateChecksum()
+	 * @generated
+	 * @ordered
+	 */
+	protected long projectStateChecksum = PROJECT_STATE_CHECKSUM_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected PrimaryVersionSpecImpl() {
@@ -61,7 +78,6 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -71,7 +87,6 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getIdentifier() {
@@ -80,88 +95,113 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setIdentifier(int newIdentifier) {
 		int oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
-				oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER, oldIdentifier, identifier));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getProjectStateChecksum() {
+		return projectStateChecksum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProjectStateChecksum(long newProjectStateChecksum) {
+		long oldProjectStateChecksum = projectStateChecksum;
+		projectStateChecksum = newProjectStateChecksum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM, oldProjectStateChecksum, projectStateChecksum));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-			return getIdentifier();
+			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+				return getIdentifier();
+			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+				return getProjectStateChecksum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-			setIdentifier((Integer) newValue);
-			return;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+				setIdentifier((Integer)newValue);
+				return;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+				setProjectStateChecksum((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-			setIdentifier(IDENTIFIER_EDEFAULT);
-			return;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+				setIdentifier(IDENTIFIER_EDEFAULT);
+				return;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+				setProjectStateChecksum(PROJECT_STATE_CHECKSUM_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-			return identifier != IDENTIFIER_EDEFAULT;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+				return identifier != IDENTIFIER_EDEFAULT;
+			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+				return projectStateChecksum != PROJECT_STATE_CHECKSUM_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (identifier: ");
 		result.append(identifier);
+		result.append(", projectStateChecksum: ");
+		result.append(projectStateChecksum);
 		result.append(')');
 		return result.toString();
 	}

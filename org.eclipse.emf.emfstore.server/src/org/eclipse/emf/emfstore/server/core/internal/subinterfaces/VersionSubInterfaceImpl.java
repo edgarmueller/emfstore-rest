@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.core.internal.subinterfaces;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
@@ -379,6 +381,19 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			previousVersion)).copy();
 		changePackage.apply(newProjectState);
 		newVersion.setProjectState(newProjectState);
+
+		long computedChecksum = ModelUtil.NO_CHECKSUM;
+
+		try {
+			if (ServerConfiguration.isComputeChecksumOnCommitActive()) {
+				computedChecksum = ModelUtil.computeChecksum(newProjectState);
+			}
+		} catch (SerializationException exception) {
+			// TODO: clarify what to do in case checksum computation fails + provide ext. point
+			throw new EmfStoreException(MessageFormat.format("Could not compute checksum of project {0}.",
+				projectHistory.getProjectName()), exception);
+		}
+
 		newVersion.setChanges(changePackage);
 
 		logMessage.setDate(new Date());
@@ -389,6 +404,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// the list), branch from previous is used.
 		newVersion.setPrimarySpec(Versions.createPRIMARY(previousVersion.getPrimarySpec(), projectHistory.getVersions()
 			.size()));
+		newVersion.getPrimarySpec().setProjectStateChecksum(computedChecksum);
 		newVersion.setNextVersion(null);
 
 		projectHistory.getVersions().add(newVersion);

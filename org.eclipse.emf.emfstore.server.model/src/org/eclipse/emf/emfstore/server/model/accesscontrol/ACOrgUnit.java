@@ -16,17 +16,17 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC Org Unit</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getRoles <em>Roles</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getDescription <em>Description</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACOrgUnit()
  * @model
  * @generated
@@ -49,10 +49,8 @@ public interface ACOrgUnit extends IdentifiableElement {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getName
-	 * <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -68,7 +66,6 @@ public interface ACOrgUnit extends IdentifiableElement {
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Roles</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACOrgUnit_Roles()
 	 * @model containment="true" resolveProxies="true"
@@ -82,7 +79,6 @@ public interface ACOrgUnit extends IdentifiableElement {
 	 * If the meaning of the '<em>Id</em>' reference isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @model kind="operation"
 	 * @generated
 	 */
@@ -106,11 +102,9 @@ public interface ACOrgUnit extends IdentifiableElement {
 	String getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getDescription
-	 * <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getDescription <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Description</em>' attribute.
 	 * @see #getDescription()
 	 * @generated
@@ -126,7 +120,6 @@ public interface ACOrgUnit extends IdentifiableElement {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Properties</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACOrgUnit_Properties()
 	 * @model containment="true" resolveProxies="true"

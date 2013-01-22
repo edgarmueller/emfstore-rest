@@ -28,11 +28,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl#getModelElements <em>Model
- * Elements</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.ModelElementQueryImpl#getModelElements <em>Model Elements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElementQuery {
@@ -40,7 +39,6 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 	 * The cached value of the '{@link #getModelElements() <em>Model Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getModelElements()
 	 * @generated
 	 * @ordered
@@ -49,7 +47,6 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ModelElementQueryImpl() {
@@ -58,7 +55,6 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,87 +64,80 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<ModelElementId> getModelElements() {
 		if (modelElements == null) {
-			modelElements = new EObjectContainmentEList.Resolving<ModelElementId>(ModelElementId.class, this,
-				VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
+			modelElements = new EObjectContainmentEList.Resolving<ModelElementId>(ModelElementId.class, this, VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
 		}
 		return modelElements;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			return ((InternalEList<?>) getModelElements()).basicRemove(otherEnd, msgs);
+			case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
+				return ((InternalEList<?>)getModelElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			return getModelElements();
+			case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
+				return getModelElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			getModelElements().clear();
-			getModelElements().addAll((Collection<? extends ModelElementId>) newValue);
-			return;
+			case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
+				getModelElements().clear();
+				getModelElements().addAll((Collection<? extends ModelElementId>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			getModelElements().clear();
-			return;
+			case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
+				getModelElements().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
-			return modelElements != null && !modelElements.isEmpty();
+			case VersioningPackage.MODEL_ELEMENT_QUERY__MODEL_ELEMENTS:
+				return modelElements != null && !modelElements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

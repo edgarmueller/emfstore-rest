@@ -17,16 +17,15 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Group</b></em>'. <!--
  * end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model
- * Elements</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model Elements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getModelElementGroup()
  * @model
  * @generated
@@ -49,11 +48,8 @@ public interface ModelElementGroup extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated

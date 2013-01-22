@@ -44,7 +44,6 @@ public interface ModelElementUrl extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Server Url</em>' containment reference.
 	 * @see #setServerUrl(ServerUrl)
 	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ServerUrl()
@@ -54,11 +53,9 @@ public interface ModelElementUrl extends EObject {
 	ServerUrl getServerUrl();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl
-	 * <em>Server Url</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl <em>Server Url</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Server Url</em>' containment reference.
 	 * @see #getServerUrl()
 	 * @generated
@@ -73,7 +70,6 @@ public interface ModelElementUrl extends EObject {
 	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Project Url Fragment</em>' containment reference.
 	 * @see #setProjectUrlFragment(ProjectUrlFragment)
 	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ProjectUrlFragment()
@@ -103,7 +99,6 @@ public interface ModelElementUrl extends EObject {
 	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Model Element Url Fragment</em>' containment reference.
 	 * @see #setModelElementUrlFragment(ModelElementUrlFragment)
 	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ModelElementUrlFragment()

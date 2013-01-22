@@ -19,13 +19,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class BranchVersionSpecImpl extends VersionSpecImpl implements BranchVersionSpec {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected BranchVersionSpecImpl() {
@@ -34,7 +33,6 @@ public class BranchVersionSpecImpl extends VersionSpecImpl implements BranchVers
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

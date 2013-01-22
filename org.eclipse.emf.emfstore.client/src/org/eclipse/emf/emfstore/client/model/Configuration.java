@@ -16,12 +16,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.util.DefaultWorkspaceLocationProvider;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
@@ -48,6 +51,11 @@ public final class Configuration {
 	 * The command line option for enabling debug mode.
 	 */
 	public static final String DEBUG_SWITCH = "-debug";
+
+	/**
+	 * The checksum value that is used in case no checksum should be computed.
+	 */
+	public static final long NO_CHECKSUM = -1;
 
 	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
 
@@ -78,6 +86,8 @@ public final class Configuration {
 
 	private static int xmlRPCConnectionTimeout = XML_RPC_CONNECTION_TIMEOUT;
 	private static int xmlRPCReplyTimeout = XML_RPC_REPLY_TIMEOUT;
+
+	private static IChecksumErrorHandler checksumErrorHandler;
 
 	private Configuration() {
 		// nothing to do
@@ -405,5 +415,62 @@ public final class Configuration {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Whether the checksum check is active. If true, and checksum comparison fails, an {@link IChecksumErrorHandler}
+	 * will be active.
+	 * 
+	 * @return true, if the checksum comparison is activated, false otherwise
+	 */
+	public static boolean isChecksumCheckActive() {
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+		return extensionPoint.getBoolean("isActive", true);
+	}
+
+	/**
+	 * Returns the active {@link IChecksumErrorHandler}. The default is {@link ChecksumErrorHandler#AUTOCORRECT}.
+	 * 
+	 * @return the active checksum error handler
+	 */
+	public static IChecksumErrorHandler getChecksumErrorHandler() {
+
+		if (checksumErrorHandler == null) {
+
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+
+			for (ExtensionElement el : extensionPoint.getExtensionElements()) {
+
+				if (!el.getIConfigurationElement().getName().equals("errorHandling")
+					&& el.getIConfigurationElement().getChildren().length == 0) {
+					continue;
+				}
+
+				IConfigurationElement configurationElement = el.getIConfigurationElement().getChildren()[0];
+
+				for (ChecksumErrorHandler action : ChecksumErrorHandler.values()) {
+					if (new Boolean(configurationElement.getAttribute(action.toString()))) {
+						checksumErrorHandler = action;
+						break;
+					}
+				}
+			}
+
+			if (checksumErrorHandler == null) {
+				checksumErrorHandler = ChecksumErrorHandler.AUTOCORRECT;
+			}
+		}
+
+		return checksumErrorHandler;
+	}
+
+	/**
+	 * Set the active {@link IChecksumErrorHandler}.
+	 * 
+	 * @param errorHandler
+	 *            the error handler to be set
+	 */
+	public static void setChecksumFailureAction(IChecksumErrorHandler errorHandler) {
+		checksumErrorHandler = errorHandler;
 	}
 }

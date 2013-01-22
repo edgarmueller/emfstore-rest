@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 public class HeadVersionSpecImpl extends VersionSpecImpl implements HeadVersionSpec {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected HeadVersionSpecImpl() {
@@ -34,7 +33,6 @@ public class HeadVersionSpecImpl extends VersionSpecImpl implements HeadVersionS
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

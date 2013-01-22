@@ -13,15 +13,15 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'. <!--
  * end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec()
  * @model
  * @generated
@@ -35,7 +35,6 @@ public interface AncestorVersionSpec extends VersionSpec {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Target()
@@ -45,11 +44,9 @@ public interface AncestorVersionSpec extends VersionSpec {
 	PrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
-	 * <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Target</em>' containment reference.
 	 * @see #getTarget()
 	 * @generated
@@ -64,7 +61,6 @@ public interface AncestorVersionSpec extends VersionSpec {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Source()
@@ -74,11 +70,9 @@ public interface AncestorVersionSpec extends VersionSpec {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
-	 * <em>Source</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Source</em>' containment reference.
 	 * @see #getSource()
 	 * @generated

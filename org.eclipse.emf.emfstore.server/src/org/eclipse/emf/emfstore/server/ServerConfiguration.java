@@ -408,6 +408,7 @@ public final class ServerConfiguration {
 	}
 
 	private static LocationProvider locationProvider;
+	private static Boolean isChecksumComputationOnCommitActive;
 
 	/**
 	 * Return the server home directory location.
@@ -616,6 +617,28 @@ public final class ServerConfiguration {
 	 */
 	public static boolean isTesting() {
 		return testing;
+	}
+
+	/**
+	 * Whether the server should compute a checksum for the project state when a commit has happened.
+	 * If the server does compute a checksum it will be sent back to the client who then can check whether
+	 * there are any differences between his and the server's project state.
+	 * 
+	 * @return true, if the server does compute a checksum in case a commit has happened, false otherwise
+	 */
+	public static boolean isComputeChecksumOnCommitActive() {
+		if (isChecksumComputationOnCommitActive == null) {
+			try {
+				isChecksumComputationOnCommitActive = new ExtensionPoint("org.eclipse.emf.emfstore.server.computechecksum", true)
+					.getBoolean("shouldComputeChecksumOnCommit");
+			} catch (ExtensionPointException e) {
+				String message = "Can not determine whether to compute checksums on commit, default is true.";
+				ModelUtil.logWarning(message);
+				isChecksumComputationOnCommitActive = true;
+			}
+		}
+
+		return isChecksumComputationOnCommitActive;
 	}
 
 }

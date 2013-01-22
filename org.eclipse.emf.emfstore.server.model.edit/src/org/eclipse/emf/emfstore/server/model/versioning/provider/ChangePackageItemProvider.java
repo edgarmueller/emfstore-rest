@@ -17,14 +17,12 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.server.model.provider.ServerEditPlugin;
@@ -65,26 +63,8 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addProjectStateChecksumPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Project State Checksum feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addProjectStateChecksumPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ChangePackage_projectStateChecksum_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ChangePackage_projectStateChecksum_feature",
-				"_UI_ChangePackage_type"), VersioningPackage.Literals.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM, true,
-			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -143,8 +123,7 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public String getText(Object object) {
-		ChangePackage changePackage = (ChangePackage) object;
-		return getString("_UI_ChangePackage_type") + " " + changePackage.getProjectStateChecksum();
+		return getString("_UI_ChangePackage_type");
 	}
 
 	/**
@@ -160,9 +139,6 @@ public class ChangePackageItemProvider extends ItemProviderAdapter implements IE
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ChangePackage.class)) {
-		case VersioningPackage.CHANGE_PACKAGE__PROJECT_STATE_CHECKSUM:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
 		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
 		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
 		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:

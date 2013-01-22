@@ -16,15 +16,14 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Query</b></em>'. <!--
  * end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements <em>Model Elements
- * </em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements <em>Model Elements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getModelElementQuery()
  * @model
  * @generated
