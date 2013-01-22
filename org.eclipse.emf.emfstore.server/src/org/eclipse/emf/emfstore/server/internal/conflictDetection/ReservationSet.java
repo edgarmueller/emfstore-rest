@@ -32,7 +32,7 @@ public class ReservationSet {
 	private ModelElementIdReservationMap modelElementIdReservationMap;
 
 	/**
-	 * Default construtor.
+	 * Default constructor.
 	 */
 	public ReservationSet() {
 		modelElementIdReservationMap = new ModelElementIdReservationMap();
