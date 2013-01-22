@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.common.IClientVersionProvider;
@@ -439,25 +438,13 @@ public final class Configuration {
 
 			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
-			for (ExtensionElement el : extensionPoint.getExtensionElements()) {
+			IChecksumErrorHandler errorHandler = extensionPoint.getClass("checksumErrorHandler",
+				IChecksumErrorHandler.class);
 
-				if (!el.getIConfigurationElement().getName().equals("errorHandling")
-					&& el.getIConfigurationElement().getChildren().length == 0) {
-					continue;
-				}
-
-				IConfigurationElement configurationElement = el.getIConfigurationElement().getChildren()[0];
-
-				for (ChecksumErrorHandler action : ChecksumErrorHandler.values()) {
-					if (new Boolean(configurationElement.getAttribute(action.toString()))) {
-						checksumErrorHandler = action;
-						break;
-					}
-				}
-			}
-
-			if (checksumErrorHandler == null) {
-				checksumErrorHandler = ChecksumErrorHandler.AUTOCORRECT;
+			if (errorHandler != null) {
+				checksumErrorHandler = errorHandler;
+			} else {
+				checksumErrorHandler = ChecksumErrorHandler.LOG;
 			}
 		}
 

@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 /**
- * An enum that contains all possible error handlers in case the checksum comparison failed.
+ * Pre-defined error handlers.
  * 
  * @author emueller
  * 
@@ -90,7 +90,8 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 
 	/**
 	 * Fixes the checksum comparison failure by deleting the {@link ProjectSpace} that got
-	 * in an inconsistent state and checking it out again.
+	 * in an inconsistent state and checking it out again.<br>
+	 * <b>Note</b>: all references to the project space that will be deleted should to be taken care of.
 	 */
 	AUTOCORRECT {
 

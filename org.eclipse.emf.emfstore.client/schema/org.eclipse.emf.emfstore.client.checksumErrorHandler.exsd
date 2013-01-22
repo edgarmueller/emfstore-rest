@@ -19,7 +19,6 @@
       <complexType>
          <sequence>
             <element ref="checksumCheck"/>
-            <element ref="errorHandling"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -57,50 +56,14 @@
                </documentation>
             </annotation>
          </attribute>
-      </complexType>
-   </element>
-
-   <element name="errorHandling">
-      <complexType>
-         <choice>
-            <element ref="log"/>
-            <element ref="abort"/>
-            <element ref="autocorrect"/>
-         </choice>
-      </complexType>
-   </element>
-
-   <element name="log">
-      <complexType>
-         <attribute name="log" type="boolean" use="default" value="true">
+         <attribute name="errorHandler" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
-            </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
-   <element name="abort">
-      <complexType>
-         <attribute name="abort" type="boolean" use="default" value="true">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
-   <element name="autocorrect">
-      <complexType>
-         <attribute name="autocorrect" type="boolean" use="default" value="true">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
