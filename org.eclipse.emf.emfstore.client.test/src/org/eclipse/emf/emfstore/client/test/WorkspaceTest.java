@@ -197,6 +197,14 @@ public abstract class WorkspaceTest {
 		return createTestElement(null);
 	}
 
+	/**
+	 * Creates a {@link TestElement} with the given name
+	 * and adds it to the test project.
+	 * 
+	 * @param name
+	 *            the name of test element
+	 * @return the created test element
+	 */
 	public TestElement createTestElement(final String name) {
 		return new EMFStoreCommandWithResult<TestElement>() {
 			@Override
