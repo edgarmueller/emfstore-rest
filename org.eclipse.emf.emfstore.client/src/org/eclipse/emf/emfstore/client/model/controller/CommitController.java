@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.controller;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -23,6 +24,9 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
+import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -166,7 +170,13 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Performing checksum check");
 		if (Configuration.isChecksumCheckActive()) {
-			long computedChecksum = changePackage.getProjectStateChecksum();
+			long computedChecksum = ModelUtil.NO_CHECKSUM;
+			try {
+				computedChecksum = ModelUtil.computeChecksum(getProjectSpace().getProject());
+			} catch (SerializationException e) {
+				WorkspaceUtil.logException(MessageFormat.format("Could not compute checksum of project {0}",
+					getProjectSpace().getProjectName()), e);
+			}
 			if (computedChecksum != newBaseVersion.getProjectStateChecksum()) {
 				IChecksumErrorHandler checksumFailureAction = Configuration.getChecksumErrorHandler();
 				ProjectSpace execute = checksumFailureAction.execute(getProjectSpace());
