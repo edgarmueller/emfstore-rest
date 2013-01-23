@@ -16,5 +16,13 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherReference" eType="#//TestElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedElements2" upperBound="-1"
+        eType="#//TestElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//TestElementContainer"
+        eOpposite="#//TestElementContainer/elements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestElementContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//TestElement" containment="true" eOpposite="#//TestElement/container"/>
   </eClassifiers>
 </ecore:EPackage>

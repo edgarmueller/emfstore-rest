@@ -24,8 +24,15 @@ import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
@@ -401,6 +408,189 @@ public class MultiReferenceOperationTest extends WorkspaceTest {
 
 	}
 
+	@Test
+	public void testCrossReferenceToElementContainedInProject() throws SerializationException {
+
+		Project clonedProject = ModelUtil.clone(getProject());
+
+		final TestElement oldRoot = createTestElement("oldRoot");
+		final TestElement newRoot = createTestElement("newRoot");
+		final TestElement a = createTestElement("A");
+		final TestElement b = createTestElement("B");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				oldRoot.getContainedElements().add(a);
+				a.getReferences().add(b);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				newRoot.getContainedElements().add(a);
+			};
+		}.run(false);
+
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(projectSpace.getOperations());
+
+		changePackage.apply(clonedProject);
+		String projectA = ModelUtil.eObjectToString(getProjectSpace().getProject());
+		String projectB = ModelUtil.eObjectToString(clonedProject);
+
+		assertEquals(projectA, projectB);
+	}
+
+	@Test
+	public void testCrossReferenceToElementContainedInProject2() throws SerializationException {
+
+		Project clonedProject = ModelUtil.clone(getProject());
+
+		final TestElement oldRoot = createTestElement("oldRoot");
+		final TestElement newRoot = createTestElement("newRoot");
+		final TestElement a = createTestElement("A");
+		final TestElement b = createTestElement("B");
+		final TestElement c = createTestElement("C");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				oldRoot.getContainedElements().add(a);
+				a.getReferences().add(b);
+			}
+		}.run(false);
+
+		// TODO: split statements in commands
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				oldRoot.getContainedElements().remove(a);
+				a.getReferences().add(c);
+				a.setName("newName");
+				a.getReferences().remove(b);
+				newRoot.getContainedElements().add(a);
+			}
+		}.run(false);
+
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(projectSpace.getOperations());
+
+		changePackage.apply(clonedProject);
+		String projectA = ModelUtil.eObjectToString(getProjectSpace().getProject());
+		String projectB = ModelUtil.eObjectToString(clonedProject);
+
+		assertEquals(projectA, projectB);
+	}
+
+	@Test
+	public void testCrossReferenceToElementContainedInProject3() throws SerializationException {
+
+		Project clonedProject = ModelUtil.clone(getProject());
+		final TestElement aContainer = createTestElement("aContainer");
+		final TestElement aRefContainer = createTestElement("aRefContainer");
+		final TestElement a = createTestElement("A");
+		final TestElement b = createTestElement("B");
+		final TestElement aRef = createTestElement("aRef");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				aContainer.getContainedElements().add(a);
+				aContainer.getContainedElements().add(b);
+				aRefContainer.getContainedElements().add(aRef);
+				aRef.getReferences().add(a);
+			}
+		}.run(false);
+
+		// TODO: split statements in commands
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				List<TestElement> l = new ArrayList<TestElement>();
+				l.add(aRef);
+				aRefContainer.getContainedElements().removeAll(l);
+				aRef.getReferences().clear();
+				aRef.getReferences().add(b);
+				aRefContainer.getContainedElements2().addAll(l);
+			}
+		}.run(false);
+
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(projectSpace.getOperations());
+
+		changePackage.apply(clonedProject);
+		String projectA = ModelUtil.eObjectToString(getProjectSpace().getProject());
+		String projectB = ModelUtil.eObjectToString(clonedProject);
+
+		assertEquals(projectA, projectB);
+	}
+
+	@Test
+	public void testCrossReferenceToElementContainedInProject4() throws SerializationException {
+
+		Project clonedProject = ModelUtil.clone(getProject());
+		final TestElementContainer aContainer = TestmodelFactory.eINSTANCE.createTestElementContainer();
+		final TestElement a = createTestElement("A");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				aContainer.getElements().add(a);
+			}
+		}.run(false);
+
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(projectSpace.getOperations());
+
+		changePackage.apply(clonedProject);
+		String projectA = ModelUtil.eObjectToString(getProjectSpace().getProject());
+		String projectB = ModelUtil.eObjectToString(clonedProject);
+		assertEquals(projectA, projectB);
+
+		// TODO: split statements in commands
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				a.setContainer(null);
+			}
+		}.run(false);
+
+	}
+
+	@Test
+	public void testCrossReferenceToElementContainedInProject5() throws SerializationException {
+
+		Project clonedProject = ModelUtil.clone(getProject());
+		final TestElementContainer aContainer = TestmodelFactory.eINSTANCE.createTestElementContainer();
+		getProject().addModelElement(aContainer);
+		final TestElement a = createTestElement("A");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				aContainer.getElements().add(a);
+			}
+		}.run(false);
+
+		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage.getOperations().addAll(projectSpace.getOperations());
+
+		changePackage.apply(clonedProject);
+		String projectA = ModelUtil.eObjectToString(getProjectSpace().getProject());
+		String projectB = ModelUtil.eObjectToString(clonedProject);
+		assertEquals(projectA, projectB);
+
+		// TODO: split statements in commands
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				a.setContainer(null);
+			}
+		}.run(false);
+
+	}
 	// /**
 	// * Checks whether the elist contains list works correctly.
 	// *
