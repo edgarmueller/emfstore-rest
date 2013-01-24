@@ -9,7 +9,18 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)";visibili
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.apache.commons.io,
+Export-Package: com.google.common.annotations,
+ com.google.common.base,
+ com.google.common.cache,
+ com.google.common.collect,
+ com.google.common.hash,
+ com.google.common.io,
+ com.google.common.math,
+ com.google.common.net,
+ com.google.common.primitives,
+ com.google.common.reflect,
+ com.google.common.util.concurrent,
+ org.apache.commons.io,
  org.apache.commons.io.output,
  org.apache.commons.lang,
  org.eclipse.emf.emfstore.common,
@@ -20,4 +31,5 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lib/commons-io-2.0.1.jar,
  .,
- lib/org.apache.commons.lang_2.4.0.v201005080502.jar
+ lib/org.apache.commons.lang_2.4.0.v201005080502.jar,
+ lib/guava-13.0.1.jar
