@@ -16,10 +16,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
@@ -108,7 +110,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(), progressMonitor);
+			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(), this,
+				progressMonitor);
 		} catch (final EmfStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -172,5 +175,19 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		IProgressMonitor monitor) throws EmfStoreException {
+		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
+		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

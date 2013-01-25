@@ -811,22 +811,28 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * the local operations.
 	 * 
 	 * @param target
-	 *            target version
+	 *            a target version
 	 * @param conflictException
-	 *            a {@link ChangeConflictException} containg the changes to be merged
+	 *            a {@link ChangeConflictException} containing the changes to be merged
 	 * @param conflictResolver
-	 *            a conflict resolver that will actually perform the conflict
+	 *            a {@link ConflictResolver} that will actually perform the conflict
 	 *            resolution
-	 * @param progressMonitor a progress monitor to report on progress
+	 * @param callback
+	 *            the {@link UpdateCallback} that is called in case the checksum comparison fails
+	 * @param progressMonitor
+	 *            an {@link IProgressMonitor} to report on progress
 	 * 
 	 * @throws EmfStoreException
 	 *             if the connection to the server fails
-	 * @return true if merge was successful
+	 * @return true, if merge was successful, false otherwise
+	 * 
+	 * @see UpdateCallback#checksumCheckFailed(ProjectSpace, PrimaryVersionSpec, IProgressMonitor)
 	 * 
 	 * @generated NOT
 	 */
 	boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
-		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException;
+		ConflictResolver conflictResolver, UpdateCallback callback, IProgressMonitor progressMonitor)
+		throws EmfStoreException;
 
 	/**
 	 * Removes a tag to the specified version of this project.

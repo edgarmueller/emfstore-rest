@@ -16,7 +16,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * Callback interface for updating a project space.
@@ -58,6 +60,24 @@ public interface UpdateCallback {
 	boolean conflictOccurred(ChangeConflictException changeConflictException, IProgressMonitor progressMonitor);
 
 	/**
+	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
+	 * 
+	 * @param projectSpace
+	 *            the {@link ProjectSpace} containing the corrupted project
+	 * @param versionSpec
+	 *            the version spec containing the correct checksum received from the server
+	 * @param progressMonitor
+	 *            an {@link IProgressMonitor} to report on progress
+	 * 
+	 * @return whether the checksum error has been handled successfully
+	 * 
+	 * @throws EmfStoreException in case any error occurs during the execution of the checksum error handler
+	 * 
+	 */
+	boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		IProgressMonitor progressMonitor) throws EmfStoreException;
+
+	/**
 	 * A default implementation of an update callback that does nothing and default
 	 * {@link UpdateCallback#conflictOccurred(ChangeConflictException)} to false and
 	 * {@link UpdateCallback#inspectChanges(ProjectSpace, List)} to true.
@@ -74,6 +94,12 @@ public interface UpdateCallback {
 		public boolean conflictOccurred(ChangeConflictException changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return false;
+		}
+
+		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+			IProgressMonitor progressMonitor)
+			throws EmfStoreException {
+			return true;
 		}
 	};
 }

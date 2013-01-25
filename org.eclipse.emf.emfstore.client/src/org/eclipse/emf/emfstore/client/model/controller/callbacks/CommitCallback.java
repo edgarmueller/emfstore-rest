@@ -13,7 +13,9 @@ package org.eclipse.emf.emfstore.client.model.controller.callbacks;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * Callback interface for implementors that are interested in influencing the
@@ -62,6 +64,24 @@ public interface CommitCallback {
 	void noLocalChanges(ProjectSpace projectSpace);
 
 	/**
+	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
+	 * 
+	 * @param projectSpace
+	 *            the {@link ProjectSpace} containing the corrupted project
+	 * @param versionSpec
+	 *            the version spec containing the correct checksum received from the server
+	 * @param monitor
+	 *            an {@link IProgressMonitor} to inform about the progress
+	 * 
+	 * @return whether the commit should be continued, true, if so, false otherwise
+	 * 
+	 * @throws EmfStoreException in case any error occurs during the execution of the checksum error handler
+	 * 
+	 */
+	boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		throws EmfStoreException;
+
+	/**
 	 * Default implementation of a callback interface for commit. Does not veto
 	 * against updating the project space in case it is out of date and returns
 	 * true for {@link #inspectChanges(ProjectSpace, ChangePackage)}, such that
@@ -80,6 +100,11 @@ public interface CommitCallback {
 
 		public void noLocalChanges(ProjectSpace projectSpace) {
 			// do nothing
+		}
+
+		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+			IProgressMonitor progressMonitor) {
+			return true;
 		}
 	};
 }

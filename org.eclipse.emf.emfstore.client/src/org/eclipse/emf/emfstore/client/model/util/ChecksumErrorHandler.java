@@ -11,11 +11,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.util;
 
-import java.io.IOException;
-
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * Pre-defined error handlers.
@@ -29,30 +32,12 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 	 * Logs the checksum comparison failure and continues execution of the caller.
 	 */
 	LOG {
-
-		@Override
-		public String toString() {
-			return "log";
-		}
-
 		/**
-		 * 
 		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#execute(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 		 */
-		public ProjectSpace execute(ProjectSpace projectSpace) throws EmfStoreException {
+		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+			throws EmfStoreException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
-			return projectSpace;
-		}
-
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#shouldContinue()
-		 */
-		public boolean shouldContinue() {
 			return true;
 		}
 	},
@@ -61,29 +46,11 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 	 * Aborts execution of the caller.
 	 */
 	CANCEL {
-
-		@Override
-		public String toString() {
-			return "abort";
-		}
-
 		/**
-		 * 
 		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#execute(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 		 */
-		public ProjectSpace execute(ProjectSpace projectSpace) throws EmfStoreException {
-			return projectSpace;
-		}
-
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#shouldContinue()
-		 */
-		public boolean shouldContinue() {
+		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+			throws EmfStoreException {
 			return false;
 		}
 	},
@@ -94,37 +61,30 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 	 * <b>Note</b>: all references to the project space that will be deleted should to be taken care of.
 	 */
 	AUTOCORRECT {
-
-		@Override
-		public String toString() {
-			return "autocorrect";
-		}
-
 		/**
-		 * 
 		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#execute(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 		 */
-		public ProjectSpace execute(ProjectSpace projectSpace) throws EmfStoreException {
-			try {
-				WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace);
-			} catch (IOException e) {
-				WorkspaceUtil.logException("Could not delete project space while autocorrecting checksum failure.", e);
+		public boolean execute(final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec,
+			IProgressMonitor monitor) throws EmfStoreException {
+
+			Project project = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
+				@Override
+				public Project run(IProgressMonitor monitor) throws EmfStoreException {
+					return WorkspaceManager.getInstance().getConnectionManager()
+						.getProject(projectSpace.getUsersession().getSessionId(),
+							projectSpace.getProjectInfo().getProjectId(),
+							ModelUtil.clone(versionSpec));
+					// projectInfoCopy.getVersion());
+				}
+			}.execute();
+
+			if (project == null) {
+				throw new EmfStoreException("Server returned a null project!");
 			}
 
-			return WorkspaceManager.getInstance().getCurrentWorkspace()
-				.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo());
-		}
-
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler#shouldContinue()
-		 */
-		public boolean shouldContinue() {
-			return false;
+			projectSpace.setProject(project);
+			projectSpace.init();
+			return true;
 		}
 	}
 }

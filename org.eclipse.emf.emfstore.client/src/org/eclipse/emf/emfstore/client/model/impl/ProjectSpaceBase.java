@@ -60,13 +60,13 @@ import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
@@ -183,7 +183,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * Helper method which applies merged changes on the projectspace. This
+	 * Helper method which applies merged changes on the ProjectSpace. This
 	 * method is used by merge mechanisms in update as well as branch merging.
 	 * 
 	 * @param baseSpec
@@ -192,8 +192,35 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            changes from the current branch
 	 * @param myChanges
 	 *            merged changes
+	 * 
+	 * @throws EmfStoreException in case the checksum comparison failed and the activated IChecksumErrorHandler
+	 *             also failed
 	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges) {
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
+		ChangePackage myChanges) throws EmfStoreException {
+		applyChanges(baseSpec, incoming, myChanges, UpdateCallback.NOCALLBACK, new NullProgressMonitor());
+	}
+
+	/**
+	 * Helper method which applies merged changes on the ProjectSpace. This
+	 * method is used by merge mechanisms in update as well as branch merging.
+	 * 
+	 * @param baseSpec
+	 *            new base version
+	 * @param incoming
+	 *            changes from the current branch
+	 * @param myChanges
+	 *            merged changes
+	 * @param callback
+	 *            a {@link UpdateCallback} that is used to handle a possibly occurring checksum error
+	 * @param progressMonitor
+	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
+	 * 
+	 * @throws EmfStoreException in case the checksum comparison failed and the activated IChecksumErrorHandler
+	 *             also failed
+	 */
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
+		ChangePackage myChanges, UpdateCallback callback, IProgressMonitor progressMonitor) throws EmfStoreException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -201,29 +228,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		notifyPostRevertMyChanges();
 
 		// apply changes from repo. incoming (aka theirs)
-		for (ChangePackage change : incoming) {
-			applyOperations(change.getOperations(), false);
-		}
+		applyChangePackages(incoming, false);
 		notifyPostApplyTheirChanges(incoming);
 
-		long computedChecksum = ModelUtil.NO_CHECKSUM;
-		long expectedChecksum = baseSpec.getProjectStateChecksum();
-
-		if (Configuration.isChecksumCheckActive()) {
-			try {
-				computedChecksum = ModelUtil.computeChecksum(getProject());
-
-				if (expectedChecksum != computedChecksum) {
-					IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
-					checksumErrorHandler.execute(this);
-					if (!checksumErrorHandler.shouldContinue()) {
-						return;
-					}
+		progressMonitor.subTask("Computing checksum");
+		if (!performChecksumCheck(baseSpec, getProject())) {
+			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
+			boolean errorHandled = callback.checksumCheckFailed(this, baseSpec, progressMonitor);
+			if (!errorHandled) {
+				// rollback
+				for (int i = incoming.size() - 1; i >= 0; i--) {
+					applyChangePackage(incoming.get(i).reverse(), false);
 				}
-			} catch (EmfStoreException e) {
-				WorkspaceUtil.logWarning("Error occurred while executing checksum error handling in applyChanges.", e);
-			} catch (SerializationException e) {
-				WorkspaceUtil.logWarning("Could not compute checksum while applying changes.", e);
+				applyChangePackage(getLocalChangePackage(), true);
+
+				throw new EmfStoreException("Update cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
 
@@ -233,6 +252,31 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		setBaseVersion(baseSpec);
 		saveProjectSpaceOnly();
+	}
+
+	private void applyChangePackage(ChangePackage changePackage, boolean addOperations) {
+		applyOperations(changePackage.getOperations(), addOperations);
+	}
+
+	private void applyChangePackages(List<ChangePackage> changePackages, boolean addOperations) {
+		for (ChangePackage changePackage : changePackages) {
+			applyChangePackage(changePackage, addOperations);
+		}
+	}
+
+	private boolean performChecksumCheck(PrimaryVersionSpec baseVersion, Project project) {
+
+		if (Configuration.isChecksumCheckActive()) {
+			long expectedChecksum = baseVersion.getProjectStateChecksum();
+			try {
+				long computedChecksum = ModelUtil.computeChecksum(project);
+				return expectedChecksum == computedChecksum;
+			} catch (SerializationException e) {
+				WorkspaceUtil.logWarning("Could not compute checksum while applying changes.", e);
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -825,15 +869,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @return
 	 */
 	public boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
-		ConflictResolver conflictResolver, IProgressMonitor progressMonitor) throws EmfStoreException {
+		ConflictResolver conflictResolver, UpdateCallback callback, IProgressMonitor progressMonitor)
+		throws EmfStoreException {
 		// merge the conflicts
 		if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, conflictException.getNewPackages(), mergedResult);
+			applyChanges(target, conflictException.getNewPackages(), mergedResult, callback, progressMonitor);
 			return true;
 		}
 		return false;
@@ -865,6 +909,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					branchChanges, baseChanges, calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
 
 				if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), null)) {
+					// TODO: do we need to care about checksum errors here?
 					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
 					setMergedVersion(ModelUtil.clone(branchSpec));
 				}

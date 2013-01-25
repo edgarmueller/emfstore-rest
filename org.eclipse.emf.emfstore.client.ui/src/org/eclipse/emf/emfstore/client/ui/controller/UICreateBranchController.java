@@ -14,10 +14,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
@@ -173,7 +175,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Create Branch failed",
-											"Create Branch failed: " + e.getMessage());
+						"Create Branch failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -201,5 +203,19 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 		});
 
 		return Versions.createBRANCH(branch);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		IProgressMonitor monitor) throws EmfStoreException {
+		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
+		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

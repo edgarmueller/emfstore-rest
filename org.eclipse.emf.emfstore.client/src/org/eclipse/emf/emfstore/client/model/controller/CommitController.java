@@ -17,14 +17,13 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
-import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
@@ -168,21 +167,22 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		getProgressMonitor().worked(30);
 
-		getProgressMonitor().subTask("Performing checksum check");
-		if (Configuration.isChecksumCheckActive()) {
-			long computedChecksum = ModelUtil.NO_CHECKSUM;
-			try {
-				computedChecksum = ModelUtil.computeChecksum(getProjectSpace().getProject());
-			} catch (SerializationException e) {
-				WorkspaceUtil.logException(MessageFormat.format("Could not compute checksum of project {0}",
-					getProjectSpace().getProjectName()), e);
-			}
-			if (computedChecksum != newBaseVersion.getProjectStateChecksum()) {
-				IChecksumErrorHandler checksumFailureAction = Configuration.getChecksumErrorHandler();
-				ProjectSpace execute = checksumFailureAction.execute(getProjectSpace());
-				if (!checksumFailureAction.shouldContinue()) {
-					return execute.getBaseVersion();
-				}
+		getProgressMonitor().subTask("Computing checksum");
+
+		boolean validChecksum = true;
+		try {
+			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
+		} catch (SerializationException exception) {
+			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
+				getProjectSpace().getProjectName()), exception);
+		}
+
+		if (!validChecksum) {
+			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
+			boolean errorHandled = callback
+				.checksumCheckFailed(getProjectSpace(), newBaseVersion, getProgressMonitor());
+			if (!errorHandled) {
+				throw new EmfStoreException("Commit cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
 
@@ -197,6 +197,17 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;
+	}
+
+	private boolean performChecksumCheck(PrimaryVersionSpec newBaseVersion, Project project)
+		throws SerializationException {
+
+		if (Configuration.isChecksumCheckActive()) {
+			long computedChecksum = ModelUtil.computeChecksum(project);
+			return computedChecksum == newBaseVersion.getProjectStateChecksum();
+		}
+
+		return true;
 	}
 
 	private boolean checkForCommitPreconditions(final BranchVersionSpec branch) throws InvalidVersionSpecException,

@@ -438,13 +438,17 @@ public final class Configuration {
 
 			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
-			IChecksumErrorHandler errorHandler = extensionPoint.getClass("checksumErrorHandler",
-				IChecksumErrorHandler.class);
+			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 
-			if (errorHandler != null) {
-				checksumErrorHandler = errorHandler;
-			} else {
-				checksumErrorHandler = ChecksumErrorHandler.LOG;
+			if (elementWithHighestPriority != null) {
+				IChecksumErrorHandler errorHandler = elementWithHighestPriority.getClass("errorHandler",
+					IChecksumErrorHandler.class);
+
+				if (errorHandler != null) {
+					checksumErrorHandler = errorHandler;
+				} else {
+					checksumErrorHandler = ChecksumErrorHandler.LOG;
+				}
 			}
 		}
 

@@ -1,21 +1,33 @@
 package org.eclipse.emf.emfstore.client.test.server;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.junit.Test;
 
 public class ChecksumTest extends CoreServerTest {
@@ -42,7 +54,48 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void testAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
+	public void testAutocorrectErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
+
+		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+
+		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		getWorkspace().setConnectionManager(getConnectionMock());
+
+		final TestElement testElement = createTestElement();
+		getProject().addModelElement(testElement);
+		share(getProjectSpace());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.setName("A");
+			}
+		}.run(false);
+
+		long expectedChecksum = ModelUtil.computeChecksum(getProject());
+		Project clonedProject = ModelUtil.clone(getProject());
+
+		getProjectSpace().getOperationManager().stopChangeRecording();
+		testElement.setName("B");
+		getProjectSpace().getOperationManager().startChangeRecording();
+
+		Assert.assertEquals(1, getProjectSpace().getOperations().size());
+
+		// re-checkout should be triggered
+		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
+		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+
+		Project restoredProject = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0)
+			.getProject();
+		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
+
+		Assert.assertTrue(ModelUtil.areEqual(restoredProject, clonedProject));
+		Assert.assertEquals(expectedChecksum, commit.getProjectStateChecksum());
+		Assert.assertEquals(commit.getProjectStateChecksum(), computedChecksum);
+	}
+
+	@Test
+	public void testChangeTrackingAfterAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
@@ -52,6 +105,12 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
+		final ProjectSpace checkedOutProjectSpace = WorkspaceManager
+			.getInstance()
+			.getCurrentWorkspace()
+			.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(getProjectSpace().getProjectInfo()),
+				new NullProgressMonitor());
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -60,27 +119,49 @@ public class ChecksumTest extends CoreServerTest {
 			}
 		}.run(false);
 
-		long expectedChecksum = ModelUtil.computeChecksum(getProject());
+		commitWithoutCommand(getProjectSpace());
+
+		Assert.assertEquals(0, getProjectSpace().getOperations().size());
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				TestElement testElement = TestmodelFactory.eINSTANCE.createTestElement();
+				testElement.setName("B");
+				checkedOutProjectSpace.getProject().addModelElement(testElement);
+			}
+		}.run(false);
+		update(checkedOutProjectSpace);
+		commitWithoutCommand(checkedOutProjectSpace);
+
+		Assert.assertEquals(0, checkedOutProjectSpace.getOperations().size());
+		Assert.assertEquals(0, getProjectSpace().getOperations().size());
+
+		// this is the operation we would like to keep
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.setName("B");
+			}
+		}.run(false);
 
 		getProjectSpace().getOperationManager().stopChangeRecording();
-		testElement.setName("B");
+		testElement.setName("C");
 		getProjectSpace().getOperationManager().startChangeRecording();
 
-		// re-checkout should be triggered
-		PrimaryVersionSpec commit = getProjectSpace().commit();
+		Assert.assertEquals(1, getProjectSpace().getOperations().size());
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		// cancel should be triggered via exception
+		getProjectSpace().update(Versions.createHEAD(getProjectSpace().getBaseVersion()),
+			new MyUpdateCallback(),
+			new NullProgressMonitor());
 
-		long computedChecksum = ModelUtil.computeChecksum(WorkspaceManager.getInstance().getCurrentWorkspace()
-			.getProjectSpaces().get(0).getProject());
-
-		Assert.assertEquals(expectedChecksum, commit.getProjectStateChecksum());
-		Assert.assertEquals(commit.getProjectStateChecksum(), computedChecksum);
-		Assert.assertEquals(expectedChecksum, computedChecksum);
+		Assert.assertEquals(1, getProjectSpace().getOperations().size());
 	}
 
-	@Test
-	public void testCancelErrorHandler() throws EmfStoreException, SerializationException {
+	@Test(expected = EmfStoreException.class)
+	public void testCancelErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
@@ -98,26 +179,16 @@ public class ChecksumTest extends CoreServerTest {
 			}
 		}.run(false);
 
-		long expectedChecksum = ModelUtil.computeChecksum(getProject());
-
 		getProjectSpace().getOperationManager().stopChangeRecording();
 		testElement.setName("B");
 		getProjectSpace().getOperationManager().startChangeRecording();
 
 		// cancel should be triggered
-		PrimaryVersionSpec commit = getProjectSpace().commit();
-
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
-
-		long computedChecksum = ModelUtil.computeChecksum(WorkspaceManager.getInstance().getCurrentWorkspace()
-			.getProjectSpaces().get(0).getProject());
-
-		Assert.assertEquals(commit.getIdentifier(), getProjectSpace().getBaseVersion().getIdentifier());
-		Assert.assertFalse(expectedChecksum == computedChecksum);
+		commitWithoutCommand(getProjectSpace());
 	}
 
-	@Test
-	public void testCancelErrorHandlerAfterOneCommit() throws EmfStoreException, SerializationException {
+	@Test(expected = EmfStoreException.class)
+	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws EmfStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
@@ -140,19 +211,20 @@ public class ChecksumTest extends CoreServerTest {
 			}
 		}.run(false);
 
-		PrimaryVersionSpec commit = getProjectSpace().commit();
+		commitWithoutCommand(getProjectSpace());
 
 		checkedOutProjectSpace.getProject().addModelElement(createTestElement("B"));
-		checkedOutProjectSpace.update();
-		checkedOutProjectSpace.commit();
+		update(checkedOutProjectSpace);
+		commitWithoutCommand(checkedOutProjectSpace);
 
 		getProjectSpace().getOperationManager().stopChangeRecording();
 		testElement.setName("B");
 		getProjectSpace().getOperationManager().startChangeRecording();
 
-		// cancel should be triggered
-		PrimaryVersionSpec update = getProjectSpace().update();
-		Assert.assertEquals(commit.getProjectStateChecksum(), update.getProjectStateChecksum());
+		// cancel should be triggered via exception
+		getProjectSpace().update(Versions.createHEAD(getProjectSpace().getBaseVersion()),
+			new MyUpdateCallback(),
+			new NullProgressMonitor());
 	}
 
 	@Test
@@ -179,15 +251,123 @@ public class ChecksumTest extends CoreServerTest {
 			}
 		}.run(false);
 
-		getProjectSpace().commit();
+		commitWithoutCommand(getProjectSpace());
 
 		checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
-		checkedOutProjectSpace.update();
-		checkedOutProjectSpace.commit();
+		update(checkedOutProjectSpace);
+		commitWithoutCommand(checkedOutProjectSpace);
 
-		// cancel should be triggered
-		PrimaryVersionSpec update = getProjectSpace().update();
+		PrimaryVersionSpec update = update(getProjectSpace());
 		Assert.assertTrue(ModelUtil.areEqual(getProject(), checkedOutProjectSpace.getProject()));
 		Assert.assertEquals(ModelUtil.computeChecksum(getProject()), update.getProjectStateChecksum());
+	}
+
+	@Test
+	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws EmfStoreException, SerializationException {
+
+		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+
+		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		getWorkspace().setConnectionManager(getConnectionMock());
+
+		final TestElement testElement = createTestElement();
+		share(getProjectSpace());
+
+		ProjectSpace checkedOutProjectSpace = WorkspaceManager
+			.getInstance()
+			.getCurrentWorkspace()
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(testElement);
+				testElement.setName("A");
+			}
+		}.run(false);
+
+		commitWithoutCommand(getProjectSpace());
+
+		checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
+		update(checkedOutProjectSpace);
+		commitWithoutCommand(checkedOutProjectSpace);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				testElement.setName("B");
+			}
+		}.run(false);
+
+		getProjectSpace().getOperationManager().stopChangeRecording();
+		testElement.setName("C");
+		getProjectSpace().getOperationManager().startChangeRecording();
+
+		Assert.assertEquals(1, getProjectSpace().getOperations().size());
+
+		// autocorrect should be triggered, will fail
+		update(getProjectSpace());
+		Assert.assertEquals(1, getProjectSpace().getOperations().size());
+	}
+
+	private class MyCommitCallback implements CommitCallback {
+
+		public boolean baseVersionOutOfDate(ProjectSpace projectSpace, IProgressMonitor progressMonitor) {
+			return CommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
+		}
+
+		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
+			IModelElementIdToEObjectMapping idToEObjectMapping) {
+			return CommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
+		}
+
+		public void noLocalChanges(ProjectSpace projectSpace) {
+			CommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
+		}
+
+		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+			IProgressMonitor progressMonitor)
+			throws EmfStoreException {
+			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
+		}
+
+	}
+
+	private class MyUpdateCallback implements UpdateCallback {
+
+		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
+			IModelElementIdToEObjectMapping idToEObjectMapping) {
+			return UpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
+		}
+
+		public void noChangesOnServer() {
+			UpdateCallback.NOCALLBACK.noChangesOnServer();
+		}
+
+		public boolean conflictOccurred(ChangeConflictException changeConflictException,
+			IProgressMonitor progressMonitor) {
+			return UpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
+		}
+
+		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+			IProgressMonitor progressMonitor)
+			throws EmfStoreException {
+			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
+		}
+	}
+
+	protected PrimaryVersionSpec commitWithoutCommand(final ProjectSpace projectSpace) throws EmfStoreException {
+		return projectSpace.commit(createEmptyLogMessage(), new MyCommitCallback(),
+			new NullProgressMonitor());
+	}
+
+	protected PrimaryVersionSpec update(ProjectSpace projectSpace) throws EmfStoreException {
+		return projectSpace.update(Versions.createHEAD(), new MyUpdateCallback(), new NullProgressMonitor());
+	}
+
+	private LogMessage createEmptyLogMessage() {
+		return VersioningFactory.eINSTANCE.createLogMessage();
 	}
 }

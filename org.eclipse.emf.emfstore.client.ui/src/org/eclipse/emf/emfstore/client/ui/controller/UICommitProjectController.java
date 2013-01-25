@@ -13,8 +13,10 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CommitDialog;
@@ -171,5 +173,19 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 		}
 
 		return null;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		IProgressMonitor monitor) throws EmfStoreException {
+		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
+		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

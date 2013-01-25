@@ -152,7 +152,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Applying changes");
 
-		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges);
+		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
 		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
 			.updateCompleted(getProjectSpace(), getProgressMonitor());

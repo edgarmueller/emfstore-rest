@@ -11,8 +11,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.util;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * Interface that determines what to do in case the checksum computation on a {@link ProjectSpace} fails.
@@ -26,20 +28,18 @@ public interface IChecksumErrorHandler {
 	 * 
 	 * @param projectSpace
 	 *            the {@link ProjectSpace} which contains the project that got in an inconsistent state
-	 *            and therefore caused the failing computation of the checksums
+	 *            and therefore caused the failing computation of the checksum
+	 * @param versionSpec
+	 *            the version spec containing the correct checksum
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that should be used to indicate progress
+	 *            of the error handler
 	 * 
-	 * @return the possibly modified project space
+	 * @return whether the error handler successfully handled the error
 	 * 
 	 * @throws EmfStoreException
 	 *             in case any error occurs during execution of the error handler
 	 */
-	ProjectSpace execute(ProjectSpace projectSpace) throws EmfStoreException;
-
-	/**
-	 * Whether to continue after the error handler has been executed, e.g. whether to
-	 * finalize update or commit, even in case an error occurred.
-	 * 
-	 * @return true, if the caller of the error handler should continue regularly, false otherwise
-	 */
-	boolean shouldContinue();
+	boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		throws EmfStoreException;
 }
