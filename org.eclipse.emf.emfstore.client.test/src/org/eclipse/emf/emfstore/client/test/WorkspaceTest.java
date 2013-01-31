@@ -14,6 +14,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import junit.framework.Assert;
 
@@ -118,18 +119,34 @@ public abstract class WorkspaceTest {
 			clonedProjectString = ModelUtil.eObjectToString(clonedProjectSpace.getProject());
 			areEqual = ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject());
 			clonedProjectSpace.save();
-			workspace.deleteProjectSpace(clonedProjectSpace);
 		}
 
-		WorkspaceManager.getInstance().dispose();
-		setProject(null);
-		setProjectSpace(null);
-		workspace = null;
-		FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
+		cleanWorkspace();
 
 		if (isCompareAtEnd()) {
 			Assert.assertTrue("Projects are not equal\n\n " + projectString + "\n\n" + clonedProjectString, areEqual);
 		}
+	}
+
+	private void cleanWorkspace() {
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				try {
+					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getProjectSpaces())) {
+						workspace.deleteProjectSpace(projectSpace);
+					}
+					WorkspaceManager.getInstance().dispose();
+					setProject(null);
+					setProjectSpace(null);
+					workspace = null;
+					FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+		}.run(false);
 	}
 
 	/**

@@ -189,10 +189,8 @@ public class Topology1to1Test extends TopologyTest {
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 
 		assertEquals(2, operations.size());
-		AbstractOperation operation = operations.get(0);
-		assertEquals(true, operation instanceof CompositeOperation);
-
-		List<AbstractOperation> subOperations = ((CompositeOperation) operation).getSubOperations();
+		List<AbstractOperation> subOperations = checkAndCast(operations.get(0), CompositeOperation.class)
+			.getSubOperations();
 
 		assertEquals(3, subOperations.size());
 
@@ -988,10 +986,9 @@ public class Topology1to1Test extends TopologyTest {
 			@Override
 			protected void doRun() {
 				issue.setSolution(solution);
+				clearOperations();
 			}
 		}.run(false);
-
-		clearOperations();
 
 		assertSame(solution, issue.getSolution());
 		ModelElementId solutionId = ModelUtil.getProject(solution).getModelElementId(solution);
