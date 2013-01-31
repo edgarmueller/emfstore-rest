@@ -195,9 +195,8 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			if (!reference.isContainment() && !reference.isContainer()) {
 				if (newValue instanceof EObject) {
 					handleSingleReference((EObject) newValue);
-					// FIXME: handle multirefs here
 				} else if (newValue instanceof List<?>) {
-					// iterate new values
+					handleMultiReference((List<?>) newValue);
 				}
 			}
 		}
@@ -214,6 +213,21 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		EObject removedElement = removedModelElements.pop();
 		if (removedElement != null) {
 			collection.modelElementRemoved(collection, removedElement);
+		}
+	}
+
+	private void handleMultiReference(List<?> list) {
+		for (Object obj : list) {
+
+			if (!(obj instanceof EObject)) {
+				continue;
+			}
+
+			EObject eObject = (EObject) obj;
+
+			if (!collection.containsInstance(eObject)) {
+				collection.addCutElement(eObject);
+			}
 		}
 	}
 
