@@ -39,6 +39,26 @@ public class EMFStoreBasicCommandStack extends BasicCommandStack implements EMFS
 	}
 
 	@Override
+	public void undo() {
+		if (canUndo()) {
+			notifier.notifiyListenersAboutStart(mostRecentCommand);
+			super.undo();
+			rethrowComamndInCaseOfError(mostRecentCommand);
+			notifier.notifiyListenersAboutCommandCompleted(mostRecentCommand);
+		}
+	}
+
+	@Override
+	public void redo() {
+		if (canRedo()) {
+			notifier.notifiyListenersAboutStart(mostRecentCommand);
+			super.redo();
+			rethrowComamndInCaseOfError(mostRecentCommand);
+			notifier.notifiyListenersAboutCommandCompleted(mostRecentCommand);
+		}
+	}
+
+	@Override
 	public void execute(Command command) {
 
 		if (currentCommand == null) {
@@ -48,6 +68,18 @@ public class EMFStoreBasicCommandStack extends BasicCommandStack implements EMFS
 
 		super.execute(command);
 
+		rethrowComamndInCaseOfError(command);
+
+		if (currentCommand == command) {
+			// check again if command was really completed.
+			if (mostRecentCommand == command) {
+				notifier.notifiyListenersAboutCommandCompleted(command);
+			}
+			currentCommand = null;
+		}
+	}
+
+	private void rethrowComamndInCaseOfError(Command command) {
 		// handle EMFStore commands
 		if (command instanceof AbstractEMFStoreCommand) {
 			AbstractEMFStoreCommand emfStoreCmd = (AbstractEMFStoreCommand) command;
@@ -56,14 +88,6 @@ public class EMFStoreBasicCommandStack extends BasicCommandStack implements EMFS
 			if (!emfStoreCmd.shouldIgnoreExceptions() && emfStoreCmd.getRuntimeException() != null) {
 				throw emfStoreCmd.getRuntimeException();
 			}
-		}
-
-		if (currentCommand == command) {
-			// check again if command was really completed.
-			if (mostRecentCommand == command) {
-				notifier.notifiyListenersAboutCommandCompleted(command);
-			}
-			currentCommand = null;
 		}
 	}
 

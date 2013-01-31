@@ -49,7 +49,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 *            the project space the operation manager should be attached to
 	 */
 	public OperationManager(ProjectSpaceBase projectSpace) {
-		this.operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
+		operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
 		this.projectSpace = operationRecorder.getProjectSpace();
 		operationListeners = new ArrayList<OperationObserver>();
 		operationRecorder.addOperationRecorderListener(this);
@@ -168,9 +168,11 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 
 	/**
 	 * Clears all recorded operations.
+	 * 
+	 * @return the cleared operations
 	 */
-	public void clearOperations() {
-		operationRecorder.clearOperations();
+	public List<AbstractOperation> clearOperations() {
+		return operationRecorder.clearOperations();
 	}
 
 	/**

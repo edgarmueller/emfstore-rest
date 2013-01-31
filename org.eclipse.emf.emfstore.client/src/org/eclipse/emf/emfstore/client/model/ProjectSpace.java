@@ -528,14 +528,6 @@ public interface ProjectSpace extends IdentifiableElement {
 	OperationComposite getLocalOperations();
 
 	/**
-	 * @return modified model elements cache. This is class clients (e.g. dirty
-	 *         decorator) can ask to see if a model element has been modified.
-	 * 
-	 * @generated NOT
-	 */
-	ModifiedModelElementsCache getModifiedModelElementsCache();
-
-	/**
 	 * Returns the value of the '<em><b>Old Log Messages</b></em>' attribute
 	 * list. The list contents are of type {@link java.lang.String}. <!--
 	 * begin-user-doc -->

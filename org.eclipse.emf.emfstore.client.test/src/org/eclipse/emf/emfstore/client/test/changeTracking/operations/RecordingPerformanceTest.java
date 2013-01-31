@@ -129,7 +129,7 @@ public class RecordingPerformanceTest extends WorkspaceTest {
 		for (AbstractOperation operation : getProjectSpace().getOperations()) {
 			operation.apply(project2);
 		}
-		Assert.assertEquals(true, ModelUtil.areEqual(project, project2));
+		Assert.assertEquals(true, ModelUtil.areEqual(getProject(), project2));
 	}
 
 	@Test

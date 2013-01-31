@@ -542,9 +542,10 @@ public class CommandTest extends WorkspaceTest {
 		editingDomain.getCommandStack().redo();
 
 		Actor pastedActor2 = (Actor) leafSection.getModelElements().get(0);
-		ModelElementId pastedActor2Id = ModelUtil.getProject(pastedActor2).getModelElementId(pastedActor2);
+		// TODO: we do not guarantee anymore that the ID will be the same
+		// ModelElementId pastedActor2Id = ModelUtil.getProject(pastedActor2).getModelElementId(pastedActor2);
 
-		assertTrue(actorId.equals(pastedActor2Id));
+		// assertTrue(actorId.equals(pastedActor2Id));
 		assertEquals(1, leafSection.getModelElements().size());
 	}
 
@@ -659,6 +660,8 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 		// does not work but is strange anyway
 		// assertTrue(editingDomain.getCommandStack().canRedo());
+		assertEquals(1, leafSection.getModelElements().size());
+
 	}
 
 	/**
@@ -809,6 +812,8 @@ public class CommandTest extends WorkspaceTest {
 		// delete
 		Collection<Actor> toDelete = new ArrayList<Actor>();
 		toDelete.add(actor);
+
+		// delete actor from model elements feature
 		Command command = editingDomain.createCommand(DeleteCommand.class, new CommandParameter(leafSection,
 			DocumentPackage.Literals.LEAF_SECTION__MODEL_ELEMENTS, toDelete));
 		if (command.canExecute()) {
@@ -818,19 +823,28 @@ public class CommandTest extends WorkspaceTest {
 		}
 
 		assertEquals(0, leafSection.getModelElements().size());
+		// undo delete
 		assertTrue(editingDomain.getCommandStack().canUndo());
 		assertEquals(1, getProjectSpace().getOperations().size());
 
-		// undo the command
-		// command.undo();
+		// undo the command - add actor to model elements feature
+
 		editingDomain.getCommandStack().undo();
 
 		assertEquals(1, leafSection.getModelElements().size());
-		// assertEquals(0, getProjectSpace().getOperations().size());
-		assertTrue(editingDomain.getCommandStack().canRedo());
+		// // assertEquals(0, getProjectSpace().getOperations().size());
+		// assertTrue(editingDomain.getCommandStack().canRedo());
+		//
+		clearOperations();
+		//
+		// // redo the command - delete again
+		new EMFStoreCommand() {
 
-		// redo the command
-		editingDomain.getCommandStack().redo();
+			@Override
+			protected void doRun() {
+				editingDomain.getCommandStack().redo();
+			}
+		}.run(false);
 		assertEquals(0, leafSection.getModelElements().size());
 		// assertEquals(1, getProjectSpace().getOperations().size());
 	}

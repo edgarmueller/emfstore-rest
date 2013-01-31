@@ -42,8 +42,8 @@ public class SampleAPITest extends CoreServerTest {
 		ProjectHistory projectHistory = getServerSpace().getProjects().get(0);
 
 		projectHistory.getVersions().get(projectHistory.getVersions().size() - 1);
-		assertEquals(1, project.getModelElements().size());
-		assertEquals("Horst", ((TestElement) project.getModelElements().get(0)).getName());
+		assertEquals(1, getProject().getModelElements().size());
+		assertEquals("Horst", ((TestElement) getProject().getModelElements().get(0)).getName());
 	}
 
 	public void mergeTest() {

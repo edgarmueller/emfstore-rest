@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Jonas Helming
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.decorators;
 
@@ -37,12 +38,11 @@ public class ModelElementDirtyDecorator implements ILightweightLabelDecorator {
 	private static ImageDescriptor descriptor;
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.jface.viewers.ILightweightLabelDecorator#decorate(java.lang .Object,
+	 * @see org.eclipse.jface.viewers.ILightweightLabelDecorator#decorate(java.lang.Object,
 	 *      org.eclipse.jface.viewers.IDecoration)
-	 * @param element element
-	 * @param decoration decoration
 	 */
 	public void decorate(Object element, IDecoration decoration) {
 		URL url = null;
@@ -60,9 +60,6 @@ public class ModelElementDirtyDecorator implements ILightweightLabelDecorator {
 			ModelElementId modelElementId = project.getModelElementId(modelElement);
 			if (modelElementId == null) {
 				return;
-			}
-			if (projectSpace.getModifiedModelElementsCache().isModelElementDirty(modelElementId)) {
-				dirty = true;
 			}
 		}
 		if (dirty) {

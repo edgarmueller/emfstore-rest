@@ -7,25 +7,30 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Slabo Chodnick
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.topology;
 
 import java.util.Date;
 
+import junit.framework.Assert;
+
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.Before;
 
 /**
  * Abstract super class for operation tests, contains setup.
  * 
  * @author chodnick
+ * @author emueller
  */
 public abstract class TopologyTest {
 
-	private Project project;
 	private ProjectSpace projectSpace;
 
 	/**
@@ -41,37 +46,18 @@ public abstract class TopologyTest {
 		projectSpace.setProjectDescription("ps description");
 		projectSpace.setProjectId(org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId());
 		projectSpace.setProjectName("ps name");
-
-		setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
-
-		projectSpace.setProject(getProject());
-
+		projectSpace.setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
 		projectSpace.makeTransient();
 		projectSpace.init();
 
-		setProjectSpace(projectSpace);
-
-	}
-
-	/**
-	 * @param project the project to set
-	 */
-	private void setProject(Project project) {
-		this.project = project;
+		this.projectSpace = projectSpace;
 	}
 
 	/**
 	 * @return the project
 	 */
 	public Project getProject() {
-		return project;
-	}
-
-	/**
-	 * @param projectSpace the projectSpace to set
-	 */
-	private void setProjectSpace(ProjectSpace projectSpace) {
-		this.projectSpace = projectSpace;
+		return projectSpace.getProject();
 	}
 
 	/**
@@ -89,4 +75,12 @@ public abstract class TopologyTest {
 		getProjectSpace().getOperationManager().clearOperations();
 	}
 
+	private <T extends AbstractOperation> T asInstanceOf(AbstractOperation op, Class<T> clazz) {
+		return clazz.cast(op);
+	}
+
+	public <T extends AbstractOperation> T checkAndCast(AbstractOperation op, Class<T> clazz) {
+		Assert.assertTrue(clazz.isInstance(op));
+		return asInstanceOf(op, clazz);
+	}
 }

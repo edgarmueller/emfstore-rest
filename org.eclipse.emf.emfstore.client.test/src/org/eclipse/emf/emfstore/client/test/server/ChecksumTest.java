@@ -34,8 +34,6 @@ public class ChecksumTest extends CoreServerTest {
 
 	@Test
 	public void testOrderOfRootElementsInvariance() throws SerializationException {
-		Project clonedProject = ModelUtil.clone(getProject());
-
 		// createTestElement automatically adds the element to the project
 		TestElement a = createTestElement("A");
 		TestElement b = createTestElement("B");
@@ -43,14 +41,16 @@ public class ChecksumTest extends CoreServerTest {
 		getProject().getModelElements().add(a);
 		getProject().getModelElements().add(b);
 
-		TestElement clonedA = ModelUtil.clone(a);
-		TestElement clonedB = ModelUtil.clone(b);
+		long computeChecksum = ModelUtil.computeChecksum(getProject());
 
-		clonedProject.getModelElements().add(clonedB);
-		clonedProject.getModelElements().add(clonedA);
+		getProject().getModelElements().clear();
 
-		Assert.assertFalse(ModelUtil.eObjectToString(getProject()).equals(ModelUtil.eObjectToString(clonedProject)));
-		Assert.assertTrue(ModelUtil.areEqual(getProject(), clonedProject));
+		getProject().getModelElements().add(b);
+		getProject().getModelElements().add(a);
+
+		long checksum = ModelUtil.computeChecksum(getProject());
+
+		Assert.assertEquals(computeChecksum, checksum);
 	}
 
 	@Test

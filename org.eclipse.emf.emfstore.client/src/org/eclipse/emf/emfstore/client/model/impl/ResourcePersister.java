@@ -144,6 +144,11 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
+		if (resources == null) {
+			// dispose may have been called
+			return;
+		}
+
 		for (Resource resource : resources) {
 
 			if (resource.getURI() == null || resource.getURI().toString().equals("")) {

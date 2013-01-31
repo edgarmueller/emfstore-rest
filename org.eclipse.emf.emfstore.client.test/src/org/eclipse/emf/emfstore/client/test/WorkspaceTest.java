@@ -15,11 +15,14 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
+import junit.framework.Assert;
+
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -28,6 +31,9 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.After;
 import org.junit.Before;
 
@@ -37,9 +43,12 @@ import org.junit.Before;
  * @author koegel
  */
 public abstract class WorkspaceTest {
-	protected Project project;
-	protected ProjectSpace projectSpace;
+
+	private Project project;
+	private ProjectSpace projectSpace;
+	protected ProjectSpaceBase clonedProjectSpace;
 	private Workspace workspace;
+	private boolean compareAtEnd = true;
 
 	/**
 	 * Setup a dummy project for testing.
@@ -61,6 +70,14 @@ public abstract class WorkspaceTest {
 				ProjectSpace localProjectSpace = workspace.createLocalProject("testProject", "test Project");
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
+
+				if (isCompareAtEnd()) {
+					Project clonedProject = ModelUtil.clone(getProject());
+					clonedProjectSpace = (ProjectSpaceBase) workspace.createLocalProject("clonedProject",
+						"Cloned test Project");
+					clonedProjectSpace.setProject(clonedProject);
+					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
+				}
 			}
 		}.run(false);
 
@@ -81,14 +98,38 @@ public abstract class WorkspaceTest {
 	 * Clean up workspace.
 	 * 
 	 * @throws IOException
+	 * @throws SerializationException
 	 */
 	@After
-	public void teardown() throws IOException {
+	public void teardown() throws IOException, SerializationException {
+
+		boolean areEqual = false;
+		projectSpace.save();
+
+		String projectString = "";
+		String clonedProjectString = "";
+
+		if (isCompareAtEnd()) {
+			// ProjectSpaceBase projectSpace = (ProjectSpaceBase) WorkspaceManager.getInstance().getCurrentWorkspace()
+			// .getProjectSpaces().get(0);
+			clonedProjectSpace.applyOperations(projectSpace.getOperations(), true);
+
+			projectString = ModelUtil.eObjectToString(projectSpace.getProject());
+			clonedProjectString = ModelUtil.eObjectToString(clonedProjectSpace.getProject());
+			areEqual = ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject());
+			clonedProjectSpace.save();
+			workspace.deleteProjectSpace(clonedProjectSpace);
+		}
+
 		WorkspaceManager.getInstance().dispose();
 		setProject(null);
 		setProjectSpace(null);
 		workspace = null;
 		FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
+
+		if (isCompareAtEnd()) {
+			Assert.assertTrue("Projects are not equal\n\n " + projectString + "\n\n" + clonedProjectString, areEqual);
+		}
 	}
 
 	/**
@@ -154,8 +195,13 @@ public abstract class WorkspaceTest {
 	 * Clear all operations from project space.
 	 */
 	protected void clearOperations() {
+		if (isCompareAtEnd()) {
+			clonedProjectSpace.applyOperations(getProjectSpace().getOperations(), false);
+			clonedProjectSpace.applyOperations(getProjectSpace().getOperationManager().clearOperations(), false);
+		} else {
+			getProjectSpace().getOperationManager().clearOperations();
+		}
 		getProjectSpace().getOperations().clear();
-		getProjectSpace().getOperationManager().clearOperations();
 	}
 
 	/**
@@ -227,5 +273,22 @@ public abstract class WorkspaceTest {
 		}.run(false);
 
 		return testElement;
+	}
+
+	public <T extends AbstractOperation> T checkAndCast(AbstractOperation op, Class<T> clazz) {
+		Assert.assertTrue(clazz.isInstance(op));
+		return asInstanceOf(op, clazz);
+	}
+
+	public <T extends AbstractOperation> T asInstanceOf(AbstractOperation op, Class<T> clazz) {
+		return clazz.cast(op);
+	}
+
+	public boolean isCompareAtEnd() {
+		return compareAtEnd;
+	}
+
+	public void setCompareAtEnd(boolean compareAtEnd) {
+		this.compareAtEnd = compareAtEnd;
 	}
 }

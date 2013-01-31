@@ -62,6 +62,7 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
+import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 
 /**
@@ -138,29 +139,24 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Compares two {@link EObject}s by checking whether the string representations of
-	 * the EObjects are equal.
+	 * Compares two {@link IdEObjectCollection}s. Order of the model elements at root level
+	 * of a collection does not influence the outcome of this operations
 	 * 
-	 * @param eObjectA
-	 *            the first EObject
-	 * @param eObjectB
-	 *            the second EObject
-	 * @return true if the two objects are equal, false otherwise
+	 * @param collectionA
+	 *            the first collection
+	 * @param collectionB
+	 *            the second collection
+	 * @return true if the two collections are equal, false otherwise
 	 */
-	public static boolean areEqual(EObject eObjectA, EObject eObjectB) {
+	public static boolean areEqual(IdEObjectCollection collectionA, IdEObjectCollection collectionB) {
 		long a;
 		long b;
 
 		try {
 			// collections are treated specially because the order
 			// of root elements should not matter
-			if (eObjectA instanceof IdEObjectCollection) {
-				a = computeChecksum((IdEObjectCollection) eObjectA);
-				b = computeChecksum((IdEObjectCollection) eObjectB);
-			} else {
-				a = computeChecksum(eObjectA);
-				b = computeChecksum(eObjectB);
-			}
+			a = computeChecksum(collectionA);
+			b = computeChecksum(collectionB);
 		} catch (SerializationException e) {
 			return false;
 		}
@@ -187,14 +183,15 @@ public final class ModelUtil {
 		int step = 200;
 		int initialSize = step;
 
-		res = (new ResourceSetImpl()).createResource(VIRTUAL_URI);
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		res = resourceSetImpl.createResource(VIRTUAL_URI);
 		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 
 		EObject copy;
 		if (object instanceof IdEObjectCollection) {
 			copy = copyIdEObjectCollection((IdEObjectCollection) object, (XMIResource) res);
 		} else {
-			copy = ModelUtil.clone(object);
+			copy = copyEObject(ModelUtil.getProject(object), object, (XMIResource) res);
 		}
 
 		res.getContents().add(copy);
@@ -222,7 +219,7 @@ public final class ModelUtil {
 	 * @throws SerializationException
 	 *             in case any errors occur during computation of the checksum
 	 */
-	public static long computeChecksum(EObject eObject) throws SerializationException {
+	private static long computeChecksum(EObject eObject) throws SerializationException {
 		String eObjectString = eObjectToString(eObject);
 
 		long h = 1125899906842597L; // prime
@@ -253,7 +250,7 @@ public final class ModelUtil {
 			long checksum = NO_CHECKSUM;
 
 			for (EObject eObject : collection.getModelElements()) {
-				if (checksum == 0) {
+				if (checksum == NO_CHECKSUM) {
 					checksum = computeChecksum(eObject);
 				} else {
 					checksum ^= computeChecksum(eObject);
@@ -295,37 +292,23 @@ public final class ModelUtil {
 			res.setID(modelElement, modelElementId.getId());
 		}
 
-		res.getContents().add(copiedCollection);
+		for (EObject modelElement : ((Project) copiedCollection).getCutElements()) {
+			if (isIgnoredDatatype(modelElement)) {
+				continue;
+			}
+			ModelElementId modelElementId = ((IdEObjectCollectionImpl) copiedCollection)
+				.getModelElementId(modelElement);
+			res.setID(modelElement, modelElementId.getId());
+		}
+
 		return copiedCollection;
 	}
 
-	/**
-	 * Compares two lists of EObject by checking whether the string representations of
-	 * the EObjects are equal.
-	 * 
-	 * @param listA
-	 *            the first list of EObject
-	 * @param listB
-	 *            the second list of EObject
-	 * @return true if the two lists are equal
-	 */
-	public static boolean areEqual(EList<? extends EObject> listA, EList<? extends EObject> listB) {
-		if (listA == listB) {
-			return true;
-		}
-
-		if (listA.size() != listB.size()) {
-			return false;
-		}
-
-		for (int i = 0; i < listA.size(); ++i) {
-			EObject o1 = listA.get(i);
-			EObject o2 = listB.get(i);
-			if (!areEqual(o1, o2)) {
-				return false;
-			}
-		}
-		return true;
+	// TODO: javadoc
+	private static EObject copyEObject(IdEObjectCollection collection, EObject object, XMIResource res) {
+		IdEObjectCollection copiedCollection = (IdEObjectCollection) copyIdEObjectCollection(collection, res);
+		EObject copiedEObject = copiedCollection.getModelElement(collection.getModelElementId(object));
+		return copiedEObject;
 	}
 
 	/**

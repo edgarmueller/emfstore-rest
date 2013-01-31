@@ -95,6 +95,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 */
 	@Override
 	protected void removeAdapter(Notifier notifier) {
+
 		if (isInitializing || currentNotifications.isEmpty()) {
 			return;
 		}
@@ -106,6 +107,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		}
 
 		if (currentNotification != null && currentNotification.getFeature() instanceof EReference) {
+			// do not remove adapter because of opposite
 			EReference eReference = (EReference) currentNotification.getFeature();
 			if (eReference.isContainment() && eReference.getEOpposite() != null
 				&& !eReference.getEOpposite().isTransient()) {
@@ -162,10 +164,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
-		currentNotifications.push(notification);
 		// push null to ensure that stack has same size as call stack
 		// will be replaced with an actual removed element by removeAdapter method if there is any
 		removedModelElements.push(null);
+		currentNotifications.push(notification);
 		Object feature = notification.getFeature();
 		Object notifier = notification.getNotifier();
 
@@ -187,15 +189,16 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		// detect if the notification is about a reference to an object outside of the collection => notify
 		// project
 		if (feature instanceof EReference) {
+			EReference reference = (EReference) feature;
 			Object newValue = notification.getNewValue();
-			if (newValue instanceof EObject) {
-				EObject newEObject = (EObject) newValue;
-				if (!collection.containsInstance(newEObject)) {
-					collection.addCutElement(newEObject);
+
+			if (!reference.isContainment() && !reference.isContainer()) {
+				if (newValue instanceof EObject) {
+					handleSingleReference((EObject) newValue);
+					// FIXME: handle multirefs here
+				} else if (newValue instanceof List<?>) {
+					// iterate new values
 				}
-				// FIXME: handle multirefs here
-			} else if (newValue instanceof List<?>) {
-				// iterate new values
 			}
 		}
 
@@ -211,6 +214,12 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		EObject removedElement = removedModelElements.pop();
 		if (removedElement != null) {
 			collection.modelElementRemoved(collection, removedElement);
+		}
+	}
+
+	private void handleSingleReference(EObject newEObject) {
+		if (!collection.containsInstance(newEObject)) {
+			collection.addCutElement(newEObject);
 		}
 	}
 

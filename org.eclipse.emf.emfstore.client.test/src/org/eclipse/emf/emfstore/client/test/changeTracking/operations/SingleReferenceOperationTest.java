@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -33,6 +32,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
@@ -50,7 +50,7 @@ import org.junit.Test;
  */
 public class SingleReferenceOperationTest extends WorkspaceTest {
 
-	private EObject expectedProject;
+	private Project expectedProject;
 
 	/**
 	 * Change a single reference and check the generated operation.
@@ -416,24 +416,22 @@ public class SingleReferenceOperationTest extends WorkspaceTest {
 				getProject().addModelElement(issue);
 				getProject().addModelElement(proposal);
 				proposal.setIssue(issue);
-
 				clearOperations();
-
-				assertEquals(1, issue.getProposals().size());
-				assertEquals(proposal, issue.getProposals().get(0));
-				assertEquals(issue, proposal.getIssue());
-				assertEquals(true, getProject().containsInstance(issue));
-				assertEquals(true, getProject().containsInstance(proposal));
-				assertEquals(getProject(), ModelUtil.getProject(issue));
-				assertEquals(getProject(), ModelUtil.getProject(proposal));
-				assertEquals(issue, proposal.eContainer());
 			}
 		}.run(false);
+
+		assertEquals(1, issue.getProposals().size());
+		assertEquals(proposal, issue.getProposals().get(0));
+		assertEquals(issue, proposal.getIssue());
+		assertEquals(true, getProject().containsInstance(issue));
+		assertEquals(true, getProject().containsInstance(proposal));
+		assertEquals(getProject(), ModelUtil.getProject(issue));
+		assertEquals(getProject(), ModelUtil.getProject(proposal));
+		assertEquals(issue, proposal.eContainer());
 
 		ModelElementId proposalId = ModelUtil.getProject(proposal).getModelElementId(proposal);
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				proposal.setIssue(null);
@@ -454,14 +452,8 @@ public class SingleReferenceOperationTest extends WorkspaceTest {
 
 		ModelElementId issueId = ModelUtil.getProject(issue).getModelElementId(issue);
 
-		assertEquals(true, operations.get(0) instanceof CreateDeleteOperation);
-		CreateDeleteOperation deleteOperation = (CreateDeleteOperation) operations.get(0);
-		assertEquals(true, deleteOperation.isDelete());
-		assertEquals(true, deleteOperation.getModelElement() instanceof Proposal);
-		assertEquals("proposal", ((Proposal) deleteOperation.getModelElement()).getName());
-		assertEquals(proposalId, deleteOperation.getModelElementId());
-
-		List<ReferenceOperation> subOperations = ((CreateDeleteOperation) operations.get(0)).getSubOperations();
+		List<ReferenceOperation> subOperations = checkAndCast(operations.get(0), CreateDeleteOperation.class)
+			.getSubOperations();
 		assertEquals(2, subOperations.size());
 
 		AbstractOperation op0 = subOperations.get(0);

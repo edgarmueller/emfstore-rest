@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
 import org.junit.Test;
 
 /**
- * Test conflict detection behaviour during a selective commit.
+ * Test conflict detection behavior during a selective commit.
  * 
  * @author mck
  */
@@ -49,6 +49,9 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 	 */
 	@Test
 	public void conflictSpecialCase() {
+
+		// do not compare at end because of selective removal of certain operations
+		setCompareAtEnd(false);
 
 		final LeafSection leafSection1 = DocumentFactory.eINSTANCE.createLeafSection();
 		final LeafSection leafSection2 = DocumentFactory.eINSTANCE.createLeafSection();
@@ -65,9 +68,7 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 				project1.addModelElement(leafSection1);
 				project1.addModelElement(leafSection2);
 				project1.addModelElement(actor);
-
 				clearOperations();
-
 			}
 
 		}.run(false);
@@ -80,7 +81,6 @@ public class ConflictDetectionSelectiveCommitSpecialCases extends ConflictDetect
 		final List<AbstractOperation> commitedOperations = new ArrayList<AbstractOperation>();
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				leafSection1.getModelElements().add(ai);

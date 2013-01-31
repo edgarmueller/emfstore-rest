@@ -19,7 +19,9 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.model.bug.BugFactory;
 import org.eclipse.emf.emfstore.client.test.model.bug.BugReport;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
@@ -36,7 +38,9 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
 
@@ -106,39 +110,47 @@ public class TopologyNto1Test extends TopologyTest {
 	@Test
 	public void setContainerFromValueToNull() throws UnsupportedOperationException, UnsupportedNotificationException {
 
-		LeafSection section = DocumentFactory.eINSTANCE.createLeafSection();
-		UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
+		final LeafSection section = DocumentFactory.eINSTANCE.createLeafSection();
+		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 
 		getProject().addModelElement(section);
 		getProject().addModelElement(useCase);
-		useCase.setLeafSection(section);
+
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				useCase.setLeafSection(section);
+			}
+		}.run(false);
+
 		assertTrue(section.getModelElements().contains(useCase));
 
 		clearOperations();
 		ModelElementId useCaseId = ModelUtil.getProject(useCase).getModelElementId(useCase);
-		useCase.setLeafSection(null);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				useCase.setLeafSection(null);
+			}
+		}.run(false);
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
-
 		assertEquals(1, operations.size());
-		if (operations.get(0) instanceof CompositeOperation) {
-			operations = ((CompositeOperation) operations.get(0)).getSubOperations();
-		} else {
-			fail("composite operation expected");
-		}
-
-		assertEquals(2, operations.size());
+		EList<ReferenceOperation> subOperations = checkAndCast(operations.get(0), CreateDeleteOperation.class)
+			.getSubOperations();
+		assertEquals(2, subOperations.size());
 
 		ModelElementId sectionId = ModelUtil.getProject(section).getModelElementId(section);
 
-		assertTrue(operations.get(0) instanceof MultiReferenceOperation);
-		MultiReferenceOperation op0 = (MultiReferenceOperation) operations.get(0);
+		MultiReferenceOperation op0 = checkAndCast(subOperations.get(0), MultiReferenceOperation.class);
+		SingleReferenceOperation op1 = checkAndCast(subOperations.get(1), SingleReferenceOperation.class);
+
 		assertEquals(sectionId, op0.getModelElementId());
 		assertEquals("modelElements", op0.getFeatureName());
 		assertEquals(op0.getReferencedModelElements().get(0), useCaseId);
 
-		assertTrue(operations.get(1) instanceof SingleReferenceOperation);
-		SingleReferenceOperation op1 = (SingleReferenceOperation) operations.get(1);
 		assertEquals(useCaseId, op1.getModelElementId());
 		assertEquals("leafSection", op1.getFeatureName());
 		assertNull(op1.getNewValue());

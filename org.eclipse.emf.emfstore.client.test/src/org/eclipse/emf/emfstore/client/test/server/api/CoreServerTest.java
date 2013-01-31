@@ -48,6 +48,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 
 	@Override
 	public void beforeHook() {
+		setCompareAtEnd(false);
 		try {
 			initServer();
 		} catch (FatalEmfStoreException e) {
@@ -163,7 +164,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					Workspace workspace = getWorkspace();
 					workspace.setConnectionManager(getConnectionMock());
-					return workspace.checkout(projectSpace.getUsersession(), ModelUtil.clone(projectInfo),
+					return workspace.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(projectInfo),
 						ModelUtil.clone(baseVersion), new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);

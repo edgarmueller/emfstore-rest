@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ModifiedModelElementsCache;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
@@ -110,29 +109,23 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private boolean isTransient;
 	private boolean disposed;
 
-	private ModifiedModelElementsCache modifiedModelElementsCache;
-
 	private FileTransferManager fileTransferManager;
 	private OperationManager operationManager;
-	private PropertyManager propertyManager;
 
+	private PropertyManager propertyManager;
 	private Map<String, OrgUnitProperty> propertyMap;
 
-	private ResourcePersister resourcePersister;
-	private ECrossReferenceAdapter crossReferenceAdapter;
-
 	private ResourceSet resourceSet;
+	private ResourcePersister resourcePersister;
 
+	private ECrossReferenceAdapter crossReferenceAdapter;
 	private IRunnableContext runnableContext;
 
 	/**
 	 * Constructor.
 	 */
 	public ProjectSpaceBase() {
-		this.propertyMap = new LinkedHashMap<String, OrgUnitProperty>();
-		modifiedModelElementsCache = new ModifiedModelElementsCache(this);
-		WorkspaceManager.getObserverBus().register(modifiedModelElementsCache);
-
+		propertyMap = new LinkedHashMap<String, OrgUnitProperty>();
 		initRunnableContext();
 	}
 
@@ -458,15 +451,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getModifiedModelElementsCache()
-	 */
-	public ModifiedModelElementsCache getModifiedModelElementsCache() {
-		return modifiedModelElementsCache;
-	}
-
-	/**
 	 * Get the current notification recorder.
 	 * 
 	 * @return the recorder
@@ -612,7 +596,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		fileTransferManager = new FileTransferManager(this);
 
 		operationManager = new OperationManager(this);
-		operationManager.addOperationListener(modifiedModelElementsCache);
 
 		initResourcePersister();
 
@@ -630,7 +613,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		initPropertyMap();
 
-		modifiedModelElementsCache.initializeCache();
 		startChangeRecording();
 		cleanCutElements();
 
@@ -771,12 +753,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		dispose();
 
-		getProject().eResource().delete(null);
-		eResource().delete(null);
-		getLocalChangePackage().eResource().delete(null);
+		deleteResource(getProject().eResource());
+		deleteResource(eResource());
+		deleteResource(getLocalChangePackage().eResource());
 
 		// delete folder of project space
 		FileUtil.deleteDirectory(new File(pathToProject), true);
+	}
+
+	private void deleteResource(Resource resource) throws IOException {
+		if (resource != null) {
+			resource.delete(null);
+		}
 	}
 
 	/**
@@ -1257,7 +1245,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
 		WorkspaceManager.getObserverBus().unregister(resourcePersister);
-		WorkspaceManager.getObserverBus().unregister(modifiedModelElementsCache);
 		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
 		WorkspaceManager.getObserverBus().unregister(this);
 
