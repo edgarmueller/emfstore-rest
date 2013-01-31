@@ -833,20 +833,12 @@ public class CommandTest extends WorkspaceTest {
 
 		assertEquals(1, leafSection.getModelElements().size());
 		// // assertEquals(0, getProjectSpace().getOperations().size());
-		// assertTrue(editingDomain.getCommandStack().canRedo());
-		//
-		clearOperations();
-		//
-		// // redo the command - delete again
-		new EMFStoreCommand() {
+		assertTrue(editingDomain.getCommandStack().canRedo());
 
-			@Override
-			protected void doRun() {
-				editingDomain.getCommandStack().redo();
-			}
-		}.run(false);
+		// redo the command - delete again
+		editingDomain.getCommandStack().redo();
+
 		assertEquals(0, leafSection.getModelElements().size());
-		// assertEquals(1, getProjectSpace().getOperations().size());
 	}
 
 	// @Test: disabled for Bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=357464

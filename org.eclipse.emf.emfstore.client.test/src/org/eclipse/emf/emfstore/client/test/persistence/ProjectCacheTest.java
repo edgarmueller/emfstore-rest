@@ -66,9 +66,13 @@ public class ProjectCacheTest extends WorkspaceTest {
 		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
 		container.getElements().add(element);
 
-		project.addModelElement(container);
-		project.initMapping();
-		clearOperations();
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				project.addModelElement(container);
+				clearOperations();
+			}
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override
@@ -95,10 +99,15 @@ public class ProjectCacheTest extends WorkspaceTest {
 		container.getElements().add(element);
 		final TestElementContainer container2 = TestmodelFactory.eINSTANCE.createTestElementContainer();
 
-		project.addModelElement(container);
-		project.addModelElement(container2);
-		project.initMapping();
-		clearOperations();
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				project.addModelElement(container);
+				project.addModelElement(container2);
+				clearOperations();
+			}
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override
@@ -118,10 +127,15 @@ public class ProjectCacheTest extends WorkspaceTest {
 		container.getElements().add(element);
 		final TestElementContainer container2 = TestmodelFactory.eINSTANCE.createTestElementContainer();
 
-		project.addModelElement(container);
-		project.addModelElement(container2);
-		project.initMapping();
-		clearOperations();
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				project.addModelElement(container);
+				project.addModelElement(container2);
+				clearOperations();
+			}
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override
@@ -130,7 +144,6 @@ public class ProjectCacheTest extends WorkspaceTest {
 				container2.getElements().add(element);
 			}
 		}.run(false);
-
 	}
 
 	@Test
@@ -141,9 +154,13 @@ public class ProjectCacheTest extends WorkspaceTest {
 		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
 		container.getElements().add(element);
 
-		project.addModelElement(container);
-		project.initMapping();
-		clearOperations();
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				project.addModelElement(container);
+				clearOperations();
+			}
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override

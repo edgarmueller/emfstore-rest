@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
@@ -52,23 +53,28 @@ public class ApplyOperationsRunnable implements Runnable {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-		projectSpace.stopChangeRecording();
-		try {
-			for (AbstractOperation operation : operations) {
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				projectSpace.stopChangeRecording();
 				try {
-					operation.apply(projectSpace.getProject());
-					// BEGIN SUPRESS CATCH EXCEPTION
-				} catch (RuntimeException e) {
-					WorkspaceUtil.handleException(e);
-				}
-				// END SUPRESS CATCH EXCEPTION
-			}
+					for (AbstractOperation operation : operations) {
+						try {
+							operation.apply(projectSpace.getProject());
+							// BEGIN SUPRESS CATCH EXCEPTION
+						} catch (RuntimeException e) {
+							WorkspaceUtil.handleException(e);
+						}
+						// END SUPRESS CATCH EXCEPTION
+					}
 
-			if (addOperations) {
-				projectSpace.addOperations(operations);
+					if (addOperations) {
+						projectSpace.addOperations(operations);
+					}
+				} finally {
+					projectSpace.startChangeRecording();
+				}
 			}
-		} finally {
-			projectSpace.startChangeRecording();
-		}
+		}.run(false);
 	}
 }

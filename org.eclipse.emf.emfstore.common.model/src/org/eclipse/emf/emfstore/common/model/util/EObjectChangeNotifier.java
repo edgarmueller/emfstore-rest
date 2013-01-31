@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,7 +33,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	private final NotifiableIdEObjectCollectionImpl collection;
 	private boolean isInitializing;
 	private Stack<Notification> currentNotifications;
-	private Stack<EObject> removedModelElements;
+	private Stack<List<EObject>> removedModelElements;
 	private int reentrantCallToAddAdapterCounter;
 	private boolean notificationDisabled;
 
@@ -48,7 +50,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		this.collection = notifiableCollection;
 		isInitializing = true;
 		currentNotifications = new Stack<Notification>();
-		removedModelElements = new Stack<EObject>();
+		removedModelElements = new Stack<List<EObject>>();
 		notifier.eAdapters().add(this);
 		isInitializing = false;
 		reentrantCallToAddAdapterCounter = 0;
@@ -82,7 +84,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		if (currentNotification != null && !currentNotification.isTouch() && !isInitializing
 			&& notifier instanceof EObject && !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
 			EObject modelElement = (EObject) notifier;
-			if (!collection.containsInstance(modelElement) && isInCollection(modelElement)) {
+			if (!collection.containsInstance(modelElement) && isInCollectionHierarchy(modelElement)) {
 				collection.modelElementAdded(collection, modelElement);
 			}
 		}
@@ -117,11 +119,9 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		if (notifier instanceof EObject) {
 			EObject modelElement = (EObject) notifier;
-			if (!isInCollection(modelElement)
-				&& (collection.containsInstance(modelElement) || collection.getDeletedModelElementId(modelElement) != null)
-				&& removedModelElements.size() > 0) {
-				removedModelElements.pop();
-				removedModelElements.push(modelElement);
+			if (!isInCollectionHierarchy(modelElement)
+				&& (collection.containsInstance(modelElement) || collection.getDeletedModelElementId(modelElement) != null)) {
+				removedModelElements.peek().add(modelElement);
 			}
 
 		}
@@ -135,7 +135,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 * @return true, if the {@link EObject} is contained in the collection,
 	 *         false otherwise
 	 */
-	private boolean isInCollection(EObject modelElement) {
+	private boolean isInCollectionHierarchy(EObject modelElement) {
 		EObject parent = modelElement.eContainer();
 		if (parent == null) {
 			return false;
@@ -149,7 +149,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return true;
 		}
 
-		return isInCollection(parent);
+		return isInCollectionHierarchy(parent);
 	}
 
 	/**
@@ -164,12 +164,11 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
-		// push null to ensure that stack has same size as call stack
-		// will be replaced with an actual removed element by removeAdapter method if there is any
-		removedModelElements.push(null);
+		removedModelElements.push(new ArrayList<EObject>());
 		currentNotifications.push(notification);
 		Object feature = notification.getFeature();
 		Object notifier = notification.getNotifier();
+		Object newValue = notification.getNewValue();
 
 		if (feature instanceof EReference) {
 			EReference eReference = (EReference) feature;
@@ -188,9 +187,8 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		// detect if the notification is about a reference to an object outside of the collection => notify
 		// project
-		if (feature instanceof EReference) {
+		if (feature instanceof EReference && newValue != null) {
 			EReference reference = (EReference) feature;
-			Object newValue = notification.getNewValue();
 
 			if (!reference.isContainment() && !reference.isContainer()) {
 				if (newValue instanceof EObject) {
@@ -198,21 +196,36 @@ public class EObjectChangeNotifier extends EContentAdapter {
 				} else if (newValue instanceof List<?>) {
 					handleMultiReference((List<?>) newValue);
 				}
+			} else if (reference.isContainment()
+				&& Map.Entry.class.isAssignableFrom(reference.getEType().getInstanceClass())) {
+				handleMapEntry((Map.Entry<?, ?>) newValue, reference);
 			}
 		}
 
 		currentNotifications.pop();
 
 		if (!notification.isTouch()
-			&& notifier instanceof EObject
-			&& (collection.getModelElementId((EObject) notifier) != null || collection
-				.getDeletedModelElementId((EObject) notifier) != null)) {
+			&& notifier instanceof EObject && hasId(notifier)) {
 			collection.notify(notification, collection, (EObject) notifier);
-
 		}
-		EObject removedElement = removedModelElements.pop();
-		if (removedElement != null) {
+
+		for (EObject removedElement : removedModelElements.pop()) {
 			collection.modelElementRemoved(collection, removedElement);
+		}
+	}
+
+	private boolean hasId(Object notifier) {
+		return collection.getModelElementId((EObject) notifier) != null || collection
+			.getDeletedModelElementId((EObject) notifier) != null;
+	}
+
+	private void handleMapEntry(Map.Entry<?, ?> entry, EReference reference) {
+		for (EReference ref : reference.getEReferenceType().getEReferences()) {
+			if (ref.getName().equals("key") && entry.getKey() instanceof EObject) {
+				handleSingleReference((EObject) entry.getKey());
+			} else if (ref.getName().equals("value") && entry.getValue() instanceof EObject) {
+				handleSingleReference((EObject) entry.getValue());
+			}
 		}
 	}
 
