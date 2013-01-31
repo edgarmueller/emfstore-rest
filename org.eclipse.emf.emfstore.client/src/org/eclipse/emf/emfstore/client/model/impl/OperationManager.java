@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
@@ -22,6 +24,7 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObse
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.client.model.observers.OperationObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -50,9 +53,28 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 */
 	public OperationManager(ProjectSpaceBase projectSpace) {
 		operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
-		this.projectSpace = operationRecorder.getProjectSpace();
-		operationListeners = new ArrayList<OperationObserver>();
 		operationRecorder.addOperationRecorderListener(this);
+		operationListeners = new ArrayList<OperationObserver>();
+		configureOperationRecorder();
+		this.projectSpace = operationRecorder.getProjectSpace();
+	}
+
+	private void configureOperationRecorder() {
+		// cut off incoming cross-references by default
+		operationRecorder.getConfig().setCutOffIncomingCrossReferences(
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
+				.getBoolean("cutOffIncomingCrossReferences", true));
+		// usage of commands is not forced by default
+		operationRecorder.getConfig().setForceCommands(
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
+				.getBoolean("forceCommands", false));
+		// cut elements are added automatically as regular model elements by default
+		operationRecorder.getConfig().setDenyAddCutElementsToModelElements(
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
+				.getBoolean("denyAddCutElementsToModelElements", false));
+		operationRecorder.getConfig().setOperationModificator(
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getClass(
+				"operationModificator", OperationModificator.class));
 	}
 
 	/**
@@ -186,25 +208,6 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	}
 
 	/**
-	 * Sets an optional operation modificator.
-	 * 
-	 * @param modificator
-	 *            the operation modificator to be used
-	 */
-	public void setOperationModificator(OperationModificator modificator) {
-		operationRecorder.setModificator(modificator);
-	}
-
-	/**
-	 * Returns the operation modificator, if any.
-	 * 
-	 * @return the operation modificator
-	 */
-	public OperationModificator getOperationModificator() {
-		return operationRecorder.getModificator();
-	}
-
-	/**
 	 * Returns the notification recorder.
 	 * 
 	 * @return the notification recorder
@@ -299,5 +302,14 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 */
 	public void stopChangeRecording() {
 		operationRecorder.stopChangeRecording();
+	}
+
+	/**
+	 * Returns the configuration options for the operation recorder.
+	 * 
+	 * @return the operation recorder configuration options
+	 */
+	public OperationRecorderConfig getRecorderConfig() {
+		return operationRecorder.getConfig();
 	}
 }

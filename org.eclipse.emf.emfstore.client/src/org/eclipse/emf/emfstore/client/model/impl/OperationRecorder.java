@@ -34,9 +34,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
-import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.model.changeTracking.NotificationToOperationConverter;
@@ -48,7 +46,6 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recordi
 import org.eclipse.emf.emfstore.client.model.exceptions.MissingCommandException;
 import org.eclipse.emf.emfstore.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -81,12 +78,13 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public static final String UNKOWN_CREATOR = "unknown";
 
 	private int currentOperationListSize;
-	private EditingDomain editingDomain;
 	private EMFStoreCommandStack emfStoreCommandStack;
 
 	private List<AbstractOperation> operations;
+	private List<OperationRecorderListener> observers;
 	private List<EObject> removedElements;
 	private List<ModelElementId> removedElementIds;
+	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
 
 	private NotificationToOperationConverter converter;
 	private NotificationRecorder notificationRecorder;
@@ -98,16 +96,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private boolean isRecording;
 	private boolean commandIsRunning;
-	private boolean cutOffIncomingCrossReferences;
-	private boolean forceCommands;
-	private boolean denyAddCutElementsToModelElements;
-	private boolean emitOperationsWhenCommandCompleted;
-	private boolean rollBackInCaseOfCommandFailure;
 
-	// no use of ObserverBus
-	private List<OperationRecorderListener> observers;
-	private OperationModificator modificator;
-	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
+	private OperationRecorderConfig config;
 
 	/**
 	 * Constructor.
@@ -129,44 +119,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		removedElementIds = new ArrayList<ModelElementId>();
 		removedElementsToReferenceSettings = new LinkedHashMap<EObject, List<SettingWithReferencedElement>>();
 
-		editingDomain = Configuration.getEditingDomain();
-
+		config = new OperationRecorderConfig();
 		converter = new NotificationToOperationConverter(collection);
-
-		initRecorderBehaviour();
-
-		setModificator(initOperationModificator());
-	}
-
-	private void initRecorderBehaviour() {
-		cutOffIncomingCrossReferences = getBooleanExtensionPoint("org.eclipse.emf.emfstore.client.recording.options",
-			"cutOffIncomingCrossReferences", true); // cut off incoming cross-references by default
-		forceCommands = getBooleanExtensionPoint("org.eclipse.emf.emfstore.client.recording.options", "forceCommands",
-			false); // usage of commands is not forced by default
-		denyAddCutElementsToModelElements = getBooleanExtensionPoint(
-			"org.eclipse.emf.emfstore.client.recording.options", "denyAddCutElementsToModelElements", false);
-
-		emitOperationsWhenCommandCompleted = true;
-		rollBackInCaseOfCommandFailure = false;
-	}
-
-	private OperationModificator initOperationModificator() {
-		OperationModificator result = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getClass(
-			"operationModificator", OperationModificator.class);
-		if (result != null) {
-			return result;
-		}
-		return null;
-	}
-
-	private boolean getBooleanExtensionPoint(String extensionPointId, String attributeName, boolean defaultValue) {
-		Boolean booleanOption = new ExtensionPoint(extensionPointId).getBoolean(attributeName);
-
-		if (booleanOption != null) {
-			return booleanOption;
-		}
-
-		return defaultValue;
 	}
 
 	/**
@@ -178,6 +132,15 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		List<AbstractOperation> ops = new ArrayList<AbstractOperation>(operations);
 		operations.clear();
 		return ops;
+	}
+
+	/**
+	 * Returns the configuration options for the operation recorder.
+	 * 
+	 * @return the operation recorder configuration options
+	 */
+	public OperationRecorderConfig getConfig() {
+		return config;
 	}
 
 	/**
@@ -197,23 +160,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public List<EObject> getRemovedElements() {
 		return removedElements;
-	}
-
-	private Set<EObject> getModelElementsFromClipboard() {
-		Set<EObject> result = new LinkedHashSet<EObject>();
-		if (editingDomain == null) {
-			return result;
-		}
-		Collection<Object> clipboard = editingDomain.getClipboard();
-		if (clipboard == null) {
-			return result;
-		}
-		for (Object element : clipboard) {
-			if (element instanceof EObject) {
-				result.add((EObject) element);
-			}
-		}
-		return result;
 	}
 
 	/**
@@ -288,15 +234,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		if (commandIsRunning && emitOperationsWhenCommandCompleted) {
-			operations.addAll(resultingOperations);
-		} else {
-			operationsRecorded(resultingOperations);
-		}
+		bufferOrRecordOperations(resultingOperations);
 	}
 
 	private void checkCommandConstraints(EObject modelElement) {
-		if (!commandIsRunning && forceCommands) {
+		if (!commandIsRunning && config.isForceCommands()) {
 			WorkspaceUtil.handleException("An element has been changed without using a command!",
 				new MissingCommandException("Element " + modelElement + " has been changed without using a command"));
 		}
@@ -536,8 +478,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 					}
 				}
 			}
-			// }
-
 		}
 	}
 
@@ -563,9 +503,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			}
 		}
 
-		Set<EObject> newElementsOnClipboardAfterCommand = getModelElementsFromClipboard();
-		// newElementsOnClipboardAfterCommand.removeAll(currentClipboard);
-
 		for (final EObject deletedElement : deletedElements) {
 			// element was deleted
 			projectSpace.executeRunnable(new Runnable() {
@@ -578,10 +515,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// add all cut elements to modelElements to guarantee a consistent state if it is allowed
 		Project project = projectSpace.getProject();
 		EList<EObject> cutElements = project.getCutElements();
-		if (denyAddCutElementsToModelElements && cutElements.size() != 0) {
+		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use denyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
@@ -597,18 +534,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		commandIsRunning = false;
 
-		// remove all deleted elements
-		newElementsOnClipboardAfterCommand.removeAll(deletedElements);
-
-		// TODO: this also clear the IDs of the cut elements
 		collection.clearAllocatedCaches();
 	}
 
 	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {
-		if (getModificator() == null) {
+		if (config.getOperationModificator() == null) {
 			return operations;
 		}
-		return getModificator().modify(operations, command);
+		return config.getOperationModificator().modify(operations, command);
 	}
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
@@ -725,14 +658,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		Set<EObject> allContainedModelElementsSet = ModelUtil.getAllContainedModelElements(deletedElement, false);
 		allContainedModelElementsSet.add(deletedElement);
 		deleteOutgoingCrossReferencesOfContainmentTree(allContainedModelElementsSet);
-		//
-		// if (!CommonUtil.isSelfContained(deletedElement, true)) {
-		// throw new IllegalStateException(
-		// "Element was removed from containment of project but still has cross references!: "
-		// + collection.getDeletedModelElementId(deletedElement).getId());
-		// // TODO: EM, remove project cast, if possible
-		// } else
-		if (cutOffIncomingCrossReferences) {
+
+		if (config.isCutOffIncomingCrossReferences()) {
 
 			for (EObject eObject : allContainedModelElementsSet) {
 				// delete incoming cross references
@@ -745,6 +672,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (!isRecording) {
 			return;
 		}
+
 		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(deletedElement, false);
 		allContainedModelElements.add(deletedElement);
 		EObject copiedElement = ModelUtil.clone(deletedElement);
@@ -783,11 +711,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (compositeOperation != null) {
 			compositeOperation.getSubOperations().add(deleteOperation);
 		} else {
-			if (commandIsRunning) {
-				operations.add(deleteOperation);
-			} else {
-				operationRecorded(deleteOperation);
-			}
+			bufferOrRecordOperation(deleteOperation);
 		}
 	}
 
@@ -876,7 +800,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			}
 		}
 
-		if (rollBackInCaseOfCommandFailure) {
+		if (config.isRollbackAtCommandFailure()) {
 			for (int i = operations.size() - 1; i >= 0; i--) {
 				operations.get(i).reverse().apply(collection);
 			}
@@ -892,8 +816,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
-		// TODO: clipboard currently not in use
-		// currentClipboard = getModelElementsFromClipboard();
 		commandIsRunning = true;
 	}
 
@@ -921,9 +843,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		CompositeOperationHandle handle = new CompositeOperationHandle(this, compositeOperation);
 		notificationRecorder.newRecording();
 
-		// operations.add(compositeOperation);
-		// currentOperationListSize++;
-
 		return handle;
 	}
 
@@ -934,8 +853,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 *            the semantic operation that replaces the composite operation
 	 */
 	public void endCompositeOperation(SemanticCompositeOperation semanticCompositeOperation) {
-		// operations.remove(operations.size() - 1);
-		// operations.add(semanticCompositeOperation);
 		compositeOperation = semanticCompositeOperation;
 		endCompositeOperation();
 	}
@@ -944,12 +861,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * Complete the current composite operation.
 	 */
 	public void endCompositeOperation() {
-		if (!commandIsRunning || !emitOperationsWhenCommandCompleted) {
-			// operations.remove(compositeOperation);
-			operationRecorded(compositeOperation);
-		} else {
-			operations.add(compositeOperation);
-		}
+		bufferOrRecordOperation(compositeOperation);
 		this.compositeOperation = null;
 	}
 
@@ -957,11 +869,6 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * Aborts the current composite operation.
 	 */
 	public void abortCompositeOperation() {
-		// if (operations.size() > 0) {
-		// AbstractOperation lastOp = operations.get(operations.size() - 1);
-		// AbstractOperation lastOp = compositeOperation.getSubOperations().get(
-		// compositeOperation.getSubOperations().size() - 1);
-
 		projectSpace.applyOperations(Collections.singletonList(compositeOperation.reverse()), false);
 
 		removedElements.clear();
@@ -1006,29 +913,32 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 			}
 
 			if (ops.size() > 1) {
-				CompositeOperation op = OperationsFactory.eINSTANCE.createCompositeOperation();
-				op.getSubOperations().addAll(ops);
-				// set the last operation as the main one for natural composites
-				op.setMainOperation(ops.get(ops.size() - 1));
-				op.setModelElementId(ModelUtil.clone(op.getMainOperation().getModelElementId()));
-
-				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
-					operations.add(op);
-				} else {
-					operationRecorded(op);
-				}
+				bufferOrRecordOperation(createCompositeOperation(ops));
 			} else if (ops.size() == 1) {
-				if (commandIsRunning && emitOperationsWhenCommandCompleted) {
-					operations.add(ops.get(0));
-				} else {
-					operationRecorded(ops.get(0));
-				}
+				bufferOrRecordOperation(ops.get(0));
 			}
 		}
 	}
 
-	private void operationRecorded(AbstractOperation op) {
-		operationsRecorded(Arrays.asList(op));
+	private CompositeOperation createCompositeOperation(List<AbstractOperation> ops) {
+		CompositeOperation op = OperationsFactory.eINSTANCE.createCompositeOperation();
+		op.getSubOperations().addAll(ops);
+		// set the last operation as the main one for natural composites
+		op.setMainOperation(ops.get(ops.size() - 1));
+		op.setModelElementId(ModelUtil.clone(op.getMainOperation().getModelElementId()));
+		return op;
+	}
+
+	private void bufferOrRecordOperations(List<AbstractOperation> operations) {
+		if (commandIsRunning && config.isEmitOperationsUponCommandCompletion()) {
+			this.operations.addAll(operations);
+		} else {
+			operationsRecorded(operations);
+		}
+	}
+
+	private void bufferOrRecordOperation(AbstractOperation operation) {
+		bufferOrRecordOperations(Arrays.asList(operation));
 	}
 
 	/**
@@ -1043,59 +953,11 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	/**
-	 * Whether operation should be emitted when command is completed.
-	 * 
-	 * @param emitOperationsImmediately
-	 *            If false, operations will be emitted immediately upon recording
-	 */
-	public void emitOperationsWhenCommandCompleted(boolean emitOperationsImmediately) {
-		this.emitOperationsWhenCommandCompleted = emitOperationsImmediately;
-	}
-
-	/**
 	 * Returns the project space this operation recorder is attached to.
 	 * 
 	 * @return the project space this operation recorder is attached to
 	 */
 	public ProjectSpace getProjectSpace() {
 		return projectSpace;
-	}
-
-	/**
-	 * Returns the used operation modificator, if any.
-	 * 
-	 * @return the operation modificator in use
-	 */
-	public OperationModificator getModificator() {
-		return modificator;
-	}
-
-	/**
-	 * Sets an optional operation modificator to be used.
-	 * 
-	 * @param modificator
-	 *            the operation modificator to be used
-	 */
-	public void setModificator(OperationModificator modificator) {
-		this.modificator = modificator;
-	}
-
-	/**
-	 * Whether to cut off incoming cross references upon deletion.
-	 * 
-	 * @return true, if incoming cross references are cut off, false otherwise
-	 */
-	public boolean isCutOffIncomingCrossReferences() {
-		return cutOffIncomingCrossReferences;
-	}
-
-	/**
-	 * Whether to cut off incoming cross references upon deletion.
-	 * 
-	 * @param cutOffIncomingCrossReferences
-	 *            true, if incoming cross references should be cut off, false otherwise
-	 */
-	public void setCutOffIncomingCrossReferences(boolean cutOffIncomingCrossReferences) {
-		this.cutOffIncomingCrossReferences = cutOffIncomingCrossReferences;
 	}
 }

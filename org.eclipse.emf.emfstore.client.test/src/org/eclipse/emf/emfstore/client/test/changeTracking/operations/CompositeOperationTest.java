@@ -176,7 +176,8 @@ public class CompositeOperationTest extends WorkspaceTest {
 	@Test
 	public void createSmallCompositeAcrossCommandsWithAutoOperationWrapper() {
 
-		this.getProjectSpace().getOperationManager().setOperationModificator(new AutoOperationWrapper());
+		this.getProjectSpace().getOperationManager().getRecorderConfig()
+			.setOperationModificator(new AutoOperationWrapper());
 		final LeafSection section = addSection();
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 
