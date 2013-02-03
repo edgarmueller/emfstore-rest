@@ -46,7 +46,7 @@ import org.junit.Before;
 public abstract class WorkspaceTest {
 
 	private Project project;
-	private ProjectSpace projectSpace;
+	protected ProjectSpace projectSpace;
 	protected ProjectSpaceBase clonedProjectSpace;
 	private Workspace workspace;
 	private boolean compareAtEnd = true;
