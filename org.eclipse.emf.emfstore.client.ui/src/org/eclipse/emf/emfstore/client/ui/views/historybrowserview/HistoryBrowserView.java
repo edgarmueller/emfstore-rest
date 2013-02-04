@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
@@ -389,7 +390,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			if (input instanceof ProjectSpace) {
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
-				this.projectSpace = WorkspaceProvider.getInstance().getCurrentWorkspace()
+				// TODO OTS
+				this.projectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 					.getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
@@ -428,12 +430,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		noProjectHint
 			.setText("Select a <a>project</a> or call 'Show history' from the context menu of an element in the navigator.");
 		noProjectHint.addSelectionListener(new SelectionListener() {
-
 			public void widgetSelected(SelectionEvent e) {
 				ElementListSelectionDialog elsd = new ElementListSelectionDialog(parent.getShell(),
 					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
-				for (ProjectSpace ps : WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces()) {
+				// TODO OTS
+				for (ProjectSpace ps : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
 					}

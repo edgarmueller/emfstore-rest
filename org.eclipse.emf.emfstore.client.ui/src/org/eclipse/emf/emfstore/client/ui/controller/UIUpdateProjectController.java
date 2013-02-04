@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -161,9 +162,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		PrimaryVersionSpec resolveVersionSpec = WorkspaceProvider
+		IPrimaryVersionSpec resolveVersionSpec = WorkspaceProvider
 			.getInstance()
-			.getCurrentWorkspace()
+			.getWorkspace()
 			.resolveVersionSpec(projectSpace.getUsersession(), Versions.createHEAD(oldBaseVersion),
 				projectSpace.getProjectId());
 
@@ -172,7 +173,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, UIUpdateProjectController.this, monitor);
+		PrimaryVersionSpec newBaseVersion = (PrimaryVersionSpec) projectSpace.update(version,
+			UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}

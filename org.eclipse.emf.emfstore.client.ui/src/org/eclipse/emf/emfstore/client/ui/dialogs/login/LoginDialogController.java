@@ -17,6 +17,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -45,7 +46,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public Usersession[] getKnownUsersessions() {
 		HashSet<Object> set = new LinkedHashSet<Object>();
-		for (Usersession session : WorkspaceProvider.getInstance().getCurrentWorkspace().getUsersessions()) {
+		// TODO OTS
+		for (Usersession session : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions()) {
 			if (getServerInfo().equals(session.getServerInfo())) {
 				set.add(session);
 			}
@@ -108,12 +110,14 @@ public class LoginDialogController implements ILoginDialogController {
 		// TODO login code
 		usersession.logIn();
 		// if successful, else exception is thrown prior reaching this code
-		EList<Usersession> usersessions = WorkspaceProvider.getInstance().getCurrentWorkspace().getUsersessions();
+		// TODO OTS
+		EList<Usersession> usersessions = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
+			.getUsersessions();
 		if (!usersessions.contains(usersession)) {
 			usersessions.add(usersession);
 		}
 		this.usersession = usersession;
-		WorkspaceProvider.getInstance().getCurrentWorkspace().save();
+		WorkspaceProvider.getInstance().getWorkspace().save();
 	}
 
 	/**

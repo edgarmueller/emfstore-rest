@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
@@ -54,7 +55,8 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
-			final AdminBroker adminBroker = WorkspaceProvider.getInstance().getCurrentWorkspace()
+			// TODO OTS
+			final AdminBroker adminBroker = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 				.getAdminBroker(session);
 			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
 				.getActiveShell(), adminBroker);

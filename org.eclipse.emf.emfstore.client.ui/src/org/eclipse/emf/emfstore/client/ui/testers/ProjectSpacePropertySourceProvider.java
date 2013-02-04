@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
@@ -62,10 +63,9 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException exception) {
 			// END SUPRESS CATCH EXCEPTION
-			ModelUtil
-				.logException(
-								"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
-								exception);
+			ModelUtil.logException(
+				"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
+				exception);
 			return;
 		}
 		saveStateChangedObserver = new SaveStateChangedObserver() {
@@ -111,10 +111,10 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
-		ArrayList<ProjectSpace> inputArray = new ArrayList<ProjectSpace>();
-		for (ProjectSpace projectSpace : WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces()) {
-			if (projectSpace.hasUnsavedChanges()) {
-				inputArray.add(projectSpace);
+		ArrayList<IProject> inputArray = new ArrayList<IProject>();
+		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getProjects()) {
+			if (project.hasUnsavedChanges()) {
+				inputArray.add(project);
 			}
 		}
 		if (inputArray.size() < 1) {

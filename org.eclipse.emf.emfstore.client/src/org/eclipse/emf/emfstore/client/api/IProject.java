@@ -14,44 +14,18 @@ import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictReso
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 public interface IProject {
 
-	/**
-	 * Adds a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 * 
-	 * @generated NOT
-	 */
 	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EmfStoreException;
-
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @return the current version spec
-	 **/
-	PrimaryVersionSpec commit() throws EmfStoreException;
 
 	IPrimaryVersionSpec commit(ILogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
 		throws EmfStoreException;
@@ -73,13 +47,13 @@ public interface IProject {
 
 	List<AbstractOperation> getOperations();
 
-	String getProjectDescription();
+	String getDescription();
 
-	IProjectId getProjectId();
+	IProjectId getId();
 
-	IProjectInfo getProjectInfo();
+	IProjectInfo getInfo();
 
-	String getProjectName();
+	String getName();
 
 	IUsersession getUsersession();
 
@@ -99,9 +73,9 @@ public interface IProject {
 
 	void revert();
 
-	void setProjectDescription(String value);
+	void setDescription(String value);
 
-	void setProjectName(String value);
+	void setName(String value);
 
 	void shareProject() throws EmfStoreException;
 

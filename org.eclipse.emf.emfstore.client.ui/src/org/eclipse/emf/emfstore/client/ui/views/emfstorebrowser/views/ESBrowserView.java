@@ -115,7 +115,8 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	 * The constructor.
 	 */
 	public ESBrowserView() {
-		Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		// TODO OTS
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		WorkspaceProvider.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
@@ -139,7 +140,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new ESBrowserLabelProvider(), decoratorManager
 			.getLabelDecorator()));
 		viewer.setSorter(new ESBrowserViewerSorter());
-		viewer.setInput(WorkspaceProvider.getInstance().getCurrentWorkspace());
+		viewer.setInput(WorkspaceProvider.getInstance().getWorkspace());
 		// viewer.addTreeListener(new ITreeViewerListener() {
 		//
 		// /**
@@ -223,7 +224,8 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	@Override
 	public void dispose() {
 		super.dispose();
-		Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		// TODO OTS
+		Workspace currentWorkspace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace());
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
 		WorkspaceProvider.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {

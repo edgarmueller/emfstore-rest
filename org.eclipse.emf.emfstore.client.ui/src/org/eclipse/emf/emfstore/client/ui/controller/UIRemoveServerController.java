@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
@@ -65,7 +66,9 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 			return null;
 		}
 
-		EList<ProjectSpace> projectSpaces = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces();
+		// TODO OTS
+		EList<ProjectSpace> projectSpaces = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
+			.getProjectSpaces();
 		ArrayList<ProjectSpace> usedSpaces = new ArrayList<ProjectSpace>();
 
 		for (ProjectSpace projectSpace : projectSpaces) {
@@ -77,7 +80,7 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				WorkspaceProvider.getInstance().getCurrentWorkspace().getServerInfos().remove(serverInfo);
+				WorkspaceProvider.getInstance().getWorkspace().getServerInfos().remove(serverInfo);
 				return null;
 			}
 		});
@@ -88,7 +91,7 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 				@Override
 				protected void doRun() {
 					EcoreUtil.delete(serverInfo);
-					WorkspaceProvider.getInstance().getCurrentWorkspace().save();
+					WorkspaceProvider.getInstance().getWorkspace().save();
 				};
 			}.run(false);
 

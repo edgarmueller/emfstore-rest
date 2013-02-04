@@ -65,7 +65,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 			session.setPassword(null);
 		}
 
-		WorkspaceProvider.getInstance().getCurrentWorkspace().save();
+		WorkspaceProvider.getInstance().getWorkspace().save();
 
 		return null;
 	}
