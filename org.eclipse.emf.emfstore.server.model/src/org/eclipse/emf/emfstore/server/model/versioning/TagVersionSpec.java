@@ -10,24 +10,29 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning;
 
+import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
- * <em>Name</em>}</li>
- * </ul>
- * </p>
+ * @extends ITagVersionSpec
+ *          <!-- end-user-doc
+ *          -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
+ *          <em>Name</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getTagVersionSpec()
  * @model
  * @generated
  */
-public interface TagVersionSpec extends VersionSpec {
+public interface TagVersionSpec extends VersionSpec, ITagVersionSpec {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -45,8 +50,10 @@ public interface TagVersionSpec extends VersionSpec {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
+	 * <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated

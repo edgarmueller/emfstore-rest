@@ -20,10 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
-import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
@@ -38,16 +34,9 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
@@ -140,20 +129,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	void addOperations(List<? extends AbstractOperation> operations);
 
 	/**
-	 * Adds a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 * 
-	 * @generated NOT
-	 */
-	void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
-
-	/**
 	 * Begin a composite operation on the projectSpace.
 	 * 
 	 * @return a handle to abort or complete the operation
@@ -161,82 +136,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	CompositeOperationHandle beginCompositeOperation();
-
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @return the current version spec
-	 **/
-	PrimaryVersionSpec commit() throws EmfStoreException;
-
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @param logMessage
-	 *            a log message describing the changes to be committed
-	 * @param callback
-	 *            an optional callback method to be performed while the commit
-	 *            is in progress, may be <code>null</code>
-	 * @param monitor
-	 *            an optional progress monitor to be used while the commit is in
-	 *            progress, may be <code>null</code>
-	 * 
-	 * @return the current version spec
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
-		throws EmfStoreException;
-
-	/**
-	 * This method allows to commit changes to a new branch. It works very
-	 * similar to {@link #commit()} with the addition of a Branch specifier.
-	 * Once the branch is created use {@link #commit()} for further commits.
-	 * 
-	 * 
-	 * @param branch
-	 *            branch specifier
-	 * @param logMessage
-	 *            optional logmessage
-	 * @param callback
-	 *            optional callback, passing an implementation is recommended
-	 * @param monitor
-	 *            optional progress monitor
-	 * @return the created version
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, CommitCallback callback,
-		IProgressMonitor monitor) throws EmfStoreException;
-
-	/**
-	 * Allows to merge a version from another branch into the current
-	 * projectspace.
-	 * 
-	 * @param branchSpec
-	 *            the version which is supposed to be merged
-	 * @param conflictResolver
-	 *            a {@link ConflictResolver} for conflict resolving
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	void mergeBranch(PrimaryVersionSpec branchSpec, ConflictResolver conflictResolver) throws EmfStoreException;
-
-	/**
-	 * Returns a list of branches of the current project. Every call triggers a
-	 * server call.
-	 * 
-	 * @return list of {@link BranchInfo}
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	List<BranchInfo> getBranches() throws EmfStoreException;
 
 	/**
 	 * Export all local changes to a file.
@@ -472,21 +371,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	FileInformation getFileInfo(FileIdentifier fileIdentifier);
 
 	/**
-	 * Gets a list of history infos.
-	 * 
-	 * @param query
-	 *            the query to be performed in order to fetch the history
-	 *            information
-	 * 
-	 * @see Workspace
-	 * @return a list of history infos
-	 * @throws EmfStoreException
-	 *             if server the throws an exception
-	 * @generated NOT
-	 */
-	List<HistoryInfo> getHistoryInfo(HistoryQuery query) throws EmfStoreException;
-
-	/**
 	 * Returns the value of the '<em><b>Last Updated</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -556,15 +440,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	OperationManager getOperationManager();
-
-	/**
-	 * Return the list of operations that have already been performed on the
-	 * project space.
-	 * 
-	 * @return a list of operations
-	 * @generated NOT
-	 */
-	List<AbstractOperation> getOperations();
 
 	/**
 	 * Returns the value of the '<em><b>Project</b></em>' containment reference.
@@ -732,16 +607,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	void initResources(ResourceSet resourceSet);
 
 	/**
-	 * Deletes the project space.
-	 * 
-	 * @generated NOT
-	 * 
-	 * @throws IOException
-	 *             in case the project space could not be deleted
-	 */
-	void delete() throws IOException;
-
-	/**
 	 * Returns the resource set of the ProjectSpace.
 	 * 
 	 * @return resource set of the ProjectSpace
@@ -804,48 +669,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	void makeTransient();
 
 	/**
-	 * Merge the changes from current base version to given target version with
-	 * the local operations.
-	 * 
-	 * @param target
-	 *            a target version
-	 * @param conflictException
-	 *            a {@link ChangeConflictException} containing the changes to be merged
-	 * @param conflictResolver
-	 *            a {@link ConflictResolver} that will actually perform the conflict
-	 *            resolution
-	 * @param callback
-	 *            the {@link UpdateCallback} that is called in case the checksum comparison fails
-	 * @param progressMonitor
-	 *            an {@link IProgressMonitor} to report on progress
-	 * 
-	 * @throws EmfStoreException
-	 *             if the connection to the server fails
-	 * @return true, if merge was successful, false otherwise
-	 * 
-	 * @see UpdateCallback#checksumCheckFailed(ProjectSpace, PrimaryVersionSpec, IProgressMonitor)
-	 * 
-	 * @generated NOT
-	 */
-	boolean merge(PrimaryVersionSpec target, ChangeConflictException conflictException,
-		ConflictResolver conflictResolver, UpdateCallback callback, IProgressMonitor progressMonitor)
-		throws EmfStoreException;
-
-	/**
-	 * Removes a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 * 
-	 * @generated NOT
-	 */
-	void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
-
-	/**
 	 * Resolve the url to a model element.
 	 * 
 	 * @param modelElementUrlFragment
@@ -856,19 +679,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException;
-
-	/**
-	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
-	 * 
-	 * @param versionSpec
-	 *            the spec to resolve
-	 * @return the primary version spec <!-- end-user-doc -->
-	 * @throws EmfStoreException
-	 *             if resolving fails
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec resolveVersionSpec(VersionSpec versionSpec) throws EmfStoreException;
 
 	/**
 	 * Revert all local changes in the project space. Returns the state of the
@@ -1027,118 +837,10 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	void setUsersession(Usersession value);
 
 	/**
-	 * Shares this project space.
-	 * 
-	 * @throws EmfStoreException
-	 *             if an error occurs during the sharing of the project
-	 */
-	public void shareProject() throws EmfStoreException;
-
-	/**
-	 * Shares this project space.
-	 * 
-	 * @param session
-	 *            the {@link Usersession} that should be used for sharing the
-	 *            project
-	 * @param monitor
-	 *            an instance of an {@link IProgressMonitor}
-	 * 
-	 * @throws EmfStoreException
-	 *             if an error occurs during the sharing of the project
-	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor) throws EmfStoreException;
-
-	/**
 	 * Transmit the OrgUnitproperties to the server.
 	 * 
 	 * @generated NOT
 	 */
 	void transmitProperties();
-
-	/**
-	 * Undo the last operation of the projectSpace.
-	 * 
-	 * @generated NOT
-	 */
-	void undoLastOperation();
-
-	/**
-	 * Undo the last operation <em>n</em> operations of the projectSpace.
-	 * 
-	 * @param nrOperations
-	 *            the number of operations to be undone
-	 * 
-	 * @generated NOT
-	 */
-	void undoLastOperations(int nrOperations);
-
-	/**
-	 * <!-- begin-user-doc --> Update the project to the head version.
-	 * 
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	IPrimaryVersionSpec update() throws EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Update the project to the given version.
-	 * 
-	 * @param version
-	 *            the version to update to
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec update(VersionSpec version) throws EmfStoreException;
-
-	/**
-	 * Update the workspace to the given revision.
-	 * 
-	 * @param version
-	 *            the {@link VersionSpec} to update to
-	 * @param callback
-	 *            the {@link UpdateCallback} that will be called when the update
-	 *            has been performed
-	 * @param progress
-	 *            an {@link IProgressMonitor} instance
-	 * @return the current version spec
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the update went wrong
-	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
-		throws EmfStoreException;
-
-	/**
-	 * Determine if the projectspace has unsave changes to any element in the project.
-	 * 
-	 * @return true if there is unsaved changes.
-	 * 
-	 * @generated NOT
-	 */
-	boolean hasUnsavedChanges();
-
-	/**
-	 * Saves the project space.
-	 * 
-	 * @generated NOT
-	 */
-	void save();
-
-	/**
-	 * Whether this project space has been shared.
-	 * 
-	 * @return true, if the project space has been shared, false otherwise
-	 * 
-	 * @generated NOt
-	 */
-	boolean isShared();
 
 } // ProjectContainer
