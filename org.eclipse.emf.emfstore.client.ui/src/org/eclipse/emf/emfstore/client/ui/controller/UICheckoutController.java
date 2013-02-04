@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
@@ -131,11 +131,11 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 				@Override
 				protected ProjectSpace run() throws EmfStoreException {
 					if (versionSpec == null) {
-						return WorkspaceManager.getInstance().getCurrentWorkspace()
+						return WorkspaceProvider.getInstance().getCurrentWorkspace()
 							.checkout(getUsersession(), projectInfo, getProgressMonitor());
 					}
 
-					return WorkspaceManager.getInstance().getCurrentWorkspace()
+					return WorkspaceProvider.getInstance().getCurrentWorkspace()
 						.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
 				}
 			}.execute();
@@ -158,7 +158,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ProjectSp
 	}
 
 	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EmfStoreException {
-		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceManager.getInstance().getCurrentWorkspace())
+		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getCurrentWorkspace())
 			.getBranches(serverInfo, projectInfo.getProjectId());
 
 		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {

@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
@@ -41,7 +41,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 */
 	public void workspaceInitComplete(Workspace currentWorkspace) {
 		this.workspace = currentWorkspace;
-		WorkspaceManager.getObserverBus().register(this);
+		WorkspaceProvider.getObserverBus().register(this);
 	}
 
 	/**

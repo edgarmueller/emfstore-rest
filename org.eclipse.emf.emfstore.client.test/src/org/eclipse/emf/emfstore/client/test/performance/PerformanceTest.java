@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
@@ -114,7 +114,7 @@ public class PerformanceTest {
 			protected void doRun() {
 				setupHelper.loginServer();
 				usersession = setupHelper.getUsersession();
-				WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
+				WorkspaceProvider.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
 			}
 		}.run(false);
 
@@ -157,7 +157,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						WorkspaceManager.getInstance().getConnectionManager()
+						WorkspaceProvider.getInstance().getConnectionManager()
 							.deleteProject(usersession.getSessionId(), projectSpace.getProjectId(), true);
 					} catch (EmfStoreException e) {
 						e.printStackTrace();
@@ -167,7 +167,7 @@ public class PerformanceTest {
 		} // for loop with iterations
 		ModelUtil.logInfo("times=" + Arrays.toString(times));
 		usersession = null;
-		WorkspaceManager.getInstance().reinit();
+		WorkspaceProvider.getInstance().reinit();
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace2 = WorkspaceManager.getInstance().getCurrentWorkspace()
+						projectSpace2 = WorkspaceProvider.getInstance().getCurrentWorkspace()
 							.checkout(setupHelper.getUsersession(), projectSpace.getProjectInfo());
 					} catch (EmfStoreException e) {
 						e.printStackTrace();
@@ -216,7 +216,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace2);
+						WorkspaceProvider.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace2);
 						projectSpace2 = null;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -231,7 +231,7 @@ public class PerformanceTest {
 			@Override
 			protected void doRun() {
 				try {
-					WorkspaceManager.getInstance().getConnectionManager()
+					WorkspaceProvider.getInstance().getConnectionManager()
 						.deleteProject(setupHelper.getUsersession().getSessionId(), projectSpace.getProjectId(), true);
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
@@ -266,7 +266,7 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = WorkspaceManager.getInstance().getCurrentWorkspace()
+					projectSpace2 = WorkspaceProvider.getInstance().getCurrentWorkspace()
 						.checkout(usersession2, setupHelper.getTestProjectSpace().getProjectInfo());
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
@@ -350,7 +350,7 @@ public class PerformanceTest {
 				}
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
-			CleanMemoryTask task = new CleanMemoryTask(WorkspaceManager.getInstance().getCurrentWorkspace()
+			CleanMemoryTask task = new CleanMemoryTask(WorkspaceProvider.getInstance().getCurrentWorkspace()
 				.getResourceSet());
 			task.run();
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
@@ -368,7 +368,7 @@ public class PerformanceTest {
 		ModelUtil.logInfo("Mutate model - average=" + average(modelChangeTimes) + ", min=" + min(modelChangeTimes)
 			+ ", max=" + max(modelChangeTimes) + ", mean=" + mean(modelChangeTimes));
 
-		WorkspaceManager.getInstance().reinit();
+		WorkspaceProvider.getInstance().reinit();
 		// new EMFStoreCommand() {
 		// @Override
 		// protected void doRun() {

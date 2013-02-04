@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -65,7 +65,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 			session.setPassword(null);
 		}
 
-		WorkspaceManager.getInstance().getCurrentWorkspace().save();
+		WorkspaceProvider.getInstance().getCurrentWorkspace().save();
 
 		return null;
 	}

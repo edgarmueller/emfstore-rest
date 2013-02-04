@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -60,7 +60,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 		if (serverInfo != null) {
 			PrimaryVersionSpec versionSpec;
 			try {
-				versionSpec = WorkspaceManager.getInstance().getCurrentWorkspace()
+				versionSpec = WorkspaceProvider.getInstance().getCurrentWorkspace()
 					.resolveVersionSpec(serverInfo, Versions.createHEAD(), projectInfo.getProjectId());
 				revision = "" + versionSpec.getIdentifier();
 			} catch (EmfStoreException e) {

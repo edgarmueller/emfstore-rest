@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
@@ -120,7 +120,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
 			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
@@ -193,7 +193,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().setMergedVersion(null);
 		getProjectSpace().updateDirtyState();
 
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
 			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;

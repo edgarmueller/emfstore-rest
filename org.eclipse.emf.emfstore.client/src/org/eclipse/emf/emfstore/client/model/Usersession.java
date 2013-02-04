@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -19,27 +20,32 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Usersession</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Usersession</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getUsername <em>Username</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getPassword <em>Password</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getSessionId <em>Session Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getPersistentPassword <em>Persistent Password</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getServerInfo <em>Server Info</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#isSavePassword <em>Save Password</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getACUser <em>AC User</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getChangedProperties <em>Changed Properties</em>}</li>
- * </ul>
- * </p>
+ * @extends IUsersession
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getUsername <em>Username</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getPassword <em>Password</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getSessionId <em>Session Id</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getPersistentPassword <em>Persistent Password
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getServerInfo <em>Server Info</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#isSavePassword <em>Save Password</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getACUser <em>AC User</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.Usersession#getChangedProperties <em>Changed Properties
+ *          </em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getUsersession()
  * @model
  * @generated
  */
-public interface Usersession extends EObject {
+public interface Usersession extends EObject, IUsersession {
 	/**
 	 * Returns the value of the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->

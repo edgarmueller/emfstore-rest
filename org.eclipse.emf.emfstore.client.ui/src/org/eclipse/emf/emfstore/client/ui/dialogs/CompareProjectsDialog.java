@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -68,7 +68,7 @@ public class CompareProjectsDialog extends TitleAreaDialog {
 		listViewer.getList().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		listViewer.setContentProvider(new IStructuredContentProvider() {
 			public Object[] getElements(Object inputElement) {
-				List<ProjectSpace> projectSpaces = WorkspaceManager.getInstance().getCurrentWorkspace()
+				List<ProjectSpace> projectSpaces = WorkspaceProvider.getInstance().getCurrentWorkspace()
 					.getProjectSpaces();
 				return projectSpaces.toArray();
 			}

@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -128,7 +128,7 @@ public abstract class ServerTests extends WorkspaceTest {
 
 		SetupHelper.addUserFileToServer(false);
 		SetupHelper.startSever();
-		setConnectionManager(WorkspaceManager.getInstance().getConnectionManager());
+		setConnectionManager(WorkspaceProvider.getInstance().getConnectionManager());
 		setServerInfo(SetupHelper.getServerInfo());
 		// login();
 		initArguments();
@@ -140,7 +140,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 */
 	protected static void login() throws EmfStoreException {
 		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
-		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
+		WorkspaceProvider.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
 		setSessionId(sessionId);
 	}
 
@@ -199,7 +199,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+					Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
 					ServerInfo serverInfo = SetupHelper.getServerInfo();
 					Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE
 						.createUsersession();
@@ -235,9 +235,9 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
+					for (ProjectInfo info : WorkspaceProvider.getInstance().getCurrentWorkspace()
 						.getRemoteProjectList(getServerInfo())) {
-						WorkspaceManager.getInstance().getCurrentWorkspace()
+						WorkspaceProvider.getInstance().getCurrentWorkspace()
 							.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
 					}
 				} catch (EmfStoreException e) {

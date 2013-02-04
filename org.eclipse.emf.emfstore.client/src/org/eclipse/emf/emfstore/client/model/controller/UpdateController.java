@@ -17,7 +17,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
@@ -128,7 +128,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			|| !callback.inspectChanges(getProjectSpace(), changes, idToEObjectMapping)) {
 			return getProjectSpace().getBaseVersion();
 		}
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
 			.inspectChanges(getProjectSpace(), changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
@@ -154,7 +154,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
 			.updateCompleted(getProjectSpace(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();

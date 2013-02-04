@@ -15,7 +15,7 @@ import java.util.Date;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -86,7 +86,7 @@ public class ShareController extends ServerCall<Void> {
 		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
 			@Override
 			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
-				return WorkspaceManager
+				return WorkspaceProvider
 					.getInstance()
 					.getConnectionManager()
 					.createProject(
@@ -104,7 +104,7 @@ public class ShareController extends ServerCall<Void> {
 		// set attributes after server call
 		getProgressMonitor().subTask("Setting attributes");
 		this.setUsersession(getUsersession());
-		WorkspaceManager.getObserverBus().register(getProjectSpace(), LoginObserver.class);
+		WorkspaceProvider.getObserverBus().register(getProjectSpace(), LoginObserver.class);
 
 		getProjectSpace().save();
 		getProjectSpace().startChangeRecording();
@@ -126,6 +126,6 @@ public class ShareController extends ServerCall<Void> {
 		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();
-		WorkspaceManager.getObserverBus().notify(ShareObserver.class).shareDone(getProjectSpace());
+		WorkspaceProvider.getObserverBus().notify(ShareObserver.class).shareDone(getProjectSpace());
 	}
 }

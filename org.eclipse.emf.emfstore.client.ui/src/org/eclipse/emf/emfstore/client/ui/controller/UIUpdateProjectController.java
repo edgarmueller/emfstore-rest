@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
@@ -161,7 +161,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager
+		PrimaryVersionSpec resolveVersionSpec = WorkspaceProvider
 			.getInstance()
 			.getCurrentWorkspace()
 			.resolveVersionSpec(projectSpace.getUsersession(), Versions.createHEAD(oldBaseVersion),

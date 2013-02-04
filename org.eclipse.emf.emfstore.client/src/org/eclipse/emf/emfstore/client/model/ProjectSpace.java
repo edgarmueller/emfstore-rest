@@ -19,6 +19,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.client.api.IBranchInfo;
+import org.eclipse.emf.emfstore.client.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
@@ -50,62 +53,65 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em> Project</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
- * <em>Project Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
- * <em>Project Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
- * <em>Project Description</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
- * <em>Usersession</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
- * <em>Last Updated</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
- * <em>Base Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
- * <em>Resource Count</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getOldLogMessages
- * <em>Old Log Messages</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
- * <em>Local Operations</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotifications
- * <em>Notifications</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
- * <em>Event Composite</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
- * <em>Notification Composite </em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWaitingUploads
- * <em>Waiting Uploads</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProperties
- * <em>Properties</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getChangedSharedProperties
- * <em>Changed Shared Properties</em>}</li>
- * </ul>
- * </p>
+ * @extends IProject
+ *          <!-- end-user-doc
+ *          -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em> Project</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
+ *          <em>Project Id</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
+ *          <em>Project Name</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
+ *          <em>Project Description</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
+ *          <em>Usersession</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
+ *          <em>Last Updated</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
+ *          <em>Base Version</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
+ *          <em>Resource Count</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getOldLogMessages
+ *          <em>Old Log Messages</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
+ *          <em>Local Operations</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotifications
+ *          <em>Notifications</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
+ *          <em>Event Composite</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
+ *          <em>Notification Composite </em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWaitingUploads
+ *          <em>Waiting Uploads</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProperties
+ *          <em>Properties</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getChangedSharedProperties
+ *          <em>Changed Shared Properties</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace()
  * @model
  * @generated
  */
-public interface ProjectSpace extends IdentifiableElement {
+public interface ProjectSpace extends IdentifiableElement, IProject {
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the
@@ -231,7 +237,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @throws EmfStoreException
 	 *             in case of an exception
 	 */
-	List<BranchInfo> getBranches() throws EmfStoreException;
+	List<IBranchInfo> getBranches() throws EmfStoreException;
 
 	/**
 	 * Export all local changes to a file.
@@ -300,7 +306,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
-	PrimaryVersionSpec getBaseVersion();
+	IPrimaryVersionSpec getBaseVersion();
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'
@@ -1076,7 +1082,7 @@ public interface ProjectSpace extends IdentifiableElement {
 	 * @model
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec update() throws EmfStoreException;
+	IPrimaryVersionSpec update() throws EmfStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the given version.

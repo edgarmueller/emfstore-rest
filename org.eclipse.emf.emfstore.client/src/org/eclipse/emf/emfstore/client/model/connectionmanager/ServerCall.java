@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -200,7 +200,7 @@ public abstract class ServerCall<U> {
 	 * @return the connection manager in use
 	 */
 	protected ConnectionManager getConnectionManager() {
-		return WorkspaceManager.getInstance().getConnectionManager();
+		return WorkspaceProvider.getInstance().getConnectionManager();
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class ServerCall<U> {
 	 *             in case any exception occurs during execution of the call
 	 */
 	public U execute() throws EmfStoreException {
-		WorkspaceManager.getInstance().getSessionManager().execute(this);
+		WorkspaceProvider.getInstance().getSessionManager().execute(this);
 		return ret;
 	}
 }

@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
@@ -56,7 +56,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testAutocorrectErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -83,9 +83,9 @@ public class ChecksumTest extends CoreServerTest {
 
 		// re-checkout should be triggered
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
-		Project restoredProject = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0)
+		Project restoredProject = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(0)
 			.getProject();
 		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
 
@@ -97,7 +97,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testChangeTrackingAfterAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -105,7 +105,7 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = WorkspaceManager
+		final ProjectSpace checkedOutProjectSpace = WorkspaceProvider
 			.getInstance()
 			.getCurrentWorkspace()
 			.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(getProjectSpace().getProjectInfo()),
@@ -163,7 +163,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = EmfStoreException.class)
 	public void testCancelErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -190,7 +190,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = EmfStoreException.class)
 	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -198,7 +198,7 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = WorkspaceManager
+		ProjectSpace checkedOutProjectSpace = WorkspaceProvider
 			.getInstance()
 			.getCurrentWorkspace()
 			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
@@ -230,7 +230,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorrectChecksumsAtUpdate() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -238,7 +238,7 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = WorkspaceManager
+		ProjectSpace checkedOutProjectSpace = WorkspaceProvider
 			.getInstance()
 			.getCurrentWorkspace()
 			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
@@ -265,7 +265,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -273,7 +273,7 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = WorkspaceManager
+		ProjectSpace checkedOutProjectSpace = WorkspaceProvider
 			.getInstance()
 			.getCurrentWorkspace()
 			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());

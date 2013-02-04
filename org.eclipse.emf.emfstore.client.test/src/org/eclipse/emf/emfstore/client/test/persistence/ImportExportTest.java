@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerFactory;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
@@ -63,7 +63,7 @@ public class ImportExportTest extends WorkspaceTest {
 
 		ProjectSpace newProjectSpace = null;
 
-		for (ProjectSpace projectSpace : WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces()) {
+		for (ProjectSpace projectSpace : WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces()) {
 			if (projectSpace.getProjectName().equals("importedProject")) {
 				newProjectSpace = projectSpace;
 				break;
@@ -90,10 +90,10 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectSpaceController());
 
-		Assert.assertEquals(2, WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(2, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
 
-		ProjectSpace a = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0);
-		ProjectSpace b = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(1);
+		ProjectSpace a = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(0);
+		ProjectSpace b = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(1);
 
 		// TODO: are the imported IDs supposed to be the same as in the original project?
 		// Assert.assertTrue(ModelUtil.areEqual(a.getProject(), b.getProject()));

@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
@@ -108,7 +108,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 
 	private ProjectInfo createRemoteProject(final Usersession usersession, final String name, final String description,
 		IProgressMonitor monitor) throws EmfStoreException {
-		return WorkspaceManager.getInstance().getCurrentWorkspace()
+		return WorkspaceProvider.getInstance().getCurrentWorkspace()
 			.createRemoteProject(usersession, name, description, monitor);
 	}
 

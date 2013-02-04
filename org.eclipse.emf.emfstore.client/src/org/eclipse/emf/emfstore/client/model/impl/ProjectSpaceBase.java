@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.recording.NotificationRecorder;
@@ -171,7 +171,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec)
 	 */
 	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException {
-		final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 		cm.addTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
@@ -189,8 +189,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @throws EmfStoreException in case the checksum comparison failed and the activated IChecksumErrorHandler
 	 *             also failed
 	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
-		ChangePackage myChanges) throws EmfStoreException {
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
+		throws EmfStoreException {
 		applyChanges(baseSpec, incoming, myChanges, UpdateCallback.NOCALLBACK, new NullProgressMonitor());
 	}
 
@@ -212,8 +212,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @throws EmfStoreException in case the checksum comparison failed and the activated IChecksumErrorHandler
 	 *             also failed
 	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
-		ChangePackage myChanges, UpdateCallback callback, IProgressMonitor progressMonitor) throws EmfStoreException {
+	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
+		UpdateCallback callback, IProgressMonitor progressMonitor) throws EmfStoreException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -398,7 +398,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion)
 		throws EmfStoreException {
-		final ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
 			sourceVersion, targetVersion);
@@ -623,7 +623,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void initPropertyMap() {
 		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {
-			WorkspaceManager.getObserverBus().register(this, LoginObserver.class);
+			WorkspaceProvider.getObserverBus().register(this, LoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
 			if (acUser != null) {
 				for (OrgUnitProperty p : acUser.getProperties()) {
@@ -660,7 +660,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resourcePersister.addResource(getLocalChangePackage().eResource());
 			resourcePersister.addResource(getProject().eResource());
 			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
-			WorkspaceManager.getObserverBus().register(resourcePersister);
+			WorkspaceProvider.getObserverBus().register(resourcePersister);
 		}
 	}
 
@@ -749,7 +749,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		// TODO: remove project space from workspace, this is not the case if delete
 		// is performed via Workspace#deleteProjectSpace
-		WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().remove(this);
+		WorkspaceProvider.getInstance().getInternalWorkspace().getProjectSpaces().remove(this);
 
 		dispose();
 
@@ -916,7 +916,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new ServerCall<List<BranchInfo>>(this) {
 			@Override
 			protected List<BranchInfo> run() throws EmfStoreException {
-				final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), getProjectId());
 			};
 		}.execute();
@@ -928,7 +928,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException {
-		final ConnectionManager cm = WorkspaceManager.getInstance().getConnectionManager();
+		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 		cm.removeTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
@@ -957,7 +957,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
 			protected PrimaryVersionSpec run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 				return connectionManager.resolveVersionSpec(getSessionId(), getProjectId(), versionSpec);
 			}
 		}.execute();
@@ -1062,12 +1062,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (changedProperty.getName().equals(property.getName())
 					&& changedProperty.getProject().equals(getProjectId())) {
 					changedProperty.setValue(property.getValue());
-					WorkspaceManager.getInstance().getCurrentWorkspace().save();
+					WorkspaceProvider.getInstance().getInternalWorkspace().save();
 					return;
 				}
 			}
 			getUsersession().getChangedProperties().add(property);
-			WorkspaceManager.getInstance().getCurrentWorkspace().save();
+			WorkspaceProvider.getInstance().getInternalWorkspace().save();
 		}
 	}
 
@@ -1131,7 +1131,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ListIterator<OrgUnitProperty> iterator = temp.listIterator();
 		while (iterator.hasNext()) {
 			try {
-				WorkspaceManager
+				WorkspaceProvider
 					.getInstance()
 					.getConnectionManager()
 					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
@@ -1244,9 +1244,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().removeIdEObjectCollectionChangeObserver(operationManager);
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
-		WorkspaceManager.getObserverBus().unregister(resourcePersister);
-		WorkspaceManager.getObserverBus().unregister(this, LoginObserver.class);
-		WorkspaceManager.getObserverBus().unregister(this);
+		WorkspaceProvider.getObserverBus().unregister(resourcePersister);
+		WorkspaceProvider.getObserverBus().unregister(this, LoginObserver.class);
+		WorkspaceProvider.getObserverBus().unregister(this);
 
 		operationManager.dispose();
 		resourcePersister.dispose();
@@ -1264,19 +1264,19 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
-		WorkspaceManager.getObserverBus().notify(MergeObserver.class).preRevertMyChanges(this, changePackage);
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).preRevertMyChanges(this, changePackage);
 	}
 
 	private void notifyPostRevertMyChanges() {
-		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postRevertMyChanges(this);
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postRevertMyChanges(this);
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
-		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this, theirChangePackages);
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this, theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
-		WorkspaceManager.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
 	}
 
 }

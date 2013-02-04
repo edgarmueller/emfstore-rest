@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
@@ -199,7 +199,7 @@ public final class DecisionUtil {
 			return StringUtils.EMPTY;
 		}
 
-		MergeLabelProvider labelProvider = WorkspaceManager.getObserverBus().notify(MergeLabelProvider.class, true);
+		MergeLabelProvider labelProvider = WorkspaceProvider.getObserverBus().notify(MergeLabelProvider.class, true);
 		if (labelProvider == null) {
 			return modelElement.toString();
 		}

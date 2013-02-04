@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
@@ -389,7 +389,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			if (input instanceof ProjectSpace) {
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
-				this.projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+				this.projectSpace = WorkspaceProvider.getInstance().getCurrentWorkspace()
 					.getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
@@ -433,7 +433,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				ElementListSelectionDialog elsd = new ElementListSelectionDialog(parent.getShell(),
 					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
-				for (ProjectSpace ps : WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces()) {
+				for (ProjectSpace ps : WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
 					}
@@ -460,7 +460,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private void initProjectDeleteListener() {
-		WorkspaceManager.getObserverBus().register(new DeleteProjectSpaceObserver() {
+		WorkspaceProvider.getObserverBus().register(new DeleteProjectSpaceObserver() {
 			public void projectSpaceDeleted(ProjectSpace projectSpace) {
 				if (HistoryBrowserView.this.projectSpace == projectSpace) {
 					setInput(null);

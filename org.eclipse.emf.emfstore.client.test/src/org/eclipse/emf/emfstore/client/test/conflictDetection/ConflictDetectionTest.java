@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -40,7 +40,7 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	 */
 	public ProjectSpace cloneProjectSpace(final ProjectSpace ps) {
 
-		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		final Workspace workspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
 		ProjectSpace result = new EMFStoreCommandWithResult<ProjectSpace>() {
 			@Override
 			protected ProjectSpace doRun() {

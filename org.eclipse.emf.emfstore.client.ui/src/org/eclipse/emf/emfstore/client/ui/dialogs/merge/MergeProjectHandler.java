@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
@@ -55,7 +55,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void preDecisionManagerHook() {
-		WorkspaceManager.getObserverBus().register(getLabelProvider(), MergeLabelProvider.class);
+		WorkspaceProvider.getObserverBus().register(getLabelProvider(), MergeLabelProvider.class);
 	}
 
 	@Override

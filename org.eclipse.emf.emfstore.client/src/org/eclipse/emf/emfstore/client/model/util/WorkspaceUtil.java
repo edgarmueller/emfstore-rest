@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.util;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.emfstore.client.model.Activator;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.ExceptionObserver;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.util.IResourceLogger;
@@ -131,7 +131,7 @@ public final class WorkspaceUtil {
 
 	private static void wrapAndHandleException(String errorMessage, Exception exception) {
 		RuntimeException runtimeException = new RuntimeException(errorMessage, exception);
-		Boolean errorHandeled = WorkspaceManager.getObserverBus().notify(ExceptionObserver.class)
+		Boolean errorHandeled = WorkspaceProvider.getObserverBus().notify(ExceptionObserver.class)
 			.handleError(runtimeException);
 		logException(exception.getMessage(), exception);
 		if (!errorHandeled.booleanValue()) {

@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
@@ -47,7 +47,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 				public Integer call() throws Exception {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
-						.getActiveShell(), WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos());
+						.getActiveShell(), WorkspaceProvider.getInstance().getCurrentWorkspace().getServerInfos());
 					int input = dialog.open();
 					selectedServerInfo = dialog.getResult();
 					return input;

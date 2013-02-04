@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -553,7 +553,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated NOT
 	 */
 	public void logIn() throws EmfStoreException, AccessControlException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
 			throw new AccessControlException("Username or Password not set!");
@@ -574,17 +574,17 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());
-		WorkspaceManager.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void logout() throws EmfStoreException {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		WorkspaceManager.getObserverBus().notify(LogoutObserver.class).logoutCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(LogoutObserver.class).logoutCompleted(this);
 	}
 
 	// end of custom code

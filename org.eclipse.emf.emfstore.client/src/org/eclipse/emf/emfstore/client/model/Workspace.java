@@ -21,6 +21,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.api.IWorkspace;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
@@ -41,7 +44,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
- * @implements IAdaptable <!-- end-user-doc -->
+ * @implements IAdaptable, IWorkspace <!-- end-user-doc -->
  * 
  *             <p>
  *             The following features are supported:
@@ -62,7 +65,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * @model
  * @generated
  */
-public interface Workspace extends EObject, IAdaptable {
+public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -129,7 +132,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 *            the project description
 	 * @return the project space that the new project resides in
 	 */
-	ProjectSpace createLocalProject(String projectName, String projectDescription);
+	IProject createLocalProject(String projectName, String projectDescription);
 
 	/**
 	 * Creates an empty project on the server.
@@ -538,7 +541,7 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @model
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, VersionSpec versionSpec, ProjectId projectId)
+	IPrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, VersionSpec versionSpec, ProjectId projectId)
 		throws EmfStoreException;
 
 	/**

@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -52,7 +52,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws EmfStoreException {
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					return WorkspaceManager
+					return WorkspaceProvider
 						.getInstance()
 						.getCurrentWorkspace()
 						.checkout(TestSessionProvider.getInstance().getDefaultUsersession(), getProjectInfo(),
@@ -97,13 +97,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws EmfStoreException {
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+				ProjectSpace projectSpace = WorkspaceProvider.getInstance().getCurrentWorkspace()
 					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
 				try {
 					projectSpace.shareProject();
@@ -113,7 +113,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
 	}
 
 	/**
@@ -129,13 +129,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void shareProjectTest() throws EmfStoreException {
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
 		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
 
 			@Override
 			protected ProjectSpace doRun() {
-				ProjectSpace projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+				ProjectSpace projectSpace = WorkspaceProvider.getInstance().getCurrentWorkspace()
 					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
 				try {
 					projectSpace.shareProject();
@@ -147,7 +147,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() + 1);
 		assertNotNull(getProject());
 		assertEqual(getProject(), projectSpace2.getProject());
 	}
@@ -162,12 +162,12 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void deleteProjectTest() throws EmfStoreException {
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
-		WorkspaceManager.getInstance().getCurrentWorkspace().deleteRemoteProject(getServerInfo(), getProjectId(), true);
+		WorkspaceProvider.getInstance().getCurrentWorkspace().deleteRemoteProject(getServerInfo(), getProjectId(), true);
 
 		try {
-			List<ProjectInfo> remoteProjectList = WorkspaceManager.getInstance().getCurrentWorkspace()
+			List<ProjectInfo> remoteProjectList = WorkspaceProvider.getInstance().getCurrentWorkspace()
 				.getRemoteProjectList(getServerInfo());
 			for (ProjectInfo projectInfo : remoteProjectList) {
 				if (projectInfo.getProjectId() == getProjectId()) {
@@ -178,7 +178,7 @@ public class ServerInterfaceTest extends ServerTests {
 		} catch (EmfStoreException e) {
 			assertTrue(true);
 		}
-		assertTrue(WorkspaceManager.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() - 1);
+		assertTrue(WorkspaceProvider.getInstance().getCurrentWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() - 1);
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void resolveVersionSpecTest() throws EmfStoreException {
-		List<ProjectInfo> remoteProjectList = WorkspaceManager.getInstance().getCurrentWorkspace()
+		List<ProjectInfo> remoteProjectList = WorkspaceProvider.getInstance().getCurrentWorkspace()
 			.getRemoteProjectList(getServerInfo());
 
 		boolean sameVersionSpec = false;

@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
@@ -126,7 +126,7 @@ public class SetupHelper {
 			seed);
 		Configuration.setAutoSave(false);
 		ModelMutator.generateModel(config);
-		testProjectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+		testProjectSpace = WorkspaceProvider.getInstance().getCurrentWorkspace()
 			.importProject(project, "Generated project", "");
 		testProject = testProjectSpace.getProject();
 		projectId = testProjectSpace.getProjectId();
@@ -141,7 +141,7 @@ public class SetupHelper {
 		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
 		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());
-		config.setEditingDomain(WorkspaceManager.getInstance().getCurrentWorkspace().getEditingDomain());
+		config.setEditingDomain(WorkspaceProvider.getInstance().getCurrentWorkspace().getEditingDomain());
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		return config;
 	}
@@ -203,7 +203,7 @@ public class SetupHelper {
 	 * @throws EmfStoreException in case of failure
 	 */
 	public static ACOrgUnitId createUserOnServer(String username) throws EmfStoreException {
-		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
@@ -216,7 +216,7 @@ public class SetupHelper {
 	 * @throws EmfStoreException if deletion fails
 	 */
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws EmfStoreException {
-		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
@@ -231,7 +231,7 @@ public class SetupHelper {
 	 * @throws EmfStoreException in case of failure
 	 */
 	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws EmfStoreException {
-		AdminConnectionManager adminConnectionManager = WorkspaceManager.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
@@ -329,7 +329,7 @@ public class SetupHelper {
 	public void setupWorkSpace() {
 		LOGGER.log(Level.INFO, "setting up workspace...");
 		CommonUtil.setTesting(true);
-		workSpace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		workSpace = WorkspaceProvider.getInstance().getCurrentWorkspace();
 		LOGGER.log(Level.INFO, "workspace initialized");
 
 	}
@@ -468,7 +468,7 @@ public class SetupHelper {
 	 * @throws IOException if deletion fails
 	 */
 	public static void cleanupWorkspace() throws IOException {
-		final Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		final Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -551,7 +551,7 @@ public class SetupHelper {
 					usersession.setServerInfo(serverInfo);
 					usersession.setUsername("super");
 					usersession.setPassword("super");
-					WorkspaceManager.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
+					WorkspaceProvider.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
 				}
 				try {
 					if (!usersession.isLoggedIn()) {
@@ -627,7 +627,7 @@ public class SetupHelper {
 			protected void doRun() {
 
 				try {
-					compareProject = WorkspaceManager.getInstance().getCurrentWorkspace()
+					compareProject = WorkspaceProvider.getInstance().getCurrentWorkspace()
 						.checkout(usersession, projectInfo, new NullProgressMonitor()).getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EmfStoreException e) {
