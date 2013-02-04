@@ -14,8 +14,6 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.swt.widgets.Shell;
@@ -43,9 +41,8 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 	}
 
 	private void deleteProject(final ProjectSpace projectSpace) {
-		final Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
 		try {
-			currentWorkspace.deleteProjectSpace(projectSpace);
+			projectSpace.delete();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")

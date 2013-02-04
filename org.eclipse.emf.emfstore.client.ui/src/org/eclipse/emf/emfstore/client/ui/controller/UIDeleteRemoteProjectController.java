@@ -151,22 +151,21 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		}
 
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
-		WorkspaceProvider.getInstance().getCurrentWorkspace()
+		WorkspaceProvider.getInstance().getWorkspace()
 			.deleteRemoteProject(serverInfo, projectInfo.getProjectId(), deleteFiles);
 	}
 
 	private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
 		throws EmfStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-			WorkspaceProvider.getInstance().getCurrentWorkspace().deleteRemoteProject(session, projectId, deleteFiles);
+			WorkspaceProvider.getInstance().getWorkspace().deleteRemoteProject(session, projectId, deleteFiles);
 		}
 	}
 
 	private void deleteRemoteProject(final ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles,
 		IProgressMonitor monitor) throws EmfStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-			WorkspaceProvider.getInstance().getCurrentWorkspace()
-				.deleteRemoteProject(serverInfo, projectId, deleteFiles);
+			WorkspaceProvider.getInstance().getWorkspace().deleteRemoteProject(serverInfo, projectId, deleteFiles);
 		}
 	}
 }

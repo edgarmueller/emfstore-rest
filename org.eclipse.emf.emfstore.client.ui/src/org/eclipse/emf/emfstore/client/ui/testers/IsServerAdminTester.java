@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.emf.emfstore.client.api.IServerInfo;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
@@ -35,7 +36,7 @@ public class IsServerAdminTester extends PropertyTester {
 	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
 		if ((receiver instanceof ServerInfo || receiver instanceof ProjectInfo) && expectedValue instanceof Boolean) {
 
-			ServerInfo serverInfo = null;
+			IServerInfo serverInfo = null;
 
 			if (receiver instanceof ServerInfo) {
 				serverInfo = (ServerInfo) receiver;
@@ -48,7 +49,8 @@ public class IsServerAdminTester extends PropertyTester {
 				return false;
 			}
 
-			final ServerInfo finalServerInfo = serverInfo;
+			// TODO OTS
+			final ServerInfo finalServerInfo = (ServerInfo) serverInfo;
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
 				protected Boolean doRun() {
@@ -73,8 +75,8 @@ public class IsServerAdminTester extends PropertyTester {
 		return true;
 	}
 
-	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
-		for (ServerInfo serverInfo : WorkspaceProvider.getInstance().getCurrentWorkspace().getServerInfos()) {
+	private IServerInfo findServerInfo(ProjectInfo projectInfo) {
+		for (IServerInfo serverInfo : WorkspaceProvider.getInstance().getWorkspace().getServerInfos()) {
 			if (projectInfo.eContainer() != null && projectInfo.eContainer().equals(serverInfo)) {
 				return serverInfo;
 			}

@@ -20,10 +20,17 @@ public interface IWorkspace {
 
 	void removeServerInfo(IServerInfo serverInfo);
 
+	List<? extends IServerInfo> getServerInfos();
+
+	List<? extends IProject> getProjects();
+
 	IProject checkout(final IUsersession usersession, final IProjectInfo projectInfo) throws EmfStoreException;
 
 	IProject checkout(final IUsersession usersession, final IProjectInfo projectInfo, IProgressMonitor progressMonitor)
 		throws EmfStoreException;
+
+	IProject checkout(final IUsersession usersession, final IProjectInfo projectInfo, IVersionSpec versionSpec,
+		IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	IProjectInfo createEmptyRemoteProject(final IUsersession usersession, final String projectName,
 		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException;
