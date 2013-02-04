@@ -13,16 +13,20 @@ package org.eclipse.emf.emfstore.server.model.versioning;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.
  * 
- * @extends Comparable<PrimaryVersionSpec> <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>Identifier</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum <em>Project State Checksum</em>}</li>
- * </ul>
- * </p>
- *
+ * @extends Comparable<PrimaryVersionSpec>, IPrimaryVersionSpec
+ * 
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>Identifier
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum <em>
+ *          Project State Checksum</em>}</li>
+ *          </ul>
+ *          </p>
+ * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getPrimaryVersionSpec()
  * @model
  * @generated
@@ -47,9 +51,11 @@ public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersi
 	int getIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>Identifier</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getIdentifier
+	 * <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Identifier</em>' attribute.
 	 * @see #getIdentifier()
 	 * @generated
@@ -64,6 +70,7 @@ public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersi
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project State Checksum</em>' attribute.
 	 * @see #setProjectStateChecksum(long)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getPrimaryVersionSpec_ProjectStateChecksum()
@@ -73,9 +80,12 @@ public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersi
 	long getProjectStateChecksum();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum <em>Project State Checksum</em>}' attribute.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum
+	 * <em>Project State Checksum</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Project State Checksum</em>' attribute.
 	 * @see #getProjectStateChecksum()
 	 * @generated

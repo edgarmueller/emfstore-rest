@@ -15,6 +15,11 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 public interface IProject {
