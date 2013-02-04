@@ -10,14 +10,19 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Element Id</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Element Id</b></em>'.
+ * 
+ * @extends IModelElementId
+ *          <!-- end-user-doc -->
  * 
  * 
  * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getModelElementId()
  * @model
  * @generated
  */
-public interface ModelElementId extends UniqueIdentifier {
+public interface ModelElementId extends UniqueIdentifier, IModelElementId {
 
 } // ModelElementId

@@ -38,10 +38,8 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
@@ -140,20 +138,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	void addOperations(List<? extends AbstractOperation> operations);
 
 	/**
-	 * Adds a tag to the specified version of this project.
-	 * 
-	 * @param versionSpec
-	 *            the versionSpec
-	 * @param tag
-	 *            the tag
-	 * @throws EmfStoreException
-	 *             if exception occurs on the server
-	 * 
-	 * @generated NOT
-	 */
-	void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws EmfStoreException;
-
-	/**
 	 * Begin a composite operation on the projectSpace.
 	 * 
 	 * @return a handle to abort or complete the operation
@@ -161,16 +145,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	CompositeOperationHandle beginCompositeOperation();
-
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @return the current version spec
-	 **/
-	PrimaryVersionSpec commit() throws EmfStoreException;
 
 	/**
 	 * Commits all pending changes of the project space.
@@ -193,40 +167,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 */
 	PrimaryVersionSpec commit(LogMessage logMessage, CommitCallback callback, IProgressMonitor monitor)
 		throws EmfStoreException;
-
-	/**
-	 * This method allows to commit changes to a new branch. It works very
-	 * similar to {@link #commit()} with the addition of a Branch specifier.
-	 * Once the branch is created use {@link #commit()} for further commits.
-	 * 
-	 * 
-	 * @param branch
-	 *            branch specifier
-	 * @param logMessage
-	 *            optional logmessage
-	 * @param callback
-	 *            optional callback, passing an implementation is recommended
-	 * @param monitor
-	 *            optional progress monitor
-	 * @return the created version
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, CommitCallback callback,
-		IProgressMonitor monitor) throws EmfStoreException;
-
-	/**
-	 * Allows to merge a version from another branch into the current
-	 * projectspace.
-	 * 
-	 * @param branchSpec
-	 *            the version which is supposed to be merged
-	 * @param conflictResolver
-	 *            a {@link ConflictResolver} for conflict resolving
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	void mergeBranch(PrimaryVersionSpec branchSpec, ConflictResolver conflictResolver) throws EmfStoreException;
 
 	/**
 	 * Returns a list of branches of the current project. Every call triggers a
@@ -1071,50 +1011,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	void undoLastOperations(int nrOperations);
-
-	/**
-	 * <!-- begin-user-doc --> Update the project to the head version.
-	 * 
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	IPrimaryVersionSpec update() throws EmfStoreException;
-
-	/**
-	 * <!-- begin-user-doc --> Update the project to the given version.
-	 * 
-	 * @param version
-	 *            the version to update to
-	 * @return the new base version
-	 * @throws EmfStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec update(VersionSpec version) throws EmfStoreException;
-
-	/**
-	 * Update the workspace to the given revision.
-	 * 
-	 * @param version
-	 *            the {@link VersionSpec} to update to
-	 * @param callback
-	 *            the {@link UpdateCallback} that will be called when the update
-	 *            has been performed
-	 * @param progress
-	 *            an {@link IProgressMonitor} instance
-	 * @return the current version spec
-	 * 
-	 * @throws EmfStoreException
-	 *             in case the update went wrong
-	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec update(VersionSpec version, UpdateCallback callback, IProgressMonitor progress)
-		throws EmfStoreException;
 
 	/**
 	 * Determine if the projectspace has unsave changes to any element in the project.

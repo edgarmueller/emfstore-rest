@@ -11,24 +11,30 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'. <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages <em>Include Change Packages</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions <em>Include All Versions</em>}</li>
- * </ul>
- * </p>
- *
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'.
+ * 
+ * @extends IHistoryInfo
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource <em>Source</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages <em>Include
+ *          Change Packages</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions <em>Include
+ *          All Versions</em>}</li>
+ *          </ul>
+ *          </p>
+ * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryQuery()
  * @model abstract="true"
  * @generated
  */
-public interface HistoryQuery extends EObject {
+public interface HistoryQuery extends EObject, IHistoryQuery {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -37,6 +43,7 @@ public interface HistoryQuery extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryQuery_Source()
@@ -46,9 +53,11 @@ public interface HistoryQuery extends EObject {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource <em>Source</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#getSource
+	 * <em>Source</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Source</em>' containment reference.
 	 * @see #getSource()
 	 * @generated
@@ -63,6 +72,7 @@ public interface HistoryQuery extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Include Change Packages</em>' attribute.
 	 * @see #setIncludeChangePackages(boolean)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryQuery_IncludeChangePackages()
@@ -72,9 +82,12 @@ public interface HistoryQuery extends EObject {
 	boolean isIncludeChangePackages();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages <em>Include Change Packages</em>}' attribute.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeChangePackages
+	 * <em>Include Change Packages</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Include Change Packages</em>' attribute.
 	 * @see #isIncludeChangePackages()
 	 * @generated
@@ -89,6 +102,7 @@ public interface HistoryQuery extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Include All Versions</em>' attribute.
 	 * @see #setIncludeAllVersions(boolean)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryQuery_IncludeAllVersions()
@@ -98,9 +112,11 @@ public interface HistoryQuery extends EObject {
 	boolean isIncludeAllVersions();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions <em>Include All Versions</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery#isIncludeAllVersions
+	 * <em>Include All Versions</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Include All Versions</em>' attribute.
 	 * @see #isIncludeAllVersions()
 	 * @generated
