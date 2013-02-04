@@ -163,7 +163,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			if (branch == null) {
 				branch = branchSelection(projectSpace);
 			}
-			return projectSpace.commitToBranch(branch, logMessage, UICreateBranchController.this, progressMonitor);
+			// TODO OTS
+			return (PrimaryVersionSpec) projectSpace.commitToBranch(branch, logMessage, UICreateBranchController.this,
+				progressMonitor);
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore
