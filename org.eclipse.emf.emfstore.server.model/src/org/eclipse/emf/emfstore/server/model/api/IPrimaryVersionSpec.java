@@ -1,5 +1,5 @@
 package org.eclipse.emf.emfstore.server.model.api;
 
-public interface IPrimaryVersionSpec {
+public interface IPrimaryVersionSpec extends IVersionSpec {
 
 }

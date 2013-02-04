@@ -38,7 +38,6 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
@@ -237,7 +236,7 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @throws EmfStoreException
 	 *             in case of an exception
 	 */
-	List<IBranchInfo> getBranches() throws EmfStoreException;
+	List<BranchInfo> getBranches() throws EmfStoreException;
 
 	/**
 	 * Export all local changes to a file.
@@ -306,7 +305,7 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
-	IPrimaryVersionSpec getBaseVersion();
+	PrimaryVersionSpec getBaseVersion();
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'

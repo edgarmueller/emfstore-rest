@@ -34,7 +34,7 @@ public interface IProject {
 
 	void mergeBranch(IPrimaryVersionSpec branchSpec, ConflictResolver conflictResolver) throws EmfStoreException;
 
-	List<IBranchInfo> getBranches() throws EmfStoreException;
+	List<? extends IBranchInfo> getBranches() throws EmfStoreException;
 
 	IPrimaryVersionSpec getBaseVersion();
 

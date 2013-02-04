@@ -11,24 +11,28 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'. <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead <em>Head</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource <em>Source</em>}</li>
- * </ul>
- * </p>
- *
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.
+ * 
+ * @extends IBranchInfo
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName <em>Name</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead <em>Head</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource <em>Source</em>}</li>
+ *          </ul>
+ *          </p>
+ * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getBranchInfo()
  * @model
  * @generated
  */
-public interface BranchInfo extends EObject {
+public interface BranchInfo extends EObject, IBranchInfo {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -46,8 +50,10 @@ public interface BranchInfo extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getName <em>Name</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -62,6 +68,7 @@ public interface BranchInfo extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Head</em>' containment reference.
 	 * @see #setHead(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getBranchInfo_Head()
@@ -71,9 +78,11 @@ public interface BranchInfo extends EObject {
 	PrimaryVersionSpec getHead();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead <em>Head</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getHead <em>Head</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Head</em>' containment reference.
 	 * @see #getHead()
 	 * @generated
@@ -88,6 +97,7 @@ public interface BranchInfo extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(PrimaryVersionSpec)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getBranchInfo_Source()
@@ -97,9 +107,11 @@ public interface BranchInfo extends EObject {
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource <em>Source</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo#getSource
+	 * <em>Source</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Source</em>' containment reference.
 	 * @see #getSource()
 	 * @generated
