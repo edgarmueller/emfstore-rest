@@ -11,22 +11,26 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'. <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
- * </ul>
- * </p>
- *
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'.
+ * 
+ * @extends IVersionSpec
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
+ *          </ul>
+ *          </p>
+ * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getVersionSpec()
  * @model abstract="true"
  * @generated
  */
-public interface VersionSpec extends EObject {
+public interface VersionSpec extends EObject, IVersionSpec {
 
 	/**
 	 * Returns the value of the '<em><b>Branch</b></em>' attribute.
@@ -37,6 +41,7 @@ public interface VersionSpec extends EObject {
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Branch</em>' attribute.
 	 * @see #setBranch(String)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getVersionSpec_Branch()

@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -103,7 +104,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IDisposable {
+	IDisposable, IProject {
 
 	private boolean initCompleted;
 	private boolean isTransient;
@@ -1277,6 +1278,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
 		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
+	}
+
+	public Collection<EObject> getModelElements() {
+		return getProject().getModelElements();
 	}
 
 }

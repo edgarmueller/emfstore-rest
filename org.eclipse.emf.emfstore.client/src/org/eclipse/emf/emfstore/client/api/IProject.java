@@ -17,7 +17,10 @@ import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -34,7 +37,7 @@ public interface IProject {
 
 	void mergeBranch(IPrimaryVersionSpec branchSpec, ConflictResolver conflictResolver) throws EmfStoreException;
 
-	List<IBranchInfo> getBranches() throws EmfStoreException;
+	List<? extends IBranchInfo> getBranches() throws EmfStoreException;
 
 	IPrimaryVersionSpec getBaseVersion();
 
@@ -46,13 +49,13 @@ public interface IProject {
 
 	List<AbstractOperation> getOperations();
 
-	String getDescription();
+	String getProjectDescription();
 
-	IProjectId getId();
+	IProjectId getProjectId();
 
-	IProjectInfo getInfo();
+	IProjectInfo getProjectInfo();
 
-	String getName();
+	String getProjectName();
 
 	IUsersession getUsersession();
 
