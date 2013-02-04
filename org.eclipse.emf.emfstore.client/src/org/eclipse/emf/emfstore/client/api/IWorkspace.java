@@ -6,6 +6,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 public interface IWorkspace {
