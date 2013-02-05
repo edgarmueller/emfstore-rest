@@ -61,7 +61,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 			IPrimaryVersionSpec versionSpec;
 			try {
 				versionSpec = WorkspaceProvider.getInstance().getWorkspace()
-					.resolveVersionSpec(serverInfo, Versions.createHEAD(), projectInfo.getProjectId());
+					.resolveVersionSpec(serverInfo, Versions.createHEAD());
 				revision = "" + versionSpec.getIdentifier();
 			} catch (EmfStoreException e) {
 				// do nothing

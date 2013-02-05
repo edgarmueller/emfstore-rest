@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.api.LOKO;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -122,16 +122,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public LOKO doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
 				versionSpec = branchSelection(serverInfo, projectInfo);
 			}
 
-			return new ServerCall<IProject>(serverInfo, progressMonitor) {
+			return new ServerCall<ILocalProject>(serverInfo, progressMonitor) {
 				@Override
-				protected LOKO run() throws EmfStoreException {
+				protected ILocalProject run() throws EmfStoreException {
 					if (versionSpec == null) {
 						return WorkspaceProvider.getInstance().getWorkspace()
 							.checkout(getUsersession(), projectInfo, getProgressMonitor());

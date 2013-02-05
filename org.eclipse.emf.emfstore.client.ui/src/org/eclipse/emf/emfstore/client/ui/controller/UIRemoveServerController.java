@@ -91,7 +91,8 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 				@Override
 				protected void doRun() {
 					EcoreUtil.delete(serverInfo);
-					WorkspaceProvider.getInstance().getWorkspace().save();
+					// TODO OTS auto save;
+					// WorkspaceProvider.getInstance().getWorkspace().save();
 				};
 			}.run(false);
 

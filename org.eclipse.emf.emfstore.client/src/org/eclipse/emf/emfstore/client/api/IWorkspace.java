@@ -17,7 +17,7 @@ public interface IWorkspace {
 	 */
 	ILocalProject createLocalProject(String projectName, String projectDescription);
 
-	List<IServer> getServers();
+	List<? extends IServer> getServers();
 
 	/**
 	 * Adds an server info and saves.

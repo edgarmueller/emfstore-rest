@@ -117,7 +117,7 @@ public class LoginDialogController implements ILoginDialogController {
 			usersessions.add(usersession);
 		}
 		this.usersession = usersession;
-		WorkspaceProvider.getInstance().getWorkspace().save();
+		// TODO OTS auto save
 	}
 
 	/**

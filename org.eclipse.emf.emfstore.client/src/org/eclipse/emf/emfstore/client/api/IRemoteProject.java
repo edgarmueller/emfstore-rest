@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.api;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
@@ -21,7 +22,7 @@ public interface IRemoteProject extends IProject {
 	 * @model
 	 * @generated NOT
 	 */
-	ILocalProject checkout(final IUsersession usersession, final IProjectInfo projectInfo) throws EmfStoreException;
+	EObjectContainer checkout(final IUsersession usersession, final IProjectInfo projectInfo) throws EmfStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -39,7 +40,7 @@ public interface IRemoteProject extends IProject {
 	 * @model
 	 * @generated NOT
 	 */
-	ILocalProject checkout(final IUsersession usersession, final IProjectInfo projectInfo,
+	EObjectContainer checkout(final IUsersession usersession, final IProjectInfo projectInfo,
 		IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
@@ -60,7 +61,7 @@ public interface IRemoteProject extends IProject {
 	 * @model
 	 * @generated NOT
 	 */
-	ILocalProject checkout(final IUsersession usersession, final IProjectInfo projectInfo, IVersionSpec versionSpec,
+	EObjectContainer checkout(final IUsersession usersession, final IProjectInfo projectInfo, IVersionSpec versionSpec,
 		IProgressMonitor progressMonitor) throws EmfStoreException;
 
 }

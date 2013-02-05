@@ -339,7 +339,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			ChangePackage changePackage = projectSpace.getLocalChangePackage(false);
 			// filter for modelelement, do additional sanity check as the
 			// project space could've been also selected
-			if (modelElement != null && projectSpace.getProject().containsInstance(modelElement)) {
+			if (modelElement != null && projectSpace.getProject().contains(modelElement)) {
 				Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
 				for (AbstractOperation ao : changePackage.getOperations()) {
 					if (!ao.getAllInvolvedModelElements().contains(
