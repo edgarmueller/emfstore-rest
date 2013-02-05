@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.testmodel.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -37,6 +38,34 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * @generated
 	 */
 	private EClass testElementContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass testElementToStringMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringToStringMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass testElementToTestElementMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringToTestElementMapEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -191,6 +220,42 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTestElement_ElementMap() {
+		return (EReference)testElementEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElement_StringToStringMap() {
+		return (EReference)testElementEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElement_ElementToStringMap() {
+		return (EReference)testElementEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElement_StringToElementMap() {
+		return (EReference)testElementEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTestElementContainer() {
 		return testElementContainerEClass;
 	}
@@ -202,6 +267,114 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 */
 	public EReference getTestElementContainer_Elements() {
 		return (EReference)testElementContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTestElementToStringMap() {
+		return testElementToStringMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTestElementToStringMap_Value() {
+		return (EAttribute)testElementToStringMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElementToStringMap_Key() {
+		return (EReference)testElementToStringMapEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringToStringMap() {
+		return stringToStringMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToStringMap_Key() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToStringMap_Value() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTestElementToTestElementMap() {
+		return testElementToTestElementMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElementToTestElementMap_Value() {
+		return (EReference)testElementToTestElementMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTestElementToTestElementMap_Key() {
+		return (EReference)testElementToTestElementMapEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringToTestElementMap() {
+		return stringToTestElementMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStringToTestElementMap_Value() {
+		return (EReference)stringToTestElementMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToTestElementMap_Key() {
+		return (EAttribute)stringToTestElementMapEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -240,9 +413,29 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 		createEAttribute(testElementEClass, TEST_ELEMENT__DESCRIPTION);
 		createEReference(testElementEClass, TEST_ELEMENT__CONTAINED_ELEMENTS2);
 		createEReference(testElementEClass, TEST_ELEMENT__CONTAINER);
+		createEReference(testElementEClass, TEST_ELEMENT__ELEMENT_MAP);
+		createEReference(testElementEClass, TEST_ELEMENT__STRING_TO_STRING_MAP);
+		createEReference(testElementEClass, TEST_ELEMENT__ELEMENT_TO_STRING_MAP);
+		createEReference(testElementEClass, TEST_ELEMENT__STRING_TO_ELEMENT_MAP);
 
 		testElementContainerEClass = createEClass(TEST_ELEMENT_CONTAINER);
 		createEReference(testElementContainerEClass, TEST_ELEMENT_CONTAINER__ELEMENTS);
+
+		testElementToStringMapEClass = createEClass(TEST_ELEMENT_TO_STRING_MAP);
+		createEAttribute(testElementToStringMapEClass, TEST_ELEMENT_TO_STRING_MAP__VALUE);
+		createEReference(testElementToStringMapEClass, TEST_ELEMENT_TO_STRING_MAP__KEY);
+
+		stringToStringMapEClass = createEClass(STRING_TO_STRING_MAP);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__KEY);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__VALUE);
+
+		testElementToTestElementMapEClass = createEClass(TEST_ELEMENT_TO_TEST_ELEMENT_MAP);
+		createEReference(testElementToTestElementMapEClass, TEST_ELEMENT_TO_TEST_ELEMENT_MAP__VALUE);
+		createEReference(testElementToTestElementMapEClass, TEST_ELEMENT_TO_TEST_ELEMENT_MAP__KEY);
+
+		stringToTestElementMapEClass = createEClass(STRING_TO_TEST_ELEMENT_MAP);
+		createEReference(stringToTestElementMapEClass, STRING_TO_TEST_ELEMENT_MAP__VALUE);
+		createEAttribute(stringToTestElementMapEClass, STRING_TO_TEST_ELEMENT_MAP__KEY);
 	}
 
 	/**
@@ -285,9 +478,29 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 		initEAttribute(getTestElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTestElement_ContainedElements2(), this.getTestElement(), null, "containedElements2", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTestElement_Container(), this.getTestElementContainer(), this.getTestElementContainer_Elements(), "container", null, 0, 1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElement_ElementMap(), this.getTestElementToTestElementMap(), null, "elementMap", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElement_StringToStringMap(), this.getStringToStringMap(), null, "stringToStringMap", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElement_ElementToStringMap(), this.getTestElementToStringMap(), null, "elementToStringMap", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElement_StringToElementMap(), this.getStringToTestElementMap(), null, "stringToElementMap", null, 0, -1, TestElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(testElementContainerEClass, TestElementContainer.class, "TestElementContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTestElementContainer_Elements(), this.getTestElement(), this.getTestElement_Container(), "elements", null, 0, -1, TestElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(testElementToStringMapEClass, Map.Entry.class, "TestElementToStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTestElementToStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElementToStringMap_Key(), this.getTestElement(), null, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringToStringMapEClass, Map.Entry.class, "StringToStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringToStringMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringToStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(testElementToTestElementMapEClass, Map.Entry.class, "TestElementToTestElementMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTestElementToTestElementMap_Value(), this.getTestElement(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestElementToTestElementMap_Key(), this.getTestElement(), null, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringToTestElementMapEClass, Map.Entry.class, "StringToTestElementMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStringToTestElementMap_Value(), this.getTestElement(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringToTestElementMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

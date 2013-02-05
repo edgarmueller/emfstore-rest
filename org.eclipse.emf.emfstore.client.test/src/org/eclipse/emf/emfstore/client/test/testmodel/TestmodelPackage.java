@@ -160,13 +160,49 @@ public interface TestmodelPackage extends EPackage {
 	int TEST_ELEMENT__CONTAINER = EcorePackage.EOBJECT_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Element Map</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT__ELEMENT_MAP = EcorePackage.EOBJECT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>String To String Map</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT__STRING_TO_STRING_MAP = EcorePackage.EOBJECT_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Element To String Map</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT__ELEMENT_TO_STRING_MAP = EcorePackage.EOBJECT_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>String To Element Map</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT__STRING_TO_ELEMENT_MAP = EcorePackage.EOBJECT_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Test Element</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_ELEMENT_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 10;
+	int TEST_ELEMENT_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementContainerImpl <em>Test Element Container</em>}' class.
@@ -195,6 +231,154 @@ public interface TestmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEST_ELEMENT_CONTAINER_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl <em>Test Element To String Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElementToStringMap()
+	 * @generated
+	 */
+	int TEST_ELEMENT_TO_STRING_MAP = 2;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_STRING_MAP__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_STRING_MAP__KEY = 1;
+
+	/**
+	 * The number of structural features of the '<em>Test Element To String Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_STRING_MAP_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToStringMapImpl
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getStringToStringMap()
+	 * @generated
+	 */
+	int STRING_TO_STRING_MAP = 3;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>String To String Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToTestElementMapImpl <em>Test Element To Test Element Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToTestElementMapImpl
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElementToTestElementMap()
+	 * @generated
+	 */
+	int TEST_ELEMENT_TO_TEST_ELEMENT_MAP = 4;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_TEST_ELEMENT_MAP__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_TEST_ELEMENT_MAP__KEY = 1;
+
+	/**
+	 * The number of structural features of the '<em>Test Element To Test Element Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_ELEMENT_TO_TEST_ELEMENT_MAP_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToTestElementMapImpl <em>String To Test Element Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToTestElementMapImpl
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getStringToTestElementMap()
+	 * @generated
+	 */
+	int STRING_TO_TEST_ELEMENT_MAP = 5;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_TEST_ELEMENT_MAP__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_TEST_ELEMENT_MAP__KEY = 1;
+
+	/**
+	 * The number of structural features of the '<em>String To Test Element Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_TEST_ELEMENT_MAP_FEATURE_COUNT = 2;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement <em>Test Element</em>}'.
@@ -317,6 +501,50 @@ public interface TestmodelPackage extends EPackage {
 	EReference getTestElement_Container();
 
 	/**
+	 * Returns the meta object for the map '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementMap <em>Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Element Map</em>'.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementMap()
+	 * @see #getTestElement()
+	 * @generated
+	 */
+	EReference getTestElement_ElementMap();
+
+	/**
+	 * Returns the meta object for the map '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToStringMap <em>String To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>String To String Map</em>'.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToStringMap()
+	 * @see #getTestElement()
+	 * @generated
+	 */
+	EReference getTestElement_StringToStringMap();
+
+	/**
+	 * Returns the meta object for the map '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementToStringMap <em>Element To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Element To String Map</em>'.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementToStringMap()
+	 * @see #getTestElement()
+	 * @generated
+	 */
+	EReference getTestElement_ElementToStringMap();
+
+	/**
+	 * Returns the meta object for the map '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToElementMap <em>String To Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>String To Element Map</em>'.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToElementMap()
+	 * @see #getTestElement()
+	 * @generated
+	 */
+	EReference getTestElement_StringToElementMap();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer <em>Test Element Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -336,6 +564,145 @@ public interface TestmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTestElementContainer_Elements();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Test Element To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Test Element To String Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model features="value key" 
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
+	 *        keyType="org.eclipse.emf.emfstore.client.test.testmodel.TestElement"
+	 * @generated
+	 */
+	EClass getTestElementToStringMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTestElementToStringMap()
+	 * @generated
+	 */
+	EAttribute getTestElementToStringMap_Value();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTestElementToStringMap()
+	 * @generated
+	 */
+	EReference getTestElementToStringMap_Key();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String To String Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
+	 * @generated
+	 */
+	EClass getStringToStringMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToStringMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringMap_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToStringMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringMap_Value();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Test Element To Test Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Test Element To Test Element Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model features="value key" 
+	 *        valueType="org.eclipse.emf.emfstore.client.test.testmodel.TestElement"
+	 *        keyType="org.eclipse.emf.emfstore.client.test.testmodel.TestElement"
+	 * @generated
+	 */
+	EClass getTestElementToTestElementMap();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTestElementToTestElementMap()
+	 * @generated
+	 */
+	EReference getTestElementToTestElementMap_Value();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTestElementToTestElementMap()
+	 * @generated
+	 */
+	EReference getTestElementToTestElementMap_Key();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To Test Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String To Test Element Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model features="value key" 
+	 *        valueType="org.eclipse.emf.emfstore.client.test.testmodel.TestElement"
+	 *        keyDataType="org.eclipse.emf.ecore.EString"
+	 * @generated
+	 */
+	EClass getStringToTestElementMap();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToTestElementMap()
+	 * @generated
+	 */
+	EReference getStringToTestElementMap_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToTestElementMap()
+	 * @generated
+	 */
+	EAttribute getStringToTestElementMap_Key();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -447,6 +814,38 @@ public interface TestmodelPackage extends EPackage {
 		EReference TEST_ELEMENT__CONTAINER = eINSTANCE.getTestElement_Container();
 
 		/**
+		 * The meta object literal for the '<em><b>Element Map</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT__ELEMENT_MAP = eINSTANCE.getTestElement_ElementMap();
+
+		/**
+		 * The meta object literal for the '<em><b>String To String Map</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT__STRING_TO_STRING_MAP = eINSTANCE.getTestElement_StringToStringMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Element To String Map</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT__ELEMENT_TO_STRING_MAP = eINSTANCE.getTestElement_ElementToStringMap();
+
+		/**
+		 * The meta object literal for the '<em><b>String To Element Map</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT__STRING_TO_ELEMENT_MAP = eINSTANCE.getTestElement_StringToElementMap();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementContainerImpl <em>Test Element Container</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -463,6 +862,110 @@ public interface TestmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEST_ELEMENT_CONTAINER__ELEMENTS = eINSTANCE.getTestElementContainer_Elements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl <em>Test Element To String Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElementToStringMap()
+		 * @generated
+		 */
+		EClass TEST_ELEMENT_TO_STRING_MAP = eINSTANCE.getTestElementToStringMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_ELEMENT_TO_STRING_MAP__VALUE = eINSTANCE.getTestElementToStringMap_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT_TO_STRING_MAP__KEY = eINSTANCE.getTestElementToStringMap_Key();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToStringMapImpl
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getStringToStringMap()
+		 * @generated
+		 */
+		EClass STRING_TO_STRING_MAP = eINSTANCE.getStringToStringMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_MAP__KEY = eINSTANCE.getStringToStringMap_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_MAP__VALUE = eINSTANCE.getStringToStringMap_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToTestElementMapImpl <em>Test Element To Test Element Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToTestElementMapImpl
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getTestElementToTestElementMap()
+		 * @generated
+		 */
+		EClass TEST_ELEMENT_TO_TEST_ELEMENT_MAP = eINSTANCE.getTestElementToTestElementMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT_TO_TEST_ELEMENT_MAP__VALUE = eINSTANCE.getTestElementToTestElementMap_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEST_ELEMENT_TO_TEST_ELEMENT_MAP__KEY = eINSTANCE.getTestElementToTestElementMap_Key();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToTestElementMapImpl <em>String To Test Element Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.StringToTestElementMapImpl
+		 * @see org.eclipse.emf.emfstore.client.test.testmodel.impl.TestmodelPackageImpl#getStringToTestElementMap()
+		 * @generated
+		 */
+		EClass STRING_TO_TEST_ELEMENT_MAP = eINSTANCE.getStringToTestElementMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRING_TO_TEST_ELEMENT_MAP__VALUE = eINSTANCE.getStringToTestElementMap_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_TEST_ELEMENT_MAP__KEY = eINSTANCE.getStringToTestElementMap_Key();
 
 	}
 

@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.testmodel.impl;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -61,6 +62,10 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 		switch (eClass.getClassifierID()) {
 			case TestmodelPackage.TEST_ELEMENT: return createTestElement();
 			case TestmodelPackage.TEST_ELEMENT_CONTAINER: return createTestElementContainer();
+			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP: return (EObject)createTestElementToStringMap();
+			case TestmodelPackage.STRING_TO_STRING_MAP: return (EObject)createStringToStringMap();
+			case TestmodelPackage.TEST_ELEMENT_TO_TEST_ELEMENT_MAP: return (EObject)createTestElementToTestElementMap();
+			case TestmodelPackage.STRING_TO_TEST_ELEMENT_MAP: return (EObject)createStringToTestElementMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -83,6 +88,46 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	public TestElementContainer createTestElementContainer() {
 		TestElementContainerImpl testElementContainer = new TestElementContainerImpl();
 		return testElementContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<TestElement, String> createTestElementToStringMap() {
+		TestElementToStringMapImpl testElementToStringMap = new TestElementToStringMapImpl();
+		return testElementToStringMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, String> createStringToStringMap() {
+		StringToStringMapImpl stringToStringMap = new StringToStringMapImpl();
+		return stringToStringMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<TestElement, TestElement> createTestElementToTestElementMap() {
+		TestElementToTestElementMapImpl testElementToTestElementMap = new TestElementToTestElementMapImpl();
+		return testElementToTestElementMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, TestElement> createStringToTestElementMap() {
+		StringToTestElementMapImpl stringToTestElementMap = new StringToTestElementMapImpl();
+		return stringToTestElementMap;
 	}
 
 	/**
