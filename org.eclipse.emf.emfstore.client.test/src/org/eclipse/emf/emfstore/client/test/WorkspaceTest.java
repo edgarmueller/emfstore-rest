@@ -197,7 +197,7 @@ public abstract class WorkspaceTest {
 	/**
 	 * @param projectSpace the projectSpace to set
 	 */
-	private void setProjectSpace(ProjectSpace projectSpace) {
+	protected void setProjectSpace(ProjectSpace projectSpace) {
 		this.projectSpace = projectSpace;
 	}
 
