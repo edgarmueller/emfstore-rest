@@ -29,7 +29,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.ServerInfo;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
@@ -244,7 +244,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(IServer serverInfo, final IProjectId projectId) throws EmfStoreException {
+	public List<IBranchInfo> getBranches(ServerInfo serverInfo, final IProjectId projectId) throws EmfStoreException {
 		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
 			protected List<IBranchInfo> run() throws EmfStoreException {
@@ -306,7 +306,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.client.model.ServerInfo,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public IProjectInfo createRemoteProject(IServer serverInfo, final String projectName,
+	public IProjectInfo createRemoteProject(ServerInfo serverInfo, final String projectName,
 		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException {
 		return new ServerCall<IProjectInfo>((ServerInfo) serverInfo) {
 			@Override
@@ -361,7 +361,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteRemoteProject(org.eclipse.emf.emfstore.client.model.ServerInfo,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId, boolean)
 	 */
-	public void deleteRemoteProject(IServer serverInfo, final IProjectId projectId, final boolean deleteFiles)
+	public void deleteRemoteProject(ServerInfo serverInfo, final IProjectId projectId, final boolean deleteFiles)
 		throws EmfStoreException {
 		new ServerCall<Void>((ServerInfo) serverInfo) {
 			@Override
@@ -495,7 +495,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		}.execute();
 	}
 
-	private Void updateProjectInfos(IServer serverInfo, final Usersession usersession) {
+	private Void updateProjectInfos(ServerInfo serverInfo, final Usersession usersession) {
 		// BEGIN SUPRESS CATCH EXCEPTION
 		try {
 			serverInfo.getProjectInfos().clear();
@@ -535,7 +535,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#addServer(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
-	public void addServer(IServer serverInfo) {
+	public void addServer(ServerInfo serverInfo) {
 		getServers().add((ServerInfo) serverInfo);
 		save();
 	}
@@ -546,7 +546,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#removeServer(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
-	public void removeServer(IServer serverInfo) {
+	public void removeServer(ServerInfo serverInfo) {
 		getServers().remove(serverInfo);
 		save();
 	}
@@ -650,7 +650,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
-	public IPrimaryVersionSpec resolveVersionSpec(IServer serverInfo, final IVersionSpec versionSpec,
+	public IPrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, final IVersionSpec versionSpec,
 		final IProjectId projectId) throws EmfStoreException {
 		return new ServerCall<IPrimaryVersionSpec>((ServerInfo) serverInfo) {
 			@Override
@@ -801,7 +801,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
 	 */
-	public List<IHistoryInfo> getHistoryInfo(IServer serverInfo, final IProjectId projectId, final IHistoryQuery query)
+	public List<IHistoryInfo> getHistoryInfo(ServerInfo serverInfo, final IProjectId projectId, final IHistoryQuery query)
 		throws EmfStoreException {
 		return new ServerCall<List<IHistoryInfo>>((ServerInfo) serverInfo) {
 			@Override
@@ -852,7 +852,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getRemoteProjectList(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
-	public List<IProjectInfo> getRemoteProjectList(IServer serverInfo) throws EmfStoreException {
+	public List<IProjectInfo> getRemoteProjectList(ServerInfo serverInfo) throws EmfStoreException {
 		return new ServerCall<List<IProjectInfo>>((ServerInfo) serverInfo) {
 			@Override
 			protected List<IProjectInfo> run() throws EmfStoreException {
