@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
@@ -45,7 +46,7 @@ public final class EMFStoreClientUtil {
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
 		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		for (ServerInfo existingServerInfo : workspace.getServerInfos()) {
+		for (ServerInfo existingServerInfo : workspace.getServers()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
 					return existingServerInfo;
@@ -53,8 +54,9 @@ public final class EMFStoreClientUtil {
 			}
 		}
 		ServerInfo serverInfo = createServerInfo(url, port, null);
-		workspace.getServerInfos().add(serverInfo);
-		workspace.save();
+		workspace.getServers().add(serverInfo);
+		// TODO: OTS
+		((WorkspaceBase) workspace).save();
 		return serverInfo;
 	}
 
@@ -115,7 +117,8 @@ public final class EMFStoreClientUtil {
 		usersession.setUsername(username);
 		usersession.setPassword(password);
 		workspace.getUsersessions().add(usersession);
-		workspace.save();
+		// TODO: OTS
+		((WorkspaceBase) workspace).save();
 		return usersession;
 	}
 

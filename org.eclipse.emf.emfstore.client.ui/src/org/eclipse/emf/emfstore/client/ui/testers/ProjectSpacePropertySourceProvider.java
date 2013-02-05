@@ -112,7 +112,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
 		ArrayList<IProject> inputArray = new ArrayList<IProject>();
-		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getProjects()) {
+		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.hasUnsavedChanges()) {
 				inputArray.add(project);
 			}

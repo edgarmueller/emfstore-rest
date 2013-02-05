@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.api.IServerInfo;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
  * @model
  * @generated
  */
-public interface ServerInfo extends EObject, IServerInfo {
+public interface ServerInfo extends EObject, IServer {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

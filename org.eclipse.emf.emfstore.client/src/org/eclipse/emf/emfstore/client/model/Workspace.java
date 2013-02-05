@@ -203,7 +203,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList<ServerInfo> getServerInfos();
+	EList<ServerInfo> getServers();
 
 	/**
 	 * Returns the value of the '<em><b>Usersessions</b></em>' containment

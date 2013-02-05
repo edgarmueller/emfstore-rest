@@ -45,11 +45,11 @@ public class PersistenceTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(WorkspaceProvider.getInstance().getWorkspace().getProjects().get(0).getModelElements().size(), 1);
+		assertEquals(WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		WorkspaceProvider.getInstance().dispose();
 		WorkspaceProvider.getInstance().reinit();
 		assertTrue(ModelUtil.areEqual(
-			((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getProjects().get(0)).getProject(),
+			((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0)).getProject(),
 			originalProject));
 	}
 

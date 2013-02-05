@@ -69,7 +69,7 @@ public class CompareProjectsDialog extends TitleAreaDialog {
 		listViewer.getList().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		listViewer.setContentProvider(new IStructuredContentProvider() {
 			public Object[] getElements(Object inputElement) {
-				List<? extends IProject> projects = WorkspaceProvider.getInstance().getWorkspace().getProjects();
+				List<? extends IProject> projects = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects();
 				return projects.toArray();
 			}
 

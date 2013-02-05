@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -46,7 +46,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  */
 public class UIUpdateProjectController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
-	UpdateCallback {
+	IUpdateCallback {
 
 	private final ProjectSpace projectSpace;
 	private VersionSpec version;
@@ -85,7 +85,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#noChangesOnServer()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#noChangesOnServer()
 	 */
 	public void noChangesOnServer() {
 		RunInUI.run(new Callable<Void>() {
@@ -101,7 +101,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
 	 */
 	public boolean conflictOccurred(final ChangeConflictException conflictException,
 		final IProgressMonitor progressMonitor) {
@@ -135,7 +135,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages,
@@ -183,7 +183,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

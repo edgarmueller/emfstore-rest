@@ -44,7 +44,7 @@ public abstract class TransmissionTests extends ServerTests {
 			@Override
 			protected void doRun() {
 				Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-				workspace.getServerInfos().add(getServerInfo());
+				workspace.getServers().add(getServerInfo());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);
 				workspace.save();

@@ -21,11 +21,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
- * Convenience super class for implementing {@link ConflictResolver}.
+ * Convenience super class for implementing {@link IConflictResolver}.
  * 
  * @author wesendon
  */
-public abstract class AbstractConflictResolver implements ConflictResolver {
+public abstract class AbstractConflictResolver implements IConflictResolver {
 
 	private List<AbstractOperation> acceptedMine;
 	private List<AbstractOperation> rejectedTheirs;
@@ -47,7 +47,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getAcceptedMine() {
 		return acceptedMine;
@@ -56,7 +56,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getRejectedTheirs() {
 		return rejectedTheirs;
@@ -66,7 +66,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project,
 	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
 	 */
@@ -121,7 +121,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictResolver#getMergedResult()
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver#getMergedResult()
 	 */
 	public ChangePackage getMergedResult() {
 		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();

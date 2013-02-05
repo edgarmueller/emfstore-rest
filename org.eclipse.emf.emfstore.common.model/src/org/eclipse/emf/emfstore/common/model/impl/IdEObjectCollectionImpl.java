@@ -416,11 +416,11 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsbyClass(org.eclipse.emf.ecore.EClass,
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
 	 *      org.eclipse.emf.common.util.EList)
 	 */
-	public <T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list) {
-		return getAllModelElementsbyClass(modelElementClass, list, true);
+	public <T extends EObject> EList<T> getAllModelElementsByClass(EClass modelElementClass, EList<T> list) {
+		return getAllModelElementsByClass(modelElementClass, list, true);
 	}
 
 	/**
@@ -445,12 +445,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsbyClass(org.eclipse.emf.ecore.EClass,
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
 	 *      org.eclipse.emf.common.util.EList, java.lang.Boolean)
 	 */
 	// two casts below are guarded by initial sanity check and if statement
 	@SuppressWarnings("unchecked")
-	public <T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list,
+	public <T extends EObject> EList<T> getAllModelElementsByClass(EClass modelElementClass, EList<T> list,
 		Boolean subclasses) {
 
 		if (subclasses) {

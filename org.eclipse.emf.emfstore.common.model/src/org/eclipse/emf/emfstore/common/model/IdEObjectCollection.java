@@ -129,15 +129,11 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 *            a sub-type of model element
 	 * @param modelElementClass
 	 *            the {@link EClass}
-	 * @param list
-	 *            a list of model elements, can be empty, but must be of the
-	 *            same type as the <code>modelElementClass</code> indicates.
 	 * @param includeSubclasses
 	 *            whether to also include all subclasses of the given {@link EClass} in the list
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list,
-		Boolean includeSubclasses);
+	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass, Boolean includeSubclasses);
 
 	/**
 	 * Retrieve a list of all model elements of a certain type in the
@@ -152,7 +148,7 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 *            same type as the <code>modelElementClass</code> indicates.
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> EList<T> getAllModelElementsbyClass(EClass modelElementClass, EList<T> list);
+	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass);
 
 	/**
 	 * Retrieve a list of model elements of a certain type in the collection

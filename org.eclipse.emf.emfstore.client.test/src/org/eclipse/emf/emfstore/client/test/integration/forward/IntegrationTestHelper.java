@@ -293,7 +293,7 @@ public final class IntegrationTestHelper {
 	 */
 	public EObject getRandomMEofType(Project project, EClass type) {
 
-		List<EObject> refTypeMEs = project.getAllModelElementsbyClass(type, new BasicEList<EObject>());
+		List<EObject> refTypeMEs = project.getAllModelElementsByClass(type, new BasicEList<EObject>());
 
 		int size = refTypeMEs.size();
 		if (size == 0) {
@@ -630,7 +630,7 @@ public final class IntegrationTestHelper {
 	public EObject changeNonContainementRef(EObject me, EReference ref, Project project) {
 
 		EClass refType = ref.getEReferenceType();
-		List<EObject> refTypeMEs = project.getAllModelElementsbyClass(refType, new BasicEList<EObject>());
+		List<EObject> refTypeMEs = project.getAllModelElementsByClass(refType, new BasicEList<EObject>());
 
 		if (refTypeMEs.contains(me)) {
 			refTypeMEs.remove(me);

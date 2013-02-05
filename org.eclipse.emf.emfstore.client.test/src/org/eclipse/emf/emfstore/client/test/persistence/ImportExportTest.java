@@ -7,6 +7,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.api.LOKO;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
@@ -62,9 +63,9 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectController("importedProject"));
 
-		IProject newProjectSpace = null;
+		LOKO newProjectSpace = null;
 
-		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getProjects()) {
+		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.getProjectName().equals("importedProject")) {
 				newProjectSpace = getProjectSpace();
 				break;
@@ -91,10 +92,10 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectSpaceController());
 
-		Assert.assertEquals(2, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(2, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		IProject a = WorkspaceProvider.getInstance().getWorkspace().getProjects().get(0);
-		IProject b = WorkspaceProvider.getInstance().getWorkspace().getProjects().get(1);
+		LOKO a = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0);
+		LOKO b = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(1);
 
 		// TODO: are the imported IDs supposed to be the same as in the original project?
 		// Assert.assertTrue(ModelUtil.areEqual(a.getProject(), b.getProject()));

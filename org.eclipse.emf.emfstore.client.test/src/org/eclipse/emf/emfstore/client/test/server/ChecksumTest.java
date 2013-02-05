@@ -9,8 +9,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.ChecksumErrorHandler;
@@ -57,7 +57,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testAutocorrectErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -84,7 +84,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		// re-checkout should be triggered
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Project restoredProject = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()
 			.get(0).getProject();
@@ -98,7 +98,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testChangeTrackingAfterAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -161,7 +161,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = EmfStoreException.class)
 	public void testCancelErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -188,7 +188,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = EmfStoreException.class)
 	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -225,7 +225,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorrectChecksumsAtUpdate() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -258,7 +258,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws EmfStoreException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
+		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		getWorkspace().setConnectionManager(getConnectionMock());
@@ -301,19 +301,19 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, getProjectSpace().getOperations().size());
 	}
 
-	private class MyCommitCallback implements CommitCallback {
+	private class MyCommitCallback implements ICommitCallback {
 
 		public boolean baseVersionOutOfDate(ProjectSpace projectSpace, IProgressMonitor progressMonitor) {
-			return CommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
+			return ICommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
 		}
 
 		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
-			return CommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
+			return ICommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
 		}
 
 		public void noLocalChanges(ProjectSpace projectSpace) {
-			CommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
+			ICommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
 		}
 
 		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
@@ -324,20 +324,20 @@ public class ChecksumTest extends CoreServerTest {
 
 	}
 
-	private class MyUpdateCallback implements UpdateCallback {
+	private class MyUpdateCallback implements IUpdateCallback {
 
 		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
-			return UpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
+			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
 
 		public void noChangesOnServer() {
-			UpdateCallback.NOCALLBACK.noChangesOnServer();
+			IUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
 		public boolean conflictOccurred(ChangeConflictException changeConflictException,
 			IProgressMonitor progressMonitor) {
-			return UpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
+			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
 
 		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,

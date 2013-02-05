@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
@@ -99,7 +99,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * @model
  * @generated
  */
-public interface ProjectSpace extends IdentifiableElement, IProject {
+public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the
@@ -459,40 +459,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	Project getProject();
 
 	/**
-	 * Returns the value of the '<em><b>Project Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project Description</em>' attribute isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Description</em>' attribute.
-	 * @see #setProjectDescription(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectDescription()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getProjectDescription();
-
-	/**
-	 * Returns the value of the '<em><b>Project Id</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Id</em>' containment reference.
-	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectId()
-	 * @model containment="true" resolveProxies="true" required="true"
-	 * @generated
-	 */
-	ProjectId getProjectId();
-
-	/**
 	 * Get a project info for the project space.
 	 * 
 	 * @return a project info
@@ -500,23 +466,6 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	ProjectInfo getProjectInfo();
-
-	/**
-	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project Name</em>' attribute.
-	 * @see #setProjectName(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectName()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getProjectName();
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
@@ -636,7 +585,7 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @model
 	 * @generated
 	 */
-	boolean isDirty();
+	boolean hasUncommitedChanges();
 
 	/**
 	 * Shows whether projectSpace is transient.
@@ -736,7 +685,7 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * 
 	 * @param value
 	 *            the new value of the '<em>Dirty</em>' attribute.
-	 * @see #isDirty()
+	 * @see #hasUncommitedChanges()
 	 * @generated
 	 */
 	void setDirty(boolean value);
@@ -842,5 +791,7 @@ public interface ProjectSpace extends IdentifiableElement, IProject {
 	 * @generated NOT
 	 */
 	void transmitProperties();
+
+	ProjectId getProjectId();
 
 } // ProjectContainer

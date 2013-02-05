@@ -62,7 +62,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		if (this.getContainer().getCurrentPage().canFlipToNextPage()) {
-			WorkspaceProvider.getInstance().getWorkspace().addServerInfo(serverInfo);
+			WorkspaceProvider.getInstance().getWorkspace().addServer(serverInfo);
 			dispose();
 		} else {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error",

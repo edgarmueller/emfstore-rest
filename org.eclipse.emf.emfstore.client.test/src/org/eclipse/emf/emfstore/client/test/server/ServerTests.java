@@ -210,7 +210,7 @@ public abstract class ServerTests extends WorkspaceTest {
 					session.setPassword("super");
 					session.setSavePassword(true);
 
-					currentWorkspace.getServerInfos().add(serverInfo);
+					currentWorkspace.getServers().add(serverInfo);
 					currentWorkspace.getUsersessions().add(session);
 					currentWorkspace.save();
 					getProjectSpace().shareProject(session, null);

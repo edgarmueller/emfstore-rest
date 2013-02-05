@@ -39,7 +39,7 @@ public class ProjectIsDirtyTester extends PropertyTester {
 			if (projectSpace == null) {
 				return false;
 			}
-			return projectSpace.isDirty();
+			return projectSpace.hasUncommitedChanges();
 		}
 		return false;
 	}

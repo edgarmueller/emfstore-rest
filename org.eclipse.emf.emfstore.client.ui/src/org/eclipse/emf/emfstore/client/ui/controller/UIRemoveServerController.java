@@ -80,7 +80,7 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				WorkspaceProvider.getInstance().getWorkspace().getServerInfos().remove(serverInfo);
+				WorkspaceProvider.getInstance().getWorkspace().getServers().remove(serverInfo);
 				return null;
 			}
 		});

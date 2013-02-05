@@ -192,20 +192,20 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 	protected int resourceCount = RESOURCE_COUNT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * The default value of the '{@link #hasUncommitedChanges() <em>Dirty</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #isDirty()
+	 * @see #hasUncommitedChanges()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final boolean DIRTY_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * The cached value of the '{@link #hasUncommitedChanges() <em>Dirty</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #isDirty()
+	 * @see #hasUncommitedChanges()
 	 * @generated
 	 * @ordered
 	 */
@@ -490,7 +490,7 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 		case ModelPackage.PROJECT_SPACE__RESOURCE_COUNT:
 			return getResourceCount();
 		case ModelPackage.PROJECT_SPACE__DIRTY:
-			return isDirty();
+			return hasUncommitedChanges();
 		case ModelPackage.PROJECT_SPACE__OLD_LOG_MESSAGES:
 			return getOldLogMessages();
 		case ModelPackage.PROJECT_SPACE__LOCAL_OPERATIONS:
@@ -985,7 +985,7 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 	 * 
 	 * @generated
 	 */
-	public boolean isDirty() {
+	public boolean hasUncommitedChanges() {
 		return dirty;
 	}
 

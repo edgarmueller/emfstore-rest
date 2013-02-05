@@ -257,9 +257,9 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 		// no workspace content found, create a workspace
 		resource = resourceSet.createResource(fileURI);
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
-		workspace.getServerInfos().addAll(Configuration.getDefaultServerInfos());
+		workspace.getServers().addAll(Configuration.getDefaultServerInfos());
 		EList<Usersession> usersessions = workspace.getUsersessions();
-		for (ServerInfo serverInfo : workspace.getServerInfos()) {
+		for (ServerInfo serverInfo : workspace.getServers()) {
 			Usersession lastUsersession = serverInfo.getLastUsersession();
 			if (lastUsersession != null) {
 				usersessions.add(lastUsersession);
@@ -475,10 +475,6 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 	 * @return the workspace
 	 */
 	public IWorkspace getWorkspace() {
-		return currentWorkspace;
-	}
-
-	public Workspace getInternalWorkspace() {
 		return currentWorkspace;
 	}
 

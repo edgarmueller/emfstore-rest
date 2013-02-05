@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.controller;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
@@ -44,7 +44,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	 *            the target version to revert to
 	 * @param headRevert if true, otherwise just revert individual version
 	 */
-	public RevertCommitController(IProject projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
+	public RevertCommitController(ILocalProject projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
 		this.projectSpace = (ProjectSpace) projectSpace;
 		this.versionSpec = versionSpec;
 		this.headRevert = headRevert;
@@ -53,9 +53,8 @@ public class RevertCommitController extends ServerCall<Void> {
 	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
 		boolean headRevert) throws EmfStoreException {
 
-		PrimaryVersionSpec localHead = getConnectionManager()
-			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
-				Versions.createHEAD(baseVersion));
+		PrimaryVersionSpec localHead = getConnectionManager().resolveVersionSpec(
+			projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(), Versions.createHEAD(baseVersion));
 
 		ProjectSpace revertSpace = (ProjectSpace) WorkspaceProvider.getInstance().getWorkspace()
 			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), localHead, getProgressMonitor());

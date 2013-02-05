@@ -33,7 +33,7 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 	@Override
 	public Object[] getElements(Object object) {
 		if (object instanceof Workspace) {
-			return ((Workspace) object).getServerInfos().toArray();
+			return ((Workspace) object).getServers().toArray();
 		}
 
 		return super.getElements(object);
@@ -48,7 +48,7 @@ public class ESBrowserContentProvider extends AdapterFactoryContentProvider {
 		Object[] children;
 
 		if (value instanceof Workspace) {
-			children = ((Workspace) value).getServerInfos().toArray();
+			children = ((Workspace) value).getServers().toArray();
 		} else if (value instanceof ServerInfo) {
 			ServerInfo serverInfo = (ServerInfo) value;
 			return serverInfo.getProjectInfos().toArray();

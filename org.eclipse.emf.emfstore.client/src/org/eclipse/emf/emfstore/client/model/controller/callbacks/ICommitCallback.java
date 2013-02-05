@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * @author ovonwesen
  * @author emueller
  */
-public interface CommitCallback {
+public interface ICommitCallback {
 
 	/**
 	 * Called when the project space that should be updated is out of date. A
@@ -87,7 +87,7 @@ public interface CommitCallback {
 	 * true for {@link #inspectChanges(ProjectSpace, ChangePackage)}, such that
 	 * a commit is always performed.
 	 */
-	CommitCallback NOCALLBACK = new CommitCallback() {
+	ICommitCallback NOCALLBACK = new ICommitCallback() {
 
 		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {

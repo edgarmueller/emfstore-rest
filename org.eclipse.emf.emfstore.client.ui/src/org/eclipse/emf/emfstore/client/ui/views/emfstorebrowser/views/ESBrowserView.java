@@ -118,7 +118,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		// TODO OTS
 		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		WorkspaceProvider.getObserverBus().register(this);
-		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
+		for (final ServerInfo serverInfo : currentWorkspace.getServers()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
 			serverInfo.eAdapters().add(serverInfoAdapter);
 			serverInfoAdapterMap.put(serverInfo, serverInfoAdapter);
@@ -228,7 +228,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		Workspace currentWorkspace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace());
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
 		WorkspaceProvider.getObserverBus().unregister(this);
-		for (ServerInfo s : currentWorkspace.getServerInfos()) {
+		for (ServerInfo s : currentWorkspace.getServers()) {
 			s.eAdapters().remove(serverInfoAdapterMap.get(s));
 		}
 

@@ -47,7 +47,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 				public Integer call() throws Exception {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
-						.getActiveShell(), WorkspaceProvider.getInstance().getWorkspace().getServerInfos());
+						.getActiveShell(), WorkspaceProvider.getInstance().getWorkspace().getServers());
 					int input = dialog.open();
 					selectedServerInfo = dialog.getResult();
 					return input;
