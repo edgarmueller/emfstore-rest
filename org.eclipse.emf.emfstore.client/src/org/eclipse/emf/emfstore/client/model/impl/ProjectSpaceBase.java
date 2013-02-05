@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.client.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
@@ -54,7 +54,6 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallbac
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.exceptions.IllegalProjectSpaceStateException;
-import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.PropertyNotFoundException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
@@ -85,12 +84,12 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
-import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -111,7 +110,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
-	IDisposable, IProject {
+	IDisposable, ILocalProject {
 
 	private boolean initCompleted;
 	private boolean isTransient;
@@ -528,16 +527,17 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectInfo()
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getRemoteProject()
 	 * @generated NOT
 	 */
-	public ProjectInfo getProjectInfo() {
+	public IRemoteProject getRemoteProject() {
 		ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectInfo();
 		projectInfo.setProjectId(ModelUtil.clone(getProjectId()));
 		projectInfo.setName(getProjectName());
 		projectInfo.setDescription(getProjectDescription());
 		projectInfo.setVersion(ModelUtil.clone(getBaseVersion()));
-		return projectInfo;
+
+		return new ProjectInfoToRemoteProjectWrapper(projectInfo);
 	}
 
 	/**
@@ -956,20 +956,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#resolve(org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment)
-	 */
-	public EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException {
-		ModelElementId modelElementId = modelElementUrlFragment.getModelElementId();
-		EObject modelElement = getProject().getModelElement(modelElementId);
-		if (modelElement == null) {
-			throw new MEUrlResolutionException();
-		}
-		return modelElement;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec)
 	 * @throws EmfStoreException
 	 * @generated NOT
@@ -1318,7 +1304,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return getProject().contains((ModelElementId) modelElementId);
 	}
 
-	public EObject get(IModelElementId modelElementId) {
+	public EObject getModelElement(IModelElementId modelElementId) {
 		return getProject().get((ModelElementId) modelElementId);
 	}
 
@@ -1334,8 +1320,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return getProject().getAllModelElementsByClass(modelElementClass);
 	}
 
-	public <T extends EObject> Set<T> getAllModelElementsbyClass(Class modelElementClass, Boolean includeSubclasses) {
+	public <T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass, Boolean includeSubclasses) {
 		return getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
-	};
-
+	}
 }

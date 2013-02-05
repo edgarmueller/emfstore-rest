@@ -48,7 +48,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 
 		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
 
-		ProjectInfo projectInfo = view.getProjectSpace().getProjectInfo();
+		ProjectInfo projectInfo = view.getProjectSpace().getRemoteProject();
 
 		// FIXME: eContainer call
 		new UICheckoutController(getShell(), view.getProjectSpace().getUsersession().getServerInfo(), projectInfo,

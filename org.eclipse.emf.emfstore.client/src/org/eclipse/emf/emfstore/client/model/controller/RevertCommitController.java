@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -53,11 +52,11 @@ public class RevertCommitController extends ServerCall<Void> {
 	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
 		boolean headRevert) throws EmfStoreException {
 
-		PrimaryVersionSpec localHead = getConnectionManager().resolveVersionSpec(
-			projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(), Versions.createHEAD(baseVersion));
+		PrimaryVersionSpec localHead = getConnectionManager()
+			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
+				Versions.createHEAD(baseVersion));
 
-		ProjectSpace revertSpace = (ProjectSpace) WorkspaceProvider.getInstance().getWorkspace()
-			.checkout(projectSpace.getUsersession(), projectSpace.getProjectInfo(), localHead, getProgressMonitor());
+		ProjectSpace revertSpace = projectSpace.getRemoteProject().checkout(projectSpace.getUsersession());
 
 		List<ChangePackage> changes = revertSpace.getChanges(baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));

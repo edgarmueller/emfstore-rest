@@ -107,7 +107,7 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		final ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(getProjectSpace().getProjectInfo()),
+			.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(getProjectSpace().getRemoteProject()),
 				new NullProgressMonitor());
 
 		new EMFStoreCommand() {
@@ -197,7 +197,7 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override
@@ -234,7 +234,7 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override
@@ -267,7 +267,7 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getProjectInfo(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override

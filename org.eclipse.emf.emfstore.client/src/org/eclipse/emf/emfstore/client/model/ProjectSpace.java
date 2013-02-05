@@ -17,10 +17,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.impl.OperationManager;
@@ -32,9 +30,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -459,15 +455,6 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	Project getProject();
 
 	/**
-	 * Get a project info for the project space.
-	 * 
-	 * @return a project info
-	 * 
-	 * @generated NOT
-	 */
-	ProjectInfo getProjectInfo();
-
-	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
 	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
 	 * <!--
@@ -616,18 +603,6 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @generated NOT
 	 */
 	void makeTransient();
-
-	/**
-	 * Resolve the url to a model element.
-	 * 
-	 * @param modelElementUrlFragment
-	 *            the url
-	 * @return the model element
-	 * @throws MEUrlResolutionException
-	 *             if model element does not exist in project.
-	 * @generated NOT
-	 */
-	EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException;
 
 	/**
 	 * Revert all local changes in the project space. Returns the state of the

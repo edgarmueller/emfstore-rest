@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.server.model;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -34,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * @model
  * @generated
  */
-public interface ProjectInfo extends EObject, IProjectInfo {
+public interface ProjectInfo extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->

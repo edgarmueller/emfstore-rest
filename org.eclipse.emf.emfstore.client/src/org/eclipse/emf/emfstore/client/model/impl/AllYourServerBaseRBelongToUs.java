@@ -4,23 +4,18 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.emfstore.client.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.client.api.ServerInfo;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 
-public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements ServerInfo {
-
-	public List<? extends IProjectInfo> getProjectInfos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer {
 
 	public IRemoteProject createEmptyRemoteProject(IUsersession usersession, String projectName,
 		String projectDescription, IProgressMonitor progressMonitor) throws EmfStoreException {
@@ -81,6 +76,11 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 
 	public IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec,
 		IProjectId projectId) throws EmfStoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<? extends IRemoteProject> getRemoteProjects() {
 		// TODO Auto-generated method stub
 		return null;
 	}

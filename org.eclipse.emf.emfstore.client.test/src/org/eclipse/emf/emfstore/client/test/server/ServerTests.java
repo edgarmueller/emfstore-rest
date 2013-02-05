@@ -99,7 +99,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public ProjectInfo getProjectInfo() {
-		return getProjectSpace().getProjectInfo();
+		return getProjectSpace().getRemoteProject();
 	}
 
 	public ProjectId getProjectId() {

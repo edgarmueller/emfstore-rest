@@ -72,7 +72,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 				public Project run(IProgressMonitor monitor) throws EmfStoreException {
 					return WorkspaceProvider.getInstance().getConnectionManager()
 						.getProject(projectSpace.getUsersession().getSessionId(),
-							projectSpace.getProjectInfo().getProjectId(),
+							projectSpace.getRemoteProject().getProjectId(),
 							ModelUtil.clone(versionSpec));
 					// projectInfoCopy.getVersion());
 				}

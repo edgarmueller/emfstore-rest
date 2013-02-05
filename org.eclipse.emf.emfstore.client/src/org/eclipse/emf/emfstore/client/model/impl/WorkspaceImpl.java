@@ -224,7 +224,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 	 * 
 	 * @generated
 	 */
-	public EList<ServerInfo> getServers() {
+	public EList<ServerInfo> getServerInfos() {
 		if (serverInfos == null) {
 			serverInfos = new EObjectContainmentEList.Resolving<ServerInfo>(ServerInfo.class, this,
 				ModelPackage.WORKSPACE__SERVER_INFOS);

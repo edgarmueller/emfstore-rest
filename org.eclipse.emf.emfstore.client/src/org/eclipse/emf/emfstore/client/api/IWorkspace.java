@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IWorkspace {
 
-	List<ILocalProject> getLocalProjects();
+	List<? extends ILocalProject> getLocalProjects();
 
 	/**
 	 * Creates a new local project that is not shared with the server yet.
@@ -17,7 +17,7 @@ public interface IWorkspace {
 	 */
 	ILocalProject createLocalProject(String projectName, String projectDescription);
 
-	List<IServer> getServers();
+	List<? extends IServer> getServers();
 
 	/**
 	 * Adds an server info and saves.

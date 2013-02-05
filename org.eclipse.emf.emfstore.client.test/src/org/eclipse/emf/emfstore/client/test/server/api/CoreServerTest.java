@@ -150,7 +150,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					workspace.setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					return (ProjectSpace) workspace.checkout(projectSpace.getUsersession(),
-						ModelUtil.clone(projectSpace.getProjectInfo()), ModelUtil.clone(projectSpace.getBaseVersion()),
+						ModelUtil.clone(projectSpace.getRemoteProject()), ModelUtil.clone(projectSpace.getBaseVersion()),
 						new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);

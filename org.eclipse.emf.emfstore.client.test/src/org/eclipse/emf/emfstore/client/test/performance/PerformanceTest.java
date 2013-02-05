@@ -196,7 +196,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
-							setupHelper.getUsersession(), projectSpace.getProjectInfo());
+							setupHelper.getUsersession(), projectSpace.getRemoteProject());
 					} catch (EmfStoreException e) {
 						e.printStackTrace();
 					}
@@ -269,7 +269,7 @@ public class PerformanceTest {
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
 					projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
-						usersession2, setupHelper.getTestProjectSpace().getProjectInfo());
+						usersession2, setupHelper.getTestProjectSpace().getRemoteProject());
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
 				}
@@ -301,7 +301,7 @@ public class PerformanceTest {
 				+ " memory used before:" + memBeforeMut[i] / 1024 / 1024 + "MB, during: " + memDuringMut[i] / 1024
 				/ 1024 + "MB, after: " + memAfterMut[i] / 1024 / 1024 + "MB");
 
-			System.out.println("VERSION BEFORE commit:" + projectSpace1.getProjectInfo().getVersion().getIdentifier());
+			System.out.println("VERSION BEFORE commit:" + projectSpace1.getRemoteProject().getVersion().getIdentifier());
 			time = System.currentTimeMillis();
 			new EMFStoreCommand() {
 				@Override

@@ -88,7 +88,7 @@ public class HistoryAPITests extends CoreServerTest {
 		assertEquals(versions[5], p.commit(ps2));
 
 		// v6
-		ProjectSpace thirdBranch = p.checkout(ps.getProjectInfo(), versions[3]);
+		ProjectSpace thirdBranch = p.checkout(ps.getRemoteProject(), versions[3]);
 		rename(thirdBranch, 6);
 		assertEquals(versions[6], p.branch(thirdBranch, branches[2]));
 

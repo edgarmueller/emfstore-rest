@@ -294,4 +294,6 @@ public interface ILocalProject extends IProject {
 	boolean hasUncommitedChanges();
 
 	void importLocalChanges(String fileName) throws IOException;
+
+	IRemoteProject getRemoteProject();
 }
