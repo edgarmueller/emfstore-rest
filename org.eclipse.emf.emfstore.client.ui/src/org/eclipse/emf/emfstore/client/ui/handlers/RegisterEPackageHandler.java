@@ -8,10 +8,10 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.epackages;
+package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.client.ui.controller.UIRegisterEPackageController;
 
 /**
  * RegisterEPackageHandler.

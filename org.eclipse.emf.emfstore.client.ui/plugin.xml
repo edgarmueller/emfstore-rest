@@ -785,7 +785,7 @@
             name="Revert Revision">
       </command>
       <command
-            defaultHandler="org.eclipse.emf.emfstore.client.ui.epackages.RegisterEPackageHandler"
+            defaultHandler="org.eclipse.emf.emfstore.client.ui.handlers.RegisterEPackageHandler"
             id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RegisterEPackage"
             name="RegisterEPackage">
       </command>

@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.ui.epackages;
+package org.eclipse.emf.emfstore.client.ui.controller;
 
 import java.util.concurrent.Callable;
 
@@ -18,6 +18,8 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.client.ui.epackages.EPackageRegistryHelper;
+import org.eclipse.emf.emfstore.client.ui.epackages.EPackageTreeSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
