@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.testmodel;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -29,6 +30,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getDescription <em>Description</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainedElements2 <em>Contained Elements2</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementMap <em>Element Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToStringMap <em>String To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getElementToStringMap <em>Element To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getStringToElementMap <em>String To Element Map</em>}</li>
  * </ul>
  * </p>
  *
@@ -252,5 +257,73 @@ public interface TestElement extends EObject {
 	 * @generated
 	 */
 	void setContainer(TestElementContainer value);
+
+	/**
+	 * Returns the value of the '<em><b>Element Map</b></em>' map.
+	 * The key is of type {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement},
+	 * and the value is of type {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Element Map</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Element Map</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElement_ElementMap()
+	 * @model mapType="org.eclipse.emf.emfstore.client.test.testmodel.TestElementToTestElementMap<org.eclipse.emf.emfstore.client.test.testmodel.TestElement, org.eclipse.emf.emfstore.client.test.testmodel.TestElement>"
+	 * @generated
+	 */
+	EMap<TestElement, TestElement> getElementMap();
+
+	/**
+	 * Returns the value of the '<em><b>String To String Map</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.String},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>String To String Map</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>String To String Map</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElement_StringToStringMap()
+	 * @model mapType="org.eclipse.emf.emfstore.client.test.testmodel.StringToStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @generated
+	 */
+	EMap<String, String> getStringToStringMap();
+
+	/**
+	 * Returns the value of the '<em><b>Element To String Map</b></em>' map.
+	 * The key is of type {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement},
+	 * and the value is of type {@link java.lang.String},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Element To String Map</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Element To String Map</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElement_ElementToStringMap()
+	 * @model mapType="org.eclipse.emf.emfstore.client.test.testmodel.TestElementToStringMap<org.eclipse.emf.emfstore.client.test.testmodel.TestElement, org.eclipse.emf.ecore.EString>"
+	 * @generated
+	 */
+	EMap<TestElement, String> getElementToStringMap();
+
+	/**
+	 * Returns the value of the '<em><b>String To Element Map</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement},
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>String To Element Map</em>' map isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>String To Element Map</em>' map.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElement_StringToElementMap()
+	 * @model mapType="org.eclipse.emf.emfstore.client.test.testmodel.StringToTestElementMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.emfstore.client.test.testmodel.TestElement>"
+	 * @generated
+	 */
+	EMap<String, TestElement> getStringToElementMap();
 
 } // TestElement

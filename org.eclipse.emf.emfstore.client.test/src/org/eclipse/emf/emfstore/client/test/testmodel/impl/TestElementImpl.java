@@ -15,13 +15,16 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
@@ -43,6 +46,10 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElements2 <em>Contained Elements2</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getElementMap <em>Element Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStringToStringMap <em>String To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getElementToStringMap <em>Element To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStringToElementMap <em>String To Element Map</em>}</li>
  * </ul>
  * </p>
  *
@@ -157,6 +164,46 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	 * @ordered
 	 */
 	protected EList<TestElement> containedElements2;
+
+	/**
+	 * The cached value of the '{@link #getElementMap() <em>Element Map</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElementMap()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<TestElement, TestElement> elementMap;
+
+	/**
+	 * The cached value of the '{@link #getStringToStringMap() <em>String To String Map</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStringToStringMap()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, String> stringToStringMap;
+
+	/**
+	 * The cached value of the '{@link #getElementToStringMap() <em>Element To String Map</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElementToStringMap()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<TestElement, String> elementToStringMap;
+
+	/**
+	 * The cached value of the '{@link #getStringToElementMap() <em>String To Element Map</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStringToElementMap()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, TestElement> stringToElementMap;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -414,6 +461,54 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMap<TestElement, TestElement> getElementMap() {
+		if (elementMap == null) {
+			elementMap = new EcoreEMap<TestElement,TestElement>(TestmodelPackage.Literals.TEST_ELEMENT_TO_TEST_ELEMENT_MAP, TestElementToTestElementMapImpl.class, this, TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP);
+		}
+		return elementMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<String, String> getStringToStringMap() {
+		if (stringToStringMap == null) {
+			stringToStringMap = new EcoreEMap<String,String>(TestmodelPackage.Literals.STRING_TO_STRING_MAP, StringToStringMapImpl.class, this, TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP);
+		}
+		return stringToStringMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<TestElement, String> getElementToStringMap() {
+		if (elementToStringMap == null) {
+			elementToStringMap = new EcoreEMap<TestElement,String>(TestmodelPackage.Literals.TEST_ELEMENT_TO_STRING_MAP, TestElementToStringMapImpl.class, this, TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP);
+		}
+		return elementToStringMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<String, TestElement> getStringToElementMap() {
+		if (stringToElementMap == null) {
+			stringToElementMap = new EcoreEMap<String,TestElement>(TestmodelPackage.Literals.STRING_TO_TEST_ELEMENT_MAP, StringToTestElementMapImpl.class, this, TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP);
+		}
+		return stringToElementMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -440,6 +535,14 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 				return ((InternalEList<?>)getContainedElements2()).basicRemove(otherEnd, msgs);
 			case TestmodelPackage.TEST_ELEMENT__CONTAINER:
 				return basicSetContainer(null, msgs);
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP:
+				return ((InternalEList<?>)getElementMap()).basicRemove(otherEnd, msgs);
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP:
+				return ((InternalEList<?>)getStringToStringMap()).basicRemove(otherEnd, msgs);
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP:
+				return ((InternalEList<?>)getElementToStringMap()).basicRemove(otherEnd, msgs);
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP:
+				return ((InternalEList<?>)getStringToElementMap()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -487,6 +590,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 				return getContainedElements2();
 			case TestmodelPackage.TEST_ELEMENT__CONTAINER:
 				return getContainer();
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP:
+				if (coreType) return getElementMap();
+				else return getElementMap().map();
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP:
+				if (coreType) return getStringToStringMap();
+				else return getStringToStringMap().map();
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP:
+				if (coreType) return getElementToStringMap();
+				else return getElementToStringMap().map();
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP:
+				if (coreType) return getStringToElementMap();
+				else return getStringToElementMap().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -533,6 +648,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 			case TestmodelPackage.TEST_ELEMENT__CONTAINER:
 				setContainer((TestElementContainer)newValue);
 				return;
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP:
+				((EStructuralFeature.Setting)getElementMap()).set(newValue);
+				return;
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP:
+				((EStructuralFeature.Setting)getStringToStringMap()).set(newValue);
+				return;
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP:
+				((EStructuralFeature.Setting)getElementToStringMap()).set(newValue);
+				return;
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP:
+				((EStructuralFeature.Setting)getStringToElementMap()).set(newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -574,6 +701,18 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 			case TestmodelPackage.TEST_ELEMENT__CONTAINER:
 				setContainer((TestElementContainer)null);
 				return;
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP:
+				getElementMap().clear();
+				return;
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP:
+				getStringToStringMap().clear();
+				return;
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP:
+				getElementToStringMap().clear();
+				return;
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP:
+				getStringToElementMap().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -605,6 +744,14 @@ public class TestElementImpl extends EObjectImpl implements TestElement {
 				return containedElements2 != null && !containedElements2.isEmpty();
 			case TestmodelPackage.TEST_ELEMENT__CONTAINER:
 				return getContainer() != null;
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_MAP:
+				return elementMap != null && !elementMap.isEmpty();
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_STRING_MAP:
+				return stringToStringMap != null && !stringToStringMap.isEmpty();
+			case TestmodelPackage.TEST_ELEMENT__ELEMENT_TO_STRING_MAP:
+				return elementToStringMap != null && !elementToStringMap.isEmpty();
+			case TestmodelPackage.TEST_ELEMENT__STRING_TO_ELEMENT_MAP:
+				return stringToElementMap != null && !stringToElementMap.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

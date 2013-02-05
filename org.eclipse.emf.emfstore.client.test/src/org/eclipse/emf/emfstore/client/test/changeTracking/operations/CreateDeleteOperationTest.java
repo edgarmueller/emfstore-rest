@@ -1505,6 +1505,212 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(useCaseId, modelElementId);
 	}
 
+	@Test
+	public void testReferenceMapDeletion() {
+
+		final TestElement testElement = getTestElement("testElement");
+		final TestElement secondTestElement = getTestElement("secondTestElement");
+		final TestElement parentTestElement = getTestElement("parentTestElement");
+		final TestElement keyRefeferenceTestElement = getTestElement("keyRefeferenceTestElement");
+		final TestElement referenceTestElement = getTestElement("referenceTestElement");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(testElement);
+				getProject().addModelElement(secondTestElement);
+				getProject().addModelElement(parentTestElement);
+
+				parentTestElement.setContainedElement(secondTestElement);
+				testElement.getElementMap().put(parentTestElement, secondTestElement);
+				testElement.getElementMap().put(keyRefeferenceTestElement, referenceTestElement);
+
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertTrue(getProject().containsInstance(secondTestElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+		assertTrue(getProject().containsInstance(keyRefeferenceTestElement));
+		assertTrue(getProject().containsInstance(referenceTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().deleteModelElement(secondTestElement);
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertFalse(getProject().containsInstance(secondTestElement));
+		assertNull(testElement.getElementMap().get(parentTestElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				// delete value reference
+				getProject().deleteModelElement(referenceTestElement);
+			}
+		}.run(false);
+
+		assertNull(testElement.getElementMap().get(referenceTestElement));
+		assertTrue(testElement.getElementMap().containsKey(keyRefeferenceTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				// delete key reference
+				getProject().deleteModelElement(keyRefeferenceTestElement);
+			}
+		}.run(false);
+
+		assertFalse(testElement.getElementMap().containsKey(keyRefeferenceTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().deleteModelElement(testElement);
+			}
+		}.run(false);
+
+		assertFalse(getProject().containsInstance(testElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+		assertNull(testElement.getElementMap().get(parentTestElement));
+	}
+
+	@Test
+	public void testAttributeToReferenceMapDeletion() {
+
+		final TestElement testElement = getTestElement("testElement");
+		final TestElement secondTestElement = getTestElement("secondTestElement");
+		final TestElement parentTestElement = getTestElement("parentTestElement");
+		final TestElement referenceTestElement = getTestElement("referenceTestElement");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(testElement);
+				getProject().addModelElement(secondTestElement);
+				getProject().addModelElement(parentTestElement);
+
+				parentTestElement.setContainedElement(secondTestElement);
+				testElement.getStringToElementMap().put("secondTestElement", secondTestElement);
+				testElement.getStringToElementMap().put("referencedTestElement", referenceTestElement);
+
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertTrue(getProject().containsInstance(secondTestElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+		assertTrue(getProject().containsInstance(referenceTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().deleteModelElement(secondTestElement);
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertFalse(getProject().containsInstance(secondTestElement));
+		assertNull(testElement.getStringToElementMap().get("secondTestElement"));
+		assertTrue(testElement.getStringToElementMap().containsKey("secondTestElement"));
+		assertTrue(getProject().containsInstance(parentTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				// delete value reference
+				getProject().deleteModelElement(referenceTestElement);
+			}
+		}.run(false);
+
+		assertNull(testElement.getStringToElementMap().get("referencedTestElement"));
+		assertTrue(testElement.getStringToElementMap().containsKey("referencedTestElement"));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().deleteModelElement(testElement);
+			}
+		}.run(false);
+
+		assertFalse(getProject().containsInstance(testElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+	}
+
+	@Test
+	public void testReferenceToAttributeMapDeletion() {
+
+		final TestElement testElement = getTestElement("testElement");
+		final TestElement secondTestElement = getTestElement("secondTestElement");
+		final TestElement parentTestElement = getTestElement("parentTestElement");
+		final TestElement referenceKeyTestElement = getTestElement("referenceTestElement");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(testElement);
+				getProject().addModelElement(secondTestElement);
+				getProject().addModelElement(parentTestElement);
+
+				parentTestElement.setContainedElement(secondTestElement);
+				testElement.getElementToStringMap().put(secondTestElement, "secondTestElement");
+				testElement.getElementToStringMap().put(referenceKeyTestElement, "referencedTestElement");
+
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertTrue(getProject().containsInstance(secondTestElement));
+		assertTrue(getProject().containsInstance(parentTestElement));
+		assertTrue(getProject().containsInstance(referenceKeyTestElement));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				// delete keys
+				getProject().deleteModelElement(secondTestElement);
+				getProject().deleteModelElement(referenceKeyTestElement);
+			}
+		}.run(false);
+
+		assertFalse(getProject().containsInstance(referenceKeyTestElement));
+		assertFalse(getProject().containsInstance(secondTestElement));
+
+		assertFalse(testElement.getElementToStringMap().containsKey(secondTestElement));
+		assertFalse(testElement.getElementToStringMap().containsKey(referenceKeyTestElement));
+	}
+
+	@Test
+	public void testAttributeMapDeletion() {
+		final TestElement testElement = getTestElement("testElement");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(testElement);
+				testElement.getStringToStringMap().put("Day", "Tag");
+				testElement.getStringToStringMap().put("Hello", "Hallo");
+
+			}
+		}.run(false);
+
+		assertTrue(getProject().containsInstance(testElement));
+		assertEquals(testElement.getStringToStringMap().get("Day"), "Tag");
+		assertEquals(testElement.getStringToStringMap().get("Hello"), "Hallo");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().deleteModelElement(testElement);
+			}
+		}.run(false);
+		assertFalse(getProject().containsInstance(testElement));
+	}
+
 	// commenting out, too exotic to happen
 	/*
 	 * @Test public void createTreeAndAddNonRootToProject() { WorkPackage root =
