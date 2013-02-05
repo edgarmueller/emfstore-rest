@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
+import org.eclipse.emf.emfstore.client.model.impl.ProjectInfoToRemoteProjectWrapper;
 import org.eclipse.emf.emfstore.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -48,7 +49,8 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 
 		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
 
-		ProjectInfo projectInfo = view.getProjectSpace().getRemoteProject();
+		ProjectInfo projectInfo = ((ProjectInfoToRemoteProjectWrapper) view.getProjectSpace().getRemoteProject())
+			.getProjectInfo();
 
 		// FIXME: eContainer call
 		new UICheckoutController(getShell(), view.getProjectSpace().getUsersession().getServerInfo(), projectInfo,

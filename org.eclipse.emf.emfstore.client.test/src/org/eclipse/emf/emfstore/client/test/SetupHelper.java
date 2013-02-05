@@ -38,6 +38,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectInfoToRemoteProjectWrapper;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -350,9 +351,9 @@ public class SetupHelper {
 				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 				projectSpace.initResources(workSpace.eResource().getResourceSet());
-
+				// TODO: OTS
 				((WorkspaceImpl) workSpace).addProjectSpace(projectSpace);
-				workSpace.save();
+				((WorkspaceBase) workSpace).save();
 				testProjectSpace = projectSpace;
 
 			}
@@ -628,8 +629,9 @@ public class SetupHelper {
 			protected void doRun() {
 
 				try {
-					compareProject = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
-						usersession, projectInfo, new NullProgressMonitor()).getProject();
+					// TODO OTS hot code incoming
+					compareProject = ((ProjectSpace) new ProjectInfoToRemoteProjectWrapper(projectInfo)
+						.checkout(usersession)).getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EmfStoreException e) {
 					e.printStackTrace();

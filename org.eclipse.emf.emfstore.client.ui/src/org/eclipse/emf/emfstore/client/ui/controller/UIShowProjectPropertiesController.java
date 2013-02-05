@@ -11,8 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectInfoToRemoteProjectWrapper;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -53,19 +52,14 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
-		ServerInfo serverInfo = (projectInfo.eContainer() instanceof ServerInfo) ? (ServerInfo) projectInfo
-			.eContainer() : null;
 		String revision = "<unknown>";
+		IPrimaryVersionSpec versionSpec;
 
-		if (serverInfo != null) {
-			IPrimaryVersionSpec versionSpec;
-			try {
-				versionSpec = WorkspaceProvider.getInstance().getWorkspace()
-					.resolveVersionSpec(serverInfo, Versions.createHEAD());
-				revision = "" + versionSpec.getIdentifier();
-			} catch (EmfStoreException e) {
-				// do nothing
-			}
+		try {
+			versionSpec = new ProjectInfoToRemoteProjectWrapper(projectInfo).resolveVersionSpec(Versions.createHEAD());
+			revision = "" + versionSpec.getIdentifier();
+		} catch (EmfStoreException e) {
+			// do nothing
 		}
 
 		final String rev = revision;

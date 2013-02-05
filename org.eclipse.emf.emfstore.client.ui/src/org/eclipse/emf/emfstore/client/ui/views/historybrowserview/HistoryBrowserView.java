@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.PlotLan
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.SWTPlotRenderer;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -790,9 +791,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			} else if (element instanceof ProjectSpace) {
 				selectedModelElement = ((ProjectSpace) element).getProject();
 			} else if (element instanceof ModelElementId
-				&& projectSpace.getProject().contains((ModelElementId) element)) {
+				&& projectSpace.getProject().contains((IModelElementId) element)) {
 				selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
-			} else if (projectSpace.getProject().containsInstance((EObject) element)) {
+			} else if (projectSpace.getProject().contains((EObject) element)) {
 				selectedModelElement = (EObject) element;
 			}
 

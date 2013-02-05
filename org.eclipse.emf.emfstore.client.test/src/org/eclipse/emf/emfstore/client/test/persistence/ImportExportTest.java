@@ -6,8 +6,8 @@ import java.io.IOException;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.api.LOKO;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
@@ -63,7 +63,7 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectController("importedProject"));
 
-		LOKO newProjectSpace = null;
+		ILocalProject newProjectSpace = null;
 
 		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.getProjectName().equals("importedProject")) {
@@ -94,8 +94,8 @@ public class ImportExportTest extends WorkspaceTest {
 
 		Assert.assertEquals(2, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		LOKO a = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0);
-		LOKO b = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(1);
+		ILocalProject a = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0);
+		ILocalProject b = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(1);
 
 		// TODO: are the imported IDs supposed to be the same as in the original project?
 		// Assert.assertTrue(ModelUtil.areEqual(a.getProject(), b.getProject()));

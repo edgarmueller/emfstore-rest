@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectInfoToRemoteProjectWrapper;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
@@ -133,12 +134,12 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 				@Override
 				protected ILocalProject run() throws EmfStoreException {
 					if (versionSpec == null) {
-						return WorkspaceProvider.getInstance().getWorkspace()
-							.checkout(getUsersession(), projectInfo, getProgressMonitor());
+						return new ProjectInfoToRemoteProjectWrapper(projectInfo).checkout(getUsersession(),
+							getProgressMonitor());
 					}
 
-					return WorkspaceProvider.getInstance().getWorkspace()
-						.checkout(getUsersession(), projectInfo, versionSpec, getProgressMonitor());
+					return new ProjectInfoToRemoteProjectWrapper(projectInfo).checkout(getUsersession(), versionSpec,
+						getProgressMonitor());
 				}
 			}.execute();
 

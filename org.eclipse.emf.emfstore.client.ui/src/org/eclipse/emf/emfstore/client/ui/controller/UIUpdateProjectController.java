@@ -161,8 +161,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(projectSpace.getUsersession(),
-			Versions.createHEAD(oldBaseVersion));
+		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(Versions.createHEAD(oldBaseVersion));
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();

@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.client.test.server;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -43,7 +43,7 @@ public abstract class TransmissionTests extends ServerTests {
 
 			@Override
 			protected void doRun() {
-				Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+				WorkspaceBase workspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
 				workspace.getServers().add(getServerInfo());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);

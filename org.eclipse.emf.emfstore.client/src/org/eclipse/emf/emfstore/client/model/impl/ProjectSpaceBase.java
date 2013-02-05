@@ -537,7 +537,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		projectInfo.setDescription(getProjectDescription());
 		projectInfo.setVersion(ModelUtil.clone(getBaseVersion()));
 
-		return new ProjectInfoToRemoteProjectWrapper(projectInfo);
+		return new ProjectInfoToRemoteProjectWrapper(this.getUsersession(), projectInfo);
 	}
 
 	/**
@@ -1297,11 +1297,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	public boolean contains(EObject object) {
-		return getProject().containsInstance(object);
+		return getProject().contains(object);
 	}
 
 	public boolean contains(IModelElementId modelElementId) {
-		return getProject().contains((ModelElementId) modelElementId);
+		return getProject().contains(modelElementId);
 	}
 
 	public EObject getModelElement(IModelElementId modelElementId) {
@@ -1316,11 +1316,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return getAllModelElements();
 	}
 
-	public <T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass) {
+	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getProject().getAllModelElementsByClass(modelElementClass);
 	}
 
-	public <T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass, Boolean includeSubclasses) {
+	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
 		return getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
 	}
 }

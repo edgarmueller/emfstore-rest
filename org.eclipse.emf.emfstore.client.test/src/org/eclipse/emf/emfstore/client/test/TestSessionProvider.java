@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
 public class TestSessionProvider extends AbstractSessionProvider {
@@ -33,7 +34,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		// currentWorkspace.getServerInfos().add(serverInfo);
 		currentWorkspace.getUsersessions().add(session);
-		currentWorkspace.save();
+		((WorkspaceBase) currentWorkspace).save();
 	}
 
 	@Override

@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -22,7 +21,6 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -45,7 +43,6 @@ import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionExcep
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectSpaceController;
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportWorkspaceController;
-import org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -53,7 +50,6 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
@@ -61,17 +57,14 @@ import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
-import org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
  * Workspace space base class that contains custom user methods.
@@ -112,132 +105,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	public void addProjectSpace(ProjectSpace projectSpace) {
 		getProjectSpaces().add(projectSpace);
 		projectToProjectSpaceMap.put(projectSpace.getProject(), projectSpace);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo)
-	 */
-	public ProjectSpace checkout(final IUsersession usersession, final IProjectInfo projectInfo)
-		throws EmfStoreException {
-		return checkout(usersession, projectInfo, new NullProgressMonitor());
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo, org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public ProjectSpace checkout(final IUsersession usersession, final IProjectInfo projectInfo,
-		IProgressMonitor progressMonitor) throws EmfStoreException {
-		PrimaryVersionSpec targetSpec = this.connectionManager.resolveVersionSpec(
-			((Usersession) usersession).getSessionId(), ((ProjectInfo) projectInfo).getProjectId(),
-			Versions.createHEAD());
-		return checkout(usersession, projectInfo, targetSpec, progressMonitor);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#checkout(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectInfo,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public ProjectSpace checkout(final IUsersession usersession, final IProjectInfo projectInfo,
-		IVersionSpec targetSpec, IProgressMonitor progressMonitor) throws EmfStoreException {
-
-		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
-		final Usersession session = (Usersession) usersession;
-		final ProjectInfo info = (ProjectInfo) projectInfo;
-
-		// FIXME: MK: hack: set head version manually because esbrowser does not
-		// update
-		// revisions properly
-		final ProjectInfo projectInfoCopy = ModelUtil.clone(info);
-		projectInfoCopy.setVersion((PrimaryVersionSpec) targetSpec);
-
-		// get project from server
-		Project project = null;
-
-		SubMonitor newChild = parent.newChild(40);
-		parent.subTask("Fetching project from server...");
-		project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
-			@Override
-			public Project run(IProgressMonitor monitor) throws EmfStoreException {
-				return connectionManager.getProject(session.getSessionId(), info.getProjectId(),
-					projectInfoCopy.getVersion());
-			}
-		}.execute();
-
-		if (project == null) {
-			throw new EmfStoreException("Server returned a null project!");
-		}
-
-		final PrimaryVersionSpec primaryVersionSpec = projectInfoCopy.getVersion();
-		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-
-		// initialize project space
-		parent.subTask("Initializing Projectspace...");
-		projectSpace.setProjectId(projectInfoCopy.getProjectId());
-		projectSpace.setProjectName(projectInfoCopy.getName());
-		projectSpace.setProjectDescription(projectInfoCopy.getDescription());
-		projectSpace.setBaseVersion(primaryVersionSpec);
-		projectSpace.setLastUpdated(new Date());
-		projectSpace.setUsersession(session);
-		WorkspaceProvider.getObserverBus().register((ProjectSpaceBase) projectSpace);
-		projectSpace.setProject(project);
-		projectSpace.setResourceCount(0);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-		parent.worked(20);
-
-		// progressMonitor.subTask("Initializing resources...");
-		projectSpace.initResources(this.workspaceResourceSet);
-		parent.worked(10);
-
-		// retrieve recent changes
-		// TODO why are we doing this?? And why HERE?
-		parent.subTask("Retrieving recent changes...");
-		try {
-			DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_YEAR, -10);
-			dateVersionSpec.setDate(calendar.getTime());
-			PrimaryVersionSpec sourceSpec;
-			try {
-				sourceSpec = this.connectionManager.resolveVersionSpec(session.getSessionId(),
-					projectSpace.getProjectId(), dateVersionSpec);
-			} catch (InvalidVersionSpecException e) {
-				sourceSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-				sourceSpec.setIdentifier(0);
-			}
-			ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
-
-		} catch (EmfStoreException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil.logException(e.getMessage(), e);
-		} catch (IOException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		}
-		parent.worked(10);
-
-		parent.subTask("Finishing checkout...");
-		addProjectSpace(projectSpace);
-		save();
-		WorkspaceProvider.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
-		parent.worked(10);
-		parent.done();
-
-		return projectSpace;
 	}
 
 	/**
@@ -499,7 +366,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		try {
 			serverInfo.getProjectInfos().clear();
 			if (WorkspaceProvider.getInstance().getConnectionManager().isLoggedIn(usersession.getSessionId())) {
-				((List<IProjectInfo>) (List<?>) serverInfo.getProjectInfos()).addAll(getRemoteProjectList(usersession));
+				serverInfo.getProjectInfos().addAll(
+					(List<ProjectInfo>) (List<?>) getServerByUsersession(usersession).getRemoteProjectList());
 			}
 			save();
 		} catch (EmfStoreException e) {
@@ -845,36 +713,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		return projectSpace;
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getRemoteProjectList(org.eclipse.emf.emfstore.client.model.ServerInfo)
-	 */
-	public List<IProjectInfo> getRemoteProjectList(ServerInfo serverInfo) throws EmfStoreException {
-		return new ServerCall<List<IProjectInfo>>((ServerInfo) serverInfo) {
-			@Override
-			protected List<IProjectInfo> run() throws EmfStoreException {
-				return (List<IProjectInfo>) (List<?>) getConnectionManager().getProjectList(getSessionId());
-			}
-		}.execute();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getRemoteProjectList(org.eclipse.emf.emfstore.client.model.Usersession)
-	 */
-	public List<IProjectInfo> getRemoteProjectList(IUsersession usersession) throws EmfStoreException {
-		return new ServerCall<List<IProjectInfo>>((Usersession) usersession) {
-			@Override
-			protected List<IProjectInfo> run() throws EmfStoreException {
-				return (List<IProjectInfo>) (List<?>) getConnectionManager().getProjectList(getSessionId());
-			}
-		}.execute();
-	}
-
 	public List<ProjectSpace> getLocalProjects() {
 		return getProjectSpaces();
 	}
@@ -882,4 +720,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	public List<ServerInfo> getServers() {
 		return getServerInfos();
 	}
+
+	public IServer getServerByUsersession(IUsersession session) {
+		// TODO OTS
+		return null;
+	}
+
 }

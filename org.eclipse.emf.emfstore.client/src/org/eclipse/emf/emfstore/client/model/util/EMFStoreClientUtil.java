@@ -46,7 +46,7 @@ public final class EMFStoreClientUtil {
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
 		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		for (ServerInfo existingServerInfo : workspace.getServers()) {
+		for (ServerInfo existingServerInfo : workspace.getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
 					return existingServerInfo;
@@ -54,7 +54,7 @@ public final class EMFStoreClientUtil {
 			}
 		}
 		ServerInfo serverInfo = createServerInfo(url, port, null);
-		workspace.getServers().add(serverInfo);
+		workspace.getServerInfos().add(serverInfo);
 		// TODO: OTS
 		((WorkspaceBase) workspace).save();
 		return serverInfo;

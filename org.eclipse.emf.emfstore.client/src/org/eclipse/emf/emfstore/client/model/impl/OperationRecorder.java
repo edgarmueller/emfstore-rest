@@ -496,7 +496,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		List<EObject> deletedElements = new ArrayList<EObject>();
 		for (int i = removedElements.size() - 1; i >= 0; i--) {
 			EObject removedElement = removedElements.get(i);
-			if (!collection.containsInstance(removedElement)) {
+			if (!collection.contains(removedElement)) {
 				if (!deletedElements.contains(removedElement)) {
 					deletedElements.add(0, removedElement);
 				}

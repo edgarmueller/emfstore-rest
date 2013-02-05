@@ -20,7 +20,6 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
@@ -195,8 +194,9 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
-							setupHelper.getUsersession(), projectSpace.getRemoteProject());
+						// TODO: OTS cast
+						projectSpace2 = (ProjectSpace) projectSpace.getRemoteProject().checkout(
+							setupHelper.getUsersession());
 					} catch (EmfStoreException e) {
 						e.printStackTrace();
 					}
@@ -268,8 +268,8 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
-						usersession2, setupHelper.getTestProjectSpace().getRemoteProject());
+					projectSpace2 = (ProjectSpace) setupHelper.getTestProjectSpace().getRemoteProject()
+						.checkout(usersession2);
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
 				}
@@ -301,7 +301,7 @@ public class PerformanceTest {
 				+ " memory used before:" + memBeforeMut[i] / 1024 / 1024 + "MB, during: " + memDuringMut[i] / 1024
 				/ 1024 + "MB, after: " + memAfterMut[i] / 1024 / 1024 + "MB");
 
-			System.out.println("VERSION BEFORE commit:" + projectSpace1.getRemoteProject().getVersion().getIdentifier());
+			System.out.println("VERSION BEFORE commit:" + projectSpace1.getBaseVersion().getIdentifier());
 			time = System.currentTimeMillis();
 			new EMFStoreCommand() {
 				@Override

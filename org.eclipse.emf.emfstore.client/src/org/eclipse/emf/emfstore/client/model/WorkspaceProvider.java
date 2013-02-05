@@ -257,7 +257,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 		// no workspace content found, create a workspace
 		resource = resourceSet.createResource(fileURI);
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
-		workspace.getServers().addAll(Configuration.getDefaultServerInfos());
+		workspace.getServerInfos().addAll(Configuration.getDefaultServerInfos());
 		EList<Usersession> usersessions = workspace.getUsersessions();
 		for (ServerInfo serverInfo : workspace.getServerInfos()) {
 			Usersession lastUsersession = serverInfo.getLastUsersession();

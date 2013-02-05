@@ -55,7 +55,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 				section.setName("Name");
 				section.setDescription("Description");
 
-				assertEquals(true, getProject().containsInstance(section));
+				assertEquals(true, getProject().contains(section));
 				assertEquals("Name", section.getName());
 				assertEquals("Description", section.getDescription());
 				assertEquals(0, section.getModelElements().size());
@@ -85,7 +85,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 				section.setDescription("newDescription");
 				section.getModelElements().add(useCase);
 
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				assertEquals(useCase, section.getModelElements().iterator().next());
 				assertEquals("newName", section.getName());
@@ -101,7 +101,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(useCase));
+		assertEquals(true, getProject().contains(useCase));
 		assertEquals(getProject(), ModelUtil.getProject(useCase));
 		assertEquals(useCase, section.getModelElements().iterator().next());
 		assertEquals("newName", section.getName());
@@ -131,7 +131,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 				section.setDescription("newDescription");
 				section.getModelElements().add(useCase);
 
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				assertEquals(useCase, section.getModelElements().iterator().next());
 				assertEquals("newName", section.getName());
@@ -157,7 +157,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(useCase));
+		assertEquals(true, getProject().contains(useCase));
 		assertEquals(getProject(), ModelUtil.getProject(useCase));
 		assertEquals(useCase, section.getModelElements().iterator().next());
 		assertEquals("newName", section.getName());
@@ -189,7 +189,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 				section.setDescription("newDescription");
 				section.getModelElements().add(useCase);
 
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				assertEquals(useCase, section.getModelElements().iterator().next());
 				assertEquals("newName", section.getName());
@@ -215,7 +215,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(useCase));
+		assertEquals(true, getProject().contains(useCase));
 		assertEquals(getProject(), ModelUtil.getProject(useCase));
 		assertEquals(useCase, section.getModelElements().iterator().next());
 		assertEquals("newName", section.getName());
@@ -249,7 +249,7 @@ public class CompositeOperationTest extends WorkspaceTest {
 				section.setDescription("newDescription");
 				section.getModelElements().add(useCase);
 
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				assertEquals(useCase, section.getModelElements().iterator().next());
 				assertEquals("newName", section.getName());
@@ -263,11 +263,11 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(section));
+		assertEquals(true, getProject().contains(section));
 		assertEquals("Name", section.getName());
 		assertEquals("Description", section.getDescription());
 		assertEquals(0, section.getModelElements().size());
-		assertEquals(false, getProject().containsInstance(useCase));
+		assertEquals(false, getProject().contains(useCase));
 
 		assertEquals(0, getProjectSpace().getOperations().size());
 
@@ -276,8 +276,8 @@ public class CompositeOperationTest extends WorkspaceTest {
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, getProject()));
-		assertEquals(false, getProject().containsInstance(useCase));
-		assertEquals(true, getProject().containsInstance(section));
+		assertEquals(false, getProject().contains(useCase));
+		assertEquals(true, getProject().contains(section));
 	}
 
 	/**

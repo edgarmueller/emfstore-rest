@@ -107,7 +107,7 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 	}
 
 	private boolean isOrWasInProject(IdEObjectCollection collection, EObject referencedElement) {
-		boolean b = collection.containsInstance(referencedElement)
+		boolean b = collection.contains(referencedElement)
 			|| ((IdEObjectCollectionImpl) collection).getDeletedModelElementId(referencedElement) != null;
 		return b;
 	}

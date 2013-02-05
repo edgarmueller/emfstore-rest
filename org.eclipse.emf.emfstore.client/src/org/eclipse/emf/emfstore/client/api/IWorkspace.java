@@ -19,6 +19,8 @@ public interface IWorkspace {
 
 	List<? extends IServer> getServers();
 
+	IServer getServerByUsersession(IUsersession session);
+
 	/**
 	 * Adds an server info and saves.
 	 * 

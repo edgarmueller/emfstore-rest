@@ -55,6 +55,7 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -166,7 +167,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(useCase));
+		assertEquals(true, getProject().contains(useCase));
 		assertEquals(getProject(), ModelUtil.getProject(useCase));
 
 		final FunctionalRequirement functionalRequirement = RequirementFactory.eINSTANCE.createFunctionalRequirement();
@@ -182,7 +183,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(functionalRequirement, useCase.getFunctionalRequirements().get(0));
 		assertEquals(useCase, functionalRequirement.getUseCases().get(0));
 
-		assertEquals(true, getProject().containsInstance(functionalRequirement));
+		assertEquals(true, getProject().contains(functionalRequirement));
 		assertEquals(getProject(), ModelUtil.getProject(functionalRequirement));
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
@@ -278,7 +279,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				useCase.setInitiatingActor(oldActor);
 				useCase.getParticipatingActors().add(newActor);
 				useCase.getParticipatingActors().add(otherActor);
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				clearOperations();
 			}
@@ -293,7 +294,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(false, getProject().containsInstance(useCase));
+		assertEquals(false, getProject().contains(useCase));
 		// assertEquals(null, useCase.eContainer());
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
@@ -394,7 +395,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			getProjectSpace().eResource().getURI(), false);
 		Project loadedProject = loadedProjectSpace.getProject();
 
-		assertEquals(false, loadedProject.containsInstance(useCase));
+		assertEquals(false, loadedProject.contains(useCase));
 		operations = loadedProjectSpace.getLocalChangePackage().getOperations();
 
 		assertEquals(1, operations.size());
@@ -518,10 +519,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				useCase.setInitiatingActor(oldActor);
 				useCase.getParticipatingActors().add(newActor);
 				useCase.getParticipatingActors().add(otherActor);
-				assertEquals(true, getProject().containsInstance(useCase));
-				assertEquals(true, getProject().containsInstance(oldActor));
-				assertEquals(true, getProject().containsInstance(newActor));
-				assertEquals(true, getProject().containsInstance(otherActor));
+				assertEquals(true, getProject().contains(useCase));
+				assertEquals(true, getProject().contains(oldActor));
+				assertEquals(true, getProject().contains(newActor));
+				assertEquals(true, getProject().contains(otherActor));
 				assertEquals(1, oldActor.getInitiatedUseCases().size());
 				assertEquals(1, newActor.getParticipatedUseCases().size());
 				assertEquals(1, otherActor.getParticipatedUseCases().size());
@@ -542,7 +543,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(false, getProject().containsInstance(useCase));
+		assertEquals(false, getProject().contains(useCase));
 		assertEquals(0, oldActor.getInitiatedUseCases().size());
 		assertEquals(0, newActor.getParticipatedUseCases().size());
 		assertEquals(0, otherActor.getParticipatedUseCases().size());
@@ -676,10 +677,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().contains(useCaseId));
-		assertEquals(true, getProject().containsInstance(oldActor));
-		assertEquals(true, getProject().containsInstance(newActor));
-		assertEquals(true, getProject().containsInstance(otherActor));
+		assertEquals(true, getProject().contains((IModelElementId) useCaseId));
+		assertEquals(true, getProject().contains(oldActor));
+		assertEquals(true, getProject().contains(newActor));
+		assertEquals(true, getProject().contains(otherActor));
 		assertEquals(1, oldActor.getInitiatedUseCases().size());
 		assertEquals(1, newActor.getParticipatedUseCases().size());
 		assertEquals(1, otherActor.getParticipatedUseCases().size());
@@ -693,10 +694,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, getProject()));
-		assertEquals(true, loadedProject.contains(useCaseId));
-		assertEquals(true, loadedProject.contains(oldActorId));
-		assertEquals(true, loadedProject.contains(newActorId));
-		assertEquals(true, loadedProject.contains(otherActorId));
+		assertEquals(true, loadedProject.contains((IModelElementId) useCaseId));
+		assertEquals(true, loadedProject.contains((IModelElementId) oldActorId));
+		assertEquals(true, loadedProject.contains((IModelElementId) newActorId));
+		assertEquals(true, loadedProject.contains((IModelElementId) otherActorId));
 	}
 
 	/**
@@ -751,8 +752,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				issue.setSolution(solution);
 				getProject().addModelElement(issue);
 
-				assertEquals(true, getProject().containsInstance(issue));
-				assertEquals(true, getProject().containsInstance(solution));
+				assertEquals(true, getProject().contains(issue));
+				assertEquals(true, getProject().contains(solution));
 				assertEquals(solution, issue.getSolution());
 				assertEquals(issue, solution.getIssue());
 
@@ -769,8 +770,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(issue));
-		assertEquals(false, getProject().containsInstance(solution));
+		assertEquals(true, getProject().contains(issue));
+		assertEquals(false, getProject().contains(solution));
 		assertEquals(null, issue.getSolution());
 		assertEquals(null, solution.getIssue());
 
@@ -823,8 +824,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(useCase);
-				assertEquals(true, getProject().containsInstance(useCase));
-				assertEquals(true, getProject().containsInstance(useCase2));
+				assertEquals(true, getProject().contains(useCase));
+				assertEquals(true, getProject().contains(useCase2));
 				assertEquals(1, getProjectSpace().getOperations().size());
 				assertEquals(true, getProjectSpace().getOperations().get(0) instanceof CreateDeleteOperation);
 				CreateDeleteOperation operation = (CreateDeleteOperation) getProjectSpace().getOperations().get(0);
@@ -851,7 +852,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			protected void doRun() {
 				getProject().addModelElement(section);
 
-				assertEquals(true, getProject().containsInstance(section));
+				assertEquals(true, getProject().contains(section));
 
 				clearOperations();
 
@@ -859,8 +860,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(useCase));
-		assertEquals(true, getProject().containsInstance(section));
+		assertEquals(true, getProject().contains(useCase));
+		assertEquals(true, getProject().contains(section));
 		assertEquals(1, section.getModelElements().size());
 		assertEquals(section, useCase.getLeafSection());
 		assertEquals(useCase, section.getModelElements().iterator().next());
@@ -1076,9 +1077,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(true, getProject().contains(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
 		assertEquals(testElement, parentTestElement.getContainedElements().get(0));
 		assertEquals(testElement2, testElement.getReferences().get(0));
@@ -1098,14 +1099,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(true, getProject().contains(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
 		assertEquals(testElement, parentTestElement.getContainedElements().get(0));
 		assertEquals(testElement2, testElement.getReferences().get(0));
 
-		assertEquals(true, getProject().containsInstance(testElement2));
+		assertEquals(true, getProject().contains(testElement2));
 		assertEquals(getProject(), ModelUtil.getProject(testElement2));
 		assertEquals(testElement2, parentTestElement.getContainedElements().get(1));
 
@@ -1162,14 +1163,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(true, getProject().contains(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
-		assertEquals(false, getProject().containsInstance(newTestElement));
-		assertEquals(false, getProject().containsInstance(newChildElement1));
-		assertEquals(false, getProject().containsInstance(newChildElement2));
-		assertEquals(true, getProject().containsInstance(newChildElement3));
+		assertEquals(false, getProject().contains(newTestElement));
+		assertEquals(false, getProject().contains(newChildElement1));
+		assertEquals(false, getProject().contains(newChildElement2));
+		assertEquals(true, getProject().contains(newChildElement3));
 
 		assertEquals(2, newTestElement.getContainedElements().size());
 		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
@@ -1194,14 +1195,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
+		assertEquals(true, getProject().contains(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
-		assertEquals(true, getProject().containsInstance(newTestElement));
-		assertEquals(true, getProject().containsInstance(newChildElement1));
-		assertEquals(true, getProject().containsInstance(newChildElement2));
-		assertEquals(true, getProject().containsInstance(newChildElement3));
+		assertEquals(true, getProject().contains(newTestElement));
+		assertEquals(true, getProject().contains(newChildElement1));
+		assertEquals(true, getProject().contains(newChildElement2));
+		assertEquals(true, getProject().contains(newChildElement3));
 
 		assertEquals(2, newTestElement.getContainedElements().size());
 		assertEquals(newChildElement1, newTestElement.getContainedElements().get(0));
@@ -1293,9 +1294,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(subTestElement));
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
-		assertEquals(true, getProject().containsInstance(subTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
+		assertEquals(true, getProject().contains(testElement));
+		assertEquals(true, getProject().contains(subTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1328,9 +1329,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(getProject(), ModelUtil.getProject(copiedTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(copiedSubTestElement));
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
-		assertEquals(true, getProject().containsInstance(copiedTestElement));
-		assertEquals(true, getProject().containsInstance(copiedSubTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
+		assertEquals(true, getProject().contains(copiedTestElement));
+		assertEquals(true, getProject().contains(copiedSubTestElement));
 
 		assertEquals(parentElementId, getProject().getModelElementId(parentTestElement));
 		assertEquals(elementId, getProject().getModelElementId(copiedTestElement));
@@ -1373,9 +1374,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(getProject(), ModelUtil.getProject(testElement));
 		assertEquals(getProject(), ModelUtil.getProject(subTestElement));
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
-		assertEquals(true, getProject().containsInstance(testElement));
-		assertEquals(true, getProject().containsInstance(subTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
+		assertEquals(true, getProject().contains(testElement));
+		assertEquals(true, getProject().contains(subTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1405,9 +1406,9 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(getProject(), ModelUtil.getProject(copiedTestElement));
 		assertEquals(getProject(), ModelUtil.getProject(copiedSubTestElement));
 
-		assertEquals(true, getProject().containsInstance(parentTestElement));
-		assertEquals(true, getProject().containsInstance(copiedTestElement));
-		assertEquals(true, getProject().containsInstance(copiedSubTestElement));
+		assertEquals(true, getProject().contains(parentTestElement));
+		assertEquals(true, getProject().contains(copiedTestElement));
+		assertEquals(true, getProject().contains(copiedSubTestElement));
 
 		assertEquals(parentElementId, getProject().getModelElementId(parentTestElement));
 		assertEquals(elementId, getProject().getModelElementId(copiedTestElement));
@@ -1466,7 +1467,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				useCase.setInitiatingActor(oldActor);
 				useCase.getParticipatingActors().add(newActor);
 				useCase.getParticipatingActors().add(otherActor);
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				clearOperations();
 			}
@@ -1528,11 +1529,11 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
-		assertTrue(getProject().containsInstance(secondTestElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
-		assertTrue(getProject().containsInstance(keyRefeferenceTestElement));
-		assertTrue(getProject().containsInstance(referenceTestElement));
+		assertTrue(getProject().contains(testElement));
+		assertTrue(getProject().contains(secondTestElement));
+		assertTrue(getProject().contains(parentTestElement));
+		assertTrue(getProject().contains(keyRefeferenceTestElement));
+		assertTrue(getProject().contains(referenceTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1541,10 +1542,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
-		assertFalse(getProject().containsInstance(secondTestElement));
+		assertTrue(getProject().contains(testElement));
+		assertFalse(getProject().contains(secondTestElement));
 		assertNull(testElement.getElementMap().get(parentTestElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
+		assertTrue(getProject().contains(parentTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1574,8 +1575,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertFalse(getProject().containsInstance(testElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
+		assertFalse(getProject().contains(testElement));
+		assertTrue(getProject().contains(parentTestElement));
 		assertNull(testElement.getElementMap().get(parentTestElement));
 	}
 
@@ -1601,10 +1602,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
-		assertTrue(getProject().containsInstance(secondTestElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
-		assertTrue(getProject().containsInstance(referenceTestElement));
+		assertTrue(getProject().contains(testElement));
+		assertTrue(getProject().contains(secondTestElement));
+		assertTrue(getProject().contains(parentTestElement));
+		assertTrue(getProject().contains(referenceTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1613,11 +1614,11 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
-		assertFalse(getProject().containsInstance(secondTestElement));
+		assertTrue(getProject().contains(testElement));
+		assertFalse(getProject().contains(secondTestElement));
 		assertNull(testElement.getStringToElementMap().get("secondTestElement"));
 		assertTrue(testElement.getStringToElementMap().containsKey("secondTestElement"));
-		assertTrue(getProject().containsInstance(parentTestElement));
+		assertTrue(getProject().contains(parentTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1637,8 +1638,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertFalse(getProject().containsInstance(testElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
+		assertFalse(getProject().contains(testElement));
+		assertTrue(getProject().contains(parentTestElement));
 	}
 
 	@Test
@@ -1663,10 +1664,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
-		assertTrue(getProject().containsInstance(secondTestElement));
-		assertTrue(getProject().containsInstance(parentTestElement));
-		assertTrue(getProject().containsInstance(referenceKeyTestElement));
+		assertTrue(getProject().contains(testElement));
+		assertTrue(getProject().contains(secondTestElement));
+		assertTrue(getProject().contains(parentTestElement));
+		assertTrue(getProject().contains(referenceKeyTestElement));
 
 		new EMFStoreCommand() {
 			@Override
@@ -1677,8 +1678,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertFalse(getProject().containsInstance(referenceKeyTestElement));
-		assertFalse(getProject().containsInstance(secondTestElement));
+		assertFalse(getProject().contains(referenceKeyTestElement));
+		assertFalse(getProject().contains(secondTestElement));
 
 		assertFalse(testElement.getElementToStringMap().containsKey(secondTestElement));
 		assertFalse(testElement.getElementToStringMap().containsKey(referenceKeyTestElement));
@@ -1698,7 +1699,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertTrue(getProject().containsInstance(testElement));
+		assertTrue(getProject().contains(testElement));
 		assertEquals(testElement.getStringToStringMap().get("Day"), "Tag");
 		assertEquals(testElement.getStringToStringMap().get("Hello"), "Hallo");
 
@@ -1708,7 +1709,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				getProject().deleteModelElement(testElement);
 			}
 		}.run(false);
-		assertFalse(getProject().containsInstance(testElement));
+		assertFalse(getProject().contains(testElement));
 	}
 
 	// commenting out, too exotic to happen
