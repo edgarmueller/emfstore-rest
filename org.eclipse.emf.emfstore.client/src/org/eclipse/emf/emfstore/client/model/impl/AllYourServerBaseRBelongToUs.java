@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.client.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.ServerInfo;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 
-public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer {
+public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements ServerInfo {
 
 	public List<? extends IProjectInfo> getProjectInfos() {
 		// TODO Auto-generated method stub
@@ -51,7 +51,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 
 	}
 
-	public List<? extends IHistoryInfo> getHistoryInfo(IServer serverInfo, IProjectId projectId, IHistoryQuery query)
+	public List<? extends IHistoryInfo> getHistoryInfo(ServerInfo serverInfo, IProjectId projectId, IHistoryQuery query)
 		throws EmfStoreException {
 		// TODO Auto-generated method stub
 		return null;

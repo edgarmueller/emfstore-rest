@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.common.IDisposable;
@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class ServerInfoSelectionDialog extends TitleAreaDialog {
 
-	private final java.util.List<? extends IServer> servers;
+	private final java.util.List<? extends ServerInfo> servers;
 	private ServerInfo result;
 	private ListViewer listViewer;
 	private ServerInfoLabelProvider labelProvider;
@@ -50,7 +50,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	 * @param servers
 	 *            a list of servers to be displayed
 	 */
-	public ServerInfoSelectionDialog(Shell parentShell, java.util.List<? extends IServer> servers) {
+	public ServerInfoSelectionDialog(Shell parentShell, java.util.List<? extends ServerInfo> servers) {
 		super(parentShell);
 		this.servers = servers;
 		this.result = null;

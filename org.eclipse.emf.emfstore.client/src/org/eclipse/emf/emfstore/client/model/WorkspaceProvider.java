@@ -259,7 +259,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
 		workspace.getServers().addAll(Configuration.getDefaultServerInfos());
 		EList<Usersession> usersessions = workspace.getUsersessions();
-		for (ServerInfo serverInfo : workspace.getServers()) {
+		for (ServerInfo serverInfo : workspace.getServerInfos()) {
 			Usersession lastUsersession = serverInfo.getLastUsersession();
 			if (lastUsersession != null) {
 				usersessions.add(lastUsersession);
