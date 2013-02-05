@@ -296,7 +296,7 @@ public class PaginationManager {
 			margins.querySpec = version;
 		}
 		if (modelElement != null && !(modelElement instanceof ProjectSpace)
-			&& projectSpace.getProject().containsInstance(modelElement)) {
+			&& projectSpace.getProject().contains(modelElement)) {
 			query = HistoryQueryBuilder.modelelementQuery(margins.querySpec, projectSpace.getProject()
 				.getModelElementId(modelElement), margins.aboveCenter, margins.belowCenter, showAllVersions, true);
 		} else {

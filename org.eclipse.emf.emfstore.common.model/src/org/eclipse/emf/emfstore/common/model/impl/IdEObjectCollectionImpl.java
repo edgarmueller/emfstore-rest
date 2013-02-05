@@ -38,6 +38,7 @@ import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelElementIdGenerator;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
@@ -155,7 +156,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getModelElements()
 	 */
-	public abstract Collection<EObject> getModelElements();
+	public abstract EList<EObject> getModelElements();
 
 	/**
 	 * Sets the model elements of this collection.
@@ -180,8 +181,21 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#containsInstance(org.eclipse.emf.ecore.EObject)
 	 */
-	public boolean containsInstance(EObject modelElement) {
+	public boolean contains(EObject modelElement) {
 		return getEObjectsCache().contains(modelElement);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 */
+	public boolean contains(IModelElementId id) {
+		if (!isCacheInitialized()) {
+			initMapping();
+		}
+		return getIdToEObjectCache().containsKey(id);
 	}
 
 	/**
@@ -270,7 +284,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getModelElement(org.eclipse.emf.emfstore.common.model.ModelElementId)
 	 */
-	public EObject getModelElement(ModelElementId modelElementId) {
+	public EObject getModelElement(IModelElementId modelElementId) {
 
 		if (modelElementId == null) {
 			return null;
@@ -280,7 +294,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		EObject eObject = getIdToEObjectCache().get(modelElementId.getId());
+		EObject eObject = getIdToEObjectCache().get(((ModelElementId) modelElementId).getId());
 
 		return eObject != null ? eObject : ModelUtil.getSingleton(modelElementId);
 	}
@@ -292,7 +306,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#deleteModelElement(org.eclipse.emf.ecore.EObject)
 	 */
 	public void deleteModelElement(final EObject modelElement) {
-		if (!this.containsInstance(modelElement)) {
+		if (!this.contains(modelElement)) {
 			throw new IllegalArgumentException("Cannot delete a model element that is not contained in this project.");
 		}
 
@@ -471,25 +485,46 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 */
+	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
+		return getAllModelElementsByClass(modelElementClass, true);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 *      java.lang.Boolean)
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
+		LinkedHashSet<T> result = new LinkedHashSet<T>();
+		if (includeSubclasses) {
+			for (EObject modelElement : getAllModelElements()) {
+				if (modelElementClass.isInstance(modelElement)) {
+					result.add((T) modelElement);
+				}
+			}
+		} else {
+			for (EObject modelElement : getAllModelElements()) {
+				if (modelElement.getClass() == modelElementClass) {
+					result.add((T) modelElement);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * Whether the cache has been initialized.
 	 * 
 	 * @return true, if the cache is initialized, false otherwise
 	 */
 	protected boolean isCacheInitialized() {
 		return cachesInitialized;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.common.model.ModelElementId)
-	 */
-	public boolean contains(ModelElementId id) {
-		if (!isCacheInitialized()) {
-			initMapping();
-		}
-		return getIdToEObjectCache().containsKey(id);
 	}
 
 	/**
@@ -794,5 +829,4 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		mapping.putAll(new LinkedHashMap<EObject, String>(allocatedEObjectToIdMap));
 		return mapping;
 	}
-
 }

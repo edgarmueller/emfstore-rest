@@ -84,7 +84,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		if (currentNotification != null && !currentNotification.isTouch() && !isInitializing
 			&& notifier instanceof EObject && !ModelUtil.isIgnoredDatatype((EObject) notifier)) {
 			EObject modelElement = (EObject) notifier;
-			if (!collection.containsInstance(modelElement) && isInCollectionHierarchy(modelElement)) {
+			if (!collection.contains(modelElement) && isInCollectionHierarchy(modelElement)) {
 				collection.modelElementAdded(collection, modelElement);
 			}
 		}
@@ -120,7 +120,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		if (notifier instanceof EObject) {
 			EObject modelElement = (EObject) notifier;
 			if (!isInCollectionHierarchy(modelElement)
-				&& (collection.containsInstance(modelElement) || collection.getDeletedModelElementId(modelElement) != null)) {
+				&& (collection.contains(modelElement) || collection.getDeletedModelElementId(modelElement) != null)) {
 				removedModelElements.peek().add(modelElement);
 			}
 
@@ -145,7 +145,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return true;
 		}
 
-		if (collection.containsInstance(parent)) {
+		if (collection.contains(parent)) {
 			return true;
 		}
 
@@ -159,7 +159,6 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		if (notificationDisabled) {
 			return;
 		}
@@ -204,8 +203,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		currentNotifications.pop();
 
-		if (!notification.isTouch()
-			&& notifier instanceof EObject && hasId(notifier)) {
+		if (!notification.isTouch() && notifier instanceof EObject && hasId(notifier)) {
 			collection.notify(notification, collection, (EObject) notifier);
 		}
 
@@ -215,8 +213,8 @@ public class EObjectChangeNotifier extends EContentAdapter {
 	}
 
 	private boolean hasId(Object notifier) {
-		return collection.getModelElementId((EObject) notifier) != null || collection
-			.getDeletedModelElementId((EObject) notifier) != null;
+		return collection.getModelElementId((EObject) notifier) != null
+			|| collection.getDeletedModelElementId((EObject) notifier) != null;
 	}
 
 	private void handleMapEntry(Map.Entry<?, ?> entry, EReference reference) {
@@ -238,14 +236,14 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 			EObject eObject = (EObject) obj;
 
-			if (!collection.containsInstance(eObject)) {
+			if (!collection.contains(eObject)) {
 				collection.addCutElement(eObject);
 			}
 		}
 	}
 
 	private void handleSingleReference(EObject newEObject) {
-		if (!collection.containsInstance(newEObject)) {
+		if (!collection.contains(newEObject)) {
 			collection.addCutElement(newEObject);
 		}
 	}

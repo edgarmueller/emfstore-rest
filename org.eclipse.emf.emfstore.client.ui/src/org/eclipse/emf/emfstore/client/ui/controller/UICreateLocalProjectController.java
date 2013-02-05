@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.api.LOKO;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
@@ -59,7 +59,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		this.description = description == null ? "" : description;
 	}
 
-	private LOKO createLocalProject() {
+	private ILocalProject createLocalProject() {
 		CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 		if (dialog.open() == Dialog.OK) {
 			String projectName = dialog.getName();
@@ -71,7 +71,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		return null;
 	}
 
-	private LOKO createLocalProject(final String name, final String description) {
+	private ILocalProject createLocalProject(final String name, final String description) {
 		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name, description);
 	}
 
@@ -82,7 +82,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public LOKO doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public ILocalProject doRun(IProgressMonitor monitor) throws EmfStoreException {
 		if (name == null) {
 			return createLocalProject();
 		}

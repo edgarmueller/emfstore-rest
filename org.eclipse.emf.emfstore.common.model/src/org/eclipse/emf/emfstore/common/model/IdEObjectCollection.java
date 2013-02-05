@@ -11,13 +11,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 
 /**
  * A collection of {@link EObject}s where each one can be identified via a {@link ModelElementId}. {@link EObject}s can
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author emueller
  * 
  */
-public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMapping {
+public interface IdEObjectCollection extends EObject, EObjectContainer, IModelElementIdToEObjectMapping {
 
 	/**
 	 * Adds the given model element to the collection.
@@ -58,6 +58,14 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	void disallocateModelElementIds(Set<ModelElementId> modelElementIds);
 
 	/**
+	 * Returns all directly contained model element of the collection, i.e. a
+	 * hierarchical representation of the model elements.
+	 * 
+	 * @return a collection of directly contained model elements
+	 */
+	EList<EObject> getModelElements();
+
+	/**
 	 * Checks whether a given model element is contained in the collection.
 	 * 
 	 * @param modelElement
@@ -66,15 +74,7 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 * @return true, if the model element is contained in the collection, false
 	 *         otherwise
 	 */
-	boolean containsInstance(EObject modelElement);
-
-	/**
-	 * Returns all directly contained model element of the collection, i.e. a
-	 * hierarchical representation of the model elements.
-	 * 
-	 * @return a collection of directly contained model elements
-	 */
-	Collection<EObject> getModelElements();
+	boolean contains(EObject modelElement);
 
 	/**
 	 * Checks whether the {@link EObject} with the given {@link ModelElementId} is contained in the collection.
@@ -85,7 +85,7 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 * @return true, if the {@link EObject} with the {@link ModelElementId} in
 	 *         question is contained in the collection
 	 */
-	boolean contains(ModelElementId eObjectId);
+	boolean contains(IModelElementId eObjectId);
 
 	/**
 	 * Retrieve the {@link ModelElementId} of the given model element.
@@ -104,7 +104,7 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 *            get retrieved
 	 * @return the model element that has the given {@link ModelElementId} assigned
 	 */
-	EObject getModelElement(ModelElementId modelElementId);
+	EObject getModelElement(IModelElementId modelElementId);
 
 	/**
 	 * Deletes the given model element from the collection.
@@ -120,35 +120,6 @@ public interface IdEObjectCollection extends EObject, IModelElementIdToEObjectMa
 	 * @return a set of all model elements contained in the collection
 	 */
 	Set<EObject> getAllModelElements();
-
-	/**
-	 * Retrieve a list of all model elements of a certain type in the
-	 * collection.
-	 * 
-	 * @param <T>
-	 *            a sub-type of model element
-	 * @param modelElementClass
-	 *            the {@link EClass}
-	 * @param includeSubclasses
-	 *            whether to also include all subclasses of the given {@link EClass} in the list
-	 * @return a list of model elements of the given type
-	 */
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass, Boolean includeSubclasses);
-
-	/**
-	 * Retrieve a list of all model elements of a certain type in the
-	 * collection.
-	 * 
-	 * @param <T>
-	 *            a sub-type of model element
-	 * @param modelElementClass
-	 *            the {@link EClass}
-	 * @param list
-	 *            a list of model elements, can be empty, but must be of the
-	 *            same type as the <code>modelElementClass</code> indicates.
-	 * @return a list of model elements of the given type
-	 */
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass);
 
 	/**
 	 * Retrieve a list of model elements of a certain type in the collection

@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.client.model.controller;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -43,7 +43,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	 *            the target version to revert to
 	 * @param headRevert if true, otherwise just revert individual version
 	 */
-	public RevertCommitController(ILocalProject projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
+	public RevertCommitController(EObjectContainer projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
 		this.projectSpace = (ProjectSpace) projectSpace;
 		this.versionSpec = versionSpec;
 		this.headRevert = headRevert;

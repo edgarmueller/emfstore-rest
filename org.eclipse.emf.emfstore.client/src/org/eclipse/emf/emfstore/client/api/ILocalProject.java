@@ -3,18 +3,16 @@ package org.eclipse.emf.emfstore.client.api;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
@@ -24,24 +22,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
-public interface ILocalProject extends IProject {
-
-	EObject getModelElement(IModelElementId modelElementId);
-
-	IModelElementId getModelElementId(EObject eObject);
-
-	EList<EObject> getModelElements();
-
-	Set<EObject> getAllModelElements();
-
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass);
-
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class modelElementClass, Boolean subclasses);
-
-	boolean contains(IModelElementId modelElementId);
-
-	// TOOD: parameter type
-	boolean contains(EObject object);
+public interface ILocalProject extends IProject, EObjectContainer {
 
 	/**
 	 * Commits all pending changes of the project space.
