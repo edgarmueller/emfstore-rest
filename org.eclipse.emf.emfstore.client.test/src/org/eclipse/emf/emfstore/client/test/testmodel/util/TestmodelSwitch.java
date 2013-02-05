@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.test.testmodel.util;
 
 import java.util.List;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.testmodel.*;
@@ -104,6 +105,30 @@ public class TestmodelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<TestElement, String> testElementToStringMap = (Map.Entry<TestElement, String>)theEObject;
+				T result = caseTestElementToStringMap(testElementToStringMap);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TestmodelPackage.STRING_TO_STRING_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> stringToStringMap = (Map.Entry<String, String>)theEObject;
+				T result = caseStringToStringMap(stringToStringMap);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TestmodelPackage.TEST_ELEMENT_TO_TEST_ELEMENT_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<TestElement, TestElement> testElementToTestElementMap = (Map.Entry<TestElement, TestElement>)theEObject;
+				T result = caseTestElementToTestElementMap(testElementToTestElementMap);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TestmodelPackage.STRING_TO_TEST_ELEMENT_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<String, TestElement> stringToTestElementMap = (Map.Entry<String, TestElement>)theEObject;
+				T result = caseStringToTestElementMap(stringToTestElementMap);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -135,6 +160,66 @@ public class TestmodelSwitch<T> {
 	 * @generated
 	 */
 	public T caseTestElementContainer(TestElementContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Test Element To String Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Test Element To String Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTestElementToStringMap(Map.Entry<TestElement, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String To String Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String To String Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringToStringMap(Map.Entry<String, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Test Element To Test Element Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Test Element To Test Element Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTestElementToTestElementMap(Map.Entry<TestElement, TestElement> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String To Test Element Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String To Test Element Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringToTestElementMap(Map.Entry<String, TestElement> object) {
 		return null;
 	}
 
