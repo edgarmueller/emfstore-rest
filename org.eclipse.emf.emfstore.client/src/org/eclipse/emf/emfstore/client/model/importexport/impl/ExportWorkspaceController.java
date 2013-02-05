@@ -96,13 +96,13 @@ public class ExportWorkspaceController implements IExportImportController {
 			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Workspace.getExtension());
 		}
 
-		Workspace copy = ModelUtil.clone(WorkspaceProvider.getInstance().getCurrentWorkspace());
+		Workspace copy = ModelUtil.clone((Workspace) WorkspaceProvider.getInstance().getWorkspace());
 
 		int i = 0;
 
 		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(i++)
-				.getProject();
+			Project orgProject = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()
+				.get(i++).getProject();
 			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
 		}
 

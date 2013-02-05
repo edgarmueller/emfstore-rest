@@ -42,7 +42,7 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 			// TODO move logic to UIController
 			RangeQuery query = HistoryQueryBuilder.rangeQuery(ps.getBaseVersion(), 20, 0, false, false, false, false);
 			try {
-				List<HistoryInfo> historyInfo = ps.getHistoryInfo(query);
+				List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(query);
 				// filter base version
 				Iterator<HistoryInfo> iter = historyInfo.iterator();
 				while (iter.hasNext()) {

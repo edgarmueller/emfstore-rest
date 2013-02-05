@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.client.api.ILogMessage;
 import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.IRunnableContext;
@@ -88,6 +87,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
@@ -439,9 +439,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getHistoryInfo(org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
 	 */
-	public List<IHistoryInfo> getHistoryInfo(IHistoryQuery query) throws EmfStoreException {
+	public List<? extends IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EmfStoreException {
 		return getWorkspace().getHistoryInfo(getUsersession(), getProjectId(), query);
 	}
 

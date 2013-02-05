@@ -1568,12 +1568,12 @@ public class Topology1toNTest extends TopologyTest {
 		SingleReferenceOperation op4 = checkAndCast(subOperations.get(4), SingleReferenceOperation.class);
 		SingleReferenceOperation op5 = checkAndCast(subOperations.get(5), SingleReferenceOperation.class);
 		SingleReferenceOperation op6 = checkAndCast(subOperations.get(6), SingleReferenceOperation.class);
-		MultiReferenceOperation op7 = checkAndCast(subOperations.get(0), MultiReferenceOperation.class);
+		MultiReferenceOperation op7 = checkAndCast(subOperations.get(7), MultiReferenceOperation.class);
 		SingleReferenceOperation op8 = checkAndCast(subOperations.get(8), SingleReferenceOperation.class);
 		SingleReferenceOperation op9 = checkAndCast(subOperations.get(9), SingleReferenceOperation.class);
 		MultiReferenceOperation op10 = checkAndCast(subOperations.get(10), MultiReferenceOperation.class);
 		SingleReferenceOperation op11 = checkAndCast(subOperations.get(11), SingleReferenceOperation.class);
-		MultiReferenceOperation op12 = checkAndCast(subOperations.get(0), MultiReferenceOperation.class);
+		MultiReferenceOperation op12 = checkAndCast(subOperations.get(12), MultiReferenceOperation.class);
 		SingleReferenceOperation op13 = checkAndCast(subOperations.get(13), SingleReferenceOperation.class);
 		SingleReferenceOperation op14 = checkAndCast(subOperations.get(14), SingleReferenceOperation.class);
 		MultiReferenceOperation op15 = checkAndCast(subOperations.get(15), MultiReferenceOperation.class);

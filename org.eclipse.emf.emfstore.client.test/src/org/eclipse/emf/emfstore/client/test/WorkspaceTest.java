@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -63,12 +64,13 @@ public abstract class WorkspaceTest {
 		if (connectionManager != null) {
 			workspaceManager.setConnectionManager(connectionManager);
 		}
-		workspace = workspaceManager.getCurrentWorkspace();
+		workspace = (Workspace) workspaceManager.getWorkspace();
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace localProjectSpace = workspace.createLocalProject("testProject", "test Project");
+				ProjectSpace localProjectSpace = ((WorkspaceBase) workspace).createLocalProject("testProject",
+					"test Project");
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
@@ -160,7 +162,7 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				int retried = 0;
 				try {
-					WorkspaceProvider.getInstance().getCurrentWorkspace().deleteProjectSpace(ps);
+					((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).deleteProjectSpace(ps);
 				} catch (IOException e) {
 					if (retried++ > 2) {
 						fail();

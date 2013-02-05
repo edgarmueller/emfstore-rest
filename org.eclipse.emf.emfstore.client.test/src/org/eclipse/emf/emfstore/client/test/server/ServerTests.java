@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.test.server;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -22,6 +23,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -199,7 +201,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+					Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 					ServerInfo serverInfo = SetupHelper.getServerInfo();
 					Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE
 						.createUsersession();
@@ -235,10 +237,10 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (ProjectInfo info : WorkspaceProvider.getInstance().getCurrentWorkspace()
+					WorkspaceBase workspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
+					for (ProjectInfo info : (List<ProjectInfo>) (List<?>) workspace
 						.getRemoteProjectList(getServerInfo())) {
-						WorkspaceProvider.getInstance().getCurrentWorkspace()
-							.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
+						workspace.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
 					}
 				} catch (EmfStoreException e) {
 				}

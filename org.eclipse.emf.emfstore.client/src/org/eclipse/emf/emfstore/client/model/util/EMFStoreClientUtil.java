@@ -44,7 +44,7 @@ public final class EMFStoreClientUtil {
 	 * @return a server info
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
-		Workspace workspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		for (ServerInfo existingServerInfo : workspace.getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
@@ -99,7 +99,7 @@ public final class EMFStoreClientUtil {
 	 * @return a user session
 	 */
 	public static Usersession createUsersession(String username, String password, String serverUrl, int serverPort) {
-		Workspace workspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		for (Usersession usersession : workspace.getUsersessions()) {
 			ServerInfo existingServerInfo = usersession.getServerInfo();
 			if (existingServerInfo != null && existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)

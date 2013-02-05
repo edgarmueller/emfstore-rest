@@ -26,6 +26,7 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
@@ -158,13 +159,13 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	}
 
 	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EmfStoreException {
-		final List<BranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace()).getBranches(
-			serverInfo, projectInfo.getProjectId());
+		final List<IBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
+			.getBranches(serverInfo, projectInfo.getProjectId());
 
 		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {
 			public BranchInfo call() throws Exception {
 				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-					getShell(), branches);
+					getShell(), (List<BranchInfo>) (List<?>) branches);
 				dialog.setBlockOnOpen(true);
 
 				if (dialog.open() != Dialog.OK || dialog.getResult() == null) {

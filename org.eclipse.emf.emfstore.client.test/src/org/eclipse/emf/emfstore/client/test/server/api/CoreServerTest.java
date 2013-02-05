@@ -105,7 +105,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					return ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
+					// TODO: TQ cast
+					return (PrimaryVersionSpec) ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -147,7 +148,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					Workspace workspace = getWorkspace();
 					workspace.setConnectionManager(getConnectionMock());
-					return workspace.checkout(projectSpace.getUsersession(),
+					// TODO: TQ
+					return (ProjectSpace) workspace.checkout(projectSpace.getUsersession(),
 						ModelUtil.clone(projectSpace.getProjectInfo()), ModelUtil.clone(projectSpace.getBaseVersion()),
 						new NullProgressMonitor());
 				} catch (EmfStoreException e) {
@@ -164,8 +166,9 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					Workspace workspace = getWorkspace();
 					workspace.setConnectionManager(getConnectionMock());
-					return workspace.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(projectInfo),
-						ModelUtil.clone(baseVersion), new NullProgressMonitor());
+					// TODO: TQ
+					return (ProjectSpace) workspace.checkout(getProjectSpace().getUsersession(),
+						ModelUtil.clone(projectInfo), ModelUtil.clone(baseVersion), new NullProgressMonitor());
 				} catch (EmfStoreException e) {
 					throw new RuntimeException(e);
 				}

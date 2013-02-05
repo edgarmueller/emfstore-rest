@@ -309,13 +309,14 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 								List<HistoryInfo> historyInfos = getLocalChanges();
 								monitor.worked(10);
 								if (projectSpace != modelElement) {
-									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder
-										.modelelementQuery(centerVersion,
+									historyInfos.addAll(((List<HistoryInfo>) (List<?>) projectSpace
+										.getHistoryInfos(HistoryQueryBuilder.modelelementQuery(centerVersion,
 											Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-											LOWER_LIMIT, showAllVersions, true)));
+											LOWER_LIMIT, showAllVersions, true))));
 								} else {
-									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.rangeQuery(
-										centerVersion, UPPER_LIMIT, LOWER_LIMIT, showAllVersions, true, true, true)));
+									historyInfos.addAll((List<HistoryInfo>) (List<?>) projectSpace
+										.getHistoryInfos(HistoryQueryBuilder.rangeQuery(centerVersion, UPPER_LIMIT,
+											LOWER_LIMIT, showAllVersions, true, true, true)));
 								}
 								monitor.worked(90);
 								return historyInfos;
@@ -681,8 +682,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					@Override
 					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
 						try {
-							return projectSpace.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL,
-								Integer.parseInt(value)));
+							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
+								VersionSpec.GLOBAL, Integer.parseInt(value)));
 						} catch (EmfStoreException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
 								"Error: The version you requested does not exist.", e);

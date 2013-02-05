@@ -73,7 +73,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 
 	public TestSessionProvider() {
 
-		final Workspace workspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		final Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
 		usersession.setUsername("super");

@@ -111,7 +111,7 @@ public class PaginationManager {
 			newCenterVersion = currentCenterVersionShown;
 		}
 		HistoryQuery query = getQuery(newCenterVersion, aboveCenterCount, belowCenterCount);
-		List<HistoryInfo> historyInfos = projectSpace.getHistoryInfo(query);
+		List<HistoryInfo> historyInfos = (List<HistoryInfo>) (List<?>) projectSpace.getHistoryInfos(query);
 
 		if (newCenterVersion != null && !currentCenterVersionShown.equals(newCenterVersion)) {
 			setCorrectCenterVersionAndHistory(historyInfos, newCenterVersion.getIdentifier(), beforeCurrent);
@@ -321,7 +321,7 @@ public class PaginationManager {
 
 		// currently always the biggest primary version of given branch which is equal or lower
 		// to the given versionSpec
-		PrimaryVersionSpec nearestSpec = projectSpace.resolveVersionSpec(centerVersion);
+		PrimaryVersionSpec nearestSpec = (PrimaryVersionSpec) projectSpace.resolveVersionSpec(centerVersion);
 		if (nearestSpec.getIdentifier() < centerVersion.getIdentifier()) {
 			margins.aboveCenter = aboveCenter + (centerVersion.getIdentifier() - nearestSpec.getIdentifier()) + 1;
 		} else if (nearestSpec.getIdentifier() > centerVersion.getIdentifier()) {
@@ -392,7 +392,7 @@ public class PaginationManager {
 
 		HistoryQuery query = getQuery(Versions.createPRIMARY(projectSpace.getBaseVersion(), id), aboveCenterCount
 			+ belowCenterCount, aboveCenterCount + belowCenterCount);
-		List<HistoryInfo> historyInfos = projectSpace.getHistoryInfo(query);
+		List<HistoryInfo> historyInfos = (List<HistoryInfo>) (List<?>) projectSpace.getHistoryInfos(query);
 		int requestedIdPos = findPositionOfId(id, historyInfos, false);
 		boolean contained = containsId(historyInfos, id);
 		int newCenterPos;

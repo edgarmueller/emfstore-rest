@@ -6,6 +6,7 @@ import java.io.IOException;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerExecutor;
@@ -61,11 +62,11 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectController("importedProject"));
 
-		ProjectSpace newProjectSpace = null;
+		IProject newProjectSpace = null;
 
-		for (ProjectSpace projectSpace : WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces()) {
-			if (projectSpace.getProjectName().equals("importedProject")) {
-				newProjectSpace = projectSpace;
+		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getProjects()) {
+			if (project.getProjectName().equals("importedProject")) {
+				newProjectSpace = getProjectSpace();
 				break;
 			}
 		}
@@ -90,10 +91,10 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectSpaceController());
 
-		Assert.assertEquals(2, WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().size());
+		Assert.assertEquals(2, WorkspaceProvider.getInstance().getWorkspace().getProjects().size());
 
-		ProjectSpace a = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(0);
-		ProjectSpace b = WorkspaceProvider.getInstance().getCurrentWorkspace().getProjectSpaces().get(1);
+		IProject a = WorkspaceProvider.getInstance().getWorkspace().getProjects().get(0);
+		IProject b = WorkspaceProvider.getInstance().getWorkspace().getProjects().get(1);
 
 		// TODO: are the imported IDs supposed to be the same as in the original project?
 		// Assert.assertTrue(ModelUtil.areEqual(a.getProject(), b.getProject()));

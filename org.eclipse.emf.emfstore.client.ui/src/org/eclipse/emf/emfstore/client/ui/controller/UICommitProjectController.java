@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -155,10 +156,10 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 */
 	@Override
 	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EmfStoreException {
-		PrimaryVersionSpec version;
+		IPrimaryVersionSpec version;
 		try {
 			version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
-			return version;
+			return (PrimaryVersionSpec) version;
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore

@@ -18,7 +18,9 @@ import java.util.Arrays;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
@@ -114,7 +116,7 @@ public class PerformanceTest {
 			protected void doRun() {
 				setupHelper.loginServer();
 				usersession = setupHelper.getUsersession();
-				WorkspaceProvider.getInstance().getCurrentWorkspace().getUsersessions().add(usersession);
+				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().add(usersession);
 			}
 		}.run(false);
 
@@ -193,8 +195,8 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace2 = WorkspaceProvider.getInstance().getCurrentWorkspace()
-							.checkout(setupHelper.getUsersession(), projectSpace.getProjectInfo());
+						projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
+							setupHelper.getUsersession(), projectSpace.getProjectInfo());
 					} catch (EmfStoreException e) {
 						e.printStackTrace();
 					}
@@ -216,7 +218,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						WorkspaceProvider.getInstance().getCurrentWorkspace().deleteProjectSpace(projectSpace2);
+						((Workspace) WorkspaceProvider.getInstance().getWorkspace()).deleteProjectSpace(projectSpace2);
 						projectSpace2 = null;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -266,8 +268,8 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = WorkspaceProvider.getInstance().getCurrentWorkspace()
-						.checkout(usersession2, setupHelper.getTestProjectSpace().getProjectInfo());
+					projectSpace2 = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
+						usersession2, setupHelper.getTestProjectSpace().getProjectInfo());
 				} catch (EmfStoreException e) {
 					e.printStackTrace();
 				}
@@ -350,8 +352,8 @@ public class PerformanceTest {
 				}
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
-			CleanMemoryTask task = new CleanMemoryTask(WorkspaceProvider.getInstance().getCurrentWorkspace()
-				.getResourceSet());
+			CleanMemoryTask task = new CleanMemoryTask(
+				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getResourceSet());
 			task.run();
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
 			memAfterUpdate[i] = usedMemory();

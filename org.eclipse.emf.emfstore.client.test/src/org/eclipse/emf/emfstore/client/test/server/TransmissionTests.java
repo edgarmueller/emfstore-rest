@@ -43,7 +43,7 @@ public abstract class TransmissionTests extends ServerTests {
 
 			@Override
 			protected void doRun() {
-				Workspace workspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+				Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 				workspace.getServerInfos().add(getServerInfo());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);
@@ -52,8 +52,11 @@ public abstract class TransmissionTests extends ServerTests {
 				try {
 					usersession1.logIn();
 					usersession2.logIn();
-					setProjectSpace1(workspace.checkout(usersession1, getProjectInfo(), new NullProgressMonitor()));
-					setProjectSpace2(workspace.checkout(usersession2, getProjectInfo(), new NullProgressMonitor()));
+					// TODO: TQ
+					setProjectSpace1((ProjectSpace) workspace.checkout(usersession1, getProjectInfo(),
+						new NullProgressMonitor()));
+					setProjectSpace2((ProjectSpace) workspace.checkout(usersession2, getProjectInfo(),
+						new NullProgressMonitor()));
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
 				} catch (EmfStoreException e) {

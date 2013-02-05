@@ -30,7 +30,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 		session.setPassword("super");
 		session.setSavePassword(true);
 
-		Workspace currentWorkspace = WorkspaceProvider.getInstance().getCurrentWorkspace();
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		// currentWorkspace.getServerInfos().add(serverInfo);
 		currentWorkspace.getUsersessions().add(session);
 		currentWorkspace.save();

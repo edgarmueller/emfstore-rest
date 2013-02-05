@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
@@ -137,7 +138,7 @@ public interface IProject {
 	 *             if server the throws an exception
 	 * @generated NOT
 	 */
-	List<IHistoryInfo> getHistoryInfo(IHistoryQuery query) throws EmfStoreException;
+	List<? extends IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EmfStoreException;
 
 	Date getLastUpdated();
 
@@ -248,10 +249,6 @@ public interface IProject {
 	 * @generated NOT
 	 */
 	void revert();
-
-	void setProjectDescription(String value);
-
-	void setProjectName(String value);
 
 	/**
 	 * Shares this project space.
