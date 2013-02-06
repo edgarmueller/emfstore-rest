@@ -51,9 +51,8 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(final String projectName,
-			final String projectDescription, final IProgressMonitor monitor)
-			throws EMFStoreException;
+	IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
+		final IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -74,13 +73,9 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(IUsersession usersession,
-			final String projectName, final String projectDescription,
-			final IProgressMonitor monitor) throws EMFStoreException;
+	IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
+		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException;
 
 	IUsersession login(String name, String password) throws EMFStoreException;
 
-	boolean isLoggedIn(IUsersession usersession);
-
-	void logout(IUsersession usersession) throws EMFStoreException;
 }
