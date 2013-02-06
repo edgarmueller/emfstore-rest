@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.client.test.server;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.model.Configuration;
@@ -36,7 +35,6 @@ import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
@@ -98,7 +96,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public RemoteProject getProjectInfo() {
+	public RemoteProject getRemoteProject() {
 		return getProjectSpace().getRemoteProject();
 	}
 
@@ -107,7 +105,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() {
-		return getProjectInfo().getHeadVersion(false);
+		return getRemoteProject().getHeadVersion(false);
 	}
 
 	/**
@@ -237,10 +235,8 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					WorkspaceBase workspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
-					for (ProjectInfo info : (List<ProjectInfo>) (List<?>) workspace
-						.getRemoteProjectList(getServerInfo())) {
-						workspace.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
+					for (RemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
+						remoteProject.delete(true);
 					}
 				} catch (EMFStoreException e) {
 				}

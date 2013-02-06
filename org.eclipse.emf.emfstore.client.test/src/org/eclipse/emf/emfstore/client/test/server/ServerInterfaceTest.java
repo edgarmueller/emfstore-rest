@@ -54,7 +54,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws EMFStoreException {
-		assertTrue(WorkspaceProvider.getInstance().getWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -72,6 +72,9 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
+					getpr
+					
+					
 					return ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).checkout(
 						TestSessionProvider.getInstance().getDefaultUsersession(), getProjectInfo(),
 						new NullProgressMonitor());

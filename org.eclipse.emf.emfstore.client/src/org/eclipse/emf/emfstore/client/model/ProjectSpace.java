@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.client.model.impl.OperationManager;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
@@ -784,5 +785,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	List<BranchInfo> getBranches() throws EMFStoreException;
 
 	List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
+
+	RemoteProject getRemoteProject();
 
 } // ProjectContainer

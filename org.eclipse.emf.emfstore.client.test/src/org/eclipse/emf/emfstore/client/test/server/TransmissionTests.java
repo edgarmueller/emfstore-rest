@@ -53,9 +53,9 @@ public abstract class TransmissionTests extends ServerTests {
 					usersession1.logIn();
 					usersession2.logIn();
 					// TODO: TQ
-					setProjectSpace1((ProjectSpace) workspace.checkout(usersession1, getProjectInfo(),
+					setProjectSpace1((ProjectSpace) workspace.checkout(usersession1, getRemoteProject(),
 						new NullProgressMonitor()));
-					setProjectSpace2((ProjectSpace) workspace.checkout(usersession2, getProjectInfo(),
+					setProjectSpace2((ProjectSpace) workspace.checkout(usersession2, getRemoteProject(),
 						new NullProgressMonitor()));
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
