@@ -18,13 +18,11 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
-public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl
-		implements IServer, ServerInfo {
+public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
 
 	List<RemoteProject> remoteProjects;
 
-	private IUsersession validateUsersession(IUsersession usersession)
-			throws EMFStoreException {
+	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
 			// TODO OTS custom exception
 			throw new EMFStoreException("Invalid usersession for given server.");
@@ -32,35 +30,29 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl
 		return usersession;
 	}
 
-	public IRemoteProject createRemoteProject(IUsersession usersession,
-			final String projectName, final String projectDescription,
-			final IProgressMonitor progressMonitor) throws EMFStoreException {
-		return new RemoteProject(this, new ServerCall<ProjectInfo>(
-				validateUsersession(usersession)) {
+	public IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
+		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
+		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
 			@Override
 			protected ProjectInfo run() throws EMFStoreException {
-				return getConnectionManager().createEmptyProject(
-						getSessionId(), projectName, projectDescription,
-						createLogmessage(getUsersession(), projectName));
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+					createLogmessage(getUsersession(), projectName));
 			}
 		}.execute());
 	}
 
-	public IRemoteProject createRemoteProject(final String projectName,
-			final String projectDescription, IProgressMonitor monitor)
-			throws EMFStoreException {
+	public IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
+		IProgressMonitor monitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(this) {
 			@Override
 			protected ProjectInfo run() throws EMFStoreException {
-				return getConnectionManager().createEmptyProject(
-						getSessionId(), projectName, projectDescription,
-						createLogmessage(getUsersession(), projectName));
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+					createLogmessage(getUsersession(), projectName));
 			}
 		}.execute());
 	}
 
-	private LogMessage createLogmessage(IUsersession usersession,
-			final String projectName) {
+	private LogMessage createLogmessage(IUsersession usersession, final String projectName) {
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		log.setMessage("Creating project '" + projectName + "'");
 		log.setAuthor(usersession.getUsername());
@@ -79,8 +71,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl
 		return remoteProjects;
 	}
 
-	public List<? extends IRemoteProject> getRemoteProjects(
-			IUsersession usersession) throws EMFStoreException {
+	public List<? extends IRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -91,27 +82,15 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl
 	 * 
 	 * @throws EmfStoreException
 	 * @throws AccessControlException
-	 * @see org.eclipse.emf.emfstore.client.api.IServer#login(java.lang.String,
-	 *      java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.api.IServer#login(java.lang.String, java.lang.String)
 	 * @generated NOT
 	 */
-	public IUsersession login(String name, String password)
-			throws EMFStoreException {
+	public IUsersession login(String name, String password) throws EMFStoreException {
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setUsername(name);
 		usersession.setPassword(password);
 		usersession.setServerInfo((ServerInfo) this);
 		usersession.logIn();
 		return usersession;
-	}
-
-	public boolean isLoggedIn(IUsersession usersession) {
-		Usersession usersessionImpl = (Usersession) usersession;
-		return usersessionImpl.isLoggedIn();
-	}
-
-	public void logout(IUsersession usersession) throws EMFStoreException {
-		Usersession usersessionImpl = (Usersession) usersession;
-		usersessionImpl.logout();
 	}
 }

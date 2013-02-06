@@ -781,4 +781,8 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		return getServerInfo();
 	}
 
+	public void renew() throws EMFStoreException {
+		logIn();
+	}
+
 } // UsersessionImpl
