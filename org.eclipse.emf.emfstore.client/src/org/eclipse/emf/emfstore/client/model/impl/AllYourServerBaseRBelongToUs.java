@@ -61,8 +61,13 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
+		return getRemoteProjects(false);
+	}
+
+	public List<RemoteProject> getRemoteProjects(boolean fetch) throws EMFStoreException {
+		// TODO: OTS read parameter
 		if (remoteProjects == null) {
-			List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
+			remoteProjects = new ArrayList<RemoteProject>();
 			for (ProjectInfo projectInfo : getProjectInfos()) {
 				RemoteProject wrapper = new RemoteProject(this, projectInfo);
 				remoteProjects.add(wrapper);
