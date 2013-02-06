@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
@@ -29,7 +30,6 @@ import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.api.IProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -164,13 +164,11 @@ public class ServerInterfaceTest extends ServerTests {
 	public void deleteProjectTest() throws EMFStoreException {
 		assertTrue(WorkspaceProvider.getInstance().getWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest());
 
-		WorkspaceProvider.getInstance().getWorkspace().deleteRemoteProject(getServerInfo(), getProjectId(), true);
+		getProjectInfo()
 
 		try {
-			// TODO: TQ cast
-			List<ProjectInfo> remoteProjectList = (List<ProjectInfo>) (List<?>) WorkspaceProvider.getInstance()
-				.getWorkspace().getRemoteProjectList(getServerInfo());
-			for (ProjectInfo projectInfo : remoteProjectList) {
+			List<RemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+			for (RemoteProject projectInfo : remoteProjectList) {
 				if (projectInfo.getProjectId() == getProjectId()) {
 					assertTrue(false);
 				}
@@ -179,7 +177,7 @@ public class ServerInterfaceTest extends ServerTests {
 		} catch (EMFStoreException e) {
 			assertTrue(true);
 		}
-		assertTrue(WorkspaceProvider.getInstance().getWorkspace().getRemoteProjectList(getServerInfo()).size() == getProjectsOnServerBeforeTest() - 1);
+		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest() - 1);
 	}
 
 	/**
@@ -192,13 +190,12 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void resolveVersionSpecTest() throws EMFStoreException {
-		// TODO: TQ cast
-		List<? extends IProjectInfo> remoteProjectList = WorkspaceProvider.getInstance().getWorkspace()
-			.getRemoteProjectList(getServerInfo());
+
+		List<RemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
 
 		boolean sameVersionSpec = false;
-		for (IProjectInfo projectInfo : remoteProjectList) {
-			if (projectInfo.getVersion().equals(getProjectVersion())) {
+		for (RemoteProject project : remoteProjectList) {
+			if (project.getHeadVersion(true).equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}
 		}

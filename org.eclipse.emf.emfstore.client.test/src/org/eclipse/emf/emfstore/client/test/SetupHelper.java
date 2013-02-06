@@ -476,8 +476,10 @@ public class SetupHelper {
 			protected void doRun() {
 				for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
 					try {
-						currentWorkspace.deleteProjectSpace(projectSpace);
+						projectSpace.delete();
 					} catch (IOException e) {
+						throw new RuntimeException(e);
+					} catch (EMFStoreException e) {
 						throw new RuntimeException(e);
 					}
 				}
@@ -630,8 +632,8 @@ public class SetupHelper {
 
 				try {
 					// TODO OTS hot code incoming
-					compareProject = ((ProjectSpace) new RemoteProject(projectInfo)
-						.checkout(usersession)).getProject();
+					compareProject = new RemoteProject(usersession.getServer(), projectInfo).checkout(usersession)
+						.getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EMFStoreException e) {
 					e.printStackTrace();

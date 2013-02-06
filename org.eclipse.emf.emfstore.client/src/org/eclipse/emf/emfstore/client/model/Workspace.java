@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
@@ -292,7 +291,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 *            The connection manager to be set.
 	 * @generated NOT
 	 */
-	void setConnectionManager(ConnectionManager connectionManager);
+	// void setConnectionManager(ConnectionManager connectionManager);
 
 	/**
 	 * Returns the workspace resource set.

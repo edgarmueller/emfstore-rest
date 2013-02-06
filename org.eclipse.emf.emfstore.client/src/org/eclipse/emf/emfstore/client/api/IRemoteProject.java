@@ -116,4 +116,5 @@ public interface IRemoteProject extends IProject {
 
 	void delete(final IUsersession usersession, final boolean deleteFiles) throws EMFStoreException;
 
+	IPrimaryVersionSpec getHeadVersion(boolean fetch);
 }
