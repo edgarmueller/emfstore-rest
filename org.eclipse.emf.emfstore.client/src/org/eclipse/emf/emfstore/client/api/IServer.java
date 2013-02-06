@@ -5,10 +5,13 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 public interface IServer {
+
+	IServerFactory FACTORY = new ServerFactoryImpl();
 
 	String getName();
 
