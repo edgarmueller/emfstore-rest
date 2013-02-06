@@ -81,8 +81,7 @@ public class SessionManager {
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 
-	private void executeCall(ServerCall<?> serverCall, IUsersession usersession, boolean retry)
-		throws EmfStoreException {
+	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) throws EmfStoreException {
 		try {
 			serverCall.run(usersession.getSessionId());
 		} catch (EmfStoreException e) {
