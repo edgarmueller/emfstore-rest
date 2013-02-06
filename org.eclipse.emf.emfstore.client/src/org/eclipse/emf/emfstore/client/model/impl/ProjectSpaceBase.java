@@ -440,7 +440,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
 	 */
 	public List<HistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException {
-		return getHistoryInfos(query);
+		return getRemoteProject().getHistoryInfos(getUsersession(), query);
 	}
 
 	/**

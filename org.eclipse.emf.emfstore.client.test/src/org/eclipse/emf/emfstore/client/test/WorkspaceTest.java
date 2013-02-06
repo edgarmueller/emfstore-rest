@@ -105,7 +105,7 @@ public abstract class WorkspaceTest {
 	 * @throws SerializationException
 	 */
 	@After
-	public void teardown() throws IOException, SerializationException {
+	public void teardown() throws IOException, SerializationException, EMFStoreException {
 
 		boolean areEqual = false;
 		projectSpace.save();
@@ -137,9 +137,11 @@ public abstract class WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
+
 					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getProjectSpaces())) {
 						projectSpace.delete();
 					}
+
 					WorkspaceProvider.getInstance().dispose();
 					setProject(null);
 					setProjectSpace(null);

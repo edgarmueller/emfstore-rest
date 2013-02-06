@@ -14,6 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -52,7 +53,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws EMFStoreException {
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServerInfo().getRemoteProjects(true).size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws EMFStoreException {
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
+		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects(true).size());
 
 		new EMFStoreCommand() {
 
@@ -109,7 +110,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest() + 1);
+		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjects(true).size());
 	}
 
 	/**
@@ -155,11 +156,14 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	/**
 	 * @throws EMFStoreException
+	 * @throws IOException
 	 */
 	@Test
-	public void deleteProjectTest() throws EMFStoreException {
+	public void deleteProjectTest() throws EMFStoreException, IOException {
 
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
+		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
+
+		getRemoteProject().delete();
 
 		try {
 			List<RemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
@@ -172,7 +176,8 @@ public class ServerInterfaceTest extends ServerTests {
 		} catch (EMFStoreException e) {
 			assertTrue(true);
 		}
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest() - 1);
+
+		assertEquals(getProjectsOnServerBeforeTest() - 1, getServerInfo().getRemoteProjects().size());
 	}
 
 	/**

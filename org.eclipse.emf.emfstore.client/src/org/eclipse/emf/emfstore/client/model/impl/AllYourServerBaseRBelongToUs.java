@@ -20,8 +20,6 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
 
-	List<RemoteProject> remoteProjects;
-
 	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
 			// TODO OTS custom exception
@@ -61,17 +59,28 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
-		return getRemoteProjects(false);
+		return getRemoteProjects(true);
 	}
 
 	public List<RemoteProject> getRemoteProjects(boolean fetch) throws EMFStoreException {
-		// TODO: OTS read parameter
-		if (remoteProjects == null) {
-			remoteProjects = new ArrayList<RemoteProject>();
-			for (ProjectInfo projectInfo : getProjectInfos()) {
-				RemoteProject wrapper = new RemoteProject(this, projectInfo);
-				remoteProjects.add(wrapper);
-			}
+
+		List<ProjectInfo> projectInfos;
+
+		if (fetch) {
+			projectInfos = new ServerCall<List<ProjectInfo>>() {
+				@Override
+				protected List<ProjectInfo> run() throws EMFStoreException {
+					return getConnectionManager().getProjectList(getSessionId());
+				}
+			}.execute();
+		} else {
+			projectInfos = getProjectInfos();
+		}
+
+		List<RemoteProject> remoteProjects = new ArrayList<RemoteProject>();
+		for (ProjectInfo projectInfo : projectInfos) {
+			RemoteProject wrapper = new RemoteProject(this, projectInfo);
+			remoteProjects.add(wrapper);
 		}
 		return remoteProjects;
 	}

@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
@@ -113,6 +114,16 @@ public abstract class ServerTests extends WorkspaceTest {
 	 */
 	public int getProjectsOnServerBeforeTest() {
 		return projectsOnServerBeforeTest;
+	}
+
+	@Override
+	@After
+	public void teardown() throws IOException, SerializationException, EMFStoreException {
+		super.teardown();
+		for (RemoteProject project : getServerInfo().getRemoteProjects()) {
+			project.delete();
+		}
+		Assert.assertEquals(0, getServerInfo().getRemoteProjects().size());
 	}
 
 	/**
@@ -220,6 +231,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		// setProjectInfo(getConnectionManager().createProject(getSessionId(), "initialProject", "TestProject",
 		// SetupHelper.createLogMessage("super", "a logmessage"), getProject()));
 		this.projectsOnServerBeforeTest = 1;
+		Assert.assertEquals(projectsOnServerBeforeTest, getServerInfo().getRemoteProjects(true).size());
 	}
 
 	/**

@@ -28,7 +28,6 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
@@ -254,12 +253,12 @@ public class RemoteProject implements IRemoteProject {
 		return projectSpace;
 	}
 
-	public List<? extends IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
+	public List<HistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
 		throws EMFStoreException {
 		return new ServerCall<List<HistoryInfo>>(usersession) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
-				return getConnectionManager().getHistoryInfo((SessionId) getUsersession().getSessionId(),
+				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
 					(ProjectId) getProjectId(), (HistoryQuery) query);
 			}
 		}.execute();
@@ -306,12 +305,10 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	public void delete(boolean deleteFiles) throws EMFStoreException {
-		// TODO Auto-generated method stub
-
+		// TODO;
 	}
 
-	public PrimaryVersionSpec getHeadVersion(boolean fetch) {
-		// TODO Auto-generated method stub
-		return null;
+	public PrimaryVersionSpec getHeadVersion(boolean fetch) throws EMFStoreException {
+		return resolveVersionSpec(Versions.createHEAD());
 	}
 }
