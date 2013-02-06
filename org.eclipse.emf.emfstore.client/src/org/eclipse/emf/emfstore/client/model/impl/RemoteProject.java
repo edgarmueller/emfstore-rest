@@ -8,7 +8,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
@@ -141,26 +140,25 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public ILocalProject checkout() throws EMFStoreException {
-		return new ServerCall<ILocalProject>(server) {
+	public ProjectSpace checkout() throws EMFStoreException {
+		return new ServerCall<ProjectSpace>(server) {
 			@Override
-			protected ILocalProject run() throws EMFStoreException {
+			protected ProjectSpace run() throws EMFStoreException {
 				return checkout(getUsersession());
 			}
 		}.execute();
 	}
 
-	public ILocalProject checkout(IUsersession usersession) throws EMFStoreException {
+	public ProjectSpace checkout(IUsersession usersession) throws EMFStoreException {
 		return checkout(usersession, new NullProgressMonitor());
-
 	}
 
-	public ILocalProject checkout(IUsersession usersession, IProgressMonitor progressMonitor) throws EMFStoreException {
+	public ProjectSpace checkout(IUsersession usersession, IProgressMonitor progressMonitor) throws EMFStoreException {
 		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD());
 		return checkout(usersession, targetSpec, progressMonitor);
 	}
 
-	public ILocalProject checkout(IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	public ProjectSpace checkout(IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException {
 
 		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
@@ -305,5 +303,15 @@ public class RemoteProject implements IRemoteProject {
 
 	public IServer getServer() {
 		return (ServerInfo) projectInfo.eContainer();
+	}
+
+	public void delete(boolean deleteFiles) throws EMFStoreException {
+		// TODO Auto-generated method stub
+
+	}
+
+	public PrimaryVersionSpec getHeadVersion(boolean fetch) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
