@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -151,22 +151,23 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		}
 
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
-		WorkspaceManager.getInstance().getCurrentWorkspace()
-			.deleteRemoteProject(serverInfo, projectInfo.getProjectId(), deleteFiles);
+		// TODO: OTS casts
+		((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
 	}
 
 	private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
 		throws EmfStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-			WorkspaceManager.getInstance().getCurrentWorkspace().deleteRemoteProject(session, projectId, deleteFiles);
+			// TODO: OTS casts
+			((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
 		}
 	}
 
 	private void deleteRemoteProject(final ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles,
 		IProgressMonitor monitor) throws EmfStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-			WorkspaceManager.getInstance().getCurrentWorkspace()
-				.deleteRemoteProject(serverInfo, projectId, deleteFiles);
+			// TODO: OTS casts
+			((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
 		}
 	}
 }

@@ -49,7 +49,7 @@ public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIContro
 		RangeQuery query = HistoryQueryBuilder.rangeQuery(projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
 		try {
-			List<HistoryInfo> historyInfo = projectSpace.getHistoryInfo(query);
+			List<HistoryInfo> historyInfo = projectSpace.getHistoryInfos(query);
 			// filter base version
 			Iterator<HistoryInfo> iter = historyInfo.iterator();
 			while (iter.hasNext()) {

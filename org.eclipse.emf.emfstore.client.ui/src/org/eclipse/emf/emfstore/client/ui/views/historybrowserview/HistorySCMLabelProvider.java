@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.historybrowserview;
 
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMLabelProvider;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
@@ -36,7 +36,7 @@ public class HistorySCMLabelProvider extends SCMLabelProvider {
 		}
 
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceManager.getProjectSpace(getProject())
+		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(getProject())
 			.getBaseVersion().getIdentifier()) {
 			baseVersion = "*";
 		}

@@ -609,7 +609,7 @@ public interface ModelPackage extends EPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Server Infos</em>'.
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos()
+	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getServers()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
@@ -933,7 +933,7 @@ public interface ModelPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Dirty</em>'.
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty()
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#hasUncommitedChanges()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */

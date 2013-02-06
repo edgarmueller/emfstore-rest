@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.emf.emfstore.server;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.model.Activator
 Import-Package: org.eclipse.emf.emfstore.client.model.observers
-Export-Package: org.eclipse.emf.emfstore.client.common,
+Export-Package: org.eclipse.emf.emfstore.client.api,
+ org.eclipse.emf.emfstore.client.common,
  org.eclipse.emf.emfstore.client.model,
  org.eclipse.emf.emfstore.client.model.accesscontrol,
  org.eclipse.emf.emfstore.client.model.changeTracking,

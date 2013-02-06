@@ -16,8 +16,10 @@ import java.util.Map;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.api.IProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -58,14 +60,13 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		currentSaveStates = new LinkedHashMap<String, Boolean>();
 		// check if workspace can init, exit otherwise
 		try {
-			WorkspaceManager.init();
+			WorkspaceProvider.init();
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException exception) {
 			// END SUPRESS CATCH EXCEPTION
-			ModelUtil
-				.logException(
-								"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
-								exception);
+			ModelUtil.logException(
+				"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
+				exception);
 			return;
 		}
 		saveStateChangedObserver = new SaveStateChangedObserver() {
@@ -76,7 +77,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			}
 
 		};
-		WorkspaceManager.getObserverBus().register(saveStateChangedObserver);
+		WorkspaceProvider.getObserverBus().register(saveStateChangedObserver);
 		PlatformUI.getWorkbench().addWorkbenchListener(new IWorkbenchListener() {
 
 			public boolean preShutdown(IWorkbench workbench, boolean forced) {
@@ -111,10 +112,10 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
-		ArrayList<ProjectSpace> inputArray = new ArrayList<ProjectSpace>();
-		for (ProjectSpace projectSpace : WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces()) {
-			if (projectSpace.hasUnsavedChanges()) {
-				inputArray.add(projectSpace);
+		ArrayList<IProject> inputArray = new ArrayList<IProject>();
+		for (ILocalProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
+			if (project.hasUnsavedChanges()) {
+				inputArray.add(project);
 			}
 		}
 		if (inputArray.size() < 1) {
@@ -146,7 +147,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	 */
 	public void dispose() {
 		if (saveStateChangedObserver != null) {
-			WorkspaceManager.getObserverBus().unregister(saveStateChangedObserver);
+			WorkspaceProvider.getObserverBus().unregister(saveStateChangedObserver);
 		}
 
 	}

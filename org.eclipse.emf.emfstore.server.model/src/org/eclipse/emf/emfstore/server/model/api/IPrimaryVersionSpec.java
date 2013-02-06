@@ -1,0 +1,6 @@
+package org.eclipse.emf.emfstore.server.model.api;
+
+public interface IPrimaryVersionSpec extends IVersionSpec {
+
+	int getIdentifier();
+}

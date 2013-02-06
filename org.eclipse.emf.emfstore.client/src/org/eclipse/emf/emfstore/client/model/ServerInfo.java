@@ -12,28 +12,32 @@ package org.eclipse.emf.emfstore.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getUrl <em>Url</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getPort <em>Port</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getLastUsersession <em>Last Usersession</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}</li>
- * </ul>
- * </p>
+ * @extends IServerInfo
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getName <em>Name</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getUrl <em>Url</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getPort <em>Port</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getLastUsersession <em>Last Usersession</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getServerInfo()
  * @model
  * @generated
  */
-public interface ServerInfo extends EObject {
+public interface ServerInfo extends EObject, IServer {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

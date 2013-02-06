@@ -13,7 +13,8 @@ package org.eclipse.emf.emfstore.client.ui.testers;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -48,6 +49,7 @@ public class IsServerAdminTester extends PropertyTester {
 				return false;
 			}
 
+			// TODO OTS
 			final ServerInfo finalServerInfo = serverInfo;
 			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
 				@Override
@@ -74,7 +76,7 @@ public class IsServerAdminTester extends PropertyTester {
 	}
 
 	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
-		for (ServerInfo serverInfo : WorkspaceManager.getInstance().getCurrentWorkspace().getServerInfos()) {
+		for (ServerInfo serverInfo : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos()) {
 			if (projectInfo.eContainer() != null && projectInfo.eContainer().equals(serverInfo)) {
 				return serverInfo;
 			}

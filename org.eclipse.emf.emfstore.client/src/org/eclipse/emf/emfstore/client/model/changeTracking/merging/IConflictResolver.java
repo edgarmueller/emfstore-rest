@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * @author koegel
  * @author wesendon
  */
-public interface ConflictResolver {
+public interface IConflictResolver {
 
 	/**
 	 * Resolves all conflicts between the given change packages "theirs" and the

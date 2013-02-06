@@ -11,14 +11,17 @@
 package org.eclipse.emf.emfstore.server.model;
 
 import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
+import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Id</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Id</b></em>'.
+ * 
+ * @extends {@link IProjectId} <!-- end-user-doc -->
  * 
  * 
  * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getProjectId()
  * @model
  * @generated
  */
-public interface ProjectId extends UniqueIdentifier {
+public interface ProjectId extends UniqueIdentifier, IProjectId {
 } // ProjectId

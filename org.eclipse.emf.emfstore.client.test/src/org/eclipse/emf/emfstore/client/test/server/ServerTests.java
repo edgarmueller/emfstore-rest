@@ -13,15 +13,17 @@ package org.eclipse.emf.emfstore.client.test.server;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -96,8 +98,8 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public ProjectInfo getProjectInfo() {
-		return getProjectSpace().getProjectInfo();
+	public IRemoteProject getProjectInfo() {
+		return getProjectSpace().getRemoteProject();
 	}
 
 	public ProjectId getProjectId() {
@@ -128,7 +130,7 @@ public abstract class ServerTests extends WorkspaceTest {
 
 		SetupHelper.addUserFileToServer(false);
 		SetupHelper.startSever();
-		setConnectionManager(WorkspaceManager.getInstance().getConnectionManager());
+		setConnectionManager(WorkspaceProvider.getInstance().getConnectionManager());
 		setServerInfo(SetupHelper.getServerInfo());
 		// login();
 		initArguments();
@@ -140,7 +142,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 */
 	protected static void login() throws EmfStoreException {
 		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
-		WorkspaceManager.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
+		WorkspaceProvider.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
 		setSessionId(sessionId);
 	}
 
@@ -199,7 +201,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+					WorkspaceBase currentWorkspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
 					ServerInfo serverInfo = SetupHelper.getServerInfo();
 					Usersession session = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE
 						.createUsersession();
@@ -208,7 +210,7 @@ public abstract class ServerTests extends WorkspaceTest {
 					session.setPassword("super");
 					session.setSavePassword(true);
 
-					currentWorkspace.getServerInfos().add(serverInfo);
+					currentWorkspace.getServers().add(serverInfo);
 					currentWorkspace.getUsersessions().add(session);
 					currentWorkspace.save();
 					getProjectSpace().shareProject(session, null);
@@ -235,10 +237,10 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
+					WorkspaceBase workspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
+					for (ProjectInfo info : (List<ProjectInfo>) (List<?>) workspace
 						.getRemoteProjectList(getServerInfo())) {
-						WorkspaceManager.getInstance().getCurrentWorkspace()
-							.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
+						workspace.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
 					}
 				} catch (EmfStoreException e) {
 				}

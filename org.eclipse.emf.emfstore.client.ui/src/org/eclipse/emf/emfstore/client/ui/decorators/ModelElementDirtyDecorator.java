@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
@@ -53,7 +53,7 @@ public class ModelElementDirtyDecorator implements ILightweightLabelDecorator {
 			if (project == null) {
 				return;
 			}
-			ProjectSpace projectSpace = WorkspaceManager.getProjectSpace(modelElement);
+			ProjectSpace projectSpace = WorkspaceProvider.getProjectSpace(modelElement);
 			if (projectSpace == null) {
 				return;
 			}

@@ -21,7 +21,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -43,7 +42,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.common.model.Project;
@@ -292,8 +291,8 @@ public final class IntegrationTestHelper {
 	 * @return ME or null if there is no ME of this type in project
 	 */
 	public EObject getRandomMEofType(Project project, EClass type) {
-
-		List<EObject> refTypeMEs = project.getAllModelElementsbyClass(type, new BasicEList<EObject>());
+		// TODO: OTS
+		Set<? extends EObject> refTypeMEs = project.getAllModelElementsByClass(type.getClass());
 
 		int size = refTypeMEs.size();
 		if (size == 0) {
@@ -301,7 +300,8 @@ public final class IntegrationTestHelper {
 			// throw new IllegalStateException("There is no ME of this type in Project: " + type.getName());
 		}
 
-		EObject me = refTypeMEs.get(getRandomPosition(size));
+		ArrayList<? extends EObject> list = new ArrayList<EObject>(refTypeMEs);
+		EObject me = list.get(getRandomPosition(size));
 		return me;
 	}
 
@@ -630,13 +630,15 @@ public final class IntegrationTestHelper {
 	public EObject changeNonContainementRef(EObject me, EReference ref, Project project) {
 
 		EClass refType = ref.getEReferenceType();
-		List<EObject> refTypeMEs = project.getAllModelElementsbyClass(refType, new BasicEList<EObject>());
+		// TODO: OTS
+		Set<? extends EObject> refTypeMEs = project.getAllModelElementsByClass(refType.getClass());
 
 		if (refTypeMEs.contains(me)) {
 			refTypeMEs.remove(me);
 		}
 
-		EObject toBeReferencedME = refTypeMEs.get(getRandomPosition(refTypeMEs.size()));
+		ArrayList<? extends EObject> list = new ArrayList<EObject>(refTypeMEs);
+		EObject toBeReferencedME = list.get(getRandomPosition(refTypeMEs.size()));
 
 		Object object = me.eGet(ref);
 		if (ref.isMany()) {
@@ -1116,7 +1118,7 @@ public final class IntegrationTestHelper {
 			}
 		}.run(false);
 
-		List<AbstractOperation> operations = WorkspaceManager.getProjectSpace(testProject).getOperations();
+		List<AbstractOperation> operations = WorkspaceProvider.getProjectSpace(testProject).getOperations();
 		if (operations.size() == 0) {
 			throw new IllegalStateException("No operations recorded");
 		}

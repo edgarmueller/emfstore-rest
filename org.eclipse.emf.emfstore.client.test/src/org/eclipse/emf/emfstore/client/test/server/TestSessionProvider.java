@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.test.server;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -73,7 +73,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 
 	public TestSessionProvider() {
 
-		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		final Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
 		usersession.setUsername("super");

@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
@@ -115,8 +115,9 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	 * The constructor.
 	 */
 	public ESBrowserView() {
-		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
-		WorkspaceManager.getObserverBus().register(this);
+		// TODO OTS
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		WorkspaceProvider.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
 			serverInfo.eAdapters().add(serverInfoAdapter);
@@ -139,7 +140,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new ESBrowserLabelProvider(), decoratorManager
 			.getLabelDecorator()));
 		viewer.setSorter(new ESBrowserViewerSorter());
-		viewer.setInput(WorkspaceManager.getInstance().getCurrentWorkspace());
+		viewer.setInput(WorkspaceProvider.getInstance().getWorkspace());
 		// viewer.addTreeListener(new ITreeViewerListener() {
 		//
 		// /**
@@ -223,9 +224,10 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	@Override
 	public void dispose() {
 		super.dispose();
-		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		// TODO OTS
+		Workspace currentWorkspace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace());
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
-		WorkspaceManager.getObserverBus().unregister(this);
+		WorkspaceProvider.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {
 			s.eAdapters().remove(serverInfoAdapterMap.get(s));
 		}

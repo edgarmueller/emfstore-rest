@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -42,7 +42,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 * Default constructor.
 	 */
 	public VersionDecorator() {
-		WorkspaceManager.getObserverBus().register(this);
+		WorkspaceProvider.getObserverBus().register(this);
 	}
 
 	/**

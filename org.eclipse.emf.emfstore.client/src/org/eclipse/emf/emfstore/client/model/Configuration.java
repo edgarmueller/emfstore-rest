@@ -362,7 +362,7 @@ public final class Configuration {
 	 */
 	public static EditingDomain getEditingDomain() {
 		if (editingDomain == null) {
-			WorkspaceManager.getInstance();
+			WorkspaceProvider.getInstance();
 		}
 		return Configuration.editingDomain;
 	}

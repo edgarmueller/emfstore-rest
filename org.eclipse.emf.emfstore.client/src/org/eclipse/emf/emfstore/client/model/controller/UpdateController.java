@@ -17,9 +17,9 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 	private VersionSpec version;
-	private UpdateCallback callback;
+	private IUpdateCallback callback;
 
 	/**
 	 * Constructor.
@@ -55,7 +55,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	 * @param progress
 	 *            a progress monitor that is used to indicate the progress of the update
 	 */
-	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, UpdateCallback callback,
+	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, IUpdateCallback callback,
 		IProgressMonitor progress) {
 		super(projectSpace);
 
@@ -64,7 +64,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			version = Versions.createHEAD(projectSpace.getBaseVersion());
 		}
 		if (callback == null) {
-			callback = UpdateCallback.NOCALLBACK;
+			callback = IUpdateCallback.NOCALLBACK;
 		}
 
 		this.version = version;
@@ -128,7 +128,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			|| !callback.inspectChanges(getProjectSpace(), changes, idToEObjectMapping)) {
 			return getProjectSpace().getBaseVersion();
 		}
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
 			.inspectChanges(getProjectSpace(), changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
@@ -154,7 +154,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
-		WorkspaceManager.getObserverBus().notify(UpdateObserver.class)
+		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
 			.updateCompleted(getProjectSpace(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();

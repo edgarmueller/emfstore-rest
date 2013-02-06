@@ -17,7 +17,7 @@ import java.util.Date;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
@@ -96,13 +96,13 @@ public class ExportWorkspaceController implements IExportImportController {
 			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Workspace.getExtension());
 		}
 
-		Workspace copy = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace());
+		Workspace copy = ModelUtil.clone((Workspace) WorkspaceProvider.getInstance().getWorkspace());
 
 		int i = 0;
 
 		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(i++)
-				.getProject();
+			Project orgProject = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()
+				.get(i++).getProject();
 			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
 		}
 

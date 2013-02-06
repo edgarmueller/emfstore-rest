@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
@@ -76,7 +76,7 @@ public class SessionManager {
 	}
 
 	private boolean isLoggedIn(Usersession usersession) {
-		ConnectionManager connectionManager = WorkspaceManager.getInstance().getConnectionManager();
+		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 

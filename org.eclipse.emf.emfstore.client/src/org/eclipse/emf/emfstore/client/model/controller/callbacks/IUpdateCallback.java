@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * @author ovonwesen
  * @author emueller
  */
-public interface UpdateCallback {
+public interface IUpdateCallback {
 
 	/**
 	 * Called right before the changes get applied upon the project space.
@@ -79,10 +79,10 @@ public interface UpdateCallback {
 
 	/**
 	 * A default implementation of an update callback that does nothing and default
-	 * {@link UpdateCallback#conflictOccurred(ChangeConflictException)} to false and
-	 * {@link UpdateCallback#inspectChanges(ProjectSpace, List)} to true.
+	 * {@link IUpdateCallback#conflictOccurred(ChangeConflictException)} to false and
+	 * {@link IUpdateCallback#inspectChanges(ProjectSpace, List)} to true.
 	 */
-	UpdateCallback NOCALLBACK = new UpdateCallback() {
+	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
 		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;

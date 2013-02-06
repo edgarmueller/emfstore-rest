@@ -21,9 +21,10 @@ import junit.framework.Assert;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -58,17 +59,18 @@ public abstract class WorkspaceTest {
 	public void setupTest() {
 		beforeHook();
 		CommonUtil.setTesting(true);
-		WorkspaceManager workspaceManager = WorkspaceManager.getInstance();
+		WorkspaceProvider workspaceManager = WorkspaceProvider.getInstance();
 		ConnectionManager connectionManager = initConnectionManager();
 		if (connectionManager != null) {
 			workspaceManager.setConnectionManager(connectionManager);
 		}
-		workspace = workspaceManager.getCurrentWorkspace();
+		workspace = (Workspace) workspaceManager.getWorkspace();
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace localProjectSpace = workspace.createLocalProject("testProject", "test Project");
+				ProjectSpace localProjectSpace = ((WorkspaceBase) workspace).createLocalProject("testProject",
+					"test Project");
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
@@ -137,7 +139,7 @@ public abstract class WorkspaceTest {
 					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getProjectSpaces())) {
 						workspace.deleteProjectSpace(projectSpace);
 					}
-					WorkspaceManager.getInstance().dispose();
+					WorkspaceProvider.getInstance().dispose();
 					setProject(null);
 					setProjectSpace(null);
 					workspace = null;
@@ -160,7 +162,7 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				int retried = 0;
 				try {
-					WorkspaceManager.getInstance().getCurrentWorkspace().deleteProjectSpace(ps);
+					((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).deleteProjectSpace(ps);
 				} catch (IOException e) {
 					if (retried++ > 2) {
 						fail();

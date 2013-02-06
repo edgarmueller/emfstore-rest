@@ -1296,14 +1296,10 @@ public class Topology1toNTest extends TopologyTest {
 
 	// BEGIN COMPLEX CODE
 	/**
-	 * add several already contained children to an empty containment feature.
-	 * 
-	 * @throws UnsupportedOperationException on test fail
-	 * @throws UnsupportedNotificationException on test fail
+	 * Add several already contained children to an empty containment feature.
 	 */
 	@Test
-	public void containmentAddMixedChildrenToEmpty() throws UnsupportedOperationException,
-		UnsupportedNotificationException {
+	public void containmentAddMixedChildrenToEmpty() {
 
 		LeafSection section = DocumentFactory.eINSTANCE.createLeafSection();
 		LeafSection oldSection1 = DocumentFactory.eINSTANCE.createLeafSection();
@@ -1316,8 +1312,8 @@ public class Topology1toNTest extends TopologyTest {
 		Solution sectionSolution1 = RationaleFactory.eINSTANCE.createSolution();
 		Solution sectionSolution2 = RationaleFactory.eINSTANCE.createSolution();
 		Solution sectionSolution3 = RationaleFactory.eINSTANCE.createSolution();
-		WorkPackage pack = TaskFactory.eINSTANCE.createWorkPackage();
-		BugReport br = BugFactory.eINSTANCE.createBugReport();
+		WorkPackage workPackage = TaskFactory.eINSTANCE.createWorkPackage();
+		BugReport bugReport = BugFactory.eINSTANCE.createBugReport();
 
 		getProject().addModelElement(issue1);
 		getProject().addModelElement(issue2);
@@ -1330,14 +1326,28 @@ public class Topology1toNTest extends TopologyTest {
 		getProject().addModelElement(sectionSolution3);
 		getProject().addModelElement(solution1);
 		getProject().addModelElement(solution2);
-		getProject().addModelElement(pack);
-		getProject().addModelElement(br);
+		getProject().addModelElement(workPackage);
+		getProject().addModelElement(bugReport);
+
+		ModelElementId sectionId = getProject().getModelElementId(section);
+		ModelElementId solution1Id = getProject().getModelElementId(solution1);
+		ModelElementId solution2Id = getProject().getModelElementId(solution2);
+		ModelElementId issue1Id = getProject().getModelElementId(issue1);
+		ModelElementId issue2Id = getProject().getModelElementId(issue2);
+		ModelElementId newSolutionId = getProject().getModelElementId(newSolution);
+		ModelElementId oldSection1Id = getProject().getModelElementId(oldSection1);
+		ModelElementId oldSection2Id = getProject().getModelElementId(oldSection2);
+		ModelElementId sectionSolution1Id = getProject().getModelElementId(sectionSolution1);
+		ModelElementId sectionSolution2Id = getProject().getModelElementId(sectionSolution2);
+		ModelElementId sectionSolution3Id = getProject().getModelElementId(sectionSolution3);
+		ModelElementId workPackageId = getProject().getModelElementId(workPackage);
+		ModelElementId bugReportId = getProject().getModelElementId(bugReport);
 
 		UnicaseModelElement[] addedElements = { solution1, solution2, newSolution, sectionSolution1, sectionSolution2,
-			sectionSolution3, br };
+			sectionSolution3, bugReport };
 		issue1.setSolution(solution1);
 		issue2.setSolution(solution2);
-		pack.getContainedWorkItems().add(br);
+		workPackage.getContainedWorkItems().add(bugReport);
 		oldSection1.getModelElements().add(sectionSolution1);
 		oldSection1.getModelElements().add(sectionSolution2);
 		oldSection2.getModelElements().add(sectionSolution3);
@@ -1345,7 +1355,7 @@ public class Topology1toNTest extends TopologyTest {
 		assertTrue(oldSection1.getModelElements().contains(sectionSolution1));
 		assertTrue(oldSection1.getModelElements().contains(sectionSolution2));
 		assertTrue(oldSection2.getModelElements().contains(sectionSolution3));
-		assertTrue(pack.getContainedWorkItems().contains(br));
+		assertTrue(workPackage.getContainedWorkItems().contains(bugReport));
 
 		clearOperations();
 
@@ -1354,146 +1364,130 @@ public class Topology1toNTest extends TopologyTest {
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 		// expecting a composite operation here
 		assertEquals(1, operations.size());
-		if (operations.get(0) instanceof CompositeOperation) {
-			operations = ((CompositeOperation) operations.get(0)).getSubOperations();
-		} else {
-			fail("composite operation expected");
-		}
+		List<AbstractOperation> subOperations = checkAndCast(operations.get(0), CompositeOperation.class)
+			.getSubOperations();
 
 		// now expectation is: we get 6 messages preserving the info on former parents for the solutions
 		// and one additional one, indicating the new parent for both of them
 
-		// changed due to refactoring
+		assertEquals(16, subOperations.size());
 
-		assertEquals(16, operations.size());
+		SingleReferenceOperation op0 = checkAndCast(subOperations.get(0), SingleReferenceOperation.class);
+		SingleReferenceOperation op1 = checkAndCast(subOperations.get(1), SingleReferenceOperation.class);
+		SingleReferenceOperation op2 = checkAndCast(subOperations.get(2), SingleReferenceOperation.class);
+		SingleReferenceOperation op3 = checkAndCast(subOperations.get(3), SingleReferenceOperation.class);
+		SingleReferenceOperation op4 = checkAndCast(subOperations.get(4), SingleReferenceOperation.class);
+		SingleReferenceOperation op5 = checkAndCast(subOperations.get(5), SingleReferenceOperation.class);
+		SingleReferenceOperation op6 = checkAndCast(subOperations.get(6), SingleReferenceOperation.class);
+		MultiReferenceOperation op7 = checkAndCast(subOperations.get(7), MultiReferenceOperation.class);
+		SingleReferenceOperation op8 = checkAndCast(subOperations.get(8), SingleReferenceOperation.class);
+		SingleReferenceOperation op9 = checkAndCast(subOperations.get(9), SingleReferenceOperation.class);
+		MultiReferenceOperation op10 = checkAndCast(subOperations.get(10), MultiReferenceOperation.class);
+		SingleReferenceOperation op11 = checkAndCast(subOperations.get(11), SingleReferenceOperation.class);
+		MultiReferenceOperation op12 = checkAndCast(subOperations.get(12), MultiReferenceOperation.class);
+		SingleReferenceOperation op13 = checkAndCast(subOperations.get(13), SingleReferenceOperation.class);
+		SingleReferenceOperation op14 = checkAndCast(subOperations.get(14), SingleReferenceOperation.class);
+		MultiReferenceOperation op15 = checkAndCast(subOperations.get(15), MultiReferenceOperation.class);
 
-		SingleReferenceOperation op0 = (SingleReferenceOperation) operations.get(0);
-		SingleReferenceOperation op1 = (SingleReferenceOperation) operations.get(1);
-		SingleReferenceOperation op2 = (SingleReferenceOperation) operations.get(2);
-		SingleReferenceOperation op3 = (SingleReferenceOperation) operations.get(3);
-		SingleReferenceOperation op4 = (SingleReferenceOperation) operations.get(4);
-		SingleReferenceOperation op5 = (SingleReferenceOperation) operations.get(5);
-		SingleReferenceOperation op6 = (SingleReferenceOperation) operations.get(6);
-		MultiReferenceOperation op7 = (MultiReferenceOperation) operations.get(7);
-		SingleReferenceOperation op8 = (SingleReferenceOperation) operations.get(8);
-		SingleReferenceOperation op9 = (SingleReferenceOperation) operations.get(9);
-		MultiReferenceOperation op10 = (MultiReferenceOperation) operations.get(10);
-		SingleReferenceOperation op11 = (SingleReferenceOperation) operations.get(11);
-		MultiReferenceOperation op12 = (MultiReferenceOperation) operations.get(12);
-		SingleReferenceOperation op13 = (SingleReferenceOperation) operations.get(13);
-		SingleReferenceOperation op14 = (SingleReferenceOperation) operations.get(14);
-		MultiReferenceOperation op15 = (MultiReferenceOperation) operations.get(15);
+		assertEquals("solution", op0.getFeatureName());
+		assertEquals(issue1Id, op0.getModelElementId());
+		assertEquals(solution1Id, op0.getOldValue());
+		assertNull(op0.getNewValue());
 
-		ModelElementId sectionId = ModelUtil.getProject(section).getModelElementId(section);
-		ModelElementId solution1Id = ModelUtil.getProject(solution1).getModelElementId(solution1);
-		ModelElementId solution2Id = ModelUtil.getProject(solution2).getModelElementId(solution2);
-		ModelElementId issue1Id = ModelUtil.getProject(issue1).getModelElementId(issue1);
-		ModelElementId issue2Id = ModelUtil.getProject(issue2).getModelElementId(issue2);
+		assertEquals("issue", op1.getFeatureName());
+		assertEquals(solution1Id, op1.getModelElementId());
+		assertEquals(issue1Id, op1.getOldValue());
+		assertNull(op1.getNewValue());
 
-		assertEquals(op0.getModelElementId(), issue1Id);
-		assertEquals(op0.getFeatureName(), "solution");
-		assertEquals(op0.getNewValue(), null);
-		assertEquals(op0.getOldValue(), solution1Id);
-		assertEquals(op1.getModelElementId(), solution1Id);
-		assertEquals(op1.getFeatureName(), "issue");
-		assertEquals(op1.getNewValue(), null);
-		assertEquals(op1.getOldValue(), issue1Id);
-		assertEquals(op2.getModelElementId(), solution1Id);
-		assertEquals(op2.getFeatureName(), "leafSection");
-		assertEquals(op2.getNewValue(), sectionId);
-		assertEquals(op2.getOldValue(), null);
+		assertEquals("leafSection", op2.getFeatureName());
+		assertEquals(solution1Id, op2.getModelElementId());
+		assertEquals(sectionId, op2.getNewValue());
+		assertNull(op2.getOldValue());
 
-		assertEquals(op3.getModelElementId(), issue2Id);
-		assertEquals(op3.getFeatureName(), "solution");
-		assertEquals(op3.getNewValue(), null);
-		assertEquals(op3.getOldValue(), solution2Id);
-		assertEquals(op4.getModelElementId(), solution2Id);
-		assertEquals(op4.getFeatureName(), "issue");
-		assertEquals(op4.getNewValue(), null);
-		assertEquals(op4.getOldValue(), issue2Id);
-		assertEquals(op5.getModelElementId(), solution2Id);
-		assertEquals(op5.getFeatureName(), "leafSection");
-		assertEquals(op5.getNewValue(), sectionId);
-		assertEquals(op5.getOldValue(), null);
+		assertEquals("solution", op3.getFeatureName());
+		assertEquals(issue2Id, op3.getModelElementId());
+		assertNull(op3.getNewValue());
+		assertEquals(solution2Id, op3.getOldValue());
 
-		ModelElementId newSolutionId = ModelUtil.getProject(newSolution).getModelElementId(newSolution);
-		ModelElementId oldSection1Id = ModelUtil.getProject(oldSection1).getModelElementId(oldSection1);
-		ModelElementId oldSection2Id = ModelUtil.getProject(oldSection2).getModelElementId(oldSection2);
-		ModelElementId sectionSolution1Id = ModelUtil.getProject(sectionSolution1).getModelElementId(sectionSolution1);
-		ModelElementId sectionSolution2Id = ModelUtil.getProject(sectionSolution2).getModelElementId(sectionSolution2);
-		ModelElementId sectionSolution3Id = ModelUtil.getProject(sectionSolution3).getModelElementId(sectionSolution3);
+		assertEquals("issue", op4.getFeatureName());
+		assertEquals(solution2Id, op4.getModelElementId());
+		assertEquals(issue2Id, op4.getOldValue());
+		assertNull(op4.getNewValue());
 
-		assertEquals(op6.getModelElementId(), newSolutionId);
-		assertEquals(op6.getFeatureName(), "leafSection");
-		assertEquals(op6.getNewValue(), sectionId);
-		assertEquals(op6.getOldValue(), null);
+		assertEquals(solution2Id, op5.getModelElementId());
+		assertEquals("leafSection", op5.getFeatureName());
+		assertEquals(sectionId, op5.getNewValue());
+		assertNull(op5.getOldValue());
 
-		assertEquals(op7.getModelElementId(), oldSection1Id);
-		assertEquals(op7.getFeatureName(), "modelElements");
-		assertEquals(op7.isAdd(), false);
-		assertEquals(op7.getReferencedModelElements().size(), 2);
-		assertEquals(op7.getReferencedModelElements().get(0), sectionSolution1Id);
-		assertEquals(op7.getReferencedModelElements().get(1), sectionSolution2Id);
-		assertEquals(op8.getModelElementId(), sectionSolution1Id);
-		assertEquals(op8.getFeatureName(), "leafSection");
-		assertEquals(op8.getNewValue(), sectionId);
-		assertEquals(op8.getOldValue(), oldSection1Id);
-		assertEquals(op9.getModelElementId(), sectionSolution2Id);
-		assertEquals(op9.getFeatureName(), "leafSection");
-		assertEquals(op9.getNewValue(), sectionId);
-		assertEquals(op9.getOldValue(), oldSection1Id);
+		assertEquals(newSolutionId, op6.getModelElementId());
+		assertEquals("leafSection", op6.getFeatureName());
+		assertEquals(sectionId, op6.getNewValue());
+		assertNull(op6.getOldValue());
 
-		assertEquals(op10.getModelElementId(), oldSection2Id);
-		assertEquals(op10.getFeatureName(), "modelElements");
-		assertEquals(op10.isAdd(), false);
-		assertEquals(op10.getReferencedModelElements().size(), 1);
-		assertEquals(op10.getReferencedModelElements().get(0), sectionSolution3Id);
-		assertEquals(op11.getModelElementId(), sectionSolution3Id);
-		assertEquals(op11.getFeatureName(), "leafSection");
-		assertEquals(op11.getNewValue(), sectionId);
-		assertEquals(op11.getOldValue(), oldSection2Id);
+		assertEquals("modelElements", op7.getFeatureName());
+		assertEquals(oldSection1Id, op7.getModelElementId());
+		assertEquals(sectionSolution1Id, op7.getReferencedModelElements().get(0));
+		assertEquals(sectionSolution2Id, op7.getReferencedModelElements().get(1));
+		assertEquals(2, op7.getReferencedModelElements().size());
+		assertFalse(op7.isAdd());
 
-		ModelElementId packId = ModelUtil.getProject(pack).getModelElementId(pack);
-		ModelElementId brId = ModelUtil.getProject(br).getModelElementId(br);
+		assertEquals("leafSection", op8.getFeatureName());
+		assertEquals(sectionSolution1Id, op8.getModelElementId());
+		assertEquals(sectionId, op8.getNewValue());
+		assertEquals(oldSection1Id, op8.getOldValue());
 
-		assertEquals(op12.getModelElementId(), packId);
-		assertEquals(op12.getFeatureName(), "containedWorkItems");
-		assertEquals(op12.isAdd(), false);
-		assertEquals(op12.getReferencedModelElements().size(), 1);
-		assertEquals(op12.getReferencedModelElements().get(0), brId);
-		assertEquals(op13.getModelElementId(), brId);
-		assertEquals(op13.getFeatureName(), "containingWorkpackage");
-		assertEquals(op13.getNewValue(), null);
-		assertEquals(op13.getOldValue(), packId);
-		assertEquals(op14.getModelElementId(), brId);
-		assertEquals(op14.getFeatureName(), "leafSection");
-		assertEquals(op14.getNewValue(), sectionId);
-		assertEquals(op14.getOldValue(), null);
+		assertEquals("leafSection", op9.getFeatureName());
+		assertEquals(sectionSolution2Id, op9.getModelElementId());
+		assertEquals(sectionId, op9.getNewValue());
+		assertEquals(oldSection1Id, op9.getOldValue());
 
-		assertEquals(op15.getModelElementId(), sectionId);
+		assertEquals("modelElements", op10.getFeatureName());
+		assertEquals(oldSection2Id, op10.getModelElementId());
+		assertEquals(sectionSolution3Id, op10.getReferencedModelElements().get(0));
+		assertEquals(1, op10.getReferencedModelElements().size());
+		assertFalse(op10.isAdd());
+
+		assertEquals("leafSection", op11.getFeatureName());
+		assertEquals(sectionSolution3Id, op11.getModelElementId());
+		assertEquals(sectionId, op11.getNewValue());
+		assertEquals(oldSection2Id, op11.getOldValue());
+
+		assertEquals("containedWorkItems", op12.getFeatureName());
+		assertEquals(workPackageId, op12.getModelElementId());
+		assertEquals(bugReportId, op12.getReferencedModelElements().get(0));
+		assertEquals(1, op12.getReferencedModelElements().size());
+		assertFalse(op12.isAdd());
+
+		assertEquals("containingWorkpackage", op13.getFeatureName());
+		assertEquals(bugReportId, op13.getModelElementId());
+		assertEquals(workPackageId, op13.getOldValue());
+		assertNull(op13.getNewValue());
+
+		assertEquals("leafSection", op14.getFeatureName());
+		assertEquals(bugReportId, op14.getModelElementId());
+		assertEquals(sectionId, op14.getNewValue());
+		assertNull(op14.getOldValue());
+
 		assertEquals("modelElements", op15.getFeatureName());
-		assertTrue(op15.isAdd());
 		assertEquals(7, op15.getReferencedModelElements().size());
+		assertEquals(0, op15.getIndex());
+		assertEquals(sectionId, op15.getModelElementId());
 		assertEquals(solution1Id, op15.getReferencedModelElements().get(0));
 		assertEquals(solution2Id, op15.getReferencedModelElements().get(1));
 		assertEquals(newSolutionId, op15.getReferencedModelElements().get(2));
 		assertEquals(sectionSolution1Id, op15.getReferencedModelElements().get(3));
 		assertEquals(sectionSolution2Id, op15.getReferencedModelElements().get(4));
 		assertEquals(sectionSolution3Id, op15.getReferencedModelElements().get(5));
-		assertEquals(brId, op15.getReferencedModelElements().get(6));
-		assertEquals(op15.getIndex(), 0);
+		assertEquals(bugReportId, op15.getReferencedModelElements().get(6));
+		assertTrue(op15.isAdd());
 
 	}
 
 	/**
-	 * add several already contained children to an empty containment feature.
-	 * 
-	 * @throws UnsupportedOperationException on test fail
-	 * @throws UnsupportedNotificationException on test fail
+	 * Add several already contained children to an empty containment feature.
 	 */
 	@Test
-	public void containmentAddMixedChildrenToNonEmpty() throws UnsupportedOperationException,
-		UnsupportedNotificationException {
+	public void containmentAddMixedChildrenToNonEmpty() {
 
 		LeafSection section = DocumentFactory.eINSTANCE.createLeafSection();
 		section.getModelElements().add(RationaleFactory.eINSTANCE.createIssue()); // prefill section
@@ -1507,8 +1501,8 @@ public class Topology1toNTest extends TopologyTest {
 		Solution sectionSolution1 = RationaleFactory.eINSTANCE.createSolution();
 		Solution sectionSolution2 = RationaleFactory.eINSTANCE.createSolution();
 		Solution sectionSolution3 = RationaleFactory.eINSTANCE.createSolution();
-		WorkPackage pack = TaskFactory.eINSTANCE.createWorkPackage();
-		BugReport br = BugFactory.eINSTANCE.createBugReport();
+		WorkPackage workPackage = TaskFactory.eINSTANCE.createWorkPackage();
+		BugReport bugReport = BugFactory.eINSTANCE.createBugReport();
 
 		getProject().addModelElement(issue1);
 		getProject().addModelElement(issue2);
@@ -1521,14 +1515,28 @@ public class Topology1toNTest extends TopologyTest {
 		getProject().addModelElement(sectionSolution3);
 		getProject().addModelElement(solution1);
 		getProject().addModelElement(solution2);
-		getProject().addModelElement(pack);
-		getProject().addModelElement(br);
+		getProject().addModelElement(workPackage);
+		getProject().addModelElement(bugReport);
+
+		ModelElementId issue1Id = getProject().getModelElementId(issue1);
+		ModelElementId issue2Id = getProject().getModelElementId(issue2);
+		ModelElementId oldSection1Id = getProject().getModelElementId(oldSection1);
+		ModelElementId oldSection2Id = getProject().getModelElementId(oldSection2);
+		ModelElementId sectionSolution1Id = getProject().getModelElementId(sectionSolution1);
+		ModelElementId sectionSolution2Id = getProject().getModelElementId(sectionSolution2);
+		ModelElementId sectionSolution3Id = getProject().getModelElementId(sectionSolution3);
+		ModelElementId sectionId = getProject().getModelElementId(section);
+		ModelElementId newSolutionId = getProject().getModelElementId(newSolution);
+		ModelElementId solution1Id = getProject().getModelElementId(solution1);
+		ModelElementId solution2Id = getProject().getModelElementId(solution2);
+		ModelElementId bugReportId = getProject().getModelElementId(bugReport);
+		ModelElementId workPackageId = getProject().getModelElementId(workPackage);
 
 		UnicaseModelElement[] addedElements = { solution1, solution2, newSolution, sectionSolution1, sectionSolution2,
-			sectionSolution3, br };
+			sectionSolution3, bugReport };
 		issue1.setSolution(solution1);
 		issue2.setSolution(solution2);
-		pack.getContainedWorkItems().add(br);
+		workPackage.getContainedWorkItems().add(bugReport);
 		oldSection1.getModelElements().add(sectionSolution1);
 		oldSection1.getModelElements().add(sectionSolution2);
 		oldSection2.getModelElements().add(sectionSolution3);
@@ -1536,7 +1544,7 @@ public class Topology1toNTest extends TopologyTest {
 		assertTrue(oldSection1.getModelElements().contains(sectionSolution1));
 		assertTrue(oldSection1.getModelElements().contains(sectionSolution2));
 		assertTrue(oldSection2.getModelElements().contains(sectionSolution3));
-		assertTrue(pack.getContainedWorkItems().contains(br));
+		assertTrue(workPackage.getContainedWorkItems().contains(bugReport));
 
 		clearOperations();
 
@@ -1545,58 +1553,41 @@ public class Topology1toNTest extends TopologyTest {
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 		// expecting a composite operation here
 		assertEquals(1, operations.size());
-		if (operations.get(0) instanceof CompositeOperation) {
-			operations = ((CompositeOperation) operations.get(0)).getSubOperations();
-		} else {
-			fail("composite operation expected");
-		}
+		List<AbstractOperation> subOperations = checkAndCast(operations.get(0), CompositeOperation.class)
+			.getSubOperations();
 
 		// now expectation is: we get 6 messages preserving the info on former parents for the solutions
 		// and one additional one, indicating the new parent for both of them
 
-		// changed due to refactoring
+		assertEquals(16, subOperations.size());
 
-		assertEquals(16, operations.size());
-
-		SingleReferenceOperation op0 = (SingleReferenceOperation) operations.get(0);
-		SingleReferenceOperation op1 = (SingleReferenceOperation) operations.get(1);
-		SingleReferenceOperation op2 = (SingleReferenceOperation) operations.get(2);
-		SingleReferenceOperation op3 = (SingleReferenceOperation) operations.get(3);
-		SingleReferenceOperation op4 = (SingleReferenceOperation) operations.get(4);
-		SingleReferenceOperation op5 = (SingleReferenceOperation) operations.get(5);
-		SingleReferenceOperation op6 = (SingleReferenceOperation) operations.get(6);
-		MultiReferenceOperation op7 = (MultiReferenceOperation) operations.get(7);
-		SingleReferenceOperation op8 = (SingleReferenceOperation) operations.get(8);
-		SingleReferenceOperation op9 = (SingleReferenceOperation) operations.get(9);
-		MultiReferenceOperation op10 = (MultiReferenceOperation) operations.get(10);
-		SingleReferenceOperation op11 = (SingleReferenceOperation) operations.get(11);
-		MultiReferenceOperation op12 = (MultiReferenceOperation) operations.get(12);
-		SingleReferenceOperation op13 = (SingleReferenceOperation) operations.get(13);
-		SingleReferenceOperation op14 = (SingleReferenceOperation) operations.get(14);
-		MultiReferenceOperation op15 = (MultiReferenceOperation) operations.get(15);
-
-		ModelElementId issue1Id = ModelUtil.getProject(issue1).getModelElementId(issue1);
-		ModelElementId issue2Id = ModelUtil.getProject(issue2).getModelElementId(issue2);
-		ModelElementId oldSection1Id = ModelUtil.getProject(oldSection1).getModelElementId(oldSection1);
-		ModelElementId oldSection2Id = ModelUtil.getProject(oldSection2).getModelElementId(oldSection2);
-		ModelElementId sectionSolution1Id = ModelUtil.getProject(sectionSolution1).getModelElementId(sectionSolution1);
-		ModelElementId sectionSolution2Id = ModelUtil.getProject(sectionSolution2).getModelElementId(sectionSolution2);
-		ModelElementId sectionSolution3Id = ModelUtil.getProject(sectionSolution3).getModelElementId(sectionSolution3);
-		ModelElementId sectionId = ModelUtil.getProject(section).getModelElementId(section);
-		ModelElementId newSolutionId = ModelUtil.getProject(newSolution).getModelElementId(newSolution);
-		ModelElementId solution1Id = ModelUtil.getProject(solution1).getModelElementId(solution1);
-		ModelElementId solution2Id = ModelUtil.getProject(solution2).getModelElementId(solution2);
-		ModelElementId brId = ModelUtil.getProject(br).getModelElementId(br);
-		ModelElementId packId = ModelUtil.getProject(pack).getModelElementId(pack);
+		SingleReferenceOperation op0 = checkAndCast(subOperations.get(0), SingleReferenceOperation.class);
+		SingleReferenceOperation op1 = checkAndCast(subOperations.get(1), SingleReferenceOperation.class);
+		SingleReferenceOperation op2 = checkAndCast(subOperations.get(2), SingleReferenceOperation.class);
+		SingleReferenceOperation op3 = checkAndCast(subOperations.get(3), SingleReferenceOperation.class);
+		SingleReferenceOperation op4 = checkAndCast(subOperations.get(4), SingleReferenceOperation.class);
+		SingleReferenceOperation op5 = checkAndCast(subOperations.get(5), SingleReferenceOperation.class);
+		SingleReferenceOperation op6 = checkAndCast(subOperations.get(6), SingleReferenceOperation.class);
+		MultiReferenceOperation op7 = checkAndCast(subOperations.get(7), MultiReferenceOperation.class);
+		SingleReferenceOperation op8 = checkAndCast(subOperations.get(8), SingleReferenceOperation.class);
+		SingleReferenceOperation op9 = checkAndCast(subOperations.get(9), SingleReferenceOperation.class);
+		MultiReferenceOperation op10 = checkAndCast(subOperations.get(10), MultiReferenceOperation.class);
+		SingleReferenceOperation op11 = checkAndCast(subOperations.get(11), SingleReferenceOperation.class);
+		MultiReferenceOperation op12 = checkAndCast(subOperations.get(12), MultiReferenceOperation.class);
+		SingleReferenceOperation op13 = checkAndCast(subOperations.get(13), SingleReferenceOperation.class);
+		SingleReferenceOperation op14 = checkAndCast(subOperations.get(14), SingleReferenceOperation.class);
+		MultiReferenceOperation op15 = checkAndCast(subOperations.get(15), MultiReferenceOperation.class);
 
 		assertEquals(op0.getModelElementId(), issue1Id);
 		assertEquals(op0.getFeatureName(), "solution");
 		assertEquals(op0.getNewValue(), null);
 		assertEquals(op0.getOldValue(), solution1Id);
+
 		assertEquals(op1.getModelElementId(), solution1Id);
 		assertEquals(op1.getFeatureName(), "issue");
 		assertEquals(op1.getNewValue(), null);
 		assertEquals(op1.getOldValue(), issue1Id);
+
 		assertEquals(op2.getModelElementId(), solution1Id);
 		assertEquals(op2.getFeatureName(), "leafSection");
 		assertEquals(op2.getNewValue(), sectionId);
@@ -1606,10 +1597,12 @@ public class Topology1toNTest extends TopologyTest {
 		assertEquals(op3.getFeatureName(), "solution");
 		assertEquals(op3.getNewValue(), null);
 		assertEquals(op3.getOldValue(), solution2Id);
+
 		assertEquals(op4.getModelElementId(), solution2Id);
 		assertEquals(op4.getFeatureName(), "issue");
 		assertEquals(op4.getNewValue(), null);
 		assertEquals(op4.getOldValue(), issue2Id);
+
 		assertEquals(op5.getModelElementId(), solution2Id);
 		assertEquals(op5.getFeatureName(), "leafSection");
 		assertEquals(op5.getNewValue(), sectionId);
@@ -1626,42 +1619,48 @@ public class Topology1toNTest extends TopologyTest {
 		assertEquals(op7.getReferencedModelElements().size(), 2);
 		assertEquals(op7.getReferencedModelElements().get(0), sectionSolution1Id);
 		assertEquals(op7.getReferencedModelElements().get(1), sectionSolution2Id);
-		assertEquals(op8.getModelElementId(), sectionSolution1Id);
-		assertEquals(op8.getFeatureName(), "leafSection");
-		assertEquals(op8.getNewValue(), sectionId);
-		assertEquals(op8.getOldValue(), oldSection1Id);
-		assertEquals(op9.getModelElementId(), sectionSolution2Id);
-		assertEquals(op9.getFeatureName(), "leafSection");
-		assertEquals(op9.getNewValue(), sectionId);
-		assertEquals(op9.getOldValue(), oldSection1Id);
 
-		assertEquals(op10.getModelElementId(), oldSection2Id);
-		assertEquals(op10.getFeatureName(), "modelElements");
-		assertEquals(op10.isAdd(), false);
-		assertEquals(op10.getReferencedModelElements().size(), 1);
-		assertEquals(op10.getReferencedModelElements().get(0), sectionSolution3Id);
-		assertEquals(op11.getModelElementId(), sectionSolution3Id);
-		assertEquals(op11.getFeatureName(), "leafSection");
-		assertEquals(op11.getNewValue(), sectionId);
-		assertEquals(op11.getOldValue(), oldSection2Id);
+		assertEquals("leafSection", op8.getFeatureName());
+		assertEquals(sectionSolution1Id, op8.getModelElementId());
+		assertEquals(sectionId, op8.getNewValue());
+		assertEquals(oldSection1Id, op8.getOldValue());
 
-		assertEquals(op12.getModelElementId(), packId);
-		assertEquals(op12.getFeatureName(), "containedWorkItems");
-		assertEquals(op12.isAdd(), false);
-		assertEquals(op12.getReferencedModelElements().size(), 1);
-		assertEquals(op12.getReferencedModelElements().get(0), brId);
-		assertEquals(op13.getModelElementId(), brId);
-		assertEquals(op13.getFeatureName(), "containingWorkpackage");
-		assertEquals(op13.getNewValue(), null);
-		assertEquals(op13.getOldValue(), packId);
-		assertEquals(op14.getModelElementId(), brId);
-		assertEquals(op14.getFeatureName(), "leafSection");
-		assertEquals(op14.getNewValue(), sectionId);
-		assertEquals(op14.getOldValue(), null);
+		assertEquals("leafSection", op9.getFeatureName());
+		assertEquals(sectionSolution2Id, op9.getModelElementId());
+		assertEquals(sectionId, op9.getNewValue());
+		assertEquals(oldSection1Id, op9.getOldValue());
 
-		assertEquals(op15.getModelElementId(), sectionId);
+		assertEquals("modelElements", op10.getFeatureName());
+		assertEquals(oldSection2Id, op10.getModelElementId());
+		assertEquals(sectionSolution3Id, op10.getReferencedModelElements().get(0));
+		assertEquals(1, op10.getReferencedModelElements().size());
+		assertFalse(op10.isAdd());
+
+		assertEquals("leafSection", op11.getFeatureName());
+		assertEquals(sectionSolution3Id, op11.getModelElementId());
+		assertEquals(sectionId, op11.getNewValue());
+		assertEquals(oldSection2Id, op11.getOldValue());
+
+		assertEquals("containedWorkItems", op12.getFeatureName());
+		assertEquals(workPackageId, op12.getModelElementId());
+		assertEquals(bugReportId, op12.getReferencedModelElements().get(0));
+		assertEquals(1, op12.getReferencedModelElements().size());
+		assertFalse(op12.isAdd());
+
+		assertEquals("containingWorkpackage", op13.getFeatureName());
+		assertEquals(bugReportId, op13.getModelElementId());
+		assertEquals(workPackageId, op13.getOldValue());
+		assertNull(op13.getNewValue());
+
+		assertEquals("leafSection", op14.getFeatureName());
+		assertEquals(bugReportId, op14.getModelElementId());
+		assertEquals(sectionId, op14.getNewValue());
+		assertNull(op14.getOldValue());
+
 		assertEquals("modelElements", op15.getFeatureName());
+		assertEquals(sectionId, op15.getModelElementId());
 		assertTrue(op15.isAdd());
+		assertEquals(1, op15.getIndex());
 		assertEquals(7, op15.getReferencedModelElements().size());
 		assertEquals(solution1Id, op15.getReferencedModelElements().get(0));
 		assertEquals(solution2Id, op15.getReferencedModelElements().get(1));
@@ -1669,8 +1668,7 @@ public class Topology1toNTest extends TopologyTest {
 		assertEquals(sectionSolution1Id, op15.getReferencedModelElements().get(3));
 		assertEquals(sectionSolution2Id, op15.getReferencedModelElements().get(4));
 		assertEquals(sectionSolution3Id, op15.getReferencedModelElements().get(5));
-		assertEquals(brId, op15.getReferencedModelElements().get(6));
-		assertEquals(op15.getIndex(), 1);
+		assertEquals(bugReportId, op15.getReferencedModelElements().get(6));
 
 	}
 

@@ -57,6 +57,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
@@ -338,7 +339,7 @@ public class CommandTest extends WorkspaceTest {
 				useCase.setInitiatingActor(oldActor);
 				useCase.getParticipatingActors().add(newActor);
 				useCase.getParticipatingActors().add(otherActor);
-				assertEquals(true, getProject().containsInstance(useCase));
+				assertEquals(true, getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				clearOperations();
 			}
@@ -350,7 +351,7 @@ public class CommandTest extends WorkspaceTest {
 		Command deleteCommand = DeleteCommand.create(Configuration.getEditingDomain(), useCase);
 		Configuration.getEditingDomain().getCommandStack().execute(deleteCommand);
 
-		assertEquals(false, getProject().containsInstance(useCase));
+		assertEquals(false, getProject().contains(useCase));
 		// assertEquals(null, useCase.eContainer());
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
@@ -877,14 +878,14 @@ public class CommandTest extends WorkspaceTest {
 		assertTrue(Configuration.getEditingDomain().getClipboard().contains(workPackage));
 		assertEquals(1, ModelUtil.getAllContainedModelElements(leafSection, false).size());
 
-		assertTrue(getProject().contains(workPackageId));
+		assertTrue(getProject().contains((IModelElementId) workPackageId));
 
 		Command pasteCommand = PasteFromClipboardCommand.create(editingDomain, leafSection,
 			DocumentPackage.Literals.LEAF_SECTION__MODEL_ELEMENTS, CommandParameter.NO_INDEX);
 		editingDomain.getCommandStack().execute(pasteCommand);
 
 		assertEquals(4, ModelUtil.getAllContainedModelElements(leafSection, false).size());
-		assertTrue(getProject().contains(workPackageId));
+		assertTrue(getProject().contains((IModelElementId) workPackageId));
 
 		assertEquals(2, getProjectSpace().getOperations().size());
 

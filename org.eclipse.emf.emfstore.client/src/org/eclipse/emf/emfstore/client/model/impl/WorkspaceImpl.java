@@ -31,9 +31,8 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
  * The following features are implemented:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getServerInfos <em>Server Infos</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorekspaceImpl#getServerInfos <em>Server Infos</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl#getHANSWURST <em>HANSWURST</em>}</li>
  * </ul>
  * </p>
  * 
@@ -52,10 +51,10 @@ public class WorkspaceImpl extends WorkspaceBase {
 	protected EList<ProjectSpace> projectSpaces;
 
 	/**
-	 * The cached value of the '{@link #getServerInfos() <em>Server Infos</em>}' containment reference list.
+	 * The cached value of the '{@link #getServers() <em>Server Infos</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #getServerInfos()
+	 * @see #getServers()
 	 * @generated
 	 * @ordered
 	 */
@@ -92,7 +91,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 		case ModelPackage.WORKSPACE__PROJECT_SPACES:
 			return getProjectSpaces();
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			return getServerInfos();
+			return getServers();
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return getUsersessions();
 		}
@@ -126,7 +125,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 		case ModelPackage.WORKSPACE__PROJECT_SPACES:
 			return ((InternalEList<?>) getProjectSpaces()).basicRemove(otherEnd, msgs);
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			return ((InternalEList<?>) getServerInfos()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getServers()).basicRemove(otherEnd, msgs);
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return ((InternalEList<?>) getUsersessions()).basicRemove(otherEnd, msgs);
 		}
@@ -165,8 +164,8 @@ public class WorkspaceImpl extends WorkspaceBase {
 			getProjectSpaces().addAll((Collection<? extends ProjectSpace>) newValue);
 			return;
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			getServerInfos().clear();
-			getServerInfos().addAll((Collection<? extends ServerInfo>) newValue);
+			getServers().clear();
+			getServers().addAll((Collection<? extends ServerInfo>) newValue);
 			return;
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			getUsersessions().clear();
@@ -198,7 +197,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 			getProjectSpaces().clear();
 			return;
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			getServerInfos().clear();
+			getServers().clear();
 			return;
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			getUsersessions().clear();

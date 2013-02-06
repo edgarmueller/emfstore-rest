@@ -107,10 +107,10 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().containsInstance(testElement1));
-		assertEquals(true, getProject().containsInstance(testElement11));
-		assertEquals(true, getProject().containsInstance(testElement12));
-		assertEquals(true, getProject().containsInstance(testElement13));
+		assertEquals(true, getProject().contains(testElement1));
+		assertEquals(true, getProject().contains(testElement11));
+		assertEquals(true, getProject().contains(testElement12));
+		assertEquals(true, getProject().contains(testElement13));
 
 		Assert.assertNotNull(getProject().getModelElementId(testElement1));
 		Assert.assertNotNull(getProject().getModelElementId(testElement11));
@@ -151,12 +151,12 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				assertEquals(true, getProject().containsInstance(testElement1));
-				assertEquals(true, getProject().containsInstance(testElement11));
-				assertEquals(true, getProject().containsInstance(testElement12));
-				assertEquals(true, getProject().containsInstance(testElement111));
-				assertEquals(true, getProject().containsInstance(testElement121));
-				assertEquals(true, getProject().containsInstance(testElement122));
+				assertEquals(true, getProject().contains(testElement1));
+				assertEquals(true, getProject().contains(testElement11));
+				assertEquals(true, getProject().contains(testElement12));
+				assertEquals(true, getProject().contains(testElement111));
+				assertEquals(true, getProject().contains(testElement121));
+				assertEquals(true, getProject().contains(testElement122));
 
 				Assert.assertNotNull(getProject().getModelElementId(testElement1));
 				Assert.assertNotNull(getProject().getModelElementId(testElement11));
@@ -187,7 +187,7 @@ public class MultiAttributeMoveOperationTest extends WorkspaceTest {
 					operation.getEObjectToIdMap()
 						.get(operation.getModelElement().eContents().get(1).eContents().get(1)));
 
-				CreateDeleteOperation copy = (CreateDeleteOperation) ModelUtil.clone(operation);
+				CreateDeleteOperation copy = ModelUtil.clone(operation);
 
 				operation = (CreateDeleteOperation) operation.reverse().reverse();
 

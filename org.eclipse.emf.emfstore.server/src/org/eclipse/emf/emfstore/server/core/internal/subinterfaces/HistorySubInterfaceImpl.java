@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
@@ -207,7 +208,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (version.getPrimarySpec() != null && version.getPrimarySpec().getIdentifier() == 0) {
 				if (version.getProjectState() != null) {
 					for (ModelElementId id : modelElements) {
-						if (version.getProjectState().contains(id)) {
+						if (version.getProjectState().contains((IModelElementId) id)) {
 							result.add(version);
 							break;
 						}

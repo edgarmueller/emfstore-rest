@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.emfstore.client.api.IWorkspace;
+import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
@@ -59,9 +61,9 @@ import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class WorkspaceManager implements IReinitializable {
+public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializable {
 
-	private static WorkspaceManager instance;
+	private static WorkspaceProvider instance;
 
 	private Workspace currentWorkspace;
 	private SessionManager sessionManager;
@@ -79,10 +81,10 @@ public final class WorkspaceManager implements IReinitializable {
 	 * @return the workspace manager singleton
 	 * @generated NOT
 	 */
-	public static synchronized WorkspaceManager getInstance() {
+	public static synchronized WorkspaceProvider getInstance() {
 		if (instance == null) {
 			try {
-				instance = new WorkspaceManager();
+				instance = new WorkspaceProvider();
 				instance.initialize();
 				// BEGIN SUPRESS CATCH EXCEPTION
 			} catch (RuntimeException e) {
@@ -112,7 +114,7 @@ public final class WorkspaceManager implements IReinitializable {
 	 * 
 	 * @generated NOT
 	 */
-	private WorkspaceManager() {
+	private WorkspaceProvider() {
 	}
 
 	private void initialize() {
@@ -472,7 +474,7 @@ public final class WorkspaceManager implements IReinitializable {
 	 * 
 	 * @return the workspace
 	 */
-	public Workspace getCurrentWorkspace() {
+	public IWorkspace getWorkspace() {
 		return currentWorkspace;
 	}
 

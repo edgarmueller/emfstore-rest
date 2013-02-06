@@ -14,17 +14,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Info</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Info</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getDescription <em>Description</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getProjectId <em>Project Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getVersion <em>Version</em>}</li>
- * </ul>
- * </p>
+ * @extends IProjectInfo
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getName <em>Name</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getDescription <em>Description</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getProjectId <em>Project Id</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.ProjectInfo#getVersion <em>Version</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getProjectInfo()
  * @model

@@ -11,8 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.api.IProject;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -25,7 +26,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICreateLocalProjectController extends AbstractEMFStoreUIController<ProjectSpace> {
+public class UICreateLocalProjectController extends AbstractEMFStoreUIController<IProject> {
 
 	private final String name;
 	private final String description;
@@ -58,7 +59,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		this.description = description == null ? "" : description;
 	}
 
-	private ProjectSpace createLocalProject() {
+	private ILocalProject createLocalProject() {
 		CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 		if (dialog.open() == Dialog.OK) {
 			String projectName = dialog.getName();
@@ -70,8 +71,8 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		return null;
 	}
 
-	private ProjectSpace createLocalProject(final String name, final String description) {
-		return WorkspaceManager.getInstance().getCurrentWorkspace().createLocalProject(name, description);
+	private ILocalProject createLocalProject(final String name, final String description) {
+		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name, description);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ProjectSpace doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public ILocalProject doRun(IProgressMonitor monitor) throws EmfStoreException {
 		if (name == null) {
 			return createLocalProject();
 		}

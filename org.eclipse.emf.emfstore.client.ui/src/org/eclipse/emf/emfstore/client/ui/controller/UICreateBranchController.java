@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
@@ -46,7 +46,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  */
 public class UICreateBranchController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
-	CommitCallback {
+	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
 	private LogMessage logMessage;
@@ -87,7 +87,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#noLocalChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#noLocalChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
 	public void noLocalChanges(ProjectSpace projectSpace) {
 		RunInUI.run(new Callable<Void>() {
@@ -102,7 +102,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
 	public boolean baseVersionOutOfDate(final ProjectSpace projectSpace, final IProgressMonitor progressMonitor) {
 
@@ -129,7 +129,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
 	 */
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
@@ -163,7 +163,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			if (branch == null) {
 				branch = branchSelection(projectSpace);
 			}
-			return projectSpace.commitToBranch(branch, logMessage, UICreateBranchController.this, progressMonitor);
+			// TODO OTS
+			return (PrimaryVersionSpec) projectSpace.commitToBranch(branch, logMessage, UICreateBranchController.this,
+				progressMonitor);
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore
@@ -209,7 +211,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

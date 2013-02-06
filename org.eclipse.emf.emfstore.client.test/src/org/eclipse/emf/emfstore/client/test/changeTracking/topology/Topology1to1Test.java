@@ -173,7 +173,13 @@ public class Topology1to1Test extends TopologyTest {
 		issue.setSolution(solutionOld);
 		assertEquals(issue.getSolution(), solutionOld);
 
-		clearOperations();
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				clearOperations();
+			}
+		}.run(false);
 
 		// fetch id here, before oldSolution is removed from project
 		ModelElementId solutionOldId = ModelUtil.getProject(solutionOld).getModelElementId(solutionOld);

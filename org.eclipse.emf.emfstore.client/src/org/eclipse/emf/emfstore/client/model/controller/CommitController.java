@@ -17,9 +17,9 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private LogMessage logMessage;
-	private CommitCallback callback;
+	private ICommitCallback callback;
 	private BranchVersionSpec branch;
 
 	/**
@@ -62,7 +62,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, CommitCallback callback,
+	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, ICommitCallback callback,
 		IProgressMonitor monitor) {
 		this(projectSpace, null, logMessage, callback, monitor);
 	}
@@ -85,11 +85,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
 	public CommitController(ProjectSpaceBase projectSpace, BranchVersionSpec branch, LogMessage logMessage,
-		CommitCallback callback, IProgressMonitor monitor) {
+		ICommitCallback callback, IProgressMonitor monitor) {
 		super(projectSpace);
 		this.branch = branch;
 		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;
-		this.callback = callback == null ? CommitCallback.NOCALLBACK : callback;
+		this.callback = callback == null ? ICommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
 
@@ -105,7 +105,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Checking changes");
 
 		// check if there are any changes. Branch commits are allowed with no changes, whereas normal committs are not.
-		if (!getProjectSpace().isDirty() && branch == null) {
+		if (!getProjectSpace().hasUncommitedChanges() && branch == null) {
 			callback.noLocalChanges(getProjectSpace());
 			return getProjectSpace().getBaseVersion();
 		}
@@ -120,7 +120,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
 			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
@@ -193,7 +193,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().setMergedVersion(null);
 		getProjectSpace().updateDirtyState();
 
-		WorkspaceManager.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
 			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;

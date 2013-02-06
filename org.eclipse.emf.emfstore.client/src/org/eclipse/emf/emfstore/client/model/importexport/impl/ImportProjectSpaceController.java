@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.client.model.importexport.IExportImportController;
 
@@ -76,7 +76,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Workspace currentWorkspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
 		currentWorkspace.importProjectSpace(file.getAbsolutePath());
 	}
 

@@ -18,8 +18,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback;
+import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -30,6 +29,7 @@ import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -45,7 +45,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  */
 public class UIUpdateProjectController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
-	UpdateCallback {
+	IUpdateCallback {
 
 	private final ProjectSpace projectSpace;
 	private VersionSpec version;
@@ -84,7 +84,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#noChangesOnServer()
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#noChangesOnServer()
 	 */
 	public void noChangesOnServer() {
 		RunInUI.run(new Callable<Void>() {
@@ -100,14 +100,14 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException)
 	 */
 	public boolean conflictOccurred(final ChangeConflictException conflictException,
 		final IProgressMonitor progressMonitor) {
 		final ProjectSpace projectSpace = conflictException.getProjectSpace();
 		boolean mergeSuccessful = false;
 		try {
-			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
+			final IPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
 				.getBaseVersion()));
 			// merge opens up a dialog
 			return projectSpace.merge(targetVersion, conflictException, new MergeProjectHandler(), this,
@@ -134,7 +134,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ProjectSpace projectSpace, final List<ChangePackage> changePackages,
@@ -161,18 +161,15 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EmfStoreException {
 		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		PrimaryVersionSpec resolveVersionSpec = WorkspaceManager
-			.getInstance()
-			.getCurrentWorkspace()
-			.resolveVersionSpec(projectSpace.getUsersession(), Versions.createHEAD(oldBaseVersion),
-				projectSpace.getProjectId());
+		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(Versions.createHEAD(oldBaseVersion));
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = projectSpace.update(version, UIUpdateProjectController.this, monitor);
+		PrimaryVersionSpec newBaseVersion = (PrimaryVersionSpec) projectSpace.update(version,
+			UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}
@@ -181,7 +178,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.UpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

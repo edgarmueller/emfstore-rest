@@ -23,7 +23,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
@@ -39,6 +40,7 @@ import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.PlotLan
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.SWTPlotRenderer;
 import org.eclipse.emf.emfstore.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -308,13 +310,14 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 								List<HistoryInfo> historyInfos = getLocalChanges();
 								monitor.worked(10);
 								if (projectSpace != modelElement) {
-									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder
-										.modelelementQuery(centerVersion,
+									historyInfos.addAll(((List<HistoryInfo>) (List<?>) projectSpace
+										.getHistoryInfos(HistoryQueryBuilder.modelelementQuery(centerVersion,
 											Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-											LOWER_LIMIT, showAllVersions, true)));
+											LOWER_LIMIT, showAllVersions, true))));
 								} else {
-									historyInfos.addAll(projectSpace.getHistoryInfo(HistoryQueryBuilder.rangeQuery(
-										centerVersion, UPPER_LIMIT, LOWER_LIMIT, showAllVersions, true, true, true)));
+									historyInfos.addAll((List<HistoryInfo>) (List<?>) projectSpace
+										.getHistoryInfos(HistoryQueryBuilder.rangeQuery(centerVersion, UPPER_LIMIT,
+											LOWER_LIMIT, showAllVersions, true, true, true)));
 								}
 								monitor.worked(90);
 								return historyInfos;
@@ -337,7 +340,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			ChangePackage changePackage = projectSpace.getLocalChangePackage(false);
 			// filter for modelelement, do additional sanity check as the
 			// project space could've been also selected
-			if (modelElement != null && projectSpace.getProject().containsInstance(modelElement)) {
+			if (modelElement != null && projectSpace.getProject().contains(modelElement)) {
 				Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
 				for (AbstractOperation ao : changePackage.getOperations()) {
 					if (!ao.getAllInvolvedModelElements().contains(
@@ -389,7 +392,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			if (input instanceof ProjectSpace) {
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
-				this.projectSpace = WorkspaceManager.getInstance().getCurrentWorkspace()
+				// TODO OTS
+				this.projectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 					.getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
@@ -428,12 +432,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		noProjectHint
 			.setText("Select a <a>project</a> or call 'Show history' from the context menu of an element in the navigator.");
 		noProjectHint.addSelectionListener(new SelectionListener() {
-
 			public void widgetSelected(SelectionEvent e) {
 				ElementListSelectionDialog elsd = new ElementListSelectionDialog(parent.getShell(),
 					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
-				for (ProjectSpace ps : WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces()) {
+				// TODO OTS
+				for (ProjectSpace ps : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
 					}
@@ -460,7 +464,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private void initProjectDeleteListener() {
-		WorkspaceManager.getObserverBus().register(new DeleteProjectSpaceObserver() {
+		WorkspaceProvider.getObserverBus().register(new DeleteProjectSpaceObserver() {
 			public void projectSpaceDeleted(ProjectSpace projectSpace) {
 				if (HistoryBrowserView.this.projectSpace == projectSpace) {
 					setInput(null);
@@ -679,8 +683,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					@Override
 					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
 						try {
-							return projectSpace.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL,
-								Integer.parseInt(value)));
+							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
+								VersionSpec.GLOBAL, Integer.parseInt(value)));
 						} catch (EmfStoreException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
 								"Error: The version you requested does not exist.", e);
@@ -787,9 +791,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			} else if (element instanceof ProjectSpace) {
 				selectedModelElement = ((ProjectSpace) element).getProject();
 			} else if (element instanceof ModelElementId
-				&& projectSpace.getProject().contains((ModelElementId) element)) {
+				&& projectSpace.getProject().contains((IModelElementId) element)) {
 				selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
-			} else if (projectSpace.getProject().containsInstance((EObject) element)) {
+			} else if (projectSpace.getProject().contains((EObject) element)) {
 				selectedModelElement = (EObject) element;
 			}
 

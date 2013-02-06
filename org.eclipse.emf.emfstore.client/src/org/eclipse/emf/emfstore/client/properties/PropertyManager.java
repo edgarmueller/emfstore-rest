@@ -18,7 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
@@ -297,7 +297,7 @@ public final class PropertyManager {
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
 			projectSpace.getChangedSharedProperties());
 
-		List<EMFStoreProperty> rejectedProperties = WorkspaceManager
+		List<EMFStoreProperty> rejectedProperties = WorkspaceProvider
 			.getInstance()
 			.getConnectionManager()
 			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
@@ -310,7 +310,7 @@ public final class PropertyManager {
 		projectSpace.getChangedSharedProperties().removeAll(nonRejectedProperties);
 
 		// update properties to reflect current state on server
-		List<EMFStoreProperty> sharedProperties = WorkspaceManager.getInstance().getConnectionManager()
+		List<EMFStoreProperty> sharedProperties = WorkspaceProvider.getInstance().getConnectionManager()
 			.getEMFProperties(this.projectSpace.getUsersession().getSessionId(), this.projectSpace.getProjectId());
 
 		for (EMFStoreProperty prop : sharedProperties) {

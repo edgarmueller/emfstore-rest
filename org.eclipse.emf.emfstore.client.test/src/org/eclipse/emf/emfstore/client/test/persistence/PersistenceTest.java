@@ -14,7 +14,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
+import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
@@ -32,7 +34,7 @@ public class PersistenceTest extends WorkspaceTest {
 	@Test
 	public void testReinitWorkspace() {
 		Configuration.setAutoSave(false);
-		Project originalProject = ModelUtil.clone(WorkspaceManager.getInstance().getCurrentWorkspace()
+		Project originalProject = ModelUtil.clone(((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 			.getProjectSpaces().get(0).getProject());
 
 		new EMFStoreCommand() {
@@ -43,12 +45,12 @@ public class PersistenceTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0).getProject()
-			.getModelElements().size(), 1);
-		WorkspaceManager.getInstance().dispose();
-		WorkspaceManager.getInstance().reinit();
-		assertTrue(ModelUtil.areEqual(WorkspaceManager.getInstance().getCurrentWorkspace().getProjectSpaces().get(0)
-			.getProject(), originalProject));
+		assertEquals(WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
+		WorkspaceProvider.getInstance().dispose();
+		WorkspaceProvider.getInstance().reinit();
+		assertTrue(ModelUtil.areEqual(
+			((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0)).getProject(),
+			originalProject));
 	}
 
 }

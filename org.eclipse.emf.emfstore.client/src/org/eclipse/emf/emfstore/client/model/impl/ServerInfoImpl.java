@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
@@ -27,22 +26,28 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Info</b></em>'. <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getUrl <em>Url</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getPort <em>Port</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getProjectInfos <em>Project Infos</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getLastUsersession <em>Last Usersession</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getCertificateAlias <em>Certificate Alias</em>}</li>
- * </ul>
- * </p>
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Info</b></em>'.
+ * 
+ * @extends AllYourServerBaseRBelongToUs
+ *          <!-- end-user-doc -->
+ *          <p>
+ *          The following features are implemented:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getName <em>Name</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getUrl <em>Url</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getPort <em>Port</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getProjectInfos <em>Project Infos</em>}
+ *          </li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getLastUsersession <em>Last Usersession
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.impl.ServerInfoImpl#getCertificateAlias <em>Certificate
+ *          Alias</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @generated
  */
-public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
+public class ServerInfoImpl extends AllYourServerBaseRBelongToUs implements ServerInfo {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->

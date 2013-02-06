@@ -62,6 +62,7 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 
@@ -1184,7 +1185,7 @@ public final class ModelUtil {
 		if (referencedElement == null) {
 			return false;
 		}
-		if ((!collection.containsInstance(referencedElement))
+		if ((!collection.contains(referencedElement))
 			&& ((ProjectImpl) collection).getDeletedModelElementId(referencedElement) == null) {
 			return false;
 		}
@@ -1202,12 +1203,13 @@ public final class ModelUtil {
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.common.model.ModelElementId)
 	 */
-	public static EObject getSingleton(ModelElementId singletonId) {
+	public static EObject getSingleton(IModelElementId singletonId) {
 
 		initSingletonIdResolvers();
 
 		for (SingletonIdResolver resolver : singletonIdResolvers) {
-			EObject singleton = resolver.getSingleton(singletonId);
+			// TODO OTS
+			EObject singleton = resolver.getSingleton((ModelElementId) singletonId);
 			if (singleton != null) {
 				return singleton;
 			}

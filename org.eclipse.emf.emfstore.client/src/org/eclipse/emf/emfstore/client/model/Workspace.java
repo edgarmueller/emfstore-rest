@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.api.IWorkspace;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.client.model.exceptions.ServerUrlResolutionException;
@@ -28,20 +29,13 @@ import org.eclipse.emf.emfstore.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
- * @implements IAdaptable <!-- end-user-doc -->
+ * @implements IAdaptable, IWorkspace <!-- end-user-doc -->
  * 
  *             <p>
  *             The following features are supported:
@@ -62,116 +56,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * @model
  * @generated
  */
-public interface Workspace extends EObject, IAdaptable {
-
-	/**
-	 * Checkout a project to the workspace in a given version.
-	 * 
-	 * @param usersession
-	 *            The user session that should be used to checkout the project.
-	 * @param projectInfo
-	 *            An {@link ProjectInfo} instance describing the project and its
-	 *            version.
-	 * @throws EmfStoreException
-	 *             If an error occurs during the checkout.
-	 * @return the project space containing the project
-	 * @model
-	 * @generated NOT
-	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo) throws EmfStoreException;
-
-	/**
-	 * Checkout a project to the workspace in a given version.
-	 * 
-	 * @param usersession
-	 *            The user session that should be used to checkout the project.
-	 * @param projectInfo
-	 *            An {@link ProjectInfo} instance describing the project and its
-	 *            version.
-	 * @param progressMonitor
-	 *            the progress monitor that should be used during checkout
-	 * @throws EmfStoreException
-	 *             If an error occurs during the checkout.
-	 * @return the project space containing the project
-	 * @model
-	 * @generated NOT
-	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, IProgressMonitor progressMonitor)
-		throws EmfStoreException;
-
-	/**
-	 * Checkout a project to the workspace in a given version.
-	 * 
-	 * @param usersession
-	 *            The user session that should be used to checkout the project.
-	 * @param projectInfo
-	 *            An {@link ProjectInfo} instance describing the project and its
-	 *            version.
-	 * @param targetSpec
-	 *            The target version.
-	 * @param progressMonitor
-	 *            the progress monitor that should be used during checkout
-	 * @throws EmfStoreException
-	 *             If an error occurs during the checkout.
-	 * @return the project space containing the project
-	 * @model
-	 * @generated NOT
-	 */
-	ProjectSpace checkout(Usersession usersession, ProjectInfo projectInfo, PrimaryVersionSpec targetSpec,
-		IProgressMonitor progressMonitor) throws EmfStoreException;
-
-	/**
-	 * Creates a new local project that is not shared with the server yet.
-	 * 
-	 * @param projectName
-	 *            the project name
-	 * @param projectDescription
-	 *            the project description
-	 * @return the project space that the new project resides in
-	 */
-	ProjectSpace createLocalProject(String projectName, String projectDescription);
-
-	/**
-	 * Creates an empty project on the server.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo} that contains information about the
-	 *            server on which the project should be created.
-	 * @param projectName
-	 *            The name of the project.
-	 * @param projectDescription
-	 *            A description of the project to be created.
-	 * @param monitor
-	 *            a progress monitor instance that is used to indicate progress
-	 *            about creating the remote project
-	 * @return a {@link ProjectInfo} object containing information about the
-	 *         created project
-	 * @throws EmfStoreException
-	 *             If an error occurs while creating the remote project
-	 */
-	ProjectInfo createRemoteProject(ServerInfo serverInfo, String projectName, String projectDescription,
-		IProgressMonitor monitor) throws EmfStoreException;
-
-	/**
-	 * Creates an empty project on the server.
-	 * 
-	 * @param usersession
-	 *            The {@link Usersession} that should be used to create the
-	 *            remote project.<br/>
-	 *            If <code>null</code>, the session manager will search for a
-	 *            session.
-	 * @param projectName
-	 *            The name of the project.
-	 * @param projectDescription
-	 *            A description of the project to be created.
-	 * @param monitor a monitor to show the progress
-	 * @return a {@link ProjectInfo} object containing information about the
-	 *         created project
-	 * @throws EmfStoreException
-	 *             If an error occurs while creating the remote project
-	 */
-	ProjectInfo createRemoteProject(Usersession usersession, String projectName, String projectDescription,
-		IProgressMonitor monitor) throws EmfStoreException;
+public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
 	 * Deletes the given project space.
@@ -182,39 +67,6 @@ public interface Workspace extends EObject, IAdaptable {
 	 *             If deleting the obsolete project space files fails
 	 */
 	void deleteProjectSpace(ProjectSpace projectSpace) throws IOException;
-
-	/**
-	 * Deletes a project on the server.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo}, that contains the information on which
-	 *            server the project is located on.
-	 * @param projectId
-	 *            The ID of the project.
-	 * @param deleteFiles
-	 *            Whether files should be deleted too
-	 * @throws EmfStoreException
-	 *             If an error occurs while deleting the project.
-	 */
-	void deleteRemoteProject(ServerInfo serverInfo, ProjectId projectId, boolean deleteFiles) throws EmfStoreException;
-
-	/**
-	 * Deletes a project on the server.
-	 * 
-	 * @param usersession
-	 *            The {@link Usersession} that should be used to delete the
-	 *            project.<br/>
-	 *            If <code>null</code>, the session manager will search for a
-	 *            session.
-	 * @param projectId
-	 *            The ID of the project.
-	 * @param deleteFiles
-	 *            Whether files should be deleted too
-	 * @throws EmfStoreException
-	 *             If an error occurs while deleting the project.
-	 */
-	void deleteRemoteProject(Usersession usersession, ProjectId projectId, boolean deleteFiles)
-		throws EmfStoreException;
 
 	/**
 	 * Exports a project space to a file.
@@ -305,57 +157,6 @@ public interface Workspace extends EObject, IAdaptable {
 	EditingDomain getEditingDomain();
 
 	/**
-	 * List all branches of the specified project. Every call triggers a server
-	 * call.
-	 * 
-	 * @param serverInfo
-	 *            server specification
-	 * @param projectId
-	 *            project id
-	 * @return list of {@link BranchInfo}
-	 * @throws EmfStoreException
-	 *             in case of an exception
-	 */
-	List<BranchInfo> getBranches(ServerInfo serverInfo, final ProjectId projectId) throws EmfStoreException;
-
-	/**
-	 * Retrieves history information for a project.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo} that contains information about the
-	 *            server the project is located on
-	 * @param projectId
-	 *            The ID of a project
-	 * @param query
-	 *            A history query.
-	 * @return a list of {@link HistoryInfo} instances
-	 * @throws EmfStoreException
-	 *             If an error occurs while retrieving the history information
-	 * @generated NOT
-	 */
-	List<HistoryInfo> getHistoryInfo(ServerInfo serverInfo, ProjectId projectId, HistoryQuery query)
-		throws EmfStoreException;
-
-	/**
-	 * Retrieves history information for a project.
-	 * 
-	 * @param usersession
-	 *            The {@link Usersession} that should be used to retrieve the
-	 *            history information. If <code>null</code>, the session manager
-	 *            will search for a session.
-	 * @param projectId
-	 *            The ID of a project
-	 * @param query
-	 *            A history query.
-	 * @return a list of {@link HistoryInfo} instances
-	 * @throws EmfStoreException
-	 *             If an error occurs while retrieving the history information
-	 * @generated NOT
-	 */
-	List<HistoryInfo> getHistoryInfo(Usersession usersession, ProjectId projectId, HistoryQuery query)
-		throws EmfStoreException;
-
-	/**
 	 * Retrieves the project space for the given project.
 	 * 
 	 * @param project
@@ -386,34 +187,6 @@ public interface Workspace extends EObject, IAdaptable {
 	 * @generated
 	 */
 	EList<ProjectSpace> getProjectSpaces();
-
-	/**
-	 * Get the list of remotely available projects.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo} that should be used to retrieve the
-	 *            information about remote projects.<br/>
-	 * @return a list containing the information about each remote project
-	 * @throws EmfStoreException
-	 *             If an error occurs while retrieving the remote project list.
-	 * @generated NOT
-	 */
-	List<ProjectInfo> getRemoteProjectList(ServerInfo serverInfo) throws EmfStoreException;
-
-	/**
-	 * Get the list of remotely available projects.
-	 * 
-	 * @param usersession
-	 *            The {@link Usersession} that should be used to retrieve the
-	 *            remote project list.<br/>
-	 *            If <code>null</code>, the session manager will search for a
-	 *            session.
-	 * @return a list containing the information about each remote project
-	 * @throws EmfStoreException
-	 *             If an error occurs while retrieving the remote project list.
-	 * @generated NOT
-	 */
-	List<ProjectInfo> getRemoteProjectList(Usersession usersession) throws EmfStoreException;
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment
@@ -523,51 +296,6 @@ public interface Workspace extends EObject, IAdaptable {
 	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
-	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo} that should be used to resolve the
-	 *            given version specification.
-	 * @param versionSpec
-	 *            The specification to resolve.
-	 * @param projectId
-	 *            The ID of a project.
-	 * @return the {@link PrimaryVersionSpec}
-	 * @throws EmfStoreException
-	 *             If an error occurs while resolving the {@link VersionSpec}
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, VersionSpec versionSpec, ProjectId projectId)
-		throws EmfStoreException;
-
-	/**
-	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
-	 * 
-	 * @param session
-	 *            The {@link Usersession} that should be used to resolve the
-	 *            given {@link VersionSpec}.<br/>
-	 *            If <code>null</code>, the session manager will search for a
-	 *            session.
-	 * @param versionSpec
-	 *            The specification to resolve.
-	 * @param projectId
-	 *            The ID of a project.
-	 * @return the {@link PrimaryVersionSpec}
-	 * @throws EmfStoreException
-	 *             If an error occurs while resolving the {@link VersionSpec}
-	 * @model
-	 * @generated NOT
-	 */
-	PrimaryVersionSpec resolveVersionSpec(Usersession session, VersionSpec versionSpec, ProjectId projectId)
-		throws EmfStoreException;
-
-	/**
-	 * Make the current workspace state persistent.
-	 */
-	void save();
-
-	/**
 	 * Set the workspace connection manager.
 	 * 
 	 * @param connectionManager
@@ -639,19 +367,23 @@ public interface Workspace extends EObject, IAdaptable {
 	void updateProjectInfos(Usersession session) throws EmfStoreException;
 
 	/**
-	 * Adds an server info and saves.
 	 * 
-	 * @param serverInfo
-	 *            the server info to be added
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.api.IWorkspace#getLocalProjects()
+	 * 
+	 * @generated NOT
 	 */
-	void addServerInfo(ServerInfo serverInfo);
+	List<ProjectSpace> getLocalProjects();
 
 	/**
-	 * Removes an server info and saves.
 	 * 
-	 * @param serverInfo
-	 *            the server info to be removed
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.api.IWorkspace#getServers()
+	 * 
+	 * @generated NOT
 	 */
-	void removeServerInfo(ServerInfo serverInfo);
+	public List<ServerInfo> getServers();
 
 } // Workspace
