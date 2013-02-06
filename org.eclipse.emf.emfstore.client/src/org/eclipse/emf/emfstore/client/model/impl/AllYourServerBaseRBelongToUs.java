@@ -19,6 +19,8 @@ import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 
 public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
 
+	List<IRemoteProject> remoteProjects;
+
 	public IRemoteProject createEmptyRemoteProject(IUsersession usersession, String projectName,
 		String projectDescription, IProgressMonitor progressMonitor) throws EmfStoreException {
 		// TODO Auto-generated method stub
@@ -61,10 +63,12 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<? extends IRemoteProject> getRemoteProjects() throws EmfStoreException {
-		List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
-		for (ProjectInfo projectInfo : getProjectInfos()) {
-			RemoteProject wrapper = new RemoteProject(projectInfo);
-			remoteProjects.add(wrapper);
+		if (remoteProjects == null) {
+			List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
+			for (ProjectInfo projectInfo : getProjectInfos()) {
+				RemoteProject wrapper = new RemoteProject(projectInfo);
+				remoteProjects.add(wrapper);
+			}
 		}
 		return remoteProjects;
 	}

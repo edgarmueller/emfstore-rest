@@ -12,10 +12,12 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -38,12 +40,12 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
  */
 public abstract class ServerCall<U> {
 
-	private ProjectSpaceBase projectSpace;
-	private Usersession usersession;
+	private ILocalProject projectSpace;
+	private IUsersession usersession;
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
 	private U ret;
-	private ServerInfo serverInfo;
+	private IServer server;
 
 	/**
 	 * Default constructor.
@@ -56,7 +58,7 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @param usersession preselected user session
 	 */
-	public ServerCall(Usersession usersession) {
+	public ServerCall(IUsersession usersession) {
 		this.usersession = usersession;
 		setProgressMonitor(null);
 	}
@@ -67,8 +69,9 @@ public abstract class ServerCall<U> {
 	 * @param projectSpace
 	 *            relevant project space if existent
 	 */
-	public ServerCall(ProjectSpaceBase projectSpace) {
-		this.projectSpace = projectSpace;
+	// TODO: OTS add javadoc to explain why type is a local project
+	public ServerCall(ILocalProject localProject) {
+		this.projectSpace = localProject;
 		setProgressMonitor(null);
 	}
 
@@ -77,8 +80,8 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @param serverInfo a given server
 	 */
-	public ServerCall(ServerInfo serverInfo) {
-		this.serverInfo = serverInfo;
+	public ServerCall(IServer server) {
+		this.server = server;
 		setProgressMonitor(null);
 	}
 
@@ -117,7 +120,7 @@ public abstract class ServerCall<U> {
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
 	public ServerCall(ServerInfo serverInfo, IProgressMonitor monitor) {
-		this.serverInfo = serverInfo;
+		this.server = serverInfo;
 		setProgressMonitor(monitor);
 	}
 
@@ -126,8 +129,8 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the server info that is used by this server call, if set
 	 */
-	public ServerInfo getServerInfo() {
-		return serverInfo;
+	public IServer getServerInfo() {
+		return server;
 	}
 
 	/**
@@ -136,8 +139,8 @@ public abstract class ServerCall<U> {
 	 * @param serverInfo
 	 *            the server info that should be used by this server call
 	 */
-	public void setServerInfo(ServerInfo serverInfo) {
-		this.serverInfo = serverInfo;
+	public void setServerInfo(IServer server) {
+		this.server = server;
 	}
 
 	/**
@@ -146,7 +149,7 @@ public abstract class ServerCall<U> {
 	 * @param usersession
 	 *            the user session to be used by the server call
 	 */
-	public void setUsersession(Usersession usersession) {
+	public void setUsersession(IUsersession usersession) {
 		this.usersession = usersession;
 	}
 
@@ -155,7 +158,7 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the user session in use
 	 */
-	public Usersession getUsersession() {
+	public IUsersession getUsersession() {
 		return usersession;
 	}
 
@@ -165,7 +168,7 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the project space that will be checked for a valid user session
 	 */
-	protected ProjectSpaceBase getProjectSpace() {
+	protected ILocalProject getProjectSpace() {
 		return projectSpace;
 	}
 

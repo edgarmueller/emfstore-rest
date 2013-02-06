@@ -30,7 +30,7 @@ public interface IProject {
 	 * @throws IOException
 	 *             in case the project space could not be deleted
 	 */
-	void delete() throws IOException;
+	void delete() throws IOException, EmfStoreException;
 
 	/**
 	 * Returns a list of branches of the current project. Every call triggers a

@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -35,7 +36,7 @@ public class SessionManager {
 	 *             If an error occurs during execution of the server call
 	 */
 	public void execute(ServerCall<?> serverCall) throws EmfStoreException {
-		Usersession usersession = getSessionProvider().provideUsersession(serverCall);
+		IUsersession usersession = getSessionProvider().provideUsersession(serverCall);
 		loginUsersession(usersession, false);
 		executeCall(serverCall, usersession, true);
 	}
@@ -55,7 +56,7 @@ public class SessionManager {
 	 * @throws EmfStoreException
 	 *             In case
 	 */
-	private void loginUsersession(Usersession usersession, boolean forceLogin) throws EmfStoreException {
+	private void loginUsersession(IUsersession usersession, boolean forceLogin) throws EmfStoreException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");
@@ -75,7 +76,7 @@ public class SessionManager {
 		}
 	}
 
-	private boolean isLoggedIn(Usersession usersession) {
+	private boolean isLoggedIn(IUsersession usersession) {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}

@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
@@ -49,9 +51,8 @@ public abstract class AbstractSessionProvider {
 	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way.
 	 * @throws EmfStoreException in case of an exception
 	 */
-	protected Usersession provideUsersession(ServerCall<?> serverCall) throws EmfStoreException {
-
-		Usersession usersession = serverCall.getUsersession();
+	protected IUsersession provideUsersession(ServerCall<?> serverCall) throws EmfStoreException {
+		IUsersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
 			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());
 		}
@@ -70,7 +71,7 @@ public abstract class AbstractSessionProvider {
 	 * @param projectSpace projectspace
 	 * @return {@link Usersession} or null
 	 */
-	protected Usersession getUsersessionFromProjectSpace(ProjectSpace projectSpace) {
+	protected IUsersession getUsersessionFromProjectSpace(ILocalProject projectSpace) {
 		if (projectSpace != null && projectSpace.getUsersession() != null) {
 			return projectSpace.getUsersession();
 		}
@@ -88,7 +89,7 @@ public abstract class AbstractSessionProvider {
 	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way
 	 * @throws EmfStoreException in case of an exception
 	 */
-	public abstract Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException;
+	public abstract Usersession provideUsersession(IServer server) throws EmfStoreException;
 
 	/**
 	 * This method is called by the {@link SessionManager} in order to login a given usersession. Either you are able to

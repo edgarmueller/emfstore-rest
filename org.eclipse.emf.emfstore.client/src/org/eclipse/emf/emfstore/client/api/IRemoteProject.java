@@ -16,6 +16,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 public interface IRemoteProject extends IProject {
 
+	IServer getServer();
+
 	ILocalProject checkout() throws EmfStoreException;
 
 	/**
@@ -109,5 +111,9 @@ public interface IRemoteProject extends IProject {
 	 */
 	IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec)
 		throws EmfStoreException;
+
+	IPrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EmfStoreException;
+
+	void delete(final IUsersession usersession, final boolean deleteFiles) throws EmfStoreException;
 
 }

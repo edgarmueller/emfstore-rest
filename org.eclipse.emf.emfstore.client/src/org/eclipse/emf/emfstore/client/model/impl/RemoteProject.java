@@ -10,10 +10,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
@@ -26,6 +28,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
@@ -47,26 +50,13 @@ public class RemoteProject implements IRemoteProject {
 	/**
 	 * The current connection manager used to connect to the server(s).
 	 */
-	private ConnectionManager connectionManager;
-
 	private final ProjectInfo projectInfo;
-
-	private final Usersession usersession;
+	private final IServer server;
 
 	// TODO: OTS
-	public RemoteProject(ProjectInfo projectInfo) {
-		this.usersession = null;
+	public RemoteProject(IServer server, ProjectInfo projectInfo) {
+		this.server = server;
 		this.projectInfo = projectInfo;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#setConnectionManager(org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager)
-	 */
-	public void setConnectionManager(ConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
 	}
 
 	public ProjectInfo getProjectInfo() {
@@ -86,7 +76,7 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	public List<BranchInfo> getBranches() throws EmfStoreException {
-		return new ServerCall<List<BranchInfo>>(usersession) {
+		return new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws EmfStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
@@ -96,7 +86,19 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EmfStoreException {
-		return new ServerCall<PrimaryVersionSpec>(usersession) {
+		return new ServerCall<PrimaryVersionSpec>(server) {
+			@Override
+			protected PrimaryVersionSpec run() throws EmfStoreException {
+				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
+				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
+					(VersionSpec) versionSpec);
+			}
+		}.execute();
+	}
+
+	public PrimaryVersionSpec resolveVersionSpec(IUsersession session, final IVersionSpec versionSpec)
+		throws EmfStoreException {
+		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
 			protected PrimaryVersionSpec run() throws EmfStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
@@ -107,7 +109,7 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	public List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EmfStoreException {
-		return new ServerCall<List<HistoryInfo>>(usersession) {
+		return new ServerCall<List<HistoryInfo>>(server) {
 			@Override
 			protected List<HistoryInfo> run() throws EmfStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
@@ -117,20 +119,35 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EmfStoreException {
-		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-		connectionManager.addTag(usersession.getSessionId(), (ProjectId) getProjectId(),
-			(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+	public void addTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag) throws EmfStoreException {
+		new ServerCall<Void>(server) {
+			@Override
+			protected Void run() throws EmfStoreException {
+				getConnectionManager().addTag((SessionId) getUsersession().getSessionId(), (ProjectId) getProjectId(),
+					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+				return null;
+			}
+		}.execute();
 	}
 
-	public void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EmfStoreException {
-		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-		cm.removeTag(usersession.getSessionId(), (ProjectId) getProjectId(), (PrimaryVersionSpec) versionSpec,
-			(TagVersionSpec) tag);
+	public void removeTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag) throws EmfStoreException {
+		new ServerCall<Void>(server) {
+			@Override
+			protected Void run() throws EmfStoreException {
+				getConnectionManager().removeTag((SessionId) getUsersession().getSessionId(),
+					(ProjectId) getProjectId(), (PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+				return null;
+			}
+		}.execute();
 	}
 
 	public ILocalProject checkout() throws EmfStoreException {
-		return checkout(usersession);
+		return new ServerCall<ILocalProject>(server) {
+			@Override
+			protected ILocalProject run() throws EmfStoreException {
+				return checkout(getUsersession());
+			}
+		}.execute();
 	}
 
 	public ILocalProject checkout(IUsersession usersession) throws EmfStoreException {
@@ -139,9 +156,7 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	public ILocalProject checkout(IUsersession usersession, IProgressMonitor progressMonitor) throws EmfStoreException {
-		PrimaryVersionSpec targetSpec = this.connectionManager.resolveVersionSpec(
-			((Usersession) usersession).getSessionId(), ((ProjectInfo) projectInfo).getProjectId(),
-			Versions.createHEAD());
+		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD());
 		return checkout(usersession, targetSpec, progressMonitor);
 	}
 
@@ -150,12 +165,11 @@ public class RemoteProject implements IRemoteProject {
 
 		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
 		final Usersession session = (Usersession) usersession;
-		final ProjectInfo info = (ProjectInfo) projectInfo;
 
 		// FIXME: MK: hack: set head version manually because esbrowser does not
 		// update
 		// revisions properly
-		final ProjectInfo projectInfoCopy = ModelUtil.clone(info);
+		final ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
 		projectInfoCopy.setVersion((PrimaryVersionSpec) versionSpec);
 
 		// get project from server
@@ -166,8 +180,13 @@ public class RemoteProject implements IRemoteProject {
 		project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
 			@Override
 			public Project run(IProgressMonitor monitor) throws EmfStoreException {
-				return connectionManager.getProject(session.getSessionId(), info.getProjectId(),
-					projectInfoCopy.getVersion());
+				return new ServerCall<Project>(session) {
+					@Override
+					protected Project run() throws EmfStoreException {
+						return getConnectionManager().getProject(session.getSessionId(), projectInfo.getProjectId(),
+							projectInfoCopy.getVersion());
+					}
+				}.execute();
 			}
 		}.execute();
 
@@ -207,8 +226,7 @@ public class RemoteProject implements IRemoteProject {
 			dateVersionSpec.setDate(calendar.getTime());
 			PrimaryVersionSpec sourceSpec;
 			try {
-				sourceSpec = this.connectionManager.resolveVersionSpec(session.getSessionId(),
-					projectSpace.getProjectId(), dateVersionSpec);
+				sourceSpec = this.resolveVersionSpec(session, dateVersionSpec);
 			} catch (InvalidVersionSpecException e) {
 				sourceSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 				sourceSpec.setIdentifier(0);
@@ -240,33 +258,53 @@ public class RemoteProject implements IRemoteProject {
 
 	public List<? extends IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
 		throws EmfStoreException {
-		return new ServerCall<List<IHistoryInfo>>((Usersession) usersession) {
+		return new ServerCall<List<HistoryInfo>>(usersession) {
 			@Override
-			protected List<IHistoryInfo> run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<IHistoryInfo>) (List<?>) connectionManager.getHistoryInfo(getSessionId(),
+			protected List<HistoryInfo> run() throws EmfStoreException {
+				return getConnectionManager().getHistoryInfo((SessionId) getUsersession().getSessionId(),
 					(ProjectId) getProjectId(), (HistoryQuery) query);
 			}
 		}.execute();
 	}
 
-	public IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, final IVersionSpec versionSpec)
-		throws EmfStoreException {
-		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
+	public void delete() throws IOException, EmfStoreException {
+		new ServerCall<Void>(server) {
 			@Override
-			protected PrimaryVersionSpec run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				// TODO: OTS cast
-				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
-					(VersionSpec) versionSpec);
+			protected Void run() throws EmfStoreException {
+				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
+					@Override
+					public Void run(IProgressMonitor monitor) throws EmfStoreException {
+						getConnectionManager().deleteProject(getSessionId(), projectInfo.getProjectId(), true);
+						return null;
+					}
+				}.execute();
+
+				getServer().getRemoteProjects().remove(this);
+				return null;
 			}
 		}.execute();
-
 	}
 
-	public void delete() throws IOException {
-		// TODO Auto-generated method stub
+	public void delete(IUsersession usersession, final boolean deleteFiles) throws EmfStoreException {
+		new ServerCall<Void>(server) {
+			@Override
+			protected Void run() throws EmfStoreException {
+				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
+					@Override
+					public Void run(IProgressMonitor monitor) throws EmfStoreException {
+						getConnectionManager().deleteProject(getSessionId(), projectInfo.getProjectId(), deleteFiles);
+						return null;
+					}
+				}.execute();
 
+				getServer().getRemoteProjects().remove(this);
+				return null;
+			}
+		}.execute();
+	}
+
+	public IServer getServer() {
+		return (ServerInfo) projectInfo.eContainer();
 	}
 
 }
