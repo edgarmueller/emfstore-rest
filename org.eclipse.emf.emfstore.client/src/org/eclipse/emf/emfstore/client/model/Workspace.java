@@ -334,29 +334,6 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	void updateACUser(Usersession session) throws EmfStoreException;
 
 	/**
-	 * Updates the ProjectInfos for the given {@link ServerInfo}.
-	 * 
-	 * @param serverInfo
-	 *            The {@link ServerInfo} whose project information should be
-	 *            updated.
-	 * @throws EmfStoreException
-	 *             if an error occurs while updating the project information
-	 */
-	void updateProjectInfos(ServerInfo serverInfo) throws EmfStoreException;
-
-	/**
-	 * Updates the ProjectInfos for the current ServerInfo.
-	 * 
-	 * @param session
-	 *            The {@link Usersession} that should be used to update the
-	 *            project information. If <code>null</code>, the session manager
-	 *            will search for a session.
-	 * @throws EmfStoreException
-	 *             if an error occurs while updating the project information
-	 */
-	void updateProjectInfos(Usersession session) throws EmfStoreException;
-
-	/**
 	 * 
 	 * {@inheritDoc}
 	 * 

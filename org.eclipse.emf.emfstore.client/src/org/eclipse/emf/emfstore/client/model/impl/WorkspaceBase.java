@@ -135,7 +135,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		}.execute();
 
 		progressMonitor.worked(10);
-		updateProjectInfos(session);
+		// TODO: OTS update remote project list
+		// updateProjectInfos(session);
 		return emptyProject;
 	}
 
@@ -557,4 +558,11 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		return projectSpace;
 	}
 
+	public List<ProjectSpace> getLocalProjects() {
+		return getProjectSpaces();
+	}
+
+	public List<ServerInfo> getServers() {
+		return getServerInfos();
+	}
 }
