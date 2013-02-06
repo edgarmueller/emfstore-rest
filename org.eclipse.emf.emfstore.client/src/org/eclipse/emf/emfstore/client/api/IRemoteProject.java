@@ -16,6 +16,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 
 public interface IRemoteProject extends IProject {
 
+	IServer getServer();
+
 	ILocalProject checkout() throws EmfStoreException;
 
 	/**

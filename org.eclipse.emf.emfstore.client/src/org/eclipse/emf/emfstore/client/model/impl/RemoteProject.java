@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
@@ -267,6 +268,11 @@ public class RemoteProject implements IRemoteProject {
 	public void delete() throws IOException {
 		// TODO Auto-generated method stub
 
+	}
+
+	public IServer getServer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
