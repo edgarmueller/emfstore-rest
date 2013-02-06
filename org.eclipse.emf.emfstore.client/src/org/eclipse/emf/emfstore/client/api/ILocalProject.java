@@ -266,5 +266,5 @@ public interface ILocalProject extends IProject, EObjectContainer {
 
 	void importLocalChanges(String fileName) throws IOException;
 
-	IRemoteProject getRemoteProject();
+	IRemoteProject getRemoteProject() throws EmfStoreException;
 }

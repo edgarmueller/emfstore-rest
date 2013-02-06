@@ -769,4 +769,16 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		return getSessionIdGen();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.api.IUsersession#getServer()
+	 * 
+	 * @generated NOT
+	 */
+	public ServerInfo getServer() {
+		return getServerInfo();
+	}
+
 } // UsersessionImpl

@@ -45,7 +45,6 @@ import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportProjectSpac
 import org.eclipse.emf.emfstore.client.model.importexport.impl.ExportWorkspaceController;
 import org.eclipse.emf.emfstore.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -53,14 +52,11 @@ import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -224,51 +220,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteRemoteProject(org.eclipse.emf.emfstore.client.model.ServerInfo,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId, boolean)
-	 */
-	public void deleteRemoteProject(ServerInfo serverInfo, final IProjectId projectId, final boolean deleteFiles)
-		throws EmfStoreException {
-		new ServerCall<Void>((ServerInfo) serverInfo) {
-			@Override
-			protected Void run() throws EmfStoreException {
-				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
-					@Override
-					public Void run(IProgressMonitor monitor) throws EmfStoreException {
-						getConnectionManager().deleteProject(getSessionId(), (ProjectId) projectId, deleteFiles);
-						return null;
-					}
-				}.execute();
-
-				updateProjectInfos(getUsersession());
-				return null;
-			}
-		}.execute();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteRemoteProject(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId, boolean)
-	 */
-	public void deleteRemoteProject(final IUsersession usersession, final IProjectId projectId,
-		final boolean deleteFiles) throws EmfStoreException {
-		new ServerCall<Void>((Usersession) usersession) {
-			@Override
-			protected Void run() throws EmfStoreException {
-				getConnectionManager().deleteProject(getSessionId(), (ProjectId) projectId, deleteFiles);
-				updateProjectInfos(getUsersession());
-				return null;
-			}
-		}.execute();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
@@ -348,56 +299,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 			}
 		}.execute();
 	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateProjectInfos(org.eclipse.emf.emfstore.client.model.ServerInfo)
-	 */
-	public void updateProjectInfos(final ServerInfo serverInfo) throws EmfStoreException {
-		new ServerCall<Void>(serverInfo) {
-			@Override
-			protected Void run() throws EmfStoreException {
-				return updateProjectInfos(serverInfo, getUsersession());
-			}
-		}.execute();
-	}
-
-	private Void updateProjectInfos(ServerInfo serverInfo, final Usersession usersession) {
-		// BEGIN SUPRESS CATCH EXCEPTION
-		try {
-			serverInfo.getProjectInfos().clear();
-			if (WorkspaceProvider.getInstance().getConnectionManager().isLoggedIn(usersession.getSessionId())) {
-				serverInfo.getProjectInfos().addAll(
-					(List<ProjectInfo>) (List<?>) getServerByUsersession(usersession).getRemoteProjectList());
-			}
-			save();
-		} catch (EmfStoreException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		} catch (RuntimeException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		}
-		// END SUPRESS CATCH EXCEPTION
-		return null;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateProjectInfos(org.eclipse.emf.emfstore.client.model.Usersession)
-	 */
-	public void updateProjectInfos(final Usersession usersession) throws EmfStoreException {
-		new ServerCall<Void>(usersession) {
-			@Override
-			protected Void run() throws EmfStoreException {
-				return updateProjectInfos(usersession.getServerInfo(), usersession);
-			}
-		}.execute();
-	}
-
-	// END OF CUSTOM CODE
 
 	/**
 	 * 
@@ -510,26 +411,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 			throw new ServerUrlResolutionException();
 		}
 		return result;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#resolveVersionSpec(org.eclipse.emf.emfstore.client.model.ServerInfo,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
-	 */
-	public IPrimaryVersionSpec resolveVersionSpec(ServerInfo serverInfo, final IVersionSpec versionSpec,
-		final IProjectId projectId) throws EmfStoreException {
-		return new ServerCall<IPrimaryVersionSpec>((ServerInfo) serverInfo) {
-			@Override
-			protected PrimaryVersionSpec run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.resolveVersionSpec(getUsersession().getSessionId(), (ProjectId) projectId,
-					(VersionSpec) versionSpec);
-			}
-		}.execute();
 	}
 
 	/**
@@ -664,46 +545,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getHistoryInfo(org.eclipse.emf.emfstore.client.model.ServerInfo,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
-	 */
-	public List<IHistoryInfo> getHistoryInfo(ServerInfo serverInfo, final IProjectId projectId,
-		final IHistoryQuery query) throws EmfStoreException {
-		return new ServerCall<List<IHistoryInfo>>((ServerInfo) serverInfo) {
-			@Override
-			protected List<IHistoryInfo> run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<IHistoryInfo>) (List<?>) connectionManager.getHistoryInfo(getUsersession().getSessionId(),
-					(ProjectId) projectId, (HistoryQuery) query);
-			}
-		}.execute();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getHistoryInfo(org.eclipse.emf.emfstore.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
-	 */
-	public List<IHistoryInfo> getHistoryInfo(final IUsersession usersession, final IProjectId projectId,
-		final IHistoryQuery query) throws EmfStoreException {
-		return new ServerCall<List<IHistoryInfo>>((Usersession) usersession) {
-			@Override
-			protected List<IHistoryInfo> run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<IHistoryInfo>) (List<?>) connectionManager.getHistoryInfo(getSessionId(),
-					(ProjectId) projectId, (HistoryQuery) query);
-			}
-		}.execute();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.common.model.Project)
@@ -714,19 +555,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 			throw new UnkownProjectException();
 		}
 		return projectSpace;
-	}
-
-	public List<ProjectSpace> getLocalProjects() {
-		return getProjectSpaces();
-	}
-
-	public List<ServerInfo> getServers() {
-		return getServerInfos();
-	}
-
-	public IServer getServerByUsersession(IUsersession session) {
-		// TODO OTS
-		return null;
 	}
 
 }

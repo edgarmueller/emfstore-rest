@@ -530,14 +530,18 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getRemoteProject()
 	 * @generated NOT
 	 */
-	public IRemoteProject getRemoteProject() {
+	public IRemoteProject getRemoteProject() throws EmfStoreException {
 		// TODO OTS only return if server is available
+		if (getUsersession() == null || getUsersession().getServer() == null) {
+			throw new EmfStoreException("No usersession or no server set on usersession.");
+		}
+
 		ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectInfo();
 		projectInfo.setProjectId(ModelUtil.clone(getProjectId()));
 		projectInfo.setName(getProjectName());
 		projectInfo.setDescription(getProjectDescription());
 		projectInfo.setVersion(ModelUtil.clone(getBaseVersion()));
-		return new RemoteProject(projectInfo);
+		return new RemoteProject(getUsersession().getServer(), projectInfo);
 	}
 
 	/**
@@ -964,7 +968,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
 			protected PrimaryVersionSpec run() throws EmfStoreException {
-				return getConnectionManager().resolveVersionSpec(getSessionId(), getProjectId(), (VersionSpec) versionSpec);
+				return getConnectionManager().resolveVersionSpec(getSessionId(), getProjectId(),
+					(VersionSpec) versionSpec);
 			}
 		}.execute();
 	}
