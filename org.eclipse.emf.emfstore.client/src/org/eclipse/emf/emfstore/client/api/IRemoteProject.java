@@ -107,14 +107,13 @@ public interface IRemoteProject extends IProject {
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec)
-		throws EMFStoreException;
+	IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec) throws EMFStoreException;
 
-	IPrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException;
+	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EMFStoreException;
 
-	void delete(final boolean deleteFiles) throws EMFStoreException;
+	void delete(boolean deleteFiles) throws EMFStoreException;
 
-	void delete(final IUsersession usersession, final boolean deleteFiles) throws EMFStoreException;
+	void delete(IUsersession usersession, boolean deleteFiles) throws EMFStoreException;
 
 	IPrimaryVersionSpec getHeadVersion(boolean fetch);
 }

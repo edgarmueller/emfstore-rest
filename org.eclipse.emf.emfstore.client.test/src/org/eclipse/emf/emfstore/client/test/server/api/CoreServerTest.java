@@ -15,9 +15,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.Workspace;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -25,7 +26,6 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.AuthControlMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ResourceFactoryMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.EMFStoreImpl;
@@ -34,7 +34,6 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -133,7 +132,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					return ps.commit();
+					return (PrimaryVersionSpec) ps.commit();
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -146,12 +145,11 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					Workspace workspace = getWorkspace();
-					workspace.setConnectionManager(getConnectionMock());
+					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					return (ProjectSpace) workspace.checkout(projectSpace.getUsersession(),
-						ModelUtil.clone(projectSpace.getRemoteProject()), ModelUtil.clone(projectSpace.getBaseVersion()),
-						new NullProgressMonitor());
+					return (ProjectSpace) projectSpace.getRemoteProject().checkout(projectSpace.getUsersession(),
+						projectSpace.getBaseVersion(), new NullProgressMonitor());
+
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -159,16 +157,16 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		}.run(false);
 	}
 
-	protected ProjectSpace checkout(final ProjectInfo projectInfo, final PrimaryVersionSpec baseVersion) {
+	protected ProjectSpace checkout(final RemoteProject remoteProject, final PrimaryVersionSpec baseVersion) {
 		return new EMFStoreCommandWithResult<ProjectSpace>() {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					Workspace workspace = getWorkspace();
-					workspace.setConnectionManager(getConnectionMock());
+					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					return (ProjectSpace) workspace.checkout(getProjectSpace().getUsersession(),
-						ModelUtil.clone(projectInfo), ModelUtil.clone(baseVersion), new NullProgressMonitor());
+					return remoteProject.checkout(getProjectSpace().getUsersession(), baseVersion,
+						new NullProgressMonitor());
+
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}

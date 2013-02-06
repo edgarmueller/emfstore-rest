@@ -60,7 +60,7 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		getProject().addModelElement(testElement);
@@ -101,7 +101,7 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -164,7 +164,7 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -191,13 +191,14 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
+				new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override
@@ -228,13 +229,14 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
+				new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override
@@ -261,13 +263,14 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		getWorkspace().setConnectionManager(getConnectionMock());
+		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
 		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(), new NullProgressMonitor());
+			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
+				new NullProgressMonitor());
 
 		new EMFStoreCommand() {
 			@Override
