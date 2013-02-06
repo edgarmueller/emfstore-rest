@@ -25,7 +25,7 @@ import org.apache.xmlrpc.server.XmlRpcServer;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.EmfStoreController;
+import org.eclipse.emf.emfstore.server.EMFStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeConverterFactory;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeFactory;
@@ -105,7 +105,7 @@ public final class XmlRpcWebserverManager {
 				private void shutdown(SSLServerSocketFactory serverSocketFactory, Exception e) {
 					if (serverSocketFactory == null) {
 						ModelUtil.logException("Couldn't initialize server socket.", e);
-						EmfStoreController.getInstance().shutdown(new FatalEmfStoreException());
+						EMFStoreController.getInstance().shutdown(new FatalEmfStoreException());
 					}
 				}
 			};

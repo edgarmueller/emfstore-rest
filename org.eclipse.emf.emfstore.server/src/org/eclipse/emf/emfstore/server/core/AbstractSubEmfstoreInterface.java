@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 
 /**
- * This is the super class for all subinterfaces of emfstore. Main interfaces, such as {@link EmfStoreImpl}, check and
+ * This is the super class for all subinterfaces of emfstore. Main interfaces, such as {@link EMFStoreImpl}, check and
  * than delegates method calls to these subinterfaces, where the actual functionality is implemented. Subinterfaces
  * shouldn't be accessed without the corresponding main interface, because they rely on the sanity checks of the main
  * interfaces. The idea behind subinterfaces is to divide an emfstore interface into logical pieces and to avoid huge

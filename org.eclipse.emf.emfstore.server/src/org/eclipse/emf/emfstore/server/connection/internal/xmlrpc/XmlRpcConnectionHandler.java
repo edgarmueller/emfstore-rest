@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.connection.internal.xmlrpc;
 
-import org.eclipse.emf.emfstore.server.EmfStore;
+import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
  * 
  * @author wesendon
  */
-public class XmlRpcConnectionHandler implements ConnectionHandler<EmfStore> {
+public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 
 	/**
 	 * String interface identifier.
@@ -29,7 +29,7 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EmfStore> {
 
 	private static final String NAME = "XML RPC Connection Handler";
 
-	private static EmfStore emfStore;
+	private static EMFStore emfStore;
 
 	private static AuthenticationControl accessControl;
 
@@ -44,7 +44,7 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EmfStore> {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("static-access")
-	public synchronized void init(EmfStore emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException {
+	public synchronized void init(EMFStore emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException {
 		this.emfStore = emfStore;
 		this.accessControl = accessControl;
 		XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
@@ -57,7 +57,7 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EmfStore> {
 	 * 
 	 * @return emfstore
 	 */
-	public static EmfStore getEmfStore() {
+	public static EMFStore getEmfStore() {
 		return emfStore;
 	}
 

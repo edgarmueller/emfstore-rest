@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
  * @author Hodaie
  * @author Wesendonk
  */
-public interface AdminEmfStore extends EmfStoreInterface {
+public interface AdminEmfStore extends EMFStoreInterface {
 
 	/**
 	 * Returns a list of available project.

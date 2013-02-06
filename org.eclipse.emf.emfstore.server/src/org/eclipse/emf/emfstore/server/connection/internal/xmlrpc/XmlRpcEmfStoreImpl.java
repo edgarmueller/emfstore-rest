@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.EmfStore;
+import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
@@ -47,9 +47,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * 
  * @author wesendon
  */
-public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
+public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 
-	private EmfStore getEmfStore() {
+	private EMFStore getEmfStore() {
 		return XmlRpcConnectionHandler.getEmfStore();
 	}
 
@@ -237,7 +237,7 @@ public class XmlRpcEmfStoreImpl implements EmfStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.EmfStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {

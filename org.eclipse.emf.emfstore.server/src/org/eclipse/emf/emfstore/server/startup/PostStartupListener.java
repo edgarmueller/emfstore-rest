@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.server.startup;
 
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.server.EmfStoreInterface;
+import org.eclipse.emf.emfstore.server.EMFStoreInterface;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
@@ -33,6 +33,6 @@ public interface PostStartupListener {
 	 * @param connectionHandlers set of connection handler
 	 */
 	void postStartUp(ServerSpace serverspace, AccessControlImpl accessControl,
-		Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers);
+		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers);
 
 }

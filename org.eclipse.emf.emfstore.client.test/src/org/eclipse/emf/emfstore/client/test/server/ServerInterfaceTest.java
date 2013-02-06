@@ -41,7 +41,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This TestCase tests all methods in the main {@link org.unicase.emfstore.EmfStore} interface.
+ * This TestCase tests all methods in the main {@link org.EMFStore.emfstore.EmfStore} interface.
  * 
  * @author wesendon
  */

@@ -12,22 +12,22 @@ package org.eclipse.emf.emfstore.server.connection;
 
 // BEGIN IGNORE UNNECCESSARY IMPORT
 // import caused by comment
-import org.eclipse.emf.emfstore.server.EmfStore;
-import org.eclipse.emf.emfstore.server.EmfStoreInterface;
+import org.eclipse.emf.emfstore.server.EMFStore;
+import org.eclipse.emf.emfstore.server.EMFStoreInterface;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 
 /**
- * The ConnectionHandler makes the network transport layer transparent for the server. It requires {@link EmfStore} and
+ * The ConnectionHandler makes the network transport layer transparent for the server. It requires {@link EMFStore} and
  * {@link AuthenticationControl} to delegate the messaeges.
  * 
- * @param <T> server interface type E.g {@link org.eclipse.emf.emfstore.server.EmfStore} or
+ * @param <T> server interface type E.g {@link org.eclipse.emf.emfstore.server.EMFStore} or
  *            {@link org.eclipse.emf.emfstore.server.AdminEmfStore}
  * @author Wesendonk
  * @author koegel
  */
-public interface ConnectionHandler<T extends EmfStoreInterface> {
+public interface ConnectionHandler<T extends EMFStoreInterface> {
 
 	/**
 	 * This method initializes the ConnectionHandler.

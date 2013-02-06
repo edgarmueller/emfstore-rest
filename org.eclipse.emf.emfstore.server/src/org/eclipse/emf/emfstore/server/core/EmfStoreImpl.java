@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.EnumMap;
 
-import org.eclipse.emf.emfstore.server.EmfStore;
+import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
@@ -32,13 +32,13 @@ import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 
 /**
- * This is the main implementation of {@link EmfStore}.
+ * This is the main implementation of {@link EMFStore}.
  * 
  * @author wesendon
- * @see EmfStore
+ * @see EMFStore
  */
 // TODO: internal
-public class EmfStoreImpl extends AbstractEmfstoreInterface implements InvocationHandler {
+public class EMFStoreImpl extends AbstractEmfstoreInterface implements InvocationHandler {
 
 	/**
 	 * Represents a method in a subinterface.
@@ -81,7 +81,7 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * @throws FatalEmfStoreException
 	 *             in case of failure
 	 */
-	public EmfStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
+	public EMFStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
 		throws FatalEmfStoreException {
 		super(serverSpace, authorizationControl);
 	}
@@ -136,10 +136,10 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * @throws IllegalArgumentException thrown by Proxy.newInstance
 	 * @throws FatalEmfStoreException thrown if something fatal happens
 	 */
-	public static EmfStore createInterface(ServerSpace serverSpace, AuthorizationControl accessControl)
+	public static EMFStore createInterface(ServerSpace serverSpace, AuthorizationControl accessControl)
 		throws IllegalArgumentException, FatalEmfStoreException {
-		return (EmfStore) Proxy.newProxyInstance(EmfStoreImpl.class.getClassLoader(), new Class[] { EmfStore.class },
-			new EmfStoreImpl(serverSpace, accessControl));
+		return (EMFStore) Proxy.newProxyInstance(EMFStoreImpl.class.getClassLoader(), new Class[] { EMFStore.class },
+			new EMFStoreImpl(serverSpace, accessControl));
 	}
 
 }

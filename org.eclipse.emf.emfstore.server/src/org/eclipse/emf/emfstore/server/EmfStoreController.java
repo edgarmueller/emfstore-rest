@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcAdminConnectionHandler;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.server.core.AdminEmfStoreImpl;
-import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
+import org.eclipse.emf.emfstore.server.core.EMFStoreImpl;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.server.core.internal.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -71,24 +71,24 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
 /**
- * The {@link EmfStoreController} is controlling startup and shutdown of the
+ * The {@link EMFStoreController} is controlling startup and shutdown of the
  * EmfStore.
  * 
  * @author koegel
  * @author wesendonk
  */
-public class EmfStoreController implements IApplication, Runnable {
+public class EMFStoreController implements IApplication, Runnable {
 
 	/**
 	 * The period of time in seconds between executing the clean memory task.
 	 */
 	private static final int CLEAN_MEMORY_TASK_PERIOD = 60;
-	private static EmfStoreController instance;
+	private static EMFStoreController instance;
 
-	private EmfStore emfStore;
+	private EMFStore emfStore;
 	private AdminEmfStore adminEmfStore;
 	private AccessControlImpl accessControl;
-	private Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers;
+	private Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers;
 	private Properties properties;
 	private ServerSpace serverSpace;
 	private Resource resource;
@@ -144,7 +144,7 @@ public class EmfStoreController implements IApplication, Runnable {
 		handleStartupListener();
 
 		accessControl = initAccessControl(serverSpace);
-		emfStore = EmfStoreImpl.createInterface(serverSpace, accessControl);
+		emfStore = EMFStoreImpl.createInterface(serverSpace, accessControl);
 		adminEmfStore = new AdminEmfStoreImpl(serverSpace, accessControl);
 
 		// copy keystore file to workspace if not existent
@@ -291,8 +291,8 @@ public class EmfStoreController implements IApplication, Runnable {
 
 	}
 
-	private Set<ConnectionHandler<? extends EmfStoreInterface>> initConnectionHandlers() throws FatalEmfStoreException {
-		Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers = new LinkedHashSet<ConnectionHandler<? extends EmfStoreInterface>>();
+	private Set<ConnectionHandler<? extends EMFStoreInterface>> initConnectionHandlers() throws FatalEmfStoreException {
+		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers = new LinkedHashSet<ConnectionHandler<? extends EMFStoreInterface>>();
 
 		// crate XML RPC connection handlers
 		XmlRpcConnectionHandler xmlRpcConnectionHander = new XmlRpcConnectionHandler();
@@ -379,7 +379,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	 * 
 	 * @return the instance
 	 */
-	public static EmfStoreController getInstance() {
+	public static EMFStoreController getInstance() {
 		return instance;
 	}
 
@@ -476,7 +476,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	 */
 	public void stop() {
 		wakeForTermination();
-		for (ConnectionHandler<? extends EmfStoreInterface> handler : connectionHandlers) {
+		for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
 			handler.stop(false);
 		}
 		ModelUtil.logInfo("Server was stopped.");
@@ -493,7 +493,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	 */
 	public void shutdown(FatalEmfStoreException exception) {
 		ModelUtil.logWarning("Stopping all connection handlers...");
-		for (ConnectionHandler<? extends EmfStoreInterface> handler : connectionHandlers) {
+		for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
 			ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
 			handler.stop(true);
 			ModelUtil.logWarning("Connection handler \"" + handler.getName() + "\" stopped.");
@@ -555,7 +555,7 @@ public class EmfStoreController implements IApplication, Runnable {
 	 *             in case of failure
 	 */
 	public static void runAsNewThread() throws FatalEmfStoreException {
-		Thread thread = new Thread(new EmfStoreController());
+		Thread thread = new Thread(new EMFStoreController());
 		thread.start();
 		try {
 			thread.join();

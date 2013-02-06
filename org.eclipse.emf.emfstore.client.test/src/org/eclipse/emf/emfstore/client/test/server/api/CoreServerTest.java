@@ -26,9 +26,9 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ResourceFactoryMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.EmfStore;
+import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
+import org.eclipse.emf.emfstore.server.core.EMFStoreImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 public abstract class CoreServerTest extends WorkspaceTest {
 
-	private EmfStore emfStore;
+	private EMFStore emfStore;
 	private AuthControlMock authMock;
 	private ServerSpace serverSpace;
 	private ConnectionMock connectionMock;
@@ -60,7 +60,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		ServerConfiguration.setTesting(true);
 		serverSpace = initServerSpace();
 		authMock = new AuthControlMock();
-		emfStore = EmfStoreImpl.createInterface(serverSpace, authMock);
+		emfStore = EMFStoreImpl.createInterface(serverSpace, authMock);
 		connectionMock = new ConnectionMock(emfStore, authMock);
 	}
 
@@ -78,7 +78,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		return connectionMock;
 	}
 
-	public EmfStore getEmfStore() {
+	public EMFStore getEmfStore() {
 		return emfStore;
 	}
 
