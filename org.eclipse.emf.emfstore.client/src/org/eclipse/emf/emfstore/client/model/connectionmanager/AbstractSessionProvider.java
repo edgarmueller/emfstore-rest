@@ -54,11 +54,11 @@ public abstract class AbstractSessionProvider {
 	protected IUsersession provideUsersession(ServerCall<?> serverCall) throws EmfStoreException {
 		IUsersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
-			usersession = getUsersessionFromProjectSpace(serverCall.getProjectSpace());
+			usersession = getUsersessionFromProjectSpace(serverCall.getLocalProject());
 		}
 
 		if (usersession == null) {
-			usersession = provideUsersession(serverCall.getServerInfo());
+			usersession = provideUsersession(serverCall.getServer());
 		}
 
 		serverCall.setUsersession(usersession);

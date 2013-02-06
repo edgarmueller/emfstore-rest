@@ -87,36 +87,36 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
-		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version);
-		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
+		final PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(version);
+		if (resolvedVersion.compareTo(getLocalProject().getBaseVersion()) == 0) {
 			return resolvedVersion;
 		}
 		getProgressMonitor().worked(5);
 
 		if (getProgressMonitor().isCanceled()) {
-			return getProjectSpace().getBaseVersion();
+			return getLocalProject().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws EmfStoreException {
-				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
-					getProjectSpace().getBaseVersion(), resolvedVersion);
+				return getConnectionManager().getChanges(getSessionId(), getLocalProject().getProjectId(),
+					getLocalProject().getBaseVersion(), resolvedVersion);
 			}
 		}.execute();
 
-		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
+		ChangePackage localChanges = getLocalProject().getLocalChangePackage(false);
 
 		// build a mapping including deleted and create model elements in local and incoming change packages
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
-			getProjectSpace().getProject(), changes);
+			getLocalProject().getProject(), changes);
 		idToEObjectMapping.put(localChanges);
 
 		getProgressMonitor().worked(65);
 
 		if (getProgressMonitor().isCanceled()) {
-			return getProjectSpace().getBaseVersion();
+			return getLocalProject().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Checking for conflicts");
@@ -125,23 +125,23 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled()
-			|| !callback.inspectChanges(getProjectSpace(), changes, idToEObjectMapping)) {
-			return getProjectSpace().getBaseVersion();
+			|| !callback.inspectChanges(getLocalProject(), changes, idToEObjectMapping)) {
+			return getLocalProject().getBaseVersion();
 		}
 		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
-			.inspectChanges(getProjectSpace(), changes, getProgressMonitor());
+			.inspectChanges(getLocalProject(), changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
-		if (getProjectSpace().getOperations().size() > 0) {
+		if (getLocalProject().getOperations().size() > 0) {
 			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
 				Collections.singletonList(localChanges), changes);
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
-				ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(),
+				ChangeConflictException conflictException = new ChangeConflictException(getLocalProject(),
 					Arrays.asList(localChanges), changes, conflictBucketCandidates, idToEObjectMapping);
 				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
-					return getProjectSpace().getBaseVersion();
+					return getLocalProject().getBaseVersion();
 				} else {
 					throw conflictException;
 				}
@@ -152,12 +152,12 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Applying changes");
 
-		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
+		getLocalProject().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
 		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
-			.updateCompleted(getProjectSpace(), getProgressMonitor());
+			.updateCompleted(getLocalProject(), getProgressMonitor());
 
-		return getProjectSpace().getBaseVersion();
+		return getLocalProject().getBaseVersion();
 	}
 
 }

@@ -14,10 +14,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IServerCall;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -39,7 +41,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  * 
  * @param <U> the return type of the wrapped action
  */
-public abstract class ServerCall<U> {
+public abstract class ServerCall<U> implements IServerCall {
 
 	private ILocalProject projectSpace;
 	private IUsersession usersession;
@@ -130,8 +132,8 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the server info that is used by this server call, if set
 	 */
-	public IServer getServerInfo() {
-		return server;
+	public ServerInfo getServer() {
+		return (ServerInfo) server;
 	}
 
 	/**
@@ -159,8 +161,8 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the user session in use
 	 */
-	public IUsersession getUsersession() {
-		return usersession;
+	public Usersession getUsersession() {
+		return (Usersession) usersession;
 	}
 
 	/**
@@ -169,8 +171,8 @@ public abstract class ServerCall<U> {
 	 * 
 	 * @return the project space that will be checked for a valid user session
 	 */
-	protected ILocalProject getProjectSpace() {
-		return projectSpace;
+	public ProjectSpaceBase getLocalProject() {
+		return (ProjectSpaceBase) projectSpace;
 	}
 
 	/**

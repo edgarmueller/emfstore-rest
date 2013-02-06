@@ -44,7 +44,7 @@ public interface IUpdateCallback {
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
-	boolean inspectChanges(ILocalProject project, List<IChangePackage> changes,
+	boolean inspectChanges(ILocalProject project, List<? extends IChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -86,7 +86,7 @@ public interface IUpdateCallback {
 	 * {@link IUpdateCallback#inspectChanges(ProjectSpace, List)} to true.
 	 */
 	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
-		public boolean inspectChanges(ILocalProject projectSpace, List<IChangePackage> changes,
+		public boolean inspectChanges(ILocalProject projectSpace, List<? extends IChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}

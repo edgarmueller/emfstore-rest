@@ -105,11 +105,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Checking changes");
 
 		// check if there are any changes. Branch commits are allowed with no changes, whereas normal committs are not.
-		if (!getProjectSpace().hasUncommitedChanges() && branch == null) {
-			callback.noLocalChanges(getProjectSpace());
-			return getProjectSpace().getBaseVersion();
+		if (!getLocalProject().hasUncommitedChanges() && branch == null) {
+			callback.noLocalChanges(getLocalProject());
+			return getLocalProject().getBaseVersion();
 		}
-		getProjectSpace().cleanCutElements();
+		getLocalProject().cleanCutElements();
 
 		getProgressMonitor().subTask("Resolving new version");
 
@@ -117,24 +117,24 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().worked(10);
 		getProgressMonitor().subTask("Gathering changes");
-		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
+		final ChangePackage changePackage = getLocalProject().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
 		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
-			.inspectChanges(getProjectSpace(), changePackage, getProgressMonitor());
+			.inspectChanges(getLocalProject(), changePackage, getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
-			getProjectSpace().getProject(), changePackage);
+			getLocalProject().getProject(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
-		if (!callback.inspectChanges(getProjectSpace(), changePackage, idToEObjectMapping)
+		if (!callback.inspectChanges(getLocalProject(), changePackage, idToEObjectMapping)
 			|| getProgressMonitor().isCanceled()) {
-			return getProjectSpace().getBaseVersion();
+			return getLocalProject().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Sending files to server");
 		// TODO reimplement with ObserverBus and think about subtasks for commit
-		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
+		getLocalProject().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Sending changes to server");
@@ -144,9 +144,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// present changes again if update was performed
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
-			if (!callback.inspectChanges(getProjectSpace(), changePackage, idToEObjectMapping)
+			if (!callback.inspectChanges(getLocalProject(), changePackage, idToEObjectMapping)
 				|| getProgressMonitor().isCanceled()) {
-				return getProjectSpace().getBaseVersion();
+				return getLocalProject().getBaseVersion();
 			}
 		}
 
@@ -156,31 +156,31 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			@Override
 			public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
 				return getConnectionManager().createVersion(getUsersession().getSessionId(),
-					getProjectSpace().getProjectId(), getProjectSpace().getBaseVersion(), changePackage, branch,
-					getProjectSpace().getMergedVersion(), changePackage.getLogMessage());
+					getLocalProject().getProjectId(), getLocalProject().getBaseVersion(), changePackage, branch,
+					getLocalProject().getMergedVersion(), changePackage.getLogMessage());
 			}
 		}.execute();
 		getProgressMonitor().worked(35);
 
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		getProgressMonitor().subTask("Sending files to server");
-		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
+		getLocalProject().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 		getProgressMonitor().worked(30);
 
 		getProgressMonitor().subTask("Computing checksum");
 
 		boolean validChecksum = true;
 		try {
-			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
+			validChecksum = performChecksumCheck(newBaseVersion, getLocalProject().getProject());
 		} catch (SerializationException exception) {
 			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
-				getProjectSpace().getProjectName()), exception);
+				getLocalProject().getProjectName()), exception);
 		}
 
 		if (!validChecksum) {
 			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
 			boolean errorHandled = callback
-				.checksumCheckFailed(getProjectSpace(), newBaseVersion, getProgressMonitor());
+				.checksumCheckFailed(getLocalProject(), newBaseVersion, getProgressMonitor());
 			if (!errorHandled) {
 				throw new EmfStoreException("Commit cancelled by checksum error handler due to invalid checksum.");
 			}
@@ -188,13 +188,13 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Finalizing commit");
 
-		getProjectSpace().setBaseVersion(newBaseVersion);
-		getProjectSpace().getOperations().clear();
-		getProjectSpace().setMergedVersion(null);
-		getProjectSpace().updateDirtyState();
+		getLocalProject().setBaseVersion(newBaseVersion);
+		getLocalProject().getOperations().clear();
+		getLocalProject().setMergedVersion(null);
+		getLocalProject().updateDirtyState();
 
 		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
-			.commitCompleted(getProjectSpace(), newBaseVersion, getProgressMonitor());
+			.commitCompleted(getLocalProject(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;
 	}
@@ -219,7 +219,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			}
 			PrimaryVersionSpec potentialBranch = null;
 			try {
-				potentialBranch = getProjectSpace().resolveVersionSpec(branch);
+				potentialBranch = getLocalProject().resolveVersionSpec(branch);
 			} catch (InvalidVersionSpecException e) {
 				// branch doesn't exist, create.
 			}
@@ -229,10 +229,10 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		} else {
 			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
-				Versions.createHEAD(getProjectSpace().getBaseVersion()));
-			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
-				if (!callback.baseVersionOutOfDate(getProjectSpace(), getProgressMonitor())) {
+			PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(
+				Versions.createHEAD(getLocalProject().getBaseVersion()));
+			if (!getLocalProject().getBaseVersion().equals(resolvedVersion)) {
+				if (!callback.baseVersionOutOfDate(getLocalProject(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();
 				}
 				return true;
@@ -244,9 +244,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	private LogMessage createLogMessage() {
 		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
 		String commiter = "UNKOWN";
-		if (getProjectSpace().getUsersession() != null && getProjectSpace().getUsersession().getACUser() != null
-			&& getProjectSpace().getUsersession().getACUser().getName() != null) {
-			commiter = getProjectSpace().getUsersession().getACUser().getName();
+		if (getLocalProject().getUsersession() != null && getLocalProject().getUsersession().getACUser() != null
+			&& getLocalProject().getUsersession().getACUser().getName() != null) {
+			commiter = getLocalProject().getUsersession().getACUser().getName();
 		}
 		logMessage.setAuthor(commiter);
 		logMessage.setClientDate(new Date());
