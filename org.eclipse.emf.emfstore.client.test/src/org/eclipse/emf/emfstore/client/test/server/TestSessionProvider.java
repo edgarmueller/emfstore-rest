@@ -10,11 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
@@ -86,11 +88,11 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 			}
 		}.run(false);
 
-		workspace.save();
+		((WorkspaceBase) workspace).save();
 	}
 
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EMFStoreException {
+	public Usersession provideUsersession(IServer serverInfo) throws EMFStoreException {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}
@@ -98,8 +100,8 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public void login(Usersession usersession) throws EMFStoreException {
-		usersession.logIn();
+	public void login(IUsersession usersession) throws EMFStoreException {
+		usersession.getServer().login(usersession.getUsername(), usersession.getPassword());
 	}
 
 }

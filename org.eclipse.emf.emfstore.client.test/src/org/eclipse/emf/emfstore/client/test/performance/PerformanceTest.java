@@ -101,8 +101,8 @@ public class PerformanceTest {
 	/**
 	 * Opens projects of different sizes, shares them with the server and then deletes them. r
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String,
+	 *      String, org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 * @throws IOException
@@ -175,8 +175,8 @@ public class PerformanceTest {
 	 * Measures average time, spent for the checkout operation. Opens projects of different sizes, shares them with the
 	 * server, checkouts and then deletes them.
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String,
+	 *      String, org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */
@@ -195,8 +195,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						// TODO: OTS cast
-						projectSpace2 = (ProjectSpace) projectSpace.getRemoteProject().checkout(
-							setupHelper.getUsersession());
+						projectSpace2 = projectSpace.getRemoteProject().checkout(setupHelper.getUsersession());
 					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
@@ -218,9 +217,11 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						((Workspace) WorkspaceProvider.getInstance().getWorkspace()).deleteProjectSpace(projectSpace2);
+						projectSpace2.delete();
 						projectSpace2 = null;
 					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
 				}
@@ -250,8 +251,8 @@ public class PerformanceTest {
 	 * projects, using the ModelMutator, commits them to the server, and updates the second project. The test performs
 	 * model change, commit and update NUM_ITERATIONS times and calculates times for commit and update operations
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String,
+	 *      String, org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */
@@ -268,8 +269,7 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = (ProjectSpace) setupHelper.getTestProjectSpace().getRemoteProject()
-						.checkout(usersession2);
+					projectSpace2 = setupHelper.getTestProjectSpace().getRemoteProject().checkout(usersession2);
 				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}

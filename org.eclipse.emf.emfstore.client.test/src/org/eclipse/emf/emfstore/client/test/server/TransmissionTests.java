@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
@@ -53,10 +52,8 @@ public abstract class TransmissionTests extends ServerTests {
 					usersession1.logIn();
 					usersession2.logIn();
 					// TODO: TQ
-					setProjectSpace1((ProjectSpace) workspace.checkout(usersession1, getRemoteProject(),
-						new NullProgressMonitor()));
-					setProjectSpace2((ProjectSpace) workspace.checkout(usersession2, getRemoteProject(),
-						new NullProgressMonitor()));
+					setProjectSpace1(getRemoteProject().checkout(usersession1));
+					setProjectSpace2(getRemoteProject().checkout(usersession2));
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
 				} catch (EMFStoreException e) {

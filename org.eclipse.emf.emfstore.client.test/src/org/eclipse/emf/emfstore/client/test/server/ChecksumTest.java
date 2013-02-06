@@ -6,12 +6,13 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.IChangeConflictException;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
-import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
@@ -24,7 +25,8 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -106,9 +108,8 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), ModelUtil.clone(getProjectSpace().getRemoteProject()),
-				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
+			getProjectSpace().getUsersession());
 
 		new EMFStoreCommand() {
 			@Override
@@ -196,9 +197,8 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
-				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
+			getProjectSpace().getUsersession());
 
 		new EMFStoreCommand() {
 			@Override
@@ -234,9 +234,8 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
-				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
+			getProjectSpace().getUsersession());
 
 		new EMFStoreCommand() {
 			@Override
@@ -268,9 +267,8 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-			.checkout(getProjectSpace().getUsersession(), getProjectSpace().getRemoteProject(),
-				new NullProgressMonitor());
+		ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
+			getProjectSpace().getUsersession());
 
 		new EMFStoreCommand() {
 			@Override
@@ -306,30 +304,31 @@ public class ChecksumTest extends CoreServerTest {
 
 	private class MyCommitCallback implements ICommitCallback {
 
-		public boolean baseVersionOutOfDate(ProjectSpace projectSpace, IProgressMonitor progressMonitor) {
+		public boolean baseVersionOutOfDate(ILocalProject projectSpace, IProgressMonitor progressMonitor) {
 			return ICommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
 		}
 
-		public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage,
+		public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return ICommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
 		}
 
-		public void noLocalChanges(ProjectSpace projectSpace) {
+		public void noLocalChanges(ILocalProject projectSpace) {
 			ICommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
 		}
 
-		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
-			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
+			return checksumErrorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec,
+				progressMonitor);
 		}
 
 	}
 
 	private class MyUpdateCallback implements IUpdateCallback {
 
-		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
+		public boolean inspectChanges(ILocalProject projectSpace, List<? extends IChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
@@ -338,15 +337,16 @@ public class ChecksumTest extends CoreServerTest {
 			IUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
-		public boolean conflictOccurred(ChangeConflictException changeConflictException,
+		public boolean conflictOccurred(IChangeConflictException changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
 
-		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
-			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
+			return checksumErrorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec,
+				progressMonitor);
 		}
 	}
 

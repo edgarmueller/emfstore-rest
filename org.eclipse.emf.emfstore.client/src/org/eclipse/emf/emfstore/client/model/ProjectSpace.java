@@ -786,6 +786,6 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
 
-	RemoteProject getRemoteProject();
+	RemoteProject getRemoteProject() throws EMFStoreException;
 
 } // ProjectContainer

@@ -96,7 +96,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public RemoteProject getRemoteProject() {
+	public RemoteProject getRemoteProject() throws EMFStoreException {
 		return getProjectSpace().getRemoteProject();
 	}
 
@@ -104,7 +104,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		return getProjectSpace().getProjectId();
 	}
 
-	public PrimaryVersionSpec getProjectVersion() {
+	public PrimaryVersionSpec getProjectVersion() throws EMFStoreException {
 		return getRemoteProject().getHeadVersion(false);
 	}
 

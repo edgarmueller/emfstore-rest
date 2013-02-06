@@ -6,6 +6,8 @@ public interface IUsersession {
 
 	String getUsername();
 
+	String getPassword();
+
 	IServer getServer();
 
 	ISessionId getSessionId();

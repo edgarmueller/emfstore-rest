@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.util;
 
 import java.util.concurrent.Callable;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
@@ -87,8 +88,10 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	private void update(final Usersession session) throws EMFStoreException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				workspace.updateProjectInfos(session);
-				return null;
+				// TODO: OTS
+				// workspace.updateProjectInfos(session);
+				throw new NotImplementedException("TODO OTS");
+				// return null;
 			}
 		});
 	}
