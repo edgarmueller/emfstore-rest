@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -60,7 +61,7 @@ public class HistoryAPITests extends CoreServerTest {
 
 	final static public String[] branches = { "b1", "b2", "b3" };
 
-	public static ProjectSpace createHistory(CoreServerTest p) {
+	public static ProjectSpace createHistory(CoreServerTest p) throws EMFStoreException {
 		ProjectSpace ps = p.getProjectSpace();
 		// v0
 		p.createTestElement(elementNames[0]);
@@ -88,7 +89,7 @@ public class HistoryAPITests extends CoreServerTest {
 		assertEquals(versions[5], p.commit(ps2));
 
 		// v6
-		ProjectSpace thirdBranch = p.checkout(ps.getRemoteProject(), versions[3]);
+		ProjectSpace thirdBranch = p.checkout((RemoteProject) ps.getRemoteProject(), versions[3]);
 		rename(thirdBranch, 6);
 		assertEquals(versions[6], p.branch(thirdBranch, branches[2]));
 
