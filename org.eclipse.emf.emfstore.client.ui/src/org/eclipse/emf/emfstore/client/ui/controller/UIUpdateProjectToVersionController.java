@@ -14,9 +14,11 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
@@ -35,32 +37,45 @@ import org.eclipse.ui.dialogs.ListDialog;
  * 
  * @author eneufeld
  */
-public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIController<PrimaryVersionSpec> {
+public class UIUpdateProjectToVersionController extends
+		AbstractEMFStoreUIController<PrimaryVersionSpec> {
 
 	private final ProjectSpace projectSpace;
 
-	public UIUpdateProjectToVersionController(Shell shell, ProjectSpace projectSpace) {
+	public UIUpdateProjectToVersionController(Shell shell,
+			ProjectSpace projectSpace) {
 		super(shell, true, true);
 		this.projectSpace = projectSpace;
 	}
 
 	@Override
-	public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EMFStoreException {
-		RangeQuery query = HistoryQueryBuilder.rangeQuery(projectSpace.getBaseVersion(), 20, 0, false, false, false,
-			false);
+	public PrimaryVersionSpec doRun(IProgressMonitor monitor)
+			throws EMFStoreException {
+		RangeQuery query = HistoryQueryBuilder.rangeQuery(
+				projectSpace.getBaseVersion(), 20, 0, false, false, false,
+				false);
 		try {
 			List<HistoryInfo> historyInfo = projectSpace.getHistoryInfos(query);
 			// filter base version
 			Iterator<HistoryInfo> iter = historyInfo.iterator();
 			while (iter.hasNext()) {
-				if (projectSpace.getBaseVersion().equals(iter.next().getPrimerySpec())) {
+				if (projectSpace.getBaseVersion().equals(
+						iter.next().getPrimerySpec())) {
 					iter.remove();
 					break;
 				}
 			}
 			if (historyInfo.size() == 0) {
-				return new UIUpdateProjectController(getShell(), projectSpace, Versions.createHEAD(projectSpace
-					.getBaseVersion())).execute();
+				return RunInUI
+						.runWithResult(new Callable<PrimaryVersionSpec>() {
+							public PrimaryVersionSpec call() throws Exception {
+								return new UIUpdateProjectController(
+										getShell(), projectSpace, Versions
+												.createHEAD(projectSpace
+														.getBaseVersion()))
+										.execute();
+							}
+						});
 			}
 
 			ListDialog listDialog = new ListDialog(getShell());
@@ -73,7 +88,8 @@ public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIContro
 					HistoryInfo historyInfo = (HistoryInfo) element;
 
 					StringBuilder sb = new StringBuilder("Version ");
-					sb.append(Integer.toString(historyInfo.getPrimerySpec().getIdentifier()));
+					sb.append(Integer.toString(historyInfo.getPrimerySpec()
+							.getIdentifier()));
 					sb.append("  -  ");
 					sb.append(historyInfo.getLogMessage().getMessage());
 
@@ -84,15 +100,25 @@ public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIContro
 			});
 			listDialog.setInput(historyInfo);
 			listDialog.setTitle("Select a Version to update to");
-			listDialog.setMessage("The project will be updated to the selected Version");
-			listDialog.setInitialSelections(new Object[] { historyInfo.get(0) });
+			listDialog
+					.setMessage("The project will be updated to the selected Version");
+			listDialog
+					.setInitialSelections(new Object[] { historyInfo.get(0) });
 			int result = listDialog.open();
 			if (Dialog.OK == result) {
 				Object[] selection = listDialog.getResult();
-				HistoryInfo info = (HistoryInfo) selection[0];
-
-				return new UIUpdateProjectController(getShell(), projectSpace, Versions.createPRIMARY(info
-					.getPrimerySpec().getIdentifier())).execute();
+				final HistoryInfo info = (HistoryInfo) selection[0];
+				return RunInUI
+						.runWithResult(new Callable<PrimaryVersionSpec>() {
+							public PrimaryVersionSpec call() throws Exception {
+								return new UIUpdateProjectController(
+										getShell(), projectSpace, Versions
+												.createPRIMARY(info
+														.getPrimerySpec()
+														.getIdentifier()))
+										.execute();
+							}
+						});
 			}
 		} catch (EMFStoreException e) {
 
