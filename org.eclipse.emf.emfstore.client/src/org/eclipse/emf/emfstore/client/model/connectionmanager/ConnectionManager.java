@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.server.EmfStore;
+import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
  * @author wesendon
  * @generated NOT
  */
-public interface ConnectionManager extends EmfStore {
+public interface ConnectionManager extends EMFStore {
 
 	/**
 	 * Connection related failure message.

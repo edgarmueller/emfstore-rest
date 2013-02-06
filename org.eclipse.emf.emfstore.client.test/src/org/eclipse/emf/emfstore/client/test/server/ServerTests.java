@@ -16,13 +16,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -98,7 +98,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public IRemoteProject getProjectInfo() {
+	public RemoteProject getProjectInfo() {
 		return getProjectSpace().getRemoteProject();
 	}
 
@@ -107,7 +107,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() {
-		return getProjectInfo().getVersion();
+		return getProjectInfo().getHeadVersion(false);
 	}
 
 	/**

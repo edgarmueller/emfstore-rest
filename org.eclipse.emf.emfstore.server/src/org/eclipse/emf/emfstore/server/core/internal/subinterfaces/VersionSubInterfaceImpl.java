@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.EmfStoreController;
+import org.eclipse.emf.emfstore.server.EMFStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
  * This subinterfaces implements all version related functionality for the
- * {@link org.eclipse.emf.emfstore.server.core.EmfStoreImpl} interface.
+ * {@link org.eclipse.emf.emfstore.server.core.EMFStoreImpl} interface.
  * 
  * @author wesendon
  */
@@ -349,7 +349,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			} catch (FatalEmfStoreException e) {
 				// roll back failed
-				EmfStoreController.getInstance().shutdown(e);
+				EMFStoreController.getInstance().shutdown(e);
 				throw new EMFStoreException("Shutting down server.");
 			}
 

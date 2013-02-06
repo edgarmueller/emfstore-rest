@@ -70,12 +70,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  * @author emueller
  * 
  */
-public abstract class WorkspaceBase extends EObjectImpl implements Workspace, IDisposable {
-
-	/**
-	 * The current connection manager used to connect to the server(s).
-	 */
-	private ConnectionManager connectionManager;
+public abstract class WorkspaceBase extends EObjectImpl implements Workspace, IDisposable, DeleteProjectSpaceObserver {
 
 	/**
 	 * A mapping between project and project spaces.
@@ -232,6 +227,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 			projectSpace.init();
 			projectToProjectSpaceMap.put(projectSpace.getProject(), projectSpace);
 		}
+
+		WorkspaceProvider.getObserverBus().register(this, DeleteProjectSpaceObserver.class);
 	}
 
 	/**
@@ -244,16 +241,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
 			((ProjectSpaceBase) projectSpace).dispose();
 		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#setConnectionManager(org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager)
-	 */
-	public void setConnectionManager(ConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
 	}
 
 	/**
@@ -565,4 +552,13 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	public List<ServerInfo> getServers() {
 		return getServerInfos();
 	}
+
+	public void projectSpaceDeleted(ProjectSpace projectSpace) {
+		assert (projectSpace != null);
+
+		getProjectSpaces().remove(projectSpace);
+		save();
+		projectToProjectSpaceMap.remove(projectSpace.getProject());
+	}
+
 }

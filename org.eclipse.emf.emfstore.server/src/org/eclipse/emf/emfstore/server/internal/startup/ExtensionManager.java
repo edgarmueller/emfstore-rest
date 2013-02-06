@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
-import org.eclipse.emf.emfstore.server.EmfStoreInterface;
+import org.eclipse.emf.emfstore.server.EMFStoreInterface;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
@@ -60,7 +60,7 @@ public final class ExtensionManager {
 	 * @param connectionHandlers set of connection handlers
 	 */
 	public static void notifyPostStartupListener(ServerSpace serverspace, AccessControlImpl accessControl,
-		Set<ConnectionHandler<? extends EmfStoreInterface>> connectionHandlers) {
+		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers) {
 		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.server.poststartuplistener", true)
 			.getExtensionElements()) {
 			try {

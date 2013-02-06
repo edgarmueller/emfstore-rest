@@ -37,7 +37,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * This TestCase tests all methods in the main {@link org.unicase.emfstore.EmfStore} interface.
+ * This TestCase tests all methods in the main {@link org.EMFStore.emfstore.EmfStore} interface.
  * 
  */
 public class PerformanceTest {
@@ -101,9 +101,9 @@ public class PerformanceTest {
 	/**
 	 * Opens projects of different sizes, shares them with the server and then deletes them. r
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 * @throws IOException
 	 */
@@ -175,9 +175,9 @@ public class PerformanceTest {
 	 * Measures average time, spent for the checkout operation. Opens projects of different sizes, shares them with the
 	 * server, checkouts and then deletes them.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */
 	@Test
@@ -250,9 +250,9 @@ public class PerformanceTest {
 	 * projects, using the ModelMutator, commits them to the server, and updates the second project. The test performs
 	 * model change, commit and update NUM_ITERATIONS times and calculates times for commit and update operations
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */
 	@Test

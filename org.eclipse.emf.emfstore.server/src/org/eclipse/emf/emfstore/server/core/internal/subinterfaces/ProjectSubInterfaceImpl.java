@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
  * This subinterfaces implements all project related functionality for the
- * {@link org.eclipse.emf.emfstore.server.core.EmfStoreImpl} interface.
+ * {@link org.eclipse.emf.emfstore.server.core.EMFStoreImpl} interface.
  * 
  * @author wesendon
  */

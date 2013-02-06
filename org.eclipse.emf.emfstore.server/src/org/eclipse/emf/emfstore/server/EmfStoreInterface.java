@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.server;
 
 /**
- * This is a interface for all interfaces provided by the emfstore. E.g. {@link EmfStore} or {@link AdminEmfStore}
+ * This is a interface for all interfaces provided by the emfstore. E.g. {@link EMFStore} or {@link AdminEmfStore}
  * 
  * @author wesendonk
  */
-public interface EmfStoreInterface {
+public interface EMFStoreInterface {
 }

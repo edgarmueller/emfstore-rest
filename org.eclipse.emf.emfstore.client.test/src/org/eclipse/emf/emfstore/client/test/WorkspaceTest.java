@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.After;
 import org.junit.Before;
@@ -137,7 +138,7 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				try {
 					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getProjectSpaces())) {
-						workspace.deleteProjectSpace(projectSpace);
+						projectSpace.delete();
 					}
 					WorkspaceProvider.getInstance().dispose();
 					setProject(null);
@@ -145,6 +146,8 @@ public abstract class WorkspaceTest {
 					workspace = null;
 					FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 				} catch (IOException e) {
+					// ignore
+				} catch (EMFStoreException e) {
 					// ignore
 				}
 			}
@@ -162,7 +165,7 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				int retried = 0;
 				try {
-					((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).deleteProjectSpace(ps);
+					ps.delete();
 				} catch (IOException e) {
 					if (retried++ > 2) {
 						fail();
@@ -174,6 +177,8 @@ public abstract class WorkspaceTest {
 						}
 						WorkspaceUtil.logWarning(e.getMessage() + " Retrying...(" + retried + " out of 3)", e);
 					}
+				} catch (EMFStoreException e) {
+					// TODO: OTS
 				}
 			}
 		}.run(false);

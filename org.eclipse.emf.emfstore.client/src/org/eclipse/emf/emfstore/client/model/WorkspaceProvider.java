@@ -219,7 +219,6 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 			workspace = (Workspace) directContents.get(0);
 		}
 
-		workspace.setConnectionManager(this.connectionManager);
 		workspace.setResourceSet(resourceSet);
 
 		new EMFStoreCommand() {

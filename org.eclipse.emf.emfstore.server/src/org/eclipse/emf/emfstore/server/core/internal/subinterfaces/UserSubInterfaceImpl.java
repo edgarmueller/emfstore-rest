@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 
 /**
  * This subinterfaces implements all user related functionality for the
- * {@link org.eclipse.emf.emfstore.server.core.EmfStoreImpl} interface.
+ * {@link org.eclipse.emf.emfstore.server.core.EMFStoreImpl} interface.
  * 
  * @author wesendon
  */

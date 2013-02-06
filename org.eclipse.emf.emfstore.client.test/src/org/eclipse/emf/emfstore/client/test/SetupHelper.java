@@ -50,7 +50,7 @@ import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.server.EmfStoreController;
+import org.eclipse.emf.emfstore.server.EMFStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
@@ -157,7 +157,7 @@ public class SetupHelper {
 			// Properties properties = ServerConfiguration.getProperties();
 			// little workaround, there is a flaw in server configuration
 			// properties.setProperty(ServerConfiguration.RMI_ENCRYPTION, ServerConfiguration.FALSE);
-			EmfStoreController.runAsNewThread();
+			EMFStoreController.runAsNewThread();
 			LOGGER.log(Level.INFO, "server started. ");
 		} catch (FatalEmfStoreException e) {
 			e.printStackTrace();
@@ -168,7 +168,7 @@ public class SetupHelper {
 	 * Stops the server.
 	 */
 	public static void stopServer() {
-		EmfStoreController server = EmfStoreController.getInstance();
+		EMFStoreController server = EMFStoreController.getInstance();
 		if (server != null) {
 			server.stop();
 		}
@@ -278,7 +278,7 @@ public class SetupHelper {
 		try {
 			Properties properties = ServerConfiguration.getProperties();
 			properties.setProperty(ServerConfiguration.RMI_ENCRYPTION, ServerConfiguration.FALSE);
-			EmfStoreController.runAsNewThread();
+			EMFStoreController.runAsNewThread();
 		} catch (FatalEmfStoreException e) {
 			e.printStackTrace();
 		}
@@ -476,8 +476,10 @@ public class SetupHelper {
 			protected void doRun() {
 				for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
 					try {
-						currentWorkspace.deleteProjectSpace(projectSpace);
+						projectSpace.delete();
 					} catch (IOException e) {
+						throw new RuntimeException(e);
+					} catch (EMFStoreException e) {
 						throw new RuntimeException(e);
 					}
 				}
@@ -630,8 +632,8 @@ public class SetupHelper {
 
 				try {
 					// TODO OTS hot code incoming
-					compareProject = ((ProjectSpace) new RemoteProject(projectInfo)
-						.checkout(usersession)).getProject();
+					compareProject = new RemoteProject(usersession.getServer(), projectInfo).checkout(usersession)
+						.getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EMFStoreException e) {
 					e.printStackTrace();

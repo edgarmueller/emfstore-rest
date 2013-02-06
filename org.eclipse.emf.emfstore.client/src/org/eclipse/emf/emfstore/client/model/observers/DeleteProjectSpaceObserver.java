@@ -25,5 +25,6 @@ public interface DeleteProjectSpaceObserver extends IObserver {
 	 * 
 	 * @param projectSpace the project space
 	 */
+	// TODO: OTS think about pre/post
 	void projectSpaceDeleted(ProjectSpace projectSpace);
 }

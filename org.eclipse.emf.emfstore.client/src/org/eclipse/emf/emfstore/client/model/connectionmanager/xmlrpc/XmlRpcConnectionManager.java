@@ -145,7 +145,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.EmfStore#getBranches(org.eclipse.emf.emfstore.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.server.EMFStore#getBranches(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
 	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
@@ -257,7 +257,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.EmfStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {

@@ -44,7 +44,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public interface EmfStore extends EmfStoreInterface {
+public interface EMFStore extends EMFStoreInterface {
 
 	/**
 	 * Virtual Uri for change package de-/serialization.

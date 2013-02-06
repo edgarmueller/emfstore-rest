@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
 
-	List<IRemoteProject> remoteProjects;
+	List<RemoteProject> remoteProjects;
 
 	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
@@ -58,7 +58,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		return log;
 	}
 
-	public List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException {
+	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
 		if (remoteProjects == null) {
 			List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
 			for (ProjectInfo projectInfo : getProjectInfos()) {
