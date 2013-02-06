@@ -306,10 +306,4 @@ public class RemoteProject implements IRemoteProject {
 	public IServer getServer() {
 		return (ServerInfo) projectInfo.eContainer();
 	}
-
-	public IServer getServer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

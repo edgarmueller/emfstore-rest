@@ -202,9 +202,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * @throws EmfStoreException
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteProjectSpace(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
-	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException {
+	// TODO: OTS: move to ProjectSpaceBase
+	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, EmfStoreException {
 
 		assert (projectSpace != null);
 

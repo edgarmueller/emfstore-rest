@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.model.api.ISessionId;
 
 /**
  * This class is intended to wrap all server calls. It may be used either by sub-classing or using anonymous classes.<br/>
@@ -221,8 +222,8 @@ public abstract class ServerCall<U> {
 	 * @param sessionId
 	 *            the session ID to be used for authentication against the server
 	 */
-	public void setSessionId(SessionId sessionId) {
-		this.sessionId = sessionId;
+	public void setSessionId(ISessionId sessionId) {
+		this.sessionId = (SessionId) sessionId;
 	}
 
 	/**
@@ -233,7 +234,7 @@ public abstract class ServerCall<U> {
 	 * @throws EmfStoreException
 	 *             in case any exception occurs during execution of the call
 	 */
-	public void run(SessionId sessionId) throws EmfStoreException {
+	public void run(ISessionId sessionId) throws EmfStoreException {
 		setSessionId(sessionId);
 		ret = run();
 	}

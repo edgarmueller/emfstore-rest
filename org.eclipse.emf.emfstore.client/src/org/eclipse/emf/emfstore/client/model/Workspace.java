@@ -59,16 +59,6 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
-	 * Deletes the given project space.
-	 * 
-	 * @param projectSpace
-	 *            the project space to be deleted
-	 * @throws IOException
-	 *             If deleting the obsolete project space files fails
-	 */
-	void deleteProjectSpace(ProjectSpace projectSpace) throws IOException;
-
-	/**
 	 * Exports a project space to a file.
 	 * 
 	 * @param projectSpace

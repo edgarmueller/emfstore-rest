@@ -15,6 +15,8 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
@@ -36,7 +38,7 @@ import org.eclipse.swt.widgets.Display;
 public class LoginDialogController implements ILoginDialogController {
 
 	private Usersession usersession;
-	private ServerInfo serverInfo;
+	private IServer serverInfo;
 
 	/**
 	 * 
@@ -55,7 +57,7 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	private Usersession login(final boolean force) throws EmfStoreException {
+	private IUsersession login(final boolean force) throws EmfStoreException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
@@ -136,7 +138,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
 	 */
-	public ServerInfo getServerInfo() {
+	public IServer getServerInfo() {
 		if (serverInfo != null) {
 			return serverInfo;
 		}
@@ -156,7 +158,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws EmfStoreException
 	 *             in case the login fails
 	 */
-	public Usersession login(ServerInfo serverInfo, boolean force) throws EmfStoreException {
+	public IUsersession login(ServerInfo serverInfo, boolean force) throws EmfStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(force);
@@ -189,7 +191,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws EmfStoreException
 	 *             in case the login fails
 	 */
-	public Usersession login(ServerInfo serverInfo) throws EmfStoreException {
+	public IUsersession login(ServerInfo serverInfo) throws EmfStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(false);

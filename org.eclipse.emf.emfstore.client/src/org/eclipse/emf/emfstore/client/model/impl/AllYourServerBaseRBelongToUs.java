@@ -66,7 +66,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		if (remoteProjects == null) {
 			List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
 			for (ProjectInfo projectInfo : getProjectInfos()) {
-				RemoteProject wrapper = new RemoteProject(projectInfo);
+				RemoteProject wrapper = new RemoteProject(this, projectInfo);
 				remoteProjects.add(wrapper);
 			}
 		}

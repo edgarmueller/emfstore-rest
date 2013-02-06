@@ -964,8 +964,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
 			protected PrimaryVersionSpec run() throws EmfStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.resolveVersionSpec(getSessionId(), getProjectId(), (VersionSpec) versionSpec);
+				return getConnectionManager().resolveVersionSpec(getSessionId(), getProjectId(), (VersionSpec) versionSpec);
 			}
 		}.execute();
 	}

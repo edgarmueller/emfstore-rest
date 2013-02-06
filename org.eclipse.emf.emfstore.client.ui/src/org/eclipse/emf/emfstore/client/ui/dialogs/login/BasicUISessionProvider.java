@@ -12,8 +12,9 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
@@ -42,8 +43,8 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
-		if (serverInfo == null) {
+	public IUsersession provideUsersession(IServer server) throws EmfStoreException {
+		if (server == null) {
 			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
 					// try to retrieve a server info by showing a server info selection dialog
@@ -57,16 +58,16 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 			});
 
 			if (userInput == Dialog.OK) {
-				serverInfo = selectedServerInfo;
+				server = selectedServerInfo;
 			} else if (userInput == Dialog.CANCEL) {
 				throw new LoginCanceledException("Operation canceled by user.");
 			}
 		}
-		if (serverInfo == null) {
+		if (server == null) {
 			throw new AccessControlException("Couldn't determine which server to connect.");
 		}
 
-		return loginServerInfo(serverInfo);
+		return loginServerInfo(server);
 	}
 
 	/**
@@ -77,17 +78,17 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @return Usersession
 	 * @throws EmfStoreException in case of an exception
 	 */
-	protected Usersession loginServerInfo(ServerInfo serverInfo) throws EmfStoreException {
+	protected IUsersession loginServerInfo(IServer server) throws EmfStoreException {
 		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
-		if (serverInfo.getLastUsersession() != null && serverInfo.getLastUsersession().isLoggedIn()) {
-			return serverInfo.getLastUsersession();
+		if (server.getLastUsersession() != null && server.getLastUsersession().isLoggedIn()) {
+			return server.getLastUsersession();
 		}
-		return new LoginDialogController().login(serverInfo);
+		return new LoginDialogController().login(server);
 	}
 
 	@Override
-	public void login(Usersession usersession) throws EmfStoreException {
+	public void login(IUsersession usersession) throws EmfStoreException {
 		if (usersession != null) {
 			new LoginDialogController().login(usersession);
 		}
