@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.model.exceptions;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.client.api.IChangeConflictException;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
@@ -24,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class ChangeConflictException extends WorkspaceException {
+public class ChangeConflictException extends WorkspaceException implements IChangeConflictException {
 
 	private List<ChangePackage> myChangePackages;
 	private List<ChangePackage> newPackages;
