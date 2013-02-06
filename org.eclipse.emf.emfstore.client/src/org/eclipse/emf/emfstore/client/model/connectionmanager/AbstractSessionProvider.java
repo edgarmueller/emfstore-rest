@@ -83,13 +83,13 @@ public abstract class AbstractSessionProvider {
 	 * determine a suitable usersession. Use this in order to implement a session selection UI or headless selection
 	 * logic.
 	 * 
-	 * @param serverInfo This parameter is a hint from the {@link ServerCall}. For that reason it can be null. A common
-	 *            example is share, where the user first has to select the server before logging in. If
-	 *            {@link ServerInfo} is set you should allow the user to select the account for the given server.
+	 * @param server This parameter is a hint from the {@link ServerCall}. For that reason it can be null. A common
+	 *            example is share, where the user first has to select the server before logging in. If {@link Server}
+	 *            is set you should allow the user to select the account for the given server.
 	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way
 	 * @throws EmfStoreException in case of an exception
 	 */
-	public abstract Usersession provideUsersession(IServer server) throws EmfStoreException;
+	public abstract IUsersession provideUsersession(IServer server) throws EmfStoreException;
 
 	/**
 	 * This method is called by the {@link SessionManager} in order to login a given usersession. Either you are able to
@@ -98,5 +98,5 @@ public abstract class AbstractSessionProvider {
 	 * @param usersession session to be logged in.
 	 * @throws EmfStoreException in case of an exception
 	 */
-	public abstract void login(Usersession usersession) throws EmfStoreException;
+	public abstract void login(IUsersession usersession) throws EmfStoreException;
 }

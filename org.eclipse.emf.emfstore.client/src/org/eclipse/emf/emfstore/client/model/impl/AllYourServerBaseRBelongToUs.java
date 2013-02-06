@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -9,57 +10,52 @@ import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
 
 	List<IRemoteProject> remoteProjects;
 
-	public IRemoteProject createEmptyRemoteProject(IUsersession usersession, String projectName,
-		String projectDescription, IProgressMonitor progressMonitor) throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
+	private IUsersession validateUsersession(IUsersession usersession) throws EmfStoreException {
+		if (usersession == null || !this.equals(usersession.getServer())) {
+			// TODO OTS custom exception
+			throw new EmfStoreException("Invalid usersession for given server.");
+		}
+		return usersession;
 	}
 
-	public IRemoteProject createRemoteProject(String projectName, String projectDescription, IProgressMonitor monitor)
-		throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
+	public IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
+		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException {
+		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
+			@Override
+			protected ProjectInfo run() throws EmfStoreException {
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+					createLogmessage(getUsersession(), projectName));
+			}
+		}.execute());
 	}
 
-	public IRemoteProject createRemoteProject(IUsersession usersession, String projectName, String projectDescription,
+	public IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
 		IProgressMonitor monitor) throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
+		return new RemoteProject(this, new ServerCall<ProjectInfo>(this) {
+			@Override
+			protected ProjectInfo run() throws EmfStoreException {
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+					createLogmessage(getUsersession(), projectName));
+			}
+		}.execute());
 	}
 
-	public void deleteRemoteProject(IProjectId projectId, boolean deleteFiles) throws EmfStoreException {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void deleteRemoteProject(IUsersession usersession, IProjectId projectId, boolean deleteFiles)
-		throws EmfStoreException {
-		// TODO Auto-generated method stub
-
-	}
-
-	public List<? extends IHistoryInfo> getHistoryInfo(ServerInfo serverInfo, IProjectId projectId, IHistoryQuery query)
-		throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<? extends IHistoryInfo> getHistoryInfo(IUsersession usersession, IProjectId projectId,
-		IHistoryQuery query) throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
+	private LogMessage createLogmessage(IUsersession usersession, final String projectName) {
+		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
+		log.setMessage("Creating project '" + projectName + "'");
+		log.setAuthor(usersession.getUsername());
+		log.setClientDate(new Date());
+		return log;
 	}
 
 	public List<? extends IRemoteProject> getRemoteProjects() throws EmfStoreException {
@@ -74,18 +70,6 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<? extends IRemoteProject> getRemoteProjects(IUsersession usersession) throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec, IProjectId projectId)
-		throws EmfStoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec,
-		IProjectId projectId) throws EmfStoreException {
 		// TODO Auto-generated method stub
 		return null;
 	}

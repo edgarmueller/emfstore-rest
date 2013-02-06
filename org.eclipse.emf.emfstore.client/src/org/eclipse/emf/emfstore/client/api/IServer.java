@@ -12,18 +12,23 @@ public interface IServer {
 
 	String getName();
 
+	void setName(String name);
+
 	int getPort();
+
+	void setPort(int port);
 
 	String getUrl();
 
+	void setUrl(String url);
+
 	String getCertificateAlias();
+
+	void setCertificateAlias(String alias);
 
 	List<? extends IRemoteProject> getRemoteProjects() throws EmfStoreException;
 
 	IUsersession getLastUsersession();
-
-	IRemoteProject createEmptyRemoteProject(final IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException;
 
 	/**
 	 * Creates an empty project on the server.

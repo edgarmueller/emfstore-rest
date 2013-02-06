@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
 
@@ -30,7 +31,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
+	public Usersession provideUsersession(IServer server) throws EmfStoreException {
 		throw new EmfStoreException("No usersession found.");
 	}
 
@@ -41,7 +42,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider#login(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	@Override
-	public void login(Usersession usersession) throws EmfStoreException {
+	public void login(IUsersession usersession) throws EmfStoreException {
 		throw new EmfStoreException("Usersession not logged in. Login first.");
 	}
 }
