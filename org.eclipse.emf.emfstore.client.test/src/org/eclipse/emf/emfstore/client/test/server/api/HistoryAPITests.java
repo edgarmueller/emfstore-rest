@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -111,7 +111,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequery() throws EmfStoreException {
+	public void rangequery() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -125,7 +125,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryAllVersions() throws EmfStoreException {
+	public void rangequeryAllVersions() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -143,7 +143,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryIncludeCp() throws EmfStoreException {
+	public void rangequeryIncludeCp() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -163,7 +163,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryNoUpper() throws EmfStoreException {
+	public void rangequeryNoUpper() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -175,7 +175,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryNoLower() throws EmfStoreException {
+	public void rangequeryNoLower() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -187,7 +187,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryLimitZero() throws EmfStoreException {
+	public void rangequeryLimitZero() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -198,7 +198,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryIncoming() throws EmfStoreException {
+	public void rangequeryIncoming() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -211,7 +211,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void rangequeryOutgoing() throws EmfStoreException {
+	public void rangequeryOutgoing() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
@@ -224,7 +224,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void pathQuery() throws EmfStoreException {
+	public void pathQuery() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
@@ -238,7 +238,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void pathQueryInverse() throws EmfStoreException {
+	public void pathQueryInverse() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
@@ -252,7 +252,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void pathQueryAllVersions() throws EmfStoreException {
+	public void pathQueryAllVersions() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
@@ -265,14 +265,14 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void invalidPathQuery() throws EmfStoreException {
+	public void invalidPathQuery() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
 		ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(versions[2], versions[3], false, false));
 	}
 
 	@Test
-	public void meQuery() throws EmfStoreException {
+	public void meQuery() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
@@ -285,7 +285,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void meQueryLimit() throws EmfStoreException {
+	public void meQueryLimit() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
@@ -299,7 +299,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void meQueryDifferentBranch() throws EmfStoreException {
+	public void meQueryDifferentBranch() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
@@ -314,7 +314,7 @@ public class HistoryAPITests extends CoreServerTest {
 	}
 
 	@Test
-	public void meQueryDifferentBranchIncludeAll() throws EmfStoreException {
+	public void meQueryDifferentBranchIncludeAll() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);

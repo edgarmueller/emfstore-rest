@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class UnknownSessionException extends EmfStoreException {
+public class UnknownSessionException extends EMFStoreException {
 
 	/**
 	 * Default constructor.

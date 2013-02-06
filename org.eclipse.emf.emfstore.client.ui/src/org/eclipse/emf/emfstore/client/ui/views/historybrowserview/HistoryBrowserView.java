@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -299,13 +299,13 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell(), true,
 			false) {
 			@Override
-			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws EmfStoreException {
+			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws EMFStoreException {
 				return new UnknownEMFStoreWorkloadCommand<List<HistoryInfo>>(monitor) {
 					@Override
-					public List<HistoryInfo> run(final IProgressMonitor monitor) throws EmfStoreException {
+					public List<HistoryInfo> run(final IProgressMonitor monitor) throws EMFStoreException {
 						return new ServerCall<List<HistoryInfo>>((ProjectSpaceBase) projectSpace) {
 							@Override
-							protected List<HistoryInfo> run() throws EmfStoreException {
+							protected List<HistoryInfo> run() throws EMFStoreException {
 								monitor.beginTask("Fetching history form server", 100);
 								List<HistoryInfo> historyInfos = getLocalChanges();
 								monitor.worked(10);
@@ -403,7 +403,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			showAll(true);
 			setCenterVersion();
 			refresh();
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 		}
 	}
 
@@ -678,14 +678,14 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private PrimaryVersionSpec resolveVersion(final String value) {
 		return new AbstractEMFStoreUIController<PrimaryVersionSpec>(getViewSite().getShell()) {
 			@Override
-			public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EmfStoreException {
+			public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EMFStoreException {
 				return new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(monitor) {
 					@Override
-					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EmfStoreException {
+					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EMFStoreException {
 						try {
 							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
 								VersionSpec.GLOBAL, Integer.parseInt(value)));
-						} catch (EmfStoreException e) {
+						} catch (EMFStoreException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
 								"Error: The version you requested does not exist.", e);
 						} catch (NumberFormatException e) {

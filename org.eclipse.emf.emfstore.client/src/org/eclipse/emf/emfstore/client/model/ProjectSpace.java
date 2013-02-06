@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -323,11 +323,11 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 *            the source version spec
 	 * @param targetVersion
 	 *            the target version spec
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws EmfStoreException;
+	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws EMFStoreException;
 
 	/**
 	 * Gets a file with a specific identifier. If the file is not cached
@@ -591,12 +591,12 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * revision and the head revision are equal.
 	 * 
 	 * @return true, if the project is up to date, false otherwise
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if the head revision can not be resolved
 	 * 
 	 * @generated NOT
 	 */
-	boolean isUpdated() throws EmfStoreException;
+	boolean isUpdated() throws EMFStoreException;
 
 	/**
 	 * Will make the projectSpace transient, it will not make its content or
@@ -781,8 +781,8 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @generated NOT
 	 */
 
-	List<BranchInfo> getBranches() throws EmfStoreException;
+	List<BranchInfo> getBranches() throws EMFStoreException;
 
-	List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EmfStoreException;
+	List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
 
 } // ProjectContainer

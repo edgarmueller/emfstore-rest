@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -50,7 +50,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	}
 
 	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
-		boolean headRevert) throws EmfStoreException {
+		boolean headRevert) throws EMFStoreException {
 
 		PrimaryVersionSpec localHead = getConnectionManager()
 			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
@@ -75,7 +75,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
-	protected Void run() throws EmfStoreException {
+	protected Void run() throws EMFStoreException {
 		checkoutHeadAndReverseCommit(projectSpace, versionSpec, headRevert);
 		return null;
 	}

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
@@ -101,7 +101,7 @@ public class PropertiesForm extends Form {
 				title = "Group: " + group.getName();
 				stackLayout.topControl = groupComposite;
 				groupComposite.updateControls(group);
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 
@@ -112,7 +112,7 @@ public class PropertiesForm extends Form {
 				title = "User: " + user.getName();
 				stackLayout.topControl = userComposite;
 				userComposite.updateControls(user);
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}

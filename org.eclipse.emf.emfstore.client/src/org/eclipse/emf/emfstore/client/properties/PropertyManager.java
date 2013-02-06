@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.EMFStorePropertyType;
 import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * This class is responsible for the modification of EMFStore based properties. <br/>
@@ -277,19 +277,19 @@ public final class PropertyManager {
 	 * 
 	 * @throws AccessControlException
 	 *             if the caller has no write access to the project space
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if the project space being manipulated is not yet shared or
 	 *             an error occurs within EMFStore
 	 * @throws EMFStorePropertiesOutdatedException
 	 *             if any changed property is outdated
 	 **/
-	public void synchronizeSharedProperties() throws AccessControlException, EmfStoreException,
+	public void synchronizeSharedProperties() throws AccessControlException, EMFStoreException,
 		EMFStorePropertiesOutdatedException {
 
 		// check if project is shared, if not throw checked exception if it is
 		// shared
 		if (projectSpace.getUsersession() == null) {
-			throw new EmfStoreException("Project has not been shared yet.");
+			throw new EMFStoreException("Project has not been shared yet.");
 		}
 
 		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());

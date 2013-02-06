@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
@@ -123,7 +123,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
@@ -132,18 +132,18 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 
 			return new ServerCall<ILocalProject>(serverInfo, progressMonitor) {
 				@Override
-				protected ILocalProject run() throws EmfStoreException {
+				protected ILocalProject run() throws EMFStoreException {
 					if (versionSpec == null) {
-						return new RemoteProject(projectInfo).checkout(getUsersession(),
+						return new RemoteProject(serverInfo, projectInfo).checkout(getUsersession(),
 							getProgressMonitor());
 					}
 
-					return new RemoteProject(projectInfo).checkout(getUsersession(), versionSpec,
+					return new RemoteProject(serverInfo, projectInfo).checkout(getUsersession(), versionSpec,
 						getProgressMonitor());
 				}
 			}.execute();
 
-		} catch (final EmfStoreException e) {
+		} catch (final EMFStoreException e) {
 			if (e instanceof CancelOperationException) {
 				return null;
 			}
@@ -160,7 +160,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 		return null;
 	}
 
-	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EmfStoreException {
+	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EMFStoreException {
 		final List<IBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
 			.getBranches(serverInfo, projectInfo.getProjectId());
 

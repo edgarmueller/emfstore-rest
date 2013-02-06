@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.RangeQuery;
@@ -45,7 +45,7 @@ public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIContro
 	}
 
 	@Override
-	public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EMFStoreException {
 		RangeQuery query = HistoryQueryBuilder.rangeQuery(projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
 		try {
@@ -94,7 +94,7 @@ public class UIUpdateProjectToVersionController extends AbstractEMFStoreUIContro
 				return new UIUpdateProjectController(getShell(), projectSpace, Versions.createPRIMARY(info
 					.getPrimerySpec().getIdentifier())).execute();
 			}
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 
 		}
 		return null;

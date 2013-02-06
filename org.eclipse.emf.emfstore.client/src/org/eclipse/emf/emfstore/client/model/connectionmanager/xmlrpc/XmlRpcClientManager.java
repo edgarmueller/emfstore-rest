@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.model.exceptions.CertificateStoreExceptio
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.xml.sax.SAXException;
 
 /**
@@ -108,9 +108,9 @@ public class XmlRpcClientManager {
 	 * @param returnType return type
 	 * @param parameters parameters
 	 * @return returned object from server
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
-	public <T> T callWithResult(String methodName, Class<T> returnType, Object... parameters) throws EmfStoreException {
+	public <T> T callWithResult(String methodName, Class<T> returnType, Object... parameters) throws EMFStoreException {
 		return executeCall(methodName, returnType, parameters);
 	}
 
@@ -122,11 +122,11 @@ public class XmlRpcClientManager {
 	 * @param returnType list return type
 	 * @param parameters parameters
 	 * @return list return type
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> List<T> callWithListResult(String methodName, Class<T> returnType, Object... parameters)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		List<T> result = new ArrayList<T>();
 		Object[] callResult = executeCall(methodName, Object[].class, parameters);
 		if (callResult == null) {
@@ -143,22 +143,22 @@ public class XmlRpcClientManager {
 	 * 
 	 * @param methodName method name
 	 * @param parameters parameters
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
-	public void call(String methodName, Object... parameters) throws EmfStoreException {
+	public void call(String methodName, Object... parameters) throws EMFStoreException {
 		executeCall(methodName, null, parameters);
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> T executeCall(String methodName, Class<T> returnType, Object[] params) throws EmfStoreException {
+	private <T> T executeCall(String methodName, Class<T> returnType, Object[] params) throws EMFStoreException {
 		if (client == null) {
 			throw new ConnectionException(ConnectionManager.REMOTE);
 		}
 		try {
 			return (T) client.execute(serverInterface + "." + methodName, params);
 		} catch (XmlRpcException e) {
-			if (e.getCause() instanceof EmfStoreException) {
-				throw ((EmfStoreException) e.getCause());
+			if (e.getCause() instanceof EMFStoreException) {
+				throw ((EMFStoreException) e.getCause());
 			} else if (e.linkedException instanceof SAXException
 				&& ((SAXException) e.linkedException).getException() instanceof SerializationException) {
 				SerializationException serialE = (SerializationException) ((SAXException) e.linkedException)

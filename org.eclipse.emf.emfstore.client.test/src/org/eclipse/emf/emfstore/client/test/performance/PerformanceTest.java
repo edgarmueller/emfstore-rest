@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -62,11 +62,11 @@ public class PerformanceTest {
 	/**
 	 * Start server and gain sessionid.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EmfStoreException, IOException {
+	public static void setUpBeforeClass() throws EMFStoreException, IOException {
 		ServerTests.setUpBeforeClass();
 		memoryMeter = new MemoryMeter();
 		memoryMeter.start();
@@ -75,10 +75,10 @@ public class PerformanceTest {
 	/**
 	 * Overrides parent implementation.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	@Before
-	public void beforeTest() throws EmfStoreException {
+	public void beforeTest() throws EMFStoreException {
 		setupHelper = new SetupHelper(modelKey, 10000, lastSeed);
 		setupHelper.setupWorkSpace();
 		setupHelper.generateRandomProject();
@@ -93,7 +93,7 @@ public class PerformanceTest {
 	}
 
 	@AfterClass
-	public static void finish() throws EmfStoreException, IOException {
+	public static void finish() throws EMFStoreException, IOException {
 		memoryMeter.finish();
 		ServerTests.tearDownAfterClass();
 	}
@@ -104,11 +104,11 @@ public class PerformanceTest {
 	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
-	 * @throws EmfStoreException in case of failure.
+	 * @throws EMFStoreException in case of failure.
 	 * @throws IOException
 	 */
 	@Test
-	public void shareProjectTest() throws EmfStoreException, IOException {
+	public void shareProjectTest() throws EMFStoreException, IOException {
 
 		new EMFStoreCommand() {
 			@Override
@@ -135,7 +135,7 @@ public class PerformanceTest {
 							usersession.logIn();
 						}
 						projectSpace.shareProject(usersession, null);
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						fail();
 					}
 				}
@@ -160,7 +160,7 @@ public class PerformanceTest {
 					try {
 						WorkspaceProvider.getInstance().getConnectionManager()
 							.deleteProject(usersession.getSessionId(), projectSpace.getProjectId(), true);
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
 				}
@@ -178,10 +178,10 @@ public class PerformanceTest {
 	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
-	 * @throws EmfStoreException in case of failure.
+	 * @throws EMFStoreException in case of failure.
 	 */
 	@Test
-	public void checkoutProjectTest() throws EmfStoreException {
+	public void checkoutProjectTest() throws EMFStoreException {
 
 		final ProjectSpace projectSpace = setupHelper.getTestProjectSpace();
 		long memAfterThreshold = 0;
@@ -197,7 +197,7 @@ public class PerformanceTest {
 						// TODO: OTS cast
 						projectSpace2 = (ProjectSpace) projectSpace.getRemoteProject().checkout(
 							setupHelper.getUsersession());
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
 				}
@@ -235,7 +235,7 @@ public class PerformanceTest {
 				try {
 					WorkspaceProvider.getInstance().getConnectionManager()
 						.deleteProject(setupHelper.getUsersession().getSessionId(), projectSpace.getProjectId(), true);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				} finally {
 					SetupHelper.cleanupServer();
@@ -253,10 +253,10 @@ public class PerformanceTest {
 	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
 	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
-	 * @throws EmfStoreException in case of failure.
+	 * @throws EMFStoreException in case of failure.
 	 */
 	@Test
-	public void commitAndUpdateProjectTest() throws EmfStoreException {
+	public void commitAndUpdateProjectTest() throws EMFStoreException {
 
 		final SetupHelper setupHelper2 = new SetupHelper((String) null);
 		setupHelper2.setupWorkSpace();
@@ -270,7 +270,7 @@ public class PerformanceTest {
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
 					projectSpace2 = (ProjectSpace) setupHelper.getTestProjectSpace().getRemoteProject()
 						.checkout(usersession2);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}
 			}
@@ -308,7 +308,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace1.update();
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
 				}
@@ -321,7 +321,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace1.commit(null, null, null);
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						fail();
 					}
 				}
@@ -346,7 +346,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace2.update();
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
 				}

@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionPr
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Assert;
 
 /**
@@ -51,9 +51,9 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	 * 
 	 * @return the default user session
 	 * @throws AccessControlException if login fails
-	 * @throws EmfStoreException if anything else fails
+	 * @throws EMFStoreException if anything else fails
 	 */
-	public Usersession getDefaultUsersession() throws AccessControlException, EmfStoreException {
+	public Usersession getDefaultUsersession() throws AccessControlException, EMFStoreException {
 
 		new EMFStoreCommand() {
 			@Override
@@ -62,7 +62,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 					usersession.logIn();
 				} catch (AccessControlException e) {
 					Assert.fail();
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					Assert.fail();
 				}
 			}
@@ -90,7 +90,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
+	public Usersession provideUsersession(ServerInfo serverInfo) throws EMFStoreException {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}
@@ -98,7 +98,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public void login(Usersession usersession) throws EmfStoreException {
+	public void login(Usersession usersession) throws EMFStoreException {
 		usersession.logIn();
 	}
 

@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -79,11 +79,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
-	protected PrimaryVersionSpec run() throws EmfStoreException {
+	protected PrimaryVersionSpec run() throws EMFStoreException {
 		return doUpdate(version);
 	}
 
-	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EmfStoreException {
+	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EMFStoreException {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
@@ -100,7 +100,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
 			@Override
-			public List<ChangePackage> run(IProgressMonitor monitor) throws EmfStoreException {
+			public List<ChangePackage> run(IProgressMonitor monitor) throws EMFStoreException {
 				return getConnectionManager().getChanges(getSessionId(), getLocalProject().getProjectId(),
 					getLocalProject().getBaseVersion(), resolvedVersion);
 			}

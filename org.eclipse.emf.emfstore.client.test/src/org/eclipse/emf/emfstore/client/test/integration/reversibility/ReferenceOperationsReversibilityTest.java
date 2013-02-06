@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Test;
 
 /**
@@ -30,11 +30,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	 * Takes a random ME (meA). Takes randomly one of its containment references. Creates a new ME matching containment
 	 * reference type (meB). Adds created meB to meA's containment reference.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void containmentReferenceAddNewReversibilityTest() throws SerializationException, EmfStoreException {
+	public void containmentReferenceAddNewReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("ContainmentReferenceAddNewReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -65,11 +65,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	 * meToMove. Finds another ME of type meA (meB). Moves meToMove to meB. Finds yet another ME of type meA (meC) .
 	 * Moves meToMove to meC.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void containmentRefTransitiveChangeReversibilityTest() throws SerializationException, EmfStoreException {
+	public void containmentRefTransitiveChangeReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("ContainmentRefTransitiveChangeReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -95,11 +95,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	/**
 	 * This move an element in a many reference list to another position.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void multiReferenceMoveReversibilityTest() throws SerializationException, EmfStoreException {
+	public void multiReferenceMoveReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("MultiReferenceMoveReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
@@ -117,11 +117,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	 * Select a random ME (meA). Select one of its non-containment references. Find an ME matching reference type (meB).
 	 * Add meB to meA.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void nonContainmentReferenceAddReversibilityTest() throws SerializationException, EmfStoreException {
+	public void nonContainmentReferenceAddReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("NonContainmentReferenceAddReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
@@ -146,11 +146,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	/**
 	 * Removes a referenced model element form a non-containment reference of a randomly selected ME.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void nonContainmentReferenceRemoveReversibilityTest() throws SerializationException, EmfStoreException {
+	public void nonContainmentReferenceRemoveReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("NonContainmentReferenceRemoveReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -178,11 +178,11 @@ public class ReferenceOperationsReversibilityTest extends OperationsReversibilit
 	 * Takes a random ME (meA). Takes randomly one of its containment references. Finds an existing ME in project
 	 * matching the reference type (meB). Adds meB to this reference of meA (moves meB from its old parent to meA).
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void containmentReferenceMoveReversibilityTest() throws SerializationException, EmfStoreException {
+	public void containmentReferenceMoveReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("ContainmentReferenceMoveReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {

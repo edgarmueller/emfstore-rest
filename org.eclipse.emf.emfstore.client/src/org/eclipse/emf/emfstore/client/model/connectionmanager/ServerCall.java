@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.api.ISessionId;
 
@@ -233,10 +233,10 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param sessionId
 	 *            the session ID to be used for authentication against the server
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case any exception occurs during execution of the call
 	 */
-	public void run(ISessionId sessionId) throws EmfStoreException {
+	public void run(ISessionId sessionId) throws EMFStoreException {
 		setSessionId(sessionId);
 		ret = run();
 	}
@@ -245,19 +245,19 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * Performs the actual behavior of the call. Meant to be implemented by clients.
 	 * 
 	 * @return a return value of type <code>U</code>
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case any exception occurs during execution of the call
 	 */
-	protected abstract U run() throws EmfStoreException;
+	protected abstract U run() throws EMFStoreException;
 
 	/**
 	 * Executes the server call.
 	 * 
 	 * @return a return value of type <code>U</code>
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case any exception occurs during execution of the call
 	 */
-	public U execute() throws EmfStoreException {
+	public U execute() throws EMFStoreException {
 		WorkspaceProvider.getInstance().getSessionManager().execute(this);
 		return ret;
 	}

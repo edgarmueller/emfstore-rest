@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Test;
 
 /**
@@ -24,10 +24,10 @@ public class InvalidAuthenticationTest extends ServerTests {
 	/**
 	 * has to be implemented.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	@Test
-	public void doNothing() throws EmfStoreException {
+	public void doNothing() throws EMFStoreException {
 		// SessionId login = login(SetupHelper.getServerInfo(), "reader", "foo");
 		// login.getId();
 	}

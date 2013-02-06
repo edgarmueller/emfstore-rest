@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.server.core.internal.helper.ResourceHelper;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
@@ -136,9 +136,9 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * @param method the method to invoke
 	 * @param args parameters
 	 * @return result of the operation
-	 * @throws EmfStoreException thrown if operation could not be executed properly
+	 * @throws EMFStoreException thrown if operation could not be executed properly
 	 */
-	public Object execute(Method method, Object[] args) throws EmfStoreException {
+	public Object execute(Method method, Object[] args) throws EMFStoreException {
 		try {
 			if (method.getParameterTypes()[0] == SessionId.class) {
 				return method.invoke(this, args);
@@ -148,16 +148,16 @@ public abstract class AbstractSubEmfstoreInterface {
 			return method.invoke(this, argsWoSessionId);
 		} catch (IllegalArgumentException e) {
 			ModelUtil.logWarning("this must not happen, bad parameters", e);
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (IllegalAccessException e) {
 			ModelUtil.logWarning("this must not happen, method is not accessible", e);
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (InvocationTargetException e) {
 			ModelUtil.logWarning("exception on execution", e);
-			if (e.getTargetException() instanceof EmfStoreException) {
-				throw (EmfStoreException) e.getTargetException();
+			if (e.getTargetException() instanceof EMFStoreException) {
+				throw (EMFStoreException) e.getTargetException();
 			}
-			throw new EmfStoreException(e.getTargetException());
+			throw new EMFStoreException(e.getTargetException());
 		}
 	}
 

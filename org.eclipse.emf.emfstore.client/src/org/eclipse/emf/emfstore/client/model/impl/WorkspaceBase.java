@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
@@ -106,10 +106,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(IServer serverInfo, final IProjectId projectId) throws EmfStoreException {
+	public List<IBranchInfo> getBranches(IServer serverInfo, final IProjectId projectId) throws EMFStoreException {
 		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
-			protected List<IBranchInfo> run() throws EmfStoreException {
+			protected List<IBranchInfo> run() throws EMFStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 				return (List<IBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
 			};
@@ -117,7 +117,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	public ProjectInfo createEmptyRemoteProject(final IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		final Usersession session = (Usersession) usersession;
@@ -128,7 +128,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 
 		new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
 			@Override
-			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
+			public ProjectInfo run(IProgressMonitor monitor) throws EMFStoreException {
 				return connectionManager.createEmptyProject(session.getSessionId(), projectName, projectDescription,
 					log);
 			}
@@ -170,10 +170,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(IServer serverInfo, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((ServerInfo) serverInfo) {
 			@Override
-			protected ProjectInfo run() throws EmfStoreException {
+			protected ProjectInfo run() throws EMFStoreException {
 				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
@@ -187,10 +187,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((Usersession) usersession) {
 			@Override
-			protected ProjectInfo run() throws EmfStoreException {
+			protected ProjectInfo run() throws EMFStoreException {
 				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
@@ -199,12 +199,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#deleteProjectSpace(org.eclipse.emf.emfstore.client.model.ProjectSpace)
 	 */
 	// TODO: OTS: move to ProjectSpaceBase
-	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, EmfStoreException {
+	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, EMFStoreException {
 
 		assert (projectSpace != null);
 
@@ -275,10 +275,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
-	public void updateACUser(ServerInfo serverInfo) throws EmfStoreException {
+	public void updateACUser(ServerInfo serverInfo) throws EMFStoreException {
 		new ServerCall<Void>(serverInfo) {
 			@Override
-			protected Void run() throws EmfStoreException {
+			protected Void run() throws EMFStoreException {
 				getUsersession().setACUser(getConnectionManager().resolveUser(getSessionId(), null));
 				return null;
 			}
@@ -291,10 +291,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void updateACUser(Usersession usersession) throws EmfStoreException {
+	public void updateACUser(Usersession usersession) throws EMFStoreException {
 		new ServerCall<Void>(usersession) {
 			@Override
-			protected Void run() throws EmfStoreException {
+			protected Void run() throws EMFStoreException {
 				getUsersession().setACUser(getConnectionManager().resolveUser(getSessionId(), null));
 				return null;
 			}
@@ -423,10 +423,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
 	public IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec,
-		final IProjectId projectId) throws EmfStoreException {
+		final IProjectId projectId) throws EMFStoreException {
 		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
-			protected PrimaryVersionSpec run() throws EmfStoreException {
+			protected PrimaryVersionSpec run() throws EMFStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) projectId,
 					(VersionSpec) versionSpec);
@@ -511,10 +511,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
-	public AdminBroker getAdminBroker(final ServerInfo serverInfo) throws EmfStoreException, AccessControlException {
+	public AdminBroker getAdminBroker(final ServerInfo serverInfo) throws EMFStoreException, AccessControlException {
 		return new ServerCall<AdminBroker>(serverInfo) {
 			@Override
-			protected AdminBroker run() throws EmfStoreException {
+			protected AdminBroker run() throws EMFStoreException {
 				return new AdminBrokerImpl(serverInfo, getSessionId());
 			}
 		}.execute();
@@ -526,10 +526,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public AdminBroker getAdminBroker(final Usersession usersession) throws EmfStoreException, AccessControlException {
+	public AdminBroker getAdminBroker(final Usersession usersession) throws EMFStoreException, AccessControlException {
 		return new ServerCall<AdminBroker>(usersession) {
 			@Override
-			protected AdminBroker run() throws EmfStoreException {
+			protected AdminBroker run() throws EMFStoreException {
 				return new AdminBrokerImpl(usersession.getServerInfo(), getSessionId());
 			}
 		}.execute();

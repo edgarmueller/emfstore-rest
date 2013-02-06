@@ -15,7 +15,7 @@ import static org.eclipse.emf.emfstore.client.test.server.api.HistoryAPITests.ve
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -24,63 +24,63 @@ import org.junit.Test;
 public class VersionSpecTests extends CoreServerTest {
 
 	@Test
-	public void resolvePrimary() throws EmfStoreException {
+	public void resolvePrimary() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(versions[5]));
 	}
 
 	@Test
-	public void resolveNearestPrimary() throws EmfStoreException {
+	public void resolveNearestPrimary() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createPRIMARY("b2", 6)));
 	}
 
 	@Test
-	public void resolvePrimaryGlobal() throws EmfStoreException {
+	public void resolvePrimaryGlobal() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createPRIMARY(VersionSpec.GLOBAL, 5)));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolvePrimaryInvalid() throws EmfStoreException {
+	public void resolvePrimaryInvalid() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createPRIMARY("foo", 5));
 	}
 
 	@Test
-	public void resolveLocalHead() throws EmfStoreException {
+	public void resolveLocalHead() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createHEAD("b2")));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolveIllegalHead() throws EmfStoreException {
+	public void resolveIllegalHead() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createHEAD("foobar"));
 	}
 
 	@Test
-	public void resolveGlobalHead() throws EmfStoreException {
+	public void resolveGlobalHead() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[7], history.resolveVersionSpec(Versions.createHEAD(VersionSpec.GLOBAL)));
 	}
 
 	@Test
-	public void resolveBranch() throws EmfStoreException {
+	public void resolveBranch() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createBRANCH("b2")));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolveIllegalBranch() throws EmfStoreException {
+	public void resolveIllegalBranch() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createBRANCH("foobar"));

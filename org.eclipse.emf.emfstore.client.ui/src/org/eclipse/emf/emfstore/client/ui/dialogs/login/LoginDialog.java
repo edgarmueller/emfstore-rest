@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -228,7 +228,7 @@ public class LoginDialog extends TitleAreaDialog {
 				candidate.setPassword(password);
 			}
 			controller.validate(candidate);
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			setErrorMessage(e.getMessage());
 			return;
 		}

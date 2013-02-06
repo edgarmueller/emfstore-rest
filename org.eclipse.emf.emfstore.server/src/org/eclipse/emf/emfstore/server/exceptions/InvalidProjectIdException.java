@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class InvalidProjectIdException extends EmfStoreException {
+public class InvalidProjectIdException extends EMFStoreException {
 
 	/**
 	 * Default constructor.

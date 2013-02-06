@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.server;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -36,36 +36,36 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @return list of project infos
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EmfStoreException;
+	List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EMFStoreException;
 
 	/**
 	 * Returns all groups on the server.
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @return list of groups
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ACGroup> getGroups(SessionId sessionId) throws EmfStoreException;
+	List<ACGroup> getGroups(SessionId sessionId) throws EMFStoreException;
 
 	/**
 	 * Returns all users on the server.
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @return list of user
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ACUser> getUsers(SessionId sessionId) throws EmfStoreException;
+	List<ACUser> getUsers(SessionId sessionId) throws EMFStoreException;
 
 	/**
 	 * Returns all orgUnits on the server.
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @return list of orgUnits
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EmfStoreException;
+	List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EMFStoreException;
 
 	/**
 	 * Returns an orgUnit with the specified orgUnitId.
@@ -73,9 +73,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param orgUnitId the orgUnitId
 	 * @param sessionId the session id for authentication
 	 * @return an orgUnit
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EmfStoreException;
+	ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EMFStoreException;
 
 	/**
 	 * Creates a group on the server.
@@ -83,18 +83,18 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param name the name for the group
 	 * @return ACOrgUnitId
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	ACOrgUnitId createGroup(SessionId sessionId, String name) throws EmfStoreException;
+	ACOrgUnitId createGroup(SessionId sessionId, String name) throws EMFStoreException;
 
 	/**
 	 * Deletes a group on the server.
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @param group orgUnitId of the group
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EmfStoreException;
+	void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EMFStoreException;
 
 	/**
 	 * Returns a list of all groups in which the specified user is member of.
@@ -102,9 +102,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param user the users orgUnitId
 	 * @return a list of groups
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws EmfStoreException;
+	List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException;
 
 	/**
 	 * Removes a user from a group.
@@ -112,9 +112,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param user the user's orgUnitId
 	 * @param group the group's orgUnitId
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EmfStoreException;
+	void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException;
 
 	/**
 	 * Returns all members from a group.
@@ -122,9 +122,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param groupId the group's orgUnitId
 	 * @return a list of orgUnits
-	 * @throws EmfStoreException if any error in the EmfStore occurs.
+	 * @throws EMFStoreException if any error in the EmfStore occurs.
 	 */
-	List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EmfStoreException;
+	List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EMFStoreException;
 
 	/**
 	 * Adds an orgUnit to a group.
@@ -132,9 +132,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param group the group's orgUnitId
 	 * @param member the members orgUnitId
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException;
+	void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
 
 	/**
 	 * Removes a orgUnit from a group.
@@ -142,9 +142,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param group the group's orgUnitId
 	 * @param member the members orgUnitId
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException;
+	void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
 
 	/**
 	 * Creates a user on the server.
@@ -152,18 +152,18 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param name the user's name
 	 * @return ACOrgUnitId
-	 * @throws EmfStoreException if any in the EmfStore occurs
+	 * @throws EMFStoreException if any in the EmfStore occurs
 	 */
-	ACOrgUnitId createUser(SessionId sessionId, String name) throws EmfStoreException;
+	ACOrgUnitId createUser(SessionId sessionId, String name) throws EMFStoreException;
 
 	/**
 	 * Deletes a user from the server.
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @param user the user's orgUnitId
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EmfStoreException;
+	void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException;
 
 	/**
 	 * Changes the orgUnit's name and description.
@@ -172,10 +172,10 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param orgUnitId the orgUnitId
 	 * @param name the new name
 	 * @param description the new description
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
 	void changeOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId, String name, String description)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Returns all orgUnits which are attached to the given project.
@@ -183,9 +183,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param projectId project's id
 	 * @return a list of orgUnits
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EmfStoreException;
+	List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EMFStoreException;
 
 	/**
 	 * Adds an orgUnit to a project.
@@ -193,9 +193,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param projectId the project's id
 	 * @param participant the orgUnit's id
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant) throws EmfStoreException;
+	void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
 
 	/**
 	 * Removes an orgUnits from a project.
@@ -203,9 +203,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param sessionId the session id for authentication
 	 * @param projectId the project's id
 	 * @param participant the orgUnit's id
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant) throws EmfStoreException;
+	void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
 
 	/**
 	 * Returns an orgUnit's role for a specified project.
@@ -214,9 +214,9 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param projectId the project's id
 	 * @param orgUnit the orgUnit's id
 	 * @return a role the user's role
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws EmfStoreException;
+	Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException;
 
 	/**
 	 * Changes the role for an orgUnit in a specified project.
@@ -225,8 +225,8 @@ public interface AdminEmfStore extends EmfStoreInterface {
 	 * @param projectId the project's id
 	 * @param orgUnit the orgUnit
 	 * @param role new role for orgUnit
-	 * @throws EmfStoreException if any error in the EmfStore occurs.
+	 * @throws EMFStoreException if any error in the EmfStore occurs.
 	 */
 	void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit, EClass role)
-		throws EmfStoreException;
+		throws EMFStoreException;
 }

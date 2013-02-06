@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
@@ -552,7 +552,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @see org.eclipse.emf.emfstore.client.model.Usersession#logIn()
 	 * @generated NOT
 	 */
-	public void logIn() throws EmfStoreException, AccessControlException {
+	public void logIn() throws EMFStoreException, AccessControlException {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
@@ -580,7 +580,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void logout() throws EmfStoreException {
+	public void logout() throws EMFStoreException {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);

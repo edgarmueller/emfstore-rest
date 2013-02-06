@@ -19,7 +19,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @generated NOT
  */
 @SuppressWarnings("serial")
-public class EmfStoreException extends Exception {
+public class EMFStoreException extends Exception {
 
 	/**
 	 * Constructor.
@@ -28,7 +28,7 @@ public class EmfStoreException extends Exception {
 	 * @param cause the causing exception
 	 * @generated NOT
 	 */
-	public EmfStoreException(String message, Throwable cause) {
+	public EMFStoreException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -38,7 +38,7 @@ public class EmfStoreException extends Exception {
 	 * @param message the message
 	 * @generated NOT
 	 */
-	public EmfStoreException(String message) {
+	public EMFStoreException(String message) {
 		super(message);
 	}
 
@@ -47,7 +47,7 @@ public class EmfStoreException extends Exception {
 	 * 
 	 * @param cause the causing exception
 	 */
-	public EmfStoreException(Throwable cause) {
+	public EMFStoreException(Throwable cause) {
 		super(cause);
 	}
 }

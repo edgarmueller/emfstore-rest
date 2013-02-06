@@ -20,7 +20,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * This class provides a way to indicate the progress of a command without knowing
@@ -61,10 +61,10 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 	 * Executes the command.
 	 * 
 	 * @return the return value as determined by the run method
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the command throws an exception
 	 */
-	public T execute() throws EmfStoreException {
+	public T execute() throws EMFStoreException {
 
 		double factor = 1.05;
 		Future<T> future = SingletonHolder.EXECUTOR.submit(new Callable<T>() {
@@ -83,10 +83,10 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 				resultReceived = true;
 			} catch (InterruptedException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
-				throw new EmfStoreException("Workload command got interrupted", e);
+				throw new EMFStoreException("Workload command got interrupted", e);
 			} catch (ExecutionException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
-				throw new EmfStoreException(e.getCause().getMessage());
+				throw new EMFStoreException(e.getCause().getMessage());
 			} catch (TimeoutException e) {
 				// do nothing
 			}
@@ -114,8 +114,8 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 	 * @param monitor
 	 *            a progress monitor that is used to indicate
 	 * @return an optional value of type <code>T</code>
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the command throws an exception
 	 */
-	public abstract T run(IProgressMonitor monitor) throws EmfStoreException;
+	public abstract T run(IProgressMonitor monitor) throws EMFStoreException;
 }

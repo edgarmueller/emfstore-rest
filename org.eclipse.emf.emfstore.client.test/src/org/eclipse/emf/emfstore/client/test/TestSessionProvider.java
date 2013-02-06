@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 public class TestSessionProvider extends AbstractSessionProvider {
 
@@ -38,7 +38,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public Usersession provideUsersession(ServerInfo serverInfo) throws EmfStoreException {
+	public Usersession provideUsersession(ServerInfo serverInfo) throws EMFStoreException {
 		if (serverInfo != null && serverInfo.getLastUsersession() != null) {
 			return serverInfo.getLastUsersession();
 		}
@@ -47,7 +47,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public void login(Usersession usersession) throws EmfStoreException {
+	public void login(Usersession usersession) throws EMFStoreException {
 		// do nothing
 	}
 

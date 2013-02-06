@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * Utility class for EMFStore clients to ease connecting to the server.
@@ -131,10 +131,10 @@ public final class EMFStoreClientUtil {
 	 * @param serverPort server port
 	 * @param certificateAlias the certificateAlias (defaults to {@link KeyStoreManager.DEFAULT_CERTIFICATE})
 	 * @return true, if user name & password are right
-	 * @throws EmfStoreException Problem with the EMFStore Server
+	 * @throws EMFStoreException Problem with the EMFStore Server
 	 */
 	public static boolean dryLogin(String username, String password, String serverUrl, int serverPort,
-		String certificateAlias) throws EmfStoreException {
+		String certificateAlias) throws EMFStoreException {
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(createServerInfo(serverUrl, serverPort, certificateAlias));
 		usersession.setUsername(username);

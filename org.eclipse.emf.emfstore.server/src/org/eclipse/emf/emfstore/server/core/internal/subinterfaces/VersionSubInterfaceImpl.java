@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
@@ -90,11 +90,11 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param versionSpec
 	 *            versionSpec
 	 * @return primary versionSpec
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if versionSpec can't be resolved or other failure
 	 */
 	@EmfStoreMethod(MethodId.RESOLVEVERSIONSPEC)
-	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec) throws EmfStoreException {
+	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec) throws EMFStoreException {
 		sanityCheckObjects(projectId, versionSpec);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
@@ -253,7 +253,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	@EmfStoreMethod(MethodId.CREATEVERSION)
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
-		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EmfStoreException {
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EMFStoreException {
 		ACUser user = getAuthorizationControl().resolveUser(sessionId);
 		sanityCheckObjects(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
 		synchronized (getMonitor()) {
@@ -350,7 +350,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			} catch (FatalEmfStoreException e) {
 				// roll back failed
 				EmfStoreController.getInstance().shutdown(e);
-				throw new EmfStoreException("Shutting down server.");
+				throw new EMFStoreException("Shutting down server.");
 			}
 
 			ModelUtil.logInfo("Total time for commit: " + (System.currentTimeMillis() - currentTimeMillis));
@@ -373,7 +373,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private Version createVersion(ProjectHistory projectHistory, ChangePackage changePackage, LogMessage logMessage,
-		ACUser user, Version previousVersion) throws EmfStoreException {
+		ACUser user, Version previousVersion) throws EMFStoreException {
 		Version newVersion = VersioningFactory.eINSTANCE.createVersion();
 
 		// copy project and apply changes
@@ -390,7 +390,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			}
 		} catch (SerializationException exception) {
 			// TODO: clarify what to do in case checksum computation fails + provide ext. point
-			throw new EmfStoreException(MessageFormat.format("Could not compute checksum of project {0}.",
+			throw new EMFStoreException(MessageFormat.format("Could not compute checksum of project {0}.",
 				projectHistory.getProjectName()), exception);
 		}
 
@@ -444,7 +444,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.GETBRANCHES)
-	public List<BranchInfo> getBranches(ProjectId projectId) throws EmfStoreException {
+	public List<BranchInfo> getBranches(ProjectId projectId) throws EMFStoreException {
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 			ArrayList<BranchInfo> result = new ArrayList<BranchInfo>();
@@ -490,7 +490,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	@EmfStoreMethod(MethodId.GETCHANGES)
 	public List<ChangePackage> getChanges(ProjectId projectId, VersionSpec source, VersionSpec target)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		sanityCheckObjects(projectId, source, target);
 		synchronized (getMonitor()) {
 			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);
@@ -553,10 +553,10 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param versionSpec
 	 *            versionSpec
 	 * @return the version
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if version couldn't be found
 	 */
-	protected Version getVersion(ProjectId projectId, PrimaryVersionSpec versionSpec) throws EmfStoreException {
+	protected Version getVersion(ProjectId projectId, PrimaryVersionSpec versionSpec) throws EMFStoreException {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		return getVersion(project, versionSpec);
 	}
@@ -573,12 +573,12 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param target
 	 *            target
 	 * @return list of versions
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if source or target are out of range or any other problem
 	 *             occurs
 	 */
 	protected List<Version> getVersions(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (source.compareTo(target) < 1) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 

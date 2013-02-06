@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -139,7 +139,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void updateFromBranch() throws InvalidVersionSpecException, EmfStoreException {
+	public void updateFromBranch() throws InvalidVersionSpecException, EMFStoreException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);
@@ -174,7 +174,7 @@ public class BranchTests extends CoreServerTest {
 			protected void doRun() {
 				try {
 					ps.update();
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -184,7 +184,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void tagBranch() throws EmfStoreException {
+	public void tagBranch() throws EMFStoreException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);
@@ -213,7 +213,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void untagBranch() throws EmfStoreException {
+	public void untagBranch() throws EMFStoreException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);

@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
@@ -37,7 +37,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-			throws EmfStoreException {
+			throws EMFStoreException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
 			return true;
 		}
@@ -51,7 +51,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-			throws EmfStoreException {
+			throws EMFStoreException {
 			return false;
 		}
 	},
@@ -66,11 +66,11 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec,
-			IProgressMonitor monitor) throws EmfStoreException {
+			IProgressMonitor monitor) throws EMFStoreException {
 
 			Project project = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
 				@Override
-				public Project run(IProgressMonitor monitor) throws EmfStoreException {
+				public Project run(IProgressMonitor monitor) throws EMFStoreException {
 					return WorkspaceProvider
 						.getInstance()
 						.getConnectionManager()
@@ -81,7 +81,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 			}.execute();
 
 			if (project == null) {
-				throw new EmfStoreException("Server returned a null project!");
+				throw new EMFStoreException("Server returned a null project!");
 			}
 
 			projectSpace.setProject(project);

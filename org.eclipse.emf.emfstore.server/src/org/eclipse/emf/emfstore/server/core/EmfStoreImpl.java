@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.ProjectProper
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.ProjectSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.UserSubInterfaceImpl;
 import org.eclipse.emf.emfstore.server.core.internal.subinterfaces.VersionSubInterfaceImpl;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ServerSpace;
 
@@ -119,7 +119,7 @@ public class EmfStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * 
 	 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
 	 */
-	public Object invoke(Object obj, Method method, Object[] args) throws EmfStoreException {
+	public Object invoke(Object obj, Method method, Object[] args) throws EMFStoreException {
 		MethodInvocation methodInvocation = new MethodInvocation(method.getName(), args);
 
 		getAuthorizationControl().checkAccess(methodInvocation);

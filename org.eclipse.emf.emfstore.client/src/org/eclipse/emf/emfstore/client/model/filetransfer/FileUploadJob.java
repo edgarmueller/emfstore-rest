@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.filetransfer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
@@ -56,7 +56,7 @@ public class FileUploadJob extends FileTransferJob {
 			if (!executeTransfer(monitor)) {
 				return Status.CANCEL_STATUS;
 			}
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			setException(e);
 			monitor.setCanceled(true);
 			monitor.done();
@@ -70,9 +70,9 @@ public class FileUploadJob extends FileTransferJob {
 	 * 
 	 * @param fileChunk file chunk
 	 * @param monitor showing the progress of the transfer.
-	 * @throws EmfStoreException if any error occurs in the emf store
+	 * @throws EMFStoreException if any error occurs in the emf store
 	 */
-	private boolean executeTransfer(IProgressMonitor monitor) throws EmfStoreException {
+	private boolean executeTransfer(IProgressMonitor monitor) throws EMFStoreException {
 		FileChunk fileChunk;
 		initializeMonitor(monitor);
 		long transmitted = 0;

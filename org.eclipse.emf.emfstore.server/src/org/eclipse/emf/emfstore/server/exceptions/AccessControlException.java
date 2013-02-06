@@ -17,7 +17,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class AccessControlException extends EmfStoreException {
+public class AccessControlException extends EMFStoreException {
 
 	/**
 	 * Constructor.

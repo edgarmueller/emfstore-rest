@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.connection;
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.EmfStoreInterface;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 
 /**
@@ -35,9 +35,9 @@ public interface ConnectionHandler<T extends EmfStoreInterface> {
 	 * @param emfStore an implementation of a server interface.
 	 * @param accessControl an implementation of the {@link AuthenticationControl}
 	 * @throws FatalEmfStoreException is thrown if the server can't initialize
-	 * @throws EmfStoreException exception within the server
+	 * @throws EMFStoreException exception within the server
 	 */
-	void init(T emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException, EmfStoreException;
+	void init(T emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException, EMFStoreException;
 
 	/**
 	 * Stop the handler.

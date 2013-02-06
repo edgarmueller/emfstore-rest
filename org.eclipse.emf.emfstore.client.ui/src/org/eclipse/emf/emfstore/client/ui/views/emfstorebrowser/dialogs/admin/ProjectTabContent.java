@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -98,7 +98,7 @@ public class ProjectTabContent extends TabContent {
 				List<ProjectInfo> projectInfos = new ArrayList<ProjectInfo>();
 				try {
 					projectInfos.addAll(getAdminBroker().getProjectInfos());
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				return projectInfos.toArray(new ProjectInfo[projectInfos.size()]);

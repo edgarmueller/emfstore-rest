@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -57,7 +57,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
 
 		// TODO: controller currently does not work if the active workbench window is not
 		// the history view
@@ -97,7 +97,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 				TagVersionSpec tag = (TagVersionSpec) o;
 				try {
 					projectSpace.removeTag(historyInfo.getPrimerySpec(), tag);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					MessageDialog.openError(getShell(), "Remove tag failed", "Remove tag failed: " + e.getMessage());
 				}
 			}

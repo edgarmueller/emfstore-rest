@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -53,7 +53,7 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 		try {
 			// TODO OTS
 			final AdminBroker adminBroker = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
@@ -64,7 +64,7 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 			dialog.open();
 		} catch (final AccessControlException e) {
 			MessageDialog.openError(getShell(), "Access denied ", e.getMessage());
-		} catch (final EmfStoreException e) {
+		} catch (final EMFStoreException e) {
 			MessageDialog.openError(getShell(), "Error while retrieving the admin broker", e.getMessage());
 		}
 

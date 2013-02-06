@@ -15,13 +15,14 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Display;
 
@@ -43,7 +44,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
 	@Override
-	public IUsersession provideUsersession(IServer server) throws EmfStoreException {
+	public IUsersession provideUsersession(IServer server) throws EMFStoreException {
 		if (server == null) {
 			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
@@ -76,21 +77,21 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * 
 	 * @param serverInfo given serverInfo
 	 * @return Usersession
-	 * @throws EmfStoreException in case of an exception
+	 * @throws EMFStoreException in case of an exception
 	 */
-	protected IUsersession loginServerInfo(IServer server) throws EmfStoreException {
+	protected IUsersession loginServerInfo(IServer server) throws EMFStoreException {
 		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
-		if (server.getLastUsersession() != null && server.getLastUsersession().isLoggedIn()) {
+		if (server.getLastUsersession() != null && ((Usersession) server.getLastUsersession()).isLoggedIn()) {
 			return server.getLastUsersession();
 		}
-		return new LoginDialogController().login(server);
+		return new LoginDialogController().login((ServerInfo) server);
 	}
 
 	@Override
-	public void login(IUsersession usersession) throws EmfStoreException {
+	public void login(IUsersession usersession) throws EMFStoreException {
 		if (usersession != null) {
-			new LoginDialogController().login(usersession);
+			new LoginDialogController().login((Usersession) usersession);
 		}
 	}
 }

@@ -52,7 +52,7 @@ import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.server.EmfStoreController;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -202,9 +202,9 @@ public class SetupHelper {
 	 * 
 	 * @param username the username
 	 * @return the user`s org unit id
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
-	public static ACOrgUnitId createUserOnServer(String username) throws EmfStoreException {
+	public static ACOrgUnitId createUserOnServer(String username) throws EMFStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
@@ -215,9 +215,9 @@ public class SetupHelper {
 	 * Delete a user from the server.
 	 * 
 	 * @param userId the users id
-	 * @throws EmfStoreException if deletion fails
+	 * @throws EMFStoreException if deletion fails
 	 */
-	public static void deleteUserOnServer(ACOrgUnitId userId) throws EmfStoreException {
+	public static void deleteUserOnServer(ACOrgUnitId userId) throws EMFStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
@@ -230,9 +230,9 @@ public class SetupHelper {
 	 * @param orgUnitId orgunitid
 	 * @param role role
 	 * @param projectId projectid, can be null, if role is serveradmin
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
-	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws EmfStoreException {
+	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws EMFStoreException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(getServerInfo(), sessionId);
@@ -304,7 +304,7 @@ public class SetupHelper {
 				usersession.logIn();
 			} catch (AccessControlException e) {
 				e.printStackTrace();
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				e.printStackTrace();
 			}
 		}
@@ -562,7 +562,7 @@ public class SetupHelper {
 
 					getTestProjectSpace().shareProject(usersession, new NullProgressMonitor());
 					LOGGER.log(Level.INFO, "project shared.");
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}
 				projectId = testProjectSpace.getProjectId();
@@ -585,7 +585,7 @@ public class SetupHelper {
 				try {
 					getTestProjectSpace().commit(logMessage, null, new NullProgressMonitor());
 					System.out.println("commit successful!");
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}
 
@@ -614,9 +614,9 @@ public class SetupHelper {
 	 * changes. We check out and return it.
 	 * 
 	 * @return project lying on the server
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 */
-	public Project getCompareProject() throws EmfStoreException {
+	public Project getCompareProject() throws EMFStoreException {
 		LOGGER.log(Level.INFO, "retrieving compare project...");
 		final ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
 			.createProjectInfo();
@@ -633,7 +633,7 @@ public class SetupHelper {
 					compareProject = ((ProjectSpace) new RemoteProject(projectInfo)
 						.checkout(usersession)).getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}
 

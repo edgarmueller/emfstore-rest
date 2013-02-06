@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -125,7 +125,7 @@ public abstract class AbstractEMFStoreUIController<T> extends MonitoredEMFStoreA
 	}
 
 	@Override
-	protected void handleException(final EmfStoreException e) {
+	protected void handleException(final EMFStoreException e) {
 		WorkspaceUtil.logException(e.getMessage(), e);
 
 		if (isForked()) {

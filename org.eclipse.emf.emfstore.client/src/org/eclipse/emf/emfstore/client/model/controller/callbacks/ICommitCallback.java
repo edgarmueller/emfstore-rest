@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -77,11 +77,11 @@ public interface ICommitCallback {
 	 * 
 	 * @return whether the commit should be continued, true, if so, false otherwise
 	 * 
-	 * @throws EmfStoreException in case any error occurs during the execution of the checksum error handler
+	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
 	boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Default implementation of a callback interface for commit. Does not veto

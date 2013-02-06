@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
@@ -49,9 +49,9 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @param serverCall current server call
 	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way.
-	 * @throws EmfStoreException in case of an exception
+	 * @throws EMFStoreException in case of an exception
 	 */
-	protected IUsersession provideUsersession(ServerCall<?> serverCall) throws EmfStoreException {
+	protected IUsersession provideUsersession(ServerCall<?> serverCall) throws EMFStoreException {
 		IUsersession usersession = serverCall.getUsersession();
 		if (usersession == null) {
 			usersession = getUsersessionFromProjectSpace(serverCall.getLocalProject());
@@ -87,16 +87,16 @@ public abstract class AbstractSessionProvider {
 	 *            example is share, where the user first has to select the server before logging in. If {@link Server}
 	 *            is set you should allow the user to select the account for the given server.
 	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way
-	 * @throws EmfStoreException in case of an exception
+	 * @throws EMFStoreException in case of an exception
 	 */
-	public abstract IUsersession provideUsersession(IServer server) throws EmfStoreException;
+	public abstract IUsersession provideUsersession(IServer server) throws EMFStoreException;
 
 	/**
 	 * This method is called by the {@link SessionManager} in order to login a given usersession. Either you are able to
 	 * login the given session or should throw an exception.
 	 * 
 	 * @param usersession session to be logged in.
-	 * @throws EmfStoreException in case of an exception
+	 * @throws EMFStoreException in case of an exception
 	 */
-	public abstract void login(IUsersession usersession) throws EmfStoreException;
+	public abstract void login(IUsersession usersession) throws EMFStoreException;
 }

@@ -17,7 +17,7 @@ import java.rmi.RemoteException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
@@ -62,7 +62,7 @@ public class FileDownloadJob extends FileTransferJob {
 			if (!executeTransfer(monitor)) {
 				return Status.CANCEL_STATUS;
 			}
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			return registerException(e);
 		} catch (IOException e) {
 			return registerException(e);
@@ -89,10 +89,10 @@ public class FileDownloadJob extends FileTransferJob {
 	/**
 	 * . {@inheritDoc}
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 * @throws RemoteException
 	 */
-	private boolean executeTransfer(IProgressMonitor monitor) throws RemoteException, EmfStoreException {
+	private boolean executeTransfer(IProgressMonitor monitor) throws RemoteException, EMFStoreException {
 
 		// download file chunk to retrieve filesize (file chunk is discarded)
 		FileChunk fileChunk = null;

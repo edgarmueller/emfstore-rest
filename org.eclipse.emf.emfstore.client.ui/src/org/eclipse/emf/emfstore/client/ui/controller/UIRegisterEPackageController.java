@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.epackages.EPackageRegistryHelper;
 import org.eclipse.emf.emfstore.client.ui.epackages.EPackageTreeSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -49,9 +49,9 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 	 * Register a new EPackage which can be selected with a SelectionDialog.
 	 * 
 	 * @param serverInfo server info
-	 * @throws EmfStoreException if any error in the EmfStore occurs
+	 * @throws EMFStoreException if any error in the EmfStore occurs
 	 */
-	public void registerEPackage(ServerInfo serverInfo) throws EmfStoreException {
+	public void registerEPackage(ServerInfo serverInfo) throws EMFStoreException {
 		EPackageTreeSelectionDialog dialog = new EPackageTreeSelectionDialog(
 			EPackageRegistryHelper.getAvailablePackages(true));
 		dialog.open();
@@ -59,7 +59,7 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 		if (pkg != null) {
 			new ServerCall<Void>(serverInfo.getLastUsersession()) {
 				@Override
-				protected Void run() throws EmfStoreException {
+				protected Void run() throws EMFStoreException {
 					getConnectionManager().registerEPackage(getSessionId(), pkg);
 					return null;
 				}
@@ -71,7 +71,7 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 	public Void doRun(IProgressMonitor monitor) {
 		try {
 			this.registerEPackage(serverInfo);
-		} catch (final EmfStoreException e) {
+		} catch (final EMFStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 
 				public Void call() throws Exception {

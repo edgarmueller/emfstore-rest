@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.TestProjectEnum;
 import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -93,9 +93,9 @@ public abstract class OperationsReversibilityTest {
 	 * changes.
 	 * 
 	 * @return project lying on the server
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 */
-	public Project getCompareProject() throws EmfStoreException {
+	public Project getCompareProject() throws EMFStoreException {
 		return setupHelper.getCompareProject();
 
 	}

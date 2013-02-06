@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import org.junit.Test;
 public class SampleAPITest extends CoreServerTest {
 
 	@Test
-	public void createProject() throws EmfStoreException {
+	public void createProject() throws EMFStoreException {
 		final ProjectSpace ps = getProjectSpace();
 
 		new EMFStoreCommand() {
@@ -32,7 +32,7 @@ public class SampleAPITest extends CoreServerTest {
 				ps.getProject().addModelElement(createTestElement("Horst"));
 				try {
 					ps.shareProject();
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -61,7 +61,7 @@ public class SampleAPITest extends CoreServerTest {
 					testElement.setName("2");
 					getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null, null, null);
 
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 				}
 			}
 		}.run(false);

@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
@@ -60,7 +60,7 @@ public class ConnectionMock implements ConnectionManager {
 	}
 
 	public AuthenticationInformation logIn(String username, String password, ServerInfo severInfo,
-		ClientVersionInfo clientVersionInfo) throws EmfStoreException {
+		ClientVersionInfo clientVersionInfo) throws EMFStoreException {
 		AuthenticationInformation information = ModelFactory.eINSTANCE.createAuthenticationInformation();
 		SessionId sessionId = ModelFactory.eINSTANCE.createSessionId();
 		sessions.add(sessionId);
@@ -68,7 +68,7 @@ public class ConnectionMock implements ConnectionManager {
 		return information;
 	}
 
-	public void logout(SessionId sessionId) throws EmfStoreException {
+	public void logout(SessionId sessionId) throws EMFStoreException {
 		sessions.remove(sessionId);
 	}
 
@@ -76,18 +76,18 @@ public class ConnectionMock implements ConnectionManager {
 		return sessions.contains(id);
 	}
 
-	public void checkSessionId(SessionId sessionId) throws EmfStoreException {
+	public void checkSessionId(SessionId sessionId) throws EMFStoreException {
 		if (!isLoggedIn(sessionId))
 			throw new AccessControlException();
 	}
 
-	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EmfStoreException {
+	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getProjectList(ModelUtil.clone(sessionId)));
 	}
 
 	public Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getProject(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
 			ModelUtil.clone(versionSpec)));
@@ -95,7 +95,7 @@ public class ConnectionMock implements ConnectionManager {
 
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
-		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EmfStoreException, InvalidVersionSpecException {
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EMFStoreException, InvalidVersionSpecException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.createVersion(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
 			ModelUtil.clone(baseVersionSpec), ModelUtil.clone(changePackage), ModelUtil.clone(targetBranch),
@@ -103,114 +103,114 @@ public class ConnectionMock implements ConnectionManager {
 	}
 
 	public PrimaryVersionSpec resolveVersionSpec(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.resolveVersionSpec(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
 			ModelUtil.clone(versionSpec)));
 	}
 
 	public List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source,
-		VersionSpec target) throws EmfStoreException {
+		VersionSpec target) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getChanges(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
 			ModelUtil.clone(source), ModelUtil.clone(target)));
 	}
 
-	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getBranches(ModelUtil.clone(sessionId), ModelUtil.clone(projectId)));
 	}
 
 	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getHistoryInfo(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
 			ModelUtil.clone(historyQuery)));
 	}
 
 	public void addTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		emfStore.addTag(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), ModelUtil.clone(versionSpec),
 			ModelUtil.clone(tag));
 	}
 
 	public void removeTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		emfStore.removeTag(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), ModelUtil.clone(versionSpec),
 			ModelUtil.clone(tag));
 	}
 
 	public ProjectInfo createEmptyProject(SessionId sessionId, String name, String description, LogMessage logMessage)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return emfStore.createEmptyProject(ModelUtil.clone(sessionId), name, description, ModelUtil.clone(logMessage));
 	}
 
 	public ProjectInfo createProject(SessionId sessionId, String name, String description, LogMessage logMessage,
-		Project project) throws EmfStoreException {
+		Project project) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return emfStore.createProject(ModelUtil.clone(sessionId), name, description, ModelUtil.clone(logMessage),
 			ModelUtil.clone(project));
 	}
 
-	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EmfStoreException {
+	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EMFStoreException {
 		checkSessionId(sessionId);
 		emfStore.deleteProject(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), deleteFiles);
 	}
 
-	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EmfStoreException {
+	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.resolveUser(ModelUtil.clone(sessionId), ModelUtil.clone(id)));
 	}
 
 	public ProjectId importProjectHistoryToServer(SessionId sessionId, ProjectHistory projectHistory)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.importProjectHistoryToServer(ModelUtil.clone(sessionId),
 			ModelUtil.clone(projectHistory)));
 	}
 
 	public ProjectHistory exportProjectHistoryFromServer(SessionId sessionId, ProjectId projectId)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.exportProjectHistoryFromServer(ModelUtil.clone(sessionId),
 			ModelUtil.clone(projectId)));
 	}
 
 	public FileTransferInformation uploadFileChunk(SessionId sessionId, ProjectId projectId, FileChunk fileChunk)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return emfStore.uploadFileChunk(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), fileChunk);
 	}
 
 	public FileChunk downloadFileChunk(SessionId sessionId, ProjectId projectId, FileTransferInformation fileInformation)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		return emfStore.downloadFileChunk(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), fileInformation);
 	}
 
 	public void transmitProperty(SessionId sessionId, OrgUnitProperty changedProperty, ACUser user, ProjectId projectId)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		checkSessionId(sessionId);
 		emfStore.transmitProperty(ModelUtil.clone(sessionId), ModelUtil.clone(changedProperty), ModelUtil.clone(user),
 			ModelUtil.clone(projectId));
 	}
 
 	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> property,
-		ProjectId projectId) throws EmfStoreException {
+		ProjectId projectId) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.setEMFProperties(ModelUtil.clone(sessionId), ModelUtil.clone(property),
 			ModelUtil.clone(projectId)));
 	}
 
-	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getEMFProperties(ModelUtil.clone(sessionId), ModelUtil.clone(projectId)));
 	}
 
-	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException {
+	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {
 		checkSessionId(sessionId);
 		emfStore.registerEPackage(ModelUtil.clone(sessionId), ModelUtil.clone(pkg));
 	}

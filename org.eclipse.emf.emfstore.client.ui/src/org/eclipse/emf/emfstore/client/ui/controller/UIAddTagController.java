@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
@@ -74,7 +74,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
 
 		HistoryBrowserView historyBrowserView = getHistoryBrowserViewFromActivePart();
 
@@ -101,7 +101,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 
 			try {
 				projectSpace.addTag(versionSpec, tag);
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 				MessageDialog.openError(getShell(), "Error", "Could not create tag. Reason: " + e.getMessage());
 				return null;

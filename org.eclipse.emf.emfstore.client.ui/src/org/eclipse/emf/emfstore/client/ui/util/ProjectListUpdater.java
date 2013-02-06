@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * This class is responsible for keeping the workspace's project infos update to date.
@@ -53,7 +53,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	public void loginCompleted(Usersession session) {
 		try {
 			update(session);
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't project infos upon loginCompleted.", e);
 		}
@@ -69,7 +69,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	public void shareDone(ProjectSpace projectSpace) {
 		try {
 			update(projectSpace.getUsersession());
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't project infos upon shareDone.", e);
 		}
@@ -78,13 +78,13 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	private void updateACUser(Usersession session) {
 		try {
 			workspace.updateACUser(session);
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't update ACUser.", e);
 		}
 	}
 
-	private void update(final Usersession session) throws EmfStoreException {
+	private void update(final Usersession session) throws EMFStoreException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				workspace.updateProjectInfos(session);

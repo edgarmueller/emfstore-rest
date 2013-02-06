@@ -17,7 +17,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  */
 // MK: move to workspace
 @SuppressWarnings("serial")
-public class BaseVersionOutdatedException extends EmfStoreException {
+public class BaseVersionOutdatedException extends EMFStoreException {
 
 	private static final String MESSAGE = "BaseVersion outdated, please update before commit.";
 

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
  * Basic implementation of {@link AbstractSessionProvider}. It's intended for when using EMFStore headless. The UI
@@ -31,8 +31,8 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
 	 */
 	@Override
-	public Usersession provideUsersession(IServer serverInfo) throws EmfStoreException {
-		throw new EmfStoreException("No usersession found.");
+	public Usersession provideUsersession(IServer serverInfo) throws EMFStoreException {
+		throw new EMFStoreException("No usersession found.");
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider#login(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
 	@Override
-	public void login(IUsersession usersession) throws EmfStoreException {
-		throw new EmfStoreException("Usersession not logged in. Login first.");
+	public void login(IUsersession usersession) throws EMFStoreException {
+		throw new EMFStoreException("Usersession not logged in. Login first.");
 	}
 }

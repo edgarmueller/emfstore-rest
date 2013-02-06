@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * 
  * @author Carl Pfeiffer
  */
-public class FileTransferException extends EmfStoreException {
+public class FileTransferException extends EMFStoreException {
 
 	private static final long serialVersionUID = 1L;
 

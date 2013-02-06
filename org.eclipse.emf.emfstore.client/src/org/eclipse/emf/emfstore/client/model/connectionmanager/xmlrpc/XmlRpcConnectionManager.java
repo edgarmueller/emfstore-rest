@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcConnectionHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
@@ -54,7 +54,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public AuthenticationInformation logIn(String username, String password, ServerInfo serverInfo,
-		ClientVersionInfo clientVersionInfo) throws EmfStoreException {
+		ClientVersionInfo clientVersionInfo) throws EMFStoreException {
 		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcConnectionHandler.EMFSTORE);
 		clientManager.initConnection(serverInfo);
 		AuthenticationInformation authenticationInformation = clientManager.callWithResult("logIn",
@@ -66,7 +66,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public void logout(SessionId sessionId) throws EmfStoreException {
+	public void logout(SessionId sessionId) throws EMFStoreException {
 		getConnectionProxy(sessionId).call("logout", sessionId);
 		removeConnectionProxy(sessionId);
 	}
@@ -75,7 +75,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public void addTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getConnectionProxy(sessionId).call("addTag", sessionId, projectId, versionSpec, tag);
 	}
 
@@ -83,7 +83,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public ProjectInfo createEmptyProject(SessionId sessionId, String name, String description, LogMessage logMessage)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("createEmptyProject", ProjectInfo.class, sessionId, name,
 			description, logMessage);
 	}
@@ -92,7 +92,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public ProjectInfo createProject(SessionId sessionId, String name, String description, LogMessage logMessage,
-		Project project) throws EmfStoreException {
+		Project project) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("createProject", ProjectInfo.class, sessionId, name,
 			description, logMessage, project);
 	}
@@ -102,7 +102,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 */
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
-		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EmfStoreException, InvalidVersionSpecException {
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EMFStoreException, InvalidVersionSpecException {
 		return getConnectionProxy(sessionId).callWithResult("createVersion", PrimaryVersionSpec.class, sessionId,
 			projectId, baseVersionSpec, changePackage, targetBranch, sourceVersion, logMessage);
 	}
@@ -110,7 +110,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EmfStoreException {
+	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EMFStoreException {
 		getConnectionProxy(sessionId).call("deleteProject", sessionId, projectId, deleteFiles);
 	}
 
@@ -118,7 +118,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public FileChunk downloadFileChunk(SessionId sessionId, ProjectId projectId, FileTransferInformation fileInformation)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("downloadFileChunk", FileChunk.class, sessionId, projectId,
 			fileInformation);
 	}
@@ -127,7 +127,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public ProjectHistory exportProjectHistoryFromServer(SessionId sessionId, ProjectId projectId)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("exportProjectHistoryFromServer", ProjectHistory.class,
 			sessionId, projectId);
 	}
@@ -136,7 +136,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source,
-		VersionSpec target) throws EmfStoreException {
+		VersionSpec target) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getChanges", ChangePackage.class, sessionId,
 			projectId, source, target);
 	}
@@ -148,7 +148,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * @see org.eclipse.emf.emfstore.server.EmfStore#getBranches(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
-	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getBranches", BranchInfo.class, sessionId, projectId);
 	}
 
@@ -156,7 +156,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getHistoryInfo", HistoryInfo.class, sessionId,
 			projectId, historyQuery);
 	}
@@ -165,7 +165,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("getProject", Project.class, sessionId, projectId,
 			versionSpec);
 	}
@@ -173,7 +173,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EmfStoreException {
+	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
 	}
 
@@ -181,7 +181,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public ProjectId importProjectHistoryToServer(SessionId sessionId, ProjectHistory projectHistory)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("importProjectHistoryToServer", ProjectId.class, sessionId,
 			projectHistory);
 	}
@@ -190,14 +190,14 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public void removeTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getConnectionProxy(sessionId).call("removeTag", sessionId, projectId, versionSpec, tag);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EmfStoreException {
+	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("resolveUser", ACUser.class, sessionId, id);
 	}
 
@@ -205,7 +205,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("resolveVersionSpec", PrimaryVersionSpec.class, sessionId,
 			projectId, versionSpec);
 	}
@@ -214,7 +214,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public void transmitProperty(SessionId sessionId, OrgUnitProperty changedProperty, ACUser tmpUser,
-		ProjectId projectId) throws EmfStoreException {
+		ProjectId projectId) throws EMFStoreException {
 		getConnectionProxy(sessionId).call("transmitProperty", sessionId, changedProperty, tmpUser, projectId);
 	}
 
@@ -222,7 +222,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public FileTransferInformation uploadFileChunk(SessionId sessionId, ProjectId projectId, FileChunk fileChunk)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithResult("uploadFileChunk", FileTransferInformation.class,
 			sessionId, projectId, fileChunk);
 	}
@@ -231,7 +231,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties,
-		ProjectId projectId) throws EmfStoreException {
+		ProjectId projectId) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("setEMFProperties", EMFStoreProperty.class, sessionId,
 			properties, projectId);
 	}
@@ -239,7 +239,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getEMFProperties", EMFStoreProperty.class, sessionId,
 			projectId);
 	}
@@ -260,7 +260,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * @see org.eclipse.emf.emfstore.server.EmfStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
-	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EmfStoreException {
+	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {
 		getConnectionProxy(sessionId).call("registerEPackage", sessionId, pkg);
 
 	}

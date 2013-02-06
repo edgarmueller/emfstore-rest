@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -52,13 +52,13 @@ public class ShareController extends ServerCall<Void> {
 	}
 
 	@Override
-	protected Void run() throws EmfStoreException {
+	protected Void run() throws EMFStoreException {
 		doRun();
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void doRun() throws EmfStoreException {
+	private void doRun() throws EMFStoreException {
 
 		getProgressMonitor().beginTask("Sharing Project", 100);
 		getProgressMonitor().worked(1);
@@ -85,7 +85,7 @@ public class ShareController extends ServerCall<Void> {
 
 		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
 			@Override
-			public ProjectInfo run(IProgressMonitor monitor) throws EmfStoreException {
+			public ProjectInfo run(IProgressMonitor monitor) throws EMFStoreException {
 				return WorkspaceProvider
 					.getInstance()
 					.getConnectionManager()

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.ui.common;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -41,22 +41,22 @@ public final class RunInUI {
 		 * @param callable
 		 *            the callable to be execued
 		 * @return the return value of the {@link Callable}
-		 * @throws EmfStoreException in case an error occurs during execution of the callable
+		 * @throws EMFStoreException in case an error occurs during execution of the callable
 		 * 
 		 * @param <T> the return type of the callable
 		 */
-		public static <T> T runWithResult(final Callable<T> callable) throws EmfStoreException {
+		public static <T> T runWithResult(final Callable<T> callable) throws EMFStoreException {
 			return runInUI.new RunInUIThreadWithResult<T>() {
 				@Override
-				public T doRun() throws EmfStoreException {
+				public T doRun() throws EMFStoreException {
 					try {
 						return callable.call();
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						throw e;
 						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
 						// END SUPRESS CATCH EXCEPTION
-						throw new EmfStoreException(e.getMessage(), e);
+						throw new EMFStoreException(e.getMessage(), e);
 					}
 				}
 			}.execute();
@@ -67,19 +67,19 @@ public final class RunInUI {
 		 * 
 		 * @param callable
 		 *            the callable to be execued
-		 * @throws EmfStoreException in case an error occurs during execution of the callable
+		 * @throws EMFStoreException in case an error occurs during execution of the callable
 		 */
-		public static void run(final Callable<Void> callable) throws EmfStoreException {
+		public static void run(final Callable<Void> callable) throws EMFStoreException {
 			runInUI.new RunInUIThread() {
 				@Override
-				public Void doRun() throws EmfStoreException {
+				public Void doRun() throws EMFStoreException {
 					try {
 						callable.call();
 						return null;
 						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
 						// END SUPRESS CATCH EXCEPTION
-						throw new EmfStoreException(e.getMessage());
+						throw new EMFStoreException(e.getMessage());
 					}
 				}
 			}.execute();
@@ -96,18 +96,18 @@ public final class RunInUI {
 		try {
 			runInUI.new RunInUIThread() {
 				@Override
-				public Void doRun() throws EmfStoreException {
+				public Void doRun() throws EMFStoreException {
 					try {
 						callable.call();
 						return null;
 						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
 						// END SUPRESS CATCH EXCEPTION
-						throw new EmfStoreException(e.getMessage());
+						throw new EMFStoreException(e.getMessage());
 					}
 				}
 			}.execute();
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			WorkspaceUtil.handleException(e);
 		}
 	}
@@ -125,17 +125,17 @@ public final class RunInUI {
 		try {
 			return runInUI.new RunInUIThreadWithResult<T>() {
 				@Override
-				public T doRun() throws EmfStoreException {
+				public T doRun() throws EMFStoreException {
 					try {
 						return callable.call();
 						// BEGIN SUPRESS CATCH EXCEPTION
 					} catch (Exception e) {
 						// END SUPRESS CATCH EXCEPTION
-						throw new EmfStoreException(e.getMessage());
+						throw new EMFStoreException(e.getMessage());
 					}
 				}
 			}.execute();
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			// ignore
 		}
 
@@ -165,7 +165,7 @@ public final class RunInUI {
 		 * @see org.eclipse.emf.emfstore.client.ui.common.RunInUIThreadWithResult#doRun(org.eclipse.swt.widgets.Shell)
 		 */
 		@Override
-		public abstract Void doRun() throws EmfStoreException;
+		public abstract Void doRun() throws EMFStoreException;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public final class RunInUI {
 
 		private T returnValue;
 		private final Display display;
-		private EmfStoreException exception;
+		private EMFStoreException exception;
 
 		/**
 		 * Default constructor.
@@ -205,10 +205,10 @@ public final class RunInUI {
 		 * 
 		 * @return the return value of the wrapped call
 		 * 
-		 * @throws EmfStoreException
+		 * @throws EMFStoreException
 		 *             in case an error occurs
 		 */
-		public T execute() throws EmfStoreException {
+		public T execute() throws EMFStoreException {
 
 			returnValue = null;
 
@@ -217,7 +217,7 @@ public final class RunInUI {
 				public void run() {
 					try {
 						returnValue = RunInUIThreadWithResult.this.doRun();
-					} catch (EmfStoreException e) {
+					} catch (EMFStoreException e) {
 						exception = e;
 					}
 				}
@@ -237,9 +237,9 @@ public final class RunInUI {
 		 *            the shell that is used during the execution
 		 * @return an optional return value that may be returned by clients
 		 * 
-		 * @throws EmfStoreException in case an error occurs
+		 * @throws EMFStoreException in case an error occurs
 		 */
-		public abstract T doRun() throws EmfStoreException;
+		public abstract T doRun() throws EMFStoreException;
 	}
 
 }

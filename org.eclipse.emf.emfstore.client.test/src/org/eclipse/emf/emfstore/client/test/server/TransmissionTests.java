@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage;
 import org.junit.After;
@@ -34,7 +34,7 @@ public abstract class TransmissionTests extends ServerTests {
 	private ACOrgUnitId user2;
 
 	@Before
-	public void setUpTests() throws EmfStoreException {
+	public void setUpTests() throws EMFStoreException {
 		user1 = setupUsers("writer1", RolesPackage.eINSTANCE.getWriterRole());
 		user2 = setupUsers("writer2", RolesPackage.eINSTANCE.getWriterRole());
 		usersession1 = setUpUsersession("writer1", "foo");
@@ -59,7 +59,7 @@ public abstract class TransmissionTests extends ServerTests {
 						new NullProgressMonitor()));
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -68,7 +68,7 @@ public abstract class TransmissionTests extends ServerTests {
 	}
 
 	@After
-	public void tearDownUsers() throws EmfStoreException {
+	public void tearDownUsers() throws EMFStoreException {
 		SetupHelper.deleteUserOnServer(user1);
 		SetupHelper.deleteUserOnServer(user2);
 

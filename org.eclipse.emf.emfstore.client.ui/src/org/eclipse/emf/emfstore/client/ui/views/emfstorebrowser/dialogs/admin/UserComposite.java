@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
@@ -63,7 +63,7 @@ public class UserComposite extends PropertiesComposite {
 	protected void removeOrgUnit(ACOrgUnit group) {
 		try {
 			getAdminBroker().removeGroup(user.getId(), ((ACGroup) group).getId());
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -80,7 +80,7 @@ public class UserComposite extends PropertiesComposite {
 				getAdminBroker().addMember(((ACGroup) group).getId(), user.getId());
 
 			}
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -100,7 +100,7 @@ public class UserComposite extends PropertiesComposite {
 
 			}
 
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -130,7 +130,7 @@ public class UserComposite extends PropertiesComposite {
 					groups.add((ACGroup) result[i]);
 				}
 			}
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return groups;
@@ -243,7 +243,7 @@ public class UserComposite extends PropertiesComposite {
 				((Form) (this.getParent().getParent())).setText("User: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
 
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}

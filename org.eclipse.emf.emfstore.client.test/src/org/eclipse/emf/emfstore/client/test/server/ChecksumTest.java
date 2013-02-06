@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
@@ -55,7 +55,7 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void testAutocorrectErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
+	public void testAutocorrectErrorHandlerAtCommit() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -96,7 +96,7 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void testChangeTrackingAfterAutocorrectErrorHandler() throws EmfStoreException, SerializationException {
+	public void testChangeTrackingAfterAutocorrectErrorHandler() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -158,8 +158,8 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, getProjectSpace().getOperations().size());
 	}
 
-	@Test(expected = EmfStoreException.class)
-	public void testCancelErrorHandlerAtCommit() throws EmfStoreException, SerializationException {
+	@Test(expected = EMFStoreException.class)
+	public void testCancelErrorHandlerAtCommit() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -185,8 +185,8 @@ public class ChecksumTest extends CoreServerTest {
 		commitWithoutCommand(getProjectSpace());
 	}
 
-	@Test(expected = EmfStoreException.class)
-	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws EmfStoreException, SerializationException {
+	@Test(expected = EMFStoreException.class)
+	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -223,7 +223,7 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void testCorrectChecksumsAtUpdate() throws EmfStoreException, SerializationException {
+	public void testCorrectChecksumsAtUpdate() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -256,7 +256,7 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	@Test
-	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws EmfStoreException, SerializationException {
+	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws EMFStoreException, SerializationException {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
@@ -317,7 +317,7 @@ public class ChecksumTest extends CoreServerTest {
 		}
 
 		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws EmfStoreException {
+			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
 		}
@@ -341,18 +341,18 @@ public class ChecksumTest extends CoreServerTest {
 		}
 
 		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws EmfStoreException {
+			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec, progressMonitor);
 		}
 	}
 
-	protected PrimaryVersionSpec commitWithoutCommand(final ProjectSpace projectSpace) throws EmfStoreException {
+	protected PrimaryVersionSpec commitWithoutCommand(final ProjectSpace projectSpace) throws EMFStoreException {
 		return (PrimaryVersionSpec) projectSpace.commit(createEmptyLogMessage(), new MyCommitCallback(),
 			new NullProgressMonitor());
 	}
 
-	protected PrimaryVersionSpec update(ProjectSpace projectSpace) throws EmfStoreException {
+	protected PrimaryVersionSpec update(ProjectSpace projectSpace) throws EMFStoreException {
 		return (PrimaryVersionSpec) projectSpace.update(Versions.createHEAD(), new MyUpdateCallback(),
 			new NullProgressMonitor());
 	}

@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.server.AdminEmfStore;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -38,7 +38,7 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		getAdminEmfStore().addMember(sessionId, group, member);
 	}
 
@@ -46,7 +46,7 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	 * {@inheritDoc}
 	 */
 	public void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getAdminEmfStore().addParticipant(sessionId, projectId, participant);
 	}
 
@@ -54,7 +54,7 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	 * {@inheritDoc}
 	 */
 	public void changeOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId, String name, String description)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getAdminEmfStore().changeOrgUnit(sessionId, orgUnitId, name, description);
 	}
 
@@ -62,112 +62,112 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	 * {@inheritDoc}
 	 */
 	public void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit, EClass role)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getAdminEmfStore().changeRole(sessionId, projectId, orgUnit, role);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws EmfStoreException {
+	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws EMFStoreException {
 		return getAdminEmfStore().createGroup(sessionId, name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createUser(SessionId sessionId, String name) throws EmfStoreException {
+	public ACOrgUnitId createUser(SessionId sessionId, String name) throws EMFStoreException {
 		return getAdminEmfStore().createUser(sessionId, name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EmfStoreException {
+	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EMFStoreException {
 		getAdminEmfStore().deleteGroup(sessionId, group);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EmfStoreException {
+	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException {
 		getAdminEmfStore().deleteUser(sessionId, user);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId) throws EmfStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId) throws EMFStoreException {
 		return getAdminEmfStore().getGroups(sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws EmfStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException {
 		return getAdminEmfStore().getGroups(sessionId, user);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EmfStoreException {
+	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EMFStoreException {
 		return getAdminEmfStore().getMembers(sessionId, groupId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EmfStoreException {
+	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EMFStoreException {
 		return getAdminEmfStore().getOrgUnit(sessionId, orgUnitId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EmfStoreException {
+	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EMFStoreException {
 		return getAdminEmfStore().getOrgUnits(sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		return getAdminEmfStore().getParticipants(sessionId, projectId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EmfStoreException {
+	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EMFStoreException {
 		return getAdminEmfStore().getProjectInfos(sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws EmfStoreException {
+	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException {
 		return getAdminEmfStore().getRole(sessionId, projectId, orgUnit);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACUser> getUsers(SessionId sessionId) throws EmfStoreException {
+	public List<ACUser> getUsers(SessionId sessionId) throws EMFStoreException {
 		return getAdminEmfStore().getUsers(sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EmfStoreException {
+	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException {
 		getAdminEmfStore().removeGroup(sessionId, user, group);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		getAdminEmfStore().removeMember(sessionId, group, member);
 	}
 
@@ -175,7 +175,7 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	 * {@inheritDoc}
 	 */
 	public void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		getAdminEmfStore().removeParticipant(sessionId, projectId, participant);
 	}
 }

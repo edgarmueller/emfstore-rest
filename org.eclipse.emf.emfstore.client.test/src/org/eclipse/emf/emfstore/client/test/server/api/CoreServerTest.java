@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.EmfStore;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.core.EmfStoreImpl;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectHistory;
@@ -107,7 +107,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					// TODO: TQ cast
 					return (PrimaryVersionSpec) ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -121,7 +121,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					ps.shareProject();
 					return ps.getBaseVersion();
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -134,7 +134,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			protected PrimaryVersionSpec doRun() {
 				try {
 					return ps.commit();
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -152,7 +152,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					return (ProjectSpace) workspace.checkout(projectSpace.getUsersession(),
 						ModelUtil.clone(projectSpace.getRemoteProject()), ModelUtil.clone(projectSpace.getBaseVersion()),
 						new NullProgressMonitor());
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -169,7 +169,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					// TODO: TQ
 					return (ProjectSpace) workspace.checkout(getProjectSpace().getUsersession(),
 						ModelUtil.clone(projectInfo), ModelUtil.clone(baseVersion), new NullProgressMonitor());
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -185,7 +185,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					// the conflict resolver always prefers the changes from the incoming branch
 					((ProjectSpaceBase) trunk).mergeBranch(latestOnBranch, new TestConflictResolver(true,
 						expectedConflicts));
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
 			}

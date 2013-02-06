@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -46,11 +46,11 @@ public class InvalidArgumentsTest extends ServerTests {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EmfStoreException, IOException {
+	public static void setUpBeforeClass() throws EMFStoreException, IOException {
 		ServerConfiguration.setTesting(true);
 		CommonUtil.setTesting(true);
 
@@ -80,14 +80,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void deleteProjectTest() throws EmfStoreException {
+	public void deleteProjectTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("deleteProject",
 				new Class[] { SessionId.class, ProjectId.class, boolean.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -95,14 +95,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createProjectTest() throws EmfStoreException {
+	public void createProjectTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("createEmptyProject",
 				new Class[] { SessionId.class, String.class, String.class, LogMessage.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -110,14 +110,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createProject2Test() throws EmfStoreException {
+	public void createProject2Test() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("createProject",
 				new Class[] { SessionId.class, String.class, String.class, LogMessage.class, Project.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -125,16 +125,16 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createVersionTest() throws EmfStoreException {
+	public void createVersionTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod(
 				"createVersion",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, ChangePackage.class,
 					BranchVersionSpec.class, PrimaryVersionSpec.class, LogMessage.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -142,14 +142,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getChangesTest() throws EmfStoreException {
+	public void getChangesTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getChanges",
 				new Class[] { SessionId.class, ProjectId.class, VersionSpec.class, VersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -157,14 +157,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getHistoryInfoTest() throws EmfStoreException {
+	public void getHistoryInfoTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getHistoryInfo",
 				new Class[] { SessionId.class, ProjectId.class, HistoryQuery.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -172,14 +172,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getProjectTest() throws EmfStoreException {
+	public void getProjectTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getProject",
 				new Class[] { SessionId.class, ProjectId.class, VersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -187,14 +187,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void addTagTest() throws EmfStoreException {
+	public void addTagTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("addTag",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, TagVersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
@@ -202,18 +202,18 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void removeTagTest() throws EmfStoreException {
+	public void removeTagTest() throws EMFStoreException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("removeTag",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, TagVersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EmfStoreException(e);
+			throw new EMFStoreException(e);
 		}
 	}
 
-	private void testAllInvalidCombinations(Method method) throws EmfStoreException {
+	private void testAllInvalidCombinations(Method method) throws EMFStoreException {
 		int parameterLength = method.getParameterTypes().length;
 		Object[] parameters = new Object[parameterLength];
 		int combinations = (int) (Math.round(Math.pow(2, parameterLength)) - 1);
@@ -225,7 +225,7 @@ public class InvalidArgumentsTest extends ServerTests {
 		}
 	}
 
-	private void callMethod(Method method, Object[] parameters) throws EmfStoreException {
+	private void callMethod(Method method, Object[] parameters) throws EMFStoreException {
 		if (method.getParameterTypes().length != parameters.length) {
 			throw new AssertionError("parameter length not equal");
 		}
@@ -243,8 +243,8 @@ public class InvalidArgumentsTest extends ServerTests {
 			e.printStackTrace();
 			Assert.assertTrue(false);
 		} catch (InvocationTargetException e) {
-			if (e.getCause() instanceof EmfStoreException) {
-				throw (EmfStoreException) e.getCause();
+			if (e.getCause() instanceof EMFStoreException) {
+				throw (EMFStoreException) e.getCause();
 			}
 			Assert.assertTrue(false);
 		}

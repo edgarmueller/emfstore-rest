@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard.AcUserImportAction;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
@@ -81,7 +81,7 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 					} else {
 						getAdminBroker().deleteUser(ou.getId());
 					}
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 
@@ -115,7 +115,7 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 			public void run() {
 				try {
 					getAdminBroker().createUser("New User");
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				getTableViewer().refresh();
@@ -179,7 +179,7 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 				List<ACUser> users = new ArrayList<ACUser>();
 				try {
 					users.addAll(getAdminBroker().getUsers());
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				return users.toArray(new ACUser[users.size()]);

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.AdminEmfStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.exceptions.StorageException;
@@ -68,7 +68,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId) throws EmfStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId) throws EMFStoreException {
 		if (sessionId == null) {
 			throw new InvalidInputException();
 		}
@@ -87,7 +87,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId orgUnitId) throws EmfStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId orgUnitId) throws EMFStoreException {
 		if (sessionId == null || orgUnitId == null) {
 			throw new InvalidInputException();
 		}
@@ -109,7 +109,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws EmfStoreException {
+	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws EMFStoreException {
 		if (sessionId == null || name == null) {
 			throw new InvalidInputException();
 		}
@@ -137,7 +137,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EmfStoreException {
+	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException {
 		if (sessionId == null || user == null || group == null) {
 			throw new InvalidInputException();
 		}
@@ -149,7 +149,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EmfStoreException {
+	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EMFStoreException {
 		if (sessionId == null || group == null) {
 			throw new InvalidInputException();
 		}
@@ -167,7 +167,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EmfStoreException {
+	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EMFStoreException {
 		if (sessionId == null || groupId == null) {
 			throw new InvalidInputException();
 		}
@@ -185,7 +185,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		if (sessionId == null || group == null || member == null) {
 			throw new InvalidInputException();
 		}
@@ -200,7 +200,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		if (sessionId == null || group == null || member == null) {
 			throw new InvalidInputException();
 		}
@@ -216,7 +216,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EmfStoreException {
+	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		if (sessionId == null || projectId == null) {
 			throw new InvalidInputException();
 		}
@@ -245,7 +245,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	 * {@inheritDoc}
 	 */
 	public void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (sessionId == null || projectId == null || participant == null) {
 			throw new InvalidInputException();
 		}
@@ -272,20 +272,20 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		save();
 	}
 
-	private ProjectId getProjectId(ProjectId projectId) throws EmfStoreException {
+	private ProjectId getProjectId(ProjectId projectId) throws EMFStoreException {
 		for (ProjectHistory projectHistory : getServerSpace().getProjects()) {
 			if (projectHistory.getProjectId().equals(projectId)) {
 				return projectHistory.getProjectId();
 			}
 		}
-		throw new EmfStoreException("Unknown ProjectId.");
+		throw new EMFStoreException("Unknown ProjectId.");
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (sessionId == null || projectId == null || participant == null) {
 			throw new InvalidInputException();
 		}
@@ -304,7 +304,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnitId) throws EmfStoreException {
+	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnitId) throws EMFStoreException {
 		if (sessionId == null || projectId == null || orgUnitId == null) {
 			throw new InvalidInputException();
 		}
@@ -316,14 +316,14 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 				return role;
 			}
 		}
-		throw new EmfStoreException("Couldn't find given OrgUnit.");
+		throw new EMFStoreException("Couldn't find given OrgUnit.");
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnitId, EClass roleClass)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (sessionId == null || projectId == null || orgUnitId == null || roleClass == null) {
 			throw new InvalidInputException();
 		}
@@ -363,7 +363,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACUser> getUsers(SessionId sessionId) throws EmfStoreException {
+	public List<ACUser> getUsers(SessionId sessionId) throws EMFStoreException {
 		if (sessionId == null) {
 			throw new InvalidInputException();
 		}
@@ -378,7 +378,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EmfStoreException {
+	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EMFStoreException {
 		if (sessionId == null) {
 			throw new InvalidInputException();
 		}
@@ -398,7 +398,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EmfStoreException {
+	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EMFStoreException {
 		if (sessionId == null) {
 			throw new InvalidInputException();
 		}
@@ -413,7 +413,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createUser(SessionId sessionId, String name) throws EmfStoreException {
+	public ACOrgUnitId createUser(SessionId sessionId, String name) throws EMFStoreException {
 		if (sessionId == null || name == null) {
 			throw new InvalidInputException();
 		}
@@ -442,7 +442,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EmfStoreException {
+	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException {
 		if (sessionId == null || user == null) {
 			throw new InvalidInputException();
 		}
@@ -461,7 +461,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	 * {@inheritDoc}
 	 */
 	public void changeOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId, String name, String description)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (sessionId == null || orgUnitId == null || name == null || description == null) {
 			throw new InvalidInputException();
 		}
@@ -476,7 +476,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EmfStoreException {
+	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EMFStoreException {
 		if (sessionId == null || orgUnitId == null) {
 			throw new InvalidInputException();
 		}
@@ -522,16 +522,16 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		return info;
 	}
 
-	private ACGroup getGroup(ACOrgUnitId orgUnitId) throws EmfStoreException {
+	private ACGroup getGroup(ACOrgUnitId orgUnitId) throws EMFStoreException {
 		for (ACGroup group : getServerSpace().getGroups()) {
 			if (group.getId().equals(orgUnitId)) {
 				return group;
 			}
 		}
-		throw new EmfStoreException("Given group doesn't exist.");
+		throw new EMFStoreException("Given group doesn't exist.");
 	}
 
-	private ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EmfStoreException {
+	private ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EMFStoreException {
 		for (ACOrgUnit unit : getServerSpace().getUsers()) {
 			if (unit.getId().equals(orgUnitId)) {
 				return unit;
@@ -542,7 +542,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 				return unit;
 			}
 		}
-		throw new EmfStoreException("Given OrgUnit doesn't exist.");
+		throw new EMFStoreException("Given OrgUnit doesn't exist.");
 	}
 
 	private Role getRole(ProjectId projectId, ACOrgUnit orgUnit) {
@@ -555,7 +555,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		return null;
 	}
 
-	private void save() throws EmfStoreException {
+	private void save() throws EMFStoreException {
 		try {
 			getServerSpace().save();
 		} catch (IOException e) {

@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * 
  * @author wesendon
  */
-public class SerializationException extends EmfStoreException {
+public class SerializationException extends EMFStoreException {
 
 	private static final String DEFAULTMESSAGE = "(De-)Serialization failed. The reason for this might be that the server does not support the used model or the data is corrupted.";
 

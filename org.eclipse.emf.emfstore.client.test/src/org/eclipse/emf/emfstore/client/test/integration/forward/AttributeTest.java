@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Test;
 
 /**
@@ -28,11 +28,11 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * Finds an attribute with isMany = true and moves elements inside this attribute.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void multiAttributeMoveTest() throws SerializationException, EmfStoreException {
+	public void multiAttributeMoveTest() throws SerializationException, EMFStoreException {
 		System.out.println("MultiAttributeMoveTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -51,11 +51,11 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * 1. Get a random model element form test project; 2. get randomly one of its attributes. 3. change the attribute
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void attributeChangeTest() throws SerializationException, EmfStoreException {
+	public void attributeChangeTest() throws SerializationException, EMFStoreException {
 		System.out.println("AttributeChangeTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -77,11 +77,11 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * Change the same attribute on a randomly selected ME twice.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void attributeTransitiveChangeTest() throws SerializationException, EmfStoreException {
+	public void attributeTransitiveChangeTest() throws SerializationException, EMFStoreException {
 		System.out.println("AttributeTransitiveChangeTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {

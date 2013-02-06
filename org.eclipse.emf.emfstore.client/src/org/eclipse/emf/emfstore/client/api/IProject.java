@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
@@ -30,17 +30,17 @@ public interface IProject {
 	 * @throws IOException
 	 *             in case the project space could not be deleted
 	 */
-	void delete() throws IOException, EmfStoreException;
+	void delete() throws IOException, EMFStoreException;
 
 	/**
 	 * Returns a list of branches of the current project. Every call triggers a
 	 * server call.
 	 * 
 	 * @return list of {@link IBranchInfo}
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
-	List<? extends IBranchInfo> getBranches() throws EmfStoreException;
+	List<? extends IBranchInfo> getBranches() throws EMFStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Resolve a version spec to a primary version spec.
@@ -48,12 +48,12 @@ public interface IProject {
 	 * @param versionSpec
 	 *            the spec to resolve
 	 * @return the primary version spec <!-- end-user-doc -->
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if resolving fails
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EmfStoreException;
+	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EMFStoreException;
 
 	/**
 	 * Retrieves history information for a project.
@@ -67,11 +67,11 @@ public interface IProject {
 	 * @param query
 	 *            A history query.
 	 * @return a list of {@link HistoryInfo} instances
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs while retrieving the history information
 	 * @generated NOT
 	 */
-	List<? extends IHistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EmfStoreException;
+	List<? extends IHistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
 
 	/**
 	 * Adds a tag to the specified version of this project.
@@ -80,12 +80,12 @@ public interface IProject {
 	 *            the versionSpec
 	 * @param tag
 	 *            the tag
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if exception occurs on the server
 	 * 
 	 * @generated NOT
 	 */
-	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EmfStoreException;
+	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException;
 
 	/**
 	 * Removes a tag to the specified version of this project.
@@ -94,10 +94,10 @@ public interface IProject {
 	 *            the versionSpec
 	 * @param tag
 	 *            the tag
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if exception occurs on the server
 	 * 
 	 * @generated NOT
 	 */
-	void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EmfStoreException;
+	void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException;
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 public interface IServer {
@@ -26,7 +26,7 @@ public interface IServer {
 
 	void setCertificateAlias(String alias);
 
-	List<? extends IRemoteProject> getRemoteProjects() throws EmfStoreException;
+	List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	IUsersession getLastUsersession();
 
@@ -45,11 +45,11 @@ public interface IServer {
 	 *            about creating the remote project
 	 * @return a {@link ProjectInfo} object containing information about the
 	 *         created project
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
 	IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
-		final IProgressMonitor monitor) throws EmfStoreException;
+		final IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -66,9 +66,9 @@ public interface IServer {
 	 * @param monitor a monitor to show the progress
 	 * @return a {@link ProjectInfo} object containing information about the
 	 *         created project
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
 	IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EmfStoreException;
+		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException;
 }

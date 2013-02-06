@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author wesendonk
  */
 @SuppressWarnings("serial")
-public class InvalidInputException extends EmfStoreException {
+public class InvalidInputException extends EMFStoreException {
 
 	/**
 	 * Default constructor.

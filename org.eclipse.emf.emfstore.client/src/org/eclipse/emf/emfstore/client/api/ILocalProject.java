@@ -13,7 +13,7 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallbac
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
@@ -27,12 +27,12 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	/**
 	 * Commits all pending changes of the project space.
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the commit went wrong
 	 * 
 	 * @return the current version spec
 	 **/
-	IPrimaryVersionSpec commit() throws EmfStoreException;
+	IPrimaryVersionSpec commit() throws EMFStoreException;
 
 	/**
 	 * Commits all pending changes of the project space.
@@ -48,13 +48,13 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * 
 	 * @return the current version spec
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the commit went wrong
 	 * 
 	 * @generated NOT
 	 */
 	IPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * This method allows to commit changes to a new branch. It works very
@@ -71,22 +71,22 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @param monitor
 	 *            optional progress monitor
 	 * @return the created version
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
 	IPrimaryVersionSpec commitToBranch(IBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
-		IProgressMonitor monitor) throws EmfStoreException;
+		IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the head version.
 	 * 
 	 * @return the new base version
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if update fails <!-- end-user-doc -->
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec update() throws EmfStoreException;
+	IPrimaryVersionSpec update() throws EMFStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the given version.
@@ -94,12 +94,12 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @param version
 	 *            the version to update to
 	 * @return the new base version
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if update fails <!-- end-user-doc -->
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec update(IVersionSpec version) throws EmfStoreException;
+	IPrimaryVersionSpec update(IVersionSpec version) throws EMFStoreException;
 
 	/**
 	 * Update the workspace to the given revision.
@@ -113,13 +113,13 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 *            an {@link IProgressMonitor} instance
 	 * @return the current version spec
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the update went wrong
 	 * @see IUpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
 	 * @generated NOT
 	 */
 	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Merge the changes from current base version to given target version with
@@ -137,7 +137,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to report on progress
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if the connection to the server fails
 	 * @return true, if merge was successful, false otherwise
 	 * 
@@ -147,7 +147,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 */
 	boolean merge(IPrimaryVersionSpec target, ChangeConflictException conflictException,
 		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
@@ -156,18 +156,18 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 *            the version which is supposed to be merged
 	 * @param conflictResolver
 	 *            a {@link IConflictResolver} for conflict resolving
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
-	void mergeBranch(IPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver) throws EmfStoreException;
+	void mergeBranch(IPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver) throws EMFStoreException;
 
 	/**
 	 * Shares this project space.
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if an error occurs during the sharing of the project
 	 */
-	void shareProject() throws EmfStoreException;
+	void shareProject() throws EMFStoreException;
 
 	/**
 	 * Shares this project space.
@@ -178,10 +178,10 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @param monitor
 	 *            an instance of an {@link IProgressMonitor}
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if an error occurs during the sharing of the project
 	 */
-	void shareProject(IUsersession session, IProgressMonitor monitor) throws EmfStoreException;
+	void shareProject(IUsersession session, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Whether this project space has been shared.
@@ -231,12 +231,12 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * revision and the head revision are equal.
 	 * 
 	 * @return true, if the project is up to date, false otherwise
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if the head revision can not be resolved
 	 * 
 	 * @generated NOT
 	 */
-	boolean isUpdated() throws EmfStoreException;
+	boolean isUpdated() throws EMFStoreException;
 
 	/**
 	 * Revert all local changes in the project space. Returns the state of the
@@ -266,5 +266,5 @@ public interface ILocalProject extends IProject, EObjectContainer {
 
 	void importLocalChanges(String fileName) throws IOException;
 
-	IRemoteProject getRemoteProject() throws EmfStoreException;
+	IRemoteProject getRemoteProject() throws EMFStoreException;
 }

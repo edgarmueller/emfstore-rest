@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Test;
 
 /**
@@ -29,11 +29,11 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 	/**
 	 * Finds an attribute with isMany = true and moves elements inside this attribute.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void multiAttributeMoveReversibilityTest() throws SerializationException, EmfStoreException {
+	public void multiAttributeMoveReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("MultiAttributeMoveReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -51,11 +51,11 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 	/**
 	 * 1. Get a random model element form test project; 2. get randomly one of its attributes. 3. change the attribute
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void attributeChangeReversibilityTest() throws SerializationException, EmfStoreException {
+	public void attributeChangeReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("AttributeChangeReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -83,11 +83,11 @@ public class AttributeOperationsReversibilityTest extends OperationsReversibilit
 	/**
 	 * Change the same attribute on a randomly selected ME twice.
 	 * 
-	 * @throws EmfStoreException EmfStoreException
+	 * @throws EMFStoreException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void attributeTransitiveChangeReversibilityTest() throws SerializationException, EmfStoreException {
+	public void attributeTransitiveChangeReversibilityTest() throws SerializationException, EMFStoreException {
 		System.out.println("AttributeTransitiveChangeReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {

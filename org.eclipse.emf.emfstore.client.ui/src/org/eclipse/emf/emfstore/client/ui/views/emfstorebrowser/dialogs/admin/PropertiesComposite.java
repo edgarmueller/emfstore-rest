@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.Activator;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
@@ -450,7 +450,7 @@ public abstract class PropertiesComposite extends Composite {
 					result = participants.toArray(new ACOrgUnit[participants.size()]);
 
 				}
-			} catch (EmfStoreException e) {
+			} catch (EMFStoreException e) {
 				// ZH Auto-generated catch block
 				e.printStackTrace();
 			}

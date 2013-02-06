@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -120,11 +120,11 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Start server and gain sessionid.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EmfStoreException, IOException {
+	public static void setUpBeforeClass() throws EMFStoreException, IOException {
 		ServerConfiguration.setTesting(true);
 		CommonUtil.setTesting(true);
 
@@ -138,9 +138,9 @@ public abstract class ServerTests extends WorkspaceTest {
 
 	/**
 	 * @param serverInfo serverinfo
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
-	protected static void login() throws EmfStoreException {
+	protected static void login() throws EMFStoreException {
 		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
 		WorkspaceProvider.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
 		setSessionId(sessionId);
@@ -151,10 +151,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @param username username
 	 * @param password password
 	 * @return sessionId
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		return getConnectionManager().logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
 			serverInfo, Configuration.getClientVersion());
 	}
@@ -193,10 +193,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Adds a project to the server before test.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	@Before
-	public void beforeTest() throws EmfStoreException {
+	public void beforeTest() throws EMFStoreException {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -214,7 +214,7 @@ public abstract class ServerTests extends WorkspaceTest {
 					currentWorkspace.getUsersessions().add(session);
 					currentWorkspace.save();
 					getProjectSpace().shareProject(session, null);
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					Assert.fail();
 				}
 			}
@@ -227,10 +227,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Removes all projects from server after test.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 	@After
-	public void afterTest() throws EmfStoreException {
+	public void afterTest() throws EMFStoreException {
 
 		new EMFStoreCommand() {
 
@@ -242,7 +242,7 @@ public abstract class ServerTests extends WorkspaceTest {
 						.getRemoteProjectList(getServerInfo())) {
 						workspace.deleteRemoteProject(getServerInfo(), info.getProjectId(), true);
 					}
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 				}
 
 				SetupHelper.cleanupServer();
@@ -255,10 +255,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * 
 	 * @param name name of the user (must be specified in users.properties)
 	 * @param role of type RolesPackage.eINSTANCE.getWriterRole() or RolesPackage.eINSTANCE.getReaderRole() ....
-	 * @throws EmfStoreException in case of failure
+	 * @throws EMFStoreException in case of failure
 	 */
 
-	public ACOrgUnitId setupUsers(String name, EClass role) throws EmfStoreException {
+	public ACOrgUnitId setupUsers(String name, EClass role) throws EMFStoreException {
 		try {
 			ACOrgUnitId orgUnitId = SetupHelper.createUserOnServer(name);
 			SetupHelper.setUsersRole(orgUnitId, role, getProjectId());

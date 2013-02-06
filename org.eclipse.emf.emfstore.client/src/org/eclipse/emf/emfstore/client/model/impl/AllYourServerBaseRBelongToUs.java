@@ -11,7 +11,7 @@ import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -20,19 +20,19 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 
 	List<IRemoteProject> remoteProjects;
 
-	private IUsersession validateUsersession(IUsersession usersession) throws EmfStoreException {
+	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
 			// TODO OTS custom exception
-			throw new EmfStoreException("Invalid usersession for given server.");
+			throw new EMFStoreException("Invalid usersession for given server.");
 		}
 		return usersession;
 	}
 
 	public IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws EmfStoreException {
+		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
 			@Override
-			protected ProjectInfo run() throws EmfStoreException {
+			protected ProjectInfo run() throws EMFStoreException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
 					createLogmessage(getUsersession(), projectName));
 			}
@@ -40,10 +40,10 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
-		IProgressMonitor monitor) throws EmfStoreException {
+		IProgressMonitor monitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(this) {
 			@Override
-			protected ProjectInfo run() throws EmfStoreException {
+			protected ProjectInfo run() throws EMFStoreException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
 					createLogmessage(getUsersession(), projectName));
 			}
@@ -58,7 +58,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		return log;
 	}
 
-	public List<? extends IRemoteProject> getRemoteProjects() throws EmfStoreException {
+	public List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException {
 		if (remoteProjects == null) {
 			List<IRemoteProject> remoteProjects = new ArrayList<IRemoteProject>();
 			for (ProjectInfo projectInfo : getProjectInfos()) {
@@ -69,7 +69,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		return remoteProjects;
 	}
 
-	public List<? extends IRemoteProject> getRemoteProjects(IUsersession usersession) throws EmfStoreException {
+	public List<? extends IRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException {
 		// TODO Auto-generated method stub
 		return null;
 	}

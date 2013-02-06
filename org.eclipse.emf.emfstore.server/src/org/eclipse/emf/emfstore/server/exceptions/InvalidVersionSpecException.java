@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class InvalidVersionSpecException extends EmfStoreException {
+public class InvalidVersionSpecException extends EMFStoreException {
 
 	/**
 	 * Default constructor.

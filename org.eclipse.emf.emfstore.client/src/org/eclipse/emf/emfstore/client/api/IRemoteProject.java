@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
@@ -16,7 +16,7 @@ public interface IRemoteProject extends IProject {
 
 	IServer getServer();
 
-	ILocalProject checkout() throws EmfStoreException;
+	ILocalProject checkout() throws EMFStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -26,13 +26,13 @@ public interface IRemoteProject extends IProject {
 	 * @param projectInfo
 	 *            An {@link ProjectInfo} instance describing the project and its
 	 *            version.
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs during the checkout.
 	 * @return the project space containing the project
 	 * @model
 	 * @generated NOT
 	 */
-	ILocalProject checkout(final IUsersession usersession) throws EmfStoreException;
+	ILocalProject checkout(final IUsersession usersession) throws EMFStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -44,13 +44,13 @@ public interface IRemoteProject extends IProject {
 	 *            version.
 	 * @param progressMonitor
 	 *            the progress monitor that should be used during checkout
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs during the checkout.
 	 * @return the project space containing the project
 	 * @model
 	 * @generated NOT
 	 */
-	ILocalProject checkout(final IUsersession usersession, IProgressMonitor progressMonitor) throws EmfStoreException;
+	ILocalProject checkout(final IUsersession usersession, IProgressMonitor progressMonitor) throws EMFStoreException;
 
 	/**
 	 * Checkout a project to the workspace in a given version.
@@ -64,14 +64,14 @@ public interface IRemoteProject extends IProject {
 	 *            The target version.
 	 * @param progressMonitor
 	 *            the progress monitor that should be used during checkout
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs during the checkout.
 	 * @return the project space containing the project
 	 * @model
 	 * @generated NOT
 	 */
 	ILocalProject checkout(final IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Gets a list of history infos.
@@ -82,12 +82,12 @@ public interface IRemoteProject extends IProject {
 	 * 
 	 * @see Workspace
 	 * @return a list of history infos
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             if server the throws an exception
 	 * @generated NOT
 	 */
 	List<? extends IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
 	/**
 	 * Resolves a {@link VersionSpec} to a {@link PrimaryVersionSpec}.
@@ -102,16 +102,18 @@ public interface IRemoteProject extends IProject {
 	 * @param projectId
 	 *            The ID of a project.
 	 * @return the {@link PrimaryVersionSpec}
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs while resolving the {@link VersionSpec}
 	 * @model
 	 * @generated NOT
 	 */
 	IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec)
-		throws EmfStoreException;
+		throws EMFStoreException;
 
-	IPrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EmfStoreException;
+	IPrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException;
 
-	void delete(final IUsersession usersession, final boolean deleteFiles) throws EmfStoreException;
+	void delete(final boolean deleteFiles) throws EMFStoreException;
+
+	void delete(final IUsersession usersession, final boolean deleteFiles) throws EMFStoreException;
 
 }

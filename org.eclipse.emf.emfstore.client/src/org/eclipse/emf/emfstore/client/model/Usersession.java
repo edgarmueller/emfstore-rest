@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
@@ -264,11 +264,11 @@ public interface Usersession extends EObject, IUsersession {
 	 * <!-- begin-user-doc --> Log in.
 	 * 
 	 * @throws AccessControlException if login fails.
-	 * @throws EmfStoreException if anything else fails. <!-- end-user-doc -->
+	 * @throws EMFStoreException if anything else fails. <!-- end-user-doc -->
 	 * @model
 	 * @generated NOT
 	 */
-	void logIn() throws AccessControlException, EmfStoreException;
+	void logIn() throws AccessControlException, EMFStoreException;
 
 	/**
 	 * Check if the user session is currently logged into a server.
@@ -280,8 +280,8 @@ public interface Usersession extends EObject, IUsersession {
 	/**
 	 * Sends a logout call to the server.
 	 * 
-	 * @throws EmfStoreException forwards any exception.
+	 * @throws EMFStoreException forwards any exception.
 	 */
-	void logout() throws EmfStoreException;
+	void logout() throws EMFStoreException;
 	// end of custom code
 } // Usersession

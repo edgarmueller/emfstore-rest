@@ -15,7 +15,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -43,6 +43,9 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 	private void deleteProject(final ProjectSpace projectSpace) {
 		try {
 			projectSpace.delete();
+		} catch (EMFStoreException e) {
+			// TODO OTS error handling?
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")
@@ -81,7 +84,7 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
 
 		if (!confirmation(projectSpace)) {
 			return null;

@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * UI controller for deleting a project on the server.
+ * 
+ * TODO REVIEW THIS PIECE OF SHIT
  * 
  * @author emueller
  * 
@@ -106,7 +108,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 
 		try {
 
@@ -119,7 +121,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 			}
 
 			deleteRemoteProject(serverInfo, projectId, deleteFiles, progressMonitor);
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			MessageDialog.openError(getShell(), "Delete project failed.",
 				"Deletion of project " + projectInfo.getName() + " failed: " + e.getMessage());
 		}
@@ -127,7 +129,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		return null;
 	}
 
-	private void deleteRemoteProject(final ProjectInfo projectInfo, IProgressMonitor monitor) throws EmfStoreException {
+	private void deleteRemoteProject(final ProjectInfo projectInfo, IProgressMonitor monitor) throws EMFStoreException {
 
 		Boolean[] ret = RunInUI.runWithResult(new Callable<Boolean[]>() {
 			public Boolean[] call() throws Exception {
@@ -147,27 +149,27 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		}
 
 		if (!(projectInfo.eContainer() instanceof ServerInfo)) {
-			throw new EmfStoreException("ServerInfo couldn't be determined for the given project.");
+			throw new EMFStoreException("ServerInfo couldn't be determined for the given project.");
 		}
 
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
 		// TODO: OTS casts
-		((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
+		new RemoteProject(serverInfo, projectInfo).delete(deleteFiles);
 	}
 
 	private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
-		throws EmfStoreException {
+		throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
 			// TODO: OTS casts
-			((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
+			new RemoteProject(serverInfo, projectInfo).delete(session, deleteFiles);
 		}
 	}
 
 	private void deleteRemoteProject(final ServerInfo serverInfo, final ProjectId projectId, final boolean deleteFiles,
-		IProgressMonitor monitor) throws EmfStoreException {
+		IProgressMonitor monitor) throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
 			// TODO: OTS casts
-			((IServer) serverInfo).deleteRemoteProject(projectInfo.getProjectId(), deleteFiles);
+			new RemoteProject(serverInfo, projectInfo).delete(deleteFiles);
 		}
 	}
 }

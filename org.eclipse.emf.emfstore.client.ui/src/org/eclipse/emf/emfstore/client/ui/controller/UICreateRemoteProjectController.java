@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -82,12 +82,12 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 		this.description = description == null ? "" : description;
 	}
 
-	private IRemoteProject createRemoteProject(IProgressMonitor monitor) throws EmfStoreException {
+	private IRemoteProject createRemoteProject(IProgressMonitor monitor) throws EMFStoreException {
 		return createRemoteProject(monitor);
 	}
 
 	private IRemoteProject createRemoteProject(Usersession usersession, IProgressMonitor monitor)
-		throws EmfStoreException {
+		throws EMFStoreException {
 
 		String[] ret = RunInUI.runWithResult(new Callable<String[]>() {
 
@@ -107,7 +107,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	private IRemoteProject createRemoteProject(final Usersession usersession, final String name,
-		final String description, IProgressMonitor monitor) throws EmfStoreException {
+		final String description, IProgressMonitor monitor) throws EMFStoreException {
 		return usersession.getServer().createRemoteProject(name, description, monitor);
 	}
 
@@ -118,7 +118,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public IRemoteProject doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public IRemoteProject doRun(IProgressMonitor monitor) throws EMFStoreException {
 		try {
 			if (session == null) {
 				return createRemoteProject(monitor);
@@ -134,7 +134,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 
 			return createRemoteProject(session, projectName, description, monitor);
 
-		} catch (final EmfStoreException e) {
+		} catch (final EMFStoreException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Create project failed", "Creation of remote project failed: "

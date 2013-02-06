@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -37,9 +37,9 @@ public interface IChecksumErrorHandler {
 	 * 
 	 * @return whether the error handler successfully handled the error
 	 * 
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case any error occurs during execution of the error handler
 	 */
 	boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EmfStoreException;
+		throws EMFStoreException;
 }

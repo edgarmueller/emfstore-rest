@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 
@@ -31,10 +31,10 @@ public class SessionManager {
 	 * 
 	 * @param serverCall
 	 *            the server call to be executed
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             If an error occurs during execution of the server call
 	 */
-	public void execute(ServerCall<?> serverCall) throws EmfStoreException {
+	public void execute(ServerCall<?> serverCall) throws EMFStoreException {
 		Usersession usersession = (Usersession) getSessionProvider().provideUsersession(serverCall);
 		// TODO OTS
 		loginUsersession(usersession, false);
@@ -53,10 +53,10 @@ public class SessionManager {
 	 * @param forceLogin
 	 *            Whether the login should be forced, i.e. the login is performed even in case the
 	 *            given user session is already logged in.
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             In case
 	 */
-	private void loginUsersession(Usersession usersession, boolean forceLogin) throws EmfStoreException {
+	private void loginUsersession(Usersession usersession, boolean forceLogin) throws EMFStoreException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");
@@ -68,7 +68,7 @@ public class SessionManager {
 					// if login fails, let the session provider handle the rest
 					usersession.logIn();
 					return;
-				} catch (EmfStoreException e) {
+				} catch (EMFStoreException e) {
 					// ignore, session provider should try to login
 				}
 			}
@@ -81,10 +81,10 @@ public class SessionManager {
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 
-	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) throws EmfStoreException {
+	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) throws EMFStoreException {
 		try {
 			serverCall.run(usersession.getSessionId());
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			if (retry && (e instanceof SessionTimedOutException || e instanceof UnknownSessionException)) {
 				// login & retry
 				loginUsersession(usersession, true);

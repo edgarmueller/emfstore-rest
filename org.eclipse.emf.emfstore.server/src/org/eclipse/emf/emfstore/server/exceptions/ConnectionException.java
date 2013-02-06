@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author koegel
  */
 // MK: move to workspace
-public class ConnectionException extends EmfStoreException {
+public class ConnectionException extends EMFStoreException {
 
 	private static final long serialVersionUID = -2839606769454873809L;
 

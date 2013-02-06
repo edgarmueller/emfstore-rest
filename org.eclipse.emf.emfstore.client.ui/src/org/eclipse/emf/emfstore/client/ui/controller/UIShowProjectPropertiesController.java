@@ -11,9 +11,10 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
@@ -51,14 +52,15 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 		String revision = "<unknown>";
 		IPrimaryVersionSpec versionSpec;
 
 		try {
-			versionSpec = new RemoteProject(projectInfo).resolveVersionSpec(Versions.createHEAD());
+			versionSpec = new RemoteProject((IServer) projectInfo.eContainer(), projectInfo)
+				.resolveVersionSpec(Versions.createHEAD());
 			revision = "" + versionSpec.getIdentifier();
-		} catch (EmfStoreException e) {
+		} catch (EMFStoreException e) {
 			// do nothing
 		}
 

@@ -17,7 +17,7 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * @author Otto Wesendonk
  */
 @SuppressWarnings("serial")
-public class StorageException extends EmfStoreException {
+public class StorageException extends EMFStoreException {
 
 	/**
 	 * String constant for loading problem message.

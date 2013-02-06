@@ -15,7 +15,6 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
@@ -23,7 +22,7 @@ import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
@@ -38,7 +37,7 @@ import org.eclipse.swt.widgets.Display;
 public class LoginDialogController implements ILoginDialogController {
 
 	private Usersession usersession;
-	private IServer serverInfo;
+	private ServerInfo serverInfo;
 
 	/**
 	 * 
@@ -57,7 +56,7 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	private IUsersession login(final boolean force) throws EmfStoreException {
+	private IUsersession login(final boolean force) throws EMFStoreException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
@@ -108,7 +107,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void validate(Usersession usersession) throws EmfStoreException {
+	public void validate(Usersession usersession) throws EMFStoreException {
 		// TODO login code
 		usersession.logIn();
 		// if successful, else exception is thrown prior reaching this code
@@ -138,7 +137,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
 	 */
-	public IServer getServerInfo() {
+	public ServerInfo getServerInfo() {
 		if (serverInfo != null) {
 			return serverInfo;
 		}
@@ -155,10 +154,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @param force
 	 *            whether to force requesting the password
 	 * @return a logged-in usersession
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public IUsersession login(ServerInfo serverInfo, boolean force) throws EmfStoreException {
+	public IUsersession login(ServerInfo serverInfo, boolean force) throws EMFStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(force);
@@ -171,10 +170,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 *            the usersession to be used during login
 	 * @param force
 	 *            whether to force requesting the password
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession, boolean force) throws EmfStoreException {
+	public void login(Usersession usersession, boolean force) throws EMFStoreException {
 		this.serverInfo = null;
 		this.usersession = usersession;
 		login(force);
@@ -188,10 +187,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @param serverInfo
 	 *            the server info to be used in order to determine a valid usersession
 	 * @return a logged-in usersession
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public IUsersession login(ServerInfo serverInfo) throws EmfStoreException {
+	public IUsersession login(ServerInfo serverInfo) throws EMFStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(false);
@@ -202,10 +201,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @param usersession
 	 *            the usersession to be used during login
-	 * @throws EmfStoreException
+	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession) throws EmfStoreException {
+	public void login(Usersession usersession) throws EMFStoreException {
 		this.serverInfo = null;
 		this.usersession = usersession;
 		login(false);

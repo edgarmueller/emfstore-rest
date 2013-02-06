@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
@@ -60,7 +60,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#addParticipant(org.eclipse.emf.emfstore.server.ProjectId,
 	 *      org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws EmfStoreException {
+	public void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException {
 
 		WorkspaceProvider.getInstance().getAdminConnectionManager()
 			.addParticipant(getSessionId(), projectId, participant);
@@ -73,7 +73,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#changeRole(org.eclipse.emf.emfstore.server.model.ProjectId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId, org.eclipse.emf.ecore.EClass)
 	 */
-	public void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws EmfStoreException {
+	public void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws EMFStoreException {
 
 		WorkspaceProvider.getInstance().getAdminConnectionManager().changeRole(getSessionId(), projectId, orgUnit, role);
 
@@ -84,7 +84,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getGroups()
 	 */
-	public List<ACGroup> getGroups() throws EmfStoreException {
+	public List<ACGroup> getGroups() throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getGroups(getSessionId());
 	}
@@ -94,7 +94,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getGroups(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public List<ACGroup> getGroups(ACOrgUnitId user) throws EmfStoreException {
+	public List<ACGroup> getGroups(ACOrgUnitId user) throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getGroups(getSessionId(), user);
 	}
@@ -104,7 +104,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getOrgUnits()
 	 */
-	public List<ACOrgUnit> getOrgUnits() throws EmfStoreException {
+	public List<ACOrgUnit> getOrgUnits() throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getOrgUnits(getSessionId());
 	}
@@ -114,7 +114,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getParticipants(org.eclipse.emf.emfstore.server.model.ProjectId)
 	 */
-	public List<ACOrgUnit> getParticipants(ProjectId projectId) throws EmfStoreException {
+	public List<ACOrgUnit> getParticipants(ProjectId projectId) throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getParticipants(getSessionId(), projectId);
 	}
@@ -124,7 +124,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getMembers(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws EmfStoreException {
+	public List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws EMFStoreException {
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getMembers(getSessionId(), groupId);
 	}
 
@@ -133,7 +133,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getProjectInfos()
 	 */
-	public List<ProjectInfo> getProjectInfos() throws EmfStoreException {
+	public List<ProjectInfo> getProjectInfos() throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getProjectInfos(getSessionId());
 	}
@@ -144,7 +144,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getRole(org.eclipse.emf.emfstore.server.model.ProjectId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws EmfStoreException {
+	public Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getRole(getSessionId(), projectId, orgUnit);
 	}
@@ -154,7 +154,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getUsers()
 	 */
-	public List<ACUser> getUsers() throws EmfStoreException {
+	public List<ACUser> getUsers() throws EMFStoreException {
 
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getUsers(getSessionId());
 	}
@@ -165,7 +165,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#removeGroup(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws EmfStoreException {
+	public void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException {
 
 		WorkspaceProvider.getInstance().getAdminConnectionManager().removeGroup(getSessionId(), user, group);
 
@@ -177,7 +177,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#removeParticipant(org.eclipse.emf.emfstore.server.model.ProjectId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws EmfStoreException {
+	public void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException {
 
 		WorkspaceProvider.getInstance().getAdminConnectionManager()
 			.removeParticipant(getSessionId(), projectId, participant);
@@ -193,7 +193,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#createGroup(java.lang.String)
 	 */
-	public ACOrgUnitId createGroup(String name) throws EmfStoreException {
+	public ACOrgUnitId createGroup(String name) throws EMFStoreException {
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().createGroup(getSessionId(), name);
 
 	}
@@ -203,7 +203,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#createUser(java.lang.String)
 	 */
-	public ACOrgUnitId createUser(String name) throws EmfStoreException {
+	public ACOrgUnitId createUser(String name) throws EMFStoreException {
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().createUser(getSessionId(), name);
 
 	}
@@ -213,7 +213,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#deleteGroup(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void deleteGroup(ACOrgUnitId group) throws EmfStoreException {
+	public void deleteGroup(ACOrgUnitId group) throws EMFStoreException {
 		WorkspaceProvider.getInstance().getAdminConnectionManager().deleteGroup(getSessionId(), group);
 
 	}
@@ -223,7 +223,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#deleteUser(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void deleteUser(ACOrgUnitId user) throws EmfStoreException {
+	public void deleteUser(ACOrgUnitId user) throws EMFStoreException {
 		WorkspaceProvider.getInstance().getAdminConnectionManager().deleteUser(getSessionId(), user);
 
 	}
@@ -234,7 +234,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#addMember(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void addMember(ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void addMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		WorkspaceProvider.getInstance().getAdminConnectionManager().addMember(getSessionId(), group, member);
 
 	}
@@ -245,7 +245,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#removeMember(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId,
 	 *      org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws EmfStoreException {
+	public void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
 		WorkspaceProvider.getInstance().getAdminConnectionManager().removeMember(getSessionId(), group, member);
 	}
 
@@ -255,7 +255,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#changeOrgUnit(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws EmfStoreException {
+	public void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws EMFStoreException {
 		WorkspaceProvider.getInstance().getAdminConnectionManager()
 			.changeOrgUnit(getSessionId(), orgUnitId, name, description);
 	}
@@ -265,7 +265,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.AdminBroker#getOrgUnit(org.eclipse.emf.emfstore.client.model.accesscontrol.ACOrgUnitId)
 	 */
-	public ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EmfStoreException {
+	public ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EMFStoreException {
 		return WorkspaceProvider.getInstance().getAdminConnectionManager().getOrgUnit(sessionId, orgUnitId);
 	}
 

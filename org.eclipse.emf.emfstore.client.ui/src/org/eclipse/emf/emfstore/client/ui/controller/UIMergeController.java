@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
@@ -49,7 +49,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EmfStoreException {
+	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
 		if (!projectSpace.getOperations().isEmpty()) {
 			MessageDialog
 				.openError(getShell(), "Merge not possible",
@@ -63,7 +63,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		return null;
 	}
 
-	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace) throws EmfStoreException {
+	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace) throws EMFStoreException {
 
 		List<BranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches();
 		ListIterator<BranchInfo> iterator = branches.listIterator();
