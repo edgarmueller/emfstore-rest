@@ -11,7 +11,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 public interface IServer {
 
-	IServerFactory FACTORY = new ServerFactoryImpl();
+	IServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
 
 	String getName();
 
@@ -31,10 +31,12 @@ public interface IServer {
 
 	List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException;
+	List<? extends IRemoteProject> getRemoteProjectsFromServer(
+			boolean shouldRemember) throws EMFStoreException;
 
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
-		throws EMFStoreException;
+	List<? extends IRemoteProject> getRemoteProjectsFromServer(
+			IUsersession session, boolean shouldRemember)
+			throws EMFStoreException;
 
 	IUsersession getLastUsersession();
 
@@ -56,8 +58,9 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
-		final IProgressMonitor monitor) throws EMFStoreException;
+	IRemoteProject createRemoteProject(final String projectName,
+			final String projectDescription, final IProgressMonitor monitor)
+			throws EMFStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -78,8 +81,9 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException;
+	IRemoteProject createRemoteProject(IUsersession usersession,
+			final String projectName, final String projectDescription,
+			final IProgressMonitor monitor) throws EMFStoreException;
 
 	IUsersession login(String name, String password) throws EMFStoreException;
 

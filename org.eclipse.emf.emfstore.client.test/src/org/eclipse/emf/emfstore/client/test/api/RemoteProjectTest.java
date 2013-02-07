@@ -2,6 +2,7 @@ package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -11,7 +12,10 @@ import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -125,30 +129,40 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testGetHistoryInfosSession() {
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(usersession, query);
-		assertEquals(0, historyInfos.size());
+	public void testGetHistoryInfosSession() throws EMFStoreException {
+		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(usersession, IHistoryQuery.FACTORY
+			.pathQuery(remoteProject.getHeadVersion(false), remoteProject.getHeadVersion(false), true, true));
+		assertEquals(1, historyInfos.size());
 	}
 
 	@Test
-	public void testGetHistoryInfos() {
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(query);
-		assertEquals(0, historyInfos.size());
+	public void testGetHistoryInfos() throws EMFStoreException {
+		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(IHistoryQuery.FACTORY.pathQuery(
+			remoteProject.getHeadVersion(false), remoteProject.getHeadVersion(false), true, true));
+		assertEquals(1, historyInfos.size());
 	}
 
 	@Test
-	public void testAddTag() {
-		remoteProject.addTag(versionSpec, tag);
+	public void testAddTag() throws EMFStoreException {
+		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		remoteProject.addTag(remoteProject.getHeadVersion(true), tagSpec);
+		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
 	}
 
 	@Test
-	public void testRemoveTag() {
-		remoteProject.removeTag(versionSpec, tag);
+	public void testRemoveTag() throws EMFStoreException {
+		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		remoteProject.addTag(remoteProject.getHeadVersion(true), tagSpec);
+		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
+		remoteProject.removeTag(remoteProject.getHeadVersion(true), tagSpec);
+		assertNotSame(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
 	}
 
 	@Test
-	public void testResolveVersion() {
-		remoteProject.resolveVersionSpec(versionSpec);
+	public void testResolveVersion() throws EMFStoreException {
+		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		remoteProject.addTag(remoteProject.getHeadVersion(true), tagSpec);
+		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
 	}
 
 	@Test
