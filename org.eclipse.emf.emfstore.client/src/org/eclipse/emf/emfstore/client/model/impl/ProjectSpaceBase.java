@@ -1226,7 +1226,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
-		throws EMFStoreException {
+		throws ChangeConflictException, EMFStoreException {
 		return new UpdateController(this, (VersionSpec) version, callback, progress).execute();
 	}
 
@@ -1332,5 +1332,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
 		return getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
+	}
+
+	public EList<String> getRecentLogMessages() {
+		return getOldLogMessages();
 	}
 }

@@ -98,17 +98,19 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return commit(this.logMessage, this.branch);
 	}
 
-	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch) throws EMFStoreException {
-		getProgressMonitor().beginTask("Commiting Changes", 100);
-		getProgressMonitor().worked(1);
+	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch)
+		throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException {
 
+		getProgressMonitor().beginTask("Commiting changes", 100);
+		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Checking changes");
 
-		// check if there are any changes. Branch commits are allowed with no changes, whereas normal committs are not.
+		// check if there are any changes. Branch commits are allowed with no changes, whereas normal commits are not.
 		if (!getLocalProject().hasUncommitedChanges() && branch == null) {
 			callback.noLocalChanges(getLocalProject());
 			return getLocalProject().getBaseVersion();
 		}
+
 		getLocalProject().cleanCutElements();
 
 		getProgressMonitor().subTask("Resolving new version");
@@ -117,6 +119,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().worked(10);
 		getProgressMonitor().subTask("Gathering changes");
+
 		final ChangePackage changePackage = getLocalProject().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
@@ -160,13 +163,14 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 					getLocalProject().getMergedVersion(), changePackage.getLogMessage());
 			}
 		}.execute();
-		getProgressMonitor().worked(35);
 
 		// TODO reimplement with ObserverBus and think about subtasks for commit
+		getProgressMonitor().worked(35);
 		getProgressMonitor().subTask("Sending files to server");
-		getLocalProject().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
-		getProgressMonitor().worked(30);
 
+		getLocalProject().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
+
+		getProgressMonitor().worked(30);
 		getProgressMonitor().subTask("Computing checksum");
 
 		boolean validChecksum = true;

@@ -208,6 +208,8 @@ public interface ServerInfo extends EObject, IServer {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.api.IServer#login(java.lang.String, java.lang.String)
+	 * 
+	 * @generated NOT
 	 */
 	Usersession login(String name, String password) throws EMFStoreException;
 

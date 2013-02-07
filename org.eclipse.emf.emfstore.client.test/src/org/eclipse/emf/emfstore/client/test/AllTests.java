@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
+import org.eclipse.emf.emfstore.client.test.api.AllAPITests;
 import org.eclipse.emf.emfstore.client.test.caching.AllCachingTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.AllChangeTrackingTests;
 import org.eclipse.emf.emfstore.client.test.common.AllCommonTests;
@@ -25,10 +26,15 @@ import org.junit.runners.Suite;
  * @author koegel
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ AllChangeTrackingTests.class, AllConflictDetectionTests.class, AllCachingTests.class,
+@Suite.SuiteClasses({ 
+	AllAPITests.class,
+	AllChangeTrackingTests.class, 
+	AllConflictDetectionTests.class, 
+	AllCachingTests.class,
 	AllServerTests.class,
 	// AllIntegrationTests.class,
-	AllCommonTests.class, AllPersistenceTests.class })
+	AllCommonTests.class, 
+	AllPersistenceTests.class })
 public class AllTests {
 
 }
