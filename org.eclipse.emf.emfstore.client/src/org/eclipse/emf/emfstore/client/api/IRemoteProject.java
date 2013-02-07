@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;

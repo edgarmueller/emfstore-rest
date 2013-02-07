@@ -7,8 +7,8 @@ import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
@@ -71,7 +71,7 @@ public interface IProject {
 	 *             If an error occurs while retrieving the history information
 	 * @generated NOT
 	 */
-	List<? extends IHistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
+	List<? extends IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
 
 	/**
 	 * Adds a tag to the specified version of this project.
