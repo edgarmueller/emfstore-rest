@@ -12,13 +12,15 @@ package org.eclipse.emf.emfstore.server.model.api;
 
 import java.util.Date;
 
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessageFactory;
+
 /**
  * A LogMessage.
  */
 public interface ILogMessage {
 
 	/** Factory for creating ILogMessages. */
-	ILogMessageFactory FACTORY = new ILogMessageFactory();
+	ILogMessageFactory FACTORY = LogMessageFactory.INSTANCE;
 
 	/**
 	 * Gets the message.
