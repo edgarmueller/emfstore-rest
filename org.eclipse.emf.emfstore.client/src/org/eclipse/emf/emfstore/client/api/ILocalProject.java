@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.api;
 
 import java.io.IOException;
@@ -21,104 +33,53 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
+/**
+ * Represents a locally checkedout project.
+ * 
+ * @author emueller
+ * @author wesendon
+ */
 public interface ILocalProject extends IProject, EObjectContainer {
 
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @throws EMFStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @return the current version spec
-	 **/
 	IPrimaryVersionSpec commit() throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
-	/**
-	 * Commits all pending changes of the project space.
-	 * 
-	 * @param logMessage
-	 *            a log message describing the changes to be committed
-	 * @param callback
-	 *            an optional callback method to be performed while the commit
-	 *            is in progress, may be <code>null</code>
-	 * @param monitor
-	 *            an optional progress monitor to be used while the commit is in
-	 *            progress, may be <code>null</code>
-	 * 
-	 * @return the current version spec
-	 * 
-	 * @throws EMFStoreException
-	 *             in case the commit went wrong
-	 * 
-	 * @generated NOT
-	 */
 	IPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
-	/**
-	 * This method allows to commit changes to a new branch. It works very
-	 * similar to {@link #commit()} with the addition of a Branch specifier.
-	 * Once the branch is created use {@link #commit()} for further commits.
-	 * 
-	 * 
-	 * @param branch
-	 *            branch specifier
-	 * @param logMessage
-	 *            optional logmessage
-	 * @param callback
-	 *            optional callback, passing an implementation is recommended
-	 * @param monitor
-	 *            optional progress monitor
-	 * @return the created version
-	 * @throws EMFStoreException
-	 *             in case of an exception
-	 */
 	IPrimaryVersionSpec commitToBranch(IBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
 		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
-	 * <!-- begin-user-doc --> Update the project to the head version.
+	 * Updates the project to the head version from the server.
 	 * 
 	 * @return the new base version
 	 * @throws EMFStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
+	 *             if update fails
 	 */
 	IPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
 
 	/**
-	 * <!-- begin-user-doc --> Update the project to the given version.
+	 * Updates the project to the given version from the server.
 	 * 
 	 * @param version
 	 *            the version to update to
 	 * @return the new base version
-	 * @throws EMFStoreException
-	 *             if update fails <!-- end-user-doc -->
-	 * @model
-	 * @generated NOT
 	 */
 	IPrimaryVersionSpec update(IVersionSpec version) throws ChangeConflictException, EMFStoreException;
 
 	/**
-	 * Update the workspace to the given revision.
+	 * Updates the project to the given version from the server.
 	 * 
 	 * @param version
-	 *            the {@link VersionSpec} to update to
+	 *            the {@link IVersionSpec} to update to
 	 * @param callback
 	 *            the {@link IUpdateCallback} that will be called when the update
 	 *            has been performed
 	 * @param progress
 	 *            an {@link IProgressMonitor} instance
-	 * @return the current version spec
-	 * 
-	 * @throws EMFStoreException
-	 *             in case the update went wrong
-	 * @see IUpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
-	 * @generated NOT
+	 * @return the new version spec
 	 */
 	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
 		throws ChangeConflictException, EMFStoreException;

@@ -61,9 +61,8 @@ public interface IProject {
 	/**
 	 * Deletes the project. This is valid for both, {@link ILocalProject} and {@link IRemoteProject} project.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * 
 	 * @throws IOException
@@ -75,9 +74,8 @@ public interface IProject {
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec the spec to resolve
 	 * @return the primary version
@@ -88,9 +86,8 @@ public interface IProject {
 	 * Returns a list of branches of the current project. Every call triggers a
 	 * server call.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @return list of {@link IBranchInfo}
 	 * @throws EMFStoreException
@@ -103,9 +100,8 @@ public interface IProject {
 	 * {@link IHistoryQueryFactory} to
 	 * generate query obejcts.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param query
 	 *            A history query.
@@ -116,9 +112,8 @@ public interface IProject {
 	/**
 	 * Adds a tag to the specified version of this project on the server.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec
 	 *            the versionSpec
@@ -130,9 +125,8 @@ public interface IProject {
 	/**
 	 * Removes a tag to the specified version of this project on the server.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec
 	 *            the versionSpec

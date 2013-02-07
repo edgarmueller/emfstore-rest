@@ -39,12 +39,17 @@ public interface IRemoteProject extends IProject {
 	/**
 	 * Checkout the project into the local workspace.
 	 * 
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
+	 * 
 	 * @return local project
 	 */
 	ILocalProject checkout() throws EMFStoreException;
 
 	/**
 	 * Checkout the project into the local workspace.
+	 * 
+	 * 
 	 * 
 	 * @param usersession session used for server call
 	 * @return local project
@@ -97,16 +102,10 @@ public interface IRemoteProject extends IProject {
 	IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec) throws EMFStoreException;
 
 	/**
-	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
-	 * 
-	 * 
-	 * @param versionSpec the spec to resolve
-	 * @return the primary version
-	 */
-	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EMFStoreException;
-
-	/**
 	 * Deletes the remote project on the server.
+	 * 
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
 	 */
@@ -123,9 +122,22 @@ public interface IRemoteProject extends IProject {
 	/**
 	 * Returns the HEAD version of the remote project.
 	 * 
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
+	 * 
 	 * @param fetch if true, the head version is resolved with the server. Otherwise the last locally known HEAD version
 	 *            is returned.
 	 * @return version spec of the HEAD version
 	 */
 	IPrimaryVersionSpec getHeadVersion(boolean fetch) throws EMFStoreException;
+
+	/**
+	 * Returns the HEAD version of the remote project.
+	 * 
+	 * @param usersession session used for server call
+	 * @param fetch if true, the head version is resolved with the server. Otherwise the last locally known HEAD version
+	 *            is returned.
+	 * @return version spec of the HEAD version
+	 */
+	IPrimaryVersionSpec getHeadVersion(IUsersession usersession, boolean fetch) throws EMFStoreException;
 }

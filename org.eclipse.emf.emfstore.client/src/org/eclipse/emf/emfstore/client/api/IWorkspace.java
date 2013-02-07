@@ -48,18 +48,17 @@ public interface IWorkspace {
 	List<? extends IServer> getServers();
 
 	/**
-	 * Adds an server saves.
+	 * Adds a server.
 	 * 
-	 * @param serverInfo
-	 *            the server info to be added
+	 * @param server new server
+	 * 
 	 */
-	void addServer(IServer serverInfo);
+	void addServer(IServer server);
 
 	/**
-	 * Removes an server saves.
+	 * Removes a server.
 	 * 
-	 * @param serverInfo
-	 *            the server info to be removed
+	 * @param server server to remove
 	 */
-	void removeServer(IServer serverInfo);
+	void removeServer(IServer server);
 }
