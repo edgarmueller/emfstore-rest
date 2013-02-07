@@ -8,7 +8,7 @@ import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
 import org.junit.After;
 import org.junit.Before;
 
-public abstract class BaseSharedProjectTest extends LoggedInUserTest {
+public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	protected IWorkspace workspace=IWorkspaceProvider.INSTANCE.getWorkspace();
 	protected ILocalProject localProject;
 	@Before

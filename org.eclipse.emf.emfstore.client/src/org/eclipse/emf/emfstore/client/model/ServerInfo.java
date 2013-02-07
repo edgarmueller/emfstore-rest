@@ -203,4 +203,12 @@ public interface ServerInfo extends EObject, IServer {
 	 */
 	public List<RemoteProject> getRemoteProjects() throws EMFStoreException;
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.api.IServer#login(java.lang.String, java.lang.String)
+	 */
+	Usersession login(String name, String password) throws EMFStoreException;
+
 } // ServerInfo

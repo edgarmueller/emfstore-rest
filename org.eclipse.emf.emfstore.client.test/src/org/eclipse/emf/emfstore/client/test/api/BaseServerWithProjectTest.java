@@ -6,7 +6,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;
 
-public abstract class BaseServerWithProjectTest extends LoggedInUserTest {
+public abstract class BaseServerWithProjectTest extends BaseLoggedInUserTest {
 
 	protected IRemoteProject remoteProject;
 	protected String projectName="TestProject";
