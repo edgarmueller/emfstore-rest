@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.api;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
@@ -35,6 +36,8 @@ public interface IServer {
 
 	List<? extends IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
 		throws EMFStoreException;
+
+	Set<? extends IUsersession> getUsersessions();
 
 	IUsersession getLastUsersession();
 

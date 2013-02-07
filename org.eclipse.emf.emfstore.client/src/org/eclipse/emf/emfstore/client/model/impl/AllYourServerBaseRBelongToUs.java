@@ -2,7 +2,9 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -12,6 +14,7 @@ import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -105,8 +108,20 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setUsername(name);
 		usersession.setPassword(password);
-		usersession.setServerInfo((ServerInfo) this);
+		usersession.setServerInfo(this);
 		usersession.logIn();
 		return usersession;
+	}
+
+	public Set<Usersession> getUsersessions() {
+		Set<Usersession> sessions = new LinkedHashSet<Usersession>();
+
+		for (Usersession session : ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions()) {
+			if (session.getServerInfo() == this) {
+				sessions.add(session);
+			}
+		}
+
+		return sessions;
 	}
 }
