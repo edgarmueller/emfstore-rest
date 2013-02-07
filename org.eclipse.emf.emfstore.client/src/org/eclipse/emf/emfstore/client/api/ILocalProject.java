@@ -198,7 +198,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 
 	Date getLastUpdated();
 
-	EList<String> getOldLogMessages();
+	EList<String> getRecentLogMessages();
 
 	/**
 	 * Return the list of operations that have already been performed on the

@@ -1333,4 +1333,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
 		return getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
 	}
+
+	public EList<String> getRecentLogMessages() {
+		return getOldLogMessages();
+	}
 }
