@@ -1323,7 +1323,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	public Set<EObject> getAllModelElements() {
-		return getAllModelElements();
+		return getProject().getAllModelElements();
 	}
 
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
