@@ -8,16 +8,25 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.model.api;
+package org.eclipse.emf.emfstore.server.model.versioning;
 
-import org.eclipse.emf.emfstore.common.model.api.IEMFStoreFactory;
+import java.util.Calendar;
+
+import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessageFactory;
 
 /**
  * A factory for creating ILogMessage objects.
  * 
  * @author Tobias Verhoeven
  */
-public interface ILogMessageFactory extends IEMFStoreFactory {
+public final class LogMessageFactory implements ILogMessageFactory {
+
+	/** The factory INSTANCE. */
+	public static final LogMessageFactory INSTANCE = new LogMessageFactory();
+
+	private LogMessageFactory() {
+	}
 
 	/**
 	 * creates a new logMessage with the specified message and author.
@@ -26,5 +35,11 @@ public interface ILogMessageFactory extends IEMFStoreFactory {
 	 * @param author the author
 	 * @return the log message
 	 */
-	ILogMessage createLogMessage(String message, String author);
+	public ILogMessage createLogMessage(String message, String author) {
+		final LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
+		logMessage.setMessage(message);
+		logMessage.setAuthor(author);
+		logMessage.setClientDate(Calendar.getInstance().getTime());
+		return logMessage;
+	}
 }
