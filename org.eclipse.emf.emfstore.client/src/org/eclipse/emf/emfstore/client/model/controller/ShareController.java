@@ -93,8 +93,7 @@ public class ShareController extends ServerCall<Void> {
 						getUsersession().getSessionId(),
 						getLocalProject().getProjectName() == null ? "Project@" + new Date() : getLocalProject()
 							.getProjectName(),
-						getLocalProject().getProjectDescription() == null ? "" : getLocalProject()
-							.getProjectDescription(), logMessage, getLocalProject().getProject());
+						"", logMessage, getLocalProject().getProject());
 			}
 		}.execute();
 

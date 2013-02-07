@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IServerCall;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
@@ -41,7 +40,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  * 
  * @param <U> the return type of the wrapped action
  */
-public abstract class ServerCall<U> implements IServerCall {
+public abstract class ServerCall<U> {
 
 	private ILocalProject projectSpace;
 	private IUsersession usersession;
@@ -139,11 +138,13 @@ public abstract class ServerCall<U> implements IServerCall {
 	/**
 	 * Sets the server info that is used by this server call.
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            the server info that should be used by this server call
+	 * @return
 	 */
-	public void setServerInfo(IServer server) {
+	public ServerCall<U> setServer(IServer server) {
 		this.server = server;
+		return this;
 	}
 
 	/**
@@ -151,9 +152,11 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param usersession
 	 *            the user session to be used by the server call
+	 * @return
 	 */
-	public void setUsersession(IUsersession usersession) {
+	public ServerCall<U> setUsersession(IUsersession usersession) {
 		this.usersession = usersession;
+		return this;
 	}
 
 	/**

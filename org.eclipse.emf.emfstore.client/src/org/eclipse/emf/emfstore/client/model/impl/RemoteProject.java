@@ -264,8 +264,20 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public void delete() throws IOException, EMFStoreException {
-		new ServerCall<Void>(server) {
+	public void delete() throws EMFStoreException {
+		getDeleteProjectServerCall()
+			.setServer(server)
+			.execute();
+	}
+
+	public void delete(IUsersession usersession) throws EMFStoreException {
+		getDeleteProjectServerCall()
+			.setUsersession(usersession)
+			.execute();
+	}
+
+	private ServerCall<Void> getDeleteProjectServerCall() throws EMFStoreException {
+		return new ServerCall<Void>() {
 			@Override
 			protected Void run() throws EMFStoreException {
 				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
@@ -279,36 +291,14 @@ public class RemoteProject implements IRemoteProject {
 				getServer().getRemoteProjects().remove(this);
 				return null;
 			}
-		}.execute();
-	}
-
-	public void delete(IUsersession usersession, final boolean deleteFiles) throws EMFStoreException {
-		new ServerCall<Void>(server) {
-			@Override
-			protected Void run() throws EMFStoreException {
-				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
-					@Override
-					public Void run(IProgressMonitor monitor) throws EMFStoreException {
-						getConnectionManager().deleteProject(getSessionId(), projectInfo.getProjectId(), deleteFiles);
-						return null;
-					}
-				}.execute();
-
-				getServer().getRemoteProjects().remove(this);
-				return null;
-			}
-		}.execute();
+		};
 	}
 
 	public IServer getServer() {
 		return (ServerInfo) projectInfo.eContainer();
 	}
 
-	public void delete(boolean deleteFiles) throws EMFStoreException {
-		// TODO;
-	}
-
-	public PrimaryVersionSpec getHeadVersion(boolean fetch) throws EMFStoreException {
+	public PrimaryVersionSpec getHeadVersion() throws EMFStoreException {
 		return resolveVersionSpec(Versions.createHEAD());
 	}
 }

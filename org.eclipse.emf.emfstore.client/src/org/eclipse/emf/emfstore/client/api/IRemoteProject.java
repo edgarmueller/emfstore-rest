@@ -107,25 +107,20 @@ public interface IRemoteProject extends IProject {
 
 	/**
 	 * Deletes the remote project on the server.
-	 * 
-	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
 	 */
-	void delete(boolean deleteFiles) throws EMFStoreException;
+	void delete() throws EMFStoreException;
 
 	/**
 	 * Deletes the remote project on the server.
 	 * 
 	 * @param usersession session used for server call
-	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
 	 */
-	void delete(IUsersession usersession, boolean deleteFiles) throws EMFStoreException;
+	void delete(IUsersession usersession) throws EMFStoreException;
 
 	/**
 	 * Returns the HEAD version of the remote project.
 	 * 
-	 * @param fetch if true, the head version is resolved with the server. Otherwise the last locally known HEAD version
-	 *            is returned.
 	 * @return version spec of the HEAD version
 	 */
-	IPrimaryVersionSpec getHeadVersion(boolean fetch) throws EMFStoreException;
+	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
 }
