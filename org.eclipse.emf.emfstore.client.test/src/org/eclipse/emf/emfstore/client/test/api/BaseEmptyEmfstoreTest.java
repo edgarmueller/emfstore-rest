@@ -25,7 +25,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-public abstract class EmptyEmfstoreTest {
+public abstract class BaseEmptyEmfstoreTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

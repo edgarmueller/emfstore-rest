@@ -10,7 +10,10 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
@@ -19,7 +22,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO use example model
 public class SharedProjectTest extends BaseSharedProjectTest {
 
 	@Override
@@ -182,7 +184,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHasUncommitedChanges() {
 		assertFalse(localProject.hasUncommitedChanges());
-		// TODO add changes
+		addPlayerToProject();
 		assertTrue(localProject.hasUncommitedChanges());
 		try {
 			localProject.commit(logMessage, callback, new NullProgressMonitor());
@@ -195,18 +197,16 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	}
 
 	@Test
-	public void testHasUnsavedChanges() {
-		assertFalse(localProject.hasUncommitedChanges());
-		// TODO add changes
-		assertFalse(localProject.hasUncommitedChanges());
-	}
-
-	@Test
 	public void testMerge() {
-		// TODO add changes
-		localProject.merge(target, conflictException, conflictResolver, callback, new NullProgressMonitor());
+		ILocalProject localProject2 = workspace.createLocalProject("TestProject2", "My Test Project2");
+		localProject2.shareProject();
+		ProjectChangeUtil.addPlayerToProject(localProject2);
+		localProject2.commitToBranch(branch, logMessage, callback, new NullProgressMonitor());
 		assertFalse(localProject.hasUncommitedChanges());
-		// TODO add changes
+		assertFalse(localProject2.hasUncommitedChanges());
+		localProject.merge(target, conflictException, new TestConflictResolver(true, 0), callback,
+			new NullProgressMonitor());
 		assertFalse(localProject.hasUncommitedChanges());
+		assertEquals(1, localProject.getAllModelElementsByClass(Player.class).size());
 	}
 }

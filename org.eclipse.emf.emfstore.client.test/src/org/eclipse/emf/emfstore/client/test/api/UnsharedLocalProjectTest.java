@@ -22,7 +22,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class UnsharedLocalProjectTest extends EmptyEmfstoreTest {
+public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	private final IWorkspace workspace=IWorkspaceProvider.INSTANCE.getWorkspace(); 
 	private ILocalProject localProject;
