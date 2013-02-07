@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model;
 
+import org.eclipse.emf.emfstore.client.api.IWorkspace;
+
 /**
  * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginning.
  * It often is used to register Listeners.
@@ -25,6 +27,6 @@ public interface PostWorkspaceInitiator {
 	 * 
 	 * @param currentWorkspace workspace
 	 */
-	void workspaceInitComplete(Workspace currentWorkspace);
+	void workspaceInitComplete(IWorkspace currentWorkspace);
 
 }
