@@ -19,7 +19,6 @@ import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.api.ISessionId;
@@ -68,7 +67,7 @@ public abstract class ServerCall<U> {
 	/**
 	 * Default constructor with project space.
 	 * 
-	 * @param projectSpace
+	 * @param localProject
 	 *            relevant project space if existent
 	 */
 	// TODO: OTS add javadoc to explain why type is a local project
@@ -80,7 +79,7 @@ public abstract class ServerCall<U> {
 	/**
 	 * Default constructor with serverinfo.
 	 * 
-	 * @param serverInfo a given server
+	 * @param server a given server
 	 */
 	public ServerCall(IServer server) {
 		this.server = server;
@@ -95,7 +94,7 @@ public abstract class ServerCall<U> {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(Usersession usersession, IProgressMonitor monitor) {
+	public ServerCall(IUsersession usersession, IProgressMonitor monitor) {
 		this.usersession = usersession;
 		setProgressMonitor(monitor);
 	}
@@ -103,26 +102,26 @@ public abstract class ServerCall<U> {
 	/**
 	 * Default constructor with project space and progress monitor.
 	 * 
-	 * @param projectSpace
-	 *            relevant project space if existent
+	 * @param localProject
+	 *            relevant project, if existent
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ProjectSpaceImpl projectSpace, IProgressMonitor monitor) {
-		this.projectSpace = projectSpace;
+	public ServerCall(ILocalProject localProject, IProgressMonitor monitor) {
+		this.projectSpace = localProject;
 		setProgressMonitor(monitor);
 	}
 
 	/**
 	 * Default constructor with server info and progress monitor.
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            a given server info
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ServerInfo serverInfo, IProgressMonitor monitor) {
-		this.server = serverInfo;
+	public ServerCall(IServer server, IProgressMonitor monitor) {
+		this.server = server;
 		setProgressMonitor(monitor);
 	}
 
