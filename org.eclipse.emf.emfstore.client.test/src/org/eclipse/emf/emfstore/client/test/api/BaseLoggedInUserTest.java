@@ -9,7 +9,7 @@ import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;
 
-public abstract class LoggedInUserTest extends EmptyEmfstoreTest {
+public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 	protected IServer server;
 	protected IUsersession usersession;
 	@Before
