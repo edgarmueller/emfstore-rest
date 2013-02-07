@@ -44,6 +44,8 @@ public abstract class BaseEmptyEmfstoreTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		stopEMFStore();
+		deleteLocalProjects();
+		deleteServerProjects();
 	}
 
 	private static void stopEMFStore() {
@@ -65,11 +67,10 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	@After
 	public void tearDown() throws Exception {
-		deleteLocalProjects();
-		deleteServerProjects();
+
 	}
 
-	private void deleteResources(String pathToMainFile) throws FatalEmfStoreException {
+	private static void deleteResources(String pathToMainFile) throws FatalEmfStoreException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
@@ -90,7 +91,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		}
 	}
 
-	private void deleteFiles(String folderPath) {
+	private static void deleteFiles(String folderPath) {
 
 		File workspaceDirectory = new File(folderPath);
 		for (File file : workspaceDirectory.listFiles()) {
@@ -100,7 +101,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		}
 	}
 
-	private void deleteLocalProjects() throws IOException, FatalEmfStoreException {
+	private static void deleteLocalProjects() throws IOException, FatalEmfStoreException {
 		String workspacePath = Configuration.getWorkspaceDirectory();
 		File workspaceFile = new File(workspacePath + "workspace.ucw");
 		if (!workspaceFile.exists())
@@ -109,7 +110,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		deleteFiles(workspacePath);
 	}
 
-	private void deleteServerProjects() throws IOException, FatalEmfStoreException {
+	private static void deleteServerProjects() throws IOException, FatalEmfStoreException {
 		String workspacePath = ServerConfiguration.getServerHome();
 		File workspaceFile = new File(workspacePath + "storage.uss");
 		if (!workspaceFile.exists())
