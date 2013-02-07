@@ -83,7 +83,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		return doUpdate(version);
 	}
 
-	private PrimaryVersionSpec doUpdate(VersionSpec version) throws EMFStoreException {
+	private PrimaryVersionSpec doUpdate(VersionSpec version) throws ChangeConflictException, EMFStoreException {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
