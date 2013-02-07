@@ -31,7 +31,10 @@ public interface IServer {
 
 	List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
-	List<? extends IRemoteProject> getRemoteProjects(boolean fetch) throws EMFStoreException;
+	List<? extends IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException;
+
+	List<? extends IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
+		throws EMFStoreException;
 
 	IUsersession getLastUsersession();
 
