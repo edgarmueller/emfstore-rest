@@ -65,12 +65,4 @@ public class UsersessionTest extends BaseLoggedInUserTest {
 		assertTrue(usersession.isLoggedIn());
 	}
 
-	@Test
-	public void testGetUsersessions() throws EMFStoreException {
-		assertTrue(usersession.isLoggedIn());
-		usersession.logout();
-		usersession = server.login("super", "super");
-		assertEquals(2, server.getUsersessions());
-	}
-
 }
