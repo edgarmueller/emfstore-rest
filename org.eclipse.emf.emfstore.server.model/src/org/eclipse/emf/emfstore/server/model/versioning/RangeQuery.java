@@ -10,24 +10,31 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning;
 
+import org.eclipse.emf.emfstore.server.model.api.query.IRangeQuery;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Range Query</b></em>'. <!-- end-user-doc -->
- *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit <em>Upper Limit</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit <em>Lower Limit</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming <em>Include Incoming</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing <em>Include Outgoing</em>}</li>
- * </ul>
- * </p>
- *
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Range Query</b></em>'.
+ * 
+ * @extends IRangeQuery
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit <em>Upper Limit</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit <em>Lower Limit</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming <em>Include
+ *          Incoming</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing <em>Include
+ *          Outgoing</em>}</li>
+ *          </ul>
+ *          </p>
+ * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getRangeQuery()
  * @model
  * @generated
  */
-public interface RangeQuery extends HistoryQuery {
+public interface RangeQuery extends HistoryQuery, IRangeQuery {
 	/**
 	 * Returns the value of the '<em><b>Upper Limit</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -46,9 +53,11 @@ public interface RangeQuery extends HistoryQuery {
 	int getUpperLimit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit <em>Upper Limit</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getUpperLimit
+	 * <em>Upper Limit</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Upper Limit</em>' attribute.
 	 * @see #getUpperLimit()
 	 * @generated
@@ -73,9 +82,11 @@ public interface RangeQuery extends HistoryQuery {
 	int getLowerLimit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit <em>Lower Limit</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#getLowerLimit
+	 * <em>Lower Limit</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Lower Limit</em>' attribute.
 	 * @see #getLowerLimit()
 	 * @generated
@@ -90,6 +101,7 @@ public interface RangeQuery extends HistoryQuery {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Include Incoming</em>' attribute.
 	 * @see #setIncludeIncoming(boolean)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getRangeQuery_IncludeIncoming()
@@ -99,9 +111,11 @@ public interface RangeQuery extends HistoryQuery {
 	boolean isIncludeIncoming();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming <em>Include Incoming</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeIncoming
+	 * <em>Include Incoming</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Include Incoming</em>' attribute.
 	 * @see #isIncludeIncoming()
 	 * @generated
@@ -116,6 +130,7 @@ public interface RangeQuery extends HistoryQuery {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Include Outgoing</em>' attribute.
 	 * @see #setIncludeOutgoing(boolean)
 	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getRangeQuery_IncludeOutgoing()
@@ -125,9 +140,11 @@ public interface RangeQuery extends HistoryQuery {
 	boolean isIncludeOutgoing();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing <em>Include Outgoing</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery#isIncludeOutgoing
+	 * <em>Include Outgoing</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Include Outgoing</em>' attribute.
 	 * @see #isIncludeOutgoing()
 	 * @generated

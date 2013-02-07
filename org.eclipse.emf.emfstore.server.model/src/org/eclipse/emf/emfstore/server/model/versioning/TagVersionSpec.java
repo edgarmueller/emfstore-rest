@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'.

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'.
@@ -67,14 +67,5 @@ public interface VersionSpec extends EObject, IVersionSpec {
 	 */
 	@Deprecated
 	VersionSpec HEAD_VERSION = VersioningFactory.eINSTANCE.createHeadVersionSpec();
-
-	String HEAD = "HEAD";
-
-	String BASE = "BASE";
-
-	String BRANCH_DEFAULT_NAME = "trunk";
-
-	// magic global variable
-	String GLOBAL = "___GLOBAL___";
 
 } // VersionSpec

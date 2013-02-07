@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
@@ -777,7 +777,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.api.IHistoryQuery)
+	 * @see org.eclipse.emf.emfstore.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery)
 	 * 
 	 * @generated NOT
 	 */

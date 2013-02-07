@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.PathQuery;
@@ -34,17 +35,25 @@ public final class HistoryQueryBuilder {
 	/**
 	 * Factory method for range query.
 	 * 
-	 * @param source source version
-	 * @param upper upper limit
-	 * @param lower lower limit
-	 * @param allVersions include all versions, from all branches
-	 * @param incoming include incoming versions, only if allVersions is false
-	 * @param outgoing include outgoing versions
-	 * @param includeCp include changepackges
+	 * @param source
+	 *            source version
+	 * @param upper
+	 *            upper limit
+	 * @param lower
+	 *            lower limit
+	 * @param allVersions
+	 *            include all versions, from all branches
+	 * @param incoming
+	 *            include incoming versions, only if allVersions is false
+	 * @param outgoing
+	 *            include outgoing versions
+	 * @param includeCp
+	 *            include changepackges
 	 * @return query
 	 */
-	public static RangeQuery rangeQuery(PrimaryVersionSpec source, int upper, int lower, boolean allVersions,
-		boolean incoming, boolean outgoing, boolean includeCp) {
+	public static RangeQuery rangeQuery(PrimaryVersionSpec source, int upper,
+			int lower, boolean allVersions, boolean incoming, boolean outgoing,
+			boolean includeCp) {
 		RangeQuery query = VersioningFactory.eINSTANCE.createRangeQuery();
 		query.setSource(ModelUtil.clone(source));
 		query.setUpperLimit(upper);
@@ -59,14 +68,18 @@ public final class HistoryQueryBuilder {
 	/**
 	 * Factory method for path query. Getting all changes from source to target.
 	 * 
-	 * @param source source version
-	 * @param target target version
-	 * @param allVersions include all versions, from all branches
-	 * @param includeCp include changepackages
+	 * @param source
+	 *            source version
+	 * @param target
+	 *            target version
+	 * @param allVersions
+	 *            include all versions, from all branches
+	 * @param includeCp
+	 *            include changepackages
 	 * @return query
 	 */
-	public static PathQuery pathQuery(PrimaryVersionSpec source, PrimaryVersionSpec target, boolean allVersions,
-		boolean includeCp) {
+	public static PathQuery pathQuery(PrimaryVersionSpec source,
+			PrimaryVersionSpec target, boolean allVersions, boolean includeCp) {
 		PathQuery query = VersioningFactory.eINSTANCE.createPathQuery();
 		query.setSource(ModelUtil.clone(source));
 		query.setTarget(ModelUtil.clone(target));
@@ -78,19 +91,28 @@ public final class HistoryQueryBuilder {
 	/**
 	 * Factory method for modelelements range queries.
 	 * 
-	 * @param source source version
-	 * @param modelElements modelelements
-	 * @param upper upper limit
-	 * @param lower lower limit
-	 * @param allVersions include all versions, from all branches
-	 * @param includeCp include change packages
+	 * @param source
+	 *            source version
+	 * @param modelElements
+	 *            modelelements
+	 * @param upper
+	 *            upper limit
+	 * @param lower
+	 *            lower limit
+	 * @param allVersions
+	 *            include all versions, from all branches
+	 * @param includeCp
+	 *            include change packages
 	 * @return query
 	 */
-	public static ModelElementQuery modelelementQuery(PrimaryVersionSpec source, List<ModelElementId> modelElements,
-		int upper, int lower, boolean allVersions, boolean includeCp) {
-		ModelElementQuery query = VersioningFactory.eINSTANCE.createModelElementQuery();
+	public static ModelElementQuery modelelementQuery(
+			PrimaryVersionSpec source,
+			List<? extends IModelElementId> modelElements, int upper,
+			int lower, boolean allVersions, boolean includeCp) {
+		ModelElementQuery query = VersioningFactory.eINSTANCE
+				.createModelElementQuery();
 		query.setSource(ModelUtil.clone(source));
-		query.getModelElements().addAll(modelElements);
+		query.getModelElements().addAll((List<ModelElementId>) modelElements);
 		query.setUpperLimit(upper);
 		query.setLowerLimit(lower);
 		query.setIncludeAllVersions(allVersions);
@@ -103,16 +125,24 @@ public final class HistoryQueryBuilder {
 	/**
 	 * Factory method for modelelement range queries.
 	 * 
-	 * @param source source version
-	 * @param id modelelement
-	 * @param upper upper limit
-	 * @param lower lower limit
-	 * @param allVersions include all versions, from all branches
-	 * @param includeCp include change packages
+	 * @param source
+	 *            source version
+	 * @param id
+	 *            modelelement
+	 * @param upper
+	 *            upper limit
+	 * @param lower
+	 *            lower limit
+	 * @param allVersions
+	 *            include all versions, from all branches
+	 * @param includeCp
+	 *            include change packages
 	 * @return query
 	 */
-	public static ModelElementQuery modelelementQuery(PrimaryVersionSpec source, ModelElementId id, int upper,
-		int lower, boolean allVersions, boolean includeCp) {
-		return modelelementQuery(source, Arrays.asList(id), upper, lower, allVersions, includeCp);
+	public static ModelElementQuery modelelementQuery(
+			PrimaryVersionSpec source, ModelElementId id, int upper, int lower,
+			boolean allVersions, boolean includeCp) {
+		return modelelementQuery(source, Arrays.asList(id), upper, lower,
+				allVersions, includeCp);
 	}
 }

@@ -7,6 +7,11 @@ import org.eclipse.emf.emfstore.client.model.util.EMFStoreClientUtil;
 
 public class ServerFactoryImpl implements IServerFactory {
 
+	public static final ServerFactoryImpl INSTANCE = new ServerFactoryImpl();
+
+	private ServerFactoryImpl() {
+	}
+
 	public IServer getServer(String url, int port, String certificate) {
 		return EMFStoreClientUtil.createServerInfo(url, port, certificate);
 	}
