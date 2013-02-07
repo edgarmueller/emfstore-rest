@@ -62,7 +62,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
-		return getRemoteProjectsFromServer(true);
+		return mapToRemoteProject(getProjectInfos());
 	}
 
 	public List<RemoteProject> getRemoteProjectsFromServer(IUsersession usersession, boolean shouldRemember)
