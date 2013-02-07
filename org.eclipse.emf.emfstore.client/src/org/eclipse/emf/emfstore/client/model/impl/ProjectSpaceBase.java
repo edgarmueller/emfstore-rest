@@ -540,7 +540,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectInfo();
 		projectInfo.setProjectId(ModelUtil.clone(getProjectId()));
 		projectInfo.setName(getProjectName());
-		projectInfo.setDescription(getProjectDescription());
 		projectInfo.setVersion(ModelUtil.clone(getBaseVersion()));
 		return new RemoteProject(getUsersession().getServer(), projectInfo);
 	}

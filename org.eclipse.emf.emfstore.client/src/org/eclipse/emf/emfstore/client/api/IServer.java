@@ -91,20 +91,12 @@ public interface IServer {
 	void setCertificateAlias(String alias);
 
 	/**
-	 * Returns a list of all locally known remote projects connected to this server.
-	 * Use {@link #getRemoteProjectsFromServer(boolean)} to fetch a current list directly from the server.
-	 * 
-	 * @return list of remote projects
-	 */
-	List<? extends IRemoteProject> getRemoteProjects() throws EMFStoreException;
-
-	/**
 	 * Makes a server call in order to fetch the current list of available projects.
 	 * 
 	 * @param shouldRemember caches the retrieved list locally. Accessible via {@link #getRemoteProjects()}
 	 * @return list of remote projects
 	 */
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException;
+	List<IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException;
 
 	/**
 	 * Makes a server call in order to fetch the current list of available projects.
@@ -113,7 +105,7 @@ public interface IServer {
 	 * @param shouldRemember caches the retrieved list locally. Accessible via {@link #getRemoteProjects()}
 	 * @return list of remote projects
 	 */
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
+	List<IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
 		throws EMFStoreException;
 
 	/**

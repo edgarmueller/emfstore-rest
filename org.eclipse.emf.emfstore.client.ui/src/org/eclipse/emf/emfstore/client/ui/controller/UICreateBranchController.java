@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.eclipse.jface.dialogs.Dialog;
@@ -148,7 +149,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
-			changePackage.getLogMessage().setMessage(commitDialog.getLogText());
+			changePackage.setLogMessage(
+				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
+					projectSpace.getUsersession().getUsername()));
 			return true;
 		}
 
@@ -222,6 +225,6 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
-		return errorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec, monitor);
+		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

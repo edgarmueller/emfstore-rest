@@ -103,25 +103,28 @@ public interface IRemoteProject extends IProject {
 
 	/**
 	 * Deletes the remote project on the server.
+<<<<<<< HEAD
 	 * 
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
 	 * 
 	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
+=======
+>>>>>>> 4439c51b36736be74f4db8dc0a94ab6eb2d77149
 	 */
-	void delete(boolean deleteFiles) throws EMFStoreException;
+	void delete() throws EMFStoreException;
 
 	/**
 	 * Deletes the remote project on the server.
 	 * 
 	 * @param usersession session used for server call
-	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
 	 */
-	void delete(IUsersession usersession, boolean deleteFiles) throws EMFStoreException;
+	void delete(IUsersession usersession) throws EMFStoreException;
 
 	/**
 	 * Returns the HEAD version of the remote project.
 	 * 
+<<<<<<< HEAD
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
 	 * 
@@ -140,4 +143,9 @@ public interface IRemoteProject extends IProject {
 	 * @return version spec of the HEAD version
 	 */
 	IPrimaryVersionSpec getHeadVersion(IUsersession usersession, boolean fetch) throws EMFStoreException;
+=======
+	 * @return version spec of the HEAD version
+	 */
+	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
+>>>>>>> 4439c51b36736be74f4db8dc0a94ab6eb2d77149
 }

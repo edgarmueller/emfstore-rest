@@ -154,14 +154,14 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
 		// TODO: OTS casts
-		new RemoteProject(serverInfo, projectInfo).delete(deleteFiles);
+		new RemoteProject(serverInfo, projectInfo).delete();
 	}
 
 	private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
 		throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
 			// TODO: OTS casts
-			new RemoteProject(serverInfo, projectInfo).delete(session, deleteFiles);
+			new RemoteProject(serverInfo, projectInfo).delete(session);
 		}
 	}
 
@@ -169,7 +169,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		IProgressMonitor monitor) throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
 			// TODO: OTS casts
-			new RemoteProject(serverInfo, projectInfo).delete(deleteFiles);
+			new RemoteProject(serverInfo, projectInfo).delete();
 		}
 	}
 }

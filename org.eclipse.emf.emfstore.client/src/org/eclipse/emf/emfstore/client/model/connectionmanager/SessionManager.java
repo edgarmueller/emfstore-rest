@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
@@ -25,6 +24,10 @@ import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 public class SessionManager {
 
 	private AbstractSessionProvider provider;
+
+	public SessionManager() {
+		provider = new BasicSessionProvider();
+	}
 
 	/**
 	 * Executes the given {@link ServerCall}.
@@ -95,17 +98,11 @@ public class SessionManager {
 		}
 	}
 
+	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
+		provider = sessionProvider;
+	}
+
 	private AbstractSessionProvider getSessionProvider() {
-
-		if (provider == null) {
-			// TODO EXPT PRIO
-			provider = new ExtensionPoint(AbstractSessionProvider.ID).getClass("class", AbstractSessionProvider.class);
-		}
-
-		if (provider == null) {
-			provider = new BasicSessionProvider();
-		}
-
 		return provider;
 	}
 }

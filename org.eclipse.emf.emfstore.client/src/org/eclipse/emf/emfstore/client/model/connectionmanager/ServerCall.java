@@ -14,13 +14,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IServerCall;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.api.ISessionId;
@@ -41,7 +39,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  * 
  * @param <U> the return type of the wrapped action
  */
-public abstract class ServerCall<U> implements IServerCall {
+public abstract class ServerCall<U> {
 
 	private ILocalProject projectSpace;
 	private IUsersession usersession;
@@ -69,7 +67,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	/**
 	 * Default constructor with project space.
 	 * 
-	 * @param projectSpace
+	 * @param localProject
 	 *            relevant project space if existent
 	 */
 	// TODO: OTS add javadoc to explain why type is a local project
@@ -81,7 +79,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	/**
 	 * Default constructor with serverinfo.
 	 * 
-	 * @param serverInfo a given server
+	 * @param server a given server
 	 */
 	public ServerCall(IServer server) {
 		this.server = server;
@@ -96,7 +94,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(Usersession usersession, IProgressMonitor monitor) {
+	public ServerCall(IUsersession usersession, IProgressMonitor monitor) {
 		this.usersession = usersession;
 		setProgressMonitor(monitor);
 	}
@@ -104,26 +102,26 @@ public abstract class ServerCall<U> implements IServerCall {
 	/**
 	 * Default constructor with project space and progress monitor.
 	 * 
-	 * @param projectSpace
-	 *            relevant project space if existent
+	 * @param localProject
+	 *            relevant project, if existent
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ProjectSpaceImpl projectSpace, IProgressMonitor monitor) {
-		this.projectSpace = projectSpace;
+	public ServerCall(ILocalProject localProject, IProgressMonitor monitor) {
+		this.projectSpace = localProject;
 		setProgressMonitor(monitor);
 	}
 
 	/**
 	 * Default constructor with server info and progress monitor.
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            a given server info
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ServerInfo serverInfo, IProgressMonitor monitor) {
-		this.server = serverInfo;
+	public ServerCall(IServer server, IProgressMonitor monitor) {
+		this.server = server;
 		setProgressMonitor(monitor);
 	}
 
@@ -139,11 +137,13 @@ public abstract class ServerCall<U> implements IServerCall {
 	/**
 	 * Sets the server info that is used by this server call.
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            the server info that should be used by this server call
+	 * @return
 	 */
-	public void setServerInfo(IServer server) {
+	public ServerCall<U> setServer(IServer server) {
 		this.server = server;
+		return this;
 	}
 
 	/**
@@ -151,9 +151,11 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param usersession
 	 *            the user session to be used by the server call
+	 * @return
 	 */
-	public void setUsersession(IUsersession usersession) {
+	public ServerCall<U> setUsersession(IUsersession usersession) {
 		this.usersession = usersession;
+		return this;
 	}
 
 	/**

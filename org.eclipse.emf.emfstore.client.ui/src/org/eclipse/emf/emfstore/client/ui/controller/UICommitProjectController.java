@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
@@ -29,6 +31,7 @@ import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -144,7 +147,9 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
-			changePackage.getLogMessage().setMessage(commitDialog.getLogText());
+			changePackage.setLogMessage(
+				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
+					projectSpace.getUsersession().getUsername()));
 			return true;
 		}
 
@@ -183,13 +188,13 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.api.ILocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
-		return errorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec, monitor);
+		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

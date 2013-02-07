@@ -13,6 +13,7 @@
 package org.eclipse.emf.emfstore.client.api;
 
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
 
 /**
  * Central access point to recieve the current workspace.
@@ -34,5 +35,13 @@ public interface IWorkspaceProvider {
 	 * @return current workspace.
 	 */
 	IWorkspace getWorkspace();
+
+	/**
+	 * Allows the user to set the {@link AbstractSessionProvider} to use.
+	 * 
+	 * @param sessionProvider
+	 *            the {@link AbstractSessionProvider} to use
+	 */
+	void setSessionProvider(AbstractSessionProvider sessionProvider);
 
 }

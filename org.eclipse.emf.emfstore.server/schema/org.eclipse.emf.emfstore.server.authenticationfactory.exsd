@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.server" id="org.eclipse.emf.emfstore.server.authenticationfactory" name="Authentication Factory"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         The user can provide an own authentication factory used for authenticating the users.
       </documentation>
    </annotation>
 
@@ -52,7 +52,7 @@
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  This class provides the control used for authenticating users.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory"/>
