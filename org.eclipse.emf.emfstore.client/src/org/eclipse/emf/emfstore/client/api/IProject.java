@@ -86,7 +86,7 @@ public interface IProject {
 	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
-	List<? extends IBranchInfo> getBranches() throws EMFStoreException;
+	List<IBranchInfo> getBranches() throws EMFStoreException;
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
@@ -100,7 +100,7 @@ public interface IProject {
 	 *            A history query.
 	 * @return a list of {@link IHistoryInfo} objects
 	 */
-	List<? extends IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
+	List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
 
 	/**
 	 * Adds a tag to the specified version of this project on the server.

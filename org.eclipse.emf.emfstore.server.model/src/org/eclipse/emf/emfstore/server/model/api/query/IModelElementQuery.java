@@ -6,5 +6,5 @@ import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 
 public interface IModelElementQuery extends IRangeQuery {
 
-	List<? extends IModelElementId> getModelElements();
+	List<IModelElementId> getModelElements();
 }

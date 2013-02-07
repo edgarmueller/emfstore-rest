@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
@@ -79,19 +80,6 @@ public interface IRemoteProject extends IProject {
 		throws EMFStoreException;
 
 	/**
-	 * Gets a list of history infos from the server.
-	 * 
-	 * @param usersession session used for server call
-	 * @param query
-	 *            the query to be performed in order to fetch the history
-	 *            information
-	 * 
-	 * @return a list of history infos
-	 */
-	List<? extends IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query)
-		throws EMFStoreException;
-
-	/**
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
 	 * 
@@ -101,16 +89,22 @@ public interface IRemoteProject extends IProject {
 	 */
 	IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec) throws EMFStoreException;
 
+	List<IBranchInfo> getBranches(IUsersession usersession) throws EMFStoreException;
+
+	/**
+	 * Gets a list of history infos from the server.
+	 * 
+	 * @param usersession session used for server call
+	 * @param query
+	 *            the query to be performed in order to fetch the history
+	 *            information
+	 * 
+	 * @return a list of history infos
+	 */
+	List<IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query) throws EMFStoreException;
+
 	/**
 	 * Deletes the remote project on the server.
-<<<<<<< HEAD
-	 * 
-	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
-	 * 
-	 * @param deleteFiles if true, the project files are deleted too, which prohibits any recovery.
-=======
->>>>>>> 4439c51b36736be74f4db8dc0a94ab6eb2d77149
 	 */
 	void delete() throws EMFStoreException;
 
@@ -120,32 +114,4 @@ public interface IRemoteProject extends IProject {
 	 * @param usersession session used for server call
 	 */
 	void delete(IUsersession usersession) throws EMFStoreException;
-
-	/**
-	 * Returns the HEAD version of the remote project.
-	 * 
-<<<<<<< HEAD
-	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
-	 * 
-	 * @param fetch if true, the head version is resolved with the server. Otherwise the last locally known HEAD version
-	 *            is returned.
-	 * @return version spec of the HEAD version
-	 */
-	IPrimaryVersionSpec getHeadVersion(boolean fetch) throws EMFStoreException;
-
-	/**
-	 * Returns the HEAD version of the remote project.
-	 * 
-	 * @param usersession session used for server call
-	 * @param fetch if true, the head version is resolved with the server. Otherwise the last locally known HEAD version
-	 *            is returned.
-	 * @return version spec of the HEAD version
-	 */
-	IPrimaryVersionSpec getHeadVersion(IUsersession usersession, boolean fetch) throws EMFStoreException;
-=======
-	 * @return version spec of the HEAD version
-	 */
-	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
->>>>>>> 4439c51b36736be74f4db8dc0a94ab6eb2d77149
 }

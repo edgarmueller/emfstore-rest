@@ -27,7 +27,7 @@ public interface IWorkspace {
 	 * 
 	 * @return list of local projects
 	 */
-	List<? extends ILocalProject> getLocalProjects();
+	List<ILocalProject> getLocalProjects();
 
 	/**
 	 * Creates a new local project that is not shared with the server yet.
@@ -45,7 +45,7 @@ public interface IWorkspace {
 	 * 
 	 * @return list of servers
 	 */
-	List<? extends IServer> getServers();
+	List<IServer> getServers();
 
 	/**
 	 * Adds a server.

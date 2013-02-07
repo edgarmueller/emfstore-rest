@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.client.api;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -33,7 +32,6 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Represents a locally checkedout project.
@@ -162,15 +160,6 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	Date getLastUpdated();
 
 	EList<String> getRecentLogMessages();
-
-	/**
-	 * Return the list of operations that have already been performed on the
-	 * project space.
-	 * 
-	 * @return a list of operations
-	 * @generated NOT
-	 */
-	List<AbstractOperation> getOperations();
 
 	/**
 	 * Undo the last operation of the projectSpace.

@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
+import static org.eclipse.emf.emfstore.common.ListUtil.copy;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,7 +85,9 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
@@ -93,7 +97,6 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
@@ -440,8 +443,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery)
 	 */
-	public List<HistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException {
-		return getRemoteProject().getHistoryInfos(getUsersession(), query);
+	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException {
+		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query));
 	}
 
 	/**
@@ -942,14 +945,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @generated NOT
 	 */
-	public List<BranchInfo> getBranches() throws EMFStoreException {
-		return new ServerCall<List<BranchInfo>>(this) {
+	public List<IBranchInfo> getBranches() throws EMFStoreException {
+		return copy(new ServerCall<List<BranchInfo>>(this) {
 			@Override
 			protected List<BranchInfo> run() throws EMFStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), getProjectId());
 			};
-		}.execute();
+		}.execute());
 	}
 
 	/**
@@ -1292,8 +1295,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
 		// OTS cast
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this,
-			(List<IChangePackage>) (List<?>) theirChangePackages);
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class)
+			.postApplyTheirChanges(this, (List<IChangePackage>) (List<?>) theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {

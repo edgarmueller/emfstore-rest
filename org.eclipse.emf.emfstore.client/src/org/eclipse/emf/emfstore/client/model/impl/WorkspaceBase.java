@@ -10,9 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.impl;
 
+import static org.eclipse.emf.emfstore.common.ListUtil.copy;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
@@ -546,12 +548,13 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		return projectSpace;
 	}
 
-	public List<ProjectSpace> getLocalProjects() {
-		return new ArrayList<ProjectSpace>(getProjectSpaces());
+	public List<ILocalProject> getLocalProjects() {
+		return copy(getProjectSpaces());
 	}
 
-	public List<ServerInfo> getServers() {
-		return getServerInfos();
+	@SuppressWarnings("unchecked")
+	public List<IServer> getServers() {
+		return copy(getServerInfos());
 	}
 
 	public void projectSpaceDeleted(ProjectSpace projectSpace) {

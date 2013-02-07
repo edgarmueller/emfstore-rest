@@ -32,10 +32,7 @@ import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -771,8 +768,6 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 */
 	void transmitProperties();
 
-	ProjectId getProjectId();
-
 	/**
 	 * 
 	 * {@inheritDoc}
@@ -782,10 +777,10 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @generated NOT
 	 */
 
-	List<BranchInfo> getBranches() throws EMFStoreException;
-
-	List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException;
+	ProjectId getProjectId();
 
 	RemoteProject getRemoteProject() throws EMFStoreException;
+
+	List<AbstractOperation> getOperations();
 
 } // ProjectContainer

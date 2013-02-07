@@ -1,10 +1,10 @@
 package org.eclipse.emf.emfstore.client.model.impl;
 
+import static org.eclipse.emf.emfstore.common.ListUtil.copy;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -14,7 +14,6 @@ import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
@@ -61,11 +60,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		return log;
 	}
 
-	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
-		return mapToRemoteProject(getProjectInfos());
-	}
-
-	public List<RemoteProject> getRemoteProjectsFromServer(IUsersession usersession, boolean shouldRemember)
+	public List<IRemoteProject> getRemoteProjectsFromServer(IUsersession usersession, boolean shouldRemember)
 		throws EMFStoreException {
 
 		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {
@@ -79,10 +74,10 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 			getProjectInfos().addAll(projectInfos);
 		}
 
-		return mapToRemoteProject(projectInfos);
+		return copy(mapToRemoteProject(projectInfos));
 	}
 
-	public List<RemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException {
+	public List<IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException {
 		return getRemoteProjectsFromServer(null, shouldRemember);
 	}
 
@@ -113,15 +108,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 		return usersession;
 	}
 
-	public Set<Usersession> getUsersessions() {
-		Set<Usersession> sessions = new LinkedHashSet<Usersession>();
-
-		for (Usersession session : ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions()) {
-			if (session.getServerInfo() == this) {
-				sessions.add(session);
-			}
-		}
-
-		return sessions;
+	public List<IRemoteProject> getRemoteProjects() throws EMFStoreException {
+		return getRemoteProjectsFromServer(false);
 	}
 }
