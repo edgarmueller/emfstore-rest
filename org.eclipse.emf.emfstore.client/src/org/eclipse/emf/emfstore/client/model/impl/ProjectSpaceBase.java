@@ -83,6 +83,7 @@ import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
@@ -847,7 +848,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	public void loginCompleted(Usersession session) {
+	public void loginCompleted(IUsersession session) {
 		// TODO Implement possibility in observerbus to register only for
 		// certain notifier
 		if (getUsersession() == null || !getUsersession().equals(session)) {
@@ -1291,7 +1292,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this, theirChangePackages);
+		// OTS cast
+		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyTheirChanges(this,
+			(List<IChangePackage>) (List<?>) theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {

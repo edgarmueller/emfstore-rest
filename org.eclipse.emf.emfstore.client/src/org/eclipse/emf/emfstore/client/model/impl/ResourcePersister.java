@@ -24,8 +24,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.EmptyRemovalsFilter;
@@ -41,8 +41,8 @@ import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 
 /**
  * 
@@ -306,10 +306,10 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.api.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages,
+	public boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages,
 		IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
@@ -318,11 +318,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * 
 	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void updateCompleted(ProjectSpace projectSpace, IProgressMonitor monitor) {
+	public void updateCompleted(ILocalProject project, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 
@@ -330,21 +327,23 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.api.ILocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.api.IChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage, IProgressMonitor monitor) {
+	public boolean inspectChanges(ILocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.api.ILocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision, IProgressMonitor monitor) {
+	public void commitCompleted(ILocalProject project, IPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 

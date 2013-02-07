@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
@@ -19,6 +20,8 @@ import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
+import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 
 /**
@@ -36,7 +39,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
 			return true;
@@ -50,7 +53,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			return false;
 		}
@@ -65,27 +68,32 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(final ProjectSpace projectSpace, final PrimaryVersionSpec versionSpec,
+		public boolean execute(final ILocalProject project, final IPrimaryVersionSpec versionSpec,
 			IProgressMonitor monitor) throws EMFStoreException {
 
-			Project project = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
+			// TODO: OTS casts
+			ProjectSpace projectSpace = (ProjectSpace) project;
+
+			Project fetchedProject = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
 				@Override
 				public Project run(IProgressMonitor monitor) throws EMFStoreException {
 					return WorkspaceProvider
 						.getInstance()
 						.getConnectionManager()
-						.getProject(projectSpace.getUsersession().getSessionId(),
-							(ProjectId) projectSpace.getRemoteProject().getProjectId(), ModelUtil.clone(versionSpec));
-					// projectInfoCopy.getVersion());
+						.getProject(
+							(SessionId) project.getUsersession().getSessionId(),
+							(ProjectId) project.getRemoteProject().getProjectId(),
+							ModelUtil.clone((PrimaryVersionSpec) versionSpec));
 				}
 			}.execute();
 
-			if (project == null) {
+			if (fetchedProject == null) {
 				throw new EMFStoreException("Server returned a null project!");
 			}
 
-			projectSpace.setProject(project);
+			projectSpace.setProject(fetchedProject);
 			projectSpace.init();
+
 			return true;
 		}
 	}

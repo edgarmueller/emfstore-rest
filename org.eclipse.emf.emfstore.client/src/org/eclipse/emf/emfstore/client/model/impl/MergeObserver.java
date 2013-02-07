@@ -13,8 +13,10 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
@@ -36,42 +38,42 @@ public interface MergeObserver extends IObserver {
 	/**
 	 * Called before all local changes are reverted.
 	 * 
-	 * @param projectSpace
+	 * @param project
 	 *            the project space upon local changes have been reverted
 	 * @param changePackage
 	 *            the {@link ChangePackage} containing the operations being reverted
 	 */
-	void preRevertMyChanges(ProjectSpace projectSpace, ChangePackage changePackage);
+	void preRevertMyChanges(ILocalProject project, IChangePackage changePackage);
 
 	/**
 	 * Called after local changes have been reverted and before incoming
 	 * changes are applied.
 	 * 
-	 * @param projectSpace
+	 * @param project
 	 *            the project space upon local changes have been reverted
 	 */
-	void postRevertMyChanges(ProjectSpace projectSpace);
+	void postRevertMyChanges(ILocalProject project);
 
 	/**
 	 * Called after incoming changes have been applied upon the {@link ProjectSpace} and before
 	 * our changes are re-applied.
 	 * 
-	 * @param projectSpace
+	 * @param project
 	 *            the project space upon local changes have been reverted
 	 * @param theirChangePackages
 	 *            a list of change packages containing the changes that have been applied
 	 *            upon the project space
 	 */
-	void postApplyTheirChanges(ProjectSpace projectSpace, List<ChangePackage> theirChangePackages);
+	void postApplyTheirChanges(ILocalProject project, List<IChangePackage> theirChangePackages);
 
 	/**
 	 * Called after merge result has been re-applied, i.e. after the incoming changes
 	 * from other parties have been applied upon the given project space.
 	 * 
-	 * @param projectSpace
+	 * @param project
 	 *            the project space upon which changes should be reapplied
 	 * @param changePackage
 	 *            the change package containing the changes to be applied upon the project space
 	 */
-	void postApplyMergedChanges(ProjectSpace projectSpace, ChangePackage changePackage);
+	void postApplyMergedChanges(ILocalProject project, IChangePackage changePackage);
 }

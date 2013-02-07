@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.connectionmanager;
 
@@ -41,8 +42,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.client.model.exceptions.InvalidCertificateException;
 import org.eclipse.emf.emfstore.client.model.util.ConfigurationProvider;
@@ -54,22 +55,16 @@ import org.eclipse.emf.emfstore.common.model.util.FileUtil;
  * The KeyStoreManager manages the client's KeyStore in which the SSL
  * certificates for multiple EMFStore servers can be stored.
  * 
- * @author Wesendonk
+ * @author wesendon
  */
-
 public final class KeyStoreManager {
-
-	private static KeyStoreManager instance;
 
 	/**
 	 * Name of keyStore file.
 	 */
 	public static final String KEYSTORENAME = "emfstoreClient.keystore";
-
 	private static final String KEYSTOREPASSWORD = "654321";
-
 	private static final String CERTIFICATE_TYPE = "X.509";
-
 	private static final String CIPHER_ALGORITHM = "RSA";
 
 	/**
@@ -77,8 +72,9 @@ public final class KeyStoreManager {
 	 */
 	public static final String DEFAULT_CERTIFICATE = "emfstore test certificate (do not use in production!)"; // "EMFStore Test Certificate (DO NOT USE IN PRODUCTION!)";
 
-	private String defaultCertificate;
+	private static KeyStoreManager instance;
 
+	private String defaultCertificate;
 	private KeyStore keyStore;
 
 	private KeyStoreManager() {
@@ -399,9 +395,9 @@ public final class KeyStoreManager {
 	 *            ServerInfo
 	 * @return String
 	 */
-	public String encrypt(String password, ServerInfo serverInfo) {
+	public String encrypt(String password, IServer server) {
 		try {
-			Certificate publicKey = getCertificateForEncryption(serverInfo);
+			Certificate publicKey = getCertificateForEncryption(server);
 			PublicKey key = publicKey.getPublicKey();
 			byte[] inpBytes;
 			inpBytes = password.getBytes();
@@ -436,12 +432,12 @@ public final class KeyStoreManager {
 		return "";
 	}
 
-	private Certificate getCertificateForEncryption(ServerInfo serverInfo) throws CertificateStoreException {
+	private Certificate getCertificateForEncryption(IServer server) throws CertificateStoreException {
 		Certificate publicKey;
-		if (serverInfo == null) {
+		if (server == null) {
 			publicKey = getCertificate(getDefaultCertificate());
 		} else {
-			publicKey = getCertificate(serverInfo.getCertificateAlias());
+			publicKey = getCertificate(server.getCertificateAlias());
 		}
 		if (publicKey == null) {
 			publicKey = getCertificate(getDefaultCertificate());

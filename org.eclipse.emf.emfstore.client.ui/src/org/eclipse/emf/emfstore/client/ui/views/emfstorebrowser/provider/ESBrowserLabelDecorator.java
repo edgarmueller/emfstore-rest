@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.ui.Activator;
@@ -90,7 +90,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void loginCompleted(Usersession session) {
+	public void loginCompleted(IUsersession session) {
 		update(session);
 	}
 
@@ -100,15 +100,15 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void logoutCompleted(Usersession session) {
+	public void logoutCompleted(IUsersession session) {
 		update(session);
 	}
 
-	private void update(final Usersession usersession) {
+	private void update(final IUsersession usersession) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				fireLabelProviderChanged(new LabelProviderChangedEvent(ESBrowserLabelDecorator.this, usersession
-					.getServerInfo()));
+					.getServer()));
 			}
 		});
 	}

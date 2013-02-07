@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 
 /**
  * Filters notifications for transient features, as these have no effect on the persisted model state.
@@ -25,7 +25,7 @@ public class TransientFilter implements NotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 		return notificationInfo.isTransient();
 	}
 

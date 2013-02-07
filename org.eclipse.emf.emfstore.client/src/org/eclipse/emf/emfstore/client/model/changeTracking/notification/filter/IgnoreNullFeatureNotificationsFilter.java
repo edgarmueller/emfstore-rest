@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 
 /**
  * Filter to ignore notifications with the illegal state of having no value for
@@ -25,11 +25,13 @@ import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 public class IgnoreNullFeatureNotificationsFilter implements NotificationFilter {
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 		return (notificationInfo.getFeature() == null);
 	}
 

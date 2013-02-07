@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
 /**
@@ -27,7 +27,7 @@ public class IgnoreDatatypeFilter implements NotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 
 		Object newValue = notificationInfo.getNewValue();
 		Object oldValue = notificationInfo.getOldValue();

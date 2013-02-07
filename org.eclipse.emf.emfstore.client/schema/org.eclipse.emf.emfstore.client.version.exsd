@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.version" name="Client Version "/>
       </appInfo>
       <documentation>
-         Enables to set a customize the version identifier of the EMFStore client component.
+         Enables to set a customized version identifier for the EMFStore client.
       </documentation>
    </annotation>
 

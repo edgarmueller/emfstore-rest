@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.notificationFilter" name="Notification Filer"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Provides a mechanism to filter specific notifications.
       </documentation>
    </annotation>
 

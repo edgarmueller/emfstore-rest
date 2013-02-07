@@ -7,10 +7,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Aleksander Shterev
+ * Carl Pfeiffer
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observers;
 
-import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 
 /**
@@ -24,8 +26,9 @@ public interface LoginObserver extends IObserver {
 	/**
 	 * To be called when login is completed.
 	 * 
-	 * @param session the usersession which was logged in.
+	 * @param session
+	 *            the usersession which was logged in
 	 */
-	void loginCompleted(Usersession session);
+	void loginCompleted(IUsersession session);
 
 }

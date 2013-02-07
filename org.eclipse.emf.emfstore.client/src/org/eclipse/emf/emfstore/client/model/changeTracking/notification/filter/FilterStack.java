@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 
 /**
  * This class filters a notification recording according to predefined stacks of
@@ -66,13 +66,15 @@ public final class FilterStack implements NotificationFilter {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 		for (NotificationFilter f : filterList) {
-			if (f.check(notificationInfo, collection)) {
+			if (f.check(notificationInfo, container)) {
 				return true;
 			}
 		}

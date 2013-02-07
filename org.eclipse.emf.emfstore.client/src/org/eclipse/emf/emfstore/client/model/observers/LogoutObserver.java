@@ -7,24 +7,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observers;
 
-import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 
 /**
  * Observes a logout of a session.
  * 
- * @author Maximilian Koegel
- * 
+ * @author koegel
  */
 public interface LogoutObserver extends IObserver {
 
 	/**
 	 * Called to notify about the completion of a logout of the given usersession.
 	 * 
-	 * @param session the usersession
+	 * @param session
+	 *            the usersession that was logged out
 	 */
-	void logoutCompleted(Usersession session);
+	void logoutCompleted(IUsersession session);
 }

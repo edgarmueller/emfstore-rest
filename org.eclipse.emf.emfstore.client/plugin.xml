@@ -9,7 +9,6 @@
 -->
 
 <plugin>
-   <extension-point id="org.eclipse.emf.emfstore.client.notification.providers" name="Notification Providers" schema="schema/org.eclipse.emf.emfstore.client.notificationProviders.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.wrapperfactories" name="Wrapper factories" schema="schema/org.eclipse.emf.emfstore.client.wrapperfactories.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.workspaceLocationProvider" name="Workspace Location Provider" schema="schema/org.eclipse.emf.emfstore.client.workspaceLocationProvider.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.defaultConfigurationProvider" name="Default Configuration Provider" schema="schema/org.eclipse.emf.emfstore.client.defaultConfigurationProvider.exsd"/>
@@ -23,7 +22,6 @@
    <extension-point id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.client.logoutObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.commitObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.commitObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.updateObserver" name="Update Observer" schema="schema/org.eclipse.emf.emfstore.client.updateObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.openModelElementObserver" name="Open ModelElement Observer" schema="schema/org.eclipse.emf.emfstore.openModelElementObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.checkoutObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.checkoutObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Exception Observer" schema="schema/org.eclipse.emf.emfstore.client.exceptionObserver.exsd"/>
    <extension-point id="org.eclipse.emf.emfstore.client.version" name="Client Version " schema="schema/org.eclipse.emf.emfstore.client.version.exsd"/>

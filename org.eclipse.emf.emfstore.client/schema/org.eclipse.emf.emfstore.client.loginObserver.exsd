@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.loginObserver" name="Login Observer"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         An observer that will be notified when the login of a user session occurred.
       </documentation>
    </annotation>
 

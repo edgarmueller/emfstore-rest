@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.inverseCrossReferenceCache" name="Inverse Cross Referene Cache"/>
       </appInfo>
       <documentation>
-         Determines whether a CrossReferenceAdapter should be used to determine the inverse cross refernces of a EObject.  This shall improve performance considerably.  If deactivated, each invocation to find inverse cross references will need to iterate through the whole ResourceSet.
+         Determines whether a CrossReferenceAdapter should be used to determine the inverse cross refernces of an EObject. If no CrossReferenceAdapter is used, each invocation to find inverse cross references will need to iterate through the whole ResourceSet.  Thus, activating this option should improve performance considerably. 
       </documentation>
    </annotation>
 

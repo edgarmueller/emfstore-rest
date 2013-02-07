@@ -13,10 +13,10 @@ package org.eclipse.emf.emfstore.client.ui.util;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -51,7 +51,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void loginCompleted(Usersession session) {
+	public void loginCompleted(IUsersession session) {
 		try {
 			update(session);
 		} catch (EMFStoreException e) {
@@ -76,7 +76,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 		}
 	}
 
-	private void updateACUser(Usersession session) {
+	private void updateACUser(IUsersession session) {
 		try {
 			workspace.updateACUser(session);
 		} catch (EMFStoreException e) {
@@ -85,7 +85,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 		}
 	}
 
-	private void update(final Usersession session) throws EMFStoreException {
+	private void update(final IUsersession session) throws EMFStoreException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				// TODO: OTS
@@ -102,10 +102,11 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
 	 */
-	public void logoutCompleted(Usersession session) {
-		ServerInfo serverInfo = session.getServerInfo();
-		if (serverInfo != null) {
-			serverInfo.getProjectInfos().clear();
+	public void logoutCompleted(IUsersession session) {
+		// OTS cast
+		ServerInfo server = (ServerInfo) session.getServer();
+		if (server != null) {
+			server.getProjectInfos().clear();
 		}
 	}
 

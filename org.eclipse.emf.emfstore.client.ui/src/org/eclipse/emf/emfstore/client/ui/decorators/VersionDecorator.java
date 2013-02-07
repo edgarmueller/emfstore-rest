@@ -16,10 +16,12 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.client.model.observers.UpdateObserver;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.viewers.IDecoration;
@@ -141,11 +143,8 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	/**
 	 * 
 	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      java.util.List)
 	 */
-	public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changePackages,
+	public boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages,
 		IProgressMonitor monitor) {
 		return true;
 	}
@@ -154,10 +153,10 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.model.observers.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.api.ILocalProject,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void updateCompleted(ProjectSpace projectSpace, IProgressMonitor monitor) {
+	public void updateCompleted(ILocalProject project, IProgressMonitor monitor) {
 		update();
 	}
 

@@ -15,9 +15,9 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
@@ -207,10 +207,10 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void loginCompleted(final Usersession session) {
+	public void loginCompleted(final IUsersession session) {
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				viewer.refresh(session.getServerInfo(), true);
+				viewer.refresh(session.getServer(), true);
 			}
 		});
 	}

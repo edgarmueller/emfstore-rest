@@ -27,6 +27,7 @@ import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEO
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
@@ -129,7 +130,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			return getLocalProject().getBaseVersion();
 		}
 		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
-			.inspectChanges(getLocalProject(), changes, getProgressMonitor());
+			.inspectChanges(getLocalProject(), (List<IChangePackage>) (List<?>) changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
 		if (getLocalProject().getOperations().size() > 0) {

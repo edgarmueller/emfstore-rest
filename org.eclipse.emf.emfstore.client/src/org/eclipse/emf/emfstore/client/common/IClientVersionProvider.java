@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.common;
 
@@ -15,8 +16,7 @@ import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 /**
  * Determines the version identifier of the client component.
  * 
- * @author Edgar Mueller
- * 
+ * @author emueller
  */
 public interface IClientVersionProvider {
 

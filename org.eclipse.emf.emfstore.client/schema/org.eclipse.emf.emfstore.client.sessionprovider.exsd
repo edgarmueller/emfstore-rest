@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.sessionprovider" name="SessionProvider"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Provides a mechanism to inject an user session in case no one was specified.
       </documentation>
    </annotation>
 

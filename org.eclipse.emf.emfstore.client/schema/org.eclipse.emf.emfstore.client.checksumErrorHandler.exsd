@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.checksumErrorHandler" name="Client Checksum Error Handler"/>
       </appInfo>
       <documentation>
-         Determines whether the client&apos;s checksum of a project state should be compared against the checksum the server&apos;s project state.  If this is the case, an additional action may be set that determines what happens if the checksums are not equal
+         Determines whether the client&apos;s checksum of a local project state should be compared against the checksum of the server&apos;s project state.  If the checksums are not equal, a configurable error handler will be called.
       </documentation>
    </annotation>
 

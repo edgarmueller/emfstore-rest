@@ -7,16 +7,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observers;
 
 import org.eclipse.emf.emfstore.common.observer.IObserver;
 
 /**
- * Observes Exceptions and tries to handle them.
+ * Observes exceptions and tries to handle them.
  * 
- * @author Maximilian Koegel
- * 
+ * @author koegel
  */
 public interface ExceptionObserver extends IObserver {
 

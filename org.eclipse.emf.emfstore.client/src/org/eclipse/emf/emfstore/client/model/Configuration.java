@@ -18,6 +18,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.util.ChecksumErrorHandler;
@@ -190,9 +191,10 @@ public final class Configuration {
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ConfigurationProvider.class);
 		if (provider != null) {
-			List<ServerInfo> defaultServerInfos = provider.getDefaultServerInfos();
+			List<IServer> defaultServerInfos = provider.getDefaultServerInfos();
 			if (defaultServerInfos != null) {
-				return defaultServerInfos;
+				// OTS cast
+				return (List<ServerInfo>) (List<?>) defaultServerInfos;
 			}
 		}
 		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();

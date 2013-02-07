@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.editingDomainProvider" name="EditingDomain Provider"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Extension point for exchanging the default editing domain of the WorkspaceProvider.
       </documentation>
    </annotation>
 

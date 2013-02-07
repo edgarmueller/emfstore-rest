@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Exception Observer"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         An observer that will be notified when runtime exceptions occur.
       </documentation>
    </annotation>
 

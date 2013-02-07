@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 
 /**
@@ -21,15 +21,17 @@ import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 public class IgnoreNotificationsOutsideProject implements NotificationFilter {
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 
 		// do not filter notifications from (deleted) elements in project
-		if (collection.getModelElementId(notificationInfo.getNotifierModelElement()) != null
-			|| ((IdEObjectCollectionImpl) collection).getDeletedModelElementId(notificationInfo
+		if (container.getModelElementId(notificationInfo.getNotifierModelElement()) != null
+			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(notificationInfo
 				.getNotifierModelElement()) != null) {
 			return false;
 		}

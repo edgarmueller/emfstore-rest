@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.notify.postinit" name="Workspace Observer"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Called when the workspace finished initialising itself.
       </documentation>
    </annotation>
 

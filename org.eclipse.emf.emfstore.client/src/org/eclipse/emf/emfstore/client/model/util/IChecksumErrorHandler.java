@@ -12,12 +12,12 @@
 package org.eclipse.emf.emfstore.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 
 /**
- * Interface that determines what to do in case the checksum computation on a {@link ProjectSpace} fails.
+ * Interface that determines what to do in case the checksum computation on a {@link ILocalProject} fails.
  * 
  * @author emueller
  */
@@ -27,7 +27,7 @@ public interface IChecksumErrorHandler {
 	 * Executes the error handler.
 	 * 
 	 * @param projectSpace
-	 *            the {@link ProjectSpace} which contains the project that got in an inconsistent state
+	 *            the {@link ILocalProject} which contains the project that got in an inconsistent state
 	 *            and therefore caused the failing computation of the checksum
 	 * @param versionSpec
 	 *            the version spec containing the correct checksum
@@ -40,6 +40,6 @@ public interface IChecksumErrorHandler {
 	 * @throws EMFStoreException
 	 *             in case any error occurs during execution of the error handler
 	 */
-	boolean execute(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean execute(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 }

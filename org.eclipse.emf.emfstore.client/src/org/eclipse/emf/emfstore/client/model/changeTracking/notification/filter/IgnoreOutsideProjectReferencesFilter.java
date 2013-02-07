@@ -16,7 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 
@@ -28,15 +28,17 @@ import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter {
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.client.model.changeTracking.notification.NotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 
 		// if notification is from an element disconnected from the project?s containment tree we will not try to filter
 		// since we cannot derive the project then
-		if (collection == null) {
+		if (container == null) {
 			return false;
 		}
 
@@ -58,26 +60,26 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 
 		// notification is about adding elements => check added elements
 		if (notificationInfo.getNewValue() != null && notificationInfo.getNewValue() instanceof List) {
-			return checkNewValueList(notificationInfo, collection);
+			return checkNewValueList(notificationInfo, container);
 			// notification is about removing elements => check removed elements
 		} else if (notificationInfo.getOldValue() != null && notificationInfo.getOldValue() instanceof List) {
-			return checkOldValueList(notificationInfo, collection);
+			return checkOldValueList(notificationInfo, container);
 		} else {
 			// check single reference notification
-			return checkSingleReference(notificationInfo, collection);
+			return checkSingleReference(notificationInfo, container);
 		}
 
 	}
 
-	private boolean checkSingleReference(NotificationInfo notificationInfo, IdEObjectCollection collection) {
+	private boolean checkSingleReference(NotificationInfo notificationInfo, EObjectContainer container) {
 		// if new value is in project then do NOT filter
 		if (notificationInfo.getOldValue() != null && !notificationInfo.isMoveEvent()
-			&& isOrWasInProject(collection, notificationInfo.getOldModelElementValue())) {
+			&& isOrWasInProject(container, notificationInfo.getOldModelElementValue())) {
 			return false;
 		}
 		// if old value is in project then do NOT filter
 		if (notificationInfo.getNewValue() != null
-			&& isOrWasInProject(collection, notificationInfo.getNewModelElementValue())) {
+			&& isOrWasInProject(container, notificationInfo.getNewModelElementValue())) {
 			return false;
 		}
 		// neither old nor new value are in project => filter
@@ -85,9 +87,9 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkOldValueList(NotificationInfo notificationInfo, IdEObjectCollection project) {
+	private boolean checkOldValueList(NotificationInfo notificationInfo, EObjectContainer container) {
 		for (EObject referencedElement : ((List<EObject>) notificationInfo.getOldValue())) {
-			if (isOrWasInProject(project, referencedElement)) {
+			if (isOrWasInProject(container, referencedElement)) {
 				return false;
 			}
 		}
@@ -96,9 +98,9 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkNewValueList(NotificationInfo notificationInfo, IdEObjectCollection project) {
+	private boolean checkNewValueList(NotificationInfo notificationInfo, EObjectContainer container) {
 		for (EObject referencedElement : ((List<EObject>) notificationInfo.getNewValue())) {
-			if (isOrWasInProject(project, referencedElement)) {
+			if (isOrWasInProject(container, referencedElement)) {
 				return false;
 			}
 		}
@@ -106,9 +108,9 @@ public class IgnoreOutsideProjectReferencesFilter implements NotificationFilter 
 		return true;
 	}
 
-	private boolean isOrWasInProject(IdEObjectCollection collection, EObject referencedElement) {
-		boolean b = collection.contains(referencedElement)
-			|| ((IdEObjectCollectionImpl) collection).getDeletedModelElementId(referencedElement) != null;
+	private boolean isOrWasInProject(EObjectContainer container, EObject referencedElement) {
+		boolean b = container.contains(referencedElement)
+			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(referencedElement) != null;
 		return b;
 	}
 }
