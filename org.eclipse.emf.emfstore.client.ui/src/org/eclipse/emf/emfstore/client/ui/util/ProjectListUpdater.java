@@ -17,8 +17,10 @@ import org.eclipse.emf.emfstore.client.api.IUsersession;
 import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.model.Usersession;
 import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
@@ -78,7 +80,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 
 	private void updateACUser(IUsersession session) {
 		try {
-			workspace.updateACUser(session);
+			((WorkspaceBase) workspace).updateACUser((Usersession) session);
 		} catch (EMFStoreException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't update ACUser.", e);
