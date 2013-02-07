@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -546,7 +547,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	public List<ProjectSpace> getLocalProjects() {
-		return getProjectSpaces();
+		return new ArrayList<ProjectSpace>(getProjectSpaces());
 	}
 
 	public List<ServerInfo> getServers() {
