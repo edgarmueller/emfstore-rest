@@ -52,7 +52,7 @@
          <attribute name="providerClass" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  This class is used to get the paths to directories used for storing resources.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.LocationProvider"/>

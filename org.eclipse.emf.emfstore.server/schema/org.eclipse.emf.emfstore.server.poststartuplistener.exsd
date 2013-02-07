@@ -48,6 +48,11 @@
    </element>
 
    <element name="listener">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+      </annotation>
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -55,7 +60,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.startup.PostStartupListener"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.startup.PostStartupListener" deprecated="true"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -64,6 +69,9 @@
                <documentation>
                   
                </documentation>
+               <appInfo>
+                  <meta.attribute deprecated="true"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>

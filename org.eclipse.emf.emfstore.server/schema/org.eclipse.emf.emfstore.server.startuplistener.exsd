@@ -48,12 +48,20 @@
    </element>
 
    <element name="listener">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+      </annotation>
       <complexType>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
+               <appInfo>
+                  <meta.attribute deprecated="true"/>
+               </appInfo>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
@@ -62,7 +70,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.startup.StartupListener"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.startup.StartupListener" deprecated="true"/>
                </appInfo>
             </annotation>
          </attribute>
