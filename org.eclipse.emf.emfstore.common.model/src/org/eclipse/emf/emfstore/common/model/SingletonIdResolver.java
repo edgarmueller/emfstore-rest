@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.common.model;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 
 /**
  * Interface for mapping {@link ModelElementId}s to singleton objects and vice versa.
@@ -26,7 +27,7 @@ public interface SingletonIdResolver {
 	 * @return the {@link ModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
 	 *         is not a singleton or if it is <code>null</code>
 	 */
-	ModelElementId getSingletonModelElementId(EObject singleton);
+	IModelElementId getSingletonModelElementId(EObject singleton);
 
 	/**
 	 * Returns the singleton which belongs to the given {@link ModelElementId}.
@@ -34,7 +35,7 @@ public interface SingletonIdResolver {
 	 * @param singletonId a {@link ModelElementId}
 	 * @return the singleton {@link EObject} that belongs to the given {@link ModelElementId}
 	 */
-	EObject getSingleton(ModelElementId singletonId);
+	EObject getSingleton(IModelElementId singletonId);
 
 	/**
 	 * Determines whether the given {@link EObject} is a singleton.
