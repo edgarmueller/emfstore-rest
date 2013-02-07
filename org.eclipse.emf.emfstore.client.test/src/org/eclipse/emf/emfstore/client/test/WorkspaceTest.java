@@ -142,9 +142,9 @@ public abstract class WorkspaceTest {
 						projectSpace.delete();
 					}
 
-					WorkspaceProvider.getInstance().dispose();
 					setProject(null);
 					setProjectSpace(null);
+					WorkspaceProvider.getInstance().dispose();
 					workspace = null;
 					FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 				} catch (IOException e) {

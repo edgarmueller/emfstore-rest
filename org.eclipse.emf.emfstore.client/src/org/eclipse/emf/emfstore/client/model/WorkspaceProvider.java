@@ -35,7 +35,6 @@ import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
@@ -180,9 +179,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 	 */
 	public void reinit() {
 
-		if (!isDisposed()) {
-			return;
-		}
+		// TODO: OTS removed dispose check
 
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
@@ -574,11 +571,12 @@ public final class WorkspaceProvider implements IWorkspaceProvider, IReinitializ
 	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
 	 */
 	public void dispose() {
-		if (currentWorkspace != null) {
-			((WorkspaceImpl) currentWorkspace).dispose();
-			currentWorkspace = null;
-			instance = null;
-		}
+		// TODO: OTS
+		// if (currentWorkspace != null) {
+		// ((WorkspaceImpl) currentWorkspace).dispose();
+		// currentWorkspace = null;
+		// instance = null;
+		// }
 	}
 
 	/**

@@ -53,7 +53,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws EMFStoreException {
-		assertTrue(getServerInfo().getRemoteProjects(true).size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServerInfo().getRemoteProjectsFromServer(true).size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws EMFStoreException {
-		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects(true).size());
+		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjectsFromServer(true).size());
 
 		new EMFStoreCommand() {
 
@@ -110,7 +110,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjects(true).size());
+		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjectsFromServer(true).size());
 	}
 
 	/**
@@ -395,8 +395,7 @@ public class ServerInterfaceTest extends ServerTests {
 		getProjectSpace().addTag(getProjectVersion(), tag);
 		getProjectSpace().removeTag(getProjectVersion(), tag);
 
-		// TODO: TQ cast
-		List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) getProjectSpace().getHistoryInfos(
+		List<HistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
 			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
