@@ -50,7 +50,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testCommit() {
 		try {
 			IPrimaryVersionSpec base = localProject.getBaseVersion();
-			// TODO add changes
+			addPlayerToProject();
 			IPrimaryVersionSpec head = localProject.commit();
 			assertNotSame(base, head);
 		} catch (EMFStoreException e) {
@@ -59,12 +59,18 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		}
 	}
 
+	@Test(expected = EMFStoreException.class)
+	public void testCommitWithoutChange() throws EMFStoreException {
+		localProject.commit();
+		fail("Expects Exception on empty commit!");
+	}
+
 	@Test
 	public void testCommitLog() {
 
 		try {
 			IPrimaryVersionSpec base = localProject.getBaseVersion();
-			// TODO add changes
+			addPlayerToProject();
 			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			assertNotSame(base, head);
 		} catch (EMFStoreException e) {
@@ -73,12 +79,18 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		}
 	}
 
+	@Test(expected = EMFStoreException.class)
+	public void testCommitLogWithoutChange() throws EMFStoreException {
+		IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
+		fail("Expects Exception on empty commit!");
+	}
+
 	@Test
 	public void testCommitBranch() {
 
 		try {
 			IPrimaryVersionSpec base = localProject.getBaseVersion();
-			// TODO add changes
+			addPlayerToProject();
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			assertNotSame(base, head);
@@ -86,6 +98,12 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			log(e);
 			fail(e.getMessage());
 		}
+	}
+
+	@Test(expected = EMFStoreException.class)
+	public void testCommitBranchWithoutChange() throws EMFStoreException {
+		IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback, new NullProgressMonitor());
+		fail("Expects Exception on empty commit!");
 	}
 
 	@Test
@@ -106,7 +124,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		try {
 			List<? extends IBranchInfo> branches = localProject.getBranches();
 			assertEquals(1, branches.size());
-			// TODO add changes
+
+			addPlayerToProject();
+
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			branches = localProject.getBranches();
@@ -123,7 +143,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		try {
 			List<? extends IHistoryInfo> infos = localProject.getHistoryInfos(query);
 			assertEquals(1, infos.size());
-			// TODO add changes
+
+			addPlayerToProject();
+
 			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			infos = localProject.getHistoryInfos(query);
 			assertEquals(2, infos.size());
@@ -139,7 +161,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		try {
 			List<? extends IHistoryInfo> infos = localProject.getHistoryInfos(query);
 			assertEquals(1, infos.size());
-			// TODO add changes
+
+			addPlayerToProject();
+
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			infos = localProject.getHistoryInfos(query);
@@ -149,6 +173,10 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			log(e);
 			fail(e.getMessage());
 		}
+	}
+
+	private void addPlayerToProject() {
+		ProjectChangeUtil.addPlayerToProject(localProject);
 	}
 
 	@Test
