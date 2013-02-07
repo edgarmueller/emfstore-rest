@@ -1,8 +1,11 @@
 package org.eclipse.emf.emfstore.server.model.api.query;
 
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryFactoryImpl;
 
 public interface IHistoryQuery {
+
+	IHistoryQueryFactory FACTORY = HistoryQueryFactoryImpl.INSTANCE;
 
 	IPrimaryVersionSpec getSource();
 

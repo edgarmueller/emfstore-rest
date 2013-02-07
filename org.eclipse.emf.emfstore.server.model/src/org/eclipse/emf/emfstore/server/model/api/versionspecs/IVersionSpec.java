@@ -1,6 +1,10 @@
 package org.eclipse.emf.emfstore.server.model.api.versionspecs;
 
+import org.eclipse.emf.emfstore.server.model.versioning.VersionsFactory;
+
 public interface IVersionSpec {
+
+	IVersionFactory FACTORY = VersionsFactory.INSTANCE;
 
 	String HEAD = "HEAD";
 
@@ -12,4 +16,5 @@ public interface IVersionSpec {
 	String GLOBAL = "___GLOBAL___";
 
 	String getBranch();
+
 }
