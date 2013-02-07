@@ -52,13 +52,6 @@ public interface IProject {
 	String getProjectName();
 
 	/**
-	 * Returns the project's description.
-	 * 
-	 * @return description
-	 */
-	String getProjectDescription();
-
-	/**
 	 * Deletes the project. This is valid for both, {@link ILocalProject} and {@link IRemoteProject} project.
 	 * 
 	 * When calling this on a remote project it is recommended to use
