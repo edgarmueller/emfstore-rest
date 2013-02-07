@@ -8,10 +8,10 @@ import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
 
 public interface IProject {

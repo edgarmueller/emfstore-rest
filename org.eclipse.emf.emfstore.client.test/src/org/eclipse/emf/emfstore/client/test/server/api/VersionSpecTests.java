@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 import org.junit.Test;
@@ -69,7 +70,7 @@ public class VersionSpecTests extends CoreServerTest {
 	public void resolveGlobalHead() throws EMFStoreException {
 		ProjectSpace history = createHistory(this);
 
-		assertEquals(versions[7], history.resolveVersionSpec(Versions.createHEAD(VersionSpec.GLOBAL)));
+		assertEquals(versions[7], history.resolveVersionSpec(Versions.createHEAD(IVersionSpec.GLOBAL)));
 	}
 
 	@Test

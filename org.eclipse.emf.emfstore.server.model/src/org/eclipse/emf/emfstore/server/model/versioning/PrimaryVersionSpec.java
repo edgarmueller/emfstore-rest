@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.

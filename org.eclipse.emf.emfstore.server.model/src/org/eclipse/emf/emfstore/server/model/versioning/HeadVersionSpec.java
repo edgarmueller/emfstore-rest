@@ -10,14 +10,19 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning;
 
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IHeadVersionSpec;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'.
+ * 
+ * @extends IHeadVersionSpec
+ *          <!-- end-user-doc
+ *          -->
  * 
  * 
  * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHeadVersionSpec()
  * @model
  * @generated
  */
-public interface HeadVersionSpec extends VersionSpec {
+public interface HeadVersionSpec extends VersionSpec, IHeadVersionSpec {
 } // HeadVersionSpec

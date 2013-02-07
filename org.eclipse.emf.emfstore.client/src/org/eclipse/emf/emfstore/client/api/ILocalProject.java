@@ -14,10 +14,10 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallbac
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.api.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.api.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
