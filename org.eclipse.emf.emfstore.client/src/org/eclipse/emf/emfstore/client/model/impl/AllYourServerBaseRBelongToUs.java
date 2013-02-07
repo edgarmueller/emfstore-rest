@@ -59,35 +59,37 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public List<RemoteProject> getRemoteProjects() throws EMFStoreException {
-		return getRemoteProjects(true);
+		return getRemoteProjectsFromServer(true);
 	}
 
-	public List<RemoteProject> getRemoteProjects(boolean fetch) throws EMFStoreException {
+	public List<RemoteProject> getRemoteProjectsFromServer(IUsersession usersession, boolean shouldRemember)
+		throws EMFStoreException {
 
-		List<ProjectInfo> projectInfos;
+		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {
+			@Override
+			protected List<ProjectInfo> run() throws EMFStoreException {
+				return getConnectionManager().getProjectList(getSessionId());
+			}
+		}.execute();
 
-		if (fetch) {
-			projectInfos = new ServerCall<List<ProjectInfo>>() {
-				@Override
-				protected List<ProjectInfo> run() throws EMFStoreException {
-					return getConnectionManager().getProjectList(getSessionId());
-				}
-			}.execute();
-		} else {
-			projectInfos = getProjectInfos();
+		if (shouldRemember) {
+			getProjectInfos().addAll(projectInfos);
 		}
 
+		return mapToRemoteProject(projectInfos);
+	}
+
+	public List<RemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException {
+		return getRemoteProjectsFromServer(null, shouldRemember);
+	}
+
+	private List<RemoteProject> mapToRemoteProject(List<ProjectInfo> projectInfos) {
 		List<RemoteProject> remoteProjects = new ArrayList<RemoteProject>();
 		for (ProjectInfo projectInfo : projectInfos) {
 			RemoteProject wrapper = new RemoteProject(this, projectInfo);
 			remoteProjects.add(wrapper);
 		}
 		return remoteProjects;
-	}
-
-	public List<? extends IRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
@@ -99,7 +101,7 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	 * @see org.eclipse.emf.emfstore.client.api.IServer#login(java.lang.String, java.lang.String)
 	 * @generated NOT
 	 */
-	public IUsersession login(String name, String password) throws EMFStoreException {
+	public Usersession login(String name, String password) throws EMFStoreException {
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setUsername(name);
 		usersession.setPassword(password);
