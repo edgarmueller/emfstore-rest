@@ -1208,8 +1208,7 @@ public final class ModelUtil {
 		initSingletonIdResolvers();
 
 		for (SingletonIdResolver resolver : singletonIdResolvers) {
-			// TODO OTS
-			EObject singleton = resolver.getSingleton((ModelElementId) singletonId);
+			EObject singleton = resolver.getSingleton(singletonId);
 			if (singleton != null) {
 				return singleton;
 			}
@@ -1232,7 +1231,7 @@ public final class ModelUtil {
 		initSingletonIdResolvers();
 
 		for (SingletonIdResolver resolver : singletonIdResolvers) {
-			ModelElementId id = resolver.getSingletonModelElementId(singleton);
+			ModelElementId id = (ModelElementId) resolver.getSingletonModelElementId(singleton);
 			if (id != null) {
 				return clone(id);
 			}

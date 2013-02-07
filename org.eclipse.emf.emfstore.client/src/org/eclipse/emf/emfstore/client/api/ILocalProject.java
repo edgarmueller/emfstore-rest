@@ -13,7 +13,9 @@ import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallbac
 import org.eclipse.emf.emfstore.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
@@ -32,7 +34,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * 
 	 * @return the current version spec
 	 **/
-	IPrimaryVersionSpec commit() throws EMFStoreException;
+	IPrimaryVersionSpec commit() throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
 	 * Commits all pending changes of the project space.
@@ -54,7 +56,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @generated NOT
 	 */
 	IPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
 	 * This method allows to commit changes to a new branch. It works very
@@ -75,7 +77,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 *             in case of an exception
 	 */
 	IPrimaryVersionSpec commitToBranch(IBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
-		IProgressMonitor monitor) throws EMFStoreException;
+		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the head version.
@@ -86,7 +88,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec update() throws EMFStoreException;
+	IPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * <!-- begin-user-doc --> Update the project to the given version.
@@ -99,7 +101,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @model
 	 * @generated NOT
 	 */
-	IPrimaryVersionSpec update(IVersionSpec version) throws EMFStoreException;
+	IPrimaryVersionSpec update(IVersionSpec version) throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * Update the workspace to the given revision.
@@ -119,7 +121,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @generated NOT
 	 */
 	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
-		throws EMFStoreException;
+		throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * Merge the changes from current base version to given target version with
@@ -198,7 +200,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 
 	Date getLastUpdated();
 
-	EList<String> getOldLogMessages();
+	EList<String> getRecentLogMessages();
 
 	/**
 	 * Return the list of operations that have already been performed on the

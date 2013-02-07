@@ -23,9 +23,9 @@ public interface ModelElementIdGenerator {
 	/**
 	 * Generates the next {@link ModelElementId} for the {@link IdEObjectCollection}.
 	 * 
-	 * @param collection The {@link IdEObjectCollection} for which a new {@link ModelElementId} should be created.
+	 * @param container The {@link IdEObjectCollection} for which a new {@link ModelElementId} should be created.
 	 * @return The next {@link ModelElementId} for the given {@link IdEObjectCollection}.
 	 */
-	ModelElementId generateModelElementId(IdEObjectCollection collection);
+	ModelElementId generateModelElementId(EObjectContainer container);
 
 }

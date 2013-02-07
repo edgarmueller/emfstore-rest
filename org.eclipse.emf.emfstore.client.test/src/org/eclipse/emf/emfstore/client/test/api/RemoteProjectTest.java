@@ -2,7 +2,6 @@ package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -59,7 +58,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ILocalProject localProject = remoteProject.checkout(usersession);
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject, localProject.getRemoteProject());
+			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -71,7 +70,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject, localProject.getRemoteProject());
+			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -84,7 +83,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 			ILocalProject localProject = remoteProject.checkout(usersession, remoteProject.getHeadVersion(false),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject, localProject.getRemoteProject());
+			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -97,7 +96,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 			ILocalProject localProject = remoteProject.checkout(usersession, remoteProject.getHeadVersion(true),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject, localProject.getRemoteProject());
+			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -149,13 +148,14 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
 	}
 
-	@Test
+	@Test(expected = EMFStoreException.class)
 	public void testRemoveTag() throws EMFStoreException {
 		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		remoteProject.addTag(remoteProject.getHeadVersion(true), tagSpec);
 		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
 		remoteProject.removeTag(remoteProject.getHeadVersion(true), tagSpec);
-		assertNotSame(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(tagSpec));
+		remoteProject.resolveVersionSpec(tagSpec);
+		fail("If no tag is there we should get an exception!");
 	}
 
 	@Test
@@ -166,7 +166,10 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testResolveVersionSession() {
-		remoteProject.resolveVersionSpec(usersession, versionSpec);
+	public void testResolveVersionSession() throws EMFStoreException {
+		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		remoteProject.addTag(remoteProject.getHeadVersion(true), tagSpec);
+		assertEquals(remoteProject.getHeadVersion(true), remoteProject.resolveVersionSpec(usersession, tagSpec));
+
 	}
 }
