@@ -28,7 +28,6 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelAdapterFactory;
-import org.eclipse.emf.emfstore.common.model.util.ModelAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.

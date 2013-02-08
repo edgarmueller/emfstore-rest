@@ -30,11 +30,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.edit.provider.CommonEditPlugin;
-import org.eclipse.emf.emfstore.internal.common.model.edit.provider.RootElementItemProvider;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
-import org.eclipse.emf.emfstore.common.model.ModelPackage;
-import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.Project} object. <!--
@@ -75,6 +70,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements IEdi
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -90,6 +86,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements IEdi
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -105,6 +102,7 @@ public class ProjectItemProvider extends RootElementItemProvider implements IEdi
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

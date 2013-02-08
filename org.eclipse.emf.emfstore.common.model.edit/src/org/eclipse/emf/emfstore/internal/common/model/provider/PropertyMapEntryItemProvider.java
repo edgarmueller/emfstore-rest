@@ -27,9 +27,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
-import org.eclipse.emf.emfstore.internal.common.model.edit.provider.CommonEditPlugin;
-import org.eclipse.emf.emfstore.internal.common.model.edit.provider.RootElementItemProvider;
-import org.eclipse.emf.emfstore.common.model.ModelPackage;
 
 /**
  * This is the item provider adapter for a {@link java.util.Map.Entry} object.

@@ -1,12 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Common Model  (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.common.model;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.common.model;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.emfstore.common;bundle-version="0.9.3"
+Require-Bundle: org.eclipse.emf.emfstore.common;bundle-version="0.9.3";visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.emf.emfstore.common.model
+Export-Package: org.eclipse.emf.emfstore.common.model,
+ org.eclipse.emf.emfstore.internal.common.model;x-friends:="org.eclipse.emf.emfstore.common.model.edit",
+ org.eclipse.emf.emfstore.internal.common.model.util;x-friends:="org.eclipse.emf.emfstore.common.model.edit"

@@ -22,7 +22,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId} object.
