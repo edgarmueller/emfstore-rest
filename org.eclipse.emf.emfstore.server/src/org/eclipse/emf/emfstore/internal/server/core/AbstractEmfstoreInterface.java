@@ -19,8 +19,6 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationContr
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
-import org.eclipse.emf.emfstore.internal.server.internal.core.InternalCommand;
-import org.eclipse.emf.emfstore.internal.server.internal.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;

@@ -17,16 +17,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactoryImpl;
 import org.eclipse.emf.emfstore.internal.server.core.MethodInvocation;
-import org.eclipse.emf.emfstore.internal.server.core.internal.helper.EmfStoreMethod.MethodId;
+import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
+import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;
-import org.eclipse.emf.emfstore.internal.server.internal.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -103,8 +107,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 
 	private AuthenticationControlFactory getAuthenticationFactory() {
 		for (ExtensionElement e : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.serverxxx.authenticationfactory")
-			.getExtensionElements()) {
+			"org.eclipse.emf.emfstore.internal.serverxxx.authenticationfactory").getExtensionElements()) {
 			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
 			if (factory != null) {
 				return factory;
