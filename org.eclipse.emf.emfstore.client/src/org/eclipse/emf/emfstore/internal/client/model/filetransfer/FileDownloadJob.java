@@ -17,11 +17,11 @@ import java.rmi.RemoteException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
-import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
-import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
 /**
  * File Download Job class is responsible for downloading files from the server in the Eclipse Worker thread.

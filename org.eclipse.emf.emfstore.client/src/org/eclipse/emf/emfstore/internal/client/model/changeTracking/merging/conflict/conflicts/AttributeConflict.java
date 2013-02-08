@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.options.MergeTextOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 
 /**
  * Conflict for two attribute operations.

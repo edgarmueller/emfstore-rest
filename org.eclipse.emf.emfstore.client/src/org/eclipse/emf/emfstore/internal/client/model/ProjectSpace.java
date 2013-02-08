@@ -27,15 +27,14 @@ import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
@@ -47,47 +46,47 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProject <em> Project</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectId
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject <em> Project</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId
  *          <em>Project Id</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectName
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName
  *          <em>Project Name</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectDescription
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription
  *          <em>Project Description</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getUsersession
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession
  *          <em>Usersession</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLastUpdated
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated
  *          <em>Last Updated</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getBaseVersion
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion
  *          <em>Base Version</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getResourceCount
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount
  *          <em>Resource Count</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getOldLogMessages
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOldLogMessages
  *          <em>Old Log Messages</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalOperations
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations
  *          <em>Local Operations</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getNotifications
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotifications
  *          <em>Notifications</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getEventComposite
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEventComposite
  *          <em>Event Composite</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getNotificationComposite
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotificationComposite
  *          <em>Notification Composite </em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWaitingUploads
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWaitingUploads
  *          <em>Waiting Uploads</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProperties
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProperties
  *          <em>Properties</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getChangedSharedProperties
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getChangedSharedProperties
  *          <em>Changed Shared Properties</em>}</li>
  *          </ul>
  *          </p>
@@ -225,7 +224,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces
 	 * <em>Project Spaces</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear, there really should be more of a
@@ -236,14 +235,14 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @return the value of the '<em>Workspace</em>' container reference.
 	 * @see #setWorkspace(Workspace)
 	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Workspace()
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces
 	 * @model opposite="projectSpaces" transient="false"
 	 * @generated
 	 */
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
 	 * <em>Workspace</em>} ' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -273,7 +272,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	ChangePackage getLocalChangePackage();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalChangePackage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage
 	 * <em>Local Change Package</em>}' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -303,7 +302,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	PrimaryVersionSpec getMergedVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getMergedVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getMergedVersion
 	 * <em>Merged Version</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -500,7 +499,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Waiting Uploads</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.server.model.FileIdentifier}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Waiting Uploads</em>' containment reference list isn't clear, there really should be
@@ -614,7 +613,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void revert();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getBaseVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion
 	 * <em>Base Version</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -644,7 +643,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	int getResourceCount();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getResourceCount
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount
 	 * <em>Resource Count</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -656,7 +655,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setResourceCount(int value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isDirty
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isDirty
 	 * <em>Dirty</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -667,7 +666,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setDirty(boolean value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLastUpdated
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated
 	 * <em>Last Updated</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -679,7 +678,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setLastUpdated(Date value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalOperations
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations
 	 * <em>Local Operations</em>}' containment reference. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
@@ -692,7 +691,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setLocalOperations(OperationComposite value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProject
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject
 	 * <em>Project</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -704,7 +703,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setProject(Project value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectDescription
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription
 	 * <em>Project Description</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -716,7 +715,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setProjectDescription(String value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectId
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId
 	 * <em>Project Id</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -729,7 +728,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setProjectId(ProjectId value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName
 	 * <em>Project Name</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -750,7 +749,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	void setProperty(OrgUnitProperty property);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getUsersession
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession
 	 * <em>Usersession</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -772,7 +771,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.internal.server.model.api.query.IHistoryQuery)
+	 * @see org.eclipse.emf.emfstore.internal.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery)
 	 * 
 	 * @generated NOT
 	 */

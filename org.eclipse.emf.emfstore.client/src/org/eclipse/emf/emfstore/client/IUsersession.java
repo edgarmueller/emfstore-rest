@@ -12,8 +12,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.model.api.ISessionId;
 
 /**

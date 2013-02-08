@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 
 /**
  * Exception that is thrown when a transfer is canceled.

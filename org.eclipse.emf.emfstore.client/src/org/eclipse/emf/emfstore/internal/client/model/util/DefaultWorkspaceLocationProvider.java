@@ -34,7 +34,7 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.DefaultServerWorkspaceLocationProvider#getRootDirectory()
+	 * @see org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider#getRootDirectory()
 	 */
 	@Override
 	protected String getRootDirectory() {
@@ -50,7 +50,7 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.DefaultServerWorkspaceLocationProvider#getSelectedProfile()
+	 * @see org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider#getSelectedProfile()
 	 */
 	@Override
 	protected String getSelectedProfile() {

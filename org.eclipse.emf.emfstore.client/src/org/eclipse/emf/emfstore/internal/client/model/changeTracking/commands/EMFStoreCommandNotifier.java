@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.internal.common.ISafeRunnable;
-import org.eclipse.emf.emfstore.internal.common.SafeRunner;
+import org.eclipse.emf.emfstore.common.ISafeRunnable;
+import org.eclipse.emf.emfstore.common.SafeRunner;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**

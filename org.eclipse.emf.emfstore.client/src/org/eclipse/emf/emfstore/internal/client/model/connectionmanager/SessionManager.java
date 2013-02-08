@@ -12,9 +12,9 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.SessionTimedOutException;
-import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
 
 /**
  * Handles session management during the execution of a {@link ServerCall}.

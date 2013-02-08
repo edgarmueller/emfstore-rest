@@ -44,15 +44,15 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getUsername <em>Username</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getPassword <em>Password</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getSessionId <em>Session Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getPersistentPassword <em>Persistent Password
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getUsername <em>Username</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getPassword <em>Password</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getSessionId <em>Session Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getPersistentPassword <em>Persistent Password
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getServerInfo <em>Server Info</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#isSavePassword <em>Save Password</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getACUser <em>AC User</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl#getChangedProperties <em>Changed Properties
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getServerInfo <em>Server Info</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#isSavePassword <em>Save Password</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getACUser <em>AC User</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getChangedProperties <em>Changed Properties
  * </em>}</li>
  * </ul>
  * </p>
@@ -240,7 +240,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getPassword()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword()
 	 * @generated NOT
 	 */
 	public String getPassword() {
@@ -271,7 +271,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#setPassword(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#setPassword(java.lang.String)
 	 * @generated NOT
 	 */
 	public void setPassword(String newPassword) {
@@ -354,7 +354,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#setPersistentPassword(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#setPersistentPassword(java.lang.String)
 	 * @generated NOT
 	 */
 	public void setPersistentPassword(String newPersistentPassword) {
@@ -429,7 +429,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#setSavePassword(boolean)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#setSavePassword(boolean)
 	 * @generated NOT
 	 */
 	public void setSavePassword(boolean newSavePassword) {
@@ -549,7 +549,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#logIn()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#logIn()
 	 * @generated NOT
 	 */
 	public void logIn() throws EMFStoreException, AccessControlException {
@@ -763,7 +763,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getSessionId()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId()
 	 */
 	public SessionId getSessionId() {
 		return getSessionIdGen();

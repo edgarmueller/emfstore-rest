@@ -19,19 +19,18 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.LocationProvider;
-import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.internal.server.LocationProvider;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.osgi.framework.Bundle;
 
 /**
@@ -139,7 +138,7 @@ public final class Configuration {
 
 			try {
 				// TODO EXPT PRIO
-				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.workspaceLocationProvider")
+				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider")
 					.setThrowException(true).getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
@@ -188,7 +187,7 @@ public final class Configuration {
 	 */
 	public static List<ServerInfo> getDefaultServerInfos() {
 		ConfigurationProvider provider = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.internal.client.defaultConfigurationProvider").getClass("providerClass",
+			"org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider").getClass("providerClass",
 			ConfigurationProvider.class);
 		if (provider != null) {
 			List<IServer> defaultServerInfos = provider.getDefaultServerInfos();
@@ -238,7 +237,7 @@ public final class Configuration {
 	}
 
 	/**
-	 * Get the client version as in the org.eclipse.emf.emfstore.internal.internal.client manifest
+	 * Get the client version as in the org.eclipse.emf.emfstore.internal.client manifest
 	 * file.
 	 * 
 	 * @return the client version number
@@ -250,7 +249,7 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.version").setThrowException(
+		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.version").setThrowException(
 			false).getFirst();
 
 		if (version != null) {
@@ -258,7 +257,7 @@ public final class Configuration {
 			return versionProvider.getVersion();
 		}
 
-		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.internal.internal.client");
+		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.internal.client");
 		versionId = (String) emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		clientVersionInfo.setVersion(versionId);
 
@@ -397,7 +396,7 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.recording.options").getBoolean(
+			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options").getBoolean(
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
@@ -425,7 +424,7 @@ public final class Configuration {
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public static boolean isChecksumCheckActive() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.checksumErrorHandler");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -438,7 +437,7 @@ public final class Configuration {
 
 		if (checksumErrorHandler == null) {
 
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.checksumErrorHandler");
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
 
 			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 

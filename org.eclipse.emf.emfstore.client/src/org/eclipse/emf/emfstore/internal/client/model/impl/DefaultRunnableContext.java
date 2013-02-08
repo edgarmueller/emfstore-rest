@@ -25,7 +25,7 @@ public class DefaultRunnableContext implements IRunnableContext {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.common.IRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.internal.client.common.IRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(Runnable runnable) {
 		runnable.run();

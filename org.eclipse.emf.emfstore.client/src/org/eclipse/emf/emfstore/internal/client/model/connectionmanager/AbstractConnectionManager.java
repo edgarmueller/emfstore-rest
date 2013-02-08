@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
-import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 
 /**
  * Superclass for all connection managers which map {@link SessionId}s

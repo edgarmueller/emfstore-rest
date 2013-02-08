@@ -25,9 +25,9 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Connecti
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.util.EObjectTypeFactory;
-import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util.EObjectTypeFactory;
+import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.xml.sax.SAXException;
 
 /**
@@ -163,7 +163,7 @@ public class XmlRpcClientManager {
 				&& ((SAXException) e.linkedException).getException() instanceof SerializationException) {
 				SerializationException serialE = (SerializationException) ((SAXException) e.linkedException)
 					.getException();
-				throw new org.eclipse.emf.emfstore.server.exceptions.SerializationException(serialE);
+				throw new org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException(serialE);
 			} else {
 				throw new ConnectionException(ConnectionManager.REMOTE + e.getMessage(), e);
 			}

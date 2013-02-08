@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.common;
 
-import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 
 /**
  * Determines the version identifier of the client component.

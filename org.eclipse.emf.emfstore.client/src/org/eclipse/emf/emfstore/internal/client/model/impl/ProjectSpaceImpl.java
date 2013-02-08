@@ -42,23 +42,23 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getProject <em>Project</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getProjectId <em>Project Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getProjectName <em>Project Name </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getProjectDescription <em>Project Description
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getProject <em>Project</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getProjectId <em>Project Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getProjectName <em>Project Name </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getProjectDescription <em>Project Description
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getUsersession <em>Usersession </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getLastUpdated <em>Last Updated </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getBaseVersion <em>Base Version </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getResourceCount <em>Resource Count</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#isDirty <em>Dirty</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getOldLogMessages <em>Old Log Messages</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getLocalOperations <em>Local Operations</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getWaitingUploads <em>Waiting Uploads</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getProperties <em>Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getChangedSharedProperties <em> Changed Shared
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getUsersession <em>Usersession </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getLastUpdated <em>Last Updated </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getBaseVersion <em>Base Version </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getResourceCount <em>Resource Count</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#isDirty <em>Dirty</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getOldLogMessages <em>Old Log Messages</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getLocalOperations <em>Local Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getWaitingUploads <em>Waiting Uploads</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getProperties <em>Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getChangedSharedProperties <em> Changed Shared
  * Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  * </p>
  * 

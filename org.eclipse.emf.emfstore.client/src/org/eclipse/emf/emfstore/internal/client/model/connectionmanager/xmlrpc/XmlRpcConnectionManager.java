@@ -18,29 +18,29 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Abstract
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.server.connection.internal.xmlrpc.XmlRpcConnectionHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
-import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
-import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
-import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcConnectionHandler;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
+import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 
 /**
  * XML RPC based Implementation of ConnectionManager.
@@ -145,8 +145,8 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.EMFStore#getBranches(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.ProjectId)
+	 * @see org.eclipse.emf.emfstore.internal.server.EMFStore#getBranches(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
 		return getConnectionProxy(sessionId).callWithListResult("getBranches", BranchInfo.class, sessionId, projectId);
@@ -248,7 +248,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.ConnectionManager#isLoggedIn(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager#isLoggedIn(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public boolean isLoggedIn(SessionId id) {
 		return hasConnectionProxy(id);
@@ -257,7 +257,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {

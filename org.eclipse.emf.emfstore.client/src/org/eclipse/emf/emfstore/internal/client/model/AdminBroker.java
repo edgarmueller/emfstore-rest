@@ -13,19 +13,17 @@ package org.eclipse.emf.emfstore.internal.client.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
  * Interface for administrative services of the EMFStore. The Adminbroker
- * delegates the method calls to the server ( {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}) via
- * {@link org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.AdminConnectionManager} .
+ * delegates the method calls to the server ( {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}) via
+ * {@link org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager} .
  * 
  * @author Hodaie
  * @author Wesendonk
@@ -33,9 +31,9 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 public interface AdminBroker {
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getProjectInfos(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getProjectInfos(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of project infos
 	 * @throws EMFStoreException
 	 *             if an exceptions occurs on the server or on transport
@@ -43,9 +41,9 @@ public interface AdminBroker {
 	List<ProjectInfo> getProjectInfos() throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getGroups(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getGroups(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of groups
 	 * @throws EMFStoreException
 	 *             if an exceptions occurs on the server or on transport
@@ -53,9 +51,9 @@ public interface AdminBroker {
 	List<ACGroup> getGroups() throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getUsers(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getUsers(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of users
 	 * @throws EMFStoreException
 	 *             if an exceptions occurs on the server or on transport
@@ -63,8 +61,8 @@ public interface AdminBroker {
 	List<ACUser> getUsers() throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
-	 * {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getOrgUnits(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId)}
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
+	 * {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getOrgUnits(org.eclipse.emf.emfstore.internal.server.model.SessionId)}
 	 * 
 	 * @return list of orgUnits
 	 * @throws EMFStoreException
@@ -73,9 +71,9 @@ public interface AdminBroker {
 	List<ACOrgUnit> getOrgUnits() throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#createGroup(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#createGroup(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String)
 	 * @param name
 	 *            new name
@@ -86,9 +84,9 @@ public interface AdminBroker {
 	ACOrgUnitId createGroup(String name) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#deleteGroup(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#deleteGroup(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId)
 	 * @param group
 	 *            orgUnit id
@@ -98,9 +96,9 @@ public interface AdminBroker {
 	void deleteGroup(ACOrgUnitId group) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getGroups(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getGroups(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId)
 	 * @param user
 	 *            orgUnit id
@@ -111,9 +109,9 @@ public interface AdminBroker {
 	List<ACGroup> getGroups(ACOrgUnitId user) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#removeGroup(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#removeGroup(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId, ACOrgUnitId)
 	 * @param user
 	 *            orgUnit id
@@ -125,9 +123,9 @@ public interface AdminBroker {
 	void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#createUser(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#createUser(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String)
 	 * @param name
 	 *            user's name
@@ -138,9 +136,9 @@ public interface AdminBroker {
 	ACOrgUnitId createUser(String name) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#deleteUser(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#deleteUser(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId)
 	 * @param user
 	 *            user id
@@ -150,9 +148,9 @@ public interface AdminBroker {
 	void deleteUser(ACOrgUnitId user) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getMembers(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getMembers(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId)
 	 * @param groupId
 	 *            group id
@@ -163,9 +161,9 @@ public interface AdminBroker {
 	List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getOrgUnit(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getOrgUnit(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId)
 	 * @param orgUnitId
 	 *            orgUnit id
@@ -176,9 +174,9 @@ public interface AdminBroker {
 	ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#addMember(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#addMember(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId, ACOrgUnitId)
 	 * @param group
 	 *            group id
@@ -190,9 +188,9 @@ public interface AdminBroker {
 	void addMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#removeMember(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#removeMember(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId, ACOrgUnitId)
 	 * @param group
 	 *            group id
@@ -204,9 +202,9 @@ public interface AdminBroker {
 	void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#changeOrgUnit(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#changeOrgUnit(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ACOrgUnitId, String, String)
 	 * @param orgUnitId
 	 *            orgUnit id
@@ -220,9 +218,9 @@ public interface AdminBroker {
 	void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getParticipants(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getParticipants(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId)
 	 * @param projectId
 	 *            project id
@@ -233,9 +231,9 @@ public interface AdminBroker {
 	List<ACOrgUnit> getParticipants(ProjectId projectId) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#addParticipant(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#addParticipant(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId, ACOrgUnitId)
 	 * @param projectId
 	 *            project id
@@ -247,9 +245,9 @@ public interface AdminBroker {
 	void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#removeParticipant(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#removeParticipant(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId, ACOrgUnitId)
 	 * @param projectId
 	 *            project id
@@ -261,9 +259,9 @@ public interface AdminBroker {
 	void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#getRole(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getRole(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId, ACOrgUnitId)
 	 * @param projectId
 	 *            project id
@@ -276,9 +274,9 @@ public interface AdminBroker {
 	Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException;
 
 	/**
-	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore}.
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.server.AdminEmfStore#changeRole(org.eclipse.emf.emfstore.internal.internal.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#changeRole(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId, ACOrgUnitId, EClass)
 	 * @param projectId
 	 *            the project id

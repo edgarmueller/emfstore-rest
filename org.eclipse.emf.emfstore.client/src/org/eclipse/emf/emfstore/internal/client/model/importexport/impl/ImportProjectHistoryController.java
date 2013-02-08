@@ -40,7 +40,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
 		return "Importing project history";
@@ -50,7 +50,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
 		return new String[] { "EMFStore Project History Files (*" + ExportImportDataUnits.History.getExtension() + ")",
@@ -61,7 +61,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
 		return new String[] { "*" + ExportImportDataUnits.History.getExtension(), "*.*" };
@@ -71,17 +71,17 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.internal.client.ui.importProjectHistoryPath";
+		return "org.eclipse.emf.emfstore.internal.client.ui.importProjectHistoryPath";
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -102,7 +102,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilename()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilename()
 	 */
 	public String getFilename() {
 		// no suggestion
@@ -113,7 +113,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#isExport()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#isExport()
 	 */
 	public boolean isExport() {
 		return false;
@@ -123,7 +123,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.ServerCall#run()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
 	protected Void run() throws EMFStoreException {

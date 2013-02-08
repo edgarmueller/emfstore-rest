@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Operation Composite</b></em>'. <!-- end-user-doc
@@ -20,11 +20,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite#getOperations <em>Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.internal.client.model.WorkspacePackage#getOperationComposite()
+ * @see org.eclipse.emf.emfstore.internal.client.model.WorkspacePackage#getOperationComposite()
  * @model
  * @generated
  */
@@ -32,7 +32,7 @@ public interface OperationComposite extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
 	 * The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.internal.server.model.versioning.operations.AbstractOperation}.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' containment reference list isn't clear, there really should be more

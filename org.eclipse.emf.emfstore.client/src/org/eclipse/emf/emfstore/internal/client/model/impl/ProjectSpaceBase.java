@@ -141,7 +141,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.runnableContext")
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.runnableContext")
 			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
@@ -153,7 +153,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#addFile(java.io.File)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addFile(java.io.File)
 	 */
 	public FileIdentifier addFile(File file) throws FileTransferException {
 		return fileTransferManager.addFile(file);
@@ -163,7 +163,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#addOperations(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addOperations(java.util.List)
 	 */
 	public void addOperations(List<? extends AbstractOperation> operations) {
 		getOperations().addAll(operations);
@@ -178,8 +178,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.TagVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec)
 	 */
 	public void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException {
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
@@ -314,7 +314,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#beginCompositeOperation()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#beginCompositeOperation()
 	 */
 	public CompositeOperationHandle beginCompositeOperation() {
 		return this.operationManager.beginCompositeOperation();
@@ -334,7 +334,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#commit()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit()
 	 */
 	public PrimaryVersionSpec commit() throws EMFStoreException {
 		return new CommitController(this, null, null, new NullProgressMonitor()).execute();
@@ -344,8 +344,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.LogMessage,
-	 *      org.eclipse.emf.emfstore.internal.internal.client.model.controller.callbacks.ICommitCallback,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage,
+	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
@@ -366,7 +366,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#exportLocalChanges(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#exportLocalChanges(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void exportLocalChanges(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -377,7 +377,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#exportLocalChanges(java.io.File)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#exportLocalChanges(java.io.File)
 	 */
 	public void exportLocalChanges(File file) throws IOException {
 		new ExportChangesController(this).execute(file, new NullProgressMonitor());
@@ -387,7 +387,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#exportProject(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#exportProject(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void exportProject(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -398,7 +398,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#exportProject(java.io.File)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#exportProject(java.io.File)
 	 */
 	public void exportProject(File file) throws IOException {
 		new ExportProjectController(this).execute(file, new NullProgressMonitor());
@@ -421,7 +421,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.internal.internal.server.model.FileIdentifier,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.internal.server.model.FileIdentifier,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
@@ -431,7 +431,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getFileInfo(org.eclipse.emf.emfstore.internal.internal.server.model.FileIdentifier)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFileInfo(org.eclipse.emf.emfstore.internal.server.model.FileIdentifier)
 	 */
 	public FileInformation getFileInfo(FileIdentifier fileIdentifier) {
 		return fileTransferManager.getFileInfo(fileIdentifier);
@@ -441,7 +441,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.HistoryQuery)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery)
 	 */
 	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException {
 		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query));
@@ -450,7 +450,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalChangePackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage()
 	 */
 	public ChangePackage getLocalChangePackage(boolean canonize) {
 		ChangePackage changePackage = VersioningFactory.eINSTANCE.createChangePackage();
@@ -476,7 +476,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getOperationManager()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOperationManager()
 	 */
 	public OperationManager getOperationManager() {
 		return operationManager;
@@ -485,7 +485,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOperations()
 	 */
 	public List<AbstractOperation> getOperations() {
 		ChangePackage localChangePackage = getLocalChangePackage();
@@ -531,7 +531,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getRemoteProject()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getRemoteProject()
 	 * @generated NOT
 	 */
 	public RemoteProject getRemoteProject() throws EMFStoreException {
@@ -550,7 +550,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getPropertyManager()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getPropertyManager()
 	 */
 	public PropertyManager getPropertyManager() {
 		if (this.propertyManager == null) {
@@ -577,7 +577,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#importLocalChanges(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#importLocalChanges(java.lang.String)
 	 */
 	public void importLocalChanges(String fileName) throws IOException {
 
@@ -602,7 +602,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#init()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#init()
 	 * @generated NOT
 	 */
 	public void init() {
@@ -657,7 +657,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// default
 		boolean useCrossReferenceAdapter = true;
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.inverseCrossReferenceCache")
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache")
 			.getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
@@ -693,7 +693,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#initResources(org.eclipse.emf.ecore.resource.ResourceSet)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#initResources(org.eclipse.emf.ecore.resource.ResourceSet)
 	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
@@ -752,7 +752,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#delete()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#delete()
 	 * @generated NOT
 	 */
 	public void delete() throws IOException {
@@ -810,7 +810,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getResourceSet()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceSet()
 	 */
 	public ResourceSet getResourceSet() {
 		return resourceSet;
@@ -820,7 +820,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#setResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#setResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
 	 */
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
@@ -830,7 +830,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isTransient()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isTransient()
 	 */
 	public boolean isTransient() {
 		return isTransient;
@@ -840,7 +840,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isUpdated()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EMFStoreException {
 		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()));
@@ -868,7 +868,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#makeTransient()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#makeTransient()
 	 */
 	public void makeTransient() {
 		if (initCompleted) {
@@ -970,7 +970,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.VersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
 	 * @throws EMFStoreException
 	 * @generated NOT
 	 */
@@ -1015,7 +1015,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#hasUnsavedChanges()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#hasUnsavedChanges()
 	 */
 	public boolean hasUnsavedChanges() {
 
@@ -1060,7 +1060,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#setProperty(org.eclipse.emf.emfstore.internal.internal.server.model.accesscontrol.OrgUnitProperty)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#setProperty(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty)
 	 */
 	public void setProperty(OrgUnitProperty property) {
 		// sanity checks
@@ -1098,7 +1098,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#shareProject()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#shareProject()
 	 */
 	public void shareProject() throws EMFStoreException {
 		shareProject(null, null);
@@ -1108,7 +1108,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.internal.client.model.Usersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void shareProject(IUsersession session, IProgressMonitor monitor) throws EMFStoreException {
@@ -1142,7 +1142,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#transmitProperties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#transmitProperties()
 	 */
 	public void transmitProperties() {
 		List<OrgUnitProperty> temp = new ArrayList<OrgUnitProperty>();
@@ -1170,7 +1170,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#undoLastOperation()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#undoLastOperation()
 	 */
 	public void undoLastOperation() {
 		undoLastOperations(1);
@@ -1180,7 +1180,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#undoLastOperation()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#undoLastOperation()
 	 */
 	public void undoLastOperations(int numberOfOperations) {
 
@@ -1205,7 +1205,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#update()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update()
 	 */
 	public PrimaryVersionSpec update() throws EMFStoreException {
 		return update(Versions.createHEAD(getBaseVersion()));
@@ -1215,7 +1215,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.VersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
 	 */
 	public PrimaryVersionSpec update(final IVersionSpec version) throws EMFStoreException {
 		return update(version, null, null);
@@ -1225,8 +1225,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.internal.client.model.controller.callbacks.IUpdateCallback,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
@@ -1245,7 +1245,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {
@@ -1280,7 +1280,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isShared()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isShared()
 	 */
 	public boolean isShared() {
 		return getUsersession() != null;

@@ -16,8 +16,8 @@ import java.io.IOException;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
 /**
  * This class manages the locally cached files for file transfers. A cache

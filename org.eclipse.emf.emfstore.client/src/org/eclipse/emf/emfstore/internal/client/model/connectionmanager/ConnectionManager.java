@@ -11,11 +11,11 @@
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.server.EMFStore;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
-import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.EMFStore;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
+import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 
 /**
  * The connection manager manages the connection to the EmfStore. It will initiate, reinitiate and terminate the

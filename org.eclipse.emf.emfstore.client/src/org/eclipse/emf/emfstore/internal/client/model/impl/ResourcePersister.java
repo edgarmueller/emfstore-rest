@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.internal.common.IDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.internal.common.EMFStoreResource;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 
@@ -86,7 +86,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		commandIsRunning = true;
@@ -96,7 +96,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 		commandIsRunning = false;
@@ -107,7 +107,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      java.lang.Exception)
 	 */
 	public void commandFailed(Command command, Exception exception) {
@@ -306,7 +306,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages,
@@ -327,8 +327,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.api.IChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 *      org.eclipse.emf.emfstore.internal.server.model.api.IChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ILocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
 		saveDirtyResources(true);
@@ -339,8 +339,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void commitCompleted(ILocalProject project, IPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
@@ -351,7 +351,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	public void dispose() {
 		listeners = null;

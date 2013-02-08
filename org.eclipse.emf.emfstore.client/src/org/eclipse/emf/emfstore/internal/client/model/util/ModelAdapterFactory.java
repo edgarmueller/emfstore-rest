@@ -136,14 +136,14 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.internal.client.model.Workspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace
 	 * @generated
 	 */
 	public Adapter createWorkspaceAdapter() {
@@ -151,7 +151,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo
 	 * <em>Server Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -159,7 +159,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo
 	 * @generated
 	 */
 	public Adapter createServerInfoAdapter() {
@@ -167,7 +167,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession
 	 * <em>Usersession</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -175,7 +175,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession
 	 * @generated
 	 */
 	public Adapter createUsersessionAdapter() {
@@ -183,7 +183,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace
 	 * <em>Project Space</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -191,7 +191,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace
 	 * @generated
 	 */
 	public Adapter createProjectSpaceAdapter() {
@@ -199,7 +199,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite
 	 * <em>Operation Composite</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -207,7 +207,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite
+	 * @see org.eclipse.emf.emfstore.internal.client.model.OperationComposite
 	 * @generated
 	 */
 	public Adapter createOperationCompositeAdapter() {
@@ -215,7 +215,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer
 	 * <em>Pending File Transfer</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -223,7 +223,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer
 	 * @generated
 	 */
 	public Adapter createPendingFileTransferAdapter() {

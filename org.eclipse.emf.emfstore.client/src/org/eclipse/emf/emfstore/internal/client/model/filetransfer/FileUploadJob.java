@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;
-import org.eclipse.emf.emfstore.server.filetransfer.FilePartitionerUtil;
-import org.eclipse.emf.emfstore.server.filetransfer.FileTransferInformation;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
+import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
 /**
  * File Upload Job class is responsible for uploading files to the server in the Eclipse Worker thread.

@@ -16,8 +16,8 @@ import java.util.Observer;
 
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
 /**
  * An object of this class is returned from any workspace method that starts a

@@ -31,7 +31,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
 		return "project space";
@@ -41,7 +41,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
 		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
@@ -52,7 +52,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
 		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
@@ -62,17 +62,17 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.internal.client.ui.importProjectSpacePath";
+		return "org.eclipse.emf.emfstore.internal.client.ui.importProjectSpacePath";
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -84,7 +84,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilename()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilename()
 	 */
 	public String getFilename() {
 		return null;
@@ -94,7 +94,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#isExport()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#isExport()
 	 */
 	public boolean isExport() {
 		return false;

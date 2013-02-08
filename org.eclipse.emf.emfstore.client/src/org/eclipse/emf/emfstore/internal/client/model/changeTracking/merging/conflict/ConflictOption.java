@@ -14,7 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * This class represents an option/solution for a conflict. A conflict may have several options.
@@ -141,7 +141,7 @@ public class ConflictOption {
 	/**
 	 * Sets a detailprovider.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.ui.dialogs.merge.ui.components.DetailsComponent
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components.DetailsComponent
 	 * @param detailProvider identifying string
 	 */
 	public void setDetailProvider(String detailProvider) {

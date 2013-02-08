@@ -43,7 +43,7 @@ public abstract class EMFStoreCommand extends AbstractEMFStoreCommand {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.util.AbstractEMFStoreCommand#commandBody()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.util.AbstractEMFStoreCommand#commandBody()
 	 */
 	@Override
 	protected void commandBody() {

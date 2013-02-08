@@ -17,15 +17,15 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
 /**
  * Represents a project in EMFStore. There are two different types of projects, {@link ILocalProject} and

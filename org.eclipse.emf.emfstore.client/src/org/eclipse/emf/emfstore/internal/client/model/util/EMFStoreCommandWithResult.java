@@ -23,7 +23,7 @@ public abstract class EMFStoreCommandWithResult<T> extends AbstractEMFStoreComma
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.util.AbstractEMFStoreCommand#commandBody()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.util.AbstractEMFStoreCommand#commandBody()
 	 */
 	@Override
 	protected void commandBody() {

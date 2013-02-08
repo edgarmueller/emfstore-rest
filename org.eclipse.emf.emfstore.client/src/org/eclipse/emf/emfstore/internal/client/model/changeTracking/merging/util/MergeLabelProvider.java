@@ -25,7 +25,7 @@ public interface MergeLabelProvider extends PrioritizedIObserver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.observer.PrioritizedIObserver#getPriority()
+	 * @see org.eclipse.emf.emfstore.internal.common.observer.PrioritizedIObserver#getPriority()
 	 */
 	int getPriority();
 

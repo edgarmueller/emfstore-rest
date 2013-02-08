@@ -31,7 +31,7 @@ public class AutoOperationWrapper implements OperationModificator {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationModificator#modify(java.util.List,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.OperationModificator#modify(java.util.List,
 	 *      org.eclipse.emf.common.command.Command)
 	 */
 	public List<AbstractOperation> modify(List<AbstractOperation> operations, Command command) {

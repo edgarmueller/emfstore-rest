@@ -42,7 +42,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
 		return new String[] { "EMFStore Project Files (*" + ExportImportDataUnits.Project.getExtension() + ")",
@@ -53,7 +53,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
 		return new String[] { "*" + ExportImportDataUnits.Project.getExtension() + ", *.*" };
@@ -63,7 +63,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#getLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
 		return "project";
@@ -73,7 +73,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.impl.IExportController#getFilename()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getFilename()
 	 */
 	public String getFilename() {
 		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
@@ -85,16 +85,16 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.internal.client.ui.exportProjectPath";
+		return "org.eclipse.emf.emfstore.internal.client.ui.exportProjectPath";
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -111,7 +111,7 @@ public class ExportProjectController extends ProjectSpaceBasedExportController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController#isExport()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#isExport()
 	 */
 	public boolean isExport() {
 		return true;

@@ -23,15 +23,14 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpda
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.observers.UpdateObserver;
-import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
  * Controller class for updating a project space.
@@ -77,7 +76,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.ServerCall#run()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
 	protected PrimaryVersionSpec run() throws EMFStoreException {

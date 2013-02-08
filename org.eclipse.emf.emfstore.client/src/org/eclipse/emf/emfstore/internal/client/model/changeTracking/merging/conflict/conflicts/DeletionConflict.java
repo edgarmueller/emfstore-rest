@@ -21,10 +21,10 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
- * Conflict with an {@link org.eclipse.emf.emfstore.internal.internal.server.model.versioning.operations.CreateDeleteOperation} involved.
+ * Conflict with an {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation} involved.
  * 
  * @author wesendon
  */

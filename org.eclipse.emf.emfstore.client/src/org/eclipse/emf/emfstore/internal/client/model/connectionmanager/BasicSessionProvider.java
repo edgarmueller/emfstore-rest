@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * Basic implementation of {@link AbstractSessionProvider}. It's intended for when using EMFStore headless. The UI
@@ -28,7 +28,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.AbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	@Override
 	public Usersession provideUsersession(IServer serverInfo) throws EMFStoreException {
@@ -39,7 +39,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.AbstractSessionProvider#login(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider#login(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	@Override
 	public void login(IUsersession usersession) throws EMFStoreException {

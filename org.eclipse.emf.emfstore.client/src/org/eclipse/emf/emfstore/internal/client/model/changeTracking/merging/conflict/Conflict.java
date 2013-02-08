@@ -17,13 +17,13 @@ import java.util.Observable;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 
 /**
  * Main class representing a conflict. it offers all kind of convenience methods
@@ -133,7 +133,8 @@ public abstract class Conflict extends Observable {
 			return;
 		}
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.ui.merge.customoption")
+		for (ExtensionElement element : new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.ui.merge.customoption")
 			.getExtensionElements()) {
 			CustomConflictOptionFactory factory = element.getClass("class", CustomConflictOptionFactory.class);
 			if (factory != null && factory.isApplicableConflict(Conflict.this)) {

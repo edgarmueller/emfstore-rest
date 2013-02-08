@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
+import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
  * Listener for a {@link EMFStoreTransactionalCommandStack}.

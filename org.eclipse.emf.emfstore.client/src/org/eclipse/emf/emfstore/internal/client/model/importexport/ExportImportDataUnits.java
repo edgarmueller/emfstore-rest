@@ -26,7 +26,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esc";
@@ -41,7 +41,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".ecp";
@@ -56,7 +56,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esp";
@@ -64,7 +64,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 	},
 
 	/**
-	 * A {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace}.
+	 * A {@link org.eclipse.emf.emfstore.internal.client.model.Workspace}.
 	 */
 	Workspace {
 
@@ -72,7 +72,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esw";
@@ -87,7 +87,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esh";

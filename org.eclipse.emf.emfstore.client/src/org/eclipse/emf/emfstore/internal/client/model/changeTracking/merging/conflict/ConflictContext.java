@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 
 /**
  * Holding the data for the context of an conflict.

@@ -19,9 +19,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
-import org.eclipse.emf.emfstore.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
 /**
  * The main managing class on the client side for file transfers. Each project

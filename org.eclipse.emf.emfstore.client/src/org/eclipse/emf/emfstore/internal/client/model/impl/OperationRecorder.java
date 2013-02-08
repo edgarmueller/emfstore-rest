@@ -453,8 +453,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
-	 *      org.eclipse.emf.emfstore.internal.internal.common.model.ModelElement)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
+	 *      org.eclipse.emf.emfstore.internal.common.model.ModelElement)
 	 */
 	public void modelElementRemoved(IdEObjectCollection project, EObject modelElement) {
 		if (isRecording) {
@@ -484,7 +484,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 
@@ -518,7 +518,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.internal.internal.client.recording.options extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.internal.client.recording.options extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
@@ -785,7 +785,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      org.eclipse.core.runtime.OperationCanceledException)
 	 */
 	public void commandFailed(Command command, Exception exception) {
@@ -812,7 +812,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;

@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationCompositeImpl#getOperations <em>Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.OperationCompositeImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  * 

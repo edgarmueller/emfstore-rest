@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.server.AdminEmfStore;
-import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.AdminEmfStore;
+import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 
 /**
  * An admin connection manager connects to the server for administrative services.

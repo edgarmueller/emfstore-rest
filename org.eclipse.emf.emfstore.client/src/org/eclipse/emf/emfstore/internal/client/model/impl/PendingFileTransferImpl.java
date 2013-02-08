@@ -26,13 +26,13 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#getAttachmentId <em>Attachment Id</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#getAttachmentId <em>Attachment Id</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#getFileVersion <em>File Version</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#getChunkNumber <em>Chunk Number</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#isUpload <em>Upload</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#getFileName <em>File Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl#getPreliminaryFileName <em>Preliminary
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#getFileVersion <em>File Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#getChunkNumber <em>Chunk Number</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#isUpload <em>Upload</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#getFileName <em>File Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl#getPreliminaryFileName <em>Preliminary
  * File Name</em>}</li>
  * </ul>
  * </p>

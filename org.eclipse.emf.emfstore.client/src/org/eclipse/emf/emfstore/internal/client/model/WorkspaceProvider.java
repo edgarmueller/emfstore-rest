@@ -28,6 +28,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
@@ -41,19 +44,13 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EditingDomainProvider
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.IReinitializable;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
-import org.eclipse.emf.emfstore.internal.internal.common.ResourceFactoryRegistry;
-import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
-import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
 
 /**
  * Controller for workspaces. Workspace Manager is a singleton.
@@ -131,7 +128,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 		this.observerBus = new ObserverBus();
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.internal.client.observers", true)
+			"org.eclipse.emf.emfstore.internal.client.observers", true)
 			.getExtensionElements()) {
 			try {
 				observerBus.register(element.getClass("ObserverClass",
@@ -144,7 +141,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 
 	private void notifyPostWorkspaceInitiators() {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.internal.client.notify.postinit", true)
+			"org.eclipse.emf.emfstore.internal.client.notify.postinit", true)
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", PostWorkspaceInitiator.class)
@@ -256,7 +253,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	private EditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
 		return new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.internal.client.editingDomainProvider")
+			"org.eclipse.emf.emfstore.internal.client.editingDomainProvider")
 			.getClass("class", EditingDomainProvider.class);
 	}
 
@@ -613,7 +610,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	public void dispose() {
 		// TODO: OTS
@@ -628,7 +625,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.IReinitializable#isDisposed()
+	 * @see org.eclipse.emf.emfstore.internal.common.IReinitializable#isDisposed()
 	 */
 	public boolean isDisposed() {
 		return currentWorkspace == null;

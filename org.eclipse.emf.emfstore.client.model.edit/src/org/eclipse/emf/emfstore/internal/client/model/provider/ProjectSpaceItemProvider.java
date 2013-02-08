@@ -35,11 +35,12 @@ import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.edit.edit.provider.IdentifiableElementItemProvider;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.common.model.provider.IdentifiableElementItemProvider;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace} object.
+ * <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

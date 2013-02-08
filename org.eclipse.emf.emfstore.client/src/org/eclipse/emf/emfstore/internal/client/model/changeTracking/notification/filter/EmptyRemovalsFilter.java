@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 
 import java.util.Collection;
 
+import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
-import org.eclipse.emf.emfstore.internal.common.model.EObjectContainer;
 
 /**
  * This class filters zero effect remove operations from a notification recording. An example of a zero effect remove is
@@ -27,7 +27,7 @@ public class EmptyRemovalsFilter implements NotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.notification.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
 	 */
 	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {

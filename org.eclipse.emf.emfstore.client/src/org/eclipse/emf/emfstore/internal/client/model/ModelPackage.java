@@ -63,12 +63,12 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.WorkspaceImpl <em>Workspace</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl <em>Workspace</em>}'
 	 * class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.WorkspaceImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getWorkspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getWorkspace()
 	 * @generated
 	 */
 	int WORKSPACE = 0;
@@ -113,12 +113,12 @@ public interface ModelPackage extends EPackage {
 	int WORKSPACE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ServerInfoImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl
 	 * <em>Server Info</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ServerInfoImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getServerInfo()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getServerInfo()
 	 * @generated
 	 */
 	int SERVER_INFO = 1;
@@ -188,12 +188,12 @@ public interface ModelPackage extends EPackage {
 	int SERVER_INFO_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl
 	 * <em>Usersession</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getUsersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getUsersession()
 	 * @generated
 	 */
 	int USERSESSION = 2;
@@ -281,12 +281,12 @@ public interface ModelPackage extends EPackage {
 	int USERSESSION_FEATURE_COUNT = 8;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl
 	 * <em>Project Space</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getProjectSpace()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getProjectSpace()
 	 * @generated
 	 */
 	int PROJECT_SPACE = 3;
@@ -474,12 +474,12 @@ public interface ModelPackage extends EPackage {
 	int PROJECT_SPACE_FEATURE_COUNT = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationCompositeImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.OperationCompositeImpl
 	 * <em>Operation Composite</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationCompositeImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getOperationComposite()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.OperationCompositeImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getOperationComposite()
 	 * @generated
 	 */
 	int OPERATION_COMPOSITE = 4;
@@ -505,12 +505,12 @@ public interface ModelPackage extends EPackage {
 	int OPERATION_COMPOSITE_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl
 	 * <em>Pending File Transfer</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getPendingFileTransfer()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getPendingFileTransfer()
 	 * @generated
 	 */
 	int PENDING_FILE_TRANSFER = 5;
@@ -582,22 +582,22 @@ public interface ModelPackage extends EPackage {
 	int PENDING_FILE_TRANSFER_FEATURE_COUNT = 6;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace <em>Workspace</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.Workspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Workspace</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace
 	 * @generated
 	 */
 	EClass getWorkspace();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Project Spaces</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
@@ -605,11 +605,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getServerInfos <em>Server Infos</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getServerInfos <em>Server Infos</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Server Infos</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getServers()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getServers()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
@@ -617,58 +617,58 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getUsersessions <em>Usersessions</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getUsersessions <em>Usersessions</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Usersessions</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getUsersessions()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getUsersessions()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
 	EReference getWorkspace_Usersessions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo <em>Server Info</em>}
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo <em>Server Info</em>}
 	 * '.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Server Info</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo
 	 * @generated
 	 */
 	EClass getServerInfo();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getName
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName
 	 * <em>Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getName()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
 	EAttribute getServerInfo_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getUrl
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl
 	 * <em>Url</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Url</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getUrl()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
 	EAttribute getServerInfo_Url();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getPort
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort
 	 * <em>Port</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Port</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getPort()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
@@ -676,11 +676,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Project Infos</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getProjectInfos()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
@@ -688,11 +688,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Last Usersession</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getLastUsersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
@@ -700,58 +700,58 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Certificate Alias</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo#getCertificateAlias()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias()
 	 * @see #getServerInfo()
 	 * @generated
 	 */
 	EAttribute getServerInfo_CertificateAlias();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession <em>Usersession</em>}
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession <em>Usersession</em>}
 	 * '.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Usersession</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession
 	 * @generated
 	 */
 	EClass getUsersession();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getUsername
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getUsername
 	 * <em>Username</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Username</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getUsername()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getUsername()
 	 * @see #getUsersession()
 	 * @generated
 	 */
 	EAttribute getUsersession_Username();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getPassword
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword
 	 * <em>Password</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Password</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getPassword()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword()
 	 * @see #getUsersession()
 	 * @generated
 	 */
 	EAttribute getUsersession_Password();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getSessionId
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId
 	 * <em>Session Id</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Session Id</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getSessionId()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId()
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -759,11 +759,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getPersistentPassword <em>Persistent Password</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPersistentPassword <em>Persistent Password</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Persistent Password</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getPersistentPassword()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getPersistentPassword()
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -771,11 +771,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getServerInfo <em>Server Info</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getServerInfo <em>Server Info</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Server Info</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getServerInfo()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getServerInfo()
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -783,11 +783,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#isSavePassword <em>Save Password</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession#isSavePassword <em>Save Password</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Save Password</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#isSavePassword()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#isSavePassword()
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -795,12 +795,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getACUser <em>AC User</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getACUser <em>AC User</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>AC User</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getACUser()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getACUser()
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -808,35 +808,35 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getChangedProperties <em>Changed Properties</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getChangedProperties <em>Changed Properties</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Changed Properties</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Usersession#getChangedProperties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#getChangedProperties()
 	 * @see #getUsersession()
 	 * @generated
 	 */
 	EReference getUsersession_ChangedProperties();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace
 	 * <em>Project Space</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Project Space</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace
 	 * @generated
 	 */
 	EClass getProjectSpace();
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProject <em>Project</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Project</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProject()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -844,12 +844,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectId <em>Project Id</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId <em>Project Id</em>}'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Project Id</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -857,11 +857,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectName <em>Project Name</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName <em>Project Name</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectName()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -869,11 +869,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectDescription <em>Project Description</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription <em>Project Description</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Project Description</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProjectDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -881,11 +881,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getUsersession <em>Usersession</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession <em>Usersession</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Usersession</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getUsersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -893,11 +893,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLastUpdated <em>Last Updated</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated <em>Last Updated</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Last Updated</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLastUpdated()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -905,11 +905,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getBaseVersion <em>Base Version</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion <em>Base Version</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Base Version</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getBaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -917,23 +917,23 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getResourceCount <em>Resource Count</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount <em>Resource Count</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resource Count</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getResourceCount()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
 	EAttribute getProjectSpace_ResourceCount();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#isDirty
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isDirty
 	 * <em>Dirty</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Dirty</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#hasUncommitedChanges()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#hasUncommitedChanges()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -941,11 +941,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getOldLogMessages <em>Old Log Messages</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOldLogMessages <em>Old Log Messages</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute list '<em>Old Log Messages</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getOldLogMessages()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOldLogMessages()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -953,11 +953,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalOperations <em>Local Operations</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations <em>Local Operations</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Local Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -965,11 +965,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWaitingUploads <em>Waiting Uploads</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWaitingUploads <em>Waiting Uploads</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Waiting Uploads</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWaitingUploads()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWaitingUploads()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -977,12 +977,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProperties <em>Properties</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Properties</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getProperties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProperties()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -990,13 +990,13 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getChangedSharedProperties
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getChangedSharedProperties
 	 * <em>Changed Shared Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Changed Shared Properties</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getChangedSharedProperties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getChangedSharedProperties()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -1004,12 +1004,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Workspace</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -1017,12 +1017,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalChangePackage <em>Local Change Package</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage <em>Local Change Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Local Change Package</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getLocalChangePackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
@@ -1030,58 +1030,58 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getMergedVersion <em>Merged Version</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getMergedVersion <em>Merged Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Merged Version</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getMergedVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getMergedVersion()
 	 * @see #getProjectSpace()
 	 * @generated
 	 */
 	EReference getProjectSpace_MergedVersion();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite
 	 * <em>Operation Composite</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Operation Composite</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite
+	 * @see org.eclipse.emf.emfstore.internal.client.model.OperationComposite
 	 * @generated
 	 */
 	EClass getOperationComposite();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite#getOperations <em>Operations</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite#getOperations <em>Operations</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.OperationComposite#getOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.OperationComposite#getOperations()
 	 * @see #getOperationComposite()
 	 * @generated
 	 */
 	EReference getOperationComposite_Operations();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer
 	 * <em>Pending File Transfer</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Pending File Transfer</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer
 	 * @generated
 	 */
 	EClass getPendingFileTransfer();
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getAttachmentId <em>Attachment Id</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getAttachmentId <em>Attachment Id</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Attachment Id</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getAttachmentId()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getAttachmentId()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1089,11 +1089,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getFileVersion <em>File Version</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getFileVersion <em>File Version</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Version</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getFileVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getFileVersion()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1101,11 +1101,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getChunkNumber <em>Chunk Number</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getChunkNumber <em>Chunk Number</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Chunk Number</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getChunkNumber()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getChunkNumber()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1113,12 +1113,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#isUpload <em>Upload</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#isUpload <em>Upload</em>}'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Upload</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#isUpload()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#isUpload()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1126,11 +1126,11 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getFileName <em>File Name</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getFileName <em>File Name</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Name</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getFileName()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getFileName()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1138,12 +1138,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getPreliminaryFileName
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getPreliminaryFileName
 	 * <em>Preliminary File Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Preliminary File Name</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.PendingFileTransfer#getPreliminaryFileName()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer#getPreliminaryFileName()
 	 * @see #getPendingFileTransfer()
 	 * @generated
 	 */
@@ -1172,12 +1172,12 @@ public interface ModelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.WorkspaceImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl
 		 * <em>Workspace</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.WorkspaceImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getWorkspace()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getWorkspace()
 		 * @generated
 		 */
 		EClass WORKSPACE = eINSTANCE.getWorkspace();
@@ -1207,12 +1207,12 @@ public interface ModelPackage extends EPackage {
 		EReference WORKSPACE__USERSESSIONS = eINSTANCE.getWorkspace_Usersessions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ServerInfoImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl
 		 * <em>Server Info</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ServerInfoImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getServerInfo()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getServerInfo()
 		 * @generated
 		 */
 		EClass SERVER_INFO = eINSTANCE.getServerInfo();
@@ -1271,12 +1271,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute SERVER_INFO__CERTIFICATE_ALIAS = eINSTANCE.getServerInfo_CertificateAlias();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl
 		 * <em>Usersession</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.UsersessionImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getUsersession()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getUsersession()
 		 * @generated
 		 */
 		EClass USERSESSION = eINSTANCE.getUsersession();
@@ -1353,12 +1353,12 @@ public interface ModelPackage extends EPackage {
 		EReference USERSESSION__CHANGED_PROPERTIES = eINSTANCE.getUsersession_ChangedProperties();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl
 		 * <em>Project Space</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ProjectSpaceImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getProjectSpace()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getProjectSpace()
 		 * @generated
 		 */
 		EClass PROJECT_SPACE = eINSTANCE.getProjectSpace();
@@ -1512,12 +1512,12 @@ public interface ModelPackage extends EPackage {
 		EReference PROJECT_SPACE__MERGED_VERSION = eINSTANCE.getProjectSpace_MergedVersion();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationCompositeImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.OperationCompositeImpl
 		 * <em>Operation Composite</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationCompositeImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getOperationComposite()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.OperationCompositeImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getOperationComposite()
 		 * @generated
 		 */
 		EClass OPERATION_COMPOSITE = eINSTANCE.getOperationComposite();
@@ -1531,12 +1531,12 @@ public interface ModelPackage extends EPackage {
 		EReference OPERATION_COMPOSITE__OPERATIONS = eINSTANCE.getOperationComposite_Operations();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl
 		 * <em>Pending File Transfer</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.PendingFileTransferImpl
-		 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.ModelPackageImpl#getPendingFileTransfer()
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.PendingFileTransferImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.model.impl.ModelPackageImpl#getPendingFileTransfer()
 		 * @generated
 		 */
 		EClass PENDING_FILE_TRANSFER = eINSTANCE.getPendingFileTransfer();

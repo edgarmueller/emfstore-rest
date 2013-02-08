@@ -36,7 +36,7 @@ public class ProjectSpaceSaveStateNotifier implements IDEObjectCollectionDirtySt
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.IDEObjectCollectionDirtyStateListener#notifyAboutDirtyStateChange()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.IDEObjectCollectionDirtyStateListener#notifyAboutDirtyStateChange()
 	 */
 	public void notifyAboutDirtyStateChange() {
 		WorkspaceProvider.getObserverBus().notify(SaveStateChangedObserver.class)

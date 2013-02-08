@@ -142,7 +142,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#createLocalProject(java.lang.String, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createLocalProject(java.lang.String, java.lang.String)
 	 */
 	public ProjectSpace createLocalProject(String projectName, String projectDescription) {
 
@@ -164,7 +164,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.ServerInfo,
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(IServer serverInfo, final String projectName,
@@ -181,7 +181,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.Usersession,
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(IUsersession usersession, final String projectName,
@@ -199,7 +199,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @throws EMFStoreException
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#deleteProjectSpace(org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#deleteProjectSpace(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	// TODO: OTS: move to ProjectSpaceBase
 	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, EMFStoreException {
@@ -221,7 +221,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
 	 */
 	public void init() {
 		projectToProjectSpaceMap = new LinkedHashMap<Project, ProjectSpace>();
@@ -249,7 +249,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#setWorkspaceResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#setWorkspaceResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
 	 */
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.workspaceResourceSet = resourceSet;
@@ -263,7 +263,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	public void updateACUser(ServerInfo serverInfo) throws EMFStoreException {
 		new ServerCall<Void>(serverInfo) {
@@ -279,7 +279,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void updateACUser(Usersession usersession) throws EMFStoreException {
 		new ServerCall<Void>(usersession) {
@@ -295,7 +295,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#addServer(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#addServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	public void addServer(IServer serverInfo) {
 		getServers().add((ServerInfo) serverInfo);
@@ -306,7 +306,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#removeServer(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#removeServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	public void removeServer(IServer serverInfo) {
 		getServers().remove(serverInfo);
@@ -342,7 +342,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#importProject(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#importProject(java.lang.String)
 	 */
 	public ProjectSpace importProject(String absoluteFileName) throws IOException {
 		Project project = ResourceHelper.getElementFromResource(absoluteFileName, Project.class, 0);
@@ -353,7 +353,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#importProjectSpace(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#importProjectSpace(java.lang.String)
 	 */
 	public ProjectSpace importProjectSpace(String absoluteFileName) throws IOException {
 
@@ -369,7 +369,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.internal.server.model.url.ProjectUrlFragment)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment)
 	 */
 	public Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException {
 		Set<ProjectSpace> result = new LinkedHashSet<ProjectSpace>();
@@ -387,7 +387,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.internal.server.model.url.ServerUrl)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl)
 	 */
 	public Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException {
 		Set<ServerInfo> result = new LinkedHashSet<ServerInfo>();
@@ -408,9 +408,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.ProjectId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.client.model.Usersession,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec,
 		final IProjectId projectId) throws EMFStoreException {
@@ -428,7 +428,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#save()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#save()
 	 */
 	public void save() {
 		try {
@@ -443,7 +443,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      java.io.File)
 	 */
 	public void exportProjectSpace(ProjectSpace projectSpace, File file) throws IOException {
@@ -454,7 +454,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#exportProjectSpace(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      java.io.File, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void exportProjectSpace(ProjectSpace projectSpace, File file, IProgressMonitor progressMonitor)
@@ -466,7 +466,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#exportWorkSpace(java.io.File)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#exportWorkSpace(java.io.File)
 	 */
 	public void exportWorkSpace(File file) throws IOException {
 		new ExportWorkspaceController().execute(file, new NullProgressMonitor());
@@ -476,7 +476,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#exportWorkSpace(java.io.File,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#exportWorkSpace(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void exportWorkSpace(File file, IProgressMonitor progressMonitor) throws IOException {
@@ -499,7 +499,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	public AdminBroker getAdminBroker(final ServerInfo serverInfo) throws EMFStoreException, AccessControlException {
 		return new ServerCall<AdminBroker>(serverInfo) {
@@ -514,7 +514,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public AdminBroker getAdminBroker(final Usersession usersession) throws EMFStoreException, AccessControlException {
 		return new ServerCall<AdminBroker>(usersession) {
@@ -529,7 +529,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getEditingDomain()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {
 		return Configuration.getEditingDomain();
@@ -538,7 +538,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project)
 	 */
 	public ProjectSpace getProjectSpace(Project project) throws UnkownProjectException {
 		ProjectSpace projectSpace = projectToProjectSpaceMap.get(project);

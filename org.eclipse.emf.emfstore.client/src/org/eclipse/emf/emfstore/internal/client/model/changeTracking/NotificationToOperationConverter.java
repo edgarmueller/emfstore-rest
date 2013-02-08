@@ -23,18 +23,18 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 
 /**
  * Converts an EMF notification to an Operation.

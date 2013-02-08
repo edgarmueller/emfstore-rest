@@ -15,10 +15,10 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Convenience super class for implementing {@link IConflictResolver}.
@@ -47,7 +47,7 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getAcceptedMine() {
 		return acceptedMine;
@@ -56,7 +56,7 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getRejectedTheirs() {
 		return rejectedTheirs;
@@ -66,9 +66,10 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
-	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
+	 *      java.util.List, java.util.List,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)
 	 */
 	public boolean resolveConflicts(Project project, ChangeConflictException conflictException,
 		PrimaryVersionSpec base, PrimaryVersionSpec target) {
@@ -121,7 +122,7 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#getMergedResult()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver#getMergedResult()
 	 */
 	public ChangePackage getMergedResult() {
 		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();

@@ -62,18 +62,18 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	private void configureOperationRecorder() {
 		// cut off incoming cross-references by default
 		operationRecorder.getConfig().setCutOffIncomingCrossReferences(
-			new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.recording.options")
+			new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options")
 				.getBoolean("cutOffIncomingCrossReferences", true));
 		// usage of commands is not forced by default
 		operationRecorder.getConfig().setForceCommands(
-			new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.recording.options")
+			new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options")
 				.getBoolean("forceCommands", false));
 		// cut elements are added automatically as regular model elements by default
 		operationRecorder.getConfig().setDenyAddCutElementsToModelElements(
-			new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.recording.options")
+			new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options")
 				.getBoolean("denyAddCutElementsToModelElements", false));
 		operationRecorder.getConfig().setOperationModificator(
-			new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.recording.options").getClass(
+			new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options").getClass(
 				"operationModificator", OperationModificator.class));
 	}
 
@@ -182,7 +182,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationRecorderListener#operationsRecorded(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.OperationRecorderListener#operationsRecorded(java.util.List)
 	 */
 	public void operationsRecorded(List<? extends AbstractOperation> operations) {
 		projectSpace.addOperations(operations);
@@ -201,7 +201,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	public void dispose() {
 		operationRecorder.removeOperationRecorderListener(this);
@@ -220,7 +220,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		operationRecorder.commandStarted(command);
@@ -230,7 +230,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 		operationRecorder.commandCompleted(command);
@@ -240,7 +240,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      java.lang.Exception)
 	 */
 	public void commandFailed(Command command, Exception exception) {

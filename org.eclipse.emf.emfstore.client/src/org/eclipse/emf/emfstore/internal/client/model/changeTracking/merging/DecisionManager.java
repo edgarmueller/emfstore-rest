@@ -10,18 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isAttribute;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isComposite;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isCompositeRef;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isDelete;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isDiagramLayout;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiAtt;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiAttMove;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiAttSet;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiRef;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isMultiRefSet;
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isSingleRef;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -31,6 +19,8 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
@@ -51,22 +41,20 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucket;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 
 /**
  * DecisionManager is the controller for the merge dialog and therefore it's
@@ -128,7 +116,8 @@ public class DecisionManager {
 
 	private List<ConflictHandler> initConflictHandlers() {
 		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.internal.client.merge.conflictHandler")
+		for (ExtensionElement element : new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.merge.conflictHandler")
 			.getExtensionElements()) {
 			ConflictHandler handler = element.getClass("class", ConflictHandler.class);
 			if (handler != null) {

@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
@@ -34,7 +34,7 @@ public abstract class AbstractSessionProvider {
 	/**
 	 * ExtensionPoint ID of the SessionProvider.
 	 */
-	public static final String ID = "org.eclipse.emf.emfstore.internal.internal.client.sessionprovider";
+	public static final String ID = "org.eclipse.emf.emfstore.internal.client.sessionprovider";
 
 	/**
 	 * The {@link SessionManager} calls this method in order to gain a usersession. In its default implementation it

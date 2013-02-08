@@ -16,8 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.emfstore.client.IChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 
 /**
  * Represents the exception that there are conflicting changes.

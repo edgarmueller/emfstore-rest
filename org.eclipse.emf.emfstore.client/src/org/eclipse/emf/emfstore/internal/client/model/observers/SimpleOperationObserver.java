@@ -27,7 +27,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.OperationObserver#operationExecuted(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserver#operationExecuted(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public void operationExecuted(AbstractOperation operation) {
 		operationPerformed(operation);
@@ -41,8 +41,8 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void commitCompleted(ProjectSpace projectSpace, PrimaryVersionSpec newRevision, IProgressMonitor monitor) {
@@ -53,8 +53,8 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage, IProgressMonitor monitor) {
 		return true;
@@ -63,7 +63,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.observers.OperationObserver#operationUnDone(org.eclipse.emf.emfstore.internal.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserver#operationUnDone(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public void operationUnDone(AbstractOperation operation) {
 		operationPerformed(operation.reverse());

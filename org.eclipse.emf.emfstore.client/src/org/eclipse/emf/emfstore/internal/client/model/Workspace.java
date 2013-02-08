@@ -25,10 +25,9 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResol
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
-import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
+import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
@@ -39,13 +38,13 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
  *             The following features are supported:
  *             <ul>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces
+ *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces
  *             <em>Project Spaces</em>}</li>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getServerInfos
+ *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getServerInfos
  *             <em>Server Infos</em>}</li>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getUsersessions
+ *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getUsersessions
  *             <em>Usersessions</em>}</li>
  *             </ul>
  *             </p>
@@ -157,8 +156,8 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace}. It is
-	 * bidirectional and its opposite is ' {@link org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace}. It is
+	 * bidirectional and its opposite is ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
@@ -169,7 +168,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 * @return the value of the '<em>Project Spaces</em>' containment reference
 	 *         list.
 	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_ProjectSpaces()
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
 	 * @model opposite="workspace" containment="true" resolveProxies="true"
 	 *        keys="identifier"
 	 * @generated
@@ -178,7 +177,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.client.model.ServerInfo}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Server Infos</em>' containment reference list isn't clear, there really should be more
@@ -196,7 +195,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Usersessions</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.client.model.Usersession}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.Usersession}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Usersessions</em>' containment reference list isn't clear, there really should be more

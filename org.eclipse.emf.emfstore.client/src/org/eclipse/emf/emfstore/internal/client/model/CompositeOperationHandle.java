@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationRecorder;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
  * A handle to control a composite operation during recording.

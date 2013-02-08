@@ -43,12 +43,12 @@ import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 
 /**
@@ -85,7 +85,7 @@ public final class KeyStoreManager {
 
 	private void loadConfiguration() {
 		ConfigurationProvider provider = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.internal.client.defaultConfigurationProvider").getClass("providerClass",
+			"org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider").getClass("providerClass",
 			ConfigurationProvider.class);
 		if (provider == null) {
 			return;
