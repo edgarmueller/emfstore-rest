@@ -927,10 +927,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				Set<ConflictBucketCandidate> calculateConflictCandidateBuckets = new ConflictDetector()
 					.calculateConflictCandidateBuckets(branchChanges, baseChanges);
 
-				ChangeConflictException conflictException = new ChangeConflictException(ProjectSpaceBase.this,
-					branchChanges, baseChanges, calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
+				ChangeConflict changeConflict = new ChangeConflict(ProjectSpaceBase.this, branchChanges, baseChanges,
+					calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
 
-				if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), null)) {
+				if (conflictResolver.resolveConflicts(getProject(), changeConflict, getBaseVersion(), null)) {
 					// TODO: do we need to care about checksum errors here?
 					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
 					setMergedVersion(ModelUtil.clone(branchSpec));
