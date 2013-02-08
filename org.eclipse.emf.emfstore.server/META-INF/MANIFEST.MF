@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Server  (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.server;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.server;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.internal.serverxxx.Activator
 Bundle-Vendor: Eclipse Modeling Project
