@@ -27,7 +27,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.OperationComposite;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite} object. <!--

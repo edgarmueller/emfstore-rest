@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.Usersession} object. <!--

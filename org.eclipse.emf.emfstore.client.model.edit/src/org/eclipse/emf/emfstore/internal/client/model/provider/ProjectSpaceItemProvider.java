@@ -348,7 +348,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 			ModelFactory.eINSTANCE.createProject()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__PROJECT_ID,
-			org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId()));
+			org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createProjectId()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__BASE_VERSION,
 			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
@@ -357,7 +357,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 			org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createOperationComposite()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__WAITING_UPLOADS,
-			org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createFileIdentifier()));
+			org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createFileIdentifier()));
 
 		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_SPACE__PROPERTIES,
 			ModelFactory.eINSTANCE.createEMFStoreProperty()));
