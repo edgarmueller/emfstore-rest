@@ -142,7 +142,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
 					getLocalProject(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
 					idToEObjectMapping));
-				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
+				if (callback.conflictOccurred(conflictException.getChangeConflict(), getProgressMonitor())) {
 					return getLocalProject().getBaseVersion();
 				} else {
 					throw conflictException;

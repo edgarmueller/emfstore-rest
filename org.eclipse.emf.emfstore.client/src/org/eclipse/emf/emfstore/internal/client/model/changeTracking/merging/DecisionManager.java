@@ -10,6 +10,18 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isAttribute;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isComposite;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCompositeRef;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isDelete;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isDiagramLayout;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAtt;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAttMove;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAttSet;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiRef;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiRefSet;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isSingleRef;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;

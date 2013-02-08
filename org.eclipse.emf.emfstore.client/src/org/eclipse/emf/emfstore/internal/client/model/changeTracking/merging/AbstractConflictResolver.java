@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -71,13 +71,13 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public boolean resolveConflicts(Project project, ChangeConflictException conflictException,
-		PrimaryVersionSpec base, PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project, ChangeConflict changeConflict, PrimaryVersionSpec base,
+		PrimaryVersionSpec target) {
 
 		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, conflictException, base, target, isBranchMerge);
+		DecisionManager decisionManager = new DecisionManager(project, changeConflict, base, target, isBranchMerge);
 
 		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {

@@ -13,12 +13,13 @@ package org.eclipse.emf.emfstore.internal.client.model.controller;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
-public class ChangeConflict {
+public class ChangeConflict implements IChangeConflict {
 
 	private List<ChangePackage> myChangePackages;
 	private List<ChangePackage> newPackages;

@@ -18,16 +18,15 @@ import java.util.Date;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
@@ -56,7 +55,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @throws EMFStoreException
 	 *             if update fails
 	 */
-	IPrimaryVersionSpec update() throws IChangeConflictException, EMFStoreException;
+	IPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * Updates the project to the given version from the server.
@@ -82,33 +81,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
 		throws ChangeConflictException, EMFStoreException;
 
-	/**
-	 * Merge the changes from current base version to given target version with
-	 * the local operations.
-	 * 
-	 * @param target
-	 *            a target version
-	 * @param conflictException
-	 *            a {@link ChangeConflictException} containing the changes to be merged
-	 * @param conflictResolver
-	 *            a {@link IConflictResolver} that will actually perform the conflict
-	 *            resolution
-	 * @param callback
-	 *            the {@link IUpdateCallback} that is called in case the checksum comparison fails
-	 * @param progressMonitor
-	 *            an {@link IProgressMonitor} to report on progress
-	 * 
-	 * @throws EMFStoreException
-	 *             if the connection to the server fails
-	 * @return true, if merge was successful, false otherwise
-	 * 
-	 * @see IUpdateCallback#checksumCheckFailed(ProjectSpace, PrimaryVersionSpec, IProgressMonitor)
-	 * 
-	 * @generated NOT
-	 */
-	boolean merge(IPrimaryVersionSpec target, ChangeConflictException conflictException,
-		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws EMFStoreException;
+	boolean merge(IPrimaryVersionSpec target, ChangeConflict changeConflict, IConflictResolver conflictResolver,
+		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
