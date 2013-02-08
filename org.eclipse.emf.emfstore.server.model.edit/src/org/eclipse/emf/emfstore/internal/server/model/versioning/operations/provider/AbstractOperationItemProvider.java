@@ -28,7 +28,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.common.model.edit.edit.provider.IdentifiableElementItemProvider;
+import org.eclipse.emf.emfstore.internal.common.model.provider.IdentifiableElementItemProvider;
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;

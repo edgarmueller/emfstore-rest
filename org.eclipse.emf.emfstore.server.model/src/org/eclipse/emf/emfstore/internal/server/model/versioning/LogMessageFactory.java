@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import java.util.Calendar;
 
-import org.eclipse.emf.emfstore.internal.server.model.api.ILogMessage;
-import org.eclipse.emf.emfstore.internal.server.model.api.ILogMessageFactory;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessageFactory;
 
 /**
  * A factory for creating ILogMessage objects.

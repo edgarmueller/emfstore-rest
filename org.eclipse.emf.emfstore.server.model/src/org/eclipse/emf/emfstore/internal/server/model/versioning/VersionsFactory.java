@@ -1,12 +1,12 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IAncestorVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IHeadVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.ITagVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IVersionFactory;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IAncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IHeadVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionFactory;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
 public class VersionsFactory implements IVersionFactory {
 
@@ -47,10 +47,8 @@ public class VersionsFactory implements IVersionFactory {
 		return Versions.createBRANCH((VersionSpec) spec);
 	}
 
-	public IAncestorVersionSpec createANCESTOR(IPrimaryVersionSpec source,
-			IPrimaryVersionSpec target) {
-		return Versions.createANCESTOR((PrimaryVersionSpec) source,
-				(PrimaryVersionSpec) target);
+	public IAncestorVersionSpec createANCESTOR(IPrimaryVersionSpec source, IPrimaryVersionSpec target) {
+		return Versions.createANCESTOR((PrimaryVersionSpec) source, (PrimaryVersionSpec) target);
 	}
 
 	public boolean isSameBranch(IVersionSpec spec1, IVersionSpec spec2) {

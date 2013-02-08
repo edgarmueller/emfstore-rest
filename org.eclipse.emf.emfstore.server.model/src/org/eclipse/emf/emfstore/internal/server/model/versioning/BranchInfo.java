@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.server.model.api.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.

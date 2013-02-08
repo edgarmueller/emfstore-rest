@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.server.model.api.versionspecs;
+package org.eclipse.emf.emfstore.server.model.api.versionspec;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionsFactory;
 

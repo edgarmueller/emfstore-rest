@@ -26,7 +26,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.internal.common.model.edit.edit.provider.IdentifiableElementItemProvider;
+import org.eclipse.emf.emfstore.internal.common.model.provider.IdentifiableElementItemProvider;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage;
