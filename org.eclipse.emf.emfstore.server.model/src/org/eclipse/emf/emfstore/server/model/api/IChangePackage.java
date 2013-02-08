@@ -5,4 +5,5 @@ public interface IChangePackage {
 	ILogMessage getLogMessage();
 
 	void setLogMessage(ILogMessage logMessage);
+
 }

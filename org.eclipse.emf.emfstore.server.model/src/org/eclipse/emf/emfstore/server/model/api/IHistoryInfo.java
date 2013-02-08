@@ -12,9 +12,9 @@ public interface IHistoryInfo {
 
 	IPrimaryVersionSpec getPreviousSpec();
 
-	List<IPrimaryVersionSpec> getMergedFrom();
+	List<IPrimaryVersionSpec> getMergedFromSpecs();
 
-	List<IPrimaryVersionSpec> getMergedTo();
+	List<IPrimaryVersionSpec> getMergedToSpecs();
 
 	ILogMessage getLogMessage();
 
