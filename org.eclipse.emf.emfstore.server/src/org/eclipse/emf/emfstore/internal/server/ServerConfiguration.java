@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
@@ -199,10 +199,8 @@ public final class ServerConfiguration {
 	public static final String AUTHENTICATION_LDAP = "ldap";
 
 	/**
-	 * Beginng tag of every ldap property. Format for ldap configuration is
-	 * {@link #AUTHENTICATION_LDAP_PREFIX} .[numberOfLdapConfiguration].{
-	 * {@link #AUTHENTICATION_LDAP_URL}/
-	 * {@link #AUTHENTICATION_LDAP_BASE_DEFAULT}/
+	 * Beginng tag of every ldap property. Format for ldap configuration is {@link #AUTHENTICATION_LDAP_PREFIX}
+	 * .[numberOfLdapConfiguration].{ {@link #AUTHENTICATION_LDAP_URL}/ {@link #AUTHENTICATION_LDAP_BASE_DEFAULT}/
 	 * {@link #AUTHENTICATION_LDAP_SEARCHDN} .
 	 */
 	public static final String AUTHENTICATION_LDAP_PREFIX = "emfstore.accesscontrol.authentication.ldap";
@@ -254,15 +252,11 @@ public final class ServerConfiguration {
 
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the
-	 * values
-	 * {@link org.eclipse.emf.emfstore.internal.serverxxx.internal.startup.EmfStoreValidator#RESOLVEALL}
-	 * ,
-	 * {@link org.eclipse.emf.emfstore.internal.serverxxx.internal.startup.EmfStoreValidator#MODELELEMENTID}
-	 * and
-	 * {@link org.eclipse.emf.emfstore.internal.serverxxx.internal.startup.EmfStoreValidator#PROJECTGENERATION}
-	 * . E.g.: If you want to resolve all elements and check use the
-	 * modelelement id validation, you have to set the level to
-	 * <code>1 | 2</code>, which is 3.
+	 * values {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#RESOLVEALL} ,
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#MODELELEMENTID} and
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#PROJECTGENERATION} . E.g.:
+	 * If you want to resolve all elements and check use the
+	 * modelelement id validation, you have to set the level to <code>1 | 2</code>, which is 3.
 	 */
 	public static final String VALIDATION_LEVEL = "emfstore.validation.level";
 
@@ -272,8 +266,7 @@ public final class ServerConfiguration {
 	public static final String VALIDATION_LEVEL_DEFAULT = "7";
 
 	/**
-	 * Exclude projects from validation, use {@link #MULTI_PROPERTY_SEPERATOR}
-	 * to seperate them.
+	 * Exclude projects from validation, use {@link #MULTI_PROPERTY_SEPERATOR} to seperate them.
 	 */
 	public static final String VALIDATION_PROJECT_EXCLUDE = "emfstore.validation.exclude";
 
@@ -431,8 +424,7 @@ public final class ServerConfiguration {
 	 * @return the dir path string
 	 */
 	public static String getServerHome() {
-		String workspaceDirectory = getLocationProvider()
-				.getWorkspaceDirectory();
+		String workspaceDirectory = getLocationProvider().getWorkspaceDirectory();
 		File workspace = new File(workspaceDirectory);
 		if (!workspace.exists()) {
 			workspace.mkdirs();
@@ -445,8 +437,7 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Returns the registered {@link LocationProvider} or if not existent, the
-	 * {@link DefaultWorkspaceLocationProvider}.
+	 * Returns the registered {@link LocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
@@ -454,9 +445,8 @@ public final class ServerConfiguration {
 		if (locationProvider == null) {
 			// TODO EXPT PRIO
 			try {
-				locationProvider = new ExtensionPoint(
-						"org.eclipse.emf.emfstore.internal.serverxxx.locationprovider",
-						true).getClass("providerClass", LocationProvider.class);
+				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.internal.serverxxx.locationprovider",
+					true).getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "No location provider or error while instantiating location provider, switching to default location!";
 				ModelUtil.logWarning(message);
@@ -480,8 +470,7 @@ public final class ServerConfiguration {
 	 */
 	public static String getStartArgument(String parameter) {
 		for (String arg : Platform.getApplicationArgs()) {
-			if (arg.startsWith(parameter) && arg.length() > parameter.length()
-					&& arg.charAt(parameter.length()) == '=') {
+			if (arg.startsWith(parameter) && arg.length() > parameter.length() && arg.charAt(parameter.length()) == '=') {
 				return arg.substring(parameter.length() + 1, arg.length());
 			}
 		}
@@ -548,16 +537,14 @@ public final class ServerConfiguration {
 	 *            default value
 	 * @return String array or null
 	 */
-	public static String[] getSplittedProperty(String property,
-			String defaultValue) {
+	public static String[] getSplittedProperty(String property, String defaultValue) {
 		String result = getProperties().getProperty(property, defaultValue);
 		return (result == null) ? null : splitProperty(result);
 	}
 
 	private static String[] splitProperty(String property) {
 		ArrayList<String> result = new ArrayList<String>();
-		for (String str : property
-				.split(ServerConfiguration.MULTI_PROPERTY_SEPERATOR)) {
+		for (String str : property.split(ServerConfiguration.MULTI_PROPERTY_SEPERATOR)) {
 			result.add(str.trim());
 		}
 		return result.toArray(new String[result.size()]);
@@ -590,10 +577,9 @@ public final class ServerConfiguration {
 	 */
 	@SuppressWarnings("cast")
 	public static String getServerVersion() {
-		Bundle emfStoreBundle = Platform
-				.getBundle("org.eclipse.emf.emfstore.internal.serverxxx");
-		String emfStoreVersionString = (String) emfStoreBundle.getHeaders()
-				.get(org.osgi.framework.Constants.BUNDLE_VERSION);
+		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.internal.serverxxx");
+		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
+			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
 	}
 
@@ -603,8 +589,7 @@ public final class ServerConfiguration {
 	 * @return true if it is a release version
 	 */
 	public static boolean isReleaseVersion() {
-		return !getServerVersion().endsWith("qualifier")
-				&& !isInternalReleaseVersion();
+		return !getServerVersion().endsWith("qualifier") && !isInternalReleaseVersion();
 	}
 
 	/**
@@ -663,8 +648,8 @@ public final class ServerConfiguration {
 		if (isChecksumComputationOnCommitActive == null) {
 			try {
 				isChecksumComputationOnCommitActive = new ExtensionPoint(
-						"org.eclipse.emf.emfstore.internal.serverxxx.computechecksum", true)
-						.getBoolean("shouldComputeChecksumOnCommit");
+					"org.eclipse.emf.emfstore.internal.serverxxx.computechecksum", true)
+					.getBoolean("shouldComputeChecksumOnCommit");
 			} catch (ExtensionPointException e) {
 				String message = "Can not determine whether to compute checksums on commit, default is true.";
 				ModelUtil.logWarning(message);
@@ -687,8 +672,8 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Adds a {@link StartupListener} to the list of {@link StartupListener}
-	 * which gets notified on start of the EMFStore.
+	 * Adds a {@link StartupListener} to the list of {@link StartupListener} which gets notified on start of the
+	 * EMFStore.
 	 * 
 	 * @param listener
 	 *            the {@link StartupListener} to add
@@ -710,8 +695,8 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Adds a {@link PostStartupListener} to the list of
-	 * {@link PostStartupListener} which gets notified on start of the EMFStore.
+	 * Adds a {@link PostStartupListener} to the list of {@link PostStartupListener} which gets notified on start of the
+	 * EMFStore.
 	 * 
 	 * @param listener
 	 *            the {@link PostStartupListener} to add
