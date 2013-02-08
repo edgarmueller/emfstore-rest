@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.ecore;
+package org.eclipse.emf.emfstore.internal.ecore;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

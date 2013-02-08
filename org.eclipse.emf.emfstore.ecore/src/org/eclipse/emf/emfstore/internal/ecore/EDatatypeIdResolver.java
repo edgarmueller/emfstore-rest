@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.ecore;
+package org.eclipse.emf.emfstore.internal.ecore;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
