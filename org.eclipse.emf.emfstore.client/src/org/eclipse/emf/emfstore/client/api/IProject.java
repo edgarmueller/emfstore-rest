@@ -16,6 +16,7 @@ package org.eclipse.emf.emfstore.client.api;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
@@ -89,7 +90,7 @@ public interface IProject {
 	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
-	List<? extends IBranchInfo> getBranches() throws EMFStoreException;
+	List<? extends IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use

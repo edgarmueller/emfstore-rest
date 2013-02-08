@@ -73,13 +73,19 @@ public class RemoteProject implements IRemoteProject {
 		return projectInfo.getDescription();
 	}
 
-	public List<BranchInfo> getBranches() throws EMFStoreException {
-		return new ServerCall<List<BranchInfo>>(server) {
+	public List<BranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
+		return new UnknownEMFStoreWorkloadCommand<List<BranchInfo>>(monitor) {
 			@Override
-			protected List<BranchInfo> run() throws EMFStoreException {
-				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return cm.getBranches(getSessionId(), (ProjectId) getProjectId());
-			};
+			public List<BranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
+				return new ServerCall<List<BranchInfo>>(server) {
+					@Override
+					protected List<BranchInfo> run() throws EMFStoreException {
+						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
+							.getConnectionManager();
+						return connectionManager.getBranches(getSessionId(), (ProjectId) getProjectId());
+					};
+				}.execute();
+			}
 		}.execute();
 	}
 
