@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore ECore Integration (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.ecore;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.ecore;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.internal.ecore.Activator
 Require-Bundle: org.eclipse.emf.emfstore.common.model;bundle-version="0.9.3"

@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
-import org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver;
 
 /**
  * An implementation of a {@link SingletonIdResolver} that treats all {@link EDataType}s as singletons.
@@ -95,7 +95,7 @@ public class EDatatypeIdResolver implements SingletonIdResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @return the {@link ModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
+	 * @return the {@link IModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
 	 *         is not a singleton, is not an instance of {@link EDataType} or is <code>null</code>
 	 */
 	public IModelElementId getSingletonModelElementId(EObject singleton) {

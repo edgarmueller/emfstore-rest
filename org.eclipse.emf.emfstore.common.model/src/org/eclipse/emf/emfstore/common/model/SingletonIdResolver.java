@@ -8,13 +8,12 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common.model;
+package org.eclipse.emf.emfstore.common.model;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
 
 /**
- * Interface for mapping {@link ModelElementId}s to singleton objects and vice versa.
+ * Interface for mapping {@link IModelElementId}s to singleton objects and vice versa.
  * 
  * @author emueller
  */
@@ -23,17 +22,17 @@ public interface SingletonIdResolver {
 	/**
 	 * Returns the ID for the given singleton {@link EObject}.
 	 * 
-	 * @param singleton the singleton {@link EObject} whose {@link ModelElementId} should get retrieved
-	 * @return the {@link ModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
+	 * @param singleton the singleton {@link EObject} whose {@link IModelElementId} should get retrieved
+	 * @return the {@link IModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
 	 *         is not a singleton or if it is <code>null</code>
 	 */
 	IModelElementId getSingletonModelElementId(EObject singleton);
 
 	/**
-	 * Returns the singleton which belongs to the given {@link ModelElementId}.
+	 * Returns the singleton which belongs to the given {@link IModelElementId}.
 	 * 
-	 * @param singletonId a {@link ModelElementId}
-	 * @return the singleton {@link EObject} that belongs to the given {@link ModelElementId}
+	 * @param singletonId a {@link IModelElementId}
+	 * @return the singleton {@link EObject} that belongs to the given {@link IModelElementId}
 	 */
 	EObject getSingleton(IModelElementId singletonId);
 

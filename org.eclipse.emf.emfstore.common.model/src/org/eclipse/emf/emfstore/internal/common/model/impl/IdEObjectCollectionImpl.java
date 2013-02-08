@@ -487,7 +487,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
 	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getAllModelElementsByClass(modelElementClass, true);
@@ -496,7 +496,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
 	 *      java.lang.Boolean)
 	 */
 	@SuppressWarnings("unchecked")

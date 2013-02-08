@@ -1,11 +1,10 @@
-package org.eclipse.emf.emfstore.internal.common.model;
+package org.eclipse.emf.emfstore.common.model;
 
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
 
 public interface EObjectContainer {
 

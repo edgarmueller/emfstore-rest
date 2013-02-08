@@ -56,12 +56,12 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 
@@ -1202,7 +1202,7 @@ public final class ModelUtil {
 	 *            the id
 	 * @return the singleton instance
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public static EObject getSingleton(IModelElementId singletonId) {
 
@@ -1225,7 +1225,7 @@ public final class ModelUtil {
 	 *            the singleton
 	 * @return the id
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	public static ModelElementId getSingletonModelElementId(EObject singleton) {
 
@@ -1248,7 +1248,7 @@ public final class ModelUtil {
 	 *            the instance
 	 * @return true if it is a singleton
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
 	 */
 	public static boolean isSingleton(EObject eObject) {
 
