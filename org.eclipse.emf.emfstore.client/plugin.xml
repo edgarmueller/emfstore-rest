@@ -9,31 +9,28 @@
 -->
 
 <plugin>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.wrapperfactories" name="Wrapper factories" schema="schema/org.eclipse.emf.emfstore.internal.client.wrapperfactories.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider" name="Workspace Location Provider" schema="schema/org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider" name="Default Configuration Provider" schema="schema/org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.notify.postinit" name="Workspace Initiated" schema="schema/org.eclipse.emf.emfstore.internal.client.notify.workspace.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.editingDomainProvider" name="EditingDomain Provider" schema="schema/org.eclipse.emf.emfstore.internal.client.editingDomainProvider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.recording.options" name="Recording options" schema="schema/org.eclipse.emf.emfstore.internal.client.recording.options.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache" name="Inverse Cross Referene Cache" schema="schema/org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.sessionprovider" name="SessionProvider" schema="schema/org.eclipse.emf.emfstore.internal.client.sessionprovider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.notificationFilter" name="Notification Filter" schema="schema/org.eclipse.emf.emfstore.internal.client.notificationFilter.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.loginObserver" name="Login Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.loginObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.logoutObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.commitObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.commitObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.updateObserver" name="Update Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.updateObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.checkoutObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.checkoutObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.exceptionObserver" name="Exception Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.exceptionObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.version" name="Client Version " schema="schema/org.eclipse.emf.emfstore.internal.client.version.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.merge.conflictDetectorStrategy" name="Conflict Detector Strategy" schema="schema/org.eclipse.emf.emfstore.internal.client.merge.conflictDetectorStrategy.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.merge.conflictHandler" name="Conflict Handler" schema="schema/org.eclipse.emf.emfstore.internal.client.merge.conflictHandler.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.runnableContext" name="Runnable Context" schema="schema/org.eclipse.emf.emfstore.internal.client.runnableContext.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.mergeObserver" name="Merge Observer" schema="schema/org.eclipse.emf.emfstore.internal.client.mergeObserver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.client.checksumErrorHandler" name="Client Checksum Error Handler" schema="schema/org.eclipse.emf.emfstore.internal.client.checksumErrorHandler.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.workspaceLocationProvider" name="Workspace Location Provider" schema="schema/org.eclipse.emf.emfstore.client.workspaceLocationProvider.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.defaultConfigurationProvider" name="Default Configuration Provider" schema="schema/org.eclipse.emf.emfstore.client.defaultConfigurationProvider.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.notify.postinit" name="Workspace Initiated" schema="schema/org.eclipse.emf.emfstore.client.notify.workspace.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.editingDomainProvider" name="EditingDomain Provider" schema="schema/org.eclipse.emf.emfstore.client.editingDomainProvider.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.recording.options" name="Recording options" schema="schema/org.eclipse.emf.emfstore.client.recording.options.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.inverseCrossReferenceCache" name="Inverse Cross Referene Cache" schema="schema/org.eclipse.emf.emfstore.client.inverseCrossReferenceCache.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.sessionprovider" name="SessionProvider" schema="schema/org.eclipse.emf.emfstore.client.sessionprovider.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.notificationFilter" name="Notification Filter" schema="schema/org.eclipse.emf.emfstore.client.notificationFilter.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.loginObserver" name="Login Observer" schema="schema/org.eclipse.emf.emfstore.client.loginObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer" schema="schema/org.eclipse.emf.emfstore.client.logoutObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.commitObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.commitObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.updateObserver" name="Update Observer" schema="schema/org.eclipse.emf.emfstore.client.updateObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.checkoutObserver" name="Commit Observer" schema="schema/org.eclipse.emf.emfstore.client.checkoutObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Exception Observer" schema="schema/org.eclipse.emf.emfstore.client.exceptionObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.version" name="Client Version " schema="schema/org.eclipse.emf.emfstore.client.version.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.runnableContext" name="Runnable Context" schema="schema/org.eclipse.emf.emfstore.client.runnableContext.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.mergeObserver" name="Merge Observer" schema="schema/org.eclipse.emf.emfstore.client.mergeObserver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.client.checksumErrorHandler" name="Client Checksum Error Handler" schema="schema/org.eclipse.emf.emfstore.client.checksumErrorHandler.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
-       class = "org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage"
+       class = "org.eclipse.emf.emfstore.internal.client.model.ModelPackage"
        genModel = "model/client.genmodel" /> 
   </extension>
 
