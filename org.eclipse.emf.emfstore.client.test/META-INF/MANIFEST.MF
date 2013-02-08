@@ -1,31 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client Tests  (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.client.test;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.client.test;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.internal.client.test,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking.canonization,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking.commands,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking.notification.recording,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking.operations,
- org.eclipse.emf.emfstore.internal.client.test.changeTracking.topology,
- org.eclipse.emf.emfstore.internal.client.test.conflictDetection,
- org.eclipse.emf.emfstore.internal.client.test.integration,
- org.eclipse.emf.emfstore.internal.client.test.integration.forward,
- org.eclipse.emf.emfstore.internal.client.test.integration.reversibility,
- org.eclipse.emf.emfstore.internal.client.test.server,
- org.eclipse.emf.emfstore.internal.client.test.server.api,
- org.eclipse.emf.emfstore.internal.client.test.testmodel,
- org.eclipse.emf.emfstore.internal.client.test.testmodel.impl,
- org.eclipse.emf.emfstore.internal.client.test.testmodel.util
 Require-Bundle: org.junit4;bundle-version="[4.5.0,5.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.internal.examplemodel;bundle-version="0.9.3",
  org.eclipse.emf.emfstore.client;bundle-version="0.9.3",
  org.eclipse.emf.emfstore.client.model.edit;bundle-version="0.9.3",
- org.eclipse.emf.emfstore.modelmutator;bundle-version="0.9.3"
+ org.eclipse.emf.emfstore.modelmutator;bundle-version="0.9.3",
+ org.eclipse.emf.emfstore.examplemodel;bundle-version="0.9.3"
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.eclipse.emf.emfstore.internal.client.test.Activator
+Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
