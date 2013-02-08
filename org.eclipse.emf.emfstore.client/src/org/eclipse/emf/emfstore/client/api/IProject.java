@@ -55,9 +55,8 @@ public interface IProject {
 	/**
 	 * Deletes the project. This is valid for both, {@link ILocalProject} and {@link IRemoteProject} project.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * 
 	 * @throws IOException
@@ -69,9 +68,8 @@ public interface IProject {
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec the spec to resolve
 	 * @return the primary version
@@ -82,37 +80,34 @@ public interface IProject {
 	 * Returns a list of branches of the current project. Every call triggers a
 	 * server call.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @return list of {@link IBranchInfo}
 	 * @throws EMFStoreException
 	 *             in case of an exception
 	 */
-	List<? extends IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
+	List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
 	 * {@link IHistoryQueryFactory} to
 	 * generate query obejcts.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param query
 	 *            A history query.
 	 * @return a list of {@link IHistoryInfo} objects
 	 */
-	List<? extends IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
+	List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
 
 	/**
 	 * Adds a tag to the specified version of this project on the server.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec
 	 *            the versionSpec
@@ -124,9 +119,8 @@ public interface IProject {
 	/**
 	 * Removes a tag to the specified version of this project on the server.
 	 * 
-	 * When calling this on a remote project it is recommended to use
-	 * {@link IRemoteProject#delete(IUsersession, boolean)},
-	 * which allows to specify a {@link IUsersession}.
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
 	 * 
 	 * @param versionSpec
 	 *            the versionSpec

@@ -1,5 +1,7 @@
 package org.eclipse.emf.emfstore.client.model.impl;
 
+import static org.eclipse.emf.emfstore.common.ListUtil.copy;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +30,8 @@ import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
@@ -73,20 +77,30 @@ public class RemoteProject implements IRemoteProject {
 		return projectInfo.getDescription();
 	}
 
-	public List<BranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
-		return new UnknownEMFStoreWorkloadCommand<List<BranchInfo>>(monitor) {
+	public List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
+		return new UnknownEMFStoreWorkloadCommand<List<IBranchInfo>>(monitor) {
 			@Override
-			public List<BranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
-				return new ServerCall<List<BranchInfo>>(server) {
+			public List<IBranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
+				return copy(new ServerCall<List<BranchInfo>>(server) {
 					@Override
 					protected List<BranchInfo> run() throws EMFStoreException {
 						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
 							.getConnectionManager();
 						return connectionManager.getBranches(getSessionId(), (ProjectId) getProjectId());
 					};
-				}.execute();
+				}.execute());
 			}
 		}.execute();
+	}
+
+	public List<IBranchInfo> getBranches(IUsersession usersession) throws EMFStoreException {
+		return copy(new ServerCall<List<BranchInfo>>(server) {
+			@Override
+			protected List<BranchInfo> run() throws EMFStoreException {
+				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
+				return cm.getBranches(getSessionId(), (ProjectId) getProjectId());
+			};
+		}.execute());
 	}
 
 	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException {
@@ -112,15 +126,26 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public List<HistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException {
-		return new ServerCall<List<HistoryInfo>>(server) {
+	public List<IHistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException {
+		return copy(new ServerCall<List<HistoryInfo>>(server) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 				return connectionManager.getHistoryInfo(getSessionId(), (ProjectId) getProjectId(),
 					(HistoryQuery) query);
 			}
-		}.execute();
+		}.execute());
+	}
+
+	public List<IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
+		throws EMFStoreException {
+		return copy(new ServerCall<List<HistoryInfo>>(usersession) {
+			@Override
+			protected List<HistoryInfo> run() throws EMFStoreException {
+				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
+					(ProjectId) getProjectId(), (HistoryQuery) query);
+			}
+		}.execute());
 	}
 
 	public void addTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag) throws EMFStoreException {
@@ -259,27 +284,12 @@ public class RemoteProject implements IRemoteProject {
 		return projectSpace;
 	}
 
-	public List<HistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
-		throws EMFStoreException {
-		return new ServerCall<List<HistoryInfo>>(usersession) {
-			@Override
-			protected List<HistoryInfo> run() throws EMFStoreException {
-				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
-					(ProjectId) getProjectId(), (HistoryQuery) query);
-			}
-		}.execute();
-	}
-
 	public void delete() throws EMFStoreException {
-		getDeleteProjectServerCall()
-			.setServer(server)
-			.execute();
+		getDeleteProjectServerCall().setServer(server).execute();
 	}
 
 	public void delete(IUsersession usersession) throws EMFStoreException {
-		getDeleteProjectServerCall()
-			.setUsersession(usersession)
-			.execute();
+		getDeleteProjectServerCall().setUsersession(usersession).execute();
 	}
 
 	private ServerCall<Void> getDeleteProjectServerCall() throws EMFStoreException {

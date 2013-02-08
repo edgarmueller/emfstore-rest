@@ -10,12 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
@@ -192,16 +189,6 @@ public interface ServerInfo extends EObject, IServer {
 	 * @generated
 	 */
 	void setCertificateAlias(String value);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.api.IServer#getRemoteProjects()
-	 * 
-	 * @generated NOT
-	 */
-	public List<RemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	/**
 	 * 

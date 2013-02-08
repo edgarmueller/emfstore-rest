@@ -8,13 +8,13 @@ public interface IHistoryInfo {
 
 	IPrimaryVersionSpec getPrimarySpec();
 
-	List<? extends IPrimaryVersionSpec> getNextSpecs();
+	List<IPrimaryVersionSpec> getNextSpecs();
 
 	IPrimaryVersionSpec getPreviousSpec();
 
-	List<? extends IPrimaryVersionSpec> getMergedFrom();
+	List<IPrimaryVersionSpec> getMergedFrom();
 
-	List<? extends IPrimaryVersionSpec> getMergedTo();
+	List<IPrimaryVersionSpec> getMergedTo();
 
 	ILogMessage getLogMessage();
 

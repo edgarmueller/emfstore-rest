@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.client.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -331,25 +330,5 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 *             if an error occurs while updating the ACUser
 	 */
 	void updateACUser(Usersession session) throws EMFStoreException;
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.api.IWorkspace#getLocalProjects()
-	 * 
-	 * @generated NOT
-	 */
-	List<ProjectSpace> getLocalProjects();
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.api.IWorkspace#getServers()
-	 * 
-	 * @generated NOT
-	 */
-	public List<ServerInfo> getServers();
 
 } // Workspace

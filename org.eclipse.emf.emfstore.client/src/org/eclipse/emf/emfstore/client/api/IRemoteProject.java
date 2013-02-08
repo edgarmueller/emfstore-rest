@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
@@ -39,12 +40,17 @@ public interface IRemoteProject extends IProject {
 	/**
 	 * Checkout the project into the local workspace.
 	 * 
+	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
+	 * specify an {@link IUsersession}.
+	 * 
 	 * @return local project
 	 */
 	ILocalProject checkout() throws EMFStoreException;
 
 	/**
 	 * Checkout the project into the local workspace.
+	 * 
+	 * 
 	 * 
 	 * @param usersession session used for server call
 	 * @return local project
@@ -74,19 +80,6 @@ public interface IRemoteProject extends IProject {
 		throws EMFStoreException;
 
 	/**
-	 * Gets a list of history infos from the server.
-	 * 
-	 * @param usersession session used for server call
-	 * @param query
-	 *            the query to be performed in order to fetch the history
-	 *            information
-	 * 
-	 * @return a list of history infos
-	 */
-	List<? extends IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query)
-		throws EMFStoreException;
-
-	/**
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
 	 * 
@@ -96,14 +89,19 @@ public interface IRemoteProject extends IProject {
 	 */
 	IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec) throws EMFStoreException;
 
+	List<IBranchInfo> getBranches(IUsersession usersession) throws EMFStoreException;
+
 	/**
-	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
+	 * Gets a list of history infos from the server.
 	 * 
+	 * @param usersession session used for server call
+	 * @param query
+	 *            the query to be performed in order to fetch the history
+	 *            information
 	 * 
-	 * @param versionSpec the spec to resolve
-	 * @return the primary version
+	 * @return a list of history infos
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EMFStoreException;
+	List<IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query) throws EMFStoreException;
 
 	/**
 	 * Deletes the remote project on the server.
@@ -116,11 +114,4 @@ public interface IRemoteProject extends IProject {
 	 * @param usersession session used for server call
 	 */
 	void delete(IUsersession usersession) throws EMFStoreException;
-
-	/**
-	 * Returns the HEAD version of the remote project.
-	 * 
-	 * @return version spec of the HEAD version
-	 */
-	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
 }

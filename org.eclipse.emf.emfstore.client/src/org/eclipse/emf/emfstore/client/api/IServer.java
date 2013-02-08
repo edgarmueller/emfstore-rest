@@ -90,25 +90,7 @@ public interface IServer {
 	 */
 	void setCertificateAlias(String alias);
 
-	/**
-	 * Makes a server call in order to fetch the current list of available projects.
-	 * 
-	 * @param shouldRemember caches the retrieved list locally. Accessible via {@link #getRemoteProjects()}
-	 * @return list of remote projects
-	 * @throws EMFStoreException
-	 */
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException;
-
-	/**
-	 * Makes a server call in order to fetch the current list of available projects.
-	 * 
-	 * @param session executes the server call with the given session
-	 * @param shouldRemember caches the retrieved list locally. Accessible via {@link #getRemoteProjects()}
-	 * @return list of remote projects
-	 * @throws EMFStoreException
-	 */
-	List<? extends IRemoteProject> getRemoteProjectsFromServer(IUsersession session, boolean shouldRemember)
-		throws EMFStoreException;
+	List<IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	/**
 	 * Returns the usersession which was used on the last call to this server.
@@ -132,8 +114,8 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
-		final IProgressMonitor monitor) throws EMFStoreException;
+	IRemoteProject createRemoteProject(String projectName, String projectDescription, final IProgressMonitor monitor)
+		throws EMFStoreException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -154,8 +136,8 @@ public interface IServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException;
+	IRemoteProject createRemoteProject(IUsersession usersession, String projectName, String projectDescription,
+		IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Logs into this server, returing a {@link IUsersession}.
