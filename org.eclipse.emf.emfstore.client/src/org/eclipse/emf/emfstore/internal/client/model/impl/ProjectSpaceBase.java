@@ -52,6 +52,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ICo
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
@@ -142,8 +143,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void initRunnableContext() {
 		ExtensionElement extensionElement = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.runnableContext")
-			.setThrowException(false).getFirst();
+			"org.eclipse.emf.emfstore.internal.client.runnableContext").setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
 		} else {
@@ -660,8 +660,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		boolean useCrossReferenceAdapter = true;
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache")
-			.getExtensionElements()) {
+			"org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache").getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
 
@@ -884,15 +883,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 */
-	public boolean merge(IPrimaryVersionSpec target, ChangeConflictException conflictException,
-		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws EMFStoreException {
+	public boolean merge(IPrimaryVersionSpec target, ChangeConflict changeConflict, IConflictResolver conflictResolver,
+		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException {
 		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(),
+		if (conflictResolver.resolveConflicts(getProject(), changeConflict, getBaseVersion(),
 			(PrimaryVersionSpec) target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges((PrimaryVersionSpec) target, conflictException.getNewPackages(), mergedResult, callback,
+			applyChanges((PrimaryVersionSpec) target, changeConflict.getNewPackages(), mergedResult, callback,
 				progressMonitor);
 			return true;
 		}

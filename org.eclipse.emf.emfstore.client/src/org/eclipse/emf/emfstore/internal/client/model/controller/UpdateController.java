@@ -139,8 +139,9 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
-				ChangeConflictException conflictException = new ChangeConflictException(getLocalProject(),
-					Arrays.asList(localChanges), changes, conflictBucketCandidates, idToEObjectMapping);
+				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
+					getLocalProject(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
+					idToEObjectMapping));
 				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
 					return getLocalProject().getBaseVersion();
 				} else {
@@ -160,5 +161,4 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		return getLocalProject().getBaseVersion();
 	}
-
 }

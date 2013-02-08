@@ -39,7 +39,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.ReferenceConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -77,7 +77,7 @@ public class DecisionManager {
 	private final PrimaryVersionSpec targetVersion;
 
 	private ConflictDetector conflictDetector;
-	private ChangeConflictException conflictException;
+	private ChangeConflict changeConflict;
 	private Set<AbstractOperation> notInvolvedInConflict;
 	private IModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
@@ -88,8 +88,8 @@ public class DecisionManager {
 	 * 
 	 * @param project
 	 *            the related project
-	 * @param conflictException
-	 *            the {@link ChangeConflictException} containing the changes leading to a potential conflict
+	 * @param changeConflict
+	 *            the {@link ChangechangeConflict} containing the changes leading to a potential conflict
 	 * @param baseVersion
 	 *            the base version
 	 * @param targetVersion
@@ -99,16 +99,16 @@ public class DecisionManager {
 	 *            changes from the same branch. Has an effect on the wording of
 	 *            conflicts
 	 */
-	public DecisionManager(Project project, ChangeConflictException conflictException, PrimaryVersionSpec baseVersion,
+	public DecisionManager(Project project, ChangeConflict changeConflict, PrimaryVersionSpec baseVersion,
 		PrimaryVersionSpec targetVersion, boolean isBranchMerge) {
 		this.project = project;
-		this.myChangePackages = conflictException.getMyChangePackages();
-		this.theirChangePackages = conflictException.getNewPackages();
-		this.mapping = conflictException.getIdToEObjectMapping();
+		this.myChangePackages = changeConflict.getMyChangePackages();
+		this.theirChangePackages = changeConflict.getNewPackages();
+		this.mapping = changeConflict.getIdToEObjectMapping();
 		this.baseVersion = baseVersion;
 		this.targetVersion = targetVersion;
 		this.isBranchMerge = isBranchMerge;
-		this.conflictException = conflictException;
+		this.changeConflict = changeConflict;
 		this.conflictHandler = initConflictHandlers();
 		this.conflictDetector = new ConflictDetector();
 		init();
@@ -117,8 +117,7 @@ public class DecisionManager {
 	private List<ConflictHandler> initConflictHandlers() {
 		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.merge.conflictHandler")
-			.getExtensionElements()) {
+			"org.eclipse.emf.emfstore.internal.client.merge.conflictHandler").getExtensionElements()) {
 			ConflictHandler handler = element.getClass("class", ConflictHandler.class);
 			if (handler != null) {
 				result.add(handler);
@@ -137,8 +136,8 @@ public class DecisionManager {
 
 		Set<ConflictBucketCandidate> conflictBucketCandidates;
 
-		if (conflictException != null) {
-			conflictBucketCandidates = conflictException.getConflictBucketCandidates();
+		if (changeConflict != null) {
+			conflictBucketCandidates = changeConflict.getConflictBucketCandidates();
 		} else {
 			conflictBucketCandidates = new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
 				theirChangePackages);
