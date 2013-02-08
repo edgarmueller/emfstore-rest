@@ -24,8 +24,8 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Shell;
 

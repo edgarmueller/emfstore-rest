@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIAddTagController;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 
 /**
  * Handler for adding a tag to a selected {@link HistoryInfo} instance.

@@ -13,10 +13,10 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialog
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;

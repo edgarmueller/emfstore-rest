@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 
 /**
  * Handler for checking out a project.

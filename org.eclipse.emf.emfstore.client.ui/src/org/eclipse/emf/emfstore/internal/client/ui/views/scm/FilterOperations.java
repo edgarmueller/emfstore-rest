@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.scm;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.ui.common.EClassFilter;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * A class that divides an given input into operations that may be filtered via

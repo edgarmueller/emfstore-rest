@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.emfstore.client.ui.dialogs.login.BasicUISessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.BasicUISessionProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

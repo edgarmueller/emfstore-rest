@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;

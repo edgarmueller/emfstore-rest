@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImport
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.util.EMFStorePreferenceHelper;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;

@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;

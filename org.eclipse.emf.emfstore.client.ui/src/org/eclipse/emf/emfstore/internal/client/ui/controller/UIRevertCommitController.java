@@ -15,9 +15,9 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.RevertCommitCon
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;

@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;

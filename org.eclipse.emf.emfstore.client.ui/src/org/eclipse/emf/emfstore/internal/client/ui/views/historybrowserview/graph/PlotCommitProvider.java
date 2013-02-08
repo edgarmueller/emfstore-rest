@@ -23,8 +23,8 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;

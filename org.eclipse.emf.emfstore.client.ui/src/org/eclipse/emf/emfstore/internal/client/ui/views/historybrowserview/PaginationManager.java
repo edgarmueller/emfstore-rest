@@ -16,12 +16,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 
 /**
  * Class handling pagination. See constructor {@link #PaginationManager(ProjectSpace, int, int)}

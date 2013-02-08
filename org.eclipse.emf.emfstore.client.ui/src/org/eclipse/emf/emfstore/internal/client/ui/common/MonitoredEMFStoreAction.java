@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;

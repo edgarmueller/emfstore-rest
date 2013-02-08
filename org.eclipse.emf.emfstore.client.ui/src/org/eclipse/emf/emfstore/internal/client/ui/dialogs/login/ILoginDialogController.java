@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} instance

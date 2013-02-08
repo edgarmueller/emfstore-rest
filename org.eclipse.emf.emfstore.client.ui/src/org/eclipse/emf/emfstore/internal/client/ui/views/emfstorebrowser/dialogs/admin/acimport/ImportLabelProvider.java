@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialog
 import java.util.ArrayList;
 
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;

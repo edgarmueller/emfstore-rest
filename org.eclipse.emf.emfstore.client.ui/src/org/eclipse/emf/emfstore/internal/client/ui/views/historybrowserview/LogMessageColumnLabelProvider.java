@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;
 
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMLabelProvider;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.swt.graphics.Image;
 

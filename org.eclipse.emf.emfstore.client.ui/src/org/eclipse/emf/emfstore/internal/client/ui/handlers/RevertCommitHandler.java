@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRevertCommitController;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 
 /**
  * Handler for forcing the revert of a commit.

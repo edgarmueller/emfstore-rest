@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.gra
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 
 /**
  * This interface represents classes that are able to create graphically representable plot commits for

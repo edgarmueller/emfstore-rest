@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;

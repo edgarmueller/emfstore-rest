@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIDeleteRemoteProjectController;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Handler for deleting a remote project.<br/>

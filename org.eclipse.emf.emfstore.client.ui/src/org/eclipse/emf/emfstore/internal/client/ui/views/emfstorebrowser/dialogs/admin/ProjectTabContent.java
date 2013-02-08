@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;

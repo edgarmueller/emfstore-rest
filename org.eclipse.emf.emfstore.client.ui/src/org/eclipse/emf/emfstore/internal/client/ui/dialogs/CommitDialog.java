@@ -24,9 +24,9 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -88,7 +88,8 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		this.numberOfChanges = changes.getSize();
 		this.trays = new LinkedHashMap<String, CommitDialogTray>();
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray", true)
+		for (ExtensionElement element : new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
 			try {
 				CommitDialogTray tray = element.getClass("class", CommitDialogTray.class);

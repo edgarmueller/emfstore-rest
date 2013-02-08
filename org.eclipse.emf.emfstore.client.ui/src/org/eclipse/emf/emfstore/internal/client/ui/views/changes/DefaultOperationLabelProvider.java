@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.changes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.server.model.provider.AbstractOperationCustomLabelProvider;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 
 /**
  * Default label provider for operations.

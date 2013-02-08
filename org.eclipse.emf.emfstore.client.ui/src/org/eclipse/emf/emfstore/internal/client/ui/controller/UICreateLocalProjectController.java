@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.internal.client.api.IProject;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.gra
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Widget;
 

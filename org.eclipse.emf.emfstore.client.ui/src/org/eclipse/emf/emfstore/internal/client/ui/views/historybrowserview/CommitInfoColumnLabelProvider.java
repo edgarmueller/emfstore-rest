@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 
 /**

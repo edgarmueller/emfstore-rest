@@ -27,7 +27,6 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
@@ -42,17 +41,17 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.grap
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.conflictDetection.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -303,7 +302,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				return new UnknownEMFStoreWorkloadCommand<List<HistoryInfo>>(monitor) {
 					@Override
 					public List<HistoryInfo> run(final IProgressMonitor monitor) throws EMFStoreException {
-						return new ServerCall<List<HistoryInfo>>((ProjectSpaceBase) projectSpace) {
+						return new ServerCall<List<HistoryInfo>>(projectSpace) {
 							@Override
 							protected List<HistoryInfo> run() throws EMFStoreException {
 								monitor.beginTask("Fetching history form server", 100);

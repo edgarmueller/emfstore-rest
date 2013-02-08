@@ -8,8 +8,7 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.server;bundle-version="0.9.3",
- org.eclipse.emf.emfstore.migration;bundle-version="0.9.3"
+ org.eclipse.emf.emfstore.server;bundle-version="0.9.3";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.model.Activator
 Import-Package: org.eclipse.emf.emfstore.internal.client.model.observers

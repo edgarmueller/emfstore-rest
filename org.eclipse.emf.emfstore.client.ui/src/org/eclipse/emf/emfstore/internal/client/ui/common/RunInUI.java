@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.common;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.swt.widgets.Display;
 
 /**

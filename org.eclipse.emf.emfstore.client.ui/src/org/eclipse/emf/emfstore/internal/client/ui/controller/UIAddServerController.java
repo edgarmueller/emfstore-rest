@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views.NewRepositoryWizard;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.NewRepositoryWizard;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.common;
 
-import static org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -21,9 +21,9 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 
 /**
  * Utility class for determing filtered types and operations that

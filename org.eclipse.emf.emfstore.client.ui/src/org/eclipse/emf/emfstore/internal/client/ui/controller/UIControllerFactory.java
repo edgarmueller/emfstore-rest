@@ -1,15 +1,15 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.internal.client.api.IProject;
-import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.internal.client.api.IServer;
-import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 
 public interface UIControllerFactory {

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider;
 
-import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;

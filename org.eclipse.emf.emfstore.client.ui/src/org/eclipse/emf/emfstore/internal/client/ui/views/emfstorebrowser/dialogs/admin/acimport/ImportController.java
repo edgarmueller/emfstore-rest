@@ -18,10 +18,10 @@ import java.util.List;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
  * @author deser, karakoc

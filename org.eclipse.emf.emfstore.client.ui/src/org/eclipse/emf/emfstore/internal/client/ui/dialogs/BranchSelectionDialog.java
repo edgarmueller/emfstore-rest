@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;

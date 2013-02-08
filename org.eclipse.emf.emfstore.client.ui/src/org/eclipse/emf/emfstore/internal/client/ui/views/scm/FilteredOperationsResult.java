@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.scm;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Convenience class to separate operations that considered to be filtered

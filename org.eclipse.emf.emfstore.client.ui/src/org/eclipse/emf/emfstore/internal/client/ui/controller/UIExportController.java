@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerFactory;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.swt.widgets.Shell;
 
 /**

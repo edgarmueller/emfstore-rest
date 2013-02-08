@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.uti
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;

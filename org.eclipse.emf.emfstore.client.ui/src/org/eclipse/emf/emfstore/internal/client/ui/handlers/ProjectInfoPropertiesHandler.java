@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIShowProjectPropertiesController;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Brings up the properties dialog for a selected project.<br/>

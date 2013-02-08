@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.internal.client.api.IProject;
+import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;

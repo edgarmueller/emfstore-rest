@@ -14,7 +14,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.Dec
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.graphics.Image;

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provid
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.swt.graphics.Image;
 
 /**

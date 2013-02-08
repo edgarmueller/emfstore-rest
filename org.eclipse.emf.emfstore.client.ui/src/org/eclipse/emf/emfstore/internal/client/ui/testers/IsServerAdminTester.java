@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Checks if the user has admin access to the server.
