@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.client.test.model.organization.User;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage
  * @generated
  */
 public class OrganizationAdapterFactory extends AdapterFactoryImpl {
@@ -111,12 +111,12 @@ public class OrganizationAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.User <em>User</em>}'. <!-- begin-user-doc --> This
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User <em>User</em>}'. <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.User
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.User
 	 * @generated
 	 */
 	public Adapter createUserAdapter() {
@@ -125,12 +125,12 @@ public class OrganizationAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit <em>Org Unit</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit <em>Org Unit</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit
 	 * @generated
 	 */
 	public Adapter createOrgUnitAdapter() {
@@ -139,12 +139,12 @@ public class OrganizationAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.Group <em>Group</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group <em>Group</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.Group
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.Group
 	 * @generated
 	 */
 	public Adapter createGroupAdapter() {
@@ -153,12 +153,12 @@ public class OrganizationAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

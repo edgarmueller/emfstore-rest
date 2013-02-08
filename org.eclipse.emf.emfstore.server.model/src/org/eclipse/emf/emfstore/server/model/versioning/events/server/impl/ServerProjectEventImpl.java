@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ServerProjectEventImpl#getProjectId <em>Project Id</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.impl.ServerProjectEventImpl#getProjectId <em>Project Id</em>}</li>
  * </ul>
  * </p>
  *

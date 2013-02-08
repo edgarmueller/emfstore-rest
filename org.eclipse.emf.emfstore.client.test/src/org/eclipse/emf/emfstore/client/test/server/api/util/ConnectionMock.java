@@ -15,11 +15,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;

@@ -13,19 +13,19 @@ package org.eclipse.emf.emfstore.client.ui.util;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
-import org.eclipse.emf.emfstore.client.model.observers.ShareObserver;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.PostWorkspaceInitiator;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
+import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;
+import org.eclipse.emf.emfstore.internal.client.model.observers.ShareObserver;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**
@@ -40,7 +40,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.PostWorkspaceInitiator#workspaceInitComplete(org.eclipse.emf.emfstore.client.model.Workspace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PostWorkspaceInitiator#workspaceInitComplete(org.eclipse.emf.emfstore.internal.client.model.Workspace)
 	 */
 	public void workspaceInitComplete(Workspace currentWorkspace) {
 		this.workspace = currentWorkspace;
@@ -51,7 +51,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void loginCompleted(IUsersession session) {
 		try {
@@ -67,7 +67,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.ShareObserver#shareDone(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.ShareObserver#shareDone(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public void shareDone(ProjectSpace projectSpace) {
 		try {
@@ -102,7 +102,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void logoutCompleted(IUsersession session) {
 		// OTS cast

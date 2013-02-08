@@ -137,7 +137,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

@@ -245,7 +245,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	public void dispose() {
 		defaultOperationLabelProvider.dispose();

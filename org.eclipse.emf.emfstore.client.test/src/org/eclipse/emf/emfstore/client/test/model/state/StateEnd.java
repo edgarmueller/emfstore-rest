@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.test.model.state;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>End</b></em>'. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getStateEnd()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getStateEnd()
  * @model
  * @generated
  */

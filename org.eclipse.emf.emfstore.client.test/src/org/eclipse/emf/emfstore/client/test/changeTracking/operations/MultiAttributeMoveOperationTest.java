@@ -18,12 +18,12 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation;

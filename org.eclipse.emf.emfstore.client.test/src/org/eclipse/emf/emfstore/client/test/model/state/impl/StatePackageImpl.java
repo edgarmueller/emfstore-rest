@@ -105,7 +105,7 @@ public class StatePackageImpl extends EPackageImpl implements StatePackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

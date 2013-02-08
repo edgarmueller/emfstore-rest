@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

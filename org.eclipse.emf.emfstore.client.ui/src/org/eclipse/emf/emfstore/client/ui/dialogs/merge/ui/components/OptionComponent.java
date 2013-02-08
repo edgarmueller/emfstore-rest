@@ -10,13 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.CustomConflictOption;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionConfig;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.CustomConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;

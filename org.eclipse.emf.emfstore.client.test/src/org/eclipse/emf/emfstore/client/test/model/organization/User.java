@@ -18,15 +18,15 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getEmail <em>Email</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getFirstName <em>First Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getLastName <em>Last Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getWorkItemsToReview <em>Work Items To Review
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getEmail <em>Email</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getFirstName <em>First Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getLastName <em>Last Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getWorkItemsToReview <em>Work Items To Review
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getUser()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getUser()
  * @model
  * @generated
  */
@@ -41,14 +41,14 @@ public interface User extends OrgUnit {
 	 * 
 	 * @return the value of the '<em>Email</em>' attribute.
 	 * @see #setEmail(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getUser_Email()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getUser_Email()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
 	 */
 	String getEmail();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getEmail
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getEmail
 	 * <em>Email</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Email</em>' attribute.
@@ -67,14 +67,14 @@ public interface User extends OrgUnit {
 	 * 
 	 * @return the value of the '<em>First Name</em>' attribute.
 	 * @see #setFirstName(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getUser_FirstName()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getUser_FirstName()
 	 * @model annotation="org.unicase.ui.meeditor priority='11.0' position='left'"
 	 * @generated
 	 */
 	String getFirstName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getFirstName
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getFirstName
 	 * <em>First Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>First Name</em>' attribute.
@@ -93,14 +93,14 @@ public interface User extends OrgUnit {
 	 * 
 	 * @return the value of the '<em>Last Name</em>' attribute.
 	 * @see #setLastName(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getUser_LastName()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getUser_LastName()
 	 * @model annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	String getLastName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.organization.User#getLastName
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getLastName
 	 * <em>Last Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Last Name</em>' attribute.
@@ -111,8 +111,8 @@ public interface User extends OrgUnit {
 
 	/**
 	 * Returns the value of the '<em><b>Work Items To Review</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Work Items To Review</em>' reference list isn't clear, there really should be more of
@@ -121,8 +121,8 @@ public interface User extends OrgUnit {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Work Items To Review</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getUser_WorkItemsToReview()
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getReviewer
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getUser_WorkItemsToReview()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer
 	 * @model opposite="reviewer"
 	 * @generated
 	 */

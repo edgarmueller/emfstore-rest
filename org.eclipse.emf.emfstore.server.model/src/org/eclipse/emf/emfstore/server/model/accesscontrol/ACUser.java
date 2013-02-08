@@ -18,13 +18,13 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName <em>Last Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getEffectiveGroups <em>Effective Groups</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getEffectiveGroups <em>Effective Groups</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACUser()
+ * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface ACUser extends ACOrgUnit {
 	 * 
 	 * @return the value of the '<em>First Name</em>' attribute.
 	 * @see #setFirstName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACUser_FirstName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser_FirstName()
 	 * @model
 	 * @generated
 	 */
 	String getFirstName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>First Name</em>' attribute.
@@ -67,14 +67,14 @@ public interface ACUser extends ACOrgUnit {
 	 * 
 	 * @return the value of the '<em>Last Name</em>' attribute.
 	 * @see #setLastName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACUser_LastName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser_LastName()
 	 * @model
 	 * @generated
 	 */
 	String getLastName();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser#getLastName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getLastName
 	 * <em>Last Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -87,7 +87,7 @@ public interface ACUser extends ACOrgUnit {
 
 	/**
 	 * Returns the value of the '<em><b>Effective Groups</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}
 	 * . <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -98,7 +98,7 @@ public interface ACUser extends ACOrgUnit {
 	 * 
 	 * @return the value of the '<em>Effective Groups</em>' containment
 	 *         reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACUser_EffectiveGroups()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser_EffectiveGroups()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

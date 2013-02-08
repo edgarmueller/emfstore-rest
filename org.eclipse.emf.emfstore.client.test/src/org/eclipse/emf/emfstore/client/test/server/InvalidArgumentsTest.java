@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcClientManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcClientManager;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;

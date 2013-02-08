@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -50,7 +50,7 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {

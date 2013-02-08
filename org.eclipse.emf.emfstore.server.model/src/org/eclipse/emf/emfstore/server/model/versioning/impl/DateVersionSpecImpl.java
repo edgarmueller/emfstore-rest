@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.DateVersionSpecImpl#getDate
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.DateVersionSpecImpl#getDate
  * <em>Date</em>}</li>
  * </ul>
  * </p>

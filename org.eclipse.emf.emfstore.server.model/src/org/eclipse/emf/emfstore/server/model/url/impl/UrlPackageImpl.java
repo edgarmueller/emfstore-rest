@@ -78,7 +78,7 @@ public class UrlPackageImpl extends EPackageImpl implements UrlPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

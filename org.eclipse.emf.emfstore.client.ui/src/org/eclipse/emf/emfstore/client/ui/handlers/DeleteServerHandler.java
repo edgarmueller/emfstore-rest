@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.controller.UIRemoveServerController;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 
 /**
  * Handler for removing a server/repository.<br/>
@@ -26,7 +26,7 @@ public class DeleteServerHandler extends AbstractEMFStoreHandler {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

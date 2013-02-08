@@ -83,7 +83,7 @@ public class EventsItemProviderAdapterFactory extends EventsAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -92,7 +92,7 @@ public class EventsItemProviderAdapterFactory extends EventsAdapterFactory imple
 	protected EventItemProvider eventItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.filetransfer.FileTransferManager;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileTransferManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.junit.Test;
 

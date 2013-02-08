@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier#getId <em>Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getUniqueIdentifier()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getUniqueIdentifier()
  * @model abstract="true"
  * @generated
  */
@@ -39,14 +39,14 @@ public interface UniqueIdentifier extends EObject {
 	 * 
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getUniqueIdentifier_Id()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getUniqueIdentifier_Id()
 	 * @model default="Default Value Literal\t" required="true"
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier#getId <em>Id</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId <em>Id</em>}'
 	 * attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

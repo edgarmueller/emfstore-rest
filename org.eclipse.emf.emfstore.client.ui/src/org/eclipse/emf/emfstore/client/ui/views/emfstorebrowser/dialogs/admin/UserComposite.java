@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;

@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.client.test.model.provider.AttachmentItemProvide
 import org.eclipse.emf.emfstore.client.test.model.provider.ModelEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

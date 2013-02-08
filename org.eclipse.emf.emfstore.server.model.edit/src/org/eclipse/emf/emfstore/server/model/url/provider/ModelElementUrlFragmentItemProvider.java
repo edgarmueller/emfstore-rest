@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment}
  * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 

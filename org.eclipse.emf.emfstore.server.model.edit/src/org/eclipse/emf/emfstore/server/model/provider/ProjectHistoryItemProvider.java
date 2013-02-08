@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectHistory} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

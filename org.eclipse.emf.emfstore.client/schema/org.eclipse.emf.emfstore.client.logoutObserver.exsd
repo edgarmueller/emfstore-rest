@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.logoutObserver" name="Logout Observer"/>
       </appInfo>
       <documentation>
          An observer that will be notified when the logout of a user session occurred.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observers.LogoutObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.observers.LogoutObserver"/>
                </appInfo>
             </annotation>
          </attribute>

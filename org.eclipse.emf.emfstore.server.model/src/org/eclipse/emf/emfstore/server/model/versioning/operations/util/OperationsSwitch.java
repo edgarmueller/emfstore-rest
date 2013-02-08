@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferen
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage
  * @generated
  */
 public class OperationsSwitch<T> {

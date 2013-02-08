@@ -134,7 +134,7 @@ public final class ServerKeyStoreManager {
 
 	/**
 	 * Creates a {@link KeyManagerFactory} for the rmi encryption (
-	 * {@link org.eclipse.emf.emfstore.server.connection.rmi.RMISSLServerSocketFactory} ).
+	 * {@link org.eclipse.emf.emfstore.internal.server.connection.rmi.RMISSLServerSocketFactory} ).
 	 * 
 	 * @return KeyManagerFactory
 	 * @throws ServerKeyStoreException in case of failure

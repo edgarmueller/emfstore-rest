@@ -2,14 +2,14 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2011 Chair for Applied Software Engineering,&#xA;Technische Universitaet Muenchen.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:"
-    modelDirectory="/org.eclipse.emf.emfstore.server.model/src" editDirectory="/org.eclipse.emf.emfstore.server.model.edit/src"
-    editorDirectory="/org.eclipse.emf.emfstore.server.model.editor/src" modelPluginID="org.eclipse.emf.emfstore.server.model"
+    modelDirectory="/org.eclipse.emf.emfstore.internal.server.model/src" editDirectory="/org.eclipse.emf.emfstore.internal.server.model.edit/src"
+    editorDirectory="/org.eclipse.emf.emfstore.internal.server.model.editor/src" modelPluginID="org.eclipse.emf.emfstore.internal.server.model"
     modelName="Server" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.emf.emfstore.server.model.edit"
-    editorPluginID="org.eclipse.emf.emfstore.server.model.editor" runtimeVersion="2.5"
-    language="" usedGenPackages="../../org.eclipse.emf.emfstore.common.model/model/common.genmodel#//model">
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.emf.emfstore.internal.server.model.edit"
+    editorPluginID="org.eclipse.emf.emfstore.internal.server.model.editor" runtimeVersion="2.5"
+    language="" usedGenPackages="../../org.eclipse.emf.emfstore.internal.common.model/model/common.genmodel#//model">
   <foreignModel>server.ecore</foreignModel>
-  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.server" disposableProviderFactory="true"
+  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.internal.server" disposableProviderFactory="true"
       ecorePackage="server.ecore#/">
     <genClasses ecoreClass="server.ecore#//ProjectHistory">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//ProjectHistory/projectId"/>
@@ -45,7 +45,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//AuthenticationInformation/sessionId"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//AuthenticationInformation/resolvedACUser"/>
     </genClasses>
-    <nestedGenPackages prefix="Versioning" basePackage="org.eclipse.emf.emfstore.server.model"
+    <nestedGenPackages prefix="Versioning" basePackage="org.eclipse.emf.emfstore.internal.server.model"
         disposableProviderFactory="true" ecorePackage="server.ecore#//versioning">
       <genClasses ecoreClass="server.ecore#//versioning/TagVersionSpec">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//versioning/TagVersionSpec/name"/>
@@ -137,7 +137,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//versioning/AncestorVersionSpec/target"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//versioning/AncestorVersionSpec/source"/>
       </genClasses>
-      <nestedGenPackages prefix="Operations" basePackage="org.eclipse.emf.emfstore.server.model.versioning"
+      <nestedGenPackages prefix="Operations" basePackage="org.eclipse.emf.emfstore.internal.server.model.versioning"
           disposableProviderFactory="true" ecorePackage="server.ecore#//versioning/operations">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="server.ecore#//versioning/operations/ContainmentType">
           <genEnumLiterals ecoreEnumLiteral="server.ecore#//versioning/operations/ContainmentType/NONE"/>
@@ -230,17 +230,17 @@
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference server.ecore#//versioning/operations/EObjectToModelElementIdMap/value"/>
         </genClasses>
-        <nestedGenPackages prefix="Semantic" basePackage="org.eclipse.emf.emfstore.server.model.versioning.operations"
+        <nestedGenPackages prefix="Semantic" basePackage="org.eclipse.emf.emfstore.internal.server.model.versioning.operations"
             disposableProviderFactory="true" ecorePackage="server.ecore#//versioning/operations/semantic">
           <genClasses image="false" ecoreClass="server.ecore#//versioning/operations/semantic/SemanticCompositeOperation"/>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Events" basePackage="org.eclipse.emf.emfstore.server.model.versioning"
+      <nestedGenPackages prefix="Events" basePackage="org.eclipse.emf.emfstore.internal.server.model.versioning"
           disposableProviderFactory="true" ecorePackage="server.ecore#//versioning/events">
         <genClasses ecoreClass="server.ecore#//versioning/events/Event">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//versioning/events/Event/timestamp"/>
         </genClasses>
-        <nestedGenPackages prefix="Server" basePackage="org.eclipse.emf.emfstore.server.model.versioning.events"
+        <nestedGenPackages prefix="Server" basePackage="org.eclipse.emf.emfstore.internal.server.model.versioning.events"
             disposableProviderFactory="true" ecorePackage="server.ecore#//versioning/events/server">
           <genClasses image="false" ecoreClass="server.ecore#//versioning/events/server/ServerEvent"/>
           <genClasses image="false" ecoreClass="server.ecore#//versioning/events/server/ServerProjectEvent">
@@ -252,7 +252,7 @@
         </nestedGenPackages>
       </nestedGenPackages>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Accesscontrol" basePackage="org.eclipse.emf.emfstore.server.model"
+    <nestedGenPackages prefix="Accesscontrol" basePackage="org.eclipse.emf.emfstore.internal.server.model"
         disposableProviderFactory="true" ecorePackage="server.ecore#//accesscontrol">
       <genClasses ecoreClass="server.ecore#//accesscontrol/ACUser">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//accesscontrol/ACUser/firstName"/>
@@ -277,7 +277,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//accesscontrol/OrgUnitProperty/value"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference server.ecore#//accesscontrol/OrgUnitProperty/project"/>
       </genClasses>
-      <nestedGenPackages prefix="Roles" basePackage="org.eclipse.emf.emfstore.server.model.accesscontrol"
+      <nestedGenPackages prefix="Roles" basePackage="org.eclipse.emf.emfstore.internal.server.model.accesscontrol"
           disposableProviderFactory="true" ecorePackage="server.ecore#//accesscontrol/roles">
         <genClasses image="false" ecoreClass="server.ecore#//accesscontrol/roles/Role">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -308,7 +308,7 @@
         <genClasses ecoreClass="server.ecore#//accesscontrol/roles/ServerAdmin"/>
       </nestedGenPackages>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Url" basePackage="org.eclipse.emf.emfstore.server.model"
+    <nestedGenPackages prefix="Url" basePackage="org.eclipse.emf.emfstore.internal.server.model"
         disposableProviderFactory="true" ecorePackage="server.ecore#//url">
       <genClasses ecoreClass="server.ecore#//url/ServerUrl">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute server.ecore#//url/ServerUrl/hostName"/>

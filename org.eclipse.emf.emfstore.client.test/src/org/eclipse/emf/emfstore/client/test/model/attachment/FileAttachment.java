@@ -17,15 +17,15 @@ import org.eclipse.emf.emfstore.client.test.model.Attachment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileName <em>File Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileID <em>File ID</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileSize <em>File Size</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileType <em>File Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName <em>File Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID <em>File ID</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize <em>File Size</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType <em>File Type</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface FileAttachment extends Attachment {
 	 * 
 	 * @return the value of the '<em>File Name</em>' attribute.
 	 * @see #setFileName(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileName()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileName()
 	 * @model annotation="org.unicase.ui.meeditor priority='2' position='left'"
 	 * @generated
 	 */
 	String getFileName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileName
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName
 	 * <em>File Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Name</em>' attribute.
@@ -66,14 +66,14 @@ public interface FileAttachment extends Attachment {
 	 * 
 	 * @return the value of the '<em>File Hash</em>' attribute.
 	 * @see #setFileHash(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileHash()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileHash()
 	 * @model annotation="org.unicase.ui.meeditor priority='2' position='left'"
 	 * @generated
 	 */
 	String getFileHash();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileHash
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash
 	 * <em>File Hash</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Hash</em>' attribute.
@@ -92,14 +92,14 @@ public interface FileAttachment extends Attachment {
 	 * 
 	 * @return the value of the '<em>File ID</em>' attribute.
 	 * @see #setFileID(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileID()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileID()
 	 * @model annotation="org.unicase.ui.meeditor priority='2' position='left'"
 	 * @generated
 	 */
 	String getFileID();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileID
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID
 	 * <em>File ID</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File ID</em>' attribute.
@@ -118,14 +118,14 @@ public interface FileAttachment extends Attachment {
 	 * 
 	 * @return the value of the '<em>File Size</em>' attribute.
 	 * @see #setFileSize(long)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileSize()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileSize()
 	 * @model annotation="org.unicase.ui.meeditor priority='2' position='left'"
 	 * @generated
 	 */
 	long getFileSize();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileSize
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize
 	 * <em>File Size</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Size</em>' attribute.
@@ -136,7 +136,7 @@ public interface FileAttachment extends Attachment {
 
 	/**
 	 * Returns the value of the '<em><b>File Type</b></em>' attribute. The literals are from the enumeration
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>File Type</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -144,20 +144,20 @@ public interface FileAttachment extends Attachment {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>File Type</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
 	 * @see #setFileType(FileAttachmentType)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachment_FileType()
 	 * @model
 	 * @generated
 	 */
 	FileAttachmentType getFileType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileType
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType
 	 * <em>File Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Type</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
 	 * @see #getFileType()
 	 * @generated
 	 */

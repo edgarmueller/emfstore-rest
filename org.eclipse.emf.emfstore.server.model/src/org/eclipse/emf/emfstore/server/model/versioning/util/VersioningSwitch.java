@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage
  * @generated
  */
 public class VersioningSwitch<T> {

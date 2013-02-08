@@ -12,15 +12,15 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.model.exceptions.LoginCanceledException;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.Dialog;
@@ -41,7 +41,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	@Override
 	public IUsersession provideUsersession(IServer server) throws EMFStoreException {

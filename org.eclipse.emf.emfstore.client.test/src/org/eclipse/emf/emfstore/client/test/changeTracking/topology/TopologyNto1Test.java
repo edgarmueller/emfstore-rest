@@ -20,8 +20,6 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.model.exceptions.UnsupportedNotificationException;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.model.bug.BugFactory;
 import org.eclipse.emf.emfstore.client.test.model.bug.BugReport;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
@@ -36,6 +34,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;

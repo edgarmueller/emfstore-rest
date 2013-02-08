@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.client.test.model.release.Stream;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage
  * @generated
  */
 public class ReleaseAdapterFactory extends AdapterFactoryImpl {
@@ -110,12 +110,12 @@ public class ReleaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.release.Stream
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream
 	 * <em>Stream</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Stream
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Stream
 	 * @generated
 	 */
 	public Adapter createStreamAdapter() {
@@ -123,12 +123,12 @@ public class ReleaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.release.Release
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release
 	 * <em>Release</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release
 	 * @generated
 	 */
 	public Adapter createReleaseAdapter() {
@@ -137,13 +137,13 @@ public class ReleaseAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryRevision
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryRevision
 	 * <em>Source Code Repository Revision</em>}'. <!-- begin-user-doc --> This default implementation returns null so
 	 * that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryRevision
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryRevision
 	 * @generated
 	 */
 	public Adapter createSourceCodeRepositoryRevisionAdapter() {
@@ -152,13 +152,13 @@ public class ReleaseAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryStream
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryStream
 	 * <em>Source Code Repository Stream</em>}'. <!-- begin-user-doc --> This default implementation returns null so
 	 * that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryStream
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryStream
 	 * @generated
 	 */
 	public Adapter createSourceCodeRepositoryStreamAdapter() {

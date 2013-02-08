@@ -32,9 +32,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#isAdd <em>Add</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getIndexes <em>Indexes</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getReferencedValues <em>Referenced Values</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl#isAdd <em>Add</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getIndexes <em>Indexes</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl#getReferencedValues <em>Referenced Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -237,7 +237,7 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 
 	@SuppressWarnings("unchecked")
@@ -288,7 +288,7 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl#reverse()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl#reverse()
 	 */
 	@Override
 	public AbstractOperation reverse() {

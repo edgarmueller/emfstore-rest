@@ -23,7 +23,7 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.impl.VersionInfoImpl#getEmfStoreVersionString <em>Emf Store Version String</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.impl.VersionInfoImpl#getEmfStoreVersionString <em>Emf Store Version String</em>}</li>
  * </ul>
  * </p>
  *

@@ -47,28 +47,28 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#isChecked <em>Checked</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getContainingWorkpackage <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#isChecked <em>Checked</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getContainingWorkpackage <em>
  * Containing Workpackage</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getPredecessors <em>Predecessors</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getPredecessors <em>Predecessors</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getSuccessors <em>Successors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getAssignee <em>Assignee</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getReviewer <em>Reviewer</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getParticipants <em>Participants</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getSuccessors <em>Successors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getAssignee <em>Assignee</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getReviewer <em>Reviewer</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getParticipants <em>Participants</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getDueDate <em>Due Date</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getEstimate <em>Estimate</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getEffort <em>Effort</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getPriority <em>Priority</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#isResolved <em>Resolved</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getIncludingReleases <em>Including
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getDueDate <em>Due Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getEstimate <em>Estimate</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getEffort <em>Effort</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getPriority <em>Priority</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#isResolved <em>Resolved</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getIncludingReleases <em>Including
  * Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getProposals <em>Proposals</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getSolution <em>Solution</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getCriteria <em>Criteria</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getActivity <em>Activity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl#getAssessments <em>Assessments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getProposals <em>Proposals</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getSolution <em>Solution</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getCriteria <em>Criteria</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getActivity <em>Activity</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl#getAssessments <em>Assessments</em>}</li>
  * </ul>
  * </p>
  * 

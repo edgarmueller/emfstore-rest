@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
  *          <!-- end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getModelElementId()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getModelElementId()
  * @model
  * @generated
  */

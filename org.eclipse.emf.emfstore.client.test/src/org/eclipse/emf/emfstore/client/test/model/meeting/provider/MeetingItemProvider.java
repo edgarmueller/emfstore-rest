@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.client.test.model.provider.ModelEditPlugin;
 import org.eclipse.emf.emfstore.client.test.model.provider.UnicaseModelElementItemProvider;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

@@ -2,13 +2,13 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2011 Chair for Applied Software Engineering,&#xA;Technische Universitaet Muenchen.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:"
-    modelDirectory="/org.eclipse.emf.emfstore.client.test/src" editDirectory="/org.eclipse.emf.emfstore.client.test/src"
-    modelPluginID="org.eclipse.emf.emfstore.client.test.model" modelName="Model" runtimeCompatibility="true"
+    modelDirectory="/org.eclipse.emf.emfstore.internal.client.test/src" editDirectory="/org.eclipse.emf.emfstore.internal.client.test/src"
+    modelPluginID="org.eclipse.emf.emfstore.internal.client.test.model" modelName="Model" runtimeCompatibility="true"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="" language=""
-    usedGenPackages="../../org.eclipse.emf.emfstore.common.model/model/common.genmodel#//model ../../org.eclipse.emf.emfstore.server.model/model/server.genmodel#//model">
+    usedGenPackages="../../org.eclipse.emf.emfstore.internal.common.model/model/common.genmodel#//model ../../org.eclipse.emf.emfstore.internal.server.model/model/server.genmodel#//model">
   <foreignModel>model.ecore</foreignModel>
-  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.client.test" disposableProviderFactory="true"
+  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.internal.client.test" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">
     <genClasses image="false" ecoreClass="model.ecore#//UnicaseModelElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UnicaseModelElement/name"/>
@@ -30,7 +30,7 @@
     <genClasses image="false" ecoreClass="model.ecore#//Attachment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attachment/referringModelElements"/>
     </genClasses>
-    <nestedGenPackages prefix="Organization" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Organization" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//organization">
       <genClasses ecoreClass="model.ecore#//organization/User">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//organization/User/email"/>
@@ -53,7 +53,7 @@
             ecoreFeature="ecore:EReference model.ecore#//organization/Group/orgUnits"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Task" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Task" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//task">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//task/ActivityType">
         <genEnumLiterals ecoreEnumLiteral="model.ecore#//task/ActivityType/NONE"/>
@@ -101,7 +101,7 @@
         <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//task/Checkable/checked"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Classes" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Classes" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//classes">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//classes/AssociationType">
         <genEnumLiterals ecoreEnumLiteral="model.ecore#//classes/AssociationType/UNDIRECTED_ASSOCIATION"/>
@@ -235,7 +235,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//classes/Literal/literal"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Document" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Document" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//document">
       <genClasses ecoreClass="model.ecore#//document/LeafSection">
         <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//document/LeafSection/modelElements"/>
@@ -249,7 +249,7 @@
         <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//document/Section/parent"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Requirement" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Requirement" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//requirement">
       <genClasses ecoreClass="model.ecore#//requirement/NonFunctionalRequirement">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -374,7 +374,7 @@
             ecoreFeature="ecore:EReference model.ecore#//requirement/Workspace/systemFunctions"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Rationale" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Rationale" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//rationale">
       <genClasses ecoreClass="model.ecore#//rationale/Issue">
         <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//rationale/Issue/proposals"/>
@@ -415,7 +415,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//rationale/AudioComment/audioFile"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Change" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Change" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//change">
       <genClasses ecoreClass="model.ecore#//change/MergingIssue">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//change/MergingIssue/baseVersion"/>
@@ -428,7 +428,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//change/MergingSolution/appliedOperations"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Bug" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Bug" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//bug">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//bug/Severity">
         <genEnumLiterals ecoreEnumLiteral="model.ecore#//bug/Severity/FEATURE"/>
@@ -449,7 +449,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//bug/BugReport/done"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Component" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Component" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//component">
       <genClasses ecoreClass="model.ecore#//component/Component">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -470,7 +470,7 @@
             ecoreFeature="ecore:EReference model.ecore#//component/DeploymentNode/components"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Meeting" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Meeting" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//meeting">
       <genClasses ecoreClass="model.ecore#//meeting/Meeting">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//meeting/Meeting/location"/>
@@ -505,7 +505,7 @@
             ecoreFeature="ecore:EReference model.ecore#//meeting/WorkItemMeetingSection/includedWorkItems"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="State" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="State" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//state">
       <genClasses ecoreClass="model.ecore#//state/State">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//state/State/exitConditions"/>
@@ -528,7 +528,7 @@
       <genClasses ecoreClass="model.ecore#//state/StateInitial"/>
       <genClasses ecoreClass="model.ecore#//state/StateEnd"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Attachment" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Attachment" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//attachment">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//attachment/FileAttachmentType">
         <genEnumLiterals ecoreEnumLiteral="model.ecore#//attachment/FileAttachmentType/BINARY"/>
@@ -551,7 +551,7 @@
             ecoreFeature="ecore:EReference model.ecore#//attachment/PatchAttachment/appliedTo"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Profile" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Profile" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//profile">
       <genClasses ecoreClass="model.ecore#//profile/Profile">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -588,7 +588,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//profile/StereotypeAttributeInstanceString/value"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Util" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Util" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//util">
       <genClasses ecoreClass="model.ecore#//util/ModelElementPath">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//util/ModelElementPath/source"/>
@@ -596,7 +596,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//util/ModelElementPath/path"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Activity" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Activity" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//activity">
       <genClasses image="false" ecoreClass="model.ecore#//activity/ActivityObject">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -617,7 +617,7 @@
       <genClasses ecoreClass="model.ecore#//activity/ActivityInitial"/>
       <genClasses ecoreClass="model.ecore#//activity/ActivityEnd"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Release" basePackage="org.eclipse.emf.emfstore.client.test.model"
+    <nestedGenPackages prefix="Release" basePackage="org.eclipse.emf.emfstore.internal.client.test.model"
         disposableProviderFactory="true" ecorePackage="model.ecore#//release">
       <genClasses ecoreClass="model.ecore#//release/Stream">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//release/Stream/releases"/>

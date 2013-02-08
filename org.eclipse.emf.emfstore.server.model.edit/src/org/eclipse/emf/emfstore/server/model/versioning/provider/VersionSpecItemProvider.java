@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

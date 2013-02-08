@@ -17,20 +17,20 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.Attachment#getReferringModelElements <em>Referring Model
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment#getReferringModelElements <em>Referring Model
  * Elements</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getAttachment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getAttachment()
  * @model abstract="true"
  * @generated
  */
 public interface Attachment extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Referring Model Elements</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referring Model Elements</em>' reference list isn't clear, there really should be more
@@ -39,8 +39,8 @@ public interface Attachment extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Referring Model Elements</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getAttachment_ReferringModelElements()
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getAttachments
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getAttachment_ReferringModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments
 	 * @model opposite="attachments"
 	 * @generated
 	 */

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.emf.emfstore.site"
+      id="org.eclipse.emf.emfstore.internal.site"
       label="EMF Store Site (Incubation)"
       version="0.9.3.qualifier"
       provider-name="EMFT"
@@ -20,23 +20,23 @@
    </license>
 
    <includes
-         id="org.eclipse.emf.emfstore.common.feature"
+         id="org.eclipse.emf.emfstore.internal.common.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.server.feature"
+         id="org.eclipse.emf.emfstore.internal.server.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.client.feature"
+         id="org.eclipse.emf.emfstore.internal.client.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.client.ui.feature"
+         id="org.eclipse.emf.emfstore.internal.client.ui.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.perspective.feature"
+         id="org.eclipse.emf.emfstore.internal.perspective.feature"
          version="0.0.0"/>
 
    <includes
@@ -60,35 +60,35 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.client.transaction.feature"
+         id="org.eclipse.emf.emfstore.internal.client.transaction.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.ecore.feature"
+         id="org.eclipse.emf.emfstore.internal.ecore.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.ecp.feature"
+         id="org.eclipse.emf.emfstore.internal.ecp.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.example.feature"
+         id="org.eclipse.emf.emfstore.internal.example.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.modelmutator.feature"	
+         id="org.eclipse.emf.emfstore.internal.modelmutator.feature"	
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.test.feature"
+         id="org.eclipse.emf.emfstore.internal.test.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.fuzzy.feature"
+         id="org.eclipse.emf.emfstore.internal.fuzzy.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.emfstore.client.ui.errorreporting.feature"
+         id="org.eclipse.emf.emfstore.internal.client.ui.errorreporting.feature"
          version="0.0.0"/>
 
 </feature>

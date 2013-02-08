@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.emf.emfstore.server.model.edit</name>
+	<name>org.eclipse.emf.emfstore.internal.server.model.edit</name>
 	<comment></comment>
 	<projects>
 	</projects>

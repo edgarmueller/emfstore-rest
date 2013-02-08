@@ -9,7 +9,7 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;

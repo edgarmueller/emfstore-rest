@@ -85,7 +85,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.common.model.Project} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.common.model.Project} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -94,7 +94,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ProjectItemProvider projectItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.common.model.Project}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.Project}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -110,7 +110,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.common.model.ModelElementId}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}
 	 * instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -120,7 +120,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ModelElementIdItemProvider modelElementIdItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.common.model.ModelElementId}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -136,7 +136,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.common.model.ModelVersion}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion}
 	 * instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,7 +146,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ModelVersionItemProvider modelVersionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.common.model.ModelVersion}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -162,7 +162,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}
 	 * instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,7 +172,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected EMFStorePropertyItemProvider emfStorePropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -214,7 +214,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.common.model.PropertyStringValue} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -223,7 +223,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected PropertyStringValueItemProvider propertyStringValueItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.common.model.PropertyStringValue}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

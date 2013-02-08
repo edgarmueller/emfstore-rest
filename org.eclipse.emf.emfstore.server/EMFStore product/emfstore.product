@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="EMFStore Server" uid="org.eclipse.emf.emfstore.server.product" id="org.eclipse.emf.emfstore.server.server" application="org.eclipse.emf.emfstore.server.application" version="0.9.3" useFeatures="false" includeLaunchers="true">
+<product name="EMFStore Server" uid="org.eclipse.emf.emfstore.internal.server.product" id="org.eclipse.emf.emfstore.internal.server.server" application="org.eclipse.emf.emfstore.internal.server.application" version="0.9.3" useFeatures="false" includeLaunchers="true">
 
 
    <configIni use="default">
@@ -41,11 +41,11 @@
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
-      <plugin id="org.eclipse.emf.emfstore.common"/>
-      <plugin id="org.eclipse.emf.emfstore.common.model"/>
-      <plugin id="org.eclipse.emf.emfstore.migration"/>
-      <plugin id="org.eclipse.emf.emfstore.server"/>
-      <plugin id="org.eclipse.emf.emfstore.server.model"/>
+      <plugin id="org.eclipse.emf.emfstore.internal.common"/>
+      <plugin id="org.eclipse.emf.emfstore.internal.common.model"/>
+      <plugin id="org.eclipse.emf.emfstore.internal.migration"/>
+      <plugin id="org.eclipse.emf.emfstore.internal.server"/>
+      <plugin id="org.eclipse.emf.emfstore.internal.server.model"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.preferences"/>

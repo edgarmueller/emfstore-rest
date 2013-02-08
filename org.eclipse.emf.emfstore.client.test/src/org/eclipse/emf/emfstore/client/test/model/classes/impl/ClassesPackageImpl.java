@@ -195,7 +195,7 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

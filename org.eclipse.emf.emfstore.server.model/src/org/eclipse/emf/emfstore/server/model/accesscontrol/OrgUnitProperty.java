@@ -20,13 +20,13 @@ import org.eclipse.emf.emfstore.server.model.ProjectId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject <em>Project</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty()
+ * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty()
  * @model
  * @generated
  */
@@ -44,14 +44,14 @@ public interface OrgUnitProperty extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Name()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
@@ -70,14 +70,14 @@ public interface OrgUnitProperty extends EObject {
 	 * 
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Value()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Value()
 	 * @model
 	 * @generated
 	 */
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
@@ -95,14 +95,14 @@ public interface OrgUnitProperty extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Project</em>' containment reference.
 	 * @see #setProject(ProjectId)
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Project()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getOrgUnitProperty_Project()
 	 * @model containment="true" resolveProxies="true" keys="id"
 	 * @generated
 	 */
 	ProjectId getProject();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty#getProject <em>Project</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty#getProject <em>Project</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Project</em>' containment reference.

@@ -12,10 +12,10 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection;
 
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithParameter;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithParameter;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;

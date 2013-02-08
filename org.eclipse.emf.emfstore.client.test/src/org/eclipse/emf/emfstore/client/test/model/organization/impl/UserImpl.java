@@ -30,10 +30,10 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.UserImpl#getEmail <em>Email</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.UserImpl#getFirstName <em>First Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.UserImpl#getLastName <em>Last Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.UserImpl#getWorkItemsToReview <em>Work Items
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl#getEmail <em>Email</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl#getFirstName <em>First Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl#getLastName <em>Last Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl#getWorkItemsToReview <em>Work Items
  * To Review</em>}</li>
  * </ul>
  * </p>

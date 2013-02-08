@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client.ui" id="org.eclipse.emf.emfstore.client.ui.merge.labelprovider" name="Merge Label Provider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.client.ui" id="org.eclipse.emf.emfstore.internal.client.ui.merge.labelprovider" name="Merge Label Provider"/>
       </appInfo>
       <documentation>
          This extension point may be used to customize the conflict description in case a conflict has been detected and the merge dialog pops up.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider"/>
                </appInfo>
             </annotation>
          </attribute>

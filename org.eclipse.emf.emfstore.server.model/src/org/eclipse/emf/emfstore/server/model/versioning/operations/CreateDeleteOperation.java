@@ -23,14 +23,14 @@ import org.eclipse.emf.emfstore.common.model.Project;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#isDelete <em>Delete</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getSubOperations <em>Sub Operations</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap <em>EObject To Id Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#isDelete <em>Delete</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getSubOperations <em>Sub Operations</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap <em>EObject To Id Map</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation()
  * @model
  * @generated
  */
@@ -46,7 +46,7 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * 
 	 * @return the value of the '<em>Delete</em>' attribute.
 	 * @see #setDelete(boolean)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_Delete()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_Delete()
 	 * @model
 	 * @generated
 	 */
@@ -54,7 +54,7 @@ public interface CreateDeleteOperation extends AbstractOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#isDelete
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#isDelete
 	 * <em>Delete</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -75,14 +75,14 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Model Element</em>' containment reference.
 	 * @see #setModelElement(EObject)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_ModelElement()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_ModelElement()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EObject getModelElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Model Element</em>' containment reference.
@@ -93,7 +93,7 @@ public interface CreateDeleteOperation extends AbstractOperation {
 
 	/**
 	 * Returns the value of the '<em><b>Sub Operations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sub Operations</em>' containment reference list isn't clear, there really should be
@@ -101,7 +101,7 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Operations</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_SubOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_SubOperations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -110,7 +110,7 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	/**
 	 * Returns the value of the '<em><b>EObject To Id Map</b></em>' map. The key
 	 * is of type {@link org.eclipse.emf.ecore.EObject}, and the value is of
-	 * type {@link org.eclipse.emf.emfstore.common.model.ModelElementId}, <!--
+	 * type {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}, <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>EObject To Id Map</em>' map isn't clear, there really should be more of a description
@@ -119,9 +119,9 @@ public interface CreateDeleteOperation extends AbstractOperation {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>EObject To Id Map</em>' map.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_EObjectToIdMap()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCreateDeleteOperation_EObjectToIdMap()
 	 * @model mapType=
-	 *        "org.eclipse.emf.emfstore.server.model.versioning.operations.EObjectToModelElementIdMap<org.eclipse.emf.ecore.EObject, org.eclipse.emf.emfstore.common.model.ModelElementId>"
+	 *        "org.eclipse.emf.emfstore.internal.server.model.versioning.operations.EObjectToModelElementIdMap<org.eclipse.emf.ecore.EObject, org.eclipse.emf.emfstore.internal.common.model.ModelElementId>"
 	 * @generated
 	 */
 	EMap<EObject, ModelElementId> getEObjectToIdMap();

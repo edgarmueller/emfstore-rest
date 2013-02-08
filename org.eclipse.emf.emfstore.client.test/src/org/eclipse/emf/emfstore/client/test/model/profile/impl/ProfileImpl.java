@@ -30,9 +30,9 @@ import org.eclipse.emf.emfstore.client.test.model.profile.Stereotype;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.impl.ProfileImpl#getAffectedContainers <em>Affected
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.ProfileImpl#getAffectedContainers <em>Affected
  * Containers</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.impl.ProfileImpl#getStereotypes <em>Stereotypes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.ProfileImpl#getStereotypes <em>Stereotypes</em>}</li>
  * </ul>
  * </p>
  * 

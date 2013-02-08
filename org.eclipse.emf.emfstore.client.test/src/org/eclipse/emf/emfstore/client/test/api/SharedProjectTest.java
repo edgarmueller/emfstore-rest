@@ -11,9 +11,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;

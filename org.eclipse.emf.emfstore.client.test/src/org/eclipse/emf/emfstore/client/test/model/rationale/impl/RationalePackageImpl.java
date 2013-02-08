@@ -121,7 +121,7 @@ public class RationalePackageImpl extends EPackageImpl implements RationalePacka
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

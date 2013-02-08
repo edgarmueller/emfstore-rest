@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  *          <!-- end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getSessionId()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getSessionId()
  * @model
  * @generated
  */

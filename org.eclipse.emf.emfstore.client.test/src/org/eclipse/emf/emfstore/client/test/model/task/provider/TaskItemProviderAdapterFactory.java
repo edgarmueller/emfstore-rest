@@ -78,7 +78,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.ActionItem} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +86,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 	protected ActionItemItemProvider actionItemItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.task.ActionItem}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +102,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +110,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 	protected WorkPackageItemProvider workPackageItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +126,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.Milestone} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +134,7 @@ public class TaskItemProviderAdapterFactory extends TaskAdapterFactory implement
 	protected MilestoneItemProvider milestoneItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.task.Milestone}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

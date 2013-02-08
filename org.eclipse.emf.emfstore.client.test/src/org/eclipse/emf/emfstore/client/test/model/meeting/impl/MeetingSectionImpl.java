@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.impl.MeetingSectionImpl#getAllocatedTime <em>Allocated
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl#getAllocatedTime <em>Allocated
  * Time</em>}</li>
  * </ul>
  * </p>

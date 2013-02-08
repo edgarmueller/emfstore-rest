@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.common" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.common" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.common" id="org.eclipse.emf.emfstore.common.resourceoptions" name="Common Resource Save Options "/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common" id="org.eclipse.emf.emfstore.internal.common.resourceoptions" name="Common Resource Save Options "/>
       </appinfo>
       <documentation>
          Common resource options.

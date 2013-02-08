@@ -16,14 +16,14 @@ import java.util.Map;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IProject;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.AbstractSourceProvider;
@@ -44,7 +44,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	/**
 	 * Name of the property defining the save state of the currently selected project space.
 	 */
-	public static final String CURRENT_SAVE_STATE_PROPERTY = "org.eclipse.emf.emfstore.client.ui.currentProjectSpaceSaveState";
+	public static final String CURRENT_SAVE_STATE_PROPERTY = "org.eclipse.emf.emfstore.internal.client.ui.currentProjectSpaceSaveState";
 
 	private SaveStateChangedObserver saveStateChangedObserver;
 
@@ -97,7 +97,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	// TODO: quick fix, duplicate code in IsAutoSaveEnabledTester
 	// TODO: provide extension point registry? discuss
 	private static boolean initExtensionPoint() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disableSaveControls");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.disableSaveControls");
 		ExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {

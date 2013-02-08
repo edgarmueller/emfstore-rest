@@ -36,20 +36,20 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStrings <em>Strings</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getReferences <em>References</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElements <em>Contained Elements</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getReference <em>Reference</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElement <em>Contained Element</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getOtherReference <em>Other Reference</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainedElements2 <em>Contained Elements2</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getContainer <em>Container</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getElementMap <em>Element Map</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStringToStringMap <em>String To String Map</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getElementToStringMap <em>Element To String Map</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementImpl#getStringToElementMap <em>String To Element Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getStrings <em>Strings</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getContainedElements <em>Contained Elements</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getContainedElement <em>Contained Element</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getOtherReference <em>Other Reference</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getContainedElements2 <em>Contained Elements2</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getElementMap <em>Element Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getStringToStringMap <em>String To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getElementToStringMap <em>Element To String Map</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementImpl#getStringToElementMap <em>String To Element Map</em>}</li>
  * </ul>
  * </p>
  *

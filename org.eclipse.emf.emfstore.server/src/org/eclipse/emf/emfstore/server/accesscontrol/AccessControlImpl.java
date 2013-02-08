@@ -18,9 +18,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
@@ -106,7 +106,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	}
 
 	private AuthenticationControlFactory getAuthenticationFactory() {
-		for (ExtensionElement e : new ExtensionPoint("org.eclipse.emf.emfstore.server.authenticationfactory")
+		for (ExtensionElement e : new ExtensionPoint("org.eclipse.emf.emfstore.internal.server.authenticationfactory")
 			.getExtensionElements()) {
 			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
 			if (factory != null) {
@@ -121,7 +121,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl#logIn(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl#logIn(java.lang.String,
 	 *      java.lang.String)
 	 */
 	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
@@ -140,7 +140,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl#logout(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl#logout(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void logout(SessionId sessionId) throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
@@ -183,7 +183,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkSession(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkSession(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void checkSession(SessionId sessionId) throws AccessControlException {
 		if (!sessionUserMap.containsKey(sessionId)) {
@@ -194,8 +194,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkWriteAccess(org.eclipse.emf.emfstore.server.model.SessionId,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId, java.util.Set)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkWriteAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId, java.util.Set)
 	 */
 	public void checkWriteAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
 		throws AccessControlException {
@@ -299,8 +299,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkReadAccess(org.eclipse.emf.emfstore.server.model.SessionId,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId, java.util.Set)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkReadAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId, java.util.Set)
 	 */
 	public void checkReadAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
 		throws AccessControlException {
@@ -322,8 +322,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.server.model.SessionId,
-	 *      org.eclipse.emf.emfstore.server.model.ProjectId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId) throws AccessControlException {
 		checkSession(sessionId);
@@ -342,7 +342,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkServerAdminAccess(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkServerAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void checkServerAdminAccess(SessionId sessionId) throws AccessControlException {
 		checkSession(sessionId);
@@ -458,7 +458,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.AuthorizationControl#checkAccess(org.eclipse.emf.emfstore.server.core.MethodInvocation)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkAccess(org.eclipse.emf.emfstore.internal.server.core.MethodInvocation)
 	 */
 	public void checkAccess(MethodInvocation op) throws AccessControlException {
 		initAccessMap();

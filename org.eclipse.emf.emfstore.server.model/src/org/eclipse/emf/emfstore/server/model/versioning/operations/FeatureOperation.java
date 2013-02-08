@@ -22,12 +22,12 @@ import org.eclipse.emf.emfstore.common.model.Project;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeatureName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeatureName
  * <em>Feature Name</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getFeatureOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getFeatureOperation()
  * @model abstract="true"
  * @generated
  */
@@ -43,14 +43,14 @@ public interface FeatureOperation extends AbstractOperation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature Name</em>' attribute.
 	 * @see #setFeatureName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getFeatureOperation_FeatureName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getFeatureOperation_FeatureName()
 	 * @model default=""
 	 * @generated
 	 */
 	String getFeatureName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeatureName <em>Feature Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeatureName <em>Feature Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Feature Name</em>' attribute.

@@ -24,23 +24,23 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Comment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getDescription <em>Description</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getAnnotations <em>Annotations</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getIncomingDocumentReferences <em>Incoming
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getDescription <em>Description</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAnnotations <em>Annotations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getIncomingDocumentReferences <em>Incoming
  * Document References</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getLeafSection <em>Leaf Section</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getState <em>State</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getAppliedStereotypeInstances <em>Applied
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection <em>Leaf Section</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getState <em>State</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAppliedStereotypeInstances <em>Applied
  * Stereotype Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getCreationDate <em>Creation Date</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getCreator <em>Creator</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreationDate <em>Creation Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreator <em>Creator</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement()
  * @model abstract="true"
  * @generated
  */
@@ -54,14 +54,14 @@ public interface UnicaseModelElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Name()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Name()
 	 * @model annotation="org.unicase.ui.meeditor priority='1.0' position='left'"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getName
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getName
 	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -80,14 +80,14 @@ public interface UnicaseModelElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Description()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Description()
 	 * @model annotation="org.unicase.ui.meeditor priority='1.0' position='left'"
 	 * @generated
 	 */
 	String getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getDescription
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getDescription
 	 * <em>Description</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Description</em>' attribute.
@@ -98,8 +98,8 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Annotations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.Annotation}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.Annotation#getAnnotatedModelElements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation#getAnnotatedModelElements
 	 * <em>Annotated Model Elements</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Annotations</em>' reference list isn't clear, there really should be more of a
@@ -108,8 +108,8 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Annotations</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Annotations()
-	 * @see org.eclipse.emf.emfstore.client.test.model.Annotation#getAnnotatedModelElements
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Annotations()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.Annotation#getAnnotatedModelElements
 	 * @model opposite="annotatedModelElements" annotation="org.unicase.ui.meeditor priority='100.0' position='right'"
 	 * @generated
 	 */
@@ -117,8 +117,8 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Attachments</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.Attachment}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.Attachment#getReferringModelElements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment#getReferringModelElements
 	 * <em>Referring Model Elements</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attachments</em>' reference list isn't clear, there really should be more of a
@@ -127,8 +127,8 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Attachments</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Attachments()
-	 * @see org.eclipse.emf.emfstore.client.test.model.Attachment#getReferringModelElements
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Attachments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.Attachment#getReferringModelElements
 	 * @model opposite="referringModelElements" annotation="org.unicase.ui.meeditor priority='101.0' position='right'"
 	 * @generated
 	 */
@@ -136,8 +136,8 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Document References</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.client.test.model.document.LeafSection}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.document.LeafSection#getReferencedModelElements
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection}. It is bidirectional and its
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getReferencedModelElements
 	 * <em>Referenced Model Elements</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Incoming Document References</em>' reference list isn't clear, there really should be
@@ -146,8 +146,8 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Incoming Document References</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_IncomingDocumentReferences()
-	 * @see org.eclipse.emf.emfstore.client.test.model.document.LeafSection#getReferencedModelElements
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_IncomingDocumentReferences()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getReferencedModelElements
 	 * @model opposite="referencedModelElements" annotation="org.unicase.ui.meeditor priority='102.0' position='right'"
 	 * @generated
 	 */
@@ -155,7 +155,7 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Leaf Section</b></em>' container reference. It is bidirectional and its opposite
-	 * is '{@link org.eclipse.emf.emfstore.client.test.model.document.LeafSection#getModelElements
+	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements
 	 * <em>Model Elements</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Leaf Section</em>' container reference isn't clear, there really should be more of a
@@ -165,15 +165,15 @@ public interface UnicaseModelElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Leaf Section</em>' container reference.
 	 * @see #setLeafSection(LeafSection)
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_LeafSection()
-	 * @see org.eclipse.emf.emfstore.client.test.model.document.LeafSection#getModelElements
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_LeafSection()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements
 	 * @model opposite="modelElements" transient="false"
 	 * @generated
 	 */
 	LeafSection getLeafSection();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getLeafSection
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection
 	 * <em>Leaf Section</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Leaf Section</em>' container reference.
@@ -192,7 +192,7 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>State</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_State()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_State()
 	 * @model default="" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
@@ -200,9 +200,9 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Applied Stereotype Instances</b></em>' containment reference list. The list
-	 * contents are of type {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance}. It is
+	 * contents are of type {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance}. It is
 	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance#getModelElement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getModelElement
 	 * <em>Model Element</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Applied Stereotype Instances</em>' containment reference list isn't clear, there
@@ -211,8 +211,8 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Applied Stereotype Instances</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_AppliedStereotypeInstances()
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance#getModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_AppliedStereotypeInstances()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getModelElement
 	 * @model opposite="modelElement" containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -220,8 +220,8 @@ public interface UnicaseModelElement extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Comments</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
 	 * <em>Commented Element</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Comments</em>' containment reference list isn't clear, there really should be more of
@@ -230,8 +230,8 @@ public interface UnicaseModelElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Comments</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Comments()
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Comments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
 	 * @model opposite="commentedElement" containment="true" resolveProxies="true"
 	 *        annotation="org.unicase.ui.meeditor priority='2.0' position='left'"
 	 * @generated
@@ -248,14 +248,14 @@ public interface UnicaseModelElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Creation Date</em>' attribute.
 	 * @see #setCreationDate(Date)
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_CreationDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_CreationDate()
 	 * @model
 	 * @generated
 	 */
 	Date getCreationDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getCreationDate
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreationDate
 	 * <em>Creation Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Creation Date</em>' attribute.
@@ -274,14 +274,14 @@ public interface UnicaseModelElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Creator</em>' attribute.
 	 * @see #setCreator(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.ModelPackage#getUnicaseModelElement_Creator()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.ModelPackage#getUnicaseModelElement_Creator()
 	 * @model
 	 * @generated
 	 */
 	String getCreator();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getCreator
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreator
 	 * <em>Creator</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Creator</em>' attribute.

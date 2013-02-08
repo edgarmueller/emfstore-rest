@@ -83,7 +83,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -92,7 +92,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected ACUserItemProvider acUserItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -108,7 +108,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -117,7 +117,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected ACOrgUnitItemProvider acOrgUnitItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -133,7 +133,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -142,7 +142,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected ACGroupItemProvider acGroupItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -158,7 +158,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -167,7 +167,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected ACOrgUnitIdItemProvider acOrgUnitIdItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -183,7 +183,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -192,7 +192,7 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected OrgUnitPropertyItemProvider orgUnitPropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

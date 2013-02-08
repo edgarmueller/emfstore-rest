@@ -82,7 +82,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory}
 	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -91,7 +91,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ProjectHistoryItemProvider projectHistoryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectHistory}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -106,7 +106,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectInfo}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo}
 	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -115,7 +115,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ProjectInfoItemProvider projectInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -130,7 +130,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.SessionId}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.SessionId}
 	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -139,7 +139,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected SessionIdItemProvider sessionIdItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.SessionId}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.SessionId}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -154,7 +154,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ServerSpace}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace}
 	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -163,7 +163,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ServerSpaceItemProvider serverSpaceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ServerSpace}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -178,7 +178,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ProjectId}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.ProjectId}
 	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -187,7 +187,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ProjectIdItemProvider projectIdItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectId}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectId}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -202,7 +202,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.VersionInfo}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo}
 	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -211,7 +211,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected VersionInfoItemProvider versionInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.VersionInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -226,7 +226,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo}
 	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -235,7 +235,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected ClientVersionInfoItemProvider clientVersionInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -250,7 +250,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}
 	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -259,7 +259,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected FileIdentifierItemProvider fileIdentifierItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -275,7 +275,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -284,7 +284,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	protected AuthenticationInformationItemProvider authenticationInformationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

@@ -78,7 +78,7 @@ public class UtilItemProviderAdapterFactory extends UtilAdapterFactory implement
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +86,7 @@ public class UtilItemProviderAdapterFactory extends UtilAdapterFactory implement
 	protected ModelElementPathItemProvider modelElementPathItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

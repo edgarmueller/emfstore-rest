@@ -19,14 +19,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
@@ -84,9 +84,9 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a project on the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String, String,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage)
+	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**
@@ -116,9 +116,9 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a project, shares it with the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.LogMessage, Project)
-	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.server.model.SessionId)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String, String,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
+	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**

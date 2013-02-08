@@ -40,25 +40,25 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getContainingWorkpackage <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getContainingWorkpackage <em>
  * Containing Workpackage</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getPredecessors <em>Predecessors</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getPredecessors <em>Predecessors</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getSuccessors <em>Successors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getAssignee <em>Assignee</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getReviewer <em>Reviewer</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getParticipants <em>Participants</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getSuccessors <em>Successors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getAssignee <em>Assignee</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getReviewer <em>Reviewer</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getParticipants <em>Participants</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getDueDate <em>Due Date</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getEstimate <em>Estimate</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getEffort <em>Effort</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getPriority <em>Priority</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#isResolved <em>Resolved</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getIncludingReleases <em>Including
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getDueDate <em>Due Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getEstimate <em>Estimate</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getEffort <em>Effort</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getPriority <em>Priority</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#isResolved <em>Resolved</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getIncludingReleases <em>Including
  * Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#isChecked <em>Checked</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#isDone <em>Done</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl#getActivity <em>Activity</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#isChecked <em>Checked</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#isDone <em>Done</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl#getActivity <em>Activity</em>}</li>
  * </ul>
  * </p>
  * 

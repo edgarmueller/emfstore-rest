@@ -37,8 +37,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -343,7 +343,7 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#getOtherInvolvedModelElements()
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {

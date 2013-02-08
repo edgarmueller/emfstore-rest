@@ -24,9 +24,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional <em>Bidirectional</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#getOppositeFeatureName <em>Opposite Feature Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl#getContainmentType <em>Containment Type</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl#isBidirectional <em>Bidirectional</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl#getOppositeFeatureName <em>Opposite Feature Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl#getContainmentType <em>Containment Type</em>}</li>
  * </ul>
  * </p>
  *

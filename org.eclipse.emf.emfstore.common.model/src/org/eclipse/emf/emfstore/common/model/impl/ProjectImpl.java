@@ -206,7 +206,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.Project#delete()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#delete()
 	 */
 	public void delete() {
 		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
@@ -222,7 +222,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl#setModelElements(java.util.Collection)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl#setModelElements(java.util.Collection)
 	 * @generate NOT
 	 */
 	@Override
@@ -233,7 +233,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl#cutElementAdded(org.eclipse.emf.emfstore.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.NotifiableIdEObjectCollectionImpl#cutElementAdded(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
@@ -244,7 +244,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.NotifiableIdEObjectCollectionImpl#initMapping()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.NotifiableIdEObjectCollectionImpl#initMapping()
 	 */
 	@Override
 	public void initMapping() {

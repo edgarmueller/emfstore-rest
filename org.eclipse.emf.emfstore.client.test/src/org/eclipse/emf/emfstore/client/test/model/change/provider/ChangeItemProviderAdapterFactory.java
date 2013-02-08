@@ -78,7 +78,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +86,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 	protected MergingIssueItemProvider mergingIssueItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +102,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingProposal} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +110,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 	protected MergingProposalItemProvider mergingProposalItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.change.MergingProposal}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +126,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +134,7 @@ public class ChangeItemProviderAdapterFactory extends ChangeAdapterFactory imple
 	protected MergingSolutionItemProvider mergingSolutionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

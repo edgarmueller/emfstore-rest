@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl#getId <em>Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  * 

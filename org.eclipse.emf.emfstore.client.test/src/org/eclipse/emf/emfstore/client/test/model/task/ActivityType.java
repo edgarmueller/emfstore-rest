@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>Activity Type</b></em>', and
  * utility methods for working with them. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getActivityType()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getActivityType()
  * @model
  * @generated
  */

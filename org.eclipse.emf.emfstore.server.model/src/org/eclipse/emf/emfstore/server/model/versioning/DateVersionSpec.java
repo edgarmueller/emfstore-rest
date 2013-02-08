@@ -25,12 +25,12 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IDateVersionSpec;
  *          The following features are supported:
  *          <ul>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec#getDate
  *          <em>Date</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getDateVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getDateVersionSpec()
  * @model
  * @generated
  */
@@ -45,14 +45,14 @@ public interface DateVersionSpec extends VersionSpec, IDateVersionSpec {
 	 * 
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(Date)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getDateVersionSpec_Date()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getDateVersionSpec_Date()
 	 * @model required="true"
 	 * @generated
 	 */
 	Date getDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec#getDate
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec#getDate
 	 * <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

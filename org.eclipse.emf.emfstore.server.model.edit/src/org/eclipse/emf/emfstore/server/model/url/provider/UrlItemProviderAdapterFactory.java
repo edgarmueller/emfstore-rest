@@ -82,7 +82,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl}
 	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -91,7 +91,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	protected ServerUrlItemProvider serverUrlItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -107,7 +107,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -116,7 +116,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	protected ProjectUrlFragmentItemProvider projectUrlFragmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -132,7 +132,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -141,7 +141,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	protected ModelElementUrlFragmentItemProvider modelElementUrlFragmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -157,7 +157,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -166,7 +166,7 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	protected ModelElementUrlItemProvider modelElementUrlItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

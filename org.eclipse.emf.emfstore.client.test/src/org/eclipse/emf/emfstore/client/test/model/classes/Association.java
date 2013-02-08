@@ -17,27 +17,27 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTarget <em>Target</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSourceMultiplicity <em>Source
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getType <em>Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceMultiplicity <em>Source
  * Multiplicity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTargetMultiplicity <em>Target
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetMultiplicity <em>Target
  * Multiplicity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSourceRole <em>Source Role</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTargetRole <em>Target Role</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#isTransient <em>Transient</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole <em>Source Role</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole <em>Target Role</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation()
  * @model
  * @generated
  */
 public interface Association extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Class#getOutgoingAssociations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getOutgoingAssociations
 	 * <em>Outgoing Associations</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear, there really should be more of a description
@@ -46,16 +46,16 @@ public interface Association extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(org.eclipse.emf.emfstore.client.test.model.classes.Class)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_Source()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Class#getOutgoingAssociations
+	 * @see #setSource(org.eclipse.emf.emfstore.internal.client.test.model.classes.Class)
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_Source()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getOutgoingAssociations
 	 * @model opposite="outgoingAssociations" annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
 	 */
 	org.eclipse.emf.emfstore.client.test.model.classes.Class getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSource
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSource
 	 * <em>Source</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source</em>' reference.
@@ -66,7 +66,7 @@ public interface Association extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Class#getIncomingAssociations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getIncomingAssociations
 	 * <em>Incoming Associations</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear, there really should be more of a description
@@ -75,16 +75,16 @@ public interface Association extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(org.eclipse.emf.emfstore.client.test.model.classes.Class)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_Target()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Class#getIncomingAssociations
+	 * @see #setTarget(org.eclipse.emf.emfstore.internal.client.test.model.classes.Class)
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_Target()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getIncomingAssociations
 	 * @model opposite="incomingAssociations" annotation="org.unicase.ui.meeditor priority='11.0' position='left'"
 	 * @generated
 	 */
 	org.eclipse.emf.emfstore.client.test.model.classes.Class getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTarget
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTarget
 	 * <em>Target</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target</em>' reference.
@@ -95,7 +95,7 @@ public interface Association extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute. The default value is <code>""</code>. The literals are
-	 * from the enumeration {@link org.eclipse.emf.emfstore.client.test.model.classes.AssociationType}. <!--
+	 * from the enumeration {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear, there really should be more of a description here...
@@ -103,20 +103,20 @@ public interface Association extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.AssociationType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
 	 * @see #setType(AssociationType)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_Type()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_Type()
 	 * @model default="" annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	AssociationType getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getType
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getType
 	 * <em>Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.AssociationType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
 	 * @see #getType()
 	 * @generated
 	 */
@@ -133,7 +133,7 @@ public interface Association extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Source Multiplicity</em>' attribute.
 	 * @see #setSourceMultiplicity(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_SourceMultiplicity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_SourceMultiplicity()
 	 * @model default="1" annotation="org.unicase.ui.meeditor priority='13.0' position='left'"
 	 * @generated
 	 */
@@ -141,7 +141,7 @@ public interface Association extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSourceMultiplicity
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceMultiplicity
 	 * <em>Source Multiplicity</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source Multiplicity</em>' attribute.
@@ -161,7 +161,7 @@ public interface Association extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Target Multiplicity</em>' attribute.
 	 * @see #setTargetMultiplicity(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_TargetMultiplicity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_TargetMultiplicity()
 	 * @model default="1" annotation="org.unicase.ui.meeditor priority='14.0' position='left'"
 	 * @generated
 	 */
@@ -169,7 +169,7 @@ public interface Association extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTargetMultiplicity
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetMultiplicity
 	 * <em>Target Multiplicity</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target Multiplicity</em>' attribute.
@@ -188,14 +188,14 @@ public interface Association extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Source Role</em>' attribute.
 	 * @see #setSourceRole(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_SourceRole()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_SourceRole()
 	 * @model
 	 * @generated
 	 */
 	String getSourceRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getSourceRole
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole
 	 * <em>Source Role</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source Role</em>' attribute.
@@ -214,14 +214,14 @@ public interface Association extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Target Role</em>' attribute.
 	 * @see #setTargetRole(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_TargetRole()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_TargetRole()
 	 * @model
 	 * @generated
 	 */
 	String getTargetRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#getTargetRole
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole
 	 * <em>Target Role</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target Role</em>' attribute.
@@ -240,14 +240,14 @@ public interface Association extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Transient</em>' attribute.
 	 * @see #setTransient(boolean)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getAssociation_Transient()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getAssociation_Transient()
 	 * @model
 	 * @generated
 	 */
 	boolean isTransient();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Association#isTransient
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient
 	 * <em>Transient</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Transient</em>' attribute.

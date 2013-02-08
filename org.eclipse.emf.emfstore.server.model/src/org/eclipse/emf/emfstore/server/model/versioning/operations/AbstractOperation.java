@@ -26,18 +26,18 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId
  * <em>Model Element Id</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#isAccepted
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted
  * <em>Accepted</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getClientDate
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate
  * <em>Client Date</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getAbstractOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAbstractOperation()
  * @model abstract="true"
  * @generated
  */
@@ -52,14 +52,14 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Model Element Id</em>' containment reference.
 	 * @see #setModelElementId(ModelElementId)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getAbstractOperation_ModelElementId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAbstractOperation_ModelElementId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ModelElementId getModelElementId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId <em>Model Element Id</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId <em>Model Element Id</em>}' containment reference.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Model Element Id</em>' containment reference.
@@ -79,7 +79,7 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * 
 	 * @return the value of the '<em>Accepted</em>' attribute.
 	 * @see #setAccepted(boolean)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getAbstractOperation_Accepted()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAbstractOperation_Accepted()
 	 * @model transient="true"
 	 * @generated
 	 */
@@ -87,7 +87,7 @@ public interface AbstractOperation extends IdentifiableElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#isAccepted
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted
 	 * <em>Accepted</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -109,14 +109,14 @@ public interface AbstractOperation extends IdentifiableElement {
 	 * 
 	 * @return the value of the '<em>Client Date</em>' attribute.
 	 * @see #setClientDate(Date)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getAbstractOperation_ClientDate()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAbstractOperation_ClientDate()
 	 * @model
 	 * @generated
 	 */
 	Date getClientDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getClientDate <em>Client Date</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate <em>Client Date</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Client Date</em>' attribute.

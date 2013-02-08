@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStorePreferenceHelper;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
@@ -38,7 +38,7 @@ import org.eclipse.ui.PlatformUI;
 
 public class CSVImportSource extends ImportSource {
 
-	private static final String CSV_IMPORT_SOURCE_PATH = "org.eclipse.emf.emfstore.client.ui.CSVImportSourcePath";
+	private static final String CSV_IMPORT_SOURCE_PATH = "org.eclipse.emf.emfstore.internal.client.ui.CSVImportSourcePath";
 
 	private Map<String, ImportItemWrapper> groupMap = new LinkedHashMap<String, ImportItemWrapper>();
 
@@ -54,7 +54,7 @@ public class CSVImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getChildren(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getChildren(java.lang.Object)
 	 * @param ob
 	 *            the object to get the children from
 	 * @return the children of the given object
@@ -72,7 +72,7 @@ public class CSVImportSource extends ImportSource {
 	 * @param ob
 	 *            The object to get the root elements from
 	 * @return The list of groups, which were read from the specified file.
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getElements(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getElements(java.lang.Object)
 	 */
 	@Override
 	public Object[] getElements(Object ob) {
@@ -80,7 +80,7 @@ public class CSVImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getLabel()
 	 * @return String label.
 	 */
 	@Override
@@ -89,7 +89,7 @@ public class CSVImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#init()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#init()
 	 * @param shell
 	 *            the shell, which holds the dialog for file selection
 	 * @return if a file was selected and successfully handled
@@ -191,7 +191,7 @@ public class CSVImportSource extends ImportSource {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getMessage()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getMessage()
 	 */
 	@Override
 	public String getMessage() {

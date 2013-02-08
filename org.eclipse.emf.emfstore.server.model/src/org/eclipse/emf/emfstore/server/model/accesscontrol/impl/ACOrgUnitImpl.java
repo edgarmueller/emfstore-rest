@@ -33,10 +33,10 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles <em>Roles</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -150,7 +150,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit#getId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit#getId()
 	 * @generated NOT
 	 */
 	public ACOrgUnitId getId() {

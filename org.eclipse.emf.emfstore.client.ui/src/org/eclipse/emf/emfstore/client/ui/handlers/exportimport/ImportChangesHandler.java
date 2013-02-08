@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIImportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Handler for importing changes that will be applied upon the selected {@link ProjectSpace}.

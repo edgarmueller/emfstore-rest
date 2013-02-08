@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.EventsFactory
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsFactory
  * @model kind="package"
  * @generated
  */
@@ -48,7 +48,7 @@ public interface EventsPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.events";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.server.model.versioning.events";
 
 	/**
 	 * The singleton instance of the package.
@@ -59,10 +59,10 @@ public interface EventsPackage extends EPackage {
 	EventsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl <em>Event</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventImpl <em>Event</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
 	 * @generated
 	 */
 	int EVENT = 0;
@@ -86,19 +86,19 @@ public interface EventsPackage extends EPackage {
 	int EVENT_FEATURE_COUNT = 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.events.Event <em>Event</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event <em>Event</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Event</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event
 	 * @generated
 	 */
 	EClass getEvent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Timestamp</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event#getTimestamp()
 	 * @see #getEvent()
 	 * @generated
 	 */
@@ -127,10 +127,10 @@ public interface EventsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl <em>Event</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventImpl <em>Event</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventsPackageImpl#getEvent()
 		 * @generated
 		 */
 		EClass EVENT = eINSTANCE.getEvent();

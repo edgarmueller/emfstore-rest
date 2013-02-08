@@ -17,13 +17,13 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getCondition <em>Condition</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition <em>Condition</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getTransition()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getTransition()
  * @model
  * @generated
  */
@@ -39,14 +39,14 @@ public interface Transition extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Condition</em>' attribute.
 	 * @see #setCondition(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getTransition_Condition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getTransition_Condition()
 	 * @model default=""
 	 * @generated
 	 */
 	String getCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getCondition
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition
 	 * <em>Condition</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Condition</em>' attribute.
@@ -57,7 +57,7 @@ public interface Transition extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getOutgoingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getOutgoingTransitions
 	 * <em>Outgoing Transitions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear, there really should be more of a description
@@ -67,15 +67,15 @@ public interface Transition extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(StateNode)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getTransition_Source()
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode#getOutgoingTransitions
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getTransition_Source()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getOutgoingTransitions
 	 * @model opposite="outgoingTransitions"
 	 * @generated
 	 */
 	StateNode getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource
 	 * <em>Source</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source</em>' reference.
@@ -86,7 +86,7 @@ public interface Transition extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getIncomingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getIncomingTransitions
 	 * <em>Incoming Transitions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear, there really should be more of a description
@@ -96,15 +96,15 @@ public interface Transition extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(StateNode)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getTransition_Target()
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode#getIncomingTransitions
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getTransition_Target()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getIncomingTransitions
 	 * @model opposite="incomingTransitions"
 	 * @generated
 	 */
 	StateNode getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget
 	 * <em>Target</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target</em>' reference.

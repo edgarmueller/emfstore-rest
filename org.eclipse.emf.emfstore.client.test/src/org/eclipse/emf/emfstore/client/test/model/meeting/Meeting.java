@@ -22,22 +22,22 @@ import org.eclipse.emf.emfstore.client.test.model.organization.User;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getLocation <em>Location</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getStarttime <em>Starttime</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getEndtime <em>Endtime</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getFacilitator <em>Facilitator</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getMinutetaker <em>Minutetaker</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getTimekeeper <em>Timekeeper</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getSections <em>Sections</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getIdentifiedIssuesSection <em>Identified
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getLocation <em>Location</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getStarttime <em>Starttime</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getEndtime <em>Endtime</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getFacilitator <em>Facilitator</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getMinutetaker <em>Minutetaker</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getTimekeeper <em>Timekeeper</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getSections <em>Sections</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedIssuesSection <em>Identified
  * Issues Section</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection <em>Identified
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection <em>Identified
  * Work Items Section</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting()
  * @model
  * @generated
  */
@@ -52,14 +52,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Location</em>' attribute.
 	 * @see #setLocation(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Location()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Location()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
 	 */
 	String getLocation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getLocation
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getLocation
 	 * <em>Location</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Location</em>' attribute.
@@ -78,14 +78,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Starttime</em>' attribute.
 	 * @see #setStarttime(Date)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Starttime()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Starttime()
 	 * @model annotation="org.unicase.ui.meeditor priority='11.0' position='left'"
 	 * @generated
 	 */
 	Date getStarttime();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getStarttime
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getStarttime
 	 * <em>Starttime</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Starttime</em>' attribute.
@@ -104,14 +104,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Endtime</em>' attribute.
 	 * @see #setEndtime(Date)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Endtime()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Endtime()
 	 * @model annotation="org.unicase.ui.meeditor priority='11.0' position='left'"
 	 * @generated
 	 */
 	Date getEndtime();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getEndtime
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getEndtime
 	 * <em>Endtime</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Endtime</em>' attribute.
@@ -130,14 +130,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Facilitator</em>' reference.
 	 * @see #setFacilitator(User)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Facilitator()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Facilitator()
 	 * @model annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	User getFacilitator();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getFacilitator
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getFacilitator
 	 * <em>Facilitator</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Facilitator</em>' reference.
@@ -156,14 +156,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Minutetaker</em>' reference.
 	 * @see #setMinutetaker(User)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Minutetaker()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Minutetaker()
 	 * @model annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	User getMinutetaker();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getMinutetaker
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getMinutetaker
 	 * <em>Minutetaker</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Minutetaker</em>' reference.
@@ -182,14 +182,14 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Timekeeper</em>' reference.
 	 * @see #setTimekeeper(User)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Timekeeper()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Timekeeper()
 	 * @model annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	User getTimekeeper();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getTimekeeper
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getTimekeeper
 	 * <em>Timekeeper</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Timekeeper</em>' reference.
@@ -200,7 +200,7 @@ public interface Meeting extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participants</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Participants</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -208,7 +208,7 @@ public interface Meeting extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Participants</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Participants()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Participants()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */
@@ -216,7 +216,7 @@ public interface Meeting extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Sections</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sections</em>' containment reference list isn't clear, there really should be more of
 	 * a description here...
@@ -224,7 +224,7 @@ public interface Meeting extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Sections</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_Sections()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_Sections()
 	 * @model containment="true" resolveProxies="true"
 	 *        annotation="org.unicase.ui.meeditor priority='11.0' position='right'"
 	 * @generated
@@ -241,7 +241,7 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Identified Issues Section</em>' reference.
 	 * @see #setIdentifiedIssuesSection(IssueMeetingSection)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_IdentifiedIssuesSection()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_IdentifiedIssuesSection()
 	 * @model annotation="org.unicase.ui.meeditor priority='13.0' position='left'"
 	 * @generated
 	 */
@@ -249,7 +249,7 @@ public interface Meeting extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getIdentifiedIssuesSection
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedIssuesSection
 	 * <em>Identified Issues Section</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Identified Issues Section</em>' reference.
@@ -268,7 +268,7 @@ public interface Meeting extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Identified Work Items Section</em>' reference.
 	 * @see #setIdentifiedWorkItemsSection(WorkItemMeetingSection)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeeting_IdentifiedWorkItemsSection()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeeting_IdentifiedWorkItemsSection()
 	 * @model annotation="org.unicase.ui.meeditor priority='14.0' position='left'"
 	 * @generated
 	 */
@@ -276,7 +276,7 @@ public interface Meeting extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection
 	 * <em>Identified Work Items Section</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Identified Work Items Section</em>' reference.

@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery}
  * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 

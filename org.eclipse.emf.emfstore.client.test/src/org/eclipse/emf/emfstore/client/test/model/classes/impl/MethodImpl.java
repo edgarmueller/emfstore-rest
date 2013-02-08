@@ -36,21 +36,21 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Scenario;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getVisibility <em>Visibility</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getScope <em>Scope</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getReturnType <em>Return Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getSignature <em>Signature</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getArguments <em>Arguments</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getProperties <em>Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getDefiningClass <em>Defining Class
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getVisibility <em>Visibility</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getScope <em>Scope</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getReturnType <em>Return Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getSignature <em>Signature</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getArguments <em>Arguments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getProperties <em>Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getDefiningClass <em>Defining Class
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getLabel <em>Label</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#isStubbed <em>Stubbed</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getCalledMethods <em>Called Methods
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getLabel <em>Label</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#isStubbed <em>Stubbed</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getCalledMethods <em>Called Methods
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getCallingMethods <em>Calling Methods
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getCallingMethods <em>Calling Methods
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.MethodImpl#getDemoParticipations <em>Demo
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl#getDemoParticipations <em>Demo
  * Participations</em>}</li>
  * </ul>
  * </p>

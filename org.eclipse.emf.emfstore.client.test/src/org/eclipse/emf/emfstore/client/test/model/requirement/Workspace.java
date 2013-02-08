@@ -18,20 +18,20 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.Workspace#getSystemFunctions <em>System Functions
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions <em>System Functions
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getWorkspace()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getWorkspace()
  * @model
  * @generated
  */
 public interface Workspace extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>System Functions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and its
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>System Functions</em>' reference list isn't clear, there really should be more of a
@@ -40,8 +40,8 @@ public interface Workspace extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>System Functions</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getWorkspace_SystemFunctions()
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getWorkspace_SystemFunctions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
 	 * @model opposite="workspace" annotation="org.unicase.ui.meeditor priority='12.0' position='right'"
 	 * @generated
 	 */

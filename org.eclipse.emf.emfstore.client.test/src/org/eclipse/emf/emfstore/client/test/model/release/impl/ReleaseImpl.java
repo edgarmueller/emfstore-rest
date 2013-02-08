@@ -36,14 +36,14 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getStream <em>Stream</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getPredecessor <em>Predecessor</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getSuccessor <em>Successor</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getAppliedPatches <em>Applied Patches
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getStream <em>Stream</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getPredecessor <em>Predecessor</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getSuccessor <em>Successor</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getAppliedPatches <em>Applied Patches
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getIncludedWorkItems <em>Included Work
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getIncludedWorkItems <em>Included Work
  * Items</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl#getSourceCodeRepositoryRevision <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl#getSourceCodeRepositoryRevision <em>
  * Source Code Repository Revision</em>}</li>
  * </ul>
  * </p>

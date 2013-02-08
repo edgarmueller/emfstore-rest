@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticFactory
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticFactory
  * @model kind="package"
  * @generated
  */
@@ -48,7 +48,7 @@ public interface SemanticPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.operations.semantic";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic";
 
 	/**
 	 * The singleton instance of the package.
@@ -59,11 +59,11 @@ public interface SemanticPackage extends EPackage {
 	SemanticPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl <em>Composite Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl <em>Composite Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl#getSemanticCompositeOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticPackageImpl#getSemanticCompositeOperation()
 	 * @generated
 	 */
 	int SEMANTIC_COMPOSITE_OPERATION = 0;
@@ -156,12 +156,12 @@ public interface SemanticPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation
 	 * <em>Composite Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Composite Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation
 	 * @generated
 	 */
 	EClass getSemanticCompositeOperation();
@@ -189,11 +189,11 @@ public interface SemanticPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl <em>Composite Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl <em>Composite Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.impl.SemanticPackageImpl#getSemanticCompositeOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticCompositeOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticPackageImpl#getSemanticCompositeOperation()
 		 * @generated
 		 */
 		EClass SEMANTIC_COMPOSITE_OPERATION = eINSTANCE.getSemanticCompositeOperation();

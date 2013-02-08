@@ -18,17 +18,17 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getInput <em>Input</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getOutput <em>Output</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getException <em>Exception</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement <em>Non
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput <em>Input</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput <em>Output</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException <em>Exception</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement <em>Non
  * Functional Requirement</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Input</em>' attribute.
 	 * @see #setInput(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_Input()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_Input()
 	 * @model
 	 * @generated
 	 */
 	String getInput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getInput
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput
 	 * <em>Input</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Input</em>' attribute.
@@ -69,14 +69,14 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Output</em>' attribute.
 	 * @see #setOutput(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_Output()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_Output()
 	 * @model
 	 * @generated
 	 */
 	String getOutput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getOutput
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput
 	 * <em>Output</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Output</em>' attribute.
@@ -95,14 +95,14 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Exception</em>' attribute.
 	 * @see #setException(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_Exception()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_Exception()
 	 * @model
 	 * @generated
 	 */
 	String getException();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getException
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException
 	 * <em>Exception</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Exception</em>' attribute.
@@ -114,7 +114,7 @@ public interface SystemFunction extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Non Functional Requirement</b></em>' reference. It is bidirectional and its
 	 * opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Non Functional Requirement</em>' reference isn't clear, there really should be more of
@@ -124,8 +124,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Non Functional Requirement</em>' reference.
 	 * @see #setNonFunctionalRequirement(NonFunctionalRequirement)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_NonFunctionalRequirement()
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_NonFunctionalRequirement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
 	 * @model opposite="systemFunctions"
 	 * @generated
 	 */
@@ -133,7 +133,7 @@ public interface SystemFunction extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
 	 * <em>Non Functional Requirement</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Non Functional Requirement</em>' reference.
@@ -144,8 +144,8 @@ public interface SystemFunction extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Usecases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Usecases</em>' reference list isn't clear, there really should be more of a
@@ -154,8 +154,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Usecases</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_Usecases()
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getSystemFunctions
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_Usecases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions
 	 * @model opposite="systemFunctions" annotation="org.unicase.ui.meeditor priority='12.0' position='right'"
 	 * @generated
 	 */
@@ -163,7 +163,7 @@ public interface SystemFunction extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Workspace#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Workspace</em>' reference isn't clear, there really should be more of a description
@@ -173,15 +173,15 @@ public interface SystemFunction extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Workspace</em>' reference.
 	 * @see #setWorkspace(Workspace)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getSystemFunction_Workspace()
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Workspace#getSystemFunctions
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getSystemFunction_Workspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions
 	 * @model opposite="systemFunctions"
 	 * @generated
 	 */
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
 	 * <em>Workspace</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Workspace</em>' reference.

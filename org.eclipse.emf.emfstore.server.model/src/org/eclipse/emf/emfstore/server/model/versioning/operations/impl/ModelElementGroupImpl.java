@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl#getModelElements <em>Model Elements</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl#getModelElements <em>Model Elements</em>}</li>
  * </ul>
  * </p>
  *

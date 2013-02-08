@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage
  * @generated
  */
 public class RationaleAdapterFactory extends AdapterFactoryImpl {
@@ -158,12 +158,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue
 	 * <em>Issue</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue
 	 * @generated
 	 */
 	public Adapter createIssueAdapter() {
@@ -172,12 +172,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Proposal <em>Proposal</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal <em>Proposal</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Proposal
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal
 	 * @generated
 	 */
 	public Adapter createProposalAdapter() {
@@ -186,12 +186,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Solution <em>Solution</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution <em>Solution</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Solution
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution
 	 * @generated
 	 */
 	public Adapter createSolutionAdapter() {
@@ -200,12 +200,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Criterion <em>Criterion</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion <em>Criterion</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Criterion
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
 	 * @generated
 	 */
 	public Adapter createCriterionAdapter() {
@@ -214,12 +214,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment <em>Assessment</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment <em>Assessment</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment
 	 * @generated
 	 */
 	public Adapter createAssessmentAdapter() {
@@ -228,12 +228,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment <em>Comment</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment <em>Comment</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment
 	 * @generated
 	 */
 	public Adapter createCommentAdapter() {
@@ -242,12 +242,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment <em>Audio Comment</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment <em>Audio Comment</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment
 	 * @generated
 	 */
 	public Adapter createAudioCommentAdapter() {
@@ -256,12 +256,12 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {
@@ -269,13 +269,13 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.Annotation
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation
 	 * <em>Annotation</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.Annotation
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.Annotation
 	 * @generated
 	 */
 	public Adapter createAnnotationAdapter() {
@@ -283,13 +283,13 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * <em>Checkable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * @generated
 	 */
 	public Adapter createCheckableAdapter() {
@@ -297,13 +297,13 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * <em>Work Item</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * @generated
 	 */
 	public Adapter createWorkItemAdapter() {
@@ -311,13 +311,13 @@ public class RationaleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * <em>Non Domain Element</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * @generated
 	 */
 	public Adapter createNonDomainElementAdapter() {

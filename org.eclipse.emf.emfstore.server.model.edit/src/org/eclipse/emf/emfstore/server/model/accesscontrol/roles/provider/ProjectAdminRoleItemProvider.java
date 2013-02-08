@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.accesscontrol.roles.ProjectAdminRole} object.
+ * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * 

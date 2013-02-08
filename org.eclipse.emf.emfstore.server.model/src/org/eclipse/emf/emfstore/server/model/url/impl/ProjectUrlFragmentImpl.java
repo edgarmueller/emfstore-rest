@@ -26,8 +26,8 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ProjectUrlFragmentImpl#getProjectId <em>Project Id</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ProjectUrlFragmentImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ProjectUrlFragmentImpl#getProjectId <em>Project Id</em>}</li>
  * </ul>
  * </p>
  *

@@ -47,16 +47,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#isDelete <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#isDelete <em>
  * Delete</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getModelElement
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getModelElement
  * <em>Model Element</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getSubOperations
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getSubOperations
  * <em>Sub Operations</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getEObjectToIdMap
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getEObjectToIdMap
  * <em>EObject To Id Map</em>}</li>
  * </ul>
  * </p>
@@ -501,7 +501,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
@@ -517,7 +517,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getLeafOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getLeafOperations()
 	 */
 	public List<AbstractOperation> getLeafOperations() {
 		List<AbstractOperation> result = new ArrayList<AbstractOperation>(getSubOperations().size() + 1);
@@ -532,7 +532,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 * {@inheritDoc}
 	 * 
 	 * @generated NOT
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getParentElement(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getParentElement(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	public ModelElementId getParentofDeletedElement(Project project) {
 

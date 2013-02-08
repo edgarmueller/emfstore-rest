@@ -14,13 +14,13 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.epackages.EPackageRegistryHelper;
 import org.eclipse.emf.emfstore.client.ui.epackages.EPackageTreeSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;

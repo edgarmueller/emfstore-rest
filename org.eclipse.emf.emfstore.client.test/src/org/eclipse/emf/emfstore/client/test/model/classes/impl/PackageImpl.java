@@ -28,9 +28,9 @@ import org.eclipse.emf.emfstore.client.test.model.classes.PackageElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.PackageImpl#getContainedPackageElements <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageImpl#getContainedPackageElements <em>
  * Contained Package Elements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.PackageImpl#getFacadeClass <em>Facade Class</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageImpl#getFacadeClass <em>Facade Class</em>}</li>
  * </ul>
  * </p>
  * 

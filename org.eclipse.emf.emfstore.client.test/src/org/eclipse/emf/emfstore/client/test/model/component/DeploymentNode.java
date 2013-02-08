@@ -18,18 +18,18 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode#getComponents <em>Components</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode#getComponents <em>Components</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getDeploymentNode()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getDeploymentNode()
  * @model
  * @generated
  */
 public interface DeploymentNode extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Components</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.Component}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Components</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -37,7 +37,7 @@ public interface DeploymentNode extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Components</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getDeploymentNode_Components()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getDeploymentNode_Components()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */

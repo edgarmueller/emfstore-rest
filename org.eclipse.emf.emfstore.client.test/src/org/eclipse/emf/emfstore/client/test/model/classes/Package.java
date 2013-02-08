@@ -17,22 +17,22 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Package#getContainedPackageElements <em>Contained
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getContainedPackageElements <em>Contained
  * Package Elements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Package#getFacadeClass <em>Facade Class</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getFacadeClass <em>Facade Class</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackage()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackage()
  * @model
  * @generated
  */
 public interface Package extends PackageElement {
 	/**
 	 * Returns the value of the '<em><b>Contained Package Elements</b></em>' containment reference list. The list
-	 * contents are of type {@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement}. It is
+	 * contents are of type {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement}. It is
 	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getParentPackage
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getParentPackage
 	 * <em>Parent Package</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contained Package Elements</em>' containment reference list isn't clear, there really
@@ -41,8 +41,8 @@ public interface Package extends PackageElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Contained Package Elements</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackage_ContainedPackageElements()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getParentPackage
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackage_ContainedPackageElements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getParentPackage
 	 * @model opposite="parentPackage" containment="true" resolveProxies="true"
 	 *        annotation="org.unicase.ui.meeditor priority='9.5' position='right'"
 	 * @generated
@@ -58,15 +58,15 @@ public interface Package extends PackageElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Facade Class</em>' reference.
-	 * @see #setFacadeClass(org.eclipse.emf.emfstore.client.test.model.classes.Class)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackage_FacadeClass()
+	 * @see #setFacadeClass(org.eclipse.emf.emfstore.internal.client.test.model.classes.Class)
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackage_FacadeClass()
 	 * @model annotation="org.unicase.ui.meeditor priority='20.0' position='left'"
 	 * @generated
 	 */
 	org.eclipse.emf.emfstore.client.test.model.classes.Class getFacadeClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Package#getFacadeClass
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getFacadeClass
 	 * <em>Facade Class</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Facade Class</em>' reference.

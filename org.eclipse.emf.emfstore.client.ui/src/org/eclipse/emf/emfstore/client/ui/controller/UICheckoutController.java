@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IProject;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
@@ -120,7 +120,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {

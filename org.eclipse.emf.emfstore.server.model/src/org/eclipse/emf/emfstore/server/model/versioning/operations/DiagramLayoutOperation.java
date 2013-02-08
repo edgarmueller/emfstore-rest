@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  * end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getDiagramLayoutOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getDiagramLayoutOperation()
  * @model
  * @generated
  */

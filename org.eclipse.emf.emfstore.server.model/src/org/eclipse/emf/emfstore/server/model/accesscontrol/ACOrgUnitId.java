@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC Org Unit Id</b></em>'. <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#getACOrgUnitId()
+ * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACOrgUnitId()
  * @model
  * @generated
  */

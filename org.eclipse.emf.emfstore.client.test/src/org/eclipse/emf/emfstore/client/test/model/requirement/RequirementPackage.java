@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementFactory
  * @model kind="package"
  * @generated
  */
@@ -51,7 +51,7 @@ public interface RequirementPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.requirement";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.requirement";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -63,11 +63,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl
 	 * <em>Non Functional Requirement</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getNonFunctionalRequirement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getNonFunctionalRequirement()
 	 * @generated
 	 */
 	int NON_FUNCTIONAL_REQUIREMENT = 0;
@@ -221,11 +221,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.FunctionalRequirementImpl
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl
 	 * <em>Functional Requirement</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.FunctionalRequirementImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getFunctionalRequirement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getFunctionalRequirement()
 	 * @generated
 	 */
 	int FUNCTIONAL_REQUIREMENT = 1;
@@ -408,11 +408,11 @@ public interface RequirementPackage extends EPackage {
 	int FUNCTIONAL_REQUIREMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl
 	 * <em>Use Case</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getUseCase()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getUseCase()
 	 * @generated
 	 */
 	int USE_CASE = 2;
@@ -650,11 +650,11 @@ public interface RequirementPackage extends EPackage {
 	int USE_CASE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl
 	 * <em>Scenario</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getScenario()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getScenario()
 	 * @generated
 	 */
 	int SCENARIO = 3;
@@ -834,11 +834,11 @@ public interface RequirementPackage extends EPackage {
 	int SCENARIO_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl
 	 * <em>Actor</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getActor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getActor()
 	 * @generated
 	 */
 	int ACTOR = 4;
@@ -990,11 +990,11 @@ public interface RequirementPackage extends EPackage {
 	int ACTOR_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl
 	 * <em>Actor Instance</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getActorInstance()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getActorInstance()
 	 * @generated
 	 */
 	int ACTOR_INSTANCE = 5;
@@ -1130,11 +1130,11 @@ public interface RequirementPackage extends EPackage {
 	int ACTOR_INSTANCE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.StepImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl
 	 * <em>Step</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.StepImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getStep()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getStep()
 	 * @generated
 	 */
 	int STEP = 6;
@@ -1278,11 +1278,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.SystemFunctionImpl <em>System Function</em>}'
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl <em>System Function</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.SystemFunctionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getSystemFunction()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getSystemFunction()
 	 * @generated
 	 */
 	int SYSTEM_FUNCTION = 7;
@@ -1440,11 +1440,11 @@ public interface RequirementPackage extends EPackage {
 	int SYSTEM_FUNCTION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UserTaskImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl
 	 * <em>User Task</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.UserTaskImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getUserTask()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getUserTask()
 	 * @generated
 	 */
 	int USER_TASK = 8;
@@ -1589,11 +1589,11 @@ public interface RequirementPackage extends EPackage {
 	int USER_TASK_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.WorkspaceImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl
 	 * <em>Workspace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.WorkspaceImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getWorkspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getWorkspace()
 	 * @generated
 	 */
 	int WORKSPACE = 9;
@@ -1712,22 +1712,22 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement
 	 * <em>Non Functional Requirement</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Non Functional Requirement</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement
 	 * @generated
 	 */
 	EClass getNonFunctionalRequirement();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios
 	 * <em>Restricted Scenarios</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Restricted Scenarios</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios()
 	 * @see #getNonFunctionalRequirement()
 	 * @generated
 	 */
@@ -1735,11 +1735,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases
 	 * <em>Restricted Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Restricted Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases()
 	 * @see #getNonFunctionalRequirement()
 	 * @generated
 	 */
@@ -1747,11 +1747,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>System Functions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions()
 	 * @see #getNonFunctionalRequirement()
 	 * @generated
 	 */
@@ -1759,11 +1759,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getUserTasks
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getUserTasks
 	 * <em>User Tasks</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>User Tasks</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement#getUserTasks()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getUserTasks()
 	 * @see #getNonFunctionalRequirement()
 	 * @generated
 	 */
@@ -1771,22 +1771,22 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement
 	 * <em>Functional Requirement</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Functional Requirement</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement
 	 * @generated
 	 */
 	EClass getFunctionalRequirement();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement
 	 * <em>Refined Requirement</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Refined Requirement</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1794,11 +1794,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getStoryPoints
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStoryPoints
 	 * <em>Story Points</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Story Points</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getStoryPoints()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStoryPoints()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1806,11 +1806,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getPriority
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getPriority
 	 * <em>Priority</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Priority</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getPriority()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getPriority()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1818,11 +1818,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements
 	 * <em>Refining Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Refining Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1830,11 +1830,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases
 	 * <em>Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1842,11 +1842,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getScenarios
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios
 	 * <em>Scenarios</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Scenarios</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getScenarios()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1854,11 +1854,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#isReviewed <em>Reviewed</em>}
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed <em>Reviewed</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Reviewed</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#isReviewed()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1866,11 +1866,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getStakeholder
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStakeholder
 	 * <em>Stakeholder</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Stakeholder</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getStakeholder()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStakeholder()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
@@ -1878,33 +1878,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getCost <em>Cost</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost <em>Cost</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Cost</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement#getCost()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost()
 	 * @see #getFunctionalRequirement()
 	 * @generated
 	 */
 	EAttribute getFunctionalRequirement_Cost();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase
 	 * <em>Use Case</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Use Case</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase
 	 * @generated
 	 */
 	EClass getUseCase();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getInitiatingActor
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor
 	 * <em>Initiating Actor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Initiating Actor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getInitiatingActor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1912,11 +1912,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getParticipatingActors
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getParticipatingActors
 	 * <em>Participating Actors</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participating Actors</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getParticipatingActors()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getParticipatingActors()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1924,11 +1924,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getRealizedUserTask
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask
 	 * <em>Realized User Task</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Realized User Task</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getRealizedUserTask()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1936,11 +1936,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getPrecondition <em>Precondition</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition <em>Precondition</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Precondition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getPrecondition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1948,11 +1948,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Use Case Steps</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getUseCaseSteps()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1960,11 +1960,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getPostcondition <em>Postcondition</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition <em>Postcondition</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Postcondition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getPostcondition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1972,11 +1972,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getRules <em>Rules</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRules <em>Rules</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Rules</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getRules()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRules()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1984,11 +1984,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getException <em>Exception</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getException <em>Exception</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Exception</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getException()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getException()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -1996,11 +1996,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getScenarios <em>Scenarios</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getScenarios <em>Scenarios</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Scenarios</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getScenarios()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getScenarios()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2008,11 +2008,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getFunctionalRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getFunctionalRequirements
 	 * <em>Functional Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Functional Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getFunctionalRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getFunctionalRequirements()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2020,11 +2020,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getNonFunctionalRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Non Functional Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getNonFunctionalRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getNonFunctionalRequirements()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2032,11 +2032,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getIdentifiedClasses
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIdentifiedClasses
 	 * <em>Identified Classes</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Identified Classes</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getIdentifiedClasses()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIdentifiedClasses()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2044,11 +2044,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getIncludedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIncludedUseCases
 	 * <em>Included Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Included Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getIncludedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIncludedUseCases()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2056,11 +2056,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getExtendedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getExtendedUseCases
 	 * <em>Extended Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Extended Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getExtendedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getExtendedUseCases()
 	 * @see #getUseCase()
 	 * @generated
 	 */
@@ -2068,33 +2068,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>System Functions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getSystemFunctions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions()
 	 * @see #getUseCase()
 	 * @generated
 	 */
 	EReference getUseCase_SystemFunctions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario
 	 * <em>Scenario</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Scenario</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario
 	 * @generated
 	 */
 	EClass getScenario();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getSteps <em>Steps</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getSteps <em>Steps</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Steps</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getSteps()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getSteps()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2102,11 +2102,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getInitiatingActorInstance
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInitiatingActorInstance
 	 * <em>Initiating Actor Instance</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Initiating Actor Instance</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getInitiatingActorInstance()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInitiatingActorInstance()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2114,11 +2114,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingActorInstances
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingActorInstances
 	 * <em>Participating Actor Instances</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participating Actor Instances</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingActorInstances()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingActorInstances()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2126,11 +2126,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getInstantiatedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInstantiatedUseCases
 	 * <em>Instantiated Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Instantiated Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getInstantiatedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInstantiatedUseCases()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2138,11 +2138,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getFunctionalRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getFunctionalRequirements
 	 * <em>Functional Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Functional Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getFunctionalRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getFunctionalRequirements()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2150,11 +2150,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getNonFunctionalRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Non Functional Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getNonFunctionalRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getNonFunctionalRequirements()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2162,11 +2162,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingMethods
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingMethods
 	 * <em>Participating Methods</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participating Methods</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingMethods()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingMethods()
 	 * @see #getScenario()
 	 * @generated
 	 */
@@ -2174,33 +2174,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingClasses
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingClasses
 	 * <em>Participating Classes</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participating Classes</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario#getParticipatingClasses()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingClasses()
 	 * @see #getScenario()
 	 * @generated
 	 */
 	EReference getScenario_ParticipatingClasses();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor
 	 * <em>Actor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Actor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor
 	 * @generated
 	 */
 	EClass getActor();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInitiatedUserTask
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask
 	 * <em>Initiated User Task</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Initiated User Task</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInitiatedUserTask()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask()
 	 * @see #getActor()
 	 * @generated
 	 */
@@ -2208,11 +2208,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getParticipatedUserTasks
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUserTasks
 	 * <em>Participated User Tasks</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participated User Tasks</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getParticipatedUserTasks()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUserTasks()
 	 * @see #getActor()
 	 * @generated
 	 */
@@ -2220,11 +2220,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInitiatedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUseCases
 	 * <em>Initiated Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Initiated Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInitiatedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUseCases()
 	 * @see #getActor()
 	 * @generated
 	 */
@@ -2232,11 +2232,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getParticipatedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUseCases
 	 * <em>Participated Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participated Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getParticipatedUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUseCases()
 	 * @see #getActor()
 	 * @generated
 	 */
@@ -2244,33 +2244,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInstances <em>Instances</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInstances <em>Instances</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Instances</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor#getInstances()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInstances()
 	 * @see #getActor()
 	 * @generated
 	 */
 	EReference getActor_Instances();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance
 	 * <em>Actor Instance</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Actor Instance</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance
 	 * @generated
 	 */
 	EClass getActorInstance();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getInitiatedScenarios
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios
 	 * <em>Initiated Scenarios</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Initiated Scenarios</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getInitiatedScenarios()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios()
 	 * @see #getActorInstance()
 	 * @generated
 	 */
@@ -2278,11 +2278,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getParticipatedScenarios
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getParticipatedScenarios
 	 * <em>Participated Scenarios</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participated Scenarios</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getParticipatedScenarios()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getParticipatedScenarios()
 	 * @see #getActorInstance()
 	 * @generated
 	 */
@@ -2290,33 +2290,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getInstantiatedActor
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor
 	 * <em>Instantiated Actor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Instantiated Actor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance#getInstantiatedActor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor()
 	 * @see #getActorInstance()
 	 * @generated
 	 */
 	EReference getActorInstance_InstantiatedActor();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step
 	 * <em>Step</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Step</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step
 	 * @generated
 	 */
 	EClass getStep();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#isUserStep <em>User Step</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#isUserStep <em>User Step</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>User Step</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step#isUserStep()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#isUserStep()
 	 * @see #getStep()
 	 * @generated
 	 */
@@ -2324,11 +2324,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use Case</em>}
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use Case</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Included Use Case</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedUseCase()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase()
 	 * @see #getStep()
 	 * @generated
 	 */
@@ -2336,11 +2336,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedSystemFunction
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction
 	 * <em>Included System Function</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Included System Function</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedSystemFunction()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction()
 	 * @see #getStep()
 	 * @generated
 	 */
@@ -2348,33 +2348,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Use Case</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step#getUseCase()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase()
 	 * @see #getStep()
 	 * @generated
 	 */
 	EReference getStep_UseCase();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction
 	 * <em>System Function</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>System Function</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction
 	 * @generated
 	 */
 	EClass getSystemFunction();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getInput <em>Input</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput <em>Input</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Input</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getInput()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
@@ -2382,11 +2382,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getOutput <em>Output</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput <em>Output</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Output</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getOutput()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
@@ -2394,11 +2394,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getException <em>Exception</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException <em>Exception</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Exception</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getException()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
@@ -2406,11 +2406,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
 	 * <em>Non Functional Requirement</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Non Functional Requirement</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
@@ -2418,11 +2418,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Usecases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getUsecases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
@@ -2430,33 +2430,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Workspace</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction#getWorkspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace()
 	 * @see #getSystemFunction()
 	 * @generated
 	 */
 	EReference getSystemFunction_Workspace();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask
 	 * <em>User Task</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>User Task</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask
 	 * @generated
 	 */
 	EClass getUserTask();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getInitiatingActor
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor
 	 * <em>Initiating Actor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Initiating Actor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getInitiatingActor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor()
 	 * @see #getUserTask()
 	 * @generated
 	 */
@@ -2464,11 +2464,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getParticipatingActors
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getParticipatingActors
 	 * <em>Participating Actors</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participating Actors</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getParticipatingActors()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getParticipatingActors()
 	 * @see #getUserTask()
 	 * @generated
 	 */
@@ -2476,11 +2476,11 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getRealizingUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getRealizingUseCases
 	 * <em>Realizing Use Cases</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Realizing Use Cases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getRealizingUseCases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getRealizingUseCases()
 	 * @see #getUserTask()
 	 * @generated
 	 */
@@ -2488,33 +2488,33 @@ public interface RequirementPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getNonFunctionalRequirements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Non Functional Requirements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask#getNonFunctionalRequirements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getNonFunctionalRequirements()
 	 * @see #getUserTask()
 	 * @generated
 	 */
 	EReference getUserTask_NonFunctionalRequirements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Workspace
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Workspace</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Workspace
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace
 	 * @generated
 	 */
 	EClass getWorkspace();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Workspace#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>System Functions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Workspace#getSystemFunctions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
@@ -2543,11 +2543,11 @@ public interface RequirementPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl
 		 * <em>Non Functional Requirement</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getNonFunctionalRequirement()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getNonFunctionalRequirement()
 		 * @generated
 		 */
 		EClass NON_FUNCTIONAL_REQUIREMENT = eINSTANCE.getNonFunctionalRequirement();
@@ -2589,11 +2589,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.FunctionalRequirementImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl
 		 * <em>Functional Requirement</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.FunctionalRequirementImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getFunctionalRequirement()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getFunctionalRequirement()
 		 * @generated
 		 */
 		EClass FUNCTIONAL_REQUIREMENT = eINSTANCE.getFunctionalRequirement();
@@ -2674,11 +2674,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl <em>Use Case</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl <em>Use Case</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getUseCase()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getUseCase()
 		 * @generated
 		 */
 		EClass USE_CASE = eINSTANCE.getUseCase();
@@ -2805,11 +2805,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl <em>Scenario</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl <em>Scenario</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getScenario()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getScenario()
 		 * @generated
 		 */
 		EClass SCENARIO = eINSTANCE.getScenario();
@@ -2880,11 +2880,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl <em>Actor</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl <em>Actor</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getActor()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getActor()
 		 * @generated
 		 */
 		EClass ACTOR = eINSTANCE.getActor();
@@ -2931,11 +2931,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl <em>Actor Instance</em>}
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl <em>Actor Instance</em>}
 		 * ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getActorInstance()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getActorInstance()
 		 * @generated
 		 */
 		EClass ACTOR_INSTANCE = eINSTANCE.getActorInstance();
@@ -2965,11 +2965,11 @@ public interface RequirementPackage extends EPackage {
 		EReference ACTOR_INSTANCE__INSTANTIATED_ACTOR = eINSTANCE.getActorInstance_InstantiatedActor();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.StepImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl
 		 * <em>Step</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.StepImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getStep()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getStep()
 		 * @generated
 		 */
 		EClass STEP = eINSTANCE.getStep();
@@ -3008,11 +3008,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.SystemFunctionImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl
 		 * <em>System Function</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.SystemFunctionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getSystemFunction()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getSystemFunction()
 		 * @generated
 		 */
 		EClass SYSTEM_FUNCTION = eINSTANCE.getSystemFunction();
@@ -3067,11 +3067,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UserTaskImpl <em>User Task</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl <em>User Task</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.UserTaskImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getUserTask()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getUserTask()
 		 * @generated
 		 */
 		EClass USER_TASK = eINSTANCE.getUserTask();
@@ -3110,11 +3110,11 @@ public interface RequirementPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.WorkspaceImpl <em>Workspace</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl <em>Workspace</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.WorkspaceImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.requirement.impl.RequirementPackageImpl#getWorkspace()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.RequirementPackageImpl#getWorkspace()
 		 * @generated
 		 */
 		EClass WORKSPACE = eINSTANCE.getWorkspace();

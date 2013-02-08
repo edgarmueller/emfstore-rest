@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage;
 import org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

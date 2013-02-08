@@ -32,12 +32,12 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.OrgUnitImpl#getAcOrgId <em>Ac Org Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.OrgUnitImpl#getGroupMemberships <em>Group
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl#getAcOrgId <em>Ac Org Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl#getGroupMemberships <em>Group
  * Memberships</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.OrgUnitImpl#getAssignments <em>Assignments
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl#getAssignments <em>Assignments
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.impl.OrgUnitImpl#getParticipations <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl#getParticipations <em>
  * Participations</em>}</li>
  * </ul>
  * </p>

@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getAssociationClassElement()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getAssociationClassElement()
  * @model interface="true" abstract="true"
  * @generated
  */

@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory
  * @model kind="package"
  * @generated
  */
@@ -51,7 +51,7 @@ public interface OperationsPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.server.model.versioning.operations";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.server.model.versioning.operations";
 
 	/**
 	 * The singleton instance of the package.
@@ -62,11 +62,11 @@ public interface OperationsPackage extends EPackage {
 	OperationsPackage eINSTANCE = org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl <em>Abstract Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl <em>Abstract Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getAbstractOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getAbstractOperation()
 	 * @generated
 	 */
 	int ABSTRACT_OPERATION = 0;
@@ -115,11 +115,11 @@ public interface OperationsPackage extends EPackage {
 	int ABSTRACT_OPERATION_FEATURE_COUNT = ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl <em>Composite Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl <em>Composite Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getCompositeOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getCompositeOperation()
 	 * @generated
 	 */
 	int COMPOSITE_OPERATION = 1;
@@ -211,11 +211,11 @@ public interface OperationsPackage extends EPackage {
 	int COMPOSITE_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl <em>Feature Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl <em>Feature Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getFeatureOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getFeatureOperation()
 	 * @generated
 	 */
 	int FEATURE_OPERATION = 2;
@@ -273,11 +273,11 @@ public interface OperationsPackage extends EPackage {
 	int FEATURE_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl <em>Create Delete Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl <em>Create Delete Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getCreateDeleteOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getCreateDeleteOperation()
 	 * @generated
 	 */
 	int CREATE_DELETE_OPERATION = 3;
@@ -361,11 +361,11 @@ public interface OperationsPackage extends EPackage {
 	int CREATE_DELETE_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl <em>Attribute Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl <em>Attribute Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getAttributeOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getAttributeOperation()
 	 * @generated
 	 */
 	int ATTRIBUTE_OPERATION = 4;
@@ -441,11 +441,11 @@ public interface OperationsPackage extends EPackage {
 	int ATTRIBUTE_OPERATION_FEATURE_COUNT = FEATURE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl <em>Multi Attribute Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl <em>Multi Attribute Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeOperation()
 	 * @generated
 	 */
 	int MULTI_ATTRIBUTE_OPERATION = 5;
@@ -531,11 +531,11 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_OPERATION_FEATURE_COUNT = FEATURE_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl <em>Multi Attribute Set Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl <em>Multi Attribute Set Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeSetOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeSetOperation()
 	 * @generated
 	 */
 	int MULTI_ATTRIBUTE_SET_OPERATION = 6;
@@ -621,11 +621,11 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_SET_OPERATION_FEATURE_COUNT = FEATURE_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl <em>Multi Attribute Move Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl <em>Multi Attribute Move Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeMoveOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeMoveOperation()
 	 * @generated
 	 */
 	int MULTI_ATTRIBUTE_MOVE_OPERATION = 7;
@@ -712,11 +712,11 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_MOVE_OPERATION_FEATURE_COUNT = FEATURE_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl <em>Reference Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl <em>Reference Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getReferenceOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getReferenceOperation()
 	 * @generated
 	 */
 	int REFERENCE_OPERATION = 12;
@@ -800,11 +800,11 @@ public interface OperationsPackage extends EPackage {
 	int REFERENCE_OPERATION_FEATURE_COUNT = FEATURE_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl <em>Single Reference Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl <em>Single Reference Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getSingleReferenceOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getSingleReferenceOperation()
 	 * @generated
 	 */
 	int SINGLE_REFERENCE_OPERATION = 8;
@@ -906,21 +906,21 @@ public interface OperationsPackage extends EPackage {
 	int SINGLE_REFERENCE_OPERATION_FEATURE_COUNT = REFERENCE_OPERATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl <em>Multi Reference Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl <em>Multi Reference Operation</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceOperation()
 	 * @generated
 	 */
 	int MULTI_REFERENCE_OPERATION = 10;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl <em>Multi Reference Set Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl <em>Multi Reference Set Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceSetOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceSetOperation()
 	 * @generated
 	 */
 	int MULTI_REFERENCE_SET_OPERATION = 9;
@@ -1136,11 +1136,11 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_REFERENCE_OPERATION_FEATURE_COUNT = REFERENCE_OPERATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl <em>Multi Reference Move Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl <em>Multi Reference Move Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceMoveOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceMoveOperation()
 	 * @generated
 	 */
 	int MULTI_REFERENCE_MOVE_OPERATION = 11;
@@ -1227,12 +1227,12 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationIdImpl
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationIdImpl
 	 * <em>Operation Id</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationIdImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationIdImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationId()
 	 * @generated
 	 */
 	int OPERATION_ID = 13;
@@ -1255,11 +1255,11 @@ public interface OperationsPackage extends EPackage {
 	int OPERATION_ID_FEATURE_COUNT = ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl <em>Operation Group</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationGroupImpl <em>Operation Group</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationGroup()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationGroupImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationGroup()
 	 * @generated
 	 */
 	int OPERATION_GROUP = 14;
@@ -1291,11 +1291,11 @@ public interface OperationsPackage extends EPackage {
 	int OPERATION_GROUP_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl <em>Model Element Group</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl <em>Model Element Group</em>}' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getModelElementGroup()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getModelElementGroup()
 	 * @generated
 	 */
 	int MODEL_ELEMENT_GROUP = 15;
@@ -1326,11 +1326,11 @@ public interface OperationsPackage extends EPackage {
 	int MODEL_ELEMENT_GROUP_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl <em>EObject To Model Element Id Map</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl <em>EObject To Model Element Id Map</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getEObjectToModelElementIdMap()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getEObjectToModelElementIdMap()
 	 * @generated
 	 */
 	int EOBJECT_TO_MODEL_ELEMENT_ID_MAP = 16;
@@ -1363,55 +1363,55 @@ public interface OperationsPackage extends EPackage {
 	int EOBJECT_TO_MODEL_ELEMENT_ID_MAP_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType <em>Containment Type</em>}' enum.
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType <em>Containment Type</em>}' enum.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getContainmentType()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getContainmentType()
 	 * @generated
 	 */
 	int CONTAINMENT_TYPE = 17;
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation
 	 * <em>Abstract Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Abstract Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation
 	 * @generated
 	 */
 	EClass getAbstractOperation();
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId
 	 * <em>Model Element Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the containment reference ' <em>Model Element Id</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getModelElementId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId()
 	 * @see #getAbstractOperation()
 	 * @generated
 	 */
 	EReference getAbstractOperation_ModelElementId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#isAccepted <em>Accepted</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted <em>Accepted</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Accepted</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#isAccepted()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted()
 	 * @see #getAbstractOperation()
 	 * @generated
 	 */
 	EAttribute getAbstractOperation_Accepted();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getClientDate <em>Client Date</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate <em>Client Date</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Client Date</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getClientDate()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate()
 	 * @see #getAbstractOperation()
 	 * @generated
 	 */
@@ -1419,62 +1419,62 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation
 	 * <em>Composite Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Composite Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation
 	 * @generated
 	 */
 	EClass getCompositeOperation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getSubOperations <em>Sub Operations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getSubOperations <em>Sub Operations</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Sub Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getSubOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getSubOperations()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
 	EReference getCompositeOperation_SubOperations();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getMainOperation <em>Main Operation</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation <em>Main Operation</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Main Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getMainOperation()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
 	EReference getCompositeOperation_MainOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getCompositeName <em>Composite Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName <em>Composite Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Composite Name</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getCompositeName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
 	EAttribute getCompositeOperation_CompositeName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getCompositeDescription <em>Composite Description</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription <em>Composite Description</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for the attribute '<em>Composite Description</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#getCompositeDescription()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
 	EAttribute getCompositeOperation_CompositeDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#isReversed <em>Reversed</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#isReversed <em>Reversed</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Reversed</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation#isReversed()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#isReversed()
 	 * @see #getCompositeOperation()
 	 * @generated
 	 */
@@ -1482,61 +1482,61 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation
 	 * <em>Feature Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Feature Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation
 	 * @generated
 	 */
 	EClass getFeatureOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeatureName <em>Feature Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeatureName <em>Feature Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Feature Name</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeatureName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeatureName()
 	 * @see #getFeatureOperation()
 	 * @generated
 	 */
 	EAttribute getFeatureOperation_FeatureName();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation <em>Create Delete Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation <em>Create Delete Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Create Delete Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation
 	 * @generated
 	 */
 	EClass getCreateDeleteOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#isDelete <em>Delete</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#isDelete <em>Delete</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Delete</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#isDelete()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#isDelete()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
 	 */
 	EAttribute getCreateDeleteOperation_Delete();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getModelElement <em>Model Element</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Model Element</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getModelElement()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getModelElement()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
 	 */
 	EReference getCreateDeleteOperation_ModelElement();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getSubOperations <em>Sub Operations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getSubOperations <em>Sub Operations</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Sub Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getSubOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getSubOperations()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
 	 */
@@ -1544,12 +1544,12 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the map '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap
 	 * <em>EObject To Id Map</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the map '<em>EObject To Id Map</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation#getEObjectToIdMap()
 	 * @see #getCreateDeleteOperation()
 	 * @generated
 	 */
@@ -1557,61 +1557,61 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation
 	 * <em>Attribute Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Attribute Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation
 	 * @generated
 	 */
 	EClass getAttributeOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Old Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation#getOldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getOldValue()
 	 * @see #getAttributeOperation()
 	 * @generated
 	 */
 	EAttribute getAttributeOperation_OldValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation#getNewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getNewValue()
 	 * @see #getAttributeOperation()
 	 * @generated
 	 */
 	EAttribute getAttributeOperation_NewValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation <em>Multi Attribute Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation <em>Multi Attribute Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Attribute Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation
 	 * @generated
 	 */
 	EClass getMultiAttributeOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Add</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#isAdd()
 	 * @see #getMultiAttributeOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeOperation_Add();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getIndexes <em>Indexes</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getIndexes <em>Indexes</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Indexes</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getIndexes()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getIndexes()
 	 * @see #getMultiAttributeOperation()
 	 * @generated
 	 */
@@ -1619,82 +1619,82 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute list '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues
 	 * <em>Referenced Values</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the attribute list ' <em>Referenced Values</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues()
 	 * @see #getMultiAttributeOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeOperation_ReferencedValues();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation <em>Multi Attribute Set Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation <em>Multi Attribute Set Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Attribute Set Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation
 	 * @generated
 	 */
 	EClass getMultiAttributeSetOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getIndex()
 	 * @see #getMultiAttributeSetOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeSetOperation_Index();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Old Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue()
 	 * @see #getMultiAttributeSetOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeSetOperation_OldValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue()
 	 * @see #getMultiAttributeSetOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeSetOperation_NewValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation <em>Multi Attribute Move Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation <em>Multi Attribute Move Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Attribute Move Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation
 	 * @generated
 	 */
 	EClass getMultiAttributeMoveOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>Old Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>Old Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Old Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex()
 	 * @see #getMultiAttributeMoveOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeMoveOperation_OldIndex();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>New Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>New Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex()
 	 * @see #getMultiAttributeMoveOperation()
 	 * @generated
 	 */
@@ -1702,164 +1702,164 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue
 	 * <em>Referenced Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the attribute '<em>Referenced Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue()
 	 * @see #getMultiAttributeMoveOperation()
 	 * @generated
 	 */
 	EAttribute getMultiAttributeMoveOperation_ReferencedValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation <em>Single Reference Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation <em>Single Reference Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Single Reference Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation
 	 * @generated
 	 */
 	EClass getSingleReferenceOperation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Old Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getOldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation#getOldValue()
 	 * @see #getSingleReferenceOperation()
 	 * @generated
 	 */
 	EReference getSingleReferenceOperation_OldValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>New Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation#getNewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation#getNewValue()
 	 * @see #getSingleReferenceOperation()
 	 * @generated
 	 */
 	EReference getSingleReferenceOperation_NewValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation <em>Multi Reference Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation <em>Multi Reference Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Reference Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation
 	 * @generated
 	 */
 	EClass getMultiReferenceOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd <em>Add</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#isAdd <em>Add</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Add</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#isAdd()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#isAdd()
 	 * @see #getMultiReferenceOperation()
 	 * @generated
 	 */
 	EAttribute getMultiReferenceOperation_Add();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#getIndex()
 	 * @see #getMultiReferenceOperation()
 	 * @generated
 	 */
 	EAttribute getMultiReferenceOperation_Index();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements <em>Referenced Model Elements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements <em>Referenced Model Elements</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Referenced Model Elements</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation#getReferencedModelElements()
 	 * @see #getMultiReferenceOperation()
 	 * @generated
 	 */
 	EReference getMultiReferenceOperation_ReferencedModelElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation <em>Multi Reference Set Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation <em>Multi Reference Set Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Reference Set Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation
 	 * @generated
 	 */
 	EClass getMultiReferenceSetOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getIndex()
 	 * @see #getMultiReferenceSetOperation()
 	 * @generated
 	 */
 	EAttribute getMultiReferenceSetOperation_Index();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Old Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue()
 	 * @see #getMultiReferenceSetOperation()
 	 * @generated
 	 */
 	EReference getMultiReferenceSetOperation_OldValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>New Value</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue()
 	 * @see #getMultiReferenceSetOperation()
 	 * @generated
 	 */
 	EReference getMultiReferenceSetOperation_NewValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation <em>Multi Reference Move Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation <em>Multi Reference Move Operation</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for class '<em>Multi Reference Move Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation
 	 * @generated
 	 */
 	EClass getMultiReferenceMoveOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex <em>Old Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex <em>Old Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Old Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getOldIndex()
 	 * @see #getMultiReferenceMoveOperation()
 	 * @generated
 	 */
 	EAttribute getMultiReferenceMoveOperation_OldIndex();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex <em>New Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex <em>New Index</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>New Index</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getNewIndex()
 	 * @see #getMultiReferenceMoveOperation()
 	 * @generated
 	 */
 	EAttribute getMultiReferenceMoveOperation_NewIndex();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId <em>Referenced Model Element Id</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId <em>Referenced Model Element Id</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Referenced Model Element Id</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation#getReferencedModelElementId()
 	 * @see #getMultiReferenceMoveOperation()
 	 * @generated
 	 */
@@ -1867,32 +1867,32 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation
 	 * <em>Reference Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Reference Operation</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation
 	 * @generated
 	 */
 	EClass getReferenceOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#isBidirectional <em>Bidirectional</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#isBidirectional <em>Bidirectional</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Bidirectional</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#isBidirectional()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#isBidirectional()
 	 * @see #getReferenceOperation()
 	 * @generated
 	 */
 	EAttribute getReferenceOperation_Bidirectional();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getOppositeFeatureName <em>Opposite Feature Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#getOppositeFeatureName <em>Opposite Feature Name</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for the attribute '<em>Opposite Feature Name</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getOppositeFeatureName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#getOppositeFeatureName()
 	 * @see #getReferenceOperation()
 	 * @generated
 	 */
@@ -1900,50 +1900,50 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getContainmentType
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#getContainmentType
 	 * <em>Containment Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the attribute '<em>Containment Type</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation#getContainmentType()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation#getContainmentType()
 	 * @see #getReferenceOperation()
 	 * @generated
 	 */
 	EAttribute getReferenceOperation_ContainmentType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId <em>Operation Id</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId <em>Operation Id</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Id</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId
 	 * @generated
 	 */
 	EClass getOperationId();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup <em>Operation Group</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup <em>Operation Group</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Group</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup
 	 * @generated
 	 */
 	EClass getOperationGroup();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName()
 	 * @see #getOperationGroup()
 	 * @generated
 	 */
 	EAttribute getOperationGroup_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getOperations <em>Operations</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getOperations <em>Operations</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getOperations()
 	 * @see #getOperationGroup()
 	 * @generated
 	 */
@@ -1951,31 +1951,31 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup
 	 * <em>Model Element Group</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Model Element Group</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup
 	 * @generated
 	 */
 	EClass getModelElementGroup();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup#getName()
 	 * @see #getModelElementGroup()
 	 * @generated
 	 */
 	EAttribute getModelElementGroup_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model Elements</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup#getModelElements <em>Model Elements</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Model Elements</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ModelElementGroup#getModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup#getModelElements()
 	 * @see #getModelElementGroup()
 	 * @generated
 	 */
@@ -1988,7 +1988,7 @@ public interface OperationsPackage extends EPackage {
 	 * @return the meta object for class '<em>EObject To Model Element Id Map</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="org.eclipse.emf.ecore.EObject"
-	 *        valueType="org.eclipse.emf.emfstore.common.model.ModelElementId" valueContainment="true" valueResolveProxies="true"
+	 *        valueType="org.eclipse.emf.emfstore.internal.common.model.ModelElementId" valueContainment="true" valueResolveProxies="true"
 	 * @generated
 	 */
 	EClass getEObjectToModelElementIdMap();
@@ -2017,12 +2017,12 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
 	 * <em>Containment Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for enum '<em>Containment Type</em>'.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
 	 * @generated
 	 */
 	EEnum getContainmentType();
@@ -2050,11 +2050,11 @@ public interface OperationsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl <em>Abstract Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl <em>Abstract Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getAbstractOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getAbstractOperation()
 		 * @generated
 		 */
 		EClass ABSTRACT_OPERATION = eINSTANCE.getAbstractOperation();
@@ -2082,11 +2082,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute ABSTRACT_OPERATION__CLIENT_DATE = eINSTANCE.getAbstractOperation_ClientDate();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl <em>Composite Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl <em>Composite Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getCompositeOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getCompositeOperation()
 		 * @generated
 		 */
 		EClass COMPOSITE_OPERATION = eINSTANCE.getCompositeOperation();
@@ -2129,11 +2129,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute COMPOSITE_OPERATION__REVERSED = eINSTANCE.getCompositeOperation_Reversed();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl <em>Feature Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl <em>Feature Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getFeatureOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getFeatureOperation()
 		 * @generated
 		 */
 		EClass FEATURE_OPERATION = eINSTANCE.getFeatureOperation();
@@ -2146,11 +2146,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute FEATURE_OPERATION__FEATURE_NAME = eINSTANCE.getFeatureOperation_FeatureName();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl <em>Create Delete Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl <em>Create Delete Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getCreateDeleteOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getCreateDeleteOperation()
 		 * @generated
 		 */
 		EClass CREATE_DELETE_OPERATION = eINSTANCE.getCreateDeleteOperation();
@@ -2186,11 +2186,11 @@ public interface OperationsPackage extends EPackage {
 		EReference CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP = eINSTANCE.getCreateDeleteOperation_EObjectToIdMap();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl <em>Attribute Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl <em>Attribute Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getAttributeOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getAttributeOperation()
 		 * @generated
 		 */
 		EClass ATTRIBUTE_OPERATION = eINSTANCE.getAttributeOperation();
@@ -2210,11 +2210,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute ATTRIBUTE_OPERATION__NEW_VALUE = eINSTANCE.getAttributeOperation_NewValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl <em>Multi Attribute Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl <em>Multi Attribute Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeOperation()
 		 * @generated
 		 */
 		EClass MULTI_ATTRIBUTE_OPERATION = eINSTANCE.getMultiAttributeOperation();
@@ -2241,11 +2241,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES = eINSTANCE.getMultiAttributeOperation_ReferencedValues();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl <em>Multi Attribute Set Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl <em>Multi Attribute Set Operation</em>}' class.
 		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeSetOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeSetOperation()
 		 * @generated
 		 */
 		EClass MULTI_ATTRIBUTE_SET_OPERATION = eINSTANCE.getMultiAttributeSetOperation();
@@ -2272,11 +2272,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute MULTI_ATTRIBUTE_SET_OPERATION__NEW_VALUE = eINSTANCE.getMultiAttributeSetOperation_NewValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl <em>Multi Attribute Move Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl <em>Multi Attribute Move Operation</em>}' class.
 		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeMoveOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiAttributeMoveOperation()
 		 * @generated
 		 */
 		EClass MULTI_ATTRIBUTE_MOVE_OPERATION = eINSTANCE.getMultiAttributeMoveOperation();
@@ -2303,11 +2303,11 @@ public interface OperationsPackage extends EPackage {
 		EAttribute MULTI_ATTRIBUTE_MOVE_OPERATION__REFERENCED_VALUE = eINSTANCE.getMultiAttributeMoveOperation_ReferencedValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl <em>Single Reference Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl <em>Single Reference Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.SingleReferenceOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getSingleReferenceOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.SingleReferenceOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getSingleReferenceOperation()
 		 * @generated
 		 */
 		EClass SINGLE_REFERENCE_OPERATION = eINSTANCE.getSingleReferenceOperation();
@@ -2329,11 +2329,11 @@ public interface OperationsPackage extends EPackage {
 		EReference SINGLE_REFERENCE_OPERATION__NEW_VALUE = eINSTANCE.getSingleReferenceOperation_NewValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl <em>Multi Reference Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl <em>Multi Reference Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceOperation()
 		 * @generated
 		 */
 		EClass MULTI_REFERENCE_OPERATION = eINSTANCE.getMultiReferenceOperation();
@@ -2360,11 +2360,11 @@ public interface OperationsPackage extends EPackage {
 		EReference MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS = eINSTANCE.getMultiReferenceOperation_ReferencedModelElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl <em>Multi Reference Set Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl <em>Multi Reference Set Operation</em>}' class.
 		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceSetOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceSetOperation()
 		 * @generated
 		 */
 		EClass MULTI_REFERENCE_SET_OPERATION = eINSTANCE.getMultiReferenceSetOperation();
@@ -2393,11 +2393,11 @@ public interface OperationsPackage extends EPackage {
 		EReference MULTI_REFERENCE_SET_OPERATION__NEW_VALUE = eINSTANCE.getMultiReferenceSetOperation_NewValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl <em>Multi Reference Move Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl <em>Multi Reference Move Operation</em>}' class.
 		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceMoveOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getMultiReferenceMoveOperation()
 		 * @generated
 		 */
 		EClass MULTI_REFERENCE_MOVE_OPERATION = eINSTANCE.getMultiReferenceMoveOperation();
@@ -2424,11 +2424,11 @@ public interface OperationsPackage extends EPackage {
 		EReference MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID = eINSTANCE.getMultiReferenceMoveOperation_ReferencedModelElementId();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl <em>Reference Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl <em>Reference Operation</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ReferenceOperationImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getReferenceOperation()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ReferenceOperationImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getReferenceOperation()
 		 * @generated
 		 */
 		EClass REFERENCE_OPERATION = eINSTANCE.getReferenceOperation();
@@ -2456,21 +2456,21 @@ public interface OperationsPackage extends EPackage {
 		EAttribute REFERENCE_OPERATION__CONTAINMENT_TYPE = eINSTANCE.getReferenceOperation_ContainmentType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationIdImpl <em>Operation Id</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationIdImpl <em>Operation Id</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationIdImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationId()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationIdImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationId()
 		 * @generated
 		 */
 		EClass OPERATION_ID = eINSTANCE.getOperationId();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl <em>Operation Group</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationGroupImpl <em>Operation Group</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationGroupImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationGroup()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationGroupImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getOperationGroup()
 		 * @generated
 		 */
 		EClass OPERATION_GROUP = eINSTANCE.getOperationGroup();
@@ -2490,11 +2490,11 @@ public interface OperationsPackage extends EPackage {
 		EReference OPERATION_GROUP__OPERATIONS = eINSTANCE.getOperationGroup_Operations();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl <em>Model Element Group</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl <em>Model Element Group</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.ModelElementGroupImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getModelElementGroup()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.ModelElementGroupImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getModelElementGroup()
 		 * @generated
 		 */
 		EClass MODEL_ELEMENT_GROUP = eINSTANCE.getModelElementGroup();
@@ -2514,11 +2514,11 @@ public interface OperationsPackage extends EPackage {
 		EReference MODEL_ELEMENT_GROUP__MODEL_ELEMENTS = eINSTANCE.getModelElementGroup_ModelElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl <em>EObject To Model Element Id Map</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl <em>EObject To Model Element Id Map</em>}' class.
 		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getEObjectToModelElementIdMap()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getEObjectToModelElementIdMap()
 		 * @generated
 		 */
 		EClass EOBJECT_TO_MODEL_ELEMENT_ID_MAP = eINSTANCE.getEObjectToModelElementIdMap();
@@ -2538,11 +2538,11 @@ public interface OperationsPackage extends EPackage {
 		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE = eINSTANCE.getEObjectToModelElementIdMap_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType <em>Containment Type</em>}' enum.
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType <em>Containment Type</em>}' enum.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.ContainmentType
-		 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.OperationsPackageImpl#getContainmentType()
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getContainmentType()
 		 * @generated
 		 */
 		EEnum CONTAINMENT_TYPE = eINSTANCE.getContainmentType();

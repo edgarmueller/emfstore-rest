@@ -1,11 +1,11 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IProject;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IProject;
+import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;

@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.client.test.model.profile.ProfileFactory;
 import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

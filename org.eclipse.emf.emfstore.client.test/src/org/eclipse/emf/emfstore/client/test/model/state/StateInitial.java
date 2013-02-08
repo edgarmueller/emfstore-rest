@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.test.model.state;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Initial</b></em>'. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getStateInitial()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getStateInitial()
  * @model
  * @generated
  */

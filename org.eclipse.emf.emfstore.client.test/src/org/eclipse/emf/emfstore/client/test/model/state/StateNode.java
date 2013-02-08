@@ -18,22 +18,22 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getOutgoingTransitions <em>Outgoing Transitions
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getOutgoingTransitions <em>Outgoing Transitions
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getIncomingTransitions <em>Incoming Transitions
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getIncomingTransitions <em>Incoming Transitions
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getStateNode()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getStateNode()
  * @model abstract="true"
  * @generated
  */
 public interface StateNode extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Outgoing Transitions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource <em>Source</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Outgoing Transitions</em>' reference list isn't clear, there really should be more of
@@ -42,8 +42,8 @@ public interface StateNode extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Outgoing Transitions</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getStateNode_OutgoingTransitions()
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getStateNode_OutgoingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource
 	 * @model opposite="source"
 	 * @generated
 	 */
@@ -51,8 +51,8 @@ public interface StateNode extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Transitions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget <em>Target</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Incoming Transitions</em>' reference list isn't clear, there really should be more of
@@ -61,8 +61,8 @@ public interface StateNode extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Incoming Transitions</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getStateNode_IncomingTransitions()
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getStateNode_IncomingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget
 	 * @model opposite="target"
 	 * @generated
 	 */

@@ -13,11 +13,11 @@ package org.eclipse.emf.emfstore.server.model.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.IDisposable;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -83,7 +83,7 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 
 	private void collectExtensions() {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true).getExtensionElements()) {
+			"org.eclipse.emf.emfstore.internal.server.model.edit.customOperationLabelProvider", true).getExtensionElements()) {
 			try {
 				AbstractOperationCustomLabelProvider provider = element.getClass("class",
 					AbstractOperationCustomLabelProvider.class);
@@ -98,7 +98,7 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
 	 */
 	public void dispose() {
 		list = null;

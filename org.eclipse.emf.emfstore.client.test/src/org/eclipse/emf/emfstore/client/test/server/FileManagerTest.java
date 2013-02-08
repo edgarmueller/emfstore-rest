@@ -18,10 +18,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
-import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus;
-import org.eclipse.emf.emfstore.client.model.filetransfer.FileDownloadStatus.Status;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
+import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
+import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus.Status;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;

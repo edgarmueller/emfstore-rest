@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier} object.
  * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 

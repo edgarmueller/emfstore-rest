@@ -76,7 +76,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

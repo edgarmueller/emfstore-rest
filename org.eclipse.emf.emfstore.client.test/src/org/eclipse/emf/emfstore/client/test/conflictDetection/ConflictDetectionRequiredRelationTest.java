@@ -16,9 +16,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
-import org.eclipse.emf.emfstore.client.model.exceptions.InvalidHandleException;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
 import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
 import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
@@ -28,6 +25,9 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
+import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.Test;

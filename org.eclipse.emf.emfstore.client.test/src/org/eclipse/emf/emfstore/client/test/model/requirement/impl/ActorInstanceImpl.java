@@ -31,11 +31,11 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Scenario;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl#getInitiatedScenarios <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl#getInitiatedScenarios <em>
  * Initiated Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl#getParticipatedScenarios
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl#getParticipatedScenarios
  * <em>Participated Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorInstanceImpl#getInstantiatedActor <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorInstanceImpl#getInstantiatedActor <em>
  * Instantiated Actor</em>}</li>
  * </ul>
  * </p>

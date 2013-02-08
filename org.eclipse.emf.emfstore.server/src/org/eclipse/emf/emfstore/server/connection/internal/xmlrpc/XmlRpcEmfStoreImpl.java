@@ -237,7 +237,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.server.model.SessionId,
+	 * @see org.eclipse.emf.emfstore.internal.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
 	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {

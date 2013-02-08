@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation} object.
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation} object.
  * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 

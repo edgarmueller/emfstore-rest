@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.task.TaskFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskFactory
  * @model kind="package"
  * @generated
  */
@@ -51,7 +51,7 @@ public interface TaskPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.task";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.task";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -61,11 +61,11 @@ public interface TaskPackage extends EPackage {
 	TaskPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem <em>Work Item</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem <em>Work Item</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getWorkItem()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getWorkItem()
 	 * @generated
 	 */
 	int WORK_ITEM = 2;
@@ -283,11 +283,11 @@ public interface TaskPackage extends EPackage {
 	int WORK_ITEM_FEATURE_COUNT = ModelPackage.ANNOTATION_FEATURE_COUNT + 12;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl
 	 * <em>Action Item</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getActionItem()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getActionItem()
 	 * @generated
 	 */
 	int ACTION_ITEM = 0;
@@ -529,11 +529,11 @@ public interface TaskPackage extends EPackage {
 	int ACTION_ITEM_FEATURE_COUNT = WORK_ITEM_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.WorkPackageImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.WorkPackageImpl
 	 * <em>Work Package</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.WorkPackageImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getWorkPackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.WorkPackageImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getWorkPackage()
 	 * @generated
 	 */
 	int WORK_PACKAGE = 1;
@@ -776,11 +776,11 @@ public interface TaskPackage extends EPackage {
 	int WORK_PACKAGE_FEATURE_COUNT = WORK_ITEM_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl
 	 * <em>Milestone</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getMilestone()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getMilestone()
 	 * @generated
 	 */
 	int MILESTONE = 3;
@@ -1007,11 +1007,11 @@ public interface TaskPackage extends EPackage {
 	int MILESTONE_FEATURE_COUNT = WORK_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable <em>Checkable</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable <em>Checkable</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getCheckable()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getCheckable()
 	 * @generated
 	 */
 	int CHECKABLE = 4;
@@ -1128,32 +1128,32 @@ public interface TaskPackage extends EPackage {
 	int CHECKABLE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.task.ActivityType
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
 	 * <em>Activity Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.ActivityType
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getActivityType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getActivityType()
 	 * @generated
 	 */
 	int ACTIVITY_TYPE = 5;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.task.ActionItem
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem
 	 * <em>Action Item</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Action Item</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.ActionItem
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem
 	 * @generated
 	 */
 	EClass getActionItem();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.ActionItem#isDone <em>Done</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#isDone <em>Done</em>}'. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Done</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.ActionItem#isDone()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#isDone()
 	 * @see #getActionItem()
 	 * @generated
 	 */
@@ -1161,33 +1161,33 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.ActionItem#getActivity <em>Activity</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#getActivity <em>Activity</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Activity</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.ActionItem#getActivity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#getActivity()
 	 * @see #getActionItem()
 	 * @generated
 	 */
 	EAttribute getActionItem_Activity();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage
 	 * <em>Work Package</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Work Package</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkPackage
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage
 	 * @generated
 	 */
 	EClass getWorkPackage();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getContainedWorkItems
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems
 	 * <em>Contained Work Items</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Contained Work Items</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getContainedWorkItems()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems()
 	 * @see #getWorkPackage()
 	 * @generated
 	 */
@@ -1195,11 +1195,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getStartDate <em>Start Date</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getStartDate <em>Start Date</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Start Date</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getStartDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getStartDate()
 	 * @see #getWorkPackage()
 	 * @generated
 	 */
@@ -1207,33 +1207,33 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getEndDate <em>End Date</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getEndDate <em>End Date</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>End Date</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getEndDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getEndDate()
 	 * @see #getWorkPackage()
 	 * @generated
 	 */
 	EAttribute getWorkPackage_EndDate();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * <em>Work Item</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Work Item</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * @generated
 	 */
 	EClass getWorkItem();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getContainingWorkpackage
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
 	 * <em>Containing Workpackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Containing Workpackage</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getContainingWorkpackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1241,11 +1241,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getPredecessors <em>Predecessors</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPredecessors <em>Predecessors</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Predecessors</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getPredecessors()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPredecessors()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1253,11 +1253,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getSuccessors <em>Successors</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getSuccessors <em>Successors</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Successors</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getSuccessors()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getSuccessors()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1265,11 +1265,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getAssignee <em>Assignee</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getAssignee <em>Assignee</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Assignee</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getAssignee()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getAssignee()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1277,11 +1277,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Reviewer</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getReviewer()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1289,11 +1289,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getParticipants <em>Participants</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getParticipants <em>Participants</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participants</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getParticipants()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getParticipants()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1301,11 +1301,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getDueDate <em>Due Date</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getDueDate <em>Due Date</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Due Date</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getDueDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getDueDate()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1313,11 +1313,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getEstimate <em>Estimate</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEstimate <em>Estimate</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Estimate</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getEstimate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEstimate()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1325,11 +1325,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getEffort <em>Effort</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEffort <em>Effort</em>}'. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Effort</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getEffort()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEffort()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1337,11 +1337,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getPriority <em>Priority</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPriority <em>Priority</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Priority</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getPriority()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPriority()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1349,11 +1349,11 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#isResolved <em>Resolved</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#isResolved <em>Resolved</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#isResolved()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#isResolved()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
@@ -1361,66 +1361,66 @@ public interface TaskPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getIncludingReleases <em>Including Releases</em>}
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases <em>Including Releases</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Including Releases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getIncludingReleases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases()
 	 * @see #getWorkItem()
 	 * @generated
 	 */
 	EReference getWorkItem_IncludingReleases();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.task.Milestone
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone
 	 * <em>Milestone</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Milestone</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Milestone
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone
 	 * @generated
 	 */
 	EClass getMilestone();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.Milestone#getContainedModelElements
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone#getContainedModelElements
 	 * <em>Contained Model Elements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Contained Model Elements</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Milestone#getContainedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone#getContainedModelElements()
 	 * @see #getMilestone()
 	 * @generated
 	 */
 	EReference getMilestone_ContainedModelElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * <em>Checkable</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Checkable</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * @generated
 	 */
 	EClass getCheckable();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.Checkable#isChecked <em>Checked</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable#isChecked <em>Checked</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Checked</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable#isChecked()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable#isChecked()
 	 * @see #getCheckable()
 	 * @generated
 	 */
 	EAttribute getCheckable_Checked();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.client.test.model.task.ActivityType
+	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
 	 * <em>Activity Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Activity Type</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.ActivityType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
 	 * @generated
 	 */
 	EEnum getActivityType();
@@ -1447,11 +1447,11 @@ public interface TaskPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl
 		 * <em>Action Item</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.ActionItemImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getActionItem()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.ActionItemImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getActionItem()
 		 * @generated
 		 */
 		EClass ACTION_ITEM = eINSTANCE.getActionItem();
@@ -1473,11 +1473,11 @@ public interface TaskPackage extends EPackage {
 		EAttribute ACTION_ITEM__ACTIVITY = eINSTANCE.getActionItem_Activity();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.WorkPackageImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.WorkPackageImpl
 		 * <em>Work Package</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.WorkPackageImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getWorkPackage()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.WorkPackageImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getWorkPackage()
 		 * @generated
 		 */
 		EClass WORK_PACKAGE = eINSTANCE.getWorkPackage();
@@ -1507,11 +1507,11 @@ public interface TaskPackage extends EPackage {
 		EAttribute WORK_PACKAGE__END_DATE = eINSTANCE.getWorkPackage_EndDate();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 		 * <em>Work Item</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getWorkItem()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getWorkItem()
 		 * @generated
 		 */
 		EClass WORK_ITEM = eINSTANCE.getWorkItem();
@@ -1613,11 +1613,11 @@ public interface TaskPackage extends EPackage {
 		EReference WORK_ITEM__INCLUDING_RELEASES = eINSTANCE.getWorkItem_IncludingReleases();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl
 		 * <em>Milestone</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getMilestone()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getMilestone()
 		 * @generated
 		 */
 		EClass MILESTONE = eINSTANCE.getMilestone();
@@ -1631,11 +1631,11 @@ public interface TaskPackage extends EPackage {
 		EReference MILESTONE__CONTAINED_MODEL_ELEMENTS = eINSTANCE.getMilestone_ContainedModelElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 		 * <em>Checkable</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getCheckable()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getCheckable()
 		 * @generated
 		 */
 		EClass CHECKABLE = eINSTANCE.getCheckable();
@@ -1649,11 +1649,11 @@ public interface TaskPackage extends EPackage {
 		EAttribute CHECKABLE__CHECKED = eINSTANCE.getCheckable_Checked();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.task.ActivityType
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
 		 * <em>Activity Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.ActivityType
-		 * @see org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl#getActivityType()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.ActivityType
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.impl.TaskPackageImpl#getActivityType()
 		 * @generated
 		 */
 		EEnum ACTIVITY_TYPE = eINSTANCE.getActivityType();

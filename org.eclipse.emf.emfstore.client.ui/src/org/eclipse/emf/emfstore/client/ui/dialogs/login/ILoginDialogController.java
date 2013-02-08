@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**

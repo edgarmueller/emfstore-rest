@@ -32,15 +32,15 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl#getInitiatedUserTask <em>Initiated
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl#getInitiatedUserTask <em>Initiated
  * User Task</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl#getParticipatedUserTasks <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl#getParticipatedUserTasks <em>
  * Participated User Tasks</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl#getInitiatedUseCases <em>Initiated
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl#getInitiatedUseCases <em>Initiated
  * Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl#getParticipatedUseCases <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl#getParticipatedUseCases <em>
  * Participated Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ActorImpl#getInstances <em>Instances</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ActorImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  * </p>
  * 

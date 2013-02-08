@@ -121,7 +121,7 @@ public class ProfilePackageImpl extends EPackageImpl implements ProfilePackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

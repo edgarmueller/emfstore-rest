@@ -37,20 +37,20 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getSteps <em>Steps</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getInitiatingActorInstance <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getSteps <em>Steps</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getInitiatingActorInstance <em>
  * Initiating Actor Instance</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getParticipatingActorInstances
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getParticipatingActorInstances
  * <em>Participating Actor Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getInstantiatedUseCases <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getInstantiatedUseCases <em>
  * Instantiated Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getFunctionalRequirements <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getFunctionalRequirements <em>
  * Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getNonFunctionalRequirements <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getNonFunctionalRequirements <em>
  * Non Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getParticipatingMethods <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getParticipatingMethods <em>
  * Participating Methods</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.ScenarioImpl#getParticipatingClasses <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.ScenarioImpl#getParticipatingClasses <em>
  * Participating Classes</em>}</li>
  * </ul>
  * </p>

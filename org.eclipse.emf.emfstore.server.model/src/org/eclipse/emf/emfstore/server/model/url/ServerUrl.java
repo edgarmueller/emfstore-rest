@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getServerUrl()
+ * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getServerUrl()
  * @model
  * @generated
  */
@@ -39,14 +39,14 @@ public interface ServerUrl extends EObject {
 	 * 
 	 * @return the value of the '<em>Host Name</em>' attribute.
 	 * @see #setHostName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getServerUrl_HostName()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getServerUrl_HostName()
 	 * @model
 	 * @generated
 	 */
 	String getHostName();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getHostName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getHostName
 	 * <em>Host Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -67,14 +67,14 @@ public interface ServerUrl extends EObject {
 	 * 
 	 * @return the value of the '<em>Port</em>' attribute.
 	 * @see #setPort(int)
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getServerUrl_Port()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getServerUrl_Port()
 	 * @model
 	 * @generated
 	 */
 	int getPort();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl#getPort <em>Port</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Port</em>' attribute.
 	 * @see #getPort()

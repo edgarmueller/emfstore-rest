@@ -29,9 +29,9 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getFirstName <em>First Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getLastName <em>Last Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups <em>Effective Groups</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACUserImpl#getFirstName <em>First Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACUserImpl#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups <em>Effective Groups</em>}</li>
  * </ul>
  * </p>
  *

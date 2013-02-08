@@ -31,9 +31,9 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.impl.ComponentServiceImpl#getOfferingComponent <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl#getOfferingComponent <em>
  * Offering Component</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.impl.ComponentServiceImpl#getConsumingComponents <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl#getConsumingComponents <em>
  * Consuming Components</em>}</li>
  * </ul>
  * </p>

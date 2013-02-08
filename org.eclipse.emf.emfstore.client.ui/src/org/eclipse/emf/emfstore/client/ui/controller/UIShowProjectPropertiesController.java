@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
@@ -49,7 +49,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {

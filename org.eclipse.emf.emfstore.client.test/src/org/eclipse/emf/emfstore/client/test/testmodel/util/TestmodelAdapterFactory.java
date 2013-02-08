@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelAdapterFactory extends AdapterFactoryImpl {
@@ -119,13 +119,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement <em>Test Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement <em>Test Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement
 	 * @generated
 	 */
 	public Adapter createTestElementAdapter() {
@@ -133,13 +133,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer <em>Test Element Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElementContainer <em>Test Element Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer
+	 * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElementContainer
 	 * @generated
 	 */
 	public Adapter createTestElementContainerAdapter() {

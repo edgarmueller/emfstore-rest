@@ -24,19 +24,19 @@ import org.eclipse.emf.emfstore.server.model.api.query.IModelElementQuery;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery#getModelElements <em>Model
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery#getModelElements <em>Model
  *          Elements </em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getModelElementQuery()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getModelElementQuery()
  * @model
  * @generated
  */
 public interface ModelElementQuery extends RangeQuery, IModelElementQuery {
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model Elements</em>' containment reference list isn't clear, there really should be
@@ -46,7 +46,7 @@ public interface ModelElementQuery extends RangeQuery, IModelElementQuery {
 	 * 
 	 * @return the value of the '<em>Model Elements</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getModelElementQuery_ModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getModelElementQuery_ModelElements()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

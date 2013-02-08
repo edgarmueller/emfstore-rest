@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage
  * @generated
  */
 public class ComponentAdapterFactory extends AdapterFactoryImpl {
@@ -111,12 +111,12 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.Component <em>Component</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component <em>Component</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.Component
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.Component
 	 * @generated
 	 */
 	public Adapter createComponentAdapter() {
@@ -125,12 +125,12 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService <em>Service</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService <em>Service</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentService
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService
 	 * @generated
 	 */
 	public Adapter createComponentServiceAdapter() {
@@ -139,12 +139,12 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode <em>Deployment Node</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode <em>Deployment Node</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode
 	 * @generated
 	 */
 	public Adapter createDeploymentNodeAdapter() {
@@ -153,12 +153,12 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

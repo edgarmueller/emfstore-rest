@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.observer.PostCreationObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.client.model.observers.PostCreationObserver"/>
                </appinfo>
             </annotation>
          </attribute>

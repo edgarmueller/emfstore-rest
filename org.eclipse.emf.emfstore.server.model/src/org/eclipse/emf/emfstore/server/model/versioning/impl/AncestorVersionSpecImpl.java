@@ -25,8 +25,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.AncestorVersionSpecImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.AncestorVersionSpecImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.AncestorVersionSpecImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *

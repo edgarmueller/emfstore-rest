@@ -88,7 +88,7 @@ public class DocumentPackageImpl extends EPackageImpl implements DocumentPackage
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.document.DocumentPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.DocumentPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

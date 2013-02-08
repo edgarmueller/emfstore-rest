@@ -23,7 +23,7 @@ import javax.naming.directory.BasicAttributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.jface.viewers.Viewer;
@@ -62,7 +62,7 @@ public class LdapImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#init(org.eclipse.swt.widgets.Shell)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#init(org.eclipse.swt.widgets.Shell)
 	 * @param shell
 	 *            the shell
 	 * @return whether the initialization was successful or not (e.g. pressing
@@ -78,7 +78,7 @@ public class LdapImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getLabel()
 	 * @return a small label which indicates that this is an import from an LDAP
 	 *         server.
 	 */
@@ -95,7 +95,7 @@ public class LdapImportSource extends ImportSource {
 	 * as otherwise displaying the items on a TreeViewer correctly would fail,
 	 * as the getParent()-method wouldn't return the right result.
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getChildren(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getChildren(java.lang.Object)
 	 * @param arg0
 	 *            the object to get the children from.
 	 * @return the children, which have the correct references to their parent
@@ -169,7 +169,7 @@ public class LdapImportSource extends ImportSource {
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getElements(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getElements(java.lang.Object)
 	 * @param arg0
 	 *            object to get the basic elements from.
 	 * @return the root elements.
@@ -294,7 +294,7 @@ public class LdapImportSource extends ImportSource {
 
 	/**
 	 * @return a small description of the LDAP import source (server, base)
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getMessage()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getMessage()
 	 */
 	@Override
 	public String getMessage() {

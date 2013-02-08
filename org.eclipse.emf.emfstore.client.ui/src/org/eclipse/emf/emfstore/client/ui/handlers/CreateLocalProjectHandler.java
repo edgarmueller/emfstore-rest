@@ -24,7 +24,7 @@ public class CreateLocalProjectHandler extends AbstractEMFStoreHandler {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

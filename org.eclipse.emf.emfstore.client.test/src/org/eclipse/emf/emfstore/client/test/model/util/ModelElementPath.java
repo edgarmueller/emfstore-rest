@@ -20,13 +20,13 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath#getTarget <em>Target</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath#getPath <em>Path</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getPath <em>Path</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage#getModelElementPath()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage#getModelElementPath()
  * @model
  * @generated
  */
@@ -41,14 +41,14 @@ public interface ModelElementPath extends EObject {
 	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(ModelElementId)
-	 * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage#getModelElementPath_Source()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage#getModelElementPath_Source()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ModelElementId getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath#getSource
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource
 	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source</em>' containment reference.
@@ -67,14 +67,14 @@ public interface ModelElementPath extends EObject {
 	 * 
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(ModelElementId)
-	 * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage#getModelElementPath_Target()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage#getModelElementPath_Target()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ModelElementId getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath#getTarget
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget
 	 * <em>Target</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target</em>' containment reference.
@@ -85,7 +85,7 @@ public interface ModelElementPath extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.common.model.ModelElementId}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Path</em>' containment reference list isn't clear, there really should be more of a
 	 * description here...
@@ -93,7 +93,7 @@ public interface ModelElementPath extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Path</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage#getModelElementPath_Path()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage#getModelElementPath_Path()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

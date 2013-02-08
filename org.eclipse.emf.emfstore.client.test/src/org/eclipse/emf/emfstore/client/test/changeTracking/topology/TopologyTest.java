@@ -16,9 +16,9 @@ import java.util.Date;
 
 import junit.framework.Assert;
 
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.Before;

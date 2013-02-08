@@ -17,15 +17,15 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getDirection <em>Direction</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getDefaultValue <em>Default Value</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getSignature <em>Signature</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getLabel <em>Label</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getType <em>Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection <em>Direction</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue <em>Default Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getSignature <em>Signature</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument()
  * @model
  * @generated
  */
@@ -39,14 +39,14 @@ public interface MethodArgument extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument_Type()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument_Type()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
 	 */
 	String getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getType
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getType
 	 * <em>Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Type</em>' attribute.
@@ -57,7 +57,7 @@ public interface MethodArgument extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute. The literals are from the enumeration
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.ArgumentDirectionType}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Direction</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -65,20 +65,20 @@ public interface MethodArgument extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Direction</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ArgumentDirectionType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
 	 * @see #setDirection(ArgumentDirectionType)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument_Direction()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument_Direction()
 	 * @model annotation="org.unicase.ui.meeditor priority='11.0' position='left'"
 	 * @generated
 	 */
 	ArgumentDirectionType getDirection();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getDirection
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection
 	 * <em>Direction</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Direction</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ArgumentDirectionType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
 	 * @see #getDirection()
 	 * @generated
 	 */
@@ -94,14 +94,14 @@ public interface MethodArgument extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Default Value</em>' attribute.
 	 * @see #setDefaultValue(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument_DefaultValue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument_DefaultValue()
 	 * @model annotation="org.unicase.ui.meeditor priority='12.0' position='left'"
 	 * @generated
 	 */
 	String getDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getDefaultValue
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue
 	 * <em>Default Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Default Value</em>' attribute.
@@ -119,7 +119,7 @@ public interface MethodArgument extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Signature</em>' attribute.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument_Signature()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument_Signature()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
@@ -135,14 +135,14 @@ public interface MethodArgument extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getMethodArgument_Label()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getMethodArgument_Label()
 	 * @model annotation="org.unicase.ui.meeditor priority='13.0' position='left'"
 	 * @generated
 	 */
 	String getLabel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument#getLabel
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getLabel
 	 * <em>Label</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Label</em>' attribute.

@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Workspace;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 
 /**
  * Content provider for the EMFStore Browser View.

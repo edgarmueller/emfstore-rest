@@ -33,7 +33,7 @@ public class XMLStorage implements ResourceStorage {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.storage.ResourceStorage#init(java.util.Properties)
+	 * @see org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage#init(java.util.Properties)
 	 */
 	public URI init(Properties properties) throws FatalEmfStoreException {
 		ResourceSet resourceSet = new ResourceSetImpl();

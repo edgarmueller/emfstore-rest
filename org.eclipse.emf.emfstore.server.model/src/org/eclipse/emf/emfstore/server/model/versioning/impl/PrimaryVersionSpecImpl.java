@@ -22,8 +22,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.PrimaryVersionSpecImpl#getProjectStateChecksum <em>Project State Checksum</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getProjectStateChecksum <em>Project State Checksum</em>}</li>
  * </ul>
  * </p>
  *

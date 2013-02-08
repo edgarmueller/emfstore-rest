@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement#getIdentifier <em>Identifier</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement#getIdentifier <em>Identifier</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getIdentifiableElement()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getIdentifiableElement()
  * @model abstract="true"
  * @generated
  */
@@ -39,14 +39,14 @@ public interface IdentifiableElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see #setIdentifier(String)
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getIdentifiableElement_Identifier()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getIdentifiableElement_Identifier()
 	 * @model id="true" required="true"
 	 * @generated
 	 */
 	String getIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement#getIdentifier
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement#getIdentifier
 	 * <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

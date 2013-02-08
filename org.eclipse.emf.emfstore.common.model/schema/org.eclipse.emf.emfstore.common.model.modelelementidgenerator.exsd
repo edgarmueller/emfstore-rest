@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.common.model" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.common.model" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.common.model" id="org.eclipse.emf.emfstore.common.model.modelelementidgenerator" name="ModelElementIDGenerator"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common.model" id="org.eclipse.emf.emfstore.internal.common.model.modelelementidgenerator" name="ModelElementIDGenerator"/>
       </appInfo>
       <documentation>
          Can be used to define an own generator for modelelements in the IdEObjectCollection.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.model.ModelElementIdGenerator"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.common.model.ModelElementIdGenerator"/>
                </appInfo>
             </annotation>
          </attribute>

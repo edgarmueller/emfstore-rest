@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.Versions;
 
 /**
  * This subinterfaces implements all version related functionality for the
- * {@link org.eclipse.emf.emfstore.server.core.EMFStoreImpl} interface.
+ * {@link org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl} interface.
  * 
  * @author wesendon
  */
@@ -74,7 +74,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @throws FatalEmfStoreException
 	 *             in case of failure
-	 * @see org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface#initSubInterface()
+	 * @see org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface#initSubInterface()
 	 */
 	@Override
 	public void initSubInterface() throws FatalEmfStoreException {

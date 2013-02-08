@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation} object. <!--
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

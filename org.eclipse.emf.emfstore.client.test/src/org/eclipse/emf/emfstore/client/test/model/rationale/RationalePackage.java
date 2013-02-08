@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationaleFactory
  * @model kind="package"
  * @generated
  */
@@ -50,7 +50,7 @@ public interface RationalePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.rationale";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.rationale";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -60,11 +60,11 @@ public interface RationalePackage extends EPackage {
 	RationalePackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
 	 * <em>Issue</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getIssue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getIssue()
 	 * @generated
 	 */
 	int ISSUE = 0;
@@ -332,11 +332,11 @@ public interface RationalePackage extends EPackage {
 	int ISSUE_FEATURE_COUNT = ModelPackage.ANNOTATION_FEATURE_COUNT + 18;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.ProposalImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
 	 * <em>Proposal</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.ProposalImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getProposal()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getProposal()
 	 * @generated
 	 */
 	int PROPOSAL = 1;
@@ -461,11 +461,11 @@ public interface RationalePackage extends EPackage {
 	int PROPOSAL_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.SolutionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
 	 * <em>Solution</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.SolutionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getSolution()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getSolution()
 	 * @generated
 	 */
 	int SOLUTION = 2;
@@ -590,11 +590,11 @@ public interface RationalePackage extends EPackage {
 	int SOLUTION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.CriterionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
 	 * <em>Criterion</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.CriterionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getCriterion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getCriterion()
 	 * @generated
 	 */
 	int CRITERION = 3;
@@ -712,11 +712,11 @@ public interface RationalePackage extends EPackage {
 	int CRITERION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.AssessmentImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
 	 * <em>Assessment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.AssessmentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getAssessment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getAssessment()
 	 * @generated
 	 */
 	int ASSESSMENT = 4;
@@ -850,11 +850,11 @@ public interface RationalePackage extends EPackage {
 	int ASSESSMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.CommentImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
 	 * <em>Comment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.CommentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getComment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getComment()
 	 * @generated
 	 */
 	int COMMENT = 5;
@@ -987,11 +987,11 @@ public interface RationalePackage extends EPackage {
 	int COMMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.AudioCommentImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
 	 * <em>Audio Comment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.AudioCommentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getAudioComment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getAudioComment()
 	 * @generated
 	 */
 	int AUDIO_COMMENT = 6;
@@ -1015,22 +1015,22 @@ public interface RationalePackage extends EPackage {
 	int AUDIO_COMMENT_FEATURE_COUNT = 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue
 	 * <em>Issue</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Issue</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue
 	 * @generated
 	 */
 	EClass getIssue();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Proposals</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getProposals()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals()
 	 * @see #getIssue()
 	 * @generated
 	 */
@@ -1038,11 +1038,11 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getSolution <em>Solution</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getSolution <em>Solution</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Solution</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getSolution()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getSolution()
 	 * @see #getIssue()
 	 * @generated
 	 */
@@ -1050,11 +1050,11 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getCriteria <em>Criteria</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getCriteria <em>Criteria</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Criteria</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getCriteria()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getCriteria()
 	 * @see #getIssue()
 	 * @generated
 	 */
@@ -1062,11 +1062,11 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getActivity <em>Activity</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getActivity <em>Activity</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Activity</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getActivity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getActivity()
 	 * @see #getIssue()
 	 * @generated
 	 */
@@ -1074,33 +1074,33 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getAssessments <em>Assessments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Assessments</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Issue#getAssessments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getAssessments()
 	 * @see #getIssue()
 	 * @generated
 	 */
 	EReference getIssue_Assessments();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Proposal
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal
 	 * <em>Proposal</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Proposal</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Proposal
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal
 	 * @generated
 	 */
 	EClass getProposal();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Proposal#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments <em>Assessments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Assessments</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Proposal#getAssessments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments()
 	 * @see #getProposal()
 	 * @generated
 	 */
@@ -1108,33 +1108,33 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Proposal#getIssue <em>Issue</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getIssue <em>Issue</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Issue</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Proposal#getIssue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getIssue()
 	 * @see #getProposal()
 	 * @generated
 	 */
 	EReference getProposal_Issue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Solution
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution
 	 * <em>Solution</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Solution</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Solution
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution
 	 * @generated
 	 */
 	EClass getSolution();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Solution#getUnderlyingProposals
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getUnderlyingProposals
 	 * <em>Underlying Proposals</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Underlying Proposals</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Solution#getUnderlyingProposals()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getUnderlyingProposals()
 	 * @see #getSolution()
 	 * @generated
 	 */
@@ -1142,55 +1142,55 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Solution#getIssue <em>Issue</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getIssue <em>Issue</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Issue</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Solution#getIssue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getIssue()
 	 * @see #getSolution()
 	 * @generated
 	 */
 	EReference getSolution_Issue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Criterion
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
 	 * <em>Criterion</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Criterion</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Criterion
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
 	 * @generated
 	 */
 	EClass getCriterion();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Assessments</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Criterion#getAssessments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments()
 	 * @see #getCriterion()
 	 * @generated
 	 */
 	EReference getCriterion_Assessments();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment
 	 * <em>Assessment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Assessment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment
 	 * @generated
 	 */
 	EClass getAssessment();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Proposal</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getProposal()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal()
 	 * @see #getAssessment()
 	 * @generated
 	 */
@@ -1198,11 +1198,11 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Criterion</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getCriterion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion()
 	 * @see #getAssessment()
 	 * @generated
 	 */
@@ -1210,33 +1210,33 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getValue <em>Value</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getValue <em>Value</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getValue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getValue()
 	 * @see #getAssessment()
 	 * @generated
 	 */
 	EAttribute getAssessment_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment
 	 * <em>Comment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Comment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment
 	 * @generated
 	 */
 	EClass getComment();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getSender <em>Sender</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getSender <em>Sender</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Sender</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getSender()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getSender()
 	 * @see #getComment()
 	 * @generated
 	 */
@@ -1244,11 +1244,11 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Recipients</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getRecipients()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients()
 	 * @see #getComment()
 	 * @generated
 	 */
@@ -1256,33 +1256,33 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
 	 * <em>Commented Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Commented Element</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement()
 	 * @see #getComment()
 	 * @generated
 	 */
 	EReference getComment_CommentedElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment
 	 * <em>Audio Comment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Audio Comment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment
 	 * @generated
 	 */
 	EClass getAudioComment();
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Audio File</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment#getAudioFile()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile()
 	 * @see #getAudioComment()
 	 * @generated
 	 */
@@ -1310,11 +1310,11 @@ public interface RationalePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
 		 * <em>Issue</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getIssue()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getIssue()
 		 * @generated
 		 */
 		EClass ISSUE = eINSTANCE.getIssue();
@@ -1361,11 +1361,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.ProposalImpl <em>Proposal</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl <em>Proposal</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.ProposalImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getProposal()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getProposal()
 		 * @generated
 		 */
 		EClass PROPOSAL = eINSTANCE.getProposal();
@@ -1388,11 +1388,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.SolutionImpl <em>Solution</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl <em>Solution</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.SolutionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getSolution()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getSolution()
 		 * @generated
 		 */
 		EClass SOLUTION = eINSTANCE.getSolution();
@@ -1415,11 +1415,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.CriterionImpl <em>Criterion</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl <em>Criterion</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.CriterionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getCriterion()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getCriterion()
 		 * @generated
 		 */
 		EClass CRITERION = eINSTANCE.getCriterion();
@@ -1434,11 +1434,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.AssessmentImpl <em>Assessment</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl <em>Assessment</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.AssessmentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getAssessment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getAssessment()
 		 * @generated
 		 */
 		EClass ASSESSMENT = eINSTANCE.getAssessment();
@@ -1469,11 +1469,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.CommentImpl <em>Comment</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl <em>Comment</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.CommentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getComment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getComment()
 		 * @generated
 		 */
 		EClass COMMENT = eINSTANCE.getComment();
@@ -1504,11 +1504,11 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.impl.AudioCommentImpl <em>Audio Comment</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl <em>Audio Comment</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.AudioCommentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.rationale.impl.RationalePackageImpl#getAudioComment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.RationalePackageImpl#getAudioComment()
 		 * @generated
 		 */
 		EClass AUDIO_COMMENT = eINSTANCE.getAudioComment();

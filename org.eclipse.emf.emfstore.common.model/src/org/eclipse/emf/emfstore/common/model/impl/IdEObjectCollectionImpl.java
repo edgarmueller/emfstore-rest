@@ -30,9 +30,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -40,6 +37,9 @@ import org.eclipse.emf.emfstore.common.model.ModelElementIdGenerator;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.IDisposable;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 
 /**
  * Implementation of an ID based storage mechanism for {@link EObject}s.
@@ -52,7 +52,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * The extension point id to configure the {@link ModelElementIdGenerator}.
 	 */
-	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
+	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.internal.common.model.modelelementidgenerator";
 
 	/**
 	 * The attribute identifying the class of the {@link ModelElementIdGenerator} extension point.
@@ -154,7 +154,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getModelElements()
 	 */
 	public abstract EList<EObject> getModelElements();
 
@@ -169,7 +169,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#addModelElement(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#addModelElement(org.eclipse.emf.ecore.EObject)
 	 */
 	public void addModelElement(EObject eObject) {
 		getModelElements().add(eObject);
@@ -179,7 +179,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#containsInstance(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#containsInstance(org.eclipse.emf.ecore.EObject)
 	 */
 	public boolean contains(EObject modelElement) {
 		return getEObjectsCache().contains(modelElement);
@@ -189,7 +189,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public boolean contains(IModelElementId id) {
 		if (!isCacheInitialized()) {
@@ -202,7 +202,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getDeletedModelElementId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getDeletedModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	public ModelElementId getDeletedModelElementId(EObject deletedModelElement) {
 
@@ -238,7 +238,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getModelElementId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	public ModelElementId getModelElementId(EObject eObject) {
 
@@ -282,7 +282,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getModelElement(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getModelElement(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public EObject getModelElement(IModelElementId modelElementId) {
 
@@ -303,7 +303,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#deleteModelElement(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#deleteModelElement(org.eclipse.emf.ecore.EObject)
 	 */
 	public void deleteModelElement(final EObject modelElement) {
 		if (!this.contains(modelElement)) {
@@ -416,7 +416,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getAllModelElements()
 	 */
 	public Set<EObject> getAllModelElements() {
 		if (!isCacheInitialized()) {
@@ -430,7 +430,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
 	 *      org.eclipse.emf.common.util.EList)
 	 */
 	public <T extends EObject> EList<T> getAllModelElementsByClass(EClass modelElementClass, EList<T> list) {
@@ -440,7 +440,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.Project#getModelElementsByClass(org.eclipse.emf.ecore.EClass)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#getModelElementsByClass(org.eclipse.emf.ecore.EClass)
 	 * @generated NOT
 	 */
 	// cast below is guarded by sanity check
@@ -459,7 +459,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getAllModelElementsByClass(org.eclipse.emf.ecore.EClass,
 	 *      org.eclipse.emf.common.util.EList, java.lang.Boolean)
 	 */
 	// two casts below are guarded by initial sanity check and if statement
@@ -487,7 +487,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
 	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getAllModelElementsByClass(modelElementClass, true);
@@ -496,7 +496,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
 	 *      java.lang.Boolean)
 	 */
 	@SuppressWarnings("unchecked")
@@ -558,7 +558,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#initMapping()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#initMapping()
 	 */
 	public void initMapping() {
 
@@ -638,7 +638,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#initCaches(java.util.Map, java.util.Map)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#initCaches(java.util.Map, java.util.Map)
 	 */
 	public void initMapping(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
 		cachesInitialized = true;
@@ -678,7 +678,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#dispose()
 	 */
 	public void dispose() {
 		eObjectToIdMap.clear();
@@ -727,7 +727,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#allocateModelElementIds(java.util.Map)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#allocateModelElementIds(java.util.Map)
 	 */
 	public void allocateModelElementIds(Map<EObject, ModelElementId> eObjectToIdMapping) {
 		for (Map.Entry<EObject, ModelElementId> entry : eObjectToIdMapping.entrySet()) {
@@ -753,7 +753,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#disallocateModelElementIds(java.util.Set)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#disallocateModelElementIds(java.util.Set)
 	 */
 	public void disallocateModelElementIds(Set<ModelElementId> modelElementIds) {
 		for (ModelElementId modelElementId : modelElementIds) {
@@ -773,7 +773,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#getEObjectId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#getEObjectId(org.eclipse.emf.ecore.EObject)
 	 */
 	public String getEObjectId(EObject eObject) {
 		ModelElementId modelElementId = getModelElementId(eObject);
@@ -798,7 +798,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public EObject get(ModelElementId modelElementId) {
 		EObject modelElement = getModelElement(modelElementId);
@@ -811,7 +811,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getIdToEObjectMapping()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getIdToEObjectMapping()
 	 */
 	public Map<String, EObject> getIdToEObjectMapping() {
 		Map<String, EObject> mapping = new LinkedHashMap<String, EObject>(idToEObjectMap);
@@ -822,7 +822,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IdEObjectCollection#getEObjectToIdMapping()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getEObjectToIdMapping()
 	 */
 	public Map<EObject, String> getEObjectToIdMapping() {
 		Map<EObject, String> mapping = new LinkedHashMap<EObject, String>(eObjectToIdMap);

@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.server.startup.StartupListener;
 import org.osgi.framework.Bundle;
@@ -49,7 +49,7 @@ public final class ServerConfiguration {
 	/**
 	 * Constant for the Default Resource Storage.
 	 */
-	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.server.storage.XMLStorage";
+	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.internal.server.storage.XMLStorage";
 
 	/**
 	 * RMI encryption property, possible values are true and false.
@@ -255,11 +255,11 @@ public final class ServerConfiguration {
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the
 	 * values
-	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#RESOLVEALL}
+	 * {@link org.eclipse.emf.emfstore.internal.server.internal.startup.EmfStoreValidator#RESOLVEALL}
 	 * ,
-	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
+	 * {@link org.eclipse.emf.emfstore.internal.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
 	 * and
-	 * {@link org.eclipse.emf.emfstore.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
+	 * {@link org.eclipse.emf.emfstore.internal.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
 	 * . E.g.: If you want to resolve all elements and check use the
 	 * modelelement id validation, you have to set the level to
 	 * <code>1 | 2</code>, which is 3.
@@ -455,7 +455,7 @@ public final class ServerConfiguration {
 			// TODO EXPT PRIO
 			try {
 				locationProvider = new ExtensionPoint(
-						"org.eclipse.emf.emfstore.server.locationprovider",
+						"org.eclipse.emf.emfstore.internal.server.locationprovider",
 						true).getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "No location provider or error while instantiating location provider, switching to default location!";
@@ -583,7 +583,7 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Get the server version as in the org.eclipse.emf.emfstore.server manifest
+	 * Get the server version as in the org.eclipse.emf.emfstore.internal.server manifest
 	 * file.
 	 * 
 	 * @return the server version number
@@ -591,7 +591,7 @@ public final class ServerConfiguration {
 	@SuppressWarnings("cast")
 	public static String getServerVersion() {
 		Bundle emfStoreBundle = Platform
-				.getBundle("org.eclipse.emf.emfstore.server");
+				.getBundle("org.eclipse.emf.emfstore.internal.server");
 		String emfStoreVersionString = (String) emfStoreBundle.getHeaders()
 				.get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
@@ -663,7 +663,7 @@ public final class ServerConfiguration {
 		if (isChecksumComputationOnCommitActive == null) {
 			try {
 				isChecksumComputationOnCommitActive = new ExtensionPoint(
-						"org.eclipse.emf.emfstore.server.computechecksum", true)
+						"org.eclipse.emf.emfstore.internal.server.computechecksum", true)
 						.getBoolean("shouldComputeChecksumOnCommit");
 			} catch (ExtensionPointException e) {
 				String message = "Can not determine whether to compute checksums on commit, default is true.";

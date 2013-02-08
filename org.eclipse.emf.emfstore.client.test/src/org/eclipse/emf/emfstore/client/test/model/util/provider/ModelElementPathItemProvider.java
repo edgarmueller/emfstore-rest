@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
 import org.eclipse.emf.emfstore.common.model.ModelFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

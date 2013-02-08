@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.migration;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
 
 /**
  * Controller for migrating models in EMFStore. Manages all registered migrators.
@@ -60,7 +60,7 @@ public final class EMFStoreMigratorUtil {
 	}
 
 	private static EMFStoreMigrator loadMigrator() throws EMFStoreMigrationException {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.migration.migrator", true);
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.migration.migrator", true);
 		if (extensionPoint.size() > 1) {
 			ModelUtil
 				.logWarning("Multiple EMFStore Migrators are registered. EMFStore will default to first loadable migrator.");

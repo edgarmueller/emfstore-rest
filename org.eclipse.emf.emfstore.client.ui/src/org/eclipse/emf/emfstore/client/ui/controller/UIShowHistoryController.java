@@ -51,7 +51,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
@@ -61,7 +61,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				HistoryBrowserView historyBrowserView = null;
 				// TODO: remove hard-coded reference
-				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
+				String viewId = "org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView";
 
 				try {
 					historyBrowserView = (HistoryBrowserView) page.showView(viewId);

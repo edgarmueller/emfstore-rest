@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentFactory
  * @model kind="package"
  * @generated
  */
@@ -51,7 +51,7 @@ public interface AttachmentPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.attachment";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.attachment";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -62,11 +62,11 @@ public interface AttachmentPackage extends EPackage {
 		.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.UrlAttachmentImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl
 	 * <em>Url Attachment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.UrlAttachmentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getUrlAttachment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getUrlAttachment()
 	 * @generated
 	 */
 	int URL_ATTACHMENT = 0;
@@ -192,11 +192,11 @@ public interface AttachmentPackage extends EPackage {
 	int URL_ATTACHMENT_FEATURE_COUNT = ModelPackage.ATTACHMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.FileAttachmentImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl
 	 * <em>File Attachment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.FileAttachmentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachment()
 	 * @generated
 	 */
 	int FILE_ATTACHMENT = 1;
@@ -355,11 +355,11 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.PatchAttachmentImpl <em>Patch Attachment</em>}'
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl <em>Patch Attachment</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.PatchAttachmentImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getPatchAttachment()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getPatchAttachment()
 	 * @generated
 	 */
 	int PATCH_ATTACHMENT = 2;
@@ -525,54 +525,54 @@ public interface AttachmentPackage extends EPackage {
 	int PATCH_ATTACHMENT_FEATURE_COUNT = FILE_ATTACHMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
 	 * <em>File Attachment Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachmentType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachmentType()
 	 * @generated
 	 */
 	int FILE_ATTACHMENT_TYPE = 3;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment
 	 * <em>Url Attachment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Url Attachment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment
 	 * @generated
 	 */
 	EClass getUrlAttachment();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment#getUrl <em>Url</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl <em>Url</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Url</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment#getUrl()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl()
 	 * @see #getUrlAttachment()
 	 * @generated
 	 */
 	EAttribute getUrlAttachment_Url();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment
 	 * <em>File Attachment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>File Attachment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment
 	 * @generated
 	 */
 	EClass getFileAttachment();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileName <em>File Name</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName <em>File Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Name</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileName()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName()
 	 * @see #getFileAttachment()
 	 * @generated
 	 */
@@ -580,11 +580,11 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Hash</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileHash()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash()
 	 * @see #getFileAttachment()
 	 * @generated
 	 */
@@ -592,11 +592,11 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileID <em>File ID</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID <em>File ID</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File ID</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileID()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID()
 	 * @see #getFileAttachment()
 	 * @generated
 	 */
@@ -604,11 +604,11 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileSize <em>File Size</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize <em>File Size</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Size</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileSize()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize()
 	 * @see #getFileAttachment()
 	 * @generated
 	 */
@@ -616,33 +616,33 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileType <em>File Type</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType <em>File Type</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>File Type</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment#getFileType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType()
 	 * @see #getFileAttachment()
 	 * @generated
 	 */
 	EAttribute getFileAttachment_FileType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment
 	 * <em>Patch Attachment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Patch Attachment</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment
 	 * @generated
 	 */
 	EClass getPatchAttachment();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment#getAppliedTo <em>Applied To</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment#getAppliedTo <em>Applied To</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Applied To</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment#getAppliedTo()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment#getAppliedTo()
 	 * @see #getPatchAttachment()
 	 * @generated
 	 */
@@ -650,11 +650,11 @@ public interface AttachmentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType <em>File Attachment Type</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType <em>File Attachment Type</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>File Attachment Type</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
 	 * @generated
 	 */
 	EEnum getFileAttachmentType();
@@ -682,11 +682,11 @@ public interface AttachmentPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.UrlAttachmentImpl <em>Url Attachment</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl <em>Url Attachment</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.UrlAttachmentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getUrlAttachment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getUrlAttachment()
 		 * @generated
 		 */
 		EClass URL_ATTACHMENT = eINSTANCE.getUrlAttachment();
@@ -701,11 +701,11 @@ public interface AttachmentPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.FileAttachmentImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl
 		 * <em>File Attachment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.FileAttachmentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachment()
 		 * @generated
 		 */
 		EClass FILE_ATTACHMENT = eINSTANCE.getFileAttachment();
@@ -752,11 +752,11 @@ public interface AttachmentPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.impl.PatchAttachmentImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl
 		 * <em>Patch Attachment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.PatchAttachmentImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getPatchAttachment()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getPatchAttachment()
 		 * @generated
 		 */
 		EClass PATCH_ATTACHMENT = eINSTANCE.getPatchAttachment();
@@ -771,11 +771,11 @@ public interface AttachmentPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
 		 * <em>File Attachment Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachmentType
-		 * @see org.eclipse.emf.emfstore.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachmentType()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.AttachmentPackageImpl#getFileAttachmentType()
 		 * @generated
 		 */
 		EEnum FILE_ATTACHMENT_TYPE = eINSTANCE.getFileAttachmentType();

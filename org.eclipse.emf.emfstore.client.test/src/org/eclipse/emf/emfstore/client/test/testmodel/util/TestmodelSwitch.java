@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelSwitch<T> {

@@ -37,11 +37,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.server.connection.ConnectionHandler;
@@ -241,7 +241,7 @@ public class EMFStoreController implements IApplication, Runnable {
 
 	private void initLogging() {
 		Platform.getLog(
-				Platform.getBundle("org.eclipse.emf.emfstore.common.model"))
+				Platform.getBundle("org.eclipse.emf.emfstore.internal.common.model"))
 				.addLogListener(new ILogListener() {
 
 					public void logging(IStatus status, String plugin) {
@@ -295,7 +295,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
 			ExtensionPoint extensionPoint = new ExtensionPoint(
-					"org.eclipse.emf.emfstore.server.configurationresource");
+					"org.eclipse.emf.emfstore.internal.server.configurationresource");
 			ExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {

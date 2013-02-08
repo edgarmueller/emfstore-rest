@@ -10,14 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components.ContextComponent;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components.DescriptionComponent;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components.DetailsComponent;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components.OptionComponent;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Color;

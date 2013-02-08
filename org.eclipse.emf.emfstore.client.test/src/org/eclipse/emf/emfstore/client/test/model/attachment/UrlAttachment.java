@@ -17,11 +17,11 @@ import org.eclipse.emf.emfstore.client.test.model.Attachment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment#getUrl <em>Url</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl <em>Url</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getUrlAttachment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getUrlAttachment()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface UrlAttachment extends Attachment {
 	 * 
 	 * @return the value of the '<em>Url</em>' attribute.
 	 * @see #setUrl(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getUrlAttachment_Url()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getUrlAttachment_Url()
 	 * @model annotation="org.unicase.ui.meeditor position='left' priority='2.5'"
 	 * @generated
 	 */
 	String getUrl();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment#getUrl
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl
 	 * <em>Url</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Url</em>' attribute.

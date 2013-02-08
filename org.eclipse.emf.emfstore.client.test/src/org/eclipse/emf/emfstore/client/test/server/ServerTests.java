@@ -15,15 +15,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.ConnectionManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.common.CommonUtil;
@@ -31,6 +22,15 @@ import org.eclipse.emf.emfstore.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
@@ -282,7 +282,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @return established usersession
 	 */
 	public Usersession setUpUsersession(String username, String password) {
-		Usersession usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
+		Usersession usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(getServerInfo());
 		usersession.setUsername(username);
 		usersession.setPassword(password);

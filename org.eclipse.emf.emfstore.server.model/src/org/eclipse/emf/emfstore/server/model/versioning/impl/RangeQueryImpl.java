@@ -21,10 +21,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getUpperLimit <em>Upper Limit</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#getLowerLimit <em>Lower Limit</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeIncoming <em>Include Incoming</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.RangeQueryImpl#isIncludeOutgoing <em>Include Outgoing</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.RangeQueryImpl#getUpperLimit <em>Upper Limit</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.RangeQueryImpl#getLowerLimit <em>Lower Limit</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.RangeQueryImpl#isIncludeIncoming <em>Include Incoming</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.RangeQueryImpl#isIncludeOutgoing <em>Include Outgoing</em>}</li>
  * </ul>
  * </p>
  *

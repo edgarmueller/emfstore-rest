@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.VersionInfo;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage
  * @generated
  */
 public class ModelAdapterFactory extends AdapterFactoryImpl {
@@ -144,13 +144,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectHistory <em>Project History</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory <em>Project History</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.ProjectHistory
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ProjectHistory
 	 * @generated
 	 */
 	public Adapter createProjectHistoryAdapter() {
@@ -158,13 +158,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectInfo <em>Project Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo <em>Project Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.ProjectInfo
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ProjectInfo
 	 * @generated
 	 */
 	public Adapter createProjectInfoAdapter() {
@@ -172,13 +172,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.SessionId <em>Session Id</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.SessionId <em>Session Id</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.SessionId
+	 * @see org.eclipse.emf.emfstore.internal.server.model.SessionId
 	 * @generated
 	 */
 	public Adapter createSessionIdAdapter() {
@@ -186,13 +186,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ServerSpace <em>Server Space</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace <em>Server Space</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.ServerSpace
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ServerSpace
 	 * @generated
 	 */
 	public Adapter createServerSpaceAdapter() {
@@ -200,13 +200,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ProjectId <em>Project Id</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectId <em>Project Id</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.ProjectId
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ProjectId
 	 * @generated
 	 */
 	public Adapter createProjectIdAdapter() {
@@ -214,13 +214,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.VersionInfo <em>Version Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo <em>Version Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.VersionInfo
+	 * @see org.eclipse.emf.emfstore.internal.server.model.VersionInfo
 	 * @generated
 	 */
 	public Adapter createVersionInfoAdapter() {
@@ -228,13 +228,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo <em>Client Version Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo <em>Client Version Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.ClientVersionInfo
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo
 	 * @generated
 	 */
 	public Adapter createClientVersionInfoAdapter() {
@@ -242,13 +242,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.FileIdentifier <em>File Identifier</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier <em>File Identifier</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.FileIdentifier
+	 * @see org.eclipse.emf.emfstore.internal.server.model.FileIdentifier
 	 * @generated
 	 */
 	public Adapter createFileIdentifierAdapter() {
@@ -256,13 +256,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation <em>Authentication Information</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation <em>Authentication Information</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.AuthenticationInformation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation
 	 * @generated
 	 */
 	public Adapter createAuthenticationInformationAdapter() {
@@ -270,13 +270,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier <em>Unique Identifier</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier <em>Unique Identifier</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * @see org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier
 	 * @generated
 	 */
 	public Adapter createUniqueIdentifierAdapter() {
@@ -284,13 +284,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * @generated
 	 */
 	public Adapter createIdentifiableElementAdapter() {

@@ -18,23 +18,23 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.Component#getPackages <em>Packages</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.Component#getOfferedServices <em>Offered Services
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getPackages <em>Packages</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getOfferedServices <em>Offered Services
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.Component#getConsumedServices <em>Consumed Services
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getConsumedServices <em>Consumed Services
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getComponent()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getComponent()
  * @model
  * @generated
  */
 public interface Component extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Packages</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Package}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Packages</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -42,7 +42,7 @@ public interface Component extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Packages</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getComponent_Packages()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getComponent_Packages()
 	 * @model
 	 * @generated
 	 */
@@ -50,8 +50,8 @@ public interface Component extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Offered Services</b></em>' containment reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService#getOfferingComponent
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional and its
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent
 	 * <em>Offering Component</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Offered Services</em>' containment reference list isn't clear, there really should be
@@ -60,8 +60,8 @@ public interface Component extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Offered Services</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getComponent_OfferedServices()
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentService#getOfferingComponent
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getComponent_OfferedServices()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent
 	 * @model opposite="offeringComponent" containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -69,8 +69,8 @@ public interface Component extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Consumed Services</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService#getConsumingComponents
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional and its
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents
 	 * <em>Consuming Components</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Consumed Services</em>' reference list isn't clear, there really should be more of a
@@ -79,8 +79,8 @@ public interface Component extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Consumed Services</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getComponent_ConsumedServices()
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentService#getConsumingComponents
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getComponent_ConsumedServices()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents
 	 * @model opposite="consumingComponents"
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface Component extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Subsystems</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Package}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subsystems</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -96,7 +96,7 @@ public interface Component extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Subsystems</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#getComponent_Subsystems()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#getComponent_Subsystems()
 	 * @model
 	 * @generated
 	 */

@@ -85,7 +85,7 @@ public class AccesscontrolPackageImpl extends EPackageImpl implements Accesscont
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

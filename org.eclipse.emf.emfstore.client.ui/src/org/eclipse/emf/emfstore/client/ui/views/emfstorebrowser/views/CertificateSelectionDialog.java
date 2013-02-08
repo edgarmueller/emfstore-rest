@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views;
 import java.security.cert.X509Certificate;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.client.model.exceptions.CertificateStoreException;
-import org.eclipse.emf.emfstore.client.model.exceptions.InvalidCertificateException;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;

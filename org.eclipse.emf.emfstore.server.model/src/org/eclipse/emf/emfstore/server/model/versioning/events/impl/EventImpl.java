@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.impl.EventImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl.EventImpl#getTimestamp <em>Timestamp</em>}</li>
  * </ul>
  * </p>
  *

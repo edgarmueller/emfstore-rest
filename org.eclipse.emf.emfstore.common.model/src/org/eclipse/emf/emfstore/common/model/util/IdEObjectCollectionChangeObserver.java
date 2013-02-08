@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.common.model.util;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
-import org.eclipse.emf.emfstore.common.observer.IObserver;
+import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 
 /**
  * An observer interface for tracking changes upon an {@link IdEObjectCollection}.

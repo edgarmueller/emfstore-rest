@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerFact
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage}
  * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 

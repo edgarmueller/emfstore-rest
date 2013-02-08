@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.merge.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider;
 
 /**
  * Default label provider for merges.
@@ -35,7 +35,7 @@ public class DefaultMergeLabelProvider implements MergeLabelProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider#getPriority()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider#getPriority()
 	 */
 	public int getPriority() {
 		return 10;
@@ -45,7 +45,7 @@ public class DefaultMergeLabelProvider implements MergeLabelProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider#getText(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider#getText(org.eclipse.emf.ecore.EObject)
 	 */
 	public String getText(EObject modelElement) {
 		return adapterFactory.getText(modelElement);
@@ -55,7 +55,7 @@ public class DefaultMergeLabelProvider implements MergeLabelProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider#dispose()
 	 */
 	public void dispose() {
 		adapterFactory.dispose();

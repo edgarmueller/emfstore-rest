@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
 import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.url.ServerUrl} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

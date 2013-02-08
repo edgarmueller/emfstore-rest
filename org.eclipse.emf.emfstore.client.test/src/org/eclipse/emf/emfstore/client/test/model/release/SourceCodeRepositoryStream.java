@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Source Code Repository Stream</b></em>'. <!--
  * end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage#getSourceCodeRepositoryStream()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage#getSourceCodeRepositoryStream()
  * @model abstract="true"
  * @generated
  */

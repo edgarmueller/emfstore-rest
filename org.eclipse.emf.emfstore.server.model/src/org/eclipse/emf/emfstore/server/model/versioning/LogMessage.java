@@ -24,14 +24,14 @@ import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor <em>Author</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage <em>Message</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate <em>Date</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate <em>Client Date</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getAuthor <em>Author</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getMessage <em>Message</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getDate <em>Date</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getClientDate <em>Client Date</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getLogMessage()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getLogMessage()
  * @model
  * @generated
  */
@@ -47,14 +47,14 @@ public interface LogMessage extends EObject, ILogMessage {
 	 * 
 	 * @return the value of the '<em>Message</em>' attribute.
 	 * @see #setMessage(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getLogMessage_Message()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getLogMessage_Message()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getMessage();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getMessage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getMessage
 	 * <em>Message</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -76,14 +76,14 @@ public interface LogMessage extends EObject, ILogMessage {
 	 * 
 	 * @return the value of the '<em>Author</em>' attribute.
 	 * @see #setAuthor(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getLogMessage_Author()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getLogMessage_Author()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getAuthor();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getAuthor
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getAuthor
 	 * <em>Author</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -104,14 +104,14 @@ public interface LogMessage extends EObject, ILogMessage {
 	 * 
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(Date)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getLogMessage_Date()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getLogMessage_Date()
 	 * @model required="true"
 	 * @generated
 	 */
 	Date getDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getDate <em>Date</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getDate <em>Date</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -132,14 +132,14 @@ public interface LogMessage extends EObject, ILogMessage {
 	 * 
 	 * @return the value of the '<em>Client Date</em>' attribute.
 	 * @see #setClientDate(Date)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getLogMessage_ClientDate()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getLogMessage_ClientDate()
 	 * @model
 	 * @generated
 	 */
 	Date getClientDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage#getClientDate
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getClientDate
 	 * <em>Client Date</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->

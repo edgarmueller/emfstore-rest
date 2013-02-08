@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.common.model.Project;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.common.model.Project} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.Project} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

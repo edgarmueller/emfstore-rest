@@ -17,11 +17,11 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable#isChecked <em>Checked</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable#isChecked <em>Checked</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getCheckable()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getCheckable()
  * @model interface="true" abstract="true"
  * @generated
  */
@@ -36,14 +36,14 @@ public interface Checkable extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Checked</em>' attribute.
 	 * @see #setChecked(boolean)
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getCheckable_Checked()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getCheckable_Checked()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isChecked();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable#isChecked
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable#isChecked
 	 * <em>Checked</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Checked</em>' attribute.

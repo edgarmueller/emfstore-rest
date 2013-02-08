@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIShareProjectController;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Handler for sharing a {@link ProjectSpace}.<br/>
@@ -48,7 +48,7 @@ public class ShareProjectHandler extends AbstractEMFStoreHandler implements IHan
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

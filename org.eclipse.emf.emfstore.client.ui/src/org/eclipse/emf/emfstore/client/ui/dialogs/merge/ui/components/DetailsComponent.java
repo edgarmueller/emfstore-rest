@@ -10,13 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets.MergeTextWidget;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
@@ -84,7 +84,7 @@ public class DetailsComponent extends Section {
 				multiWidget.addOption(option);
 			}
 
-			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.detailwidget")
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.merge.detailwidget")
 				.getExtensionElements()) {
 				if (option.getDetailProvider().equals(element.getAttribute("id"))) {
 					DetailsPart detailsPart = element.getClass("class", DetailsPart.class);

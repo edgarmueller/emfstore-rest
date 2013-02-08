@@ -22,8 +22,8 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getHostName <em>Host Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.url.impl.ServerUrlImpl#getPort <em>Port</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getHostName <em>Host Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
  *
@@ -205,7 +205,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.url.ServerUrl#getUrlString()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getUrlString()
 	 * @generated NOT
 	 */
 	public String getUrlString() {

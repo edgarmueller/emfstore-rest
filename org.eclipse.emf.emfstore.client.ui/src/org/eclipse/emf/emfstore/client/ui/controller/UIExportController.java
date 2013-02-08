@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.controller;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.importexport.ExportImportControllerFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.swt.widgets.Shell;
 

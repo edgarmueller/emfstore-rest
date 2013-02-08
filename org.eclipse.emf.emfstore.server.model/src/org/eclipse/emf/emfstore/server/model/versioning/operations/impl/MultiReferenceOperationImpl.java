@@ -42,9 +42,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#isAdd <em>Add</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getIndex <em>Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getReferencedModelElements <em>Referenced Model Elements</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl#isAdd <em>Add</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl#getReferencedModelElements <em>Referenced Model Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -369,7 +369,7 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getOtherInvolvedModelElements()
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {

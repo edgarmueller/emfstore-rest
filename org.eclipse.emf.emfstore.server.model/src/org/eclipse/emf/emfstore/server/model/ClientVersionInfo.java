@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo#getVersion <em>Version</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getVersion <em>Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getClientVersionInfo()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface ClientVersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
-	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getClientVersionInfo_Version()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo_Version()
 	 * @model
 	 * @generated
 	 */
 	String getVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo#getVersion
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getVersion
 	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -68,14 +68,14 @@ public interface ClientVersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getClientVersionInfo_Name()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo#getName <em>Name</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getName <em>Name</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

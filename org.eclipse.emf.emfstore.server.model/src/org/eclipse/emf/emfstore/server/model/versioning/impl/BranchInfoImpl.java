@@ -25,9 +25,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getHead <em>Head</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.BranchInfoImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.BranchInfoImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.BranchInfoImpl#getHead <em>Head</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.BranchInfoImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *

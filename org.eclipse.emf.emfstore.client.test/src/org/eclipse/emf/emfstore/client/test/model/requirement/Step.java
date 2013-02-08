@@ -18,16 +18,16 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#isUserStep <em>User Step</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use Case</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#isUserStep <em>User Step</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use Case</em>}
  * </li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedSystemFunction <em>Included System
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction <em>Included System
  * Function</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getStep()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getStep()
  * @model
  * @generated
  */
@@ -42,14 +42,14 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>User Step</em>' attribute.
 	 * @see #setUserStep(boolean)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getStep_UserStep()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getStep_UserStep()
 	 * @model
 	 * @generated
 	 */
 	boolean isUserStep();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#isUserStep
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#isUserStep
 	 * <em>User Step</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>User Step</em>' attribute.
@@ -68,14 +68,14 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>Included Use Case</em>' reference.
 	 * @see #setIncludedUseCase(UseCase)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getStep_IncludedUseCase()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getStep_IncludedUseCase()
 	 * @model
 	 * @generated
 	 */
 	UseCase getIncludedUseCase();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedUseCase
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase
 	 * <em>Included Use Case</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Included Use Case</em>' reference.
@@ -94,7 +94,7 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>Included System Function</em>' reference.
 	 * @see #setIncludedSystemFunction(SystemFunction)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getStep_IncludedSystemFunction()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getStep_IncludedSystemFunction()
 	 * @model
 	 * @generated
 	 */
@@ -102,7 +102,7 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getIncludedSystemFunction
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction
 	 * <em>Included System Function</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Included System Function</em>' reference.
@@ -113,7 +113,7 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Use Case</b></em>' container reference. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}'.
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Use Case</em>' container reference isn't clear, there really should be more of a
@@ -123,15 +123,15 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>Use Case</em>' container reference.
 	 * @see #setUseCase(UseCase)
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#getStep_UseCase()
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase#getUseCaseSteps
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#getStep_UseCase()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps
 	 * @model opposite="useCaseSteps" transient="false"
 	 * @generated
 	 */
 	UseCase getUseCase();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step#getUseCase
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase
 	 * <em>Use Case</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Use Case</em>' container reference.

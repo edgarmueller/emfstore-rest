@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.Attachment;
 import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.Attachment} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

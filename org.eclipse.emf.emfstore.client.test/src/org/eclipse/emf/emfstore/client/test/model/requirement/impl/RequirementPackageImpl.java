@@ -145,7 +145,7 @@ public class RequirementPackageImpl extends EPackageImpl implements RequirementP
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

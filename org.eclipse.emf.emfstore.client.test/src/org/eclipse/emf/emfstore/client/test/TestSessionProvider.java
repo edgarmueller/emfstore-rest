@@ -10,14 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 public class TestSessionProvider extends AbstractSessionProvider {

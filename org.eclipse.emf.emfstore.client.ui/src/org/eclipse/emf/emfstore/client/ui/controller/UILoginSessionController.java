@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.swt.widgets.Shell;
 
@@ -44,7 +44,7 @@ public class UILoginSessionController extends AbstractEMFStoreUIController<Void>
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {

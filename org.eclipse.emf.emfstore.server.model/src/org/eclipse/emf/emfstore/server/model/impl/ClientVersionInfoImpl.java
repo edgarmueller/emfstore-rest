@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.impl.ClientVersionInfoImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.impl.ClientVersionInfoImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.impl.ClientVersionInfoImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *

@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.common.model;
 
 /**
  * Interface for the modelelementidgenerator extension point, identified by this id:
- * {@link org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl#MODELELEMENTID_GENERATOR_EXTENSIONPOINT}.
+ * {@link org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl#MODELELEMENTID_GENERATOR_EXTENSIONPOINT}.
  * 
  * 
  * @author Julian Sommerfeldt

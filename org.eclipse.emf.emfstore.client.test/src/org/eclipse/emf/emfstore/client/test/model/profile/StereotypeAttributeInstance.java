@@ -18,14 +18,14 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance <em>
  * Stereotype Instance</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute <em>
  * Stereotype Attribute</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance()
  * @model abstract="true"
  * @generated
  */
@@ -33,7 +33,7 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Stereotype Instance</b></em>' container reference. It is bidirectional and its
 	 * opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance#getStereotypeAttributeInstances
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getStereotypeAttributeInstances
 	 * <em>Stereotype Attribute Instances</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stereotype Instance</em>' container reference isn't clear, there really should be more
@@ -43,8 +43,8 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Stereotype Instance</em>' container reference.
 	 * @see #setStereotypeInstance(StereotypeInstance)
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance_StereotypeInstance()
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance#getStereotypeAttributeInstances
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance_StereotypeInstance()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getStereotypeAttributeInstances
 	 * @model opposite="stereotypeAttributeInstances" transient="false"
 	 * @generated
 	 */
@@ -52,7 +52,7 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance
 	 * <em>Stereotype Instance</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Stereotype Instance</em>' container reference.
@@ -64,7 +64,7 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Stereotype Attribute</b></em>' reference. It is bidirectional and its opposite
 	 * is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
 	 * <em>Stereotype Attribute Instances</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stereotype Attribute</em>' reference isn't clear, there really should be more of a
@@ -74,8 +74,8 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Stereotype Attribute</em>' reference.
 	 * @see #setStereotypeAttribute(StereotypeAttribute)
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance_StereotypeAttribute()
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstance_StereotypeAttribute()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
 	 * @model opposite="stereotypeAttributeInstances"
 	 * @generated
 	 */
@@ -83,7 +83,7 @@ public interface StereotypeAttributeInstance extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute
 	 * <em>Stereotype Attribute</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Stereotype Attribute</em>' reference.

@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.client.test.model.activity.Transition;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityPackage
  * @generated
  */
 public class ActivityAdapterFactory extends AdapterFactoryImpl {
@@ -135,12 +135,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject <em>Object</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject <em>Object</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject
 	 * @generated
 	 */
 	public Adapter createActivityObjectAdapter() {
@@ -149,12 +149,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.Transition <em>Transition</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition <em>Transition</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Transition
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition
 	 * @generated
 	 */
 	public Adapter createTransitionAdapter() {
@@ -163,12 +163,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.Activity <em>Activity</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity <em>Activity</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Activity
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity
 	 * @generated
 	 */
 	public Adapter createActivityAdapter() {
@@ -176,12 +176,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Fork
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork
 	 * <em>Fork</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Fork
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork
 	 * @generated
 	 */
 	public Adapter createForkAdapter() {
@@ -189,12 +189,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Branch
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch
 	 * <em>Branch</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Branch
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch
 	 * @generated
 	 */
 	public Adapter createBranchAdapter() {
@@ -203,12 +203,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityInitial <em>Initial</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial <em>Initial</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityInitial
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial
 	 * @generated
 	 */
 	public Adapter createActivityInitialAdapter() {
@@ -217,12 +217,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityEnd <em>End</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd <em>End</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityEnd
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd
 	 * @generated
 	 */
 	public Adapter createActivityEndAdapter() {
@@ -231,12 +231,12 @@ public class ActivityAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

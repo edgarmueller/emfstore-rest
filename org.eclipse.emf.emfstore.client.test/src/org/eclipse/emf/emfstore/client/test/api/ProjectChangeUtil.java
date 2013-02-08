@@ -7,8 +7,8 @@ import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IWorkspaceProvider;
 
 public final class ProjectChangeUtil {
 

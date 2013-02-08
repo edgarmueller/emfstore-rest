@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UICommitProjectController;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Handler for commit a project.<br/>
@@ -46,7 +46,7 @@ public class CommitProjectHandler extends AbstractEMFStoreHandler {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

@@ -18,11 +18,11 @@ import org.eclipse.emf.emfstore.server.model.ProjectId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId <em>Project Id</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerProjectEvent#getProjectId <em>Project Id</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage#getServerProjectEvent()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerPackage#getServerProjectEvent()
  * @model abstract="true"
  * @generated
  */
@@ -37,14 +37,14 @@ public interface ServerProjectEvent extends ServerEvent {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Project Id</em>' containment reference.
 	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage#getServerProjectEvent_ProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerPackage#getServerProjectEvent_ProjectId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ProjectId getProjectId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent#getProjectId <em>Project Id</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerProjectEvent#getProjectId <em>Project Id</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Project Id</em>' containment reference.

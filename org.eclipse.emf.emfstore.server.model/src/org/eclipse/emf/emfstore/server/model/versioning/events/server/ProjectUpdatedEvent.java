@@ -19,11 +19,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion <em>New Version</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion <em>New Version</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage#getProjectUpdatedEvent()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerPackage#getProjectUpdatedEvent()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface ProjectUpdatedEvent extends ServerProjectEvent {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>New Version</em>' containment reference.
 	 * @see #setNewVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage#getProjectUpdatedEvent_NewVersion()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerPackage#getProjectUpdatedEvent_NewVersion()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getNewVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion <em>New Version</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent#getNewVersion <em>New Version</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>New Version</em>' containment reference.

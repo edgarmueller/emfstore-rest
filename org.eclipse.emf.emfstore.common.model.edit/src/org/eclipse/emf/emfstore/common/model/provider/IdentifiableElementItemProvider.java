@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.common.model.ModelPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement} object.
  * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 

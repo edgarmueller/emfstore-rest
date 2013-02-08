@@ -78,7 +78,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.Component} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +86,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 	protected ComponentItemProvider componentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.component.Component}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +102,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService} instances. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +110,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 	protected ComponentServiceItemProvider componentServiceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.component.ComponentService}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +126,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode} instances. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +134,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
 	protected DeploymentNodeItemProvider deploymentNodeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.component.DeploymentNode}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

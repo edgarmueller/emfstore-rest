@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.login;
 
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -77,7 +77,7 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		setTitleImage(ResourceManager.getPluginImage("org.eclipse.emf.emfstore.client.ui", "icons/login_icon.png"));
+		setTitleImage(ResourceManager.getPluginImage("org.eclipse.emf.emfstore.internal.client.ui", "icons/login_icon.png"));
 		setTitle("Log in to " + controller.getServerLabel());
 		setMessage("Please enter your username and password");
 		getShell().setText("Authentication required");

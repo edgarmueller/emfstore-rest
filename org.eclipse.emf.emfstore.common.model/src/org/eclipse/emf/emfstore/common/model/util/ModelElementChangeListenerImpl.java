@@ -24,14 +24,14 @@ public abstract class ModelElementChangeListenerImpl implements ModelElementChan
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ModelElementChangeListener#onChange(org.eclipse.emf.common.notify.Notification)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ModelElementChangeListener#onChange(org.eclipse.emf.common.notify.Notification)
 	 */
 	public abstract void onChange(Notification notification);
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ModelElementChangeListener#onRuntimeExceptionInListener(java.lang.RuntimeException)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ModelElementChangeListener#onRuntimeExceptionInListener(java.lang.RuntimeException)
 	 */
 	public abstract void onRuntimeExceptionInListener(RuntimeException exception);
 

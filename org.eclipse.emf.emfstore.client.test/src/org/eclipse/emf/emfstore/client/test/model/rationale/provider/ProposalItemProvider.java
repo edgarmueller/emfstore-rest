@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
 import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.rationale.Proposal} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

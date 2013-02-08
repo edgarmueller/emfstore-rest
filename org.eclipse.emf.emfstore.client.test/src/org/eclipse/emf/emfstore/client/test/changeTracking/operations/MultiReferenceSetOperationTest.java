@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;

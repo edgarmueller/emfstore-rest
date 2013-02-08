@@ -78,7 +78,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment} instances. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +86,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 	protected UrlAttachmentItemProvider urlAttachmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +102,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment} instances. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +110,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 	protected FileAttachmentItemProvider fileAttachmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +126,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment} instances. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +134,7 @@ public class AttachmentItemProviderAdapterFactory extends AttachmentAdapterFacto
 	protected PatchAttachmentItemProvider patchAttachmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

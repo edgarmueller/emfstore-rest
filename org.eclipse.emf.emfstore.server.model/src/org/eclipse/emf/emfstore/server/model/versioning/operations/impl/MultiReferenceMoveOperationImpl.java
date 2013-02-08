@@ -36,9 +36,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getOldIndex <em>Old Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getNewIndex <em>New Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getReferencedModelElementId <em>Referenced Model Element Id</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getOldIndex <em>Old Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getNewIndex <em>New Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceMoveOperationImpl#getReferencedModelElementId <em>Referenced Model Element Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -352,7 +352,7 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {

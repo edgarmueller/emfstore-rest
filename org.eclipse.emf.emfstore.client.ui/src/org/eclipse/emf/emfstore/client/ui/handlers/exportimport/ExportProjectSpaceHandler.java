@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers.exportimport;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Handler for exporting a {@link ProjectSpace}.

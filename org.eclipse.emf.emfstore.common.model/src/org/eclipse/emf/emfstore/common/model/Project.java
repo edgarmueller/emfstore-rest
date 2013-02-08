@@ -23,15 +23,15 @@ import org.eclipse.emf.ecore.EObject;
  *             The following features are supported:
  *             <ul>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.common.model.Project#getModelElements
+ *             {@link org.eclipse.emf.emfstore.internal.common.model.Project#getModelElements
  *             <em>Model Elements</em>}</li>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.common.model.Project#getCutElements
+ *             {@link org.eclipse.emf.emfstore.internal.common.model.Project#getCutElements
  *             <em>Cut Elements</em>}</li>
  *             </ul>
  *             </p>
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getProject()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getProject()
  * @model
  * @extends NotifiableIdEObjectCollection
  */
@@ -48,7 +48,7 @@ public interface Project extends EObject, IAdaptable, NotifiableIdEObjectCollect
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Model Elements</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getProject_ModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getProject_ModelElements()
 	 * @model containment="true" resolveProxies="true" ordered="false"
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface Project extends EObject, IAdaptable, NotifiableIdEObjectCollect
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Cut Elements</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getProject_CutElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getProject_CutElements()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

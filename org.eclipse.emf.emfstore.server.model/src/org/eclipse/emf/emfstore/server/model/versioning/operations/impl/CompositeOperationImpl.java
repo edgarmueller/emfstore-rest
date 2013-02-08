@@ -38,11 +38,11 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getSubOperations <em>Sub Operations</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getMainOperation <em>Main Operation</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeName <em>Composite Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeDescription <em>Composite Description</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CompositeOperationImpl#isReversed <em>Reversed</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl#getSubOperations <em>Sub Operations</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl#getMainOperation <em>Main Operation</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeName <em>Composite Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl#getCompositeDescription <em>Composite Description</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CompositeOperationImpl#isReversed <em>Reversed</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,7 +53,7 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#getOtherInvolvedModelElements()
 	 */
 	@Override
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
@@ -452,7 +452,7 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getLeafOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getLeafOperations()
 	 */
 	public List<AbstractOperation> getLeafOperations() {
 		List<AbstractOperation> result = new ArrayList<AbstractOperation>();

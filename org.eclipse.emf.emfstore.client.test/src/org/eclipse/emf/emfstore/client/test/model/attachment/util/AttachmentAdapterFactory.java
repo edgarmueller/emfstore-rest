@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage
  * @generated
  */
 public class AttachmentAdapterFactory extends AdapterFactoryImpl {
@@ -117,12 +117,12 @@ public class AttachmentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment <em>Url Attachment</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment <em>Url Attachment</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.UrlAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment
 	 * @generated
 	 */
 	public Adapter createUrlAttachmentAdapter() {
@@ -131,12 +131,12 @@ public class AttachmentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment <em>File Attachment</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment <em>File Attachment</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment
 	 * @generated
 	 */
 	public Adapter createFileAttachmentAdapter() {
@@ -145,12 +145,12 @@ public class AttachmentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment <em>Patch Attachment</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment <em>Patch Attachment</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment
 	 * @generated
 	 */
 	public Adapter createPatchAttachmentAdapter() {
@@ -159,12 +159,12 @@ public class AttachmentAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {
@@ -172,13 +172,13 @@ public class AttachmentAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.Attachment
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment
 	 * <em>Attachment</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.Attachment
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.Attachment
 	 * @generated
 	 */
 	public Adapter createAttachmentAdapter() {

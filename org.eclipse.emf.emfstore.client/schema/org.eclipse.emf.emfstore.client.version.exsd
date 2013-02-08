@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.version" name="Client Version "/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.version" name="Client Version "/>
       </appInfo>
       <documentation>
          Enables to set a customized version identifier for the EMFStore client.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.common.IClientVersionProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.common.IClientVersionProvider"/>
                </appInfo>
             </annotation>
          </attribute>

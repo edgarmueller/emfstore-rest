@@ -56,7 +56,7 @@ public class EventsPackageImpl extends EPackageImpl implements EventsPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

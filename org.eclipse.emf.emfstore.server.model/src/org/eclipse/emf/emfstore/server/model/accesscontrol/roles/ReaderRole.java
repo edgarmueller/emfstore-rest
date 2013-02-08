@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.server.model.accesscontrol.roles;
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Reader Role</b></em>'. <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage#getReaderRole()
+ * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage#getReaderRole()
  * @model
  * @generated
  */

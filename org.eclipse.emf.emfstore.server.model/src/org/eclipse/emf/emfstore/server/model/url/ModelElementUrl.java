@@ -20,18 +20,18 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getServerUrl
  * <em>Server Url</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getProjectUrlFragment
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getProjectUrlFragment
  * <em>Project Url Fragment</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getModelElementUrlFragment
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getModelElementUrlFragment
  * <em>Model Element Url Fragment</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl()
+ * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getModelElementUrl()
  * @model
  * @generated
  */
@@ -46,14 +46,14 @@ public interface ModelElementUrl extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Server Url</em>' containment reference.
 	 * @see #setServerUrl(ServerUrl)
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ServerUrl()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getModelElementUrl_ServerUrl()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ServerUrl getServerUrl();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getServerUrl <em>Server Url</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getServerUrl <em>Server Url</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Server Url</em>' containment reference.
@@ -72,14 +72,14 @@ public interface ModelElementUrl extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Project Url Fragment</em>' containment reference.
 	 * @see #setProjectUrlFragment(ProjectUrlFragment)
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ProjectUrlFragment()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getModelElementUrl_ProjectUrlFragment()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ProjectUrlFragment getProjectUrlFragment();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getProjectUrlFragment
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getProjectUrlFragment
 	 * <em>Project Url Fragment</em>}' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -101,7 +101,7 @@ public interface ModelElementUrl extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Model Element Url Fragment</em>' containment reference.
 	 * @see #setModelElementUrlFragment(ModelElementUrlFragment)
-	 * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage#getModelElementUrl_ModelElementUrlFragment()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getModelElementUrl_ModelElementUrlFragment()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -109,7 +109,7 @@ public interface ModelElementUrl extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl#getModelElementUrlFragment
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl#getModelElementUrlFragment
 	 * <em>Model Element Url Fragment</em>}' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIUpdateProjectToVersionController;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Handler for updating a project to a specific version.<br/>

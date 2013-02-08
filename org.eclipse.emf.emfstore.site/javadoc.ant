@@ -30,10 +30,10 @@
 			<fileset dir="${source}/" defaultexcludes="true">
 				<!-- EMFStore -->
 				<include name="*emfstore.core/**/*.java" />
-				<include name="*emfstore.other/org.eclipse.emf.emfstore.*.backchannel/**/*.java" />
-				<include name="*emfstore.other/org.eclipse.emf.emfstore.examplemodel/**/*.java" />
-				<include name="*emfstore.other/org.eclipse.emf.emfstore.migration.edapt/**/*.java" />
-				<include name="*emfstore.other/org.eclipse.emf.emfstore.client.transaction/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.internal.*.backchannel/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.internal.examplemodel/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.internal.migration.edapt/**/*.java" />
+				<include name="*emfstore.other/org.eclipse.emf.emfstore.internal.client.transaction/**/*.java" />
 
 				<!-- EMF Client Platform -->
 				<include name="*ecp.core/**/*.java" />
@@ -59,7 +59,7 @@
 			<tag name="extends" scope="all" description="EMF Extends:" />
 	
 			<!-- grouping in package overview -->
-			<group title="EMFStore" packages="org.eclipse.emf.emfstore.*" />
+			<group title="EMFStore" packages="org.eclipse.emf.emfstore.internal.*" />
 			<group title="EMF Client Platform" packages="org.eclipse.emf.ecp.*" />
 		</javadoc>
 	</target>

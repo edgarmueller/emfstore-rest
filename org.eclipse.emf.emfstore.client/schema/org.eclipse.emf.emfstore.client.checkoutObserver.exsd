@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.checkoutObserver" name="Checkout Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.checkoutObserver" name="Checkout Observer"/>
       </appInfo>
       <documentation>
          An observer that will be notified during the checkout of a project.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observers.CheckoutObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.observers.CheckoutObserver"/>
                </appInfo>
             </annotation>
          </attribute>

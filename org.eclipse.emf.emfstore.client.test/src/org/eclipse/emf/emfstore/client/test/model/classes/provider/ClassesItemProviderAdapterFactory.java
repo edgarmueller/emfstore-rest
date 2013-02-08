@@ -77,7 +77,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.client.test.model.classes.Class}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}
 	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -85,7 +85,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected ClassItemProvider classItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Class}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -101,7 +101,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Package} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -109,7 +109,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected PackageItemProvider packageItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Package}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -125,7 +125,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Association} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -133,7 +133,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected AssociationItemProvider associationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Association}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -149,7 +149,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Attribute} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -157,7 +157,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected AttributeItemProvider attributeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Attribute}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -173,7 +173,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Method} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -181,7 +181,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected MethodItemProvider methodItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Method}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -197,7 +197,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -205,7 +205,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected MethodArgumentItemProvider methodArgumentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -221,7 +221,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -229,7 +229,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected DependencyItemProvider dependencyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -245,7 +245,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Enumeration} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -253,7 +253,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected EnumerationItemProvider enumerationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Enumeration}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -269,7 +269,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Literal} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal} instances. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -277,7 +277,7 @@ public class ClassesItemProviderAdapterFactory extends ClassesAdapterFactory imp
 	protected LiteralItemProvider literalItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Literal}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;

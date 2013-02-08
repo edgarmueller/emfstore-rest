@@ -29,13 +29,13 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getServerUrl
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ModelElementUrlImpl#getServerUrl
  * <em>Server Url</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getProjectUrlFragment
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ModelElementUrlImpl#getProjectUrlFragment
  * <em>Project Url Fragment</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.url.impl.ModelElementUrlImpl#getModelElementUrlFragment
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ModelElementUrlImpl#getModelElementUrlFragment
  * <em>Model Element Url Fragment</em>}</li>
  * </ul>
  * </p>

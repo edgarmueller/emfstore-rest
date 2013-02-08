@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage
  * @generated
  */
 public class MeetingAdapterFactory extends AdapterFactoryImpl {
@@ -122,12 +122,12 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.meeting.Meeting
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting
 	 * <em>Meeting</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.Meeting
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting
 	 * @generated
 	 */
 	public Adapter createMeetingAdapter() {
@@ -136,12 +136,12 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection <em>Section</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection <em>Section</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection
 	 * @generated
 	 */
 	public Adapter createMeetingSectionAdapter() {
@@ -150,13 +150,13 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.CompositeMeetingSection
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection
 	 * <em>Composite Meeting Section</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.CompositeMeetingSection
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection
 	 * @generated
 	 */
 	public Adapter createCompositeMeetingSectionAdapter() {
@@ -165,12 +165,12 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.IssueMeetingSection <em>Issue Meeting Section</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection <em>Issue Meeting Section</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.IssueMeetingSection
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection
 	 * @generated
 	 */
 	public Adapter createIssueMeetingSectionAdapter() {
@@ -179,13 +179,13 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection
 	 * <em>Work Item Meeting Section</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection
 	 * @generated
 	 */
 	public Adapter createWorkItemMeetingSectionAdapter() {
@@ -194,12 +194,12 @@ public class MeetingAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

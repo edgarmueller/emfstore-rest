@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingProposalImpl#getPendingOperations <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingProposalImpl#getPendingOperations <em>
  * Pending Operations</em>}</li>
  * </ul>
  * </p>

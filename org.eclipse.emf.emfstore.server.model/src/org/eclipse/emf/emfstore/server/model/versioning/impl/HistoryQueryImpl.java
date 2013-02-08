@@ -26,10 +26,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeChangePackages <em>Include
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryQueryImpl#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryQueryImpl#isIncludeChangePackages <em>Include
  * Change Packages</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryQueryImpl#isIncludeAllVersions <em>Include
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryQueryImpl#isIncludeAllVersions <em>Include
  * All Versions</em>}</li>
  * </ul>
  * </p>
@@ -169,7 +169,7 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec)
 	 * @generated NOT
 	 */
 	public void setSource(IPrimaryVersionSpec newSource) {

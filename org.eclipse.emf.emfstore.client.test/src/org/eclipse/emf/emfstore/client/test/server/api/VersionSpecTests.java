@@ -14,7 +14,7 @@ import static org.eclipse.emf.emfstore.client.test.server.api.HistoryAPITests.cr
 import static org.eclipse.emf.emfstore.client.test.server.api.HistoryAPITests.versions;
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;

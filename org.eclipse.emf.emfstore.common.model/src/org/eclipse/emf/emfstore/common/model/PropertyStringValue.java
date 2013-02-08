@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.PropertyStringValue#getValue <em>Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getPropertyStringValue()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getPropertyStringValue()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface PropertyStringValue extends EObject {
 	 * 
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getPropertyStringValue_Value()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getPropertyStringValue_Value()
 	 * @model
 	 * @generated
 	 */
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.common.model.PropertyStringValue#getValue <em>Value</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue <em>Value</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

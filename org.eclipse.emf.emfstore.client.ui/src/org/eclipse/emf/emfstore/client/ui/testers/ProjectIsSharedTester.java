@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 
 /**
  * Property tester to test if a project is Shared with a server already.

@@ -19,13 +19,13 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation()
  * @model
  * @generated
  */
@@ -41,14 +41,14 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * 
 	 * @return the value of the '<em>Index</em>' attribute.
 	 * @see #setIndex(int)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_Index()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_Index()
 	 * @model
 	 * @generated
 	 */
 	int getIndex();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getIndex <em>Index</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Index</em>' attribute.
 	 * @see #getIndex()
@@ -66,14 +66,14 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Old Value</em>' containment reference.
 	 * @see #setOldValue(ModelElementId)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_OldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_OldValue()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ModelElementId getOldValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getOldValue <em>Old Value</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Old Value</em>' containment reference.
@@ -92,14 +92,14 @@ public interface MultiReferenceSetOperation extends ReferenceOperation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>New Value</em>' containment reference.
 	 * @see #setNewValue(ModelElementId)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_NewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiReferenceSetOperation_NewValue()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ModelElementId getNewValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation#getNewValue <em>New Value</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>New Value</em>' containment reference.

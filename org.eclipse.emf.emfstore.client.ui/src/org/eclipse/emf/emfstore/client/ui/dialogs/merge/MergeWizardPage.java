@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionConfig;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.WizardPage;

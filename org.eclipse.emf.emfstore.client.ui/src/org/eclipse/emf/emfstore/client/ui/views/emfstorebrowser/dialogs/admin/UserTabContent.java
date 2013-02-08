@@ -15,10 +15,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard.AcUserImportAction;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
@@ -106,7 +106,7 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.TabContent#initActions()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.TabContent#initActions()
 	 */
 	@Override
 	protected List<Action> initActions() {

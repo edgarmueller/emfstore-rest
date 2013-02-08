@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.notification.recording;
 
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 
 /**
  * Abstract super class for operation tests, contains setup.

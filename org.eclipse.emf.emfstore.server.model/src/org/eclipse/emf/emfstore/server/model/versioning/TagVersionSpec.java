@@ -23,12 +23,12 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
  *          The following features are supported:
  *          <ul>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec#getName
  *          <em>Name</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getTagVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getTagVersionSpec()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface TagVersionSpec extends VersionSpec, ITagVersionSpec {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getTagVersionSpec_Name()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getTagVersionSpec_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec#getName
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec#getName
 	 * <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

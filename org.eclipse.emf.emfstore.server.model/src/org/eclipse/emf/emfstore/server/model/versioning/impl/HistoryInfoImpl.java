@@ -36,18 +36,18 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery Spec
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery Spec
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>Previous Spec
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>Previous Spec
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged From</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log Message</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>Version
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged From</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>Version
  * Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.HistoryInfoImpl#getChangePackage <em>Change Package
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getChangePackage <em>Change Package
  * </em>}</li>
  * </ul>
  * </p>

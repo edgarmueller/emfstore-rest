@@ -37,7 +37,7 @@ public abstract class ModelElementChangeObserver implements IdEObjectCollectionC
 	 * Notifies all model elements listeners since the deletion of a collection is also deleting all contained model
 	 * elements.
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(IdEObjectCollection)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(IdEObjectCollection)
 	 * @param collection the deleted {@link IdEObjectCollection}
 	 */
 	public final void collectionDeleted(IdEObjectCollection collection) {
@@ -78,7 +78,7 @@ public abstract class ModelElementChangeObserver implements IdEObjectCollectionC
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.Project,
 	 *      org.eclipse.emf.core.EObject)
 	 */
 	public final void modelElementAdded(Project project, EObject modelElement) {
@@ -88,7 +88,7 @@ public abstract class ModelElementChangeObserver implements IdEObjectCollectionC
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.Project,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public final void modelElementRemoved(Project project, EObject modelElement) {
@@ -119,8 +119,8 @@ public abstract class ModelElementChangeObserver implements IdEObjectCollectionC
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.common.model.Project, org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.internal.common.model.Project, org.eclipse.emf.ecore.EObject)
 	 */
 	public final void notify(Notification notification, Project project, EObject modelElement) {
 		if (this.isObservedElement(modelElement)) {

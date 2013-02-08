@@ -20,13 +20,13 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC User
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC User
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getAuthenticationInformation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation()
  * @model
  * @generated
  */
@@ -42,14 +42,14 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Session Id</em>' containment reference.
 	 * @see #setSessionId(SessionId)
-	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getAuthenticationInformation_SessionId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_SessionId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	SessionId getSessionId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getSessionId
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId
 	 * <em>Session Id</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -71,14 +71,14 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Resolved AC User</em>' containment reference.
 	 * @see #setResolvedACUser(ACUser)
-	 * @see org.eclipse.emf.emfstore.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ACUser getResolvedACUser();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation#getResolvedACUser
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser
 	 * <em>Resolved AC User</em>}' containment reference.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->

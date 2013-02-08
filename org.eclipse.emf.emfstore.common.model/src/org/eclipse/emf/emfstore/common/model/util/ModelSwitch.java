@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
  * which is the result of the switch.
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage
  * @generated
  */
 public class ModelSwitch<T> {

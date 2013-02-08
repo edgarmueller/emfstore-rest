@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.ModelVersion#getReleaseNumber <em>Release Number</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion#getReleaseNumber <em>Release Number</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getModelVersion()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getModelVersion()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface ModelVersion extends EObject {
 	 * 
 	 * @return the value of the '<em>Release Number</em>' attribute.
 	 * @see #setReleaseNumber(int)
-	 * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getModelVersion_ReleaseNumber()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getModelVersion_ReleaseNumber()
 	 * @model
 	 * @generated
 	 */
 	int getReleaseNumber();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.common.model.ModelVersion#getReleaseNumber
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion#getReleaseNumber
 	 * <em>Release Number</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

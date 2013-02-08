@@ -169,7 +169,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

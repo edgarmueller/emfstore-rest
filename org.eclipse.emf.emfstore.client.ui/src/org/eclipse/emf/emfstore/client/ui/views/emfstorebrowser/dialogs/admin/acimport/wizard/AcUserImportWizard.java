@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.a
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportController;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportItemWrapper;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.wizard.Wizard;
 

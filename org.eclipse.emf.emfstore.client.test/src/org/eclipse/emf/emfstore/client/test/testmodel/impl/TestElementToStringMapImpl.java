@@ -32,8 +32,8 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *

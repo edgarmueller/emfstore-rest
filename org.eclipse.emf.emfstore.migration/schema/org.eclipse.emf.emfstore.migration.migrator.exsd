@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.migration" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.migration" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.migration" id="org.eclipse.emf.emfstore.migration.migrator" name="migrator"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.migration" id="org.eclipse.emf.emfstore.internal.migration.migrator" name="migrator"/>
       </appinfo>
       <documentation>
          Allows to register migrators to migrate a model from one to another version.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.migration.EMFStoreMigrator"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrator"/>
                </appinfo>
             </annotation>
          </attribute>

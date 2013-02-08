@@ -24,10 +24,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl#getName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionPropertyImpl#getName
  * <em>Name</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.VersionPropertyImpl#getValue
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionPropertyImpl#getValue
  * <em>Value</em>}</li>
  * </ul>
  * </p>

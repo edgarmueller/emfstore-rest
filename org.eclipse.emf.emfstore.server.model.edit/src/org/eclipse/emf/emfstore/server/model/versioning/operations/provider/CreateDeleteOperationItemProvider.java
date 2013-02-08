@@ -46,7 +46,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOper
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation} object.
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation} object.
  * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 
@@ -130,7 +130,7 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 	}
 
 	/**
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.provider.AbstractOperationItemProvider#getChildren(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.provider.AbstractOperationItemProvider#getChildren(java.lang.Object)
 	 */
 	@Override
 	public Collection<?> getChildren(Object object) {

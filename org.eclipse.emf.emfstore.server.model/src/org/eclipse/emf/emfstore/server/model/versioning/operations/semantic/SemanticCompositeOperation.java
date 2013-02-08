@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOper
  * end-user-doc -->
  *
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticPackage#getSemanticCompositeOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticPackage#getSemanticCompositeOperation()
  * @model abstract="true"
  * @generated
  */

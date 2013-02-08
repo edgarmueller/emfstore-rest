@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.state.Transition;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage
  * @generated
  */
 public class StateAdapterFactory extends AdapterFactoryImpl {
@@ -122,12 +122,12 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.state.State
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State
 	 * <em>State</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.State
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State
 	 * @generated
 	 */
 	public Adapter createStateAdapter() {
@@ -135,13 +135,13 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.state.Transition
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition
 	 * <em>Transition</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition
 	 * @generated
 	 */
 	public Adapter createTransitionAdapter() {
@@ -149,12 +149,12 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.state.StateNode
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode
 	 * <em>Node</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode
 	 * @generated
 	 */
 	public Adapter createStateNodeAdapter() {
@@ -163,12 +163,12 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.StateInitial <em>Initial</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial <em>Initial</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateInitial
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial
 	 * @generated
 	 */
 	public Adapter createStateInitialAdapter() {
@@ -176,12 +176,12 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.state.StateEnd
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd
 	 * <em>End</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateEnd
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd
 	 * @generated
 	 */
 	public Adapter createStateEndAdapter() {
@@ -190,12 +190,12 @@ public class StateAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.client.ui.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.ui.exceptions.RequiredSelectionException;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreHandlerUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 

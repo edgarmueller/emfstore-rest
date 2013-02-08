@@ -23,15 +23,15 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IAncestorVersionSp
  *          The following features are supported:
  *          <ul>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget
  *          <em>Target</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource
  *          <em>Source</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getAncestorVersionSpec()
  * @model
  * @generated
  */
@@ -47,14 +47,14 @@ public interface AncestorVersionSpec extends VersionSpec, IAncestorVersionSpec {
 	 * 
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Target()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Target()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getTarget
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget
 	 * <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -76,14 +76,14 @@ public interface AncestorVersionSpec extends VersionSpec, IAncestorVersionSpec {
 	 * 
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Source()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getAncestorVersionSpec_Source()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec#getSource
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource
 	 * <em>Source</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->

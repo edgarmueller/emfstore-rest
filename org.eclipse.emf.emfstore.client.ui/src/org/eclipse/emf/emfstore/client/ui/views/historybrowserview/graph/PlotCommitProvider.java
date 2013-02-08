@@ -91,7 +91,7 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.IPlotCommitProvider#refresh(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommitProvider#refresh(java.util.List)
 	 */
 	public void refresh(List<HistoryInfo> newInfos) {
 		this.positionsAllocated = 0;
@@ -419,7 +419,7 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.historybrowserview.graph.IPlotCommitProvider#getCommitFor(org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo,
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommitProvider#getCommitFor(org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo,
 	 *      boolean)
 	 */
 	public IPlotCommit getCommitFor(HistoryInfo info, boolean onlyAChildRequest) {

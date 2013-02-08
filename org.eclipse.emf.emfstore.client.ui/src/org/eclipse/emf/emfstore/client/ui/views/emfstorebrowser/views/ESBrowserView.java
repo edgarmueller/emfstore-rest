@@ -15,15 +15,15 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.DecoratingLabelProvider;
@@ -96,7 +96,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 						// re-evaluate property tester
 						IEvaluationService service = (IEvaluationService) getSite()
 							.getService(IEvaluationService.class);
-						service.requestEvaluation("org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn");
+						service.requestEvaluation("org.eclipse.emf.emfstore.internal.client.ui.commands.ServerInfoIsLoggedIn");
 					}
 				});
 			}
@@ -165,7 +165,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		// });
 
 		PlatformUI.getWorkbench().getHelpSystem()
-			.setHelp(viewer.getControl(), "org.eclipse.emf.emfstore.client.ui.views.RepositoryView");
+			.setHelp(viewer.getControl(), "org.eclipse.emf.emfstore.internal.client.ui.views.RepositoryView");
 
 		menuMgr = new MenuManager();
 		menuMgr.add(new Separator("additions"));

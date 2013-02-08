@@ -15,9 +15,9 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;

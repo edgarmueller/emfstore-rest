@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 

@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CompareProjectsDialog;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * This handler shows compare projects dialog.
@@ -24,7 +24,7 @@ public class CompareProjectsHandler extends AbstractEMFStoreHandler {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.commands.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.commands.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage
  * @generated
  */
 public class UtilAdapterFactory extends AdapterFactoryImpl {
@@ -93,12 +93,12 @@ public class UtilAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath <em>Model Element Path</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath <em>Model Element Path</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath
 	 * @generated
 	 */
 	public Adapter createModelElementPathAdapter() {

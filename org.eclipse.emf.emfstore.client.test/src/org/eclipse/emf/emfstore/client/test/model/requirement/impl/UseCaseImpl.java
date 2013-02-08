@@ -39,32 +39,32 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getInitiatingActor <em>Initiating
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getInitiatingActor <em>Initiating
  * Actor</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getParticipatingActors <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getParticipatingActors <em>
  * Participating Actors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getRealizedUserTask <em>Realized
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getRealizedUserTask <em>Realized
  * User Task</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getPrecondition <em>Precondition
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getPrecondition <em>Precondition
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getUseCaseSteps <em>Use Case Steps
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getUseCaseSteps <em>Use Case Steps
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getPostcondition <em>Postcondition
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getPostcondition <em>Postcondition
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getRules <em>Rules</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getException <em>Exception</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getScenarios <em>Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getFunctionalRequirements <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getRules <em>Rules</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getException <em>Exception</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getScenarios <em>Scenarios</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getFunctionalRequirements <em>
  * Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getNonFunctionalRequirements <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getNonFunctionalRequirements <em>
  * Non Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getIdentifiedClasses <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getIdentifiedClasses <em>
  * Identified Classes</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getIncludedUseCases <em>Included
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getIncludedUseCases <em>Included
  * Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getExtendedUseCases <em>Extended
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getExtendedUseCases <em>Extended
  * Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.UseCaseImpl#getSystemFunctions <em>System
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UseCaseImpl#getSystemFunctions <em>System
  * Functions</em>}</li>
  * </ul>
  * </p>

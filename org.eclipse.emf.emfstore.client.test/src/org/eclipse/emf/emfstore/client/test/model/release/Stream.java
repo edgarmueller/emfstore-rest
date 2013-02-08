@@ -18,21 +18,21 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.Stream#getReleases <em>Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.release.Stream#getSourceCodeRepositoryStream <em>Source Code
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getReleases <em>Releases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream <em>Source Code
  * Repository Stream</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage#getStream()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage#getStream()
  * @model
  * @generated
  */
 public interface Stream extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Releases</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Releases</em>' containment reference list isn't clear, there really should be more of
@@ -41,8 +41,8 @@ public interface Stream extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Releases</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage#getStream_Releases()
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getStream
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage#getStream_Releases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream
 	 * @model opposite="stream" containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -58,7 +58,7 @@ public interface Stream extends EObject {
 	 * 
 	 * @return the value of the '<em>Source Code Repository Stream</em>' reference.
 	 * @see #setSourceCodeRepositoryStream(SourceCodeRepositoryStream)
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage#getStream_SourceCodeRepositoryStream()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage#getStream_SourceCodeRepositoryStream()
 	 * @model
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface Stream extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Stream#getSourceCodeRepositoryStream
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream
 	 * <em>Source Code Repository Stream</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source Code Repository Stream</em>' reference.

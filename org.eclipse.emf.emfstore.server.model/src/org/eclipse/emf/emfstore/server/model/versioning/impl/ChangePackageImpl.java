@@ -45,16 +45,16 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.util.Operatio
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getOperations
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl#getOperations
  * <em>Operations</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getEvents
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl#getEvents
  * <em>Events</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getLogMessage
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl#getLogMessage
  * <em>Log Message</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.ChangePackageImpl#getVersionProperties
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl#getVersionProperties
  * <em>Version Properties</em>}</li>
  * </ul>
  * </p>
@@ -247,7 +247,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#apply(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#apply(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 * @generated NOT
 	 */
 	public void apply(Project project) {
@@ -257,7 +257,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#apply(org.eclipse.emf.emfstore.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#apply(org.eclipse.emf.emfstore.internal.common.model.Project,
 	 *      boolean)
 	 */
 	public void apply(Project project, boolean force) {
@@ -396,7 +396,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getCopyOfOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getCopyOfOperations()
 	 */
 	public List<AbstractOperation> getCopyOfOperations() {
 		List<AbstractOperation> copiedOperations = new ArrayList<AbstractOperation>();
@@ -420,7 +420,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage#getAllInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getAllInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getAllInvolvedModelElements() {
 		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();

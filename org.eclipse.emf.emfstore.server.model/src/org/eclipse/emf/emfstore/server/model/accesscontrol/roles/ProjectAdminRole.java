@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.server.model.accesscontrol.roles;
  * -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage#getProjectAdminRole()
+ * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage#getProjectAdminRole()
  * @model
  * @generated
  */

@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.component.impl.DeploymentNodeImpl#getComponents <em>Components
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl#getComponents <em>Components
  * </em>}</li>
  * </ul>
  * </p>

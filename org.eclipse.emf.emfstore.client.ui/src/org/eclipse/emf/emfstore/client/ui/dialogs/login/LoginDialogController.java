@@ -15,12 +15,12 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.jface.window.Window;
@@ -43,7 +43,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
 	 */
 	public Usersession[] getKnownUsersessions() {
 		HashSet<Object> set = new LinkedHashSet<Object>();
@@ -82,7 +82,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#isUsersessionLocked()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#isUsersessionLocked()
 	 */
 	public boolean isUsersessionLocked() {
 		if (getUsersession() == null) {
@@ -95,7 +95,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerLabel()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServerLabel()
 	 */
 	public String getServerLabel() {
 		return getServerInfo().getName();
@@ -105,7 +105,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void validate(Usersession usersession) throws EMFStoreException {
 		// TODO login code
@@ -125,7 +125,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getUsersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getUsersession()
 	 */
 	public Usersession getUsersession() {
 		return usersession;
@@ -135,7 +135,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
 	 */
 	public ServerInfo getServerInfo() {
 		if (serverInfo != null) {

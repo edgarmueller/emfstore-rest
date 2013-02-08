@@ -21,15 +21,15 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName
  * <em>Name</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getOperations
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getOperations
  * <em>Operations</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getOperationGroup()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getOperationGroup()
  * @model
  * @generated
  */
@@ -44,14 +44,14 @@ public interface OperationGroup extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getOperationGroup_Name()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getOperationGroup_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
@@ -61,7 +61,7 @@ public interface OperationGroup extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' reference list isn't clear, there really should be more of a
@@ -69,7 +69,7 @@ public interface OperationGroup extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operations</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getOperationGroup_Operations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getOperationGroup_Operations()
 	 * @model
 	 * @generated
 	 */

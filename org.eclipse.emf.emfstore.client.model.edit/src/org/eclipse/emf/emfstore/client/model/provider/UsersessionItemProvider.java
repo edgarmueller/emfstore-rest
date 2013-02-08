@@ -27,13 +27,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.model.Usersession} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.Usersession} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

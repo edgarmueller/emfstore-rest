@@ -14,11 +14,11 @@ import static java.util.Arrays.asList;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeConflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetConflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetSetConflict;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeConflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetConflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetSetConflict;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation;
 import org.junit.Test;

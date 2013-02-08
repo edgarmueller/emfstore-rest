@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.impl.TagVersionSpecImpl#getName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.TagVersionSpecImpl#getName
  * <em>Name</em>}</li>
  * </ul>
  * </p>

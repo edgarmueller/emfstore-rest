@@ -31,9 +31,9 @@ import org.eclipse.emf.emfstore.common.model.ModelElementId;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.impl.ModelElementPathImpl#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.impl.ModelElementPathImpl#getTarget <em>Target</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.util.impl.ModelElementPathImpl#getPath <em>Path</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl#getPath <em>Path</em>}</li>
  * </ul>
  * </p>
  * 

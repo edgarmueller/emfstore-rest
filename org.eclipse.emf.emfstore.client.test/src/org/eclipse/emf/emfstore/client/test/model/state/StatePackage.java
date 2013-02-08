@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StateFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateFactory
  * @model kind="package"
  * @generated
  */
@@ -50,7 +50,7 @@ public interface StatePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.state";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.state";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -60,11 +60,11 @@ public interface StatePackage extends EPackage {
 	StatePackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateNodeImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
 	 * <em>Node</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateNodeImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateNode()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateNode()
 	 * @generated
 	 */
 	int STATE_NODE = 2;
@@ -190,11 +190,11 @@ public interface StatePackage extends EPackage {
 	int STATE_NODE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
 	 * <em>State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getState()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getState()
 	 * @generated
 	 */
 	int STATE = 0;
@@ -345,11 +345,11 @@ public interface StatePackage extends EPackage {
 	int STATE_FEATURE_COUNT = STATE_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.TransitionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
 	 * <em>Transition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.TransitionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getTransition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getTransition()
 	 * @generated
 	 */
 	int TRANSITION = 1;
@@ -482,11 +482,11 @@ public interface StatePackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateInitialImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
 	 * <em>Initial</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateInitialImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateInitial()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateInitial()
 	 * @generated
 	 */
 	int STATE_INITIAL = 3;
@@ -612,11 +612,11 @@ public interface StatePackage extends EPackage {
 	int STATE_INITIAL_FEATURE_COUNT = STATE_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateEndImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
 	 * <em>End</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateEndImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateEnd()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateEnd()
 	 * @generated
 	 */
 	int STATE_END = 4;
@@ -742,22 +742,22 @@ public interface StatePackage extends EPackage {
 	int STATE_END_FEATURE_COUNT = STATE_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.state.State <em>State</em>}
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State <em>State</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>State</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.State
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State
 	 * @generated
 	 */
 	EClass getState();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Exit Conditions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.State#getExitConditions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions()
 	 * @see #getState()
 	 * @generated
 	 */
@@ -765,11 +765,11 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.State#getActivities <em>Activities</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getActivities <em>Activities</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Activities</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.State#getActivities()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State#getActivities()
 	 * @see #getState()
 	 * @generated
 	 */
@@ -777,33 +777,33 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Entry Conditions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.State#getEntryConditions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions()
 	 * @see #getState()
 	 * @generated
 	 */
 	EAttribute getState_EntryConditions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.state.Transition
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition
 	 * <em>Transition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Transition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition
 	 * @generated
 	 */
 	EClass getTransition();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getCondition <em>Condition</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition <em>Condition</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Condition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition#getCondition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition()
 	 * @see #getTransition()
 	 * @generated
 	 */
@@ -811,11 +811,11 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource <em>Source</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition#getSource()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getSource()
 	 * @see #getTransition()
 	 * @generated
 	 */
@@ -823,33 +823,33 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget <em>Target</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.Transition#getTarget()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getTarget()
 	 * @see #getTransition()
 	 * @generated
 	 */
 	EReference getTransition_Target();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.state.StateNode
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode
 	 * <em>Node</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Node</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode
 	 * @generated
 	 */
 	EClass getStateNode();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getOutgoingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getOutgoingTransitions
 	 * <em>Outgoing Transitions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Outgoing Transitions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode#getOutgoingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getOutgoingTransitions()
 	 * @see #getStateNode()
 	 * @generated
 	 */
@@ -857,32 +857,32 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.state.StateNode#getIncomingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getIncomingTransitions
 	 * <em>Incoming Transitions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Incoming Transitions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateNode#getIncomingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateNode#getIncomingTransitions()
 	 * @see #getStateNode()
 	 * @generated
 	 */
 	EReference getStateNode_IncomingTransitions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.state.StateInitial
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial
 	 * <em>Initial</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Initial</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateInitial
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial
 	 * @generated
 	 */
 	EClass getStateInitial();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.state.StateEnd <em>End</em>}
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd <em>End</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>End</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StateEnd
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd
 	 * @generated
 	 */
 	EClass getStateEnd();
@@ -909,11 +909,11 @@ public interface StatePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
 		 * <em>State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getState()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getState()
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
@@ -943,11 +943,11 @@ public interface StatePackage extends EPackage {
 		EAttribute STATE__ENTRY_CONDITIONS = eINSTANCE.getState_EntryConditions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.TransitionImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
 		 * <em>Transition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.TransitionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getTransition()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getTransition()
 		 * @generated
 		 */
 		EClass TRANSITION = eINSTANCE.getTransition();
@@ -977,11 +977,11 @@ public interface StatePackage extends EPackage {
 		EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateNodeImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
 		 * <em>Node</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateNodeImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateNode()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateNode()
 		 * @generated
 		 */
 		EClass STATE_NODE = eINSTANCE.getStateNode();
@@ -1004,21 +1004,21 @@ public interface StatePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateInitialImpl <em>Initial</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl <em>Initial</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateInitialImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateInitial()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateInitial()
 		 * @generated
 		 */
 		EClass STATE_INITIAL = eINSTANCE.getStateInitial();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.state.impl.StateEndImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
 		 * <em>End</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StateEndImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.state.impl.StatePackageImpl#getStateEnd()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StatePackageImpl#getStateEnd()
 		 * @generated
 		 */
 		EClass STATE_END = eINSTANCE.getStateEnd();

@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec
  *          end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getBranchVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getBranchVersionSpec()
  * @model
  * @generated
  */

@@ -29,10 +29,10 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.profile.impl.StereotypeAttributeInstanceImpl#getStereotypeInstance
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeAttributeInstanceImpl#getStereotypeInstance
  * <em>Stereotype Instance</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.profile.impl.StereotypeAttributeInstanceImpl#getStereotypeAttribute
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeAttributeInstanceImpl#getStereotypeAttribute
  * <em>Stereotype Attribute</em>}</li>
  * </ul>
  * </p>

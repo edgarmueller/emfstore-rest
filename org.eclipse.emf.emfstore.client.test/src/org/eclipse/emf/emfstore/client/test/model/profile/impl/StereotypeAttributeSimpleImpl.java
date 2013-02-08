@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeSim
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.impl.StereotypeAttributeSimpleImpl#getType <em>Type
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeAttributeSimpleImpl#getType <em>Type
  * </em>}</li>
  * </ul>
  * </p>

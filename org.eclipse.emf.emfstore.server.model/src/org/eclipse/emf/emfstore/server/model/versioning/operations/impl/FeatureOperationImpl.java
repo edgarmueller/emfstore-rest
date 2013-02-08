@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.FeatureOperationImpl#getFeatureName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.FeatureOperationImpl#getFeatureName
  * <em>Feature Name</em>}</li>
  * </ul>
  * </p>
@@ -177,7 +177,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 * @generated NOT
 	 */
 	public EStructuralFeature getFeature(Project project) throws UnkownFeatureException {
@@ -191,7 +191,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#reverse()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#reverse()
 	 */
 	@Override
 	public AbstractOperation reverse() {
@@ -203,7 +203,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 * {@inheritDoc}
 	 * 
 	 * @generated NOT
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getLeafOperations()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getLeafOperations()
 	 */
 	public List<AbstractOperation> getLeafOperations() {
 		List<AbstractOperation> result = new ArrayList<AbstractOperation>();
@@ -215,7 +215,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 * {@inheritDoc}
 	 * 
 	 * @generated NOT
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.common.model.ModelElement)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getFeature(org.eclipse.emf.emfstore.internal.common.model.ModelElement)
 	 */
 	public EStructuralFeature getFeature(EObject modelElement) throws UnkownFeatureException {
 		EList<EStructuralFeature> features = modelElement.eClass().getEAllStructuralFeatures();

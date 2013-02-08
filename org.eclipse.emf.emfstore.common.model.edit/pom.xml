@@ -3,13 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.eclipse.emf.emfstore</groupId>
+    <groupId>org.eclipse.emf.emfstore.internal</groupId>
     <artifactId>emfstore-parent</artifactId>
     <version>0.9.3-SNAPSHOT</version>
-    <relativePath>../../org.eclipse.emf.emfstore.releng/emfstore-parent/</relativePath>
+    <relativePath>../../org.eclipse.emf.emfstore.internal.releng/emfstore-parent/</relativePath>
   </parent>
-  <groupId>org.eclipse.emf.emfstore</groupId>
-  <artifactId>org.eclipse.emf.emfstore.common.model.edit</artifactId>
+  <groupId>org.eclipse.emf.emfstore.internal</groupId>
+  <artifactId>org.eclipse.emf.emfstore.internal.common.model.edit</artifactId>
   <version>0.9.3-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>

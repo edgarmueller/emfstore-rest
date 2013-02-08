@@ -15,8 +15,8 @@ package org.eclipse.emf.emfstore.client.api;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
 /**

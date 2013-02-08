@@ -32,11 +32,11 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.PackageElementImpl#getParentPackage <em>Parent
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl#getParentPackage <em>Parent
  * Package</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.PackageElementImpl#getOutgoingDependencies <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl#getOutgoingDependencies <em>
  * Outgoing Dependencies</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.PackageElementImpl#getIncomingDependencies <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl#getIncomingDependencies <em>
  * Incoming Dependencies</em>}</li>
  * </ul>
  * </p>

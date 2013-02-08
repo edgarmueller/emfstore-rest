@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ClientVersionInfo} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

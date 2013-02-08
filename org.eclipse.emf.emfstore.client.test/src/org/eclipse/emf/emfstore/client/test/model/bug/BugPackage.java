@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.TaskPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.bug.BugFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugFactory
  * @model kind="package"
  * @generated
  */
@@ -50,7 +50,7 @@ public interface BugPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.bug";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.bug";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -60,11 +60,11 @@ public interface BugPackage extends EPackage {
 	BugPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.impl.BugReportImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
 	 * <em>Report</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugReportImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getBugReport()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getBugReport()
 	 * @generated
 	 */
 	int BUG_REPORT = 0;
@@ -321,42 +321,42 @@ public interface BugPackage extends EPackage {
 	int BUG_REPORT_FEATURE_COUNT = TaskPackage.WORK_ITEM_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.Severity <em>Severity</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity <em>Severity</em>}'
 	 * enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.Severity
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getSeverity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getSeverity()
 	 * @generated
 	 */
 	int SEVERITY = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
 	 * <em>Resolution Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getResolutionType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getResolutionType()
 	 * @generated
 	 */
 	int RESOLUTION_TYPE = 2;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
 	 * <em>Report</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Report</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
 	 * @generated
 	 */
 	EClass getBugReport();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getSeverity <em>Severity</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getSeverity <em>Severity</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Severity</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getSeverity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getSeverity()
 	 * @see #getBugReport()
 	 * @generated
 	 */
@@ -364,11 +364,11 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getResolution <em>Resolution</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolution <em>Resolution</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resolution</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getResolution()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolution()
 	 * @see #getBugReport()
 	 * @generated
 	 */
@@ -376,11 +376,11 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getResolutionType <em>Resolution Type</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType <em>Resolution Type</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resolution Type</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport#getResolutionType()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType()
 	 * @see #getBugReport()
 	 * @generated
 	 */
@@ -388,32 +388,32 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport#isDone <em>Done</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone <em>Done</em>}'. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Done</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport#isDone()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone()
 	 * @see #getBugReport()
 	 * @generated
 	 */
 	EAttribute getBugReport_Done();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.client.test.model.bug.Severity
+	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
 	 * <em>Severity</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Severity</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.Severity
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
 	 * @generated
 	 */
 	EEnum getSeverity();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
+	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
 	 * <em>Resolution Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Resolution Type</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
 	 * @generated
 	 */
 	EEnum getResolutionType();
@@ -440,11 +440,11 @@ public interface BugPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.impl.BugReportImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
 		 * <em>Report</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugReportImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getBugReport()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getBugReport()
 		 * @generated
 		 */
 		EClass BUG_REPORT = eINSTANCE.getBugReport();
@@ -482,21 +482,21 @@ public interface BugPackage extends EPackage {
 		EAttribute BUG_REPORT__DONE = eINSTANCE.getBugReport_Done();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.Severity
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
 		 * <em>Severity</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.Severity
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getSeverity()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getSeverity()
 		 * @generated
 		 */
 		EEnum SEVERITY = eINSTANCE.getSeverity();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
 		 * <em>Resolution Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.ResolutionType
-		 * @see org.eclipse.emf.emfstore.client.test.model.bug.impl.BugPackageImpl#getResolutionType()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugPackageImpl#getResolutionType()
 		 * @generated
 		 */
 		EEnum RESOLUTION_TYPE = eINSTANCE.getResolutionType();

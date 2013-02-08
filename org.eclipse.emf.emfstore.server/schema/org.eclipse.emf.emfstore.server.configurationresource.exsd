@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.server" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.server" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.server" id="org.eclipse.emf.emfstore.server.configurationresource" name="ConfigurationResources"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="org.eclipse.emf.emfstore.internal.server.configurationresource" name="ConfigurationResources"/>
       </appInfo>
       <documentation>
          Enables to replace the default property file &apos;es.properties&apos; and keystore file &apos;emfstore.keyStore&apos;.  When used, both files, which are used for replacement, must be named exactly like those being replaced, i.e. &apos;es.properties&apos; and &apos;emfstore.keyStore&apos;.

@@ -16,12 +16,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.eclipse.emf.emfstore.client.model.CompositeOperationHandle;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.exceptions.InvalidHandleException;
-import org.eclipse.emf.emfstore.client.model.impl.AutoOperationWrapper;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
 import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
@@ -33,6 +27,12 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.AutoOperationWrapper;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 import org.junit.Test;

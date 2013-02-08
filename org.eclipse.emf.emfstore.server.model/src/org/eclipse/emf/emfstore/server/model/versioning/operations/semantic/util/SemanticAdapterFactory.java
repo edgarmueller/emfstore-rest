@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticPackage
  * @generated
  */
 public class SemanticAdapterFactory extends AdapterFactoryImpl {
@@ -109,13 +109,13 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation <em>Composite Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation <em>Composite Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation
 	 * @generated
 	 */
 	public Adapter createSemanticCompositeOperationAdapter() {
@@ -123,13 +123,13 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * @generated
 	 */
 	public Adapter createIdentifiableElementAdapter() {
@@ -137,13 +137,13 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation <em>Abstract Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation <em>Abstract Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation
 	 * @generated
 	 */
 	public Adapter createAbstractOperationAdapter() {
@@ -151,13 +151,13 @@ public class SemanticAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation <em>Composite Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation <em>Composite Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation
 	 * @generated
 	 */
 	public Adapter createCompositeOperationAdapter() {

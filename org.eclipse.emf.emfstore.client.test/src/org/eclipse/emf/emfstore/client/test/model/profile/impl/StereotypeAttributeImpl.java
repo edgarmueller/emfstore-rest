@@ -33,10 +33,10 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeIns
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.impl.StereotypeAttributeImpl#getStereotype <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeAttributeImpl#getStereotype <em>
  * Stereotype</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.profile.impl.StereotypeAttributeImpl#getStereotypeAttributeInstances
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeAttributeImpl#getStereotypeAttributeInstances
  * <em>Stereotype Attribute Instances</em>}</li>
  * </ul>
  * </p>

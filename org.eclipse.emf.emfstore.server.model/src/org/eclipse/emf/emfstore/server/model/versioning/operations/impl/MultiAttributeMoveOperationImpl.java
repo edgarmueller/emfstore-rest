@@ -29,9 +29,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getOldIndex <em>Old Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getNewIndex <em>New Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getReferencedValue <em>Referenced Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getOldIndex <em>Old Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getNewIndex <em>New Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeMoveOperationImpl#getReferencedValue <em>Referenced Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -264,7 +264,7 @@ public class MultiAttributeMoveOperationImpl extends FeatureOperationImpl implem
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	public void apply(IdEObjectCollection project) {
 		EObject modelElement = project.getModelElement(getModelElementId());

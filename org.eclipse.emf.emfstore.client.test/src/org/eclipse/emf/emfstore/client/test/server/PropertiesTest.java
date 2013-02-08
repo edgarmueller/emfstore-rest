@@ -14,15 +14,15 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
-import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.properties.EMFStorePropertiesOutdatedException;
-import org.eclipse.emf.emfstore.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.properties.EMFStorePropertiesOutdatedException;
+import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Assert;
 import org.junit.Test;

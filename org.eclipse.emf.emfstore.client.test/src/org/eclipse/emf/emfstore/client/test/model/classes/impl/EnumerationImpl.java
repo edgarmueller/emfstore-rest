@@ -29,8 +29,8 @@ import org.eclipse.emf.emfstore.client.test.model.classes.Literal;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.EnumerationImpl#getLiterals <em>Literals</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.EnumerationImpl#getAttributes <em>Attributes</em>}
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl#getLiterals <em>Literals</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl#getAttributes <em>Attributes</em>}
  * </li>
  * </ul>
  * </p>

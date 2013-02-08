@@ -1,10 +1,10 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.internal.client.api.IWorkspace;
+import org.eclipse.emf.emfstore.internal.client.api.IWorkspaceProvider;
 import org.junit.After;
 import org.junit.Before;
 

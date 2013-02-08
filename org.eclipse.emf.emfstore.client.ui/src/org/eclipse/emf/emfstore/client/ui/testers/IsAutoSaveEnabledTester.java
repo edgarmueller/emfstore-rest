@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.emf.emfstore.client.model.Configuration;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
 /**
  * Tests if auto save is enabled.
@@ -36,7 +36,7 @@ public class IsAutoSaveEnabledTester extends PropertyTester {
 	}
 
 	private static boolean initExtensionPoint() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.disableSaveControls");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.disableSaveControls");
 		ExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {

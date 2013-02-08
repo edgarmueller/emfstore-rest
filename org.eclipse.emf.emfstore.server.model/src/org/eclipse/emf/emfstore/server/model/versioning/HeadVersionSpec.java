@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IHeadVersionSpec;
  *          -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHeadVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHeadVersionSpec()
  * @model
  * @generated
  */

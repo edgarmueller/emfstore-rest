@@ -18,23 +18,23 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getParentPackage <em>Parent Package
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getParentPackage <em>Parent Package
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getOutgoingDependencies <em>Outgoing
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getOutgoingDependencies <em>Outgoing
  * Dependencies</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getIncomingDependencies <em>Incoming
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getIncomingDependencies <em>Incoming
  * Dependencies</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackageElement()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackageElement()
  * @model abstract="true"
  * @generated
  */
 public interface PackageElement extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Parent Package</b></em>' container reference. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.classes.Package#getContainedPackageElements
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getContainedPackageElements
 	 * <em>Contained Package Elements</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Package</em>' container reference isn't clear, there really should be more of a
@@ -43,9 +43,9 @@ public interface PackageElement extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Parent Package</em>' container reference.
-	 * @see #setParentPackage(org.eclipse.emf.emfstore.client.test.model.classes.Package)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackageElement_ParentPackage()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Package#getContainedPackageElements
+	 * @see #setParentPackage(org.eclipse.emf.emfstore.internal.client.test.model.classes.Package)
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackageElement_ParentPackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getContainedPackageElements
 	 * @model opposite="containedPackageElements" transient="false"
 	 *        annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
@@ -53,7 +53,7 @@ public interface PackageElement extends UnicaseModelElement {
 	org.eclipse.emf.emfstore.client.test.model.classes.Package getParentPackage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement#getParentPackage
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement#getParentPackage
 	 * <em>Parent Package</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Parent Package</em>' container reference.
@@ -64,8 +64,8 @@ public interface PackageElement extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Outgoing Dependencies</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency#getSource <em>Source</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Outgoing Dependencies</em>' reference list isn't clear, there really should be more of
@@ -74,8 +74,8 @@ public interface PackageElement extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Outgoing Dependencies</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackageElement_OutgoingDependencies()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Dependency#getSource
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackageElement_OutgoingDependencies()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency#getSource
 	 * @model opposite="source" annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */
@@ -83,8 +83,8 @@ public interface PackageElement extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Dependencies</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency#getTarget <em>Target</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Incoming Dependencies</em>' reference list isn't clear, there really should be more of
@@ -93,8 +93,8 @@ public interface PackageElement extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Incoming Dependencies</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getPackageElement_IncomingDependencies()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Dependency#getTarget
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getPackageElement_IncomingDependencies()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency#getTarget
 	 * @model opposite="target" annotation="org.unicase.ui.meeditor priority='11.0' position='right'"
 	 * @generated
 	 */

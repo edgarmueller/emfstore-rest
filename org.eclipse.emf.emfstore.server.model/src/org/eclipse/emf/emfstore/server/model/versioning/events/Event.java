@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event#getTimestamp <em>Timestamp</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage#getEvent()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsPackage#getEvent()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface Event extends EObject {
 	 * 
 	 * @return the value of the '<em>Timestamp</em>' attribute.
 	 * @see #setTimestamp(Date)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage#getEvent_Timestamp()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsPackage#getEvent_Timestamp()
 	 * @model
 	 * @generated
 	 */
 	Date getTimestamp();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event#getTimestamp
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event#getTimestamp
 	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 

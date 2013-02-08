@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.EObjectToModelElementIdMapImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *

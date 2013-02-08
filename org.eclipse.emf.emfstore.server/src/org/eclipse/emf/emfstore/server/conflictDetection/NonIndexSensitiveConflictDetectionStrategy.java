@@ -31,8 +31,8 @@ public class NonIndexSensitiveConflictDetectionStrategy implements ConflictDetec
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean doConflict(AbstractOperation operationA, AbstractOperation operationB) {
 		if (indexSensitiveConflictDetectionStrategy.doConflict(operationA, operationB)) {
@@ -44,8 +44,8 @@ public class NonIndexSensitiveConflictDetectionStrategy implements ConflictDetec
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean isRequired(AbstractOperation requiredOperation, AbstractOperation operation) {
 		return (indexSensitiveConflictDetectionStrategy.isRequired(requiredOperation, operation));

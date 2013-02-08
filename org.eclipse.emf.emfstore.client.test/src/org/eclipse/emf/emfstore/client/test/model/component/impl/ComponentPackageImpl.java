@@ -88,7 +88,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.component.ComponentPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

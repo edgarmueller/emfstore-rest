@@ -16,12 +16,12 @@ package org.eclipse.emf.emfstore.client.test.model.profile;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstanceString#getValue <em>Value
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString#getValue <em>Value
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstanceString()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstanceString()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface StereotypeAttributeInstanceString extends StereotypeAttributeIn
 	 * 
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstanceString_Value()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage#getStereotypeAttributeInstanceString_Value()
 	 * @model
 	 * @generated
 	 */
@@ -44,7 +44,7 @@ public interface StereotypeAttributeInstanceString extends StereotypeAttributeIn
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstanceString#getValue
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString#getValue
 	 * <em>Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Value</em>' attribute.

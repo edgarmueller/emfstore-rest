@@ -46,7 +46,7 @@ import org.eclipse.emf.emfstore.client.test.model.state.StateFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.document.LeafSection}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.swt.graphics.Image;
 

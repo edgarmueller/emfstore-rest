@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.impl.AnnotationImpl#getAnnotatedModelElements <em>Annotated
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AnnotationImpl#getAnnotatedModelElements <em>Annotated
  * Model Elements</em>}</li>
  * </ul>
  * </p>

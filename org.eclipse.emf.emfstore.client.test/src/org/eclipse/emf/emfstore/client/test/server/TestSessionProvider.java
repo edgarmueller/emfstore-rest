@@ -10,15 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.Assert;
@@ -76,7 +76,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	public TestSessionProvider() {
 
 		final Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		usersession = org.eclipse.emf.emfstore.client.model.ModelFactory.eINSTANCE.createUsersession();
+		usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
 		usersession.setUsername("super");
 		usersession.setPassword("super");

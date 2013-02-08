@@ -17,13 +17,13 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation()
  * @model
  * @generated
  */
@@ -39,14 +39,14 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>Index</em>' attribute.
 	 * @see #setIndex(int)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_Index()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_Index()
 	 * @model
 	 * @generated
 	 */
 	int getIndex();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getIndex <em>Index</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Index</em>' attribute.
 	 * @see #getIndex()
@@ -65,7 +65,7 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>Old Value</em>' attribute.
 	 * @see #setOldValue(Object)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_OldValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_OldValue()
 	 * @model
 	 * @generated
 	 */
@@ -73,7 +73,7 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getOldValue
 	 * <em>Old Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -95,7 +95,7 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>New Value</em>' attribute.
 	 * @see #setNewValue(Object)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_NewValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeSetOperation_NewValue()
 	 * @model
 	 * @generated
 	 */
@@ -103,7 +103,7 @@ public interface MultiAttributeSetOperation extends FeatureOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation#getNewValue
 	 * <em>New Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 

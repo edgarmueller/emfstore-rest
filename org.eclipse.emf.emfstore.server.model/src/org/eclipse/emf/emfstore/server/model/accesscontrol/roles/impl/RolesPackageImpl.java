@@ -85,7 +85,7 @@ public class RolesPackageImpl extends EPackageImpl implements RolesPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

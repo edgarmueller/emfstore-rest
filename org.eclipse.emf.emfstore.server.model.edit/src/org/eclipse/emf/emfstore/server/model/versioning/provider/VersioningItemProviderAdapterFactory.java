@@ -83,7 +83,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -92,7 +92,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected TagVersionSpecItemProvider tagVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -108,7 +108,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -117,7 +117,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected DateVersionSpecItemProvider dateVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -133,7 +133,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -142,7 +142,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected PrimaryVersionSpecItemProvider primaryVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -158,7 +158,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -167,7 +167,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected LogMessageItemProvider logMessageItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -183,7 +183,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -192,7 +192,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected ChangePackageItemProvider changePackageItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -208,7 +208,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -217,7 +217,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected HistoryInfoItemProvider historyInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -233,7 +233,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -242,7 +242,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected RangeQueryItemProvider rangeQueryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -258,7 +258,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -267,7 +267,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected PathQueryItemProvider pathQueryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -283,7 +283,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -292,7 +292,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected ModelElementQueryItemProvider modelElementQueryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -307,7 +307,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.server.model.versioning.Version}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version}
 	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -316,7 +316,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected VersionItemProvider versionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.Version}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -332,7 +332,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -341,7 +341,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected HeadVersionSpecItemProvider headVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -357,7 +357,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -366,7 +366,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected VersionPropertyItemProvider versionPropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty}.
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -382,7 +382,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -391,7 +391,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected BranchVersionSpecItemProvider branchVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -407,7 +407,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo} instances.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -416,7 +416,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected BranchInfoItemProvider branchInfoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -432,7 +432,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec} instances.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -441,7 +441,7 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected AncestorVersionSpecItemProvider ancestorVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.profile.ProfilePackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.ProfilePackage
  * @generated
  */
 public class ProfileAdapterFactory extends AdapterFactoryImpl {
@@ -134,12 +134,12 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.profile.Profile
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile
 	 * <em>Profile</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.Profile
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile
 	 * @generated
 	 */
 	public Adapter createProfileAdapter() {
@@ -148,12 +148,12 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.Stereotype <em>Stereotype</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype <em>Stereotype</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.Stereotype
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype
 	 * @generated
 	 */
 	public Adapter createStereotypeAdapter() {
@@ -162,12 +162,12 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance <em>Stereotype Instance</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance <em>Stereotype Instance</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance
 	 * @generated
 	 */
 	public Adapter createStereotypeInstanceAdapter() {
@@ -176,12 +176,12 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttribute <em>Stereotype Attribute</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute <em>Stereotype Attribute</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttribute
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute
 	 * @generated
 	 */
 	public Adapter createStereotypeAttributeAdapter() {
@@ -190,13 +190,13 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeSimple
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple
 	 * <em>Stereotype Attribute Simple</em>}'. <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeSimple
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple
 	 * @generated
 	 */
 	public Adapter createStereotypeAttributeSimpleAdapter() {
@@ -205,13 +205,13 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance
 	 * <em>Stereotype Attribute Instance</em>}'. <!-- begin-user-doc --> This default implementation returns null so
 	 * that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstance
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance
 	 * @generated
 	 */
 	public Adapter createStereotypeAttributeInstanceAdapter() {
@@ -220,13 +220,13 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstanceString
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString
 	 * <em>Stereotype Attribute Instance String</em>}'. <!-- begin-user-doc --> This default implementation returns null
 	 * so that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.profile.StereotypeAttributeInstanceString
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString
 	 * @generated
 	 */
 	public Adapter createStereotypeAttributeInstanceStringAdapter() {
@@ -235,12 +235,12 @@ public class ProfileAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

@@ -12,15 +12,15 @@ package org.eclipse.emf.emfstore.client.ui.dialogs.merge;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.IConflictResolver;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.util.MergeLabelProvider;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
@@ -80,7 +80,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements ICo
 	private MergeLabelProvider getLabelProvider() {
 
 		if (labelProvider == null) {
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.merge.labelprovider");
 			ExtensionElement element = extensionPoint.getElementWithHighestPriority();
 
 			if (element == null) {

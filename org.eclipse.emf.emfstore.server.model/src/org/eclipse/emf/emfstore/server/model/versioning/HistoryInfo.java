@@ -23,23 +23,23 @@ import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery Spec
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery Spec
  *          </em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getNextSpec <em>Next Spec</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec <em>Previous Spec
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getNextSpec <em>Next Spec</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPreviousSpec <em>Previous Spec
  *          </em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedFrom <em>Merged From</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getMergedTo <em>Merged To</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage <em>Log Message</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getTagSpecs <em>Tag Specs</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getVersionProperties <em>Version
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getMergedFrom <em>Merged From</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getMergedTo <em>Merged To</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getLogMessage <em>Log Message</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getTagSpecs <em>Tag Specs</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getVersionProperties <em>Version
  *          Properties</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getChangePackage <em>Change Package
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getChangePackage <em>Change Package
  *          </em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo()
  * @model
  * @generated
  */
@@ -55,14 +55,14 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * 
 	 * @return the value of the '<em>Primery Spec</em>' containment reference.
 	 * @see #setPrimerySpec(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_PrimerySpec()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_PrimerySpec()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getPrimerySpec();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPrimerySpec
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec
 	 * <em>Primery Spec</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,7 +75,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 
 	/**
 	 * Returns the value of the '<em><b>Next Spec</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Next Spec</em>' containment reference list isn't clear, there really should be more of
@@ -84,7 +84,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Next Spec</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_NextSpec()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_NextSpec()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -101,14 +101,14 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * 
 	 * @return the value of the '<em>Previous Spec</em>' containment reference.
 	 * @see #setPreviousSpec(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_PreviousSpec()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_PreviousSpec()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getPreviousSpec();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getPreviousSpec
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPreviousSpec
 	 * <em>Previous Spec</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,7 +121,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 
 	/**
 	 * Returns the value of the '<em><b>Merged From</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merged From</em>' containment reference list isn't clear, there really should be more
@@ -130,7 +130,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Merged From</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_MergedFrom()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_MergedFrom()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -138,7 +138,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 
 	/**
 	 * Returns the value of the '<em><b>Merged To</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merged To</em>' containment reference list isn't clear, there really should be more of
@@ -147,7 +147,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Merged To</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_MergedTo()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_MergedTo()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -164,14 +164,14 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * 
 	 * @return the value of the '<em>Log Message</em>' containment reference.
 	 * @see #setLogMessage(LogMessage)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_LogMessage()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_LogMessage()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getLogMessage
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getLogMessage
 	 * <em>Log Message</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -184,7 +184,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 
 	/**
 	 * Returns the value of the '<em><b>Tag Specs</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tag Specs</em>' containment reference list isn't clear, there really should be more of
@@ -193,7 +193,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Tag Specs</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_TagSpecs()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_TagSpecs()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -201,7 +201,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 
 	/**
 	 * Returns the value of the '<em><b>Version Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Version Properties</em>' containment reference list isn't clear, there really should
@@ -210,7 +210,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Version Properties</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_VersionProperties()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_VersionProperties()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -227,14 +227,14 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * 
 	 * @return the value of the '<em>Change Package</em>' containment reference.
 	 * @see #setChangePackage(ChangePackage)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getHistoryInfo_ChangePackage()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_ChangePackage()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	ChangePackage getChangePackage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo#getChangePackage
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getChangePackage
 	 * <em>Change Package</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

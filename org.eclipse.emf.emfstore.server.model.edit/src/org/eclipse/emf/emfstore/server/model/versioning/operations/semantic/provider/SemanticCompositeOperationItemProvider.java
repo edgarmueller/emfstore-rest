@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.Sema
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation} object. <!--
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -123,7 +123,7 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	 * {@inheritDoc}
 	 * 
 	 * @generated NOT
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.provider.CompositeOperationItemProvider#getChildren(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.provider.CompositeOperationItemProvider#getChildren(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

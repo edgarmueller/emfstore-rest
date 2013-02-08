@@ -14,19 +14,19 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.client.model.exceptions.CancelOperationException;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.client.model.util.IChecksumErrorHandler;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
@@ -91,7 +91,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#noLocalChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#noLocalChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public void noLocalChanges(ILocalProject projectSpace) {
 		RunInUI.run(new Callable<Void>() {
@@ -106,7 +106,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public boolean baseVersionOutOfDate(final ILocalProject projectSpace, final IProgressMonitor progressMonitor) {
 
@@ -133,8 +133,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.ChangePackage)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
 	public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
@@ -162,7 +162,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EMFStoreException {
@@ -218,8 +218,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,

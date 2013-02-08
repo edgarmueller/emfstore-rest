@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.merge.conflictHandler" name="Conflict Handler"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.merge.conflictHandler" name="Conflict Handler"/>
       </appInfo>
       <documentation>
          Allows to register Conflict handler with the decision manager.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.changeTracking.merging.ConflictHandler"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.ConflictHandler"/>
                </appInfo>
             </annotation>
          </attribute>

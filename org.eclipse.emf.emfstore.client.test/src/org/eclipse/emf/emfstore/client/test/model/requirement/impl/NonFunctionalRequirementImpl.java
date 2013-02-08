@@ -33,15 +33,15 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getRestrictedScenarios
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getRestrictedScenarios
  * <em>Restricted Scenarios</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getRestrictedUseCases
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getRestrictedUseCases
  * <em>Restricted Use Cases</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getSystemFunctions
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getSystemFunctions
  * <em>System Functions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getUserTasks <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getUserTasks <em>
  * User Tasks</em>}</li>
  * </ul>
  * </p>

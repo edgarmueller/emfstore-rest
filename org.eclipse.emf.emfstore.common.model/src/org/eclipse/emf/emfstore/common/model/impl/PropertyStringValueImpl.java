@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl#getValue <em>Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  * 

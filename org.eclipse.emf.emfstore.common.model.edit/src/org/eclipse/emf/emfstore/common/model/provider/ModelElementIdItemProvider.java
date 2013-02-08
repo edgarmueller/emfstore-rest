@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.common.model.ModelElementId} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * 

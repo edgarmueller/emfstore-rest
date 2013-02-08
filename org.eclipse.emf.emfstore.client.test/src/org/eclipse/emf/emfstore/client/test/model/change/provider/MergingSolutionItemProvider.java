@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.provider.SolutionIte
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

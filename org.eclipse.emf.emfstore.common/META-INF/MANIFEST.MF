@@ -3,19 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Util  (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.common;singleton:=true
 Bundle-Version: 0.9.3.qualifier
-Bundle-Activator: org.eclipse.emf.emfstore.common.Activator
+Bundle-Activator: org.eclipse.emf.emfstore.internal.common.Activator
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.apache.commons.io,
- org.apache.commons.io.output,
- org.apache.commons.lang,
- org.eclipse.emf.emfstore.common,
- org.eclipse.emf.emfstore.common.extensionpoint,
- org.eclipse.emf.emfstore.common.observer,
- org.eclipse.emf.emfstore.internal.common;x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.server,org.eclipse.emf.ecp.common.util"
+Export-Package: org.eclipse.emf.emfstore.common
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lib/commons-io-2.0.1.jar,

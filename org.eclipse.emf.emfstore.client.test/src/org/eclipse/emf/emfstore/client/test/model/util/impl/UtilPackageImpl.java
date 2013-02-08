@@ -72,7 +72,7 @@ public class UtilPackageImpl extends EPackageImpl implements UtilPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.client.test.model.util.UtilPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.UtilPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

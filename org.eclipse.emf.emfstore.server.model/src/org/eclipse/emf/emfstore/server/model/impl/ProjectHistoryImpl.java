@@ -35,22 +35,22 @@ import org.eclipse.emf.emfstore.server.model.versioning.Version;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getProjectId
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getProjectId
  * <em>Project Id</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getVersions
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getVersions
  * <em>Versions</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getProjectName
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getProjectName
  * <em>Project Name</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getProjectDescription
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getProjectDescription
  * <em>Project Description</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getSharedProperties
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getSharedProperties
  * <em>Shared Properties</em>}</li>
  * <li>
- * {@link org.eclipse.emf.emfstore.server.model.impl.ProjectHistoryImpl#getBranches
+ * {@link org.eclipse.emf.emfstore.internal.server.model.impl.ProjectHistoryImpl#getBranches
  * <em>Branches</em>}</li>
  * </ul>
  * </p>

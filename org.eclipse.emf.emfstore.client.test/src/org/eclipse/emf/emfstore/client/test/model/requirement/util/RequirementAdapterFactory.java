@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.RequirementPackage
  * @generated
  */
 public class RequirementAdapterFactory extends AdapterFactoryImpl {
@@ -165,13 +165,13 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement
 	 * <em>Non Functional Requirement</em>}'. <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.NonFunctionalRequirement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement
 	 * @generated
 	 */
 	public Adapter createNonFunctionalRequirementAdapter() {
@@ -180,13 +180,13 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement
 	 * <em>Functional Requirement</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.FunctionalRequirement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement
 	 * @generated
 	 */
 	public Adapter createFunctionalRequirementAdapter() {
@@ -195,12 +195,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UseCase <em>Use Case</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase <em>Use Case</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UseCase
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase
 	 * @generated
 	 */
 	public Adapter createUseCaseAdapter() {
@@ -209,12 +209,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Scenario <em>Scenario</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario <em>Scenario</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Scenario
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario
 	 * @generated
 	 */
 	public Adapter createScenarioAdapter() {
@@ -223,12 +223,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor <em>Actor</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor <em>Actor</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Actor
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor
 	 * @generated
 	 */
 	public Adapter createActorAdapter() {
@@ -237,12 +237,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance <em>Actor Instance</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance <em>Actor Instance</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.ActorInstance
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance
 	 * @generated
 	 */
 	public Adapter createActorInstanceAdapter() {
@@ -250,12 +250,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.requirement.Step
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step
 	 * <em>Step</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Step
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step
 	 * @generated
 	 */
 	public Adapter createStepAdapter() {
@@ -264,12 +264,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction <em>System Function</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction <em>System Function</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction
 	 * @generated
 	 */
 	public Adapter createSystemFunctionAdapter() {
@@ -278,12 +278,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.UserTask <em>User Task</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask <em>User Task</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.UserTask
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask
 	 * @generated
 	 */
 	public Adapter createUserTaskAdapter() {
@@ -292,12 +292,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.requirement.Workspace <em>Workspace</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace <em>Workspace</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.requirement.Workspace
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace
 	 * @generated
 	 */
 	public Adapter createWorkspaceAdapter() {
@@ -306,12 +306,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {
@@ -320,12 +320,12 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Criterion <em>Criterion</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion <em>Criterion</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Criterion
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
 	 * @generated
 	 */
 	public Adapter createCriterionAdapter() {
@@ -333,13 +333,13 @@ public class RequirementAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * <em>Non Domain Element</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * @generated
 	 */
 	public Adapter createNonDomainElementAdapter() {

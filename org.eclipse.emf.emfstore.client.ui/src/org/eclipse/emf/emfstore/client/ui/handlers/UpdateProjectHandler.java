@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.controller.UIUpdateProjectController;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Updates a {@link ProjectSpace} to the most recent version (HEAD).<br/>
@@ -46,7 +46,7 @@ public class UpdateProjectHandler extends AbstractEMFStoreHandler {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

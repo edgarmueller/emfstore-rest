@@ -32,7 +32,7 @@ public abstract class ImportSource implements ITreeContentProvider {
 	 * @param obj
 	 *            Object from which the parent object will be returned
 	 * @return the parent object of the given object
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getParent(java.lang.Object)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.ImportSource#getParent(java.lang.Object)
 	 */
 	public Object getParent(Object obj) {
 		if (obj instanceof TreeItem) {

@@ -3,8 +3,8 @@ package org.eclipse.emf.emfstore.client.test.api;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.api.IServer;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

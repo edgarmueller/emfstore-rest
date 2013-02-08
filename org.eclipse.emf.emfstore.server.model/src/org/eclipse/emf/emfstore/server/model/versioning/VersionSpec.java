@@ -22,11 +22,11 @@ import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec#getBranch <em>Branch</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getVersionSpec()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getVersionSpec()
  * @model abstract="true"
  * @generated
  */
@@ -44,14 +44,14 @@ public interface VersionSpec extends EObject, IVersionSpec {
 	 * 
 	 * @return the value of the '<em>Branch</em>' attribute.
 	 * @see #setBranch(String)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage#getVersionSpec_Branch()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getVersionSpec_Branch()
 	 * @model default="trunk"
 	 * @generated
 	 */
 	String getBranch();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec#getBranch
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec#getBranch
 	 * <em>Branch</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 

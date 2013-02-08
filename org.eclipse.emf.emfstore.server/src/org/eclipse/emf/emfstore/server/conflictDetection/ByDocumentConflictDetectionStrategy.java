@@ -40,8 +40,8 @@ public class ByDocumentConflictDetectionStrategy implements ConflictDetectionStr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean doConflict(AbstractOperation operationA, AbstractOperation operationB) {
 		Set<ModelElementId> allInvolvedModelElementsA = operationA.getAllInvolvedModelElements();
@@ -68,8 +68,8 @@ public class ByDocumentConflictDetectionStrategy implements ConflictDetectionStr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean isRequired(AbstractOperation requiredOperation, AbstractOperation operation) {
 		return this.doConflict(requiredOperation, operation);

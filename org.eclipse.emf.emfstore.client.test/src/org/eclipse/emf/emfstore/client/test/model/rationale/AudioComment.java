@@ -18,11 +18,11 @@ import org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getAudioComment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getAudioComment()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface AudioComment extends EObject {
 	 * 
 	 * @return the value of the '<em>Audio File</em>' containment reference.
 	 * @see #setAudioFile(FileAttachment)
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getAudioComment_AudioFile()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getAudioComment_AudioFile()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	FileAttachment getAudioFile();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.AudioComment#getAudioFile
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile
 	 * <em>Audio File</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Audio File</em>' containment reference.

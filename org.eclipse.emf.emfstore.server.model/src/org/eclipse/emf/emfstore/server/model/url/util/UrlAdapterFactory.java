@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.url.UrlPackage;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.url.UrlPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage
  * @generated
  */
 public class UrlAdapterFactory extends AdapterFactoryImpl {
@@ -109,13 +109,13 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.url.ServerUrl <em>Server Url</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl <em>Server Url</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.url.ServerUrl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl
 	 * @generated
 	 */
 	public Adapter createServerUrlAdapter() {
@@ -123,13 +123,13 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment <em>Project Url Fragment</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment <em>Project Url Fragment</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment
 	 * @generated
 	 */
 	public Adapter createProjectUrlFragmentAdapter() {
@@ -137,13 +137,13 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment <em>Model Element Url Fragment</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment <em>Model Element Url Fragment</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment
 	 * @generated
 	 */
 	public Adapter createModelElementUrlFragmentAdapter() {
@@ -151,13 +151,13 @@ public class UrlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.url.ModelElementUrl <em>Model Element Url</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl <em>Model Element Url</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.url.ModelElementUrl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl
 	 * @generated
 	 */
 	public Adapter createModelElementUrlAdapter() {

@@ -13,7 +13,7 @@
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory
-          class="org.eclipse.emf.emfstore.server.model.provider.ModelItemProviderAdapterFactory"
+          class="org.eclipse.emf.emfstore.internal.server.model.provider.ModelItemProviderAdapterFactory"
           supportedTypes=
           	"org.eclipse.emf.edit.provider.IEditingDomainItemProvider  
           	 org.eclipse.emf.edit.provider.IStructuredItemContentProvider  
@@ -26,7 +26,7 @@
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http://eclipse.org/emf/emfstore/server/model/accesscontrol" 
-       class = "org.eclipse.emf.emfstore.server.model.accesscontrol.provider.AccesscontrolItemProviderAdapterFactory" 
+       class = "org.eclipse.emf.emfstore.internal.server.model.accesscontrol.provider.AccesscontrolItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -37,7 +37,7 @@
   <extension  point="org.eclipse.emf.edit.itemProviderAdapterFactories">
      <factory
            uri = "http://eclipse.org/emf/emfstore/server/model/accesscontrol/roles"
-           class = "org.eclipse.emf.emfstore.server.model.accesscontrol.roles.provider.RolesItemProviderAdapterFactory"
+           class = "org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.provider.RolesItemProviderAdapterFactory"
            supportedTypes = 
 	         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
 	          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -47,7 +47,7 @@
   </extension>
   <extension  point="org.eclipse.emf.edit.itemProviderAdapterFactories">
      <factory
-           class="org.eclipse.emf.emfstore.server.model.versioning.provider.VersioningItemProviderAdapterFactory"
+           class="org.eclipse.emf.emfstore.internal.server.model.versioning.provider.VersioningItemProviderAdapterFactory"
            supportedTypes=
            	"org.eclipse.emf.edit.provider.IEditingDomainItemProvider  
            	 org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -59,7 +59,7 @@
   </extension>
   <extension  point="org.eclipse.emf.edit.itemProviderAdapterFactories">
      <factory
-           class="org.eclipse.emf.emfstore.server.model.versioning.operations.provider.OperationsItemProviderAdapterFactory"
+           class="org.eclipse.emf.emfstore.internal.server.model.versioning.operations.provider.OperationsItemProviderAdapterFactory"
            supportedTypes=
            	"org.eclipse.emf.edit.provider.IEditingDomainItemProvider
            	org.eclipse.emf.edit.provider.IStructuredItemContentProvider

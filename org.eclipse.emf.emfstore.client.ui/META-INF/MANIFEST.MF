@@ -1,33 +1,33 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client UI  (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.client.ui;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.client.ui;singleton:=true
 Bundle-Version: 0.9.3.qualifier
-Bundle-Activator: org.eclipse.emf.emfstore.client.ui.Activator
-Require-Bundle: org.eclipse.emf.emfstore.client.model.edit;visibility:=reexport,
+Bundle-Activator: org.eclipse.emf.emfstore.internal.client.ui.Activator
+Require-Bundle: org.eclipse.emf.emfstore.internal.client.model.edit;visibility:=reexport,
  org.eclipse.core.expressions;bundle-version="[3.4.0,4.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-ClassPath: .,
  lib/dmp.jar
-Export-Package: org.eclipse.emf.emfstore.client.ui.common,
- org.eclipse.emf.emfstore.client.ui.controller,
- org.eclipse.emf.emfstore.client.ui.decorators,
- org.eclipse.emf.emfstore.client.ui.dialogs,
- org.eclipse.emf.emfstore.client.ui.dialogs.login,
- org.eclipse.emf.emfstore.client.ui.dialogs.merge,
- org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui,
- org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.components,
- org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets,
- org.eclipse.emf.emfstore.client.ui.dialogs.merge.util,
- org.eclipse.emf.emfstore.client.ui.handlers,
- org.eclipse.emf.emfstore.client.ui.handlers.exportimport,
- org.eclipse.emf.emfstore.client.ui.util,
- org.eclipse.emf.emfstore.client.ui.views.changes,
- org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin,
- org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.views,
- org.eclipse.emf.emfstore.client.ui.views.historybrowserview
+Export-Package: org.eclipse.emf.emfstore.internal.client.ui.common,
+ org.eclipse.emf.emfstore.internal.client.ui.controller,
+ org.eclipse.emf.emfstore.internal.client.ui.decorators,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.login,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.widgets,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util,
+ org.eclipse.emf.emfstore.internal.client.ui.handlers,
+ org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport,
+ org.eclipse.emf.emfstore.internal.client.ui.util,
+ org.eclipse.emf.emfstore.internal.client.ui.views.changes,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views,
+ org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview
 Import-Package: org.eclipse.core.commands,
  org.eclipse.emf.edit.ui.provider,
  org.eclipse.jface.action,

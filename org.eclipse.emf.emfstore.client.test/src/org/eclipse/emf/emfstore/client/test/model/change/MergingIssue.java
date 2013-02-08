@@ -18,12 +18,12 @@ import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getTargetVersion <em>Target Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion <em>Target Version</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.change.ChangePackage#getMergingIssue()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangePackage#getMergingIssue()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface MergingIssue extends Issue {
 	 * 
 	 * @return the value of the '<em>Base Version</em>' containment reference.
 	 * @see #setBaseVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.ChangePackage#getMergingIssue_BaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangePackage#getMergingIssue_BaseVersion()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getBaseVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getBaseVersion
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion
 	 * <em>Base Version</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Base Version</em>' containment reference.
@@ -64,14 +64,14 @@ public interface MergingIssue extends Issue {
 	 * 
 	 * @return the value of the '<em>Target Version</em>' containment reference.
 	 * @see #setTargetVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.ChangePackage#getMergingIssue_TargetVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangePackage#getMergingIssue_TargetVersion()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getTargetVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getTargetVersion
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion
 	 * <em>Target Version</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target Version</em>' containment reference.

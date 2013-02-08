@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.client.test.model.classes.PackageElement;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage
  * @generated
  */
 public class ClassesAdapterFactory extends AdapterFactoryImpl {
@@ -150,12 +150,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.classes.Class
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class
 	 * <em>Class</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Class
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Class
 	 * @generated
 	 */
 	public Adapter createClassAdapter() {
@@ -163,12 +163,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.classes.Package
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package
 	 * <em>Package</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Package
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Package
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
@@ -177,12 +177,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.PackageElement <em>Package Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement <em>Package Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.PackageElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement
 	 * @generated
 	 */
 	public Adapter createPackageElementAdapter() {
@@ -191,12 +191,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Association <em>Association</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association <em>Association</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Association
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Association
 	 * @generated
 	 */
 	public Adapter createAssociationAdapter() {
@@ -205,12 +205,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Attribute <em>Attribute</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute <em>Attribute</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Attribute
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute
 	 * @generated
 	 */
 	public Adapter createAttributeAdapter() {
@@ -218,12 +218,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.classes.Method
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method
 	 * <em>Method</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Method
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Method
 	 * @generated
 	 */
 	public Adapter createMethodAdapter() {
@@ -232,12 +232,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument <em>Method Argument</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument <em>Method Argument</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.MethodArgument
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument
 	 * @generated
 	 */
 	public Adapter createMethodArgumentAdapter() {
@@ -246,12 +246,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Dependency <em>Dependency</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency <em>Dependency</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Dependency
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Dependency
 	 * @generated
 	 */
 	public Adapter createDependencyAdapter() {
@@ -260,12 +260,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.classes.Enumeration <em>Enumeration</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration <em>Enumeration</em>}'. <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Enumeration
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration
 	 * @generated
 	 */
 	public Adapter createEnumerationAdapter() {
@@ -273,12 +273,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.classes.Literal
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal
 	 * <em>Literal</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Literal
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal
 	 * @generated
 	 */
 	public Adapter createLiteralAdapter() {
@@ -287,12 +287,12 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {

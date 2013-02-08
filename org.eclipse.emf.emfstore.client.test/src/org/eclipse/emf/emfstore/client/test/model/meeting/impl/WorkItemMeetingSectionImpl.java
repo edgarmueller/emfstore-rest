@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.impl.WorkItemMeetingSectionImpl#getIncludedWorkItems
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.WorkItemMeetingSectionImpl#getIncludedWorkItems
  * <em>Included Work Items</em>}</li>
  * </ul>
  * </p>

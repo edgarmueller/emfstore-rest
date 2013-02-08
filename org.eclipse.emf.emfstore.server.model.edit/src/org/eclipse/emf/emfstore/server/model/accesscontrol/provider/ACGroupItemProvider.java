@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

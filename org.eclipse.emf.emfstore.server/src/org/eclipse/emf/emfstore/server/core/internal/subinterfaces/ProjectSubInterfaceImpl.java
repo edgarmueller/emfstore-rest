@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
 
 /**
  * This subinterfaces implements all project related functionality for the
- * {@link org.eclipse.emf.emfstore.server.core.EMFStoreImpl} interface.
+ * {@link org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl} interface.
  * 
  * @author wesendon
  */
@@ -342,7 +342,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		// create initial project
 		// Project project =
-		// org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		// org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 		// .createProject();
 		firstVersion.setProjectState(initialProjectState);
 		getResourceHelper().createResourceForProject(initialProjectState, firstVersion.getPrimarySpec(),

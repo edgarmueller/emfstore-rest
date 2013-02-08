@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-user-doc --> A representation of the literals of the enumeration '<em><b>File Attachment Type</b></em>',
  * and utility methods for working with them. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getFileAttachmentType()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getFileAttachmentType()
  * @model
  * @generated
  */

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.test.model.activity;
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Activity</b></em>'. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage#getActivity()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityPackage#getActivity()
  * @model
  * @generated
  */

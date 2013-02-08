@@ -17,13 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.Activator;
 import org.eclipse.emf.emfstore.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
@@ -88,7 +88,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		this.numberOfChanges = changes.getSize();
 		this.trays = new LinkedHashMap<String, CommitDialogTray>();
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
 			try {
 				CommitDialogTray tray = element.getClass("class", CommitDialogTray.class);
@@ -105,7 +105,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreTitleAreaDialog#configureShell(org.eclipse.swt.widgets.Shell)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreTitleAreaDialog#configureShell(org.eclipse.swt.widgets.Shell)
 	 */
 	@Override
 	protected void configureShell(Shell newShell) {
@@ -280,7 +280,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// final String notifyUsers = "Notify users";
-		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
+		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray")
 			.getExtensionElements()) {
 			final String name = c.getAttribute("name");
 			final CommitDialogTray tray = trays.get(name);

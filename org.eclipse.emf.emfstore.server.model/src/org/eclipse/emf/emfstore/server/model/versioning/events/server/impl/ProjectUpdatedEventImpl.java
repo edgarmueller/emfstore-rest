@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPack
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl#getNewVersion <em>New Version</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.impl.ProjectUpdatedEventImpl#getNewVersion <em>New Version</em>}</li>
  * </ul>
  * </p>
  *

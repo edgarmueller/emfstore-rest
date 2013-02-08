@@ -10,11 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.provider;
 
-import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.client.ui.Activator;
+import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
+import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
@@ -88,7 +88,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void loginCompleted(IUsersession session) {
 		update(session);
@@ -98,7 +98,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void logoutCompleted(IUsersession session) {
 		update(session);

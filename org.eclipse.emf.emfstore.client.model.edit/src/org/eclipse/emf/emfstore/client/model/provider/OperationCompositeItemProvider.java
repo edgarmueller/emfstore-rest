@@ -25,12 +25,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.client.model.OperationComposite;
+import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.model.OperationComposite} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

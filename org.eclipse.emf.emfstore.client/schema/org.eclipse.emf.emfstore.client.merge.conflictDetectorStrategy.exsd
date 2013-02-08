@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy" name="Conflict Detector Strategy"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.merge.conflictDetectorStrategy" name="Conflict Detector Strategy"/>
       </appInfo>
       <documentation>
          Allows to register a conflict detectino strategy used by the merge mechanism.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.server.conflictDetection.ConflictDetectionStrategy"/>
                </appInfo>
             </annotation>
          </attribute>

@@ -20,14 +20,14 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getSender <em>Sender</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement <em>Commented Element
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getSender <em>Sender</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement <em>Commented Element
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getComment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getComment()
  * @model
  * @generated
  */
@@ -42,14 +42,14 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>Sender</em>' reference.
 	 * @see #setSender(OrgUnit)
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getComment_Sender()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getComment_Sender()
 	 * @model
 	 * @generated
 	 */
 	OrgUnit getSender();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getSender
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getSender
 	 * <em>Sender</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Sender</em>' reference.
@@ -60,7 +60,7 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Recipients</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Recipients</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -68,7 +68,7 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Recipients</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getComment_Recipients()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getComment_Recipients()
 	 * @model
 	 * @generated
 	 */
@@ -76,7 +76,7 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Commented Element</b></em>' container reference. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}
 	 * '. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Commented Element</em>' container reference isn't clear, there really should be more
@@ -86,15 +86,15 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 	 * 
 	 * @return the value of the '<em>Commented Element</em>' container reference.
 	 * @see #setCommentedElement(UnicaseModelElement)
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getComment_CommentedElement()
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement#getComments
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getComment_CommentedElement()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments
 	 * @model opposite="comments" transient="false"
 	 * @generated
 	 */
 	UnicaseModelElement getCommentedElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Comment#getCommentedElement
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
 	 * <em>Commented Element</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Commented Element</em>' container reference.

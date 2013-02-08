@@ -17,12 +17,12 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection#getAllocatedTime <em>Allocated Time
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime <em>Allocated Time
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeetingSection()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeetingSection()
  * @model abstract="true"
  * @generated
  */
@@ -38,14 +38,14 @@ public interface MeetingSection extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Allocated Time</em>' attribute.
 	 * @see #setAllocatedTime(int)
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getMeetingSection_AllocatedTime()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getMeetingSection_AllocatedTime()
 	 * @model default="0" annotation="org.unicase.ui.meeditor priority='10.0' position='left'"
 	 * @generated
 	 */
 	int getAllocatedTime();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection#getAllocatedTime
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime
 	 * <em>Allocated Time</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Allocated Time</em>' attribute.

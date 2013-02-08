@@ -15,13 +15,13 @@ package org.eclipse.emf.emfstore.client.test.model.state;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.State#getActivities <em>Activities</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getActivities <em>Activities</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getState()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getState()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface State extends StateNode {
 	 * 
 	 * @return the value of the '<em>Exit Conditions</em>' attribute.
 	 * @see #setExitConditions(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getState_ExitConditions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getState_ExitConditions()
 	 * @model
 	 * @generated
 	 */
 	String getExitConditions();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.State#getExitConditions
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions
 	 * <em>Exit Conditions</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Exit Conditions</em>' attribute.
@@ -62,14 +62,14 @@ public interface State extends StateNode {
 	 * 
 	 * @return the value of the '<em>Activities</em>' attribute.
 	 * @see #setActivities(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getState_Activities()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getState_Activities()
 	 * @model
 	 * @generated
 	 */
 	String getActivities();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.State#getActivities
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getActivities
 	 * <em>Activities</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Activities</em>' attribute.
@@ -88,14 +88,14 @@ public interface State extends StateNode {
 	 * 
 	 * @return the value of the '<em>Entry Conditions</em>' attribute.
 	 * @see #setEntryConditions(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.state.StatePackage#getState_EntryConditions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StatePackage#getState_EntryConditions()
 	 * @model
 	 * @generated
 	 */
 	String getEntryConditions();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.state.State#getEntryConditions
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions
 	 * <em>Entry Conditions</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Entry Conditions</em>' attribute.

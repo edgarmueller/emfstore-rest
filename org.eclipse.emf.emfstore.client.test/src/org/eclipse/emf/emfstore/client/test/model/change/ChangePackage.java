@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.change.ChangeFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangeFactory
  * @model kind="package"
  * @generated
  */
@@ -49,7 +49,7 @@ public interface ChangePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.change";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.change";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -59,11 +59,11 @@ public interface ChangePackage extends EPackage {
 	ChangePackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingIssueImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl
 	 * <em>Merging Issue</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingIssueImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingIssue()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingIssue()
 	 * @generated
 	 */
 	int MERGING_ISSUE = 0;
@@ -350,11 +350,11 @@ public interface ChangePackage extends EPackage {
 	int MERGING_ISSUE_FEATURE_COUNT = RationalePackage.ISSUE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingProposalImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingProposalImpl
 	 * <em>Merging Proposal</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingProposalImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingProposal()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingProposalImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingProposal()
 	 * @generated
 	 */
 	int MERGING_PROPOSAL = 1;
@@ -489,11 +489,11 @@ public interface ChangePackage extends EPackage {
 	int MERGING_PROPOSAL_FEATURE_COUNT = RationalePackage.PROPOSAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingSolutionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingSolutionImpl
 	 * <em>Merging Solution</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingSolutionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingSolution()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingSolutionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingSolution()
 	 * @generated
 	 */
 	int MERGING_SOLUTION = 2;
@@ -628,22 +628,22 @@ public interface ChangePackage extends EPackage {
 	int MERGING_SOLUTION_FEATURE_COUNT = RationalePackage.SOLUTION_FEATURE_COUNT + 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue
 	 * <em>Merging Issue</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Merging Issue</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingIssue
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue
 	 * @generated
 	 */
 	EClass getMergingIssue();
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Base Version</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getBaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion()
 	 * @see #getMergingIssue()
 	 * @generated
 	 */
@@ -651,55 +651,55 @@ public interface ChangePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getTargetVersion <em>Target Version</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion <em>Target Version</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Target Version</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingIssue#getTargetVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion()
 	 * @see #getMergingIssue()
 	 * @generated
 	 */
 	EReference getMergingIssue_TargetVersion();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.change.MergingProposal
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal
 	 * <em>Merging Proposal</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Merging Proposal</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingProposal
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal
 	 * @generated
 	 */
 	EClass getMergingProposal();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingProposal#getPendingOperations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal#getPendingOperations
 	 * <em>Pending Operations</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Pending Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingProposal#getPendingOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal#getPendingOperations()
 	 * @see #getMergingProposal()
 	 * @generated
 	 */
 	EReference getMergingProposal_PendingOperations();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution
 	 * <em>Merging Solution</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Merging Solution</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingSolution
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution
 	 * @generated
 	 */
 	EClass getMergingSolution();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution#getAppliedOperations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution#getAppliedOperations
 	 * <em>Applied Operations</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Applied Operations</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.MergingSolution#getAppliedOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution#getAppliedOperations()
 	 * @see #getMergingSolution()
 	 * @generated
 	 */
@@ -728,11 +728,11 @@ public interface ChangePackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingIssueImpl <em>Merging Issue</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl <em>Merging Issue</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingIssueImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingIssue()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingIssue()
 		 * @generated
 		 */
 		EClass MERGING_ISSUE = eINSTANCE.getMergingIssue();
@@ -755,11 +755,11 @@ public interface ChangePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingProposalImpl <em>Merging Proposal</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingProposalImpl <em>Merging Proposal</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingProposalImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingProposal()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingProposalImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingProposal()
 		 * @generated
 		 */
 		EClass MERGING_PROPOSAL = eINSTANCE.getMergingProposal();
@@ -774,11 +774,11 @@ public interface ChangePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.change.impl.MergingSolutionImpl <em>Merging Solution</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingSolutionImpl <em>Merging Solution</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.MergingSolutionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.change.impl.ChangePackageImpl#getMergingSolution()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingSolutionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.impl.ChangePackageImpl#getMergingSolution()
 		 * @generated
 		 */
 		EClass MERGING_SOLUTION = eINSTANCE.getMergingSolution();

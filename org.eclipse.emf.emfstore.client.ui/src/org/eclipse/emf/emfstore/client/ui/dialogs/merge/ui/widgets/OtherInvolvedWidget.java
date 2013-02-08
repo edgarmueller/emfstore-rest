@@ -10,10 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.dialogs.merge.ui.widgets;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.client.ui.dialogs.merge.util.UIDecisionUtil;
 import org.eclipse.emf.emfstore.client.ui.views.changes.ChangePackageVisualizationHelper;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;

@@ -178,7 +178,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

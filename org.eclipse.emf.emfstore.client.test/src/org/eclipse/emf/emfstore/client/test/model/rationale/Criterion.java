@@ -18,19 +18,19 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getCriterion()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getCriterion()
  * @model
  * @generated
  */
 public interface Criterion extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Assessments</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment}. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment}. It is bidirectional and its opposite is
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Assessments</em>' reference list isn't clear, there really should be more of a
@@ -39,8 +39,8 @@ public interface Criterion extends UnicaseModelElement {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Assessments</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage#getCriterion_Assessments()
-	 * @see org.eclipse.emf.emfstore.client.test.model.rationale.Assessment#getCriterion
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.RationalePackage#getCriterion_Assessments()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion
 	 * @model opposite="criterion" annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */

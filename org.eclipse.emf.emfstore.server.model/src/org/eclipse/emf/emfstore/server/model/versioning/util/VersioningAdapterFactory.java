@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage
  * @generated
  */
 public class VersioningAdapterFactory extends AdapterFactoryImpl {
@@ -174,13 +174,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec <em>Tag Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec <em>Tag Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec
 	 * @generated
 	 */
 	public Adapter createTagVersionSpecAdapter() {
@@ -188,13 +188,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec <em>Date Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec <em>Date Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.DateVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec
 	 * @generated
 	 */
 	public Adapter createDateVersionSpecAdapter() {
@@ -202,13 +202,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec <em>Primary Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec <em>Primary Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec
 	 * @generated
 	 */
 	public Adapter createPrimaryVersionSpecAdapter() {
@@ -216,13 +216,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.VersionSpec <em>Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec <em>Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec
 	 * @generated
 	 */
 	public Adapter createVersionSpecAdapter() {
@@ -230,13 +230,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage <em>Log Message</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage <em>Log Message</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.LogMessage
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage
 	 * @generated
 	 */
 	public Adapter createLogMessageAdapter() {
@@ -244,13 +244,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.ChangePackage <em>Change Package</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage <em>Change Package</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ChangePackage
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage
 	 * @generated
 	 */
 	public Adapter createChangePackageAdapter() {
@@ -258,13 +258,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo <em>History Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo <em>History Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo
 	 * @generated
 	 */
 	public Adapter createHistoryInfoAdapter() {
@@ -272,13 +272,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery <em>History Query</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery <em>History Query</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery
 	 * @generated
 	 */
 	public Adapter createHistoryQueryAdapter() {
@@ -286,13 +286,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.RangeQuery <em>Range Query</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery <em>Range Query</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.RangeQuery
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery
 	 * @generated
 	 */
 	public Adapter createRangeQueryAdapter() {
@@ -300,13 +300,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.PathQuery <em>Path Query</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery <em>Path Query</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.PathQuery
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery
 	 * @generated
 	 */
 	public Adapter createPathQueryAdapter() {
@@ -314,13 +314,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery <em>Model Element Query</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery <em>Model Element Query</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.ModelElementQuery
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery
 	 * @generated
 	 */
 	public Adapter createModelElementQueryAdapter() {
@@ -328,14 +328,14 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.server.model.versioning.Version
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version
 	 * <em>Version</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.Version
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.Version
 	 * @generated
 	 */
 	public Adapter createVersionAdapter() {
@@ -343,13 +343,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec <em>Head Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec <em>Head Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.HeadVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec
 	 * @generated
 	 */
 	public Adapter createHeadVersionSpecAdapter() {
@@ -357,13 +357,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.VersionProperty <em>Version Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty <em>Version Property</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.VersionProperty
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty
 	 * @generated
 	 */
 	public Adapter createVersionPropertyAdapter() {
@@ -371,13 +371,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec <em>Branch Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec <em>Branch Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec
 	 * @generated
 	 */
 	public Adapter createBranchVersionSpecAdapter() {
@@ -385,13 +385,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.BranchInfo <em>Branch Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo <em>Branch Info</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.BranchInfo
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo
 	 * @generated
 	 */
 	public Adapter createBranchInfoAdapter() {
@@ -399,13 +399,13 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec <em>Ancestor Version Spec</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec <em>Ancestor Version Spec</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.AncestorVersionSpec
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec
 	 * @generated
 	 */
 	public Adapter createAncestorVersionSpecAdapter() {

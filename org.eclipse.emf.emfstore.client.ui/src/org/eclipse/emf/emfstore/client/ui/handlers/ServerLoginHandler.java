@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.controller.UILoginSessionController;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 
 /**
  * Handler for logging into a selected server.<br/>
@@ -25,7 +25,7 @@ public class ServerLoginHandler extends AbstractEMFStoreHandler {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.handlers.AbstractEMFStoreHandler#handle()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler#handle()
 	 */
 	@Override
 	public void handle() {

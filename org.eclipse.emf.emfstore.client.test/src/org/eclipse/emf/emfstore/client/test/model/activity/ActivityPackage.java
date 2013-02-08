@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityFactory
  * @model kind="package"
  * @generated
  */
@@ -50,7 +50,7 @@ public interface ActivityPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.activity";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.activity";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -60,11 +60,11 @@ public interface ActivityPackage extends EPackage {
 	ActivityPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityObjectImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityObjectImpl
 	 * <em>Object</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityObjectImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityObject()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityObjectImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityObject()
 	 * @generated
 	 */
 	int ACTIVITY_OBJECT = 0;
@@ -190,11 +190,11 @@ public interface ActivityPackage extends EPackage {
 	int ACTIVITY_OBJECT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.TransitionImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.TransitionImpl
 	 * <em>Transition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.TransitionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getTransition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.TransitionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getTransition()
 	 * @generated
 	 */
 	int TRANSITION = 1;
@@ -327,11 +327,11 @@ public interface ActivityPackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityImpl
 	 * <em>Activity</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivity()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivity()
 	 * @generated
 	 */
 	int ACTIVITY = 2;
@@ -457,11 +457,11 @@ public interface ActivityPackage extends EPackage {
 	int ACTIVITY_FEATURE_COUNT = ACTIVITY_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ForkImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ForkImpl
 	 * <em>Fork</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ForkImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getFork()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ForkImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getFork()
 	 * @generated
 	 */
 	int FORK = 3;
@@ -587,11 +587,11 @@ public interface ActivityPackage extends EPackage {
 	int FORK_FEATURE_COUNT = ACTIVITY_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.BranchImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.BranchImpl
 	 * <em>Branch</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.BranchImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getBranch()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.BranchImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getBranch()
 	 * @generated
 	 */
 	int BRANCH = 4;
@@ -717,11 +717,11 @@ public interface ActivityPackage extends EPackage {
 	int BRANCH_FEATURE_COUNT = ACTIVITY_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityInitialImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityInitialImpl
 	 * <em>Initial</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityInitialImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityInitial()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityInitialImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityInitial()
 	 * @generated
 	 */
 	int ACTIVITY_INITIAL = 5;
@@ -847,11 +847,11 @@ public interface ActivityPackage extends EPackage {
 	int ACTIVITY_INITIAL_FEATURE_COUNT = ACTIVITY_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityEndImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityEndImpl
 	 * <em>End</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityEndImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityEnd()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityEndImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityEnd()
 	 * @generated
 	 */
 	int ACTIVITY_END = 6;
@@ -977,22 +977,22 @@ public interface ActivityPackage extends EPackage {
 	int ACTIVITY_END_FEATURE_COUNT = ACTIVITY_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject
 	 * <em>Object</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Object</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject
 	 * @generated
 	 */
 	EClass getActivityObject();
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject#getIncomingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getIncomingTransitions
 	 * <em>Incoming Transitions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Incoming Transitions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject#getIncomingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getIncomingTransitions()
 	 * @see #getActivityObject()
 	 * @generated
 	 */
@@ -1000,33 +1000,33 @@ public interface ActivityPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject#getOutgoingTransitions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getOutgoingTransitions
 	 * <em>Outgoing Transitions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Outgoing Transitions</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityObject#getOutgoingTransitions()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getOutgoingTransitions()
 	 * @see #getActivityObject()
 	 * @generated
 	 */
 	EReference getActivityObject_OutgoingTransitions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Transition
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition
 	 * <em>Transition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Transition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Transition
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition
 	 * @generated
 	 */
 	EClass getTransition();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.Transition#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getSource <em>Source</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Transition#getSource()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getSource()
 	 * @see #getTransition()
 	 * @generated
 	 */
@@ -1034,11 +1034,11 @@ public interface ActivityPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.Transition#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getTarget <em>Target</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Transition#getTarget()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getTarget()
 	 * @see #getTransition()
 	 * @generated
 	 */
@@ -1046,62 +1046,62 @@ public interface ActivityPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.activity.Transition#getCondition <em>Condition</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getCondition <em>Condition</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Condition</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Transition#getCondition()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getCondition()
 	 * @see #getTransition()
 	 * @generated
 	 */
 	EAttribute getTransition_Condition();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Activity
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity
 	 * <em>Activity</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Activity</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Activity
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity
 	 * @generated
 	 */
 	EClass getActivity();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Fork <em>Fork</em>}
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork <em>Fork</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Fork</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Fork
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork
 	 * @generated
 	 */
 	EClass getFork();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.Branch
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch
 	 * <em>Branch</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Branch</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.Branch
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch
 	 * @generated
 	 */
 	EClass getBranch();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityInitial
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial
 	 * <em>Initial</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Initial</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityInitial
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial
 	 * @generated
 	 */
 	EClass getActivityInitial();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.activity.ActivityEnd
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd
 	 * <em>End</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>End</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.activity.ActivityEnd
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd
 	 * @generated
 	 */
 	EClass getActivityEnd();
@@ -1129,11 +1129,11 @@ public interface ActivityPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityObjectImpl <em>Object</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityObjectImpl <em>Object</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityObjectImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityObject()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityObjectImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityObject()
 		 * @generated
 		 */
 		EClass ACTIVITY_OBJECT = eINSTANCE.getActivityObject();
@@ -1156,11 +1156,11 @@ public interface ActivityPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.activity.impl.TransitionImpl <em>Transition</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.TransitionImpl <em>Transition</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.TransitionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getTransition()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.TransitionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getTransition()
 		 * @generated
 		 */
 		EClass TRANSITION = eINSTANCE.getTransition();
@@ -1191,53 +1191,53 @@ public interface ActivityPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityImpl <em>Activity</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityImpl <em>Activity</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivity()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivity()
 		 * @generated
 		 */
 		EClass ACTIVITY = eINSTANCE.getActivity();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ForkImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ForkImpl
 		 * <em>Fork</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ForkImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getFork()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ForkImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getFork()
 		 * @generated
 		 */
 		EClass FORK = eINSTANCE.getFork();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.activity.impl.BranchImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.BranchImpl
 		 * <em>Branch</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.BranchImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getBranch()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.BranchImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getBranch()
 		 * @generated
 		 */
 		EClass BRANCH = eINSTANCE.getBranch();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityInitialImpl <em>Initial</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityInitialImpl <em>Initial</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityInitialImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityInitial()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityInitialImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityInitial()
 		 * @generated
 		 */
 		EClass ACTIVITY_INITIAL = eINSTANCE.getActivityInitial();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityEndImpl <em>End</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityEndImpl <em>End</em>}' class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityEndImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl#getActivityEnd()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityEndImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.activity.impl.ActivityPackageImpl#getActivityEnd()
 		 * @generated
 		 */
 		EClass ACTIVITY_END = eINSTANCE.getActivityEnd();

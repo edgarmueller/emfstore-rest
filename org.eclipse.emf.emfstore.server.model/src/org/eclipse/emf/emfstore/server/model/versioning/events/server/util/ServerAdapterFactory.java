@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerPackage
  * @generated
  */
 public class ServerAdapterFactory extends AdapterFactoryImpl {
@@ -110,14 +110,14 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerEvent
 	 * <em>Event</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerEvent
 	 * @generated
 	 */
 	public Adapter createServerEventAdapter() {
@@ -125,13 +125,13 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent <em>Project Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerProjectEvent <em>Project Event</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerProjectEvent
 	 * @generated
 	 */
 	public Adapter createServerProjectEventAdapter() {
@@ -139,13 +139,13 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent <em>Project Updated Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent <em>Project Updated Event</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.server.ProjectUpdatedEvent
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent
 	 * @generated
 	 */
 	public Adapter createProjectUpdatedEventAdapter() {
@@ -154,14 +154,14 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event
 	 * <em>Event</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event
 	 * @generated
 	 */
 	public Adapter createEventAdapter() {

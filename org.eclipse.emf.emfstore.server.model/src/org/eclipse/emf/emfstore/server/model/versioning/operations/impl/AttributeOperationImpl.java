@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AttributeOperationImpl#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AttributeOperationImpl#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *

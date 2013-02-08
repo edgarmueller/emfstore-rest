@@ -40,21 +40,21 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getContainingWorkpackage <em>Containing
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getContainingWorkpackage <em>Containing
  * Workpackage</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getPredecessors <em>Predecessors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getSuccessors <em>Successors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getAssignee <em>Assignee</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getReviewer <em>Reviewer</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getParticipants <em>Participants</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getDueDate <em>Due Date</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getEstimate <em>Estimate</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getEffort <em>Effort</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getPriority <em>Priority</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#isResolved <em>Resolved</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getIncludingReleases <em>Including
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getPredecessors <em>Predecessors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getSuccessors <em>Successors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getAssignee <em>Assignee</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getReviewer <em>Reviewer</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getParticipants <em>Participants</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getDueDate <em>Due Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getEstimate <em>Estimate</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getEffort <em>Effort</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getPriority <em>Priority</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#isResolved <em>Resolved</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getIncludingReleases <em>Including
  * Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.impl.MilestoneImpl#getContainedModelElements <em>Contained
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.impl.MilestoneImpl#getContainedModelElements <em>Contained
  * Model Elements</em>}</li>
  * </ul>
  * </p>

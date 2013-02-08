@@ -17,19 +17,19 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Literal#getEnumeration <em>Enumeration</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.Literal#getLiteral <em>Literal</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration <em>Enumeration</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getLiteral <em>Literal</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getLiteral()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getLiteral()
  * @model
  * @generated
  */
 public interface Literal extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference. It is bidirectional and its opposite
-	 * is '{@link org.eclipse.emf.emfstore.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}'. <!--
+	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Enumeration</em>' container reference isn't clear, there really should be more of a
@@ -39,15 +39,15 @@ public interface Literal extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Enumeration</em>' container reference.
 	 * @see #setEnumeration(Enumeration)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getLiteral_Enumeration()
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.Enumeration#getLiterals
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getLiteral_Enumeration()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals
 	 * @model opposite="literals" transient="false"
 	 * @generated
 	 */
 	Enumeration getEnumeration();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Literal#getEnumeration
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration
 	 * <em>Enumeration</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Enumeration</em>' container reference.
@@ -66,14 +66,14 @@ public interface Literal extends UnicaseModelElement {
 	 * 
 	 * @return the value of the '<em>Literal</em>' attribute.
 	 * @see #setLiteral(String)
-	 * @see org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage#getLiteral_Literal()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ClassesPackage#getLiteral_Literal()
 	 * @model
 	 * @generated
 	 */
 	String getLiteral();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.classes.Literal#getLiteral
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getLiteral
 	 * <em>Literal</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Literal</em>' attribute.

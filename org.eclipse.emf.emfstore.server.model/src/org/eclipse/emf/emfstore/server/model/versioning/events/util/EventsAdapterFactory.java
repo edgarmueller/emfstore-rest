@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see org.eclipse.emf.emfstore.server.model.versioning.events.EventsPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsPackage
  * @generated
  */
 public class EventsAdapterFactory extends AdapterFactoryImpl {
@@ -95,14 +95,14 @@ public class EventsAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event
 	 * <em>Event</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.events.Event
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event
 	 * @generated
 	 */
 	public Adapter createEventAdapter() {

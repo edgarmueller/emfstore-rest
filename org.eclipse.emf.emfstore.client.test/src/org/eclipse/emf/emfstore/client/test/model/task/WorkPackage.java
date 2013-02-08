@@ -19,22 +19,22 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getContainedWorkItems <em>Contained Work Items
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems <em>Contained Work Items
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getStartDate <em>Start Date</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getEndDate <em>End Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getStartDate <em>Start Date</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getEndDate <em>End Date</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getWorkPackage()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getWorkPackage()
  * @model
  * @generated
  */
 public interface WorkPackage extends WorkItem {
 	/**
 	 * Returns the value of the '<em><b>Contained Work Items</b></em>' containment reference list. The list contents are
-	 * of type {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem}. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getContainingWorkpackage
+	 * of type {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
 	 * <em>Containing Workpackage</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contained Work Items</em>' containment reference list isn't clear, there really should
@@ -43,8 +43,8 @@ public interface WorkPackage extends WorkItem {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Contained Work Items</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getWorkPackage_ContainedWorkItems()
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem#getContainingWorkpackage
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getWorkPackage_ContainedWorkItems()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
 	 * @model opposite="containingWorkpackage" containment="true" resolveProxies="true"
 	 *        annotation="org.unicase.ui.meeditor priority='20.0' position='right'"
 	 * @generated
@@ -61,14 +61,14 @@ public interface WorkPackage extends WorkItem {
 	 * 
 	 * @return the value of the '<em>Start Date</em>' attribute.
 	 * @see #setStartDate(Date)
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getWorkPackage_StartDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getWorkPackage_StartDate()
 	 * @model annotation="org.unicase.ui.meeditor priority='20.0' position='left'"
 	 * @generated
 	 */
 	Date getStartDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getStartDate
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getStartDate
 	 * <em>Start Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Start Date</em>' attribute.
@@ -87,14 +87,14 @@ public interface WorkPackage extends WorkItem {
 	 * 
 	 * @return the value of the '<em>End Date</em>' attribute.
 	 * @see #setEndDate(Date)
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.TaskPackage#getWorkPackage_EndDate()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.TaskPackage#getWorkPackage_EndDate()
 	 * @model annotation="org.unicase.ui.meeditor priority='21.0' position='left'"
 	 * @generated
 	 */
 	Date getEndDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkPackage#getEndDate
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getEndDate
 	 * <em>End Date</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>End Date</em>' attribute.

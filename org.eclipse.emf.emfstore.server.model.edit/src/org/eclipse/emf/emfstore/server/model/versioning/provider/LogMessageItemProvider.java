@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.versioning.LogMessage} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

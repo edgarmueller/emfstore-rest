@@ -112,7 +112,7 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public EObject get(ModelElementId modelElementId) {
 		EObject eObject = delegateMapping.get(modelElementId);

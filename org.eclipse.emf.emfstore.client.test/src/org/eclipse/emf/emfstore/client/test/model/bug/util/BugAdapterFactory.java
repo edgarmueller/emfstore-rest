@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
  * method for each class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.bug.BugPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugPackage
  * @generated
  */
 public class BugAdapterFactory extends AdapterFactoryImpl {
@@ -116,12 +116,12 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.bug.BugReport
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
 	 * <em>Report</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.bug.BugReport
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
 	 * @generated
 	 */
 	public Adapter createBugReportAdapter() {
@@ -130,12 +130,12 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * @generated
 	 */
 	public Adapter createUnicaseModelElementAdapter() {
@@ -143,13 +143,13 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.Annotation
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation
 	 * <em>Annotation</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.Annotation
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.Annotation
 	 * @generated
 	 */
 	public Adapter createAnnotationAdapter() {
@@ -157,13 +157,13 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * <em>Work Item</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.WorkItem
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * @generated
 	 */
 	public Adapter createWorkItemAdapter() {
@@ -171,13 +171,13 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * <em>Checkable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.client.test.model.task.Checkable
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * @generated
 	 */
 	public Adapter createCheckableAdapter() {

@@ -18,19 +18,19 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.document.CompositeSection#getSubsections <em>Subsections</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections <em>Subsections</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.document.DocumentPackage#getCompositeSection()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.document.DocumentPackage#getCompositeSection()
  * @model
  * @generated
  */
 public interface CompositeSection extends Section {
 	/**
 	 * Returns the value of the '<em><b>Subsections</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.document.Section}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.document.Section#getParent <em>Parent</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section#getParent <em>Parent</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subsections</em>' containment reference list isn't clear, there really should be more
@@ -39,8 +39,8 @@ public interface CompositeSection extends Section {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Subsections</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.document.DocumentPackage#getCompositeSection_Subsections()
-	 * @see org.eclipse.emf.emfstore.client.test.model.document.Section#getParent
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.DocumentPackage#getCompositeSection_Subsections()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.Section#getParent
 	 * @model opposite="parent" containment="true" resolveProxies="true"
 	 *        annotation="org.unicase.ui.meeditor priority='20.0' position='right'"
 	 * @generated

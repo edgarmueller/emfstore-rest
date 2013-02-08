@@ -17,19 +17,19 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.organization.Group#getOrgUnits <em>Org Units</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group#getOrgUnits <em>Org Units</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getGroup()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getGroup()
  * @model
  * @generated
  */
 public interface Group extends OrgUnit {
 	/**
 	 * Returns the value of the '<em><b>Org Units</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit}. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit#getGroupMemberships
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. It is bidirectional and its opposite is
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getGroupMemberships
 	 * <em>Group Memberships</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Org Units</em>' reference list isn't clear, there really should be more of a
@@ -38,8 +38,8 @@ public interface Group extends OrgUnit {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Org Units</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPackage#getGroup_OrgUnits()
-	 * @see org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit#getGroupMemberships
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrganizationPackage#getGroup_OrgUnits()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getGroupMemberships
 	 * @model opposite="groupMemberships" annotation="org.unicase.ui.meeditor priority='10.5' position='right'"
 	 * @generated
 	 */

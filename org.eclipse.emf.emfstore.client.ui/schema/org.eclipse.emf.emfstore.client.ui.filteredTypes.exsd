@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client.ui" id="org.eclipse.emf.emfstore.client.ui.filteredTypes" name="Filtered Types"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.client.ui" id="org.eclipse.emf.emfstore.internal.client.ui.filteredTypes" name="Filtered Types"/>
       </appInfo>
       <documentation>
          Specifies the types that will be ignored in the UI controls, e.g. the merge &amp; update dialog.

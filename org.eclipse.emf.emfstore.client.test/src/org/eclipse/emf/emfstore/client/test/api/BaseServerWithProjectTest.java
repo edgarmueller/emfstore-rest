@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
+import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;

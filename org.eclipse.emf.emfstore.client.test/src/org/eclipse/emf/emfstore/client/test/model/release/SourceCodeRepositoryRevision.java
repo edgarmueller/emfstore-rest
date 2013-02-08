@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Source Code Repository Revision</b></em>'. <!--
  * end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage#getSourceCodeRepositoryRevision()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleasePackage#getSourceCodeRepositoryRevision()
  * @model abstract="true"
  * @generated
  */

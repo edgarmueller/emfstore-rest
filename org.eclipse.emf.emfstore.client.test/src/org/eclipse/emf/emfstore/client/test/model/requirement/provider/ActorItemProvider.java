@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.requirement.Actor} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

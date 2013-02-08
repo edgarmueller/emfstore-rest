@@ -19,19 +19,19 @@ import org.eclipse.emf.emfstore.client.test.model.release.Release;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.attachment.PatchAttachment#getAppliedTo <em>Applied To</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment#getAppliedTo <em>Applied To</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getPatchAttachment()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getPatchAttachment()
  * @model
  * @generated
  */
 public interface PatchAttachment extends FileAttachment {
 	/**
 	 * Returns the value of the '<em><b>Applied To</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Applied To</em>' reference list isn't clear, there really should be more of a
@@ -40,8 +40,8 @@ public interface PatchAttachment extends FileAttachment {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Applied To</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage#getPatchAttachment_AppliedTo()
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getAppliedPatches
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.attachment.AttachmentPackage#getPatchAttachment_AppliedTo()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches
 	 * @model opposite="appliedPatches"
 	 * @generated
 	 */

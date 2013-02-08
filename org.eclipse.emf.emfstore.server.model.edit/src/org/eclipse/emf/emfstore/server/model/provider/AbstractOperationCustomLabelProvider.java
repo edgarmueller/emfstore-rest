@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.provider;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.internal.common.IDisposable;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**

@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl#getTypedKey <em>Key</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl#getTypedKey <em>Key</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  * 

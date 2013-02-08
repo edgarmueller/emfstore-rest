@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProj
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerProjectEvent} object.
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ServerProjectEvent} object.
  * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 

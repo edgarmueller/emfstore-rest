@@ -36,9 +36,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getIndex <em>Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceSetOperationImpl#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -350,7 +350,7 @@ public class MultiReferenceSetOperationImpl extends ReferenceOperationImpl imple
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	public void apply(IdEObjectCollection project) {
 		EObject parentElement = project.getModelElement(getModelElementId());

@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.impl.IssueMeetingSectionImpl#getIncludedIssues <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.IssueMeetingSectionImpl#getIncludedIssues <em>
  * Included Issues</em>}</li>
  * </ul>
  * </p>

@@ -29,9 +29,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.UnkownFeature
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex <em>Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiAttributeSetOperationImpl#getNewValue <em>New Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -262,7 +262,7 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#apply(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	@SuppressWarnings("unchecked")
 	public void apply(IdEObjectCollection project) {

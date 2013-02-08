@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage;
 import org.eclipse.emf.emfstore.client.test.model.classes.Enumeration;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.classes.Enumeration}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

@@ -33,9 +33,9 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getModelElementId <em>Model Element Id</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#isAccepted <em>Accepted</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.impl.AbstractOperationImpl#getClientDate <em>Client Date</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#getModelElementId <em>Model Element Id</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#isAccepted <em>Accepted</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.AbstractOperationImpl#getClientDate <em>Client Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -343,7 +343,7 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getAllInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getAllInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getAllInvolvedModelElements() {
 		Set<ModelElementId> result = new LinkedHashSet<ModelElementId>();
@@ -357,7 +357,7 @@ public abstract class AbstractOperationImpl extends IdentifiableElementImpl impl
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation#getOtherInvolvedModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getOtherInvolvedModelElements()
 	 */
 	public Set<ModelElementId> getOtherInvolvedModelElements() {
 		return new LinkedHashSet<ModelElementId>();

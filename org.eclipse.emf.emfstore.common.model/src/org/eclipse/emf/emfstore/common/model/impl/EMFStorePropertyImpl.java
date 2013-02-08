@@ -28,10 +28,10 @@ import org.eclipse.emf.emfstore.common.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getKey <em>Key</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getValue <em>Value</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl#getKey <em>Key</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl#getValue <em>Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl#getType <em>Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -422,7 +422,7 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#isVersioned()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#isVersioned()
 	 */
 	public boolean isVersioned() {
 		return getVersion() != UNVERSIONED;
@@ -432,7 +432,7 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#setVersioned()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#setVersioned()
 	 */
 	public void setVersioned() {
 		if (isVersioned()) {
@@ -445,7 +445,7 @@ public class EMFStorePropertyImpl extends EObjectImpl implements EMFStorePropert
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#increaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#increaseVersion()
 	 */
 	public void increaseVersion() {
 		setVersion(getVersion() + 1);

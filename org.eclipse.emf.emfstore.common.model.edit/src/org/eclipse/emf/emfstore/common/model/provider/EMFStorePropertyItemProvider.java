@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.common.model.ModelPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * 

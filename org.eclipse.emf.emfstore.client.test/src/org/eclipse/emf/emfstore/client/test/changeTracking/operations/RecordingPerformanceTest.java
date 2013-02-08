@@ -14,12 +14,12 @@ import junit.framework.Assert;
 
 import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.emfstore.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 import org.junit.Test;
 
@@ -43,13 +43,13 @@ public class RecordingPerformanceTest extends WorkspaceTest {
 	@Test
 	public void testElementAddIterationWithoutSave() {
 		StopWatch allStopWatch = new StopWatch("EMFStore Plain without AutoSave but with Save at End");
-		org.eclipse.emf.emfstore.client.model.Configuration.setAutoSave(false);
+		org.eclipse.emf.emfstore.internal.client.model.Configuration.setAutoSave(false);
 		runIterationTestWithoutOptimization();
 		ProjectSpaceBase projectSpaceBase = (ProjectSpaceBase) getProjectSpace();
 		StopWatch saveTimer = new StopWatch("Save");
 		projectSpaceBase.save();
 		saveTimer.stop();
-		org.eclipse.emf.emfstore.client.model.Configuration.setAutoSave(true);
+		org.eclipse.emf.emfstore.internal.client.model.Configuration.setAutoSave(true);
 		allStopWatch.stop();
 	}
 
@@ -135,13 +135,13 @@ public class RecordingPerformanceTest extends WorkspaceTest {
 	@Test
 	public void testElementAddWithoutSaveOptimized() {
 		StopWatch allStopWatch = new StopWatch("EMFStore Plain without AutoSave but with Save at End and Optimized");
-		org.eclipse.emf.emfstore.client.model.Configuration.setAutoSave(false);
+		org.eclipse.emf.emfstore.internal.client.model.Configuration.setAutoSave(false);
 		runOptimizedIterationTest();
 		ProjectSpaceBase projectSpaceBase = (ProjectSpaceBase) getProjectSpace();
 		StopWatch saveTimer = new StopWatch("Save");
 		projectSpaceBase.save();
 		saveTimer.stop();
-		org.eclipse.emf.emfstore.client.model.Configuration.setAutoSave(true);
+		org.eclipse.emf.emfstore.internal.client.model.Configuration.setAutoSave(true);
 		allStopWatch.stop();
 	}
 

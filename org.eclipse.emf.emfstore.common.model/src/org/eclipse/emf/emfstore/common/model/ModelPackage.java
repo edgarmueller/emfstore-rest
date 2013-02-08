@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelFactory
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelFactory
  * @model kind="package"
  * @generated
  */
@@ -59,7 +59,7 @@ public interface ModelPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.common.model";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.common.model";
 
 	/**
 	 * The singleton instance of the package.
@@ -71,13 +71,13 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.ProjectImpl <em>Project</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl <em>Project</em>}'
 	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ProjectImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getProject()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getProject()
 	 * @generated
 	 */
 	int PROJECT = 0;
@@ -113,13 +113,13 @@ public interface ModelPackage extends EPackage {
 	int PROJECT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
 	 * <em>Unique Identifier</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getUniqueIdentifier()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getUniqueIdentifier()
 	 * @generated
 	 */
 	int UNIQUE_IDENTIFIER = 1;
@@ -145,13 +145,13 @@ public interface ModelPackage extends EPackage {
 	int UNIQUE_IDENTIFIER_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
 	 * <em>Identifiable Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getIdentifiableElement()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getIdentifiableElement()
 	 * @generated
 	 */
 	int IDENTIFIABLE_ELEMENT = 2;
@@ -177,13 +177,13 @@ public interface ModelPackage extends EPackage {
 	int IDENTIFIABLE_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.ModelElementIdImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
 	 * <em>Element Id</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelElementIdImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getModelElementId()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getModelElementId()
 	 * @generated
 	 */
 	int MODEL_ELEMENT_ID = 3;
@@ -209,13 +209,13 @@ public interface ModelPackage extends EPackage {
 	int MODEL_ELEMENT_ID_FEATURE_COUNT = UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.ModelVersionImpl <em>Version</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl <em>Version</em>}'
 	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelVersionImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getModelVersion()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getModelVersion()
 	 * @generated
 	 */
 	int MODEL_VERSION = 4;
@@ -241,13 +241,13 @@ public interface ModelPackage extends EPackage {
 	int MODEL_VERSION_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * <em>Non Domain Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.NonDomainElement
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getNonDomainElement()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getNonDomainElement()
 	 * @generated
 	 */
 	int NON_DOMAIN_ELEMENT = 5;
@@ -263,13 +263,13 @@ public interface ModelPackage extends EPackage {
 	int NON_DOMAIN_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.AssociationClassElement
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
 	 * <em>Association Class Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.AssociationClassElement
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getAssociationClassElement()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getAssociationClassElement()
 	 * @generated
 	 */
 	int ASSOCIATION_CLASS_ELEMENT = 6;
@@ -285,13 +285,13 @@ public interface ModelPackage extends EPackage {
 	int ASSOCIATION_CLASS_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
 	 * <em>EMF Store Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getEMFStoreProperty()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getEMFStoreProperty()
 	 * @generated
 	 */
 	int EMF_STORE_PROPERTY = 7;
@@ -347,13 +347,13 @@ public interface ModelPackage extends EPackage {
 	int EMF_STORE_PROPERTY_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
 	 * <em>Property Map Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
 	 * @generated
 	 */
 	int PROPERTY_MAP_ENTRY = 8;
@@ -389,13 +389,13 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
 	 * <em>Property String Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyStringValue()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getPropertyStringValue()
 	 * @generated
 	 */
 	int PROPERTY_STRING_VALUE = 9;
@@ -421,36 +421,36 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY_STRING_VALUE_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
 	 * <em>EMF Store Property Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
-	 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getEMFStorePropertyType()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getEMFStorePropertyType()
 	 * @generated
 	 */
 	int EMF_STORE_PROPERTY_TYPE = 10;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.Project <em>Project</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.Project <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Project</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.Project
+	 * @see org.eclipse.emf.emfstore.internal.common.model.Project
 	 * @generated
 	 */
 	EClass getProject();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.common.model.Project#getModelElements <em>Model Elements</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.Project#getModelElements <em>Model Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Model Elements</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.Project#getModelElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#getModelElements()
 	 * @see #getProject()
 	 * @generated
 	 */
@@ -458,147 +458,147 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.common.model.Project#getCutElements <em>Cut Elements</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.Project#getCutElements <em>Cut Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Cut Elements</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.Project#getCutElements()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#getCutElements()
 	 * @see #getProject()
 	 * @generated
 	 */
 	EReference getProject_CutElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier
 	 * <em>Unique Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Unique Identifier</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.UniqueIdentifier
+	 * @see org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier
 	 * @generated
 	 */
 	EClass getUniqueIdentifier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.common.model.UniqueIdentifier#getId
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId
 	 * <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.UniqueIdentifier#getId()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId()
 	 * @see #getUniqueIdentifier()
 	 * @generated
 	 */
 	EAttribute getUniqueIdentifier_Id();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * <em>Identifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Identifiable Element</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.IdentifiableElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * @generated
 	 */
 	EClass getIdentifiableElement();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.common.model.IdentifiableElement#getIdentifier <em>Identifier</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement#getIdentifier <em>Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Identifier</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.IdentifiableElement#getIdentifier()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement#getIdentifier()
 	 * @see #getIdentifiableElement()
 	 * @generated
 	 */
 	EAttribute getIdentifiableElement_Identifier();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.ModelElementId
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId
 	 * <em>Element Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Element Id</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.ModelElementId
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelElementId
 	 * @generated
 	 */
 	EClass getModelElementId();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.ModelVersion <em>Version</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Version</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.ModelVersion
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelVersion
 	 * @generated
 	 */
 	EClass getModelVersion();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.common.model.ModelVersion#getReleaseNumber <em>Release Number</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion#getReleaseNumber <em>Release Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Release Number</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.ModelVersion#getReleaseNumber()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.ModelVersion#getReleaseNumber()
 	 * @see #getModelVersion()
 	 * @generated
 	 */
 	EAttribute getModelVersion_ReleaseNumber();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * <em>Non Domain Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Non Domain Element</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.NonDomainElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 	 * @generated
 	 */
 	EClass getNonDomainElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.AssociationClassElement
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
 	 * <em>Association Class Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Association Class Element</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.AssociationClassElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
 	 * @generated
 	 */
 	EClass getAssociationClassElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty
 	 * <em>EMF Store Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>EMF Store Property</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty
 	 * @generated
 	 */
 	EClass getEMFStoreProperty();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getKey
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey
 	 * <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Key</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getKey()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey()
 	 * @see #getEMFStoreProperty()
 	 * @generated
 	 */
@@ -606,25 +606,25 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getValue <em>Value</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getValue()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getValue()
 	 * @see #getEMFStoreProperty()
 	 * @generated
 	 */
 	EReference getEMFStoreProperty_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getType
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType
 	 * <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getType()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType()
 	 * @see #getEMFStoreProperty()
 	 * @generated
 	 */
@@ -632,12 +632,12 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion <em>Version</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStoreProperty#getVersion()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getVersion()
 	 * @see #getEMFStoreProperty()
 	 * @generated
 	 */
@@ -651,7 +651,7 @@ public interface ModelPackage extends EPackage {
 	 * @return the meta object for class '<em>Property Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.eclipse.emf.ecore.EString"
-	 *        valueType="org.eclipse.emf.emfstore.common.model.EMFStoreProperty"
+	 *        valueType="org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty"
 	 * @generated
 	 */
 	EClass getPropertyMapEntry();
@@ -681,38 +681,38 @@ public interface ModelPackage extends EPackage {
 	EReference getPropertyMapEntry_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.common.model.PropertyStringValue
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue
 	 * <em>Property String Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Property String Value</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.PropertyStringValue
+	 * @see org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue
 	 * @generated
 	 */
 	EClass getPropertyStringValue();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.common.model.PropertyStringValue#getValue <em>Value</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.PropertyStringValue#getValue()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue()
 	 * @see #getPropertyStringValue()
 	 * @generated
 	 */
 	EAttribute getPropertyStringValue_Value();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
+	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
 	 * <em>EMF Store Property Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>EMF Store Property Type</em>'.
-	 * @see org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
+	 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
 	 * @generated
 	 */
 	EEnum getEMFStorePropertyType();
@@ -742,13 +742,13 @@ public interface ModelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.ProjectImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl
 		 * <em>Project</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ProjectImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getProject()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getProject()
 		 * @generated
 		 */
 		EClass PROJECT = eINSTANCE.getProject();
@@ -772,13 +772,13 @@ public interface ModelPackage extends EPackage {
 		EReference PROJECT__CUT_ELEMENTS = eINSTANCE.getProject_CutElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
 		 * <em>Unique Identifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getUniqueIdentifier()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getUniqueIdentifier()
 		 * @generated
 		 */
 		EClass UNIQUE_IDENTIFIER = eINSTANCE.getUniqueIdentifier();
@@ -793,13 +793,13 @@ public interface ModelPackage extends EPackage {
 		EAttribute UNIQUE_IDENTIFIER__ID = eINSTANCE.getUniqueIdentifier_Id();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
 		 * <em>Identifiable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getIdentifiableElement()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getIdentifiableElement()
 		 * @generated
 		 */
 		EClass IDENTIFIABLE_ELEMENT = eINSTANCE.getIdentifiableElement();
@@ -814,25 +814,25 @@ public interface ModelPackage extends EPackage {
 		EAttribute IDENTIFIABLE_ELEMENT__IDENTIFIER = eINSTANCE.getIdentifiableElement_Identifier();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.ModelElementIdImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
 		 * <em>Element Id</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelElementIdImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getModelElementId()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getModelElementId()
 		 * @generated
 		 */
 		EClass MODEL_ELEMENT_ID = eINSTANCE.getModelElementId();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.ModelVersionImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl
 		 * <em>Version</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelVersionImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getModelVersion()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getModelVersion()
 		 * @generated
 		 */
 		EClass MODEL_VERSION = eINSTANCE.getModelVersion();
@@ -847,37 +847,37 @@ public interface ModelPackage extends EPackage {
 		EAttribute MODEL_VERSION__RELEASE_NUMBER = eINSTANCE.getModelVersion_ReleaseNumber();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.NonDomainElement
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
 		 * <em>Non Domain Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.NonDomainElement
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getNonDomainElement()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.NonDomainElement
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getNonDomainElement()
 		 * @generated
 		 */
 		EClass NON_DOMAIN_ELEMENT = eINSTANCE.getNonDomainElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.AssociationClassElement
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
 		 * <em>Association Class Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.AssociationClassElement
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getAssociationClassElement()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getAssociationClassElement()
 		 * @generated
 		 */
 		EClass ASSOCIATION_CLASS_ELEMENT = eINSTANCE.getAssociationClassElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
 		 * <em>EMF Store Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.EMFStorePropertyImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getEMFStoreProperty()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getEMFStoreProperty()
 		 * @generated
 		 */
 		EClass EMF_STORE_PROPERTY = eINSTANCE.getEMFStoreProperty();
@@ -919,13 +919,13 @@ public interface ModelPackage extends EPackage {
 		EAttribute EMF_STORE_PROPERTY__VERSION = eINSTANCE.getEMFStoreProperty_Version();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
 		 * <em>Property Map Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyMapEntryImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getPropertyMapEntry()
 		 * @generated
 		 */
 		EClass PROPERTY_MAP_ENTRY = eINSTANCE.getPropertyMapEntry();
@@ -949,13 +949,13 @@ public interface ModelPackage extends EPackage {
 		EReference PROPERTY_MAP_ENTRY__VALUE = eINSTANCE.getPropertyMapEntry_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
 		 * <em>Property String Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.impl.PropertyStringValueImpl
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getPropertyStringValue()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getPropertyStringValue()
 		 * @generated
 		 */
 		EClass PROPERTY_STRING_VALUE = eINSTANCE.getPropertyStringValue();
@@ -970,13 +970,13 @@ public interface ModelPackage extends EPackage {
 		EAttribute PROPERTY_STRING_VALUE__VALUE = eINSTANCE.getPropertyStringValue_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
 		 * <em>EMF Store Property Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.EMFStorePropertyType
-		 * @see org.eclipse.emf.emfstore.common.model.impl.ModelPackageImpl#getEMFStorePropertyType()
+		 * @see org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType
+		 * @see org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl#getEMFStorePropertyType()
 		 * @generated
 		 */
 		EEnum EMF_STORE_PROPERTY_TYPE = eINSTANCE.getEMFStorePropertyType();

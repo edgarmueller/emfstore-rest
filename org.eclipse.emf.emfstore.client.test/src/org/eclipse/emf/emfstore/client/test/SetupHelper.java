@@ -29,24 +29,24 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.emfstore.client.model.Configuration;
-import org.eclipse.emf.emfstore.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.AdminConnectionManager;
-import org.eclipse.emf.emfstore.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.client.model.impl.WorkspaceImpl;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.common.CommonUtil;
 import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
@@ -69,7 +69,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
  */
 public class SetupHelper {
 
-	private static final Logger LOGGER = Logger.getLogger("org.eclipse.emf.emfstore.client.test.SetupHelper");
+	private static final Logger LOGGER = Logger.getLogger("org.eclipse.emf.emfstore.internal.client.test.SetupHelper");
 
 	private Workspace workSpace;
 	private ProjectSpace testProjectSpace;

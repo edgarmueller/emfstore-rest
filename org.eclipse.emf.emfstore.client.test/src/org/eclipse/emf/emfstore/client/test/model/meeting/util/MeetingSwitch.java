@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection
  * starting with the actual class of the object and proceeding up the inheritance hierarchy until a non-null result is
  * returned, which is the result of the switch. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage
  * @generated
  */
 public class MeetingSwitch<T> {

@@ -52,10 +52,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
-import org.eclipse.emf.emfstore.common.CommonUtil;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
@@ -65,6 +61,10 @@ import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
 import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
 import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.common.model.impl.ProjectImpl;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
 
 /**
  * Utility class for ModelElements.
@@ -85,7 +85,7 @@ public final class ModelUtil {
 	 */
 	public static final URI VIRTUAL_URI = URI.createURI("virtualUri");
 
-	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.internal.common.model";
 
 	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
 
@@ -98,7 +98,7 @@ public final class ModelUtil {
 		/**
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.common.model.util.IResourceLogger#logError(java.lang.String)
+		 * @see org.eclipse.emf.emfstore.internal.common.model.util.IResourceLogger#logError(java.lang.String)
 		 */
 		public void logError(String msg) {
 			ModelUtil.logError(msg);
@@ -323,7 +323,7 @@ public final class ModelUtil {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new LinkedHashSet<String>();
-			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoredatatype",
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.common.model.ignoredatatype",
 				true).getExtensionElements()) {
 				try {
 					ignoredDataTypes.add(element.getAttribute("type"));
@@ -834,7 +834,7 @@ public final class ModelUtil {
 	 *             if there is no well formed or defined model version
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.common.model.modelversion", true);
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.common.model.modelversion", true);
 		if (extensionPoint.size() != 1) {
 			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
@@ -1201,7 +1201,7 @@ public final class ModelUtil {
 	 *            the id
 	 * @return the singleton instance
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
 	public static EObject getSingleton(IModelElementId singletonId) {
 
@@ -1224,7 +1224,7 @@ public final class ModelUtil {
 	 *            the singleton
 	 * @return the id
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	public static ModelElementId getSingletonModelElementId(EObject singleton) {
 
@@ -1247,7 +1247,7 @@ public final class ModelUtil {
 	 *            the instance
 	 * @return true if it is a singleton
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
 	 */
 	public static boolean isSingleton(EObject eObject) {
 
@@ -1271,7 +1271,7 @@ public final class ModelUtil {
 			singletonIdResolvers = new LinkedHashSet<SingletonIdResolver>();
 
 			for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
+				"org.eclipse.emf.emfstore.internal.common.model.singletonidresolver").getExtensionElements()) {
 				try {
 					singletonIdResolvers.add(element.getClass("class", SingletonIdResolver.class));
 				} catch (ExtensionPointException e) {

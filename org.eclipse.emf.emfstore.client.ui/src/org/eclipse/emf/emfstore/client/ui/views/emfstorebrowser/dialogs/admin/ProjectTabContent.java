@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.client.ui.dialogs.EMFStoreMessageDialog;
+import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 import org.eclipse.jface.action.Action;
@@ -71,7 +71,7 @@ public class ProjectTabContent extends TabContent {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ui.views.emfstorebrowser.dialogs.admin.TabContent#initActions()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.TabContent#initActions()
 	 */
 	@Override
 	protected List<Action> initActions() {

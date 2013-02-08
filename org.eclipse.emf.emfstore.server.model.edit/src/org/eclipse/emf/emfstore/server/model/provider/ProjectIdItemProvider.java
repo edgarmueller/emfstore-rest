@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.common.model.provider.UniqueIdentifierItemProvid
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.ProjectId} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectId} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

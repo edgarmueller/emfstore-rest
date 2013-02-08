@@ -19,13 +19,13 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getIndexes <em>Indexes</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues <em>Referenced Values</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getIndexes <em>Indexes</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#getReferencedValues <em>Referenced Values</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>Add</em>' attribute.
 	 * @see #setAdd(boolean)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_Add()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_Add()
 	 * @model
 	 * @generated
 	 */
 	boolean isAdd();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation#isAdd <em>Add</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Add</em>' attribute.
 	 * @see #isAdd()
@@ -66,7 +66,7 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Indexes</em>' attribute list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_Indexes()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_Indexes()
 	 * @model
 	 * @generated
 	 */
@@ -83,7 +83,7 @@ public interface MultiAttributeOperation extends FeatureOperation {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Referenced Values</em>' attribute list.
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_ReferencedValues()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeOperation_ReferencedValues()
 	 * @model unique="false"
 	 * @generated
 	 */

@@ -24,10 +24,10 @@ import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getAuthor <em>Author</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getMessage <em>Message</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getDate <em>Date</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.impl.LogMessageImpl#getClientDate <em>Client Date</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.LogMessageImpl#getAuthor <em>Author</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.LogMessageImpl#getMessage <em>Message</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.LogMessageImpl#getDate <em>Date</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.LogMessageImpl#getClientDate <em>Client Date</em>}</li>
  * </ul>
  * </p>
  *

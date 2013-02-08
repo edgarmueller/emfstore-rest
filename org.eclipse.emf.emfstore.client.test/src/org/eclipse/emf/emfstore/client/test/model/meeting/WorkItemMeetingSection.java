@@ -19,19 +19,19 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection#getIncludedWorkItems <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection#getIncludedWorkItems <em>
  * Included Work Items</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getWorkItemMeetingSection()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getWorkItemMeetingSection()
  * @model
  * @generated
  */
 public interface WorkItemMeetingSection extends MeetingSection {
 	/**
 	 * Returns the value of the '<em><b>Included Work Items</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.task.WorkItem}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Included Work Items</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -39,7 +39,7 @@ public interface WorkItemMeetingSection extends MeetingSection {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Included Work Items</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getWorkItemMeetingSection_IncludedWorkItems()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getWorkItemMeetingSection_IncludedWorkItems()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */

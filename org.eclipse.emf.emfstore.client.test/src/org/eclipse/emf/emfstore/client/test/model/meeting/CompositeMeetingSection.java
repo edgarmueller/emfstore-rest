@@ -18,19 +18,19 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.CompositeMeetingSection#getSubsections <em>Subsections
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection#getSubsections <em>Subsections
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getCompositeMeetingSection()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getCompositeMeetingSection()
  * @model
  * @generated
  */
 public interface CompositeMeetingSection extends MeetingSection {
 	/**
 	 * Returns the value of the '<em><b>Subsections</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subsections</em>' containment reference list isn't clear, there really should be more
 	 * of a description here...
@@ -38,7 +38,7 @@ public interface CompositeMeetingSection extends MeetingSection {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Subsections</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getCompositeMeetingSection_Subsections()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getCompositeMeetingSection_Subsections()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

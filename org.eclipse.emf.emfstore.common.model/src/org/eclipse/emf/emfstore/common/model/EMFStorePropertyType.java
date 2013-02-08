@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.common.model.ModelPackage#getEMFStorePropertyType()
+ * @see org.eclipse.emf.emfstore.internal.common.model.ModelPackage#getEMFStorePropertyType()
  * @model
  * @generated
  */

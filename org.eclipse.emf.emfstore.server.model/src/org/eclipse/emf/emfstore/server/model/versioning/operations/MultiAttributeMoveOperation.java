@@ -17,13 +17,13 @@ package org.eclipse.emf.emfstore.server.model.versioning.operations;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>Old Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>New Index</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue <em>Referenced Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex <em>Old Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex <em>New Index</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue <em>Referenced Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation()
  * @model
  * @generated
  */
@@ -39,7 +39,7 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>Old Index</em>' attribute.
 	 * @see #setOldIndex(int)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_OldIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_OldIndex()
 	 * @model
 	 * @generated
 	 */
@@ -47,7 +47,7 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getOldIndex
 	 * <em>Old Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -69,7 +69,7 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * 
 	 * @return the value of the '<em>New Index</em>' attribute.
 	 * @see #setNewIndex(int)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_NewIndex()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_NewIndex()
 	 * @model
 	 * @generated
 	 */
@@ -77,7 +77,7 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getNewIndex
 	 * <em>New Index</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -98,14 +98,14 @@ public interface MultiAttributeMoveOperation extends FeatureOperation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referenced Value</em>' attribute.
 	 * @see #setReferencedValue(Object)
-	 * @see org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_ReferencedValue()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getMultiAttributeMoveOperation_ReferencedValue()
 	 * @model unique="false"
 	 * @generated
 	 */
 	Object getReferencedValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue <em>Referenced Value</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation#getReferencedValue <em>Referenced Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @param value the new value of the '<em>Referenced Value</em>' attribute.

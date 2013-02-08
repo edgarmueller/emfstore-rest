@@ -32,8 +32,8 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.document.impl.CompositeSectionImpl#getParent <em>Parent</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.document.impl.CompositeSectionImpl#getSubsections <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.CompositeSectionImpl#getParent <em>Parent</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.CompositeSectionImpl#getSubsections <em>
  * Subsections</em>}</li>
  * </ul>
  * </p>

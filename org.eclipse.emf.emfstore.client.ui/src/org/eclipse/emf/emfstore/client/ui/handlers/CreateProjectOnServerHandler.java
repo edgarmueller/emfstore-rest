@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.client.ui.controller.UICreateRemoteProjectController;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 
 /**
  * Creates an empty project on a server.

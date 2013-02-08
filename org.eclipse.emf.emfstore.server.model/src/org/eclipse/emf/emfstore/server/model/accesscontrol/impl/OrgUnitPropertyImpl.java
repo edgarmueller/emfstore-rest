@@ -29,9 +29,9 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.OrgUnitPropertyImpl#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *

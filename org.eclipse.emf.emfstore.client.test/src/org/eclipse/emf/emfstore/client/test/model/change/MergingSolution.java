@@ -20,19 +20,19 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.change.MergingSolution#getAppliedOperations <em>Applied
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution#getAppliedOperations <em>Applied
  * Operations</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.change.ChangePackage#getMergingSolution()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangePackage#getMergingSolution()
  * @model
  * @generated
  */
 public interface MergingSolution extends Solution {
 	/**
 	 * Returns the value of the '<em><b>Applied Operations</b></em>' containment reference list. The list contents are
-	 * of type {@link org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation}. <!--
+	 * of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Applied Operations</em>' containment reference list isn't clear, there really should
@@ -41,7 +41,7 @@ public interface MergingSolution extends Solution {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Applied Operations</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.change.ChangePackage#getMergingSolution_AppliedOperations()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.change.ChangePackage#getMergingSolution_AppliedOperations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

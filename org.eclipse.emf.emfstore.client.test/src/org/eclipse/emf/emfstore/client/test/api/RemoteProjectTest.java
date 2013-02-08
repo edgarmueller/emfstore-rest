@@ -7,11 +7,11 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.internal.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;

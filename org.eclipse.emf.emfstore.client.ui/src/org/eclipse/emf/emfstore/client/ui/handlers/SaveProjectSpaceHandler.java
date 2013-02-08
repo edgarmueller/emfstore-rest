@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.client.ui.handlers;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.ui.util.EMFStoreHandlerUtil;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 /**

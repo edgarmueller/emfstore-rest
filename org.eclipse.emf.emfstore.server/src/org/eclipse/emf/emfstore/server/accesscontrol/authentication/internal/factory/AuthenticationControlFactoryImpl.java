@@ -32,7 +32,7 @@ public class AuthenticationControlFactoryImpl implements AuthenticationControlFa
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.accesscontrol.authentication.factory.AuthenticationControlFactory#createAuthenticationControl()
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory#createAuthenticationControl()
 	 */
 	public AbstractAuthenticationControl createAuthenticationControl() throws FatalEmfStoreException {
 

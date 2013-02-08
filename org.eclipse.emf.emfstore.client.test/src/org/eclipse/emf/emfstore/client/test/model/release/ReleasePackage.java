@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.release.ReleaseFactory
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.release.ReleaseFactory
  * @model kind="package"
  * @generated
  */
@@ -48,7 +48,7 @@ public interface ReleasePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.release";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.release";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -58,11 +58,11 @@ public interface ReleasePackage extends EPackage {
 	ReleasePackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.release.impl.StreamImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
 	 * <em>Stream</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.StreamImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getStream()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getStream()
 	 * @generated
 	 */
 	int STREAM = 0;
@@ -94,11 +94,11 @@ public interface ReleasePackage extends EPackage {
 	int STREAM_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
 	 * <em>Release</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getRelease()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getRelease()
 	 * @generated
 	 */
 	int RELEASE = 1;
@@ -165,11 +165,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
 	 * <em>Source Code Repository Revision</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryRevision()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryRevision()
 	 * @generated
 	 */
 	int SOURCE_CODE_REPOSITORY_REVISION = 2;
@@ -185,11 +185,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
 	 * <em>Source Code Repository Stream</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryStream()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryStream()
 	 * @generated
 	 */
 	int SOURCE_CODE_REPOSITORY_STREAM = 3;
@@ -204,22 +204,22 @@ public interface ReleasePackage extends EPackage {
 	int SOURCE_CODE_REPOSITORY_STREAM_FEATURE_COUNT = 0;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.release.Stream
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream
 	 * <em>Stream</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Stream</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Stream
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Stream
 	 * @generated
 	 */
 	EClass getStream();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Stream#getReleases <em>Releases</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getReleases <em>Releases</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Releases</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Stream#getReleases()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getReleases()
 	 * @see #getStream()
 	 * @generated
 	 */
@@ -227,33 +227,33 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Stream#getSourceCodeRepositoryStream
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream
 	 * <em>Source Code Repository Stream</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Source Code Repository Stream</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Stream#getSourceCodeRepositoryStream()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream()
 	 * @see #getStream()
 	 * @generated
 	 */
 	EReference getStream_SourceCodeRepositoryStream();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.client.test.model.release.Release
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release
 	 * <em>Release</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Release</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release
 	 * @generated
 	 */
 	EClass getRelease();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Stream</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getStream()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -261,11 +261,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Predecessor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getPredecessor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -273,11 +273,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getSuccessor <em>Successor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Successor</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getSuccessor()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -285,11 +285,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Applied Patches</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getAppliedPatches()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -297,11 +297,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getIncludedWorkItems
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems
 	 * <em>Included Work Items</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Included Work Items</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getIncludedWorkItems()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -309,11 +309,11 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.Release#getSourceCodeRepositoryRevision
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSourceCodeRepositoryRevision
 	 * <em>Source Code Repository Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Source Code Repository Revision</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.Release#getSourceCodeRepositoryRevision()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSourceCodeRepositoryRevision()
 	 * @see #getRelease()
 	 * @generated
 	 */
@@ -321,22 +321,22 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryRevision
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryRevision
 	 * <em>Source Code Repository Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Source Code Repository Revision</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryRevision
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryRevision
 	 * @generated
 	 */
 	EClass getSourceCodeRepositoryRevision();
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryStream
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryStream
 	 * <em>Source Code Repository Stream</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Source Code Repository Stream</em>'.
-	 * @see org.eclipse.emf.emfstore.client.test.model.release.SourceCodeRepositoryStream
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.SourceCodeRepositoryStream
 	 * @generated
 	 */
 	EClass getSourceCodeRepositoryStream();
@@ -363,11 +363,11 @@ public interface ReleasePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.release.impl.StreamImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
 		 * <em>Stream</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.StreamImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getStream()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getStream()
 		 * @generated
 		 */
 		EClass STREAM = eINSTANCE.getStream();
@@ -389,11 +389,11 @@ public interface ReleasePackage extends EPackage {
 		EReference STREAM__SOURCE_CODE_REPOSITORY_STREAM = eINSTANCE.getStream_SourceCodeRepositoryStream();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
 		 * <em>Release</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleaseImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getRelease()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getRelease()
 		 * @generated
 		 */
 		EClass RELEASE = eINSTANCE.getRelease();
@@ -448,22 +448,22 @@ public interface ReleasePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
 		 * <em>Source Code Repository Revision</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryRevision()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryRevisionImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryRevision()
 		 * @generated
 		 */
 		EClass SOURCE_CODE_REPOSITORY_REVISION = eINSTANCE.getSourceCodeRepositoryRevision();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
 		 * <em>Source Code Repository Stream</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
-		 * @see org.eclipse.emf.emfstore.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryStream()
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.SourceCodeRepositoryStreamImpl
+		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleasePackageImpl#getSourceCodeRepositoryStream()
 		 * @generated
 		 */
 		EClass SOURCE_CODE_REPOSITORY_STREAM = eINSTANCE.getSourceCodeRepositoryStream();

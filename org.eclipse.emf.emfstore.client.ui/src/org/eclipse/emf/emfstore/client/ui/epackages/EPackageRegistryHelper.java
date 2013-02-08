@@ -18,7 +18,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.emfstore.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 
 /**
  * Helper-class to retrieve EPackages from the EPackage-registry.

@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.SessionId;
  * {@link InternalCommand} it is possible to access the interface without accesscontrol.
  * 
  * @see AbstractSubEmfstoreInterface
- * @see org.eclipse.emf.emfstore.server.EMFStoreInterface
+ * @see org.eclipse.emf.emfstore.internal.server.EMFStoreInterface
  * @author wesendon
  */
 public abstract class AbstractEmfstoreInterface {

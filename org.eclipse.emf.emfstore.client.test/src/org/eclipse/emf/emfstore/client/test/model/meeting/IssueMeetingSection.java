@@ -19,19 +19,19 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.meeting.IssueMeetingSection#getIncludedIssues <em>Included
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection#getIncludedIssues <em>Included
  * Issues</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getIssueMeetingSection()
+ * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getIssueMeetingSection()
  * @model
  * @generated
  */
 public interface IssueMeetingSection extends MeetingSection {
 	/**
 	 * Returns the value of the '<em><b>Included Issues</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.client.test.model.rationale.Issue}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Included Issues</em>' reference list isn't clear, there really should be more of a
 	 * description here...
@@ -39,7 +39,7 @@ public interface IssueMeetingSection extends MeetingSection {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Included Issues</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.client.test.model.meeting.MeetingPackage#getIssueMeetingSection_IncludedIssues()
+	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingPackage#getIssueMeetingSection_IncludedIssues()
 	 * @model annotation="org.unicase.ui.meeditor priority='10.0' position='right'"
 	 * @generated
 	 */

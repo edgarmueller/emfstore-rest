@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.client.test.model.provider.ModelEditPlugin;
 import org.eclipse.emf.emfstore.client.test.model.provider.UnicaseModelElementItemProvider;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.client.test.model.profile.Profile} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

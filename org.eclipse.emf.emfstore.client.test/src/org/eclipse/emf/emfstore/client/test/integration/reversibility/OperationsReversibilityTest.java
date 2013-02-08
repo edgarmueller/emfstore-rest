@@ -13,10 +13,10 @@ package org.eclipse.emf.emfstore.client.test.integration.reversibility;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.TestProjectEnum;
 import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.AfterClass;

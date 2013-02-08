@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.server.model.AuthenticationInformation}
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation}
  * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 

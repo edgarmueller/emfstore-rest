@@ -10,10 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server.api.util;
 
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 
 public class TestConflictResolver extends AbstractConflictResolver {
 

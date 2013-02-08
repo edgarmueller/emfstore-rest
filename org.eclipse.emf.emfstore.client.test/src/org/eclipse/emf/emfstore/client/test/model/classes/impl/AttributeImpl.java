@@ -29,22 +29,22 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getDefiningClass <em>Defining Class
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getDefiningClass <em>Defining Class
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getVisibility <em>Visibility</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getScope <em>Scope</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getSignature <em>Signature</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getDefaultValue <em>Default Value
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getVisibility <em>Visibility</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getScope <em>Scope</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getSignature <em>Signature</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getType <em>Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getDefaultValue <em>Default Value
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getProperties <em>Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getLabel <em>Label</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#isId <em>Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getImplementationType <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getProperties <em>Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getLabel <em>Label</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#isId <em>Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getImplementationType <em>
  * Implementation Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#getImplementationEnumeration <em>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#getImplementationEnumeration <em>
  * Implementation Enumeration</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.test.model.classes.impl.AttributeImpl#isTransient <em>Transient</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
  * 

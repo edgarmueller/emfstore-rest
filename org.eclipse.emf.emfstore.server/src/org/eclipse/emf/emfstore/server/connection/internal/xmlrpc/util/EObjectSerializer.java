@@ -29,13 +29,13 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.CommonUtil;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
@@ -179,7 +179,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 		if (serializationOptionsInitialized) {
 			return;
 		}
-		ExtensionElement element = new ExtensionPoint("org.eclipse.emf.emfstore.common.model.serializationoptions")
+		ExtensionElement element = new ExtensionPoint("org.eclipse.emf.emfstore.internal.common.model.serializationoptions")
 			.getFirst();
 
 		if (element != null) {
