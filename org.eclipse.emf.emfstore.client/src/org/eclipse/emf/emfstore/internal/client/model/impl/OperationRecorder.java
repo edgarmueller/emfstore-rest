@@ -54,15 +54,15 @@ import org.eclipse.emf.emfstore.internal.common.model.util.EObjectChangeNotifier
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SettingWithReferencedElement;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.ReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.semantic.SemanticCompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
  * Tracks changes on any given {@link IdEObjectCollection}.

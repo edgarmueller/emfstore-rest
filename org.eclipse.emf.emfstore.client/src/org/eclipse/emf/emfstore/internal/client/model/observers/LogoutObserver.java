@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
 import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
+import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
  * Observes a logout of a session.

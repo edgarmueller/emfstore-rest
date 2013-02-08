@@ -50,20 +50,20 @@ import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpa
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
+import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
-import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
-import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
 /**
  * Workspace space base class that contains custom user methods.
@@ -142,7 +142,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createLocalProject(java.lang.String, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createLocalProject(java.lang.String,
+	 *      java.lang.String)
 	 */
 	public ProjectSpace createLocalProject(String projectName, String projectDescription) {
 

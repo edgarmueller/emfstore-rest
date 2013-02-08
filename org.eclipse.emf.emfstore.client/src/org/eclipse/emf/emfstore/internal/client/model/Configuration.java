@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -138,7 +139,8 @@ public final class Configuration {
 
 			try {
 				// TODO EXPT PRIO
-				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider")
+				locationProvider = new ExtensionPoint(
+					"org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider")
 					.setThrowException(true).getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
@@ -244,13 +246,14 @@ public final class Configuration {
 	 */
 	@SuppressWarnings("cast")
 	public static ClientVersionInfo getClientVersion() {
-		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
+		ClientVersionInfo clientVersionInfo = org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 			.createClientVersionInfo();
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.version").setThrowException(
-			false).getFirst();
+		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.version")
+			.setThrowException(
+				false).getFirst();
 
 		if (version != null) {
 			IClientVersionProvider versionProvider = version.getClass("class", IClientVersionProvider.class);
@@ -424,7 +427,8 @@ public final class Configuration {
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public static boolean isChecksumCheckActive() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
+		ExtensionPoint extensionPoint = new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -437,7 +441,8 @@ public final class Configuration {
 
 		if (checksumErrorHandler == null) {
 
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
+			ExtensionPoint extensionPoint = new ExtensionPoint(
+				"org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
 
 			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 

@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
+import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 
 /**
  * Receives a notification when a project is deleted from the workspace.

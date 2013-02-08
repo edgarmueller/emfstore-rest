@@ -14,10 +14,9 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 
 /**
  * Callback that is called during the merge process.<br/>

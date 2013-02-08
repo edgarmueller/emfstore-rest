@@ -23,9 +23,9 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolPackage;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -128,12 +128,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Obtain or create and register package
 		ModelPackageImpl theModelPackage = (ModelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new ModelPackageImpl());
+			.get(eNS_URI)
+			: new ModelPackageImpl());
 
 		isInited = true;
 
 		// Initialize simple dependencies
-		org.eclipse.emf.emfstore.server.model.ModelPackage.eINSTANCE.eClass();
+		org.eclipse.emf.emfstore.internal.server.model.ModelPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
@@ -734,8 +735,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Obtain other dependent packages
 		org.eclipse.emf.emfstore.internal.common.model.ModelPackage theModelPackage_2 = (org.eclipse.emf.emfstore.internal.common.model.ModelPackage) EPackage.Registry.INSTANCE
 			.getEPackage(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eNS_URI);
-		org.eclipse.emf.emfstore.server.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.server.model.ModelPackage) EPackage.Registry.INSTANCE
-			.getEPackage(org.eclipse.emf.emfstore.server.model.ModelPackage.eNS_URI);
+		org.eclipse.emf.emfstore.internal.server.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.internal.server.model.ModelPackage) EPackage.Registry.INSTANCE
+			.getEPackage(org.eclipse.emf.emfstore.internal.server.model.ModelPackage.eNS_URI);
 		AccesscontrolPackage theAccesscontrolPackage = (AccesscontrolPackage) EPackage.Registry.INSTANCE
 			.getEPackage(AccesscontrolPackage.eNS_URI);
 		VersioningPackage theVersioningPackage = (VersioningPackage) EPackage.Registry.INSTANCE

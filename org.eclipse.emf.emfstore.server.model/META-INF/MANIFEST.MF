@@ -14,9 +14,6 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model;x-friends:="org.e
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.impl;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.util;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.util;x-friends:="org.eclipse.emf.emfstore.server",
- org.eclipse.emf.emfstore.server.model.api,
- org.eclipse.emf.emfstore.server.model.api.query,
- org.eclipse.emf.emfstore.server.model.api.versionspec,
  org.eclipse.emf.emfstore.internal.server.model.impl;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.url;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.url.impl;x-friends:="org.eclipse.emf.emfstore.server",
@@ -36,6 +33,9 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model;x-friends:="org.e
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.util;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util;x-friends:="org.eclipse.emf.emfstore.server",
- org.eclipse.emf.emfstore.internal.server.model.versioning.util;x-friends:="org.eclipse.emf.emfstore.server"
+ org.eclipse.emf.emfstore.internal.server.model.versioning.util;x-friends:="org.eclipse.emf.emfstore.server",
+ org.eclipse.emf.emfstore.server.model.api,
+ org.eclipse.emf.emfstore.server.model.api.query,
+ org.eclipse.emf.emfstore.server.model.api.versionspec
 Require-Bundle: org.eclipse.emf.emfstore.common.model;bundle-version="0.9.3";visibility:=reexport
 Bundle-ActivationPolicy: lazy

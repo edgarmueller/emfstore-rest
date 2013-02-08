@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
+import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
  * Enables the modification of attributes of newly created model elements.<br>

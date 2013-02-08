@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Encapsulates configuration options for the operation recorder.

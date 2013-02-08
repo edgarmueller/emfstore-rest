@@ -25,9 +25,9 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImport
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Controller class for exporting a {@link ProjectHistory}.

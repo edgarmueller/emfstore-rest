@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
@@ -30,13 +31,14 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitPrope
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getUsername <em>Username</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword <em>Password</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId <em>Session Id</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPersistentPassword <em>Persistent Password
- *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPersistentPassword <em>Persistent
+ *          Password </em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getServerInfo <em>Server Info</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#isSavePassword <em>Save Password</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#isSavePassword <em>Save Password</em>}
+ *          </li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getACUser <em>AC User</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getChangedProperties <em>Changed Properties
- *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getChangedProperties <em>Changed
+ *          Properties </em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -63,7 +65,8 @@ public interface Usersession extends EObject, IUsersession {
 	String getUsername();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getUsername <em>Username</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getUsername
+	 * <em>Username</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -91,7 +94,8 @@ public interface Usersession extends EObject, IUsersession {
 	String getPassword();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword <em>Password</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getPassword
+	 * <em>Password</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -119,8 +123,8 @@ public interface Usersession extends EObject, IUsersession {
 	SessionId getSessionId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId <em>Session Id</em>}
-	 * ' reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getSessionId
+	 * <em>Session Id</em>} ' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Session Id</em>' reference.
@@ -231,7 +235,8 @@ public interface Usersession extends EObject, IUsersession {
 	ACUser getACUser();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getACUser <em>AC User</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.Usersession#getACUser
+	 * <em>AC User</em>}'
 	 * containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -243,7 +248,8 @@ public interface Usersession extends EObject, IUsersession {
 
 	/**
 	 * Returns the value of the '<em><b>Changed Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty}.
+	 * The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Changed Properties</em>' containment reference list isn't clear, there really should

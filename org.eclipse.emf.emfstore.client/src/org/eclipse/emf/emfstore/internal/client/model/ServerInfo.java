@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'.
@@ -27,9 +28,12 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}
+ *          </li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate
+ *          Alias</em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -55,7 +59,8 @@ public interface ServerInfo extends EObject, IServer {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -81,7 +86,8 @@ public interface ServerInfo extends EObject, IServer {
 	String getUrl();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Url</em>' attribute.
@@ -107,7 +113,8 @@ public interface ServerInfo extends EObject, IServer {
 	int getPort();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Port</em>' attribute.

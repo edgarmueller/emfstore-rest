@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Info</b></em>'.
@@ -36,12 +36,12 @@ import org.eclipse.emf.emfstore.server.model.ProjectInfo;
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getName <em>Name</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getUrl <em>Url</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getPort <em>Port</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getProjectInfos <em>Project Infos</em>}
- *          </li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getLastUsersession <em>Last Usersession
- *          </em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getCertificateAlias <em>Certificate
- *          Alias</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getProjectInfos <em>Project
+ *          Infos</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getLastUsersession <em>Last
+ *          Usersession </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getCertificateAlias <em>
+ *          Certificate Alias</em>}</li>
  *          </ul>
  *          </p>
  * 

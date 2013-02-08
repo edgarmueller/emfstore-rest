@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * This interface allows to hook into the operation recorder and to modify the recorded operations. Generally this is

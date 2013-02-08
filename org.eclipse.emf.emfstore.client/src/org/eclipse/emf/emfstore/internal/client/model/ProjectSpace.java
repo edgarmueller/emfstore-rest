@@ -32,6 +32,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -204,7 +205,8 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -456,7 +458,8 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -499,7 +502,8 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Waiting Uploads</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}. <!--
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Waiting Uploads</em>' containment reference list isn't clear, there really should be

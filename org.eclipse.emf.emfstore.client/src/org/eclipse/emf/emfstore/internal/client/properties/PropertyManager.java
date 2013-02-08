@@ -24,8 +24,8 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType;
 import org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * This class is responsible for the modification of EMFStore based properties. <br/>
@@ -387,7 +387,8 @@ public final class PropertyManager {
 	 * @return the newly created property
 	 */
 	private EMFStoreProperty createProperty(String key, EObject value, boolean isVersioned) {
-		EMFStoreProperty prop = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty();
+		EMFStoreProperty prop = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+			.createEMFStoreProperty();
 		prop.setKey(key);
 		prop.setValue(value);
 

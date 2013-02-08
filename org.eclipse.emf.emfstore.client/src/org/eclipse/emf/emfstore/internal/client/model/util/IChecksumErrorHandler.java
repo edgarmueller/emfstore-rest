@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 
 /**
  * Interface that determines what to do in case the checksum computation on a {@link ILocalProject} fails.

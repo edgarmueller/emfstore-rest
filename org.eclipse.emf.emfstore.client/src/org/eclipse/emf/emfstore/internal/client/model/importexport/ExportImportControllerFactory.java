@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportCh
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectHistoryController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectSpaceController;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Convenience class for easy obtainment of export/import controllers.

@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
@@ -51,6 +52,8 @@ import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
+import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
+import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
 
 /**
  * Controller for workspaces. Workspace Manager is a singleton.

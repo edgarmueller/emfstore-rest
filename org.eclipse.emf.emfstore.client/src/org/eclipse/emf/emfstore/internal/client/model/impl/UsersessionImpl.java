@@ -31,13 +31,13 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
-import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Usersession</b></em>'. <!-- end-user-doc -->
@@ -47,13 +47,14 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getUsername <em>Username</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getPassword <em>Password</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getSessionId <em>Session Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getPersistentPassword <em>Persistent Password
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getPersistentPassword <em>Persistent
+ * Password </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getServerInfo <em>Server Info</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#isSavePassword <em>Save Password</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#isSavePassword <em>Save Password</em>}
+ * </li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getACUser <em>AC User</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getChangedProperties <em>Changed Properties
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.UsersessionImpl#getChangedProperties <em>Changed
+ * Properties </em>}</li>
  * </ul>
  * </p>
  * 

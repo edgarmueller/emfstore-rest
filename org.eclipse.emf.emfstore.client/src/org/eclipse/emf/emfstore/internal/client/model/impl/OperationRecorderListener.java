@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Listener for operations recorded by operation recorder.

@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
+import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 
 /**
  * Listener for changes to the save state (project is fully saved or still dirty) of a project space.

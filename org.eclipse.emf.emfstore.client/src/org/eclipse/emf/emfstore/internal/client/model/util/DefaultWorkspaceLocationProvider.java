@@ -14,9 +14,9 @@ import static org.eclipse.emf.emfstore.internal.client.model.Configuration.isInt
 import static org.eclipse.emf.emfstore.internal.client.model.Configuration.isReleaseVersion;
 
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
-import org.eclipse.emf.emfstore.server.DefaultServerWorkspaceLocationProvider;
-import org.eclipse.emf.emfstore.server.LocationProvider;
-import org.eclipse.emf.emfstore.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
+import org.eclipse.emf.emfstore.internal.server.LocationProvider;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 
 /**
  * This is the default workspace location provider. If no other location

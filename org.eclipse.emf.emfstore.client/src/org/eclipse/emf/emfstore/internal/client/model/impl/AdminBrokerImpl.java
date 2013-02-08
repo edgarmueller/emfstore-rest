@@ -16,16 +16,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACGroup;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnit;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
+import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 
 /**
  * Implementation of the AdminBroker.
@@ -75,7 +75,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	 */
 	public void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws EMFStoreException {
 
-		WorkspaceProvider.getInstance().getAdminConnectionManager().changeRole(getSessionId(), projectId, orgUnit, role);
+		WorkspaceProvider.getInstance().getAdminConnectionManager()
+			.changeRole(getSessionId(), projectId, orgUnit, role);
 
 	}
 

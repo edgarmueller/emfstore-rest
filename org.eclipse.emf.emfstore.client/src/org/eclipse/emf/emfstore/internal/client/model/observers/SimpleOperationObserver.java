@@ -12,9 +12,9 @@ package org.eclipse.emf.emfstore.internal.client.model.observers;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Clients (like GUI classes) who are not interested if an operation has been run forward or backward (i.e. undone) can
@@ -54,7 +54,8 @@ public abstract class SimpleOperationObserver implements OperationObserver, Comm
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ProjectSpace projectSpace, ChangePackage changePackage, IProgressMonitor monitor) {
 		return true;
