@@ -2,16 +2,16 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2011 Chair for Applied Software Engineering,&#xA;Technische Universitaet Muenchen.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:"
-    modelDirectory="/org.eclipse.emf.emfstore.internal.common.model/src" editDirectory="/org.eclipse.emf.emfstore.internal.common.model.edit/src"
-    editorDirectory="/org.eclipse.emf.emfstore.internal.common.model.editor/src" modelPluginID="org.eclipse.emf.emfstore.internal.common.model"
-    modelName="Common" editPluginClass="org.eclipse.emf.emfstore.internal.common.model.provider.CommonEditPlugin"
-    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
-    complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.emfstore.internal.common.model.provider.RootElementItemProvider"
-    editPluginID="org.eclipse.emf.emfstore.internal.common.model.edit" editorPluginID="org.eclipse.emf.emfstore.internal.common.model.editor"
+    modelDirectory="/org.eclipse.emf.emfstore.common.model/src" editDirectory="/org.eclipse.emf.emfstore.common.model.edit/src"
+    editorDirectory="/org.eclipse.emf.emfstore.common.model.editor/src" modelPluginID="org.eclipse.emf.emfstore.internal.common.model"
+    modelName="Common" modelPluginClass="" editPluginClass="org.eclipse.emf.emfstore.internal.common.model.edit.provider.CommonEditPlugin"
+    nonNLSMarkers="true" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="org.eclipse.emf.emfstore.internal.common.model.edit.provider.RootElementItemProvider"
+    editPluginID="org.eclipse.emf.emfstore.internal.common.model.edit" editorPluginID="org.eclipse.emf.emfstore.common.model.editor"
     runtimeVersion="2.5" language="">
   <foreignModel>common.ecore</foreignModel>
-  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.internal.common" disposableProviderFactory="true"
-      ecorePackage="common.ecore#/">
+  <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.internal.common"
+      disposableProviderFactory="true" ecorePackage="common.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="common.ecore#//EMFStorePropertyType">
       <genEnumLiterals ecoreEnumLiteral="common.ecore#//EMFStorePropertyType/Shared"/>
       <genEnumLiterals ecoreEnumLiteral="common.ecore#//EMFStorePropertyType/Local"/>

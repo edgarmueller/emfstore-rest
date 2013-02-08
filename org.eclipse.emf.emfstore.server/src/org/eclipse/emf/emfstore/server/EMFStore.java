@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
-import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.filetransfer.FileChunk;

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.server.internal.eventmanager;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.events.server.ServerEvent;
 
 /**

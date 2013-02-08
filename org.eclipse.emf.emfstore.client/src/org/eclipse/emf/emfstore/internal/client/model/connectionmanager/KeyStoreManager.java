@@ -43,13 +43,13 @@ import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 
 /**
  * The KeyStoreManager manages the client's KeyStore in which the SSL

@@ -2,8 +2,8 @@ package org.eclipse.emf.emfstore.server.model.versioning.util;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory;
 import org.eclipse.emf.emfstore.server.model.api.query.IModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.api.query.IPathQuery;

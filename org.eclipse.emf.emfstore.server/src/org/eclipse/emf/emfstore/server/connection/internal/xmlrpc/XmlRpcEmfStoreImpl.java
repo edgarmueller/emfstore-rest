@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
-import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.EMFStore;
 import org.eclipse.emf.emfstore.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;

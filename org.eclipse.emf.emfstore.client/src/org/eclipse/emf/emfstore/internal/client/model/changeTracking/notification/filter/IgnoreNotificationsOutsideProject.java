@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
-import org.eclipse.emf.emfstore.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 
 /**
  * Filter notifications from elements outside of the project.
@@ -25,7 +25,7 @@ public class IgnoreNotificationsOutsideProject implements NotificationFilter {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.notification.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.internal.common.model.EObjectContainer)
+	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
 	 */
 	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
 

@@ -7,9 +7,6 @@ Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.internal.common.model,
- org.eclipse.emf.emfstore.internal.common.model.api,
- org.eclipse.emf.emfstore.internal.common.model.impl,
- org.eclipse.emf.emfstore.internal.common.model.util
-Require-Bundle: org.eclipse.emf.emfstore.internal.common;visibility:=reexport
+Require-Bundle: org.eclipse.emf.emfstore.common;bundle-version="0.9.3"
 Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.emf.emfstore.common.model

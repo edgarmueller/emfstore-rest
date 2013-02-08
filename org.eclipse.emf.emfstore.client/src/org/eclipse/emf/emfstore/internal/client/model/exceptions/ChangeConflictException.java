@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.api.IChangeConflictException;
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 

@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
@@ -66,7 +66,7 @@ public abstract class AbstractConflictResolver implements IConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.internal.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.changeTracking.merging.IConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
 	 *      java.util.List, java.util.List, org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.internal.server.model.versioning.PrimaryVersionSpec)
 	 */

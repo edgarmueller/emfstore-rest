@@ -19,14 +19,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
-import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
@@ -92,7 +92,7 @@ import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOpera
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace()
+ * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace()
  * @model
  * @generated
  */
@@ -197,7 +197,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Base Version</em>' containment reference.
 	 * @see #setBaseVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_BaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_BaseVersion()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -205,7 +205,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -216,7 +216,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Changed Shared Properties</em>' reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
 	 * @model
 	 * @generated
 	 */
@@ -235,7 +235,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Workspace</em>' container reference.
 	 * @see #setWorkspace(Workspace)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_Workspace()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Workspace()
 	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpaces
 	 * @model opposite="projectSpaces" transient="false"
 	 * @generated
@@ -266,7 +266,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @return the value of the '<em>Local Change Package</em>' containment
 	 *         reference.
 	 * @see #setLocalChangePackage(ChangePackage)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_LocalChangePackage()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_LocalChangePackage()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -296,7 +296,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Merged Version</em>' containment reference.
 	 * @see #setMergedVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_MergedVersion()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_MergedVersion()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -378,7 +378,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Last Updated</em>' attribute.
 	 * @see #setLastUpdated(Date)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_LastUpdated()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_LastUpdated()
 	 * @model
 	 * @generated
 	 */
@@ -407,7 +407,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * @return the value of the '<em>Local Operations</em>' containment
 	 *         reference.
 	 * @see #setLocalOperations(OperationComposite)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_LocalOperations()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_LocalOperations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -424,7 +424,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Old Log Messages</em>' attribute list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_OldLogMessages()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_OldLogMessages()
 	 * @model
 	 * @generated
 	 */
@@ -449,7 +449,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Project</em>' containment reference.
 	 * @see #setProject(Project)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_Project()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Project()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -457,7 +457,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -467,7 +467,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Properties</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_Properties()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Properties()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -492,7 +492,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Usersession</em>' reference.
 	 * @see #setUsersession(Usersession)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_Usersession()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Usersession()
 	 * @model
 	 * @generated
 	 */
@@ -510,7 +510,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Waiting Uploads</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_WaitingUploads()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_WaitingUploads()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -569,7 +569,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Dirty</em>' attribute.
 	 * @see #setDirty(boolean)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_Dirty()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_Dirty()
 	 * @model
 	 * @generated
 	 */
@@ -637,7 +637,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @return the value of the '<em>Resource Count</em>' attribute.
 	 * @see #setResourceCount(int)
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getProjectSpace_ResourceCount()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getProjectSpace_ResourceCount()
 	 * @model
 	 * @generated
 	 */

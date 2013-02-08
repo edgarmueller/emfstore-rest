@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.server.model.impl;
 import java.io.Serializable;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.common.model.impl.IdentifiableElementImpl;
+import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.server.model.ModelPackage;
 

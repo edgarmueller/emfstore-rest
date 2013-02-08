@@ -14,10 +14,10 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 
 /**
  * Exports pending changes on a given {@link ProjectSpace}.

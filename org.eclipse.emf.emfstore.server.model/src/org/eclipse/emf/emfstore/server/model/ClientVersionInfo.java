@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getClientVersionInfo()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface ClientVersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo_Version()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getClientVersionInfo_Version()
 	 * @model
 	 * @generated
 	 */
@@ -68,7 +68,7 @@ public interface ClientVersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getClientVersionInfo_Name()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getClientVersionInfo_Name()
 	 * @model
 	 * @generated
 	 */

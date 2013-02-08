@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelFactory
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelFactory
  * @model kind="package"
  * @generated
  */
@@ -213,7 +213,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION_ID__ID = org.eclipse.emf.emfstore.common.model.ModelPackage.UNIQUE_IDENTIFIER__ID;
+	int SESSION_ID__ID = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.UNIQUE_IDENTIFIER__ID;
 
 	/**
 	 * The number of structural features of the '<em>Session Id</em>' class.
@@ -222,7 +222,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION_ID_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
+	int SESSION_ID_FEATURE_COUNT = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.internal.server.model.impl.ServerSpaceImpl
@@ -298,7 +298,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_ID__ID = org.eclipse.emf.emfstore.common.model.ModelPackage.UNIQUE_IDENTIFIER__ID;
+	int PROJECT_ID__ID = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.UNIQUE_IDENTIFIER__ID;
 
 	/**
 	 * The number of structural features of the '<em>Project Id</em>' class.
@@ -307,7 +307,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_ID_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
+	int PROJECT_ID_FEATURE_COUNT = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.internal.server.model.impl.VersionInfoImpl
@@ -396,7 +396,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_IDENTIFIER__IDENTIFIER = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER;
+	int FILE_IDENTIFIER__IDENTIFIER = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER;
 
 	/**
 	 * The number of structural features of the '<em>File Identifier</em>' class.
@@ -405,7 +405,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_IDENTIFIER_FEATURE_COUNT = org.eclipse.emf.emfstore.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int FILE_IDENTIFIER_FEATURE_COUNT = org.eclipse.emf.emfstore.internal.common.model.ModelPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.impl.AuthenticationInformationImpl

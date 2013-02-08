@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.url.ProjectUrlFragment;
@@ -50,7 +50,7 @@ import org.eclipse.emf.emfstore.server.model.url.ServerUrl;
  *             </ul>
  *             </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getWorkspace()
+ * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
  */
@@ -168,7 +168,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getWorkspace_ProjectSpaces()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_ProjectSpaces()
 	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ProjectSpace#getWorkspace
 	 * @model opposite="workspace" containment="true" resolveProxies="true"
 	 *        keys="identifier"
@@ -188,7 +188,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getWorkspace_ServerInfos()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -206,7 +206,7 @@ public interface Workspace extends EObject, IAdaptable, IWorkspace {
 	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.ModelPackage#getWorkspace_Usersessions()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versioning.operations.semantic;
 
-import org.eclipse.emf.emfstore.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
 
 /**

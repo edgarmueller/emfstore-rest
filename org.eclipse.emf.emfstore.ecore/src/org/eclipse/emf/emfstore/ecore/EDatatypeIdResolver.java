@@ -16,10 +16,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
-import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
-import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.common.model.SingletonIdResolver;
 
 /**
  * An implementation of a {@link SingletonIdResolver} that treats all {@link EDataType}s as singletons.

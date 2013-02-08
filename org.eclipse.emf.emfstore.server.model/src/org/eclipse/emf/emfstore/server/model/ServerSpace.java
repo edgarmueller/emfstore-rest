@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace()
  * @model
  * @generated
  */
@@ -47,7 +47,7 @@ public interface ServerSpace extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Groups</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace_Groups()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Groups()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -64,7 +64,7 @@ public interface ServerSpace extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Projects</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace_Projects()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Projects()
 	 * @model
 	 * @generated
 	 */
@@ -82,7 +82,7 @@ public interface ServerSpace extends EObject {
 	 * 
 	 * @return the value of the '<em>Open Sessions</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace_OpenSessions()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_OpenSessions()
 	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
@@ -99,7 +99,7 @@ public interface ServerSpace extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Users</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace_Users()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Users()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

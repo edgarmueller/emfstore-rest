@@ -921,7 +921,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Step" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Step" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="userStep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedUseCase" eType="#//requirement/UseCase"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedSystemFunction"
@@ -1018,7 +1018,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Proposal" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Proposal" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="assessments" upperBound="-1"
           eType="#//rationale/Assessment" containment="true" eOpposite="#//rationale/Assessment/proposal">
         <eAnnotations source="org.unicase.ui.meeditor">
@@ -1034,7 +1034,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Solution" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Solution" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="underlyingProposals"
           upperBound="-1" eType="#//rationale/Proposal">
         <eAnnotations source="org.unicase.ui.meeditor">
@@ -1059,14 +1059,14 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="proposal" eType="#//rationale/Proposal"
           eOpposite="#//rationale/Proposal/assessments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="criterion" eType="#//rationale/Criterion"
           eOpposite="#//rationale/Criterion/assessments"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//organization/OrgUnit"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="recipients" upperBound="-1"
           eType="#//organization/OrgUnit"/>
@@ -1395,12 +1395,12 @@
   <eSubpackages name="util" nsURI="http://eclipse.org/emf/emfstore/client/test/model/util"
       nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model.util">
     <eClassifiers xsi:type="ecore:EClass" name="ModelElementPath">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="path" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>

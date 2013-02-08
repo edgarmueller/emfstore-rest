@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
-import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
+import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.server.model.FileIdentifier;
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.VersionInfo;
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage
  * @generated
  */
 public class ModelSwitch<T> {

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.accesscontrol;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.Role;
 
 /**

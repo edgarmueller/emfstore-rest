@@ -19,7 +19,6 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
@@ -29,6 +28,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.LocationProvider;
 import org.eclipse.emf.emfstore.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.server.model.ClientVersionInfo;

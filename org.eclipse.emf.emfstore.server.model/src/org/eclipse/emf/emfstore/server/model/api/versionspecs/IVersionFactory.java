@@ -1,6 +1,6 @@
 package org.eclipse.emf.emfstore.server.model.api.versionspecs;
 
-import org.eclipse.emf.emfstore.common.model.api.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 public interface IVersionFactory extends IEMFStoreFactory {
 

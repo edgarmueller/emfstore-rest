@@ -14,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.common.model.IdEObjectCollection;
-import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Abstract Operation</b></em>'. <!-- end-user-doc

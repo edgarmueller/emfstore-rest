@@ -113,7 +113,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#eNS_URI
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -148,7 +148,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		org.eclipse.emf.emfstore.common.model.ModelPackage.eINSTANCE.eClass();
+		org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VersioningPackage.eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VersioningPackage.eNS_URI) : VersioningPackage.eINSTANCE);
@@ -505,7 +505,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		VersioningPackage theVersioningPackage = (VersioningPackage)EPackage.Registry.INSTANCE.getEPackage(VersioningPackage.eNS_URI);
 		AccesscontrolPackage theAccesscontrolPackage = (AccesscontrolPackage)EPackage.Registry.INSTANCE.getEPackage(AccesscontrolPackage.eNS_URI);
 		UrlPackage theUrlPackage = (UrlPackage)EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI);
-		org.eclipse.emf.emfstore.common.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.common.model.ModelPackage)EPackage.Registry.INSTANCE.getEPackage(org.eclipse.emf.emfstore.common.model.ModelPackage.eNS_URI);
+		org.eclipse.emf.emfstore.internal.common.model.ModelPackage theModelPackage_1 = (org.eclipse.emf.emfstore.internal.common.model.ModelPackage)EPackage.Registry.INSTANCE.getEPackage(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVersioningPackage);

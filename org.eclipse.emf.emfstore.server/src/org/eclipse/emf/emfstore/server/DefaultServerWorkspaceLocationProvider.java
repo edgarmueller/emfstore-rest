@@ -18,7 +18,7 @@ import static org.eclipse.emf.emfstore.server.ServerConfiguration.isTesting;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
  * This is the default workspace location provider. If no other location provider is registered, this provider is used.

@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common;
 
+import org.eclipse.emf.emfstore.common.IDisposable;
+
 /**
  * Models an object that has a lifecycle.
  * 

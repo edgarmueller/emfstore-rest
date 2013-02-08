@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
+import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 
 /**
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.server.model.api.IProjectId;
  * @extends {@link IProjectId} <!-- end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectId()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectId()
  * @model
  * @generated
  */

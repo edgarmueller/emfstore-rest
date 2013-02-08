@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.api.query.IModelElementQuery;
 
 /**

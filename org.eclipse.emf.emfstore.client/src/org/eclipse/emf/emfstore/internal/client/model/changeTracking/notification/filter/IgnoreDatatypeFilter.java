@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
  * Filters notifications which come from datatypes that should be ignored.

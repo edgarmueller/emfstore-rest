@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.url;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Url Fragment</b></em>'. <!--

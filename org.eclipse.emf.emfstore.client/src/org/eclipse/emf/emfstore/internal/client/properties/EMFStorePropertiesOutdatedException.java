@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.properties;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 
 /**
  * Exception that indicates that some client-side properties are outdated.

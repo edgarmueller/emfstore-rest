@@ -17,9 +17,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.server.core.internal.helper.EmfStoreMethod;
@@ -172,7 +172,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				logMessage.setDate(new Date());
 				projectHistory = createEmptyProject(name, description, logMessage,
-					org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
+					org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 			} catch (FatalEmfStoreException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}

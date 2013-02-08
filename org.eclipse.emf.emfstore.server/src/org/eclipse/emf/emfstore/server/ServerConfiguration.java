@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.server.startup.StartupListener;
 import org.osgi.framework.Bundle;

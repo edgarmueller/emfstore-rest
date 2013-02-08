@@ -10,14 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.IdentifiableElement;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>File Identifier</b></em>'. <!-- end-user-doc
  * -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getFileIdentifier()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getFileIdentifier()
  * @model
  * @generated
  */

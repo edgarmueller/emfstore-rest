@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org.eclipse.emf.emfstore.internal.common.model:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.attachment="http://eclipse.org/emf/emfstore/client/test/model/attachment" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.profile="http://eclipse.org/emf/emfstore/client/test/model/profile" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.requirement="http://eclipse.org/emf/emfstore/client/test/model/requirement" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.state="http://eclipse.org/emf/emfstore/client/test/model/state" xmlns:org.eclipse.emf.emfstore.internal.common.model="http://eclipse.org/emf/emfstore/common/model">
+<org.eclipse.emf.emfstore.internal.common.model.edit.edit:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.attachment="http://eclipse.org/emf/emfstore/client/test/model/attachment" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.profile="http://eclipse.org/emf/emfstore/client/test/model/profile" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.requirement="http://eclipse.org/emf/emfstore/client/test/model/requirement" xmlns:org.eclipse.emf.emfstore.internal.client.test.model.state="http://eclipse.org/emf/emfstore/client/test/model/state" xmlns:org.eclipse.emf.emfstore.internal.common.model.edit.edit="http://eclipse.org/emf/emfstore/common/model">
   <modelElements xsi:type="org.eclipse.emf.emfstore.internal.client.test.model.requirement:Scenario" name="EusAyPaB!" description="9S]7Wu9Lu" creationDate="1989-06-23T09:53:17.473+0200" creator="2yt>j&quot;aM.">
     <appliedStereotypeInstances name="|UMM-R2VJ" description="H,7^zvD" creationDate="1984-05-17T12:34:52.971+0200" creator="U#`\O">
       <appliedStereotypeInstances name="/o$-i6w+)(T" description="L,M*>#" creationDate="2017-07-09T14:57:41.126+0200" creator="tcPtDWyo'">
@@ -4685,4 +4685,4 @@
       </stereotypeAttributeInstances>
     </appliedStereotypeInstances>
   </modelElements>
-</org.eclipse.emf.emfstore.internal.common.model:Project>
+</org.eclipse.emf.emfstore.internal.common.model.edit.edit:Project>

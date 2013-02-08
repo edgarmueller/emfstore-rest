@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server.model.versioning.operations.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.common.model.impl.UniqueIdentifierImpl;
+import org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationId;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsPackage;
 

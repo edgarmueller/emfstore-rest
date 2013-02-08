@@ -30,8 +30,6 @@ import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.client.api.IServer;
 import org.eclipse.emf.emfstore.client.api.IUsersession;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -50,6 +48,8 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportPr
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportWorkspaceController;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
@@ -147,7 +147,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	public ProjectSpace createLocalProject(String projectName, String projectDescription) {
 
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-		projectSpace.setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
+		projectSpace.setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 		projectSpace.setProjectName(projectName);
 		projectSpace.setProjectDescription(projectDescription);
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
@@ -538,7 +538,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.internal.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project)
 	 */
 	public ProjectSpace getProjectSpace(Project project) throws UnkownProjectException {
 		ProjectSpace projectSpace = projectToProjectSpaceMap.get(project);

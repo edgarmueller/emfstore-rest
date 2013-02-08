@@ -28,8 +28,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.common.model.ModelPackage;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.server.model.accesscontrol.roles.RolesFactory;
@@ -415,23 +415,23 @@ public class CreateDeleteOperationItemProvider extends AbstractOperationItemProv
 			UrlFactory.eINSTANCE.createModelElementUrl()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject()));
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createModelElementId()));
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createModelElementId()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createModelVersion()));
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createModelVersion()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 				.create(ModelPackage.Literals.PROPERTY_MAP_ENTRY)));
 
 		newChildDescriptors.add(createChildParameter(OperationsPackage.Literals.CREATE_DELETE_OPERATION__MODEL_ELEMENT,
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createPropertyStringValue()));
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createPropertyStringValue()));
 
 		newChildDescriptors.add(createChildParameter(
 			OperationsPackage.Literals.CREATE_DELETE_OPERATION__SUB_OPERATIONS,

@@ -17,13 +17,13 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.EMFStoreProperty;
-import org.eclipse.emf.emfstore.common.model.EMFStorePropertyType;
-import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
+import org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType;
+import org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 
@@ -101,7 +101,7 @@ public final class PropertyManager {
 	 *            the value of the local property
 	 **/
 	public void setLocalStringProperty(String propertyName, String value) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(value);
 		setLocalProperty(propertyName, propertyValue);
@@ -156,7 +156,7 @@ public final class PropertyManager {
 	 * @see this{@link #synchronizeSharedProperties()}
 	 **/
 	public void setSharedStringProperty(String propertyName, String string) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(string);
 		setSharedProperty(propertyName, propertyValue, false);
@@ -173,7 +173,7 @@ public final class PropertyManager {
 	 * @see this{@link #synchronizeSharedProperties()}
 	 **/
 	public void setSharedVersionedStringProperty(String propertyName, String string) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(string);
 		setSharedProperty(propertyName, propertyValue, true);
@@ -387,7 +387,7 @@ public final class PropertyManager {
 	 * @return the newly created property
 	 */
 	private EMFStoreProperty createProperty(String key, EObject value, boolean isVersioned) {
-		EMFStoreProperty prop = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty();
+		EMFStoreProperty prop = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty();
 		prop.setKey(key);
 		prop.setValue(value);
 

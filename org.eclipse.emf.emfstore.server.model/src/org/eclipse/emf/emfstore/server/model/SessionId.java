@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.UniqueIdentifier;
+import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.server.model.api.ISessionId;
 
 /**
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  *          <!-- end-user-doc -->
  * 
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getSessionId()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getSessionId()
  * @model
  * @generated
  */

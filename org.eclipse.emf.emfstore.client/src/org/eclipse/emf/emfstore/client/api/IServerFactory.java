@@ -1,6 +1,6 @@
 package org.eclipse.emf.emfstore.client.api;
 
-import org.eclipse.emf.emfstore.common.model.api.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 public interface IServerFactory extends IEMFStoreFactory {
 

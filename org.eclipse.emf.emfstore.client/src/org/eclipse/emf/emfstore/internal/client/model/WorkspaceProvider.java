@@ -28,11 +28,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.api.IWorkspace;
 import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
-import org.eclipse.emf.emfstore.common.model.ModelVersion;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.common.model.util.MalformedModelVersionException;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
@@ -49,6 +44,11 @@ import org.eclipse.emf.emfstore.internal.common.IReinitializable;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.internal.common.ResourceFactoryRegistry;
@@ -305,7 +305,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 			.getModelReleaseNumberFileName());
 		Resource versionResource = new ResourceSetImpl()
 			.createResource(versionFileUri);
-		ModelVersion modelVersion = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createModelVersion();
 		modelVersion.setReleaseNumber(modelReleaseNumber);
 		versionResource.getContents().add(modelVersion);
@@ -481,7 +481,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 			// END SUPRESS CATCH EXCEPTION
 			// resource can not be loaded, assume version number before
 			// metamodel split
-			ModelVersion modelVersion = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+			ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 				.createModelVersion();
 			modelVersion.setReleaseNumber(4);
 			return modelVersion;

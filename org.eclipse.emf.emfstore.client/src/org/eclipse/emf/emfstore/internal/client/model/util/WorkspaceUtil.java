@@ -12,11 +12,11 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.common.model.util.IResourceLogger;
 import org.eclipse.emf.emfstore.internal.client.model.Activator;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.observers.ExceptionObserver;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.IResourceLogger;
 
 /**
  * Workspace utility class.

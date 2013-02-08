@@ -13,11 +13,11 @@ package org.eclipse.emf.emfstore.server.model.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.IDisposable;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
 
 /**

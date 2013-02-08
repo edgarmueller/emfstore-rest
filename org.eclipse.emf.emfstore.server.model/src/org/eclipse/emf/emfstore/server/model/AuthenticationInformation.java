@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation()
  * @model
  * @generated
  */
@@ -42,7 +42,7 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Session Id</em>' containment reference.
 	 * @see #setSessionId(SessionId)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_SessionId()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation_SessionId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -71,7 +71,7 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Resolved AC User</em>' containment reference.
 	 * @see #setResolvedACUser(ACUser)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

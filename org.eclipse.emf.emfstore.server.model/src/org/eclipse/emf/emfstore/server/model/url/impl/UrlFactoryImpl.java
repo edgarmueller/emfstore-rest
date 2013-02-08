@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.model.url.ModelElementUrl;
@@ -173,7 +173,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 					throw new MalformedURLException(EXCEPTION_MESSAGE);
 				}
 				modelFragment.setName(string.substring(0, p));
-				ModelElementId modelElementId = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+				ModelElementId modelElementId = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 					.createModelElementId();
 				modelElementId.setId(string.substring(p + 1));
 				modelFragment.setModelElementId(modelElementId);

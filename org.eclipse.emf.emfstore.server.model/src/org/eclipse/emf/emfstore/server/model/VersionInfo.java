@@ -24,7 +24,7 @@ import org.osgi.framework.Version;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getVersionInfo()
+ * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getVersionInfo()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface VersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Emf Store Version String</em>' attribute.
 	 * @see #setEmfStoreVersionString(String)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getVersionInfo_EmfStoreVersionString()
+	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getVersionInfo_EmfStoreVersionString()
 	 * @model
 	 * @generated
 	 */

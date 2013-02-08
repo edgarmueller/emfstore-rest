@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.api;
 
-import org.eclipse.emf.emfstore.common.model.api.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 /**
  * A factory for creating ILogMessage objects.
