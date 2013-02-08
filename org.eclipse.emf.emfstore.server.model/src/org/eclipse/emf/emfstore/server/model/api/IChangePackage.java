@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.server.model.api;
+package org.eclipse.emf.emfstore.server.model.api;
 
 public interface IChangePackage {
 

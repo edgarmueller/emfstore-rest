@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model;
 
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
-import org.eclipse.emf.emfstore.internal.server.model.api.ISessionId;
+import org.eclipse.emf.emfstore.server.model.api.ISessionId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Session Id</b></em>'.

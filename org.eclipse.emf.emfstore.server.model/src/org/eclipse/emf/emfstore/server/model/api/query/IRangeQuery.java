@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.server.model.api.query;
+package org.eclipse.emf.emfstore.server.model.api.query;
 
 public interface IRangeQuery extends IHistoryQuery {
 
@@ -8,7 +8,7 @@ public interface IRangeQuery extends IHistoryQuery {
 
 	int getLowerLimit();
 
-	void setLowerLimit();
+	void setLowerLimit(int value);
 
 	void setIncludeIncoming(boolean value);
 

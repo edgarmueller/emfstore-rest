@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.server.model.api.query;
+package org.eclipse.emf.emfstore.server.model.api.query;
 
 import java.util.List;
 

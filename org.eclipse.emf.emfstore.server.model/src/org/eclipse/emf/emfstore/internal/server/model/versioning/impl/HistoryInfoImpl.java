@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -30,25 +29,31 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>History Info</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery Spec
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPrimerySpec <em>Primery
+ * Spec </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getNextSpec <em>Next Spec</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>Previous Spec
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getPreviousSpec <em>
+ * Previous Spec </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged
+ * From</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedFrom <em>Merged From</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getMergedTo <em>Merged To</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log Message</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>Version
- * Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getChangePackage <em>Change Package
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getLogMessage <em>Log
+ * Message</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getTagSpecs <em>Tag Specs
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getVersionProperties <em>
+ * Version Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.HistoryInfoImpl#getChangePackage <em>Change
+ * Package </em>}</li>
  * </ul>
  * </p>
  * 
@@ -727,8 +732,8 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		return getPrimerySpec();
 	}
 
-	public List<? extends IPrimaryVersionSpec> getNextSpecs() {
-		return getNextSpec();
+	public List<IPrimaryVersionSpec> getNextSpecs() {
+		return null;
 	}
 
 } // HistoryInfoImpl
