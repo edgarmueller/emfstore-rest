@@ -25,6 +25,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
+import org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue;
+import org.eclipse.emf.emfstore.internal.common.model.edit.provider.CommonEditPlugin;
+import org.eclipse.emf.emfstore.internal.common.model.edit.provider.RootElementItemProvider;
 import org.eclipse.emf.emfstore.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
 
@@ -32,7 +36,6 @@ import org.eclipse.emf.emfstore.common.model.PropertyStringValue;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class PropertyStringValueItemProvider extends RootElementItemProvider implements IEditingDomainItemProvider,
@@ -41,7 +44,6 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyStringValueItemProvider(AdapterFactory adapterFactory) {
@@ -52,12 +54,12 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
@@ -69,24 +71,29 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_PropertyStringValue_value_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_PropertyStringValue_value_feature",
-				"_UI_PropertyStringValue_type"), ModelPackage.Literals.PROPERTY_STRING_VALUE__VALUE, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_PropertyStringValue_value_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_PropertyStringValue_value_feature",
+					"_UI_PropertyStringValue_type"),
+				ModelPackage.Literals.PROPERTY_STRING_VALUE__VALUE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This returns PropertyStringValue.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -98,14 +105,14 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((PropertyStringValue) object).getValue();
-		return label == null || label.length() == 0 ? getString("_UI_PropertyStringValue_type")
-			: getString("_UI_PropertyStringValue_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_PropertyStringValue_type") :
+			getString("_UI_PropertyStringValue_type") + " " + label;
 	}
 
 	/**
@@ -113,14 +120,14 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(PropertyStringValue.class)) {
+		switch (notification.getFeatureID(PropertyStringValue.class))
+		{
 		case ModelPackage.PROPERTY_STRING_VALUE__VALUE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
@@ -133,7 +140,6 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -145,7 +151,6 @@ public class PropertyStringValueItemProvider extends RootElementItemProvider imp
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
