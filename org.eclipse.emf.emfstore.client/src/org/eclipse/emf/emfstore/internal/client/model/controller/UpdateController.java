@@ -27,6 +27,7 @@ import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElem
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
@@ -138,8 +139,9 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
-				ChangeConflictException conflictException = new ChangeConflictException(getLocalProject(),
-					Arrays.asList(localChanges), changes, conflictBucketCandidates, idToEObjectMapping);
+				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
+					getLocalProject(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
+					idToEObjectMapping));
 				if (callback.conflictOccurred(conflictException, getProgressMonitor())) {
 					return getLocalProject().getBaseVersion();
 				} else {
@@ -159,5 +161,4 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		return getLocalProject().getBaseVersion();
 	}
-
 }

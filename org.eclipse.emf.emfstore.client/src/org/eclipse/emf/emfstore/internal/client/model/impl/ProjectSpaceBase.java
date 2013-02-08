@@ -37,6 +37,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
@@ -49,6 +52,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ICo
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
@@ -66,9 +70,6 @@ import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpa
 import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
-import org.eclipse.emf.emfstore.internal.common.IDisposable;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.internal.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
@@ -76,34 +77,34 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
-import org.eclipse.emf.emfstore.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.server.model.FileIdentifier;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.BranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
 /**
  * Project space base class that contains custom user methods.
@@ -141,8 +142,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.runnableContext")
-			.setThrowException(false).getFirst();
+		ExtensionElement extensionElement = new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.runnableContext").setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
 		} else {
@@ -657,8 +658,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// default
 		boolean useCrossReferenceAdapter = true;
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache")
-			.getExtensionElements()) {
+		for (ExtensionElement element : new ExtensionPoint(
+			"org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache").getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
 
@@ -881,15 +882,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 */
-	public boolean merge(IPrimaryVersionSpec target, ChangeConflictException conflictException,
-		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws EMFStoreException {
+	public boolean merge(IPrimaryVersionSpec target, ChangeConflict changeConflict, IConflictResolver conflictResolver,
+		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException {
 		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(),
+		if (conflictResolver.resolveConflicts(getProject(), changeConflict, getBaseVersion(),
 			(PrimaryVersionSpec) target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges((PrimaryVersionSpec) target, conflictException.getNewPackages(), mergedResult, callback,
+			applyChanges((PrimaryVersionSpec) target, changeConflict.getNewPackages(), mergedResult, callback,
 				progressMonitor);
 			return true;
 		}
