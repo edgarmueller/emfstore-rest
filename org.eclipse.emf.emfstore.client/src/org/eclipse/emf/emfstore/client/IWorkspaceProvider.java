@@ -12,8 +12,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
+import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
 
 /**
  * Central access point to recieve the current workspace.

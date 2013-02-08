@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
+import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
@@ -39,6 +40,7 @@ public class SessionManager {
 	 */
 	public void execute(ServerCall<?> serverCall) throws EMFStoreException {
 		Usersession usersession = (Usersession) getSessionProvider().provideUsersession(serverCall);
+		serverCall.setUsersession(usersession);
 		// TODO OTS
 		loginUsersession(usersession, false);
 		executeCall(serverCall, usersession, true);
