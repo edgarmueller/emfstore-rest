@@ -10,12 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Info</b></em>'.
@@ -147,8 +144,6 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * @generated
 	 */
 	EList<PrimaryVersionSpec> getMergedFrom();
-
-	List<IPrimaryVersionSpec> getMergedFrom();
 
 	/**
 	 * Returns the value of the '<em><b>Merged To</b></em>' containment reference list.

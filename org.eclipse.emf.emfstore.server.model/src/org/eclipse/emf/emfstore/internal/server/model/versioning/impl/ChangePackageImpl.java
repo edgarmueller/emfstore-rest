@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationsCanonizer;
+import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc
@@ -65,6 +66,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getOperations()
 	 * @generated
 	 * @ordered
@@ -74,6 +76,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEvents()
 	 * @generated
 	 * @ordered
@@ -83,6 +86,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	/**
 	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLogMessage()
 	 * @generated
 	 * @ordered
@@ -102,6 +106,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ChangePackageImpl() {
@@ -110,6 +115,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -144,32 +150,39 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList.Resolving<Event>(Event.class, this, VersioningPackage.CHANGE_PACKAGE__EVENTS);
+			events = new EObjectContainmentEList.Resolving<Event>(Event.class, this,
+				VersioningPackage.CHANGE_PACKAGE__EVENTS);
 		}
 		return events;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public LogMessage getLogMessage() {
 		if (logMessage != null && logMessage.eIsProxy()) {
-			InternalEObject oldLogMessage = (InternalEObject)logMessage;
-			logMessage = (LogMessage)eResolveProxy(oldLogMessage);
+			InternalEObject oldLogMessage = (InternalEObject) logMessage;
+			logMessage = (LogMessage) eResolveProxy(oldLogMessage);
 			if (logMessage != oldLogMessage) {
-				InternalEObject newLogMessage = (InternalEObject)logMessage;
-				NotificationChain msgs = oldLogMessage.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, null);
+				InternalEObject newLogMessage = (InternalEObject) logMessage;
+				NotificationChain msgs = oldLogMessage.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, null);
 				if (newLogMessage.eInternalContainer() == null) {
-					msgs = newLogMessage.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
+					msgs = newLogMessage.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 				}
-				if (msgs != null) msgs.dispatch();
+				if (msgs != null)
+					msgs.dispatch();
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, logMessage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, logMessage));
 			}
 		}
 		return logMessage;
@@ -177,6 +190,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public LogMessage basicGetLogMessage() {
@@ -185,43 +199,65 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetLogMessage(LogMessage newLogMessage, NotificationChain msgs) {
 		LogMessage oldLogMessage = logMessage;
 		logMessage = newLogMessage;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, newLogMessage);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, oldLogMessage, newLogMessage);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.api.IChangePackage#setLogMessage(org.eclipse.emf.emfstore.server.model.api.ILogMessage)
+	 * @generated NOT
+	 */
+	public void setLogMessage(ILogMessage logMessage) {
+		setLogMessage((LogMessage) logMessage);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setLogMessage(LogMessage newLogMessage) {
 		if (newLogMessage != logMessage) {
 			NotificationChain msgs = null;
 			if (logMessage != null)
-				msgs = ((InternalEObject)logMessage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
+				msgs = ((InternalEObject) logMessage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 			if (newLogMessage != null)
-				msgs = ((InternalEObject)newLogMessage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
+				msgs = ((InternalEObject) newLogMessage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, null, msgs);
 			msgs = basicSetLogMessage(newLogMessage, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE, newLogMessage, newLogMessage));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE,
+				newLogMessage, newLogMessage));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<VersionProperty> getVersionProperties() {
 		if (versionProperties == null) {
-			versionProperties = new EObjectContainmentEList.Resolving<VersionProperty>(VersionProperty.class, this, VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES);
+			versionProperties = new EObjectContainmentEList.Resolving<VersionProperty>(VersionProperty.class, this,
+				VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES);
 		}
 		return versionProperties;
 	}
@@ -285,19 +321,20 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	// end of custom code
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
-				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
-			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-				return basicSetLogMessage(null, msgs);
-			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-				return ((InternalEList<?>)getVersionProperties()).basicRemove(otherEnd, msgs);
+		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
+			return ((InternalEList<?>) getOperations()).basicRemove(otherEnd, msgs);
+		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
+			return ((InternalEList<?>) getEvents()).basicRemove(otherEnd, msgs);
+		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
+			return basicSetLogMessage(null, msgs);
+		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
+			return ((InternalEList<?>) getVersionProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,89 +343,94 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-				return getOperations();
-			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
-				return getEvents();
-			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-				if (resolve) return getLogMessage();
-				return basicGetLogMessage();
-			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-				return getVersionProperties();
+		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
+			return getOperations();
+		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
+			return getEvents();
+		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
+			if (resolve)
+				return getLogMessage();
+			return basicGetLogMessage();
+		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
+			return getVersionProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-				getOperations().clear();
-				getOperations().addAll((Collection<? extends AbstractOperation>)newValue);
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
-				getEvents().clear();
-				getEvents().addAll((Collection<? extends Event>)newValue);
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-				setLogMessage((LogMessage)newValue);
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-				getVersionProperties().clear();
-				getVersionProperties().addAll((Collection<? extends VersionProperty>)newValue);
-				return;
+		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
+			getOperations().clear();
+			getOperations().addAll((Collection<? extends AbstractOperation>) newValue);
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
+			getEvents().clear();
+			getEvents().addAll((Collection<? extends Event>) newValue);
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
+			setLogMessage((LogMessage) newValue);
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
+			getVersionProperties().clear();
+			getVersionProperties().addAll((Collection<? extends VersionProperty>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-				getOperations().clear();
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
-				getEvents().clear();
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-				setLogMessage((LogMessage)null);
-				return;
-			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-				getVersionProperties().clear();
-				return;
+		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
+			getOperations().clear();
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
+			getEvents().clear();
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
+			setLogMessage((LogMessage) null);
+			return;
+		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
+			getVersionProperties().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
-				return operations != null && !operations.isEmpty();
-			case VersioningPackage.CHANGE_PACKAGE__EVENTS:
-				return events != null && !events.isEmpty();
-			case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
-				return logMessage != null;
-			case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
-				return versionProperties != null && !versionProperties.isEmpty();
+		case VersioningPackage.CHANGE_PACKAGE__OPERATIONS:
+			return operations != null && !operations.isEmpty();
+		case VersioningPackage.CHANGE_PACKAGE__EVENTS:
+			return events != null && !events.isEmpty();
+		case VersioningPackage.CHANGE_PACKAGE__LOG_MESSAGE:
+			return logMessage != null;
+		case VersioningPackage.CHANGE_PACKAGE__VERSION_PROPERTIES:
+			return versionProperties != null && !versionProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

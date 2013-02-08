@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 
+import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -733,7 +735,15 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	}
 
 	public List<IPrimaryVersionSpec> getNextSpecs() {
-		return null;
+		return copy(getNextSpec());
+	}
+
+	public List<IPrimaryVersionSpec> getMergedFromSpecs() {
+		return copy(getMergedFrom());
+	}
+
+	public List<IPrimaryVersionSpec> getMergedToSpecs() {
+		return copy(getMergedTo());
 	}
 
 } // HistoryInfoImpl
