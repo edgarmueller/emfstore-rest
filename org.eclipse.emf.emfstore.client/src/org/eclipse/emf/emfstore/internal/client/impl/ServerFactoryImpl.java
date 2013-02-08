@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.internal.client.impl;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IServerFactory;
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IServerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 

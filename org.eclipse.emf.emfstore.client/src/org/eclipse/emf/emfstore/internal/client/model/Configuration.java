@@ -18,7 +18,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.internal.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;

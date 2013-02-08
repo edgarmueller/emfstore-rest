@@ -21,10 +21,10 @@ import org.eclipse.emf.emfstore.internal.common.IDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.internal.core.MonitorProvider;
-import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.Version;
+import org.eclipse.emf.emfstore.internal.server.internal.core.MonitorProvider;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 
 /**
  * This task is used to clean the memory by proxifying the project states.

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;

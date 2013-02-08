@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.emfstore.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.client.api.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
@@ -52,8 +52,8 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.internal.common.ResourceFactoryRegistry;
-import org.eclipse.emf.emfstore.migration.EMFStoreMigrationException;
-import org.eclipse.emf.emfstore.migration.EMFStoreMigratorUtil;
+import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
+import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
 
 /**
  * Controller for workspaces. Workspace Manager is a singleton.

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
-import org.eclipse.emf.emfstore.client.api.IWorkspace;
+import org.eclipse.emf.emfstore.client.IWorkspace;
 
 /**
  * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginning.

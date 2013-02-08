@@ -202,7 +202,7 @@
                     ifEmpty="false"
                     operator="and">
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -218,7 +218,7 @@
                     ifEmpty="false"
                     operator="and">
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -287,7 +287,7 @@
                        value="true">
                  </test>
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -308,7 +308,7 @@
                        value="true">
                  </test>
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -330,7 +330,7 @@
                        value="true">
                  </test>
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -369,7 +369,7 @@
                     ifEmpty="false"
                     operator="and">
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                       value="org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectInfo">
                  </instanceof>
               </iterate>
            </visibleWhen>
@@ -405,7 +405,7 @@
                          ifEmpty="true"
                          operator="and">
                       <instanceof
-                            value="org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo">
+                            value="org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.HistoryInfo">
                       </instanceof>
                    </iterate>
                 </visibleWhen>
@@ -422,7 +422,7 @@
                          ifEmpty="false"
                          operator="and">
                       <instanceof
-                            value="org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo">
+                            value="org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.HistoryInfo">
                       </instanceof>
                    </iterate>
                 </visibleWhen>

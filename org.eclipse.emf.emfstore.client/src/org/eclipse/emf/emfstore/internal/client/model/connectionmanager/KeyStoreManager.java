@@ -42,7 +42,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;

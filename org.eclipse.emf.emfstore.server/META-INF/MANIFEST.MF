@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Server  (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.server;singleton:=true
 Bundle-Version: 0.9.3.qualifier
-Bundle-Activator: org.eclipse.emf.emfstore.internal.server.Activator
+Bundle-Activator: org.eclipse.emf.emfstore.internal.serverxxx.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.emf.emfstore.internal.server.model;visibility:=reexport,
  org.eclipse.emf.emfstore.internal.migration;visibility:=reexport,
@@ -27,7 +27,6 @@ Export-Package:
  org.apache.xmlrpc.util,
  org.apache.xmlrpc.webserver,
  org.eclipse.emf.emfstore.internal.internal.server;x-friends:="org.eclipse.emf.emfstore.internal.client.test",
- org.eclipse.emf.emfstore.internal.server,
  org.eclipse.emf.emfstore.internal.server.accesscontrol,
  org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication,
  org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory,
@@ -42,6 +41,7 @@ Export-Package:
  org.eclipse.emf.emfstore.internal.server.filetransfer,
  org.eclipse.emf.emfstore.internal.server.internal.eventmanager;x-internal:=true,
  org.eclipse.emf.emfstore.internal.server.startup,
- org.eclipse.emf.emfstore.internal.server.storage
+ org.eclipse.emf.emfstore.internal.server.storage,
+ org.eclipse.emf.emfstore.internal.serverxxx
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.commons.logging

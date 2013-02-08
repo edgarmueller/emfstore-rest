@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.server" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.serverxxx" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="org.eclipse.emf.emfstore.internal.server.authenticationfactory" name="Authentication Factory"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.serverxxx" id="org.eclipse.emf.emfstore.internal.serverxxx.authenticationfactory" name="Authentication Factory"/>
       </appInfo>
       <documentation>
          The user can provide an own authentication factory used for authenticating the users.
@@ -55,7 +55,7 @@
                   This class provides the control used for authenticating users.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.authentication.factory.AuthenticationControlFactory"/>
                </appInfo>
             </annotation>
          </attribute>

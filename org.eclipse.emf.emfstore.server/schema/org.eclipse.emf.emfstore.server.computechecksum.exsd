@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.server" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.serverxxx" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="org.eclipse.emf.emfstore.internal.server.computechecksum" name="Compute Checksum on Commit"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.serverxxx" id="org.eclipse.emf.emfstore.internal.serverxxx.computechecksum" name="Compute Checksum on Commit"/>
       </appInfo>
       <documentation>
          Whether the server should compute a checksum for the project state when a commit has happened.  If the server does compute a checksum it will be sent back to the client who then can check whether there are any differences between their and the server&apos;s project state.

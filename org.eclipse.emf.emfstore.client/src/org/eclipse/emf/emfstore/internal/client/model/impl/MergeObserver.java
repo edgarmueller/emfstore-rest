@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;

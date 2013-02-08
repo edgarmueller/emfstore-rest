@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ProjectInfo;
 

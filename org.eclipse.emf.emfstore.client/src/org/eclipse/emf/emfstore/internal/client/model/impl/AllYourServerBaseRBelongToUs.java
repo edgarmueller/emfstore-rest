@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.emfstore.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.client.api.IServer;
-import org.eclipse.emf.emfstore.client.api.IUsersession;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;

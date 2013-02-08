@@ -1081,19 +1081,19 @@
   <eSubpackages name="change" nsURI="http://eclipse.org/emf/emfstore/client/test/model/change"
       nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model.change">
     <eClassifiers xsi:type="ecore:EClass" name="MergingIssue" eSuperTypes="#//rationale/Issue">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.serverxxx.model/model/server.ecore#//versioning/PrimaryVersionSpec"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.serverxxx.model/model/server.ecore#//versioning/PrimaryVersionSpec"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MergingProposal" eSuperTypes="#//rationale/Proposal">
       <eStructuralFeatures xsi:type="ecore:EReference" name="pendingOperations" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.serverxxx.model/model/server.ecore#//versioning/operations/AbstractOperation"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MergingSolution" eSuperTypes="#//rationale/Solution">
       <eStructuralFeatures xsi:type="ecore:EReference" name="appliedOperations" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.serverxxx.model/model/server.ecore#//versioning/operations/AbstractOperation"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>

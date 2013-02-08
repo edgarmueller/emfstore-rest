@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.api.IServer;
+import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 
 /**

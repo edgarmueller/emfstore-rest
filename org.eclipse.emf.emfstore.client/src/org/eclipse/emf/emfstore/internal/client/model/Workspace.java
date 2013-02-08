@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.api.IWorkspace;
+import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;

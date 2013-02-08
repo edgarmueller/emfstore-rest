@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.internal.client.model.observers;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.api.ILocalProject;
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.common.observer.IObserver;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 

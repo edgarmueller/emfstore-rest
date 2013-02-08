@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.client.api.IChangeConflictException;
+import org.eclipse.emf.emfstore.client.IChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;

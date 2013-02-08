@@ -11,6 +11,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: 
  org.eclipse.emf.emfstore.internal.client.model.provider
 Require-Bundle: org.eclipse.emf.emfstore.internal.client;visibility:=reexport,
- org.eclipse.emf.emfstore.internal.server.model.edit;visibility:=reexport
+ org.eclipse.emf.emfstore.internal.serverxxx.model.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.edit.ui.provider

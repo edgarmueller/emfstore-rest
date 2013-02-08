@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.server" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.serverxxx" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="org.eclipse.emf.emfstore.internal.server.locationprovider" name="Location Provider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.serverxxx" id="org.eclipse.emf.emfstore.internal.serverxxx.locationprovider" name="Location Provider"/>
       </appInfo>
       <documentation>
          This extension point can be used to register a location provider for the server. The location provider is used to determine the working directory of the server. The default location provider also accepts application startup arguments, so there isn&apos;t necessarily a need to use this extension point.
@@ -55,7 +55,7 @@
                   This class is used to get the paths to directories used for storing resources.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.server.LocationProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.serverxxx.LocationProvider"/>
                </appInfo>
             </annotation>
          </attribute>

@@ -9,7 +9,7 @@
     <relativePath>../../org.eclipse.emf.emfstore.internal.releng/emfstore-parent/</relativePath>
   </parent>
   <groupId>org.eclipse.emf.emfstore.internal</groupId>
-  <artifactId>org.eclipse.emf.emfstore.internal.server</artifactId>
+  <artifactId>org.eclipse.emf.emfstore.internal.serverxxx</artifactId>
   <version>0.9.3-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>
