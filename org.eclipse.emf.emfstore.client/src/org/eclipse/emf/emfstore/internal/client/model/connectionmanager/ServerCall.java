@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -31,7 +32,8 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  * If initialized with an user session, it will be used for the server class when the SessionProvider isn't extended by
  * the user to change this behavior.<br/>
  * Using serverInfo as an input will call the login dialog in the default implementation.
- * Further, in the default implementation, when the {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace} is set,
+ * Further, in the default implementation, when the {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace}
+ * is set,
  * it is checked whether it has an user session attached to it.
  * 
  * @author wesendon
@@ -39,7 +41,7 @@ import org.eclipse.emf.emfstore.server.model.api.ISessionId;
  * 
  * @param <U> the return type of the wrapped action
  */
-public abstract class ServerCall<U> {
+public abstract class ServerCall<U> implements IServerCall {
 
 	private ILocalProject projectSpace;
 	private IUsersession usersession;
