@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.server.model.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.emfstore.internal.common.model.edit.edit.provider.CommonEditPlugin;
+import org.eclipse.emf.emfstore.internal.common.model.provider.CommonEditPlugin;
 
 /**
  * This is the central singleton for the Server edit plugin.
