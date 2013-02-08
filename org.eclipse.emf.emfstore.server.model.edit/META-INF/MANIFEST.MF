@@ -17,6 +17,6 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model.accesscontrol.pro
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.provider,
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.provider,
  org.eclipse.emf.emfstore.internal.server.model.versioning.provider
-Require-Bundle: org.eclipse.emf.emfstore.internal.server.model;visibility:=reexport,
- org.eclipse.emf.emfstore.internal.common.model.edit.edit.edit;visibility:=reexport
+Require-Bundle: org.eclipse.emf.emfstore.server.model;visibility:=reexport,
+ org.eclipse.emf.emfstore.common.model.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
