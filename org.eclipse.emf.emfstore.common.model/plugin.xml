@@ -9,12 +9,12 @@
 -->
 
 <plugin>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.modelversion" name="ModelVersion" schema="schema/org.eclipse.emf.emfstore.internal.common.model.modelversion.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.ignoredatatype" name="Ignore Datatype" schema="schema/org.eclipse.emf.emfstore.internal.common.model.ignoredatatype.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.singletonidresolver" name="Singleton ID Resolver" schema="schema/org.eclipse.emf.emfstore.internal.common.model.singletonidresolver.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.serializationoptions" name="Serialization Options" schema="schema/org.eclipse.emf.emfstore.internal.common.model.serializationoptions.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.modelelementidgenerator" name="ModelElementIDGenerator" schema="schema/org.eclipse.emf.emfstore.internal.common.model.modelelementidgenerator.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.internal.common.model.resourceoptions" name="Common Model Resource Options" schema="schema/org.eclipse.emf.emfstore.internal.common.model.resourceoptions.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.modelversion" name="ModelVersion" schema="schema/org.eclipse.emf.emfstore.common.model.modelversion.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.ignoredatatype" name="Ignore Datatype" schema="schema/org.eclipse.emf.emfstore.common.model.ignoredatatype.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.singletonidresolver" name="Singleton ID Resolver" schema="schema/org.eclipse.emf.emfstore.common.model.singletonidresolver.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.serializationoptions" name="Serialization Options" schema="schema/org.eclipse.emf.emfstore.common.model.serializationoptions.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.modelelementidgenerator" name="ModelElementIDGenerator" schema="schema/org.eclipse.emf.emfstore.common.model.modelelementidgenerator.exsd"/>
+   <extension-point id="org.eclipse.emf.emfstore.common.model.resourceoptions" name="Common Model Resource Options" schema="schema/org.eclipse.emf.emfstore.common.model.resourceoptions.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
