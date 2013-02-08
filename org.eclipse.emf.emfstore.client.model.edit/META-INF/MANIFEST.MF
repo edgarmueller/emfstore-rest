@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client Model Edit  (Incubation)
-Bundle-SymbolicName: org.eclipse.emf.emfstore.internal.client.model.edit;singleton:=true
+Bundle-SymbolicName: org.eclipse.emf.emfstore.client.model.edit;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.model.provider.ClientModelEditPlugin$Implementation
