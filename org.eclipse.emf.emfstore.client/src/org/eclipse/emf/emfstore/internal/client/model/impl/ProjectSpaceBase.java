@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.common.IDisposable;
@@ -883,14 +884,17 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 */
-	public boolean merge(IPrimaryVersionSpec target, ChangeConflict changeConflict, IConflictResolver conflictResolver,
+	public boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict,
+		IConflictResolver conflictResolver,
 		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException {
 		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), changeConflict, getBaseVersion(),
+		// TODO: OTS casts
+		if (conflictResolver.resolveConflicts(getProject(), (ChangeConflict) changeConflict, getBaseVersion(),
 			(PrimaryVersionSpec) target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges((PrimaryVersionSpec) target, changeConflict.getNewPackages(), mergedResult, callback,
+			applyChanges((PrimaryVersionSpec) target, ((ChangeConflict) changeConflict).getNewPackages(), mergedResult,
+				callback,
 				progressMonitor);
 			return true;
 		}

@@ -167,7 +167,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {
 			public BranchInfo call() throws Exception {
 				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-					getShell(), (List<BranchInfo>) (List<?>) branches);
+					getShell(), branches);
 				dialog.setBlockOnOpen(true);
 
 				if (dialog.open() != Dialog.OK || dialog.getResult() == null) {

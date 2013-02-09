@@ -17,15 +17,18 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.query.IRangeQuery;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -38,44 +41,42 @@ import org.eclipse.ui.dialogs.ListDialog;
  * @author eneufeld
  */
 public class UIUpdateProjectToVersionController extends
-		AbstractEMFStoreUIController<PrimaryVersionSpec> {
+	AbstractEMFStoreUIController<IPrimaryVersionSpec> {
 
-	private final ProjectSpace projectSpace;
+	private final ILocalProject projectSpace;
 
 	public UIUpdateProjectToVersionController(Shell shell,
-			ProjectSpace projectSpace) {
+		ProjectSpace projectSpace) {
 		super(shell, true, true);
 		this.projectSpace = projectSpace;
 	}
 
 	@Override
-	public PrimaryVersionSpec doRun(IProgressMonitor monitor)
-			throws EMFStoreException {
-		RangeQuery query = HistoryQueryBuilder.rangeQuery(
-				projectSpace.getBaseVersion(), 20, 0, false, false, false,
-				false);
+	public IPrimaryVersionSpec doRun(IProgressMonitor monitor)
+		throws EMFStoreException {
+		IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(
+			projectSpace.getBaseVersion(), 20, 0, false, false, false,
+			false);
 		try {
-			List<HistoryInfo> historyInfo = projectSpace.getHistoryInfos(query);
+			List<IHistoryInfo> historyInfo = projectSpace.getHistoryInfos(query);
 			// filter base version
-			Iterator<HistoryInfo> iter = historyInfo.iterator();
+			Iterator<IHistoryInfo> iter = historyInfo.iterator();
 			while (iter.hasNext()) {
-				if (projectSpace.getBaseVersion().equals(
-						iter.next().getPrimerySpec())) {
+				if (projectSpace.getBaseVersion().equals(iter.next().getPrimarySpec())) {
 					iter.remove();
 					break;
 				}
 			}
 			if (historyInfo.size() == 0) {
 				return RunInUI
-						.runWithResult(new Callable<PrimaryVersionSpec>() {
-							public PrimaryVersionSpec call() throws Exception {
-								return new UIUpdateProjectController(
-										getShell(), projectSpace, Versions
-												.createHEAD(projectSpace
-														.getBaseVersion()))
-										.execute();
-							}
-						});
+					.runWithResult(new Callable<IPrimaryVersionSpec>() {
+						public IPrimaryVersionSpec call() throws Exception {
+							return new UIUpdateProjectController(
+								getShell(), projectSpace,
+								IVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
+								.execute();
+						}
+					});
 			}
 
 			ListDialog listDialog = new ListDialog(getShell());
@@ -89,7 +90,7 @@ public class UIUpdateProjectToVersionController extends
 
 					StringBuilder sb = new StringBuilder("Version ");
 					sb.append(Integer.toString(historyInfo.getPrimerySpec()
-							.getIdentifier()));
+						.getIdentifier()));
 					sb.append("  -  ");
 					sb.append(historyInfo.getLogMessage().getMessage());
 
@@ -101,24 +102,24 @@ public class UIUpdateProjectToVersionController extends
 			listDialog.setInput(historyInfo);
 			listDialog.setTitle("Select a Version to update to");
 			listDialog
-					.setMessage("The project will be updated to the selected Version");
+				.setMessage("The project will be updated to the selected Version");
 			listDialog
-					.setInitialSelections(new Object[] { historyInfo.get(0) });
+				.setInitialSelections(new Object[] { historyInfo.get(0) });
 			int result = listDialog.open();
 			if (Dialog.OK == result) {
 				Object[] selection = listDialog.getResult();
 				final HistoryInfo info = (HistoryInfo) selection[0];
 				return RunInUI
-						.runWithResult(new Callable<PrimaryVersionSpec>() {
-							public PrimaryVersionSpec call() throws Exception {
-								return new UIUpdateProjectController(
-										getShell(), projectSpace, Versions
-												.createPRIMARY(info
-														.getPrimerySpec()
-														.getIdentifier()))
-										.execute();
-							}
-						});
+					.runWithResult(new Callable<IPrimaryVersionSpec>() {
+						public IPrimaryVersionSpec call() throws Exception {
+							return new UIUpdateProjectController(
+								getShell(), projectSpace, Versions
+									.createPRIMARY(info
+										.getPrimerySpec()
+										.getIdentifier()))
+								.execute();
+						}
+					});
 			}
 		} catch (EMFStoreException e) {
 

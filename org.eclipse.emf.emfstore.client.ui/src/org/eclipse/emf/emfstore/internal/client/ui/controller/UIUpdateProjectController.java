@@ -16,12 +16,11 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflictException;
+import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
@@ -33,10 +32,9 @@ import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMa
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -47,11 +45,11 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UIUpdateProjectController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
+public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
 	IUpdateCallback {
 
-	private final ProjectSpace projectSpace;
-	private VersionSpec version;
+	private final ILocalProject projectSpace;
+	private IVersionSpec version;
 
 	/**
 	 * Constructor.
@@ -77,7 +75,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * @param version
 	 *            the version to update to
 	 */
-	public UIUpdateProjectController(Shell shell, ProjectSpace projectSpace, VersionSpec version) {
+	public UIUpdateProjectController(Shell shell, ILocalProject projectSpace, IVersionSpec version) {
 		super(shell);
 		this.projectSpace = projectSpace;
 		this.version = version;
@@ -105,16 +103,16 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException)
 	 */
-	public boolean conflictOccurred(final IChangeConflictException conflictException,
+	public boolean conflictOccurred(final IChangeConflict changeConflict,
 		final IProgressMonitor progressMonitor) {
 		// TODO OTS
-		final ProjectSpace projectSpace = ((ChangeConflictException) conflictException).getProjectSpace();
 		boolean mergeSuccessful = false;
 		try {
-			final IPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(projectSpace
-				.getBaseVersion()));
+			final IPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
+				.createHEAD(projectSpace
+					.getBaseVersion()));
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion, (ChangeConflictException) conflictException,
+			return projectSpace.merge(targetVersion, changeConflict,
 				new MergeProjectHandler(), this, progressMonitor);
 		} catch (final EMFStoreException e) {
 			RunInUI.run(new Callable<Void>() {
@@ -128,7 +126,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 		return mergeSuccessful;
 	}
 
-	private void handleMergeException(final ProjectSpace projectSpace, EMFStoreException e) {
+	private void handleMergeException(final ILocalProject projectSpace, EMFStoreException e) {
 		WorkspaceUtil.logException(
 			String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
 		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
@@ -163,10 +161,11 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<Prim
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EMFStoreException {
-		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
+	public IPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EMFStoreException {
+		IPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(Versions.createHEAD(oldBaseVersion));
+		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
+			.createHEAD(oldBaseVersion));
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();

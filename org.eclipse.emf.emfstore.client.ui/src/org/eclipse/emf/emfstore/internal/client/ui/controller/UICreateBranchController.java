@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -29,13 +30,13 @@ import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUICo
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
@@ -49,7 +50,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author wesendon
  * 
  */
-public class UICreateBranchController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
+public class UICreateBranchController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
 	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
@@ -116,8 +117,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
-					PrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+					IPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
+					IPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
 						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
@@ -194,7 +195,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<Prima
 	}
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws EMFStoreException {
-		final List<BranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches();
+		final List<IBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException().runWithResult(new Callable<String>() {

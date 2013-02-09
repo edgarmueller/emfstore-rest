@@ -48,7 +48,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICommitProjectController extends AbstractEMFStoreUIController<PrimaryVersionSpec> implements
+public class UICommitProjectController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
 	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
@@ -100,8 +100,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<Prim
 			}
 		});
 		if (shouldUpdate) {
-			PrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
-			PrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+			IPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
+			IPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
 				.executeSub(progressMonitor);
 			if (version.equals(baseVersion)) {
 				return false;

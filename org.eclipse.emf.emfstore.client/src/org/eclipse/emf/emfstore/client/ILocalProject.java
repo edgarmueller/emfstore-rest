@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
@@ -81,7 +80,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
 		throws ChangeConflictException, EMFStoreException;
 
-	boolean merge(IPrimaryVersionSpec target, ChangeConflict changeConflict, IConflictResolver conflictResolver,
+	boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict, IConflictResolver conflictResolver,
 		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException;
 
 	/**

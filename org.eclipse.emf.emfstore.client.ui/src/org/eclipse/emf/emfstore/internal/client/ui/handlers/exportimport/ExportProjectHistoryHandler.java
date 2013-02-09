@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * Handler for exporting a project history.

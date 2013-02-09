@@ -13,6 +13,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.model.Activator
 Import-Package: org.eclipse.emf.emfstore.internal.client.model.observers
 Export-Package: org.eclipse.emf.emfstore.client,
+ org.eclipse.emf.emfstore.client.sessionprovider,
  org.eclipse.emf.emfstore.internal.client.common,
  org.eclipse.emf.emfstore.internal.client.model,
  org.eclipse.emf.emfstore.internal.client.model.accesscontrol,
