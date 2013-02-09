@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.model.requirement;
 
 import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Step</b></em>'. <!-- end-user-doc -->
@@ -19,10 +19,10 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#isUserStep <em>User Step</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use Case</em>}
- * </li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction <em>Included System
- * Function</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase <em>Included Use
+ * Case</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedSystemFunction <em>
+ * Included System Function</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}</li>
  * </ul>
  * </p>
@@ -75,7 +75,8 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 	UseCase getIncludedUseCase();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getIncludedUseCase
 	 * <em>Included Use Case</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Included Use Case</em>' reference.
@@ -113,7 +114,8 @@ public interface Step extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Use Case</b></em>' container reference. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}'.
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps
+	 * <em>Use Case Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Use Case</em>' container reference isn't clear, there really should be more of a

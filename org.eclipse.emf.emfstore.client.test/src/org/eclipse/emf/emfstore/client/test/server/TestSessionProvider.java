@@ -10,17 +10,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
-import org.eclipse.emf.emfstore.internal.client.api.IServer;
-import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.Assert;
 
 /**

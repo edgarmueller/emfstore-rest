@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.test.model.rationale;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 import org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Comment</b></em>'. <!-- end-user-doc -->
@@ -22,8 +22,8 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getSender <em>Sender</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement <em>Commented Element
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement <em>Commented
+ * Element </em>}</li>
  * </ul>
  * </p>
  * 
@@ -76,8 +76,8 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Commented Element</b></em>' container reference. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}
-	 * '. <!-- begin-user-doc -->
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments
+	 * <em>Comments</em>} '. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Commented Element</em>' container reference isn't clear, there really should be more
 	 * of a description here...
@@ -94,7 +94,8 @@ public interface Comment extends UnicaseModelElement, NonDomainElement {
 	UnicaseModelElement getCommentedElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getCommentedElement
 	 * <em>Commented Element</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Commented Element</em>' container reference.

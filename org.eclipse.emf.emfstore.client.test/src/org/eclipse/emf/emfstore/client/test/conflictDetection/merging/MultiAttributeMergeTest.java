@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiAttributeSetSetConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiAttributeSetOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation;
 import org.junit.Test;
 
 /**

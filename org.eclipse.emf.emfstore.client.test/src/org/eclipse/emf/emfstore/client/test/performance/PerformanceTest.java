@@ -18,18 +18,18 @@ import java.util.Arrays;
 
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -101,8 +101,8 @@ public class PerformanceTest {
 	/**
 	 * Opens projects of different sizes, shares them with the server and then deletes them. r
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String,
-	 *      String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 * @throws IOException
@@ -175,8 +175,8 @@ public class PerformanceTest {
 	 * Measures average time, spent for the checkout operation. Opens projects of different sizes, shares them with the
 	 * server, checkouts and then deletes them.
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String,
-	 *      String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */
@@ -251,8 +251,8 @@ public class PerformanceTest {
 	 * projects, using the ModelMutator, commits them to the server, and updates the second project. The test performs
 	 * model change, commit and update NUM_ITERATIONS times and calculates times for commit and update operations
 	 * 
-	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String,
-	 *      String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
+	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EMFStoreException in case of failure.
 	 */

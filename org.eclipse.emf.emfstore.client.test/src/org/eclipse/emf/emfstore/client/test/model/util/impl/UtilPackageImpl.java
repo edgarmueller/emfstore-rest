@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage;
@@ -48,7 +49,6 @@ import org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilFactory;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
-import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
@@ -105,7 +105,8 @@ public class UtilPackageImpl extends EPackageImpl implements UtilPackage {
 
 		// Obtain or create and register package
 		UtilPackageImpl theUtilPackage = (UtilPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UtilPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new UtilPackageImpl());
+			.get(eNS_URI)
+			: new UtilPackageImpl());
 
 		isInited = true;
 
@@ -121,7 +122,8 @@ public class UtilPackageImpl extends EPackageImpl implements UtilPackage {
 			.getEPackage(OrganizationPackage.eNS_URI) instanceof OrganizationPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(OrganizationPackage.eNS_URI) : OrganizationPackage.eINSTANCE);
 		TaskPackageImpl theTaskPackage = (TaskPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(TaskPackage.eNS_URI) instanceof TaskPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(TaskPackage.eNS_URI) : TaskPackage.eINSTANCE);
+			.getEPackage(TaskPackage.eNS_URI)
+			: TaskPackage.eINSTANCE);
 		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
@@ -138,7 +140,8 @@ public class UtilPackageImpl extends EPackageImpl implements UtilPackage {
 			.getEPackage(ChangePackage.eNS_URI) instanceof ChangePackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ChangePackage.eNS_URI) : ChangePackage.eINSTANCE);
 		BugPackageImpl theBugPackage = (BugPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(BugPackage.eNS_URI) instanceof BugPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(BugPackage.eNS_URI) : BugPackage.eINSTANCE);
+			.getEPackage(BugPackage.eNS_URI)
+			: BugPackage.eINSTANCE);
 		ComponentPackageImpl theComponentPackage = (ComponentPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) instanceof ComponentPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) : ComponentPackage.eINSTANCE);
@@ -301,8 +304,8 @@ public class UtilPackageImpl extends EPackageImpl implements UtilPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		org.eclipse.emf.emfstore.common.model.ModelPackage theModelPackage_2 = (org.eclipse.emf.emfstore.common.model.ModelPackage) EPackage.Registry.INSTANCE
-			.getEPackage(org.eclipse.emf.emfstore.common.model.ModelPackage.eNS_URI);
+		org.eclipse.emf.emfstore.internal.common.model.ModelPackage theModelPackage_2 = (org.eclipse.emf.emfstore.internal.common.model.ModelPackage) EPackage.Registry.INSTANCE
+			.getEPackage(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eNS_URI);
 
 		// Create type parameters
 

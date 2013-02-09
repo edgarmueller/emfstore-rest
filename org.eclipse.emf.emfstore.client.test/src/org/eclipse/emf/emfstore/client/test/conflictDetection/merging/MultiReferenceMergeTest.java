@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSetConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.junit.Test;
 
 public class MultiReferenceMergeTest extends MergeTest {

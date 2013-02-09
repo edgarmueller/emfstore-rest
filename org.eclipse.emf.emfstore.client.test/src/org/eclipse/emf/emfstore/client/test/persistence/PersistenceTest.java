@@ -15,13 +15,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.junit.Test;
 
 public class PersistenceTest extends WorkspaceTest {
@@ -45,7 +45,8 @@ public class PersistenceTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
+		assertEquals(
+			WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		WorkspaceProvider.getInstance().dispose();
 		WorkspaceProvider.getInstance().reinit();
 		assertTrue(ModelUtil.areEqual(

@@ -17,10 +17,10 @@ import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetectionStrategy;
-import org.eclipse.emf.emfstore.server.conflictDetection.FineGrainedConflictDetectionStrategy;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.FineGrainedConflictDetectionStrategy;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.junit.Test;
 
 /**
@@ -59,7 +59,7 @@ public class AttributeConflictTest extends ConflictDetectionTest {
 		attributeOperation2.setClientDate(new Date());
 		attributeOperation2.setFeatureName(featureName);
 		attributeOperation2.setIdentifier("id1");
-		attributeOperation2.setModelElementId(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE
+		attributeOperation2.setModelElementId(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createModelElementId());
 		attributeOperation2.setOldValue("oldValue");
 		attributeOperation2.setNewValue("oldeValue");

@@ -15,8 +15,8 @@ import java.net.URISyntaxException;
 
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.TestProjectEnum;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

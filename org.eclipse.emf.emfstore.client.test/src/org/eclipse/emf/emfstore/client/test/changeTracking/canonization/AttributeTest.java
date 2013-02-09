@@ -24,18 +24,18 @@ import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
 import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.CreateDeleteOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.util.OperationsCanonizer;
+import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationsCanonizer;
 import org.junit.Test;
 
 /**
@@ -105,7 +105,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -231,7 +232,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -287,7 +289,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertEquals(operations.size(), 0);
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -343,7 +346,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertEquals(operations.size(), 0);
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -401,7 +405,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertEquals(operations.size(), 0);
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -467,7 +472,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -539,7 +545,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -623,7 +630,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -696,7 +704,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -769,7 +778,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -840,7 +850,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -909,7 +920,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -984,7 +996,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), originalProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, originalProject));
@@ -1155,7 +1168,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -1255,7 +1269,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), originalProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, originalProject));
@@ -1428,7 +1443,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
@@ -1475,7 +1491,8 @@ public class AttributeTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), originalProject));
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
-			org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(), getProject()
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),
+			getProject()
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, originalProject));

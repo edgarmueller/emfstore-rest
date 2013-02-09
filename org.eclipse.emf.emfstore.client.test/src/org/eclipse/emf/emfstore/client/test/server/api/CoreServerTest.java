@@ -26,17 +26,17 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.server.EMFStore;
-import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.core.EMFStoreImpl;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ModelFactory;
-import org.eclipse.emf.emfstore.server.model.ProjectHistory;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ServerSpace;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.EMFStore;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 
 public abstract class CoreServerTest extends WorkspaceTest {
 
@@ -147,7 +147,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					return (ProjectSpace) projectSpace.getRemoteProject().checkout(projectSpace.getUsersession(),
+					return projectSpace.getRemoteProject().checkout(projectSpace.getUsersession(),
 						projectSpace.getBaseVersion(), new NullProgressMonitor());
 
 				} catch (EMFStoreException e) {

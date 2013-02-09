@@ -16,9 +16,9 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSingleConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSingleConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.MultiReferenceSetOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
 
 /**

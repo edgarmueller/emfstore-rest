@@ -12,15 +12,15 @@ package org.eclipse.emf.emfstore.client.test.model.rationale;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Solution</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getUnderlyingProposals <em>Underlying
- * Proposals</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getUnderlyingProposals <em>
+ * Underlying Proposals</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution#getIssue <em>Issue</em>}</li>
  * </ul>
  * </p>

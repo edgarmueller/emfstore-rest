@@ -13,20 +13,20 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
-import org.eclipse.emf.emfstore.common.model.api.IModelElementId;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.internal.client.api.IServer;
-import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
-import org.eclipse.emf.emfstore.internal.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.internal.client.api.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,11 +56,6 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testProjectName() {
 		assertEquals("TestProject", localProject.getProjectName());
-	}
-
-	@Test
-	public void testProjectDescription() {
-		assertEquals("My Test Project", localProject.getProjectDescription());
 	}
 
 	@Test
@@ -106,7 +101,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = EMFStoreException.class)
 	public void testGetBranches() throws EMFStoreException {
-		localProject.getBranches();
+		localProject.getBranches(new NullProgressMonitor());
 		fail("Should not be able to getBranches from an unshared Project!");
 	}
 

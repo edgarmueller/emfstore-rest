@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.client.test.model.change.ChangePackage;
 import org.eclipse.emf.emfstore.client.test.model.change.MergingSolution;
 import org.eclipse.emf.emfstore.client.test.model.rationale.impl.SolutionImpl;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Merging Solution</b></em>'. <!-- end-user-doc

@@ -31,9 +31,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
-import org.eclipse.emf.emfstore.common.CommonUtil;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -47,20 +44,23 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutator;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration;
-import org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.server.EMFStoreController;
-import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.FatalEmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
+import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
+import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
 /**
  * Helper class for setup/cleanup test fixtures.
@@ -123,7 +123,7 @@ public class SetupHelper {
 	 * @return the project space containing the generated project
 	 */
 	public void generateRandomProject() {
-		Project project = org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject();
+		Project project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
 		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, minObjectsCount,
 			seed);
 		Configuration.setAutoSave(false);
@@ -141,7 +141,7 @@ public class SetupHelper {
 		config.setIgnoreAndLog(false);
 		config.setMinObjectsCount(minObjectsCount);
 		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
-		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.common.model.ModelPackage.eINSTANCE
+		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());
 		config.setEditingDomain(((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getEditingDomain());
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
@@ -345,7 +345,8 @@ public class SetupHelper {
 			@Override
 			protected void doRun() {
 				ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-				projectSpace.setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
+				projectSpace.setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+					.createProject());
 				projectSpace.setProjectName("Testproject");
 				projectSpace.setProjectDescription("Test description");
 				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
@@ -620,7 +621,7 @@ public class SetupHelper {
 	 */
 	public Project getCompareProject() throws EMFStoreException {
 		LOGGER.log(Level.INFO, "retrieving compare project...");
-		final ProjectInfo projectInfo = org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
+		final ProjectInfo projectInfo = org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 			.createProjectInfo();
 		projectInfo.setName("CompareProject");
 		projectInfo.setDescription("compare project description");
@@ -708,7 +709,7 @@ public class SetupHelper {
 
 			@Override
 			protected void doRun() {
-				testProjectSpace.setProjectId(org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE
+				testProjectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 					.createProjectId());
 				projectId = testProjectSpace.getProjectId();
 			}

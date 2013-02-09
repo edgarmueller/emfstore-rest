@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Model Element Path</b></em>'. <!-- end-user-doc

@@ -6,15 +6,11 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
-import org.eclipse.emf.emfstore.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.client.api.IChangeConflictException;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -24,13 +20,17 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.api.versionspecs.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.junit.Test;
 
 public class ChecksumTest extends CoreServerTest {
@@ -320,7 +320,7 @@ public class ChecksumTest extends CoreServerTest {
 		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
-			return checksumErrorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec,
+			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}
 
@@ -337,7 +337,7 @@ public class ChecksumTest extends CoreServerTest {
 			IUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
-		public boolean conflictOccurred(IChangeConflictException changeConflictException,
+		public boolean conflictOccurred(IChangeConflict changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
@@ -345,7 +345,7 @@ public class ChecksumTest extends CoreServerTest {
 		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
-			return checksumErrorHandler.execute((ProjectSpace) projectSpace, (PrimaryVersionSpec) versionSpec,
+			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}
 	}

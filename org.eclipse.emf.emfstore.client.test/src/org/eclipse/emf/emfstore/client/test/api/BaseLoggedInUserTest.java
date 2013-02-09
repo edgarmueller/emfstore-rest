@@ -2,10 +2,10 @@ package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.fail;
 
-import org.eclipse.emf.emfstore.internal.client.api.IServer;
-import org.eclipse.emf.emfstore.internal.client.api.IUsersession;
+import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;
 

@@ -6,15 +6,15 @@ import java.io.IOException;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.internal.client.api.IProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerExecutor;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.junit.Before;
 import org.junit.Test;
 

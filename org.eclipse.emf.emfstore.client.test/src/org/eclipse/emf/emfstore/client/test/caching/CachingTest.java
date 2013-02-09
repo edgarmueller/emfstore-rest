@@ -12,10 +12,10 @@ package org.eclipse.emf.emfstore.client.test.caching;
 
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.junit.Before;
 
 /**
@@ -39,10 +39,11 @@ public abstract class CachingTest {
 		projectSpace.setLastUpdated(new Date());
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		projectSpace.setProjectDescription("ps description");
-		projectSpace.setProjectId(org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId());
+		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
+			.createProjectId());
 		projectSpace.setProjectName("ps name");
 
-		setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
+		setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 
 		projectSpace.setProject(getProject());
 

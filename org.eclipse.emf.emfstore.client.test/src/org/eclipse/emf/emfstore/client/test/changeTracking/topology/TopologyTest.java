@@ -16,11 +16,11 @@ import java.util.Date;
 
 import junit.framework.Assert;
 
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.junit.Before;
 
 /**
@@ -44,9 +44,10 @@ public abstract class TopologyTest {
 		projectSpace.setLastUpdated(new Date());
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		projectSpace.setProjectDescription("ps description");
-		projectSpace.setProjectId(org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId());
+		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
+			.createProjectId());
 		projectSpace.setProjectName("ps name");
-		projectSpace.setProject(org.eclipse.emf.emfstore.common.model.ModelFactory.eINSTANCE.createProject());
+		projectSpace.setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 		projectSpace.makeTransient();
 		projectSpace.init();
 

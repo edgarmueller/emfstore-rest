@@ -19,23 +19,24 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.UnknownSessionException;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AttributeOperation;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -53,7 +54,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws EMFStoreException {
-		assertTrue(getServerInfo().getRemoteProjectsFromServer(true).size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -84,8 +85,8 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a project on the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
@@ -94,7 +95,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws EMFStoreException {
-		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjectsFromServer(true).size());
+		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
 
 		new EMFStoreCommand() {
 
@@ -110,14 +111,14 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjectsFromServer(true).size());
+		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjects().size());
 	}
 
 	/**
 	 * Creates a project, shares it with the server and then deletes it.
 	 * 
-	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId, String, String,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
+	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @throws EmfStoreException in case of failure.
 	 */
@@ -166,8 +167,8 @@ public class ServerInterfaceTest extends ServerTests {
 		getRemoteProject().delete();
 
 		try {
-			List<RemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
-			for (RemoteProject projectInfo : remoteProjectList) {
+			List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+			for (IRemoteProject projectInfo : remoteProjectList) {
 				if (projectInfo.getProjectId() == getProjectId()) {
 					assertTrue(false);
 				}
@@ -191,11 +192,11 @@ public class ServerInterfaceTest extends ServerTests {
 	@Test
 	public void resolveVersionSpecTest() throws EMFStoreException {
 
-		List<RemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+		List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
 
 		boolean sameVersionSpec = false;
-		for (RemoteProject project : remoteProjectList) {
-			if (project.getHeadVersion(true).equals(getProjectVersion())) {
+		for (IRemoteProject project : remoteProjectList) {
+			if (project.getHeadVersion().equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}
 		}
@@ -222,7 +223,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				getProject().addModelElement(
-					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
+					org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createProjectHistory());
 
 				try {
 					// TODO: TQ cast
@@ -273,7 +274,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(
-					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
+					org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createProjectHistory());
 			}
 		}.run(false);
 
@@ -329,7 +330,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				getProject().addModelElement(
-					org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectHistory());
+					org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createProjectHistory());
 
 				try {
 					// TODO: TQ cast
@@ -395,11 +396,12 @@ public class ServerInterfaceTest extends ServerTests {
 		getProjectSpace().addTag(getProjectVersion(), tag);
 		getProjectSpace().removeTag(getProjectVersion(), tag);
 
-		List<HistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
+		List<IHistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
 			createHistoryQuery(getProjectVersion(), getProjectVersion()));
 
 		assertTrue(historyInfo.size() == 1);
-		EList<TagVersionSpec> tagSpecs = historyInfo.get(0).getTagSpecs();
+		HistoryInfo iHistoryInfo = (HistoryInfo) historyInfo.get(0);
+		List<TagVersionSpec> tagSpecs = iHistoryInfo.getTagSpecs();
 		assertEquals(2, tagSpecs.size());
 		assertEquals("HEAD", tagSpecs.get(0).getName());
 		assertEquals("HEAD: trunk", tagSpecs.get(1).getName());

@@ -9,7 +9,7 @@ import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.server.exceptions.FileTransferException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.junit.Test;
 
 public class FileTransferTest extends WorkspaceTest {

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.model.rationale;
 
 import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Assessment</b></em>'. <!-- end-user-doc -->
@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
 public interface Assessment extends UnicaseModelElement, NonDomainElement {
 	/**
 	 * Returns the value of the '<em><b>Proposal</b></em>' container reference. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments <em>Assessments</em>}'. <!--
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments
+	 * <em>Assessments</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Proposal</em>' container reference isn't clear, there really should be more of a
@@ -49,7 +50,8 @@ public interface Assessment extends UnicaseModelElement, NonDomainElement {
 	Proposal getProposal();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal
 	 * <em>Proposal</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Proposal</em>' container reference.
@@ -60,7 +62,8 @@ public interface Assessment extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Criterion</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments
+	 * <em>Assessments</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Criterion</em>' reference isn't clear, there really should be more of a description
@@ -78,7 +81,8 @@ public interface Assessment extends UnicaseModelElement, NonDomainElement {
 	Criterion getCriterion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion
 	 * <em>Criterion</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Criterion</em>' reference.

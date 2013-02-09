@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage;
@@ -55,7 +56,6 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
 import org.eclipse.emf.emfstore.client.test.model.util.impl.UtilPackageImpl;
-import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
@@ -147,7 +147,8 @@ public class TaskPackageImpl extends EPackageImpl implements TaskPackage {
 
 		// Obtain or create and register package
 		TaskPackageImpl theTaskPackage = (TaskPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TaskPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new TaskPackageImpl());
+			.get(eNS_URI)
+			: new TaskPackageImpl());
 
 		isInited = true;
 
@@ -178,7 +179,8 @@ public class TaskPackageImpl extends EPackageImpl implements TaskPackage {
 			.getEPackage(ChangePackage.eNS_URI) instanceof ChangePackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ChangePackage.eNS_URI) : ChangePackage.eINSTANCE);
 		BugPackageImpl theBugPackage = (BugPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(BugPackage.eNS_URI) instanceof BugPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(BugPackage.eNS_URI) : BugPackage.eINSTANCE);
+			.getEPackage(BugPackage.eNS_URI)
+			: BugPackage.eINSTANCE);
 		ComponentPackageImpl theComponentPackage = (ComponentPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) instanceof ComponentPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) : ComponentPackage.eINSTANCE);
@@ -195,7 +197,8 @@ public class TaskPackageImpl extends EPackageImpl implements TaskPackage {
 			.getEPackage(ProfilePackage.eNS_URI) instanceof ProfilePackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ProfilePackage.eNS_URI) : ProfilePackage.eINSTANCE);
 		UtilPackageImpl theUtilPackage = (UtilPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UtilPackage.eNS_URI) instanceof UtilPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UtilPackage.eNS_URI) : UtilPackage.eINSTANCE);
+			.getEPackage(UtilPackage.eNS_URI)
+			: UtilPackage.eINSTANCE);
 		ActivityPackageImpl theActivityPackage = (ActivityPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ActivityPackage.eNS_URI) instanceof ActivityPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ActivityPackage.eNS_URI) : ActivityPackage.eINSTANCE);

@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.client.test.model.change.ChangePackage;
 import org.eclipse.emf.emfstore.client.test.model.change.MergingSolution;
 import org.eclipse.emf.emfstore.client.test.model.provider.ModelEditPlugin;
 import org.eclipse.emf.emfstore.client.test.model.rationale.provider.SolutionItemProvider;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution}

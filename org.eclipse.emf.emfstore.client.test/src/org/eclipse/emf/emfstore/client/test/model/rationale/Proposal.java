@@ -12,14 +12,15 @@ package org.eclipse.emf.emfstore.client.test.model.rationale;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Proposal</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments <em>Assessments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments <em>Assessments
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getIssue <em>Issue</em>}</li>
  * </ul>
  * </p>
@@ -31,8 +32,10 @@ import org.eclipse.emf.emfstore.common.model.NonDomainElement;
 public interface Proposal extends UnicaseModelElement, NonDomainElement {
 	/**
 	 * Returns the value of the '<em><b>Assessments</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment}. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment}. It is bidirectional and its
+	 * opposite is
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Assessments</em>' containment reference list isn't clear, there really should be more
@@ -51,7 +54,8 @@ public interface Proposal extends UnicaseModelElement, NonDomainElement {
 
 	/**
 	 * Returns the value of the '<em><b>Issue</b></em>' container reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Issue</em>' container reference isn't clear, there really should be more of a

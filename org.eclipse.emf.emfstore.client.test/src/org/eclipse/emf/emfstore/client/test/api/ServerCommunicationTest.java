@@ -9,8 +9,8 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,10 +56,9 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	public void testCreateRemoteProject() {
 		try {
 			IRemoteProject remoteProject = server.createRemoteProject(usersession, "MyProject",
-				"MyProject Description", new NullProgressMonitor());
+				new NullProgressMonitor());
 			assertNotNull(remoteProject);
 			assertEquals("MyProject", remoteProject.getProjectName());
-			assertEquals("MyProject Description", remoteProject.getProjectDescription());
 			List<? extends IRemoteProject> remoteProjects = server.getRemoteProjects();
 			assertEquals(1, remoteProjects.size());
 			assertEquals(remoteProject, remoteProjects.get(0));
@@ -73,11 +72,10 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	@Test
 	public void testCreateRemoteProjectWithoutUsersession() {
 		try {
-			IRemoteProject remoteProject = server.createRemoteProject("MyProject", "MyProject Description",
+			IRemoteProject remoteProject = server.createRemoteProject("MyProject",
 				new NullProgressMonitor());
 			assertNotNull(remoteProject);
 			assertEquals("MyProject", remoteProject.getProjectName());
-			assertEquals("MyProject Description", remoteProject.getProjectDescription());
 			List<? extends IRemoteProject> remoteProjects = server.getRemoteProjects();
 			assertEquals(1, remoteProjects.size());
 			assertEquals(remoteProject, remoteProjects.get(0));
@@ -91,9 +89,9 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	public void testDeleteRemoteProject() {
 		try {
 			IRemoteProject remoteProject = server.createRemoteProject(usersession, "MyProject",
-				"MyProject Description", new NullProgressMonitor());
+				new NullProgressMonitor());
 			assertEquals(1, server.getRemoteProjects().size());
-			remoteProject.delete(true);
+			remoteProject.delete();
 			assertEquals(0, server.getRemoteProjects().size());
 		} catch (EMFStoreException e) {
 			log(e);
@@ -104,12 +102,12 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	@Test
 	public void testGetRemoteProjectsFromServer() {
 		try {
-			server.createRemoteProject(usersession, "MyProject", "MyProject Description", new NullProgressMonitor());
-			server.createRemoteProject(usersession, "MyProject2", "MyProject Description", new NullProgressMonitor());
+			server.createRemoteProject(usersession, "MyProject", new NullProgressMonitor());
+			server.createRemoteProject(usersession, "MyProject2", new NullProgressMonitor());
 			assertEquals(0, server.getRemoteProjects().size());
-			assertEquals(2, server.getRemoteProjectsFromServer(false).size());
+			assertEquals(2, server.getRemoteProjects().size());
 			assertEquals(0, server.getRemoteProjects().size());
-			server.getRemoteProjectsFromServer(true);
+			server.getRemoteProjects();
 			assertEquals(2, server.getRemoteProjects().size());
 		} catch (EMFStoreException e) {
 			log(e);

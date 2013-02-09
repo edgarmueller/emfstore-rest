@@ -31,22 +31,23 @@ public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implement
 	}
 
 	public IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
+		final IProgressMonitor progressMonitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
 			@Override
 			protected ProjectInfo run() throws EMFStoreException {
-				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
 					createLogmessage(getUsersession(), projectName));
 			}
 		}.execute());
 	}
 
-	public IRemoteProject createRemoteProject(final String projectName, final String projectDescription,
+	public IRemoteProject createRemoteProject(final String projectName,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(this) {
 			@Override
 			protected ProjectInfo run() throws EMFStoreException {
-				return getConnectionManager().createEmptyProject(getSessionId(), projectName, projectDescription,
+				// TODO OTS change remote call too?
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
 					createLogmessage(getUsersession(), projectName));
 			}
 		}.execute());

@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
 import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
 import org.eclipse.emf.emfstore.client.test.model.task.Checkable;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance hierarchy. It supports the call

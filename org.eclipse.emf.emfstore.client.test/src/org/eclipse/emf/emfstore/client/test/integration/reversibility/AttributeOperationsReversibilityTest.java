@@ -13,10 +13,10 @@ package org.eclipse.emf.emfstore.client.test.integration.reversibility;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
 import org.junit.Test;
 
 /**

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.model.change;
 
 import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Merging Issue</b></em>'. <!-- end-user-doc -->

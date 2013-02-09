@@ -114,4 +114,6 @@ public interface IRemoteProject extends IProject {
 	 * @param usersession session used for server call
 	 */
 	void delete(IUsersession usersession) throws EMFStoreException;
+
+	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
 }

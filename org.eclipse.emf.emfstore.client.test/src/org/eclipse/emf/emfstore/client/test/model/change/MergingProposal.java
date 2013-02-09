@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.test.model.change;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.test.model.rationale.Proposal;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Merging Proposal</b></em>'. <!-- end-user-doc

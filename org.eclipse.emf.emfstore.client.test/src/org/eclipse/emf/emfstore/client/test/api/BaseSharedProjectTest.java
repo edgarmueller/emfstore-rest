@@ -1,16 +1,18 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.api.ILocalProject;
-import org.eclipse.emf.emfstore.internal.client.api.IRemoteProject;
-import org.eclipse.emf.emfstore.internal.client.api.IWorkspace;
-import org.eclipse.emf.emfstore.internal.client.api.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.junit.After;
 import org.junit.Before;
 
 public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
-	protected IWorkspace workspace=IWorkspaceProvider.INSTANCE.getWorkspace();
+	protected IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
 	protected ILocalProject localProject;
+
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -19,12 +21,13 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 		localProject.shareProject(usersession, new NullProgressMonitor());
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 		workspace.removeServer(server);
-		for(IRemoteProject project:server.getRemoteProjects())
-			project.delete(true);
-		for(ILocalProject project:workspace.getLocalProjects())
+		for (IRemoteProject project : server.getRemoteProjects())
+			project.delete();
+		for (ILocalProject project : workspace.getLocalProjects())
 			project.delete();
 		super.tearDown();
 	}

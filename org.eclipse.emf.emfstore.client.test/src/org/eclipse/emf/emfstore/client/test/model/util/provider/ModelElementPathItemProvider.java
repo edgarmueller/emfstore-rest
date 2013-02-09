@@ -28,11 +28,12 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.client.test.model.provider.ModelEditPlugin;
 import org.eclipse.emf.emfstore.client.test.model.util.ModelElementPath;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * 
  * @generated
  */

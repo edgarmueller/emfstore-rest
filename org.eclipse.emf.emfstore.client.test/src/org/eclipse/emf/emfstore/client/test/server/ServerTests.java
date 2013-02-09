@@ -15,13 +15,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
-import org.eclipse.emf.emfstore.common.CommonUtil;
-import org.eclipse.emf.emfstore.common.model.ModelFactory;
-import org.eclipse.emf.emfstore.common.model.Project;
-import org.eclipse.emf.emfstore.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -31,22 +27,26 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.exceptions.InvalidInputException;
-import org.eclipse.emf.emfstore.server.model.AuthenticationInformation;
-import org.eclipse.emf.emfstore.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ACOrgUnitId;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.AccesscontrolFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.HistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
+import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -106,7 +106,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() throws EMFStoreException {
-		return getRemoteProject().getHeadVersion(false);
+		return getRemoteProject().getHeadVersion();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	@After
 	public void teardown() throws IOException, SerializationException, EMFStoreException {
 		super.teardown();
-		for (RemoteProject project : getServerInfo().getRemoteProjects()) {
+		for (IRemoteProject project : getServerInfo().getRemoteProjects()) {
 			project.delete();
 		}
 		Assert.assertEquals(0, getServerInfo().getRemoteProjects().size());
@@ -173,12 +173,14 @@ public abstract class ServerTests extends WorkspaceTest {
 		arguments.put(boolean.class, false);
 		arguments.put(String.class, new String());
 		arguments.put(SessionId.class, ModelUtil.clone(getSessionId()));
-		arguments.put(ProjectId.class, org.eclipse.emf.emfstore.server.model.ModelFactory.eINSTANCE.createProjectId());
+		arguments.put(ProjectId.class,
+			org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE.createProjectId());
 		arguments.put(PrimaryVersionSpec.class, VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		arguments.put(VersionSpec.class, VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		arguments.put(TagVersionSpec.class, VersioningFactory.eINSTANCE.createTagVersionSpec());
 		arguments.put(LogMessage.class, VersioningFactory.eINSTANCE.createLogMessage());
-		arguments.put(Project.class, ModelFactory.eINSTANCE.createProject());
+		arguments.put(Project.class,
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
 		arguments.put(HistoryQuery.class, VersioningFactory.eINSTANCE.createPathQuery());
 		arguments.put(ChangePackage.class, VersioningFactory.eINSTANCE.createChangePackage());
@@ -245,8 +247,8 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (RemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
-						remoteProject.delete(true);
+					for (IRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
+						remoteProject.delete();
 					}
 				} catch (EMFStoreException e) {
 				}
@@ -282,7 +284,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @return established usersession
 	 */
 	public Usersession setUpUsersession(String username, String password) {
-		Usersession usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
+		Usersession usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE
+			.createUsersession();
 		usersession.setServerInfo(getServerInfo());
 		usersession.setUsername(username);
 		usersession.setPassword(password);

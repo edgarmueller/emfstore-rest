@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.emfstore.client.test.model.change.ChangePackage;
 import org.eclipse.emf.emfstore.client.test.model.change.MergingIssue;
 import org.eclipse.emf.emfstore.client.test.model.rationale.impl.IssueImpl;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Merging Issue</b></em>'. <!-- end-user-doc -->

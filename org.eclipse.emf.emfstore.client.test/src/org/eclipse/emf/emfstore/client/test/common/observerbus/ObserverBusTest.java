@@ -23,9 +23,9 @@ import org.eclipse.emf.emfstore.client.test.common.observerbus.assets.BImpl;
 import org.eclipse.emf.emfstore.client.test.common.observerbus.assets.C;
 import org.eclipse.emf.emfstore.client.test.common.observerbus.assets.CImpl;
 import org.eclipse.emf.emfstore.client.test.common.observerbus.assets.DImpl;
-import org.eclipse.emf.emfstore.common.observer.ObserverBus;
-import org.eclipse.emf.emfstore.common.observer.ObserverCall;
-import org.eclipse.emf.emfstore.common.observer.ObserverCall.Result;
+import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
+import org.eclipse.emf.emfstore.internal.common.observer.ObserverCall;
+import org.eclipse.emf.emfstore.internal.common.observer.ObserverCall.Result;
 import org.junit.Before;
 import org.junit.Test;
 

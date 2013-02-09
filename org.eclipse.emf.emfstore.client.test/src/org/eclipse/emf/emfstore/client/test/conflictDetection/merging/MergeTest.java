@@ -24,19 +24,19 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
-import org.eclipse.emf.emfstore.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.common.model.Project;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictBucketCandidate;
-import org.eclipse.emf.emfstore.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
  * Helper super class for merge tests.
@@ -169,10 +169,10 @@ public class MergeTest extends ConflictDetectionTest {
 
 			Set<ConflictBucketCandidate> conflictCandidateBuckets = new ConflictDetector()
 				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages);
-			ChangeConflictException conflictException = new ChangeConflictException(getProjectSpace(),
+			ChangeConflict changeConflict = new ChangeConflict(getProjectSpace(),
 				myChangePackages, theirChangePackages, conflictCandidateBuckets, getProject());
 
-			DecisionManager manager = new DecisionManager(getProject(), conflictException, spec, spec, false);
+			DecisionManager manager = new DecisionManager(getProject(), changeConflict, spec, spec, false);
 
 			return manager;
 		}

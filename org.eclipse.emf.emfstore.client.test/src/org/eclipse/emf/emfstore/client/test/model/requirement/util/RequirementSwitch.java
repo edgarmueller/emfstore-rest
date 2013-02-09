@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.SystemFunction;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
 import org.eclipse.emf.emfstore.client.test.model.requirement.Workspace;
-import org.eclipse.emf.emfstore.common.model.NonDomainElement;
+import org.eclipse.emf.emfstore.internal.common.model.NonDomainElement;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance hierarchy. It supports the call

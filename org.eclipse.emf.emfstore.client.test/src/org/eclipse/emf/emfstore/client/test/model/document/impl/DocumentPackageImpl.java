@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage;
@@ -50,7 +51,6 @@ import org.eclipse.emf.emfstore.client.test.model.task.TaskPackage;
 import org.eclipse.emf.emfstore.client.test.model.task.impl.TaskPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
 import org.eclipse.emf.emfstore.client.test.model.util.impl.UtilPackageImpl;
-import org.eclipse.emf.emfstore.server.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
@@ -121,7 +121,8 @@ public class DocumentPackageImpl extends EPackageImpl implements DocumentPackage
 
 		// Obtain or create and register package
 		DocumentPackageImpl theDocumentPackage = (DocumentPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DocumentPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new DocumentPackageImpl());
+			.get(eNS_URI)
+			: new DocumentPackageImpl());
 
 		isInited = true;
 
@@ -137,7 +138,8 @@ public class DocumentPackageImpl extends EPackageImpl implements DocumentPackage
 			.getEPackage(OrganizationPackage.eNS_URI) instanceof OrganizationPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(OrganizationPackage.eNS_URI) : OrganizationPackage.eINSTANCE);
 		TaskPackageImpl theTaskPackage = (TaskPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(TaskPackage.eNS_URI) instanceof TaskPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(TaskPackage.eNS_URI) : TaskPackage.eINSTANCE);
+			.getEPackage(TaskPackage.eNS_URI)
+			: TaskPackage.eINSTANCE);
 		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
@@ -151,7 +153,8 @@ public class DocumentPackageImpl extends EPackageImpl implements DocumentPackage
 			.getEPackage(ChangePackage.eNS_URI) instanceof ChangePackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ChangePackage.eNS_URI) : ChangePackage.eINSTANCE);
 		BugPackageImpl theBugPackage = (BugPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(BugPackage.eNS_URI) instanceof BugPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(BugPackage.eNS_URI) : BugPackage.eINSTANCE);
+			.getEPackage(BugPackage.eNS_URI)
+			: BugPackage.eINSTANCE);
 		ComponentPackageImpl theComponentPackage = (ComponentPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) instanceof ComponentPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ComponentPackage.eNS_URI) : ComponentPackage.eINSTANCE);
@@ -168,7 +171,8 @@ public class DocumentPackageImpl extends EPackageImpl implements DocumentPackage
 			.getEPackage(ProfilePackage.eNS_URI) instanceof ProfilePackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ProfilePackage.eNS_URI) : ProfilePackage.eINSTANCE);
 		UtilPackageImpl theUtilPackage = (UtilPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UtilPackage.eNS_URI) instanceof UtilPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UtilPackage.eNS_URI) : UtilPackage.eINSTANCE);
+			.getEPackage(UtilPackage.eNS_URI)
+			: UtilPackage.eINSTANCE);
 		ActivityPackageImpl theActivityPackage = (ActivityPackageImpl) (EPackage.Registry.INSTANCE
 			.getEPackage(ActivityPackage.eNS_URI) instanceof ActivityPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(ActivityPackage.eNS_URI) : ActivityPackage.eINSTANCE);
