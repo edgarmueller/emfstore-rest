@@ -30,7 +30,8 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl#getProjectSpaces <em>Project Spaces
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorekspaceImpl#getServerInfos <em>Server Infos</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl#getUsersessions <em>Usersessions </em>}</li>
  * </ul>
@@ -91,7 +92,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 		case ModelPackage.WORKSPACE__PROJECT_SPACES:
 			return getProjectSpaces();
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			return getServers();
+			return getServerInfos();
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return getUsersessions();
 		}

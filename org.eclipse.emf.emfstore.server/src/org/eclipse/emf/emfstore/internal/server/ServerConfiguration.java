@@ -49,7 +49,8 @@ public final class ServerConfiguration {
 	/**
 	 * Constant for the Default Resource Storage.
 	 */
-	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.server.storage.XMLStorage";
+	// TODO: OTS
+	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.internal.server.storage.XMLStorage";
 
 	/**
 	 * RMI encryption property, possible values are true and false.

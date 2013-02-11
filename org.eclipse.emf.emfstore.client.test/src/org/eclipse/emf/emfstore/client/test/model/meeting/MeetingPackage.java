@@ -50,7 +50,7 @@ public interface MeetingPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.meeting";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.meeting";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -256,7 +256,8 @@ public interface MeetingPackage extends EPackage {
 	int MEETING_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl
 	 * <em>Section</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl
@@ -792,7 +793,8 @@ public interface MeetingPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getStarttime <em>Starttime</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getStarttime <em>Starttime</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Starttime</em>'.
@@ -816,7 +818,8 @@ public interface MeetingPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getFacilitator <em>Facilitator</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getFacilitator <em>Facilitator</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Facilitator</em>'.
@@ -828,7 +831,8 @@ public interface MeetingPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getMinutetaker <em>Minutetaker</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getMinutetaker <em>Minutetaker</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Minutetaker</em>'.
@@ -840,7 +844,8 @@ public interface MeetingPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getTimekeeper <em>Timekeeper</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getTimekeeper <em>Timekeeper</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Timekeeper</em>'.
@@ -852,7 +857,8 @@ public interface MeetingPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participants</em>'.
@@ -899,7 +905,8 @@ public interface MeetingPackage extends EPackage {
 	EReference getMeeting_IdentifiedWorkItemsSection();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection
 	 * <em>Section</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Section</em>'.
@@ -944,7 +951,8 @@ public interface MeetingPackage extends EPackage {
 	EReference getCompositeMeetingSection_Subsections();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection
 	 * <em>Issue Meeting Section</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Issue Meeting Section</em>'.
@@ -1010,7 +1018,8 @@ public interface MeetingPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl
 		 * <em>Meeting</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl
@@ -1101,7 +1110,8 @@ public interface MeetingPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl <em>Section</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl <em>Section</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingSectionImpl

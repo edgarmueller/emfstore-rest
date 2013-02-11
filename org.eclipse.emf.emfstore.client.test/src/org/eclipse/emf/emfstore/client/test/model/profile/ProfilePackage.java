@@ -50,7 +50,7 @@ public interface ProfilePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.profile";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.profile";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -190,7 +190,8 @@ public interface ProfilePackage extends EPackage {
 	int PROFILE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl
 	 * <em>Stereotype</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl
@@ -1045,7 +1046,8 @@ public interface ProfilePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getStereotypes <em>Stereotypes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getStereotypes <em>Stereotypes</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Stereotypes</em>'.
@@ -1067,7 +1069,8 @@ public interface ProfilePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#isRequired <em>Required</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#isRequired <em>Required</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Required</em>'.
@@ -1114,7 +1117,8 @@ public interface ProfilePackage extends EPackage {
 	EReference getStereotype_StereotypeAttributes();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance
 	 * <em>Stereotype Instance</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Stereotype Instance</em>'.
@@ -1125,7 +1129,8 @@ public interface ProfilePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getStereotype <em>Stereotype</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getStereotype
+	 * <em>Stereotype</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Stereotype</em>'.
@@ -1160,7 +1165,8 @@ public interface ProfilePackage extends EPackage {
 	EReference getStereotypeInstance_StereotypeAttributeInstances();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute
 	 * <em>Stereotype Attribute</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Stereotype Attribute</em>'.
@@ -1171,8 +1177,8 @@ public interface ProfilePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype <em>Stereotype</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype
+	 * <em>Stereotype</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Stereotype</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype()
@@ -1206,7 +1212,8 @@ public interface ProfilePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType <em>Type</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType
+	 * <em>Type</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Type</em>'.
@@ -1296,7 +1303,8 @@ public interface ProfilePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.ProfileImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.ProfileImpl
 		 * <em>Profile</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.ProfileImpl
@@ -1323,7 +1331,8 @@ public interface ProfilePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl <em>Stereotype</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl <em>Stereotype</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl

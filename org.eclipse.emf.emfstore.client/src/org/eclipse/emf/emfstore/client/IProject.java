@@ -62,7 +62,7 @@ public interface IProject {
 	 * @throws IOException
 	 *             in case the project space could not be deleted
 	 */
-	void delete() throws IOException, EMFStoreException;
+	void delete(IProgressMonitor monitor) throws IOException, EMFStoreException;
 
 	/**
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.

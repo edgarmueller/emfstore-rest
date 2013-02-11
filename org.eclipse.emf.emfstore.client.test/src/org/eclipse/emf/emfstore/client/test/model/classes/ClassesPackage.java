@@ -51,7 +51,7 @@ public interface ClassesPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.classes";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.classes";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -61,7 +61,8 @@ public interface ClassesPackage extends EPackage {
 	ClassesPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.classes.impl.ClassesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl
 	 * <em>Package Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl
@@ -577,7 +578,8 @@ public interface ClassesPackage extends EPackage {
 	int PACKAGE_FEATURE_COUNT = PACKAGE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl
 	 * <em>Association</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl
@@ -756,7 +758,8 @@ public interface ClassesPackage extends EPackage {
 	int ASSOCIATION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl
 	 * <em>Attribute</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl
@@ -1181,7 +1184,8 @@ public interface ClassesPackage extends EPackage {
 	int METHOD_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl
 	 * <em>Method Argument</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl
@@ -1334,7 +1338,8 @@ public interface ClassesPackage extends EPackage {
 	int METHOD_ARGUMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl
 	 * <em>Dependency</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl
@@ -1463,7 +1468,8 @@ public interface ClassesPackage extends EPackage {
 	int DEPENDENCY_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl
 	 * <em>Enumeration</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl
@@ -1779,7 +1785,8 @@ public interface ClassesPackage extends EPackage {
 	int SCOPE_TYPE = 12;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
 	 * <em>Argument Direction Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
@@ -1820,8 +1827,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType <em>Instantiation Type</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType
+	 * <em>Instantiation Type</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Instantiation Type</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType()
@@ -1844,7 +1851,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSuperClasses <em>Super Classes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSuperClasses <em>Super Classes</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Super Classes</em>'.
@@ -1856,7 +1864,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSubClasses <em>Sub Classes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSubClasses <em>Sub Classes</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Sub Classes</em>'.
@@ -1892,7 +1901,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getAttributes <em>Attributes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getAttributes <em>Attributes</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
@@ -1950,7 +1960,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getFacadeClass <em>Facade Class</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getFacadeClass <em>Facade Class</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Facade Class</em>'.
@@ -1961,7 +1972,8 @@ public interface ClassesPackage extends EPackage {
 	EReference getPackage_FacadeClass();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PackageElement
 	 * <em>Package Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Package Element</em>'.
@@ -2007,7 +2019,8 @@ public interface ClassesPackage extends EPackage {
 	EReference getPackageElement_IncomingDependencies();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association
 	 * <em>Association</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Association</em>'.
@@ -2078,7 +2091,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole <em>Source Role</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole
+	 * <em>Source Role</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Source Role</em>'.
@@ -2090,7 +2104,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole <em>Target Role</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole
+	 * <em>Target Role</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Target Role</em>'.
@@ -2102,7 +2117,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient <em>Transient</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient <em>Transient</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Transient</em>'.
@@ -2124,7 +2140,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefiningClass <em>Defining Class</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefiningClass
+	 * <em>Defining Class</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Defining Class</em>'.
@@ -2136,7 +2153,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getVisibility <em>Visibility</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getVisibility <em>Visibility</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Visibility</em>'.
@@ -2160,7 +2178,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getSignature <em>Signature</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getSignature <em>Signature</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Signature</em>'.
@@ -2172,7 +2191,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getType <em>Type</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getType <em>Type</em>}'. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Type</em>'.
@@ -2184,7 +2204,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefaultValue <em>Default Value</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefaultValue
+	 * <em>Default Value</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Default Value</em>'.
@@ -2196,7 +2217,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getProperties <em>Properties</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getProperties <em>Properties</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Properties</em>'.
@@ -2220,7 +2242,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#isId <em>Id</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#isId <em>Id</em>}'. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Id</em>'.
@@ -2256,7 +2279,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#isTransient <em>Transient</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#isTransient <em>Transient</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Transient</em>'.
@@ -2278,7 +2302,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getVisibility <em>Visibility</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getVisibility <em>Visibility</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Visibility</em>'.
@@ -2290,7 +2315,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getScope <em>Scope</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getScope <em>Scope</em>}'. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Scope</em>'.
@@ -2302,7 +2328,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getReturnType <em>Return Type</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getReturnType <em>Return Type</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Return Type</em>'.
@@ -2338,7 +2365,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getProperties <em>Properties</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getProperties <em>Properties</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Properties</em>'.
@@ -2350,7 +2378,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass <em>Defining Class</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass
+	 * <em>Defining Class</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Defining Class</em>'.
@@ -2362,7 +2391,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getLabel <em>Label</em>}'. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getLabel <em>Label</em>}'. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Label</em>'.
@@ -2386,7 +2416,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods <em>Called Methods</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods
+	 * <em>Called Methods</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Called Methods</em>'.
@@ -2398,7 +2429,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods <em>Calling Methods</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods
+	 * <em>Calling Methods</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Calling Methods</em>'.
@@ -2421,7 +2453,8 @@ public interface ClassesPackage extends EPackage {
 	EReference getMethod_DemoParticipations();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument
 	 * <em>Method Argument</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Method Argument</em>'.
@@ -2444,7 +2477,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection <em>Direction</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection
+	 * <em>Direction</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Direction</em>'.
@@ -2456,8 +2490,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue <em>Default Value</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue
+	 * <em>Default Value</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Default Value</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue()
@@ -2468,7 +2502,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getSignature <em>Signature</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getSignature
+	 * <em>Signature</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Signature</em>'.
@@ -2525,7 +2560,8 @@ public interface ClassesPackage extends EPackage {
 	EReference getDependency_Target();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration
 	 * <em>Enumeration</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Enumeration</em>'.
@@ -2536,7 +2572,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Literals</em>'.
@@ -2548,7 +2585,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getAttributes <em>Attributes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getAttributes <em>Attributes</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Attributes</em>'.
@@ -2570,7 +2608,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration <em>Enumeration</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration <em>Enumeration</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Enumeration</em>'.
@@ -2593,7 +2632,8 @@ public interface ClassesPackage extends EPackage {
 	EAttribute getLiteral_Literal();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
+	 * Returns the meta object for enum '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
 	 * <em>Association Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Association Type</em>'.
@@ -2603,7 +2643,8 @@ public interface ClassesPackage extends EPackage {
 	EEnum getAssociationType();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.VisibilityType
+	 * Returns the meta object for enum '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.VisibilityType
 	 * <em>Visibility Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Visibility Type</em>'.
@@ -2624,8 +2665,8 @@ public interface ClassesPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType <em>Argument Direction Type</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
+	 * <em>Argument Direction Type</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Argument Direction Type</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType
@@ -2634,7 +2675,8 @@ public interface ClassesPackage extends EPackage {
 	EEnum getArgumentDirectionType();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.InstantiationType
+	 * Returns the meta object for enum '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.InstantiationType
 	 * <em>Instantiation Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Instantiation Type</em>'.
@@ -2644,7 +2686,8 @@ public interface ClassesPackage extends EPackage {
 	EEnum getInstantiationType();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PrimitiveType
+	 * Returns the meta object for enum '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PrimitiveType
 	 * <em>Primitive Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Primitive Type</em>'.
@@ -2675,7 +2718,8 @@ public interface ClassesPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl
 		 * <em>Class</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl
@@ -2757,7 +2801,8 @@ public interface ClassesPackage extends EPackage {
 		EReference CLASS__DEMO_PARTICIPATIONS = eINSTANCE.getClass_DemoParticipations();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageImpl
 		 * <em>Package</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageImpl
@@ -2784,7 +2829,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl <em>Package Element</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl
+		 * <em>Package Element</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.PackageElementImpl
@@ -2819,7 +2865,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl <em>Association</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl <em>Association</em>}
+		 * ' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl
@@ -2894,7 +2941,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl <em>Attribute</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl <em>Attribute</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AttributeImpl
@@ -3000,7 +3048,8 @@ public interface ClassesPackage extends EPackage {
 		EAttribute ATTRIBUTE__TRANSIENT = eINSTANCE.getAttribute_Transient();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl
 		 * <em>Method</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodImpl
@@ -3107,7 +3156,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl <em>Method Argument</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl
+		 * <em>Method Argument</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl
@@ -3158,7 +3208,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl <em>Dependency</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl <em>Dependency</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl
@@ -3185,7 +3236,8 @@ public interface ClassesPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl <em>Enumeration</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl <em>Enumeration</em>}
+		 * ' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.EnumerationImpl
@@ -3211,7 +3263,8 @@ public interface ClassesPackage extends EPackage {
 		EReference ENUMERATION__ATTRIBUTES = eINSTANCE.getEnumeration_Attributes();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl
 		 * <em>Literal</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl
@@ -3237,7 +3290,8 @@ public interface ClassesPackage extends EPackage {
 		EAttribute LITERAL__LITERAL = eINSTANCE.getLiteral_Literal();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
 		 * <em>Association Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.AssociationType
@@ -3247,7 +3301,8 @@ public interface ClassesPackage extends EPackage {
 		EEnum ASSOCIATION_TYPE = eINSTANCE.getAssociationType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.VisibilityType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.VisibilityType
 		 * <em>Visibility Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.VisibilityType
@@ -3257,7 +3312,8 @@ public interface ClassesPackage extends EPackage {
 		EEnum VISIBILITY_TYPE = eINSTANCE.getVisibilityType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ScopeType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ScopeType
 		 * <em>Scope Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.ScopeType
@@ -3278,7 +3334,8 @@ public interface ClassesPackage extends EPackage {
 		EEnum ARGUMENT_DIRECTION_TYPE = eINSTANCE.getArgumentDirectionType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.InstantiationType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.InstantiationType
 		 * <em>Instantiation Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.InstantiationType
@@ -3288,7 +3345,8 @@ public interface ClassesPackage extends EPackage {
 		EEnum INSTANTIATION_TYPE = eINSTANCE.getInstantiationType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PrimitiveType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.PrimitiveType
 		 * <em>Primitive Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.classes.PrimitiveType

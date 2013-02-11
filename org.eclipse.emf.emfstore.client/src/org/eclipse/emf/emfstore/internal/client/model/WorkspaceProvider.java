@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -617,11 +618,11 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	 */
 	public void dispose() {
 		// TODO: OTS
-		// if (currentWorkspace != null) {
-		// ((WorkspaceImpl) currentWorkspace).dispose();
-		// currentWorkspace = null;
-		// instance = null;
-		// }
+		if (currentWorkspace != null) {
+			((WorkspaceImpl) currentWorkspace).dispose();
+			currentWorkspace = null;
+			// instance = null;
+		}
 	}
 
 	/**
@@ -643,4 +644,5 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
 		getSessionManager().setSessionProvider(sessionProvider);
 	}
+
 }

@@ -27,7 +27,7 @@ public abstract class BaseServerWithProjectTest extends BaseLoggedInUserTest {
 	public void tearDown() throws Exception {
 		super.tearDown();
 		if (remoteProject != null)
-			remoteProject.delete(usersession);
+			remoteProject.delete(usersession, new NullProgressMonitor());
 	}
 
 }

@@ -471,37 +471,39 @@ public class SetupHelper {
 	 * @throws IOException if deletion fails
 	 */
 	public static void cleanupWorkspace() throws IOException {
-		final Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
-					try {
-						projectSpace.delete();
-					} catch (IOException e) {
-						throw new RuntimeException(e);
-					} catch (EMFStoreException e) {
-						throw new RuntimeException(e);
-					}
-				}
-			}
-		}.run(false);
-
-		String workspacePath = Configuration.getWorkspaceDirectory();
-		File workspaceDirectory = new File(workspacePath);
-		FileFilter workspaceFileFilter = new FileFilter() {
-
-			public boolean accept(File pathname) {
-				return pathname.getName().startsWith("ps-");
-			}
-
-		};
-		File[] filesToDelete = workspaceDirectory.listFiles(workspaceFileFilter);
-		for (int i = 0; i < filesToDelete.length; i++) {
-			FileUtil.deleteDirectory(filesToDelete[i], true);
-		}
-
-		new File(workspacePath + "workspace.ucw").delete();
+		WorkspaceProvider.getInstance().dispose();
+		// final Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		// new EMFStoreCommand() {
+		// @Override
+		// protected void doRun() {
+		// for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(currentWorkspace.getProjectSpaces())) {
+		// try {
+		// // TODO: monitor
+		// projectSpace.delete(new NullProgressMonitor());
+		// } catch (IOException e) {
+		// throw new RuntimeException(e);
+		// } catch (EMFStoreException e) {
+		// throw new RuntimeException(e);
+		// }
+		// }
+		// }
+		// }.run(false);
+		//
+		// String workspacePath = Configuration.getWorkspaceDirectory();
+		// File workspaceDirectory = new File(workspacePath);
+		// FileFilter workspaceFileFilter = new FileFilter() {
+		//
+		// public boolean accept(File pathname) {
+		// return pathname.getName().startsWith("ps-");
+		// }
+		//
+		// };
+		// File[] filesToDelete = workspaceDirectory.listFiles(workspaceFileFilter);
+		// for (int i = 0; i < filesToDelete.length; i++) {
+		// FileUtil.deleteDirectory(filesToDelete[i], true);
+		// }
+		//
+		// new File(workspacePath + "workspace.ucw").delete();
 		LOGGER.log(Level.INFO, "workspace cleaned.");
 	}
 

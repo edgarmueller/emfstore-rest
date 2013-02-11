@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
-public abstract class AllYourServerBaseRBelongToUs extends EObjectImpl implements IServer, ServerInfo {
+public abstract class ServerBase extends EObjectImpl implements IServer, ServerInfo {
 
 	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {

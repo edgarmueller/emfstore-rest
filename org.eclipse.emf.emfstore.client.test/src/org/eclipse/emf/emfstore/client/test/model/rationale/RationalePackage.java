@@ -50,7 +50,7 @@ public interface RationalePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.rationale";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.rationale";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -332,7 +332,8 @@ public interface RationalePackage extends EPackage {
 	int ISSUE_FEATURE_COUNT = ModelPackage.ANNOTATION_FEATURE_COUNT + 18;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
 	 * <em>Proposal</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
@@ -461,7 +462,8 @@ public interface RationalePackage extends EPackage {
 	int PROPOSAL_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
 	 * <em>Solution</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
@@ -590,7 +592,8 @@ public interface RationalePackage extends EPackage {
 	int SOLUTION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
 	 * <em>Criterion</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
@@ -712,7 +715,8 @@ public interface RationalePackage extends EPackage {
 	int CRITERION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
 	 * <em>Assessment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
@@ -850,7 +854,8 @@ public interface RationalePackage extends EPackage {
 	int ASSESSMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
 	 * <em>Comment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
@@ -987,7 +992,8 @@ public interface RationalePackage extends EPackage {
 	int COMMENT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
 	 * <em>Audio Comment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
@@ -1026,7 +1032,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getProposals <em>Proposals</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Proposals</em>'.
@@ -1074,7 +1081,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue#getAssessments <em>Assessments</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Assessments</em>'.
@@ -1096,7 +1104,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getAssessments
+	 * <em>Assessments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Assessments</em>'.
@@ -1153,7 +1162,8 @@ public interface RationalePackage extends EPackage {
 	EReference getSolution_Issue();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion
 	 * <em>Criterion</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Criterion</em>'.
@@ -1164,7 +1174,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments <em>Assessments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion#getAssessments
+	 * <em>Assessments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Assessments</em>'.
@@ -1175,7 +1186,8 @@ public interface RationalePackage extends EPackage {
 	EReference getCriterion_Assessments();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment
 	 * <em>Assessment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Assessment</em>'.
@@ -1186,7 +1198,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getProposal <em>Proposal</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Proposal</em>'.
@@ -1198,7 +1211,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment#getCriterion <em>Criterion</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Criterion</em>'.
@@ -1244,7 +1258,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment#getRecipients <em>Recipients</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Recipients</em>'.
@@ -1267,7 +1282,8 @@ public interface RationalePackage extends EPackage {
 	EReference getComment_CommentedElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment
 	 * <em>Audio Comment</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Audio Comment</em>'.
@@ -1278,7 +1294,8 @@ public interface RationalePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile
+	 * <em>Audio File</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Audio File</em>'.
@@ -1310,7 +1327,8 @@ public interface RationalePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
 		 * <em>Issue</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.IssueImpl
@@ -1361,7 +1379,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl <em>Proposal</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl <em>Proposal</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.ProposalImpl
@@ -1388,7 +1407,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl <em>Solution</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl <em>Solution</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.SolutionImpl
@@ -1415,7 +1435,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl <em>Criterion</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl <em>Criterion</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CriterionImpl
@@ -1434,7 +1455,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl <em>Assessment</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl <em>Assessment</em>}
+		 * ' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AssessmentImpl
@@ -1469,7 +1491,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl <em>Comment</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl <em>Comment</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl
@@ -1504,7 +1527,8 @@ public interface RationalePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl <em>Audio Comment</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl
+		 * <em>Audio Comment</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.AudioCommentImpl

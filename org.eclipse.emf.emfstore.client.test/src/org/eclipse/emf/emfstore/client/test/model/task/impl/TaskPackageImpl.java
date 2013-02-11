@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.emf.emfstore.client.test.model.ModelPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.ActivityPackage;
 import org.eclipse.emf.emfstore.client.test.model.activity.impl.ActivityPackageImpl;
 import org.eclipse.emf.emfstore.client.test.model.attachment.AttachmentPackage;
@@ -56,6 +55,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 import org.eclipse.emf.emfstore.client.test.model.util.UtilPackage;
 import org.eclipse.emf.emfstore.client.test.model.util.impl.UtilPackageImpl;
+import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->

@@ -758,7 +758,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#delete()
 	 * @generated NOT
 	 */
-	public void delete() throws IOException {
+	public void delete(IProgressMonitor monitor) throws IOException {
 
 		WorkspaceProvider.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(this);
 

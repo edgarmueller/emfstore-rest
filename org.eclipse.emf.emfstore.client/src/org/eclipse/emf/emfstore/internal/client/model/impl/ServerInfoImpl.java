@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Info</b></em>'.
  * 
- * @extends AllYourServerBaseRBelongToUs
+ * @extends ServerBase
  *          <!-- end-user-doc -->
  *          <p>
  *          The following features are implemented:
@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
  * 
  * @generated
  */
-public class ServerInfoImpl extends AllYourServerBaseRBelongToUs implements ServerInfo {
+public class ServerInfoImpl extends ServerBase implements ServerInfo {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->

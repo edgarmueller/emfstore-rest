@@ -50,7 +50,7 @@ public interface BugPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.bug";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.bug";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -321,7 +321,8 @@ public interface BugPackage extends EPackage {
 	int BUG_REPORT_FEATURE_COUNT = TaskPackage.WORK_ITEM_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity <em>Severity</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
+	 * <em>Severity</em>}'
 	 * enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.Severity
@@ -364,7 +365,8 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolution <em>Resolution</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolution <em>Resolution</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resolution</em>'.
@@ -376,7 +378,8 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType <em>Resolution Type</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType
+	 * <em>Resolution Type</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Resolution Type</em>'.
@@ -388,7 +391,8 @@ public interface BugPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone <em>Done</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone <em>Done</em>}'. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Done</em>'.
@@ -440,7 +444,8 @@ public interface BugPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
 		 * <em>Report</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl
@@ -492,7 +497,8 @@ public interface BugPackage extends EPackage {
 		EEnum SEVERITY = eINSTANCE.getSeverity();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType
 		 * <em>Resolution Type</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.bug.ResolutionType

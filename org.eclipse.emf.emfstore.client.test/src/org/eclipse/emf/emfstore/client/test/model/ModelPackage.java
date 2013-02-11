@@ -49,7 +49,7 @@ public interface ModelPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -59,7 +59,8 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.impl.ModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl
 	 * <em>Unicase Model Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl
@@ -416,7 +417,8 @@ public interface ModelPackage extends EPackage {
 	int ATTACHMENT_FEATURE_COUNT = UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement
 	 * <em>Unicase Model Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Unicase Model Element</em>'.
@@ -439,7 +441,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getDescription <em>Description</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getDescription
+	 * <em>Description</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Description</em>'.
@@ -451,7 +454,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAnnotations <em>Annotations</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAnnotations
+	 * <em>Annotations</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Annotations</em>'.
@@ -463,7 +467,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments
+	 * <em>Attachments</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Attachments</em>'.
@@ -487,7 +492,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection <em>Leaf Section</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection
+	 * <em>Leaf Section</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Leaf Section</em>'.
@@ -523,7 +529,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getComments <em>Comments</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Comments</em>'.
@@ -535,7 +542,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreationDate <em>Creation Date</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreationDate
+	 * <em>Creation Date</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Creation Date</em>'.
@@ -547,7 +555,8 @@ public interface ModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreator <em>Creator</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getCreator <em>Creator</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Creator</em>'.
@@ -724,7 +733,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute UNICASE_MODEL_ELEMENT__CREATOR = eINSTANCE.getUnicaseModelElement_Creator();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AnnotationImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AnnotationImpl
 		 * <em>Annotation</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.impl.AnnotationImpl
@@ -742,7 +752,8 @@ public interface ModelPackage extends EPackage {
 		EReference ANNOTATION__ANNOTATED_MODEL_ELEMENTS = eINSTANCE.getAnnotation_AnnotatedModelElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AttachmentImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AttachmentImpl
 		 * <em>Attachment</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.impl.AttachmentImpl

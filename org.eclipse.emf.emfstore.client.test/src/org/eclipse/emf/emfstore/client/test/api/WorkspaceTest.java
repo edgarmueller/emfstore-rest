@@ -3,6 +3,7 @@ package org.eclipse.emf.emfstore.client.test.api;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IWorkspace;
@@ -32,7 +33,7 @@ public class WorkspaceTest {
 	@After
 	public void tearDown() throws Exception {
 		for (ILocalProject lp : workspace.getLocalProjects())
-			lp.delete();
+			lp.delete(new NullProgressMonitor());
 	}
 
 	@Test

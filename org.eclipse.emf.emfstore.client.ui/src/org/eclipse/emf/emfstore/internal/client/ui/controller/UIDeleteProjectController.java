@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
@@ -42,7 +43,8 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 
 	private void deleteProject(final ProjectSpace projectSpace) {
 		try {
-			projectSpace.delete();
+			// TODO: pass monitor in
+			projectSpace.delete(new NullProgressMonitor());
 		} catch (EMFStoreException e) {
 			// TODO OTS error handling?
 			e.printStackTrace();

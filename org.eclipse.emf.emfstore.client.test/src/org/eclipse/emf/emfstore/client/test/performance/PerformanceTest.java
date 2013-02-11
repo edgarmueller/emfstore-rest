@@ -16,6 +16,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -217,7 +218,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace2.delete();
+						projectSpace2.delete(new NullProgressMonitor());
 						projectSpace2 = null;
 					} catch (IOException e) {
 						e.printStackTrace();

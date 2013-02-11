@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -27,7 +28,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -50,7 +50,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQue
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
@@ -121,7 +120,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	public void teardown() throws IOException, SerializationException, EMFStoreException {
 		super.teardown();
 		for (IRemoteProject project : getServerInfo().getRemoteProjects()) {
-			project.delete();
+			// TODO: monitor
+			project.delete(new NullProgressMonitor());
 		}
 		Assert.assertEquals(0, getServerInfo().getRemoteProjects().size());
 	}
@@ -134,15 +134,17 @@ public abstract class ServerTests extends WorkspaceTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws EMFStoreException, IOException {
+		WorkspaceTest.beforeClass();
 		ServerConfiguration.setTesting(true);
-		CommonUtil.setTesting(true);
-
 		SetupHelper.addUserFileToServer(false);
 		SetupHelper.startSever();
 		setConnectionManager(WorkspaceProvider.getInstance().getConnectionManager());
 		setServerInfo(SetupHelper.getServerInfo());
 		// login();
 		initArguments();
+		WorkspaceBase currentWorkspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
+		serverInfo = SetupHelper.getServerInfo();
+		currentWorkspace.addServer(serverInfo);
 	}
 
 	/**
@@ -197,7 +199,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws IOException, EMFStoreException {
 		SetupHelper.stopServer();
-		SetupHelper.cleanupWorkspace();
+		WorkspaceProvider.getInstance().dispose();
 		SetupHelper.cleanupServer();
 		SetupHelper.removeServerTestProfile();
 	}
@@ -207,31 +209,21 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * 
 	 * @throws EMFStoreException in case of failure
 	 */
-	@Before
-	public void beforeTest() throws EMFStoreException {
+	@Override
+	public void beforeHook() {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				try {
-					WorkspaceBase currentWorkspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
-					serverInfo = SetupHelper.getServerInfo();
-					Usersession session = serverInfo.login("super", "super");
-					session.setSavePassword(true);
-
-					currentWorkspace.getServers().add(serverInfo);
-					currentWorkspace.getUsersessions().add(session);
-					currentWorkspace.save();
-					getProjectSpace().shareProject(session, null);
+					// getProjectSpace().setUsersession(getServerInfo().getLastUsersession());
+					// getProjectSpace().getUsersession().logIn();
+					getProjectSpace().shareProject();
 				} catch (EMFStoreException e) {
 					Assert.fail();
 				}
 			}
 		}.run(false);
-		// setProjectInfo(getConnectionManager().createProject(getSessionId(), "initialProject", "TestProject",
-		// SetupHelper.createLogMessage("super", "a logmessage"), getProject()));
 		this.projectsOnServerBeforeTest = 1;
-		// TODO: OTS enable assert
-		// Assert.assertEquals(projectsOnServerBeforeTest, getServerInfo().getRemoteProjects(true).size());
 	}
 
 	/**
@@ -248,7 +240,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			protected void doRun() {
 				try {
 					for (IRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
-						remoteProject.delete();
+						remoteProject.delete(new NullProgressMonitor());
 					}
 				} catch (EMFStoreException e) {
 				}

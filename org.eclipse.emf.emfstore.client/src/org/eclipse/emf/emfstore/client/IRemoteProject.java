@@ -106,14 +106,14 @@ public interface IRemoteProject extends IProject {
 	/**
 	 * Deletes the remote project on the server.
 	 */
-	void delete() throws EMFStoreException;
+	void delete(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Deletes the remote project on the server.
 	 * 
 	 * @param usersession session used for server call
 	 */
-	void delete(IUsersession usersession) throws EMFStoreException;
+	void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	IPrimaryVersionSpec getHeadVersion() throws EMFStoreException;
 }

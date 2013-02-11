@@ -26,9 +26,9 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	public void tearDown() throws Exception {
 		workspace.removeServer(server);
 		for (IRemoteProject project : server.getRemoteProjects())
-			project.delete();
+			project.delete(new NullProgressMonitor());
 		for (ILocalProject project : workspace.getLocalProjects())
-			project.delete();
+			project.delete(new NullProgressMonitor());
 		super.tearDown();
 	}
 

@@ -188,7 +188,7 @@
    <extension
          point="org.eclipse.emf.emfstore.client.sessionprovider">
       <sessionProvider
-            class="org.eclipse.emf.emfstore.client.test.server.TestSessionProvider">
+            class="org.eclipse.emf.emfstore.client.test.TestSessionProvider">
       </sessionProvider>
    </extension>
 

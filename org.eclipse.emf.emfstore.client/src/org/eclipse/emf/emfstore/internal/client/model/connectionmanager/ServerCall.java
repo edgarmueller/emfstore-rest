@@ -187,11 +187,12 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            a progress monitor instance that may used during execution
 	 *            of this server call
 	 */
-	public void setProgressMonitor(IProgressMonitor monitor) {
+	public ServerCall<U> setProgressMonitor(IProgressMonitor monitor) {
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
 		this.monitor = monitor;
+		return this;
 	}
 
 	/**

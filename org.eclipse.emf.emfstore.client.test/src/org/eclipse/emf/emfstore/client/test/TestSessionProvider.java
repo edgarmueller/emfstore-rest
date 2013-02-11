@@ -25,14 +25,19 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	private Usersession session;
 
 	public TestSessionProvider() {
+
+	}
+
+	private void initSession() {
 		// ServerInfo serverInfo = SetupHelper.getServerInfo();
 		session = ModelFactory.eINSTANCE.createUsersession();
 		// session.setServerInfo(serverInfo);
 		session.setUsername("super");
 		session.setPassword("super");
 		session.setSavePassword(true);
+		session.setServerInfo(SetupHelper.getServerInfo());
 
-		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.INSTANCE.getWorkspace();
 		// currentWorkspace.getServerInfos().add(serverInfo);
 		currentWorkspace.getUsersessions().add(session);
 		((WorkspaceBase) currentWorkspace).save();
@@ -45,12 +50,18 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 		}
 
+		if (session == null
+			|| !((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
+			initSession();
+		}
+
 		return session;
 	}
 
 	@Override
 	public void login(IUsersession usersession) throws EMFStoreException {
 		// do nothing
+		session.logIn();
 	}
 
 }

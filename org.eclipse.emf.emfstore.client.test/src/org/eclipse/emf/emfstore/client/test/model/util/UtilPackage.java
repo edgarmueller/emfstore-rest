@@ -48,7 +48,7 @@ public interface UtilPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.util";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.util";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -58,7 +58,8 @@ public interface UtilPackage extends EPackage {
 	UtilPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.util.impl.UtilPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl
 	 * <em>Model Element Path</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl
@@ -104,7 +105,8 @@ public interface UtilPackage extends EPackage {
 	int MODEL_ELEMENT_PATH_FEATURE_COUNT = 3;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath
 	 * <em>Model Element Path</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Model Element Path</em>'.
@@ -115,7 +117,8 @@ public interface UtilPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource <em>Source</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Source</em>'.
@@ -127,7 +130,8 @@ public interface UtilPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget <em>Target</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '<em>Target</em>'.
@@ -172,8 +176,8 @@ public interface UtilPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl <em>Model Element Path</em>}
-		 * ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl
+		 * <em>Model Element Path</em>} ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.impl.ModelElementPathImpl
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.util.impl.UtilPackageImpl#getModelElementPath()

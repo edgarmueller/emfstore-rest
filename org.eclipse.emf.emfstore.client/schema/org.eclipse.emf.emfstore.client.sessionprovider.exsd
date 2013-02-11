@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.sessionprovider" name="SessionProvider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.sessionprovider" name="SessionProvider"/>
       </appInfo>
       <documentation>
          Provides a mechanism to inject an user session in case no one was specified.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.emf.emfstore.internal.internal.client.model.connectionmanager.AbstractSessionProvider:"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider:"/>
                </appInfo>
             </annotation>
          </attribute>

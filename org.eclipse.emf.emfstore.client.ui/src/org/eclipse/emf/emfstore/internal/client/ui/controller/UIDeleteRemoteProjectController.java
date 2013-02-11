@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
@@ -154,14 +155,14 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
 		// TODO: OTS casts
-		new RemoteProject(serverInfo, projectInfo).delete();
+		new RemoteProject(serverInfo, projectInfo).delete(monitor);
 	}
 
 	private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
 		throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-			// TODO: OTS casts
-			new RemoteProject(serverInfo, projectInfo).delete(session);
+			// TODO: OTS casts + monitor
+			new RemoteProject(serverInfo, projectInfo).delete(session, new NullProgressMonitor());
 		}
 	}
 
@@ -169,7 +170,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		IProgressMonitor monitor) throws EMFStoreException {
 		if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
 			// TODO: OTS casts
-			new RemoteProject(serverInfo, projectInfo).delete();
+			new RemoteProject(serverInfo, projectInfo).delete(monitor);
 		}
 	}
 }

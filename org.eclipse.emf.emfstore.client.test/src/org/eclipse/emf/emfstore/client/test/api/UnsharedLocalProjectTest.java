@@ -48,7 +48,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	public void tearDown() throws Exception {
 		List<ILocalProject> projects = new ArrayList<ILocalProject>(workspace.getLocalProjects());
 		for (ILocalProject lp : projects) {
-			lp.delete();
+			lp.delete(new NullProgressMonitor());
 		}
 		super.tearDown();
 	}

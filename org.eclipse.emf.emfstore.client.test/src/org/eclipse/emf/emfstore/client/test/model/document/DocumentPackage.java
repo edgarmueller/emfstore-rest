@@ -49,7 +49,7 @@ public interface DocumentPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.document";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.document";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -59,7 +59,8 @@ public interface DocumentPackage extends EPackage {
 	DocumentPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.document.impl.DocumentPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section <em>Section</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section
+	 * <em>Section</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.Section
@@ -180,7 +181,8 @@ public interface DocumentPackage extends EPackage {
 	int SECTION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl
 	 * <em>Leaf Section</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl
@@ -320,7 +322,8 @@ public interface DocumentPackage extends EPackage {
 	int LEAF_SECTION_FEATURE_COUNT = SECTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.CompositeSectionImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.CompositeSectionImpl
 	 * <em>Composite Section</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.impl.CompositeSectionImpl
@@ -451,7 +454,8 @@ public interface DocumentPackage extends EPackage {
 	int COMPOSITE_SECTION_FEATURE_COUNT = SECTION_FEATURE_COUNT + 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection
 	 * <em>Leaf Section</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Leaf Section</em>'.
@@ -462,8 +466,8 @@ public interface DocumentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements <em>Model Elements</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements
+	 * <em>Model Elements</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Model Elements</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements()
@@ -485,7 +489,8 @@ public interface DocumentPackage extends EPackage {
 	EReference getLeafSection_ReferencedModelElements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection
 	 * <em>Composite Section</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Composite Section</em>'.
@@ -496,8 +501,8 @@ public interface DocumentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections <em>Subsections</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections
+	 * <em>Subsections</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Subsections</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections()
@@ -551,7 +556,8 @@ public interface DocumentPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl <em>Leaf Section</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl
+		 * <em>Leaf Section</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl

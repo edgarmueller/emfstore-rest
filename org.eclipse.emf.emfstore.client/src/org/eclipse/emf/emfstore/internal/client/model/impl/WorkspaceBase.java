@@ -214,7 +214,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		save();
 		projectToProjectSpaceMap.remove(projectSpace.getProject());
 
-		projectSpace.delete();
+		// TODO: OTS pass monitor in
+		projectSpace.delete(new NullProgressMonitor());
 
 		WorkspaceProvider.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(projectSpace);
 	}
@@ -245,6 +246,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
 			((ProjectSpaceBase) projectSpace).dispose();
 		}
+		getServerInfos().clear();
+		getUsersessions().clear();
+		save();
 	}
 
 	/**

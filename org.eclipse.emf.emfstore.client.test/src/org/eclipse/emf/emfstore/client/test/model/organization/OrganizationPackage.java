@@ -50,7 +50,7 @@ public interface OrganizationPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.organization";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.organization";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -61,7 +61,8 @@ public interface OrganizationPackage extends EPackage {
 		.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl
 	 * <em>Org Unit</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl
@@ -208,7 +209,8 @@ public interface OrganizationPackage extends EPackage {
 	int ORG_UNIT_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl
 	 * <em>User</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl
@@ -388,7 +390,8 @@ public interface OrganizationPackage extends EPackage {
 	int USER_FEATURE_COUNT = ORG_UNIT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl
 	 * <em>Group</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl
@@ -566,7 +569,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getFirstName <em>First Name</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getFirstName <em>First Name</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>First Name</em>'.
@@ -578,7 +582,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getLastName <em>Last Name</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getLastName <em>Last Name</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Last Name</em>'.
@@ -601,7 +606,8 @@ public interface OrganizationPackage extends EPackage {
 	EReference getUser_WorkItemsToReview();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit
 	 * <em>Org Unit</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Org Unit</em>'.
@@ -612,7 +618,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAcOrgId <em>Ac Org Id</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAcOrgId <em>Ac Org Id</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Ac Org Id</em>'.
@@ -636,7 +643,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments <em>Assignments</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments
+	 * <em>Assignments</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Assignments</em>'.
@@ -648,8 +656,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations <em>Participations</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations
+	 * <em>Participations</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Participations</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations()
@@ -670,7 +678,8 @@ public interface OrganizationPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group#getOrgUnits <em>Org Units</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group#getOrgUnits <em>Org Units</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Org Units</em>'.
@@ -703,7 +712,8 @@ public interface OrganizationPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl <em>User</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl <em>User</em>}' class.
+		 * <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.UserImpl
@@ -746,7 +756,8 @@ public interface OrganizationPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl <em>Org Unit</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl <em>Org Unit</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.OrgUnitImpl
@@ -789,7 +800,8 @@ public interface OrganizationPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl <em>Group</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl <em>Group</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.internal.client" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.internal.client" id="org.eclipse.emf.emfstore.internal.internal.client.checksumErrorHandler" name="Client Checksum Error Handler"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.checksumErrorHandler" name="Client Checksum Error Handler"/>
       </appInfo>
       <documentation>
          Determines whether the client&apos;s checksum of a local project state should be compared against the checksum of the server&apos;s project state.  If the checksums are not equal, a configurable error handler will be called.

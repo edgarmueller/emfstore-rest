@@ -91,7 +91,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			IRemoteProject remoteProject = server.createRemoteProject(usersession, "MyProject",
 				new NullProgressMonitor());
 			assertEquals(1, server.getRemoteProjects().size());
-			remoteProject.delete();
+			remoteProject.delete(new NullProgressMonitor());
 			assertEquals(0, server.getRemoteProjects().size());
 		} catch (EMFStoreException e) {
 			log(e);

@@ -49,7 +49,7 @@ public interface ComponentPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.component";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.component";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -59,7 +59,8 @@ public interface ComponentPackage extends EPackage {
 	ComponentPackage eINSTANCE = org.eclipse.emf.emfstore.client.test.model.component.impl.ComponentPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl
 	 * <em>Component</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl
@@ -207,7 +208,8 @@ public interface ComponentPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl <em>Service</em>}' class.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl <em>Service</em>}'
+	 * class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl
@@ -337,7 +339,8 @@ public interface ComponentPackage extends EPackage {
 	int COMPONENT_SERVICE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl
 	 * <em>Deployment Node</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl
@@ -458,7 +461,8 @@ public interface ComponentPackage extends EPackage {
 	int DEPLOYMENT_NODE_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component
 	 * <em>Component</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Component</em>'.
@@ -469,7 +473,8 @@ public interface ComponentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getPackages <em>Packages</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getPackages <em>Packages</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Packages</em>'.
@@ -505,7 +510,8 @@ public interface ComponentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}
+	 * '. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Subsystems</em>'.
@@ -516,7 +522,8 @@ public interface ComponentPackage extends EPackage {
 	EReference getComponent_Subsystems();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService
 	 * <em>Service</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Service</em>'.
@@ -550,7 +557,8 @@ public interface ComponentPackage extends EPackage {
 	EReference getComponentService_ConsumingComponents();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode
 	 * <em>Deployment Node</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Deployment Node</em>'.
@@ -561,7 +569,8 @@ public interface ComponentPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode#getComponents <em>Components</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode#getComponents
+	 * <em>Components</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Components</em>'.
@@ -594,7 +603,8 @@ public interface ComponentPackage extends EPackage {
 	interface Literals {
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl <em>Component</em>}' class.
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl <em>Component</em>}'
+		 * class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl
@@ -637,7 +647,8 @@ public interface ComponentPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl <em>Service</em>}'
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl
+		 * <em>Service</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentServiceImpl
@@ -664,8 +675,8 @@ public interface ComponentPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl <em>Deployment Node</em>}
-		 * ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl
+		 * <em>Deployment Node</em>} ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.DeploymentNodeImpl
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentPackageImpl#getDeploymentNode()

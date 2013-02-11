@@ -50,7 +50,7 @@ public interface StatePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.state";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.state";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -482,7 +482,8 @@ public interface StatePackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = ModelPackage.UNICASE_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
 	 * <em>Initial</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
@@ -742,8 +743,8 @@ public interface StatePackage extends EPackage {
 	int STATE_END_FEATURE_COUNT = STATE_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State <em>State</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State
+	 * <em>State</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>State</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.State
@@ -753,7 +754,8 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions
+	 * <em>Exit Conditions</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Exit Conditions</em>'.
@@ -777,7 +779,8 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions
+	 * <em>Entry Conditions</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Entry Conditions</em>'.
@@ -799,7 +802,8 @@ public interface StatePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition <em>Condition</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition#getCondition <em>Condition</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Condition</em>'.
@@ -878,8 +882,8 @@ public interface StatePackage extends EPackage {
 	EClass getStateInitial();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd <em>End</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd
+	 * <em>End</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>End</em>'.
 	 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd
@@ -909,7 +913,8 @@ public interface StatePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
 		 * <em>State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl
@@ -943,7 +948,8 @@ public interface StatePackage extends EPackage {
 		EAttribute STATE__ENTRY_CONDITIONS = eINSTANCE.getState_EntryConditions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
 		 * <em>Transition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl
@@ -977,7 +983,8 @@ public interface StatePackage extends EPackage {
 		EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
 		 * <em>Node</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl
@@ -1004,7 +1011,8 @@ public interface StatePackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl <em>Initial</em>}' class. <!--
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl <em>Initial</em>}'
+		 * class. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateInitialImpl
@@ -1014,7 +1022,8 @@ public interface StatePackage extends EPackage {
 		EClass STATE_INITIAL = eINSTANCE.getStateInitial();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl
 		 * <em>End</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateEndImpl

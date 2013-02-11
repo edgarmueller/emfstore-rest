@@ -284,12 +284,12 @@ public class RemoteProject implements IRemoteProject {
 		return projectSpace;
 	}
 
-	public void delete() throws EMFStoreException {
-		getDeleteProjectServerCall().setServer(server).execute();
+	public void delete(IProgressMonitor monitor) throws EMFStoreException {
+		getDeleteProjectServerCall().setProgressMonitor(monitor).setServer(server).execute();
 	}
 
-	public void delete(IUsersession usersession) throws EMFStoreException {
-		getDeleteProjectServerCall().setUsersession(usersession).execute();
+	public void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
 	}
 
 	private ServerCall<Void> getDeleteProjectServerCall() throws EMFStoreException {

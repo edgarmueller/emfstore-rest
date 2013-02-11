@@ -48,7 +48,7 @@ public interface ReleasePackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "org.eclipse.emf.emfstore.internal.client.test.model.release";
+	String eNS_PREFIX = "org.eclipse.emf.emfstore.client.test.model.release";
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -261,7 +261,8 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Predecessor</em>'.
@@ -273,7 +274,8 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}'.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Successor</em>'.
@@ -285,7 +287,8 @@ public interface ReleasePackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches
+	 * <em>Applied Patches</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Applied Patches</em>'.
@@ -363,7 +366,8 @@ public interface ReleasePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
 		 * <em>Stream</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl
@@ -389,7 +393,8 @@ public interface ReleasePackage extends EPackage {
 		EReference STREAM__SOURCE_CODE_REPOSITORY_STREAM = eINSTANCE.getStream_SourceCodeRepositoryStream();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl
 		 * <em>Release</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.internal.client.test.model.release.impl.ReleaseImpl

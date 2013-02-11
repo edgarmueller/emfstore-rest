@@ -12,19 +12,16 @@ package org.eclipse.emf.emfstore.client.test;
 
 import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -32,13 +29,14 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  * Abstract Superclass for Workspace Tests. Provides Setup and Tear-down.
@@ -50,34 +48,37 @@ public abstract class WorkspaceTest {
 	private Project project;
 	private ProjectSpace projectSpace;
 	protected ProjectSpaceBase clonedProjectSpace;
-	private Workspace workspace;
+	// private static Workspace workspace;
 	private boolean compareAtEnd = true;
+
+	@BeforeClass
+	public static void beforeClass() {
+		CommonUtil.setTesting(true);
+		WorkspaceProvider workspaceManager = WorkspaceProvider.getInstance();
+		workspaceManager.reinit();
+		// workspace = (Workspace) workspaceManager.getWorkspace();
+	}
 
 	/**
 	 * Setup a dummy project for testing.
 	 */
 	@Before
 	public void setupTest() {
-		beforeHook();
-		CommonUtil.setTesting(true);
-		WorkspaceProvider workspaceManager = WorkspaceProvider.getInstance();
-		ConnectionManager connectionManager = initConnectionManager();
-		if (connectionManager != null) {
-			workspaceManager.setConnectionManager(connectionManager);
-		}
-		workspace = (Workspace) workspaceManager.getWorkspace();
+		System.out.println("setup");
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace localProjectSpace = ((WorkspaceBase) workspace).createLocalProject("testProject",
-					"test Project");
+				ProjectSpace localProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
+					.createLocalProject("testProject",
+						"test Project");
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
 				if (isCompareAtEnd()) {
 					Project clonedProject = ModelUtil.clone(getProject());
-					clonedProjectSpace = (ProjectSpaceBase) workspace.createLocalProject("clonedProject",
+					clonedProjectSpace = (ProjectSpaceBase) ((WorkspaceBase) WorkspaceProvider.getInstance()
+						.getWorkspace()).createLocalProject("clonedProject",
 						"Cloned test Project");
 					clonedProjectSpace.setProject(clonedProject);
 					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
@@ -85,17 +86,10 @@ public abstract class WorkspaceTest {
 			}
 		}.run(false);
 
-	}
-
-	public Workspace getWorkspace() {
-		return workspace;
+		beforeHook();
 	}
 
 	public void beforeHook() {
-	}
-
-	public ConnectionManager initConnectionManager() {
-		return null;
 	}
 
 	/**
@@ -106,7 +100,7 @@ public abstract class WorkspaceTest {
 	 */
 	@After
 	public void teardown() throws IOException, SerializationException, EMFStoreException {
-
+		System.out.println("teardown");
 		boolean areEqual = false;
 		projectSpace.save();
 
@@ -124,29 +118,36 @@ public abstract class WorkspaceTest {
 			clonedProjectSpace.save();
 		}
 
-		cleanWorkspace();
+		cleanProjects();
 
 		if (isCompareAtEnd()) {
 			Assert.assertTrue("Projects are not equal\n\n " + projectString + "\n\n" + clonedProjectString, areEqual);
 		}
 	}
 
-	private void cleanWorkspace() {
+	@AfterClass
+	public static void tearDownAfterClass() throws IOException, EMFStoreException {
+		WorkspaceProvider.getInstance().dispose();
+	}
+
+	private void cleanProjects() {
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
 				try {
 
-					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getProjectSpaces())) {
-						projectSpace.delete();
+					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(((WorkspaceBase) WorkspaceProvider
+						.getInstance().getWorkspace()).getProjectSpaces())) {
+						// TODO: monitor
+						projectSpace.delete(new NullProgressMonitor());
 					}
 
 					setProject(null);
 					setProjectSpace(null);
-					WorkspaceProvider.getInstance().dispose();
-					workspace = null;
-					FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
+					// WorkspaceProvider.getInstance().dispose();
+					// workspace = null;
+					// FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 				} catch (IOException e) {
 					// ignore
 				} catch (EMFStoreException e) {
@@ -167,7 +168,8 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				int retried = 0;
 				try {
-					ps.delete();
+					// TODO: monitor
+					ps.delete(new NullProgressMonitor());
 				} catch (IOException e) {
 					if (retried++ > 2) {
 						fail();
