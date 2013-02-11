@@ -79,7 +79,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.client.ui.importProjectPath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectPath";
 	}
 
 	/**

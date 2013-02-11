@@ -38,7 +38,7 @@ import org.eclipse.ui.PlatformUI;
 
 public class CSVImportSource extends ImportSource {
 
-	private static final String CSV_IMPORT_SOURCE_PATH = "org.eclipse.emf.emfstore.internal.client.ui.CSVImportSourcePath";
+	private static final String CSV_IMPORT_SOURCE_PATH = "org.eclipse.emf.emfstore.client.ui.CSVImportSourcePath";
 
 	private Map<String, ImportItemWrapper> groupMap = new LinkedHashMap<String, ImportItemWrapper>();
 

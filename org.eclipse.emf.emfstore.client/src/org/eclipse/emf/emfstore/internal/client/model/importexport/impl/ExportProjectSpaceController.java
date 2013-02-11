@@ -89,7 +89,7 @@ public class ExportProjectSpaceController extends ProjectSpaceBasedExportControl
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.client.ui.exportProjectSpacePath";
+		return "org.eclipse.emf.emfstore.client.ui.exportProjectSpacePath";
 	}
 
 	/**

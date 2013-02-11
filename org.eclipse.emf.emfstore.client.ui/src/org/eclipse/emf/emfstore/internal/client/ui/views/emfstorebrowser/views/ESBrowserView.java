@@ -96,7 +96,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 						// re-evaluate property tester
 						IEvaluationService service = (IEvaluationService) getSite()
 							.getService(IEvaluationService.class);
-						service.requestEvaluation("org.eclipse.emf.emfstore.internal.client.ui.commands.ServerInfoIsLoggedIn");
+						service.requestEvaluation("org.eclipse.emf.emfstore.client.ui.commands.ServerInfoIsLoggedIn");
 					}
 				});
 			}
@@ -165,7 +165,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 		// });
 
 		PlatformUI.getWorkbench().getHelpSystem()
-			.setHelp(viewer.getControl(), "org.eclipse.emf.emfstore.internal.client.ui.views.RepositoryView");
+			.setHelp(viewer.getControl(), "org.eclipse.emf.emfstore.client.ui.views.RepositoryView");
 
 		menuMgr = new MenuManager();
 		menuMgr.add(new Separator("additions"));

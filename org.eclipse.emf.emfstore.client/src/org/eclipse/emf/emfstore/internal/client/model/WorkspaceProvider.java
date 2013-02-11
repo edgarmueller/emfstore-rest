@@ -131,7 +131,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 		this.observerBus = new ObserverBus();
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.observers", true)
+			"org.eclipse.emf.emfstore.client.observers", true)
 			.getExtensionElements()) {
 			try {
 				observerBus.register(element.getClass("ObserverClass",
@@ -144,7 +144,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 
 	private void notifyPostWorkspaceInitiators() {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.notify.postinit", true)
+			"org.eclipse.emf.emfstore.client.notify.postinit", true)
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", PostWorkspaceInitiator.class)
@@ -256,7 +256,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	private EditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
 		return new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.editingDomainProvider")
+			"org.eclipse.emf.emfstore.client.editingDomainProvider")
 			.getClass("class", EditingDomainProvider.class);
 	}
 

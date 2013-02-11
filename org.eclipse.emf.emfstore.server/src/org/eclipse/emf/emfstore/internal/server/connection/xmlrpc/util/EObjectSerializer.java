@@ -180,7 +180,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 			return;
 		}
 		ExtensionElement element = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.common.model.serializationoptions").getFirst();
+			"org.eclipse.emf.emfstore.common.model.serializationoptions").getFirst();
 
 		if (element != null) {
 			hrefCheckEnabled = element.getBoolean("HrefCheck");

@@ -50,7 +50,7 @@ public final class DecisionUtil {
 	/**
 	 * Multiline widget detail provider.
 	 */
-	public static final String WIDGET_MULTILINE = "org.eclipse.emf.emfstore.internal.client.ui.merge.widget.multiline";
+	public static final String WIDGET_MULTILINE = "org.eclipse.emf.emfstore.client.ui.merge.widget.multiline";
 
 	/**
 	 * Multiline editable widget detail provider.

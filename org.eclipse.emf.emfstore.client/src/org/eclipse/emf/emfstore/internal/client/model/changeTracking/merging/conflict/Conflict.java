@@ -134,7 +134,7 @@ public abstract class Conflict extends Observable {
 		}
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.ui.merge.customoption")
+			"org.eclipse.emf.emfstore.client.ui.merge.customoption")
 			.getExtensionElements()) {
 			CustomConflictOptionFactory factory = element.getClass("class", CustomConflictOptionFactory.class);
 			if (factory != null && factory.isApplicableConflict(Conflict.this)) {

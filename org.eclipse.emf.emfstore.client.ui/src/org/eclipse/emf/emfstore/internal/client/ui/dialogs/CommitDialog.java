@@ -89,7 +89,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		this.trays = new LinkedHashMap<String, CommitDialogTray>();
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray", true)
+			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
 			try {
 				CommitDialogTray tray = element.getClass("class", CommitDialogTray.class);
@@ -281,7 +281,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// final String notifyUsers = "Notify users";
-		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.commitdialog.tray")
+		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
 			.getExtensionElements()) {
 			final String name = c.getAttribute("name");
 			final CommitDialogTray tray = trays.get(name);

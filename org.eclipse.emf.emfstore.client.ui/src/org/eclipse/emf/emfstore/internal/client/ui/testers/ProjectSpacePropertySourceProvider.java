@@ -44,7 +44,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	/**
 	 * Name of the property defining the save state of the currently selected project space.
 	 */
-	public static final String CURRENT_SAVE_STATE_PROPERTY = "org.eclipse.emf.emfstore.internal.client.ui.currentProjectSpaceSaveState";
+	public static final String CURRENT_SAVE_STATE_PROPERTY = "org.eclipse.emf.emfstore.client.ui.currentProjectSpaceSaveState";
 
 	private SaveStateChangedObserver saveStateChangedObserver;
 
@@ -98,7 +98,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	// TODO: provide extension point registry? discuss
 	private static boolean initExtensionPoint() {
 		ExtensionPoint extensionPoint = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.ui.disableSaveControls");
+			"org.eclipse.emf.emfstore.client.ui.disableSaveControls");
 		ExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {

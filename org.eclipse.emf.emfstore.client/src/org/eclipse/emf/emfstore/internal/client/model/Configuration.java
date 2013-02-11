@@ -140,7 +140,7 @@ public final class Configuration {
 			try {
 				// TODO EXPT PRIO
 				locationProvider = new ExtensionPoint(
-					"org.eclipse.emf.emfstore.internal.client.workspaceLocationProvider")
+					"org.eclipse.emf.emfstore.client.workspaceLocationProvider")
 					.setThrowException(true).getClass("providerClass", LocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
@@ -189,7 +189,7 @@ public final class Configuration {
 	 */
 	public static List<ServerInfo> getDefaultServerInfos() {
 		ConfigurationProvider provider = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider").getClass("providerClass",
+			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ConfigurationProvider.class);
 		if (provider != null) {
 			List<IServer> defaultServerInfos = provider.getDefaultServerInfos();
@@ -251,7 +251,7 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.version")
+		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.version")
 			.setThrowException(
 				false).getFirst();
 
@@ -260,7 +260,7 @@ public final class Configuration {
 			return versionProvider.getVersion();
 		}
 
-		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.internal.client");
+		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.client");
 		versionId = (String) emfStoreBundle.getHeaders().get(org.osgi.framework.Constants.BUNDLE_VERSION);
 		clientVersionInfo.setVersion(versionId);
 
@@ -399,7 +399,7 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.recording.options").getBoolean(
+			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getBoolean(
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
@@ -428,7 +428,7 @@ public final class Configuration {
 	 */
 	public static boolean isChecksumCheckActive() {
 		ExtensionPoint extensionPoint = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
+			"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -442,7 +442,7 @@ public final class Configuration {
 		if (checksumErrorHandler == null) {
 
 			ExtensionPoint extensionPoint = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.internal.client.checksumErrorHandler");
+				"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
 			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 

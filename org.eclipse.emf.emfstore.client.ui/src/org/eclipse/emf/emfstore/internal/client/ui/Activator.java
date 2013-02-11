@@ -25,7 +25,7 @@ public class Activator extends AbstractUIPlugin {
 	/**
 	 * The plug-in ID.
 	 */
-	public static final String PLUGIN_ID = "org.eclipse.emf.emfstore.internal.client.ui";
+	public static final String PLUGIN_ID = "org.eclipse.emf.emfstore.client.ui";
 
 	// The shared instance
 	private static Activator plugin;

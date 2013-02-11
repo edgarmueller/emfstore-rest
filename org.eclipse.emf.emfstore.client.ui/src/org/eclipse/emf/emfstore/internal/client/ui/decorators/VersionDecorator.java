@@ -164,7 +164,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				PlatformUI.getWorkbench().getDecoratorManager()
-					.update("org.eclipse.emf.emfstore.internal.client.ui.decorators.VersionDecorator");
+					.update("org.eclipse.emf.emfstore.client.ui.decorators.VersionDecorator");
 			}
 		});
 	}

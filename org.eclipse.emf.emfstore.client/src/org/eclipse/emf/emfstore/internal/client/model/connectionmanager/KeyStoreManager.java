@@ -85,7 +85,7 @@ public final class KeyStoreManager {
 
 	private void loadConfiguration() {
 		ConfigurationProvider provider = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.defaultConfigurationProvider").getClass("providerClass",
+			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ConfigurationProvider.class);
 		if (provider == null) {
 			return;

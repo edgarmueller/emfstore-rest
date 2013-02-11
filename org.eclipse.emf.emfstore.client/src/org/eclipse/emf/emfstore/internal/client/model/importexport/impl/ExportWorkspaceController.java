@@ -80,7 +80,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.client.ui.exportWorkSpacePath";
+		return "org.eclipse.emf.emfstore.client.ui.exportWorkSpacePath";
 	}
 
 	/**

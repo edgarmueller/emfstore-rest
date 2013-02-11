@@ -221,7 +221,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private void initLogging() {
-		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.internal.common.model")).addLogListener(
+		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.common.model")).addLogListener(
 			new ILogListener() {
 
 				public void logging(IStatus status, String plugin) {
@@ -269,7 +269,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
 			ExtensionPoint extensionPoint = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.internal.serverxxx.configurationresource");
+				"org.eclipse.emf.emfstore.server.configurationresource");
 			ExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {

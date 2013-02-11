@@ -41,7 +41,7 @@ public final class ExtensionManager {
 	 */
 	public static void notifyStartupListener(EList<ProjectHistory> projects) {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.serverxxx.startuplistener", true).getExtensionElements()) {
+			"org.eclipse.emf.emfstore..server.startuplistener", true).getExtensionElements()) {
 			try {
 				element.getClass("class", StartupListener.class).startedUp(projects);
 			} catch (ExtensionPointException e) {
@@ -60,7 +60,7 @@ public final class ExtensionManager {
 	public static void notifyPostStartupListener(ServerSpace serverspace, AccessControlImpl accessControl,
 		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers) {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.serverxxx.poststartuplistener", true).getExtensionElements()) {
+			"org.eclipse.emf.emfstore.server.poststartuplistener", true).getExtensionElements()) {
 			try {
 				element.getClass("class", PostStartupListener.class).postStartUp(serverspace, accessControl,
 					connectionHandlers);

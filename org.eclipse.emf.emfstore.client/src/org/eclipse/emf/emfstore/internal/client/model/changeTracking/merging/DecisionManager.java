@@ -129,7 +129,7 @@ public class DecisionManager {
 	private List<ConflictHandler> initConflictHandlers() {
 		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.merge.conflictHandler").getExtensionElements()) {
+			"org.eclipse.emf.emfstore.client.merge.conflictHandler").getExtensionElements()) {
 			ConflictHandler handler = element.getClass("class", ConflictHandler.class);
 			if (handler != null) {
 				result.add(handler);

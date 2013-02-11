@@ -84,7 +84,7 @@ public final class ModelUtil {
 	 */
 	public static final URI VIRTUAL_URI = URI.createURI("virtualUri");
 
-	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.internal.common.model";
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
 
 	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
 
@@ -323,7 +323,7 @@ public final class ModelUtil {
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new LinkedHashSet<String>();
 			for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.internal.common.model.ignoredatatype",
+				"org.eclipse.emf.emfstore.common.model.ignoredatatype",
 				true).getExtensionElements()) {
 				try {
 					ignoredDataTypes.add(element.getAttribute("type"));
@@ -835,7 +835,7 @@ public final class ModelUtil {
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
 		ExtensionPoint extensionPoint = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.common.model.modelversion", true);
+			"org.eclipse.emf.emfstore.ommon.model.modelversion", true);
 		if (extensionPoint.size() != 1) {
 			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
@@ -1272,7 +1272,7 @@ public final class ModelUtil {
 			singletonIdResolvers = new LinkedHashSet<SingletonIdResolver>();
 
 			for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.internal.common.model.singletonidresolver").getExtensionElements()) {
+				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
 				try {
 					singletonIdResolvers.add(element.getClass("class", SingletonIdResolver.class));
 				} catch (ExtensionPointException e) {

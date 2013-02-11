@@ -80,7 +80,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements ICo
 	private MergeLabelProvider getLabelProvider() {
 
 		if (labelProvider == null) {
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.merge.labelprovider");
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
 			ExtensionElement element = extensionPoint.getElementWithHighestPriority();
 
 			if (element == null) {

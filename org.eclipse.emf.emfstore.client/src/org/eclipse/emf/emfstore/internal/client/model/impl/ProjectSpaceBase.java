@@ -144,7 +144,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void initRunnableContext() {
 		ExtensionElement extensionElement = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.runnableContext").setThrowException(false).getFirst();
+			"org.eclipse.emf.emfstore.client.runnableContext").setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
 		} else {
@@ -661,7 +661,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		boolean useCrossReferenceAdapter = true;
 
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.inverseCrossReferenceCache").getExtensionElements()) {
+			"org.eclipse.emf.emfstore.client.inverseCrossReferenceCache").getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
 

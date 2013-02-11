@@ -359,7 +359,7 @@ public class ObserverBus {
 	 * Pulls observers from an extension point and registers them.
 	 */
 	public void collectionExtensionPoints() {
-		for (ExtensionElement outer : new ExtensionPoint("org.eclipse.emf.emfstore.internal.common.observer", true)
+		for (ExtensionElement outer : new ExtensionPoint("org.eclipse.emf.emfstore.common.observer", true)
 			.getExtensionElements()) {
 			try {
 				for (ExtensionElement inner : new ExtensionPoint(outer.getAttribute("extensionPointName"), true)

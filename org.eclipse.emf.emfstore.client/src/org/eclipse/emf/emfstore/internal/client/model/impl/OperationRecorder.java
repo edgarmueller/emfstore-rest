@@ -518,7 +518,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.internal.client.recording.options extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
@@ -885,7 +885,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
+	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
+	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 

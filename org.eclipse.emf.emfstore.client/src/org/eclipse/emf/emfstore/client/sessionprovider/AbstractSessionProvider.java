@@ -36,7 +36,7 @@ public abstract class AbstractSessionProvider {
 	/**
 	 * ExtensionPoint ID of the SessionProvider.
 	 */
-	public static final String ID = "org.eclipse.emf.emfstore.internal.client.sessionprovider";
+	public static final String ID = "org.eclipse.emf.emfstore.client.sessionprovider";
 
 	/**
 	 * The {@link SessionManager} calls this method in order to gain a usersession. In its default implementation it

@@ -56,7 +56,7 @@ public final class FilterStack implements NotificationFilter {
 
 	private void collectExtensionPoints() {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.client.notificationFilter", true)
+			"org.eclipse.emf.emfstore.client.notificationFilter", true)
 			.getExtensionElements()) {
 			try {
 				filterList.add(element.getClass("class", NotificationFilter.class));

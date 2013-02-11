@@ -49,7 +49,7 @@ public final class EClassFilter {
 
 	private void initFilteredEClasses() {
 
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.filteredTypes");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.filteredTypes");
 
 		if (extensionPoint.size() == 0) {
 			return;

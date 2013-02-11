@@ -60,7 +60,7 @@ public final class EMFStoreMigratorUtil {
 	}
 
 	private static EMFStoreMigrator loadMigrator() throws EMFStoreMigrationException {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.internal.migration.migrator", true);
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.migration.migrator", true);
 		if (extensionPoint.size() > 1) {
 			ModelUtil
 				.logWarning("Multiple EMFStore Migrators are registered. EMFStore will default to first loadable migrator.");

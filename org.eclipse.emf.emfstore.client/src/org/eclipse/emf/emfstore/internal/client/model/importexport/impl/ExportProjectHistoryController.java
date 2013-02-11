@@ -88,7 +88,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.internal.client.ui.exportProjectHistoryPath";
+		return "org.eclipse.emf.emfstore.client.ui.exportProjectHistoryPath";
 	}
 
 	/**

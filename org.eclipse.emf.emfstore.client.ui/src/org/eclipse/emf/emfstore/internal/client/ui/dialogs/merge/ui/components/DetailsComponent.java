@@ -84,7 +84,7 @@ public class DetailsComponent extends Section {
 				multiWidget.addOption(option);
 			}
 
-			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.internal.client.ui.merge.detailwidget")
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.detailwidget")
 				.getExtensionElements()) {
 				if (option.getDetailProvider().equals(element.getAttribute("id"))) {
 					DetailsPart detailsPart = element.getClass("class", DetailsPart.class);

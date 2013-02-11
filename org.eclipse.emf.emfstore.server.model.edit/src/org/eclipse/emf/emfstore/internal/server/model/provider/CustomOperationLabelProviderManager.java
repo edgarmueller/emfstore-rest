@@ -83,7 +83,7 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 
 	private void collectExtensions() {
 		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.internal.server.model.edit.customOperationLabelProvider", true)
+			"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true)
 			.getExtensionElements()) {
 			try {
 				AbstractOperationCustomLabelProvider provider = element.getClass("class",

@@ -40,7 +40,7 @@ public class ConflictDetector {
 	private static ConflictDetectionStrategy getStrategy() {
 		if (defaultStrategy == null) {
 			ConflictDetectionStrategy strategy = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.internal.client.merge.conflictDetectorStrategy").getClass("class",
+				"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
 				ConflictDetectionStrategy.class);
 			if (strategy != null) {
 				defaultStrategy = strategy;
