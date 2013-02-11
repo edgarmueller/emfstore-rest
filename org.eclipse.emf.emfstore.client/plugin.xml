@@ -35,56 +35,56 @@
   </extension>
 
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.loginObserver"
            observerAttributeName="loginObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.logoutObserver"
            observerAttributeName="logoutObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.updateObserver"
            observerAttributeName="updateObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.commitObserver"
            observerAttributeName="commitObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.openModelElementObserver"
            observerAttributeName="openModelElementObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.checkoutObserver"
            observerAttributeName="checkoutObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.exceptionObserver"
            observerAttributeName="exceptionObserver">
      </observer>
   </extension>
   <extension
-        point="org.eclipse.emf.emfstore.internal.common.observer">
+        point="org.eclipse.emf.emfstore.common.observer">
      <observer
            extensionPointName="org.eclipse.emf.emfstore.internal.client.mergeObserver"
            observerAttributeName="mergeObserver">
