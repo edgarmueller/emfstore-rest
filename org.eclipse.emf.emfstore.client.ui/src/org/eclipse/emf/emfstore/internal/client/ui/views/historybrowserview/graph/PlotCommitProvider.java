@@ -419,7 +419,7 @@ public class PlotCommitProvider implements IPlotCommitProvider {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommitProvider#getCommitFor(org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.HistoryInfo,
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommitProvider#getCommitFor(org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo,
 	 *      boolean)
 	 */
 	public IPlotCommit getCommitFor(HistoryInfo info, boolean onlyAChildRequest) {

@@ -22,8 +22,8 @@ public class AlwaysFalseConflictDetectionStrategy implements ConflictDetectionSt
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean doConflict(AbstractOperation operationA, AbstractOperation operationB) {
 		return false;
@@ -32,8 +32,8 @@ public class AlwaysFalseConflictDetectionStrategy implements ConflictDetectionSt
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean isRequired(AbstractOperation requiredOperation, AbstractOperation operation) {
 		return false;

@@ -254,11 +254,11 @@ public final class ServerConfiguration {
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the
 	 * values
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#RESOLVEALL}
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#RESOLVEALL}
 	 * ,
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#MODELELEMENTID}
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
 	 * and
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.serverxxx.internal.startup.EmfStoreValidator#PROJECTGENERATION}
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
 	 * . E.g.:
 	 * If you want to resolve all elements and check use the
 	 * modelelement id validation, you have to set the level to <code>1 | 2</code>, which is 3.
@@ -575,7 +575,7 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Get the server version as in the org.eclipse.emf.emfstore.internal.serverxxx manifest
+	 * Get the server version as in the org.eclipse.emf.emfstore.internal.server manifest
 	 * file.
 	 * 
 	 * @return the server version number
