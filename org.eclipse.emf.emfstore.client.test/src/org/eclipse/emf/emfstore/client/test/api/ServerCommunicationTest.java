@@ -27,6 +27,8 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
+		deleteRemoteProjects();
+		// deleteLocalProjects();
 	}
 
 	@Test
@@ -59,9 +61,11 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 				new NullProgressMonitor());
 			assertNotNull(remoteProject);
 			assertEquals("MyProject", remoteProject.getProjectName());
-			List<? extends IRemoteProject> remoteProjects = server.getRemoteProjects();
+			List<IRemoteProject> remoteProjects = server.getRemoteProjects();
 			assertEquals(1, remoteProjects.size());
-			assertEquals(remoteProject, remoteProjects.get(0));
+			// we expect a copy to be returned
+			assertFalse(remoteProject.equals(remoteProjects.get(0)));
+			assertEquals(remoteProject.getProjectName(), remoteProjects.get(0).getProjectName());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -78,7 +82,9 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			assertEquals("MyProject", remoteProject.getProjectName());
 			List<? extends IRemoteProject> remoteProjects = server.getRemoteProjects();
 			assertEquals(1, remoteProjects.size());
-			assertEquals(remoteProject, remoteProjects.get(0));
+			// we expect a copy to be returned
+			assertFalse(remoteProject.equals(remoteProjects.get(0)));
+			assertEquals(remoteProject.getProjectName(), remoteProjects.get(0).getProjectName());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -104,10 +110,6 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 		try {
 			server.createRemoteProject(usersession, "MyProject", new NullProgressMonitor());
 			server.createRemoteProject(usersession, "MyProject2", new NullProgressMonitor());
-			assertEquals(0, server.getRemoteProjects().size());
-			assertEquals(2, server.getRemoteProjects().size());
-			assertEquals(0, server.getRemoteProjects().size());
-			server.getRemoteProjects();
 			assertEquals(2, server.getRemoteProjects().size());
 		} catch (EMFStoreException e) {
 			log(e);

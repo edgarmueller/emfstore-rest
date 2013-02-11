@@ -217,7 +217,7 @@ public abstract class ServerTests extends WorkspaceTest {
 				try {
 					// getProjectSpace().setUsersession(getServerInfo().getLastUsersession());
 					// getProjectSpace().getUsersession().logIn();
-					getProjectSpace().shareProject();
+					getProjectSpace().shareProject(new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					Assert.fail();
 				}

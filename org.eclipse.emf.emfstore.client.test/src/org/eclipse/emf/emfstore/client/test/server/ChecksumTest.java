@@ -62,7 +62,6 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		getProject().addModelElement(testElement);
@@ -165,7 +164,6 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -192,7 +190,6 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -229,7 +226,6 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -262,7 +258,6 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());

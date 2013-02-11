@@ -215,7 +215,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testMerge() throws EMFStoreException {
 		ILocalProject localProject2 = workspace.createLocalProject("TestProject2", "My Test Project2");
-		localProject2.shareProject();
+		localProject2.shareProject(usersession, new NullProgressMonitor());
 		ProjectChangeUtil.addPlayerToProject(localProject2);
 		localProject2.commitToBranch(branch, logMessage, callback, new NullProgressMonitor());
 		assertFalse(localProject.hasUncommitedChanges());

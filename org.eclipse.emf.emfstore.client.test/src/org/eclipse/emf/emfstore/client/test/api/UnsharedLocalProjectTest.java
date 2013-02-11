@@ -60,7 +60,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test
 	public void testProjectID() {
-		assertNotNull(localProject.getProjectId());
+		// unshared projects have no project ID
+		assertNull(localProject.getProjectId());
 	}
 
 	@Test(expected = EMFStoreException.class)
@@ -74,19 +75,19 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertFalse(localProject.isShared());
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testCommit() throws EMFStoreException {
 		localProject.commit();
 		fail("Should not be able to commit an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testCommit2() throws EMFStoreException {
 		localProject.commit(ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testCommitToBranch() throws EMFStoreException {
 		localProject.commitToBranch(IVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
 			ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
@@ -138,7 +139,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	public void testHasUncommitedChanges() {
 		assertFalse(localProject.hasUncommitedChanges());
 		ProjectChangeUtil.addPlayerToProject(localProject);
-		assertFalse(localProject.hasUncommitedChanges());
+		assertTrue(localProject.hasUncommitedChanges());
 	}
 
 	@Test
@@ -288,7 +289,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testShare() {
 		try {
-			localProject.shareProject();
+			assertNull(localProject.getUsersession());
+			localProject.shareProject(new NullProgressMonitor());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());

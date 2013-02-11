@@ -29,6 +29,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
+
 		// setUp might have failed
 		if (usersession != null && usersession.isLoggedIn()) {
 			usersession.logout();

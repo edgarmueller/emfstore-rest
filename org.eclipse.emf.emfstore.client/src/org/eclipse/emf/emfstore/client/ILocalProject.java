@@ -101,7 +101,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @throws EMFStoreException
 	 *             if an error occurs during the sharing of the project
 	 */
-	void shareProject() throws EMFStoreException;
+	void shareProject(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Shares this project space.
