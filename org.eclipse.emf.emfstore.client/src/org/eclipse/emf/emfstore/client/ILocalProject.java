@@ -32,10 +32,11 @@ import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
 /**
- * Represents a locally checkedout project.
+ * Represents a project in the local workspace that was checked out from a server or created locally.
  * 
  * @author emueller
  * @author wesendon
+ * @author mkoegel
  */
 public interface ILocalProject extends IProject, EObjectContainer {
 
