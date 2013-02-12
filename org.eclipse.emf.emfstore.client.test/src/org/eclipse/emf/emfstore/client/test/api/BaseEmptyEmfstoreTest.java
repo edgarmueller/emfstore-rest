@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.Activator;
+import org.eclipse.emf.emfstore.client.test.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -50,6 +51,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		deleteLocalProjects();
 		deleteRemoteProjects();
 		stopEMFStore();
+		((TestSessionProvider) WorkspaceProvider.getInstance().getSessionManager().getSessionProvider()).clearSession();
 	}
 
 	private static void stopEMFStore() {

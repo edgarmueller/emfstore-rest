@@ -184,6 +184,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec)
 	 */
 	public void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException {
+
+		checkIsShared();
+
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.addTag(getUsersession().getSessionId(), getProjectId(), (PrimaryVersionSpec) versionSpec,
 			(TagVersionSpec) tag);
@@ -339,7 +342,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit()
 	 */
 	public PrimaryVersionSpec commit() throws EMFStoreException {
-		return new CommitController(this, null, null, new NullProgressMonitor()).execute();
+		return commit(null, null, new NullProgressMonitor());
 	}
 
 	/**
@@ -352,6 +355,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public PrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws EMFStoreException {
+		checkIsShared();
 		return new CommitController(this, (LogMessage) logMessage, callback, monitor).execute();
 	}
 
@@ -360,6 +364,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public PrimaryVersionSpec commitToBranch(IBranchVersionSpec branch, ILogMessage logMessage,
 		ICommitCallback callback, IProgressMonitor monitor) throws EMFStoreException {
+		checkIsShared();
 		return new CommitController(this, (BranchVersionSpec) branch, (LogMessage) logMessage, callback, monitor)
 			.execute();
 	}
@@ -915,10 +920,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver)
 		throws EMFStoreException {
 
-		if (!isShared()) {
-			// TODO: OTS runtimeException?
-			throw new RuntimeException("Project has not been shared.");
-		}
+		checkIsShared();
 
 		new ServerCall<Void>(this) {
 			@Override
@@ -951,6 +953,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}.execute();
 	}
 
+	private void checkIsShared() {
+		if (!isShared()) {
+			// TODO: OTS runtimeException?
+			throw new RuntimeException("Project has not been shared.");
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -973,6 +982,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException {
+
+		checkIsShared();
+
 		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 		cm.removeTag(getUsersession().getSessionId(), getProjectId(), (PrimaryVersionSpec) versionSpec,
 			(TagVersionSpec) tag);

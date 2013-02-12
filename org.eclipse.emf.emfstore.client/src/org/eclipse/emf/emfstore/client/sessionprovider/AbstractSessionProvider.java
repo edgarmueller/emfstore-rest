@@ -14,7 +14,6 @@ import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
@@ -39,7 +38,7 @@ public abstract class AbstractSessionProvider {
 	public static final String ID = "org.eclipse.emf.emfstore.client.sessionprovider";
 
 	/**
-	 * The {@link SessionManager} calls this method in order to gain a usersession. In its default implementation it
+	 * The SessionManager calls this method in order to gain a usersession. In its default implementation it
 	 * first looks for specified usersession in the {@link ServerCall}, then it checks whether the projectspace is
 	 * associated with a usersession (e.g. in case of update) and if there's still no usersession
 	 * {@link #provideUsersession(IServer)} is called, which should be used when implementing an usersession
@@ -93,7 +92,7 @@ public abstract class AbstractSessionProvider {
 	public abstract IUsersession provideUsersession(IServer server) throws EMFStoreException;
 
 	/**
-	 * This method is called by the {@link SessionManager} in order to login a given usersession. Either you are able to
+	 * This method is called by the SessionManager in order to login a given usersession. Either you are able to
 	 * login the given session or should throw an exception.
 	 * 
 	 * @param usersession session to be logged in.

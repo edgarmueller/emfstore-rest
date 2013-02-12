@@ -69,4 +69,11 @@ public class TestSessionProvider extends AbstractSessionProvider {
 		session.logIn();
 	}
 
+	public void clearSession() {
+		if (session != null
+			&& ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
+			((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().remove(session);
+			session = null;
+		}
+	}
 }

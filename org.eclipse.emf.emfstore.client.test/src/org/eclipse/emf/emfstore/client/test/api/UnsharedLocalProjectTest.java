@@ -64,8 +64,9 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertNull(localProject.getProjectId());
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testAddTag() throws EMFStoreException {
+		// a tag can not be created for an unshared project
 		localProject.addTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("test", "test"));
 		fail("Cannot add a tag!");
 	}
@@ -77,12 +78,14 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testCommit() throws EMFStoreException {
+		// can not commit an unshared project
 		localProject.commit();
 		fail("Should not be able to commit an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testCommit2() throws EMFStoreException {
+		// can not commit an unshared project
 		localProject.commit(ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
@@ -96,8 +99,9 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test
 	public void testGetBaseVersion() {
+		// unshared project has no base version
 		IPrimaryVersionSpec version = localProject.getBaseVersion();
-		assertNotNull(version);
+		assertNull(version);
 	}
 
 	@Test(expected = EMFStoreException.class)
@@ -118,8 +122,9 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test
 	public void testGetLastUpdated() {
+		// unshared project has no last updated date
 		Date date = localProject.getLastUpdated();
-		assertNotNull(date);
+		assertNull(date);
 	}
 
 	@Test(expected = EMFStoreException.class)
@@ -162,13 +167,13 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to check update state of an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testMerge() throws EMFStoreException {
 		localProject.mergeBranch(localProject.getBaseVersion(), new TestConflictResolver(false, 0));
 		fail("Should not be able to merge with head on an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testMergeBranch() throws EMFStoreException {
 		localProject.mergeBranch(localProject.getBaseVersion(),
 			new TestConflictResolver(false, 0));
@@ -176,9 +181,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to merge with head on an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testRemoveTag() throws EMFStoreException {
-
 		localProject.removeTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("tag", "branch"));
 		fail("Should not remove a tag from an unshared Project!");
 	}

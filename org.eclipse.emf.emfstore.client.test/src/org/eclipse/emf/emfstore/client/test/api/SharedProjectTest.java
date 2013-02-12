@@ -9,14 +9,18 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
+import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
@@ -24,6 +28,7 @@ import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +41,10 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	private IBranchVersionSpec branch;
 	private IUpdateCallback updateCallback;
 	private IPrimaryVersionSpec target;
-	private IChangeConflict changeConflict;
 	private IHistoryQuery query;
+
+	private boolean conflictOccurred;
+	private boolean noLocalChangesOccurred;
 
 	@Override
 	@Before
@@ -76,10 +83,14 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		}
 	}
 
-	@Test(expected = EMFStoreException.class)
 	public void testCommitWithoutChange() throws EMFStoreException {
-		localProject.commit();
-		fail("Expects Exception on empty commit!");
+		localProject.commit(null, new CommitCallbackAdapter() {
+			@Override
+			public void noLocalChanges(ILocalProject projectSpace) {
+				noLocalChangesOccurred = true;
+			};
+		}, new NullProgressMonitor());
+		assertTrue(noLocalChangesOccurred);
 	}
 
 	@Test
@@ -94,12 +105,6 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			log(e);
 			fail(e.getMessage());
 		}
-	}
-
-	@Test(expected = EMFStoreException.class)
-	public void testCommitLogWithoutChange() throws EMFStoreException {
-		IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
-		fail("Expects Exception on empty commit!");
 	}
 
 	@Test
@@ -117,10 +122,14 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		}
 	}
 
-	@Test(expected = EMFStoreException.class)
 	public void testCommitBranchWithoutChange() throws EMFStoreException {
-		IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback, new NullProgressMonitor());
-		fail("Expects Exception on empty commit!");
+		localProject.commitToBranch(branch, logMessage, new CommitCallbackAdapter() {
+			@Override
+			public void noLocalChanges(ILocalProject projectSpace) {
+				noLocalChangesOccurred = true;
+			};
+		}, new NullProgressMonitor());
+		assertTrue(noLocalChangesOccurred);
 	}
 
 	@Test
@@ -212,17 +221,93 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 
 	}
 
+	@Test(expected = BaseVersionOutdatedException.class)
+	public void testMergeAndExpectBaseVersionOutOfDateException() throws EMFStoreException {
+
+		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		localProject.commit();
+		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout();
+		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+
+		player.setName("A");
+		localProject.commit();
+		checkedoutPlayer.setName("B");
+		checkedoutCopy.commit();
+	}
+
+	@Test
+	public void testMergeAndExpectChangeConflictException() throws EMFStoreException {
+
+		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		localProject.commit();
+		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout();
+		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+
+		player.setName("A");
+		localProject.commit();
+		checkedoutPlayer.setName("B");
+		callback = new CommitCallbackAdapter() {
+			@Override
+			public boolean baseVersionOutOfDate(ILocalProject localProject, IProgressMonitor progressMonitor) {
+				IPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
+				IPrimaryVersionSpec version;
+				try {
+					version = localProject.resolveVersionSpec(IVersionSpec.FACTORY
+						.createHEAD(baseVersion));
+					localProject.update(version, null, new NullProgressMonitor());
+				} catch (ChangeConflictException e) {
+					conflictOccurred = true;
+				} catch (EMFStoreException e) {
+					fail("Expected ChangeConflictException");
+				}
+				fail("Expected ChangeConflictException");
+				return true;
+			}
+		};
+		checkedoutCopy.commit(null, callback, new NullProgressMonitor());
+		assertTrue(conflictOccurred);
+	}
+
 	@Test
 	public void testMerge() throws EMFStoreException {
-		ILocalProject localProject2 = workspace.createLocalProject("TestProject2", "My Test Project2");
-		localProject2.shareProject(usersession, new NullProgressMonitor());
-		ProjectChangeUtil.addPlayerToProject(localProject2);
-		localProject2.commitToBranch(branch, logMessage, callback, new NullProgressMonitor());
-		assertFalse(localProject.hasUncommitedChanges());
-		assertFalse(localProject2.hasUncommitedChanges());
-		localProject.merge(target, changeConflict, new TestConflictResolver(true, 0), updateCallback,
-			new NullProgressMonitor());
-		assertFalse(localProject.hasUncommitedChanges());
-		assertEquals(1, localProject.getAllModelElementsByClass(Player.class).size());
+
+		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		localProject.commit();
+		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout();
+		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+
+		player.setName("A");
+		localProject.commit();
+		checkedoutPlayer.setName("B");
+		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
+			@Override
+			public boolean baseVersionOutOfDate(final ILocalProject localProject, IProgressMonitor progressMonitor) {
+				IPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
+				try {
+					final IPrimaryVersionSpec version = localProject.resolveVersionSpec(IVersionSpec.FACTORY
+						.createHEAD(baseVersion));
+					localProject.update(version, new UpdateCallbackAdapter() {
+						@Override
+						public boolean conflictOccurred(org.eclipse.emf.emfstore.client.IChangeConflict changeConflict,
+							IProgressMonitor progressMonitor) {
+							try {
+								return localProject.merge(version, changeConflict,
+									new TestConflictResolver(
+										false, 1), null, new NullProgressMonitor());
+							} catch (EMFStoreException e) {
+								fail("Merge failed.");
+							}
+							return false;
+						};
+					}, new NullProgressMonitor());
+				} catch (EMFStoreException e) {
+					fail("Expected ChangeConflictException");
+				}
+				return true;
+			}
+		}, new NullProgressMonitor());
+		assertEquals("B", checkedoutPlayer.getName());
+		localProject.update();
+		assertEquals("B", player.getName());
 	}
 }

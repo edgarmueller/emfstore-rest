@@ -105,7 +105,7 @@ public class SessionManager {
 		provider = sessionProvider;
 	}
 
-	private AbstractSessionProvider getSessionProvider() {
+	public AbstractSessionProvider getSessionProvider() {
 		return provider;
 	}
 
