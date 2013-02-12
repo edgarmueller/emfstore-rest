@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * This is the central singleton for the Bowling edit plugin.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public final class BowlingEditPlugin extends EMFPlugin {
@@ -26,7 +25,6 @@ public final class BowlingEditPlugin extends EMFPlugin {
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static final BowlingEditPlugin INSTANCE = new BowlingEditPlugin();
@@ -35,7 +33,6 @@ public final class BowlingEditPlugin extends EMFPlugin {
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static Implementation plugin;
@@ -44,18 +41,18 @@ public final class BowlingEditPlugin extends EMFPlugin {
 	 * Create the instance.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BowlingEditPlugin() {
-		super(new ResourceLocator[] {});
+		super
+		  (new ResourceLocator [] {
+		   });
 	}
 
 	/**
 	 * Returns the singleton instance of the Eclipse plugin.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -68,7 +65,6 @@ public final class BowlingEditPlugin extends EMFPlugin {
 	 * Returns the singleton instance of the Eclipse plugin.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -80,7 +76,6 @@ public final class BowlingEditPlugin extends EMFPlugin {
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static class Implementation extends EclipsePlugin {
@@ -88,7 +83,6 @@ public final class BowlingEditPlugin extends EMFPlugin {
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		public Implementation() {

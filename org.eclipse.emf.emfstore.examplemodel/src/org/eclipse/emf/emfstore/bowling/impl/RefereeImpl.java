@@ -29,10 +29,10 @@ import org.eclipse.emf.emfstore.bowling.Referee;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.bowling.impl.RefereeImpl#getLeague <em>League</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.RefereeImpl#getLeague <em>League</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class RefereeImpl extends EObjectImpl implements Referee {
@@ -40,7 +40,6 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	 * The cached value of the '{@link #getLeague() <em>League</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getLeague()
 	 * @generated
 	 * @ordered
@@ -50,7 +49,6 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected RefereeImpl() {
@@ -60,7 +58,6 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -71,17 +68,15 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public League getLeague() {
 		if (league != null && league.eIsProxy()) {
-			InternalEObject oldLeague = (InternalEObject) league;
-			league = (League) eResolveProxy(oldLeague);
+			InternalEObject oldLeague = (InternalEObject)league;
+			league = (League)eResolveProxy(oldLeague);
 			if (league != oldLeague) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BowlingPackage.REFEREE__LEAGUE,
-						oldLeague, league));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BowlingPackage.REFEREE__LEAGUE, oldLeague, league));
 			}
 		}
 		return league;
@@ -90,7 +85,6 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public League basicGetLeague() {
@@ -100,7 +94,6 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setLeague(League newLeague) {
@@ -113,16 +106,14 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case BowlingPackage.REFEREE__LEAGUE:
-			if (resolve)
-				return getLeague();
-			return basicGetLeague();
+			case BowlingPackage.REFEREE__LEAGUE:
+				if (resolve) return getLeague();
+				return basicGetLeague();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,15 +121,14 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case BowlingPackage.REFEREE__LEAGUE:
-			setLeague((League) newValue);
-			return;
+			case BowlingPackage.REFEREE__LEAGUE:
+				setLeague((League)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -146,15 +136,14 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case BowlingPackage.REFEREE__LEAGUE:
-			setLeague((League) null);
-			return;
+			case BowlingPackage.REFEREE__LEAGUE:
+				setLeague((League)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -162,14 +151,13 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case BowlingPackage.REFEREE__LEAGUE:
-			return league != null;
+			case BowlingPackage.REFEREE__LEAGUE:
+				return league != null;
 		}
 		return super.eIsSet(featureID);
 	}

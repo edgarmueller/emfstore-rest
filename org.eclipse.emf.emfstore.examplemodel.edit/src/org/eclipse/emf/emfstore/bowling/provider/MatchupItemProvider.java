@@ -37,7 +37,6 @@ import org.eclipse.emf.emfstore.bowling.Matchup;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Matchup} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class MatchupItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -46,7 +45,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public MatchupItemProvider(AdapterFactory adapterFactory) {
@@ -57,7 +55,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -75,7 +72,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -90,7 +86,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -105,7 +100,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * This returns Matchup.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -117,7 +111,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -130,7 +123,6 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -138,9 +130,9 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Matchup.class)) {
-		case BowlingPackage.MATCHUP__GAMES:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-			return;
+			case BowlingPackage.MATCHUP__GAMES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -150,22 +142,22 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(BowlingPackage.Literals.MATCHUP__GAMES,
-			BowlingFactory.eINSTANCE.createGame()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BowlingPackage.Literals.MATCHUP__GAMES,
+				 BowlingFactory.eINSTANCE.createGame()));
 	}
 
 	/**
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
