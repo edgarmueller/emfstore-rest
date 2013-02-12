@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
@@ -229,7 +229,7 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 	 */
 	public EList<Double> getPriceMoney() {
 		if (priceMoney == null) {
-			priceMoney = new EDataTypeUniqueEList<Double>(Double.class, this, BowlingPackage.TOURNAMENT__PRICE_MONEY);
+			priceMoney = new EDataTypeEList<Double>(Double.class, this, BowlingPackage.TOURNAMENT__PRICE_MONEY);
 		}
 		return priceMoney;
 	}
@@ -241,7 +241,7 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 	 */
 	public EList<Boolean> getReceivesTrophy() {
 		if (receivesTrophy == null) {
-			receivesTrophy = new EDataTypeUniqueEList<Boolean>(Boolean.class, this, BowlingPackage.TOURNAMENT__RECEIVES_TROPHY);
+			receivesTrophy = new EDataTypeEList<Boolean>(Boolean.class, this, BowlingPackage.TOURNAMENT__RECEIVES_TROPHY);
 		}
 		return receivesTrophy;
 	}

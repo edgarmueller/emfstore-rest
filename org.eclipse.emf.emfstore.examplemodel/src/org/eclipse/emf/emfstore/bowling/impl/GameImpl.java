@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
 import org.eclipse.emf.emfstore.bowling.Game;
@@ -177,7 +177,7 @@ public class GameImpl extends EObjectImpl implements Game {
 	 */
 	public EList<Integer> getFrames() {
 		if (frames == null) {
-			frames = new EDataTypeUniqueEList<Integer>(Integer.class, this, BowlingPackage.GAME__FRAMES);
+			frames = new EDataTypeEList<Integer>(Integer.class, this, BowlingPackage.GAME__FRAMES);
 		}
 		return frames;
 	}
