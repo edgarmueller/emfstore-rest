@@ -64,7 +64,7 @@ public abstract class WorkspaceTest {
 	 */
 	@Before
 	public void setupTest() {
-		System.out.println("setup");
+		configureCompareAtEnd();
 		new EMFStoreCommand() {
 
 			@Override
@@ -89,6 +89,10 @@ public abstract class WorkspaceTest {
 		beforeHook();
 	}
 
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(true);
+	}
+
 	public void beforeHook() {
 	}
 
@@ -100,7 +104,6 @@ public abstract class WorkspaceTest {
 	 */
 	@After
 	public void teardown() throws IOException, SerializationException, EMFStoreException {
-		System.out.println("teardown");
 		boolean areEqual = false;
 		projectSpace.save();
 
@@ -316,7 +319,7 @@ public abstract class WorkspaceTest {
 		return compareAtEnd;
 	}
 
-	public void setCompareAtEnd(boolean compareAtEnd) {
+	protected void setCompareAtEnd(boolean compareAtEnd) {
 		this.compareAtEnd = compareAtEnd;
 	}
 }

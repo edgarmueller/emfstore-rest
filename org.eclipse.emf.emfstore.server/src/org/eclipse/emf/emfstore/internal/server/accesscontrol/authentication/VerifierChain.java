@@ -42,7 +42,7 @@ public class VerifierChain extends AbstractAuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override

@@ -46,8 +46,12 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	private ConnectionMock connectionMock;
 
 	@Override
-	public void beforeHook() {
+	protected void configureCompareAtEnd() {
 		setCompareAtEnd(false);
+	}
+
+	@Override
+	public void beforeHook() {
 		try {
 			initServer();
 		} catch (FatalEmfStoreException e) {
@@ -61,6 +65,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		authMock = new AuthControlMock();
 		emfStore = EMFStoreImpl.createInterface(serverSpace, authMock);
 		connectionMock = new ConnectionMock(emfStore, authMock);
+		WorkspaceProvider.getInstance().setConnectionManager(connectionMock);
 	}
 
 	private ServerSpace initServerSpace() {
@@ -72,7 +77,6 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		return serverSpace;
 	}
 
-	@Override
 	public ConnectionManager initConnectionManager() {
 		return connectionMock;
 	}
@@ -118,7 +122,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					ps.shareProject();
+					ps.shareProject(new NullProgressMonitor());
 					return ps.getBaseVersion();
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);

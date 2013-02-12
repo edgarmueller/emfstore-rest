@@ -61,7 +61,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		return log;
 	}
 
-	public List<IRemoteProject> getRemoteProjectsFromServer(IUsersession usersession, boolean shouldRemember)
+	public List<IRemoteProject> getRemoteProjects(IUsersession usersession)
 		throws EMFStoreException {
 
 		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {
@@ -71,15 +71,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 			}
 		}.execute();
 
-		if (shouldRemember) {
-			getProjectInfos().addAll(projectInfos);
-		}
-
 		return copy(mapToRemoteProject(projectInfos));
-	}
-
-	public List<IRemoteProject> getRemoteProjectsFromServer(boolean shouldRemember) throws EMFStoreException {
-		return getRemoteProjectsFromServer(null, shouldRemember);
 	}
 
 	private List<RemoteProject> mapToRemoteProject(List<ProjectInfo> projectInfos) {
@@ -110,6 +102,6 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 	}
 
 	public List<IRemoteProject> getRemoteProjects() throws EMFStoreException {
-		return getRemoteProjectsFromServer(false);
+		return getRemoteProjects(null);
 	}
 }

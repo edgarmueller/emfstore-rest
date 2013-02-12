@@ -31,7 +31,8 @@ public class UsersessionTest extends BaseLoggedInUserTest {
 
 	@Test
 	public void testGetPassword() {
-		assertEquals("super", usersession.getPassword());
+		// hashed password is returned
+		assertFalse("super".equals(usersession.getPassword()));
 	}
 
 	@Test

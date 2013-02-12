@@ -6,18 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.Activator;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.junit.After;
@@ -43,9 +47,9 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		stopEMFStore();
 		deleteLocalProjects();
-		deleteServerProjects();
+		deleteRemoteProjects();
+		stopEMFStore();
 	}
 
 	private static void stopEMFStore() {
@@ -101,23 +105,16 @@ public abstract class BaseEmptyEmfstoreTest {
 		}
 	}
 
-	private static void deleteLocalProjects() throws IOException, FatalEmfStoreException {
-		String workspacePath = Configuration.getWorkspaceDirectory();
-		File workspaceFile = new File(workspacePath + "workspace.ucw");
-		if (!workspaceFile.exists())
-			return;
-		deleteResources(workspaceFile.getAbsolutePath());
-		deleteFiles(workspacePath);
+	protected static void deleteLocalProjects() throws IOException, FatalEmfStoreException, EMFStoreException {
+		for (ILocalProject project : WorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
+			project.delete(new NullProgressMonitor());
+		}
 	}
 
-	private static void deleteServerProjects() throws IOException, FatalEmfStoreException {
-		String workspacePath = ServerConfiguration.getServerHome();
-		File workspaceFile = new File(workspacePath + "storage.uss");
-		if (!workspaceFile.exists())
-			return;
-		deleteResources(workspaceFile.getAbsolutePath());
-		deleteFiles(workspacePath);
-
+	protected static void deleteRemoteProjects() throws IOException, FatalEmfStoreException, EMFStoreException {
+		for (IRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0).getRemoteProjects()) {
+			project.delete(new NullProgressMonitor());
+		}
 	}
 
 	protected static void log(Throwable e) {

@@ -568,7 +568,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	/**
 	 * {@inheritDoc}.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.core.AbstractEmfstoreInterface#initSubInterfaces()
+	 * @see org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface#initSubInterfaces()
 	 */
 	@Override
 	protected void initSubInterfaces() throws FatalEmfStoreException {

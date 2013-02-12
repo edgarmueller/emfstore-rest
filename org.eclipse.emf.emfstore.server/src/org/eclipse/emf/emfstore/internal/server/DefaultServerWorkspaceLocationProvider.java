@@ -46,7 +46,7 @@ public class DefaultServerWorkspaceLocationProvider implements LocationProvider 
 	 * {@link #getSelectedProfile()} method. If you want to use profiles, you should use or override
 	 * {@link #getSelectedProfile()}. If you don't want profiles override this method and just return your path.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.LocationProvider#getWorkspaceDirectory()
+	 * @see org.eclipse.emf.emfstore.internal.server.LocationProvider#getWorkspaceDirectory()
 	 */
 	public String getWorkspaceDirectory() {
 		String rootDirectory = getRootDirectory();
@@ -98,7 +98,7 @@ public class DefaultServerWorkspaceLocationProvider implements LocationProvider 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.LocationProvider#getBackupDirectory()
+	 * @see org.eclipse.emf.emfstore.internal.server.LocationProvider#getBackupDirectory()
 	 */
 	public String getBackupDirectory() {
 		return addFolders(getRootDirectory(), "backup");

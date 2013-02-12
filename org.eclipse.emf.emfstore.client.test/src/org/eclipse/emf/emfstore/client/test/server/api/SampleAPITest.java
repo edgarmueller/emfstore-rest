@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.test.server.api;
 
 import static org.junit.Assert.assertEquals;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -31,7 +32,7 @@ public class SampleAPITest extends CoreServerTest {
 			protected void doRun() {
 				ps.getProject().addModelElement(createTestElement("Horst"));
 				try {
-					ps.shareProject();
+					ps.shareProject(new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}
@@ -53,7 +54,7 @@ public class SampleAPITest extends CoreServerTest {
 				try {
 					TestElement testElement = createTestElement("Horst");
 					getProjectSpace().getProject().addModelElement(testElement);
-					getProjectSpace().shareProject();
+					getProjectSpace().shareProject(new NullProgressMonitor());
 
 					testElement.setName("1");
 					getProjectSpace().commit();

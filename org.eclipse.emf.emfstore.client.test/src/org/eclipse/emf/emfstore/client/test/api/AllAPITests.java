@@ -20,8 +20,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ ServerCreationTest.class, ServerCommunicationTest.class,
-// UnsharedLocalProjectTest.class,
-// SharedProjectTest.class,
+	UnsharedLocalProjectTest.class,
+	SharedProjectTest.class,
 	UsersessionTest.class })
 public class AllAPITests {
 

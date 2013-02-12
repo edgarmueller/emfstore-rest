@@ -51,8 +51,8 @@ public class IndexSensitiveConflictDetectionStrategy implements ConflictDetectio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#doConflict(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean doConflict(AbstractOperation operationA, AbstractOperation operationB) {
 
@@ -680,8 +680,8 @@ public class IndexSensitiveConflictDetectionStrategy implements ConflictDetectio
 	/**
 	 * {@inheritDoc} TODO multiattribute and mulitreferenceset operations are not yet considerered
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy#isRequired(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public boolean isRequired(AbstractOperation requiredOperation, AbstractOperation operation) {
 

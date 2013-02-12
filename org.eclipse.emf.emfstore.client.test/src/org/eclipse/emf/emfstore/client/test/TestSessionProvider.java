@@ -45,6 +45,11 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 	@Override
 	public IUsersession provideUsersession(IServer serverInfo) throws EMFStoreException {
+		if (session != null
+			&& ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
+			return session;
+		}
+
 		if (serverInfo != null && serverInfo.getLastUsersession() != null) {
 			return serverInfo.getLastUsersession();
 

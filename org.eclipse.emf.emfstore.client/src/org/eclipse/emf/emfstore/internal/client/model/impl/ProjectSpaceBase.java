@@ -914,6 +914,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver)
 		throws EMFStoreException {
+
+		if (!isShared()) {
+			// TODO: OTS runtimeException?
+			throw new RuntimeException("Project has not been shared.");
+		}
+
 		new ServerCall<Void>(this) {
 			@Override
 			protected Void run() throws EMFStoreException {
@@ -1105,8 +1111,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#shareProject()
 	 */
-	public void shareProject() throws EMFStoreException {
-		shareProject(null, null);
+	public void shareProject(IProgressMonitor monitor) throws EMFStoreException {
+		shareProject(null, monitor);
 	}
 
 	/**

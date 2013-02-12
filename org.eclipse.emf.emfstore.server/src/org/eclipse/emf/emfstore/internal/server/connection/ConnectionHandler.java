@@ -22,8 +22,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreExceptio
  * The ConnectionHandler makes the network transport layer transparent for the server. It requires {@link EMFStore} and
  * {@link AuthenticationControl} to delegate the messaeges.
  * 
- * @param <T> server interface type E.g {@link org.eclipse.emf.emfstore.internal.serverxxx.EMFStore} or
- *            {@link org.eclipse.emf.emfstore.internal.serverxxx.AdminEmfStore}
+ * @param <T> server interface type E.g {@link org.eclipse.emf.emfstore.internal.server.EMFStore} or
+ *            {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}
  * @author Wesendonk
  * @author koegel
  */

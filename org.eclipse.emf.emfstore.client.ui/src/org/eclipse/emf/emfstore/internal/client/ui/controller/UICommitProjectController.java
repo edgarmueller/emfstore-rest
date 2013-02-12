@@ -117,7 +117,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.versioning.ChangePackage)
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
 	public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
@@ -189,7 +189,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.api.versionspecs.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,

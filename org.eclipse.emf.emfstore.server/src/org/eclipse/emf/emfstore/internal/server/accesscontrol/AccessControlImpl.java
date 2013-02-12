@@ -121,7 +121,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthenticationControl#logIn(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl#logIn(java.lang.String,
 	 *      java.lang.String)
 	 */
 	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
@@ -140,7 +140,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthenticationControl#logout(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl#logout(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void logout(SessionId sessionId) throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
@@ -183,7 +183,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkSession(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkSession(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void checkSession(SessionId sessionId) throws AccessControlException {
 		if (!sessionUserMap.containsKey(sessionId)) {
@@ -194,8 +194,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkWriteAccess(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectId, java.util.Set)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkWriteAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId, java.util.Set)
 	 */
 	public void checkWriteAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
 		throws AccessControlException {
@@ -299,8 +299,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkReadAccess(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectId, java.util.Set)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkReadAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId, java.util.Set)
 	 */
 	public void checkReadAccess(SessionId sessionId, ProjectId projectId, Set<EObject> modelElements)
 		throws AccessControlException {
@@ -322,8 +322,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId,
-	 *      org.eclipse.emf.emfstore.internal.serverxxx.model.ProjectId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId) throws AccessControlException {
 		checkSession(sessionId);
@@ -342,7 +342,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkServerAdminAccess(org.eclipse.emf.emfstore.internal.serverxxx.model.SessionId)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkServerAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void checkServerAdminAccess(SessionId sessionId) throws AccessControlException {
 		checkSession(sessionId);
@@ -458,7 +458,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.serverxxx.accesscontrol.AuthorizationControl#checkAccess(org.eclipse.emf.emfstore.internal.serverxxx.core.MethodInvocation)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkAccess(org.eclipse.emf.emfstore.internal.server.core.MethodInvocation)
 	 */
 	public void checkAccess(MethodInvocation op) throws AccessControlException {
 		initAccessMap();
