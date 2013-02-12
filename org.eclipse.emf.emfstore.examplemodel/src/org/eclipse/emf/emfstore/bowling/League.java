@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.bowling;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

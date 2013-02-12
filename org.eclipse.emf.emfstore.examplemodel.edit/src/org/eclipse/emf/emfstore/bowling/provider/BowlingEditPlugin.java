@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.bowling.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
