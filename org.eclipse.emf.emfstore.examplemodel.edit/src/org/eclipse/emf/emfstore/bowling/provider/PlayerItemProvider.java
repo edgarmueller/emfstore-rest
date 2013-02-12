@@ -15,9 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -28,7 +26,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
 import org.eclipse.emf.emfstore.bowling.Player;
 
@@ -36,7 +33,6 @@ import org.eclipse.emf.emfstore.bowling.Player;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Player} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class PlayerItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -45,7 +41,6 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PlayerItemProvider(AdapterFactory adapterFactory) {
@@ -56,7 +51,6 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,7 +62,9 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 			addDateOfBirthPropertyDescriptor(object);
 			addHeightPropertyDescriptor(object);
 			addIsProfessionalPropertyDescriptor(object);
-			addEMailPropertyDescriptor(object);
+			addEMailsPropertyDescriptor(object);
+			addNumberOfVictoriesPropertyDescriptor(object);
+			addPlayedTournamentTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -77,87 +73,160 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_Player_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Player_name_feature", "_UI_Player_type"),
-			BowlingPackage.Literals.PLAYER__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-			null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_name_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Date Of Birth feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addDateOfBirthPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_Player_dateOfBirth_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Player_dateOfBirth_feature", "_UI_Player_type"),
-			BowlingPackage.Literals.PLAYER__DATE_OF_BIRTH, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_dateOfBirth_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_dateOfBirth_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__DATE_OF_BIRTH,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Height feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addHeightPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_Player_height_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Player_height_feature", "_UI_Player_type"),
-			BowlingPackage.Literals.PLAYER__HEIGHT, true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null,
-			null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_height_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_height_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__HEIGHT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Is Professional feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addIsProfessionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_Player_isProfessional_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Player_isProfessional_feature", "_UI_Player_type"),
-			BowlingPackage.Literals.PLAYER__IS_PROFESSIONAL, true, false, false,
-			ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_isProfessional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_isProfessional_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__IS_PROFESSIONAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the EMail feature.
+	 * This adds a property descriptor for the EMails feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	protected void addEMailPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_Player_eMail_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_Player_eMail_feature", "_UI_Player_type"),
-			BowlingPackage.Literals.PLAYER__EMAIL, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-			null, null));
+	protected void addEMailsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_eMails_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_eMails_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__EMAILS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Number Of Victories feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNumberOfVictoriesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_numberOfVictories_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_numberOfVictories_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__NUMBER_OF_VICTORIES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Played Tournament Types feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPlayedTournamentTypesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_playedTournamentTypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_playedTournamentTypes_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__PLAYED_TOURNAMENT_TYPES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
 	 * This returns Player.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -169,14 +238,14 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Player) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_Player_type") : getString("_UI_Player_type") + " "
-			+ label;
+		String label = ((Player)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Player_type") :
+			getString("_UI_Player_type") + " " + label;
 	}
 
 	/**
@@ -184,7 +253,6 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -192,13 +260,15 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Player.class)) {
-		case BowlingPackage.PLAYER__NAME:
-		case BowlingPackage.PLAYER__DATE_OF_BIRTH:
-		case BowlingPackage.PLAYER__HEIGHT:
-		case BowlingPackage.PLAYER__IS_PROFESSIONAL:
-		case BowlingPackage.PLAYER__EMAIL:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
+			case BowlingPackage.PLAYER__NAME:
+			case BowlingPackage.PLAYER__DATE_OF_BIRTH:
+			case BowlingPackage.PLAYER__HEIGHT:
+			case BowlingPackage.PLAYER__IS_PROFESSIONAL:
+			case BowlingPackage.PLAYER__EMAILS:
+			case BowlingPackage.PLAYER__NUMBER_OF_VICTORIES:
+			case BowlingPackage.PLAYER__PLAYED_TOURNAMENT_TYPES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -208,7 +278,6 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -220,7 +289,6 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

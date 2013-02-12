@@ -12,24 +12,27 @@ package org.eclipse.emf.emfstore.bowling;
 
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Player</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Player#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Player#getDateOfBirth <em>Date Of Birth</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Player#getHeight <em>Height</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Player#isIsProfessional <em>Is Professional</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Player#getEMail <em>EMail</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getDateOfBirth <em>Date Of Birth</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getHeight <em>Height</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#isIsProfessional <em>Is Professional</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getEMails <em>EMails</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getNumberOfVictories <em>Number Of Victories</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getPlayedTournamentTypes <em>Played Tournament Types</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer()
  * @model
  * @generated
@@ -42,7 +45,6 @@ public interface Player extends EObject {
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_Name()
@@ -55,7 +57,6 @@ public interface Player extends EObject {
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -70,7 +71,6 @@ public interface Player extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Date Of Birth</em>' attribute.
 	 * @see #setDateOfBirth(Date)
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_DateOfBirth()
@@ -80,11 +80,9 @@ public interface Player extends EObject {
 	Date getDateOfBirth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getDateOfBirth <em>Date Of Birth</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getDateOfBirth <em>Date Of Birth</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Date Of Birth</em>' attribute.
 	 * @see #getDateOfBirth()
 	 * @generated
@@ -99,7 +97,6 @@ public interface Player extends EObject {
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Height</em>' attribute.
 	 * @see #setHeight(double)
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_Height()
@@ -112,7 +109,6 @@ public interface Player extends EObject {
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getHeight <em>Height</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Height</em>' attribute.
 	 * @see #getHeight()
 	 * @generated
@@ -127,7 +123,6 @@ public interface Player extends EObject {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Is Professional</em>' attribute.
 	 * @see #setIsProfessional(boolean)
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_IsProfessional()
@@ -137,11 +132,9 @@ public interface Player extends EObject {
 	boolean isIsProfessional();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#isIsProfessional <em>Is Professional</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#isIsProfessional <em>Is Professional</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Is Professional</em>' attribute.
 	 * @see #isIsProfessional()
 	 * @generated
@@ -149,31 +142,63 @@ public interface Player extends EObject {
 	void setIsProfessional(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>EMail</b></em>' attribute.
+	 * Returns the value of the '<em><b>EMails</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EMail</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>EMails</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>EMail</em>' attribute.
-	 * @see #setEMail(String)
-	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_EMail()
+	 * @return the value of the '<em>EMails</em>' attribute list.
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_EMails()
 	 * @model
 	 * @generated
 	 */
-	String getEMail();
+	EList<String> getEMails();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getEMail <em>EMail</em>}' attribute.
+	 * Returns the value of the '<em><b>Number Of Victories</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Number Of Victories</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>EMail</em>' attribute.
-	 * @see #getEMail()
+	 * @return the value of the '<em>Number Of Victories</em>' attribute.
+	 * @see #setNumberOfVictories(int)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_NumberOfVictories()
+	 * @model
 	 * @generated
 	 */
-	void setEMail(String value);
+	int getNumberOfVictories();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getNumberOfVictories <em>Number Of Victories</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Number Of Victories</em>' attribute.
+	 * @see #getNumberOfVictories()
+	 * @generated
+	 */
+	void setNumberOfVictories(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Played Tournament Types</b></em>' attribute list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.bowling.TournamentType}.
+	 * The literals are from the enumeration {@link org.eclipse.emf.emfstore.bowling.TournamentType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Played Tournament Types</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Played Tournament Types</em>' attribute list.
+	 * @see org.eclipse.emf.emfstore.bowling.TournamentType
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_PlayedTournamentTypes()
+	 * @model
+	 * @generated
+	 */
+	EList<TournamentType> getPlayedTournamentTypes();
 
 } // Player

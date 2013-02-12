@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Referee</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Referee#getLeague <em>League</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Referee#getLeague <em>League</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getReferee()
  * @model
  * @generated
@@ -37,7 +37,6 @@ public interface Referee extends EObject {
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>League</em>' reference.
 	 * @see #setLeague(League)
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getReferee_League()
@@ -50,7 +49,6 @@ public interface Referee extends EObject {
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Referee#getLeague <em>League</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>League</em>' reference.
 	 * @see #getLeague()
 	 * @generated

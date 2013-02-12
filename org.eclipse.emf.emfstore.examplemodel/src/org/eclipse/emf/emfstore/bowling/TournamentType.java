@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Tournament Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * 
  * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getTournamentType()
  * @model
  * @generated
@@ -31,7 +30,6 @@ public enum TournamentType implements Enumerator {
 	 * The '<em><b>Pro</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #PRO_VALUE
 	 * @generated
 	 * @ordered
@@ -42,7 +40,6 @@ public enum TournamentType implements Enumerator {
 	 * The '<em><b>Amateur</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #AMATEUR_VALUE
 	 * @generated
 	 * @ordered
@@ -57,7 +54,6 @@ public enum TournamentType implements Enumerator {
 	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #PRO
 	 * @model name="Pro"
 	 * @generated
@@ -73,7 +69,6 @@ public enum TournamentType implements Enumerator {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #AMATEUR
 	 * @model name="Amateur"
 	 * @generated
@@ -85,16 +80,17 @@ public enum TournamentType implements Enumerator {
 	 * An array of all the '<em><b>Tournament Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	private static final TournamentType[] VALUES_ARRAY = new TournamentType[] { PRO, AMATEUR, };
+	private static final TournamentType[] VALUES_ARRAY = new TournamentType[] {
+			PRO,
+			AMATEUR,
+		};
 
 	/**
 	 * A public read-only list of all the '<em><b>Tournament Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static final List<TournamentType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
@@ -103,7 +99,6 @@ public enum TournamentType implements Enumerator {
 	 * Returns the '<em><b>Tournament Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static TournamentType get(String literal) {
@@ -120,7 +115,6 @@ public enum TournamentType implements Enumerator {
 	 * Returns the '<em><b>Tournament Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static TournamentType getByName(String name) {
@@ -137,15 +131,12 @@ public enum TournamentType implements Enumerator {
 	 * Returns the '<em><b>Tournament Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static TournamentType get(int value) {
 		switch (value) {
-		case PRO_VALUE:
-			return PRO;
-		case AMATEUR_VALUE:
-			return AMATEUR;
+			case PRO_VALUE: return PRO;
+			case AMATEUR_VALUE: return AMATEUR;
 		}
 		return null;
 	}
@@ -153,7 +144,6 @@ public enum TournamentType implements Enumerator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
@@ -161,7 +151,6 @@ public enum TournamentType implements Enumerator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
@@ -169,7 +158,6 @@ public enum TournamentType implements Enumerator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
@@ -178,7 +166,6 @@ public enum TournamentType implements Enumerator {
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private TournamentType(int value, String name, String literal) {
@@ -190,38 +177,34 @@ public enum TournamentType implements Enumerator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**
 	 * Returns the literal value of the enumerator, which is its string representation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

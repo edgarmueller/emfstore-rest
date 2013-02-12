@@ -33,7 +33,6 @@ import org.eclipse.emf.emfstore.bowling.TournamentType;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
@@ -41,17 +40,16 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static BowlingFactory init() {
 		try {
-			BowlingFactory theBowlingFactory = (BowlingFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://org/eclipse/example/bowling");
+			BowlingFactory theBowlingFactory = (BowlingFactory)EPackage.Registry.INSTANCE.getEFactory("http://org/eclipse/example/bowling"); 
 			if (theBowlingFactory != null) {
 				return theBowlingFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new BowlingFactoryImpl();
@@ -61,7 +59,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BowlingFactoryImpl() {
@@ -71,71 +68,58 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case BowlingPackage.PLAYER:
-			return createPlayer();
-		case BowlingPackage.LEAGUE:
-			return createLeague();
-		case BowlingPackage.TOURNAMENT:
-			return createTournament();
-		case BowlingPackage.MATCHUP:
-			return createMatchup();
-		case BowlingPackage.GAME:
-			return createGame();
-		case BowlingPackage.PLAYER_TO_POINTS_MAP:
-			return (EObject) createPlayerToPointsMap();
-		case BowlingPackage.REFEREE:
-			return createReferee();
-		case BowlingPackage.REFEREE_TO_GAMES_MAP:
-			return (EObject) createRefereeToGamesMap();
-		case BowlingPackage.AREA:
-			return createArea();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			case BowlingPackage.PLAYER: return createPlayer();
+			case BowlingPackage.LEAGUE: return createLeague();
+			case BowlingPackage.TOURNAMENT: return createTournament();
+			case BowlingPackage.MATCHUP: return createMatchup();
+			case BowlingPackage.GAME: return createGame();
+			case BowlingPackage.PLAYER_TO_POINTS_MAP: return (EObject)createPlayerToPointsMap();
+			case BowlingPackage.REFEREE: return createReferee();
+			case BowlingPackage.REFEREE_TO_GAMES_MAP: return (EObject)createRefereeToGamesMap();
+			case BowlingPackage.AREA: return createArea();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-		case BowlingPackage.TOURNAMENT_TYPE:
-			return createTournamentTypeFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			case BowlingPackage.TOURNAMENT_TYPE:
+				return createTournamentTypeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-		case BowlingPackage.TOURNAMENT_TYPE:
-			return convertTournamentTypeToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			case BowlingPackage.TOURNAMENT_TYPE:
+				return convertTournamentTypeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Player createPlayer() {
@@ -146,7 +130,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public League createLeague() {
@@ -157,7 +140,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Tournament createTournament() {
@@ -168,7 +150,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Matchup createMatchup() {
@@ -179,7 +160,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Game createGame() {
@@ -190,7 +170,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Map.Entry<Player, Integer> createPlayerToPointsMap() {
@@ -201,7 +180,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Referee createReferee() {
@@ -212,7 +190,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Map.Entry<Referee, Game> createRefereeToGamesMap() {
@@ -223,7 +200,6 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Area createArea() {
@@ -234,21 +210,17 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TournamentType createTournamentTypeFromString(EDataType eDataType, String initialValue) {
 		TournamentType result = TournamentType.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
-				+ eDataType.getName() + "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertTournamentTypeToString(EDataType eDataType, Object instanceValue) {
@@ -258,17 +230,15 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BowlingPackage getBowlingPackage() {
-		return (BowlingPackage) getEPackage();
+		return (BowlingPackage)getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */
