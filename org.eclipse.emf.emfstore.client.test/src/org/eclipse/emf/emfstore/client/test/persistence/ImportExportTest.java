@@ -15,16 +15,13 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportC
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ImportExportTest extends WorkspaceTest {
 
 	@Override
-	@Before
-	public void setupTest() {
+	protected void configureCompareAtEnd() {
 		setCompareAtEnd(false);
-		super.setupTest();
 	}
 
 	@Test

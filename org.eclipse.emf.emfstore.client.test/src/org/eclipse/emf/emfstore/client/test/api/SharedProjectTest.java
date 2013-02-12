@@ -19,13 +19,13 @@ import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.api.query.IRangeQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
@@ -38,10 +38,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	// TODO: OTS
 	private ILogMessage logMessage;
 	private ICommitCallback callback;
-	private IBranchVersionSpec branch;
 	private IUpdateCallback updateCallback;
 	private IPrimaryVersionSpec target;
-	private IHistoryQuery query;
 
 	private boolean conflictOccurred;
 	private boolean noLocalChangesOccurred;
@@ -113,6 +111,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		try {
 			IPrimaryVersionSpec base = localProject.getBaseVersion();
 			addPlayerToProject();
+			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			assertNotSame(base, head);
@@ -123,6 +122,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	}
 
 	public void testCommitBranchWithoutChange() throws EMFStoreException {
+		IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
 		localProject.commitToBranch(branch, logMessage, new CommitCallbackAdapter() {
 			@Override
 			public void noLocalChanges(ILocalProject projectSpace) {
@@ -152,7 +152,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			assertEquals(1, branches.size());
 
 			addPlayerToProject();
-
+			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			branches = localProject.getBranches(new NullProgressMonitor());
@@ -167,14 +167,17 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoOnlyTrunk() {
 		try {
-
-			List<? extends IHistoryInfo> infos = localProject.getHistoryInfos(query);
+			IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+				true);
+			List<IHistoryInfo> infos = localProject.getHistoryInfos(query);
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();
 
+			assertEquals(0, localProject.getBaseVersion().getIdentifier());
 			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
-			infos = localProject.getHistoryInfos(query);
+			assertEquals(1, localProject.getBaseVersion().getIdentifier());
+			infos = localProject.getHistoryInfos(IHistoryQuery.FACTORY.rangeQuery(head, 1, 1, true, true, true, true));
 			assertEquals(2, infos.size());
 			// TODO assert infos
 		} catch (EMFStoreException e) {
@@ -186,11 +189,13 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoBranch() {
 		try {
+			IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+				true);
 			List<? extends IHistoryInfo> infos = localProject.getHistoryInfos(query);
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();
-
+			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
 			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			infos = localProject.getHistoryInfos(query);
@@ -233,39 +238,6 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		localProject.commit();
 		checkedoutPlayer.setName("B");
 		checkedoutCopy.commit();
-	}
-
-	@Test
-	public void testMergeAndExpectChangeConflictException() throws EMFStoreException {
-
-		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		localProject.commit();
-		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout();
-		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
-
-		player.setName("A");
-		localProject.commit();
-		checkedoutPlayer.setName("B");
-		callback = new CommitCallbackAdapter() {
-			@Override
-			public boolean baseVersionOutOfDate(ILocalProject localProject, IProgressMonitor progressMonitor) {
-				IPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-				IPrimaryVersionSpec version;
-				try {
-					version = localProject.resolveVersionSpec(IVersionSpec.FACTORY
-						.createHEAD(baseVersion));
-					localProject.update(version, null, new NullProgressMonitor());
-				} catch (ChangeConflictException e) {
-					conflictOccurred = true;
-				} catch (EMFStoreException e) {
-					fail("Expected ChangeConflictException");
-				}
-				fail("Expected ChangeConflictException");
-				return true;
-			}
-		};
-		checkedoutCopy.commit(null, callback, new NullProgressMonitor());
-		assertTrue(conflictOccurred);
 	}
 
 	@Test
