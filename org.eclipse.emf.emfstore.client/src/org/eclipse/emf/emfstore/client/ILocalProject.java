@@ -65,7 +65,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
-	 * successful or not. This enables the the headless execution the commit.
+	 * successful or not. This enables the the headless execution of the commit.
 	 * 
 	 * @param logMessage
 	 *            a {@link ILogMessage} describing the changes being committed
@@ -87,8 +87,11 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Commits any local changes to a branch.
 	 * </p>
 	 * <p>
+	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * </p>
+	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
-	 * successful or not. This enables the the headless execution the commit.
+	 * successful or not. This enables the the headless execution of the commit.
 	 * 
 	 * @param branch
 	 *            the {@link IBranchVersionSpec} indicating the branch to commit to

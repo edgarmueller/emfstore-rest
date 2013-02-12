@@ -10,25 +10,36 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
+import org.eclipse.emf.emfstore.client.IChangeConflict;
 
 /**
- * Represents the exception that there are conflicting changes.
+ * Exception that represents that there are conflicting changes.
  * 
  * @author koegel
  */
 @SuppressWarnings("serial")
 public class ChangeConflictException extends WorkspaceException {
 
-	private final ChangeConflict changeConflict;
+	private final IChangeConflict changeConflict;
 
-	public ChangeConflictException(ChangeConflict changeConflict) {
+	/**
+	 * Constructor.
+	 * 
+	 * @param changeConflict
+	 *            the {@link IChangeConflict} leading to the conflict
+	 */
+	public ChangeConflictException(IChangeConflict changeConflict) {
 		super("Conflict detected on update");
 		this.changeConflict = changeConflict;
 
 	}
 
-	public ChangeConflict getChangeConflict() {
+	/**
+	 * Returns the {@link IChangeConflict} that caused the exception.
+	 * 
+	 * @return the change conflict that led to the exception
+	 */
+	public IChangeConflict getChangeConflict() {
 		return changeConflict;
 	}
 }

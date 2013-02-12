@@ -729,11 +729,6 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		return super.eIsSet(featureID);
 	}
 
-	// TODO OTS remap for typo
-	public IPrimaryVersionSpec getPrimarySpec() {
-		return getPrimarySpec();
-	}
-
 	public List<IPrimaryVersionSpec> getNextSpecs() {
 		return copy(getNextSpec());
 	}
