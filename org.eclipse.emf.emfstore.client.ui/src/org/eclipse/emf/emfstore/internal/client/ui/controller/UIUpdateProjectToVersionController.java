@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
@@ -58,7 +59,7 @@ public class UIUpdateProjectToVersionController extends
 			projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
 		try {
-			List<IHistoryInfo> historyInfo = projectSpace.getHistoryInfos(query);
+			List<IHistoryInfo> historyInfo = projectSpace.getHistoryInfos(query, new NullProgressMonitor());
 			// filter base version
 			Iterator<IHistoryInfo> iter = historyInfo.iterator();
 			while (iter.hasNext()) {
@@ -89,7 +90,7 @@ public class UIUpdateProjectToVersionController extends
 					HistoryInfo historyInfo = (HistoryInfo) element;
 
 					StringBuilder sb = new StringBuilder("Version ");
-					sb.append(Integer.toString(historyInfo.getPrimerySpec()
+					sb.append(Integer.toString(historyInfo.getPrimarySpec()
 						.getIdentifier()));
 					sb.append("  -  ");
 					sb.append(historyInfo.getLogMessage().getMessage());
@@ -115,7 +116,7 @@ public class UIUpdateProjectToVersionController extends
 							return new UIUpdateProjectController(
 								getShell(), projectSpace, Versions
 									.createPRIMARY(info
-										.getPrimerySpec()
+										.getPrimarySpec()
 										.getIdentifier()))
 								.execute();
 						}

@@ -64,7 +64,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
-	PrimaryVersionSpec getPrimerySpec();
+	PrimaryVersionSpec getPrimarySpec();
 
 	/**
 	 * Sets the value of the '
@@ -74,7 +74,7 @@ public interface HistoryInfo extends EObject, IHistoryInfo {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Primery Spec</em>' containment reference.
-	 * @see #getPrimerySpec()
+	 * @see #getPrimarySpec()
 	 * @generated
 	 */
 	void setPrimerySpec(PrimaryVersionSpec value);

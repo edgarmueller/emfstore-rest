@@ -153,13 +153,13 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 * @return The text for the given historyInfo.
 	 */
 	protected String getText(HistoryInfo historyInfo) {
-		if (historyInfo.getPrimerySpec() != null && historyInfo.getPrimerySpec().getIdentifier() == -1) {
+		if (historyInfo.getPrimarySpec() != null && historyInfo.getPrimarySpec().getIdentifier() == -1) {
 			return LOCAL_REVISION;
 		}
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project).getBaseVersion()
+		if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project).getBaseVersion()
 			.getIdentifier()) {
 			baseVersion = "*";
 		}
@@ -176,7 +176,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		builder.append(baseVersion);
 		builder.append("Version ");
-		builder.append(historyInfo.getPrimerySpec().getIdentifier());
+		builder.append(historyInfo.getPrimarySpec().getIdentifier());
 		LogMessage logMessage = null;
 
 		if (historyInfo.getLogMessage() != null) {
@@ -236,7 +236,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 				return italic;
 			}
 			HistoryInfo historyInfo = (HistoryInfo) element;
-			if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project)
+			if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project)
 				.getBaseVersion().getIdentifier()) {
 				return bold;
 			}

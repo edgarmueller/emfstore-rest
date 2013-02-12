@@ -186,7 +186,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					// the conflict resolver always prefers the changes from the incoming branch
 					((ProjectSpaceBase) trunk).mergeBranch(latestOnBranch, new TestConflictResolver(true,
-						expectedConflicts));
+						expectedConflicts), new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					throw new RuntimeException(e);
 				}

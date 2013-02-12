@@ -635,7 +635,8 @@ public class SetupHelper {
 
 				try {
 					// TODO OTS hot code incoming
-					compareProject = new RemoteProject(usersession.getServer(), projectInfo).checkout(usersession)
+					compareProject = new RemoteProject(usersession.getServer(), projectInfo).checkout(usersession,
+						new NullProgressMonitor())
 						.getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (EMFStoreException e) {

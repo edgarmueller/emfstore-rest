@@ -56,8 +56,8 @@ public class RevertCommitController extends ServerCall<Void> {
 			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
 				Versions.createHEAD(baseVersion));
 
-		ProjectSpace revertSpace = (ProjectSpace) projectSpace.getRemoteProject().checkout(
-			projectSpace.getUsersession());
+		ProjectSpace revertSpace = projectSpace.getRemoteProject().checkout(
+			projectSpace.getUsersession(), getProgressMonitor());
 
 		List<ChangePackage> changes = revertSpace.getChanges(baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -312,11 +313,15 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 									historyInfos.addAll(((List<HistoryInfo>) (List<?>) projectSpace
 										.getHistoryInfos(HistoryQueryBuilder.modelelementQuery(centerVersion,
 											Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-											LOWER_LIMIT, showAllVersions, true))));
+											LOWER_LIMIT, showAllVersions, true),
+											new NullProgressMonitor())));// TODO monitor
 								} else {
-									historyInfos.addAll((List<HistoryInfo>) (List<?>) projectSpace
-										.getHistoryInfos(HistoryQueryBuilder.rangeQuery(centerVersion, UPPER_LIMIT,
-											LOWER_LIMIT, showAllVersions, true, true, true)));
+									// TODO monitor
+									historyInfos
+										.addAll((List<HistoryInfo>) (List<?>) projectSpace
+											.getHistoryInfos(HistoryQueryBuilder.rangeQuery(centerVersion, UPPER_LIMIT,
+												LOWER_LIMIT, showAllVersions, true, true, true),
+												new NullProgressMonitor()));
 								}
 								monitor.worked(90);
 								return historyInfos;
@@ -562,7 +567,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				if (current.getNextSpec().size() > 0) {
 					HistoryInfo nextInfo = getHistoryInfo(current.getNextSpec().get(0));
 					if (nextInfo == null) {
-						return current.getPrimerySpec();
+						return current.getPrimarySpec();
 					}
 					current = nextInfo;
 				} else {
@@ -573,7 +578,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					&& current.getPreviousSpec().getBranch().equals(projectSpace.getBaseVersion().getBranch())) {
 					HistoryInfo prevInfo = getHistoryInfo(current.getPreviousSpec());
 					if (prevInfo == null) {
-						return current.getPrimerySpec();
+						return current.getPrimarySpec();
 					}
 					current = prevInfo;
 				} else {
@@ -585,7 +590,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		if (current == null) {
 			return centerVersion;
 		}
-		return current.getPrimerySpec();
+		return current.getPrimarySpec();
 	}
 
 	private HistoryInfo getHistoryInfo(PrimaryVersionSpec version) {
@@ -593,7 +598,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			return null;
 		}
 		for (HistoryInfo info : infos) {
-			if (version.equals(info.getPrimerySpec())) {
+			if (version.equals(info.getPrimarySpec())) {
 				return info;
 			}
 		}
@@ -609,10 +614,10 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		ArrayList<HistoryInfo> resultCandidates = new ArrayList<HistoryInfo>(input);
 		PrimaryVersionSpec result = centerVersion;
 		for (HistoryInfo info : resultCandidates) {
-			if (info.getPrimerySpec().getIdentifier() != -1
-				&& ((biggest && info.getPrimerySpec().compareTo(result) == 1) || (!biggest && info.getPrimerySpec()
+			if (info.getPrimarySpec().getIdentifier() != -1
+				&& ((biggest && info.getPrimarySpec().compareTo(result) == 1) || (!biggest && info.getPrimarySpec()
 					.compareTo(result) == -1))) {
-				result = info.getPrimerySpec();
+				result = info.getPrimarySpec();
 			}
 		}
 		return result;
@@ -683,7 +688,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EMFStoreException {
 						try {
 							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
-								VersionSpec.GLOBAL, Integer.parseInt(value)));
+								VersionSpec.GLOBAL, Integer.parseInt(value)), new NullProgressMonitor());
 						} catch (EMFStoreException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
 								"Error: The version you requested does not exist.", e);

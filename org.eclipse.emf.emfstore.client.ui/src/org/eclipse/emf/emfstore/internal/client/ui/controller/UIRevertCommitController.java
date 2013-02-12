@@ -72,7 +72,7 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 				+ view.getProjectSpace().getProjectName(), MessageDialog.QUESTION, new String[] { "Yes", "No" }, 0);
 		int result = dialog.open();
 		if (result == Window.OK) {
-			PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
+			PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimarySpec());
 			try {
 				new RevertCommitController(view.getProjectSpace(), versionSpec, true).execute();
 			} catch (EMFStoreException e) {

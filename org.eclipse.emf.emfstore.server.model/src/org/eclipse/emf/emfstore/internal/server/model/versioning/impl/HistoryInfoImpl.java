@@ -63,10 +63,10 @@ import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec
  */
 public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	/**
-	 * The cached value of the '{@link #getPrimerySpec() <em>Primery Spec</em>}' containment reference.
+	 * The cached value of the '{@link #getPrimarySpec() <em>Primery Spec</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #getPrimerySpec()
+	 * @see #getPrimarySpec()
 	 * @generated
 	 * @ordered
 	 */
@@ -179,7 +179,7 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 	 * 
 	 * @generated
 	 */
-	public PrimaryVersionSpec getPrimerySpec() {
+	public PrimaryVersionSpec getPrimarySpec() {
 		if (primerySpec != null && primerySpec.eIsProxy()) {
 			InternalEObject oldPrimerySpec = (InternalEObject) primerySpec;
 			primerySpec = (PrimaryVersionSpec) eResolveProxy(oldPrimerySpec);
@@ -587,7 +587,7 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		switch (featureID) {
 		case VersioningPackage.HISTORY_INFO__PRIMERY_SPEC:
 			if (resolve)
-				return getPrimerySpec();
+				return getPrimarySpec();
 			return basicGetPrimerySpec();
 		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
 			return getNextSpec();
@@ -731,7 +731,7 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 
 	// TODO OTS remap for typo
 	public IPrimaryVersionSpec getPrimarySpec() {
-		return getPrimerySpec();
+		return getPrimarySpec();
 	}
 
 	public List<IPrimaryVersionSpec> getNextSpecs() {

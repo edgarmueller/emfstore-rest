@@ -196,7 +196,8 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						// TODO: OTS cast
-						projectSpace2 = projectSpace.getRemoteProject().checkout(setupHelper.getUsersession());
+						projectSpace2 = projectSpace.getRemoteProject().checkout(setupHelper.getUsersession(),
+							new NullProgressMonitor());
 					} catch (EMFStoreException e) {
 						e.printStackTrace();
 					}
@@ -270,7 +271,8 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = setupHelper.getTestProjectSpace().getRemoteProject().checkout(usersession2);
+					projectSpace2 = setupHelper.getTestProjectSpace().getRemoteProject()
+						.checkout(usersession2, new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					e.printStackTrace();
 				}

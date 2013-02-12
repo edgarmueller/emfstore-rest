@@ -67,7 +67,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = RuntimeException.class)
 	public void testAddTag() throws EMFStoreException {
 		// a tag can not be created for an unshared project
-		localProject.addTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("test", "test"));
+		localProject.addTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("test", "test"),
+			new NullProgressMonitor());
 		fail("Cannot add a tag!");
 	}
 
@@ -116,7 +117,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		IModelElementId id = localProject.getModelElementId(player);
 		IHistoryQuery query = IHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
 			true);
-		localProject.getHistoryInfos(query);
+		localProject.getHistoryInfos(query, new NullProgressMonitor());
 		fail("Should not be able to getHistoryInfos from an unshared Project!");
 	}
 
@@ -169,27 +170,29 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testMerge() throws EMFStoreException {
-		localProject.mergeBranch(localProject.getBaseVersion(), new TestConflictResolver(false, 0));
+		localProject.mergeBranch(localProject.getBaseVersion(), new TestConflictResolver(false, 0),
+			new NullProgressMonitor());
 		fail("Should not be able to merge with head on an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testMergeBranch() throws EMFStoreException {
 		localProject.mergeBranch(localProject.getBaseVersion(),
-			new TestConflictResolver(false, 0));
+			new TestConflictResolver(false, 0), new NullProgressMonitor());
 
 		fail("Should not be able to merge with head on an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveTag() throws EMFStoreException {
-		localProject.removeTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("tag", "branch"));
+		localProject.removeTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("tag", "branch"),
+			new NullProgressMonitor());
 		fail("Should not remove a tag from an unshared Project!");
 	}
 
 	@Test(expected = EMFStoreException.class)
 	public void testResolveSpec() throws EMFStoreException {
-		localProject.resolveVersionSpec(IVersionSpec.FACTORY.createHEAD());
+		localProject.resolveVersionSpec(IVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
 		fail("Should not be able to resolve a version spec from an unshared Project!");
 	}
 

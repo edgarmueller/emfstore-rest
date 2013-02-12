@@ -115,7 +115,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Resolving new version");
 
-		checkForCommitPreconditions(branch);
+		checkForCommitPreconditions(branch, getProgressMonitor());
 
 		getProgressMonitor().worked(10);
 		getProgressMonitor().subTask("Gathering changes");
@@ -143,7 +143,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Sending changes to server");
 
 		// check again if an update is required
-		boolean updatePerformed = checkForCommitPreconditions(branch);
+		boolean updatePerformed = checkForCommitPreconditions(branch, getProgressMonitor());
 		// present changes again if update was performed
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
@@ -214,7 +214,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return true;
 	}
 
-	private boolean checkForCommitPreconditions(final BranchVersionSpec branch) throws InvalidVersionSpecException,
+	private boolean checkForCommitPreconditions(final BranchVersionSpec branch, IProgressMonitor monitor)
+		throws InvalidVersionSpecException,
 		EMFStoreException, BaseVersionOutdatedException {
 		if (branch != null) {
 			// check branch conditions
@@ -223,7 +224,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			}
 			PrimaryVersionSpec potentialBranch = null;
 			try {
-				potentialBranch = getLocalProject().resolveVersionSpec(branch);
+				potentialBranch = getLocalProject().resolveVersionSpec(branch, monitor);
 			} catch (InvalidVersionSpecException e) {
 				// branch doesn't exist, create.
 			}
@@ -234,7 +235,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		} else {
 			// check if we need to update first
 			PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(
-				Versions.createHEAD(getLocalProject().getBaseVersion()));
+				Versions.createHEAD(getLocalProject().getBaseVersion()), monitor);
 			if (!getLocalProject().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getLocalProject(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();

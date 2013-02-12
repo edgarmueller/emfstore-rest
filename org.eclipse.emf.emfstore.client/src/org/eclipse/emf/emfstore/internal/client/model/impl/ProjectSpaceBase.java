@@ -183,13 +183,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec)
 	 */
-	public void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException {
+	public void addTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException {
 
 		checkIsShared();
 
-		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-		connectionManager.addTag(getUsersession().getSessionId(), getProjectId(), (PrimaryVersionSpec) versionSpec,
-			(TagVersionSpec) tag);
+		new ServerCall<Void>(this, monitor) {
+			@Override
+			protected Void run() throws EMFStoreException {
+				getConnectionManager().addTag(getUsersession().getSessionId(), getProjectId(),
+					(PrimaryVersionSpec) versionSpec,
+					(TagVersionSpec) tag);
+				return null;
+			}
+		};
 	}
 
 	/**
@@ -448,10 +455,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery)
+	 * @see org.eclipse.emf.emfstore.client.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException {
-		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query));
+	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
+		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
 	}
 
 	/**
@@ -851,7 +859,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isUpdated()
 	 */
 	public boolean isUpdated() throws EMFStoreException {
-		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()));
+		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()),
+			new NullProgressMonitor());
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -907,17 +916,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ILocalProject#mergeBranch(org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void mergeBranch(final IPrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver)
+	public void mergeBranch(final IPrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver,
+		final IProgressMonitor monitor)
 		throws EMFStoreException {
-		mergeBranch((PrimaryVersionSpec) branchSpec, conflictResolver);
+		mergeBranch((PrimaryVersionSpec) branchSpec, conflictResolver, monitor);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void mergeBranch(final PrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver)
+	public void mergeBranch(final PrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver,
+		final IProgressMonitor monitor)
 		throws EMFStoreException {
 
 		checkIsShared();
@@ -932,7 +945,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
-					branchSpec));
+					branchSpec), monitor);
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
@@ -977,27 +990,44 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#removeTag(org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 * 
 	 * @generated NOT
 	 */
-	public void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException {
+	public void removeTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException {
 
 		checkIsShared();
 
-		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-		cm.removeTag(getUsersession().getSessionId(), getProjectId(), (PrimaryVersionSpec) versionSpec,
-			(TagVersionSpec) tag);
+		new ServerCall<Void>(this, monitor) {
+			@Override
+			protected Void run() throws EMFStoreException {
+				getConnectionManager().removeTag(getSessionId(), getProjectId(), (PrimaryVersionSpec) versionSpec,
+					(TagVersionSpec) tag);
+				return null;
+			}
+		}.execute();
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
-	 * @throws EMFStoreException
+	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * 
 	 * @generated NOT
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException {
+	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec, IProgressMonitor monitor)
+		throws EMFStoreException {
+
+		checkIsShared();
+
 		return new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {

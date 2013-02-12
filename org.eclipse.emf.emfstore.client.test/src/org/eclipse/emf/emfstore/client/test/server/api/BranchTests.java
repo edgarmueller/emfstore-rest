@@ -14,6 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -198,7 +199,7 @@ public class BranchTests extends CoreServerTest {
 
 		PrimaryVersionSpec branch = branch(ps, "b1");
 
-		ps.addTag(branch, Versions.createTAG("mytag", branch.getBranch()));
+		ps.addTag(branch, Versions.createTAG("mytag", branch.getBranch()), new NullProgressMonitor());
 
 		ProjectHistory history = getProjectHistory(ps);
 		assertEquals(2, history.getVersions().size());
@@ -237,7 +238,7 @@ public class BranchTests extends CoreServerTest {
 		assertEquals(1, branchedVersion.getTagSpecs().size());
 		assertEquals("mytag", branchedVersion.getTagSpecs().get(0).getName());
 
-		ps.removeTag(branch, Versions.createTAG("mytag", "b1"));
+		ps.removeTag(branch, Versions.createTAG("mytag", "b1"), new NullProgressMonitor());
 
 		assertEquals(0, branchedVersion.getTagSpecs().size());
 	}

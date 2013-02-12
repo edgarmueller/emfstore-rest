@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
@@ -96,7 +97,8 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 			if (o instanceof TagVersionSpec) {
 				TagVersionSpec tag = (TagVersionSpec) o;
 				try {
-					projectSpace.removeTag(historyInfo.getPrimerySpec(), tag);
+					// TODO: monitor
+					projectSpace.removeTag(historyInfo.getPrimarySpec(), tag, new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					MessageDialog.openError(getShell(), "Remove tag failed", "Remove tag failed: " + e.getMessage());
 				}

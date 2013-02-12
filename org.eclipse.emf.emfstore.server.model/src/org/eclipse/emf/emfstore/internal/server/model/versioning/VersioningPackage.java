@@ -1152,7 +1152,7 @@ public interface VersioningPackage extends EPackage {
 	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery Spec</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Primery Spec</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimarySpec()
 	 * @see #getHistoryInfo()
 	 * @generated
 	 */

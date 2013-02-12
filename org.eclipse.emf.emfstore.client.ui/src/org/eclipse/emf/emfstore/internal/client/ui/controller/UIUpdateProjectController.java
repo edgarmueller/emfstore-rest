@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -110,7 +111,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 		try {
 			final IPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
 				.createHEAD(projectSpace
-					.getBaseVersion()));
+					.getBaseVersion()), new NullProgressMonitor());
 			// merge opens up a dialog
 			return projectSpace.merge(targetVersion, changeConflict,
 				new MergeProjectHandler(), this, progressMonitor);
@@ -165,7 +166,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 		IPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
 		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
-			.createHEAD(oldBaseVersion));
+			.createHEAD(oldBaseVersion), new NullProgressMonitor());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();

@@ -31,12 +31,12 @@ public class HistorySCMLabelProvider extends SCMLabelProvider {
 
 	@Override
 	protected String getText(HistoryInfo historyInfo) {
-		if (historyInfo.getPrimerySpec() != null && historyInfo.getPrimerySpec().getIdentifier() == -1) {
+		if (historyInfo.getPrimarySpec() != null && historyInfo.getPrimarySpec().getIdentifier() == -1) {
 			return LOCAL_REVISION;
 		}
 
 		String baseVersion = "";
-		if (historyInfo.getPrimerySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(getProject())
+		if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(getProject())
 			.getBaseVersion().getIdentifier()) {
 			baseVersion = "*";
 		}
@@ -53,7 +53,7 @@ public class HistorySCMLabelProvider extends SCMLabelProvider {
 
 		builder.append(baseVersion);
 		builder.append("Version ");
-		builder.append(historyInfo.getPrimerySpec().getIdentifier());
+		builder.append(historyInfo.getPrimarySpec().getIdentifier());
 		return builder.toString();
 	}
 

@@ -117,7 +117,8 @@ public interface IRemoteProject extends IProject {
 	List<IBranchInfo> getBranches(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
-	 * Gets a list of history infos from the server.
+	 * Retrieves a part of the project's version history from the server based on the given query. Use
+	 * {@link org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory} to generate query objects.
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the

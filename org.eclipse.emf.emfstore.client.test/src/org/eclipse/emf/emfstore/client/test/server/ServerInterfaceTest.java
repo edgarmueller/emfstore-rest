@@ -77,7 +77,8 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					return getRemoteProject().checkout(TestSessionProvider.getInstance().getDefaultUsersession());
+					return getRemoteProject().checkout(TestSessionProvider.getInstance().getDefaultUsersession()
+						, new NullProgressMonitor());
 				} catch (EMFStoreException e) {
 					Assert.fail();
 					return null;
@@ -212,10 +213,10 @@ public class ServerInterfaceTest extends ServerTests {
 	public void resolveVersionSpecTest() throws EMFStoreException {
 
 		List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
-
+		NullProgressMonitor monitor = new NullProgressMonitor();
 		boolean sameVersionSpec = false;
 		for (IRemoteProject project : remoteProjectList) {
-			if (project.getHeadVersion().equals(getProjectVersion())) {
+			if (project.getHeadVersion(monitor).equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}
 		}
@@ -378,7 +379,7 @@ public class ServerInterfaceTest extends ServerTests {
 
 		// TODO: TQ cast
 		List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) getProjectSpace().getHistoryInfos(
-			createHistoryQuery(createdVersion, createdVersion));
+			createHistoryQuery(createdVersion, createdVersion), new NullProgressMonitor());
 
 		assertTrue(historyInfo.size() == 1);
 		// assertTrue(historyInfo.get(0).getLogMessage().getMessage().equals(logMessage));
@@ -392,15 +393,15 @@ public class ServerInterfaceTest extends ServerTests {
 	@Test
 	public void addTagTest() throws EMFStoreException {
 		String tagName = "testValue";
-
+		NullProgressMonitor monitor = new NullProgressMonitor();
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tag.setName(tagName);
 
-		getProjectSpace().addTag(getProjectVersion(), tag);
+		getProjectSpace().addTag(getProjectVersion(), tag, monitor);
 
 		// TODO: TQ cast
 		List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) getProjectSpace().getHistoryInfos(
-			createHistoryQuery(getProjectVersion(), getProjectVersion()));
+			createHistoryQuery(getProjectVersion(), getProjectVersion()), monitor);
 
 		assertTrue(historyInfo.size() == 1);
 		EList<TagVersionSpec> tagSpecs = historyInfo.get(0).getTagSpecs();
@@ -427,12 +428,13 @@ public class ServerInterfaceTest extends ServerTests {
 
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tag.setName(tagName);
+		NullProgressMonitor monitor = new NullProgressMonitor();
 
-		getProjectSpace().addTag(getProjectVersion(), tag);
-		getProjectSpace().removeTag(getProjectVersion(), tag);
+		getProjectSpace().addTag(getProjectVersion(), tag, monitor);
+		getProjectSpace().removeTag(getProjectVersion(), tag, monitor);
 
 		List<IHistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
-			createHistoryQuery(getProjectVersion(), getProjectVersion()));
+			createHistoryQuery(getProjectVersion(), getProjectVersion()), monitor);
 
 		assertTrue(historyInfo.size() == 1);
 		HistoryInfo iHistoryInfo = (HistoryInfo) historyInfo.get(0);

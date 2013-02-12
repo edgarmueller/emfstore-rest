@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.api.IProjectId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
@@ -41,91 +40,130 @@ public interface IProject {
 	/**
 	 * Return the project's id.
 	 * 
-	 * @return {@link IProject}
+	 * @return the ID of the project
 	 */
 	IProjectId getProjectId();
 
 	/**
 	 * Returns the project's name.
 	 * 
-	 * @return name
+	 * @return the name of the project
 	 */
 	String getProjectName();
 
 	/**
-	 * Deletes the project. This is valid for both, {@link ILocalProject} and {@link IRemoteProject} project.
-	 * 
+	 * <p>
+	 * Deletes the project.
+	 * </p>
+	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
+	 * </p>
 	 * 
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while deleting the project
 	 * 
 	 * @throws IOException
-	 *             in case the project space could not be deleted
+	 *             in case an I/O related error occurred while deleting the project
+	 * @throws EMFStoreException
+	 *             in case any other error occurred while deleting the project
 	 */
 	void delete(IProgressMonitor monitor) throws IOException, EMFStoreException;
 
 	/**
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
-	 * 
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
 	 * 
-	 * @param versionSpec the spec to resolve
-	 * @return the primary version
+	 * @param versionSpec
+	 *            the {@link IVersionSpec} to resolve
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while resolving the version
+	 * 
+	 * @return the resolved {@link IPrimaryVersionSpec}
+	 * 
+	 * @throws EMFStoreException in case an error occurs while resolving the given {@link IVersionSpec}
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec) throws EMFStoreException;
+	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
-	 * Returns a list of branches of the current project. Every call triggers a
-	 * server call.
-	 * 
+	 * <p>
+	 * Returns a list of branches for the current project.
+	 * </p>
+	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
+	 * </p>
 	 * 
-	 * @return list of {@link IBranchInfo}
-	 * @throws EMFStoreException
-	 *             in case of an exception
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while fetching the branch
+	 *            information
+	 * 
+	 * @return a list containing information about all branches for the current project
+	 * 
+	 * @throws EMFStoreException in case an error occurs while retrieving the branch information for the project
 	 */
 	List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
+	 * <p>
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
-	 * {@link IHistoryQueryFactory} to
-	 * generate query obejcts.
-	 * 
-	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * {@link org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory} to generate query objects.
+	 * </p>
 	 * 
 	 * @param query
-	 *            A history query.
-	 * @return a list of {@link IHistoryInfo} objects
+	 *            the {@link IHistoryQuery} to be performed in order to fetch the history information
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while fetching the history
+	 *            information
+	 * 
+	 * @return a list containg the history information for the given query
+	 * 
+	 * @throws EMFStoreException in case an error occurs while retrieving the history information
 	 */
-	List<IHistoryInfo> getHistoryInfos(IHistoryQuery query) throws EMFStoreException;
+	List<IHistoryInfo> getHistoryInfos(IHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
+	 * <p>
 	 * Adds a tag to the specified version of this project on the server.
+	 * </p>
 	 * 
+	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
+	 * </p>
 	 * 
 	 * @param versionSpec
-	 *            the versionSpec
+	 *            the {@link IPrimaryVersionSpec} that should be tagged
 	 * @param tag
-	 *            the tag
+	 *            the tag being created
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while adding the tag
+	 * 
+	 * @throws EMFStoreException in case the given tag could not be removed
 	 */
-	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException;
+	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException;
 
 	/**
-	 * Removes a tag to the specified version of this project on the server.
-	 * 
+	 * <p>
+	 * Removes a tag from the specified version of this project on the server.
+	 * </p>
+	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link IUsersession}.
+	 * </p>
 	 * 
 	 * @param versionSpec
-	 *            the versionSpec
+	 *            the {@link IPrimaryVersionSpec} identifying the version from which the tag should be removed
 	 * @param tag
-	 *            the tag
+	 *            the {@link ITagVersionSpec} to be removed
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while removing the tag
+	 * 
+	 * @throws EMFStoreException in case the given tag could not be removed
 	 */
-	void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag) throws EMFStoreException;
+	void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException;
 }

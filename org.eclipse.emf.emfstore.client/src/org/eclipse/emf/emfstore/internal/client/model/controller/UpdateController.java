@@ -88,7 +88,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
-		final PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(version);
+		final PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(version, getProgressMonitor());
 		if (resolvedVersion.compareTo(getLocalProject().getBaseVersion()) == 0) {
 			return resolvedVersion;
 		}

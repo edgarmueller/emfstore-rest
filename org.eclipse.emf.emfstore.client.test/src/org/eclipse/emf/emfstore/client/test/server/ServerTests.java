@@ -105,7 +105,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() throws EMFStoreException {
-		return getRemoteProject().getHeadVersion();
+		return getRemoteProject().getHeadVersion(new NullProgressMonitor());
 	}
 
 	/**

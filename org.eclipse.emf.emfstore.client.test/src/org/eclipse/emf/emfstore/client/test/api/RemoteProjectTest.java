@@ -51,7 +51,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSession() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession);
+			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
 		} catch (EMFStoreException e) {
@@ -75,7 +75,8 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressNoFetch() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession, remoteProject.getHeadVersion(),
+			ILocalProject localProject = remoteProject.checkout(usersession,
+				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
@@ -88,7 +89,8 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressFetch() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession, remoteProject.getHeadVersion(),
+			ILocalProject localProject = remoteProject.checkout(usersession,
+				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
@@ -112,59 +114,77 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testGetHeadVersion() throws EMFStoreException {
 		IPrimaryVersionSpec versionSpec;
-		versionSpec = remoteProject.getHeadVersion();
+		versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
 	@Test
 	public void testGetHeadVersionFetch() throws EMFStoreException {
-		IPrimaryVersionSpec versionSpec = remoteProject.getHeadVersion();
+		IPrimaryVersionSpec versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
 	@Test
 	public void testGetHistoryInfosSession() throws EMFStoreException {
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(usersession, IHistoryQuery.FACTORY
-			.pathQuery(remoteProject.getHeadVersion(), remoteProject.getHeadVersion(), true, true));
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		;
+		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(
+			usersession,
+			IHistoryQuery.FACTORY
+				.pathQuery(remoteProject.getHeadVersion(monitor),
+					remoteProject.getHeadVersion(monitor), true, true), monitor);
 		assertEquals(1, historyInfos.size());
 	}
 
 	@Test
 	public void testGetHistoryInfos() throws EMFStoreException {
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		;
 		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(IHistoryQuery.FACTORY.pathQuery(
-			remoteProject.getHeadVersion(), remoteProject.getHeadVersion(), true, true));
+			remoteProject.getHeadVersion(monitor),
+			remoteProject.getHeadVersion(monitor), true, true), monitor);
 		assertEquals(1, historyInfos.size());
 	}
 
 	@Test
 	public void testAddTag() throws EMFStoreException {
 		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
-		remoteProject.addTag(remoteProject.getHeadVersion(), tagSpec);
-		assertEquals(remoteProject.getHeadVersion(), remoteProject.resolveVersionSpec(tagSpec));
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		;
+		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
+		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
+			remoteProject.resolveVersionSpec(tagSpec, new NullProgressMonitor()));
 	}
 
 	@Test(expected = EMFStoreException.class)
 	public void testRemoveTag() throws EMFStoreException {
 		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
-		remoteProject.addTag(remoteProject.getHeadVersion(), tagSpec);
-		assertEquals(remoteProject.getHeadVersion(), remoteProject.resolveVersionSpec(tagSpec));
-		remoteProject.removeTag(remoteProject.getHeadVersion(), tagSpec);
-		remoteProject.resolveVersionSpec(tagSpec);
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
+		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
+			remoteProject.resolveVersionSpec(tagSpec, new NullProgressMonitor()));
+		remoteProject.removeTag(remoteProject.getHeadVersion(new NullProgressMonitor()), tagSpec,
+			new NullProgressMonitor());
+		remoteProject.resolveVersionSpec(tagSpec, new NullProgressMonitor());
 		fail("If no tag is there we should get an exception!");
 	}
 
 	@Test
 	public void testResolveVersion() throws EMFStoreException {
 		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
-		remoteProject.addTag(remoteProject.getHeadVersion(), tagSpec);
-		assertEquals(remoteProject.getHeadVersion(), remoteProject.resolveVersionSpec(tagSpec));
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
+		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
+			remoteProject.resolveVersionSpec(tagSpec, new NullProgressMonitor()));
 	}
 
 	@Test
 	public void testResolveVersionSession() throws EMFStoreException {
 		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
-		remoteProject.addTag(remoteProject.getHeadVersion(), tagSpec);
-		assertEquals(remoteProject.getHeadVersion(), remoteProject.resolveVersionSpec(usersession, tagSpec));
+		NullProgressMonitor monitor = new NullProgressMonitor();
+		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
+		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
+			remoteProject.resolveVersionSpec(usersession, tagSpec, new NullProgressMonitor()));
 
 	}
 }

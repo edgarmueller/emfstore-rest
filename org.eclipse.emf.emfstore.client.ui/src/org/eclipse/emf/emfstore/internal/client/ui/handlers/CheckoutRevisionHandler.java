@@ -34,7 +34,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 	public void handle() {
 
 		HistoryInfo historyInfo = requireSelection(HistoryInfo.class);
-		PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimerySpec());
+		PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimarySpec());
 
 		// TODO: remove HistoryBrowserView
 		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();

@@ -15,10 +15,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
@@ -89,7 +89,7 @@ public class HistoryAPITests extends CoreServerTest {
 		assertEquals(versions[5], p.commit(ps2));
 
 		// v6
-		ProjectSpace thirdBranch = p.checkout((RemoteProject) ps.getRemoteProject(), versions[3]);
+		ProjectSpace thirdBranch = p.checkout(ps.getRemoteProject(), versions[3]);
 		rename(thirdBranch, 6);
 		assertEquals(versions[6], p.branch(thirdBranch, branches[2]));
 
@@ -116,13 +116,13 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 5, 25, false, false, false, false));
+			versions[3], 5, 25, false, false, false, false), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
-		assertEquals(versions[1], result.get(2).getPrimerySpec());
-		assertEquals(versions[0], result.get(3).getPrimerySpec());
+		assertEquals(versions[5], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[1], result.get(2).getPrimarySpec());
+		assertEquals(versions[0], result.get(3).getPrimarySpec());
 	}
 
 	@Test
@@ -130,17 +130,17 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 5, 25, true, false, false, false));
+			versions[3], 5, 25, true, false, false, false), new NullProgressMonitor());
 
 		assertEquals(8, result.size());
-		assertEquals(versions[7], result.get(0).getPrimerySpec());
-		assertEquals(versions[6], result.get(1).getPrimerySpec());
-		assertEquals(versions[5], result.get(2).getPrimerySpec());
-		assertEquals(versions[4], result.get(3).getPrimerySpec());
-		assertEquals(versions[3], result.get(4).getPrimerySpec());
-		assertEquals(versions[2], result.get(5).getPrimerySpec());
-		assertEquals(versions[1], result.get(6).getPrimerySpec());
-		assertEquals(versions[0], result.get(7).getPrimerySpec());
+		assertEquals(versions[7], result.get(0).getPrimarySpec());
+		assertEquals(versions[6], result.get(1).getPrimarySpec());
+		assertEquals(versions[5], result.get(2).getPrimarySpec());
+		assertEquals(versions[4], result.get(3).getPrimarySpec());
+		assertEquals(versions[3], result.get(4).getPrimarySpec());
+		assertEquals(versions[2], result.get(5).getPrimarySpec());
+		assertEquals(versions[1], result.get(6).getPrimarySpec());
+		assertEquals(versions[0], result.get(7).getPrimarySpec());
 	}
 
 	@Test
@@ -148,13 +148,13 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 1, 25, false, false, false, true));
+			versions[3], 1, 25, false, false, false, true), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
-		assertEquals(versions[1], result.get(2).getPrimerySpec());
-		assertEquals(versions[0], result.get(3).getPrimerySpec());
+		assertEquals(versions[5], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[1], result.get(2).getPrimarySpec());
+		assertEquals(versions[0], result.get(3).getPrimarySpec());
 
 		assertTrue(result.get(0).getChangePackage() != null);
 		assertTrue(result.get(1).getChangePackage() != null);
@@ -168,11 +168,11 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[5], 5, 1, false, false, false, false));
+			versions[5], 5, 1, false, false, false, false), new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
+		assertEquals(versions[5], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
 	}
 
 	@Test
@@ -180,11 +180,11 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[0], 1, 20, false, false, false, false));
+			versions[0], 1, 20, false, false, false, false), new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[1], result.get(0).getPrimerySpec());
-		assertEquals(versions[0], result.get(1).getPrimerySpec());
+		assertEquals(versions[1], result.get(0).getPrimarySpec());
+		assertEquals(versions[0], result.get(1).getPrimarySpec());
 	}
 
 	@Test
@@ -192,10 +192,10 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[0], 0, 0, false, false, false, false));
+			versions[0], 0, 0, false, false, false, false), new NullProgressMonitor());
 
 		assertEquals(1, result.size());
-		assertEquals(versions[0], result.get(0).getPrimerySpec());
+		assertEquals(versions[0], result.get(0).getPrimarySpec());
 	}
 
 	@Test
@@ -203,12 +203,12 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[7], 0, 2, false, true, false, false));
+			versions[7], 0, 2, false, true, false, false), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[7], result.get(0).getPrimerySpec());
-		assertEquals(versions[6], result.get(1).getPrimerySpec());
-		assertEquals(versions[5], result.get(2).getPrimerySpec());
+		assertEquals(versions[7], result.get(0).getPrimarySpec());
+		assertEquals(versions[6], result.get(1).getPrimarySpec());
+		assertEquals(versions[5], result.get(2).getPrimarySpec());
 	}
 
 	@Test
@@ -216,12 +216,12 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 2, 0, false, false, true, false));
+			versions[3], 2, 0, false, false, true, false), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[6], result.get(0).getPrimerySpec());
-		assertEquals(versions[5], result.get(1).getPrimerySpec());
-		assertEquals(versions[3], result.get(2).getPrimerySpec());
+		assertEquals(versions[6], result.get(0).getPrimarySpec());
+		assertEquals(versions[5], result.get(1).getPrimarySpec());
+		assertEquals(versions[3], result.get(2).getPrimarySpec());
 	}
 
 	@Test
@@ -229,13 +229,13 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[0], versions[5], false, false));
+			versions[0], versions[5], false, false), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[0], result.get(0).getPrimerySpec());
-		assertEquals(versions[1], result.get(1).getPrimerySpec());
-		assertEquals(versions[3], result.get(2).getPrimerySpec());
-		assertEquals(versions[5], result.get(3).getPrimerySpec());
+		assertEquals(versions[0], result.get(0).getPrimarySpec());
+		assertEquals(versions[1], result.get(1).getPrimarySpec());
+		assertEquals(versions[3], result.get(2).getPrimarySpec());
+		assertEquals(versions[5], result.get(3).getPrimarySpec());
 	}
 
 	@Test
@@ -243,13 +243,13 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[5], versions[0], false, false));
+			versions[5], versions[0], false, false), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
-		assertEquals(versions[1], result.get(2).getPrimerySpec());
-		assertEquals(versions[0], result.get(3).getPrimerySpec());
+		assertEquals(versions[5], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[1], result.get(2).getPrimarySpec());
+		assertEquals(versions[0], result.get(3).getPrimarySpec());
 	}
 
 	@Test
@@ -257,19 +257,20 @@ public class HistoryAPITests extends CoreServerTest {
 		ProjectSpace ps = createHistory(this);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[1], versions[3], true, false));
+			versions[1], versions[3], true, false), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[1], result.get(0).getPrimerySpec());
-		assertEquals(versions[2], result.get(1).getPrimerySpec());
-		assertEquals(versions[3], result.get(2).getPrimerySpec());
+		assertEquals(versions[1], result.get(0).getPrimarySpec());
+		assertEquals(versions[2], result.get(1).getPrimarySpec());
+		assertEquals(versions[3], result.get(2).getPrimarySpec());
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
 	public void invalidPathQuery() throws EMFStoreException {
 		ProjectSpace ps = createHistory(this);
 
-		ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(versions[2], versions[3], false, false));
+		ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(versions[2], versions[3], false, false),
+			new NullProgressMonitor());
 	}
 
 	@Test
@@ -279,10 +280,10 @@ public class HistoryAPITests extends CoreServerTest {
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 0, 0, false, false));
+			.modelelementQuery(versions[3], id, 0, 0, false, false), new NullProgressMonitor());
 
 		assertEquals(1, result.size());
-		assertEquals(versions[3], result.get(0).getPrimerySpec());
+		assertEquals(versions[3], result.get(0).getPrimarySpec());
 	}
 
 	@Test
@@ -292,11 +293,11 @@ public class HistoryAPITests extends CoreServerTest {
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[1], id, 0, 1, false, false));
+			.modelelementQuery(versions[1], id, 0, 1, false, false), new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[1], result.get(0).getPrimerySpec());
-		assertEquals(versions[0], result.get(1).getPrimerySpec());
+		assertEquals(versions[1], result.get(0).getPrimarySpec());
+		assertEquals(versions[0], result.get(1).getPrimarySpec());
 	}
 
 	@Test
@@ -306,12 +307,12 @@ public class HistoryAPITests extends CoreServerTest {
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 1, 1, false, false));
+			.modelelementQuery(versions[3], id, 1, 1, false, false), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[5], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
-		assertEquals(versions[1], result.get(2).getPrimerySpec());
+		assertEquals(versions[5], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[1], result.get(2).getPrimarySpec());
 	}
 
 	@Test
@@ -321,11 +322,11 @@ public class HistoryAPITests extends CoreServerTest {
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
 		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 1, 1, true, false));
+			.modelelementQuery(versions[3], id, 1, 1, true, false), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[4], result.get(0).getPrimerySpec());
-		assertEquals(versions[3], result.get(1).getPrimerySpec());
-		assertEquals(versions[2], result.get(2).getPrimerySpec());
+		assertEquals(versions[4], result.get(0).getPrimarySpec());
+		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[2], result.get(2).getPrimarySpec());
 	}
 }

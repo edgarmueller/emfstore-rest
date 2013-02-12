@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
@@ -28,7 +40,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
@@ -46,6 +57,12 @@ import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec
 import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
+/**
+ * Represents a remote project that is located on a remote server.
+ * 
+ * @author wesendon
+ * @author emueller
+ */
 public class RemoteProject implements IRemoteProject {
 
 	/**
@@ -54,7 +71,14 @@ public class RemoteProject implements IRemoteProject {
 	private final ProjectInfo projectInfo;
 	private final IServer server;
 
-	// TODO: OTS
+	/**
+	 * Constructor.
+	 * 
+	 * @param server
+	 *            the server the remote project is located on
+	 * @param projectInfo
+	 *            information about which project to access
+	 */
 	public RemoteProject(IServer server, ProjectInfo projectInfo) {
 		this.server = server;
 		this.projectInfo = projectInfo;
@@ -76,6 +100,12 @@ public class RemoteProject implements IRemoteProject {
 		return projectInfo.getDescription();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#getBranches(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
 		return new UnknownEMFStoreWorkloadCommand<List<IBranchInfo>>(monitor) {
 			@Override
@@ -92,7 +122,14 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public List<IBranchInfo> getBranches(IUsersession usersession) throws EMFStoreException {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#getBranches(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public List<IBranchInfo> getBranches(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws EMFStoreException {
@@ -103,16 +140,18 @@ public class RemoteProject implements IRemoteProject {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec)
+	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException {
-		return new ServerCall<PrimaryVersionSpec>(server) {
+	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec, IProgressMonitor monitor)
+		throws EMFStoreException {
+		return new ServerCall<PrimaryVersionSpec>(server, monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
 					(VersionSpec) versionSpec);
 			}
 		}.execute();
@@ -132,27 +171,41 @@ public class RemoteProject implements IRemoteProject {
 		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
 					(VersionSpec) versionSpec);
 			}
 		}.execute();
 	}
 
-	public List<IHistoryInfo> getHistoryInfos(final IHistoryQuery query) throws EMFStoreException {
-		return copy(new ServerCall<List<HistoryInfo>>(server) {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public List<IHistoryInfo> getHistoryInfos(final IHistoryQuery query, IProgressMonitor monitor)
+		throws EMFStoreException {
+		return copy(new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.getHistoryInfo(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().getHistoryInfo(getSessionId(), (ProjectId) getProjectId(),
 					(HistoryQuery) query);
 			}
 		}.execute());
 	}
 
-	public List<IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query)
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public List<IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query,
+		IProgressMonitor monitor)
 		throws EMFStoreException {
-		return copy(new ServerCall<List<HistoryInfo>>(usersession) {
+		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
 				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
@@ -161,22 +214,40 @@ public class RemoteProject implements IRemoteProject {
 		}.execute());
 	}
 
-	public void addTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag) throws EMFStoreException {
-		new ServerCall<Void>(server) {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#addTag(org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void addTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException {
+		new ServerCall<Void>(server, monitor) {
 			@Override
 			protected Void run() throws EMFStoreException {
-				getConnectionManager().addTag((SessionId) getUsersession().getSessionId(), (ProjectId) getProjectId(),
+				getConnectionManager().addTag(getUsersession().getSessionId(), (ProjectId) getProjectId(),
 					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
 		}.execute();
 	}
 
-	public void removeTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag) throws EMFStoreException {
-		new ServerCall<Void>(server) {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#removeTag(org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void removeTag(final IPrimaryVersionSpec versionSpec, final ITagVersionSpec tag, IProgressMonitor monitor)
+		throws EMFStoreException {
+		new ServerCall<Void>(server, monitor) {
 			@Override
 			protected Void run() throws EMFStoreException {
-				getConnectionManager().removeTag((SessionId) getUsersession().getSessionId(),
+				getConnectionManager().removeTag(getUsersession().getSessionId(),
 					(ProjectId) getProjectId(), (PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
@@ -358,7 +429,7 @@ public class RemoteProject implements IRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#getHeadVersion(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException {
-		return resolveVersionSpec(Versions.createHEAD());
+		return resolveVersionSpec(Versions.createHEAD(), monitor);
 	}
 
 	private ServerCall<Void> getDeleteProjectServerCall() {
