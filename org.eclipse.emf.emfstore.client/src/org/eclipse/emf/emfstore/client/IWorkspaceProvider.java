@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 
 /**
- * Central access point to recieve the current workspace.
+ * Central access point to receive the current workspace.
  * 
  * @author emueller
  * @author wesendon

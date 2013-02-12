@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.client.IChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 
 /**
@@ -19,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class ChangeConflictException extends WorkspaceException implements IChangeConflictException {
+public class ChangeConflictException extends WorkspaceException {
 
 	private final ChangeConflict changeConflict;
 

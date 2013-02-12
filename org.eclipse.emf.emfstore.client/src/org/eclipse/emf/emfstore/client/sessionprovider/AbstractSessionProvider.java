@@ -13,19 +13,24 @@ package org.eclipse.emf.emfstore.client.sessionprovider;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
+ * <p>
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
- * derives a usersession for a given serverrequest (IServerCall). When overriding
+ * derives a user session for a given server request (IServerCall). When overriding
  * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link IUsersession}
  * selection.
- * However, in most usecases most users
- * will use the session provider to open a login dialog of kind. For this purpose
- * it is better to use {@link #provideUsersession(IServer)}. SessionProviders can be registered via an extension
+ * </p>
+ * <p>
+ * However, in most usecases most, users will use the session provider to open a login dialog of some kind. For this
+ * purpose it is better to use {@link #provideUsersession(IServer)}. SessionProviders can be registered via an extension
  * point.<br/>
- * Implementations of SessionProviders must not assume that they are executed within the UI-Thread.
+ * </p>
+ * 
+ * <p>
+ * <b>Note</b>: Implementations of SessionProviders must not assume that they are executed within the UI-Thread.
+ * </p>
  * 
  * @author wesendon
  * 
@@ -33,29 +38,30 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 public abstract class AbstractSessionProvider {
 
 	/**
-	 * ExtensionPoint ID of the SessionProvider.
-	 */
-	public static final String ID = "org.eclipse.emf.emfstore.client.sessionprovider";
-
-	/**
-	 * The SessionManager calls this method in order to gain a usersession. In its default implementation it
-	 * first looks for specified usersession in the {@link ServerCall}, then it checks whether the projectspace is
-	 * associated with a usersession (e.g. in case of update) and if there's still no usersession
-	 * {@link #provideUsersession(IServer)} is called, which should be used when implementing an usersession
-	 * selection UI.
+	 * <p>
+	 * The SessionManager calls this method in order to obtain a user session. In its default implementation it first
+	 * looks for specified user session in the {@link IServerCall}, then it checks whether the local project is
+	 * associated with a user session (e.g. in case of update). If there is still no user session,
+	 * {@link #provideUsersession(IServer)} is called, which is meant to be used when implementing an UI to select a UI.
+	 * </p>
 	 * 
-	 * In most cases it is sufficient to implement {@link #provideUsersession(IServer)} and there's no need to change
-	 * this implementation.
+	 * <p>
+	 * In most cases it is sufficient to implement {@link #provideUsersession(IServer)}. There should be no need to
+	 * change this implementation.
+	 * </p>
 	 * 
+	 * @param serverCall
+	 *            current server call
+	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * 
-	 * @param serverCall current server call
-	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way.
-	 * @throws EMFStoreException in case of an exception
+	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
 	public IUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
+
 		IUsersession usersession = serverCall.getUsersession();
+
 		if (usersession == null) {
-			usersession = getUsersessionFromProjectSpace(serverCall.getLocalProject());
+			usersession = getUsersessionFromProject(serverCall.getLocalProject());
 		}
 
 		if (usersession == null) {
@@ -66,37 +72,46 @@ public abstract class AbstractSessionProvider {
 	}
 
 	/**
-	 * Tries to gain a usersession for a given projectspace.
+	 * Tries to obtain a user session from a given {@link ILocalProject}.
 	 * 
-	 * @param projectSpace projectspace
-	 * @return {@link IUsersession} or null
+	 * @param project
+	 *            the local project to obtain the user session from
+	 * @return the user session associated with the project or {@code null}, if no session is available
 	 */
-	protected IUsersession getUsersessionFromProjectSpace(ILocalProject projectSpace) {
-		if (projectSpace != null && projectSpace.getUsersession() != null) {
-			return projectSpace.getUsersession();
+	protected IUsersession getUsersessionFromProject(ILocalProject project) {
+
+		if (project != null && project.getUsersession() != null) {
+			return project.getUsersession();
 		}
+
 		return null;
 	}
 
 	/**
+	 * <p>
 	 * This is the template method for {@link #provideUsersession(IServer)}. It is called, if the latter couldn't
-	 * determine a suitable usersession. Use this in order to implement a session selection UI or headless selection
+	 * determine a suitable user session. Use this in order to implement a session selection UI or a headless selection
 	 * logic.
+	 * </p>
 	 * 
-	 * @param server This parameter is a hint from the {@link IServer}. For that reason it can be null. A common
+	 * @param server
+	 *            This parameter is a hint from the {@link IServer}. For that reason it can be null. A common
 	 *            example is share, where the user first has to select the server before logging in. If {@link IServer}
 	 *            is set you should allow the user to select the account for the given server.
-	 * @return a usersession, can be logged in or logged out. SessionManager will double check that either way
-	 * @throws EMFStoreException in case of an exception
+	 * 
+	 * @return an user session. It is not specified whether this session is logged in or logged out.
+	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
 	public abstract IUsersession provideUsersession(IServer server) throws EMFStoreException;
 
 	/**
-	 * This method is called by the SessionManager in order to login a given usersession. Either you are able to
-	 * login the given session or should throw an exception.
+	 * This method is called by the SessionManager in order to login a given user session. Either you are able to
+	 * login the given session or you should throw an exception.
 	 * 
-	 * @param usersession session to be logged in.
-	 * @throws EMFStoreException in case of an exception
+	 * @param usersession
+	 *            the session to be logged in
+	 * 
+	 * @throws EMFStoreException in case an exception occurred while logging in the given session
 	 */
 	public abstract void login(IUsersession usersession) throws EMFStoreException;
 }

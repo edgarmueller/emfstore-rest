@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
@@ -103,6 +102,11 @@ public class RemoteProject implements IRemoteProject {
 		}.execute());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec)
+	 */
 	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec) throws EMFStoreException {
 		return new ServerCall<PrimaryVersionSpec>(server) {
 			@Override
@@ -114,7 +118,16 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public PrimaryVersionSpec resolveVersionSpec(IUsersession session, final IVersionSpec versionSpec)
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#resolveVersionSpec(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public PrimaryVersionSpec resolveVersionSpec(IUsersession session, final IVersionSpec versionSpec,
+		IProgressMonitor monitor)
 		throws EMFStoreException {
 		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
@@ -170,24 +183,41 @@ public class RemoteProject implements IRemoteProject {
 		}.execute();
 	}
 
-	public ProjectSpace checkout() throws EMFStoreException {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#checkout(org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public ProjectSpace checkout(final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectSpace>(server) {
 			@Override
 			protected ProjectSpace run() throws EMFStoreException {
-				return checkout(getUsersession());
+				return checkout(getUsersession(), monitor);
 			}
 		}.execute();
 	}
 
-	public ProjectSpace checkout(IUsersession usersession) throws EMFStoreException {
-		return checkout(usersession, new NullProgressMonitor());
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#checkout(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public ProjectSpace checkout(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD(), monitor);
+		return checkout(usersession, targetSpec, monitor);
 	}
 
-	public ProjectSpace checkout(IUsersession usersession, IProgressMonitor progressMonitor) throws EMFStoreException {
-		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD());
-		return checkout(usersession, targetSpec, progressMonitor);
-	}
-
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#checkout(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public ProjectSpace checkout(IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException {
 
@@ -254,7 +284,7 @@ public class RemoteProject implements IRemoteProject {
 			dateVersionSpec.setDate(calendar.getTime());
 			PrimaryVersionSpec sourceSpec;
 			try {
-				sourceSpec = this.resolveVersionSpec(session, dateVersionSpec);
+				sourceSpec = this.resolveVersionSpec(session, dateVersionSpec, progressMonitor);
 			} catch (InvalidVersionSpecException e) {
 				sourceSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 				sourceSpec.setIdentifier(0);
@@ -284,15 +314,54 @@ public class RemoteProject implements IRemoteProject {
 		return projectSpace;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#delete(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public void delete(IProgressMonitor monitor) throws EMFStoreException {
-		getDeleteProjectServerCall().setProgressMonitor(monitor).setServer(server).execute();
+		getDeleteProjectServerCall()
+			.setProgressMonitor(monitor)
+			.setServer(server)
+			.execute();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#delete(org.eclipse.emf.emfstore.client.IUsersession,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	public void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
-		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
+		getDeleteProjectServerCall()
+			.setProgressMonitor(monitor)
+			.setUsersession(usersession)
+			.execute();
 	}
 
-	private ServerCall<Void> getDeleteProjectServerCall() throws EMFStoreException {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#getServer()
+	 */
+	public IServer getServer() {
+		return (ServerInfo) projectInfo.eContainer();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#getHeadVersion(org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public PrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException {
+		return resolveVersionSpec(Versions.createHEAD());
+	}
+
+	private ServerCall<Void> getDeleteProjectServerCall() {
 		return new ServerCall<Void>() {
 			@Override
 			protected Void run() throws EMFStoreException {
@@ -308,13 +377,5 @@ public class RemoteProject implements IRemoteProject {
 				return null;
 			}
 		};
-	}
-
-	public IServer getServer() {
-		return (ServerInfo) projectInfo.eContainer();
-	}
-
-	public PrimaryVersionSpec getHeadVersion() throws EMFStoreException {
-		return resolveVersionSpec(Versions.createHEAD());
 	}
 }
