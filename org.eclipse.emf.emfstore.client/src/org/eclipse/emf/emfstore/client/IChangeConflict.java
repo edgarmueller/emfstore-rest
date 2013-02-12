@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client;
 
 /**
- * Represents a conflict between two change sets.
+ * Represents conflicting changes on model objects.
  * 
  * @author emueller
  * @author wesendon
