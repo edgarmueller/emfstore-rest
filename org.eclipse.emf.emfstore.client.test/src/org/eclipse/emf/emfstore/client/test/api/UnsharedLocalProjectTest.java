@@ -162,9 +162,9 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		// TODO: localProject.importLocalChanges(fileName);
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testIsUpdated() throws EMFStoreException {
-		boolean result = localProject.isUpdated();
+		localProject.isUpdated();
 		fail("Should not be able to check update state of an unshared Project!");
 	}
 
@@ -190,7 +190,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not remove a tag from an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testResolveSpec() throws EMFStoreException {
 		localProject.resolveVersionSpec(IVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
 		fail("Should not be able to resolve a version spec from an unshared Project!");
@@ -275,19 +275,19 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertFalse(localProject.getAllModelElements().contains(player3));
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testUpdate() throws EMFStoreException {
 		localProject.update();
 		fail("Should not be able to update an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testUpdateVersion() throws EMFStoreException {
 		localProject.update(localProject.getBaseVersion());
 		fail("Should not be able to update an unshared Project!");
 	}
 
-	@Test(expected = EMFStoreException.class)
+	@Test(expected = RuntimeException.class)
 	public void testUpdateVersionCallback() throws EMFStoreException {
 		localProject.update(localProject.getBaseVersion(), null, new NullProgressMonitor());
 		fail("Should not be able to update an unshared Project!");

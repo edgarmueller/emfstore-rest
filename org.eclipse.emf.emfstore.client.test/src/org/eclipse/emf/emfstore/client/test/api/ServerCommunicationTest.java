@@ -108,8 +108,10 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	@Test
 	public void testGetRemoteProjectsFromServer() {
 		try {
-			server.createRemoteProject(usersession, "MyProject", new NullProgressMonitor());
+			IRemoteProject project = server.createRemoteProject(usersession, "MyProject", new NullProgressMonitor());
 			server.createRemoteProject(usersession, "MyProject2", new NullProgressMonitor());
+			assertEquals(2, server.getRemoteProjects().size());
+			server.getRemoteProjects().add(project);
 			assertEquals(2, server.getRemoteProjects().size());
 		} catch (EMFStoreException e) {
 			log(e);

@@ -112,40 +112,80 @@ public interface ILocalProject extends IProject, EObjectContainer {
 		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
+	 * <p>
 	 * Updates the project to the head version from the server.
+	 * </p>
+	 * <p>
+	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * </p>
 	 * 
 	 * @return the new base version
-	 * @throws EMFStoreException
-	 *             if update fails
+	 * 
+	 * @throws ChangeConflictException in case a conflict is detected on update
+	 * @throws EMFStoreException in case update fails for any other reason
 	 */
 	IPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
 
 	/**
+	 * <p>
 	 * Updates the project to the given version from the server.
+	 * </p>
+	 * <p>
+	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * </p>
 	 * 
 	 * @param version
 	 *            the version to update to
 	 * @return the new base version
+	 * 
+	 * @throws ChangeConflictException in case a conflict is detected on update
+	 * @throws EMFStoreException in case update fails for any other reason
 	 */
 	IPrimaryVersionSpec update(IVersionSpec version) throws ChangeConflictException, EMFStoreException;
 
 	/**
+	 * <p>
 	 * Updates the project to the given version from the server.
+	 * </p>
+	 * <p>
+	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * </p>
 	 * 
 	 * @param version
 	 *            the {@link IVersionSpec} to update to
 	 * @param callback
-	 *            the {@link IUpdateCallback} that will be called when the update
-	 *            has been performed
-	 * @param progress
-	 *            an {@link IProgressMonitor} instance
-	 * @return the new version spec
+	 *            the {@link IUpdateCallback} that will be called while the update is performing
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while updating
+	 * @return the new base version
+	 * 
+	 * @throws ChangeConflictException in case a conflict is detected on update
+	 * @throws EMFStoreException in case update fails for any other reason
 	 */
-	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
+	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor monitor)
 		throws ChangeConflictException, EMFStoreException;
 
+	/**
+	 * Performs a merge in case of a conflict.
+	 * 
+	 * @param target
+	 *            the {@link IPrimaryVersionSpec} which is supposed to be merged
+	 * @param changeConflict
+	 *            the {@link IChangeConflict} containing the conflicting changes
+	 * @param conflictResolver
+	 *            a {@link IConflictResolver} for resolving conflicts
+	 * @param callback
+	 *            the {@link IUpdateCallback} that will be called while the update is performing
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
+	 * 
+	 * @return true, if the merge was successful, false otherwise
+	 * 
+	 * @throws EMFStoreException
+	 *             in case an error occurs while merging the branch
+	 */
 	boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict, IConflictResolver conflictResolver,
-		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException;
+		IUpdateCallback callback, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
@@ -156,6 +196,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 *            a {@link IConflictResolver} for resolving conflicts in case any conflicts occur
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
+	 * 
 	 * @throws EMFStoreException
 	 *             in case an error occurs while merging the branch
 	 */
@@ -198,6 +239,11 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 */
 	boolean isShared();
 
+	/**
+	 * Returns the {@link IUsersession} associated with this project, if any.
+	 * 
+	 * @return the user session associated with this project, or {@code null}, if no such usersession is available
+	 */
 	IUsersession getUsersession();
 
 	/**
@@ -286,6 +332,14 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 */
 	IRemoteProject getRemoteProject() throws EMFStoreException;
 
+	/**
+	 * Imports and applies changes on this project.
+	 * 
+	 * @param fileName
+	 *            the absolute path to the file containing the changes to be imported
+	 * 
+	 * @throws IOException in case importing the changes fails
+	 */
 	// TODO: OTS
 	void importLocalChanges(String fileName) throws IOException;
 }

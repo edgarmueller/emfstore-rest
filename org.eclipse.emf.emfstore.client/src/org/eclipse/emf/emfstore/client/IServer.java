@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
@@ -34,68 +33,78 @@ public interface IServer {
 	IServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
 
 	/**
-	 * Returns the server's local name.
+	 * Returns the local name of the server.
 	 * 
-	 * @return name
+	 * @return the name of the server
 	 */
 	String getName();
 
 	/**
-	 * Sets the server's local name.
+	 * Sets the local name of the server.
 	 * 
-	 * @param name new name
+	 * @param name the new local name of th server
 	 */
 	void setName(String name);
 
 	/**
-	 * Returns the server's port.
+	 * Returns the port of the server where EMFStore is listening on.
 	 * 
-	 * @return port
+	 * @return the port of the server EMFStore is listing on
 	 */
 	int getPort();
 
 	/**
-	 * Sets the server's port.
+	 * Sets the port of the server where EMFStore is listening on.
 	 * 
-	 * @param port new port
+	 * @param port
+	 *            the port of the server EMFStore is listing on
 	 */
 	void setPort(int port);
 
 	/**
-	 * Returns the server's url.
+	 * Returns the URL of the server.
 	 * 
-	 * @return url
+	 * @return the URL of the server as a string
 	 */
 	String getUrl();
 
 	/**
-	 * Sets the server's url.
+	 * Sets the URL of the server.
 	 * 
-	 * @param url new url
+	 * @param url
+	 *            the URL of the server as a string
 	 */
 	void setUrl(String url);
 
 	/**
-	 * Returns the alias for the certificate used for this server.
-	 * Certificates are managed by the {@link KeyStoreManager}
+	 * Returns the alias for the certificate used by this server.
+	 * Certificates are managed by the
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager}
 	 * 
-	 * @return alias
+	 * @return the certificate alias
 	 */
 	String getCertificateAlias();
 
 	/**
 	 * Sets a new certificate alias.
 	 * 
-	 * @param alias new alias
+	 * @param alias the alias of the the certificate to be set
 	 */
 	void setCertificateAlias(String alias);
 
+	/**
+	 * Returns a list with all remote projects hosted on this server.
+	 * 
+	 * @return a list with all remote project
+	 * 
+	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
+	 */
 	List<IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	/**
-	 * Returns the usersession which was used on the last call to this server.
+	 * Returns the {@link IUsersession} which was used on the last call to this server.
 	 * 
-	 * @return usersession
+	 * @return the lastly used session
 	 */
 	IUsersession getLastUsersession();
 
@@ -103,11 +112,9 @@ public interface IServer {
 	 * Creates an empty project on the server.
 	 * 
 	 * @param projectName
-	 *            The name of the project.
-	 * @param projectDescription
-	 *            A description of the project to be created.
+	 *            The name of the project to be created
 	 * @param monitor
-	 *            a progress monitor instance that is used to indicate progress
+	 *            a {@link IProgressMonitor} instance that is used to indicate progress
 	 *            about creating the remote project
 	 * @return a {@link IRemoteProject} object containing information about the
 	 *         created project
@@ -126,9 +133,7 @@ public interface IServer {
 	 *            If <code>null</code>, the session manager will search for a
 	 *            session.
 	 * @param projectName
-	 *            The name of the project.
-	 * @param projectDescription
-	 *            A description of the project to be created.
+	 *            The name of the project..
 	 * @param monitor
 	 *            a monitor to show the progress
 	 * @return a {@link IRemoteProject} object containing information about the
@@ -140,12 +145,15 @@ public interface IServer {
 		throws EMFStoreException;
 
 	/**
-	 * Logs into this server, returing a {@link IUsersession}.
+	 * Logs into this server, returning a {@link IUsersession}.
 	 * 
-	 * @param name username
-	 * @param password password
-	 * @return {@link IUsersession}
-	 * @throws EMFStoreException
+	 * @param name
+	 *            the name of the user
+	 * @param password
+	 *            the cleartext password of the user
+	 * 
+	 * @return a logged in {@link IUsersession}
+	 * @throws EMFStoreException in case an error occurs while creating and logging in the session for the given user
 	 */
 	IUsersession login(String name, String password) throws EMFStoreException;
 
