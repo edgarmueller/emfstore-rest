@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.bowling.impl;
 
 import java.util.Collection;
 
+import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
@@ -48,6 +50,7 @@ import org.eclipse.emf.emfstore.bowling.TournamentType;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.TournamentImpl#getReferees <em>Referees</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.TournamentImpl#getPriceMoney <em>Price Money</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.TournamentImpl#getReceivesTrophy <em>Receives Trophy</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.TournamentImpl#getMatchDays <em>Match Days</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,6 +136,16 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 	 * @ordered
 	 */
 	protected EList<Boolean> receivesTrophy;
+
+	/**
+	 * The cached value of the '{@link #getMatchDays() <em>Match Days</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMatchDays()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Date> matchDays;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,6 +264,18 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Date> getMatchDays() {
+		if (matchDays == null) {
+			matchDays = new EDataTypeUniqueEList<Date>(Date.class, this, BowlingPackage.TOURNAMENT__MATCH_DAYS);
+		}
+		return matchDays;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -288,6 +313,8 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 				return getPriceMoney();
 			case BowlingPackage.TOURNAMENT__RECEIVES_TROPHY:
 				return getReceivesTrophy();
+			case BowlingPackage.TOURNAMENT__MATCH_DAYS:
+				return getMatchDays();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -326,6 +353,10 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 				getReceivesTrophy().clear();
 				getReceivesTrophy().addAll((Collection<? extends Boolean>)newValue);
 				return;
+			case BowlingPackage.TOURNAMENT__MATCH_DAYS:
+				getMatchDays().clear();
+				getMatchDays().addAll((Collection<? extends Date>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -359,6 +390,9 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 			case BowlingPackage.TOURNAMENT__RECEIVES_TROPHY:
 				getReceivesTrophy().clear();
 				return;
+			case BowlingPackage.TOURNAMENT__MATCH_DAYS:
+				getMatchDays().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -385,6 +419,8 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 				return priceMoney != null && !priceMoney.isEmpty();
 			case BowlingPackage.TOURNAMENT__RECEIVES_TROPHY:
 				return receivesTrophy != null && !receivesTrophy.isEmpty();
+			case BowlingPackage.TOURNAMENT__MATCH_DAYS:
+				return matchDays != null && !matchDays.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -405,6 +441,8 @@ public class TournamentImpl extends EObjectImpl implements Tournament {
 		result.append(priceMoney);
 		result.append(", receivesTrophy: ");
 		result.append(receivesTrophy);
+		result.append(", matchDays: ");
+		result.append(matchDays);
 		result.append(')');
 		return result.toString();
 	}

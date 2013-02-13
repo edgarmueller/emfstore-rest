@@ -65,6 +65,7 @@ public class TournamentItemProvider extends ItemProviderAdapter implements IEdit
 			addPlayersPropertyDescriptor(object);
 			addPriceMoneyPropertyDescriptor(object);
 			addReceivesTrophyPropertyDescriptor(object);
+			addMatchDaysPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -158,6 +159,28 @@ public class TournamentItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
+	 * This adds a property descriptor for the Match Days feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMatchDaysPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Tournament_matchDays_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Tournament_matchDays_feature", "_UI_Tournament_type"),
+				 BowlingPackage.Literals.TOURNAMENT__MATCH_DAYS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -230,6 +253,7 @@ public class TournamentItemProvider extends ItemProviderAdapter implements IEdit
 			case BowlingPackage.TOURNAMENT__TYPE:
 			case BowlingPackage.TOURNAMENT__PRICE_MONEY:
 			case BowlingPackage.TOURNAMENT__RECEIVES_TROPHY:
+			case BowlingPackage.TOURNAMENT__MATCH_DAYS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BowlingPackage.TOURNAMENT__MATCHUPS:
