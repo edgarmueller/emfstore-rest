@@ -1,7 +1,7 @@
-package org.eclipse.emf.emfstore.server.model.api.query;
+package org.eclipse.emf.emfstore.server.model.query;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryFactoryImpl;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
 public interface IHistoryQuery {
 

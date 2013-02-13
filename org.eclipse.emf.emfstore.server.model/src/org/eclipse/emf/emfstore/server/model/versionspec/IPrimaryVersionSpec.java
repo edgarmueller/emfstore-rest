@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.server.model.api.versionspec;
+package org.eclipse.emf.emfstore.server.model.versionspec;
 
 public interface IPrimaryVersionSpec extends IVersionSpec {
 

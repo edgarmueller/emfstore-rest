@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'.

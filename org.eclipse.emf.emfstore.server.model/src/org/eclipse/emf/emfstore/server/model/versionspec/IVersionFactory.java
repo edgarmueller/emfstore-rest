@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.server.model.api.versionspec;
+package org.eclipse.emf.emfstore.server.model.versionspec;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 

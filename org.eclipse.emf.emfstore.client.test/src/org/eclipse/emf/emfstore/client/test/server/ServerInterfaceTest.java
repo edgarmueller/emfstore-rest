@@ -39,7 +39,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.junit.Test;
 
 /**

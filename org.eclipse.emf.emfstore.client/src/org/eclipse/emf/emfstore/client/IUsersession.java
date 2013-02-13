@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client;
 
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.api.ISessionId;
+import org.eclipse.emf.emfstore.server.model.ISessionId;
 
 /**
  * User session for a given {@link IServer}. Can be used with multiple projects.

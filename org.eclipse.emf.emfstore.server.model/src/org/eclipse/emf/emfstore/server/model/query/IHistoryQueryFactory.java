@@ -1,10 +1,10 @@
-package org.eclipse.emf.emfstore.server.model.api.query;
+package org.eclipse.emf.emfstore.server.model.query;
 
 import java.util.List;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
 public interface IHistoryQueryFactory extends IEMFStoreFactory {
 	/**

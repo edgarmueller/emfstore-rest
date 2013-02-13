@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ILogMessage;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Log Message</b></em>'.

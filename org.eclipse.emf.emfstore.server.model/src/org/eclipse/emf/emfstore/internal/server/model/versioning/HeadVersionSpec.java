@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IHeadVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IHeadVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'.

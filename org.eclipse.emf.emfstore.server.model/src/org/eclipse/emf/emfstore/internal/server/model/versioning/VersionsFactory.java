@@ -1,12 +1,12 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IAncestorVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IHeadVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionFactory;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IAncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IHeadVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionFactory;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
 public class VersionsFactory implements IVersionFactory {
 

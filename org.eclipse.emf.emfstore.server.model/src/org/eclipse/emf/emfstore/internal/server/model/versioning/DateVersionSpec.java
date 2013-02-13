@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IDateVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IDateVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Date Version Spec</b></em>'.

@@ -60,10 +60,10 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.IProjectId;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
 /**
  * Workspace space base class that contains custom user methods.

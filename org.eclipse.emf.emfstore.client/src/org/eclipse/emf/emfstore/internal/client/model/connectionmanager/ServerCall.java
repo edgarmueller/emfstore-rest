@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.api.ISessionId;
+import org.eclipse.emf.emfstore.server.model.ISessionId;
 
 /**
  * This class is intended to wrap all server calls. It may be used either by sub-classing or using anonymous classes.<br/>
