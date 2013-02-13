@@ -300,10 +300,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#addServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#addServer(org.eclipse.emf.emfstore.client.IServer)
 	 */
-	public void addServer(IServer serverInfo) {
-		getServers().add((ServerInfo) serverInfo);
+	public void addServer(IServer server) {
+		getServerInfos().add((ServerInfo) server);
 		save();
 	}
 
@@ -311,10 +311,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#removeServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#removeServer(org.eclipse.emf.emfstore.client.IServer)
 	 */
-	public void removeServer(IServer serverInfo) {
-		getServers().remove(serverInfo);
+	public void removeServer(IServer server) {
+		getServerInfos().remove(server);
 		save();
 	}
 

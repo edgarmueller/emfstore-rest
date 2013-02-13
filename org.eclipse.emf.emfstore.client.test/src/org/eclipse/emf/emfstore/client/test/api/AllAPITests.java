@@ -19,10 +19,15 @@ import org.junit.runners.Suite;
  * @author koegel
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ServerCreationTest.class, ServerCommunicationTest.class,
+@Suite.SuiteClasses({
+	ServerCreationTest.class,
+	ModelElementTest.class,
+	ServerCommunicationTest.class,
 	UnsharedLocalProjectTest.class,
 	SharedProjectTest.class,
-	UsersessionTest.class })
+	UsersessionTest.class,
+	WorkspaceTest.class
+})
 public class AllAPITests {
 
 }

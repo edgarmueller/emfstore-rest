@@ -196,7 +196,7 @@ public class ModelElementTest {
 			}
 		}.execute();
 
-		assertEquals(0, localProject.getAllModelElements());
+		assertEquals(0, localProject.getAllModelElements().size());
 	}
 
 	/**
@@ -211,6 +211,6 @@ public class ModelElementTest {
 			localProject.getModelElements().remove(object);
 		}
 
-		assertEquals(0, localProject.getAllModelElements());
+		assertEquals(0, localProject.getAllModelElements().size());
 	}
 }

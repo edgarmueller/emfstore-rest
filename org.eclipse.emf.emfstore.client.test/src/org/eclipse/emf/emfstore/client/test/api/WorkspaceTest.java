@@ -26,7 +26,7 @@ public class WorkspaceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		assertEquals(0, workspace.getLocalProjects());
+		assertEquals(0, workspace.getLocalProjects().size());
 		localProject = workspace.createLocalProject("TestProject", "My Test Project");
 	}
 
@@ -39,19 +39,19 @@ public class WorkspaceTest {
 	@Test
 	public void testCreateLocalProject() {
 		assertNotNull(localProject);
-		assertEquals(1, workspace.getLocalProjects());
+		assertEquals(1, workspace.getLocalProjects().size());
 		workspace.createLocalProject("TestProject2", "My Test Project");
-		assertEquals(2, workspace.getLocalProjects());
+		assertEquals(2, workspace.getLocalProjects().size());
 	}
 
 	@Test
 	public void testServers() {
-		assertEquals(0, workspace.getServers());
+		int servers = workspace.getServers().size();
 		IServer server = IServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
-		assertEquals(1, workspace.getServers());
+		assertEquals(servers + 1, workspace.getServers().size());
 		workspace.removeServer(server);
-		assertEquals(0, workspace.getServers());
+		assertEquals(servers, workspace.getServers().size());
 	}
 
 }
