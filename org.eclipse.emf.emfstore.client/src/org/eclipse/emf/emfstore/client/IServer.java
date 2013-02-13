@@ -102,6 +102,19 @@ public interface IServer {
 	List<IRemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	/**
+	 * Returns a list with all remote projects hosted on this server.
+	 * 
+	 * @param usersession
+	 *            the {@link IUsersession} that should be used to fetch the remote project.<br/>
+	 *            If <code>null</code>, the session manager will try to inject a session.
+	 * 
+	 * @return a list with all remote project
+	 * 
+	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
+	 */
+	List<IRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException;
+
+	/**
 	 * Returns the {@link IUsersession} which was used on the last call to this server.
 	 * 
 	 * @return the lastly used session
@@ -128,12 +141,12 @@ public interface IServer {
 	 * Creates an empty project on the server.
 	 * 
 	 * @param usersession
-	 *            The {@link IUsersession} that should be used to create the
+	 *            the {@link IUsersession} that should be used to create the
 	 *            remote project.<br/>
 	 *            If <code>null</code>, the session manager will search for a
 	 *            session.
 	 * @param projectName
-	 *            The name of the project..
+	 *            the name of the project
 	 * @param monitor
 	 *            a monitor to show the progress
 	 * @return a {@link IRemoteProject} object containing information about the
