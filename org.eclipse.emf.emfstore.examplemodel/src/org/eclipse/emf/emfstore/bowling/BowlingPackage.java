@@ -257,13 +257,22 @@ public interface BowlingPackage extends EPackage {
 	int TOURNAMENT__RECEIVES_TROPHY = 6;
 
 	/**
+	 * The feature id for the '<em><b>Match Days</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOURNAMENT__MATCH_DAYS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Tournament</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOURNAMENT_FEATURE_COUNT = 7;
+	int TOURNAMENT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.MatchupImpl <em>Matchup</em>}' class.
@@ -695,6 +704,17 @@ public interface BowlingPackage extends EPackage {
 	EAttribute getTournament_ReceivesTrophy();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.emf.emfstore.bowling.Tournament#getMatchDays <em>Match Days</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Match Days</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Tournament#getMatchDays()
+	 * @see #getTournament()
+	 * @generated
+	 */
+	EAttribute getTournament_MatchDays();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Matchup <em>Matchup</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1068,6 +1088,14 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TOURNAMENT__RECEIVES_TROPHY = eINSTANCE.getTournament_ReceivesTrophy();
+
+		/**
+		 * The meta object literal for the '<em><b>Match Days</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOURNAMENT__MATCH_DAYS = eINSTANCE.getTournament_MatchDays();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.MatchupImpl <em>Matchup</em>}' class.

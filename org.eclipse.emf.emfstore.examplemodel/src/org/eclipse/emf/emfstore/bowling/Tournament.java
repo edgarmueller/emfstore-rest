@@ -10,6 +10,7 @@
  */
 package org.eclipse.emf.emfstore.bowling;
 
+import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Tournament#getReferees <em>Referees</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Tournament#getPriceMoney <em>Price Money</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Tournament#getReceivesTrophy <em>Receives Trophy</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Tournament#getMatchDays <em>Match Days</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,5 +163,21 @@ public interface Tournament extends EObject {
 	 * @generated
 	 */
 	EList<Boolean> getReceivesTrophy();
+
+	/**
+	 * Returns the value of the '<em><b>Match Days</b></em>' attribute list.
+	 * The list contents are of type {@link java.util.Date}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Match Days</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Match Days</em>' attribute list.
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getTournament_MatchDays()
+	 * @model
+	 * @generated
+	 */
+	EList<Date> getMatchDays();
 
 } // Tournament

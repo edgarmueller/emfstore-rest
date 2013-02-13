@@ -342,6 +342,15 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTournament_MatchDays() {
+		return (EAttribute)tournamentEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMatchup() {
 		return matchupEClass;
 	}
@@ -548,6 +557,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		createEReference(tournamentEClass, TOURNAMENT__REFEREES);
 		createEAttribute(tournamentEClass, TOURNAMENT__PRICE_MONEY);
 		createEAttribute(tournamentEClass, TOURNAMENT__RECEIVES_TROPHY);
+		createEAttribute(tournamentEClass, TOURNAMENT__MATCH_DAYS);
 
 		matchupEClass = createEClass(MATCHUP);
 		createEReference(matchupEClass, MATCHUP__GAMES);
@@ -627,6 +637,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEReference(getTournament_Referees(), this.getRefereeToGamesMap(), null, "referees", null, 0, -1, Tournament.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTournament_PriceMoney(), ecorePackage.getEDouble(), "priceMoney", null, 0, -1, Tournament.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTournament_ReceivesTrophy(), ecorePackage.getEBoolean(), "receivesTrophy", null, 0, -1, Tournament.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTournament_MatchDays(), ecorePackage.getEDate(), "matchDays", null, 0, -1, Tournament.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(matchupEClass, Matchup.class, "Matchup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMatchup_Games(), this.getGame(), this.getGame_Matchup(), "games", null, 2, 2, Matchup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
