@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
@@ -72,13 +72,13 @@ public abstract class AbstractSessionProvider {
 	}
 
 	/**
-	 * Tries to obtain a user session from a given {@link ILocalProject}.
+	 * Tries to obtain a user session from a given {@link ESLocalProject}.
 	 * 
 	 * @param project
 	 *            the local project to obtain the user session from
 	 * @return the user session associated with the project or {@code null}, if no session is available
 	 */
-	protected IUsersession getUsersessionFromProject(ILocalProject project) {
+	protected IUsersession getUsersessionFromProject(ESLocalProject project) {
 
 		if (project != null && project.getUsersession() != null) {
 			return project.getUsersession();

@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.server.model.ISessionId;
  */
 public abstract class ServerCall<U> implements IServerCall {
 
-	private ILocalProject projectSpace;
+	private ESLocalProject projectSpace;
 	private IUsersession usersession;
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
@@ -73,7 +73,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            relevant project space if existent
 	 */
 	// TODO: OTS add javadoc to explain why type is a local project
-	public ServerCall(ILocalProject localProject) {
+	public ServerCall(ESLocalProject localProject) {
 		this.projectSpace = localProject;
 		setProgressMonitor(null);
 	}
@@ -109,7 +109,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ILocalProject localProject, IProgressMonitor monitor) {
+	public ServerCall(ESLocalProject localProject, IProgressMonitor monitor) {
 		this.projectSpace = localProject;
 		setProgressMonitor(monitor);
 	}

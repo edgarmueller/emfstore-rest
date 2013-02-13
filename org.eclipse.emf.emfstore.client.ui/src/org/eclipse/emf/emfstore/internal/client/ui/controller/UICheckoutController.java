@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -123,16 +123,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public ESLocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
 				versionSpec = branchSelection(serverInfo, projectInfo);
 			}
 
-			return new ServerCall<ILocalProject>(serverInfo, progressMonitor) {
+			return new ServerCall<ESLocalProject>(serverInfo, progressMonitor) {
 				@Override
-				protected ILocalProject run() throws EMFStoreException {
+				protected ESLocalProject run() throws EMFStoreException {
 					if (versionSpec == null) {
 						return new RemoteProject(serverInfo, projectInfo).checkout(getUsersession(),
 							getProgressMonitor());

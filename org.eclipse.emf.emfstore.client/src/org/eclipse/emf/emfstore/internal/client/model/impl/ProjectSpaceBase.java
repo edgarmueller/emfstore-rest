@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
@@ -120,7 +120,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
-	IDisposable, ILocalProject {
+	IDisposable, ESLocalProject {
 
 	private boolean initCompleted;
 	private boolean isTransient;
@@ -905,7 +905,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ILocalProject#mergeBranch(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#mergeBranch(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -1394,7 +1394,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ILocalProject#getRecentLogMessages()
+	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#getRecentLogMessages()
 	 */
 	public List<String> getRecentLogMessages() {
 		return Collections.unmodifiableList(getOldLogMessages());
@@ -1414,7 +1414,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ILocalProject#getLocalProjectId()
+	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#getLocalProjectId()
 	 */
 	public ILocalProjectId getLocalProjectId() {
 		return new LocalProjectIdImpl(getIdentifier());

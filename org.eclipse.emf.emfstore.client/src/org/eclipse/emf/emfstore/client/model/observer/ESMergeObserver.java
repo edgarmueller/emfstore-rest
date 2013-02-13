@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.model.observer;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
@@ -42,7 +42,7 @@ public interface ESMergeObserver extends IObserver {
 	 * @param changePackage
 	 *            the {@link ChangePackage} containing the operations being reverted
 	 */
-	void preRevertMyChanges(ILocalProject project, IChangePackage changePackage);
+	void preRevertMyChanges(ESLocalProject project, IChangePackage changePackage);
 
 	/**
 	 * Called after local changes have been reverted and before incoming
@@ -51,7 +51,7 @@ public interface ESMergeObserver extends IObserver {
 	 * @param project
 	 *            the project space upon local changes have been reverted
 	 */
-	void postRevertMyChanges(ILocalProject project);
+	void postRevertMyChanges(ESLocalProject project);
 
 	/**
 	 * Called after incoming changes have been applied upon the {@link ProjectSpace} and before
@@ -63,7 +63,7 @@ public interface ESMergeObserver extends IObserver {
 	 *            a list of change packages containing the changes that have been applied
 	 *            upon the project space
 	 */
-	void postApplyTheirChanges(ILocalProject project, List<IChangePackage> theirChangePackages);
+	void postApplyTheirChanges(ESLocalProject project, List<IChangePackage> theirChangePackages);
 
 	/**
 	 * Called after merge result has been re-applied, i.e. after the incoming changes
@@ -74,5 +74,5 @@ public interface ESMergeObserver extends IObserver {
 	 * @param changePackage
 	 *            the change package containing the changes to be applied upon the project space
 	 */
-	void postApplyMergedChanges(ILocalProject project, IChangePackage changePackage);
+	void postApplyMergedChanges(ESLocalProject project, IChangePackage changePackage);
 }

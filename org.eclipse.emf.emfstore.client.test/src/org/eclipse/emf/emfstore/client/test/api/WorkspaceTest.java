@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class WorkspaceTest {
 
 	private static IWorkspace workspace;
-	private ILocalProject localProject;
+	private ESLocalProject localProject;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -32,7 +32,7 @@ public class WorkspaceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		for (ILocalProject lp : workspace.getLocalProjects())
+		for (ESLocalProject lp : workspace.getLocalProjects())
 			lp.delete(new NullProgressMonitor());
 	}
 

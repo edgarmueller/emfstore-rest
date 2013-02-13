@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
 /**
- * Represents a project in EMFStore. There are two different types of projects, {@link ILocalProject} and
+ * Represents a project in EMFStore. There are two different types of projects, {@link ESLocalProject} and
  * {@link IRemoteProject}. Representing a locally checked out and a project on the server. This interface groups all
  * attributes and calls which are available on both.
  * 

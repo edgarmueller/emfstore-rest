@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
@@ -10,7 +10,7 @@ import org.junit.Before;
 
 public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	protected IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
-	protected ILocalProject localProject;
+	protected ESLocalProject localProject;
 
 	@Override
 	@Before
@@ -27,7 +27,7 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 		workspace.removeServer(server);
 		for (IRemoteProject project : server.getRemoteProjects())
 			project.delete(new NullProgressMonitor());
-		for (ILocalProject project : workspace.getLocalProjects())
+		for (ESLocalProject project : workspace.getLocalProjects())
 			project.delete(new NullProgressMonitor());
 		super.tearDown();
 	}

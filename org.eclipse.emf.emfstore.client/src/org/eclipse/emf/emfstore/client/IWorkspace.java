@@ -27,7 +27,7 @@ public interface IWorkspace {
 	 * 
 	 * @return list of local projects
 	 */
-	List<ILocalProject> getLocalProjects();
+	List<ESLocalProject> getLocalProjects();
 
 	/**
 	 * Creates a new local project that is not shared with the server yet.
@@ -38,7 +38,7 @@ public interface IWorkspace {
 	 *            the project description
 	 * @return the project space that the new project resides in
 	 */
-	ILocalProject createLocalProject(String projectName, String projectDescription);
+	ESLocalProject createLocalProject(String projectName, String projectDescription);
 
 	/**
 	 * Returns all available servers.

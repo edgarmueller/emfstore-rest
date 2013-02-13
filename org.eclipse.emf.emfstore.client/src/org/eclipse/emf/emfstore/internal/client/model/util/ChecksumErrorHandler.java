@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -40,7 +40,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ESLocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
 			return true;
@@ -54,7 +54,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ESLocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			return false;
 		}
@@ -69,7 +69,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(final ILocalProject project, final IPrimaryVersionSpec versionSpec,
+		public boolean execute(final ESLocalProject project, final IPrimaryVersionSpec versionSpec,
 			IProgressMonitor monitor) throws EMFStoreException {
 
 			// TODO: OTS casts

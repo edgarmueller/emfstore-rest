@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client.model.observer;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
 
@@ -39,7 +39,7 @@ public interface ESUpdateObserver extends IObserver {
 	 *            about progress
 	 * @return false if the observer wants to cancel the update
 	 */
-	boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages, IProgressMonitor monitor);
+	boolean inspectChanges(ESLocalProject project, List<IChangePackage> changePackages, IProgressMonitor monitor);
 
 	/**
 	 * Called after the changes have been applied to the project and the update is completed.
@@ -50,6 +50,6 @@ public interface ESUpdateObserver extends IObserver {
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
 	 */
-	void updateCompleted(ILocalProject project, IProgressMonitor monitor);
+	void updateCompleted(ESLocalProject project, IProgressMonitor monitor);
 
 }

@@ -47,7 +47,7 @@ public interface IRemoteProject extends IProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ILocalProject checkout(IProgressMonitor monitor) throws EMFStoreException;
+	ESLocalProject checkout(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Checkouts the project in the given version into the local workspace.
@@ -62,7 +62,7 @@ public interface IRemoteProject extends IProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ILocalProject checkout(final IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	ESLocalProject checkout(final IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Checkouts the project in the given version into the local workspace.
@@ -79,7 +79,7 @@ public interface IRemoteProject extends IProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ILocalProject checkout(final IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
+	ESLocalProject checkout(final IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**

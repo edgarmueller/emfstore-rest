@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
@@ -84,7 +84,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testCommitWithoutChange() throws EMFStoreException {
 		localProject.commit(null, new CommitCallbackAdapter() {
 			@Override
-			public void noLocalChanges(ILocalProject projectSpace) {
+			public void noLocalChanges(ESLocalProject projectSpace) {
 				noLocalChangesOccurred = true;
 			};
 		}, new NullProgressMonitor());
@@ -125,7 +125,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
 		localProject.commitToBranch(branch, logMessage, new CommitCallbackAdapter() {
 			@Override
-			public void noLocalChanges(ILocalProject projectSpace) {
+			public void noLocalChanges(ESLocalProject projectSpace) {
 				noLocalChangesOccurred = true;
 			};
 		}, new NullProgressMonitor());
@@ -237,7 +237,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		;
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit();
-		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
+		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
 		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
 		player.setName("A");
@@ -253,7 +253,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		;
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit();
-		ILocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
+		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
 		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
 		player.setName("A");
@@ -261,7 +261,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		checkedoutPlayer.setName("B");
 		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
 			@Override
-			public boolean baseVersionOutOfDate(final ILocalProject localProject, IProgressMonitor progressMonitor) {
+			public boolean baseVersionOutOfDate(final ESLocalProject localProject, IProgressMonitor progressMonitor) {
 				IPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 				try {
 					final IPrimaryVersionSpec version = localProject.resolveVersionSpec(IVersionSpec.FACTORY

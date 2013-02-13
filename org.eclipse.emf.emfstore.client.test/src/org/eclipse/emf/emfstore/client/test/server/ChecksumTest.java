@@ -7,7 +7,7 @@ import junit.framework.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
@@ -321,20 +321,20 @@ public class ChecksumTest extends CoreServerTest {
 
 	private class MyCommitCallback implements ICommitCallback {
 
-		public boolean baseVersionOutOfDate(ILocalProject projectSpace, IProgressMonitor progressMonitor) {
+		public boolean baseVersionOutOfDate(ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
 			return ICommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
 		}
 
-		public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
+		public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return ICommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
 		}
 
-		public void noLocalChanges(ILocalProject projectSpace) {
+		public void noLocalChanges(ESLocalProject projectSpace) {
 			ICommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
 		}
 
-		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,
@@ -345,7 +345,7 @@ public class ChecksumTest extends CoreServerTest {
 
 	private class MyUpdateCallback implements IUpdateCallback {
 
-		public boolean inspectChanges(ILocalProject projectSpace, List<? extends IChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends IChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
@@ -359,7 +359,7 @@ public class ChecksumTest extends CoreServerTest {
 			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
 
-		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,

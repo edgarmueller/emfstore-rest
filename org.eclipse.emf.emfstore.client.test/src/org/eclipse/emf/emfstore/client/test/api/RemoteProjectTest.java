@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
@@ -51,7 +51,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSession() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
+			ESLocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
@@ -63,7 +63,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgress() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
+			ESLocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
@@ -75,7 +75,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressNoFetch() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession,
+			ESLocalProject localProject = remoteProject.checkout(usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
@@ -89,7 +89,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressFetch() {
 		try {
-			ILocalProject localProject = remoteProject.checkout(usersession,
+			ESLocalProject localProject = remoteProject.checkout(usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());

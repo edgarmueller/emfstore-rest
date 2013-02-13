@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -43,7 +43,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testAddModelElementsWithoutCommands() {
-		ILocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		ESLocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"Testprojekt", "");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");
@@ -101,7 +101,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testAddModelElementsWithCommands() {
-		final ILocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		final ESLocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"Testprojekt", "");
 
 		final League leagueA = ProjectChangeUtil.createLeague("America");
@@ -187,7 +187,7 @@ public class ModelElementTest {
 
 	@Test(expected = ConcurrentModificationException.class)
 	public void testDeleteAllModelElementsWithCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 
 		new EMFStoreCommand() {
 			@Override
@@ -204,7 +204,7 @@ public class ModelElementTest {
 
 	@Test(expected = ConcurrentModificationException.class)
 	public void testDeleteAllModelElementsWithoutCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 
 		Set<EObject> elements = localProject.getAllModelElements();
 		for (EObject object : elements) {
@@ -219,7 +219,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testDeleteUndoWithCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
 		final int SIZE = localProject.getAllModelElements().size();
 
@@ -264,7 +264,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testDeleteUndoWithoutCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
 		final int SIZE = localProject.getAllModelElements().size();
 
@@ -289,7 +289,7 @@ public class ModelElementTest {
 
 	@Test
 	public void testReferenceDeletionWithCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
 
 		new EMFStoreCommand() {
@@ -329,7 +329,7 @@ public class ModelElementTest {
 
 	@Test
 	public void testReferenceDeletionWithoutCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
 		localProject.getModelElements().add(tournament);
 

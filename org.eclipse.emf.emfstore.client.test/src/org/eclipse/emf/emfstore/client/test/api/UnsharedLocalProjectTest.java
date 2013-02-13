@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
@@ -34,7 +34,7 @@ import org.junit.Test;
 public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	private final IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
-	private ILocalProject localProject;
+	private ESLocalProject localProject;
 
 	@Override
 	@Before
@@ -46,8 +46,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-		List<ILocalProject> projects = new ArrayList<ILocalProject>(workspace.getLocalProjects());
-		for (ILocalProject lp : projects) {
+		List<ESLocalProject> projects = new ArrayList<ESLocalProject>(workspace.getLocalProjects());
+		for (ESLocalProject lp : projects) {
 			lp.delete(new NullProgressMonitor());
 		}
 		super.tearDown();

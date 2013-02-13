@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.TestSessionProvider;
@@ -108,7 +108,7 @@ public abstract class BaseEmptyEmfstoreTest {
 	}
 
 	protected static void deleteLocalProjects() throws IOException, FatalEmfStoreException, EMFStoreException {
-		for (ILocalProject project : WorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
+		for (ESLocalProject project : WorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 			project.delete(new NullProgressMonitor());
 		}
 	}

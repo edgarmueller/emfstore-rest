@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -75,7 +75,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#noLocalChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
-	public void noLocalChanges(ILocalProject projectSpace) {
+	public void noLocalChanges(ESLocalProject projectSpace) {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null, "No local changes in your project. No need to commit.");
@@ -90,7 +90,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
-	public boolean baseVersionOutOfDate(final ILocalProject projectSpace, IProgressMonitor progressMonitor) {
+	public boolean baseVersionOutOfDate(final ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
 		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
@@ -119,7 +119,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
+	public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		if (((ChangePackage) changePackage).getOperations().isEmpty()) {
@@ -188,11 +188,11 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);

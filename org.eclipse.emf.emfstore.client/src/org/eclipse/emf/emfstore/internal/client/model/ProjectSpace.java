@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationManager;
@@ -96,7 +96,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @model
  * @generated
  */
-public interface ProjectSpace extends IdentifiableElement, ILocalProject {
+public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the

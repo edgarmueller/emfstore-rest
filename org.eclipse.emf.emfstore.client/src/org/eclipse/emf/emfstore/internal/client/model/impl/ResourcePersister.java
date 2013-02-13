@@ -24,7 +24,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
@@ -307,10 +307,10 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages,
+	public boolean inspectChanges(ESLocalProject project, List<IChangePackage> changePackages,
 		IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
@@ -320,7 +320,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 */
-	public void updateCompleted(ILocalProject project, IProgressMonitor monitor) {
+	public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 
@@ -328,11 +328,11 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.api.IChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ILocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
+	public boolean inspectChanges(ESLocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
 	}
@@ -341,11 +341,11 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void commitCompleted(ILocalProject project, IPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
+	public void commitCompleted(ESLocalProject project, IPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 	}
 

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
@@ -26,6 +26,6 @@ public interface ESCheckoutObserver extends IObserver {
 	 * @param project
 	 *            the checked out project
 	 */
-	void checkoutDone(ILocalProject project);
+	void checkoutDone(ESLocalProject project);
 
 }

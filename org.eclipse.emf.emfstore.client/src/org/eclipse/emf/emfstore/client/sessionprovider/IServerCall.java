@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 
@@ -35,7 +35,7 @@ public interface IServerCall {
 	 * 
 	 * @return the local project associated with this server call
 	 */
-	ILocalProject getLocalProject();
+	ESLocalProject getLocalProject();
 
 	/**
 	 * Returns the server this server call is meant to be executed against.
