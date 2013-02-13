@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.logoutObserver" name="Logout Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="loginObserver" name="Login Observer"/>
       </appInfo>
       <documentation>
-         An observer that will be notified when the logout of a user session occurred.
+         An observer that will be notified when the login of a user session occurred.
       </documentation>
    </annotation>
 
@@ -49,13 +49,13 @@
 
    <element name="observer">
       <complexType>
-         <attribute name="logoutObserver" type="string">
+         <attribute name="loginObserver" type="string">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver"/>
                </appInfo>
             </annotation>
          </attribute>

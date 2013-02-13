@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.exceptionObserver" name="Exception Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="mergeObserver" name="Merge Observer"/>
       </appInfo>
       <documentation>
-         An observer that will be notified when runtime exceptions occur.
+         An observer that will be notified during a merge.
       </documentation>
    </annotation>
 
@@ -49,13 +49,13 @@
 
    <element name="observer">
       <complexType>
-         <attribute name="exceptionObserver" type="string">
+         <attribute name="mergeObserver" type="string">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESExceptionObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver"/>
                </appInfo>
             </annotation>
          </attribute>

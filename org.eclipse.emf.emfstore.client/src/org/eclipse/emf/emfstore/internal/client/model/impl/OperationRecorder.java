@@ -518,7 +518,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recordingOptions extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {

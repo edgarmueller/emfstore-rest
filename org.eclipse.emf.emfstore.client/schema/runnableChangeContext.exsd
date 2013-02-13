@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.commitObserver" name="Commit Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="runnableChangeContext" name="Runnable Change Context"/>
       </appInfo>
       <documentation>
-         An observer that will be notified during the commit of a local project.
+         Sets the context which is used when Runnables are executed on a project space.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="observer" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="context"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,15 +47,15 @@
       </complexType>
    </element>
 
-   <element name="observer">
+   <element name="context">
       <complexType>
-         <attribute name="commitObserver" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext"/>
                </appInfo>
             </annotation>
          </attribute>

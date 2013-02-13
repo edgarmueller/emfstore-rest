@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.workspaceLocationProvider" name="Workspace Location Provider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="usersessionProvider" name="UsersessionProvider"/>
       </appInfo>
       <documentation>
-         Allows to configure the location of the local workspace for models.
+         Provides a mechanism to inject an user session in case no one was specified.
       </documentation>
    </annotation>
 
@@ -17,9 +17,9 @@
          </appInfo>
       </annotation>
       <complexType>
-         <choice>
-            <element ref="LocationProvider"/>
-         </choice>
+         <sequence>
+            <element ref="sessionProvider"/>
+         </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -47,15 +47,15 @@
       </complexType>
    </element>
 
-   <element name="LocationProvider">
+   <element name="sessionProvider">
       <complexType>
-         <attribute name="providerClass" type="string" use="required">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.ESLocationProvider"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.emf.emfstore.client.model.connectionmanager.AbstractSessionProvider:"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -67,23 +67,36 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         0.4.4.internal
+         [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
-
-
-
 
    <annotation>
       <appInfo>
-         <meta.section type="copyright"/>
+         <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         Copyright (c) 2010 Jonas Helming, Maximilian Koegel. All rights
-reserved. This program and the accompanying materials are made
-available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+         [Enter extension point usage example here.]
       </documentation>
    </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiinfo"/>
+      </appInfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
 
 </schema>

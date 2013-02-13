@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.notificationFilter" name="Notification Filer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="defaultConfigurationProvider" name="Default Configuration Provider"/>
       </appInfo>
       <documentation>
-         Provides a mechanism to filter specific notifications.
+         This extension points allow to set the default ServerInfo and CertificateAlias for the client.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="filter" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="configurationProvider"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,15 +47,15 @@
       </complexType>
    </element>
 
-   <element name="filter">
+   <element name="configurationProvider">
       <complexType>
-         <attribute name="class" type="string" use="required">
+         <attribute name="providerClass" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider"/>
                </appInfo>
             </annotation>
          </attribute>

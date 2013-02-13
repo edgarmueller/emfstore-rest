@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.checksumErrorHandler" name="Client Checksum Error Handler"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="logoutObserver" name="Logout Observer"/>
       </appInfo>
       <documentation>
-         Determines whether the client&apos;s checksum of a local project state should be compared against the checksum of the server&apos;s project state.  If the checksums are not equal, a configurable error handler will be called.
+         An observer that will be notified when the logout of a user session occurred.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="checksumCheck"/>
+            <element ref="observer" minOccurs="1" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,22 +47,15 @@
       </complexType>
    </element>
 
-   <element name="checksumCheck">
+   <element name="observer">
       <complexType>
-         <attribute name="isActive" type="boolean" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="errorHandler" type="string" use="required">
+         <attribute name="logoutObserver" type="string">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver"/>
                </appInfo>
             </annotation>
          </attribute>

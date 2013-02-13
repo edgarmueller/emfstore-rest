@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.client.ui" id="org.eclipse.emf.emfstore.internal.client.ui.filteredTypes" name="Filtered Types"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="workspaceLocationProvider" name="Workspace Location Provider"/>
       </appInfo>
       <documentation>
-         Specifies the types that will be ignored in the UI controls, e.g. the merge &amp; update dialog.
+         Allows to configure the location of the local workspace for models.
       </documentation>
    </annotation>
 
@@ -17,9 +17,9 @@
          </appInfo>
       </annotation>
       <complexType>
-         <sequence>
-            <element ref="filter"/>
-         </sequence>
+         <choice>
+            <element ref="LocationProvider"/>
+         </choice>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -44,25 +44,18 @@
                </appInfo>
             </annotation>
          </attribute>
-         <attribute name="label" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
       </complexType>
    </element>
 
-   <element name="filter">
+   <element name="LocationProvider">
       <complexType>
-         <attribute name="filteredTypes" type="string" use="required">
+         <attribute name="providerClass" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":IEClassFilter"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.ESLocationProvider"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -74,36 +67,23 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         0.4.4.internal
       </documentation>
    </annotation>
+
+
+
 
    <annotation>
       <appInfo>
-         <meta.section type="examples"/>
+         <meta.section type="copyright"/>
       </appInfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Copyright (c) 2010 Jonas Helming, Maximilian Koegel. All rights
+reserved. This program and the accompanying materials are made
+available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
       </documentation>
    </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="apiinfo"/>
-      </appInfo>
-      <documentation>
-         [Enter API information here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="implementation"/>
-      </appInfo>
-      <documentation>
-         [Enter information about supplied implementation of this extension point.]
-      </documentation>
-   </annotation>
-
 
 </schema>

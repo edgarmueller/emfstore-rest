@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.ui.common;
+package org.eclipse.emf.emfstore.client.ui;
 
 import java.util.Set;
 

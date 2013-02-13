@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="org.eclipse.emf.emfstore.client.loginObserver" name="Login Observer"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="workspaceInitObserver" name="Workspace Observer"/>
       </appInfo>
       <documentation>
-         An observer that will be notified when the login of a user session occurred.
+         Called when the workspace finished initialising itself.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="observer" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="initiator"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,15 +47,15 @@
       </complexType>
    </element>
 
-   <element name="observer">
+   <element name="initiator">
       <complexType>
-         <attribute name="loginObserver" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver"/>
                </appInfo>
             </annotation>
          </attribute>

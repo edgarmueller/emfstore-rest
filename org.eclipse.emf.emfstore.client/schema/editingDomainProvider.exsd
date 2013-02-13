@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.client.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.client" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.client.ui" id="org.eclipse.emf.emfstore.internal.client.ui.merge.labelprovider" name="Merge Label Provider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.client" id="editingDomainProvider" name="EditingDomain Provider"/>
       </appInfo>
       <documentation>
-         This extension point may be used to customize the conflict description in case a conflict has been detected and the merge dialog pops up.
+         Extension point for exchanging the default editing domain of the WorkspaceProvider.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="labelProvider"/>
+            <element ref="provider"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,7 +47,7 @@
       </complexType>
    </element>
 
-   <element name="labelProvider">
+   <element name="provider">
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider"/>
                </appInfo>
             </annotation>
          </attribute>

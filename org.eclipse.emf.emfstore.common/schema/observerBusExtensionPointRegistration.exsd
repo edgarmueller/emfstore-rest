@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.common" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.common" id="org.eclipse.emf.emfstore.common.observer.postcreation" name="Post-Creation Observers"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.common" id="observerBusExtensionPointRegistration" name="Observer Markup Interface"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -49,14 +49,18 @@
 
    <element name="observer">
       <complexType>
-         <attribute name="postcreationobserver" type="string">
+         <attribute name="observerAttributeName" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.client.model.observers.PostCreationObserver"/>
-               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="extensionPointName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
             </annotation>
          </attribute>
       </complexType>

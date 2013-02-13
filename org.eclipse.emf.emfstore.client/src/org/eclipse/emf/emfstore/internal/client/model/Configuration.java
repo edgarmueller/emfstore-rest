@@ -130,7 +130,8 @@ public final class Configuration {
 	}
 
 	/**
-	 * Returns the registered {@link ESLocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
+	 * Returns the registered {@link ESLocationProvider} or if not existent, the
+	 * {@link DefaultWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
@@ -250,8 +251,8 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.version").setThrowException(
-			false).getFirst();
+		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.clientVersion")
+			.setThrowException(false).getFirst();
 
 		if (version != null) {
 			ESClientVersionProvider versionProvider = version.getClass("class", ESClientVersionProvider.class);
@@ -399,7 +400,7 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getBoolean(
+			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;

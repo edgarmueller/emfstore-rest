@@ -147,7 +147,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableContext")
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableChangeContext")
 			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", ESRunnableContext.class);
