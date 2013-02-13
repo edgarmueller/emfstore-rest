@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.common.model.impl;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -423,7 +424,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		return eObjectToIdMap.keySet();
+		return Collections.unmodifiableSet(eObjectToIdMap.keySet());
 	}
 
 	/**
