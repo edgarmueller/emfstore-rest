@@ -851,10 +851,4 @@
          </variable>
       </sourceProvider>
    </extension>
-   <extension
-         point="org.eclipse.emf.emfstore.client.notify.postinit">
-      <initiator
-            class="org.eclipse.emf.emfstore.internal.client.ui.util.ProjectListUpdater">
-      </initiator>
-   </extension>
 </plugin>
