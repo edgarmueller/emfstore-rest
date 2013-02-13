@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -44,7 +44,7 @@ import org.eclipse.emf.emfstore.server.model.ISessionId;
 public abstract class ServerCall<U> implements IServerCall {
 
 	private ESLocalProject projectSpace;
-	private IUsersession usersession;
+	private ESUsersession usersession;
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
 	private U ret;
@@ -61,7 +61,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param usersession preselected user session
 	 */
-	public ServerCall(IUsersession usersession) {
+	public ServerCall(ESUsersession usersession) {
 		this.usersession = usersession;
 		setProgressMonitor(null);
 	}
@@ -96,7 +96,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(IUsersession usersession, IProgressMonitor monitor) {
+	public ServerCall(ESUsersession usersession, IProgressMonitor monitor) {
 		this.usersession = usersession;
 		setProgressMonitor(monitor);
 	}
@@ -155,7 +155,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            the user session to be used by the server call
 	 * @return
 	 */
-	public ServerCall<U> setUsersession(IUsersession usersession) {
+	public ServerCall<U> setUsersession(ESUsersession usersession) {
 		this.usersession = usersession;
 		return this;
 	}

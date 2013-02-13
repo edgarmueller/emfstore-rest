@@ -774,7 +774,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IUsersession#getServer()
+	 * @see org.eclipse.emf.emfstore.internal.client.ESUsersession.IUsersession#getServer()
 	 * 
 	 * @generated NOT
 	 */

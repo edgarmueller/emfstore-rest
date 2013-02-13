@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.model.observer.ESCheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
@@ -126,10 +126,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getBranches(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getBranches(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IBranchInfo> getBranches(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public List<IBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws EMFStoreException {
@@ -161,11 +161,11 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#resolveVersionSpec(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#resolveVersionSpec(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec resolveVersionSpec(IUsersession session, final IVersionSpec versionSpec,
+	public PrimaryVersionSpec resolveVersionSpec(ESUsersession session, final IVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
@@ -198,10 +198,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.query.IHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query,
+	public List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, final IHistoryQuery query,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override
@@ -271,10 +271,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ProjectSpace checkout(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public ProjectSpace checkout(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
 		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD(), monitor);
 		return checkout(usersession, targetSpec, monitor);
 	}
@@ -283,11 +283,11 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ProjectSpace checkout(IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	public ProjectSpace checkout(ESUsersession usersession, IVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException {
 
 		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
@@ -397,10 +397,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.emf.emfstore.client.IUsersession,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public void delete(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
 		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
 	}
 

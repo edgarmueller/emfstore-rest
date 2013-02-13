@@ -5,7 +5,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
@@ -28,21 +28,21 @@ public interface UIControllerFactory {
 
 	ESRemoteProject createRemoteProject(Shell shell);
 
-	ESRemoteProject createRemoteProject(Shell shell, IUsersession usersession);
+	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession);
 
-	ESRemoteProject createRemoteProject(Shell shell, IUsersession usersession, String projectName, String description);
+	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName, String description);
 
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 
 	void deleteRemoteProject(Shell shell, ESServer server, IGlobalProjectId projectId, boolean deleteFiles);
 
-	void deleteRemoteProject(Shell shell, IUsersession session, IGlobalProjectId projectId, boolean deleteFiles);
+	void deleteRemoteProject(Shell shell, ESUsersession session, IGlobalProjectId projectId, boolean deleteFiles);
 
 	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject);
 
 	void login(Shell shell, ESServer server);
 
-	void logout(Shell shell, IUsersession usersession);
+	void logout(Shell shell, ESUsersession usersession);
 
 	void mergeBranch(Shell shell, ESLocalProject project);
 

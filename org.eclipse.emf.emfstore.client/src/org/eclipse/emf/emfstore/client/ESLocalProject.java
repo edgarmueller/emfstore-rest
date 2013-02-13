@@ -215,7 +215,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * Shares this project.
 	 * </p>
 	 * <p>
-	 * The {@link IUsersession} used to share the project will be injected by the framework.
+	 * The {@link ESUsersession} used to share the project will be injected by the framework.
 	 * </p>
 	 * 
 	 * @param monitor
@@ -230,14 +230,14 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * Shares this project.
 	 * 
 	 * @param session
-	 *            the {@link IUsersession} that should be used for sharing the project
+	 *            the {@link ESUsersession} that should be used for sharing the project
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while sharing the project
 	 * 
 	 * @throws EMFStoreException
 	 *             in case an error occurs while sharing the project
 	 */
-	void shareProject(IUsersession session, IProgressMonitor monitor) throws EMFStoreException;
+	void shareProject(ESUsersession session, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Whether this project has been shared.
@@ -247,11 +247,11 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	boolean isShared();
 
 	/**
-	 * Returns the {@link IUsersession} associated with this project, if any.
+	 * Returns the {@link ESUsersession} associated with this project, if any.
 	 * 
 	 * @return the user session associated with this project, or {@code null}, if no such usersession is available
 	 */
-	IUsersession getUsersession();
+	ESUsersession getUsersession();
 
 	/**
 	 * Returns the base version of the project.

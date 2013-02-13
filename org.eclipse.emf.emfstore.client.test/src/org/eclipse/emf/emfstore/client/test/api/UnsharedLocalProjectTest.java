@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
@@ -137,7 +137,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test
 	public void testGetUsersession() {
-		IUsersession session = localProject.getUsersession();
+		ESUsersession session = localProject.getUsersession();
 		assertNull(session);
 	}
 
@@ -308,7 +308,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	public void testShareSession() {
 		try {
 			ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
-			IUsersession usersession = server.login("super", "super");
+			ESUsersession usersession = server.login("super", "super");
 			localProject.shareProject(usersession, new NullProgressMonitor());
 			ESRemoteProject remote = localProject.getRemoteProject();
 			assertNotNull(remote);

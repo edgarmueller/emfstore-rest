@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.ISessionId;
  * @author emueller
  * @author wesendon
  */
-public interface IUsersession {
+public interface ESUsersession {
 
 	/**
 	 * Returns the usersession's server.

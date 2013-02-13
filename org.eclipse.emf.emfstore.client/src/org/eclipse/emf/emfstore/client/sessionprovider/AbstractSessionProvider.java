@@ -12,14 +12,14 @@ package org.eclipse.emf.emfstore.client.sessionprovider;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * <p>
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
  * derives a user session for a given server request (IServerCall). When overriding
- * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link IUsersession}
+ * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link ESUsersession}
  * selection.
  * </p>
  * <p>
@@ -56,9 +56,9 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
-	public IUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
+	public ESUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
 
-		IUsersession usersession = serverCall.getUsersession();
+		ESUsersession usersession = serverCall.getUsersession();
 
 		if (usersession == null) {
 			usersession = getUsersessionFromProject(serverCall.getLocalProject());
@@ -78,7 +78,7 @@ public abstract class AbstractSessionProvider {
 	 *            the local project to obtain the user session from
 	 * @return the user session associated with the project or {@code null}, if no session is available
 	 */
-	protected IUsersession getUsersessionFromProject(ESLocalProject project) {
+	protected ESUsersession getUsersessionFromProject(ESLocalProject project) {
 
 		if (project != null && project.getUsersession() != null) {
 			return project.getUsersession();
@@ -102,7 +102,7 @@ public abstract class AbstractSessionProvider {
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
-	public abstract IUsersession provideUsersession(ESServer server) throws EMFStoreException;
+	public abstract ESUsersession provideUsersession(ESServer server) throws EMFStoreException;
 
 	/**
 	 * This method is called by the SessionManager in order to login a given user session. Either you are able to
@@ -113,5 +113,5 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @throws EMFStoreException in case an exception occurred while logging in the given session
 	 */
-	public abstract void login(IUsersession usersession) throws EMFStoreException;
+	public abstract void login(ESUsersession usersession) throws EMFStoreException;
 }

@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.util;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
@@ -49,9 +49,9 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.IUsersession)
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
-	public void loginCompleted(IUsersession session) {
+	public void loginCompleted(ESUsersession session) {
 		try {
 			update(session);
 		} catch (EMFStoreException e) {
@@ -76,7 +76,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 		}
 	}
 
-	private void updateACUser(IUsersession session) {
+	private void updateACUser(ESUsersession session) {
 		try {
 			((WorkspaceBase) workspace).updateACUser((Usersession) session);
 		} catch (EMFStoreException e) {
@@ -85,7 +85,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 		}
 	}
 
-	private void update(final IUsersession session) throws EMFStoreException {
+	private void update(final ESUsersession session) throws EMFStoreException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				// throw new NotImplementedException("TODO OTS");
@@ -98,9 +98,9 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.IUsersession)
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
-	public void logoutCompleted(IUsersession session) {
+	public void logoutCompleted(ESUsersession session) {
 		// TODO OTS cast
 		ServerInfo server = (ServerInfo) session.getServer();
 		if (server != null) {

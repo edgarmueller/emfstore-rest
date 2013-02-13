@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
@@ -27,5 +27,5 @@ public interface ESLogoutObserver extends IObserver {
 	 * @param session
 	 *            the usersession that was logged out
 	 */
-	void logoutCompleted(IUsersession session);
+	void logoutCompleted(ESUsersession session);
 }

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.sessionprovider;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 
 /**
  * Represents a call to a server, i.e. a remote action that involves a server.
@@ -28,7 +28,7 @@ public interface IServerCall {
 	 * 
 	 * @return the user session in use
 	 */
-	IUsersession getUsersession();
+	ESUsersession getUsersession();
 
 	/**
 	 * Returns the project this server call is associated with.

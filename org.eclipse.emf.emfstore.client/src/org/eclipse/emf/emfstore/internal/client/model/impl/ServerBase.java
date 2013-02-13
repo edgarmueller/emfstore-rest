@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 
 public abstract class ServerBase extends EObjectImpl implements ESServer, ServerInfo {
 
-	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
+	private ESUsersession validateUsersession(ESUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
 			// TODO OTS custom exception
 			throw new EMFStoreException("Invalid usersession for given server.");
@@ -30,7 +30,7 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 		return usersession;
 	}
 
-	public ESRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
+	public ESRemoteProject createRemoteProject(ESUsersession usersession, final String projectName,
 		final IProgressMonitor progressMonitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
 			@Override
@@ -53,7 +53,7 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 		}.execute());
 	}
 
-	private LogMessage createLogmessage(IUsersession usersession, final String projectName) {
+	private LogMessage createLogmessage(ESUsersession usersession, final String projectName) {
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		log.setMessage("Creating project '" + projectName + "'");
 		log.setAuthor(usersession.getUsername());
@@ -61,7 +61,7 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 		return log;
 	}
 
-	public List<ESRemoteProject> getRemoteProjects(IUsersession usersession)
+	public List<ESRemoteProject> getRemoteProjects(ESUsersession usersession)
 		throws EMFStoreException {
 
 		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {

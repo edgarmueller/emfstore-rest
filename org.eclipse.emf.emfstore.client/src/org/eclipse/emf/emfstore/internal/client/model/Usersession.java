@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitPrope
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Usersession</b></em>'.
  * 
- * @extends IUsersession
+ * @extends ESUsersession
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -46,7 +46,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitPrope
  * @model
  * @generated
  */
-public interface Usersession extends EObject, IUsersession {
+public interface Usersession extends EObject, ESUsersession {
 	/**
 	 * Returns the value of the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->

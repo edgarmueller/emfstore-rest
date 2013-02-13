@@ -57,7 +57,7 @@ public interface ESProject {
 	 * </p>
 	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * specify an {@link ESUsersession}.
 	 * </p>
 	 * 
 	 * @param monitor
@@ -74,7 +74,7 @@ public interface ESProject {
 	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
 	 * 
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * specify an {@link ESUsersession}.
 	 * 
 	 * @param versionSpec
 	 *            the {@link IVersionSpec} to resolve
@@ -93,7 +93,7 @@ public interface ESProject {
 	 * </p>
 	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * specify an {@link ESUsersession}.
 	 * </p>
 	 * 
 	 * @param monitor
@@ -131,7 +131,7 @@ public interface ESProject {
 	 * 
 	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * specify an {@link ESUsersession}.
 	 * </p>
 	 * 
 	 * @param versionSpec
@@ -152,7 +152,7 @@ public interface ESProject {
 	 * </p>
 	 * <p>
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
-	 * specify an {@link IUsersession}.
+	 * specify an {@link ESUsersession}.
 	 * </p>
 	 * 
 	 * @param versionSpec

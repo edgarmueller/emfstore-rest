@@ -105,21 +105,21 @@ public interface ESServer {
 	 * Returns a list with all remote projects hosted on this server.
 	 * 
 	 * @param usersession
-	 *            the {@link IUsersession} that should be used to fetch the remote project.<br/>
+	 *            the {@link ESUsersession} that should be used to fetch the remote project.<br/>
 	 *            If <code>null</code>, the session manager will try to inject a session.
 	 * 
 	 * @return a list with all remote project
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
 	 */
-	List<ESRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException;
+	List<ESRemoteProject> getRemoteProjects(ESUsersession usersession) throws EMFStoreException;
 
 	/**
-	 * Returns the {@link IUsersession} which was used on the last call to this server.
+	 * Returns the {@link ESUsersession} which was used on the last call to this server.
 	 * 
 	 * @return the lastly used session
 	 */
-	IUsersession getLastUsersession();
+	ESUsersession getLastUsersession();
 
 	/**
 	 * Creates an empty project on the server.
@@ -141,7 +141,7 @@ public interface ESServer {
 	 * Creates an empty project on the server.
 	 * 
 	 * @param usersession
-	 *            the {@link IUsersession} that should be used to create the
+	 *            the {@link ESUsersession} that should be used to create the
 	 *            remote project.<br/>
 	 *            If <code>null</code>, the session manager will search for a
 	 *            session.
@@ -154,20 +154,20 @@ public interface ESServer {
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	ESRemoteProject createRemoteProject(IUsersession usersession, String projectName, IProgressMonitor monitor)
+	ESRemoteProject createRemoteProject(ESUsersession usersession, String projectName, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
-	 * Logs into this server, returning a {@link IUsersession}.
+	 * Logs into this server, returning a {@link ESUsersession}.
 	 * 
 	 * @param name
 	 *            the name of the user
 	 * @param password
 	 *            the cleartext password of the user
 	 * 
-	 * @return a logged in {@link IUsersession}
+	 * @return a logged in {@link ESUsersession}
 	 * @throws EMFStoreException in case an error occurs while creating and logging in the session for the given user
 	 */
-	IUsersession login(String name, String password) throws EMFStoreException;
+	ESUsersession login(String name, String password) throws EMFStoreException;
 
 }

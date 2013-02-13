@@ -29,7 +29,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -114,7 +114,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		}.execute();
 	}
 
-	public ProjectInfo createEmptyRemoteProject(final IUsersession usersession, final String projectName,
+	public ProjectInfo createEmptyRemoteProject(final ESUsersession usersession, final String projectName,
 		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
@@ -185,7 +185,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.Usersession,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public ProjectInfo createRemoteProject(IUsersession usersession, final String projectName,
+	public ProjectInfo createRemoteProject(ESUsersession usersession, final String projectName,
 		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((Usersession) usersession) {
 			@Override
@@ -417,7 +417,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
-	public IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec,
+	public IPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final IVersionSpec versionSpec,
 		final IGlobalProjectId projectId) throws EMFStoreException {
 		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
 			@Override

@@ -62,7 +62,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(final IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Checkouts the project in the given version into the local workspace.
@@ -79,7 +79,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(final IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
+	ESLocalProject checkout(final ESUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -98,7 +98,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while resolving the version
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(IUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
+	IPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -114,7 +114,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the branch information for the project
 	 */
-	List<IBranchInfo> getBranches(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	List<IBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
@@ -133,7 +133,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the history information
 	 */
-	List<IHistoryInfo> getHistoryInfos(IUsersession usersession, IHistoryQuery query, IProgressMonitor monitor)
+	List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, IHistoryQuery query, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -159,7 +159,7 @@ public interface ESRemoteProject extends ESProject {
 	 * @throws EMFStoreException
 	 *             in case an error occurs during the deletion of the project
 	 */
-	void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	void delete(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Returns the HEAD version of the project.
