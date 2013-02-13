@@ -524,11 +524,13 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @param fileName
 	 *            the file name to import from
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while import the changes
 	 * @throws IOException
 	 *             if file access fails
 	 * @generated NOT
 	 */
-	void importLocalChanges(String fileName) throws IOException;
+	void importLocalChanges(String fileName, IProgressMonitor monitor) throws IOException;
 
 	/**
 	 * Initialize the project space and its resources.

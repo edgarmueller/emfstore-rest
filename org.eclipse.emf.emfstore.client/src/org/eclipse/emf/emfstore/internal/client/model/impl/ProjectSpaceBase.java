@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -67,6 +66,7 @@ import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileInformati
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileTransferManager;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectController;
+import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportChangesController;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -597,24 +597,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#importLocalChanges(java.lang.String)
 	 */
-	public void importLocalChanges(String fileName) throws IOException {
-
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createFileURI(fileName), true);
-		EList<EObject> directContents = resource.getContents();
-		// sanity check
-
-		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ChangePackage))) {
-			throw new IOException("File is corrupt, does not contain Changes.");
-		}
-
-		ChangePackage changePackage = (ChangePackage) directContents.get(0);
-
-		if (!initCompleted) {
-			init();
-		}
-
-		applyOperations(changePackage.getOperations(), true);
+	public void importLocalChanges(String fileName, IProgressMonitor monitor) throws IOException {
+		new ImportChangesController(this).execute(new File(fileName), monitor);
 	}
 
 	/**

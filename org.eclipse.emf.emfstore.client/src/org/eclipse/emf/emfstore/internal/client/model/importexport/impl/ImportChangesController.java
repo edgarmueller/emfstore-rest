@@ -14,9 +14,16 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
 /**
  * A controller for importing changes which then will be applied upon
@@ -27,7 +34,7 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImport
  */
 public class ImportChangesController implements IExportImportController {
 
-	private final ProjectSpace projectSpace;
+	private final ProjectSpaceBase projectSpace;
 
 	/**
 	 * Constructor.
@@ -35,7 +42,7 @@ public class ImportChangesController implements IExportImportController {
 	 * @param projectSpace
 	 *            the {@link ProjectSpace} upon which to apply the changes being imported
 	 */
-	public ImportChangesController(ProjectSpace projectSpace) {
+	public ImportChangesController(ProjectSpaceBase projectSpace) {
 		this.projectSpace = projectSpace;
 	}
 
@@ -88,7 +95,19 @@ public class ImportChangesController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		projectSpace.importLocalChanges(file.getAbsolutePath());
+
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+		EList<EObject> directContents = resource.getContents();
+
+		// sanity check
+		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ChangePackage))) {
+			throw new IOException("File is corrupt, does not contain changes.");
+		}
+
+		ChangePackage changePackage = (ChangePackage) directContents.get(0);
+
+		projectSpace.applyOperations(changePackage.getOperations(), true);
 	}
 
 	/**

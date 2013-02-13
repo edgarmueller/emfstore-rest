@@ -13,7 +13,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -344,7 +343,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @throws IOException in case importing the changes fails
 	 */
 	// TODO: OTS
-	void importLocalChanges(String fileName) throws IOException;
+	// void importLocalChanges(String fileName) throws IOException;
 
 	/**
 	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same
