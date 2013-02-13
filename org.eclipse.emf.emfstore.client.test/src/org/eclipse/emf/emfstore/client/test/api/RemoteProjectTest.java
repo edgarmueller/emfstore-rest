@@ -45,7 +45,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test
 	public void testGetProjectID() {
-		assertNotNull(remoteProject.getProjectId());
+		assertNotNull(remoteProject.getGlobalProjectId());
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
+			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -65,7 +65,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ILocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
+			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -79,7 +79,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
+			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());
@@ -93,7 +93,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
-			assertEquals(remoteProject.getProjectId(), localProject.getRemoteProject().getProjectId());
+			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
 			log(e);
 			fail(e.getMessage());

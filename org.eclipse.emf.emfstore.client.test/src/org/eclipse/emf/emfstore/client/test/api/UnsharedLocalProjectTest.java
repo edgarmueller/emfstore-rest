@@ -61,7 +61,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testProjectID() {
 		// unshared projects have no project ID
-		assertNull(localProject.getProjectId());
+		assertNull(localProject.getGlobalProjectId());
 	}
 
 	@Test(expected = RuntimeException.class)

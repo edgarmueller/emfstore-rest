@@ -6,7 +6,7 @@ import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
@@ -34,9 +34,9 @@ public interface UIControllerFactory {
 
 	void deleteLocalProject(Shell shell, ILocalProject project);
 
-	void deleteRemoteProject(Shell shell, IServer server, IProjectId projectId, boolean deleteFiles);
+	void deleteRemoteProject(Shell shell, IServer server, IGlobalProjectId projectId, boolean deleteFiles);
 
-	void deleteRemoteProject(Shell shell, IUsersession session, IProjectId projectId, boolean deleteFiles);
+	void deleteRemoteProject(Shell shell, IUsersession session, IGlobalProjectId projectId, boolean deleteFiles);
 
 	void deleteRemoteProject(Shell shell, IRemoteProject remoteProject);
 

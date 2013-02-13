@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
@@ -38,11 +38,11 @@ import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 public interface IProject {
 
 	/**
-	 * Return the project's id.
+	 * Return the global ID of the project. This ID is globally unique even among different server and client nodes.
 	 * 
-	 * @return the ID of the project
+	 * @return the global ID of the project
 	 */
-	IProjectId getProjectId();
+	IGlobalProjectId getGlobalProjectId();
 
 	/**
 	 * Returns the project's name.

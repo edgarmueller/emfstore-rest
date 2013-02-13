@@ -87,6 +87,7 @@ import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.internal.server.model.impl.LocalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -99,7 +100,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.api.ILocalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
@@ -143,8 +146,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ExtensionElement extensionElement = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.runnableContext").setThrowException(false).getFirst();
+		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableContext")
+			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
 		} else {
@@ -192,8 +195,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			@Override
 			protected Void run() throws EMFStoreException {
 				getConnectionManager().addTag(getUsersession().getSessionId(), getProjectId(),
-					(PrimaryVersionSpec) versionSpec,
-					(TagVersionSpec) tag);
+					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
 		};
@@ -673,8 +675,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// default
 		boolean useCrossReferenceAdapter = true;
 
-		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.inverseCrossReferenceCache").getExtensionElements()) {
+		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
+			.getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
 
@@ -899,8 +901,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 */
 	public boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict,
-		IConflictResolver conflictResolver,
-		IUpdateCallback callback, IProgressMonitor progressMonitor) throws EMFStoreException {
+		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
+		throws EMFStoreException {
 		// merge the conflicts
 		// TODO: OTS casts
 		if (conflictResolver.resolveConflicts(getProject(), (ChangeConflict) changeConflict, getBaseVersion(),
@@ -908,8 +910,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
 			applyChanges((PrimaryVersionSpec) target, ((ChangeConflict) changeConflict).getNewPackages(), mergedResult,
-				callback,
-				progressMonitor);
+				callback, progressMonitor);
 			return true;
 		}
 		return false;
@@ -924,14 +925,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void mergeBranch(final IPrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver,
-		final IProgressMonitor monitor)
-		throws EMFStoreException {
+		final IProgressMonitor monitor) throws EMFStoreException {
 		mergeBranch((PrimaryVersionSpec) branchSpec, conflictResolver, monitor);
 	}
 
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final IConflictResolver conflictResolver,
-		final IProgressMonitor monitor)
-		throws EMFStoreException {
+		final IProgressMonitor monitor) throws EMFStoreException {
 
 		checkIsShared();
 
@@ -944,8 +943,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
-					branchSpec), monitor);
+				PrimaryVersionSpec commonAncestor = resolveVersionSpec(
+					Versions.createANCESTOR(getBaseVersion(), branchSpec), monitor);
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
@@ -1396,4 +1395,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public EList<String> getRecentLogMessages() {
 		return getOldLogMessages();
 	}
+
+	public IGlobalProjectId getGlobalProjectId() {
+		return getProjectId();
+	}
+
+	public ILocalProjectId getLocalProjectId() {
+		return new LocalProjectIdImpl(getIdentifier());
+	}
+
 }

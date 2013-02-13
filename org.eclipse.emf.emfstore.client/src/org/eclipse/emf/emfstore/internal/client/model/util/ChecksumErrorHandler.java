@@ -80,9 +80,8 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 					return WorkspaceProvider
 						.getInstance()
 						.getConnectionManager()
-						.getProject(
-							(SessionId) project.getUsersession().getSessionId(),
-							(ProjectId) project.getRemoteProject().getProjectId(),
+						.getProject((SessionId) project.getUsersession().getSessionId(),
+							(ProjectId) project.getRemoteProject().getGlobalProjectId(),
 							ModelUtil.clone((PrimaryVersionSpec) versionSpec));
 				}
 			}.execute();

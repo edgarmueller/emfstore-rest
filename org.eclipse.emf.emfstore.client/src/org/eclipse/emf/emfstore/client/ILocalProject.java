@@ -22,9 +22,11 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ICo
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.server.model.api.ILocalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
@@ -342,4 +344,14 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 */
 	// TODO: OTS
 	void importLocalChanges(String fileName) throws IOException;
+
+	/**
+	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same
+	 * for different checkouts of the same {@link RemoteProject}. It is intended to identify a local copy of a remote
+	 * project.
+	 * 
+	 * @return the ID
+	 */
+	ILocalProjectId getLocalProjectId();
+
 }

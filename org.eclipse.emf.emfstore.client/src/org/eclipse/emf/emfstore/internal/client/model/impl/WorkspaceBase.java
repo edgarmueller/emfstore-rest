@@ -61,7 +61,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
 
@@ -104,7 +104,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(IServer serverInfo, final IProjectId projectId) throws EMFStoreException {
+	public List<IBranchInfo> getBranches(IServer serverInfo, final IGlobalProjectId projectId) throws EMFStoreException {
 		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
 			protected List<IBranchInfo> run() throws EMFStoreException {
@@ -418,7 +418,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec,
-		final IProjectId projectId) throws EMFStoreException {
+		final IGlobalProjectId projectId) throws EMFStoreException {
 		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {

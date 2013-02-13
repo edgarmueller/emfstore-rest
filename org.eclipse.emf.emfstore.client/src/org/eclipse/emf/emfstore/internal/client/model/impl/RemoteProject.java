@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IProjectId;
+import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
@@ -88,7 +88,7 @@ public class RemoteProject implements IRemoteProject {
 		return projectInfo;
 	}
 
-	public IProjectId getProjectId() {
+	public IGlobalProjectId getGlobalProjectId() {
 		return projectInfo.getProjectId();
 	}
 
@@ -115,7 +115,7 @@ public class RemoteProject implements IRemoteProject {
 					protected List<BranchInfo> run() throws EMFStoreException {
 						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
 							.getConnectionManager();
-						return connectionManager.getBranches(getSessionId(), (ProjectId) getProjectId());
+						return connectionManager.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
 					};
 				}.execute());
 			}
@@ -134,7 +134,7 @@ public class RemoteProject implements IRemoteProject {
 			@Override
 			protected List<BranchInfo> run() throws EMFStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return cm.getBranches(getSessionId(), (ProjectId) getProjectId());
+				return cm.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
 			};
 		}.execute());
 	}
@@ -151,7 +151,7 @@ public class RemoteProject implements IRemoteProject {
 		return new ServerCall<PrimaryVersionSpec>(server, monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
-				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(VersionSpec) versionSpec);
 			}
 		}.execute();
@@ -166,12 +166,11 @@ public class RemoteProject implements IRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(IUsersession session, final IVersionSpec versionSpec,
-		IProgressMonitor monitor)
-		throws EMFStoreException {
+		IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
-				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(VersionSpec) versionSpec);
 			}
 		}.execute();
@@ -189,7 +188,7 @@ public class RemoteProject implements IRemoteProject {
 		return copy(new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
-				return getConnectionManager().getHistoryInfo(getSessionId(), (ProjectId) getProjectId(),
+				return getConnectionManager().getHistoryInfo(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(HistoryQuery) query);
 			}
 		}.execute());
@@ -203,13 +202,12 @@ public class RemoteProject implements IRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<IHistoryInfo> getHistoryInfos(IUsersession usersession, final IHistoryQuery query,
-		IProgressMonitor monitor)
-		throws EMFStoreException {
+		IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws EMFStoreException {
 				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
-					(ProjectId) getProjectId(), (HistoryQuery) query);
+					(ProjectId) getGlobalProjectId(), (HistoryQuery) query);
 			}
 		}.execute());
 	}
@@ -227,7 +225,7 @@ public class RemoteProject implements IRemoteProject {
 		new ServerCall<Void>(server, monitor) {
 			@Override
 			protected Void run() throws EMFStoreException {
-				getConnectionManager().addTag(getUsersession().getSessionId(), (ProjectId) getProjectId(),
+				getConnectionManager().addTag(getUsersession().getSessionId(), (ProjectId) getGlobalProjectId(),
 					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
@@ -247,8 +245,8 @@ public class RemoteProject implements IRemoteProject {
 		new ServerCall<Void>(server, monitor) {
 			@Override
 			protected Void run() throws EMFStoreException {
-				getConnectionManager().removeTag(getUsersession().getSessionId(),
-					(ProjectId) getProjectId(), (PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+				getConnectionManager().removeTag(getUsersession().getSessionId(), (ProjectId) getGlobalProjectId(),
+					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
 		}.execute();
@@ -392,10 +390,7 @@ public class RemoteProject implements IRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.IRemoteProject#delete(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void delete(IProgressMonitor monitor) throws EMFStoreException {
-		getDeleteProjectServerCall()
-			.setProgressMonitor(monitor)
-			.setServer(server)
-			.execute();
+		getDeleteProjectServerCall().setProgressMonitor(monitor).setServer(server).execute();
 	}
 
 	/**
@@ -406,10 +401,7 @@ public class RemoteProject implements IRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void delete(IUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
-		getDeleteProjectServerCall()
-			.setProgressMonitor(monitor)
-			.setUsersession(usersession)
-			.execute();
+		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
 	}
 
 	/**

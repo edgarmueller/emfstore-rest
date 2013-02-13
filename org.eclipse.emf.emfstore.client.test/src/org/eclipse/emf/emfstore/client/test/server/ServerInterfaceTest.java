@@ -186,7 +186,7 @@ public class ServerInterfaceTest extends ServerTests {
 		try {
 			List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
 			for (IRemoteProject projectInfo : remoteProjectList) {
-				if (projectInfo.getProjectId() == getProjectId()) {
+				if (projectInfo.getGlobalProjectId() == getProjectId()) {
 					assertTrue(false);
 				}
 			}
