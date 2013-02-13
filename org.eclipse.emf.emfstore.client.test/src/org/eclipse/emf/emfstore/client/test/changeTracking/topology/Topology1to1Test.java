@@ -61,8 +61,9 @@ public class Topology1to1Test extends TopologyTest {
 
 		assertEquals(issue.getSolution(), null);
 
-		getProject().addModelElement(issue);
-		getProject().addModelElement(solution);
+		addToProject(issue, solution);
+		ModelElementId issueId = getProject().getModelElementId(issue);
+		ModelElementId solutionId = getProject().getModelElementId(solution);
 
 		clearOperations();
 
@@ -78,9 +79,6 @@ public class Topology1to1Test extends TopologyTest {
 		List<AbstractOperation> subOperations = ((CompositeOperation) operation).getSubOperations();
 
 		assertEquals(2, subOperations.size());
-
-		ModelElementId issueId = ModelUtil.getProject(issue).getModelElementId(issue);
-		ModelElementId solutionId = ModelUtil.getProject(solution).getModelElementId(solution);
 
 		AbstractOperation op = subOperations.get(0);
 		assertEquals(true, op instanceof SingleReferenceOperation);

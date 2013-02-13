@@ -24,9 +24,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 public class OperationRecorderConfig {
 
 	private boolean isCutOffIncomingCrossReferences;
-	private boolean isForceCommands;
 	private boolean isDenyAddCutElementsToModelElements;
 	private boolean isRollBackInCaseOfCommandFailure;
+	private boolean isForceCommands;
 	private boolean isEmitOperationsUponCommandCompletion = true;
 
 	private OperationModificator modificator;
@@ -134,6 +134,7 @@ public class OperationRecorderConfig {
 	 * @param shouldEmitOperationsUponCommandCompletion
 	 *            true, if operations should only be emitted when a command completes, false otherwise
 	 */
+	// TODO: call this from the operationManager initialization?
 	public void setEmitOperationsUponCommandCompletion(Boolean shouldEmitOperationsUponCommandCompletion) {
 		isEmitOperationsUponCommandCompletion = shouldEmitOperationsUponCommandCompletion;
 	}

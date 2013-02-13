@@ -38,18 +38,23 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testOrderOfRootElementsInvariance() throws SerializationException {
 		// createTestElement automatically adds the element to the project
-		TestElement a = createTestElement("A");
-		TestElement b = createTestElement("B");
+		final TestElement a = createTestElement("A");
+		final TestElement b = createTestElement("B");
 
 		getProject().getModelElements().add(a);
 		getProject().getModelElements().add(b);
 
 		long computeChecksum = ModelUtil.computeChecksum(getProject());
 
-		getProject().getModelElements().clear();
+		new EMFStoreCommand() {
 
-		getProject().getModelElements().add(b);
-		getProject().getModelElements().add(a);
+			@Override
+			protected void doRun() {
+				getProject().getModelElements().clear();
+				getProject().getModelElements().add(b);
+				getProject().getModelElements().add(a);
+			}
+		}.run(false);
 
 		long checksum = ModelUtil.computeChecksum(getProject());
 
@@ -207,7 +212,13 @@ public class ChecksumTest extends CoreServerTest {
 
 		commitWithoutCommand(getProjectSpace());
 
-		checkedOutProjectSpace.getProject().addModelElement(createTestElement("B"));
+		new EMFStoreCommand() {
+
+			@Override
+			protected void doRun() {
+				checkedOutProjectSpace.getProject().addModelElement(createTestElement("B"));
+			}
+		}.run(false);
 		update(checkedOutProjectSpace);
 		commitWithoutCommand(checkedOutProjectSpace);
 
@@ -243,7 +254,12 @@ public class ChecksumTest extends CoreServerTest {
 
 		commitWithoutCommand(getProjectSpace());
 
-		checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
+			}
+		}.run(false);
 		update(checkedOutProjectSpace);
 		commitWithoutCommand(checkedOutProjectSpace);
 
@@ -262,7 +278,7 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
+		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
 			getProjectSpace().getUsersession(), new NullProgressMonitor());
 
 		new EMFStoreCommand() {
@@ -275,7 +291,13 @@ public class ChecksumTest extends CoreServerTest {
 
 		commitWithoutCommand(getProjectSpace());
 
-		checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				checkedOutProjectSpace.getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
+			}
+		}.run(false);
+
 		update(checkedOutProjectSpace);
 		commitWithoutCommand(checkedOutProjectSpace);
 

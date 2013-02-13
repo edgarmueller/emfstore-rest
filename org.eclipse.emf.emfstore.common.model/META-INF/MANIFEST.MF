@@ -10,7 +10,11 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.emfstore.common;bundle-version="0.9.3";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.emfstore.common.model,
- org.eclipse.emf.emfstore.internal.common.model;x-friends:="org.eclipse.emf.emfstore.common.model.edit,org.eclipse.emf.emfstore.server.model,org.eclipse.emf.emfstore.server",
+ org.eclipse.emf.emfstore.internal.common.model;
+  x-friends:="org.eclipse.emf.emfstore.common.model.edit,
+   org.eclipse.emf.emfstore.server.model,
+   org.eclipse.emf.emfstore.server,
+   org.eclipse.emf.emfstore.client.test",
  org.eclipse.emf.emfstore.internal.common.model.impl;x-friends:="org.eclipse.emf.emfstore.server.model",
  org.eclipse.emf.emfstore.internal.common.model.util;
   x-friends:="org.eclipse.emf.emfstore.common.model.edit,
