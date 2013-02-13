@@ -337,11 +337,11 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * 
 	 * @throws EMFStoreException in case any error occurs while retrieving the remote project
 	 */
-	IRemoteProject getRemoteProject() throws EMFStoreException;
+	ESRemoteProject getRemoteProject() throws EMFStoreException;
 
 	/**
 	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same
-	 * for different checkouts of the same {@link IRemoteProject}. It is intended to identify a local copy of a remote
+	 * for different checkouts of the same {@link ESRemoteProject}. It is intended to identify a local copy of a remote
 	 * project.
 	 * 
 	 * @return the ID

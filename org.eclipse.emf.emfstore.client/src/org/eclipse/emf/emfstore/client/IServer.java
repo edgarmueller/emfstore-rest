@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
- * Represents an EMFStore server and its API. It gives access to {@link IRemoteProject} which can be used to operate on
+ * Represents an EMFStore server and its API. It gives access to {@link ESRemoteProject} which can be used to operate on
  * existing projects.
  * 
  * @author emueller
@@ -99,7 +99,7 @@ public interface IServer {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
 	 */
-	List<IRemoteProject> getRemoteProjects() throws EMFStoreException;
+	List<ESRemoteProject> getRemoteProjects() throws EMFStoreException;
 
 	/**
 	 * Returns a list with all remote projects hosted on this server.
@@ -112,7 +112,7 @@ public interface IServer {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
 	 */
-	List<IRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException;
+	List<ESRemoteProject> getRemoteProjects(IUsersession usersession) throws EMFStoreException;
 
 	/**
 	 * Returns the {@link IUsersession} which was used on the last call to this server.
@@ -129,12 +129,12 @@ public interface IServer {
 	 * @param monitor
 	 *            a {@link IProgressMonitor} instance that is used to indicate progress
 	 *            about creating the remote project
-	 * @return a {@link IRemoteProject} object containing information about the
+	 * @return a {@link ESRemoteProject} object containing information about the
 	 *         created project
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(String projectName, final IProgressMonitor monitor)
+	ESRemoteProject createRemoteProject(String projectName, final IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -149,12 +149,12 @@ public interface IServer {
 	 *            the name of the project
 	 * @param monitor
 	 *            a monitor to show the progress
-	 * @return a {@link IRemoteProject} object containing information about the
+	 * @return a {@link ESRemoteProject} object containing information about the
 	 *         created project
 	 * @throws EMFStoreException
 	 *             If an error occurs while creating the remote project
 	 */
-	IRemoteProject createRemoteProject(IUsersession usersession, String projectName, IProgressMonitor monitor)
+	ESRemoteProject createRemoteProject(IUsersession usersession, String projectName, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**

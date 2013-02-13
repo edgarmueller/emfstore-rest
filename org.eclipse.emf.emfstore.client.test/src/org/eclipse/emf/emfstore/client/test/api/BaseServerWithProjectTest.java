@@ -1,14 +1,14 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.junit.After;
 import org.junit.Before;
 
 public abstract class BaseServerWithProjectTest extends BaseLoggedInUserTest {
 
-	protected IRemoteProject remoteProject;
+	protected ESRemoteProject remoteProject;
 	protected String projectName = "TestProject";
 
 	@Override

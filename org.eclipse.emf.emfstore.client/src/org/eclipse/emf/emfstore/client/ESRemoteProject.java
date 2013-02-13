@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * @author emueller
  * @author wesendon
  */
-public interface IRemoteProject extends ESProject {
+public interface ESRemoteProject extends ESProject {
 
 	/**
 	 * Returns the project's server.

@@ -22,7 +22,7 @@ import junit.framework.Assert;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -184,8 +184,8 @@ public class ServerInterfaceTest extends ServerTests {
 		getRemoteProject().delete(new NullProgressMonitor());
 
 		try {
-			List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
-			for (IRemoteProject projectInfo : remoteProjectList) {
+			List<ESRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+			for (ESRemoteProject projectInfo : remoteProjectList) {
 				if (projectInfo.getGlobalProjectId() == getProjectId()) {
 					assertTrue(false);
 				}
@@ -212,10 +212,10 @@ public class ServerInterfaceTest extends ServerTests {
 	@Test
 	public void resolveVersionSpecTest() throws EMFStoreException {
 
-		List<IRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+		List<ESRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		boolean sameVersionSpec = false;
-		for (IRemoteProject project : remoteProjectList) {
+		for (ESRemoteProject project : remoteProjectList) {
 			if (project.getHeadVersion(monitor).equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}

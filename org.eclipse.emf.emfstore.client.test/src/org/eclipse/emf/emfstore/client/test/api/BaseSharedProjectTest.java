@@ -2,7 +2,7 @@ package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.junit.After;
@@ -25,7 +25,7 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	@After
 	public void tearDown() throws Exception {
 		workspace.removeServer(server);
-		for (IRemoteProject project : server.getRemoteProjects())
+		for (ESRemoteProject project : server.getRemoteProjects())
 			project.delete(new NullProgressMonitor());
 		for (ESLocalProject project : workspace.getLocalProjects())
 			project.delete(new NullProgressMonitor());

@@ -3,7 +3,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
@@ -26,11 +26,11 @@ public interface UIControllerFactory {
 
 	ESLocalProject createLocalProject(Shell shell, String name, String description);
 
-	IRemoteProject createRemoteProject(Shell shell);
+	ESRemoteProject createRemoteProject(Shell shell);
 
-	IRemoteProject createRemoteProject(Shell shell, IUsersession usersession);
+	ESRemoteProject createRemoteProject(Shell shell, IUsersession usersession);
 
-	IRemoteProject createRemoteProject(Shell shell, IUsersession usersession, String projectName, String description);
+	ESRemoteProject createRemoteProject(Shell shell, IUsersession usersession, String projectName, String description);
 
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 
@@ -38,7 +38,7 @@ public interface UIControllerFactory {
 
 	void deleteRemoteProject(Shell shell, IUsersession session, IGlobalProjectId projectId, boolean deleteFiles);
 
-	void deleteRemoteProject(Shell shell, IRemoteProject remoteProject);
+	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject);
 
 	void login(Shell shell, IServer server);
 

@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
@@ -59,7 +59,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testShare() {
 		try {
-			IRemoteProject remoteProject = localProject.getRemoteProject();
+			ESRemoteProject remoteProject = localProject.getRemoteProject();
 			assertNotNull(remoteProject);
 			assertTrue(localProject.isShared());
 		} catch (EMFStoreException e) {

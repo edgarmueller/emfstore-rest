@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICreateRemoteProjectController extends AbstractEMFStoreUIController<IRemoteProject> {
+public class UICreateRemoteProjectController extends AbstractEMFStoreUIController<ESRemoteProject> {
 
 	private Usersession session;
 	private final String projectName;
@@ -82,11 +82,11 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 		this.description = description == null ? "" : description;
 	}
 
-	private IRemoteProject createRemoteProject(IProgressMonitor monitor) throws EMFStoreException {
+	private ESRemoteProject createRemoteProject(IProgressMonitor monitor) throws EMFStoreException {
 		return createRemoteProject(monitor);
 	}
 
-	private IRemoteProject createRemoteProject(Usersession usersession, IProgressMonitor monitor)
+	private ESRemoteProject createRemoteProject(Usersession usersession, IProgressMonitor monitor)
 		throws EMFStoreException {
 
 		String[] ret = RunInUI.runWithResult(new Callable<String[]>() {
@@ -106,7 +106,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 		return createRemoteProject(usersession, projectName, description, monitor);
 	}
 
-	private IRemoteProject createRemoteProject(final Usersession usersession, final String name,
+	private ESRemoteProject createRemoteProject(final Usersession usersession, final String name,
 		final String description, IProgressMonitor monitor) throws EMFStoreException {
 		return usersession.getServer().createRemoteProject(name, monitor);
 	}
@@ -118,7 +118,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public IRemoteProject doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public ESRemoteProject doRun(IProgressMonitor monitor) throws EMFStoreException {
 		try {
 			if (session == null) {
 				return createRemoteProject(monitor);

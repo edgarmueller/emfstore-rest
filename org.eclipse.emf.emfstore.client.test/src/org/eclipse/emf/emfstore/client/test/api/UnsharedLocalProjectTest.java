@@ -14,7 +14,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.IWorkspace;
@@ -130,7 +130,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = EMFStoreException.class)
 	public void testGetRemoteProject() throws EMFStoreException {
-		IRemoteProject remoteProject = localProject.getRemoteProject();
+		ESRemoteProject remoteProject = localProject.getRemoteProject();
 		assertNull(remoteProject);
 		fail("Should not be able to getRemoteProject from an unshared Project!");
 	}
@@ -310,7 +310,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 			IServer server = IServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 			IUsersession usersession = server.login("super", "super");
 			localProject.shareProject(usersession, new NullProgressMonitor());
-			IRemoteProject remote = localProject.getRemoteProject();
+			ESRemoteProject remote = localProject.getRemoteProject();
 			assertNotNull(remote);
 		} catch (EMFStoreException e) {
 			log(e);
