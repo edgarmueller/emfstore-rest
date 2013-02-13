@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.client.model.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.CompositeSection;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
@@ -51,7 +52,6 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -116,7 +116,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 		useCase.setName("oldName");
-		PostCreationObserver observer = new PostCreationObserver() {
+		ESPostCreationObserver observer = new ESPostCreationObserver() {
 
 			public void onCreation(EObject modelElement) {
 				if (modelElement instanceof UseCase) {

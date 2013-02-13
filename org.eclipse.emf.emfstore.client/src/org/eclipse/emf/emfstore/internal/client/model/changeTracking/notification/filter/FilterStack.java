@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
@@ -28,9 +29,9 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
  * 
  * @author chodnick
  */
-public final class FilterStack implements NotificationFilter {
+public final class FilterStack implements ESNotificationFilter {
 
-	private static final NotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
+	private static final ESNotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
 		new UnknownEventTypeFilter(), new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(),
 		new IgnoreOutsideProjectReferencesFilter(), new IgnoreNullFeatureNotificationsFilter(),
 		new NotifiableIdEObjectCollectionFilter(), new IgnoreNotificationsOutsideProject() };
@@ -38,17 +39,17 @@ public final class FilterStack implements NotificationFilter {
 	/**
 	 * The default filter stack.
 	 */
-	public static final NotificationFilter DEFAULT = new FilterStack(DEFAULT_STACK);
+	public static final ESNotificationFilter DEFAULT = new FilterStack(DEFAULT_STACK);
 
-	private List<NotificationFilter> filterList;
+	private List<ESNotificationFilter> filterList;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param filters the filter the filter stack should consists of.
 	 */
-	public FilterStack(NotificationFilter[] filters) {
-		filterList = new LinkedList<NotificationFilter>();
+	public FilterStack(ESNotificationFilter[] filters) {
+		filterList = new LinkedList<ESNotificationFilter>();
 		Collections.addAll(filterList, filters);
 		collectExtensionPoints();
 
@@ -59,7 +60,7 @@ public final class FilterStack implements NotificationFilter {
 			"org.eclipse.emf.emfstore.client.notificationFilter", true)
 			.getExtensionElements()) {
 			try {
-				filterList.add(element.getClass("class", NotificationFilter.class));
+				filterList.add(element.getClass("class", ESNotificationFilter.class));
 			} catch (ExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
@@ -70,11 +71,11 @@ public final class FilterStack implements NotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
 	 */
 	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
-		for (NotificationFilter f : filterList) {
+		for (ESNotificationFilter f : filterList) {
 			if (f.check(notificationInfo, container)) {
 				return true;
 			}

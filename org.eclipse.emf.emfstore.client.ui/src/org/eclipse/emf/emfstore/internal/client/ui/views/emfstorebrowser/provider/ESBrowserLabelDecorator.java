@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider;
 
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Display;
 /**
  * @see ILightweightLabelDecorator
  */
-public class ESBrowserLabelDecorator extends LabelProvider implements ILightweightLabelDecorator, LoginObserver,
-	LogoutObserver {
+public class ESBrowserLabelDecorator extends LabelProvider implements ILightweightLabelDecorator, ESLoginObserver,
+	ESLogoutObserver {
 
 	/**
 	 * {@inheritDoc} Decorates the label of a {@link ServerInfo} object
@@ -88,7 +88,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void loginCompleted(IUsersession session) {
 		update(session);
@@ -98,7 +98,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void logoutCompleted(IUsersession session) {
 		update(session);

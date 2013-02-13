@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.server.LocationProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.ESLocationProvider"/>
                </appInfo>
             </annotation>
          </attribute>

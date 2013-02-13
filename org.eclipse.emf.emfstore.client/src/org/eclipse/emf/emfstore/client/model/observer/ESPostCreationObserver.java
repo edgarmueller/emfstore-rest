@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.IObserver;
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.common.IObserver;
  * 
  * @author emueller
  */
-public interface PostCreationObserver extends IObserver {
+public interface ESPostCreationObserver extends IObserver {
 
 	/**
 	 * Called when a new model element has been created. Use this method to to

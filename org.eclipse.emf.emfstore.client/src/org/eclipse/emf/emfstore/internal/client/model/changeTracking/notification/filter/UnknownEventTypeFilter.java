@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 
@@ -21,13 +22,13 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificatio
  * @author emueller
  * 
  */
-public class UnknownEventTypeFilter implements NotificationFilter {
+public class UnknownEventTypeFilter implements ESNotificationFilter {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
 	 */
 	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {

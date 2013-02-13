@@ -7,23 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.common;
+package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
- * Determines the version identifier of the client component.
+ * Share listeners are added to a project space and informed whenever a share is
+ * executed.
  * 
- * @author emueller
+ * @author pfeifferc
  */
-public interface IClientVersionProvider {
+public interface ESShareObserver extends IObserver {
 
 	/**
-	 * Returns the version of the client.
+	 * Share is executed.
 	 * 
-	 * @return the client version
+	 * @param projectSpace the {@link ProjectSpace} that got shared
 	 */
-	ClientVersionInfo getVersion();
+	void shareDone(ProjectSpace projectSpace);
 }

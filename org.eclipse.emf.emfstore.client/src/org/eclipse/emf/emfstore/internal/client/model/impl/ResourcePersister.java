@@ -25,17 +25,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
+import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.EmptyRemovalsFilter;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.NotificationFilter;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.TouchFilter;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.TransientFilter;
-import org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver;
-import org.eclipse.emf.emfstore.internal.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -50,8 +50,8 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author koegel
  * @author emueller
  */
-public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, CommitObserver,
-	UpdateObserver, IDisposable {
+public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, ESCommitObserver,
+	ESUpdateObserver, IDisposable {
 
 	private FilterStack filterStack;
 
@@ -78,7 +78,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 		this.collection = collection;
 		this.resources = new LinkedHashSet<Resource>();
 		this.listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
-		this.filterStack = new FilterStack(new NotificationFilter[] { new TouchFilter(), new TransientFilter(),
+		this.filterStack = new FilterStack(new ESNotificationFilter[] { new TouchFilter(), new TransientFilter(),
 			new EmptyRemovalsFilter() });
 	}
 
@@ -307,7 +307,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.UpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ILocalProject project, List<IChangePackage> changePackages,
@@ -328,7 +328,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.api.IChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -341,7 +341,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.api.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.common;
+package org.eclipse.emf.emfstore.client.model.handler;
 
 /**
  * Provides a context in which a {@link Runnable} is exectued.
@@ -17,7 +17,7 @@ package org.eclipse.emf.emfstore.internal.client.common;
  * @author emueller
  * 
  */
-public interface IRunnableContext {
+public interface ESRunnableContext {
 
 	/**
 	 * Executes a given {@link Runnable}.

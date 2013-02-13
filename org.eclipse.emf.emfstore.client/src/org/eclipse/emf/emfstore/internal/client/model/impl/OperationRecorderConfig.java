@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.emfstore.client.model.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -29,7 +30,7 @@ public class OperationRecorderConfig {
 	private boolean isForceCommands;
 	private boolean isEmitOperationsUponCommandCompletion = true;
 
-	private OperationModificator modificator;
+	private ESOperationModifier modificator;
 
 	/**
 	 * Whether to cut off incoming cross references upon deletion.
@@ -145,7 +146,7 @@ public class OperationRecorderConfig {
 	 * 
 	 * @return the operation modificator, if any
 	 */
-	public OperationModificator getOperationModificator() {
+	public ESOperationModifier getOperationModificator() {
 		if (modificator == null) {
 			modificator = initDefaultOperationModificator();
 		}
@@ -158,12 +159,12 @@ public class OperationRecorderConfig {
 	 * @param operationModificator
 	 *            the operations modificator
 	 */
-	public void setOperationModificator(OperationModificator operationModificator) {
+	public void setOperationModificator(ESOperationModifier operationModificator) {
 		this.modificator = operationModificator;
 	}
 
-	private OperationModificator initDefaultOperationModificator() {
-		return new OperationModificator() {
+	private ESOperationModifier initDefaultOperationModificator() {
+		return new ESOperationModifier() {
 			// return operations unaltered
 			public List<AbstractOperation> modify(List<AbstractOperation> operations, Command command) {
 				return operations;

@@ -16,7 +16,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
@@ -39,14 +38,7 @@ public class ConflictDetector {
 
 	private static ConflictDetectionStrategy getStrategy() {
 		if (defaultStrategy == null) {
-			ConflictDetectionStrategy strategy = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.client.merge.conflictDetectorStrategy").getClass("class",
-				ConflictDetectionStrategy.class);
-			if (strategy != null) {
-				defaultStrategy = strategy;
-			} else {
-				defaultStrategy = new IndexSensitiveConflictDetectionStrategy();
-			}
+			defaultStrategy = new IndexSensitiveConflictDetectionStrategy();
 		}
 		return defaultStrategy;
 	}

@@ -10,7 +10,7 @@
  * Aleksandar Shterev
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author shterev
  * @author emueller
  */
-public interface CommitObserver extends IObserver {
+public interface ESCommitObserver extends IObserver {
 
 	/**
 	 * Called before the commit proceeds. A callback method to initiate the commit dialog and allow the user to confirm

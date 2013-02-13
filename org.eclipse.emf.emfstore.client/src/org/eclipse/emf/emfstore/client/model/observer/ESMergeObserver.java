@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.impl;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.IChangePackage;
  * 
  * @author emueller
  */
-public interface MergeObserver extends IObserver {
+public interface ESMergeObserver extends IObserver {
 
 	/**
 	 * Called before all local changes are reverted.

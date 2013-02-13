@@ -37,11 +37,13 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
+import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
-import org.eclipse.emf.emfstore.internal.client.common.IRunnableContext;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -68,7 +70,6 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportCh
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportChangesController;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -118,7 +119,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * @author emueller
  * 
  */
-public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, LoginObserver,
+public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
 	IDisposable, ILocalProject {
 
 	private boolean initCompleted;
@@ -135,7 +136,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private ResourcePersister resourcePersister;
 
 	private ECrossReferenceAdapter crossReferenceAdapter;
-	private IRunnableContext runnableContext;
+	private ESRunnableContext runnableContext;
 
 	/**
 	 * Constructor.
@@ -149,7 +150,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableContext")
 			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
-			runnableContext = extensionElement.getClass("class", IRunnableContext.class);
+			runnableContext = extensionElement.getClass("class", ESRunnableContext.class);
 		} else {
 			runnableContext = new DefaultRunnableContext();
 		}
@@ -642,7 +643,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void initPropertyMap() {
 		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {
-			WorkspaceProvider.getObserverBus().register(this, LoginObserver.class);
+			WorkspaceProvider.getObserverBus().register(this, ESLoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
 			if (acUser != null) {
 				for (OrgUnitProperty p : acUser.getProperties()) {
@@ -1304,7 +1305,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
 		WorkspaceProvider.getObserverBus().unregister(resourcePersister);
-		WorkspaceProvider.getObserverBus().unregister(this, LoginObserver.class);
+		WorkspaceProvider.getObserverBus().unregister(this, ESLoginObserver.class);
 		WorkspaceProvider.getObserverBus().unregister(this);
 
 		operationManager.dispose();
@@ -1323,21 +1324,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).preRevertMyChanges(this, changePackage);
+		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class).preRevertMyChanges(this, changePackage);
 	}
 
 	private void notifyPostRevertMyChanges() {
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postRevertMyChanges(this);
+		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class).postRevertMyChanges(this);
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
 		// OTS cast
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class)
+		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class)
 			.postApplyTheirChanges(this, (List<IChangePackage>) (List<?>) theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
-		WorkspaceProvider.getObserverBus().notify(MergeObserver.class).postApplyMergedChanges(this, changePackage);
+		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class).postApplyMergedChanges(this, changePackage);
 	}
 
 	public EList<EObject> getModelElements() {

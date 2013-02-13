@@ -8,23 +8,24 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
+import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
- * Share listeners are added to a project space and informed whenever a share is
- * executed.
+ * Observer that notifies on new checkouts.
  * 
- * @author pfeifferc
+ * @author wesendon
  */
-public interface ShareObserver extends IObserver {
+public interface ESCheckoutObserver extends IObserver {
 
 	/**
-	 * Share is executed.
+	 * Called on checkout.
 	 * 
-	 * @param projectSpace the {@link ProjectSpace} that got shared
+	 * @param project
+	 *            the checked out project
 	 */
-	void shareDone(ProjectSpace projectSpace);
+	void checkoutDone(ILocalProject project);
+
 }

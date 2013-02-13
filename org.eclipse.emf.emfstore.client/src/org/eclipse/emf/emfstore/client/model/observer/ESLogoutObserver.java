@@ -7,25 +7,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
+ * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.util;
+package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
- * Interface for editing domain provider.
+ * Observes a logout of a session.
  * 
- * @author wesendon
+ * @author koegel
  */
-public interface EditingDomainProvider {
+public interface ESLogoutObserver extends IObserver {
 
 	/**
-	 * Returns EditingDomain.
+	 * Called to notify about the completion of a logout of the given usersession.
 	 * 
-	 * @param resourceSet resource set
-	 * @return domain
+	 * @param session
+	 *            the usersession that was logged out
 	 */
-	EditingDomain getEditingDomain(ResourceSet resourceSet);
+	void logoutCompleted(IUsersession session);
 }

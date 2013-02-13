@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.ESLocationProvider;
 
 /**
  * This is the default workspace location provider. If no other location provider is registered, this provider is used.
@@ -29,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * @author wesendon
  */
 // TODO: split server/client configuration; discuss with Maximilian (see tickets)
-public class DefaultServerWorkspaceLocationProvider implements LocationProvider {
+public class DefaultServerWorkspaceLocationProvider implements ESLocationProvider {
 
 	/**
 	 * Get root folder.
@@ -46,7 +47,7 @@ public class DefaultServerWorkspaceLocationProvider implements LocationProvider 
 	 * {@link #getSelectedProfile()} method. If you want to use profiles, you should use or override
 	 * {@link #getSelectedProfile()}. If you don't want profiles override this method and just return your path.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.LocationProvider#getWorkspaceDirectory()
+	 * @see org.eclipse.emf.emfstore.server.ESLocationProvider#getWorkspaceDirectory()
 	 */
 	public String getWorkspaceDirectory() {
 		String rootDirectory = getRootDirectory();
@@ -98,7 +99,7 @@ public class DefaultServerWorkspaceLocationProvider implements LocationProvider 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.LocationProvider#getBackupDirectory()
+	 * @see org.eclipse.emf.emfstore.server.ESLocationProvider#getBackupDirectory()
 	 */
 	public String getBackupDirectory() {
 		return addFolders(getRootDirectory(), "backup");

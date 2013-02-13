@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.util;
+package org.eclipse.emf.emfstore.client.model.provider;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
  * 
  * @author wesendon
  */
-public interface ConfigurationProvider {
+public interface ESClientConfigurationProvider {
 
 	/**
 	 * Returns a list of default {@link IServer}s.
@@ -31,12 +31,12 @@ public interface ConfigurationProvider {
 	List<IServer> getDefaultServerInfos();
 
 	/**
-	 * Allows the {@link ConfigurationProvider} to initialize the {@link KeyStoreManager}. Use
+	 * Allows the {@link ESClientConfigurationProvider} to initialize the {@link KeyStoreManager}. Use
 	 * {@link KeyStoreManager#setDefaultCertificate(String)} to set the default alias and
 	 * {@link KeyStoreManager#addCertificate(String, java.io.InputStream)} to add you certificate.
 	 * 
 	 * @param keyStoreManager {@link KeyStoreManager}
 	 */
-	void initDefaultCertificates(KeyStoreManager keyStoreManager);
+	void initDefaultCertificates(ESKeyStoreManager keyStoreManager);
 
 }

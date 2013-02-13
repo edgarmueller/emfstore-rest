@@ -7,24 +7,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Otto von Wesendonk
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.provider;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.EditingDomain;
 
 /**
- * Observes exceptions and tries to handle them.
+ * Interface for editing domain provider.
  * 
- * @author koegel
+ * @author wesendon
  */
-public interface ExceptionObserver extends IObserver {
+public interface ESEditingDomainProvider {
 
 	/**
-	 * Handle the exception.
+	 * Returns EditingDomain.
 	 * 
-	 * @param exception the exception
-	 * @return true if exception was successfully handled
+	 * @param resourceSet resource set
+	 * @return domain
 	 */
-	boolean handleError(RuntimeException exception);
+	EditingDomain getEditingDomain(ResourceSet resourceSet);
 }

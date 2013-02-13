@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.model.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
@@ -74,7 +75,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 				.getBoolean("denyAddCutElementsToModelElements", false));
 		operationRecorder.getConfig().setOperationModificator(
 			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getClass(
-				"operationModificator", OperationModificator.class));
+				"operationModificator", ESOperationModifier.class));
 	}
 
 	/**

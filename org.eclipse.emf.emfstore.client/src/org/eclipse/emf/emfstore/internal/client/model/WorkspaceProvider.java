@@ -28,6 +28,8 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
+import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
@@ -42,7 +44,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.X
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.client.model.util.EditingDomainProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.IReinitializable;
@@ -148,7 +149,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 			"org.eclipse.emf.emfstore.client.notify.postinit", true)
 			.getExtensionElements()) {
 			try {
-				element.getClass("class", PostWorkspaceInitiator.class)
+				element.getClass("class", ESWorkspaceInitObserver.class)
 					.workspaceInitComplete(currentWorkspace);
 			} catch (ExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
@@ -239,7 +240,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	}
 
 	private EditingDomain createEditingDomain(ResourceSet resourceSet) {
-		EditingDomainProvider domainProvider = getDomainProvider();
+		ESEditingDomainProvider domainProvider = getDomainProvider();
 		if (domainProvider != null) {
 			return domainProvider.getEditingDomain(resourceSet);
 		} else {
@@ -254,11 +255,11 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 		}
 	}
 
-	private EditingDomainProvider getDomainProvider() {
+	private ESEditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
 		return new ExtensionPoint(
 			"org.eclipse.emf.emfstore.client.editingDomainProvider")
-			.getClass("class", EditingDomainProvider.class);
+			.getClass("class", ESEditingDomainProvider.class);
 	}
 
 	private Workspace createNewWorkspace(ResourceSet resourceSet, URI fileURI) {
