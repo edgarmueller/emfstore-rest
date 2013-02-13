@@ -1369,22 +1369,53 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return getProject().getAllModelElements();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getProject().getAllModelElementsByClass(modelElementClass);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 *      java.lang.Boolean)
+	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
 		return getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
 	}
 
-	public EList<String> getRecentLogMessages() {
-		return getOldLogMessages();
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ILocalProject#getRecentLogMessages()
+	 */
+	public List<String> getRecentLogMessages() {
+		return Collections.unmodifiableList(getOldLogMessages());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IProject#getGlobalProjectId()
+	 */
 	public IGlobalProjectId getGlobalProjectId() {
 		return getProjectId();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ILocalProject#getLocalProjectId()
+	 */
 	public ILocalProjectId getLocalProjectId() {
 		return new LocalProjectIdImpl(getIdentifier());
 	}

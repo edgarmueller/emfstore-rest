@@ -553,15 +553,32 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		return projectSpace;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#getLocalProjects()
+	 */
 	public List<ILocalProject> getLocalProjects() {
 		return copy(getProjectSpaces());
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#getServers()
+	 */
 	public List<IServer> getServers() {
 		return copy(getServerInfos());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver#projectSpaceDeleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 */
 	public void projectSpaceDeleted(ProjectSpace projectSpace) {
 		assert (projectSpace != null);
 

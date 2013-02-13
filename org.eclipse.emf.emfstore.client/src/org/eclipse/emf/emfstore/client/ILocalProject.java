@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ICo
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -46,7 +45,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Commits any local changes.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
@@ -63,7 +63,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Commits any local changes.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
@@ -89,7 +90,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Commits any local changes to a branch.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
@@ -118,7 +120,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Updates the project to the head version from the server.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @return the new base version
@@ -133,7 +136,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Updates the project to the given version from the server.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @param version
@@ -150,7 +154,8 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * Updates the project to the given version from the server.
 	 * </p>
 	 * <p>
-	 * If the project has not been shared yet, a {@link RuntimeException} will be thrown.
+	 * If the project has not been shared yet, a
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @param version
@@ -335,6 +340,15 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	IRemoteProject getRemoteProject() throws EMFStoreException;
 
 	/**
+	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same
+	 * for different checkouts of the same {@link IRemoteProject}. It is intended to identify a local copy of a remote
+	 * project.
+	 * 
+	 * @return the ID
+	 */
+	ILocalProjectId getLocalProjectId();
+
+	/**
 	 * Imports and applies changes on this project.
 	 * 
 	 * @param fileName
@@ -344,14 +358,5 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 */
 	// TODO: OTS
 	// void importLocalChanges(String fileName) throws IOException;
-
-	/**
-	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same
-	 * for different checkouts of the same {@link RemoteProject}. It is intended to identify a local copy of a remote
-	 * project.
-	 * 
-	 * @return the ID
-	 */
-	ILocalProjectId getLocalProjectId();
 
 }
