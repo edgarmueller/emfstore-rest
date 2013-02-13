@@ -97,7 +97,7 @@ public interface Game extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Frames</em>' attribute list.
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getGame_Frames()
-	 * @model upper="10"
+	 * @model unique="false" upper="10"
 	 * @generated
 	 */
 	EList<Integer> getFrames();

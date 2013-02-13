@@ -141,7 +141,7 @@ public interface Tournament extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Price Money</em>' attribute list.
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getTournament_PriceMoney()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<Double> getPriceMoney();
@@ -157,7 +157,7 @@ public interface Tournament extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Receives Trophy</em>' attribute list.
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getTournament_ReceivesTrophy()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<Boolean> getReceivesTrophy();
