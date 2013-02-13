@@ -20,5 +20,10 @@ package org.eclipse.emf.emfstore.common.model;
  */
 public interface IUniqueIdentifier {
 
+	/**
+	 * Returns the actual identifier as a string.
+	 * 
+	 * @return the ID as a string
+	 */
 	String getId();
 }

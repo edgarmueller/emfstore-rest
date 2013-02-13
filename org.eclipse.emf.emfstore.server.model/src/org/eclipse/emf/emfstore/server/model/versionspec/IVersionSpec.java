@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionsFactory;
@@ -16,18 +28,29 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionsFactory
 public interface IVersionSpec {
 
 	/**
+	 * HEAD identifier.
+	 */
+	String HEAD = "HEAD";
+
+	/**
+	 * BASE identifier.
+	 */
+	String BASE = "BASE";
+
+	/**
+	 * The default branch name 'trunk'.
+	 */
+	String BRANCH_DEFAULT_NAME = "trunk";
+
+	/**
+	 * Global identifier.
+	 */
+	String GLOBAL = "___GLOBAL___";
+
+	/**
 	 * The factory used for creating {@link IVersionSpec}s.
 	 */
 	IVersionFactory FACTORY = VersionsFactory.INSTANCE;
-
-	String HEAD = "HEAD";
-
-	String BASE = "BASE";
-
-	String BRANCH_DEFAULT_NAME = "trunk";
-
-	// magic global variable
-	String GLOBAL = "___GLOBAL___";
 
 	/**
 	 * Returns the branch name.

@@ -1,7 +1,25 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
+/**
+ * A factory for creating version specifiers.
+ * 
+ * @author wesendon
+ * @author emueller
+ */
 public interface IVersionFactory extends IEMFStoreFactory {
 
 	/**
@@ -89,7 +107,7 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 * @return version spec
 	 */
 	IAncestorVersionSpec createANCESTOR(IPrimaryVersionSpec source,
-			IPrimaryVersionSpec target);
+		IPrimaryVersionSpec target);
 
 	/**
 	 * Checks whether two versions spec target the same branch.

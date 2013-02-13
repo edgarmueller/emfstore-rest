@@ -7,24 +7,27 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Tobias Verhoeven
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 /**
- * A factory for creating ILogMessage objects.
+ * A factory for creating {@link ILogMessage} objects.
  * 
  * @author Tobias Verhoeven
  */
 public interface ILogMessageFactory extends IEMFStoreFactory {
 
 	/**
-	 * creates a new logMessage with the specified message and author.
+	 * Creates a new log message with the specified message and author.
 	 * 
-	 * @param message the message
-	 * @param author the author
-	 * @return the log message
+	 * @param message
+	 *            the actual log message
+	 * @param author
+	 *            the author of the log message
+	 * @return the created {@link ILogMessage}
 	 */
 	ILogMessage createLogMessage(String message, String author);
 }
