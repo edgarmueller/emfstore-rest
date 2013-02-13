@@ -10,15 +10,28 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.model;
+package org.eclipse.emf.emfstore.server.model.versionspec;
 
 /**
- * Represents a workspace wide unique identifier.
+ * Represents a version specifier that is used to resolve common ancestor version of two versions.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IUniqueIdentifier {
+public interface IAncestorVersionSpec extends IVersionSpec {
 
-	String getId();
+	/**
+	 * Returns the {@link IPrimaryVersionSpec} of the target to resolve.
+	 * 
+	 * @return the target version specifier
+	 */
+	IPrimaryVersionSpec getTarget();
+
+	/**
+	 * Returns the {@link IPrimaryVersionSpec} of the source to resolve.
+	 * 
+	 * @return the source version specifier
+	 */
+	IPrimaryVersionSpec getSource();
+
 }

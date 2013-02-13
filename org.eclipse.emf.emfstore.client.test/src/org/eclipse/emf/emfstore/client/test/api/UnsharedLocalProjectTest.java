@@ -23,10 +23,10 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

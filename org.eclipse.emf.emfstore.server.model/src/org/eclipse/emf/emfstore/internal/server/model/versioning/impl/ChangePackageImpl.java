@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationsCanonizer;
-import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ILogMessage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc
@@ -220,7 +220,7 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.model.api.IChangePackage#setLogMessage(org.eclipse.emf.emfstore.server.model.api.ILogMessage)
+	 * @see org.eclipse.emf.emfstore.server.model.IChangePackage#setLogMessage(org.eclipse.emf.emfstore.server.model.ILogMessage)
 	 * @generated NOT
 	 */
 	public void setLogMessage(ILogMessage logMessage) {

@@ -9,6 +9,7 @@
  * Contributors:
  * Otto von Wesendonk
  * Edgar Mueller
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
@@ -26,11 +27,11 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.server.model.api.ILocalProjectId;
-import org.eclipse.emf.emfstore.server.model.api.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
+import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
 /**
  * Represents a project in the local workspace that was checked out from a server or created locally.

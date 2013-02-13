@@ -5,11 +5,11 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory;
-import org.eclipse.emf.emfstore.server.model.api.query.IModelElementQuery;
-import org.eclipse.emf.emfstore.server.model.api.query.IPathQuery;
-import org.eclipse.emf.emfstore.server.model.api.query.IRangeQuery;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.query.IHistoryQueryFactory;
+import org.eclipse.emf.emfstore.server.model.query.IModelElementQuery;
+import org.eclipse.emf.emfstore.server.model.query.IPathQuery;
+import org.eclipse.emf.emfstore.server.model.query.IRangeQuery;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
 public class HistoryQueryFactoryImpl implements IHistoryQueryFactory {
 

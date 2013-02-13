@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.model.api;
+package org.eclipse.emf.emfstore.server.model;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 

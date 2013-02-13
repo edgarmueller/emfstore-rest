@@ -6,10 +6,10 @@ import org.eclipse.emf.emfstore.client.IProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 
 public interface UIControllerFactory {

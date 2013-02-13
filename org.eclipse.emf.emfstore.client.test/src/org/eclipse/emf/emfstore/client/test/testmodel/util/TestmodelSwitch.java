@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.client.test.testmodel.util;
 
 import java.util.List;
-
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.test.testmodel.*;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
 
 /**

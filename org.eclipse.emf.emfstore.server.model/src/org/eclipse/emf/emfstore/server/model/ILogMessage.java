@@ -10,7 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.model.api;
+package org.eclipse.emf.emfstore.server.model;
 
 import java.util.Date;
 

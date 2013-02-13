@@ -1,8 +1,8 @@
-package org.eclipse.emf.emfstore.server.model.api;
+package org.eclipse.emf.emfstore.server.model;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
 public interface IHistoryInfo {
 

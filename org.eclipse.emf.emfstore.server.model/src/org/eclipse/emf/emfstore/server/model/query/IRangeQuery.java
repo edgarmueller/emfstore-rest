@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.server.model.api.query;
+package org.eclipse.emf.emfstore.server.model.query;
 
 public interface IRangeQuery extends IHistoryQuery {
 

@@ -3,10 +3,6 @@ package org.eclipse.emf.emfstore.internal.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.BasicInternalEList;
-
 public class ListUtil {
 
 	private ListUtil(){

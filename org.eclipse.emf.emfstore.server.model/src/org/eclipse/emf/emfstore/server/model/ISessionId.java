@@ -10,15 +10,16 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.model;
+package org.eclipse.emf.emfstore.server.model;
+
+import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
 
 /**
- * Represents a workspace wide unique identifier.
+ * Represents the ID of a session as used in an user session.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IUniqueIdentifier {
+public interface ISessionId extends IUniqueIdentifier {
 
-	String getId();
 }

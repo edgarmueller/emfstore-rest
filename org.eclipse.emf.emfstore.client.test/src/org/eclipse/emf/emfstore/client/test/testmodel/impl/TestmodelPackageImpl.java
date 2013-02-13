@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.testmodel.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;

@@ -10,15 +10,23 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.model;
+package org.eclipse.emf.emfstore.server.model.versionspec;
+
+import java.util.Date;
 
 /**
- * Represents a workspace wide unique identifier.
+ * Represents a version specifier that is based on a date.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IUniqueIdentifier {
+public interface IDateVersionSpec extends IVersionSpec {
 
-	String getId();
+	/**
+	 * Returns the date this version specifier is based on.
+	 * 
+	 * @return the date this version specifier is based on
+	 */
+	Date getDate();
+
 }

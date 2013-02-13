@@ -18,13 +18,13 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.api.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.api.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.api.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.api.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
 /**
  * Represents a project in EMFStore. There are two different types of projects, {@link ILocalProject} and
@@ -109,7 +109,7 @@ public interface IProject {
 	/**
 	 * <p>
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
-	 * {@link org.eclipse.emf.emfstore.server.model.api.query.IHistoryQueryFactory} to generate query objects.
+	 * {@link org.eclipse.emf.emfstore.server.model.query.IHistoryQueryFactory} to generate query objects.
 	 * </p>
 	 * 
 	 * @param query

@@ -10,15 +10,13 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.model;
+package org.eclipse.emf.emfstore.server.model.versionspec;
 
 /**
- * Represents a workspace wide unique identifier.
+ * Represents a version specifier that is used to identify a branch.
  * 
- * @author emueller
  * @author wesendon
+ * @author emueller
  */
-public interface IUniqueIdentifier {
-
-	String getId();
+public interface IBranchVersionSpec extends IVersionSpec {
 }

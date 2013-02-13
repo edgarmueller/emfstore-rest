@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.api.versionspec.IAncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.IAncestorVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'.
