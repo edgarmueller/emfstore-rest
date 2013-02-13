@@ -7,8 +7,9 @@ import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
 public interface IHistoryQueryFactory extends IEMFStoreFactory {
+
 	/**
-	 * Factory method for range query.
+	 * Factory method for creating range query.
 	 * 
 	 * @param source
 	 *            source version

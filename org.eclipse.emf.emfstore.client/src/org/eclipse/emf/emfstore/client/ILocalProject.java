@@ -9,6 +9,7 @@
  * Contributors:
  * Otto von Wesendonk
  * Edgar Mueller
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
