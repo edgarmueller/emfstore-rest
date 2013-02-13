@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.emf.emfstore.internal.client.test.model" modelName="Model" runtimeCompatibility="true"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="" language=""
-    usedGenPackages="../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.genmodel#//model ../../org.eclipse.emf.emfstore.internal.serverxxx.model/model/server.genmodel#//model">
+    usedGenPackages="../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.genmodel#//model ../../org.eclipse.emf.emfstore.internal.server.model/model/server.genmodel#//model">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.eclipse.emf.emfstore.internal.client.test" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">

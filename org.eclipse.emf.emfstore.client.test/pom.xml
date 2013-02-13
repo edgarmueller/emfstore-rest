@@ -97,22 +97,22 @@
             </dependency>
             <dependency>
               <type>eclipse-plugin</type>
-              <artifactId>org.eclipse.emf.emfstore.internal.serverxxx.backchannel</artifactId>
+              <artifactId>org.eclipse.emf.emfstore.internal.server.backchannel</artifactId>
               <version>0.0.0</version>
             </dependency>
             <dependency>
               <type>eclipse-plugin</type>
-              <artifactId>org.eclipse.emf.emfstore.internal.serverxxx.model.edit</artifactId>
+              <artifactId>org.eclipse.emf.emfstore.internal.server.model.edit</artifactId>
               <version>0.0.0</version>
             </dependency>
             <dependency>
               <type>eclipse-plugin</type>
-              <artifactId>org.eclipse.emf.emfstore.internal.serverxxx.model</artifactId>
+              <artifactId>org.eclipse.emf.emfstore.internal.server.model</artifactId>
               <version>0.0.0</version>
             </dependency>
             <dependency>
               <type>eclipse-plugin</type>
-              <artifactId>org.eclipse.emf.emfstore.internal.serverxxx</artifactId>
+              <artifactId>org.eclipse.emf.emfstore.internal.server</artifactId>
               <version>0.0.0</version>
             </dependency>
           </dependencies>
@@ -179,22 +179,22 @@
               <autoStart>false</autoStart>
             </bundle>
             <bundle>
-              <id>org.eclipse.emf.emfstore.internal.serverxxx.backchannel</id>
+              <id>org.eclipse.emf.emfstore.internal.server.backchannel</id>
               <level>4</level>
               <autoStart>false</autoStart>
             </bundle>
             <bundle>
-              <id>org.eclipse.emf.emfstore.internal.serverxxx.model.edit</id>
+              <id>org.eclipse.emf.emfstore.internal.server.model.edit</id>
               <level>4</level>
               <autoStart>false</autoStart>
             </bundle>
             <bundle>
-              <id>org.eclipse.emf.emfstore.internal.serverxxx.model</id>
+              <id>org.eclipse.emf.emfstore.internal.server.model</id>
               <level>4</level>
               <autoStart>false</autoStart>
             </bundle>
             <bundle>
-              <id>org.eclipse.emf.emfstore.internal.serverxxx</id>
+              <id>org.eclipse.emf.emfstore.internal.server</id>
               <level>4</level>
               <autoStart>false</autoStart>
             </bundle>
@@ -271,17 +271,17 @@
                 </dependency>
                 <dependency>
                   <type>eclipse-plugin</type>
-                  <artifactId>org.eclipse.emf.emfstore.internal.serverxxx.model.edit</artifactId>
+                  <artifactId>org.eclipse.emf.emfstore.internal.server.model.edit</artifactId>
                   <version>0.0.0</version>
                 </dependency>
                 <dependency>
                   <type>eclipse-plugin</type>
-                  <artifactId>org.eclipse.emf.emfstore.internal.serverxxx.model</artifactId>
+                  <artifactId>org.eclipse.emf.emfstore.internal.server.model</artifactId>
                   <version>0.0.0</version>
                 </dependency>
                 <dependency>
                   <type>eclipse-plugin</type>
-                  <artifactId>org.eclipse.emf.emfstore.internal.serverxxx</artifactId>
+                  <artifactId>org.eclipse.emf.emfstore.internal.server</artifactId>
                   <version>0.0.0</version>
                 </dependency>
               </dependencies>
@@ -338,17 +338,17 @@
                   <autoStart>false</autoStart>
                 </bundle>
                 <bundle>
-                  <id>org.eclipse.emf.emfstore.internal.serverxxx.model.edit</id>
+                  <id>org.eclipse.emf.emfstore.internal.server.model.edit</id>
                   <level>4</level>
                   <autoStart>false</autoStart>
                 </bundle>
                 <bundle>
-                  <id>org.eclipse.emf.emfstore.internal.serverxxx.model</id>
+                  <id>org.eclipse.emf.emfstore.internal.server.model</id>
                   <level>4</level>
                   <autoStart>false</autoStart>
                 </bundle>
                 <bundle>
-                  <id>org.eclipse.emf.emfstore.internal.serverxxx</id>
+                  <id>org.eclipse.emf.emfstore.internal.server</id>
                   <level>4</level>
                   <autoStart>false</autoStart>
                 </bundle>

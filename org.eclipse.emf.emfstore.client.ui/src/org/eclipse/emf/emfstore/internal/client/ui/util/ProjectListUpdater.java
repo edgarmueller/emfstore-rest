@@ -30,7 +30,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * This class is responsible for keeping the workspace's project infos update to date.
- * 
  */
 public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver, LoginObserver, LogoutObserver {
 
@@ -40,7 +39,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.PostWorkspaceInitiator#workspaceInitComplete(org.eclipse.emf.emfstore.internal.client.model.Workspace)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.PostWorkspaceInitiator#workspaceInitComplete(org.eclipse.emf.emfstore.client.IWorkspace)
 	 */
 	public void workspaceInitComplete(IWorkspace currentWorkspace) {
 		this.workspace = currentWorkspace;
@@ -51,7 +50,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.IUsersession)
 	 */
 	public void loginCompleted(IUsersession session) {
 		try {
@@ -90,10 +89,7 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	private void update(final IUsersession session) throws EMFStoreException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				// TODO: OTS
-				// workspace.updateProjectInfos(session);
 				throw new NotImplementedException("TODO OTS");
-				// return null;
 			}
 		});
 	}
@@ -102,10 +98,10 @@ public class ProjectListUpdater implements PostWorkspaceInitiator, ShareObserver
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.IUsersession)
 	 */
 	public void logoutCompleted(IUsersession session) {
-		// OTS cast
+		// TODO OTS cast
 		ServerInfo server = (ServerInfo) session.getServer();
 		if (server != null) {
 			server.getProjectInfos().clear();
