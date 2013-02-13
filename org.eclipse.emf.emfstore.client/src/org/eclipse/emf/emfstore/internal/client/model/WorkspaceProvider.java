@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
@@ -514,7 +514,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	 * 
 	 * @return the workspace
 	 */
-	public IWorkspace getWorkspace() {
+	public ESWorkspace getWorkspace() {
 		return currentWorkspace;
 	}
 

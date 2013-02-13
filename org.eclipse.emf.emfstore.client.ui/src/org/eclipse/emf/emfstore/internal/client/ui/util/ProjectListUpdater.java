@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.util;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESShareObserver;
@@ -32,15 +32,15 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  */
 public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObserver, ESLoginObserver, ESLogoutObserver {
 
-	private IWorkspace workspace;
+	private ESWorkspace workspace;
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver#workspaceInitComplete(org.eclipse.emf.emfstore.client.IWorkspace)
+	 * @see org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver#workspaceInitComplete(org.eclipse.emf.emfstore.client.ESWorkspace)
 	 */
-	public void workspaceInitComplete(IWorkspace currentWorkspace) {
+	public void workspaceInitComplete(ESWorkspace currentWorkspace) {
 		this.workspace = currentWorkspace;
 		WorkspaceProvider.getObserverBus().register(this);
 	}

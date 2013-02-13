@@ -3,13 +3,13 @@ package org.eclipse.emf.emfstore.client.test.api;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.junit.After;
 import org.junit.Before;
 
 public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
-	protected IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
+	protected ESWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
 	protected ESLocalProject localProject;
 
 	@Override

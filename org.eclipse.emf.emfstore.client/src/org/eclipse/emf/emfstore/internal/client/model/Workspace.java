@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;
@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
- * @implements IAdaptable, IWorkspace <!-- end-user-doc -->
+ * @implements IAdaptable, ESWorkspace <!-- end-user-doc -->
  * 
  *             <p>
  *             The following features are supported:
@@ -54,7 +54,7 @@ import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
  * @model
  * @generated
  */
-public interface Workspace extends EObject, IAdaptable, IWorkspace {
+public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 
 	/**
 	 * Exports a project space to a file.

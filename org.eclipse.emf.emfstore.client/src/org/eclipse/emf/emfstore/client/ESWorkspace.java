@@ -20,7 +20,7 @@ import java.util.List;
  * @author emueller
  * @author wesendon
  */
-public interface IWorkspace {
+public interface ESWorkspace {
 
 	/**
 	 * Returns all local projects.

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.junit.After;
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class WorkspaceTest {
 
-	private static IWorkspace workspace;
+	private static ESWorkspace workspace;
 	private ESLocalProject localProject;
 
 	@BeforeClass

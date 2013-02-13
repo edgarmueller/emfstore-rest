@@ -300,7 +300,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#addServer(org.eclipse.emf.emfstore.client.ESServer)
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#addServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
 	public void addServer(ESServer server) {
 		getServerInfos().add((ServerInfo) server);
@@ -311,7 +311,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#removeServer(org.eclipse.emf.emfstore.client.ESServer)
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#removeServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
 	public void removeServer(ESServer server) {
 		getServerInfos().remove(server);
@@ -557,7 +557,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#getLocalProjects()
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getLocalProjects()
 	 */
 	public List<ESLocalProject> getLocalProjects() {
 		return copy(getProjectSpaces());
@@ -567,7 +567,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#getServers()
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getServers()
 	 */
 	public List<ESServer> getServers() {
 		return copy(getServerInfos());

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 
 /**
  * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginning.
@@ -27,6 +27,6 @@ public interface ESWorkspaceInitObserver {
 	 * 
 	 * @param currentWorkspace workspace
 	 */
-	void workspaceInitComplete(IWorkspace currentWorkspace);
+	void workspaceInitComplete(ESWorkspace currentWorkspace);
 
 }

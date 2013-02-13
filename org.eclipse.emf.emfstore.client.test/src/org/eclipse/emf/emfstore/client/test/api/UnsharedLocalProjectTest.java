@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.IWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
-	private final IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
+	private final ESWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
 	private ESLocalProject localProject;
 
 	@Override

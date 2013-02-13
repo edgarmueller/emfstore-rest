@@ -34,7 +34,7 @@ public interface IWorkspaceProvider {
 	 * 
 	 * @return current workspace.
 	 */
-	IWorkspace getWorkspace();
+	ESWorkspace getWorkspace();
 
 	/**
 	 * Allows the user to set the {@link AbstractSessionProvider} to use.
