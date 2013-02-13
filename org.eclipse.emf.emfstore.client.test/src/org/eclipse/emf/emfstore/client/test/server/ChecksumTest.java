@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.IChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
@@ -19,7 +20,6 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpda
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -314,7 +314,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
-			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}
@@ -339,7 +339,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
-			IChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}

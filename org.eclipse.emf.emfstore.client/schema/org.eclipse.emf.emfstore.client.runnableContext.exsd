@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.impl.IRunnableContext"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext"/>
                </appInfo>
             </annotation>
          </attribute>

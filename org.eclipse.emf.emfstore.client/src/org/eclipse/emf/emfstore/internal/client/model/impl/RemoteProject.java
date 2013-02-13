@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.model.observer.ESCheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -32,7 +33,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.observers.CheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -376,7 +376,7 @@ public class RemoteProject implements IRemoteProject {
 		((WorkspaceBase) WorkspaceProvider.INSTANCE.getWorkspace()).addProjectSpace(projectSpace);
 		// TODO: OTS save
 		((WorkspaceBase) WorkspaceProvider.INSTANCE.getWorkspace()).save();
-		WorkspaceProvider.getObserverBus().notify(CheckoutObserver.class).checkoutDone(projectSpace);
+		WorkspaceProvider.getObserverBus().notify(ESCheckoutObserver.class).checkoutDone(projectSpace);
 		parent.worked(10);
 		parent.done();
 

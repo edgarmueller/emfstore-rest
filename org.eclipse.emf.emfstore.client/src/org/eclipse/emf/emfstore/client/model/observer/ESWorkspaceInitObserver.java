@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.emfstore.client.IWorkspace;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.IWorkspace;
  * @author wesendon
  */
 // TODO: check whether we can re-use the ObserverBus
-public interface PostWorkspaceInitiator {
+public interface ESWorkspaceInitObserver {
 
 	/**
 	 * Is called when the workspace is initiated.

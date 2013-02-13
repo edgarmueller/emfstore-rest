@@ -70,16 +70,6 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="operationModificator" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-               <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.impl.OperationModificator"/>
-               </appInfo>
-            </annotation>
-         </attribute>
          <attribute name="denyAddCutElementsToModelElements" type="boolean">
             <annotation>
                <documentation>

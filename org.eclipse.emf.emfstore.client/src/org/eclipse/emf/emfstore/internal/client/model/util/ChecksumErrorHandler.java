@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -30,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author emueller
  * 
  */
-public enum ChecksumErrorHandler implements IChecksumErrorHandler {
+public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 
 	/**
 	 * Logs the checksum comparison failure and continues execution of the caller.

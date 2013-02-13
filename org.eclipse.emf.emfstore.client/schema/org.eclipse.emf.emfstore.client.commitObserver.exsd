@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.observers.CommitObserver"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver"/>
                </appInfo>
             </annotation>
          </attribute>

@@ -7,25 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
- * Observer that notifies on new checkouts.
+ * Observes exceptions and tries to handle them.
  * 
- * @author wesendon
+ * @author koegel
  */
-public interface CheckoutObserver extends IObserver {
+public interface ESExceptionObserver extends IObserver {
 
 	/**
-	 * Called on checkout.
+	 * Handle the exception.
 	 * 
-	 * @param project
-	 *            the checked out project
+	 * @param exception the exception
+	 * @return true if exception was successfully handled
 	 */
-	void checkoutDone(ILocalProject project);
-
+	boolean handleError(RuntimeException exception);
 }

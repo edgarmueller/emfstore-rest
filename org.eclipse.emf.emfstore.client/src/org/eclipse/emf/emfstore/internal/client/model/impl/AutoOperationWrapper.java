@@ -16,22 +16,23 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
+import org.eclipse.emf.emfstore.client.model.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 
 /**
- * Very basic implementation of {@link OperationModificator}. All operations are merged into one composite operation.
+ * Very basic implementation of {@link ESOperationModifier}. All operations are merged into one composite operation.
  * 
  * @author wesendon
  */
-public class AutoOperationWrapper implements OperationModificator {
+public class AutoOperationWrapper implements ESOperationModifier {
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.OperationModificator#modify(java.util.List,
+	 * @see org.eclipse.emf.emfstore.client.model.handler.ESOperationModifier#modify(java.util.List,
 	 *      org.eclipse.emf.common.command.Command)
 	 */
 	public List<AbstractOperation> modify(List<AbstractOperation> operations, Command command) {

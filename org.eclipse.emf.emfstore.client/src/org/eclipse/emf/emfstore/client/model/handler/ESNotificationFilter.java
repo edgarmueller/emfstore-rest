@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
+package org.eclipse.emf.emfstore.client.model.handler;
 
 import org.eclipse.emf.emfstore.common.model.EObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificatio
  * @author chodnick
  * @author koegel
  */
-public interface NotificationFilter {
+public interface ESNotificationFilter {
 
 	/**
 	 * Check a notification if it should be ignored.

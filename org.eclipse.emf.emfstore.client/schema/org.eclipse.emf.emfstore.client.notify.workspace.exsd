@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.PostWorkspaceInitiator"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver"/>
                </appInfo>
             </annotation>
          </attribute>

@@ -15,8 +15,8 @@ import static org.eclipse.emf.emfstore.internal.client.model.Configuration.isRel
 
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
-import org.eclipse.emf.emfstore.internal.server.LocationProvider;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.server.ESLocationProvider;
 
 /**
  * This is the default workspace location provider. If no other location
@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
  * @author wesendon
  */
 public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLocationProvider implements
-	LocationProvider {
+	ESLocationProvider {
 
 	/**
 	 * {@inheritDoc}

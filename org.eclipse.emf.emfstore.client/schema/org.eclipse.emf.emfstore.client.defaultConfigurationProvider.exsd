@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.internal.client.model.util.ConfigurationProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider"/>
                </appInfo>
             </annotation>
          </attribute>

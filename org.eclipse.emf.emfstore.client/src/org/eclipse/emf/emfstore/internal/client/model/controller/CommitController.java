@@ -15,13 +15,13 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.observers.CommitObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -123,7 +123,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		final ChangePackage changePackage = getLocalProject().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
-		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getLocalProject(), changePackage, getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
@@ -197,7 +197,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getLocalProject().setMergedVersion(null);
 		getLocalProject().updateDirtyState();
 
-		WorkspaceProvider.getObserverBus().notify(CommitObserver.class)
+		WorkspaceProvider.getObserverBus().notify(ESCommitObserver.class)
 			.commitCompleted(getLocalProject(), newBaseVersion, getProgressMonitor());
 
 		return newBaseVersion;

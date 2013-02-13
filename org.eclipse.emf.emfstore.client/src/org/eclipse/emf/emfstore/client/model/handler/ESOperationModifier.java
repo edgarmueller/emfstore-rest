@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.impl;
+package org.eclipse.emf.emfstore.client.model.handler;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * 
  * @author wesendon
  */
-public interface OperationModificator {
+public interface ESOperationModifier {
 
 	/**
 	 * Allows to modify the operations.

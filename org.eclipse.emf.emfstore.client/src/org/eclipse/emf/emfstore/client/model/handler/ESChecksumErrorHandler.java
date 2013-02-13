@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.util;
+package org.eclipse.emf.emfstore.client.model.handler;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ILocalProject;
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * 
  * @author emueller
  */
-public interface IChecksumErrorHandler {
+public interface ESChecksumErrorHandler {
 
 	/**
 	 * Executes the error handler.

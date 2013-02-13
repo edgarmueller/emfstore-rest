@@ -10,7 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.IChangePackage;
  * @emueller
  * @ovonwesen
  */
-public interface UpdateObserver extends IObserver {
+public interface ESUpdateObserver extends IObserver {
 
 	/**
 	 * Called to notify the observer about the changes that will be merged into the project space.

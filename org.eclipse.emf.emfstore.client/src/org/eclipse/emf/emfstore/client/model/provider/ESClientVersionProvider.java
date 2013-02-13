@@ -7,25 +7,29 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.provider;
 
-import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.common.IObserver;
 
 /**
- * Observes a logout of a session.
+ * Determines the version identifier of the client component.
  * 
- * @author koegel
+ * @author emueller
  */
-public interface LogoutObserver extends IObserver {
+public interface ESClientVersionProvider {
 
 	/**
-	 * Called to notify about the completion of a logout of the given usersession.
+	 * Returns the version of the client.
 	 * 
-	 * @param session
-	 *            the usersession that was logged out
+	 * @return the client version
 	 */
-	void logoutCompleted(IUsersession session);
+	String getVersion();
+
+	/**
+	 * Returns the name of the client.
+	 * 
+	 * @return the client name
+	 */
+	String getName();
 }

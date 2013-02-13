@@ -10,7 +10,7 @@
  * Aleksander Shterev
  * Carl Pfeiffer
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.common.IObserver;
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.common.IObserver;
  * @author pfeifferc
  * @author shterev
  */
-public interface LoginObserver extends IObserver {
+public interface ESLoginObserver extends IObserver {
 
 	/**
 	 * To be called when login is completed.
