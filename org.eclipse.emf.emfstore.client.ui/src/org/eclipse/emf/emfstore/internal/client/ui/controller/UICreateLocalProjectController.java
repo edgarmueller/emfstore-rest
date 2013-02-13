@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICreateLocalProjectController extends AbstractEMFStoreUIController<IProject> {
+public class UICreateLocalProjectController extends AbstractEMFStoreUIController<ESProject> {
 
 	private final String name;
 	private final String description;

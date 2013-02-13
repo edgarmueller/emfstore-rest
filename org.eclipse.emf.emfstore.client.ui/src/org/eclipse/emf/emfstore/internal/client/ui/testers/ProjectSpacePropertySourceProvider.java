@@ -17,7 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -113,7 +113,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
-		ArrayList<IProject> inputArray = new ArrayList<IProject>();
+		ArrayList<ESProject> inputArray = new ArrayList<ESProject>();
 		for (ESLocalProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.hasUnsavedChanges()) {
 				inputArray.add(project);

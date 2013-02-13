@@ -104,7 +104,7 @@ public class RemoteProject implements IRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#getBranches(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getBranches(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
 		return new UnknownEMFStoreWorkloadCommand<List<IBranchInfo>>(monitor) {
@@ -143,7 +143,7 @@ public class RemoteProject implements IRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(final IVersionSpec versionSpec, IProgressMonitor monitor)
@@ -180,7 +180,7 @@ public class RemoteProject implements IRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<IHistoryInfo> getHistoryInfos(final IHistoryQuery query, IProgressMonitor monitor)
@@ -216,7 +216,7 @@ public class RemoteProject implements IRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#addTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#addTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -236,7 +236,7 @@ public class RemoteProject implements IRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#removeTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#removeTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

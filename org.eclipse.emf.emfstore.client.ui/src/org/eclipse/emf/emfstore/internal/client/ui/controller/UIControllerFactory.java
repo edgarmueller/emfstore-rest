@@ -2,7 +2,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.IRemoteProject;
 import org.eclipse.emf.emfstore.client.IServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
@@ -18,9 +18,9 @@ public interface UIControllerFactory {
 
 	IPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project);
 
-	IPrimaryVersionSpec createBranch(Shell shell, IProject project);
+	IPrimaryVersionSpec createBranch(Shell shell, ESProject project);
 
-	IPrimaryVersionSpec createBranch(Shell shell, IProject project, IBranchVersionSpec branch);
+	IPrimaryVersionSpec createBranch(Shell shell, ESProject project, IBranchVersionSpec branch);
 
 	ESLocalProject createLocalProject(Shell shell);
 

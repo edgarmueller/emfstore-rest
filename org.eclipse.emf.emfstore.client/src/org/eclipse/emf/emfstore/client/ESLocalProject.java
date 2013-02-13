@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * @author wesendon
  * @author mkoegel
  */
-public interface ESLocalProject extends IProject, EObjectContainer {
+public interface ESLocalProject extends ESProject, EObjectContainer {
 
 	/**
 	 * <p>

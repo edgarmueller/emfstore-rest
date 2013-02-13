@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -62,7 +62,7 @@ public class ImportExportTest extends WorkspaceTest {
 
 		ESLocalProject newProjectSpace = null;
 
-		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
+		for (ESProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.getProjectName().equals("importedProject")) {
 				newProjectSpace = getProjectSpace();
 				break;

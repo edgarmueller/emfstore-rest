@@ -458,7 +458,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
@@ -977,7 +977,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#removeTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#removeTag(org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 * 
@@ -1002,7 +1002,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 * 
 	 * @generated NOT
@@ -1404,7 +1404,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IProject#getGlobalProjectId()
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getGlobalProjectId()
 	 */
 	public IGlobalProjectId getGlobalProjectId() {
 		return getProjectId();

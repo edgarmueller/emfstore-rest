@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
  * 
- * @extends IProject
+ * @extends ESProject
  *          <!-- end-user-doc
  *          -->
  * 
@@ -777,7 +777,7 @@ public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery)
+	 * @see org.eclipse.emf.emfstore.internal.client.ESProject.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery)
 	 * 
 	 * @generated NOT
 	 */

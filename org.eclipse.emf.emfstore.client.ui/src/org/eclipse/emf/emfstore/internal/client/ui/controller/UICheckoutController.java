@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
@@ -41,7 +41,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UICheckoutController extends AbstractEMFStoreUIController<IProject> {
+public class UICheckoutController extends AbstractEMFStoreUIController<ESProject> {
 
 	private ServerInfo serverInfo;
 	private ProjectInfo projectInfo;

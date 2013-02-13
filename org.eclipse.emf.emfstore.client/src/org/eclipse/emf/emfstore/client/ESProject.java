@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * @author emueller
  * @author wesendon
  */
-public interface IProject {
+public interface ESProject {
 
 	/**
 	 * Return the global ID of the project. This ID is globally unique even among different server and client nodes.
