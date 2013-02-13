@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class WorkspaceTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
+		workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 	}
 
 	@Before

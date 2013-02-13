@@ -27,7 +27,7 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
@@ -63,7 +63,7 @@ import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class WorkspaceProvider implements IWorkspaceProvider,
+public final class WorkspaceProvider implements ESWorkspaceProvider,
 	IReinitializable {
 
 	private static WorkspaceProvider instance;
@@ -640,7 +640,7 @@ public final class WorkspaceProvider implements IWorkspaceProvider,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see IWorkspaceProvider#setSessionProvider(AbstractSessionProvider)
+	 * @see ESWorkspaceProvider#setSessionProvider(AbstractSessionProvider)
 	 */
 	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
 		getSessionManager().setSessionProvider(sessionProvider);

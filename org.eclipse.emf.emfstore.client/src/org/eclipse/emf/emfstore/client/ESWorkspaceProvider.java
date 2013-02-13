@@ -22,12 +22,12 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
  * @author wesendon
  * 
  */
-public interface IWorkspaceProvider {
+public interface ESWorkspaceProvider {
 
 	/**
 	 * Singleton instance of the workspace provider.
 	 */
-	IWorkspaceProvider INSTANCE = WorkspaceProvider.getInstance();
+	ESWorkspaceProvider INSTANCE = WorkspaceProvider.getInstance();
 
 	/**
 	 * Returns the current workspace.

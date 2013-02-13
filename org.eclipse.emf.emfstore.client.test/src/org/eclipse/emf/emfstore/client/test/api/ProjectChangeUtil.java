@@ -8,7 +8,7 @@ import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 
 public final class ProjectChangeUtil {
 
@@ -63,7 +63,7 @@ public final class ProjectChangeUtil {
 	}
 
 	public static ESLocalProject createBasicBowlingProject() {
-		ESLocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"BasicBowlingProject", "");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");
