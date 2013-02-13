@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
  * @model
  * @generated
  */
-public interface ServerInfo extends EObject, IServer {
+public interface ServerInfo extends EObject, ESServer {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -200,7 +200,7 @@ public interface ServerInfo extends EObject, IServer {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IServer#login(java.lang.String, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.ESServer.IServer#login(java.lang.String, java.lang.String)
 	 * 
 	 * @generated NOT
 	 */

@@ -42,7 +42,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -377,7 +377,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 *            ServerInfo
 	 * @return String
 	 */
-	public String encrypt(String password, IServer server) {
+	public String encrypt(String password, ESServer server) {
 		try {
 			Certificate publicKey = getCertificateForEncryption(server);
 			PublicKey key = publicKey.getPublicKey();
@@ -414,7 +414,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		return "";
 	}
 
-	private Certificate getCertificateForEncryption(IServer server) throws CertificateStoreException {
+	private Certificate getCertificateForEncryption(ESServer server) throws CertificateStoreException {
 		Certificate publicKey;
 		if (server == null) {
 			publicKey = getCertificate(getDefaultCertificate());

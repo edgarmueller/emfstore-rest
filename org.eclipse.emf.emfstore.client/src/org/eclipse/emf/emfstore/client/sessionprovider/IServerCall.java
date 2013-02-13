@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 
 /**
@@ -42,6 +42,6 @@ public interface IServerCall {
 	 * 
 	 * @return the server this call is meant to be executed against
 	 */
-	IServer getServer();
+	ESServer getServer();
 
 }

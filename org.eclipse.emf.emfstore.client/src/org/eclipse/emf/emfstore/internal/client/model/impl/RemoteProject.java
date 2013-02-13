@@ -22,7 +22,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.model.observer.ESCheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
@@ -69,7 +69,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * The current connection manager used to connect to the server(s).
 	 */
 	private final ProjectInfo projectInfo;
-	private final IServer server;
+	private final ESServer server;
 
 	/**
 	 * Constructor.
@@ -79,7 +79,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @param projectInfo
 	 *            information about which project to access
 	 */
-	public RemoteProject(IServer server, ProjectInfo projectInfo) {
+	public RemoteProject(ESServer server, ProjectInfo projectInfo) {
 		this.server = server;
 		this.projectInfo = projectInfo;
 	}
@@ -410,7 +410,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getServer()
 	 */
-	public IServer getServer() {
+	public ESServer getServer() {
 		return (ServerInfo) projectInfo.eContainer();
 	}
 

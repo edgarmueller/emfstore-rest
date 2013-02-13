@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
@@ -92,7 +92,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public Usersession provideUsersession(IServer serverInfo) throws EMFStoreException {
+	public Usersession provideUsersession(ESServer serverInfo) throws EMFStoreException {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}

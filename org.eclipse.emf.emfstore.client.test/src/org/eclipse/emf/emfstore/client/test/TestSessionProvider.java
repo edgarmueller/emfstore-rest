@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
@@ -44,7 +44,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public IUsersession provideUsersession(IServer serverInfo) throws EMFStoreException {
+	public IUsersession provideUsersession(ESServer serverInfo) throws EMFStoreException {
 		if (session != null
 			&& ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
 			return session;

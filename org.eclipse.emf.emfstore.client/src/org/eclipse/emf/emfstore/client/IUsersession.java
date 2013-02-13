@@ -16,8 +16,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ISessionId;
 
 /**
- * User session for a given {@link IServer}. Can be used with multiple projects.
- * An user session is gained by calling {@link IServer#login(String, String)}
+ * User session for a given {@link ESServer}. Can be used with multiple projects.
+ * An user session is gained by calling {@link ESServer#login(String, String)}
  * 
  * @author emueller
  * @author wesendon
@@ -29,7 +29,7 @@ public interface IUsersession {
 	 * 
 	 * @return the server this user session is associated with
 	 */
-	IServer getServer();
+	ESServer getServer();
 
 	/**
 	 * Returns the name of the user this user session is associated with.

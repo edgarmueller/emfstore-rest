@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client;
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 /**
- * Factory for creating {@link IServer} instances.
+ * Factory for creating {@link ESServer} instances.
  * 
  * @author wesendon
  * @author emueller
@@ -32,9 +32,9 @@ public interface IServerFactory extends IEMFStoreFactory {
 	 * @param certificate
 	 *            the certificate alias to be used
 	 * 
-	 * @return an {@link IServer} instance representing the remote server
+	 * @return an {@link ESServer} instance representing the remote server
 	 */
-	IServer getServer(String url, int port, String certificate);
+	ESServer getServer(String url, int port, String certificate);
 
 	/**
 	 * Creates a server with a local name.
@@ -48,8 +48,8 @@ public interface IServerFactory extends IEMFStoreFactory {
 	 * @param certificate
 	 *            the certificate alias to be used
 	 * 
-	 * @return an {@link IServer} instance representing the remote server
+	 * @return an {@link ESServer} instance representing the remote server
 	 */
-	IServer getServer(String name, String url, int port, String certificate);
+	ESServer getServer(String name, String url, int port, String certificate);
 
 }

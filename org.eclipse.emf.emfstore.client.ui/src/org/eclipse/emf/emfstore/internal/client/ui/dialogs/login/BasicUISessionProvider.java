@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -44,7 +44,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	@Override
-	public IUsersession provideUsersession(IServer server) throws EMFStoreException {
+	public IUsersession provideUsersession(ESServer server) throws EMFStoreException {
 		if (server == null) {
 			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
@@ -79,7 +79,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @return Usersession
 	 * @throws EMFStoreException in case of an exception
 	 */
-	protected IUsersession loginServerInfo(IServer server) throws EMFStoreException {
+	protected IUsersession loginServerInfo(ESServer server) throws EMFStoreException {
 		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
 		if (server.getLastUsersession() != null && ((Usersession) server.getLastUsersession()).isLoggedIn()) {

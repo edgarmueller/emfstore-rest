@@ -25,10 +25,10 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  * @author emueller
  * @author wesendon
  */
-public interface IServer {
+public interface ESServer {
 
 	/**
-	 * Factory for creating IServer instances.
+	 * Factory for creating ESServer instances.
 	 */
 	IServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
 

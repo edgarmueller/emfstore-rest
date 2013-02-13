@@ -45,7 +45,7 @@ public interface IWorkspace {
 	 * 
 	 * @return list of servers
 	 */
-	List<IServer> getServers();
+	List<ESServer> getServers();
 
 	/**
 	 * Adds a server.
@@ -53,12 +53,12 @@ public interface IWorkspace {
 	 * @param server new server
 	 * 
 	 */
-	void addServer(IServer server);
+	void addServer(ESServer server);
 
 	/**
 	 * Removes a server.
 	 * 
 	 * @param server server to remove
 	 */
-	void removeServer(IServer server);
+	void removeServer(ESServer server);
 }

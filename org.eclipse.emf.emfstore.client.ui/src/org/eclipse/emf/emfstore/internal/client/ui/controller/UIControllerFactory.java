@@ -4,7 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
@@ -34,21 +34,21 @@ public interface UIControllerFactory {
 
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 
-	void deleteRemoteProject(Shell shell, IServer server, IGlobalProjectId projectId, boolean deleteFiles);
+	void deleteRemoteProject(Shell shell, ESServer server, IGlobalProjectId projectId, boolean deleteFiles);
 
 	void deleteRemoteProject(Shell shell, IUsersession session, IGlobalProjectId projectId, boolean deleteFiles);
 
 	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject);
 
-	void login(Shell shell, IServer server);
+	void login(Shell shell, ESServer server);
 
 	void logout(Shell shell, IUsersession usersession);
 
 	void mergeBranch(Shell shell, ESLocalProject project);
 
-	void registerEPackage(Shell shell, IServer server);
+	void registerEPackage(Shell shell, ESServer server);
 
-	void removeServer(Shell shell, IServer server);
+	void removeServer(Shell shell, ESServer server);
 
 	void shareProject(Shell shell, ESLocalProject project);
 

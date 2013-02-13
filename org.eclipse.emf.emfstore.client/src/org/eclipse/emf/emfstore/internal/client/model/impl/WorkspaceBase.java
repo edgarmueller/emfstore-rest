@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
@@ -104,7 +104,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(IServer serverInfo, final IGlobalProjectId projectId) throws EMFStoreException {
+	public List<IBranchInfo> getBranches(ESServer serverInfo, final IGlobalProjectId projectId) throws EMFStoreException {
 		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
 			protected List<IBranchInfo> run() throws EMFStoreException {
@@ -168,7 +168,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.ServerInfo,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public ProjectInfo createRemoteProject(IServer serverInfo, final String projectName,
+	public ProjectInfo createRemoteProject(ESServer serverInfo, final String projectName,
 		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((ServerInfo) serverInfo) {
 			@Override
@@ -300,9 +300,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#addServer(org.eclipse.emf.emfstore.client.IServer)
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#addServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
-	public void addServer(IServer server) {
+	public void addServer(ESServer server) {
 		getServerInfos().add((ServerInfo) server);
 		save();
 	}
@@ -311,9 +311,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.IWorkspace#removeServer(org.eclipse.emf.emfstore.client.IServer)
+	 * @see org.eclipse.emf.emfstore.client.IWorkspace#removeServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
-	public void removeServer(IServer server) {
+	public void removeServer(ESServer server) {
 		getServerInfos().remove(server);
 		save();
 	}
@@ -569,7 +569,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.IWorkspace#getServers()
 	 */
-	public List<IServer> getServers() {
+	public List<ESServer> getServers() {
 		return copy(getServerInfos());
 	}
 

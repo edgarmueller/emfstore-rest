@@ -9,7 +9,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
-public abstract class ServerBase extends EObjectImpl implements IServer, ServerInfo {
+public abstract class ServerBase extends EObjectImpl implements ESServer, ServerInfo {
 
 	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
@@ -89,7 +89,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 	 * 
 	 * @throws EmfStoreException
 	 * @throws AccessControlException
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IServer#login(java.lang.String, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.ESServer.IServer#login(java.lang.String, java.lang.String)
 	 * @generated NOT
 	 */
 	public Usersession login(String name, String password) throws EMFStoreException {

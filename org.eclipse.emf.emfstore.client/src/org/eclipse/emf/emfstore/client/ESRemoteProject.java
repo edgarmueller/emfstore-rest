@@ -35,7 +35,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return server
 	 */
-	IServer getServer();
+	ESServer getServer();
 
 	/**
 	 * Checkouts the project in the given version into the local workspace.

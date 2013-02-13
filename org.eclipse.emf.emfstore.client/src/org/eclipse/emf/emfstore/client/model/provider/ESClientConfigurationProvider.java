@@ -12,11 +12,11 @@ package org.eclipse.emf.emfstore.client.model.provider;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 
 /**
- * This provider allows to set the default {@link IServer} and initialize the {@link KeyStoreManager} with necessary
+ * This provider allows to set the default {@link ESServer} and initialize the {@link KeyStoreManager} with necessary
  * certificates.
  * 
  * @author wesendon
@@ -24,11 +24,11 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 public interface ESClientConfigurationProvider {
 
 	/**
-	 * Returns a list of default {@link IServer}s.
+	 * Returns a list of default {@link ESServer}s.
 	 * 
 	 * @return a list of default server entries
 	 */
-	List<IServer> getDefaultServerInfos();
+	List<ESServer> getDefaultServerInfos();
 
 	/**
 	 * Allows the {@link ESClientConfigurationProvider} to initialize the {@link KeyStoreManager}. Use

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -48,7 +48,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
 	private U ret;
-	private IServer server;
+	private ESServer server;
 
 	/**
 	 * Default constructor.
@@ -83,7 +83,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param server a given server
 	 */
-	public ServerCall(IServer server) {
+	public ServerCall(ESServer server) {
 		this.server = server;
 		setProgressMonitor(null);
 	}
@@ -122,7 +122,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(IServer server, IProgressMonitor monitor) {
+	public ServerCall(ESServer server, IProgressMonitor monitor) {
 		this.server = server;
 		setProgressMonitor(monitor);
 	}
@@ -143,7 +143,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            the server info that should be used by this server call
 	 * @return
 	 */
-	public ServerCall<U> setServer(IServer server) {
+	public ServerCall<U> setServer(ESServer server) {
 		this.server = server;
 		return this;
 	}

@@ -18,7 +18,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientVersionProvider;
@@ -191,7 +191,7 @@ public final class Configuration {
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ESClientConfigurationProvider.class);
 		if (provider != null) {
-			List<IServer> defaultServerInfos = provider.getDefaultServerInfos();
+			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
 			if (defaultServerInfos != null) {
 				// OTS cast
 				return (List<ServerInfo>) (List<?>) defaultServerInfos;

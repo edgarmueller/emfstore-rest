@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.IWorkspace;
 import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -47,7 +47,7 @@ public class WorkspaceTest {
 	@Test
 	public void testServers() {
 		int servers = workspace.getServers().size();
-		IServer server = IServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
 		assertEquals(servers + 1, workspace.getServers().size());
 		workspace.removeServer(server);
