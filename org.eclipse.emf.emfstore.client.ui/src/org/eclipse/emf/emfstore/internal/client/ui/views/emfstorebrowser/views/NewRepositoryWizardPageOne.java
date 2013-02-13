@@ -12,9 +12,9 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.viewers.LabelProvider;

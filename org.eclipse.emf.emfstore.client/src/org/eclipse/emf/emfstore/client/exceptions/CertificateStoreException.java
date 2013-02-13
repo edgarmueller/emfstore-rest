@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.exceptions;
+package org.eclipse.emf.emfstore.client.exceptions;
 
 /**
  * CertificateStoreException is thrown when problems arise with the KeyStoreManager.

@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.exceptions;
+package org.eclipse.emf.emfstore.client.exceptions;
 
 /**
  * Exception that is thrown when the specified certificate can not be found, or

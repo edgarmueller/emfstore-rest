@@ -14,8 +14,8 @@ package org.eclipse.emf.emfstore.client.model.provider;
 import java.io.InputStream;
 import java.security.cert.CertificateFactory;
 
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;
+import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.InvalidCertificateException;
 
 public interface ESKeyStoreManager {
 
