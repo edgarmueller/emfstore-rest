@@ -3,7 +3,7 @@ package org.eclipse.emf.emfstore.client.test;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
@@ -22,7 +22,7 @@ public class UpdateCallbackAdapter implements IUpdateCallback {
 
 	}
 
-	public boolean conflictOccurred(IChangeConflict changeConflict, IProgressMonitor progressMonitor) {
+	public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor) {
 		return true;
 	}
 

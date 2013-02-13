@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.IUsersession;
 import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
@@ -885,7 +885,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 */
-	public boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict,
+	public boolean merge(IPrimaryVersionSpec target, ESChangeConflict changeConflict,
 		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
 		throws EMFStoreException {
 		// merge the conflicts

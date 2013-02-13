@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
@@ -59,7 +59,7 @@ public interface IUpdateCallback {
 	 * @param progressMonitor a progress monitor to report on progress
 	 * @return true, if the conflict has been resolved, false otherwise
 	 */
-	boolean conflictOccurred(IChangeConflict changeConflict, IProgressMonitor progressMonitor);
+	boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor);
 
 	/**
 	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
@@ -93,7 +93,7 @@ public interface IUpdateCallback {
 		public void noChangesOnServer() {
 		}
 
-		public boolean conflictOccurred(IChangeConflict changeConflict, IProgressMonitor progressMonitor) {
+		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor) {
 			return false;
 		}
 

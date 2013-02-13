@@ -6,7 +6,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
@@ -354,7 +354,7 @@ public class ChecksumTest extends CoreServerTest {
 			IUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
-		public boolean conflictOccurred(IChangeConflict changeConflictException,
+		public boolean conflictOccurred(ESChangeConflict changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}

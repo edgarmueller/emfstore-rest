@@ -18,6 +18,6 @@ package org.eclipse.emf.emfstore.client;
  * @author emueller
  * @author wesendon
  */
-public interface IChangeConflict {
+public interface ESChangeConflict {
 
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ILocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -104,7 +104,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException)
 	 */
-	public boolean conflictOccurred(final IChangeConflict changeConflict,
+	public boolean conflictOccurred(final ESChangeConflict changeConflict,
 		final IProgressMonitor progressMonitor) {
 		// TODO OTS
 		boolean mergeSuccessful = false;

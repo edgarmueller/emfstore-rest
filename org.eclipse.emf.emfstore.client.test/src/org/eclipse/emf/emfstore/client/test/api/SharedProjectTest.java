@@ -268,7 +268,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 						.createHEAD(baseVersion), monitor);
 					localProject.update(version, new UpdateCallbackAdapter() {
 						@Override
-						public boolean conflictOccurred(org.eclipse.emf.emfstore.client.IChangeConflict changeConflict,
+						public boolean conflictOccurred(org.eclipse.emf.emfstore.client.ESChangeConflict changeConflict,
 							IProgressMonitor progressMonitor) {
 							try {
 								return localProject.merge(version, changeConflict,

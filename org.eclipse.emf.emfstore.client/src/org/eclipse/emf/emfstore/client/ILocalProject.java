@@ -178,7 +178,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @param target
 	 *            the {@link IPrimaryVersionSpec} which is supposed to be merged
 	 * @param changeConflict
-	 *            the {@link IChangeConflict} containing the conflicting changes
+	 *            the {@link ESChangeConflict} containing the conflicting changes
 	 * @param conflictResolver
 	 *            a {@link IConflictResolver} for resolving conflicts
 	 * @param callback
@@ -191,7 +191,7 @@ public interface ILocalProject extends IProject, EObjectContainer {
 	 * @throws EMFStoreException
 	 *             in case an error occurs while merging the branch
 	 */
-	boolean merge(IPrimaryVersionSpec target, IChangeConflict changeConflict, IConflictResolver conflictResolver,
+	boolean merge(IPrimaryVersionSpec target, ESChangeConflict changeConflict, IConflictResolver conflictResolver,
 		IUpdateCallback callback, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
