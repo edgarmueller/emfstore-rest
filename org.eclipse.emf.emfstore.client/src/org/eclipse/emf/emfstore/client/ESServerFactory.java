@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
  * @author wesendon
  * @author emueller
  */
-public interface IServerFactory extends IEMFStoreFactory {
+public interface ESServerFactory extends IEMFStoreFactory {
 
 	/**
 	 * Creates a server without a local name.

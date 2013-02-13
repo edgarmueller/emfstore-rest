@@ -30,7 +30,7 @@ public interface ESServer {
 	/**
 	 * Factory for creating ESServer instances.
 	 */
-	IServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
+	ESServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
 
 	/**
 	 * Returns the local name of the server.

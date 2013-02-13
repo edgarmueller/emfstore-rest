@@ -1,11 +1,11 @@
 package org.eclipse.emf.emfstore.internal.client.impl;
 
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.IServerFactory;
+import org.eclipse.emf.emfstore.client.ESServerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 
-public class ServerFactoryImpl implements IServerFactory {
+public class ServerFactoryImpl implements ESServerFactory {
 
 	public static final ServerFactoryImpl INSTANCE = new ServerFactoryImpl();
 
