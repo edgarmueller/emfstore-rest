@@ -13,10 +13,9 @@ package org.eclipse.emf.emfstore.client.model.provider;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 
 /**
- * This provider allows to set the default {@link ESServer} and initialize the {@link KeyStoreManager} with necessary
+ * This provider allows to set the default {@link ESServer} and initialize the {@link ESKeyStoreManager} with necessary
  * certificates.
  * 
  * @author wesendon
@@ -31,11 +30,12 @@ public interface ESClientConfigurationProvider {
 	List<ESServer> getDefaultServerInfos();
 
 	/**
-	 * Allows the {@link ESClientConfigurationProvider} to initialize the {@link KeyStoreManager}. Use
-	 * {@link KeyStoreManager#setDefaultCertificate(String)} to set the default alias and
-	 * {@link KeyStoreManager#addCertificate(String, java.io.InputStream)} to add you certificate.
+	 * Allows the {@link ESClientConfigurationProvider} to initialize the {@link ESKeyStoreManager}. Use
+	 * {@link ESKeyStoreManager#setDefaultCertificate(String)} to set the default alias and
+	 * {@link ESKeyStoreManager#addCertificate(String, java.io.InputStream)} to add you certificate.
 	 * 
-	 * @param keyStoreManager {@link KeyStoreManager}
+	 * @param keyStoreManager
+	 *            the {@link ESKeyStoreManager} to be initialized
 	 */
 	void initDefaultCertificates(ESKeyStoreManager keyStoreManager);
 

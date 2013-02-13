@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
 
 /**
@@ -54,7 +53,7 @@ public interface ESMergeObserver extends IObserver {
 	void postRevertMyChanges(ESLocalProject project);
 
 	/**
-	 * Called after incoming changes have been applied upon the {@link ProjectSpace} and before
+	 * Called after incoming changes have been applied upon the {@link ESLocalProject} and before
 	 * our changes are re-applied.
 	 * 
 	 * @param project
