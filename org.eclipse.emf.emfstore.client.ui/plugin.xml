@@ -584,14 +584,14 @@
             icon="icons/serverDB.png"
             category="org.eclipse.emf.ecp"
             class="org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.ESBrowserView"
-            id="org.eclipse.emf.emfstore.internal.client.ui.views.RepositoryView">
+            id="org.eclipse.emf.emfstore.client.ui.views.RepositoryView">
       </view>
       <view
             allowMultiple="false"
             category="org.eclipse.emf.ecp"
             class="org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView"
             icon="icons/historyview.png"
-            id="org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView"
+            id="org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView"
             name="History Browser"
             restorable="false">
       </view>
