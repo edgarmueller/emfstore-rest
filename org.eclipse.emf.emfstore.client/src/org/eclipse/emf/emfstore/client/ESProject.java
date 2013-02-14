@@ -18,9 +18,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -42,7 +42,7 @@ public interface ESProject {
 	 * 
 	 * @return the global ID of the project
 	 */
-	IGlobalProjectId getGlobalProjectId();
+	ESGlobalProjectId getGlobalProjectId();
 
 	/**
 	 * Returns the project's name.
@@ -104,7 +104,7 @@ public interface ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the branch information for the project
 	 */
-	List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
+	List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * <p>
@@ -122,7 +122,7 @@ public interface ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the history information
 	 */
-	List<IHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
+	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * <p>

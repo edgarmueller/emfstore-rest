@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -125,7 +125,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ESLocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
+	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
 		return false;
 	}
 
@@ -145,7 +145,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 * 
 	 * {@inheritDoc}
 	 */
-	public boolean inspectChanges(ESLocalProject project, List<IChangePackage> changePackages, IProgressMonitor monitor) {
+	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor) {
 		return true;
 	}
 

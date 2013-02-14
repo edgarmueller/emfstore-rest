@@ -12,14 +12,29 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
-
 /**
- * Represents the ID of a project.
+ * Represents a change package.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IProjectId extends IUniqueIdentifier {
+public interface ESChangePackage {
+
+	/**
+	 * Returns the {@link ESLogMessage} that was entered by the
+	 * user and is supposed to describe the changes within
+	 * the change package.
+	 * 
+	 * @return the log message as entered by the user
+	 */
+	ESLogMessage getLogMessage();
+
+	/**
+	 * Sets the log message of this change package.
+	 * 
+	 * @param logMessage
+	 *            the log message to be set
+	 */
+	void setLogMessage(ESLogMessage logMessage);
 
 }

@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.junit.Test;
 
@@ -325,7 +325,7 @@ public class ChecksumTest extends CoreServerTest {
 			return ICommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
 		}
 
-		public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
+		public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return ICommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
 		}
@@ -345,7 +345,7 @@ public class ChecksumTest extends CoreServerTest {
 
 	private class MyUpdateCallback implements IUpdateCallback {
 
-		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends IChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends ESChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}

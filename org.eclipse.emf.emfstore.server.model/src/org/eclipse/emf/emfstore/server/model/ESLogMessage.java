@@ -22,10 +22,10 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFacto
  * @author emueller
  * @author wesendon
  */
-public interface ILogMessage {
+public interface ESLogMessage {
 
 	/** Factory for creating ILogMessages. */
-	ILogMessageFactory FACTORY = LogMessageFactory.INSTANCE;
+	ESLogMessageFactory FACTORY = LogMessageFactory.INSTANCE;
 
 	/**
 	 * Returns the actual log message.

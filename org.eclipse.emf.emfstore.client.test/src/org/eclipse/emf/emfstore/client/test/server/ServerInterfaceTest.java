@@ -39,7 +39,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.junit.Test;
 
 /**
@@ -433,7 +433,7 @@ public class ServerInterfaceTest extends ServerTests {
 		getProjectSpace().addTag(getProjectVersion(), tag, monitor);
 		getProjectSpace().removeTag(getProjectVersion(), tag, monitor);
 
-		List<IHistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
+		List<ESHistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
 			createHistoryQuery(getProjectVersion(), getProjectVersion()), monitor);
 
 		assertTrue(historyInfo.size() == 1);

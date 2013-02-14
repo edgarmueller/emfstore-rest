@@ -15,11 +15,11 @@ package org.eclipse.emf.emfstore.server.model;
 import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
 
 /**
- * Represents the ID of a session as used in an user session.
+ * Represents the ID of a project.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface ISessionId extends IUniqueIdentifier {
+public interface ESProjectId extends IUniqueIdentifier {
 
 }

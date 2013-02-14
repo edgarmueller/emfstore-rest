@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -119,7 +119,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
+	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		if (((ChangePackage) changePackage).getOperations().isEmpty()) {

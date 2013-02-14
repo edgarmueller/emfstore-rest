@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  * @author wesendon
  */
-public interface IBranchInfo {
+public interface ESBranchInfo {
 
 	/**
 	 * Returns the name of the branch.

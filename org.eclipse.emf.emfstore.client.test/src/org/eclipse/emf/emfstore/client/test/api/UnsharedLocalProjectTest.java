@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -87,14 +87,14 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = RuntimeException.class)
 	public void testCommit2() throws EMFStoreException {
 		// can not commit an unshared project
-		localProject.commit(ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
+		localProject.commit(ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testCommitToBranch() throws EMFStoreException {
 		localProject.commitToBranch(ESVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
-			ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
+			ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 

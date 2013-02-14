@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * Controller class for updating a project space.
@@ -130,7 +130,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			return getLocalProject().getBaseVersion();
 		}
 		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
-			.inspectChanges(getLocalProject(), (List<IChangePackage>) (List<?>) changes, getProgressMonitor());
+			.inspectChanges(getLocalProject(), (List<ESChangePackage>) (List<?>) changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
 		if (getLocalProject().getOperations().size() > 0) {

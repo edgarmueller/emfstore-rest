@@ -60,8 +60,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
@@ -104,12 +104,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(ESServer serverInfo, final IGlobalProjectId projectId) throws EMFStoreException {
-		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
+	public List<ESBranchInfo> getBranches(ESServer serverInfo, final ESGlobalProjectId projectId) throws EMFStoreException {
+		return new ServerCall<List<ESBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
-			protected List<IBranchInfo> run() throws EMFStoreException {
+			protected List<ESBranchInfo> run() throws EMFStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<IBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
+				return (List<ESBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
 			};
 		}.execute();
 	}
@@ -418,7 +418,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public ESPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final ESVersionSpec versionSpec,
-		final IGlobalProjectId projectId) throws EMFStoreException {
+		final ESGlobalProjectId projectId) throws EMFStoreException {
 		return new ServerCall<ESPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {

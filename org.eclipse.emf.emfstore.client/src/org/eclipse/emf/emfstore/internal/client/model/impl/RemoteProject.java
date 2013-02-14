@@ -49,9 +49,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -88,7 +88,7 @@ public class RemoteProject implements ESRemoteProject {
 		return projectInfo;
 	}
 
-	public IGlobalProjectId getGlobalProjectId() {
+	public ESGlobalProjectId getGlobalProjectId() {
 		return projectInfo.getProjectId();
 	}
 
@@ -106,10 +106,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getBranches(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
-		return new UnknownEMFStoreWorkloadCommand<List<IBranchInfo>>(monitor) {
+	public List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
+		return new UnknownEMFStoreWorkloadCommand<List<ESBranchInfo>>(monitor) {
 			@Override
-			public List<IBranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
+			public List<ESBranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
 				return copy(new ServerCall<List<BranchInfo>>(server) {
 					@Override
 					protected List<BranchInfo> run() throws EMFStoreException {
@@ -129,7 +129,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getBranches(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws EMFStoreException {
@@ -183,7 +183,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
+	public List<ESHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
 		throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
@@ -201,7 +201,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, final ESHistoryQuery query,
+	public List<ESHistoryInfo> getHistoryInfos(ESUsersession usersession, final ESHistoryQuery query,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override

@@ -21,9 +21,9 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IComm
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
@@ -36,7 +36,7 @@ import org.junit.Test;
 public class SharedProjectTest extends BaseSharedProjectTest {
 
 	// TODO: OTS
-	private ILogMessage logMessage;
+	private ESLogMessage logMessage;
 	private ICommitCallback callback;
 	private IUpdateCallback updateCallback;
 	private ESPrimaryVersionSpec target;
@@ -135,7 +135,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testBranchesOnlyTrunk() {
 		try {
-			List<? extends IBranchInfo> branches = localProject.getBranches(new NullProgressMonitor());
+			List<? extends ESBranchInfo> branches = localProject.getBranches(new NullProgressMonitor());
 			assertEquals(1, branches.size());
 			// TODO assert branch name
 		} catch (EMFStoreException e) {
@@ -148,7 +148,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testBranches() {
 
 		try {
-			List<? extends IBranchInfo> branches = localProject.getBranches(new NullProgressMonitor());
+			List<? extends ESBranchInfo> branches = localProject.getBranches(new NullProgressMonitor());
 			assertEquals(1, branches.size());
 
 			addPlayerToProject();
@@ -171,7 +171,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;
-			List<IHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
+			List<ESHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();
@@ -196,7 +196,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;
-			List<? extends IHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
+			List<? extends ESHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();

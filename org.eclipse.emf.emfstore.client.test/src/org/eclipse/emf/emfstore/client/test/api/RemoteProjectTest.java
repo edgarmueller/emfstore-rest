@@ -9,8 +9,8 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -103,7 +103,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testGetBranches() {
 		try {
-			List<? extends IBranchInfo> branches = remoteProject.getBranches(new NullProgressMonitor());
+			List<? extends ESBranchInfo> branches = remoteProject.getBranches(new NullProgressMonitor());
 			assertEquals(1, branches.size());
 		} catch (EMFStoreException e) {
 			log(e);
@@ -128,7 +128,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testGetHistoryInfosSession() throws EMFStoreException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(
+		List<? extends ESHistoryInfo> historyInfos = remoteProject.getHistoryInfos(
 			usersession,
 			ESHistoryQuery.FACTORY
 				.pathQuery(remoteProject.getHeadVersion(monitor),
@@ -140,7 +140,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testGetHistoryInfos() throws EMFStoreException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(ESHistoryQuery.FACTORY.pathQuery(
+		List<? extends ESHistoryInfo> historyInfos = remoteProject.getHistoryInfos(ESHistoryQuery.FACTORY.pathQuery(
 			remoteProject.getHeadVersion(monitor),
 			remoteProject.getHeadVersion(monitor), true, true), monitor);
 		assertEquals(1, historyInfos.size());

@@ -20,6 +20,6 @@ import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
  * @author emueller
  * @author wesendon
  */
-public interface ILocalProjectId extends IUniqueIdentifier {
+public interface ESLocalProjectId extends IUniqueIdentifier {
 
 }

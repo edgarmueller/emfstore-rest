@@ -14,11 +14,11 @@ package org.eclipse.emf.emfstore.server.model;
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 
 /**
- * A factory for creating {@link ILogMessage} objects.
+ * A factory for creating {@link ESLogMessage} objects.
  * 
  * @author Tobias Verhoeven
  */
-public interface ILogMessageFactory extends IEMFStoreFactory {
+public interface ESLogMessageFactory extends IEMFStoreFactory {
 
 	/**
 	 * Creates a new log message with the specified message and author.
@@ -27,7 +27,7 @@ public interface ILogMessageFactory extends IEMFStoreFactory {
 	 *            the actual log message
 	 * @param author
 	 *            the author of the log message
-	 * @return the created {@link ILogMessage}
+	 * @return the created {@link ESLogMessage}
 	 */
-	ILogMessage createLogMessage(String message, String author);
+	ESLogMessage createLogMessage(String message, String author);
 }

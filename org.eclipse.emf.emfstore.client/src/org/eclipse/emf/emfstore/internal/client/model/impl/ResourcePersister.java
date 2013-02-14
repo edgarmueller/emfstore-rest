@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -310,7 +310,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * @see org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ESLocalProject project, List<IChangePackage> changePackages,
+	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
 		IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
@@ -329,10 +329,10 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.server.model.api.IChangePackage,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ESChangePackage.IChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean inspectChanges(ESLocalProject project, IChangePackage changePackage, IProgressMonitor monitor) {
+	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
 		saveDirtyResources(true);
 		return true;
 	}

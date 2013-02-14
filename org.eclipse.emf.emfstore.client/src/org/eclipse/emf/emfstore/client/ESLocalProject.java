@@ -25,8 +25,8 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictE
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
-import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -50,7 +50,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
-	 * to influence the commit behavior, they should use {@link #commit(ILogMessage, ICommitCallback, IProgressMonitor)}.
+	 * to influence the commit behavior, they should use {@link #commit(ESLogMessage, ICommitCallback, IProgressMonitor)}.
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
@@ -71,7 +71,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * successful or not. This enables the the headless execution of the commit.
 	 * 
 	 * @param logMessage
-	 *            a {@link ILogMessage} describing the changes being committed
+	 *            a {@link ESLogMessage} describing the changes being committed
 	 * @param callback
 	 *            a optional {@link ICommitCallback}
 	 * @param monitor
@@ -82,7 +82,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws EMFStoreException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	ESPrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws BaseVersionOutdatedException, EMFStoreException;
 
 	/**
@@ -100,7 +100,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @param branch
 	 *            the {@link ESBranchVersionSpec} indicating the branch to commit to
 	 * @param logMessage
-	 *            a {@link ILogMessage} describing the changes being committed
+	 *            a {@link ESLogMessage} describing the changes being committed
 	 * @param callback
 	 *            a optional {@link ICommitCallback}
 	 * @param monitor
@@ -112,7 +112,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws EMFStoreException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
+	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage, ICommitCallback callback,
 		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
@@ -346,7 +346,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * 
 	 * @return the ID
 	 */
-	ILocalProjectId getLocalProjectId();
+	ESLocalProjectId getLocalProjectId();
 
 	/**
 	 * Imports and applies changes on this project.

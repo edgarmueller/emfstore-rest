@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * Callback that is called during the merge process.<br/>
@@ -41,7 +41,7 @@ public interface ESMergeObserver extends IObserver {
 	 * @param changePackage
 	 *            the {@link ChangePackage} containing the operations being reverted
 	 */
-	void preRevertMyChanges(ESLocalProject project, IChangePackage changePackage);
+	void preRevertMyChanges(ESLocalProject project, ESChangePackage changePackage);
 
 	/**
 	 * Called after local changes have been reverted and before incoming
@@ -62,7 +62,7 @@ public interface ESMergeObserver extends IObserver {
 	 *            a list of change packages containing the changes that have been applied
 	 *            upon the project space
 	 */
-	void postApplyTheirChanges(ESLocalProject project, List<IChangePackage> theirChangePackages);
+	void postApplyTheirChanges(ESLocalProject project, List<ESChangePackage> theirChangePackages);
 
 	/**
 	 * Called after merge result has been re-applied, i.e. after the incoming changes
@@ -73,5 +73,5 @@ public interface ESMergeObserver extends IObserver {
 	 * @param changePackage
 	 *            the change package containing the changes to be applied upon the project space
 	 */
-	void postApplyMergedChanges(ESLocalProject project, IChangePackage changePackage);
+	void postApplyMergedChanges(ESLocalProject project, ESChangePackage changePackage);
 }

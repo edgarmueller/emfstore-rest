@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -53,7 +53,7 @@ public interface ICommitCallback {
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the commit should continue, false otherwise
 	 */
-	boolean inspectChanges(ESLocalProject project, IChangePackage changePackage,
+	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -90,7 +90,7 @@ public interface ICommitCallback {
 	 */
 	ICommitCallback NOCALLBACK = new ICommitCallback() {
 
-		public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
+		public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}

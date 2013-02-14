@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'.
  * 
- * @extends IHistoryInfo
+ * @extends ESHistoryInfo
  *          <!-- end-user-doc -->
  * 
  *          <p>

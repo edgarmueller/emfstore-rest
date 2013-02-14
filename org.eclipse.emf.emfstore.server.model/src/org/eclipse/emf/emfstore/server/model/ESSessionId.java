@@ -12,29 +12,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
+import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
+
 /**
- * Represents a change package.
+ * Represents the ID of a session as used in an user session.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IChangePackage {
-
-	/**
-	 * Returns the {@link ILogMessage} that was entered by the
-	 * user and is supposed to describe the changes within
-	 * the change package.
-	 * 
-	 * @return the log message as entered by the user
-	 */
-	ILogMessage getLogMessage();
-
-	/**
-	 * Sets the log message of this change package.
-	 * 
-	 * @param logMessage
-	 *            the log message to be set
-	 */
-	void setLogMessage(ILogMessage logMessage);
+public interface ESSessionId extends IUniqueIdentifier {
 
 }

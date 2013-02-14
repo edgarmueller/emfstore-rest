@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMa
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -141,7 +141,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ESLocalProject projectSpace,
-		final List<? extends IChangePackage> changePackages, final IModelElementIdToEObjectMapping idToEObjectMapping) {
+		final List<? extends ESChangePackage> changePackages, final IModelElementIdToEObjectMapping idToEObjectMapping) {
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				@SuppressWarnings("unchecked")

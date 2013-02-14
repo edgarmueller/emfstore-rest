@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -161,7 +161,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	}
 
 	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EMFStoreException {
-		final List<IBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
+		final List<ESBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
 			.getBranches(serverInfo, projectInfo.getProjectId());
 
 		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {

@@ -18,6 +18,6 @@ import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
  * 
  * @author mkoegel
  */
-public interface IGlobalProjectId extends IUniqueIdentifier {
+public interface ESGlobalProjectId extends IUniqueIdentifier {
 
 }

@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.internal.server.model;
 
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
-import org.eclipse.emf.emfstore.server.model.ISessionId;
+import org.eclipse.emf.emfstore.server.model.ESSessionId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Session Id</b></em>'.
  * 
- * @extends ISessionId
+ * @extends ESSessionId
  *          <!-- end-user-doc -->
  * 
  * 
@@ -24,6 +24,6 @@ import org.eclipse.emf.emfstore.server.model.ISessionId;
  * @model
  * @generated
  */
-public interface SessionId extends UniqueIdentifier, ISessionId {
+public interface SessionId extends UniqueIdentifier, ESSessionId {
 
 } // SessionId

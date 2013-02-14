@@ -36,8 +36,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -137,7 +137,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ESLocalProject projectSpace, IChangePackage changePackage,
+	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		final CommitDialog commitDialog = new CommitDialog(getShell(), (ChangePackage) changePackage,
@@ -195,7 +195,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	}
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws EMFStoreException {
-		final List<IBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
+		final List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException().runWithResult(new Callable<String>() {

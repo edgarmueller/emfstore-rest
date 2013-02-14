@@ -99,12 +99,12 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
-import org.eclipse.emf.emfstore.server.model.ILogMessage;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -363,7 +363,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	public PrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws EMFStoreException {
 		checkIsShared();
 		return new CommitController(this, (LogMessage) logMessage, callback, monitor).execute();
@@ -372,7 +372,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	public PrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ILogMessage logMessage,
+	public PrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage,
 		ICommitCallback callback, IProgressMonitor monitor) throws EMFStoreException {
 		checkIsShared();
 		return new CommitController(this, (BranchVersionSpec) branch, (LogMessage) logMessage, callback, monitor)
@@ -461,7 +461,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
+	public List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
 		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
 	}
 
@@ -962,7 +962,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @generated NOT
 	 */
-	public List<IBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
+	public List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
 		// TODO: OTS use monitor
 		return copy(new ServerCall<List<BranchInfo>>(this) {
 			@Override
@@ -1334,7 +1334,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
 		// OTS cast
 		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class)
-			.postApplyTheirChanges(this, (List<IChangePackage>) (List<?>) theirChangePackages);
+			.postApplyTheirChanges(this, (List<ESChangePackage>) (List<?>) theirChangePackages);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
@@ -1406,7 +1406,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getGlobalProjectId()
 	 */
-	public IGlobalProjectId getGlobalProjectId() {
+	public ESGlobalProjectId getGlobalProjectId() {
 		return getProjectId();
 	}
 
@@ -1416,7 +1416,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#getLocalProjectId()
 	 */
-	public ILocalProjectId getLocalProjectId() {
+	public ESLocalProjectId getLocalProjectId() {
 		return new LocalProjectIdImpl(getIdentifier());
 	}
 

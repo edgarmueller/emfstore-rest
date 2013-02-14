@@ -17,15 +17,15 @@ import java.util.List;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
- * When querying the history API successfully, the result is a set of {@link IHistoryInfo}.
- * Each IHistoryInfo contains pointers to versions, in form of PrimaryVersionIdentier,
+ * When querying the history API successfully, the result is a set of {@link ESHistoryInfo}.
+ * Each ESHistoryInfo contains pointers to versions, in form of PrimaryVersionIdentier,
  * as well as possible tags, the log message for the given version
  * and optionally the changes for this version.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IHistoryInfo {
+public interface ESHistoryInfo {
 
 	/**
 	 * Returns the version the history information is associated with.
@@ -65,10 +65,10 @@ public interface IHistoryInfo {
 	List<ESPrimaryVersionSpec> getMergedToSpecs();
 
 	/**
-	 * Returns the {@link ILogMessage} that was specified when a commit succeeded.
+	 * Returns the {@link ESLogMessage} that was specified when a commit succeeded.
 	 * 
 	 * @return the log message that is associated with this history information
 	 */
-	ILogMessage getLogMessage();
+	ESLogMessage getLogMessage();
 
 }

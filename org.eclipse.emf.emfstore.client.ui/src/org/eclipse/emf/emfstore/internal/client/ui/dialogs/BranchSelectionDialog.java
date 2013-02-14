@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -46,7 +46,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	/**
 	 * Access for subclasses.
 	 */
-	private final java.util.List<IBranchInfo> branches;
+	private final java.util.List<ESBranchInfo> branches;
 
 	/**
 	 * Access for subclasses.
@@ -73,7 +73,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * @param branches
 	 *            list of branches
 	 */
-	public BranchSelectionDialog(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<IBranchInfo> branches) {
+	public BranchSelectionDialog(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<ESBranchInfo> branches) {
 		super(parentShell);
 		this.baseVersion = baseVersion;
 		this.branches = branches;
@@ -204,7 +204,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * 
 	 * @return the branches
 	 */
-	protected java.util.List<IBranchInfo> getBranches() {
+	protected java.util.List<ESBranchInfo> getBranches() {
 		return branches;
 	}
 
@@ -253,7 +253,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 * @param branches
 		 *            list of branches
 		 */
-		public CheckoutSelection(Shell parentShell, List<IBranchInfo> branches) {
+		public CheckoutSelection(Shell parentShell, List<ESBranchInfo> branches) {
 			super(parentShell, null, branches);
 		}
 
@@ -288,7 +288,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 * @param branches
 		 *            list of branches
 		 */
-		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<IBranchInfo> branches) {
+		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<ESBranchInfo> branches) {
 			super(parentShell, baseVersion, branches);
 		}
 

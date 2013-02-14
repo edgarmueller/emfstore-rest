@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUICo
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -59,9 +59,9 @@ public class UIUpdateProjectToVersionController extends
 			projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
 		try {
-			List<IHistoryInfo> historyInfo = projectSpace.getHistoryInfos(query, new NullProgressMonitor());
+			List<ESHistoryInfo> historyInfo = projectSpace.getHistoryInfos(query, new NullProgressMonitor());
 			// filter base version
-			Iterator<IHistoryInfo> iter = historyInfo.iterator();
+			Iterator<ESHistoryInfo> iter = historyInfo.iterator();
 			while (iter.hasNext()) {
 				if (projectSpace.getBaseVersion().equals(iter.next().getPrimarySpec())) {
 					iter.remove();

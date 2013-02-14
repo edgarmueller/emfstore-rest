@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * Notifies the UI that a list of changes will be automatically merged with the current model state.
@@ -39,7 +39,7 @@ public interface ESUpdateObserver extends IObserver {
 	 *            about progress
 	 * @return false if the observer wants to cancel the update
 	 */
-	boolean inspectChanges(ESLocalProject project, List<IChangePackage> changePackages, IProgressMonitor monitor);
+	boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor);
 
 	/**
 	 * Called after the changes have been applied to the project and the update is completed.

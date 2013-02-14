@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client;
 
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ISessionId;
+import org.eclipse.emf.emfstore.server.model.ESSessionId;
 
 /**
  * User session for a given {@link ESServer}. Can be used with multiple projects.
@@ -48,7 +48,7 @@ public interface ESUsersession {
 	String getPassword();
 
 	/**
-	 * Checks whether the user session has a {@link ISessionId}.
+	 * Checks whether the user session has a {@link ESSessionId}.
 	 * 
 	 * @return true, if session is logged in, false otherwise
 	 */
@@ -56,7 +56,7 @@ public interface ESUsersession {
 	boolean isLoggedIn();
 
 	/**
-	 * Relogins into the server using the same credentials in order to update the {@link ISessionId}.
+	 * Relogins into the server using the same credentials in order to update the {@link ESSessionId}.
 	 * 
 	 * @throws EMFStoreException in case renewal of the session failed
 	 */
@@ -75,5 +75,5 @@ public interface ESUsersession {
 	 * 
 	 * @return the current session id
 	 */
-	ISessionId getSessionId();
+	ESSessionId getSessionId();
 }

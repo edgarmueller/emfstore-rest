@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -43,7 +43,7 @@ public interface IUpdateCallback {
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
-	boolean inspectChanges(ESLocalProject project, List<? extends IChangePackage> changes,
+	boolean inspectChanges(ESLocalProject project, List<? extends ESChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -85,7 +85,7 @@ public interface IUpdateCallback {
 	 * {@link IUpdateCallback#inspectChanges(ProjectSpace, List)} to true.
 	 */
 	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
-		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends IChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends ESChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}

@@ -44,7 +44,7 @@ public interface ESHistoryQuery {
 	void setSource(ESPrimaryVersionSpec versionSpec);
 
 	/**
-	 * Determines whether {@link org.eclipse.emf.emfstore.server.model.IChangePackage}s
+	 * Determines whether {@link org.eclipse.emf.emfstore.server.model.ESChangePackage}s
 	 * are included in the query.
 	 * 
 	 * @param includeChangePackages
@@ -53,7 +53,7 @@ public interface ESHistoryQuery {
 	void setIncludeChangePackages(boolean includeChangePackages);
 
 	/**
-	 * Whether {@link org.eclipse.emf.emfstore.server.model.IChangePackage}s are included in the query.
+	 * Whether {@link org.eclipse.emf.emfstore.server.model.ESChangePackage}s are included in the query.
 	 * 
 	 * @return {@code true}, if change packages are included in the query, {@code false} otherwise
 	 */

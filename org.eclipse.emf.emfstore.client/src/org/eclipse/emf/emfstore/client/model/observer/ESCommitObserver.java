@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client.model.observer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -33,13 +33,13 @@ public interface ESCommitObserver extends IObserver {
 	 * @param project
 	 *            the project the commit occurs on
 	 * @param changePackage
-	 *            the {@link IChangePackage}
+	 *            the {@link ESChangePackage}
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
 	 * @return true if the changes have been confirmed, false - otherwise.
 	 */
-	boolean inspectChanges(ESLocalProject project, IChangePackage changePackage, IProgressMonitor monitor);
+	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor);
 
 	/**
 	 * Called after the commit is completed.
