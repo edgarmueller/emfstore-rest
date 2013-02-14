@@ -21,7 +21,7 @@ public class Activator extends AbstractUIPlugin {
 	/**
 	 * The plugin id.
 	 */
-	public static final String PLUGIN_ID = "org.unicase.emfstore.branding";
+	public static final String PLUGIN_ID = "org.eclipse.emf.emfstore.branding";
 
 	// The shared instance
 	private static Activator plugin;
