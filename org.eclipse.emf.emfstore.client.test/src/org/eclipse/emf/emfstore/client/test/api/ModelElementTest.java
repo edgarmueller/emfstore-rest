@@ -10,12 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ConcurrentModificationException;
 import java.util.Set;
 
@@ -29,7 +23,6 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.junit.Test;
 
 /**
  * ModelElementTest.
@@ -352,4 +345,78 @@ public class ModelElementTest {
 		// assertFalse(localProject.contains(player2));
 	}
 
+	@Test
+	public void testMultiReferenceRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.execute();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(false);
+			}
+		}.execute();
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.execute();
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
+
+	@Test
+	public void testMultiReferenceDeleteRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		final int numDeletes = 10;
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.execute();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(false);
+			}
+		}.execute();
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numDeletes; i++)
+					tournament.getReceivesTrophy().remove(i);
+			}
+		}.execute();
+
+		assertEquals(numTrophies - numDeletes, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.execute();
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
 }
