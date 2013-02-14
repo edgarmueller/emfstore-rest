@@ -141,7 +141,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ESLocalProject projectSpace,
-		final List<? extends ESChangePackage> changePackages, final IModelElementIdToEObjectMapping idToEObjectMapping) {
+		final List<ESChangePackage> changePackages, final IModelElementIdToEObjectMapping idToEObjectMapping) {
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				@SuppressWarnings("unchecked")

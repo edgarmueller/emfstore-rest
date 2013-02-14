@@ -10,6 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ConcurrentModificationException;
 import java.util.Set;
 
@@ -28,6 +34,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.junit.Test;
 
 /**
  * ModelElementTest.

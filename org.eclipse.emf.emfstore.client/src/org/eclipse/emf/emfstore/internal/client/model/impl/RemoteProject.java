@@ -84,20 +84,24 @@ public class RemoteProject implements ESRemoteProject {
 		this.projectInfo = projectInfo;
 	}
 
-	public ProjectInfo getProjectInfo() {
-		return projectInfo;
-	}
-
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getGlobalProjectId()
+	 */
 	public ESGlobalProjectId getGlobalProjectId() {
 		return projectInfo.getProjectId();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getProjectName()
+	 */
 	public String getProjectName() {
 		return projectInfo.getName();
-	}
-
-	public String getProjectDescription() {
-		return projectInfo.getDescription();
 	}
 
 	/**
@@ -162,8 +166,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#resolveVersionSpec(org.eclipse.emf.emfstore.client.ESUsersession,
-	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(ESUsersession session, final ESVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
@@ -284,8 +287,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
-	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ProjectSpace checkout(ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException {

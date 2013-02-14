@@ -69,7 +69,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	private static final String CIPHER_ALGORITHM = "RSA";
 
 	/**
-	 * Certificate Alias for devevelopment test certificate.
+	 * Certificate Alias for development test certificate.
 	 */
 	public static final String DEFAULT_CERTIFICATE = "emfstore test certificate (do not use in production!)"; // "EMFStore Test Certificate (DO NOT USE IN PRODUCTION!)";
 
@@ -196,7 +196,9 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String, java.lang.String)
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
+	 *      java.lang.String)
 	 */
 	public void addCertificate(String alias, String path) throws InvalidCertificateException, CertificateStoreException {
 		FileInputStream fileInputStream = null;
@@ -222,7 +224,9 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String, java.io.InputStream)
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
+	 *      java.io.InputStream)
 	 */
 	public void addCertificate(String alias, InputStream certificate) throws InvalidCertificateException,
 		CertificateStoreException {
@@ -372,17 +376,16 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * Encrypts a password.
 	 * 
 	 * @param password
-	 *            String
-	 * @param serverInfo
-	 *            ServerInfo
-	 * @return String
+	 *            the password to be encrypted
+	 * @param server
+	 *            the server from which to fetch the public key that is used for encryption
+	 * @return the encrypted password
 	 */
 	public String encrypt(String password, ESServer server) {
 		try {
 			Certificate publicKey = getCertificateForEncryption(server);
 			PublicKey key = publicKey.getPublicKey();
-			byte[] inpBytes;
-			inpBytes = password.getBytes();
+			byte[] inpBytes = password.getBytes();
 			Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 			byte[] encryptededByteAr = cipher.doFinal(inpBytes);
@@ -443,6 +446,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#getDefaultCertificate()
 	 */
 	public String getDefaultCertificate() {
@@ -474,6 +478,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#setDefaultCertificate(java.lang.String)
 	 */
 	public void setDefaultCertificate(String defaultCertificate) {
@@ -505,6 +510,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#certificateExists(java.lang.String)
 	 */
 	public boolean certificateExists(String alias) throws CertificateStoreException {

@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
@@ -19,6 +21,13 @@ import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMa
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
+/**
+ * The actual implementation of an {@link ESChangeConflict} containing
+ * the changes that caused the conflict.
+ * 
+ * @author wesendon
+ * @author emueller
+ */
 public class ChangeConflict implements ESChangeConflict {
 
 	private List<ChangePackage> myChangePackages;

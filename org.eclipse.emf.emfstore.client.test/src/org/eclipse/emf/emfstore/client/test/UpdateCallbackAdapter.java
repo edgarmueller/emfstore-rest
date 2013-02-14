@@ -13,7 +13,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 public class UpdateCallbackAdapter implements IUpdateCallback {
 
-	public boolean inspectChanges(ESLocalProject project, List<? extends ESChangePackage> changes,
+	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 		return true;
 	}

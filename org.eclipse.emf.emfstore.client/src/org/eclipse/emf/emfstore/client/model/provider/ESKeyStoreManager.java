@@ -12,11 +12,15 @@
 package org.eclipse.emf.emfstore.client.model.provider;
 
 import java.io.InputStream;
-import java.security.cert.CertificateFactory;
 
 import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
 import org.eclipse.emf.emfstore.client.exceptions.InvalidCertificateException;
 
+/**
+ * The EMFStore key store manager that is used to managed certificates and their aliases.
+ * 
+ * @author mkoegel
+ */
 public interface ESKeyStoreManager {
 
 	/**
@@ -32,7 +36,7 @@ public interface ESKeyStoreManager {
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
-	public abstract void addCertificate(String alias, String path) throws InvalidCertificateException,
+	void addCertificate(String alias, String path) throws InvalidCertificateException,
 		CertificateStoreException;
 
 	/**
@@ -42,14 +46,14 @@ public interface ESKeyStoreManager {
 	 *            alias for the certificate
 	 * @param certificate
 	 *            inputstream delivering the certificate. Stream is used by
-	 *            {@link CertificateFactory#generateCertificate(InputStream)}.
+	 *            {@link java.security.cert.CertificateFactory#generateCertificate(InputStream)}.
 	 * @throws InvalidCertificateException
 	 *             certificate cannot be found, accessed or identified
 	 * @throws CertificateStoreException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations
 	 */
-	public abstract void addCertificate(String alias, InputStream certificate) throws InvalidCertificateException,
+	void addCertificate(String alias, InputStream certificate) throws InvalidCertificateException,
 		CertificateStoreException;
 
 	/**
@@ -57,7 +61,7 @@ public interface ESKeyStoreManager {
 	 * 
 	 * @return alias
 	 */
-	public abstract String getDefaultCertificate();
+	String getDefaultCertificate();
 
 	/**
 	 * Sets the alias for the default certificate.
@@ -65,17 +69,16 @@ public interface ESKeyStoreManager {
 	 * @param defaultCertificate
 	 *            certificate alias, use null to unset
 	 */
-	public abstract void setDefaultCertificate(String defaultCertificate);
+	void setDefaultCertificate(String defaultCertificate);
 
 	/**
 	 * Checks whether a certificate for a given alias exists.
 	 * 
 	 * @param alias
-	 *            to check
-	 * @return true if exists
-	 * @throws CertificateStoreException
-	 *             in case of failure
+	 *            the alias which needs to be check
+	 * @return {@code true} if a certificate with the given alias exists, {@code false otherwise}
+	 * @throws CertificateStoreException in case of failure
 	 */
-	public abstract boolean certificateExists(String alias) throws CertificateStoreException;
+	boolean certificateExists(String alias) throws CertificateStoreException;
 
 }

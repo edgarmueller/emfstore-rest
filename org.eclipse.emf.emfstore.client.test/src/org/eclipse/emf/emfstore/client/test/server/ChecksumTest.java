@@ -345,7 +345,7 @@ public class ChecksumTest extends CoreServerTest {
 
 	private class MyUpdateCallback implements IUpdateCallback {
 
-		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends ESChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}

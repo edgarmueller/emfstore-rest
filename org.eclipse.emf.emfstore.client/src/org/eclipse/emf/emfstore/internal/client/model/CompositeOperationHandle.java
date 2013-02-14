@@ -11,10 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationRecorder;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -31,7 +28,6 @@ public class CompositeOperationHandle {
 	private boolean isValid;
 	private CompositeOperation compositeOperation;
 	private OperationRecorder operationRecorder;
-	private Set<EObject> removedElements;
 
 	/**
 	 * Default constructor.
@@ -43,8 +39,6 @@ public class CompositeOperationHandle {
 	 */
 	public CompositeOperationHandle(OperationRecorder operationRecorder, CompositeOperation compositeOperation) {
 		this.operationRecorder = operationRecorder;
-		removedElements = new LinkedHashSet<EObject>();
-		removedElements.addAll(operationRecorder.getRemovedElements());
 		this.compositeOperation = compositeOperation;
 		isValid = true;
 	}
@@ -67,7 +61,6 @@ public class CompositeOperationHandle {
 	 */
 	public void abort() throws InvalidHandleException {
 		checkAndCloseHandle();
-		operationRecorder.getRemovedElements().retainAll(removedElements);
 		operationRecorder.abortCompositeOperation();
 		dropAllReferences();
 	}
@@ -75,8 +68,6 @@ public class CompositeOperationHandle {
 	private void dropAllReferences() {
 		compositeOperation = null;
 		operationRecorder = null;
-		removedElements = null;
-
 	}
 
 	private void checkAndCloseHandle() throws InvalidHandleException {

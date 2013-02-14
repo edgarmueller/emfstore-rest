@@ -56,9 +56,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 			// TODO: OTS
 		}
 
-		// FIXME: eContainer call
-		new UICheckoutController(getShell(), view.getProjectSpace().getUsersession().getServerInfo(),
-			remoteProject.getProjectInfo(), versionSpec).execute();
+		new UICheckoutController(getShell(), versionSpec, remoteProject).execute();
 	}
 
 }

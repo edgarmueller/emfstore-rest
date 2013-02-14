@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
@@ -27,7 +26,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
 /**
  * A controller for importing changes which then will be applied upon
- * a given {@link ProjectSpace}.
+ * a given {@link ProjectSpaceBase}.
  * 
  * @author emueller
  * 
@@ -40,7 +39,7 @@ public class ImportChangesController implements IExportImportController {
 	 * Constructor.
 	 * 
 	 * @param projectSpace
-	 *            the {@link ProjectSpace} upon which to apply the changes being imported
+	 *            the {@link ProjectSpaceBase} upon which to apply the changes being imported
 	 */
 	public ImportChangesController(ProjectSpaceBase projectSpace) {
 		this.projectSpace = projectSpace;

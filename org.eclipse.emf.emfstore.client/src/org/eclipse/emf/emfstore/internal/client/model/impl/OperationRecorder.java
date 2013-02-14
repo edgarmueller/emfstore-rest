@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -82,9 +81,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 	private List<AbstractOperation> operations;
 	private List<OperationRecorderListener> observers;
-	private List<EObject> removedElements;
-	private List<ModelElementId> removedElementIds;
-	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
+	private RemovedElementsCache removedElementsCache;
 
 	private NotificationToOperationConverter converter;
 	private NotificationRecorder notificationRecorder;
@@ -115,9 +112,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
-		removedElements = new ArrayList<EObject>();
-		removedElementIds = new ArrayList<ModelElementId>();
-		removedElementsToReferenceSettings = new LinkedHashMap<EObject, List<SettingWithReferencedElement>>();
+		removedElementsCache = new RemovedElementsCache(collection);
 
 		config = new OperationRecorderConfig();
 		converter = new NotificationToOperationConverter(collection);
@@ -153,20 +148,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	/**
-	 * Returns the elements removed during execution of the operations
-	 * that have been recorded by the recorder.
-	 * 
-	 * @return the elements removed during execution of the operations
-	 */
-	public List<EObject> getRemovedElements() {
-		return removedElements;
-	}
-
-	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementAdded(IdEObjectCollection project, EObject modelElement) {
@@ -199,7 +184,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		crossReferences.addAll(ingoingCrossReferences);
 
 		// clean up already existing references when collection already contained the object
-		List<SettingWithReferencedElement> savedSettings = removedElementsToReferenceSettings.get(modelElement);
+		List<SettingWithReferencedElement> savedSettings = removedElementsCache
+			.getRemovedElementToReferenceSetting(modelElement);
 		if (savedSettings != null) {
 			List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
 			for (SettingWithReferencedElement setting : savedSettings) {
@@ -221,7 +207,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		List<AbstractOperation> resultingOperations;
 
 		// check if create element has been deleted during running command, if so do not record a create operation
-		if (commandIsRunning && removedElements.contains(modelElement)) {
+		if (commandIsRunning && removedElementsCache.getRemovedElements().contains(modelElement)) {
 			resultingOperations = new ArrayList<AbstractOperation>(recordedOperations);
 		} else {
 			CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
@@ -453,17 +439,14 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ModelElement)
+	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.common.model.Project,
+	 *      org.eclipse.emf.emfstore.common.model.ModelElement)
 	 */
 	public void modelElementRemoved(IdEObjectCollection project, EObject modelElement) {
 		if (isRecording) {
 			if (!commandIsRunning) {
 				handleElementDelete(modelElement);
 			} else {
-				removedElements.add(modelElement);
-				removedElementIds.add(collection.getDeletedModelElementId(modelElement));
-
 				Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 				allModelElements.add(modelElement);
 				allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
@@ -472,11 +455,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 				List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
 					allModelElements);
 				crossReferences.addAll(ingoingCrossReferences);
-				if (crossReferences.size() != 0) {
-					for (EObject eObject : allModelElements) {
-						removedElementsToReferenceSettings.put(eObject, crossReferences);
-					}
-				}
+
+				removedElementsCache.addRemovedElement(modelElement, allModelElements, crossReferences);
 			}
 		}
 	}
@@ -484,7 +464,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 
@@ -494,8 +474,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		// }
 
 		List<EObject> deletedElements = new ArrayList<EObject>();
-		for (int i = removedElements.size() - 1; i >= 0; i--) {
-			EObject removedElement = removedElements.get(i);
+		for (int i = removedElementsCache.getRemovedElements().size() - 1; i >= 0; i--) {
+			EObject removedElement = removedElementsCache.getRemovedElements().get(i);
 			if (!collection.contains(removedElement)) {
 				if (!deletedElements.contains(removedElement)) {
 					deletedElements.add(0, removedElement);
@@ -518,7 +498,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recordingOptions extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
@@ -528,8 +508,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		operations = modifyOperations(operations, command);
 
 		operationsRecorded(operations);
-		removedElements.clear();
-		removedElementIds.clear();
+		removedElementsCache.clear();
 		operations.clear();
 
 		commandIsRunning = false;
@@ -687,8 +666,8 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (!commandIsRunning) {
 			deleteOperation.setModelElementId(collection.getDeletedModelElementId(deletedElement));
 		} else {
-			deleteOperation.setModelElementId(ModelUtil.clone(removedElementIds.get(removedElements
-				.indexOf(deletedElement))));
+			deleteOperation
+				.setModelElementId(ModelUtil.clone(removedElementsCache.getRemovedElementId(deletedElement)));
 		}
 
 		// sync IDs into Map
@@ -785,7 +764,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      org.eclipse.core.runtime.OperationCanceledException)
 	 */
 	public void commandFailed(Command command, Exception exception) {
@@ -812,7 +791,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
@@ -871,22 +850,19 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public void abortCompositeOperation() {
 		projectSpace.applyOperations(Collections.singletonList(compositeOperation.reverse()), false);
 
-		removedElements.clear();
-		removedElementIds.clear();
+		removedElementsCache.clear();
 		notificationRecorder.stopRecording();
 
 		compositeOperation = null;
 		currentOperationListSize = operations.size();
-		removedElements.clear();
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
-	 *      org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
@@ -945,7 +921,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection)
+	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)
 	 */
 	public void collectionDeleted(IdEObjectCollection collection) {
 		if (emfStoreCommandStack != null) {

@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -28,30 +27,38 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 public interface ICommitCallback {
 
 	/**
-	 * Called when the project space that should be updated is out of date. A
-	 * caller may veto against updating the project space by returning false.
+	 * <p>
+	 * Called when the project that should be updated is out of date.
+	 * </p>
+	 * <p>
+	 * A caller may veto against updating the project space by returning {@code false}.
+	 * </p>
 	 * 
-	 * @param projectSpace
-	 *            the project space being out of date
-	 * @param progressMonitor the currently used {@link IProgressMonitor}
-	 * @return true, if the caller is willing to update the project space, false
-	 *         otherwise
+	 * @param project
+	 *            the project being out of date
+	 * @param monitor
+	 *            the currently used {@link IProgressMonitor}
+	 * @return {@code true}, if the caller is willing to update the project space, {@code false} otherwise
 	 */
-	boolean baseVersionOutOfDate(ESLocalProject project, IProgressMonitor progressMonitor);
+	boolean baseVersionOutOfDate(ESLocalProject project, IProgressMonitor monitor);
 
 	/**
-	 * Called right before the actual commit is performed. Implementors may veto
-	 * against the commit by returning false
+	 * <p>
+	 * Called right before the actual commit is performed.
+	 * </p>
+	 * <p>
+	 * Implementors may veto against the commit by returning {@code false}.
+	 * </p>
 	 * 
-	 * @param projectSpace
-	 *            the project space with the local pending changes
+	 * @param project
+	 *            the project with the local pending changes
 	 * @param changePackage
-	 *            the actual changes
+	 *            the actual changes that are up to be inspected
 	 * @param idToEObjectMapping
 	 *            a mapping from IDs to EObjects and vice versa.<br/>
-	 *            Contains all IDs of model elements involved in the {@link ChangePackage}s
-	 *            as well as those contained by the project in the {@link ProjectSpace}
-	 * @return true, if the commit should continue, false otherwise
+	 *            Contains all IDs of model elements involved in the {@link ESChangePackage}s
+	 *            as well as those contained by the project in the {@link ESLocalProject}
+	 * @return {@code true}, if the commit should continue, {@code false} otherwise
 	 */
 	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
@@ -59,51 +66,54 @@ public interface ICommitCallback {
 	/**
 	 * Called when there are no changes on the given project space.
 	 * 
-	 * @param projectSpace
-	 *            the project space that has no local pending changes
+	 * @param project
+	 *            the project that has no local pending changes
 	 */
-	void noLocalChanges(ESLocalProject projectSpace);
+	void noLocalChanges(ESLocalProject project);
 
 	/**
 	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
 	 * 
-	 * @param projectSpace
-	 *            the {@link ProjectSpace} containing the corrupted project
+	 * @param project
+	 *            the {@link ESLocalProject} containing the corrupted project
 	 * @param versionSpec
-	 *            the version spec containing the correct checksum received from the server
+	 *            the version specifier containing the correct checksum received from the server
 	 * @param monitor
 	 *            an {@link IProgressMonitor} to inform about the progress
 	 * 
-	 * @return whether the commit should be continued, true, if so, false otherwise
+	 * @return whether the commit should be continued, {@code true}, if so, {@code false} otherwise
 	 * 
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
-	 * 
 	 */
-	boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
-	 * Default implementation of a callback interface for commit. Does not veto
-	 * against updating the project space in case it is out of date and returns
-	 * true for {@link #inspectChanges(ProjectSpace, ChangePackage)}, such that
-	 * a commit is always performed.
+	 * <p>
+	 * Default implementation of a callback interface for commit.
+	 * </p>
+	 * 
+	 * <p>
+	 * Does not veto against updating the project in case it is out of date and returns {@code true} for
+	 * {@link #inspectChanges(ESLocalProject, ESChangePackage)}, such that a commit is always performed.
+	 * </p>
 	 */
 	ICommitCallback NOCALLBACK = new ICommitCallback() {
 
-		public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
+		public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 
-		public boolean baseVersionOutOfDate(ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
+		public boolean baseVersionOutOfDate(ESLocalProject project, IProgressMonitor progressMonitor) {
 			return false;
 		}
 
-		public void noLocalChanges(ESLocalProject projectSpace) {
+		public void noLocalChanges(ESLocalProject project) {
 			// do nothing
 		}
 
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) {
 			return true;
 		}

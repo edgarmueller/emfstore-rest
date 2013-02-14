@@ -51,7 +51,9 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSession() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
+			ESLocalProject localProject = remoteProject.checkout(usersession,
+				ESVersionSpec.FACTORY.createHEAD(),
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {
@@ -63,7 +65,9 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgress() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession, new NullProgressMonitor());
+			ESLocalProject localProject = remoteProject.checkout(usersession,
+				ESVersionSpec.FACTORY.createHEAD(),
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (EMFStoreException e) {

@@ -27,6 +27,9 @@ public class SessionManager {
 
 	private AbstractSessionProvider provider;
 
+	/**
+	 * Constructor.
+	 */
 	public SessionManager() {
 		initSessionProvider();
 	}
@@ -101,10 +104,21 @@ public class SessionManager {
 		}
 	}
 
+	/**
+	 * Sets the {@link AbstractSessionProvider} to be used by this session manager.
+	 * 
+	 * @param sessionProvider
+	 *            the session provider to be used
+	 */
 	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
 		provider = sessionProvider;
 	}
 
+	/**
+	 * Returns the {@link AbstractSessionProvider} in use by this session manager.
+	 * 
+	 * @return the session provider in use
+	 */
 	public AbstractSessionProvider getSessionProvider() {
 		return provider;
 	}

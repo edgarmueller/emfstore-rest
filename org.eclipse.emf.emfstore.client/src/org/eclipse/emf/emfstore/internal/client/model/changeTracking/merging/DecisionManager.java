@@ -729,10 +729,20 @@ public class DecisionManager {
 		return theirOperationCount;
 	}
 
+	/**
+	 * Returns the mapping that is used to resolve model elements correctly.
+	 * 
+	 * @return the ID to {@link EObject} mapping
+	 */
 	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return mapping;
 	}
 
+	/**
+	 * Returns the project on which the decision manager is working on.
+	 * 
+	 * @return the project associated with this decision manager
+	 */
 	public Project getProject() {
 		return project;
 	}

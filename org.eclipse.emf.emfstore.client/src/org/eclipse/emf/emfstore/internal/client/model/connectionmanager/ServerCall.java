@@ -141,7 +141,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param server
 	 *            the server info that should be used by this server call
-	 * @return
+	 * @return the server call itself
 	 */
 	public ServerCall<U> setServer(ESServer server) {
 		this.server = server;
@@ -153,7 +153,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param usersession
 	 *            the user session to be used by the server call
-	 * @return
+	 * @return the server call itself
 	 */
 	public ServerCall<U> setUsersession(ESUsersession usersession) {
 		this.usersession = usersession;
@@ -186,6 +186,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            a progress monitor instance that may used during execution
 	 *            of this server call
+	 * @return the server call itself
 	 */
 	public ServerCall<U> setProgressMonitor(IProgressMonitor monitor) {
 		if (monitor == null) {

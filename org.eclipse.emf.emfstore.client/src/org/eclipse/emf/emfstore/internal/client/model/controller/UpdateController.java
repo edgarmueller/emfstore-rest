@@ -125,8 +125,10 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		ConflictDetector conflictDetector = new ConflictDetector();
 
 		// TODO ASYNC review this cancel
+		// TODO casts..
 		if (getProgressMonitor().isCanceled()
-			|| !callback.inspectChanges(getLocalProject(), changes, idToEObjectMapping)) {
+			|| !callback.inspectChanges(getLocalProject(), (List<ESChangePackage>) (List<?>) changes,
+				idToEObjectMapping)) {
 			return getLocalProject().getBaseVersion();
 		}
 		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)

@@ -35,8 +35,10 @@ public interface IConflictResolver {
 	 *            the project at the time were all local changes are already
 	 *            applied and their operations are NOT, in other words the base
 	 *            version plus local operations
+	 * @param changeConflict
+	 *            the {@link ChangeConflict} that needs to be resolved
 	 * @param baseVersion
-	 *            baseVersion of projectspace and sourceversion of changes from
+	 *            baseVersion of project space and source version of changes from
 	 *            server
 	 * @param targetVersion
 	 *            the version to which is updated
@@ -46,7 +48,7 @@ public interface IConflictResolver {
 		PrimaryVersionSpec targetVersion);
 
 	/**
-	 * Get all operations that have been rejected in their changepackages.
+	 * Get all operations that have been rejected in their change packages.
 	 * 
 	 * @return a list of operations
 	 */

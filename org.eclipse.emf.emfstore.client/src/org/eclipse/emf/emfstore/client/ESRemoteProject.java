@@ -38,7 +38,12 @@ public interface ESRemoteProject extends ESProject {
 	ESServer getServer();
 
 	/**
-	 * Checkouts the project in the given version into the local workspace.
+	 * <p>
+	 * Checkouts the project in its HEAD version into the local workspace.
+	 * </p>
+	 * <p>
+	 * The {@link ESUsersession} used for checking out the project will be injected.
+	 * </p>
 	 * 
 	 * @param monitor
 	 *            the progress monitor that is used during checkout in order to indicate progress
@@ -50,34 +55,33 @@ public interface ESRemoteProject extends ESProject {
 	ESLocalProject checkout(IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
+	 * <p>
 	 * Checkouts the project in the given version into the local workspace.
-	 * 
-	 * @param usersession
-	 *            the user session that will be used by the
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to checkout the project
-	 * @param monitor
-	 *            the progress monitor that is used during checkout in order to indicate progress
-	 * 
-	 * @return the checked out project
-	 * 
-	 * @throws EMFStoreException in case an error occurs during checkout
-	 */
-	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
-
-	/**
-	 * Checkouts the project in the given version into the local workspace.
+	 * </p>
+	 * <p>
+	 * The caller must provide the {@link ESUsersession} used for checking out the project, e.g. by specifying the
+	 * session that was lastly used in an {@link ESServer}.
+	 * </p>
+	 * <p>
+	 * The caller also must specify which specific {@link ESVersionSpec} to checkout. If the HEAD version should get
+	 * checked out, the {@link org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory} must be used, which
+	 * can be fetched via {@link ESVersionSpec#FACTORY}.
+	 * </p>
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to checkout the project
 	 * @param versionSpec
-	 *            the version that should be checked out
+	 *            the version that should be checked out.
 	 * @param monitor
-	 *            the progress monitor that is used during checkout in order to indicate progress
+	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
 	 * 
 	 * @return the checked out project
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
+	 * @see ESServer#getLastUsersession()
 	 */
 	ESLocalProject checkout(final ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
@@ -90,15 +94,16 @@ public interface ESRemoteProject extends ESProject {
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to resolve the given
 	 *            {@link ESVersionSpec}
 	 * @param versionSpec
-	 *            the version spec to resolve
+	 *            the version specifier to resolve
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while resolving the version
-	 *            spec
+	 *            specifier
 	 * @return the resolved primary version
 	 * 
 	 * @throws EMFStoreException in case an error occurs while resolving the version
 	 */
-	ESPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
+	ESPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, ESVersionSpec versionSpec,
+		IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**

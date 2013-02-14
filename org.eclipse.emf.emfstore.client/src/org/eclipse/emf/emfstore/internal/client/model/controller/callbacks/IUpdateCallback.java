@@ -15,8 +15,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -33,17 +31,17 @@ public interface IUpdateCallback {
 	/**
 	 * Called right before the changes get applied upon the project space.
 	 * 
-	 * @param projectSpace
-	 *            the {@link ProjectSpace} being updated
+	 * @param project
+	 *            the {@link ESLocalProject} being updated
 	 * @param changes
-	 *            the changes that will get applied upon the project space
+	 *            a list of {@link ESChangePackage}s that will get applied upon the project
 	 * @param idToEObjectMapping
 	 *            a mapping from IDs to EObjects and vice versa. Contains
-	 *            all IDs of model elements involved in the {@link ChangePackage}s
-	 *            as well as those contained by the project in the {@link ProjectSpace}
+	 *            all IDs of model elements involved in the {@link ESChangePackage}s
+	 *            as well as those contained by the project in the {@link ESLocalProject}
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
-	boolean inspectChanges(ESLocalProject project, List<? extends ESChangePackage> changes,
+	boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -54,38 +52,41 @@ public interface IUpdateCallback {
 	/**
 	 * Called when local and remote changes overlap.
 	 * 
-	 * @param changeConflictException
-	 *            the exception that caused the conflict between the local and the remote changes
-	 * @param progressMonitor a progress monitor to report on progress
-	 * @return true, if the conflict has been resolved, false otherwise
+	 * @param changeConflict
+	 *            the {@link ESChangeConflict} containing the changes that led to the conflict
+	 * @param monitor
+	 *            an {@link IProgressMonitor} to report on progress
+	 * @return {@code true}, if the conflict has been resolved, {@code false} otherwise
 	 */
-	boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor);
+	boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor monitor);
 
 	/**
 	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
 	 * 
-	 * @param projectSpace
-	 *            the {@link ProjectSpace} containing the corrupted project
+	 * @param project
+	 *            the {@link ESLocalProject} that is corrupt
 	 * @param versionSpec
-	 *            the version spec containing the correct checksum received from the server
-	 * @param progressMonitor
+	 *            the version specifier containing the correct checksum received from the server
+	 * @param monitor
 	 *            an {@link IProgressMonitor} to report on progress
 	 * 
-	 * @return whether the checksum error has been handled successfully
+	 * @return {@code true}, if the checksum error has been handled successfully, {@code false}
 	 * 
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
-	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
+		IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
-	 * A default implementation of an update callback that does nothing and default
-	 * {@link IUpdateCallback#conflictOccurred(ChangeConflictException)} to false and
-	 * {@link IUpdateCallback#inspectChanges(ProjectSpace, List)} to true.
+	 * A default implementation of an update callback that does nothing and defaults
+	 * {@link IUpdateCallback#conflictOccurred(ESChangeConflict)} to false and
+	 * {@link IUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
 	 */
 	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
-		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends ESChangePackage> changes,
+
+		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
