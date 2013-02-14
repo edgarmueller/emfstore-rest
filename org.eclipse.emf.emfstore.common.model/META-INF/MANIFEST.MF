@@ -17,11 +17,12 @@ Export-Package: org.eclipse.emf.emfstore.common.model,
    org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.model.edit",
- org.eclipse.emf.emfstore.internal.common.model.impl;x-friends:="org.eclipse.emf.emfstore.server.model,org.eclipse.emf.emfstore.client",
+ org.eclipse.emf.emfstore.internal.common.model.impl;x-friends:="org.eclipse.emf.emfstore.server.model,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test",
  org.eclipse.emf.emfstore.internal.common.model.util;
   x-friends:="org.eclipse.emf.emfstore.common.model.edit,
    org.eclipse.emf.emfstore.server,
    org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
-   org.eclipse.emf.emfstore.client.ui"
+   org.eclipse.emf.emfstore.client.ui,
+   org.eclipse.emf.emfstore.client.test"
 
