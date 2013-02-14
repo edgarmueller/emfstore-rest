@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.emf.emfstore.internal.common" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.emf.emfstore.internal.common.model" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common" id="org.eclipse.emf.emfstore.internal.common.resourceoptions" name="Common Resource Save Options "/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common.model" id="modelelementIdGenerator" name="ModelElement IDGenerator"/>
       </appinfo>
       <documentation>
-         Common resource options.
+         Can be used to define an own generator for modelelements in the IdEObjectCollection.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="saveOptions"/>
+            <element ref="idgenerator"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,13 +47,16 @@
       </complexType>
    </element>
 
-   <element name="saveOptions">
+   <element name="idgenerator">
       <complexType>
-         <attribute name="discardDanglingHREFs" type="boolean">
+         <attribute name="class" type="string">
             <annotation>
                <documentation>
-                  Whether to discard dangling HREFs on resource save. By default, false.
+                  
                </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.common.model.ModelElementIdGenerator"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>

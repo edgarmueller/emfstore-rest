@@ -2,23 +2,23 @@
 <!-- Schema file written by PDE -->
 <schema targetNamespace="org.eclipse.emf.emfstore.internal.common.model" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common.model" id="org.eclipse.emf.emfstore.internal.common.model.modelelementidgenerator" name="ModelElementIDGenerator"/>
-      </appInfo>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.common.model" id="serializationOptions" name="Serialization Options"/>
+      </appinfo>
       <documentation>
-         Can be used to define an own generator for modelelements in the IdEObjectCollection.
+         [Enter description of this extension point.]
       </documentation>
    </annotation>
 
    <element name="extension">
       <annotation>
-         <appInfo>
+         <appinfo>
             <meta.element />
-         </appInfo>
+         </appinfo>
       </annotation>
       <complexType>
          <sequence>
-            <element ref="idgenerator"/>
+            <element ref="SerializationOptions"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -39,60 +39,64 @@
                <documentation>
                   
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute translatable="true"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
-   <element name="idgenerator">
+   <element name="SerializationOptions">
       <complexType>
-         <attribute name="class" type="string">
+         <attribute name="HrefCheck" type="boolean">
             <annotation>
                <documentation>
                   
                </documentation>
-               <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.common.model.ModelElementIdGenerator"/>
-               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="SelfContainmentCheck" type="boolean">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="since"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="examples"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter extension point usage example here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="apiinfo"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter API information here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="implementation"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter information about supplied implementation of this extension point.]
       </documentation>

@@ -53,7 +53,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * The extension point id to configure the {@link ModelElementIdGenerator}.
 	 */
-	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementidgenerator";
+	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementIdGenerator";
 
 	/**
 	 * The attribute identifying the class of the {@link ModelElementIdGenerator} extension point.

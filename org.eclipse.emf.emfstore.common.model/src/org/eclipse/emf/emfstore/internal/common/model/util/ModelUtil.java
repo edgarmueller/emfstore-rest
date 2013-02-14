@@ -197,8 +197,7 @@ public final class ModelUtil {
 		res.getContents().add(copy);
 
 		StringWriter stringWriter = new StringWriter(initialSize);
-		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter,
-			"UTF-8");
+		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 
 		try {
 			res.save(uws, getResourceSaveOptions());
@@ -322,8 +321,7 @@ public final class ModelUtil {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new LinkedHashSet<String>();
-			for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.common.model.ignoredatatype",
+			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoreDatatype",
 				true).getExtensionElements()) {
 				try {
 					ignoredDataTypes.add(element.getAttribute("type"));
@@ -459,7 +457,7 @@ public final class ModelUtil {
 
 		if (discardDanglingHREFs == null) {
 			ExtensionPoint extensionPoint = new ExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL
-				+ ".resourceoptions");
+				+ ".resourceOptions");
 			discardDanglingHREFs = extensionPoint.getBoolean("discardDanglingHREFs",
 				OPTION_DISCARD_DANGLING_HREF_DEFAULT);
 		}
@@ -834,8 +832,7 @@ public final class ModelUtil {
 	 *             if there is no well formed or defined model version
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		ExtensionPoint extensionPoint = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.ommon.model.modelversion", true);
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion", true);
 		if (extensionPoint.size() != 1) {
 			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
@@ -1272,7 +1269,7 @@ public final class ModelUtil {
 			singletonIdResolvers = new LinkedHashSet<ESSingletonIdResolver>();
 
 			for (ExtensionElement element : new ExtensionPoint(
-				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
+				"org.eclipse.emf.emfstore.common.model.singletonIdResolver").getExtensionElements()) {
 				try {
 					singletonIdResolvers.add(element.getClass("class", ESSingletonIdResolver.class));
 				} catch (ExtensionPointException e) {
