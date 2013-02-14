@@ -17,9 +17,9 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.Abs
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.SimplePropertyFileVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.VerifierChain;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyException;
+import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
 
 /**
  * Default authentication control factory.
@@ -32,7 +32,7 @@ public class AuthenticationControlFactoryImpl implements AuthenticationControlFa
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory#createAuthenticationControl()
+	 * @see org.eclipse.emf.emfstore.server.AuthenticationControlFactory#createAuthenticationControl()
 	 */
 	public AbstractAuthenticationControl createAuthenticationControl() throws FatalEmfStoreException {
 

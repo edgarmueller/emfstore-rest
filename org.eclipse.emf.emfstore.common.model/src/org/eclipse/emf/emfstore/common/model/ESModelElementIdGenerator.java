@@ -8,25 +8,23 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common.model;
+package org.eclipse.emf.emfstore.common.model;
 
-import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 
 /**
- * Interface for the modelelementidgenerator extension point, identified by this id:
- * {@link org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl#MODELELEMENTID_GENERATOR_EXTENSIONPOINT}.
- * 
+ * Allows clients to return a custom ID for new model elements.
  * 
  * @author Julian Sommerfeldt
- * 
+ * @author mkoegel
  */
-public interface ModelElementIdGenerator {
+public interface ESModelElementIdGenerator {
 
 	/**
-	 * Generates the next {@link ModelElementId} for the {@link IdEObjectCollection}.
+	 * Generates the next {@link ModelElementId} for the {@link ESObjectContainer}.
 	 * 
-	 * @param container The {@link IdEObjectCollection} for which a new {@link ModelElementId} should be created.
-	 * @return The next {@link ModelElementId} for the given {@link IdEObjectCollection}.
+	 * @param container The {@link ESObjectContainer} for which a new {@link ModelElementId} should be created.
+	 * @return The next {@link ModelElementId} for the given {@link ESObjectContainer}.
 	 */
 	ModelElementId generateModelElementId(ESObjectContainer container);
 

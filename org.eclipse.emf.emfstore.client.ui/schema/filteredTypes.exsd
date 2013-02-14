@@ -62,7 +62,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.ui.IEClassFilter"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.ui.ESClassFilter"/>
                </appinfo>
             </annotation>
          </attribute>

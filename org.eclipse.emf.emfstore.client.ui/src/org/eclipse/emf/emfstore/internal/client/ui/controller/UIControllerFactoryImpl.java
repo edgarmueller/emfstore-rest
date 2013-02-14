@@ -6,7 +6,7 @@ import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.ui.UIControllerFactory;
+import org.eclipse.emf.emfstore.client.ui.ESUIControllerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 
-public final class UIControllerFactoryImpl implements UIControllerFactory {
+public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 
 	public static UIControllerFactoryImpl INSTANCE = new UIControllerFactoryImpl();
 

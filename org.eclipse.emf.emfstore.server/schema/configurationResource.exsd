@@ -2,23 +2,23 @@
 <!-- Schema file written by PDE -->
 <schema targetNamespace="org.eclipse.emf.emfstore.internal.server" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="org.eclipse.emf.emfstore.internal.server.computechecksum" name="Compute Checksum on Commit"/>
-      </appInfo>
+      <appinfo>
+         <meta.schema plugin="org.eclipse.emf.emfstore.internal.server" id="configurationResource" name="ConfigurationResources"/>
+      </appinfo>
       <documentation>
-         Whether the server should compute a checksum for the project state when a commit has happened.  If the server does compute a checksum it will be sent back to the client who then can check whether there are any differences between their and the server&apos;s project state.
+         Enables to replace the default property file &apos;es.properties&apos; and keystore file &apos;emfstore.keyStore&apos;.  When used, both files, which are used for replacement, must be named exactly like those being replaced, i.e. &apos;es.properties&apos; and &apos;emfstore.keyStore&apos;.
       </documentation>
    </annotation>
 
    <element name="extension">
       <annotation>
-         <appInfo>
+         <appinfo>
             <meta.element />
-         </appInfo>
+         </appinfo>
       </annotation>
       <complexType>
          <sequence>
-            <element ref="serverConfiguration"/>
+            <element ref="serverConfigurationResources"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -39,57 +39,75 @@
                <documentation>
                   
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute translatable="true"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
-   <element name="serverConfiguration">
+   <element name="serverConfigurationResources">
+      <annotation>
+         <documentation>
+            Provide a customised &apos;es.properties&apos;, and a keystore file with the name &apos;emfstoreServer.keystore&apos;
+         </documentation>
+      </annotation>
       <complexType>
-         <attribute name="shouldComputeChecksumOnCommit" type="boolean" use="required">
+         <attribute name="es.properties" type="string">
             <annotation>
                <documentation>
-                  Whether the server should compute a checksum for the project state when a commit has happened.  If the server does compute a checksum it will be sent back to the client who then can check whether there are any differences between their and the server&apos;s project state.
+                  
                </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="emfstoreServer.keystore" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="since"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="examples"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter extension point usage example here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="apiinfo"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter API information here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="implementation"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          [Enter information about supplied implementation of this extension point.]
       </documentation>

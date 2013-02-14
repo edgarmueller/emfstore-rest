@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EClass;
  * 
  * @author emueller
  */
-public interface IEClassFilter {
+public interface ESClassFilter {
 
 	/**
 	 * The {@link EClass}es that are considered as filtered.

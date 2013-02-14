@@ -23,7 +23,6 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactoryImpl;
 import org.eclipse.emf.emfstore.internal.server.core.MethodInvocation;
 import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
@@ -42,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
+import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
 
 /**
  * A simple implementation of Authentication and Authorization Control.
@@ -106,8 +106,8 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	}
 
 	private AuthenticationControlFactory getAuthenticationFactory() {
-		for (ExtensionElement e : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.server.authenticationfactory").getExtensionElements()) {
+		for (ExtensionElement e : new ExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
+			.getExtensionElements()) {
 			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
 			if (factory != null) {
 				return factory;

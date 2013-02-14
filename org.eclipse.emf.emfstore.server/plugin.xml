@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension-point id="org.eclipse.emf.emfstore.server.authenticationfactory" name="Authentication Factory" schema="schema/org.eclipse.emf.emfstore.server.authenticationfactory.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.server.locationprovider" name="Location Provider" schema="schema/org.eclipse.emf.emfstore.server.locationprovider.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.server.configurationresource" name="Server Configuration Resources" schema="schema/org.eclipse.emf.emfstore.server.configurationresource.exsd"/>
-   <extension-point id="org.eclipse.emf.emfstore.server.computechecksum" name="Compute Checksum on Commit" schema="schema/org.eclipse.emf.emfstore.server.computechecksum.exsd"/>
+   <extension-point id="authenticationFactory" name="Authentication Factory" schema="schema/authenticationFactory.exsd"/>
+   <extension-point id="locationProvider" name="Location Provider" schema="schema/locationProvider.exsd"/>
+   <extension-point id="configurationResource" name="Server Configuration Resources" schema="schema/configurationResource.exsd"/>
+   <extension-point id="computeChecksum" name="Compute Checksum on Commit" schema="schema/computeChecksum.exsd"/>
    <extension
          id="application"
          name="EMFStore server"

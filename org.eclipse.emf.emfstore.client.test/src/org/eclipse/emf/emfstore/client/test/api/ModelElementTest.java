@@ -10,16 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ConcurrentModificationException;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.command.MoveCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.emfstore.bowling.BowlingPackage;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
@@ -417,6 +416,93 @@ public class ModelElementTest {
 		}.run(false);
 
 		assertEquals(numTrophies - numDeletes, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.run(false);
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
+
+	@Test
+	public void testMultiReferenceRemoveRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		final int numDeletes = 10;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(false);
+			}
+		}.run(false);
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(tournament);
+		for (int i = 0; i < numDeletes; i++)
+
+			domain.getCommandStack().execute(
+				RemoveCommand.create(domain,
+					tournament, BowlingPackage.eINSTANCE.getTournament_ReceivesTrophy(), Boolean.FALSE));
+
+		assertEquals(numTrophies - numDeletes, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.run(false);
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
+
+	@Test
+	public void testMultiReferenceMoveRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		final int numDeletes = 10;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(Boolean.FALSE);
+			}
+		}.run(false);
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(tournament);
+		for (int i = 10; i < numDeletes; i++)
+
+			domain.getCommandStack().execute(
+				MoveCommand.create(domain,
+					tournament, BowlingPackage.eINSTANCE.getTournament_ReceivesTrophy(), Boolean.FALSE,
+					i - 1));
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
 
 		new EMFStoreCommand() {
 			@Override

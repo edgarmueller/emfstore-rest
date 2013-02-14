@@ -35,10 +35,10 @@ import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdGenerator;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
@@ -51,12 +51,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	IModelElementIdToEObjectMapping {
 
 	/**
-	 * The extension point id to configure the {@link ModelElementIdGenerator}.
+	 * The extension point id to configure the {@link ESModelElementIdGenerator}.
 	 */
 	public static final String MODELELEMENTID_GENERATOR_EXTENSIONPOINT = "org.eclipse.emf.emfstore.common.model.modelelementIdGenerator";
 
 	/**
-	 * The attribute identifying the class of the {@link ModelElementIdGenerator} extension point.
+	 * The attribute identifying the class of the {@link ESModelElementIdGenerator} extension point.
 	 */
 	public static final String MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE = "class";
 
@@ -73,9 +73,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	private boolean cachesInitialized;
 
 	/**
-	 * A {@link ModelElementIdGenerator} for other plugins to register a special ID generation.
+	 * A {@link ESModelElementIdGenerator} for other plugins to register a special ID generation.
 	 */
-	private ModelElementIdGenerator modelElementIdGenerator;
+	private ESModelElementIdGenerator modelElementIdGenerator;
 
 	/**
 	 * Constructor.
@@ -90,7 +90,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,
-				ModelElementIdGenerator.class);
+				ESModelElementIdGenerator.class);
 		}
 	}
 

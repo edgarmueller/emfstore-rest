@@ -17,7 +17,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.ui.IEClassFilter;
+import org.eclipse.emf.emfstore.client.ui.ESClassFilter;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
@@ -57,7 +57,7 @@ public final class EClassFilter {
 		}
 
 		for (ExtensionElement element : extensionPoint.getExtensionElements()) {
-			IEClassFilter filter = element.getClass("filteredTypes", IEClassFilter.class);
+			ESClassFilter filter = element.getClass("filteredTypes", ESClassFilter.class);
 
 			if (filter != null) {
 				filteredEClasses.addAll(filter.getFilteredEClasses());
