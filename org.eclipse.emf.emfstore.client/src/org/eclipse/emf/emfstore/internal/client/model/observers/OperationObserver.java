@@ -14,23 +14,25 @@ import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
- * Operation listeners are added to a project space and informed whenever an operation is executed of undone.
+ * Operation observers are added to a project space and informed whenever an operation is executed or undone.
  * 
  * @author hodaie
  */
 public interface OperationObserver extends IObserver {
 
 	/**
-	 * Operation is executed.
+	 * Called when an {@link AbstractOperation} has been executed.
 	 * 
-	 * @param operation operation
+	 * @param operation
+	 *            the executed operation
 	 */
 	void operationExecuted(AbstractOperation operation);
 
 	/**
-	 * operation undone.
+	 * Called when an {@link AbstractOperation} has been reversed.
 	 * 
-	 * @param operation operation
+	 * @param reversedOperation
+	 *            the reversed operation that has been executed
 	 */
-	void operationUnDone(AbstractOperation operation);
+	void operationUnDone(AbstractOperation reversedOperation);
 }
