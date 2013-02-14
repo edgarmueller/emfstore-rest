@@ -17,13 +17,13 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 
 /**
- * The model element query is a specialization of the {@link IRangeQuery}, which allows to additionally
+ * The model element query is a specialization of the {@link ESRangeQuery}, which allows to additionally
  * alter the results produced by the range query on selected elements.
  * 
  * @author Edgar
  * 
  */
-public interface IModelElementQuery extends IRangeQuery {
+public interface ESModelElementQuery extends ESRangeQuery {
 
 	/**
 	 * Returns all model element IDs this query is filtering for.

@@ -170,7 +170,7 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ESHistoryQuery.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec)
 	 * @generated NOT
 	 */
 	public void setSource(IPrimaryVersionSpec newSource) {

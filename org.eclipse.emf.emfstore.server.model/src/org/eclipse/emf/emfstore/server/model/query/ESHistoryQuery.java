@@ -21,12 +21,12 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author emueller
  * @author wesendom
  */
-public interface IHistoryQuery {
+public interface ESHistoryQuery {
 
 	/**
 	 * Factory for creating history queries.
 	 */
-	IHistoryQueryFactory FACTORY = HistoryQueryFactoryImpl.INSTANCE;
+	ESHistoryQueryFactory FACTORY = HistoryQueryFactoryImpl.INSTANCE;
 
 	/**
 	 * Returns the {@link IPrimaryVersionSpec} this history query is pointing to.

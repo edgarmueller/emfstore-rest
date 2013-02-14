@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 
@@ -118,7 +118,7 @@ public interface ESRemoteProject extends ESProject {
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
-	 * {@link org.eclipse.emf.emfstore.server.model.query.IHistoryQueryFactory} to generate query objects.
+	 * {@link org.eclipse.emf.emfstore.server.model.query.ESHistoryQueryFactory} to generate query objects.
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
@@ -133,7 +133,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the history information
 	 */
-	List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, IHistoryQuery query, IProgressMonitor monitor)
+	List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, ESHistoryQuery query, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**

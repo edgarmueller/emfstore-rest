@@ -24,8 +24,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.query.IRangeQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
@@ -167,7 +167,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoOnlyTrunk() {
 		try {
-			IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;
@@ -179,7 +179,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			assertEquals(0, localProject.getBaseVersion().getIdentifier());
 			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			assertEquals(1, localProject.getBaseVersion().getIdentifier());
-			infos = localProject.getHistoryInfos(IHistoryQuery.FACTORY.rangeQuery(head, 1, 1, true, true, true, true),
+			infos = localProject.getHistoryInfos(ESHistoryQuery.FACTORY.rangeQuery(head, 1, 1, true, true, true, true),
 				monitor);
 			assertEquals(2, infos.size());
 			// TODO assert infos
@@ -192,7 +192,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoBranch() {
 		try {
-			IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;

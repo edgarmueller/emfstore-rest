@@ -12,12 +12,12 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.model.query.IModelElementQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Query</b></em>'.
  * 
- * @extends IModelElementQuery
+ * @extends ESModelElementQuery
  *          <!--
  *          end-user-doc -->
  * 
@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.query.IModelElementQuery;
  * @model
  * @generated
  */
-public interface ModelElementQuery extends RangeQuery, IModelElementQuery {
+public interface ModelElementQuery extends RangeQuery, ESModelElementQuery {
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment
 	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}. <!--

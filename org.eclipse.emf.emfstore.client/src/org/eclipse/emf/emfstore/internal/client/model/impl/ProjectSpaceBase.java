@@ -105,7 +105,7 @@ import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
@@ -458,10 +458,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(IHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
+	public List<IHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException {
 		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
 	}
 

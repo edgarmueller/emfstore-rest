@@ -11,7 +11,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
@@ -130,7 +130,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		;
 		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(
 			usersession,
-			IHistoryQuery.FACTORY
+			ESHistoryQuery.FACTORY
 				.pathQuery(remoteProject.getHeadVersion(monitor),
 					remoteProject.getHeadVersion(monitor), true, true), monitor);
 		assertEquals(1, historyInfos.size());
@@ -140,7 +140,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testGetHistoryInfos() throws EMFStoreException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
-		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(IHistoryQuery.FACTORY.pathQuery(
+		List<? extends IHistoryInfo> historyInfos = remoteProject.getHistoryInfos(ESHistoryQuery.FACTORY.pathQuery(
 			remoteProject.getHeadVersion(monitor),
 			remoteProject.getHeadVersion(monitor), true, true), monitor);
 		assertEquals(1, historyInfos.size());

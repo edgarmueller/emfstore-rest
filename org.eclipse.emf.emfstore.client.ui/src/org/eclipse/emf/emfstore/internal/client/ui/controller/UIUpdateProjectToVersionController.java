@@ -26,8 +26,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.query.IRangeQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
@@ -55,7 +55,7 @@ public class UIUpdateProjectToVersionController extends
 	@Override
 	public IPrimaryVersionSpec doRun(IProgressMonitor monitor)
 		throws EMFStoreException {
-		IRangeQuery query = IHistoryQuery.FACTORY.rangeQuery(
+		ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(
 			projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
 		try {

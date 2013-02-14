@@ -52,7 +52,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
@@ -180,10 +180,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.IHistoryQuery,
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(final IHistoryQuery query, IProgressMonitor monitor)
+	public List<IHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
 		throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
@@ -199,9 +199,9 @@ public class RemoteProject implements ESRemoteProject {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.ESUsersession,
-	 *      org.eclipse.emf.emfstore.server.model.query.IHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, final IHistoryQuery query,
+	public List<IHistoryInfo> getHistoryInfos(ESUsersession usersession, final ESHistoryQuery query,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override

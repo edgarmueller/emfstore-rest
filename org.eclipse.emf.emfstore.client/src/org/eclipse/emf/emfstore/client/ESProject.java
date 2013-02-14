@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
@@ -109,11 +109,11 @@ public interface ESProject {
 	/**
 	 * <p>
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
-	 * {@link org.eclipse.emf.emfstore.server.model.query.IHistoryQueryFactory} to generate query objects.
+	 * {@link org.eclipse.emf.emfstore.server.model.query.ESHistoryQueryFactory} to generate query objects.
 	 * </p>
 	 * 
 	 * @param query
-	 *            the {@link IHistoryQuery} to be performed in order to fetch the history information
+	 *            the {@link ESHistoryQuery} to be performed in order to fetch the history information
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while fetching the history
 	 *            information
@@ -122,7 +122,7 @@ public interface ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while retrieving the history information
 	 */
-	List<IHistoryInfo> getHistoryInfos(IHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
+	List<IHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * <p>

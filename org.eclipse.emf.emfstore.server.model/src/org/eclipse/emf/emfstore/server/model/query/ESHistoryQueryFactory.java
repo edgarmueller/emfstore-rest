@@ -24,10 +24,10 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author wesendon
  * @author emueller
  */
-public interface IHistoryQueryFactory extends IEMFStoreFactory {
+public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 
 	/**
-	 * Factory method for creating a {@link IRangeQuery}.
+	 * Factory method for creating a {@link ESRangeQuery}.
 	 * 
 	 * @param source
 	 *            the source version of the query
@@ -45,12 +45,12 @@ public interface IHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packges
 	 * @return query the constructed range query
 	 */
-	IRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower,
+	ESRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower,
 		boolean allVersions, boolean incoming,
 		boolean outgoing, boolean includeChangePackages);
 
 	/**
-	 * Factory method for creating a {@link IPathQuery}, which fetches
+	 * Factory method for creating a {@link ESPathQuery}, which fetches
 	 * all changes from {@code source} to {@code target}.
 	 * 
 	 * @param source
@@ -63,11 +63,11 @@ public interface IHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packges
 	 * @return query the constructed path query
 	 */
-	IPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target,
+	ESPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target,
 		boolean allVersions, boolean includeChangePackages);
 
 	/**
-	 * Factory method for creating a {@link IModelElementQuery}.
+	 * Factory method for creating a {@link ESModelElementQuery}.
 	 * 
 	 * @param source
 	 *            the source version of the query
@@ -83,11 +83,11 @@ public interface IHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	IModelElementQuery modelelementQuery(IPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
+	ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
 		int lower, boolean allVersions, boolean includeChangePackages);
 
 	/**
-	 * Factory method for creating a {@link IModelElementQuery}.
+	 * Factory method for creating a {@link ESModelElementQuery}.
 	 * 
 	 * @param source
 	 *            the source version of the query
@@ -103,6 +103,6 @@ public interface IHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	IModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id,
+	ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id,
 		int upper, int lower, boolean allVersions, boolean includeChangePackages);
 }

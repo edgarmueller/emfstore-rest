@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
 import org.junit.After;
@@ -115,7 +115,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	public void testGetHistoryInfos() throws EMFStoreException {
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		IModelElementId id = localProject.getModelElementId(player);
-		IHistoryQuery query = IHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
+		ESHistoryQuery query = ESHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
 			true);
 		localProject.getHistoryInfos(query, new NullProgressMonitor());
 		fail("Should not be able to getHistoryInfos from an unshared Project!");
