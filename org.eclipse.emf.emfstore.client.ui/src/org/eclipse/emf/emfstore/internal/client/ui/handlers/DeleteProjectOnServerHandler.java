@@ -34,7 +34,6 @@ public class DeleteProjectOnServerHandler extends AbstractEMFStoreHandler {
 	public void handle() {
 		ProjectInfo projectInfoSelection = requireSelection(ProjectInfo.class);
 		ServerInfo serverInfo = (ServerInfo) projectInfoSelection.eContainer();
-		new UIDeleteRemoteProjectController(getShell(), serverInfo, projectInfoSelection.getProjectId(), false)
-			.execute();
+		new UIDeleteRemoteProjectController(getShell(), serverInfo, projectInfoSelection).execute();
 	}
 }
