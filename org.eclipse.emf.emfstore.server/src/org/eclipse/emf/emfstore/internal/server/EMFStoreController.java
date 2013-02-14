@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -267,8 +267,8 @@ public class EMFStoreController implements IApplication, Runnable {
 		if (!targetFile.exists()) {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.server.configurationResource");
-			ExtensionElement element = extensionPoint.getFirst();
+			ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.configurationResource");
+			ESExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {
 

@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.common.model.util;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
  * @author emueller
  * 
  */
-public interface IdEObjectCollectionChangeObserver extends IObserver {
+public interface IdEObjectCollectionChangeObserver extends ESObserver {
 
 	/**
 	 * A notification on a model element of the collection occurred.

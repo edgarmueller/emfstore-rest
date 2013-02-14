@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.ISafeRunnable;
-import org.eclipse.emf.emfstore.common.SafeRunner;
+import org.eclipse.emf.emfstore.common.ESSafeRunnable;
+import org.eclipse.emf.emfstore.common.ESSafeRunner;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.util.EObjectChangeNotifier;
@@ -123,7 +123,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 		isNotifiying = true;
 		for (final IdEObjectCollectionChangeObserver changeObserver : this.observers) {
 
-			ISafeRunnable code = new ISafeRunnable() {
+			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
 					command.run(changeObserver);
@@ -149,7 +149,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 				}
 			};
 
-			SafeRunner.run(code);
+			ESSafeRunner.run(code);
 		}
 		isNotifiying = false;
 		for (IdEObjectCollectionChangeObserver observer : this.observersToRemove) {

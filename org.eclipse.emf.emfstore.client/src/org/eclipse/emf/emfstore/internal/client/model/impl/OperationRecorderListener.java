@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @author mkoegel
  * 
  */
-public interface OperationRecorderListener extends IObserver {
+public interface OperationRecorderListener extends ESObserver {
 
 	/**
 	 * Notify observer about recorded operations.

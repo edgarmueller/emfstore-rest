@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
@@ -80,8 +80,8 @@ public class MergeProjectHandler extends AbstractConflictResolver implements ICo
 	private MergeLabelProvider getLabelProvider() {
 
 		if (labelProvider == null) {
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
-			ExtensionElement element = extensionPoint.getElementWithHighestPriority();
+			ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
+			ESExtensionElement element = extensionPoint.getElementWithHighestPriority();
 
 			if (element == null) {
 				labelProvider = new DefaultMergeLabelProvider();

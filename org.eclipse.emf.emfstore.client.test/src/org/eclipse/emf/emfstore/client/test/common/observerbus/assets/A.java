@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.common.observerbus.assets;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
-public interface A extends IObserver {
+public interface A extends ESObserver {
 
 	public int returnTwo();
 

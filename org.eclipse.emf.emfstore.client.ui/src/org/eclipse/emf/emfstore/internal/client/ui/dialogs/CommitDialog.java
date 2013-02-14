@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
@@ -88,7 +88,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		this.numberOfChanges = changes.getSize();
 		this.trays = new LinkedHashMap<String, CommitDialogTray>();
 
-		for (ExtensionElement element : new ExtensionPoint(
+		for (ESExtensionElement element : new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
 			try {
@@ -96,7 +96,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 				String name = element.getAttribute("name");
 				tray.init(CommitDialog.this);
 				trays.put(name, tray);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				// fail silently
 			}
 		}
@@ -281,7 +281,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// final String notifyUsers = "Notify users";
-		for (ExtensionElement c : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
+		for (ESExtensionElement c : new ESExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
 			.getExtensionElements()) {
 			final String name = c.getAttribute("name");
 			final CommitDialogTray tray = trays.get(name);

@@ -22,9 +22,9 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientVersionProvider;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocationProvider;
@@ -140,9 +140,9 @@ public final class Configuration {
 
 			try {
 				// TODO EXPT PRIO
-				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.client.workspaceLocationProvider")
+				locationProvider = new ESExtensionPoint("org.eclipse.emf.emfstore.client.workspaceLocationProvider")
 					.setThrowException(true).getClass("providerClass", ESLocationProvider.class);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
 				ModelUtil.logInfo(message);
 			}
@@ -188,7 +188,7 @@ public final class Configuration {
 	 * @return server info
 	 */
 	public static List<ServerInfo> getDefaultServerInfos() {
-		ESClientConfigurationProvider provider = new ExtensionPoint(
+		ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ESClientConfigurationProvider.class);
 		if (provider != null) {
@@ -251,7 +251,7 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.clientVersion")
+		ESExtensionElement version = new ESExtensionPoint("org.eclipse.emf.emfstore.client.clientVersion")
 			.setThrowException(false).getFirst();
 
 		if (version != null) {
@@ -400,7 +400,7 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
@@ -428,7 +428,7 @@ public final class Configuration {
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public static boolean isChecksumCheckActive() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -441,9 +441,9 @@ public final class Configuration {
 
 		if (checksumErrorHandler == null) {
 
-			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+			ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
-			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
+			ESExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 
 			if (elementWithHighestPriority != null) {
 				ESChecksumErrorHandler errorHandler = elementWithHighestPriority.getClass("errorHandler",

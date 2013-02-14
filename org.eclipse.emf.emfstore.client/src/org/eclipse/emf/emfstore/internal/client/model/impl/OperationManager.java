@@ -18,8 +18,8 @@ import java.util.List;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.sema
  * @author koegel
  * @author emueller
  */
-public class OperationManager implements OperationRecorderListener, IDisposable, CommandObserver,
+public class OperationManager implements OperationRecorderListener, ESDisposable, CommandObserver,
 	IdEObjectCollectionChangeObserver {
 
 	private OperationRecorder operationRecorder;
@@ -62,14 +62,14 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	private void configureOperationRecorder() {
 		// cut off incoming cross-references by default
 		operationRecorder.getConfig().setCutOffIncomingCrossReferences(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				"cutOffIncomingCrossReferences", true));
 		// usage of commands is not forced by default
 		operationRecorder.getConfig().setForceCommands(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean("forceCommands", false));
+			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean("forceCommands", false));
 		// cut elements are added automatically as regular model elements by default
 		operationRecorder.getConfig().setDenyAddCutElementsToModelElements(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				"denyAddCutElementsToModelElements", false));
 	}
 
@@ -197,7 +197,7 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		operationRecorder.removeOperationRecorderListener(this);

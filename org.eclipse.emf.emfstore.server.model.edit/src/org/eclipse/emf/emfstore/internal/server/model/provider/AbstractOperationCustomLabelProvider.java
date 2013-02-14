@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.provider;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @author Michael Kagel
  * @author emueller
  */
-public abstract class AbstractOperationCustomLabelProvider implements IDisposable {
+public abstract class AbstractOperationCustomLabelProvider implements ESDisposable {
 
 	/**
 	 * Constant for render priority meaning this provider does not want to

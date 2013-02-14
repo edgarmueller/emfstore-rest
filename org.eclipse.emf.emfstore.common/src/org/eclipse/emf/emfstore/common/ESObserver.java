@@ -11,15 +11,9 @@
 package org.eclipse.emf.emfstore.common;
 
 /**
- * Disposable interface for marking classes that need to perform clean up tasks when
- * de-initialized.
+ * Universal observer super interface. To be used with observer bus.
  * 
- * @author emueller
+ * @author wesendon
  */
-public interface IDisposable {
-
-	/**
-	 * Marker method for classes that need to perform clean-up tasks.
-	 */
-	void dispose();
+public interface ESObserver {
 }

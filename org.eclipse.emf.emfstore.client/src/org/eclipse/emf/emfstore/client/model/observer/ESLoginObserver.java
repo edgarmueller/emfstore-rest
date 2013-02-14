@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Observer interface for logging in.
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.common.IObserver;
  * @author pfeifferc
  * @author shterev
  */
-public interface ESLoginObserver extends IObserver {
+public interface ESLoginObserver extends ESObserver {
 
 	/**
 	 * To be called when login is completed.

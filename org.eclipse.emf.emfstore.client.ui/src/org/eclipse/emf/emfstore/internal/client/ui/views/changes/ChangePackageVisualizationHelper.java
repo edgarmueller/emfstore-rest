@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -43,7 +43,7 @@ import org.eclipse.swt.graphics.Image;
  * @author shterev
  * @author emueller
  */
-public class ChangePackageVisualizationHelper implements IDisposable {
+public class ChangePackageVisualizationHelper implements ESDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private IModelElementIdToEObjectMapping idToEObjectMapping;
@@ -245,7 +245,7 @@ public class ChangePackageVisualizationHelper implements IDisposable {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		defaultOperationLabelProvider.dispose();

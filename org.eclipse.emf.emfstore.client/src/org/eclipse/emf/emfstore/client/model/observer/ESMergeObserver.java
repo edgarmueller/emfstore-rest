@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.client.model.observer;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * 
  * @author emueller
  */
-public interface ESMergeObserver extends IObserver {
+public interface ESMergeObserver extends ESObserver {
 
 	/**
 	 * Called before all local changes are reverted.

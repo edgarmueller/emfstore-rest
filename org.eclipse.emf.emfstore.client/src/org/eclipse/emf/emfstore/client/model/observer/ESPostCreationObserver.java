@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Enables the modification of attributes of newly created model elements.<br>
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.common.IObserver;
  * 
  * @author emueller
  */
-public interface ESPostCreationObserver extends IObserver {
+public interface ESPostCreationObserver extends ESObserver {
 
 	/**
 	 * Called when a new model element has been created. Use this method to to

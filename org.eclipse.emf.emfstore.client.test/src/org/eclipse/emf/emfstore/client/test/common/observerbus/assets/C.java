@@ -10,9 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.common.observerbus.assets;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
-public interface C extends IObserver {
+public interface C extends ESObserver {
 
 	String fourtyTwo();
 

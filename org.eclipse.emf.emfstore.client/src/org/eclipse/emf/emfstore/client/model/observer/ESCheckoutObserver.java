@@ -11,14 +11,14 @@
 package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Observer that notifies on new checkouts.
  * 
  * @author wesendon
  */
-public interface ESCheckoutObserver extends IObserver {
+public interface ESCheckoutObserver extends ESObserver {
 
 	/**
 	 * Called on checkout.

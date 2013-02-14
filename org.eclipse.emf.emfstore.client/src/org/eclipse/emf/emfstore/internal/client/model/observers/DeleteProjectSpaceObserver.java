@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
  * 
  * @author Shterev
  */
-public interface DeleteProjectSpaceObserver extends IObserver {
+public interface DeleteProjectSpaceObserver extends ESObserver {
 
 	/**
 	 * Notifies that the project space has been deleted. This is a <b>PRE-DELETE</b> event.

@@ -27,18 +27,18 @@ import org.eclipse.emf.emfstore.internal.common.Activator;
  * @author wesendon
  */
 
-public class ExtensionPoint {
-	private List<ExtensionElement> elements;
+public class ESExtensionPoint {
+	private List<ESExtensionElement> elements;
 	private final String id;
 	private boolean exceptionInsteadOfNull;
-	private Comparator<ExtensionElement> comparator;
+	private Comparator<ESExtensionElement> comparator;
 
 	/**
 	 * Default constructor.
 	 * 
 	 * @param id extension point id
 	 */
-	public ExtensionPoint(String id) {
+	public ESExtensionPoint(String id) {
 		this(id, false);
 	}
 
@@ -46,9 +46,9 @@ public class ExtensionPoint {
 	 * Constructor with option of set the throw exception option.
 	 * 
 	 * @param id extension point id
-	 * @param throwException if true, an {@link ExtensionPointException} is thrown instead of returning null
+	 * @param throwException if true, an {@link ESExtensionPointException} is thrown instead of returning null
 	 */
-	public ExtensionPoint(String id, boolean throwException) {
+	public ESExtensionPoint(String id, boolean throwException) {
 		this.id = id;
 		exceptionInsteadOfNull = throwException;
 		this.comparator = getDefaultComparator();
@@ -59,9 +59,9 @@ public class ExtensionPoint {
 	 * Reloads extensions from the registry.
 	 */
 	public void reload() {
-		this.elements = new ArrayList<ExtensionElement>();
+		this.elements = new ArrayList<ESExtensionElement>();
 		for (IConfigurationElement element : Platform.getExtensionRegistry().getConfigurationElementsFor(this.id)) {
-			elements.add(new ExtensionElement(element, exceptionInsteadOfNull));
+			elements.add(new ESExtensionElement(element, exceptionInsteadOfNull));
 		}
 		Collections.sort(this.elements, this.comparator);
 	}
@@ -72,9 +72,9 @@ public class ExtensionPoint {
 	 * 
 	 * @return comparator
 	 */
-	protected Comparator<ExtensionElement> getDefaultComparator() {
-		return new Comparator<ExtensionElement>() {
-			public int compare(ExtensionElement o1, ExtensionElement o2) {
+	protected Comparator<ESExtensionElement> getDefaultComparator() {
+		return new Comparator<ESExtensionElement>() {
+			public int compare(ESExtensionElement o1, ESExtensionElement o2) {
 				return 0;
 			}
 		};
@@ -92,7 +92,7 @@ public class ExtensionPoint {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getClass(String classAttributeName, Class<T> returnType) {
-		ExtensionElement first = getElementWithHighestPriority();
+		ESExtensionElement first = getElementWithHighestPriority();
 		if (first != null) {
 			return first.getClass(classAttributeName, returnType);
 		}
@@ -121,7 +121,7 @@ public class ExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public Boolean getBoolean(String name, boolean defaultValue) {
-		ExtensionElement element = getElementWithHighestPriority();
+		ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getBoolean(name, defaultValue);
 		}
@@ -138,7 +138,7 @@ public class ExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public Integer getInteger(String name) {
-		ExtensionElement element = getElementWithHighestPriority();
+		ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getInteger(name);
 		}
@@ -154,7 +154,7 @@ public class ExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public String getAttribute(String name) {
-		ExtensionElement element = getElementWithHighestPriority();
+		ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getAttribute(name);
 		}
@@ -165,40 +165,40 @@ public class ExtensionPoint {
 	 * Returns the element with highest priority, by default {@link #getFirst()} is used. This method is intended to be
 	 * overriden in order to modify default behavior.
 	 * 
-	 * @return {@link ExtensionElement}
+	 * @return {@link ESExtensionElement}
 	 */
-	public ExtensionElement getElementWithHighestPriority() {
+	public ESExtensionElement getElementWithHighestPriority() {
 		return getFirst();
 	}
 
 	/**
-	 * Set a custom comparator which defines the order of the {@link ExtensionElement}.
+	 * Set a custom comparator which defines the order of the {@link ESExtensionElement}.
 	 * 
 	 * @param comparator the comparator
 	 */
-	public void setComparator(Comparator<ExtensionElement> comparator) {
+	public void setComparator(Comparator<ESExtensionElement> comparator) {
 		this.comparator = comparator;
 	}
 
 	/**
-	 * Returns the first {@link ExtensionElement} in the list.
+	 * Returns the first {@link ESExtensionElement} in the list.
 	 * 
-	 * @return {@link ExtensionElement}, null or a {@link ExtensionPointException} is thrown, depending on your config (
+	 * @return {@link ESExtensionElement}, null or a {@link ESExtensionPointException} is thrown, depending on your config (
 	 *         {@link #setThrowException(boolean)}
 	 */
-	public ExtensionElement getFirst() {
+	public ESExtensionElement getFirst() {
 		if (elements.size() > 0) {
 			return elements.get(0);
 		}
-		return (ExtensionElement) handleErrorOrNull(exceptionInsteadOfNull, null);
+		return (ESExtensionElement) handleErrorOrNull(exceptionInsteadOfNull, null);
 	}
 
 	/**
 	 * Returns the wrapped extension elements.
 	 * 
-	 * @return list of {@link ExtensionElement}
+	 * @return list of {@link ESExtensionElement}
 	 */
-	public List<ExtensionElement> getExtensionElements() {
+	public List<ESExtensionElement> getExtensionElements() {
 		return Collections.unmodifiableList(elements);
 	}
 
@@ -208,18 +208,18 @@ public class ExtensionPoint {
 	 * @param b true to throw exceptions
 	 * @return returns this, in order to allow chaining method calls
 	 */
-	public ExtensionPoint setThrowException(boolean b) {
+	public ESExtensionPoint setThrowException(boolean b) {
 		this.exceptionInsteadOfNull = b;
 		return this;
 	}
 
 	// public void batch(ForEach expt) {
-	// for (ExtensionElement element : elements) {
+	// for (ESExtensionElement element : elements) {
 	// boolean throwException = element.getThrowException();
 	// element.setThrowException(true);
 	// try {
 	// expt.execute(element);
-	// } catch (ExtensionPointException e) {
+	// } catch (ESExtensionPointException e) {
 	// // do nothing
 	// }
 	// element.setThrowException(throwException);
@@ -232,15 +232,15 @@ public class ExtensionPoint {
 	 * 
 	 * @param useException chosen option
 	 * @param expOrNull exception which will be wrapped, or null, for which an exception can be genereated
-	 * @return null, or a {@link ExtensionPointException} is thrown
+	 * @return null, or a {@link ESExtensionPointException} is thrown
 	 */
 	protected static Object handleErrorOrNull(boolean useException, Exception expOrNull) {
 		if (useException) {
 			if (expOrNull == null) {
-				throw new ExtensionPointException("Value not found.");
+				throw new ESExtensionPointException("Value not found.");
 			}
 			logException(expOrNull);
-			throw new ExtensionPointException(expOrNull);
+			throw new ESExtensionPointException(expOrNull);
 		}
 		return null;
 	}
@@ -251,11 +251,11 @@ public class ExtensionPoint {
 	 * @param e exception
 	 */
 	protected static void logException(Exception e) {
-		Activator.getDefault().logException("An exception occurred while using an ExtensionPoint", e);
+		Activator.getDefault().logException("An exception occurred while using an ESExtensionPoint", e);
 	}
 
 	/**
-	 * Returns the number of {@link ExtensionElement}.
+	 * Returns the number of {@link ESExtensionElement}.
 	 * 
 	 * @return size
 	 */

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
  * 
  * @author pfeifferc
  */
-public interface ESShareObserver extends IObserver {
+public interface ESShareObserver extends ESObserver {
 
 	/**
 	 * Share is executed.

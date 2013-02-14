@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -179,7 +179,7 @@ public class EObjectSerializer extends TypeSerializerImpl {
 		if (serializationOptionsInitialized) {
 			return;
 		}
-		ExtensionElement element = new ExtensionPoint("org.eclipse.emf.emfstore.common.model.serializationOptions")
+		ESExtensionElement element = new ESExtensionPoint("org.eclipse.emf.emfstore.common.model.serializationOptions")
 			.getFirst();
 
 		if (element != null) {

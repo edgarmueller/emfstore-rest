@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author shterev
  * @author emueller
  */
-public interface ESCommitObserver extends IObserver {
+public interface ESCommitObserver extends ESObserver {
 
 	/**
 	 * Called before the commit proceeds. A callback method to initiate the commit dialog and allow the user to confirm

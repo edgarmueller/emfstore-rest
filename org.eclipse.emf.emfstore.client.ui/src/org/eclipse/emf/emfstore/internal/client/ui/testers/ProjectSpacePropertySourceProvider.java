@@ -18,8 +18,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
@@ -97,9 +97,9 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	// TODO: quick fix, duplicate code in IsAutoSaveEnabledTester
 	// TODO: provide extension point registry? discuss
 	private static boolean initExtensionPoint() {
-		ExtensionPoint extensionPoint = new ExtensionPoint(
+		ESExtensionPoint extensionPoint = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.ui.disableSaveControls");
-		ExtensionElement element = extensionPoint.getFirst();
+		ESExtensionElement element = extensionPoint.getFirst();
 
 		if (element == null) {
 			// default

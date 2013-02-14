@@ -31,9 +31,9 @@ import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -127,11 +127,11 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	}
 
 	private void notifyPostWorkspaceInitiators() {
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
+		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(currentWorkspace);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
@@ -232,7 +232,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 
 	private ESEditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
-		return new ExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider").getClass("class",
+		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider").getClass("class",
 			ESEditingDomainProvider.class);
 	}
 
@@ -558,7 +558,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		// TODO: OTS

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @author Michael Kagel
  * @author emueller
  */
-public final class CustomOperationLabelProviderManager implements IDisposable {
+public final class CustomOperationLabelProviderManager implements ESDisposable {
 
 	/**
 	 * Initializes the singleton instance statically.
@@ -77,14 +77,14 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 	}
 
 	// private void collectExtensions() {
-	// for (ExtensionElement element : new ExtensionPoint(
+	// for (ESExtensionElement element : new ESExtensionPoint(
 	// "org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true)
 	// .getExtensionElements()) {
 	// try {
 	// AbstractOperationCustomLabelProvider provider = element.getClass("class",
 	// AbstractOperationCustomLabelProvider.class);
 	// list.add(provider);
-	// } catch (ExtensionPointException e) {
+	// } catch (ESExtensionPointException e) {
 	// ModelUtil.logException("Exception occured while initializing custom label provider extensions!", e);
 	// }
 	// }
@@ -94,7 +94,7 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		list = null;

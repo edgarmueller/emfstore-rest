@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.migration;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
@@ -60,14 +60,14 @@ public final class EMFStoreMigratorUtil {
 	}
 
 	private static EMFStoreMigrator loadMigrator() throws EMFStoreMigrationException {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.migration.migrator", true);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.migration.migrator", true);
 		if (extensionPoint.size() > 1) {
 			ModelUtil
 				.logWarning("Multiple EMFStore Migrators are registered. EMFStore will default to first loadable migrator.");
 		}
 		try {
 			return extensionPoint.getFirst().getClass(MIGRATOR_CLASS, EMFStoreMigrator.class);
-		} catch (ExtensionPointException e) {
+		} catch (ESExtensionPointException e) {
 			String message = "Error while instantiating EMFStore Migrator";
 			ModelUtil.logWarning(message, e);
 		}

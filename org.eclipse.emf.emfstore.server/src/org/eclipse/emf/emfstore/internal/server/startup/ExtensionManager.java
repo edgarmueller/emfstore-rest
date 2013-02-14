@@ -13,9 +13,9 @@ package org.eclipse.emf.emfstore.internal.server.startup;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreInterface;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
@@ -40,11 +40,11 @@ public final class ExtensionManager {
 	 * @param projects list of projects
 	 */
 	public static void notifyStartupListener(EList<ProjectHistory> projects) {
-		for (ExtensionElement element : new ExtensionPoint(
+		for (ESExtensionElement element : new ESExtensionPoint(
 			"org.eclipse.emf.emfstore..server.startuplistener", true).getExtensionElements()) {
 			try {
 				element.getClass("class", StartupListener.class).startedUp(projects);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				// fail silently
 			}
 		}
@@ -59,12 +59,12 @@ public final class ExtensionManager {
 	 */
 	public static void notifyPostStartupListener(ServerSpace serverspace, AccessControlImpl accessControl,
 		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers) {
-		for (ExtensionElement element : new ExtensionPoint(
+		for (ESExtensionElement element : new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.server.poststartuplistener", true).getExtensionElements()) {
 			try {
 				element.getClass("class", PostStartupListener.class).postStartUp(serverspace, accessControl,
 					connectionHandlers);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				// fail silently
 			}
 		}

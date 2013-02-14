@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.common.ISafeRunnable;
-import org.eclipse.emf.emfstore.common.SafeRunner;
+import org.eclipse.emf.emfstore.common.ESSafeRunnable;
+import org.eclipse.emf.emfstore.common.ESSafeRunner;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
@@ -42,7 +42,7 @@ public class EMFStoreCommandNotifier {
 	 */
 	public void notifiyListenersAboutStart(final Command command) {
 		for (final CommandObserver commandObservers : this.commandObservers) {
-			ISafeRunnable code = new ISafeRunnable() {
+			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
 					commandObservers.commandStarted(command);
@@ -53,7 +53,7 @@ public class EMFStoreCommandNotifier {
 				}
 			};
 
-			SafeRunner.run(code);
+			ESSafeRunner.run(code);
 
 		}
 	}
@@ -66,7 +66,7 @@ public class EMFStoreCommandNotifier {
 	 */
 	public void notifiyListenersAboutCommandFailed(final Command command, final Exception exception) {
 		for (final CommandObserver commandObservers : this.commandObservers) {
-			ISafeRunnable code = new ISafeRunnable() {
+			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
 					commandObservers.commandFailed(command, exception);
@@ -77,7 +77,7 @@ public class EMFStoreCommandNotifier {
 				}
 			};
 
-			SafeRunner.run(code);
+			ESSafeRunner.run(code);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class EMFStoreCommandNotifier {
 	 */
 	public void notifiyListenersAboutCommandCompleted(final Command command) {
 		for (final CommandObserver commandObservers : this.commandObservers) {
-			ISafeRunnable code = new ISafeRunnable() {
+			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
 					commandObservers.commandCompleted(command);
@@ -99,7 +99,7 @@ public class EMFStoreCommandNotifier {
 				}
 			};
 
-			SafeRunner.run(code);
+			ESSafeRunner.run(code);
 		}
 	}
 

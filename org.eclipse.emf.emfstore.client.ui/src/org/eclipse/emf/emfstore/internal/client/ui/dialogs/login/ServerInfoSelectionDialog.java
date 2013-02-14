@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -141,7 +141,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	/**
 	 * A label provider for {@link ServerInfo} instances.
 	 */
-	private class ServerInfoLabelProvider extends AdapterFactoryLabelProvider implements IDisposable {
+	private class ServerInfoLabelProvider extends AdapterFactoryLabelProvider implements ESDisposable {
 
 		public ServerInfoLabelProvider() {
 			super(Activator.getAdapterFactory());

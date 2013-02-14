@@ -15,11 +15,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * ProxyObserver, returned by the {@link ObserverBus} when calling {@link ObserverBus#notify(Class))}, normally it has
- * the type of the class extending IObserver in order to call the observer interface with type safety.
+ * the type of the class extending ESObserver in order to call the observer interface with type safety.
  * However, the same proxies can be casted into {@link ObserverCall} in order to access the results by all registered
  * observers.
  * 
@@ -44,7 +44,7 @@ public interface ObserverCall {
 	 */
 	class Result {
 
-		private final IObserver observer;
+		private final ESObserver observer;
 		private final Method method;
 		private final Object result;
 		private final Throwable throwable;
@@ -56,7 +56,7 @@ public interface ObserverCall {
 		 * @param method method
 		 * @param result result
 		 */
-		public Result(IObserver observer, Method method, Object result) {
+		public Result(ESObserver observer, Method method, Object result) {
 			this.observer = observer;
 			this.method = method;
 			this.result = result;
@@ -70,7 +70,7 @@ public interface ObserverCall {
 		 * @param throwable throwable
 		 * @param method method
 		 */
-		public Result(IObserver observer, Method method, Throwable throwable) {
+		public Result(ESObserver observer, Method method, Throwable throwable) {
 			this.observer = observer;
 			this.method = method;
 			this.result = null;
@@ -100,7 +100,7 @@ public interface ObserverCall {
 		 * 
 		 * @return this can't be null
 		 */
-		public IObserver getObserver() {
+		public ESObserver getObserver() {
 			return this.observer;
 		}
 

@@ -10,14 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.observer;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * An observer with a priority. The higher the number the more important is the observer.
  * 
  * @author ovonwesen
  */
-public interface PrioritizedIObserver extends IObserver {
+public interface ESPrioritizedObserver extends ESObserver {
 
 	/**
 	 * Returns the priority of this observer. The higher the number returned

@@ -14,23 +14,23 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 
 /**
- * Utility class to run {@link ISafeRunnable}s.
+ * Utility class to run {@link ESSafeRunnable}s.
  * If {@link CommonUtil#isTesting()} is true, a possible exception is thrown.
  * 
  * @author Julian Sommerfeldt
  * 
  */
-public final class SafeRunner {
+public final class ESSafeRunner {
 
-	private SafeRunner() {
+	private ESSafeRunner() {
 	}
 
 	/**
-	 * Runs a {@link ISafeRunnable} and handles exceptions.
+	 * Runs a {@link ESSafeRunnable} and handles exceptions.
 	 * 
-	 * @param code The {@link ISafeRunnable} to execute.
+	 * @param code The {@link ESSafeRunnable} to execute.
 	 */
-	public static void run(final ISafeRunnable code) {
+	public static void run(final ESSafeRunnable code) {
 		Assert.isNotNull(code);
 		try {
 			code.run();
@@ -45,7 +45,7 @@ public final class SafeRunner {
 		}
 	}
 
-	private static void handleException(final ISafeRunnable code, final Throwable exception) {
+	private static void handleException(final ESSafeRunnable code, final Throwable exception) {
 		code.handleException(exception);
 		if (CommonUtil.isTesting()) {
 			if (exception instanceof RuntimeException) {

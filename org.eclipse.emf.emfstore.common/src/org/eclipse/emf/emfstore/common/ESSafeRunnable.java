@@ -12,12 +12,12 @@ package org.eclipse.emf.emfstore.common;
 
 
 /**
- * Interface for code which should run with the {@link SafeRunner}.
+ * Interface for code which should run with the {@link ESSafeRunner}.
  * 
  * @author Julian Sommerfeldt
  * 
  */
-public interface ISafeRunnable {
+public interface ESSafeRunnable {
 
 	/**
 	 * Contains the code to execute.

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.common.observer.PrioritizedIObserver;
+import org.eclipse.emf.emfstore.internal.common.observer.ESPrioritizedObserver;
 
 /**
  * 
@@ -19,13 +19,13 @@ import org.eclipse.emf.emfstore.internal.common.observer.PrioritizedIObserver;
  * @author ovonwesen
  * 
  */
-public interface MergeLabelProvider extends PrioritizedIObserver {
+public interface MergeLabelProvider extends ESPrioritizedObserver {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.observer.PrioritizedIObserver#getPriority()
+	 * @see org.eclipse.emf.emfstore.internal.common.observer.ESPrioritizedObserver#getPriority()
 	 */
 	int getPriority();
 

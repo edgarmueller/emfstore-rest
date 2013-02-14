@@ -31,9 +31,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * 
  * @author emueller
  */
-public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection, IDisposable,
+public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection, ESDisposable,
 	IModelElementIdToEObjectMapping {
 
 	/**
@@ -86,7 +86,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		allocatedEObjectToIdMap = new LinkedHashMap<EObject, String>();
 		allocatedIdToEObjectMap = new LinkedHashMap<String, EObject>();
 
-		ExtensionElement element = new ExtensionPoint(MODELELEMENTID_GENERATOR_EXTENSIONPOINT)
+		ESExtensionElement element = new ESExtensionPoint(MODELELEMENTID_GENERATOR_EXTENSIONPOINT)
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,

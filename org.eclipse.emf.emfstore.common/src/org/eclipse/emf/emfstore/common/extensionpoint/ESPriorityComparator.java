@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 
 /**
- * A comparator for {@link ExtensionElement}. This allows to sort the elements in the {@link ExtensionPoint} in order to
+ * A comparator for {@link ESExtensionElement}. This allows to sort the elements in the {@link ESExtensionPoint} in order to
  * represent priority of registed elements.
  * 
  * This comparator by default uses a field priority, which is expected to hold an priority number and then sorty by this
@@ -23,7 +23,7 @@ import java.util.Comparator;
  * @author wesendon
  * 
  */
-public class PriorityComparator implements Comparator<ExtensionElement> {
+public class ESPriorityComparator implements Comparator<ESExtensionElement> {
 
 	private final String fieldname;
 	private final boolean desc;
@@ -31,7 +31,7 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	/**
 	 * Default constructor.
 	 */
-	public PriorityComparator() {
+	public ESPriorityComparator() {
 		this("priority", false);
 	}
 
@@ -40,7 +40,7 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	 * 
 	 * @param descending if true, priorities are sorted in descending order, ascending otherwise
 	 */
-	public PriorityComparator(final boolean descending) {
+	public ESPriorityComparator(final boolean descending) {
 		this("priority", descending);
 	}
 
@@ -50,7 +50,7 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	 * @param fieldname the attribute id of the priority field
 	 * @param descending if true, priorities are sorted in descending order, ascending otherwise
 	 */
-	public PriorityComparator(final String fieldname, final boolean descending) {
+	public ESPriorityComparator(final String fieldname, final boolean descending) {
 		this.fieldname = fieldname;
 		this.desc = descending;
 
@@ -59,12 +59,12 @@ public class PriorityComparator implements Comparator<ExtensionElement> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int compare(ExtensionElement element1, ExtensionElement element2) {
+	public int compare(ESExtensionElement element1, ESExtensionElement element2) {
 		try {
 			element1.setThrowException(true);
 			element2.setThrowException(true);
 			return element1.getInteger(this.fieldname).compareTo(element2.getInteger(this.fieldname)) * ((desc) ? -1 : 1);
-		} catch (ExtensionPointException e) {
+		} catch (ESExtensionPointException e) {
 			return 0;
 		}
 	}

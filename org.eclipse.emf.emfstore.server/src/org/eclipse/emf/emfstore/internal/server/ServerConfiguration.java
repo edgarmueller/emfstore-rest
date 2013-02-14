@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
@@ -451,9 +451,9 @@ public final class ServerConfiguration {
 		if (locationProvider == null) {
 			// TODO EXPT PRIO
 			try {
-				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.server.locationProvider", true)
+				locationProvider = new ESExtensionPoint("org.eclipse.emf.emfstore.server.locationProvider", true)
 					.getClass("providerClass", ESLocationProvider.class);
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				String message = "No location provider or error while instantiating location provider, switching to default location!";
 				ModelUtil.logWarning(message);
 			}
@@ -653,10 +653,10 @@ public final class ServerConfiguration {
 	public static boolean isComputeChecksumOnCommitActive() {
 		if (isChecksumComputationOnCommitActive == null) {
 			try {
-				isChecksumComputationOnCommitActive = new ExtensionPoint(
+				isChecksumComputationOnCommitActive = new ESExtensionPoint(
 					"org.eclipse.emf.emfstore.server.computeChecksum", true)
 					.getBoolean("shouldComputeChecksumOnCommit");
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				String message = "Can not determine whether to compute checksums on commit, default is true.";
 				ModelUtil.logWarning(message);
 				isChecksumComputationOnCommitActive = true;

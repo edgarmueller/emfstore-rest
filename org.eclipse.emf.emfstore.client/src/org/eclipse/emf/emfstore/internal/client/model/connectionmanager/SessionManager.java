@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
@@ -124,7 +124,7 @@ public class SessionManager {
 	}
 
 	private void initSessionProvider() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
 			AbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",

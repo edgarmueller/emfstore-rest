@@ -40,9 +40,9 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver;
-import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -120,7 +120,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
-	IDisposable, ESLocalProject {
+	ESDisposable, ESLocalProject {
 
 	private boolean initCompleted;
 	private boolean isTransient;
@@ -147,7 +147,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ExtensionElement extensionElement = new ExtensionPoint("org.eclipse.emf.emfstore.client.runnableChangeContext")
+		ESExtensionElement extensionElement = new ESExtensionPoint("org.eclipse.emf.emfstore.client.runnableChangeContext")
 			.setThrowException(false).getFirst();
 		if (extensionElement != null) {
 			runnableContext = extensionElement.getClass("class", ESRunnableContext.class);
@@ -660,7 +660,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// default
 		boolean useCrossReferenceAdapter = true;
 
-		for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
+		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.inverseCrossReferenceCache")
 			.getExtensionElements()) {
 			useCrossReferenceAdapter &= element.getBoolean("activated");
 		}
@@ -1282,7 +1282,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {

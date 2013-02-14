@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
 import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
@@ -85,7 +85,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	}
 
 	private void loadConfiguration() {
-		ESClientConfigurationProvider provider = new ExtensionPoint(
+		ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ESClientConfigurationProvider.class);
 		if (provider == null) {

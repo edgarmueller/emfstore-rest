@@ -12,12 +12,12 @@ package org.eclipse.emf.emfstore.common.extensionpoint;
 
 
 /**
- * Exception thrown by the {@link ExtensionPoint} wrapper.
+ * Exception thrown by the {@link ESExtensionPoint} wrapper.
  * 
  * @author wesendon
  * 
  */
-public class ExtensionPointException extends RuntimeException {
+public class ESExtensionPointException extends RuntimeException {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class ExtensionPointException extends RuntimeException {
 	 * 
 	 * @param exception causing exception
 	 */
-	public ExtensionPointException(final Exception exception) {
+	public ESExtensionPointException(final Exception exception) {
 		super(exception);
 	}
 
@@ -39,7 +39,7 @@ public class ExtensionPointException extends RuntimeException {
 	 * @param message 
 	 * 			the exception message
 	 */
-	public ExtensionPointException(final String message) {
+	public ESExtensionPointException(final String message) {
 		super(message);
 	}
 }

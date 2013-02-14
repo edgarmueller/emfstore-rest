@@ -11,14 +11,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.observer;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Observes exceptions and tries to handle them.
  * 
  * @author koegel
  */
-public interface ESExceptionObserver extends IObserver {
+public interface ESExceptionObserver extends ESObserver {
 
 	/**
 	 * Handle the exception.

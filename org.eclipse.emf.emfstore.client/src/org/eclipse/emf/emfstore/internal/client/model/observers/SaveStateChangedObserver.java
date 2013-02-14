@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
  * @author mkoegel
  * 
  */
-public interface SaveStateChangedObserver extends IObserver {
+public interface SaveStateChangedObserver extends ESObserver {
 
 	/**
 	 * Notify the listener about a save state change.

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common;
 
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 
 /**
  * Models an object that has a lifecycle.
@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.common.IDisposable;
  * @author emueller
  * 
  */
-public interface IReinitializable extends IDisposable {
+public interface IReinitializable extends ESDisposable {
 
 	/**
 	 * Whether the object has been disposed.

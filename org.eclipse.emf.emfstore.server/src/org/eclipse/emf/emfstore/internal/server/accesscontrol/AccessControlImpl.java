@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
@@ -106,7 +106,7 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	}
 
 	private AuthenticationControlFactory getAuthenticationFactory() {
-		for (ExtensionElement e : new ExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
+		for (ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
 			.getExtensionElements()) {
 			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
 			if (factory != null) {

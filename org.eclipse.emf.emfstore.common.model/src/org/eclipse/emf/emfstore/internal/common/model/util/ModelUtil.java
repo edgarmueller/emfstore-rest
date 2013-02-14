@@ -52,9 +52,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
@@ -321,11 +321,11 @@ public final class ModelUtil {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new LinkedHashSet<String>();
-			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoreDatatype",
+			for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoreDatatype",
 				true).getExtensionElements()) {
 				try {
 					ignoredDataTypes.add(element.getAttribute("type"));
-				} catch (ExtensionPointException e) {
+				} catch (ESExtensionPointException e) {
 				}
 			}
 		}
@@ -456,7 +456,7 @@ public final class ModelUtil {
 	private static boolean isDiscardDanglingHREFs() {
 
 		if (discardDanglingHREFs == null) {
-			ExtensionPoint extensionPoint = new ExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL
+			ESExtensionPoint extensionPoint = new ESExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL
 				+ ".resourceOptions");
 			discardDanglingHREFs = extensionPoint.getBoolean("discardDanglingHREFs",
 				OPTION_DISCARD_DANGLING_HREF_DEFAULT);
@@ -832,7 +832,7 @@ public final class ModelUtil {
 	 *             if there is no well formed or defined model version
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion", true);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion", true);
 		if (extensionPoint.size() != 1) {
 			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
@@ -841,7 +841,7 @@ public final class ModelUtil {
 		}
 		try {
 			return extensionPoint.getFirst().getInteger("versionIdentifier");
-		} catch (ExtensionPointException e) {
+		} catch (ESExtensionPointException e) {
 			throw new MalformedModelVersionException("Version identifier was malformed, it must be an integer.", e);
 		}
 	}
@@ -1268,11 +1268,11 @@ public final class ModelUtil {
 			// collect singleton ID resolvers
 			singletonIdResolvers = new LinkedHashSet<ESSingletonIdResolver>();
 
-			for (ExtensionElement element : new ExtensionPoint(
+			for (ESExtensionElement element : new ESExtensionPoint(
 				"org.eclipse.emf.emfstore.common.model.singletonIdResolver").getExtensionElements()) {
 				try {
 					singletonIdResolvers.add(element.getClass("class", ESSingletonIdResolver.class));
-				} catch (ExtensionPointException e) {
+				} catch (ESExtensionPointException e) {
 					ModelUtil.logWarning("Couldn't instantiate Singleton ID resolver:" + e.getMessage());
 				}
 			}

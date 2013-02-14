@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * @emueller
  * @ovonwesen
  */
-public interface ESUpdateObserver extends IObserver {
+public interface ESUpdateObserver extends ESObserver {
 
 	/**
 	 * Called to notify the observer about the changes that will be merged into the project space.

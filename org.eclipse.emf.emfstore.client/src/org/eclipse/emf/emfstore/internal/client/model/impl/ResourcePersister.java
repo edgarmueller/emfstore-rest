@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
-import org.eclipse.emf.emfstore.common.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  */
 public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, ESCommitObserver,
-	ESUpdateObserver, IDisposable {
+	ESUpdateObserver, ESDisposable {
 
 	private FilterStack filterStack;
 
@@ -353,7 +353,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		listeners = null;

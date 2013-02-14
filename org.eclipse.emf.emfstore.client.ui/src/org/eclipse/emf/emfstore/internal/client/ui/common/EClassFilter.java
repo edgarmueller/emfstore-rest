@@ -18,8 +18,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ui.ESClassFilter;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -50,13 +50,13 @@ public final class EClassFilter {
 
 	private void initFilteredEClasses() {
 
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.filteredTypes");
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.ui.filteredTypes");
 
 		if (extensionPoint.size() == 0) {
 			return;
 		}
 
-		for (ExtensionElement element : extensionPoint.getExtensionElements()) {
+		for (ESExtensionElement element : extensionPoint.getExtensionElements()) {
 			ESClassFilter filter = element.getClass("filteredTypes", ESClassFilter.class);
 
 			if (filter != null) {

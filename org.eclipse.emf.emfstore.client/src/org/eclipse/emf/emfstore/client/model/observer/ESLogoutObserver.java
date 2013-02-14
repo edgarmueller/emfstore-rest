@@ -12,14 +12,14 @@
 package org.eclipse.emf.emfstore.client.model.observer;
 
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Observes a logout of a session.
  * 
  * @author koegel
  */
-public interface ESLogoutObserver extends IObserver {
+public interface ESLogoutObserver extends ESObserver {
 
 	/**
 	 * Called to notify about the completion of a logout of the given usersession.

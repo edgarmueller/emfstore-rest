@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
-import org.eclipse.emf.emfstore.common.IObserver;
+import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * 
  * @author hodaie
  */
-public interface OperationObserver extends IObserver {
+public interface OperationObserver extends ESObserver {
 
 	/**
 	 * Called when an {@link AbstractOperation} has been executed.
@@ -31,8 +31,10 @@ public interface OperationObserver extends IObserver {
 	/**
 	 * Called when an {@link AbstractOperation} has been reversed.
 	 * 
-	 * @param reversedOperation
-	 *            the reversed operation that has been executed
+	 * @param operation
+	 *            the operation that has been reversed.<br/>
+	 *            <b>Note</b>: the given operation is not reserved. If you wish to get
+	 *            the reversed operation, call {@link AbstractOperation#reverse()} on {@code operation}
 	 */
-	void operationUnDone(AbstractOperation reversedOperation);
+	void operationUnDone(AbstractOperation operation);
 }

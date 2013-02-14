@@ -10,21 +10,21 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
-import static org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint.handleErrorOrNull;
+import static org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint.handleErrorOrNull;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
- * This is the companion class to {@link ExtensionPoint}. It wrapps a {@link IConfigurationElement} for convenience
+ * This is the companion class to {@link ESExtensionPoint}. It wrapps a {@link IConfigurationElement} for convenience
  * purposes.
- * As {@link ExtensionPoint} it can be configured to return null or throw an runtime exception
- * {@link ExtensionPointException}
+ * As {@link ESExtensionPoint} it can be configured to return null or throw an runtime exception
+ * {@link ESExtensionPointException}
  * 
  * @author wesendon
  * 
  */
-public class ExtensionElement {
+public class ESExtensionElement {
 
 	private final IConfigurationElement element;
 	private boolean exceptionInsteadOfNull;
@@ -34,7 +34,7 @@ public class ExtensionElement {
 	 * 
 	 * @param element element to be wrapped
 	 */
-	public ExtensionElement(final IConfigurationElement element) {
+	public ESExtensionElement(final IConfigurationElement element) {
 		this(element, false);
 	}
 
@@ -44,7 +44,7 @@ public class ExtensionElement {
 	 * @param element element to be wrapped
 	 * @param throwExceptions if true exceptions are thrown instead of returning null
 	 */
-	public ExtensionElement(final IConfigurationElement element, final boolean throwExceptions) {
+	public ESExtensionElement(final IConfigurationElement element, final boolean throwExceptions) {
 		this.element = element;
 		this.exceptionInsteadOfNull = throwExceptions;
 	}
@@ -53,7 +53,7 @@ public class ExtensionElement {
 	 * Returns the value of the boolean attribute, if existing, or false otherwise.
 	 * 
 	 * @param name attribute id
-	 * @return Boolean or an {@link ExtensionPointException} is thrown
+	 * @return Boolean or an {@link ESExtensionPointException} is thrown
 	 */
 	public Boolean getBoolean(final String name) {
 		return getBoolean(name, false);
@@ -64,7 +64,7 @@ public class ExtensionElement {
 	 * 
 	 * @param name attribute id
 	 * @param defaultValue the default value
-	 * @return Boolean or an {@link ExtensionPointException} is thrown
+	 * @return Boolean or an {@link ESExtensionPointException} is thrown
 	 */
 	public Boolean getBoolean(final String name, final boolean defaultValue) {
 		final String attribute = getAttribute(name);
@@ -78,7 +78,7 @@ public class ExtensionElement {
 	 * Returns an Integer attribute.
 	 * 
 	 * @param name attribute id
-	 * @return Integer, null or an {@link ExtensionPointException} is thrown
+	 * @return Integer, null or an {@link ESExtensionPointException} is thrown
 	 */
 	public Integer getInteger(final String name) {
 		try {
@@ -92,7 +92,7 @@ public class ExtensionElement {
 	 * Returns an attribute as string.
 	 * 
 	 * @param name attribute id
-	 * @return String, null or an {@link ExtensionPointException} is thrown
+	 * @return String, null or an {@link ESExtensionPointException} is thrown
 	 */
 	public String getAttribute(final String name) {
 		final String attribute = this.element.getAttribute(name);
@@ -108,7 +108,7 @@ public class ExtensionElement {
 	 * @param classAttributeName attribute name of the class attribute
 	 * @param returnType expected class type
 	 * @param <T> type of class
-	 * @return Instance, null or a {@link ExtensionPointException} is thrown
+	 * @return Instance, null or a {@link ESExtensionPointException} is thrown
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getClass(final String classAttributeName, final Class<T> returnType) {

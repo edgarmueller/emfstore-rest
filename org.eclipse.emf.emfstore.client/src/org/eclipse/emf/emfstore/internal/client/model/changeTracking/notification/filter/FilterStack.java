@@ -15,9 +15,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -56,12 +56,12 @@ public final class FilterStack implements ESNotificationFilter {
 	}
 
 	private void collectExtensionPoints() {
-		for (ExtensionElement element : new ExtensionPoint(
+		for (ESExtensionElement element : new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.notificationFilter", true)
 			.getExtensionElements()) {
 			try {
 				filterList.add(element.getClass("class", ESNotificationFilter.class));
-			} catch (ExtensionPointException e) {
+			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
