@@ -10,18 +10,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
-import java.util.concurrent.Callable;
+import java.text.MessageFormat;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -29,10 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * UI controller for deleting a project on the server.
  * 
- * TODO REVIEW THIS PIECE OF SHIT
- * 
  * @author emueller
- * 
  */
 public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIController<Void> {
 
@@ -42,16 +38,20 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	private final ESRemoteProject remoteProject;
 
 	/**
+	 * <p>
 	 * Constructor.
+	 * </p>
+	 * <p>
+	 * The {@link ESUsersession} to delete the remote server instance will be injected. If this is not desired use one
+	 * of the other constructors.
+	 * </p>
 	 * 
 	 * @param shell
 	 *            the parent {@link Shell} that should be used during the deletion of the project
 	 * @param serverInfo
 	 *            the server info containing the information about the server the project is hosted on
-	 * @param projectId
-	 *            the {@link ProjectId} of the project to be deleted
-	 * @param deleteFiles
-	 *            whether to delete the physical files on the server
+	 * @param projectInfo
+	 *            the {@link ProjectInfo} that will be used to identify the remote project
 	 */
 	public UIDeleteRemoteProjectController(Shell shell, ServerInfo serverInfo, ProjectInfo projectInfo) {
 		super(shell);
@@ -66,12 +66,10 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * 
 	 * @param shell
 	 *            the parent {@link Shell} that should be used during the deletion of the project
-	 * @param serverInfo
-	 *            the server info containing the information about the server the project is hosted on
-	 * @param projectId
-	 *            the {@link ProjectId} of the project to be deleted
-	 * @param deleteFiles
-	 *            whether to delete the physical files on the server
+	 * @param session
+	 *            the {@link ESUsersession} that should be used to delete the remote server instance
+	 * @param projectInfo
+	 *            the {@link ProjectInfo} that will be used to identify the remote project
 	 */
 	public UIDeleteRemoteProjectController(Shell shell, Usersession session, ProjectInfo projectInfo) {
 		super(shell);
@@ -81,6 +79,16 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		remoteProject = null;
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the parent {@link Shell} that should be used during the deletion of the project
+	 * @param session
+	 *            the {@link ESUsersession} that should be used to delete the remote server instance
+	 * @param remoteProject
+	 *            the {@link ESRemoteProject} that should be deleted
+	 */
 	public UIDeleteRemoteProjectController(Shell shell, ESUsersession session, ESRemoteProject remoteProject) {
 		super(shell);
 		this.serverInfo = null;
@@ -96,83 +104,53 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
 
 		try {
 
 			if (remoteProject != null) {
-				deleteRemoteProject(remoteProject, progressMonitor);
+				deleteRemoteProject(remoteProject, session, monitor);
 				return null;
 			} else {
-				deleteRemoteProject(progressMonitor);
+				deleteRemoteProject(serverInfo, projectInfo, session, monitor);
 				return null;
 			}
 
 		} catch (EMFStoreException e) {
-			MessageDialog.openError(getShell(), "Delete project failed.",
-				"Deletion of project " + projectInfo.getName() + " failed: " + e.getMessage());
+			String msg;
+			if (remoteProject != null) {
+				msg = "Deletion of project " + remoteProject.getProjectName() + " failed: ";
+			} else {
+				msg = "Deletion of project " + projectInfo.getName() + " failed: ";
+			}
+			MessageDialog.openError(getShell(), "Delete project failed.", msg + e.getMessage());
 		}
 
 		return null;
 	}
 
-	private void deleteRemoteProject(IProgressMonitor monitor) throws EMFStoreException {
-
-		Boolean shouldDelete = RunInUI.runWithResult(new Callable<Boolean>() {
-			public Boolean call() throws Exception {
-				// TODO: include project name, use confirm method
-				return MessageDialog.openConfirm(getShell(),
-					"Delete project?",
-					"Are you sure you want to delete?");
+	private void deleteRemoteProject(ESServer server, ProjectInfo projectInfo, ESUsersession session,
+		IProgressMonitor monitor) throws EMFStoreException {
+		if (confirm("Confirmation",
+			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
+			if (session != null) {
+				new RemoteProject(server, projectInfo).delete(session, monitor);
+			} else {
+				new RemoteProject(server, projectInfo).delete(monitor);
 			}
-		});
-
-		if (!shouldDelete) {
-			return;
-		}
-
-		if (session != null) {
-			new RemoteProject(serverInfo, projectInfo).delete(session, monitor);
-		} else {
-			new RemoteProject(serverInfo, projectInfo).delete(monitor);
 		}
 	}
 
-	private void deleteRemoteProject(ESRemoteProject remoteProject, IProgressMonitor monitor) throws EMFStoreException {
-
-		Boolean shouldDelete = RunInUI.runWithResult(new Callable<Boolean>() {
-			public Boolean call() throws Exception {
-				// TODO: include project name, use confirm method
-				return MessageDialog.openConfirm(getShell(),
-					"Confirmation",
-					"Are you sure you want to delete?");
+	private void deleteRemoteProject(ESRemoteProject remoteProject, ESUsersession session, IProgressMonitor monitor)
+		throws EMFStoreException {
+		if (confirm(
+			"Confirmation",
+			MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject.getProjectName()))) {
+			if (session != null) {
+				remoteProject.delete(session, monitor);
+			} else {
+				remoteProject.delete(monitor);
 			}
-		});
-
-		if (!shouldDelete) {
-			return;
-		}
-
-		if (session != null) {
-			remoteProject.delete(session, monitor);
-		} else {
-			remoteProject.delete(monitor);
 		}
 	}
-	// private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
-	// throws EMFStoreException {
-	// if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-	// // TODO: OTS casts + monitor
-	// new RemoteProject(serverInfo, projectInfo).delete(session, new NullProgressMonitor());
-	// }
-	// }
-	//
-	// private void deleteRemoteProject(final ServerInfo serverInfo, final ProjectId projectId, final boolean
-	// deleteFiles,
-	// IProgressMonitor monitor) throws EMFStoreException {
-	// if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
-	// // TODO: OTS casts
-	// new RemoteProject(serverInfo, projectInfo).delete(monitor);
-	// }
-	// }
 }
