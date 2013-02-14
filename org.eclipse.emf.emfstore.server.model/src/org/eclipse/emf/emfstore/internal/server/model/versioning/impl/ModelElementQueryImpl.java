@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
@@ -157,15 +157,15 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 		return super.eIsSet(featureID);
 	}
 
-	public List<IModelElementId> getModelElementIds() {
+	public List<ESModelElementId> getModelElementIds() {
 		return copy(getModelElements());
 	}
 
-	public void addModelElementId(IModelElementId id) {
+	public void addModelElementId(ESModelElementId id) {
 		getModelElements().add((ModelElementId) id);
 	}
 
-	public void removeModelElementId(IModelElementId id) {
+	public void removeModelElementId(ESModelElementId id) {
 		getModelElements().remove(id);
 	}
 

@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>History Info</b></em>'. <!-- end-user-doc -->
@@ -729,15 +729,15 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		return super.eIsSet(featureID);
 	}
 
-	public List<IPrimaryVersionSpec> getNextSpecs() {
+	public List<ESPrimaryVersionSpec> getNextSpecs() {
 		return copy(getNextSpec());
 	}
 
-	public List<IPrimaryVersionSpec> getMergedFromSpecs() {
+	public List<ESPrimaryVersionSpec> getMergedFromSpecs() {
 		return copy(getMergedFrom());
 	}
 
-	public List<IPrimaryVersionSpec> getMergedToSpecs() {
+	public List<ESPrimaryVersionSpec> getMergedToSpecs() {
 		return copy(getMergedTo());
 	}
 

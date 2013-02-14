@@ -110,7 +110,7 @@ public class SessionManager {
 	}
 
 	private void initSessionProvider() {
-		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.sessionprovider");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
 			AbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",

@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -119,7 +119,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	@After
 	public void teardown() throws IOException, SerializationException, EMFStoreException {
 		super.teardown();
-		for (IRemoteProject project : getServerInfo().getRemoteProjects()) {
+		for (ESRemoteProject project : getServerInfo().getRemoteProjects()) {
 			// TODO: monitor
 			project.delete(new NullProgressMonitor());
 		}
@@ -239,7 +239,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (IRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
+					for (ESRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
 						remoteProject.delete(new NullProgressMonitor());
 					}
 				} catch (EMFStoreException e) {

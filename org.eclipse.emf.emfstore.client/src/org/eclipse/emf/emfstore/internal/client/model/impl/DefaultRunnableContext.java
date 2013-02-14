@@ -11,21 +11,21 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
-import org.eclipse.emf.emfstore.internal.client.common.IRunnableContext;
+import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
 
 /**
- * A {@link IRunnableContext} implementation that does nothing.
+ * A {@link ESRunnableContext} implementation that does nothing.
  * 
  * @author emueller
  * 
  */
-public class DefaultRunnableContext implements IRunnableContext {
+public class DefaultRunnableContext implements ESRunnableContext {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.common.IRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(Runnable runnable) {
 		runnable.run();

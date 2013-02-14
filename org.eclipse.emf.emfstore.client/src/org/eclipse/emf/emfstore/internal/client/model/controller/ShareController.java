@@ -13,13 +13,13 @@ package org.eclipse.emf.emfstore.internal.client.model.controller;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.model.observer.ESShareObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.internal.client.model.observers.ShareObserver;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -103,7 +103,7 @@ public class ShareController extends ServerCall<Void> {
 		// set attributes after server call
 		getProgressMonitor().subTask("Setting attributes");
 		this.setUsersession(getUsersession());
-		WorkspaceProvider.getObserverBus().register(getLocalProject(), LoginObserver.class);
+		WorkspaceProvider.getObserverBus().register(getLocalProject(), ESLoginObserver.class);
 
 		getLocalProject().save();
 		getLocalProject().startChangeRecording();
@@ -125,6 +125,6 @@ public class ShareController extends ServerCall<Void> {
 		getLocalProject().updateDirtyState();
 
 		getProgressMonitor().done();
-		WorkspaceProvider.getObserverBus().notify(ShareObserver.class).shareDone(getLocalProject());
+		WorkspaceProvider.getObserverBus().notify(ESShareObserver.class).shareDone(getLocalProject());
 	}
 }

@@ -31,8 +31,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
@@ -128,13 +126,6 @@ public class DecisionManager {
 
 	private List<ConflictHandler> initConflictHandlers() {
 		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
-		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.merge.conflictHandler").getExtensionElements()) {
-			ConflictHandler handler = element.getClass("class", ConflictHandler.class);
-			if (handler != null) {
-				result.add(handler);
-			}
-		}
 		return result;
 	}
 

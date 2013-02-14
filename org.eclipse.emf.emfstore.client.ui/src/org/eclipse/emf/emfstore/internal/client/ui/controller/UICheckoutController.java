@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -41,7 +41,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UICheckoutController extends AbstractEMFStoreUIController<IProject> {
+public class UICheckoutController extends AbstractEMFStoreUIController<ESProject> {
 
 	private ServerInfo serverInfo;
 	private ProjectInfo projectInfo;
@@ -123,16 +123,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ILocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public ESLocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
 				versionSpec = branchSelection(serverInfo, projectInfo);
 			}
 
-			return new ServerCall<ILocalProject>(serverInfo, progressMonitor) {
+			return new ServerCall<ESLocalProject>(serverInfo, progressMonitor) {
 				@Override
-				protected ILocalProject run() throws EMFStoreException {
+				protected ESLocalProject run() throws EMFStoreException {
 					if (versionSpec == null) {
 						return new RemoteProject(serverInfo, projectInfo).checkout(getUsersession(),
 							getProgressMonitor());
@@ -161,7 +161,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<IProject>
 	}
 
 	private PrimaryVersionSpec branchSelection(ServerInfo serverInfo, ProjectInfo projectInfo) throws EMFStoreException {
-		final List<IBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
+		final List<ESBranchInfo> branches = ((WorkspaceImpl) WorkspaceProvider.getInstance().getWorkspace())
 			.getBranches(serverInfo, projectInfo.getProjectId());
 
 		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {

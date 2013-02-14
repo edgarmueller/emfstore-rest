@@ -11,9 +11,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 
 /**
  * Represents a call to a server, i.e. a remote action that involves a server.
@@ -28,20 +28,20 @@ public interface IServerCall {
 	 * 
 	 * @return the user session in use
 	 */
-	IUsersession getUsersession();
+	ESUsersession getUsersession();
 
 	/**
 	 * Returns the project this server call is associated with.
 	 * 
 	 * @return the local project associated with this server call
 	 */
-	ILocalProject getLocalProject();
+	ESLocalProject getLocalProject();
 
 	/**
 	 * Returns the server this server call is meant to be executed against.
 	 * 
 	 * @return the server this call is meant to be executed against
 	 */
-	IServer getServer();
+	ESServer getServer();
 
 }

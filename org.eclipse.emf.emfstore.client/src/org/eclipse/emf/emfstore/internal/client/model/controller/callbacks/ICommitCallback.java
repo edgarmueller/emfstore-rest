@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for implementors that are interested in influencing the
@@ -37,7 +37,7 @@ public interface ICommitCallback {
 	 * @return true, if the caller is willing to update the project space, false
 	 *         otherwise
 	 */
-	boolean baseVersionOutOfDate(ILocalProject project, IProgressMonitor progressMonitor);
+	boolean baseVersionOutOfDate(ESLocalProject project, IProgressMonitor progressMonitor);
 
 	/**
 	 * Called right before the actual commit is performed. Implementors may veto
@@ -53,7 +53,7 @@ public interface ICommitCallback {
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the commit should continue, false otherwise
 	 */
-	boolean inspectChanges(ILocalProject project, IChangePackage changePackage,
+	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -62,7 +62,7 @@ public interface ICommitCallback {
 	 * @param projectSpace
 	 *            the project space that has no local pending changes
 	 */
-	void noLocalChanges(ILocalProject projectSpace);
+	void noLocalChanges(ESLocalProject projectSpace);
 
 	/**
 	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
@@ -79,7 +79,7 @@ public interface ICommitCallback {
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
-	boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -90,20 +90,20 @@ public interface ICommitCallback {
 	 */
 	ICommitCallback NOCALLBACK = new ICommitCallback() {
 
-		public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
+		public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 
-		public boolean baseVersionOutOfDate(ILocalProject projectSpace, IProgressMonitor progressMonitor) {
+		public boolean baseVersionOutOfDate(ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
 			return false;
 		}
 
-		public void noLocalChanges(ILocalProject projectSpace) {
+		public void noLocalChanges(ESLocalProject projectSpace) {
 			// do nothing
 		}
 
-		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) {
 			return true;
 		}

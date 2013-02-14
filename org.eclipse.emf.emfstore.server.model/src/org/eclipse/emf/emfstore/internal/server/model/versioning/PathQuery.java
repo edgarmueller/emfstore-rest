@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.query.IPathQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESPathQuery;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Path Query</b></em>'.
  * 
- * @extends IPathQuery
+ * @extends ESPathQuery
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.query.IPathQuery;
  * @model
  * @generated
  */
-public interface PathQuery extends HistoryQuery, IPathQuery {
+public interface PathQuery extends HistoryQuery, ESPathQuery {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

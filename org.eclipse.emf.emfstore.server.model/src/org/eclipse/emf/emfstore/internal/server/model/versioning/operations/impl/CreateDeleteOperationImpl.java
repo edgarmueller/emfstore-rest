@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -67,7 +67,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 
 	public void apply(IdEObjectCollection collection) {
 		if (isDelete()) {
-			if (!collection.contains((IModelElementId) getModelElementId())) {
+			if (!collection.contains((ESModelElementId) getModelElementId())) {
 				// silently fail
 				return;
 			}
@@ -99,7 +99,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 
 			collection.disallocateModelElementIds(disallocatedIds);
 		} else {
-			if (collection.contains((IModelElementId) getModelElementId())) {
+			if (collection.contains((ESModelElementId) getModelElementId())) {
 				// silently fail
 				return;
 			}

@@ -13,14 +13,14 @@ package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.IChangeConflict;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for updating a project space.
@@ -43,7 +43,7 @@ public interface IUpdateCallback {
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
-	boolean inspectChanges(ILocalProject project, List<? extends IChangePackage> changes,
+	boolean inspectChanges(ESLocalProject project, List<? extends ESChangePackage> changes,
 		IModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
@@ -59,7 +59,7 @@ public interface IUpdateCallback {
 	 * @param progressMonitor a progress monitor to report on progress
 	 * @return true, if the conflict has been resolved, false otherwise
 	 */
-	boolean conflictOccurred(IChangeConflict changeConflict, IProgressMonitor progressMonitor);
+	boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor);
 
 	/**
 	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
@@ -76,7 +76,7 @@ public interface IUpdateCallback {
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
-	boolean checksumCheckFailed(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException;
 
 	/**
@@ -85,7 +85,7 @@ public interface IUpdateCallback {
 	 * {@link IUpdateCallback#inspectChanges(ProjectSpace, List)} to true.
 	 */
 	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
-		public boolean inspectChanges(ILocalProject projectSpace, List<? extends IChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject projectSpace, List<? extends ESChangePackage> changes,
 			IModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
@@ -93,11 +93,11 @@ public interface IUpdateCallback {
 		public void noChangesOnServer() {
 		}
 
-		public boolean conflictOccurred(IChangeConflict changeConflict, IProgressMonitor progressMonitor) {
+		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor) {
 			return false;
 		}
 
-		public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			return true;
 		}

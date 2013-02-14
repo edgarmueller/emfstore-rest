@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICreateLocalProjectController extends AbstractEMFStoreUIController<IProject> {
+public class UICreateLocalProjectController extends AbstractEMFStoreUIController<ESProject> {
 
 	private final String name;
 	private final String description;
@@ -59,7 +59,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		this.description = description == null ? "" : description;
 	}
 
-	private ILocalProject createLocalProject() {
+	private ESLocalProject createLocalProject() {
 		CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 		if (dialog.open() == Dialog.OK) {
 			String projectName = dialog.getName();
@@ -71,7 +71,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		return null;
 	}
 
-	private ILocalProject createLocalProject(final String name, final String description) {
+	private ESLocalProject createLocalProject(final String name, final String description) {
 		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name, description);
 	}
 
@@ -82,7 +82,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ILocalProject doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public ESLocalProject doRun(IProgressMonitor monitor) throws EMFStoreException {
 		if (name == null) {
 			return createLocalProject();
 		}

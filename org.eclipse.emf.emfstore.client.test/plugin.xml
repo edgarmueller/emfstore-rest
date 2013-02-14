@@ -186,7 +186,7 @@
       </useInverseCrossReferenceCache>
    </extension>
    <extension
-         point="org.eclipse.emf.emfstore.client.sessionprovider">
+         point="org.eclipse.emf.emfstore.client.usersessionProvider">
       <sessionProvider
             class="org.eclipse.emf.emfstore.client.test.TestSessionProvider">
       </sessionProvider>

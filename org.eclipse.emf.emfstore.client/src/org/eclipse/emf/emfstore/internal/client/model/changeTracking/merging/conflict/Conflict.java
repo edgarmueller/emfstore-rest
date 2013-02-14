@@ -17,8 +17,6 @@ import java.util.Observable;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
@@ -125,35 +123,6 @@ public abstract class Conflict extends Observable {
 		conflictDescription = initConflictDescription();
 		options = new ArrayList<ConflictOption>();
 		initConflictOptions(options);
-		initAdditionalConflictOptions(options);
-	}
-
-	private void initAdditionalConflictOptions(ArrayList<ConflictOption> options2) {
-		if (!allowOtherOptions()) {
-			return;
-		}
-
-		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.ui.merge.customoption")
-			.getExtensionElements()) {
-			CustomConflictOptionFactory factory = element.getClass("class", CustomConflictOptionFactory.class);
-			if (factory != null && factory.isApplicableConflict(Conflict.this)) {
-				CustomConflictOption customConflictOption = factory.createCustomConflictOption(Conflict.this);
-				if (customConflictOption != null) {
-					options.add(customConflictOption);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Defines whether other option should be allowed via extension. E.g. Issue
-	 * option.
-	 * 
-	 * @return true, if other options are allowed
-	 */
-	protected boolean allowOtherOptions() {
-		return true;
 	}
 
 	/**

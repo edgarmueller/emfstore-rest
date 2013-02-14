@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.observers.UpdateObserver;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * Controller class for updating a project space.
@@ -129,8 +129,8 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			|| !callback.inspectChanges(getLocalProject(), changes, idToEObjectMapping)) {
 			return getLocalProject().getBaseVersion();
 		}
-		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
-			.inspectChanges(getLocalProject(), (List<IChangePackage>) (List<?>) changes, getProgressMonitor());
+		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
+			.inspectChanges(getLocalProject(), (List<ESChangePackage>) (List<?>) changes, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
 		if (getLocalProject().getOperations().size() > 0) {
@@ -156,7 +156,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getLocalProject().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
-		WorkspaceProvider.getObserverBus().notify(UpdateObserver.class)
+		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
 			.updateCompleted(getLocalProject(), getProgressMonitor());
 
 		return getLocalProject().getBaseVersion();

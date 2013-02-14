@@ -15,12 +15,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
@@ -46,7 +46,7 @@ import org.eclipse.ui.services.IEvaluationService;
  * 
  * @author shterev
  */
-public class ESBrowserView extends ViewPart implements LoginObserver {
+public class ESBrowserView extends ViewPart implements ESLoginObserver {
 
 	/**
 	 * Listener for changes in the workspace.
@@ -207,7 +207,7 @@ public class ESBrowserView extends ViewPart implements LoginObserver {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void loginCompleted(final IUsersession session) {
+	public void loginCompleted(final ESUsersession session) {
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				viewer.refresh(session.getServer(), true);

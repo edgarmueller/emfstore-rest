@@ -11,7 +11,12 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ConcurrentModificationException;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,8 +25,9 @@ import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.junit.Test;
 
@@ -37,7 +43,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testAddModelElementsWithoutCommands() {
-		ILocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"Testprojekt", "");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");
@@ -95,7 +101,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testAddModelElementsWithCommands() {
-		final ILocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"Testprojekt", "");
 
 		final League leagueA = ProjectChangeUtil.createLeague("America");
@@ -179,12 +185,9 @@ public class ModelElementTest {
 		assertEquals(3, localProject.getModelElements().size());
 	}
 
-	/**
-	 * Test deletion of all model elements.
-	 */
-	@Test
+	@Test(expected = ConcurrentModificationException.class)
 	public void testDeleteAllModelElementsWithCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 
 		new EMFStoreCommand() {
 			@Override
@@ -196,21 +199,156 @@ public class ModelElementTest {
 			}
 		}.execute();
 
-		assertEquals(0, localProject.getAllModelElements());
+		assertEquals(0, localProject.getAllModelElements().size());
 	}
 
-	/**
-	 * Test deletion of all model elements.
-	 */
-	@Test
+	@Test(expected = ConcurrentModificationException.class)
 	public void testDeleteAllModelElementsWithoutCommand() {
-		final ILocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 
 		Set<EObject> elements = localProject.getAllModelElements();
 		for (EObject object : elements) {
 			localProject.getModelElements().remove(object);
 		}
 
-		assertEquals(0, localProject.getAllModelElements());
+		assertEquals(0, localProject.getAllModelElements().size());
 	}
+
+	/**
+	 * adds and deletes model element and undos the deletion.
+	 */
+	@Test
+	public void testDeleteUndoWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
+		final int SIZE = localProject.getAllModelElements().size();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(player);
+			}
+		}.run(false);
+
+		assertTrue(localProject.getAllModelElements().contains(player));
+		assertTrue(localProject.contains(player));
+		ESModelElementId id = localProject.getModelElementId(player);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().remove(player);
+			}
+		}.run(false);
+
+		assertEquals(SIZE, localProject.getAllModelElements().size());
+		assertFalse(localProject.getAllModelElements().contains(player));
+		assertFalse(localProject.contains(player));
+		assertNull(localProject.getModelElement(id));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.undoLastOperation();
+			}
+		}.run(false);
+
+		assertEquals(SIZE + 1, localProject.getAllModelElements().size());
+		assertFalse(localProject.getAllModelElements().contains(player));
+		assertFalse(localProject.contains(player));
+		assertNotNull(localProject.getModelElement(id));
+	}
+
+	/**
+	 * adds and deletes model element and undos the deletion.
+	 */
+	@Test
+	public void testDeleteUndoWithoutCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
+		final int SIZE = localProject.getAllModelElements().size();
+
+		localProject.getModelElements().add(player);
+
+		assertTrue(localProject.getAllModelElements().contains(player));
+		assertTrue(localProject.contains(player));
+		ESModelElementId id = localProject.getModelElementId(player);
+		localProject.getModelElements().remove(player);
+
+		assertEquals(SIZE, localProject.getAllModelElements().size());
+		assertFalse(localProject.getAllModelElements().contains(player));
+		assertFalse(localProject.contains(player));
+
+		localProject.undoLastOperation();
+
+		assertEquals(SIZE + 1, localProject.getAllModelElements().size());
+		assertFalse(localProject.getAllModelElements().contains(player));
+		assertFalse(localProject.contains(player));
+		assertNotNull(localProject.getModelElement(id));
+	}
+
+	@Test
+	public void testReferenceDeletionWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.run(false);
+
+		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
+		final Player player2 = ProjectChangeUtil.createPlayer("Walter");
+		final Player player3 = ProjectChangeUtil.createPlayer("Wilhelm");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournament.getPlayers().add(player);
+				tournament.getPlayers().add(player2);
+				tournament.getPlayers().add(player3);
+			}
+		}.run(false);
+
+		assertEquals(3, tournament.getPlayers().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().remove(player2);
+			}
+		}.execute();
+
+		assertEquals(2, tournament.getPlayers().size());
+		assertTrue(localProject.contains(player));
+		assertTrue(localProject.contains(player3));
+		assertFalse(localProject.contains(player2));
+	}
+
+	@Test
+	public void testReferenceDeletionWithoutCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		localProject.getModelElements().add(tournament);
+
+		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
+		final Player player2 = ProjectChangeUtil.createPlayer("Walter");
+		final Player player3 = ProjectChangeUtil.createPlayer("Wilhelm");
+
+		tournament.getPlayers().add(player);
+		tournament.getPlayers().add(player2);
+		tournament.getPlayers().add(player3);
+
+		assertEquals(3, tournament.getPlayers().size());
+
+		tournament.getPlayers().remove(player2);
+
+		assertEquals(2, tournament.getPlayers().size());
+		assertTrue(localProject.contains(player));
+		assertTrue(localProject.contains(player3));
+		assertFalse(localProject.contains(player2));
+	}
+
 }

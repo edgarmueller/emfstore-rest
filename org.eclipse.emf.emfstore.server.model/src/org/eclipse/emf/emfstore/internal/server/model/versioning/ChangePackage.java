@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc -->
@@ -39,7 +39,7 @@ import org.eclipse.emf.emfstore.server.model.IChangePackage;
  * @model
  * @generated
  */
-public interface ChangePackage extends EObject, IChangePackage {
+public interface ChangePackage extends EObject, ESChangePackage {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

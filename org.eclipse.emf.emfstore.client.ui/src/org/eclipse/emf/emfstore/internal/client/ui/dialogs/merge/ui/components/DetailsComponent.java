@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
@@ -76,7 +74,6 @@ public class DetailsComponent extends Section {
 			if (!option.isDetailsProvider() || option.getDetailProvider() == null) {
 				continue;
 			}
-			// TODO Hardcoded behavior, maybe generalize in later iteration.
 			if (option.getDetailProvider().startsWith(DecisionUtil.WIDGET_MULTILINE)) {
 				if (multiWidget == null) {
 					multiWidget = new MergeTextWidget(decisionBox, this);
@@ -84,15 +81,6 @@ public class DetailsComponent extends Section {
 				multiWidget.addOption(option);
 			}
 
-			for (ExtensionElement element : new ExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.detailwidget")
-				.getExtensionElements()) {
-				if (option.getDetailProvider().equals(element.getAttribute("id"))) {
-					DetailsPart detailsPart = element.getClass("class", DetailsPart.class);
-					if (detailsPart != null) {
-						detailsPart.initialize(decisionBox.getDecisionManager(), option, client);
-					}
-				}
-			}
 		}
 
 		if (multiWidget != null) {

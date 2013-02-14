@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -878,14 +878,14 @@ public class CommandTest extends WorkspaceTest {
 		assertTrue(Configuration.getEditingDomain().getClipboard().contains(workPackage));
 		assertEquals(1, ModelUtil.getAllContainedModelElements(leafSection, false).size());
 
-		assertTrue(getProject().contains((IModelElementId) workPackageId));
+		assertTrue(getProject().contains((ESModelElementId) workPackageId));
 
 		Command pasteCommand = PasteFromClipboardCommand.create(editingDomain, leafSection,
 			DocumentPackage.Literals.LEAF_SECTION__MODEL_ELEMENTS, CommandParameter.NO_INDEX);
 		editingDomain.getCommandStack().execute(pasteCommand);
 
 		assertEquals(4, ModelUtil.getAllContainedModelElements(leafSection, false).size());
-		assertTrue(getProject().contains((IModelElementId) workPackageId));
+		assertTrue(getProject().contains((ESModelElementId) workPackageId));
 
 		assertEquals(2, getProjectSpace().getOperations().size());
 

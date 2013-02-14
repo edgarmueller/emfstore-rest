@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfstore.client.model.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.CompositeSection;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
@@ -45,13 +46,12 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -116,7 +116,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 		useCase.setName("oldName");
-		PostCreationObserver observer = new PostCreationObserver() {
+		ESPostCreationObserver observer = new ESPostCreationObserver() {
 
 			public void onCreation(EObject modelElement) {
 				if (modelElement instanceof UseCase) {
@@ -677,7 +677,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().contains((IModelElementId) useCaseId));
+		assertEquals(true, getProject().contains((ESModelElementId) useCaseId));
 		assertEquals(true, getProject().contains(oldActor));
 		assertEquals(true, getProject().contains(newActor));
 		assertEquals(true, getProject().contains(otherActor));
@@ -695,10 +695,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, getProject()));
-		assertEquals(true, loadedProject.contains((IModelElementId) useCaseId));
-		assertEquals(true, loadedProject.contains((IModelElementId) oldActorId));
-		assertEquals(true, loadedProject.contains((IModelElementId) newActorId));
-		assertEquals(true, loadedProject.contains((IModelElementId) otherActorId));
+		assertEquals(true, loadedProject.contains((ESModelElementId) useCaseId));
+		assertEquals(true, loadedProject.contains((ESModelElementId) oldActorId));
+		assertEquals(true, loadedProject.contains((ESModelElementId) newActorId));
+		assertEquals(true, loadedProject.contains((ESModelElementId) otherActorId));
 	}
 
 	/**

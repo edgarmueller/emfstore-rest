@@ -15,7 +15,7 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
@@ -56,7 +56,7 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	private IUsersession login(final boolean force) throws EMFStoreException {
+	private ESUsersession login(final boolean force) throws EMFStoreException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
@@ -157,7 +157,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public IUsersession login(ServerInfo serverInfo, boolean force) throws EMFStoreException {
+	public ESUsersession login(ServerInfo serverInfo, boolean force) throws EMFStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(force);
@@ -190,7 +190,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws EMFStoreException
 	 *             in case the login fails
 	 */
-	public IUsersession login(ServerInfo serverInfo) throws EMFStoreException {
+	public ESUsersession login(ServerInfo serverInfo) throws EMFStoreException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(false);

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.common;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.internal.client.common.IRunnableContext;
+import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
 
 /**
  * Executes the given {@link Runnable} in the UI thread.
@@ -21,13 +21,13 @@ import org.eclipse.emf.emfstore.internal.client.common.IRunnableContext;
  * @author emueller
  * 
  */
-public class UIRunnableContext implements IRunnableContext {
+public class UIRunnableContext implements ESRunnableContext {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.common.IRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.client.model.handler.IRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(final Runnable runnable) {
 		RunInUI.run(new Callable<Void>() {

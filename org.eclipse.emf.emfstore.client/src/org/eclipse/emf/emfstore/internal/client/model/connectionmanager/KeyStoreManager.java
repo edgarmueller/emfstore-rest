@@ -42,12 +42,13 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.InvalidCertificateException;
+import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
+import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.CertificateStoreException;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidCertificateException;
-import org.eclipse.emf.emfstore.internal.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 
@@ -57,7 +58,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
  * 
  * @author wesendon
  */
-public final class KeyStoreManager {
+public final class KeyStoreManager implements ESKeyStoreManager {
 
 	/**
 	 * Name of keyStore file.
@@ -84,9 +85,9 @@ public final class KeyStoreManager {
 	}
 
 	private void loadConfiguration() {
-		ConfigurationProvider provider = new ExtensionPoint(
+		ESClientConfigurationProvider provider = new ExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
-			ConfigurationProvider.class);
+			ESClientConfigurationProvider.class);
 		if (provider == null) {
 			return;
 		}
@@ -194,17 +195,8 @@ public final class KeyStoreManager {
 	}
 
 	/**
-	 * Adds a certificate to the KeyStore.
-	 * 
-	 * @param alias
-	 *            alias for the certificate
-	 * @param path
-	 *            path to the certificate file
-	 * @throws InvalidCertificateException
-	 *             certificate cannot be found, accessed or identified
-	 * @throws CertificateStoreException
-	 *             is thrown when problems occur with the CertificateStore, i.e.
-	 *             illegal operations.
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String, java.lang.String)
 	 */
 	public void addCertificate(String alias, String path) throws InvalidCertificateException, CertificateStoreException {
 		FileInputStream fileInputStream = null;
@@ -229,18 +221,8 @@ public final class KeyStoreManager {
 	}
 
 	/**
-	 * Adds a certificate to the KeyStore.
-	 * 
-	 * @param alias
-	 *            alias for the certificate
-	 * @param certificate
-	 *            inputstream delivering the certificate. Stream is used by
-	 *            {@link CertificateFactory#generateCertificate(InputStream)}.
-	 * @throws InvalidCertificateException
-	 *             certificate cannot be found, accessed or identified
-	 * @throws CertificateStoreException
-	 *             is thrown when problems occur with the CertificateStore, i.e.
-	 *             illegal operations
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String, java.io.InputStream)
 	 */
 	public void addCertificate(String alias, InputStream certificate) throws InvalidCertificateException,
 		CertificateStoreException {
@@ -395,7 +377,7 @@ public final class KeyStoreManager {
 	 *            ServerInfo
 	 * @return String
 	 */
-	public String encrypt(String password, IServer server) {
+	public String encrypt(String password, ESServer server) {
 		try {
 			Certificate publicKey = getCertificateForEncryption(server);
 			PublicKey key = publicKey.getPublicKey();
@@ -432,7 +414,7 @@ public final class KeyStoreManager {
 		return "";
 	}
 
-	private Certificate getCertificateForEncryption(IServer server) throws CertificateStoreException {
+	private Certificate getCertificateForEncryption(ESServer server) throws CertificateStoreException {
 		Certificate publicKey;
 		if (server == null) {
 			publicKey = getCertificate(getDefaultCertificate());
@@ -460,9 +442,8 @@ public final class KeyStoreManager {
 	}
 
 	/**
-	 * Returns the default certificate alias.
-	 * 
-	 * @return alias
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#getDefaultCertificate()
 	 */
 	public String getDefaultCertificate() {
 		if (defaultCertificate != null) {
@@ -492,10 +473,8 @@ public final class KeyStoreManager {
 	}
 
 	/**
-	 * Sets the alias for the default certificate.
-	 * 
-	 * @param defaultCertificate
-	 *            certificate alias, use null to unset
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#setDefaultCertificate(java.lang.String)
 	 */
 	public void setDefaultCertificate(String defaultCertificate) {
 		this.defaultCertificate = defaultCertificate;
@@ -525,13 +504,8 @@ public final class KeyStoreManager {
 	}
 
 	/**
-	 * Checks whether a certificate for a given alias exists.
-	 * 
-	 * @param alias
-	 *            to check
-	 * @return true if exists
-	 * @throws CertificateStoreException
-	 *             in case of failure
+	 * {@inheritDoc}
+	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#certificateExists(java.lang.String)
 	 */
 	public boolean certificateExists(String alias) throws CertificateStoreException {
 		try {

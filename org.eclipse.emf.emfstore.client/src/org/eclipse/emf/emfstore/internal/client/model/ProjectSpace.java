@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationManager;
@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
  * 
- * @extends IProject
+ * @extends ESProject
  *          <!-- end-user-doc
  *          -->
  * 
@@ -96,7 +96,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @model
  * @generated
  */
-public interface ProjectSpace extends IdentifiableElement, ILocalProject {
+public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the
@@ -524,11 +524,13 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * @param fileName
 	 *            the file name to import from
+	 * @param monitor
+	 *            an {@link IProgressMonitor} instance that is used to indicate progress while import the changes
 	 * @throws IOException
 	 *             if file access fails
 	 * @generated NOT
 	 */
-	void importLocalChanges(String fileName) throws IOException;
+	void importLocalChanges(String fileName, IProgressMonitor monitor) throws IOException;
 
 	/**
 	 * Initialize the project space and its resources.
@@ -775,7 +777,7 @@ public interface ProjectSpace extends IdentifiableElement, ILocalProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery)
+	 * @see org.eclipse.emf.emfstore.internal.client.ESProject.IProject#getHistoryInfos(org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery)
 	 * 
 	 * @generated NOT
 	 */

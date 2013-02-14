@@ -15,13 +15,13 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
@@ -36,9 +36,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -50,7 +50,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author wesendon
  * 
  */
-public class UICreateBranchController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
+public class UICreateBranchController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
@@ -94,7 +94,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#noLocalChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
-	public void noLocalChanges(ILocalProject projectSpace) {
+	public void noLocalChanges(ESLocalProject projectSpace) {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null, "No local changes in your project. No need to commit.");
@@ -109,7 +109,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
-	public boolean baseVersionOutOfDate(final ILocalProject projectSpace, final IProgressMonitor progressMonitor) {
+	public boolean baseVersionOutOfDate(final ESLocalProject projectSpace, final IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before branching. Do you want to update now?";
 		return RunInUI.runWithResult(new Callable<Boolean>() {
@@ -117,8 +117,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
-					IPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					IPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
+					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
 						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
@@ -137,7 +137,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ILocalProject projectSpace, IChangePackage changePackage,
+	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
 		IModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		final CommitDialog commitDialog = new CommitDialog(getShell(), (ChangePackage) changePackage,
@@ -195,7 +195,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	}
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws EMFStoreException {
-		final List<IBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
+		final List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException().runWithResult(new Callable<String>() {
@@ -223,9 +223,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ILocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
-		IChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
+		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

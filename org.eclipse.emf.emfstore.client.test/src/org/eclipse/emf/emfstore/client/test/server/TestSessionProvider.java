@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -92,7 +92,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public Usersession provideUsersession(IServer serverInfo) throws EMFStoreException {
+	public Usersession provideUsersession(ESServer serverInfo) throws EMFStoreException {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}
@@ -100,7 +100,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public void login(IUsersession usersession) throws EMFStoreException {
+	public void login(ESUsersession usersession) throws EMFStoreException {
 		usersession.getServer().login(usersession.getUsername(), usersession.getPassword());
 	}
 

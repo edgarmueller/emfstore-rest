@@ -17,8 +17,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 
 /**
  * A collection of {@link EObject}s where each one can be identified via a {@link ModelElementId}. {@link EObject}s can
@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.common.model.IModelElementId;
  * @author emueller
  * 
  */
-public interface IdEObjectCollection extends EObject, EObjectContainer, IModelElementIdToEObjectMapping {
+public interface IdEObjectCollection extends EObject, ESObjectContainer, IModelElementIdToEObjectMapping {
 
 	/**
 	 * Adds the given model element to the collection.
@@ -59,53 +59,44 @@ public interface IdEObjectCollection extends EObject, EObjectContainer, IModelEl
 	void disallocateModelElementIds(Set<ModelElementId> modelElementIds);
 
 	/**
-	 * Returns all directly contained model element of the collection, i.e. a
-	 * hierarchical representation of the model elements.
 	 * 
-	 * @return a collection of directly contained model elements
-	 */
-	EList<EObject> getModelElements();
-
-	/**
-	 * Checks whether a given model element is contained in the collection.
+	 * {@inheritDoc}
 	 * 
-	 * @param modelElement
-	 *            the model element to check for, whether it is contained in the
-	 *            collection
-	 * @return true, if the model element is contained in the collection, false
-	 *         otherwise
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#contains(org.eclipse.emf.ecore.EObject)
 	 */
 	boolean contains(EObject modelElement);
 
 	/**
-	 * Checks whether the {@link EObject} with the given {@link ModelElementId} is contained in the collection.
 	 * 
-	 * @param eObjectId
-	 *            the {@link ModelElementId} of the {@link EObject}, which
-	 *            should get checked, whether it is contained in the collection
-	 * @return true, if the {@link EObject} with the {@link ModelElementId} in
-	 *         question is contained in the collection
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#contains(org.eclipse.emf.emfstore.common.model.ESModelElementId)
 	 */
-	boolean contains(IModelElementId eObjectId);
+	boolean contains(ESModelElementId eObjectId);
 
 	/**
-	 * Retrieve the {@link ModelElementId} of the given model element.
 	 * 
-	 * @param modelElement
-	 *            the model element
-	 * @return the {@link ModelElementId} of the given model element
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	ModelElementId getModelElementId(EObject modelElement);
 
 	/**
-	 * Returns the model element with the given {@link ModelElementId}.
 	 * 
-	 * @param modelElementId
-	 *            the {@link ModelElementId} of the model element, that should
-	 *            get retrieved
-	 * @return the model element that has the given {@link ModelElementId} assigned
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElement(org.eclipse.emf.emfstore.common.model.ESModelElementId)
 	 */
-	EObject getModelElement(IModelElementId modelElementId);
+	EObject getModelElement(ESModelElementId modelElementId);
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElements()
+	 */
+	EList<EObject> getModelElements();
 
 	/**
 	 * Deletes the given model element from the collection.
@@ -116,9 +107,10 @@ public interface IdEObjectCollection extends EObject, EObjectContainer, IModelEl
 	void deleteModelElement(EObject modelElement);
 
 	/**
-	 * Returns a flat representation of all model elements in the collection.
 	 * 
-	 * @return a set of all model elements contained in the collection
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElements()
 	 */
 	Set<EObject> getAllModelElements();
 

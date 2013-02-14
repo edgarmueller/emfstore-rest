@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.query.IRangeQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Range Query</b></em>'.
  * 
- * @extends IRangeQuery
+ * @extends ESRangeQuery
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.query.IRangeQuery;
  * @model
  * @generated
  */
-public interface RangeQuery extends HistoryQuery, IRangeQuery {
+public interface RangeQuery extends HistoryQuery, ESRangeQuery {
 	/**
 	 * Returns the value of the '<em><b>Upper Limit</b></em>' attribute. <!--
 	 * begin-user-doc -->

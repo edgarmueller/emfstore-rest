@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'.
  * 
- * @extends IHistoryInfo
+ * @extends ESHistoryInfo
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
  * @model abstract="true"
  * @generated
  */
-public interface HistoryQuery extends EObject, IHistoryQuery {
+public interface HistoryQuery extends EObject, ESHistoryQuery {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

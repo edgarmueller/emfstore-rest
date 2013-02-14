@@ -62,19 +62,15 @@ public class OperationManager implements OperationRecorderListener, IDisposable,
 	private void configureOperationRecorder() {
 		// cut off incoming cross-references by default
 		operationRecorder.getConfig().setCutOffIncomingCrossReferences(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
-				.getBoolean("cutOffIncomingCrossReferences", true));
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+				"cutOffIncomingCrossReferences", true));
 		// usage of commands is not forced by default
 		operationRecorder.getConfig().setForceCommands(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
-				.getBoolean("forceCommands", false));
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean("forceCommands", false));
 		// cut elements are added automatically as regular model elements by default
 		operationRecorder.getConfig().setDenyAddCutElementsToModelElements(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options")
-				.getBoolean("denyAddCutElementsToModelElements", false));
-		operationRecorder.getConfig().setOperationModificator(
-			new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getClass(
-				"operationModificator", OperationModificator.class));
+			new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+				"denyAddCutElementsToModelElements", false));
 	}
 
 	/**

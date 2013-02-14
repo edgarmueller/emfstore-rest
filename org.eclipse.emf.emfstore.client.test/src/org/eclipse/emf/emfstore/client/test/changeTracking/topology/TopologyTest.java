@@ -16,6 +16,7 @@ import java.util.Date;
 
 import junit.framework.Assert;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -83,5 +84,11 @@ public abstract class TopologyTest {
 	public <T extends AbstractOperation> T checkAndCast(AbstractOperation op, Class<T> clazz) {
 		Assert.assertTrue(clazz.isInstance(op));
 		return asInstanceOf(op, clazz);
+	}
+
+	public void addToProject(EObject... eObjects) {
+		for (EObject eObject : eObjects) {
+			getProject().getModelElements().add(eObject);
+		}
 	}
 }

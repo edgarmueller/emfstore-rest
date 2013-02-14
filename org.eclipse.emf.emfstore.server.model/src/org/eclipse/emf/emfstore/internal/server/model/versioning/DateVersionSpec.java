@@ -12,12 +12,12 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IDateVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESDateVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Date Version Spec</b></em>'.
  * 
- * @extends IDateVersionSpec
+ * @extends ESDateVersionSpec
  *          <!-- end-user-doc
  *          -->
  * 
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IDateVersionSpec;
  * @model
  * @generated
  */
-public interface DateVersionSpec extends VersionSpec, IDateVersionSpec {
+public interface DateVersionSpec extends VersionSpec, ESDateVersionSpec {
 	/**
 	 * Returns the value of the '<em><b>Date</b></em>' attribute. <!--
 	 * begin-user-doc -->

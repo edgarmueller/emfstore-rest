@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.util;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
@@ -107,7 +107,7 @@ public final class HistoryQueryBuilder {
 	 */
 	public static ModelElementQuery modelelementQuery(
 			PrimaryVersionSpec source,
-			List<? extends IModelElementId> modelElements, int upper,
+			List<? extends ESModelElementId> modelElements, int upper,
 			int lower, boolean allVersions, boolean includeCp) {
 		ModelElementQuery query = VersioningFactory.eINSTANCE
 				.createModelElementQuery();

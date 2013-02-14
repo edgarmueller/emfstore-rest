@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
+import org.eclipse.emf.emfstore.server.ESLocationProvider;
 import org.osgi.framework.Bundle;
 
 /**
@@ -420,7 +421,7 @@ public final class ServerConfiguration {
 		return getConfDirectory() + "es.properties";
 	}
 
-	private static LocationProvider locationProvider;
+	private static ESLocationProvider locationProvider;
 	private static Boolean isChecksumComputationOnCommitActive;
 
 	/**
@@ -442,16 +443,16 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Returns the registered {@link LocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
+	 * Returns the registered {@link ESLocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
-	public static synchronized LocationProvider getLocationProvider() {
+	public static synchronized ESLocationProvider getLocationProvider() {
 		if (locationProvider == null) {
 			// TODO EXPT PRIO
 			try {
 				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.server.locationprovider",
-					true).getClass("providerClass", LocationProvider.class);
+					true).getClass("providerClass", ESLocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "No location provider or error while instantiating location provider, switching to default location!";
 				ModelUtil.logWarning(message);

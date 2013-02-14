@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Path Query</b></em>'. <!-- end-user-doc -->
@@ -212,7 +212,7 @@ public class PathQueryImpl extends HistoryQueryImpl implements PathQuery {
 		return super.eIsSet(featureID);
 	}
 
-	public void setTarget(IPrimaryVersionSpec target) {
+	public void setTarget(ESPrimaryVersionSpec target) {
 		this.setTarget((PrimaryVersionSpec) target);
 	}
 

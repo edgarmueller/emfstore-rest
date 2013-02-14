@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.Test;
 
 public class VersionSpecTests extends CoreServerTest {
@@ -74,7 +74,7 @@ public class VersionSpecTests extends CoreServerTest {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[7],
-			history.resolveVersionSpec(Versions.createHEAD(IVersionSpec.GLOBAL), new NullProgressMonitor()));
+			history.resolveVersionSpec(Versions.createHEAD(ESVersionSpec.GLOBAL), new NullProgressMonitor()));
 	}
 
 	@Test

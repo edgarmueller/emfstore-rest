@@ -6,8 +6,8 @@ import java.io.IOException;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -60,9 +60,9 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectController("importedProject"));
 
-		ILocalProject newProjectSpace = null;
+		ESLocalProject newProjectSpace = null;
 
-		for (IProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
+		for (ESProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.getProjectName().equals("importedProject")) {
 				newProjectSpace = getProjectSpace();
 				break;
@@ -91,8 +91,8 @@ public class ImportExportTest extends WorkspaceTest {
 
 		Assert.assertEquals(2, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		ILocalProject a = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0);
-		ILocalProject b = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(1);
+		ESLocalProject a = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0);
+		ESLocalProject b = WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(1);
 
 		// TODO: are the imported IDs supposed to be the same as in the original project?
 		// Assert.assertTrue(ModelUtil.areEqual(a.getProject(), b.getProject()));

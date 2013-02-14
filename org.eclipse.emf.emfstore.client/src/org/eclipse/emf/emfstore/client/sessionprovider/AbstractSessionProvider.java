@@ -10,21 +10,21 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 
 /**
  * <p>
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
  * derives a user session for a given server request (IServerCall). When overriding
- * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link IUsersession}
+ * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link ESUsersession}
  * selection.
  * </p>
  * <p>
  * However, in most usecases most, users will use the session provider to open a login dialog of some kind. For this
- * purpose it is better to use {@link #provideUsersession(IServer)}. SessionProviders can be registered via an extension
+ * purpose it is better to use {@link #provideUsersession(ESServer)}. SessionProviders can be registered via an extension
  * point.<br/>
  * </p>
  * 
@@ -42,11 +42,11 @@ public abstract class AbstractSessionProvider {
 	 * The SessionManager calls this method in order to obtain a user session. In its default implementation it first
 	 * looks for specified user session in the {@link IServerCall}, then it checks whether the local project is
 	 * associated with a user session (e.g. in case of update). If there is still no user session,
-	 * {@link #provideUsersession(IServer)} is called, which is meant to be used when implementing an UI to select a UI.
+	 * {@link #provideUsersession(ESServer)} is called, which is meant to be used when implementing an UI to select a UI.
 	 * </p>
 	 * 
 	 * <p>
-	 * In most cases it is sufficient to implement {@link #provideUsersession(IServer)}. There should be no need to
+	 * In most cases it is sufficient to implement {@link #provideUsersession(ESServer)}. There should be no need to
 	 * change this implementation.
 	 * </p>
 	 * 
@@ -56,9 +56,9 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
-	public IUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
+	public ESUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
 
-		IUsersession usersession = serverCall.getUsersession();
+		ESUsersession usersession = serverCall.getUsersession();
 
 		if (usersession == null) {
 			usersession = getUsersessionFromProject(serverCall.getLocalProject());
@@ -72,13 +72,13 @@ public abstract class AbstractSessionProvider {
 	}
 
 	/**
-	 * Tries to obtain a user session from a given {@link ILocalProject}.
+	 * Tries to obtain a user session from a given {@link ESLocalProject}.
 	 * 
 	 * @param project
 	 *            the local project to obtain the user session from
 	 * @return the user session associated with the project or {@code null}, if no session is available
 	 */
-	protected IUsersession getUsersessionFromProject(ILocalProject project) {
+	protected ESUsersession getUsersessionFromProject(ESLocalProject project) {
 
 		if (project != null && project.getUsersession() != null) {
 			return project.getUsersession();
@@ -89,20 +89,20 @@ public abstract class AbstractSessionProvider {
 
 	/**
 	 * <p>
-	 * This is the template method for {@link #provideUsersession(IServer)}. It is called, if the latter couldn't
+	 * This is the template method for {@link #provideUsersession(ESServer)}. It is called, if the latter couldn't
 	 * determine a suitable user session. Use this in order to implement a session selection UI or a headless selection
 	 * logic.
 	 * </p>
 	 * 
 	 * @param server
-	 *            This parameter is a hint from the {@link IServer}. For that reason it can be null. A common
-	 *            example is share, where the user first has to select the server before logging in. If {@link IServer}
+	 *            This parameter is a hint from the {@link ESServer}. For that reason it can be null. A common
+	 *            example is share, where the user first has to select the server before logging in. If {@link ESServer}
 	 *            is set you should allow the user to select the account for the given server.
 	 * 
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
 	 */
-	public abstract IUsersession provideUsersession(IServer server) throws EMFStoreException;
+	public abstract ESUsersession provideUsersession(ESServer server) throws EMFStoreException;
 
 	/**
 	 * This method is called by the SessionManager in order to login a given user session. Either you are able to
@@ -113,5 +113,5 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @throws EMFStoreException in case an exception occurred while logging in the given session
 	 */
-	public abstract void login(IUsersession usersession) throws EMFStoreException;
+	public abstract void login(ESUsersession usersession) throws EMFStoreException;
 }

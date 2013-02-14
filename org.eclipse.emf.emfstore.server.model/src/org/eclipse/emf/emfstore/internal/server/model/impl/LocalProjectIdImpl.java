@@ -1,8 +1,8 @@
 package org.eclipse.emf.emfstore.internal.server.model.impl;
 
-import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
+import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
 
-public class LocalProjectIdImpl implements ILocalProjectId {
+public class LocalProjectIdImpl implements ESLocalProjectId {
 
 	private String id;
 

@@ -16,18 +16,18 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
-import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 
 /**
- * An implementation of a {@link SingletonIdResolver} that treats all {@link EDataType}s as singletons.
+ * An implementation of a {@link ESSingletonIdResolver} that treats all {@link EDataType}s as singletons.
  * 
  * @author emueller
  * 
  */
-public class EDatatypeIdResolver implements SingletonIdResolver {
+public class EDatatypeIdResolver implements ESSingletonIdResolver {
 
 	private Map<String, EDataType> datatypes = new LinkedHashMap<String, EDataType>();
 
@@ -83,7 +83,7 @@ public class EDatatypeIdResolver implements SingletonIdResolver {
 	/**
 	 * {@inheritDoc}
 	 */
-	public EObject getSingleton(IModelElementId singletonId) {
+	public EObject getSingleton(ESModelElementId singletonId) {
 
 		if (singletonId == null) {
 			return null;
@@ -95,10 +95,10 @@ public class EDatatypeIdResolver implements SingletonIdResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @return the {@link IModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
+	 * @return the {@link ESModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
 	 *         is not a singleton, is not an instance of {@link EDataType} or is <code>null</code>
 	 */
-	public IModelElementId getSingletonModelElementId(EObject singleton) {
+	public ESModelElementId getSingletonModelElementId(EObject singleton) {
 
 		if (!(singleton instanceof EDataType) || singleton == null) {
 			return null;

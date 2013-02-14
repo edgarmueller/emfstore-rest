@@ -12,9 +12,9 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
-import org.eclipse.emf.emfstore.server.model.ISessionId;
+import org.eclipse.emf.emfstore.server.model.ESSessionId;
 
 /**
  * This class is intended to wrap all server calls. It may be used either by sub-classing or using anonymous classes.<br/>
@@ -43,12 +43,12 @@ import org.eclipse.emf.emfstore.server.model.ISessionId;
  */
 public abstract class ServerCall<U> implements IServerCall {
 
-	private ILocalProject projectSpace;
-	private IUsersession usersession;
+	private ESLocalProject projectSpace;
+	private ESUsersession usersession;
 	private SessionId sessionId;
 	private IProgressMonitor monitor;
 	private U ret;
-	private IServer server;
+	private ESServer server;
 
 	/**
 	 * Default constructor.
@@ -61,7 +61,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param usersession preselected user session
 	 */
-	public ServerCall(IUsersession usersession) {
+	public ServerCall(ESUsersession usersession) {
 		this.usersession = usersession;
 		setProgressMonitor(null);
 	}
@@ -73,7 +73,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            relevant project space if existent
 	 */
 	// TODO: OTS add javadoc to explain why type is a local project
-	public ServerCall(ILocalProject localProject) {
+	public ServerCall(ESLocalProject localProject) {
 		this.projectSpace = localProject;
 		setProgressMonitor(null);
 	}
@@ -83,7 +83,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * 
 	 * @param server a given server
 	 */
-	public ServerCall(IServer server) {
+	public ServerCall(ESServer server) {
 		this.server = server;
 		setProgressMonitor(null);
 	}
@@ -96,7 +96,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(IUsersession usersession, IProgressMonitor monitor) {
+	public ServerCall(ESUsersession usersession, IProgressMonitor monitor) {
 		this.usersession = usersession;
 		setProgressMonitor(monitor);
 	}
@@ -109,7 +109,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(ILocalProject localProject, IProgressMonitor monitor) {
+	public ServerCall(ESLocalProject localProject, IProgressMonitor monitor) {
 		this.projectSpace = localProject;
 		setProgressMonitor(monitor);
 	}
@@ -122,7 +122,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param monitor
 	 *            monitor a progress monitor instance that is used during execution of the server call
 	 */
-	public ServerCall(IServer server, IProgressMonitor monitor) {
+	public ServerCall(ESServer server, IProgressMonitor monitor) {
 		this.server = server;
 		setProgressMonitor(monitor);
 	}
@@ -143,7 +143,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            the server info that should be used by this server call
 	 * @return
 	 */
-	public ServerCall<U> setServer(IServer server) {
+	public ServerCall<U> setServer(ESServer server) {
 		this.server = server;
 		return this;
 	}
@@ -155,7 +155,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 *            the user session to be used by the server call
 	 * @return
 	 */
-	public ServerCall<U> setUsersession(IUsersession usersession) {
+	public ServerCall<U> setUsersession(ESUsersession usersession) {
 		this.usersession = usersession;
 		return this;
 	}
@@ -229,7 +229,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @param sessionId
 	 *            the session ID to be used for authentication against the server
 	 */
-	public void setSessionId(ISessionId sessionId) {
+	public void setSessionId(ESSessionId sessionId) {
 		this.sessionId = (SessionId) sessionId;
 	}
 
@@ -241,7 +241,7 @@ public abstract class ServerCall<U> implements IServerCall {
 	 * @throws EMFStoreException
 	 *             in case any exception occurs during execution of the call
 	 */
-	public void run(ISessionId sessionId) throws EMFStoreException {
+	public void run(ESSessionId sessionId) throws EMFStoreException {
 		setSessionId(sessionId);
 		ret = run();
 	}

@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -20,9 +20,9 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
-public abstract class ServerBase extends EObjectImpl implements IServer, ServerInfo {
+public abstract class ServerBase extends EObjectImpl implements ESServer, ServerInfo {
 
-	private IUsersession validateUsersession(IUsersession usersession) throws EMFStoreException {
+	private ESUsersession validateUsersession(ESUsersession usersession) throws EMFStoreException {
 		if (usersession == null || !this.equals(usersession.getServer())) {
 			// TODO OTS custom exception
 			throw new EMFStoreException("Invalid usersession for given server.");
@@ -30,7 +30,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		return usersession;
 	}
 
-	public IRemoteProject createRemoteProject(IUsersession usersession, final String projectName,
+	public ESRemoteProject createRemoteProject(ESUsersession usersession, final String projectName,
 		final IProgressMonitor progressMonitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(validateUsersession(usersession)) {
 			@Override
@@ -41,7 +41,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		}.execute());
 	}
 
-	public IRemoteProject createRemoteProject(final String projectName,
+	public ESRemoteProject createRemoteProject(final String projectName,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return new RemoteProject(this, new ServerCall<ProjectInfo>(this) {
 			@Override
@@ -53,7 +53,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		}.execute());
 	}
 
-	private LogMessage createLogmessage(IUsersession usersession, final String projectName) {
+	private LogMessage createLogmessage(ESUsersession usersession, final String projectName) {
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		log.setMessage("Creating project '" + projectName + "'");
 		log.setAuthor(usersession.getUsername());
@@ -61,7 +61,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		return log;
 	}
 
-	public List<IRemoteProject> getRemoteProjects(IUsersession usersession)
+	public List<ESRemoteProject> getRemoteProjects(ESUsersession usersession)
 		throws EMFStoreException {
 
 		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {
@@ -89,7 +89,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 	 * 
 	 * @throws EmfStoreException
 	 * @throws AccessControlException
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IServer#login(java.lang.String, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.client.ESServer.IServer#login(java.lang.String, java.lang.String)
 	 * @generated NOT
 	 */
 	public Usersession login(String name, String password) throws EMFStoreException {
@@ -101,7 +101,7 @@ public abstract class ServerBase extends EObjectImpl implements IServer, ServerI
 		return usersession;
 	}
 
-	public List<IRemoteProject> getRemoteProjects() throws EMFStoreException {
+	public List<ESRemoteProject> getRemoteProjects() throws EMFStoreException {
 		return getRemoteProjects(null);
 	}
 }

@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -28,8 +30,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LoginObserver;
-import org.eclipse.emf.emfstore.internal.client.model.observers.LogoutObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
@@ -575,7 +575,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());
-		WorkspaceProvider.getObserverBus().notify(LoginObserver.class).loginCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this);
 	}
 
 	/**
@@ -585,7 +585,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		WorkspaceProvider.getObserverBus().notify(LogoutObserver.class).logoutCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(this);
 	}
 
 	// end of custom code
@@ -774,7 +774,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.api.IUsersession#getServer()
+	 * @see org.eclipse.emf.emfstore.internal.client.ESUsersession.IUsersession#getServer()
 	 * 
 	 * @generated NOT
 	 */

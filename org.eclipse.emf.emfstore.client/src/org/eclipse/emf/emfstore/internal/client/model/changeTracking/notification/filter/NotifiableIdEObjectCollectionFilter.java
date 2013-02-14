@@ -10,27 +10,28 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection;
 
 /**
- * A {@link NotificationFilter} that filters all notifications from
+ * A {@link ESNotificationFilter} that filters all notifications from
  * a {@link NotifiableIdEObjectCollection}.
  * 
  * @author emueller
  * 
  */
-public class NotifiableIdEObjectCollectionFilter implements NotificationFilter {
+public class NotifiableIdEObjectCollectionFilter implements ESNotificationFilter {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.NotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
+	 * @see org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
+	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
+	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
 		return (notificationInfo.getNotifier() instanceof NotifiableIdEObjectCollection);
 	}
 

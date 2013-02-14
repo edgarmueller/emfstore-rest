@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.emfstore.client.model.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -44,7 +45,6 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificatio
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MissingCommandException;
-import org.eclipse.emf.emfstore.internal.client.model.observers.PostCreationObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -182,7 +182,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 
 		// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
 		stopChangeRecording();
-		WorkspaceProvider.getObserverBus().notify(PostCreationObserver.class).onCreation(modelElement);
+		WorkspaceProvider.getObserverBus().notify(ESPostCreationObserver.class).onCreation(modelElement);
 		startChangeRecording();
 
 		Set<EObject> allModelElements = new LinkedHashSet<EObject>();
@@ -518,7 +518,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
-					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
+					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recordingOptions extension point.");
 		}
 
 		for (EObject eObject : new ArrayList<EObject>(cutElements)) {

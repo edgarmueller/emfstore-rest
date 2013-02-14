@@ -12,7 +12,8 @@
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ILocalProject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -22,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Pre-defined error handlers.
@@ -30,7 +31,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @author emueller
  * 
  */
-public enum ChecksumErrorHandler implements IChecksumErrorHandler {
+public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 
 	/**
 	 * Logs the checksum comparison failure and continues execution of the caller.
@@ -39,7 +40,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
 			return true;
@@ -53,7 +54,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(ILocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		public boolean execute(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 			throws EMFStoreException {
 			return false;
 		}
@@ -68,7 +69,7 @@ public enum ChecksumErrorHandler implements IChecksumErrorHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		public boolean execute(final ILocalProject project, final IPrimaryVersionSpec versionSpec,
+		public boolean execute(final ESLocalProject project, final ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor monitor) throws EMFStoreException {
 
 			// TODO: OTS casts

@@ -52,14 +52,6 @@ public class ReferenceConflict extends Conflict {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected boolean allowOtherOptions() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	protected ConflictContext initConflictContext() {
 		return conflict.getConflictContext();
 	}

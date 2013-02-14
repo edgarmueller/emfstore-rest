@@ -11,8 +11,11 @@ Require-Bundle: org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)";visibility:=
  org.eclipse.emf.emfstore.server;bundle-version="0.9.3";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.model.Activator
-Import-Package: org.eclipse.emf.emfstore.internal.client.model.observers
+Import-Package: org.eclipse.emf.emfstore.client.model.observer
 Export-Package: org.eclipse.emf.emfstore.client,
+ org.eclipse.emf.emfstore.client.exceptions,
+ org.eclipse.emf.emfstore.client.model.handler,
+ org.eclipse.emf.emfstore.client.model.observer,
  org.eclipse.emf.emfstore.client.sessionprovider,
  org.eclipse.emf.emfstore.internal.client.common,
  org.eclipse.emf.emfstore.internal.client.model,

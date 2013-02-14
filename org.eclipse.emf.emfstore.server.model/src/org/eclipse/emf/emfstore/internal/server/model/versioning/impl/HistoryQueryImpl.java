@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>History Query</b></em>'. <!-- end-user-doc -->
@@ -170,10 +170,10 @@ public abstract class HistoryQueryImpl extends EObjectImpl implements HistoryQue
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.api.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ESHistoryQuery.query.IHistoryQuery#setSource(org.eclipse.emf.emfstore.internal.server.model.ESPrimaryVersionSpec.versionspecs.IPrimaryVersionSpec)
 	 * @generated NOT
 	 */
-	public void setSource(IPrimaryVersionSpec newSource) {
+	public void setSource(ESPrimaryVersionSpec newSource) {
 		setSource((PrimaryVersionSpec) newSource);
 	}
 

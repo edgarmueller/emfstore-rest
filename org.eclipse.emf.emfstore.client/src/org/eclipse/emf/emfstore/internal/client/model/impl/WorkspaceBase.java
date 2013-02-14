@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -60,10 +60,10 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.model.IBranchInfo;
-import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Workspace space base class that contains custom user methods.
@@ -104,17 +104,17 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<IBranchInfo> getBranches(IServer serverInfo, final IGlobalProjectId projectId) throws EMFStoreException {
-		return new ServerCall<List<IBranchInfo>>((ServerInfo) serverInfo) {
+	public List<ESBranchInfo> getBranches(ESServer serverInfo, final ESGlobalProjectId projectId) throws EMFStoreException {
+		return new ServerCall<List<ESBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
-			protected List<IBranchInfo> run() throws EMFStoreException {
+			protected List<ESBranchInfo> run() throws EMFStoreException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<IBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
+				return (List<ESBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
 			};
 		}.execute();
 	}
 
-	public ProjectInfo createEmptyRemoteProject(final IUsersession usersession, final String projectName,
+	public ProjectInfo createEmptyRemoteProject(final ESUsersession usersession, final String projectName,
 		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
@@ -168,7 +168,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.ServerInfo,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public ProjectInfo createRemoteProject(IServer serverInfo, final String projectName,
+	public ProjectInfo createRemoteProject(ESServer serverInfo, final String projectName,
 		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((ServerInfo) serverInfo) {
 			@Override
@@ -185,7 +185,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createRemoteProject(org.eclipse.emf.emfstore.internal.client.model.Usersession,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public ProjectInfo createRemoteProject(IUsersession usersession, final String projectName,
+	public ProjectInfo createRemoteProject(ESUsersession usersession, final String projectName,
 		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
 		return new ServerCall<ProjectInfo>((Usersession) usersession) {
 			@Override
@@ -300,10 +300,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#addServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#addServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
-	public void addServer(IServer serverInfo) {
-		getServers().add((ServerInfo) serverInfo);
+	public void addServer(ESServer server) {
+		getServerInfos().add((ServerInfo) server);
 		save();
 	}
 
@@ -311,10 +311,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#removeServer(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#removeServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
-	public void removeServer(IServer serverInfo) {
-		getServers().remove(serverInfo);
+	public void removeServer(ESServer server) {
+		getServerInfos().remove(server);
 		save();
 	}
 
@@ -417,9 +417,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
-	public IPrimaryVersionSpec resolveVersionSpec(final IUsersession usersession, final IVersionSpec versionSpec,
-		final IGlobalProjectId projectId) throws EMFStoreException {
-		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
+	public ESPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final ESVersionSpec versionSpec,
+		final ESGlobalProjectId projectId) throws EMFStoreException {
+		return new ServerCall<ESPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
@@ -553,15 +553,32 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 		return projectSpace;
 	}
 
-	public List<ILocalProject> getLocalProjects() {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getLocalProjects()
+	 */
+	public List<ESLocalProject> getLocalProjects() {
 		return copy(getProjectSpaces());
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<IServer> getServers() {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getServers()
+	 */
+	public List<ESServer> getServers() {
 		return copy(getServerInfos());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver#projectSpaceDeleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 */
 	public void projectSpaceDeleted(ProjectSpace projectSpace) {
 		assert (projectSpace != null);
 

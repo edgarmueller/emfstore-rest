@@ -7,15 +7,15 @@ import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 
 public final class ProjectChangeUtil {
 
 	private ProjectChangeUtil() {
 	}
 
-	public static Player addPlayerToProject(ILocalProject localProject) {
+	public static Player addPlayerToProject(ESLocalProject localProject) {
 		Player player = createPlayer("player");
 		localProject.getModelElements().add(player);
 		return player;
@@ -62,8 +62,8 @@ public final class ProjectChangeUtil {
 		return matchup;
 	}
 
-	public static ILocalProject createBasicBowlingProject() {
-		ILocalProject localProject = IWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+	public static ESLocalProject createBasicBowlingProject() {
+		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"BasicBowlingProject", "");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");

@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.importexport;
 
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectHistoryController;
@@ -111,7 +112,8 @@ public class ExportImportControllerFactory {
 		 * @return a controller for importing changes on the given project space
 		 */
 		public static IExportImportController getImportChangesController(ProjectSpace projectSpace) {
-			return new ImportChangesController(projectSpace);
+			// TODO: cast
+			return new ImportChangesController((ProjectSpaceBase) projectSpace);
 		}
 
 		/**

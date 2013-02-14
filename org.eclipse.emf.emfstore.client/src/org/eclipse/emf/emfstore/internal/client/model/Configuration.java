@@ -18,20 +18,20 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.IServer;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
+import org.eclipse.emf.emfstore.client.model.provider.ESClientVersionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
-import org.eclipse.emf.emfstore.internal.client.common.IClientVersionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
-import org.eclipse.emf.emfstore.internal.client.model.util.ConfigurationProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocationProvider;
-import org.eclipse.emf.emfstore.internal.client.model.util.IChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.LocationProvider;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.server.ESLocationProvider;
 import org.osgi.framework.Bundle;
 
 /**
@@ -81,13 +81,13 @@ public final class Configuration {
 
 	private static Boolean autoSave;
 
-	private static LocationProvider locationProvider;
+	private static ESLocationProvider locationProvider;
 	private static EditingDomain editingDomain;
 
 	private static int xmlRPCConnectionTimeout = XML_RPC_CONNECTION_TIMEOUT;
 	private static int xmlRPCReplyTimeout = XML_RPC_REPLY_TIMEOUT;
 
-	private static IChecksumErrorHandler checksumErrorHandler;
+	private static ESChecksumErrorHandler checksumErrorHandler;
 
 	private Configuration() {
 		// nothing to do
@@ -130,18 +130,18 @@ public final class Configuration {
 	}
 
 	/**
-	 * Returns the registered {@link LocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
+	 * Returns the registered {@link ESLocationProvider} or if not existent, the
+	 * {@link DefaultWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
-	public static LocationProvider getLocationProvider() {
+	public static ESLocationProvider getLocationProvider() {
 		if (locationProvider == null) {
 
 			try {
 				// TODO EXPT PRIO
-				locationProvider = new ExtensionPoint(
-					"org.eclipse.emf.emfstore.client.workspaceLocationProvider")
-					.setThrowException(true).getClass("providerClass", LocationProvider.class);
+				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.client.workspaceLocationProvider")
+					.setThrowException(true).getClass("providerClass", ESLocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
 				ModelUtil.logInfo(message);
@@ -188,11 +188,11 @@ public final class Configuration {
 	 * @return server info
 	 */
 	public static List<ServerInfo> getDefaultServerInfos() {
-		ConfigurationProvider provider = new ExtensionPoint(
+		ESClientConfigurationProvider provider = new ExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
-			ConfigurationProvider.class);
+			ESClientConfigurationProvider.class);
 		if (provider != null) {
-			List<IServer> defaultServerInfos = provider.getDefaultServerInfos();
+			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
 			if (defaultServerInfos != null) {
 				// OTS cast
 				return (List<ServerInfo>) (List<?>) defaultServerInfos;
@@ -251,13 +251,14 @@ public final class Configuration {
 		clientVersionInfo.setName(CLIENT_NAME);
 
 		String versionId;
-		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.version")
-			.setThrowException(
-				false).getFirst();
+		ExtensionElement version = new ExtensionPoint("org.eclipse.emf.emfstore.client.clientVersion")
+			.setThrowException(false).getFirst();
 
 		if (version != null) {
-			IClientVersionProvider versionProvider = version.getClass("class", IClientVersionProvider.class);
-			return versionProvider.getVersion();
+			ESClientVersionProvider versionProvider = version.getClass("class", ESClientVersionProvider.class);
+			clientVersionInfo.setName(versionProvider.getName());
+			clientVersionInfo.setVersion(versionProvider.getVersion());
+			return clientVersionInfo;
 		}
 
 		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.client");
@@ -399,7 +400,7 @@ public final class Configuration {
 	 */
 	public static boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
-			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recording.options").getBoolean(
+			autoSave = new ExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		}
 		return autoSave;
@@ -421,34 +422,32 @@ public final class Configuration {
 	}
 
 	/**
-	 * Whether the checksum check is active. If true, and checksum comparison fails, an {@link IChecksumErrorHandler}
+	 * Whether the checksum check is active. If true, and checksum comparison fails, an {@link ESChecksumErrorHandler}
 	 * will be active.
 	 * 
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public static boolean isChecksumCheckActive() {
-		ExtensionPoint extensionPoint = new ExtensionPoint(
-			"org.eclipse.emf.emfstore.client.checksumErrorHandler");
+		ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
 	/**
-	 * Returns the active {@link IChecksumErrorHandler}. The default is {@link ChecksumErrorHandler#AUTOCORRECT}.
+	 * Returns the active {@link ESChecksumErrorHandler}. The default is {@link ChecksumErrorHandler#AUTOCORRECT}.
 	 * 
 	 * @return the active checksum error handler
 	 */
-	public static IChecksumErrorHandler getChecksumErrorHandler() {
+	public static ESChecksumErrorHandler getChecksumErrorHandler() {
 
 		if (checksumErrorHandler == null) {
 
-			ExtensionPoint extensionPoint = new ExtensionPoint(
-				"org.eclipse.emf.emfstore.client.checksumErrorHandler");
+			ExtensionPoint extensionPoint = new ExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
 			ExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 
 			if (elementWithHighestPriority != null) {
-				IChecksumErrorHandler errorHandler = elementWithHighestPriority.getClass("errorHandler",
-					IChecksumErrorHandler.class);
+				ESChecksumErrorHandler errorHandler = elementWithHighestPriority.getClass("errorHandler",
+					ESChecksumErrorHandler.class);
 
 				if (errorHandler != null) {
 					checksumErrorHandler = errorHandler;
@@ -462,12 +461,12 @@ public final class Configuration {
 	}
 
 	/**
-	 * Set the active {@link IChecksumErrorHandler}.
+	 * Set the active {@link ESChecksumErrorHandler}.
 	 * 
 	 * @param errorHandler
 	 *            the error handler to be set
 	 */
-	public static void setChecksumFailureAction(IChecksumErrorHandler errorHandler) {
+	public static void setChecksumFailureAction(ESChecksumErrorHandler errorHandler) {
 		checksumErrorHandler = errorHandler;
 	}
 }

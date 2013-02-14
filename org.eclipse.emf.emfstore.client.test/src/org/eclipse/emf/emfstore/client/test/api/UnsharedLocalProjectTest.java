@@ -13,28 +13,28 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.ILocalProject;
-import org.eclipse.emf.emfstore.client.IRemoteProject;
-import org.eclipse.emf.emfstore.client.IServer;
-import org.eclipse.emf.emfstore.client.IUsersession;
-import org.eclipse.emf.emfstore.client.IWorkspace;
-import org.eclipse.emf.emfstore.client.IWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.query.IHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
-	private final IWorkspace workspace = IWorkspaceProvider.INSTANCE.getWorkspace();
-	private ILocalProject localProject;
+	private final ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
+	private ESLocalProject localProject;
 
 	@Override
 	@Before
@@ -46,8 +46,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-		List<ILocalProject> projects = new ArrayList<ILocalProject>(workspace.getLocalProjects());
-		for (ILocalProject lp : projects) {
+		List<ESLocalProject> projects = new ArrayList<ESLocalProject>(workspace.getLocalProjects());
+		for (ESLocalProject lp : projects) {
 			lp.delete(new NullProgressMonitor());
 		}
 		super.tearDown();
@@ -67,7 +67,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = RuntimeException.class)
 	public void testAddTag() throws EMFStoreException {
 		// a tag can not be created for an unshared project
-		localProject.addTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("test", "test"),
+		localProject.addTag(localProject.getBaseVersion(), ESVersionSpec.FACTORY.createTAG("test", "test"),
 			new NullProgressMonitor());
 		fail("Cannot add a tag!");
 	}
@@ -87,21 +87,21 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = RuntimeException.class)
 	public void testCommit2() throws EMFStoreException {
 		// can not commit an unshared project
-		localProject.commit(ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
+		localProject.commit(ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testCommitToBranch() throws EMFStoreException {
-		localProject.commitToBranch(IVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
-			ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
+		localProject.commitToBranch(ESVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
+			ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
 	@Test
 	public void testGetBaseVersion() {
 		// unshared project has no base version
-		IPrimaryVersionSpec version = localProject.getBaseVersion();
+		ESPrimaryVersionSpec version = localProject.getBaseVersion();
 		assertNull(version);
 	}
 
@@ -114,8 +114,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = EMFStoreException.class)
 	public void testGetHistoryInfos() throws EMFStoreException {
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		IModelElementId id = localProject.getModelElementId(player);
-		IHistoryQuery query = IHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
+		ESModelElementId id = localProject.getModelElementId(player);
+		ESHistoryQuery query = ESHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
 			true);
 		localProject.getHistoryInfos(query, new NullProgressMonitor());
 		fail("Should not be able to getHistoryInfos from an unshared Project!");
@@ -130,14 +130,14 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = EMFStoreException.class)
 	public void testGetRemoteProject() throws EMFStoreException {
-		IRemoteProject remoteProject = localProject.getRemoteProject();
+		ESRemoteProject remoteProject = localProject.getRemoteProject();
 		assertNull(remoteProject);
 		fail("Should not be able to getRemoteProject from an unshared Project!");
 	}
 
 	@Test
 	public void testGetUsersession() {
-		IUsersession session = localProject.getUsersession();
+		ESUsersession session = localProject.getUsersession();
 		assertNull(session);
 	}
 
@@ -185,14 +185,14 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveTag() throws EMFStoreException {
-		localProject.removeTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("tag", "branch"),
+		localProject.removeTag(localProject.getBaseVersion(), ESVersionSpec.FACTORY.createTAG("tag", "branch"),
 			new NullProgressMonitor());
 		fail("Should not remove a tag from an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testResolveSpec() throws EMFStoreException {
-		localProject.resolveVersionSpec(IVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
+		localProject.resolveVersionSpec(ESVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
 		fail("Should not be able to resolve a version spec from an unshared Project!");
 	}
 
@@ -307,10 +307,10 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testShareSession() {
 		try {
-			IServer server = IServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
-			IUsersession usersession = server.login("super", "super");
+			ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+			ESUsersession usersession = server.login("super", "super");
 			localProject.shareProject(usersession, new NullProgressMonitor());
-			IRemoteProject remote = localProject.getRemoteProject();
+			ESRemoteProject remote = localProject.getRemoteProject();
 			assertNotNull(remote);
 		} catch (EMFStoreException e) {
 			log(e);
