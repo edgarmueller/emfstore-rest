@@ -144,7 +144,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 			public Boolean call() throws Exception {
 				// TODO: include project name, use confirm method
 				return MessageDialog.openConfirm(getShell(),
-					"Delete project?",
+					"Confirmation",
 					"Are you sure you want to delete?");
 			}
 		});
@@ -159,7 +159,6 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 			remoteProject.delete(monitor);
 		}
 	}
-
 	// private void deleteRemoteProject(Usersession session, ProjectId projectId, boolean deleteFiles)
 	// throws EMFStoreException {
 	// if (confirm("Confirmation", "Do you really want to delete the remote project?")) {
