@@ -17,19 +17,34 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 
 /**
- * The ModelElementQuery is a
- * specialization of the range query, which allows to additionally lter the results produced
- * by the range query on selected elements. All queries can include the respective change
- * operations and can be used globally or branch speci c.
+ * The model element query is a specialization of the {@link IRangeQuery}, which allows to additionally
+ * alter the results produced by the range query on selected elements.
  * 
  * @author Edgar
  * 
  */
 public interface IModelElementQuery extends IRangeQuery {
 
+	/**
+	 * Returns all model element IDs this query is filtering for.
+	 * 
+	 * @return a list of model elements IDs for which this query is filtering for
+	 */
 	List<IModelElementId> getModelElementIds();
 
+	/**
+	 * Adds the ID of a model element that the query should filter for.
+	 * 
+	 * @param id
+	 *            the ID of a model element
+	 */
 	void addModelElementId(IModelElementId id);
 
+	/**
+	 * Removes the ID of a model element from this query.
+	 * 
+	 * @param id
+	 *            the ID of the model element to be removed
+	 */
 	void removeModelElementId(IModelElementId id);
 }

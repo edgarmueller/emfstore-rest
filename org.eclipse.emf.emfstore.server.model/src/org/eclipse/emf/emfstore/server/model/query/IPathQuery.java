@@ -14,10 +14,27 @@ package org.eclipse.emf.emfstore.server.model.query;
 
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
+/**
+ * A path query additionally considers a target version beside the source version,
+ * i.e. it is possible to specify a version range.
+ * 
+ * @author wesendon
+ * @author emueller
+ */
 public interface IPathQuery extends IHistoryQuery {
 
+	/**
+	 * Returns the target {@link IPrimaryVersionSpec}.
+	 * 
+	 * @return the target version
+	 */
 	IPrimaryVersionSpec getTarget();
 
+	/**
+	 * Sets the target {@link IPrimaryVersionSpec}.
+	 * 
+	 * @param target
+	 *            the target version to be used by the query
+	 */
 	void setTarget(IPrimaryVersionSpec target);
-
 }

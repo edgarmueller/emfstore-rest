@@ -15,19 +15,64 @@ package org.eclipse.emf.emfstore.server.model.query;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryFactoryImpl;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
+/**
+ * A query that is used to retrieve information about the version history.
+ * 
+ * @author emueller
+ * @author wesendom
+ */
 public interface IHistoryQuery {
 
+	/**
+	 * Factory for creating history queries.
+	 */
 	IHistoryQueryFactory FACTORY = HistoryQueryFactoryImpl.INSTANCE;
 
+	/**
+	 * Returns the {@link IPrimaryVersionSpec} this history query is pointing to.
+	 * 
+	 * @return the version specifier this history query points to
+	 */
 	IPrimaryVersionSpec getSource();
 
-	void setSource(IPrimaryVersionSpec spec);
+	/**
+	 * Sets the version specifier this history query should be pointing to.
+	 * 
+	 * @param versionSpec
+	 *            the version specifier the history query should be pointing to
+	 */
+	void setSource(IPrimaryVersionSpec versionSpec);
 
-	void setIncludeChangePackages(boolean value);
+	/**
+	 * Determines whether {@link org.eclipse.emf.emfstore.server.model.IChangePackage}s
+	 * are included in the query.
+	 * 
+	 * @param includeChangePackages
+	 *            {@code true}, if change packages should be included in the query, {@code false} otherwise
+	 */
+	void setIncludeChangePackages(boolean includeChangePackages);
 
+	/**
+	 * Whether {@link org.eclipse.emf.emfstore.server.model.IChangePackage}s are included in the query.
+	 * 
+	 * @return {@code true}, if change packages are included in the query, {@code false} otherwise
+	 */
 	boolean isIncludeChangePackages();
 
-	void setIncludeAllVersions(boolean value);
+	/**
+	 * Determines whether to include all versions, i.e. whether branches should be
+	 * considered by the history query.
+	 * 
+	 * @param includeAllVersion
+	 *            {@code true}, if branches should be considered, {@code false} otherwise
+	 */
+	void setIncludeAllVersions(boolean includeAllVersion);
 
+	/**
+	 * Whether the include all versions, i.e. whether branches should be
+	 * considered by the history query.
+	 * 
+	 * @return {@code true}, if branches are considered by the query, {@code false} otherwise
+	 */
 	boolean isIncludeAllVersions();
 }

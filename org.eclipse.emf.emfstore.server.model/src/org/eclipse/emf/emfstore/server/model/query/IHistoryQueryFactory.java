@@ -18,82 +18,91 @@ import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
 import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 
+/**
+ * Factory for creating history queries.
+ * 
+ * @author wesendon
+ * @author emueller
+ */
 public interface IHistoryQueryFactory extends IEMFStoreFactory {
 
 	/**
-	 * Factory method for creating range query.
+	 * Factory method for creating a {@link IRangeQuery}.
 	 * 
 	 * @param source
-	 *            source version
+	 *            the source version of the query
 	 * @param upper
-	 *            upper limit
+	 *            the upper limit of the query
 	 * @param lower
-	 *            lower limit
+	 *            the lower limit of the query
 	 * @param allVersions
-	 *            include all versions, from all branches
+	 *            whether to include all versions, from all branches
 	 * @param incoming
-	 *            include incoming versions, only if allVersions is false
+	 *            whether to include incoming versions, only if {@code allVersions} is set to {@code false}
 	 * @param outgoing
-	 *            include outgoing versions
-	 * @param includeCp
-	 *            include changepackges
-	 * @return query
+	 *            whether to include include outgoing versions
+	 * @param includeChangePackages
+	 *            whether to include change packges
+	 * @return query the constructed range query
 	 */
-	IRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower, boolean allVersions, boolean incoming,
-		boolean outgoing, boolean includeCp);
+	IRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower,
+		boolean allVersions, boolean incoming,
+		boolean outgoing, boolean includeChangePackages);
 
 	/**
-	 * Factory method for path query. Getting all changes from source to target.
+	 * Factory method for creating a {@link IPathQuery}, which fetches
+	 * all changes from {@code source} to {@code target}.
 	 * 
 	 * @param source
-	 *            source version
+	 *            the source version of the query
 	 * @param target
-	 *            target version
+	 *            the target version of the query
 	 * @param allVersions
-	 *            include all versions, from all branches
-	 * @param includeCp
-	 *            include changepackages
-	 * @return query
+	 *            whether to include all versions, from all branches
+	 * @param includeChangePackages
+	 *            whether to include change packges
+	 * @return query the constructed path query
 	 */
-	IPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target, boolean allVersions, boolean includeCp);
+	IPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target,
+		boolean allVersions, boolean includeChangePackages);
 
 	/**
-	 * Factory method for modelelements range queries.
+	 * Factory method for creating a {@link IModelElementQuery}.
 	 * 
 	 * @param source
-	 *            source version
+	 *            the source version of the query
 	 * @param modelElements
-	 *            modelelements
+	 *            a list containing the IDs of possibly multiple model elements
 	 * @param upper
-	 *            upper limit
+	 *            the upper limit of the query
 	 * @param lower
-	 *            lower limit
+	 *            the lower limit of the query
 	 * @param allVersions
 	 *            include all versions, from all branches
-	 * @param includeCp
-	 *            include change packages
-	 * @return query
+	 * @param includeChangePackages
+	 *            whether to include change packages
+	 * @return query the constructed model element query
 	 */
 	IModelElementQuery modelelementQuery(IPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
-		int lower, boolean allVersions, boolean includeCp);
+		int lower, boolean allVersions, boolean includeChangePackages);
 
 	/**
-	 * Factory method for modelelement range queries.
+	 * Factory method for creating a {@link IModelElementQuery}.
 	 * 
 	 * @param source
-	 *            source version
+	 *            the source version of the query
 	 * @param id
-	 *            modelelement
+	 *            the ID of a model element
 	 * @param upper
-	 *            upper limit
+	 *            the upper limit of the query
 	 * @param lower
-	 *            lower limit
+	 *            the lower limit of the query
 	 * @param allVersions
-	 *            include all versions, from all branches
-	 * @param includeCp
-	 *            include change packages
-	 * @return query
+	 *            whether to include all versions, from all branches
+	 * @param includeChangePackages
+	 *            whether to include change packages
+	 * @return query the constructed model element query
 	 */
-	IModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id, int upper, int lower,
-		boolean allVersions, boolean includeCp);
+	IModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id,
+		int upper, int lower, boolean allVersions, boolean includeChangePackages);
 }
