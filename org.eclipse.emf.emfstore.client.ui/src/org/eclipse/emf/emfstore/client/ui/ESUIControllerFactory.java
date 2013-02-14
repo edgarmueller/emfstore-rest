@@ -12,9 +12,9 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 
-public interface UIControllerFactory {
+public interface ESUIControllerFactory {
 
-	UIControllerFactory INSTANCE = UIControllerFactoryImpl.INSTANCE;
+	ESUIControllerFactory INSTANCE = UIControllerFactoryImpl.INSTANCE;
 
 	ESPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project);
 

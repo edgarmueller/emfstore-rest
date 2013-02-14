@@ -255,8 +255,7 @@ public final class ServerConfiguration {
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the
 	 * values
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#RESOLVEALL}
-	 * ,
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#RESOLVEALL} ,
 	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
 	 * and
 	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
@@ -443,7 +442,8 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Returns the registered {@link ESLocationProvider} or if not existent, the {@link DefaultWorkspaceLocationProvider}.
+	 * Returns the registered {@link ESLocationProvider} or if not existent, the
+	 * {@link DefaultWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
@@ -451,8 +451,8 @@ public final class ServerConfiguration {
 		if (locationProvider == null) {
 			// TODO EXPT PRIO
 			try {
-				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.server.locationprovider",
-					true).getClass("providerClass", ESLocationProvider.class);
+				locationProvider = new ExtensionPoint("org.eclipse.emf.emfstore.server.locationProvider", true)
+					.getClass("providerClass", ESLocationProvider.class);
 			} catch (ExtensionPointException e) {
 				String message = "No location provider or error while instantiating location provider, switching to default location!";
 				ModelUtil.logWarning(message);
@@ -654,7 +654,7 @@ public final class ServerConfiguration {
 		if (isChecksumComputationOnCommitActive == null) {
 			try {
 				isChecksumComputationOnCommitActive = new ExtensionPoint(
-					"org.eclipse.emf.emfstore.server.computechecksum", true)
+					"org.eclipse.emf.emfstore.server.computeChecksum", true)
 					.getBoolean("shouldComputeChecksumOnCommit");
 			} catch (ExtensionPointException e) {
 				String message = "Can not determine whether to compute checksums on commit, default is true.";

@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory;
+package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;

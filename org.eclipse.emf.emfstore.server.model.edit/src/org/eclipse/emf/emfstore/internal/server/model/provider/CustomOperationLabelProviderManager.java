@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.common.IDisposable;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
-import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -51,7 +47,6 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 	 */
 	private CustomOperationLabelProviderManager() {
 		list = new ArrayList<AbstractOperationCustomLabelProvider>();
-		collectExtensions();
 	}
 
 	/**
@@ -81,19 +76,19 @@ public final class CustomOperationLabelProviderManager implements IDisposable {
 		return highestVisualizer;
 	}
 
-	private void collectExtensions() {
-		for (ExtensionElement element : new ExtensionPoint(
-			"org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true)
-			.getExtensionElements()) {
-			try {
-				AbstractOperationCustomLabelProvider provider = element.getClass("class",
-					AbstractOperationCustomLabelProvider.class);
-				list.add(provider);
-			} catch (ExtensionPointException e) {
-				ModelUtil.logException("Exception occured while initializing custom label provider extensions!", e);
-			}
-		}
-	}
+	// private void collectExtensions() {
+	// for (ExtensionElement element : new ExtensionPoint(
+	// "org.eclipse.emf.emfstore.server.model.edit.customOperationLabelProvider", true)
+	// .getExtensionElements()) {
+	// try {
+	// AbstractOperationCustomLabelProvider provider = element.getClass("class",
+	// AbstractOperationCustomLabelProvider.class);
+	// list.add(provider);
+	// } catch (ExtensionPointException e) {
+	// ModelUtil.logException("Exception occured while initializing custom label provider extensions!", e);
+	// }
+	// }
+	// }
 
 	/**
 	 * 
