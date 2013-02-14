@@ -199,7 +199,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
 			}
-		};
+		}.execute();
 	}
 
 	/**
@@ -1420,4 +1420,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new LocalProjectIdImpl(getIdentifier());
 	}
 
+	public boolean isInitialized() {
+		return initCompleted;
+	}
 }

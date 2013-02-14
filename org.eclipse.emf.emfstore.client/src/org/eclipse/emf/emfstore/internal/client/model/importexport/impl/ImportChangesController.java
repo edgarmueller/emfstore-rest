@@ -107,6 +107,10 @@ public class ImportChangesController implements IExportImportController {
 
 		ChangePackage changePackage = (ChangePackage) directContents.get(0);
 
+		if (!projectSpace.isInitialized()) {
+			projectSpace.init();
+		}
+
 		projectSpace.applyOperations(changePackage.getOperations(), true);
 	}
 
