@@ -7,8 +7,12 @@ Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.internal.server.model;x-friends:="org.eclipse.emf.emfstore.server,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.ui",
- org.eclipse.emf.emfstore.internal.server.model.accesscontrol;x-friends:="org.eclipse.emf.emfstore.server,org.eclipse.emf.emfstore.client",
+Export-Package: org.eclipse.emf.emfstore.internal.server.model;
+  x-friends:="org.eclipse.emf.emfstore.server,
+   org.eclipse.emf.emfstore.client,
+   org.eclipse.emf.emfstore.client.ui,
+   org.eclipse.emf.emfstore.client.model.edit",
+ org.eclipse.emf.emfstore.internal.server.model.accesscontrol;x-friends:="org.eclipse.emf.emfstore.server,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.model.edit",
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles;x-friends:="org.eclipse.emf.emfstore.server,org.eclipse.emf.emfstore.client",
  org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.impl;x-friends:="org.eclipse.emf.emfstore.server",
@@ -23,7 +27,8 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model;x-friends:="org.e
   x-friends:="org.eclipse.emf.emfstore.server,
    org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.test,
-   org.eclipse.emf.emfstore.client.ui",
+   org.eclipse.emf.emfstore.client.ui,
+   org.eclipse.emf.emfstore.client.model.edit",
  org.eclipse.emf.emfstore.internal.server.model.versioning.events;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.versioning.events.impl;x-friends:="org.eclipse.emf.emfstore.server",
  org.eclipse.emf.emfstore.internal.server.model.versioning.events.server;x-friends:="org.eclipse.emf.emfstore.server",
