@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'.
  * 
- * @extends {@link IBranchVersionSpec} <!--
+ * @extends {@link ESBranchVersionSpec} <!--
  *          end-user-doc -->
  * 
  * 
@@ -23,5 +23,5 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
  * @model
  * @generated
  */
-public interface BranchVersionSpec extends VersionSpec, IBranchVersionSpec {
+public interface BranchVersionSpec extends VersionSpec, ESBranchVersionSpec {
 } // BranchVersionSpec

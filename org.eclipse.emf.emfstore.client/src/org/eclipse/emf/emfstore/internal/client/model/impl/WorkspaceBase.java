@@ -62,8 +62,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Workspace space base class that contains custom user methods.
@@ -417,9 +417,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
-	public IPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final IVersionSpec versionSpec,
+	public ESPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final ESVersionSpec versionSpec,
 		final IGlobalProjectId projectId) throws EMFStoreException {
-		return new ServerCall<IPrimaryVersionSpec>((Usersession) usersession) {
+		return new ServerCall<ESPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws EMFStoreException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();

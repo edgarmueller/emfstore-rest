@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'.
  * 
- * @extends ITagVersionSpec
+ * @extends ESTagVersionSpec
  *          <!-- end-user-doc
  *          -->
  * 
@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
  * @model
  * @generated
  */
-public interface TagVersionSpec extends VersionSpec, ITagVersionSpec {
+public interface TagVersionSpec extends VersionSpec, ESTagVersionSpec {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->

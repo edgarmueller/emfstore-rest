@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Represents a remote project on the server.
@@ -79,16 +79,16 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
+	ESLocalProject checkout(final ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
-	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
+	 * Resolves a {@link ESVersionSpec} to a {@link ESPrimaryVersionSpec} by querying the server.
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to resolve the given
-	 *            {@link IVersionSpec}
+	 *            {@link ESVersionSpec}
 	 * @param versionSpec
 	 *            the version spec to resolve
 	 * @param monitor
@@ -98,7 +98,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while resolving the version
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, IVersionSpec versionSpec, IProgressMonitor monitor)
+	ESPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -171,5 +171,5 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while fetching the HEAD version of the project
 	 */
-	IPrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException;
+	ESPrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException;
 }

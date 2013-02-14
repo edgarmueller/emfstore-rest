@@ -13,25 +13,18 @@
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
 /**
- * A primary version specifier is a version specifier that has
- * a globally unique number that may be used to identify a specific
- * version. Globally unique means that this identifier is unique even
- * in the case of branches.
+ * Represents a version specifier that identifier a specific tag.
  * 
  * @author wesendon
  * @author emueller
  */
-public interface IPrimaryVersionSpec extends IVersionSpec {
+public interface ESTagVersionSpec extends ESVersionSpec {
 
 	/**
-	 * <p>
-	 * Returns the globally unique numeric identifier.
-	 * </p>
-	 * <p>
-	 * This identifier is also unique even in case of branches.
-	 * </p>
+	 * Return the name of the tag name this version specifier is associated with.
 	 * 
-	 * @return the globally unique numeric identifier of this version
+	 * @return the name of the tag
 	 */
-	int getIdentifier();
+	// TODO OTS currently called getName, rename to getTag?
+	String getName();
 }

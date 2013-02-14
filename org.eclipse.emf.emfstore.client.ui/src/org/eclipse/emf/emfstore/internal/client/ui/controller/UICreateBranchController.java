@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -50,7 +50,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author wesendon
  * 
  */
-public class UICreateBranchController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
+public class UICreateBranchController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
@@ -117,8 +117,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
-					IPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					IPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
+					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
 						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
@@ -223,7 +223,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<IPrim
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);

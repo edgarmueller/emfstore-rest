@@ -6,7 +6,7 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IComm
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 public class CommitCallbackAdapter implements ICommitCallback {
 
@@ -23,7 +23,7 @@ public class CommitCallbackAdapter implements ICommitCallback {
 		// do nothing
 	}
 
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		return true;
 	}

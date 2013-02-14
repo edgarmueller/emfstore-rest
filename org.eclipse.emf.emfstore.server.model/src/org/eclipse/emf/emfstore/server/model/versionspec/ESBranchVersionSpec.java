@@ -12,21 +12,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
-import java.util.Date;
-
 /**
- * Represents a version specifier that is based on a date.
+ * Represents a version specifier that is used to identify a branch.
  * 
- * @author emueller
  * @author wesendon
+ * @author emueller
  */
-public interface IDateVersionSpec extends IVersionSpec {
-
-	/**
-	 * Returns the date this version specifier is based on.
-	 * 
-	 * @return the date this version specifier is based on
-	 */
-	Date getDate();
-
+public interface ESBranchVersionSpec extends ESVersionSpec {
 }

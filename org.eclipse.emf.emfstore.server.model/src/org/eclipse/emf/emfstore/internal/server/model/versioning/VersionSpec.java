@@ -11,12 +11,12 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'.
  * 
- * @extends IVersionSpec
+ * @extends ESVersionSpec
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
  * @model abstract="true"
  * @generated
  */
-public interface VersionSpec extends EObject, IVersionSpec {
+public interface VersionSpec extends EObject, ESVersionSpec {
 
 	/**
 	 * Returns the value of the '<em><b>Branch</b></em>' attribute.

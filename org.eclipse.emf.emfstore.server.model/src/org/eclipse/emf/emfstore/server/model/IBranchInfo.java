@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Represents information about a specific branch.
@@ -32,9 +32,9 @@ public interface IBranchInfo {
 	/**
 	 * Returns the HEAD version of this branch.
 	 * 
-	 * @return the {@link IPrimaryVersionSpec} of the HEAD version of this branch
+	 * @return the {@link ESPrimaryVersionSpec} of the HEAD version of this branch
 	 */
-	IPrimaryVersionSpec getHead();
+	ESPrimaryVersionSpec getHead();
 
 	/**
 	 * <p>
@@ -44,7 +44,7 @@ public interface IBranchInfo {
 	 * The source version of a branch is the version this branch was created from.
 	 * </p>
 	 * 
-	 * @return the {@link IPrimaryVersionSpec} of the source version of this branch
+	 * @return the {@link ESPrimaryVersionSpec} of the source version of this branch
 	 */
-	IPrimaryVersionSpec getSource();
+	ESPrimaryVersionSpec getSource();
 }

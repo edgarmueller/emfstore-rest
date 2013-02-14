@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -42,7 +42,7 @@ import org.eclipse.ui.dialogs.ListDialog;
  * @author eneufeld
  */
 public class UIUpdateProjectToVersionController extends
-	AbstractEMFStoreUIController<IPrimaryVersionSpec> {
+	AbstractEMFStoreUIController<ESPrimaryVersionSpec> {
 
 	private final ESLocalProject projectSpace;
 
@@ -53,7 +53,7 @@ public class UIUpdateProjectToVersionController extends
 	}
 
 	@Override
-	public IPrimaryVersionSpec doRun(IProgressMonitor monitor)
+	public ESPrimaryVersionSpec doRun(IProgressMonitor monitor)
 		throws EMFStoreException {
 		ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(
 			projectSpace.getBaseVersion(), 20, 0, false, false, false,
@@ -70,11 +70,11 @@ public class UIUpdateProjectToVersionController extends
 			}
 			if (historyInfo.size() == 0) {
 				return RunInUI
-					.runWithResult(new Callable<IPrimaryVersionSpec>() {
-						public IPrimaryVersionSpec call() throws Exception {
+					.runWithResult(new Callable<ESPrimaryVersionSpec>() {
+						public ESPrimaryVersionSpec call() throws Exception {
 							return new UIUpdateProjectController(
 								getShell(), projectSpace,
-								IVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
+								ESVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
 								.execute();
 						}
 					});
@@ -111,8 +111,8 @@ public class UIUpdateProjectToVersionController extends
 				Object[] selection = listDialog.getResult();
 				final HistoryInfo info = (HistoryInfo) selection[0];
 				return RunInUI
-					.runWithResult(new Callable<IPrimaryVersionSpec>() {
-						public IPrimaryVersionSpec call() throws Exception {
+					.runWithResult(new Callable<ESPrimaryVersionSpec>() {
+						public ESPrimaryVersionSpec call() throws Exception {
 							return new UIUpdateProjectController(
 								getShell(), projectSpace, Versions
 									.createPRIMARY(info

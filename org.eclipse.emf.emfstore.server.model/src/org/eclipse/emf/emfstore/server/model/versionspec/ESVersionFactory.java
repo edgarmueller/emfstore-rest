@@ -20,35 +20,35 @@ import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
  * @author wesendon
  * @author emueller
  */
-public interface IVersionFactory extends IEMFStoreFactory {
+public interface ESVersionFactory extends IEMFStoreFactory {
 
 	/**
 	 * Creates a HEAD revision for the branch "trunk".
 	 * 
 	 * @return head version
 	 */
-	IHeadVersionSpec createHEAD();
+	ESHeadVersionSpec createHEAD();
 
 	/**
-	 * Create {@link IHeadVersionSpec}.
+	 * Create {@link ESHeadVersionSpec}.
 	 * 
 	 * @param branch
 	 *            name of branch
 	 * @return version spec
 	 */
-	IHeadVersionSpec createHEAD(String branch);
+	ESHeadVersionSpec createHEAD(String branch);
 
 	/**
-	 * Create {@link IHeadVersionSpec}.
+	 * Create {@link ESHeadVersionSpec}.
 	 * 
 	 * @param versionSpec
 	 *            copies branch name from
 	 * @return version spec
 	 */
-	IHeadVersionSpec createHEAD(IVersionSpec versionSpec);
+	ESHeadVersionSpec createHEAD(ESVersionSpec versionSpec);
 
 	/**
-	 * Create {@link IPrimaryVersionSpec}.
+	 * Create {@link ESPrimaryVersionSpec}.
 	 * 
 	 * @param branch
 	 *            branch name
@@ -56,10 +56,10 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 *            verison number
 	 * @return version spec
 	 */
-	IPrimaryVersionSpec createPRIMARY(String branch, int index);
+	ESPrimaryVersionSpec createPRIMARY(String branch, int index);
 
 	/**
-	 * Create {@link IPrimaryVersionSpec}.
+	 * Create {@link ESPrimaryVersionSpec}.
 	 * 
 	 * @param versionSpec
 	 *            copy branch name from
@@ -68,37 +68,37 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 * 
 	 * @return version spec
 	 */
-	IPrimaryVersionSpec createPRIMARY(IVersionSpec versionSpec, int index);
+	ESPrimaryVersionSpec createPRIMARY(ESVersionSpec versionSpec, int index);
 
 	/**
-	 * Create {@link IPrimaryVersionSpec}.
+	 * Create {@link ESPrimaryVersionSpec}.
 	 * 
 	 * @param i
 	 *            version number
 	 * @return version spec
 	 */
-	IPrimaryVersionSpec createPRIMARY(int i);
+	ESPrimaryVersionSpec createPRIMARY(int i);
 
 	/**
-	 * Create {@link IBranchVersionSpec}.
+	 * Create {@link ESBranchVersionSpec}.
 	 * 
 	 * @param value
 	 *            branch name
 	 * @return version spec
 	 */
-	IBranchVersionSpec createBRANCH(String value);
+	ESBranchVersionSpec createBRANCH(String value);
 
 	/**
-	 * Creates {@link IBranchVersionSpec}.
+	 * Creates {@link ESBranchVersionSpec}.
 	 * 
 	 * @param spec
 	 *            copies branch name from
 	 * @return version spec
 	 */
-	IBranchVersionSpec createBRANCH(IVersionSpec spec);
+	ESBranchVersionSpec createBRANCH(ESVersionSpec spec);
 
 	/**
-	 * Creates {@link IAncestorVersionSpec}.
+	 * Creates {@link ESAncestorVersionSpec}.
 	 * 
 	 * @param source
 	 *            source
@@ -106,8 +106,8 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 *            target
 	 * @return version spec
 	 */
-	IAncestorVersionSpec createANCESTOR(IPrimaryVersionSpec source,
-		IPrimaryVersionSpec target);
+	ESAncestorVersionSpec createANCESTOR(ESPrimaryVersionSpec source,
+		ESPrimaryVersionSpec target);
 
 	/**
 	 * Checks whether two versions spec target the same branch.
@@ -118,10 +118,10 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 *            spec 2
 	 * @return true, if same branch
 	 */
-	boolean isSameBranch(IVersionSpec spec1, IVersionSpec spec2);
+	boolean isSameBranch(ESVersionSpec spec1, ESVersionSpec spec2);
 
 	/**
-	 * Creates {@link ITagVersionSpec}.
+	 * Creates {@link ESTagVersionSpec}.
 	 * 
 	 * @param tag
 	 *            tag
@@ -129,5 +129,5 @@ public interface IVersionFactory extends IEMFStoreFactory {
 	 *            branch name
 	 * @return version spec
 	 */
-	ITagVersionSpec createTAG(String tag, String branch);
+	ESTagVersionSpec createTAG(String tag, String branch);
 }

@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -48,7 +48,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICommitProjectController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
+public class UICommitProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ICommitCallback {
 
 	private final ProjectSpace projectSpace;
@@ -100,8 +100,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 			}
 		});
 		if (shouldUpdate) {
-			IPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
-			IPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
+			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
 				.executeSub(progressMonitor);
 			if (version.equals(baseVersion)) {
 				return false;
@@ -164,7 +164,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 */
 	@Override
 	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EMFStoreException {
-		IPrimaryVersionSpec version;
+		ESPrimaryVersionSpec version;
 		try {
 			version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
 			return (PrimaryVersionSpec) version;
@@ -189,10 +189,10 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<IPri
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.server.model.api.versionspecs.IPrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ESPrimaryVersionSpec.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);

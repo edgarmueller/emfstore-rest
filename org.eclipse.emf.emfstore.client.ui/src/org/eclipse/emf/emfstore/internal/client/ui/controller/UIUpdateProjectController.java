@@ -34,8 +34,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -46,11 +46,11 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPrimaryVersionSpec> implements
+public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	IUpdateCallback {
 
 	private final ESLocalProject projectSpace;
-	private IVersionSpec version;
+	private ESVersionSpec version;
 
 	/**
 	 * Constructor.
@@ -76,7 +76,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 	 * @param version
 	 *            the version to update to
 	 */
-	public UIUpdateProjectController(Shell shell, ESLocalProject projectSpace, IVersionSpec version) {
+	public UIUpdateProjectController(Shell shell, ESLocalProject projectSpace, ESVersionSpec version) {
 		super(shell);
 		this.projectSpace = projectSpace;
 		this.version = version;
@@ -109,7 +109,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 		// TODO OTS
 		boolean mergeSuccessful = false;
 		try {
-			final IPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
+			final ESPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(ESVersionSpec.FACTORY
 				.createHEAD(projectSpace
 					.getBaseVersion()), new NullProgressMonitor());
 			// merge opens up a dialog
@@ -162,10 +162,10 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public IPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EMFStoreException {
-		IPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EMFStoreException {
+		ESPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
-		IPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(IVersionSpec.FACTORY
+		ESPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(ESVersionSpec.FACTORY
 			.createHEAD(oldBaseVersion), new NullProgressMonitor());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
@@ -187,7 +187,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<IPri
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws EMFStoreException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);

@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.client.model.handler;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Interface that determines what to do in case the checksum computation on a {@link ESLocalProject} fails.
@@ -40,6 +40,6 @@ public interface ESChecksumErrorHandler {
 	 * @throws EMFStoreException
 	 *             in case any error occurs during execution of the error handler
 	 */
-	boolean execute(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean execute(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 }

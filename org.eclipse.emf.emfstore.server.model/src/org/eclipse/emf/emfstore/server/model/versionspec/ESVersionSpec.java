@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionsFactory
  * @author wesendon
  * @author emueller
  */
-public interface IVersionSpec {
+public interface ESVersionSpec {
 
 	/**
 	 * HEAD identifier.
@@ -48,9 +48,9 @@ public interface IVersionSpec {
 	String GLOBAL = "___GLOBAL___";
 
 	/**
-	 * The factory used for creating {@link IVersionSpec}s.
+	 * The factory used for creating {@link ESVersionSpec}s.
 	 */
-	IVersionFactory FACTORY = VersionsFactory.INSTANCE;
+	ESVersionFactory FACTORY = VersionsFactory.INSTANCE;
 
 	/**
 	 * Returns the branch name.

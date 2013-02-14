@@ -9,7 +9,7 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpda
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 public class UpdateCallbackAdapter implements IUpdateCallback {
 
@@ -26,7 +26,7 @@ public class UpdateCallbackAdapter implements IUpdateCallback {
 		return true;
 	}
 
-	public boolean checksumCheckFailed(ESLocalProject project, IPrimaryVersionSpec versionSpec,
+	public boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor progressMonitor) throws EMFStoreException {
 		return true;
 	}

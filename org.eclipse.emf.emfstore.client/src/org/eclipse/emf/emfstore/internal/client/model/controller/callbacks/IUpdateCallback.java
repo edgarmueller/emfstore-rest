@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictE
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for updating a project space.
@@ -76,7 +76,7 @@ public interface IUpdateCallback {
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
-	boolean checksumCheckFailed(ESLocalProject project, IPrimaryVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor progressMonitor)
 		throws EMFStoreException;
 
 	/**
@@ -97,7 +97,7 @@ public interface IUpdateCallback {
 			return false;
 		}
 
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws EMFStoreException {
 			return true;
 		}

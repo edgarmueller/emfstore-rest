@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.server.model;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * When querying the history API successfully, the result is a set of {@link IHistoryInfo}.
@@ -30,39 +30,39 @@ public interface IHistoryInfo {
 	/**
 	 * Returns the version the history information is associated with.
 	 * 
-	 * @return the {@link IPrimaryVersionSpec} of the history information
+	 * @return the {@link ESPrimaryVersionSpec} of the history information
 	 */
-	IPrimaryVersionSpec getPrimarySpec();
+	ESPrimaryVersionSpec getPrimarySpec();
 
 	/**
-	 * Returns a list of the {@link IPrimaryVersionSpec}s that followed this version.
+	 * Returns a list of the {@link ESPrimaryVersionSpec}s that followed this version.
 	 * 
-	 * @return a list containing the next {@link IPrimaryVersionSpec}s
+	 * @return a list containing the next {@link ESPrimaryVersionSpec}s
 	 */
-	List<IPrimaryVersionSpec> getNextSpecs();
+	List<ESPrimaryVersionSpec> getNextSpecs();
 
 	/**
-	 * Returns the {@link IPrimaryVersionSpec} of the previous version.
+	 * Returns the {@link ESPrimaryVersionSpec} of the previous version.
 	 * 
 	 * @return the previous version
 	 */
-	IPrimaryVersionSpec getPreviousSpec();
+	ESPrimaryVersionSpec getPreviousSpec();
 
 	/**
-	 * Returns an optional list of {@link IPrimaryVersionSpec}s that identifies the versions
+	 * Returns an optional list of {@link ESPrimaryVersionSpec}s that identifies the versions
 	 * this version was merged from.
 	 * 
 	 * @return an optional list of branch versions this version was merged from
 	 */
-	List<IPrimaryVersionSpec> getMergedFromSpecs();
+	List<ESPrimaryVersionSpec> getMergedFromSpecs();
 
 	/**
-	 * Returns an optional list of {@link IPrimaryVersionSpec}s that identifies the versions
+	 * Returns an optional list of {@link ESPrimaryVersionSpec}s that identifies the versions
 	 * this version was merged from.
 	 * 
 	 * @return an optional list of branch versions this version was merged from
 	 */
-	List<IPrimaryVersionSpec> getMergedToSpecs();
+	List<ESPrimaryVersionSpec> getMergedToSpecs();
 
 	/**
 	 * Returns the {@link ILogMessage} that was specified when a commit succeeded.

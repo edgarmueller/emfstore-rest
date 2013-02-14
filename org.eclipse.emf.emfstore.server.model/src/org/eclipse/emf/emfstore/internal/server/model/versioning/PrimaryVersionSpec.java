@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.
  * 
- * @extends Comparable<PrimaryVersionSpec>, IPrimaryVersionSpec
+ * @extends Comparable<PrimaryVersionSpec>, ESPrimaryVersionSpec
  * 
  *          <!-- end-user-doc -->
  * 
@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
  * @model
  * @generated
  */
-public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersionSpec>, IPrimaryVersionSpec {
+public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersionSpec>, ESPrimaryVersionSpec {
 
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute. <!--

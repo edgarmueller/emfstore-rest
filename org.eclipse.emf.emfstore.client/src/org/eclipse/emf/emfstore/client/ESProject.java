@@ -22,9 +22,9 @@ import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Represents a project in EMFStore. There are two different types of projects, {@link ESLocalProject} and
@@ -71,21 +71,21 @@ public interface ESProject {
 	void delete(IProgressMonitor monitor) throws IOException, EMFStoreException;
 
 	/**
-	 * Resolves a {@link IVersionSpec} to a {@link IPrimaryVersionSpec} by querying the server.
+	 * Resolves a {@link ESVersionSpec} to a {@link ESPrimaryVersionSpec} by querying the server.
 	 * 
 	 * When calling this method on a remote project it is recommended to use the overloaded method which allows to
 	 * specify an {@link ESUsersession}.
 	 * 
 	 * @param versionSpec
-	 *            the {@link IVersionSpec} to resolve
+	 *            the {@link ESVersionSpec} to resolve
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while resolving the version
 	 * 
-	 * @return the resolved {@link IPrimaryVersionSpec}
+	 * @return the resolved {@link ESPrimaryVersionSpec}
 	 * 
-	 * @throws EMFStoreException in case an error occurs while resolving the given {@link IVersionSpec}
+	 * @throws EMFStoreException in case an error occurs while resolving the given {@link ESVersionSpec}
 	 */
-	IPrimaryVersionSpec resolveVersionSpec(IVersionSpec versionSpec, IProgressMonitor monitor) throws EMFStoreException;
+	ESPrimaryVersionSpec resolveVersionSpec(ESVersionSpec versionSpec, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * <p>
@@ -135,7 +135,7 @@ public interface ESProject {
 	 * </p>
 	 * 
 	 * @param versionSpec
-	 *            the {@link IPrimaryVersionSpec} that should be tagged
+	 *            the {@link ESPrimaryVersionSpec} that should be tagged
 	 * @param tag
 	 *            the tag being created
 	 * @param monitor
@@ -143,7 +143,7 @@ public interface ESProject {
 	 * 
 	 * @throws EMFStoreException in case the given tag could not be removed
 	 */
-	void addTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag, IProgressMonitor monitor)
+	void addTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -156,14 +156,14 @@ public interface ESProject {
 	 * </p>
 	 * 
 	 * @param versionSpec
-	 *            the {@link IPrimaryVersionSpec} identifying the version from which the tag should be removed
+	 *            the {@link ESPrimaryVersionSpec} identifying the version from which the tag should be removed
 	 * @param tag
-	 *            the {@link ITagVersionSpec} to be removed
+	 *            the {@link ESTagVersionSpec} to be removed
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while removing the tag
 	 * 
 	 * @throws EMFStoreException in case the given tag could not be removed
 	 */
-	void removeTag(IPrimaryVersionSpec versionSpec, ITagVersionSpec tag, IProgressMonitor monitor)
+	void removeTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
 		throws EMFStoreException;
 }

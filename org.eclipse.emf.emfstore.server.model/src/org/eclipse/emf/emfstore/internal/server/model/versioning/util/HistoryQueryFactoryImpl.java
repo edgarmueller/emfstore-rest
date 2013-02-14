@@ -9,7 +9,7 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQueryFactory;
 import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESPathQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 
@@ -18,25 +18,25 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 	private HistoryQueryFactoryImpl() {
 	}
 
-	public ESRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower, boolean allVersions,
+	public ESRangeQuery rangeQuery(ESPrimaryVersionSpec source, int upper, int lower, boolean allVersions,
 		boolean incoming, boolean outgoing, boolean includeCp) {
 		return HistoryQueryBuilder.rangeQuery((PrimaryVersionSpec) source, upper, lower, allVersions, incoming,
 			outgoing, includeCp);
 	}
 
-	public ESPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target, boolean allVersions,
+	public ESPathQuery pathQuery(ESPrimaryVersionSpec source, ESPrimaryVersionSpec target, boolean allVersions,
 		boolean includeCp) {
 		return HistoryQueryBuilder.pathQuery((PrimaryVersionSpec) source, (PrimaryVersionSpec) target, allVersions,
 			includeCp);
 	}
 
-	public ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, List<IModelElementId> modelElements,
+	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<IModelElementId> modelElements,
 		int upper, int lower, boolean allVersions, boolean includeCp) {
 		return HistoryQueryBuilder.modelelementQuery((PrimaryVersionSpec) source, modelElements, upper, lower,
 			allVersions, includeCp);
 	}
 
-	public ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id, int upper, int lower,
+	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, IModelElementId id, int upper, int lower,
 		boolean allVersions, boolean includeCp) {
 		return HistoryQueryBuilder.modelelementQuery((PrimaryVersionSpec) source, (ModelElementId) id, upper, lower,
 			allVersions, includeCp);

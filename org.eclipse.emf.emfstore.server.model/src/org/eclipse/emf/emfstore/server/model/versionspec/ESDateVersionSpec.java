@@ -12,19 +12,21 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
+import java.util.Date;
+
 /**
- * Represents a version specifier that identifier a specific tag.
+ * Represents a version specifier that is based on a date.
  * 
- * @author wesendon
  * @author emueller
+ * @author wesendon
  */
-public interface ITagVersionSpec extends IVersionSpec {
+public interface ESDateVersionSpec extends ESVersionSpec {
 
 	/**
-	 * Return the name of the tag name this version specifier is associated with.
+	 * Returns the date this version specifier is based on.
 	 * 
-	 * @return the name of the tag
+	 * @return the date this version specifier is based on
 	 */
-	// TODO OTS currently called getName, rename to getTag?
-	String getName();
+	Date getDate();
+
 }

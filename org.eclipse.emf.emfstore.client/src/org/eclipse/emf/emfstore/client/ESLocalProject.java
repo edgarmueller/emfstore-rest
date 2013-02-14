@@ -27,9 +27,9 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.server.model.ILocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Represents a project in the local workspace that was checked out from a server or created locally.
@@ -56,7 +56,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * 
 	 * @throws EMFStoreException in case any error occurs during commit
 	 */
-	IPrimaryVersionSpec commit() throws EMFStoreException;
+	ESPrimaryVersionSpec commit() throws EMFStoreException;
 
 	/**
 	 * <p>
@@ -82,7 +82,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws EMFStoreException in case any other error occurs during commit
 	 */
-	IPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	ESPrimaryVersionSpec commit(ILogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws BaseVersionOutdatedException, EMFStoreException;
 
 	/**
@@ -98,7 +98,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * successful or not. This enables the the headless execution of the commit.
 	 * 
 	 * @param branch
-	 *            the {@link IBranchVersionSpec} indicating the branch to commit to
+	 *            the {@link ESBranchVersionSpec} indicating the branch to commit to
 	 * @param logMessage
 	 *            a {@link ILogMessage} describing the changes being committed
 	 * @param callback
@@ -108,11 +108,11 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws InvalidVersionSpecException in case the given {@link IBranchVersionSpec} could not be resolved
+	 * @throws InvalidVersionSpecException in case the given {@link ESBranchVersionSpec} could not be resolved
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws EMFStoreException in case any other error occurs during commit
 	 */
-	IPrimaryVersionSpec commitToBranch(IBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
+	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ILogMessage logMessage, ICommitCallback callback,
 		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
 
 	/**
@@ -129,7 +129,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws EMFStoreException in case update fails for any other reason
 	 */
-	IPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
+	ESPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * <p>
@@ -147,7 +147,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws EMFStoreException in case update fails for any other reason
 	 */
-	IPrimaryVersionSpec update(IVersionSpec version) throws ChangeConflictException, EMFStoreException;
+	ESPrimaryVersionSpec update(ESVersionSpec version) throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * <p>
@@ -159,7 +159,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * </p>
 	 * 
 	 * @param version
-	 *            the {@link IVersionSpec} to update to
+	 *            the {@link ESVersionSpec} to update to
 	 * @param callback
 	 *            the {@link IUpdateCallback} that will be called while the update is performing
 	 * @param monitor
@@ -169,14 +169,14 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws EMFStoreException in case update fails for any other reason
 	 */
-	IPrimaryVersionSpec update(IVersionSpec version, IUpdateCallback callback, IProgressMonitor monitor)
+	ESPrimaryVersionSpec update(ESVersionSpec version, IUpdateCallback callback, IProgressMonitor monitor)
 		throws ChangeConflictException, EMFStoreException;
 
 	/**
 	 * Performs a merge in case of a conflict.
 	 * 
 	 * @param target
-	 *            the {@link IPrimaryVersionSpec} which is supposed to be merged
+	 *            the {@link ESPrimaryVersionSpec} which is supposed to be merged
 	 * @param changeConflict
 	 *            the {@link ESChangeConflict} containing the conflicting changes
 	 * @param conflictResolver
@@ -191,14 +191,14 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws EMFStoreException
 	 *             in case an error occurs while merging the branch
 	 */
-	boolean merge(IPrimaryVersionSpec target, ESChangeConflict changeConflict, IConflictResolver conflictResolver,
+	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, IConflictResolver conflictResolver,
 		IUpdateCallback callback, IProgressMonitor monitor) throws EMFStoreException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
 	 * 
 	 * @param branchSpec
-	 *            the {@link IPrimaryVersionSpec} which is supposed to be merged
+	 *            the {@link ESPrimaryVersionSpec} which is supposed to be merged
 	 * @param conflictResolver
 	 *            a {@link IConflictResolver} for resolving conflicts in case any conflicts occur
 	 * @param monitor
@@ -207,7 +207,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * @throws EMFStoreException
 	 *             in case an error occurs while merging the branch
 	 */
-	void mergeBranch(IPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver, IProgressMonitor monitor)
+	void mergeBranch(ESPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -258,7 +258,7 @@ public interface ESLocalProject extends ESProject, EObjectContainer {
 	 * 
 	 * @return the base version of the project
 	 */
-	IPrimaryVersionSpec getBaseVersion();
+	ESPrimaryVersionSpec getBaseVersion();
 
 	/**
 	 * Returns the {@link Date} when the project was updated the last time.

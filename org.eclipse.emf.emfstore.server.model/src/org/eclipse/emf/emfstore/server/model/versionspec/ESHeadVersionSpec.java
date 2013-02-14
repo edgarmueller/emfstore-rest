@@ -13,10 +13,11 @@
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
 /**
- * Represents a version specifier that is used to identify a branch.
+ * Represents a version specifier that is used to identify the HEAD version of a branch.
  * 
  * @author wesendon
  * @author emueller
  */
-public interface IBranchVersionSpec extends IVersionSpec {
+public interface ESHeadVersionSpec extends ESVersionSpec {
+
 }

@@ -12,9 +12,9 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IBranchInfo;
 import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.ITagVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -113,14 +113,14 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test
 	public void testGetHeadVersion() throws EMFStoreException {
-		IPrimaryVersionSpec versionSpec;
+		ESPrimaryVersionSpec versionSpec;
 		versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
 	@Test
 	public void testGetHeadVersionFetch() throws EMFStoreException {
-		IPrimaryVersionSpec versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
+		ESPrimaryVersionSpec versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
@@ -148,7 +148,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test
 	public void testAddTag() throws EMFStoreException {
-		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
@@ -158,7 +158,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test(expected = EMFStoreException.class)
 	public void testRemoveTag() throws EMFStoreException {
-		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
 		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
@@ -171,7 +171,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test
 	public void testResolveVersion() throws EMFStoreException {
-		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
 		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),
@@ -180,7 +180,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 
 	@Test
 	public void testResolveVersionSession() throws EMFStoreException {
-		ITagVersionSpec tagSpec = IVersionSpec.FACTORY.createTAG("MyTag", "trunk");
+		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
 		assertEquals(remoteProject.getHeadVersion(new NullProgressMonitor()),

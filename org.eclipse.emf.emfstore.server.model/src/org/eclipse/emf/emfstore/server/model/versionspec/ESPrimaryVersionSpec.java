@@ -13,11 +13,25 @@
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
 /**
- * Represents a version specifier that is used to identify the HEAD version of a branch.
+ * A primary version specifier is a version specifier that has
+ * a globally unique number that may be used to identify a specific
+ * version. Globally unique means that this identifier is unique even
+ * in the case of branches.
  * 
  * @author wesendon
  * @author emueller
  */
-public interface IHeadVersionSpec extends IVersionSpec {
+public interface ESPrimaryVersionSpec extends ESVersionSpec {
 
+	/**
+	 * <p>
+	 * Returns the globally unique numeric identifier.
+	 * </p>
+	 * <p>
+	 * This identifier is also unique even in case of branches.
+	 * </p>
+	 * 
+	 * @return the globally unique numeric identifier of this version
+	 */
+	int getIdentifier();
 }

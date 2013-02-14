@@ -18,20 +18,20 @@ package org.eclipse.emf.emfstore.server.model.versionspec;
  * @author emueller
  * @author wesendon
  */
-public interface IAncestorVersionSpec extends IVersionSpec {
+public interface ESAncestorVersionSpec extends ESVersionSpec {
 
 	/**
-	 * Returns the {@link IPrimaryVersionSpec} of the target to resolve.
+	 * Returns the {@link ESPrimaryVersionSpec} of the target to resolve.
 	 * 
 	 * @return the target version specifier
 	 */
-	IPrimaryVersionSpec getTarget();
+	ESPrimaryVersionSpec getTarget();
 
 	/**
-	 * Returns the {@link IPrimaryVersionSpec} of the source to resolve.
+	 * Returns the {@link ESPrimaryVersionSpec} of the source to resolve.
 	 * 
 	 * @return the source version specifier
 	 */
-	IPrimaryVersionSpec getSource();
+	ESPrimaryVersionSpec getSource();
 
 }

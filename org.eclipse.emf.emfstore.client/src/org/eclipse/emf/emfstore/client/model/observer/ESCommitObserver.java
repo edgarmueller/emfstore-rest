@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.IObserver;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * An observer which waits for commit notifications and authorizes the commit procedure.
@@ -52,5 +52,5 @@ public interface ESCommitObserver extends IObserver {
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
 	 */
-	void commitCompleted(ESLocalProject project, IPrimaryVersionSpec newRevision, IProgressMonitor monitor);
+	void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor);
 }

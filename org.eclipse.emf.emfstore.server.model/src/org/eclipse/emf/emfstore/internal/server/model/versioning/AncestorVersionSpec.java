@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IAncestorVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'.
  * 
- * @extends IAncestorVersionSpec
+ * @extends ESAncestorVersionSpec
  *          <!--
  *          end-user-doc -->
  * 
@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IAncestorVersionSpec;
  * @model
  * @generated
  */
-public interface AncestorVersionSpec extends VersionSpec, IAncestorVersionSpec {
+public interface AncestorVersionSpec extends VersionSpec, ESAncestorVersionSpec {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

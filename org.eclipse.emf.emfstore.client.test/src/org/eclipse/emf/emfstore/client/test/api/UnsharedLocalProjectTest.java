@@ -25,8 +25,8 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = RuntimeException.class)
 	public void testAddTag() throws EMFStoreException {
 		// a tag can not be created for an unshared project
-		localProject.addTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("test", "test"),
+		localProject.addTag(localProject.getBaseVersion(), ESVersionSpec.FACTORY.createTAG("test", "test"),
 			new NullProgressMonitor());
 		fail("Cannot add a tag!");
 	}
@@ -93,7 +93,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testCommitToBranch() throws EMFStoreException {
-		localProject.commitToBranch(IVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
+		localProject.commitToBranch(ESVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
 			ILogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
@@ -101,7 +101,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testGetBaseVersion() {
 		// unshared project has no base version
-		IPrimaryVersionSpec version = localProject.getBaseVersion();
+		ESPrimaryVersionSpec version = localProject.getBaseVersion();
 		assertNull(version);
 	}
 
@@ -185,14 +185,14 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveTag() throws EMFStoreException {
-		localProject.removeTag(localProject.getBaseVersion(), IVersionSpec.FACTORY.createTAG("tag", "branch"),
+		localProject.removeTag(localProject.getBaseVersion(), ESVersionSpec.FACTORY.createTAG("tag", "branch"),
 			new NullProgressMonitor());
 		fail("Should not remove a tag from an unshared Project!");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testResolveSpec() throws EMFStoreException {
-		localProject.resolveVersionSpec(IVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
+		localProject.resolveVersionSpec(ESVersionSpec.FACTORY.createHEAD(), new NullProgressMonitor());
 		fail("Should not be able to resolve a version spec from an unshared Project!");
 	}
 

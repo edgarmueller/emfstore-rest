@@ -26,9 +26,9 @@ import org.eclipse.emf.emfstore.server.model.IHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ILogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
-import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	private ILogMessage logMessage;
 	private ICommitCallback callback;
 	private IUpdateCallback updateCallback;
-	private IPrimaryVersionSpec target;
+	private ESPrimaryVersionSpec target;
 
 	private boolean conflictOccurred;
 	private boolean noLocalChangesOccurred;
@@ -71,9 +71,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testCommit() {
 		try {
-			IPrimaryVersionSpec base = localProject.getBaseVersion();
+			ESPrimaryVersionSpec base = localProject.getBaseVersion();
 			addPlayerToProject();
-			IPrimaryVersionSpec head = localProject.commit();
+			ESPrimaryVersionSpec head = localProject.commit();
 			assertNotSame(base, head);
 		} catch (EMFStoreException e) {
 			log(e);
@@ -95,9 +95,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testCommitLog() {
 
 		try {
-			IPrimaryVersionSpec base = localProject.getBaseVersion();
+			ESPrimaryVersionSpec base = localProject.getBaseVersion();
 			addPlayerToProject();
-			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
+			ESPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			assertNotSame(base, head);
 		} catch (EMFStoreException e) {
 			log(e);
@@ -109,10 +109,10 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testCommitBranch() {
 
 		try {
-			IPrimaryVersionSpec base = localProject.getBaseVersion();
+			ESPrimaryVersionSpec base = localProject.getBaseVersion();
 			addPlayerToProject();
-			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
-			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
+			ESBranchVersionSpec branch = ESVersionSpec.FACTORY.createBRANCH("newBranch");
+			ESPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			assertNotSame(base, head);
 		} catch (EMFStoreException e) {
@@ -122,7 +122,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	}
 
 	public void testCommitBranchWithoutChange() throws EMFStoreException {
-		IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
+		ESBranchVersionSpec branch = ESVersionSpec.FACTORY.createBRANCH("newBranch");
 		localProject.commitToBranch(branch, logMessage, new CommitCallbackAdapter() {
 			@Override
 			public void noLocalChanges(ESLocalProject projectSpace) {
@@ -152,8 +152,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			assertEquals(1, branches.size());
 
 			addPlayerToProject();
-			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
-			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
+			ESBranchVersionSpec branch = ESVersionSpec.FACTORY.createBRANCH("newBranch");
+			ESPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			branches = localProject.getBranches(new NullProgressMonitor());
 			assertEquals(2, branches.size());
@@ -177,7 +177,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			addPlayerToProject();
 
 			assertEquals(0, localProject.getBaseVersion().getIdentifier());
-			IPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
+			ESPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			assertEquals(1, localProject.getBaseVersion().getIdentifier());
 			infos = localProject.getHistoryInfos(ESHistoryQuery.FACTORY.rangeQuery(head, 1, 1, true, true, true, true),
 				monitor);
@@ -200,8 +200,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();
-			IBranchVersionSpec branch = IVersionSpec.FACTORY.createBRANCH("newBranch");
-			IPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
+			ESBranchVersionSpec branch = ESVersionSpec.FACTORY.createBRANCH("newBranch");
+			ESPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(2, infos.size());
@@ -262,9 +262,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
 			@Override
 			public boolean baseVersionOutOfDate(final ESLocalProject localProject, IProgressMonitor progressMonitor) {
-				IPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
+				ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 				try {
-					final IPrimaryVersionSpec version = localProject.resolveVersionSpec(IVersionSpec.FACTORY
+					final ESPrimaryVersionSpec version = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
 						.createHEAD(baseVersion), monitor);
 					localProject.update(version, new UpdateCallbackAdapter() {
 						@Override

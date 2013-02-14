@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.query;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * A path query additionally considers a target version beside the source version,
@@ -24,17 +24,17 @@ import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
 public interface ESPathQuery extends ESHistoryQuery {
 
 	/**
-	 * Returns the target {@link IPrimaryVersionSpec}.
+	 * Returns the target {@link ESPrimaryVersionSpec}.
 	 * 
 	 * @return the target version
 	 */
-	IPrimaryVersionSpec getTarget();
+	ESPrimaryVersionSpec getTarget();
 
 	/**
-	 * Sets the target {@link IPrimaryVersionSpec}.
+	 * Sets the target {@link ESPrimaryVersionSpec}.
 	 * 
 	 * @param target
 	 *            the target version to be used by the query
 	 */
-	void setTarget(IPrimaryVersionSpec target);
+	void setTarget(ESPrimaryVersionSpec target);
 }

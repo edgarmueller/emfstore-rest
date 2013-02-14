@@ -7,20 +7,20 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.server.model.IGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.versionspec.IBranchVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.IVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 
 public interface UIControllerFactory {
 
 	UIControllerFactory INSTANCE = null;// UIControllerFactoryImpl.INSTANCE;
 
-	IPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project);
+	ESPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project);
 
-	IPrimaryVersionSpec createBranch(Shell shell, ESProject project);
+	ESPrimaryVersionSpec createBranch(Shell shell, ESProject project);
 
-	IPrimaryVersionSpec createBranch(Shell shell, ESProject project, IBranchVersionSpec branch);
+	ESPrimaryVersionSpec createBranch(Shell shell, ESProject project, ESBranchVersionSpec branch);
 
 	ESLocalProject createLocalProject(Shell shell);
 
@@ -56,9 +56,9 @@ public interface UIControllerFactory {
 
 	void showHistoryView(Shell shell, EObject eObject);
 
-	IPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project);
+	ESPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project);
 
-	IPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project, IVersionSpec version);
+	ESPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project, ESVersionSpec version);
 
-	IPrimaryVersionSpec updateProjectToVersion(Shell shell, ESLocalProject project);
+	ESPrimaryVersionSpec updateProjectToVersion(Shell shell, ESLocalProject project);
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.IChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for implementors that are interested in influencing the
@@ -79,7 +79,7 @@ public interface ICommitCallback {
 	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
-	boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws EMFStoreException;
 
 	/**
@@ -103,7 +103,7 @@ public interface ICommitCallback {
 			// do nothing
 		}
 
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, IPrimaryVersionSpec versionSpec,
+		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) {
 			return true;
 		}

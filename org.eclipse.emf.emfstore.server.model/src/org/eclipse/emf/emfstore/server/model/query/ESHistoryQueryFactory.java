@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
 import org.eclipse.emf.emfstore.common.model.IModelElementId;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Factory for creating history queries.
@@ -45,7 +45,7 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packges
 	 * @return query the constructed range query
 	 */
-	ESRangeQuery rangeQuery(IPrimaryVersionSpec source, int upper, int lower,
+	ESRangeQuery rangeQuery(ESPrimaryVersionSpec source, int upper, int lower,
 		boolean allVersions, boolean incoming,
 		boolean outgoing, boolean includeChangePackages);
 
@@ -63,7 +63,7 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packges
 	 * @return query the constructed path query
 	 */
-	ESPathQuery pathQuery(IPrimaryVersionSpec source, IPrimaryVersionSpec target,
+	ESPathQuery pathQuery(ESPrimaryVersionSpec source, ESPrimaryVersionSpec target,
 		boolean allVersions, boolean includeChangePackages);
 
 	/**
@@ -83,7 +83,7 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
+	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
 		int lower, boolean allVersions, boolean includeChangePackages);
 
 	/**
@@ -103,6 +103,6 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(IPrimaryVersionSpec source, IModelElementId id,
+	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, IModelElementId id,
 		int upper, int lower, boolean allVersions, boolean includeChangePackages);
 }

@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.server.model.query;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryFactoryImpl;
-import org.eclipse.emf.emfstore.server.model.versionspec.IPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * A query that is used to retrieve information about the version history.
@@ -29,11 +29,11 @@ public interface ESHistoryQuery {
 	ESHistoryQueryFactory FACTORY = HistoryQueryFactoryImpl.INSTANCE;
 
 	/**
-	 * Returns the {@link IPrimaryVersionSpec} this history query is pointing to.
+	 * Returns the {@link ESPrimaryVersionSpec} this history query is pointing to.
 	 * 
 	 * @return the version specifier this history query points to
 	 */
-	IPrimaryVersionSpec getSource();
+	ESPrimaryVersionSpec getSource();
 
 	/**
 	 * Sets the version specifier this history query should be pointing to.
@@ -41,7 +41,7 @@ public interface ESHistoryQuery {
 	 * @param versionSpec
 	 *            the version specifier the history query should be pointing to
 	 */
-	void setSource(IPrimaryVersionSpec versionSpec);
+	void setSource(ESPrimaryVersionSpec versionSpec);
 
 	/**
 	 * Determines whether {@link org.eclipse.emf.emfstore.server.model.IChangePackage}s
