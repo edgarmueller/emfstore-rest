@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.client.ui.controller;
+package org.eclipse.emf.emfstore.client.ui;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
@@ -6,7 +6,7 @@ import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
+import org.eclipse.emf.emfstore.internal.client.ui.controller.UIControllerFactoryImpl;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public interface UIControllerFactory {
 
-	UIControllerFactory INSTANCE = null;// UIControllerFactoryImpl.INSTANCE;
+	UIControllerFactory INSTANCE = UIControllerFactoryImpl.INSTANCE;
 
 	ESPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project);
 
@@ -34,11 +34,7 @@ public interface UIControllerFactory {
 
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 
-	void deleteRemoteProject(Shell shell, ESServer server, ESGlobalProjectId projectId, boolean deleteFiles);
-
-	void deleteRemoteProject(Shell shell, ESUsersession session, ESGlobalProjectId projectId, boolean deleteFiles);
-
-	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject);
+	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject, ESUsersession usersession);
 
 	void login(Shell shell, ESServer server);
 
