@@ -120,9 +120,10 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 		Boolean shouldDelete = RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
+				// TODO: include project name, use confirm method
 				return MessageDialog.openConfirm(getShell(),
-					"Delete " + projectInfo.getName(),
-					String.format("Are you sure you want to delete \'%s\'", projectInfo.getName()));
+					"Delete project?",
+					"Are you sure you want to delete?");
 			}
 		});
 
@@ -141,9 +142,10 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 		Boolean shouldDelete = RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
+				// TODO: include project name, use confirm method
 				return MessageDialog.openConfirm(getShell(),
-					"Delete " + projectInfo.getName(),
-					String.format("Are you sure you want to delete \'%s\'", projectInfo.getName()));
+					"Delete project?",
+					"Are you sure you want to delete?");
 			}
 		});
 
