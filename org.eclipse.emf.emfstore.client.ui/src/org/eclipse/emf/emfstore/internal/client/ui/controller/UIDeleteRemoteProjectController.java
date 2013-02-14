@@ -101,12 +101,12 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 
 			if (remoteProject != null) {
 				deleteRemoteProject(remoteProject, progressMonitor);
+				return null;
 			} else {
 				deleteRemoteProject(progressMonitor);
 				return null;
 			}
 
-			deleteRemoteProject(progressMonitor);
 		} catch (EMFStoreException e) {
 			MessageDialog.openError(getShell(), "Delete project failed.",
 				"Deletion of project " + projectInfo.getName() + " failed: " + e.getMessage());
