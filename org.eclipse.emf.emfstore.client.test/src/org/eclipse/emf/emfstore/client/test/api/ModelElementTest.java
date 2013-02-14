@@ -352,4 +352,79 @@ public class ModelElementTest {
 		// assertFalse(localProject.contains(player2));
 	}
 
+	@Test
+	public void testMultiReferenceRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(false);
+			}
+		}.run(false);
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.run(false);
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
+
+	@Test
+	public void testMultiReferenceDeleteRevertWithCommand() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final int numTrophies = 40;
+		final int numDeletes = 10;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournament);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numTrophies; i++)
+					tournament.getReceivesTrophy().add(false);
+			}
+		}.run(false);
+
+		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				for (int i = 0; i < numDeletes; i++)
+					tournament.getReceivesTrophy().remove(i);
+			}
+		}.run(false);
+
+		assertEquals(numTrophies - numDeletes, tournament.getReceivesTrophy().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.revert();
+			}
+		}.run(false);
+
+		assertEquals(0, tournament.getReceivesTrophy().size());
+	}
 }
