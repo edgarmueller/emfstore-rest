@@ -14,6 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
@@ -36,7 +37,7 @@ import org.eclipse.swt.widgets.Shell;
 public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIController<Void> {
 
 	private final ServerInfo serverInfo;
-	private final Usersession session;
+	private final ESUsersession session;
 	private final ProjectInfo projectInfo;
 	private final ESRemoteProject remoteProject;
 
@@ -80,7 +81,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		remoteProject = null;
 	}
 
-	public UIDeleteRemoteProjectController(Shell shell, Usersession session, ESRemoteProject remoteProject) {
+	public UIDeleteRemoteProjectController(Shell shell, ESUsersession session, ESRemoteProject remoteProject) {
 		super(shell);
 		this.serverInfo = null;
 		this.projectInfo = null;
