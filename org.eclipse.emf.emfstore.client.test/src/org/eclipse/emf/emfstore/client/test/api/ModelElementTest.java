@@ -10,6 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ConcurrentModificationException;
 import java.util.Set;
 
@@ -23,6 +29,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.junit.Test;
 
 /**
  * ModelElementTest.
@@ -355,7 +362,7 @@ public class ModelElementTest {
 			protected void doRun() {
 				localProject.getModelElements().add(tournament);
 			}
-		}.execute();
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override
@@ -363,7 +370,7 @@ public class ModelElementTest {
 				for (int i = 0; i < numTrophies; i++)
 					tournament.getReceivesTrophy().add(false);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
 
@@ -372,7 +379,7 @@ public class ModelElementTest {
 			protected void doRun() {
 				localProject.revert();
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(0, tournament.getReceivesTrophy().size());
 	}
@@ -383,12 +390,13 @@ public class ModelElementTest {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
 		final int numTrophies = 40;
 		final int numDeletes = 10;
+
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				localProject.getModelElements().add(tournament);
 			}
-		}.execute();
+		}.run(false);
 
 		new EMFStoreCommand() {
 			@Override
@@ -396,7 +404,7 @@ public class ModelElementTest {
 				for (int i = 0; i < numTrophies; i++)
 					tournament.getReceivesTrophy().add(false);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(numTrophies, tournament.getReceivesTrophy().size());
 
@@ -406,7 +414,7 @@ public class ModelElementTest {
 				for (int i = 0; i < numDeletes; i++)
 					tournament.getReceivesTrophy().remove(i);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(numTrophies - numDeletes, tournament.getReceivesTrophy().size());
 
@@ -415,7 +423,7 @@ public class ModelElementTest {
 			protected void doRun() {
 				localProject.revert();
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(0, tournament.getReceivesTrophy().size());
 	}
