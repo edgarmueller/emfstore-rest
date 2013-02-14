@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * @author wesendon
  * @author mkoegel
  */
-public interface ESLocalProject extends ESProject, EObjectContainer {
+public interface ESLocalProject extends ESProject, ESObjectContainer {
 
 	/**
 	 * <p>

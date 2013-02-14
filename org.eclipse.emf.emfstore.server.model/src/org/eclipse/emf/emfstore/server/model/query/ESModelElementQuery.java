@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.server.model.query;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 
 /**
  * The model element query is a specialization of the {@link ESRangeQuery}, which allows to additionally
@@ -30,7 +30,7 @@ public interface ESModelElementQuery extends ESRangeQuery {
 	 * 
 	 * @return a list of model elements IDs for which this query is filtering for
 	 */
-	List<IModelElementId> getModelElementIds();
+	List<ESModelElementId> getModelElementIds();
 
 	/**
 	 * Adds the ID of a model element that the query should filter for.
@@ -38,7 +38,7 @@ public interface ESModelElementQuery extends ESRangeQuery {
 	 * @param id
 	 *            the ID of a model element
 	 */
-	void addModelElementId(IModelElementId id);
+	void addModelElementId(ESModelElementId id);
 
 	/**
 	 * Removes the ID of a model element from this query.
@@ -46,5 +46,5 @@ public interface ESModelElementQuery extends ESRangeQuery {
 	 * @param id
 	 *            the ID of the model element to be removed
 	 */
-	void removeModelElementId(IModelElementId id);
+	void removeModelElementId(ESModelElementId id);
 }

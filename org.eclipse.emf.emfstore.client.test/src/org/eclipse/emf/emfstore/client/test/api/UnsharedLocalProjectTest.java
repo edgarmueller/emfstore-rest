@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
@@ -114,7 +114,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = EMFStoreException.class)
 	public void testGetHistoryInfos() throws EMFStoreException {
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		IModelElementId id = localProject.getModelElementId(player);
+		ESModelElementId id = localProject.getModelElementId(player);
 		ESHistoryQuery query = ESHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
 			true);
 		localProject.getHistoryInfos(query, new NullProgressMonitor());

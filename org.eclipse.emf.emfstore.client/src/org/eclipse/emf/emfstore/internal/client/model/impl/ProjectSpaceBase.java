@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -1353,15 +1353,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return getProject().contains(object);
 	}
 
-	public boolean contains(IModelElementId modelElementId) {
+	public boolean contains(ESModelElementId modelElementId) {
 		return getProject().contains(modelElementId);
 	}
 
-	public EObject getModelElement(IModelElementId modelElementId) {
+	public EObject getModelElement(ESModelElementId modelElementId) {
 		return getProject().get((ModelElementId) modelElementId);
 	}
 
-	public IModelElementId getModelElementId(EObject eObject) {
+	public ESModelElementId getModelElementId(EObject eObject) {
 		return getProject().getModelElementId(eObject);
 	}
 
@@ -1373,7 +1373,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class)
 	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getProject().getAllModelElementsByClass(modelElementClass);
@@ -1383,7 +1383,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class,
 	 *      java.lang.Boolean)
 	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {

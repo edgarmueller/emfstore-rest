@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 import java.util.Collection;
 
 import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 
 /**
@@ -29,9 +29,9 @@ public class EmptyRemovalsFilter implements ESNotificationFilter {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
+	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
+	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
 
 		return notificationInfo.isRemoveManyEvent() && notificationInfo.getNewValue() == null
 			&& notificationInfo.getOldValue() instanceof Collection<?>

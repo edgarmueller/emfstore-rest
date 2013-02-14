@@ -11,14 +11,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.ESFactory;
 
 /**
  * A factory for creating {@link ESLogMessage} objects.
  * 
  * @author Tobias Verhoeven
  */
-public interface ESLogMessageFactory extends IEMFStoreFactory {
+public interface ESLogMessageFactory extends ESFactory {
 
 	/**
 	 * Creates a new log message with the specified message and author.

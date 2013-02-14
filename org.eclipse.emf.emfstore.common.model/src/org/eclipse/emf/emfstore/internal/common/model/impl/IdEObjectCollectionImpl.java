@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.IDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -192,7 +192,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public boolean contains(IModelElementId id) {
+	public boolean contains(ESModelElementId id) {
 		if (!isCacheInitialized()) {
 			initMapping();
 		}
@@ -285,7 +285,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getModelElement(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject getModelElement(IModelElementId modelElementId) {
+	public EObject getModelElement(ESModelElementId modelElementId) {
 
 		if (modelElementId == null) {
 			return null;
@@ -488,7 +488,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class)
 	 */
 	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
 		return getAllModelElementsByClass(modelElementClass, true);
@@ -497,7 +497,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.EObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class,
 	 *      java.lang.Boolean)
 	 */
 	@SuppressWarnings("unchecked")

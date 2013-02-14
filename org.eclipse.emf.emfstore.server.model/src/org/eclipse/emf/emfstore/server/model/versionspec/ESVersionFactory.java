@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
-import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.ESFactory;
 
 /**
  * A factory for creating version specifiers.
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
  * @author wesendon
  * @author emueller
  */
-public interface ESVersionFactory extends IEMFStoreFactory {
+public interface ESVersionFactory extends ESFactory {
 
 	/**
 	 * Creates a HEAD revision for the branch "trunk".

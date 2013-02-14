@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.model.handler;
 
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 
 /**
@@ -31,6 +31,6 @@ public interface ESNotificationFilter {
 	 *            is about
 	 * @return true if the notification is to be ignored
 	 */
-	boolean check(NotificationInfo notificationInfo, EObjectContainer container);
+	boolean check(NotificationInfo notificationInfo, ESObjectContainer container);
 
 }

@@ -13,17 +13,12 @@
 package org.eclipse.emf.emfstore.common.model;
 
 /**
- * Represents a workspace wide unique identifier.
+ * Represents a unique model element ID that is used to identify
+ * model elements within EMFStore.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface IUniqueIdentifier {
+public interface ESModelElementId extends ESUniqueIdentifier {
 
-	/**
-	 * Returns the actual identifier as a string.
-	 * 
-	 * @return the ID as a string
-	 */
-	String getId();
 }

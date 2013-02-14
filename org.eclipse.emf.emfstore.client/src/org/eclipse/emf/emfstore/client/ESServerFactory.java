@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
+import org.eclipse.emf.emfstore.common.model.ESFactory;
 
 /**
  * Factory for creating {@link ESServer} instances.
@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
  * @author wesendon
  * @author emueller
  */
-public interface ESServerFactory extends IEMFStoreFactory {
+public interface ESServerFactory extends ESFactory {
 
 	/**
 	 * Creates a server without a local name.

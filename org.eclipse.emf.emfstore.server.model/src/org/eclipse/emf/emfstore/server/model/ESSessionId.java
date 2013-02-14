@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
+import org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier;
 
 /**
  * Represents the ID of a session as used in an user session.
@@ -20,6 +20,6 @@ import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
  * @author emueller
  * @author wesendon
  */
-public interface ESSessionId extends IUniqueIdentifier {
+public interface ESSessionId extends ESUniqueIdentifier {
 
 }

@@ -55,8 +55,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPointException;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
-import org.eclipse.emf.emfstore.common.model.SingletonIdResolver;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -112,7 +112,7 @@ public final class ModelUtil {
 	/**
 	 * Contains all ID resolvers for singleton datatypes.
 	 */
-	private static Set<SingletonIdResolver> singletonIdResolvers;
+	private static Set<ESSingletonIdResolver> singletonIdResolvers;
 	private static HashMap<Object, Object> resourceLoadOptions;
 	private static HashMap<Object, Object> resourceSaveOptions;
 
@@ -1202,13 +1202,13 @@ public final class ModelUtil {
 	 *            the id
 	 * @return the singleton instance
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public static EObject getSingleton(IModelElementId singletonId) {
+	public static EObject getSingleton(ESModelElementId singletonId) {
 
 		initSingletonIdResolvers();
 
-		for (SingletonIdResolver resolver : singletonIdResolvers) {
+		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
 			EObject singleton = resolver.getSingleton(singletonId);
 			if (singleton != null) {
 				return singleton;
@@ -1225,13 +1225,13 @@ public final class ModelUtil {
 	 *            the singleton
 	 * @return the id
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver#getSingletonModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
 	public static ModelElementId getSingletonModelElementId(EObject singleton) {
 
 		initSingletonIdResolvers();
 
-		for (SingletonIdResolver resolver : singletonIdResolvers) {
+		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
 			ModelElementId id = (ModelElementId) resolver.getSingletonModelElementId(singleton);
 			if (id != null) {
 				return clone(id);
@@ -1248,13 +1248,13 @@ public final class ModelUtil {
 	 *            the instance
 	 * @return true if it is a singleton
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.SingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver#isSingleton(org.eclipse.emf.ecore.EObject)
 	 */
 	public static boolean isSingleton(EObject eObject) {
 
 		initSingletonIdResolvers();
 
-		for (SingletonIdResolver resolver : singletonIdResolvers) {
+		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
 			if (resolver.isSingleton(eObject)) {
 				return true;
 			}
@@ -1264,17 +1264,17 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Initializes all available {@link SingletonIdResolver}.
+	 * Initializes all available {@link ESSingletonIdResolver}.
 	 */
 	private static synchronized void initSingletonIdResolvers() {
 		if (singletonIdResolvers == null) {
 			// collect singleton ID resolvers
-			singletonIdResolvers = new LinkedHashSet<SingletonIdResolver>();
+			singletonIdResolvers = new LinkedHashSet<ESSingletonIdResolver>();
 
 			for (ExtensionElement element : new ExtensionPoint(
 				"org.eclipse.emf.emfstore.common.model.singletonidresolver").getExtensionElements()) {
 				try {
-					singletonIdResolvers.add(element.getClass("class", SingletonIdResolver.class));
+					singletonIdResolvers.add(element.getClass("class", ESSingletonIdResolver.class));
 				} catch (ExtensionPointException e) {
 					ModelUtil.logWarning("Couldn't instantiate Singleton ID resolver:" + e.getMessage());
 				}

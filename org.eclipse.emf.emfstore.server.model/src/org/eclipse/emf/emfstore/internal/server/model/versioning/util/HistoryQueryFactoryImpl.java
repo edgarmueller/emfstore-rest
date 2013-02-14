@@ -2,7 +2,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.util;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQueryFactory;
@@ -30,13 +30,13 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 			includeCp);
 	}
 
-	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<IModelElementId> modelElements,
+	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements,
 		int upper, int lower, boolean allVersions, boolean includeCp) {
 		return HistoryQueryBuilder.modelelementQuery((PrimaryVersionSpec) source, modelElements, upper, lower,
 			allVersions, includeCp);
 	}
 
-	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, IModelElementId id, int upper, int lower,
+	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, ESModelElementId id, int upper, int lower,
 		boolean allVersions, boolean includeCp) {
 		return HistoryQueryBuilder.modelelementQuery((PrimaryVersionSpec) source, (ModelElementId) id, upper, lower,
 			allVersions, includeCp);

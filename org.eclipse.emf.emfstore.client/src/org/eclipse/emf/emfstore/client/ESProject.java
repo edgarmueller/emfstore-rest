@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -85,7 +85,8 @@ public interface ESProject {
 	 * 
 	 * @throws EMFStoreException in case an error occurs while resolving the given {@link ESVersionSpec}
 	 */
-	ESPrimaryVersionSpec resolveVersionSpec(ESVersionSpec versionSpec, IProgressMonitor monitor) throws EMFStoreException;
+	ESPrimaryVersionSpec resolveVersionSpec(ESVersionSpec versionSpec, IProgressMonitor monitor)
+		throws EMFStoreException;
 
 	/**
 	 * <p>

@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.junit.Test;
 
@@ -232,7 +232,7 @@ public class ModelElementTest {
 
 		assertTrue(localProject.getAllModelElements().contains(player));
 		assertTrue(localProject.contains(player));
-		IModelElementId id = localProject.getModelElementId(player);
+		ESModelElementId id = localProject.getModelElementId(player);
 
 		new EMFStoreCommand() {
 			@Override
@@ -272,7 +272,7 @@ public class ModelElementTest {
 
 		assertTrue(localProject.getAllModelElements().contains(player));
 		assertTrue(localProject.contains(player));
-		IModelElementId id = localProject.getModelElementId(player);
+		ESModelElementId id = localProject.getModelElementId(player);
 		localProject.getModelElements().remove(player);
 
 		assertEquals(SIZE, localProject.getAllModelElements().size());

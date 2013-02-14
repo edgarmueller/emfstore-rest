@@ -23,7 +23,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
@@ -208,7 +208,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (version.getPrimarySpec() != null && version.getPrimarySpec().getIdentifier() == 0) {
 				if (version.getProjectState() != null) {
 					for (ModelElementId id : modelElements) {
-						if (version.getProjectState().contains((IModelElementId) id)) {
+						if (version.getProjectState().contains((ESModelElementId) id)) {
 							result.add(version);
 							break;
 						}

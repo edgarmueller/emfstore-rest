@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
@@ -795,7 +795,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			} else if (element instanceof ProjectSpace) {
 				selectedModelElement = ((ProjectSpace) element).getProject();
 			} else if (element instanceof ModelElementId
-				&& projectSpace.getProject().contains((IModelElementId) element)) {
+				&& projectSpace.getProject().contains((ESModelElementId) element)) {
 				selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
 			} else if (projectSpace.getProject().contains((EObject) element)) {
 				selectedModelElement = (EObject) element;

@@ -7,17 +7,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.model;
-
-import org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier;
+package org.eclipse.emf.emfstore.common.model;
 
 /**
- * Represents the global ID of a project.
+ * Represents a workspace wide unique identifier.
  * 
- * @author mkoegel
+ * @author emueller
+ * @author wesendon
  */
-public interface ESGlobalProjectId extends ESUniqueIdentifier {
+public interface ESUniqueIdentifier {
 
+	/**
+	 * Returns the actual identifier as a string.
+	 * 
+	 * @return the ID as a string
+	 */
+	String getId();
 }

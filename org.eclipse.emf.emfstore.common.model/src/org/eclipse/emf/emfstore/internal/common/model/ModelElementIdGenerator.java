@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model;
 
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 
 /**
  * Interface for the modelelementidgenerator extension point, identified by this id:
@@ -28,6 +28,6 @@ public interface ModelElementIdGenerator {
 	 * @param container The {@link IdEObjectCollection} for which a new {@link ModelElementId} should be created.
 	 * @return The next {@link ModelElementId} for the given {@link IdEObjectCollection}.
 	 */
-	ModelElementId generateModelElementId(EObjectContainer container);
+	ModelElementId generateModelElementId(ESObjectContainer container);
 
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
-import org.eclipse.emf.emfstore.common.model.EObjectContainer;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -33,9 +33,9 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.EObjectContainer)
+	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, EObjectContainer container) {
+	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
 
 		// if notification is from an element disconnected from the project?s containment tree we will not try to filter
 		// since we cannot derive the project then
@@ -72,7 +72,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 
 	}
 
-	private boolean checkSingleReference(NotificationInfo notificationInfo, EObjectContainer container) {
+	private boolean checkSingleReference(NotificationInfo notificationInfo, ESObjectContainer container) {
 		// if new value is in project then do NOT filter
 		if (notificationInfo.getOldValue() != null && !notificationInfo.isMoveEvent()
 			&& isOrWasInProject(container, notificationInfo.getOldModelElementValue())) {
@@ -88,7 +88,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkOldValueList(NotificationInfo notificationInfo, EObjectContainer container) {
+	private boolean checkOldValueList(NotificationInfo notificationInfo, ESObjectContainer container) {
 		for (EObject referencedElement : ((List<EObject>) notificationInfo.getOldValue())) {
 			if (isOrWasInProject(container, referencedElement)) {
 				return false;
@@ -99,7 +99,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkNewValueList(NotificationInfo notificationInfo, EObjectContainer container) {
+	private boolean checkNewValueList(NotificationInfo notificationInfo, ESObjectContainer container) {
 		for (EObject referencedElement : ((List<EObject>) notificationInfo.getNewValue())) {
 			if (isOrWasInProject(container, referencedElement)) {
 				return false;
@@ -109,7 +109,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 		return true;
 	}
 
-	private boolean isOrWasInProject(EObjectContainer container, EObject referencedElement) {
+	private boolean isOrWasInProject(ESObjectContainer container, EObject referencedElement) {
 		boolean b = container.contains(referencedElement)
 			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(referencedElement) != null;
 		return b;

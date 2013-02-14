@@ -14,8 +14,8 @@ package org.eclipse.emf.emfstore.server.model.query;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.IEMFStoreFactory;
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESFactory;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author wesendon
  * @author emueller
  */
-public interface ESHistoryQueryFactory extends IEMFStoreFactory {
+public interface ESHistoryQueryFactory extends ESFactory {
 
 	/**
 	 * Factory method for creating a {@link ESRangeQuery}.
@@ -83,7 +83,7 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<IModelElementId> modelElements, int upper,
+	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements, int upper,
 		int lower, boolean allVersions, boolean includeChangePackages);
 
 	/**
@@ -103,6 +103,6 @@ public interface ESHistoryQueryFactory extends IEMFStoreFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, IModelElementId id,
+	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, ESModelElementId id,
 		int upper, int lower, boolean allVersions, boolean includeChangePackages);
 }

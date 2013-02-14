@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
-import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
+import org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier;
 
 /**
  * Represents the local ID of a project.
@@ -20,6 +20,6 @@ import org.eclipse.emf.emfstore.common.model.IUniqueIdentifier;
  * @author emueller
  * @author wesendon
  */
-public interface ESLocalProjectId extends IUniqueIdentifier {
+public interface ESLocalProjectId extends ESUniqueIdentifier {
 
 }

@@ -10,12 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model;
 
-import org.eclipse.emf.emfstore.common.model.IModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Element Id</b></em>'.
  * 
- * @extends IModelElementId
+ * @extends ESModelElementId
  *          <!-- end-user-doc -->
  * 
  * 
@@ -23,6 +23,6 @@ import org.eclipse.emf.emfstore.common.model.IModelElementId;
  * @model
  * @generated
  */
-public interface ModelElementId extends UniqueIdentifier, IModelElementId {
+public interface ModelElementId extends UniqueIdentifier, ESModelElementId {
 
 } // ModelElementId
