@@ -46,7 +46,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
@@ -64,7 +64,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
@@ -91,7 +91,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: If no callback is specified the return value will be used to indicate whether the commit was
@@ -121,7 +121,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @return the new base version
@@ -137,7 +137,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @param version
@@ -155,7 +155,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ProjectNotSharedException} will be thrown.
+	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
 	 * 
 	 * @param version

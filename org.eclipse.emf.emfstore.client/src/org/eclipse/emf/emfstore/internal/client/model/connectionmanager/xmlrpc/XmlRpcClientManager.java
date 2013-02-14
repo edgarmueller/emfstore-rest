@@ -19,7 +19,7 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.client.XmlRpcSun15HttpTransportFactory;
-import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -72,7 +72,7 @@ public class XmlRpcClientManager {
 
 			try {
 				factory.setSSLSocketFactory(KeyStoreManager.getInstance().getSSLContext().getSocketFactory());
-			} catch (CertificateStoreException e) {
+			} catch (ESCertificateStoreException e) {
 				throw new ConnectionException("Couldn't load certificate", e);
 			}
 			client.setTransportFactory(factory);

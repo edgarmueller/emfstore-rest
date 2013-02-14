@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.client.model.handler;
 
 /**
- * Provides a context in which a {@link Runnable} is exectued.
+ * Provides a context in which a {@link Runnable} is executed.
  * 
  * @author emueller
  * 

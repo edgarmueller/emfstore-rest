@@ -19,6 +19,6 @@ package org.eclipse.emf.emfstore.client.exceptions;
  * @author emueller
  */
 @SuppressWarnings("serial")
-public class ProjectNotSharedException extends RuntimeException {
+public class ESProjectNotSharedException extends RuntimeException {
 
 }

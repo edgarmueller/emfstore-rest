@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -130,7 +130,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 				} else {
 					cert.setText("");
 				}
-			} catch (CertificateStoreException e1) {
+			} catch (ESCertificateStoreException e1) {
 				cert.setText("");
 			}
 		}
@@ -149,7 +149,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			ServerInfo serverInfo = wizard.getServerInfo();
 			String selectedCertificate = serverInfo.getCertificateAlias();
 			cert.select(certificates.indexOf(selectedCertificate));
-		} catch (CertificateStoreException e) {
+		} catch (ESCertificateStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}
 	}
@@ -242,7 +242,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			try {
 				certificates = KeyStoreManager.getInstance().getCertificates();
 				csd.setElements(certificates.toArray());
-			} catch (CertificateStoreException e1) {
+			} catch (ESCertificateStoreException e1) {
 				csd.setErrorMessage(e1.getMessage());
 			}
 			csd.setBlockOnOpen(true);

@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 import java.security.cert.X509Certificate;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
-import org.eclipse.emf.emfstore.client.exceptions.InvalidCertificateException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -139,7 +139,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					try {
 						KeyStoreManager.getInstance().deleteCertificate(alias);
 						setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-					} catch (CertificateStoreException e1) {
+					} catch (ESCertificateStoreException e1) {
 						setErrorMessage(e1.getMessage());
 					}
 				}
@@ -202,7 +202,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					}
 					certAlias.setText(alias);
 					certDetails.setText(tmp);
-				} catch (CertificateStoreException e1) {
+				} catch (ESCertificateStoreException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}
@@ -243,14 +243,14 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 				}
 				try {
 					KeyStoreManager.getInstance().addCertificate(alias, location);
-				} catch (final InvalidCertificateException e1) {
+				} catch (final ESInvalidCertificateException e1) {
 					setErrorMessage("Invalid certificate!");
-				} catch (CertificateStoreException e1) {
+				} catch (ESCertificateStoreException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 				try {
 					setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-				} catch (CertificateStoreException e1) {
+				} catch (ESCertificateStoreException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}

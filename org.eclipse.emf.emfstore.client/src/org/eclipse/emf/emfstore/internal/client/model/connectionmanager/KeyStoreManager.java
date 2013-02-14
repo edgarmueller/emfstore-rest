@@ -43,8 +43,8 @@ import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.exceptions.CertificateStoreException;
-import org.eclipse.emf.emfstore.client.exceptions.InvalidCertificateException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionPoint;
@@ -148,11 +148,11 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * Lists all certificates in the client's KeyStore.
 	 * 
 	 * @return string representation of the certificates
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
-	public ArrayList<String> getCertificates() throws CertificateStoreException {
+	public ArrayList<String> getCertificates() throws ESCertificateStoreException {
 		loadKeyStore();
 		ArrayList<String> certificates = new ArrayList<String>();
 		try {
@@ -164,7 +164,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		} catch (KeyStoreException e) {
 			String message = "Loading certificates failed!";
 			WorkspaceUtil.logException(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		}
 		return certificates;
 	}
@@ -174,13 +174,13 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * 
 	 * @param alias
 	 *            alias of certificate
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
-	public void deleteCertificate(String alias) throws CertificateStoreException {
+	public void deleteCertificate(String alias) throws ESCertificateStoreException {
 		if (isDefaultCertificate(alias)) {
-			throw new CertificateStoreException("Cannot delete default certificate!");
+			throw new ESCertificateStoreException("Cannot delete default certificate!");
 		} else {
 			loadKeyStore();
 			try {
@@ -189,7 +189,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			} catch (KeyStoreException e) {
 				String message = "Deleting certificate failed!";
 				WorkspaceUtil.logException(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			}
 		}
 	}
@@ -200,7 +200,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.lang.String)
 	 */
-	public void addCertificate(String alias, String path) throws InvalidCertificateException, CertificateStoreException {
+	public void addCertificate(String alias, String path) throws ESInvalidCertificateException, ESCertificateStoreException {
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(path);
@@ -208,7 +208,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		} catch (FileNotFoundException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logException(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		} finally {
 			if (fileInputStream != null) {
 				try {
@@ -216,7 +216,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				} catch (IOException e) {
 					String message = "Storing certificate failed!";
 					WorkspaceUtil.logException(message, e);
-					throw new CertificateStoreException(message, e);
+					throw new ESCertificateStoreException(message, e);
 				}
 			}
 		}
@@ -228,8 +228,8 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.io.InputStream)
 	 */
-	public void addCertificate(String alias, InputStream certificate) throws InvalidCertificateException,
-		CertificateStoreException {
+	public void addCertificate(String alias, InputStream certificate) throws ESInvalidCertificateException,
+		ESCertificateStoreException {
 		if (!isDefaultCertificate(alias)) {
 			loadKeyStore();
 			try {
@@ -239,54 +239,54 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				storeKeyStore();
 			} catch (CertificateException e) {
 				String message = "Please choose a valid certificate!";
-				throw new InvalidCertificateException(message);
+				throw new ESInvalidCertificateException(message);
 			} catch (KeyStoreException e) {
 				String message = "Storing certificate failed!";
 				WorkspaceUtil.logException(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			}
 		}
 	}
 
-	private void storeKeyStore() throws CertificateStoreException {
+	private void storeKeyStore() throws ESCertificateStoreException {
 		loadKeyStore();
 		try {
 			keyStore.store(new FileOutputStream(getPathToKeyStore()), KEYSTOREPASSWORD.toCharArray());
 		} catch (KeyStoreException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		} catch (NoSuchAlgorithmException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		} catch (CertificateException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		} catch (FileNotFoundException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		} catch (IOException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);
-			throw new CertificateStoreException(message, e);
+			throw new ESCertificateStoreException(message, e);
 		}
 	}
 
 	/**
 	 * Reloads the keystore.
 	 * 
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             in case of failure
 	 */
-	public void reloadKeyStore() throws CertificateStoreException {
+	public void reloadKeyStore() throws ESCertificateStoreException {
 		keyStore = null;
 		loadKeyStore();
 	}
 
-	private void loadKeyStore() throws CertificateStoreException {
+	private void loadKeyStore() throws ESCertificateStoreException {
 		if (keyStore == null) {
 			try {
 				keyStore = KeyStore.getInstance("JKS");
@@ -296,23 +296,23 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			} catch (KeyStoreException e) {
 				String message = "Loading certificate failed!";
 				WorkspaceUtil.logWarning(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			} catch (NoSuchAlgorithmException e) {
 				String message = "Loading certificate failed!";
 				WorkspaceUtil.logWarning(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			} catch (CertificateException e) {
 				String message = "Loading certificate failed!";
 				WorkspaceUtil.logWarning(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			} catch (FileNotFoundException e) {
 				String message = "Loading certificate failed!";
 				WorkspaceUtil.logWarning(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			} catch (IOException e) {
 				String message = "Loading certificate failed!";
 				WorkspaceUtil.logWarning(message, e);
-				throw new CertificateStoreException(message, e);
+				throw new ESCertificateStoreException(message, e);
 			}
 		}
 	}
@@ -322,10 +322,10 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * SSLSocketFactory.
 	 * 
 	 * @return SSL Context
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             in case of failure retrieving the context
 	 */
-	public SSLContext getSSLContext() throws CertificateStoreException {
+	public SSLContext getSSLContext() throws ESCertificateStoreException {
 		try {
 			loadKeyStore();
 			KeyManagerFactory managerFactory = KeyManagerFactory.getInstance("SunX509");
@@ -343,13 +343,13 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 			return sslContext;
 		} catch (NoSuchAlgorithmException e) {
-			throw new CertificateStoreException("Loading certificate failed!", e);
+			throw new ESCertificateStoreException("Loading certificate failed!", e);
 		} catch (UnrecoverableKeyException e) {
-			throw new CertificateStoreException("Loading certificate failed!", e);
+			throw new ESCertificateStoreException("Loading certificate failed!", e);
 		} catch (KeyStoreException e) {
-			throw new CertificateStoreException("Loading certificate failed!", e);
+			throw new ESCertificateStoreException("Loading certificate failed!", e);
 		} catch (KeyManagementException e) {
-			throw new CertificateStoreException("Loading certificate failed!", e);
+			throw new ESCertificateStoreException("Loading certificate failed!", e);
 		}
 	}
 
@@ -408,16 +408,16 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		} catch (BadPaddingException e) {
 			// nothing to do
 			e.printStackTrace();
-		} catch (CertificateStoreException e) {
+		} catch (ESCertificateStoreException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		WorkspaceUtil.logException("Couldn't encrypt password.", new CertificateStoreException(
+		WorkspaceUtil.logException("Couldn't encrypt password.", new ESCertificateStoreException(
 			"Couldn't encrypt password."));
 		return "";
 	}
 
-	private Certificate getCertificateForEncryption(ESServer server) throws CertificateStoreException {
+	private Certificate getCertificateForEncryption(ESServer server) throws ESCertificateStoreException {
 		Certificate publicKey;
 		if (server == null) {
 			publicKey = getCertificate(getDefaultCertificate());
@@ -427,7 +427,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		if (publicKey == null) {
 			publicKey = getCertificate(getDefaultCertificate());
 			if (publicKey == null) {
-				throw new CertificateStoreException("Unable to get certificate for password encryption.");
+				throw new ESCertificateStoreException("Unable to get certificate for password encryption.");
 			}
 		}
 		return publicKey;
@@ -465,11 +465,11 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @param alias
 	 *            Certificate alias
 	 * @return boolean
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
-	public boolean contains(String alias) throws CertificateStoreException {
+	public boolean contains(String alias) throws ESCertificateStoreException {
 		if (getCertificate(alias) == null) {
 			return false;
 		}
@@ -492,11 +492,11 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @param alias
 	 *            String
 	 * @return Certificate
-	 * @throws CertificateStoreException
+	 * @throws ESCertificateStoreException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
-	public Certificate getCertificate(String alias) throws CertificateStoreException {
+	public Certificate getCertificate(String alias) throws ESCertificateStoreException {
 		if (alias == null) {
 			return null;
 		}
@@ -504,7 +504,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		try {
 			return keyStore.getCertificate(alias);
 		} catch (KeyStoreException e) {
-			throw new CertificateStoreException("Loading certificate failed!");
+			throw new ESCertificateStoreException("Loading certificate failed!");
 		}
 	}
 
@@ -513,10 +513,10 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#certificateExists(java.lang.String)
 	 */
-	public boolean certificateExists(String alias) throws CertificateStoreException {
+	public boolean certificateExists(String alias) throws ESCertificateStoreException {
 		try {
 			return getCertificate(alias) != null;
-		} catch (CertificateStoreException e) {
+		} catch (ESCertificateStoreException e) {
 			if (!(e.getCause() instanceof FileNotFoundException)) {
 				throw e;
 			}

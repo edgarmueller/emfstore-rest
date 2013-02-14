@@ -11,34 +11,27 @@
 package org.eclipse.emf.emfstore.client.exceptions;
 
 /**
- * Exception that is thrown when the specified certificate can not be found, or
- * when the specified path does not point at a valid certificate.
+ * ESCertificateStoreException is thrown when problems arise with the KeyStoreManager.
  * 
- * @author Carl Pfeiffer
+ * @author pfeifferc
  */
-public class InvalidCertificateException extends Exception {
+public class ESCertificateStoreException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private String errorString;
-
 	/**
-	 * @param string
-	 *            error string
+	 * @param message exception message
+	 * @param cause reason for exception
 	 */
-	public InvalidCertificateException(String string) {
-		this.errorString = string;
+	public ESCertificateStoreException(String message, Throwable cause) {
+		super(message, cause);
 	}
 
 	/**
-	 * Returns error message.
-	 * 
-	 * @return error string
-	 * @see java.lang.Throwable#toString()
+	 * @param message exception message
 	 */
-	@Override
-	public String toString() {
-		return errorString;
+	public ESCertificateStoreException(String message) {
+		super(message);
 	}
 
 }
