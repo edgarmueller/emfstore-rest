@@ -13,7 +13,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectDescription" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sharedProperties" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//EMFStoreProperty"
+        eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//EMFStoreProperty"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
         eType="#//versioning/BranchInfo" containment="true"/>
@@ -26,7 +26,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="version" lowerBound="1"
         eType="#//versioning/PrimaryVersionSpec" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SessionId" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SessionId" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="ServerSpace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
         eType="#//accesscontrol/ACGroup" containment="true"/>
@@ -37,7 +37,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1"
         eType="#//accesscontrol/ACUser" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProjectId" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProjectId" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersionInfo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="emfStoreVersionString"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -46,7 +46,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FileIdentifier" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//IdentifiableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FileIdentifier" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="AuthenticationInformation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sessionId" eType="#//SessionId"
         containment="true"/>
@@ -131,11 +131,11 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModelElementQuery" eSuperTypes="#//versioning/RangeQuery">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modelElements" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Version">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="projectState" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//Project"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="projectState" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//Project"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="primarySpec" lowerBound="1"
           eType="#//versioning/PrimaryVersionSpec" containment="true"/>
@@ -180,8 +180,8 @@
     <eSubpackages name="operations" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations"
         nsPrefix="org.eclipse.emf.emfstore.internal.server.model.versioning.operations">
       <eClassifiers xsi:type="ecore:EClass" name="AbstractOperation" abstract="true"
-          eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//IdentifiableElement">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="modelElementId" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+          eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="modelElementId" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="accepted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
             transient="true"/>
@@ -233,30 +233,30 @@
             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SingleReferenceOperation" eSuperTypes="#//versioning/operations/ReferenceOperation">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="oldValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="oldValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MultiReferenceSetOperation" eSuperTypes="#//versioning/operations/ReferenceOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="oldValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="oldValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MultiReferenceOperation" eSuperTypes="#//versioning/operations/ReferenceOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="add" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModelElements"
-            upperBound="-1" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+            upperBound="-1" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MultiReferenceMoveOperation" eSuperTypes="#//versioning/operations/FeatureOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="newIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModelElementId"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReferenceOperation" abstract="true"
@@ -266,7 +266,7 @@
             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="containmentType" eType="#//versioning/operations/ContainmentType"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="OperationId" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier"/>
+      <eClassifiers xsi:type="ecore:EClass" name="OperationId" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier"/>
       <eClassifiers xsi:type="ecore:EClass" name="OperationGroup">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
@@ -275,7 +275,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="ModelElementGroup">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="modelElements" upperBound="-1"
-            eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"/>
+            eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="ContainmentType">
         <eLiterals name="NONE"/>
@@ -284,7 +284,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EObjectToModelElementIdMap" instanceClassName="java.util.Map$Entry">
         <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
       <eSubpackages name="semantic" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic"
@@ -321,7 +321,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="effectiveGroups" upperBound="-1"
           eType="#//accesscontrol/ACGroup" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ACOrgUnit" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//IdentifiableElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ACOrgUnit" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement">
       <eOperations name="getId" eType="#//accesscontrol/ACOrgUnitId"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -333,14 +333,14 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ACGroup" eSuperTypes="#//accesscontrol/ACOrgUnit">
       <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-          eType="#//accesscontrol/ACOrgUnit" eKeys="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
+          eType="#//accesscontrol/ACOrgUnit" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement/identifier"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ACOrgUnitId" eSuperTypes="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ACOrgUnitId" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier"/>
     <eClassifiers xsi:type="ecore:EClass" name="OrgUnitProperty">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//ProjectId"
-          containment="true" eKeys="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier/id"/>
+          containment="true" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier/id"/>
     </eClassifiers>
     <eSubpackages name="roles" nsURI="http://eclipse.org/emf/emfstore/server/model/roles"
         nsPrefix="org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles">
@@ -365,7 +365,7 @@
           <eParameters name="modelElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="projects" upperBound="-1"
-            eType="#//ProjectId" containment="true" eKeys="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier/id"/>
+            eType="#//ProjectId" containment="true" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier/id"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReaderRole" eSuperTypes="#//accesscontrol/roles/Role"/>
       <eClassifiers xsi:type="ecore:EClass" name="WriterRole" eSuperTypes="#//accesscontrol/roles/Role"/>
@@ -382,11 +382,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="ProjectUrlFragment">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="projectId" eType="#//ProjectId"
-          containment="true" eKeys="../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//UniqueIdentifier/id"/>
+          containment="true" eKeys="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//UniqueIdentifier/id"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModelElementUrlFragment">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElementId" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model/model/common.ecore#//ModelElementId"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElementId" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModelElementUrl">
