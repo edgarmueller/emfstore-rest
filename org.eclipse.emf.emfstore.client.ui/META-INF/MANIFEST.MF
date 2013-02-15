@@ -12,7 +12,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-ClassPath: .,
  lib/dmp.jar
-Export-Package: org.eclipse.emf.emfstore.internal.client.ui.common,
+Export-Package: org.eclipse.emf.emfstore.client.ui,
+ org.eclipse.emf.emfstore.internal.client.ui.common,
  org.eclipse.emf.emfstore.internal.client.ui.controller,
  org.eclipse.emf.emfstore.internal.client.ui.decorators,
  org.eclipse.emf.emfstore.internal.client.ui.dialogs,
