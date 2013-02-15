@@ -87,7 +87,7 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @throws EmfStoreException
+	 * @throws ESException
 	 * @throws AccessControlException
 	 * @see org.eclipse.emf.emfstore.internal.client.ESServer.IServer#login(java.lang.String, java.lang.String)
 	 * @generated NOT

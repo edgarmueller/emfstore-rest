@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
@@ -41,7 +41,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		ServerConfiguration.setTesting(true);
 		try {
 			EMFStoreController.runAsNewThread();
-		} catch (FatalEmfStoreException e) {
+		} catch (FatalESException e) {
 			log(e);
 		}
 	}
@@ -76,7 +76,7 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	}
 
-	private static void deleteResources(String pathToMainFile) throws FatalEmfStoreException {
+	private static void deleteResources(String pathToMainFile) throws FatalESException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
@@ -84,7 +84,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
 		} catch (IOException e) {
-			throw new FatalEmfStoreException(StorageException.NOLOAD, e);
+			throw new FatalESException(StorageException.NOLOAD, e);
 		}
 		EcoreUtil.resolveAll(resource);
 		List<Resource> loadedResources = new ArrayList<Resource>(resourceSet.getResources());
@@ -107,13 +107,13 @@ public abstract class BaseEmptyEmfstoreTest {
 		}
 	}
 
-	protected static void deleteLocalProjects() throws IOException, FatalEmfStoreException, ESException {
+	protected static void deleteLocalProjects() throws IOException, FatalESException, ESException {
 		for (ESLocalProject project : WorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 			project.delete(new NullProgressMonitor());
 		}
 	}
 
-	protected static void deleteRemoteProjects() throws IOException, FatalEmfStoreException, ESException {
+	protected static void deleteRemoteProjects() throws IOException, FatalESException, ESException {
 		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0).getRemoteProjects()) {
 			project.delete(new NullProgressMonitor());
 		}

@@ -52,7 +52,7 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfigurat
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
@@ -159,7 +159,7 @@ public class SetupHelper {
 			// properties.setProperty(ServerConfiguration.RMI_ENCRYPTION, ServerConfiguration.FALSE);
 			EMFStoreController.runAsNewThread();
 			LOGGER.log(Level.INFO, "server started. ");
-		} catch (FatalEmfStoreException e) {
+		} catch (FatalESException e) {
 			e.printStackTrace();
 		}
 	}
@@ -279,7 +279,7 @@ public class SetupHelper {
 			Properties properties = ServerConfiguration.getProperties();
 			properties.setProperty(ServerConfiguration.RMI_ENCRYPTION, ServerConfiguration.FALSE);
 			EMFStoreController.runAsNewThread();
-		} catch (FatalEmfStoreException e) {
+		} catch (FatalESException e) {
 			e.printStackTrace();
 		}
 		LOGGER.log(Level.INFO, "setup server space finished");
@@ -619,7 +619,7 @@ public class SetupHelper {
 	 * changes. We check out and return it.
 	 * 
 	 * @return project lying on the server
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 */
 	public Project getCompareProject() throws ESException {
 		LOGGER.log(Level.INFO, "retrieving compare project...");

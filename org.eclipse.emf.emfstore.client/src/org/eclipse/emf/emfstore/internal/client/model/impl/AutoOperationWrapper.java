@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Comp
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 
 /**
- * Very basic implementation of {@link ESOperationModifier}. All operations are merged into one composite operation.
+ * Very basic implementation of an {@link ESOperationModifier}. All operations are merged into one composite operation.
  * 
  * @author wesendon
  */

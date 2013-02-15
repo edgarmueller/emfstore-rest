@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.Abs
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.SimplePropertyFileVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.VerifierChain;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyException;
 import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
 
@@ -34,7 +34,7 @@ public class AuthenticationControlFactoryImpl implements AuthenticationControlFa
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.AuthenticationControlFactory#createAuthenticationControl()
 	 */
-	public AbstractAuthenticationControl createAuthenticationControl() throws FatalEmfStoreException {
+	public AbstractAuthenticationControl createAuthenticationControl() throws FatalESException {
 
 		// under construction
 		// this factory reproduces the legacy behavior of unicase until new config is implemented

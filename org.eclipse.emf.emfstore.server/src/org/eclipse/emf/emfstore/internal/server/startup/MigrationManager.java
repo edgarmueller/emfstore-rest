@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * Applies migrator to files on server.
@@ -46,14 +46,14 @@ public class MigrationManager {
 	/**
 	 * Starts migration.
 	 * 
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public void migrateModel() throws FatalEmfStoreException {
+	public void migrateModel() throws FatalESException {
 		int modelVersionNumber;
 		try {
 			modelVersionNumber = ModelUtil.getModelVersionNumber();
 		} catch (MalformedModelVersionException e1) {
-			throw new FatalEmfStoreException(e1);
+			throw new FatalESException(e1);
 		}
 
 		// check for legacy server space
@@ -83,7 +83,7 @@ public class MigrationManager {
 		}
 
 		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
-			throw new FatalEmfStoreException("Model must be migrated to new version, but no migrators are available.");
+			throw new FatalESException("Model must be migrated to new version, but no migrators are available.");
 		}
 
 		// ask for confirmation
@@ -91,7 +91,7 @@ public class MigrationManager {
 		if (!doProcceed) {
 			String message = "Server shutting down, model update is mandatory.";
 			System.out.println(message);
-			throw new FatalEmfStoreException(message);
+			throw new FatalESException(message);
 		}
 
 		// migrate all versions of all projects
@@ -125,19 +125,19 @@ public class MigrationManager {
 	}
 
 	private void convertInitialProjectState(ModelVersion modelVersion, File projectDirectory)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		URI version0StateURI = URI.createFileURI(projectDirectory.getAbsolutePath() + File.separatorChar
 			+ ServerConfiguration.FILE_PREFIX_PROJECTSTATE + "0" + ServerConfiguration.FILE_EXTENSION_PROJECTSTATE);
 		try {
 			System.out.println("Migrating version 0...");
 			migrate(version0StateURI, new ArrayList<URI>(), modelVersion.getReleaseNumber());
 		} catch (EMFStoreMigrationException e) {
-			throw new FatalEmfStoreException("Migration of project at " + projectDirectory + " failed!", e);
+			throw new FatalESException("Migration of project at " + projectDirectory + " failed!", e);
 		}
 	}
 
 	private void convertAllVersions(ModelVersion modelVersion, File projectDirectory, File[] listFiles)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		List<URI> changePackageURIs = new ArrayList<URI>();
 
 		Arrays.sort(listFiles, new Comparator<File>() {
@@ -181,7 +181,7 @@ public class MigrationManager {
 							+ (changePackageURIs.size() - 1) + " previous versions...");
 						migrate(projectURI, changePackageURIs, modelVersion.getReleaseNumber());
 					} catch (EMFStoreMigrationException e) {
-						throw new FatalEmfStoreException("Migration of project at " + projectDirectory + " failed!", e);
+						throw new FatalESException("Migration of project at " + projectDirectory + " failed!", e);
 					}
 					changePackageURIs.clear();
 				}
@@ -237,9 +237,9 @@ public class MigrationManager {
 	 * Ask for Confirmation for model migration.
 	 * 
 	 * @return true if user wants to proceed
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 */
-	private boolean askForConfirmationForMigration() throws FatalEmfStoreException {
+	private boolean askForConfirmationForMigration() throws FatalESException {
 		System.out
 			.println("Your model is not up to date. Do you want to update now and did you backup your emfstore folder? (y/n)");
 
@@ -250,7 +250,7 @@ public class MigrationManager {
 		try {
 			read = System.in.read(buffer, 0, 1);
 		} catch (IOException e) {
-			throw new FatalEmfStoreException("Cannot read from input", e);
+			throw new FatalESException("Cannot read from input", e);
 		}
 
 		input = new String(buffer, 0, read);

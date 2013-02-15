@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterfac
 import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileNotOnServerException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
@@ -56,9 +56,9 @@ public class FileTransferSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	/**
 	 * @param parentInterface the parent interface
-	 * @throws FatalEmfStoreException if any fatal error occurs
+	 * @throws FatalESException if any fatal error occurs
 	 */
-	public FileTransferSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public FileTransferSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 	}
 

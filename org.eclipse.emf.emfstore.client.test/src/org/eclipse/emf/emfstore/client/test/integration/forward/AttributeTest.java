@@ -28,7 +28,7 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * Finds an attribute with isMany = true and moves elements inside this attribute.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -51,7 +51,7 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * 1. Get a random model element form test project; 2. get randomly one of its attributes. 3. change the attribute
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -77,7 +77,7 @@ public class AttributeTest extends IntegrationTest {
 	/**
 	 * Change the same attribute on a randomly selected ME twice.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test

@@ -62,7 +62,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Gets a project from the server.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	/**
 	 * @throws ESException
@@ -94,7 +94,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
-	 * @throws EmfStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	/**
 	 * @throws ESException
@@ -129,7 +129,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @see org.unicase.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.unicase.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
-	 * @throws EmfStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	/**
 	 * @throws ESException
@@ -165,7 +165,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Deletes a project on the server.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	/**
 	 * @throws ESException
@@ -201,7 +201,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Resolves version spec.
 	 * 
-	 * @throws EmfStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	/**
 	 * @throws ESException
@@ -231,7 +231,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Creates a version.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	/**
 	 * @throws ESException
@@ -268,7 +268,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Gets changes, which should be empty.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	/**
 	 * @throws ESException
@@ -286,7 +286,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Gets changes.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 * @throws SerializationException in case of failure
 	 */
 	/**
@@ -348,7 +348,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Gets a historyInfo.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	/**
 	 * @throws ESException
@@ -414,7 +414,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Removes a tag.
 	 * 
-	 * @throws EmfStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	/**
 	 * @throws ESException
@@ -447,7 +447,7 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Deletes session on server and creates new one.
 	 * 
-	 * @throws EmfStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	// @Test
 	/**

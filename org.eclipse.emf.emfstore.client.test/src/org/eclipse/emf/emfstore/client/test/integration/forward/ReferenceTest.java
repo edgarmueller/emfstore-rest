@@ -29,7 +29,7 @@ public class ReferenceTest extends IntegrationTest {
 	 * Takes a random ME (meA). Takes randomly one of its containment references. Creates a new ME matching containment
 	 * reference type (meB). Adds created meB to meA's containment reference.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -56,7 +56,7 @@ public class ReferenceTest extends IntegrationTest {
 	 * meToMove. Finds another ME of type meA (meB). Moves meToMove to meB. Finds yet another ME of type meA (meC) .
 	 * Moves meToMove to meC.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	// @Test
@@ -80,7 +80,7 @@ public class ReferenceTest extends IntegrationTest {
 	/**
 	 * This move an element in a many reference list to another position.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -102,7 +102,7 @@ public class ReferenceTest extends IntegrationTest {
 	 * Select a random ME (meA). Select one of its non-containment references. Find an ME matching reference type (meB).
 	 * Add meB to meA.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -125,7 +125,7 @@ public class ReferenceTest extends IntegrationTest {
 	/**
 	 * Removes a referenced model element form a non-containment reference of a randomly selected ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -149,7 +149,7 @@ public class ReferenceTest extends IntegrationTest {
 	 * Takes a random ME (meA). Takes randomly one of its containment references. Finds an existing ME in project
 	 * matching the reference type (meB). Adds meB to this reference of meA (moves meB from its old parent to meA).
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test

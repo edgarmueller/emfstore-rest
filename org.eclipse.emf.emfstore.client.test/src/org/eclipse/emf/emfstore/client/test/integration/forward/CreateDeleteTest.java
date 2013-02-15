@@ -29,7 +29,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * create a random ME and change one of its attributes.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -57,7 +57,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	 * Create a random ME and change one of its attributes, then changes one of its references, then changes one of its
 	 * attributes, and again changes one of its references.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	// @Test
@@ -84,7 +84,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME and change one of its references.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -111,7 +111,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME. Change one of its non-containment references. Delete ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -135,7 +135,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME. Delete ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -159,7 +159,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Delete a random ME. Revert delete.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -176,7 +176,7 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Delete a random ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test

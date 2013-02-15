@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
@@ -316,5 +318,24 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 			log(e);
 			fail(e.getMessage());
 		}
+	}
+
+	@Test
+	public void testGetterMethods() throws ESException {
+
+		final NullProgressMonitor monitor = new NullProgressMonitor();
+
+		League league = ProjectChangeUtil.createLeague("League");
+		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		Player player2 = ProjectChangeUtil.addPlayerToProject(localProject);
+
+		league.getPlayers().add(player);
+		league.getPlayers().add(player2);
+
+		localProject.getModelElements().add(league);
+		assertEquals(3, localProject.getAllModelElements().size());
+		assertEquals(1, localProject.getModelElements().size());
+		assertEquals(2, localProject.getAllModelElementsByClass(Player.class).size());
+		assertEquals(1, localProject.getAllModelElementsByClass(Tournament.class, true).size());
 	}
 }

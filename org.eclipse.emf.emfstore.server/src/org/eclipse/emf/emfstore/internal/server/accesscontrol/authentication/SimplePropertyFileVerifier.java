@@ -19,7 +19,7 @@ import java.util.Properties;
 
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * This verifyer can be used to store user and passwords in a property file. Entries in the property file look should
@@ -50,9 +50,9 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	 * 
 	 * @see #SimplePropertyFileVerifier(String, Hash)
 	 * @param filePath path to password file
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public SimplePropertyFileVerifier(String filePath) throws FatalEmfStoreException {
+	public SimplePropertyFileVerifier(String filePath) throws FatalESException {
 		this(filePath, Hash.NONE);
 	}
 
@@ -61,12 +61,12 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	 * 
 	 * @param filePath path to file
 	 * @param hash selected hash
-	 * @throws FatalEmfStoreException if hash is null
+	 * @throws FatalESException if hash is null
 	 */
-	public SimplePropertyFileVerifier(String filePath, Hash hash) throws FatalEmfStoreException {
+	public SimplePropertyFileVerifier(String filePath, Hash hash) throws FatalESException {
 		super();
 		if (hash == null) {
-			throw new FatalEmfStoreException("Hash may not be null for verifier.");
+			throw new FatalESException("Hash may not be null for verifier.");
 		}
 		this.hash = hash;
 

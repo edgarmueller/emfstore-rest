@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
@@ -80,9 +80,9 @@ public class EmfStoreValidator {
 	 * 
 	 * @param options options
 	 * @param throwException allows you to prevent that an exception is thrown if validation failes
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public void validate(int options, boolean throwException) throws FatalEmfStoreException {
+	public void validate(int options, boolean throwException) throws FatalESException {
 		boolean errors = true;
 		if ((options & RESOLVEALL) == RESOLVEALL) {
 			errors = validateResolveAll() && errors;
@@ -96,7 +96,7 @@ public class EmfStoreValidator {
 		// }
 
 		if (!errors && throwException) {
-			throw new FatalEmfStoreException("Validation failed.");
+			throw new FatalESException("Validation failed.");
 		}
 	}
 
@@ -105,9 +105,9 @@ public class EmfStoreValidator {
 	 * {@link #MODELELEMENTID} and {@link #PROJECTGENERATION}.
 	 * 
 	 * @param options options
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public void validate(int options) throws FatalEmfStoreException {
+	public void validate(int options) throws FatalESException {
 		validate(options, true);
 	}
 

@@ -388,7 +388,7 @@ public class PerformanceTest {
 		// .remove(setupHelper2.getUsersession());
 		// } catch (IOException e) {
 		// e.printStackTrace();
-		// } catch (EmfStoreException e) {
+		// } catch (ESException e) {
 		// e.printStackTrace();
 		// } finally {
 		// try {

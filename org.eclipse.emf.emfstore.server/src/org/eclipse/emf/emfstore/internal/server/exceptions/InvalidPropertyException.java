@@ -16,7 +16,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  * @author wesendonk
  */
 @SuppressWarnings("serial")
-public class InvalidPropertyException extends FatalEmfStoreException {
+public class InvalidPropertyException extends FatalESException {
 
 	/**
 	 * Default constructor.

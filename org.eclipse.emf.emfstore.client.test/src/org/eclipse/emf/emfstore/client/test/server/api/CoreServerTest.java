@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -54,12 +54,12 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	public void beforeHook() {
 		try {
 			initServer();
-		} catch (FatalEmfStoreException e) {
+		} catch (FatalESException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public void initServer() throws FatalEmfStoreException {
+	public void initServer() throws FatalESException {
 		ServerConfiguration.setTesting(true);
 		serverSpace = initServerSpace();
 		authMock = new AuthControlMock();

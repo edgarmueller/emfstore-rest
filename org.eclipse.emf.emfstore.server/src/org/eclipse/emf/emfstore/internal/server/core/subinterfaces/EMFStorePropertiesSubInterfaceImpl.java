@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterfac
 import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -45,10 +45,10 @@ public class EMFStorePropertiesSubInterfaceImpl extends AbstractSubEmfstoreInter
 	/**
 	 * @param parentInterface
 	 *            the parent interface
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if any fatal error occurs
 	 */
-	public EMFStorePropertiesSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public EMFStorePropertiesSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 		cache = new LinkedHashMap<ProjectHistory, Map<String, EMFStoreProperty>>();
 	}

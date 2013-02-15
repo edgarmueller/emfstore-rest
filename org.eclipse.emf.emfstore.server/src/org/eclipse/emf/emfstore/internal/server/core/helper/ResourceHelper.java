@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -50,10 +50,10 @@ public class ResourceHelper {
 	 * 
 	 * @param serverSpace
 	 *            serverspace
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public ResourceHelper(ServerSpace serverSpace) throws FatalEmfStoreException {
+	public ResourceHelper(ServerSpace serverSpace) throws FatalESException {
 		this.serverSpace = serverSpace;
 	}
 
@@ -62,10 +62,10 @@ public class ResourceHelper {
 	 * 
 	 * @param projectHistory
 	 *            project history
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if saving fails
 	 */
-	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalEmfStoreException {
+	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
 		String fileName = getProjectFolder(projectHistory.getProjectId()) + "projectHistory"
 			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY;
 		saveInResource(projectHistory, fileName);
@@ -78,10 +78,10 @@ public class ResourceHelper {
 	 *            version
 	 * @param projectId
 	 *            project id
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if saving fails
 	 */
-	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalEmfStoreException {
+	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
 		String fileName = getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
 			+ version.getPrimarySpec().getIdentifier() + ServerConfiguration.FILE_EXTENSION_VERSION;
 		saveInResource(version, fileName);
@@ -96,11 +96,11 @@ public class ResourceHelper {
 	 *            projectid
 	 * @param versionId
 	 *            versionid
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if saving fails
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		String filename = getProjectFolder(projectId) + getProjectFile(versionId.getIdentifier());
 		saveInResourceWithProject(project, filename, project);
 	}
@@ -114,11 +114,11 @@ public class ResourceHelper {
 	 *            versionId
 	 * @param projectId
 	 *            projectId
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if saving fails
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
-		ProjectId projectId) throws FatalEmfStoreException {
+		ProjectId projectId) throws FatalESException {
 		String filename = getProjectFolder(projectId) + getChangePackageFile(versionId.getIdentifier());
 		List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
@@ -226,13 +226,13 @@ public class ResourceHelper {
 			+ ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE;
 	}
 
-	private void saveInResource(EObject obj, String fileName) throws FatalEmfStoreException {
+	private void saveInResource(EObject obj, String fileName) throws FatalESException {
 		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
 		resource.getContents().add(obj);
 		save(obj);
 	}
 
-	private void saveInResourceWithProject(EObject obj, String fileName, Project project) throws FatalEmfStoreException {
+	private void saveInResourceWithProject(EObject obj, String fileName, Project project) throws FatalESException {
 		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
 		resource.getContents().add(obj);
 
@@ -256,10 +256,10 @@ public class ResourceHelper {
 	 * @param project
 	 *            the project, that is used to set the IDs of all model elements
 	 *            within the project on the resource
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public void saveWithProject(EObject eObject, Project project) throws FatalEmfStoreException {
+	public void saveWithProject(EObject eObject, Project project) throws FatalESException {
 		Resource resource = eObject.eResource();
 
 		if (resource instanceof XMIResource) {
@@ -278,15 +278,15 @@ public class ResourceHelper {
 	 * 
 	 * @param object
 	 *            the object
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public void save(EObject object) throws FatalEmfStoreException {
+	public void save(EObject object) throws FatalESException {
 		try {
 			ModelUtil.saveResource(object.eResource(), ModelUtil.getResourceLogger());
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (Exception e) {
-			throw new FatalEmfStoreException(StorageException.NOSAVE, e);
+			throw new FatalESException(StorageException.NOSAVE, e);
 		}
 		// END SUPRESS CATCH EXCEPTION
 	}
@@ -294,17 +294,17 @@ public class ResourceHelper {
 	/**
 	 * Saves all modified resources in the serverspace's resource set.
 	 * 
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public void saveAll() throws FatalEmfStoreException {
+	public void saveAll() throws FatalESException {
 		for (Resource res : serverSpace.eResource().getResourceSet().getResources()) {
 			if (res.isLoaded() && res.isModified()) {
 				try {
 					ModelUtil.saveResource(res, ModelUtil.getResourceLogger());
 					// BEGIN SUPRESS CATCH EXCEPTION
 				} catch (Exception e) {
-					throw new FatalEmfStoreException(StorageException.NOSAVE, e);
+					throw new FatalESException(StorageException.NOSAVE, e);
 				}
 				// END SUPRESS CATCH EXCEPTION
 			}

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server;
 
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -33,12 +33,12 @@ public class Activator extends Plugin {
 	 * @see org.eclipse.core.runtime.Plugin#start(org.osgi.framework.BundleContext)
 	 */
 	@Override
-	public void start(BundleContext context) throws FatalEmfStoreException {
+	public void start(BundleContext context) throws FatalESException {
 		try {
 			super.start(context);
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (Exception e) {
-			throw new FatalEmfStoreException("Plugin Bundle start failed!", e);
+			throw new FatalESException("Plugin Bundle start failed!", e);
 		}
 		// END SUPRESS CATCH EXCEPTION
 		plugin = this;
@@ -50,13 +50,13 @@ public class Activator extends Plugin {
 	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	@Override
-	public void stop(BundleContext context) throws FatalEmfStoreException {
+	public void stop(BundleContext context) throws FatalESException {
 		plugin = null;
 		try {
 			super.stop(context);
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (Exception e) {
-			throw new FatalEmfStoreException("Plugin Bundle stop failed!", e);
+			throw new FatalESException("Plugin Bundle stop failed!", e);
 		}
 		// END SUPRESS CATCH EXCEPTION
 	}

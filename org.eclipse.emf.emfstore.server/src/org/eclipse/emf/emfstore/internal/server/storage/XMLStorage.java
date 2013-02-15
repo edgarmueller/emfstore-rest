@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * Implementation of a {@link ResourceStorage} backed by an XMLResource.
@@ -35,7 +35,7 @@ public class XMLStorage implements ResourceStorage {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage#init(java.util.Properties)
 	 */
-	public URI init(Properties properties) throws FatalEmfStoreException {
+	public URI init(Properties properties) throws FatalESException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		String pathName = ServerConfiguration.getServerMainFile();
 		URI fileURI = URI.createFileURI(pathName);
@@ -45,7 +45,7 @@ public class XMLStorage implements ResourceStorage {
 				Resource resource = resourceSet.createResource(fileURI);
 				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (IOException e) {
-				throw new FatalEmfStoreException("Could not init XMLRessource", e);
+				throw new FatalESException("Could not init XMLRessource", e);
 			}
 		}
 		return fileURI;

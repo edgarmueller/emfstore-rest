@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * Connection Handler for XML RPC Emfstore interface.
@@ -44,7 +44,7 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("static-access")
-	public synchronized void init(EMFStore emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException {
+	public synchronized void init(EMFStore emfStore, AuthenticationControl accessControl) throws FatalESException {
 		this.emfStore = emfStore;
 		this.accessControl = accessControl;
 		XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.AdminEmfStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
@@ -57,11 +57,11 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	 *            the serverspace
 	 * @param authorizationControl
 	 *            the authoriazationcontrol
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
 	public AdminEmfStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		super(serverSpace, authorizationControl);
 	}
 
@@ -571,6 +571,6 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	 * @see org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface#initSubInterfaces()
 	 */
 	@Override
-	protected void initSubInterfaces() throws FatalEmfStoreException {
+	protected void initSubInterfaces() throws FatalESException {
 	}
 }

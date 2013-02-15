@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -52,9 +52,9 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * Constructor.
 	 * 
 	 * @param parentInterface the parent interface
-	 * @throws FatalEmfStoreException if init fails
+	 * @throws FatalESException if init fails
 	 */
-	public EPackageSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public EPackageSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 	}
 

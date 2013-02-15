@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterfac
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
@@ -62,22 +62,22 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param parentInterface
 	 *            parent interface
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public VersionSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public VersionSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 * @see org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface#initSubInterface()
 	 */
 	@Override
-	public void initSubInterface() throws FatalEmfStoreException {
+	public void initSubInterface() throws FatalESException {
 		super.initSubInterface();
 	}
 
@@ -317,7 +317,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					getResourceHelper().createResourceForChangePackage(changePackage, newVersion.getPrimarySpec(),
 						projectId);
 					getResourceHelper().createResourceForVersion(newVersion, projectHistory.getProjectId());
-				} catch (FatalEmfStoreException e) {
+				} catch (FatalESException e) {
 					// try to roll back. removing version is necessary in all cases
 					projectHistory.getVersions().remove(newVersion);
 
@@ -347,7 +347,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				save(baseVersion);
 				save(projectHistory);
 
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				// roll back failed
 				EMFStoreController.getInstance().shutdown(e);
 				throw new ESException("Shutting down server.");

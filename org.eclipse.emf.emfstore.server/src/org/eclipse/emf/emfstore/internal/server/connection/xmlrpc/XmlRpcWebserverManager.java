@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.connection.ServerKeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util.EObjectTypeConverterFactory;
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util.EObjectTypeFactory;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ServerKeyStoreException;
 
 /**
@@ -72,9 +72,9 @@ public final class XmlRpcWebserverManager {
 	/**
 	 * Starts the server.
 	 * 
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public void initServer() throws FatalEmfStoreException {
+	public void initServer() throws FatalESException {
 		if (webServer != null) {
 			return;
 		}
@@ -105,7 +105,7 @@ public final class XmlRpcWebserverManager {
 				private void shutdown(SSLServerSocketFactory serverSocketFactory, Exception e) {
 					if (serverSocketFactory == null) {
 						ModelUtil.logException("Couldn't initialize server socket.", e);
-						EMFStoreController.getInstance().shutdown(new FatalEmfStoreException());
+						EMFStoreController.getInstance().shutdown(new FatalESException());
 					}
 				}
 			};
@@ -131,7 +131,7 @@ public final class XmlRpcWebserverManager {
 
 			webServer.start();
 		} catch (IOException e) {
-			throw new FatalEmfStoreException("Couldn't start webserver", e);
+			throw new FatalESException("Couldn't start webserver", e);
 		}
 	}
 
@@ -140,14 +140,14 @@ public final class XmlRpcWebserverManager {
 	 * 
 	 * @param handlerName handler name
 	 * @param clazz class of server interface
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	public void addHandler(String handlerName, Class<?> clazz) throws FatalEmfStoreException {
+	public void addHandler(String handlerName, Class<?> clazz) throws FatalESException {
 		try {
 			PropertyHandlerMapping mapper = (PropertyHandlerMapping) webServer.getXmlRpcServer().getHandlerMapping();
 			mapper.addHandler(handlerName, clazz);
 		} catch (XmlRpcException e) {
-			throw new FatalEmfStoreException("Couldn't add handler", e);
+			throw new FatalESException("Couldn't add handler", e);
 		}
 	}
 

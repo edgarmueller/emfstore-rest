@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * Helper class for access control checks.
@@ -43,9 +44,9 @@ public class AccessControlHelper {
 	 * @param projectId the project id
 	 * @throws AccessControlException if access is not permitted.
 	 */
-	public void checkReadAccess(ProjectId projectId) throws AccessControlException {
+	public void checkReadAccess(ESGlobalProjectId projectId) throws AccessControlException {
 		for (Role role : user.getRoles()) {
-			if (role.canRead(projectId, null)) {
+			if (role.canRead((ProjectId) projectId, null)) {
 				return;
 			}
 		}
@@ -55,10 +56,14 @@ public class AccessControlHelper {
 	/**
 	 * Check write access for the given project.
 	 * 
-	 * @param projectId the project id
-	 * @throws AccessControlException if access is denied.
+	 * @param globalId
+	 *            the global project id
+	 * @throws AccessControlException if access is denied
 	 */
-	public void checkWriteAccess(ProjectId projectId) throws AccessControlException {
+	public void checkWriteAccess(ESGlobalProjectId globalId) throws AccessControlException {
+
+		ProjectId projectId = (ProjectId) globalId;
+
 		for (Role role : user.getRoles()) {
 			if (role.canDelete(projectId, null) || role.canCreate(projectId, null) || role.canModify(projectId, null)) {
 				return;
@@ -73,9 +78,9 @@ public class AccessControlHelper {
 	 * @param projectId the project id
 	 * @throws AccessControlException if access is denied.
 	 */
-	public void checkProjectAdminAccess(ProjectId projectId) throws AccessControlException {
+	public void checkProjectAdminAccess(ESGlobalProjectId projectId) throws AccessControlException {
 		for (Role role : user.getRoles()) {
-			if (role.canAdministrate(projectId)) {
+			if (role.canAdministrate((ProjectId) projectId)) {
 				return;
 			}
 		}

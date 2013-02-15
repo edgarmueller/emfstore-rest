@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.storage;
 import java.util.Properties;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * Represents a Storage based on a Resource.
@@ -27,8 +27,8 @@ public interface ResourceStorage {
 	 * 
 	 * @param properties initalization properties
 	 * @return the Resource URI
-	 * @throws FatalEmfStoreException if init fails
+	 * @throws FatalESException if init fails
 	 */
-	URI init(Properties properties) throws FatalEmfStoreException;
+	URI init(Properties properties) throws FatalESException;
 
 }

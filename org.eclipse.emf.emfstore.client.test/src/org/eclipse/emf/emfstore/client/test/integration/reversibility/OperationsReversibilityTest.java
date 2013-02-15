@@ -93,7 +93,7 @@ public abstract class OperationsReversibilityTest {
 	 * changes.
 	 * 
 	 * @return project lying on the server
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 */
 	public Project getCompareProject() throws ESException {
 		return setupHelper.getCompareProject();

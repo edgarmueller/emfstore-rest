@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
  * Factory interface for creating authenticationcontroller.
@@ -24,8 +24,8 @@ public interface AuthenticationControlFactory {
 	 * Creates an authentication controller.
 	 * 
 	 * @return controller
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	AbstractAuthenticationControl createAuthenticationControl() throws FatalEmfStoreException;
+	AbstractAuthenticationControl createAuthenticationControl() throws FatalESException;
 
 }

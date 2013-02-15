@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
@@ -42,11 +42,11 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * Default constructor.
 	 * 
 	 * @param parentInterface parentInterface
-	 * @throws FatalEmfStoreException if parent interface is null
+	 * @throws FatalESException if parent interface is null
 	 */
-	public AbstractSubEmfstoreInterface(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public AbstractSubEmfstoreInterface(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		if (parentInterface == null) {
-			throw new FatalEmfStoreException();
+			throw new FatalESException();
 		}
 		this.parentInterface = parentInterface;
 	}
@@ -54,9 +54,9 @@ public abstract class AbstractSubEmfstoreInterface {
 	/**
 	 * This method is called after the initialisation of the parent interface.
 	 * 
-	 * @throws FatalEmfStoreException exception
+	 * @throws FatalESException exception
 	 */
-	protected void initSubInterface() throws FatalEmfStoreException {
+	protected void initSubInterface() throws FatalESException {
 		resourceHelper = new ResourceHelper(parentInterface.getServerSpace());
 	}
 
@@ -73,9 +73,9 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * Saves an eObject.
 	 * 
 	 * @param object the object
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	protected void save(EObject object) throws FatalEmfStoreException {
+	protected void save(EObject object) throws FatalESException {
 		resourceHelper.save(object);
 	}
 
@@ -84,9 +84,9 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * 
 	 * @param object the object
 	 * @param project the project, that contains the model element IDs to be saved
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	protected void saveWithProject(EObject object, Project project) throws FatalEmfStoreException {
+	protected void saveWithProject(EObject object, Project project) throws FatalESException {
 		resourceHelper.saveWithProject(object, project);
 	}
 

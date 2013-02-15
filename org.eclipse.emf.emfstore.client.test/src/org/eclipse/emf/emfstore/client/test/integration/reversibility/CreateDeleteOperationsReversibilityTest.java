@@ -30,7 +30,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * create a random ME and change one of its attributes.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -61,7 +61,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME and change one of its references.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -95,7 +95,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME. Change one of its non-containment references. Delete ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
@@ -118,7 +118,7 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME. Delete ME.
 	 * 
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test

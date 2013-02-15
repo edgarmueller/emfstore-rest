@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
@@ -64,15 +64,15 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param parentInterface
 	 *            parent interface
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public HistorySubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public HistorySubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 	}
 
 	@Override
-	protected void initSubInterface() throws FatalEmfStoreException {
+	protected void initSubInterface() throws FatalESException {
 		super.initSubInterface();
 	}
 
@@ -92,7 +92,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			version.getTagSpecs().add(tag);
 			try {
 				save(version);
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 		}
@@ -115,7 +115,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			}
 			try {
 				save(version);
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 		}

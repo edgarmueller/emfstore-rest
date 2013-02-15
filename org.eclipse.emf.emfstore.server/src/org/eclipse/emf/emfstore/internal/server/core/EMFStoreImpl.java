@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.server.core.subinterfaces.ProjectProper
 import org.eclipse.emf.emfstore.internal.server.core.subinterfaces.ProjectSubInterfaceImpl;
 import org.eclipse.emf.emfstore.internal.server.core.subinterfaces.UserSubInterfaceImpl;
 import org.eclipse.emf.emfstore.internal.server.core.subinterfaces.VersionSubInterfaceImpl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
@@ -78,11 +78,11 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 *            the serverspace
 	 * @param authorizationControl
 	 *            the accesscontrol
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
 	public EMFStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		super(serverSpace, authorizationControl);
 	}
 
@@ -90,7 +90,7 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void initSubInterfaces() throws FatalEmfStoreException {
+	protected void initSubInterfaces() throws FatalESException {
 		subInterfaceMethods = new EnumMap<MethodId, SubInterfaceMethod>(MethodId.class);
 		addSubInterface(new HistorySubInterfaceImpl(this));
 		addSubInterface(new ProjectSubInterfaceImpl(this));
@@ -134,10 +134,10 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * @param accessControl an access control instance
 	 * @return an instance of emfstore
 	 * @throws IllegalArgumentException thrown by Proxy.newInstance
-	 * @throws FatalEmfStoreException thrown if something fatal happens
+	 * @throws FatalESException thrown if something fatal happens
 	 */
 	public static EMFStore createInterface(ServerSpace serverSpace, AuthorizationControl accessControl)
-		throws IllegalArgumentException, FatalEmfStoreException {
+		throws IllegalArgumentException, FatalESException {
 		return (EMFStore) Proxy.newProxyInstance(EMFStoreImpl.class.getClassLoader(), new Class[] { EMFStore.class },
 			new EMFStoreImpl(serverSpace, accessControl));
 	}

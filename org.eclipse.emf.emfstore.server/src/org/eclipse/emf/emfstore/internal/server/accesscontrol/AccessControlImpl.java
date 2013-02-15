@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.internal.server.core.MethodInvocation;
 import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
@@ -95,10 +95,10 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 	 * 
 	 * @param serverSpace
 	 *            the server space to work on
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             an exception
 	 */
-	public AccessControlImpl(ServerSpace serverSpace) throws FatalEmfStoreException {
+	public AccessControlImpl(ServerSpace serverSpace) throws FatalESException {
 		this.sessionUserMap = new LinkedHashMap<SessionId, ACUserContainer>();
 		this.serverSpace = serverSpace;
 

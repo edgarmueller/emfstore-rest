@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterfac
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
@@ -56,15 +56,15 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * 
 	 * @param parentInterface
 	 *            parent interface
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public ProjectSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalEmfStoreException {
+	public ProjectSubInterfaceImpl(AbstractEmfstoreInterface parentInterface) throws FatalESException {
 		super(parentInterface);
 	}
 
 	@Override
-	protected void initSubInterface() throws FatalEmfStoreException {
+	protected void initSubInterface() throws FatalESException {
 		super.initSubInterface();
 	}
 
@@ -173,7 +173,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				logMessage.setDate(new Date());
 				projectHistory = createEmptyProject(name, description, logMessage,
 					org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 			return createProjectInfo(projectHistory);
@@ -192,7 +192,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				logMessage.setDate(new Date());
 				projectHistory = createEmptyProject(name, description, logMessage, project);
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 
@@ -230,7 +230,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				getServerSpace().getProjects().remove(project);
 				try {
 					save(getServerSpace());
-				} catch (FatalEmfStoreException e) {
+				} catch (FatalESException e) {
 					throw new StorageException(StorageException.NOSAVE);
 				} finally {
 					// delete resources
@@ -297,7 +297,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				}
 				getResourceHelper().save(projectHistory);
 				getResourceHelper().saveAll();
-			} catch (FatalEmfStoreException e) {
+			} catch (FatalESException e) {
 				// roll back
 				deleteProject(projectHistory.getProjectId(), true, false);
 				throw new StorageException(StorageException.NOSAVE);
@@ -318,7 +318,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private ProjectHistory createEmptyProject(String name, String description, LogMessage logMessage,
-		Project initialProjectState) throws FatalEmfStoreException {
+		Project initialProjectState) throws FatalESException {
 
 		// create initial ProjectHistory
 		ProjectHistory projectHistory = ModelFactory.eINSTANCE.createProjectHistory();

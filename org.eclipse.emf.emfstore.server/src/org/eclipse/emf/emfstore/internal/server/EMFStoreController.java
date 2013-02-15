@@ -50,7 +50,7 @@ import org.eclipse.emf.emfstore.internal.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
@@ -98,7 +98,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	 * 
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
-	public synchronized Object start(IApplicationContext context) throws FatalEmfStoreException {
+	public synchronized Object start(IApplicationContext context) throws FatalESException {
 		run(true);
 		instance = null;
 		ModelUtil.logInfo("Server is STOPPED.");
@@ -111,12 +111,12 @@ public class EMFStoreController implements IApplication, Runnable {
 	 * @param waitForTermination
 	 *            true if the server should force the calling thread to wait for
 	 *            its termination
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             if the server fails fatally
 	 */
-	public synchronized void run(boolean waitForTermination) throws FatalEmfStoreException {
+	public synchronized void run(boolean waitForTermination) throws FatalESException {
 		if (instance != null) {
-			throw new FatalEmfStoreException("Another EmfStore Controller seems to be running already!");
+			throw new FatalESException("Another EmfStore Controller seems to be running already!");
 		}
 
 		instance = this;
@@ -174,7 +174,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		ModelUtil.logInfo("JVM Max Memory: " + Runtime.getRuntime().maxMemory() / 1000000 + " MByte");
 	}
 
-	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalEmfStoreException {
+	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalESException {
 		for (ProjectHistory project : serverSpace.getProjects()) {
 			if (project.getBranches().size() == 0) {
 				// create branch information
@@ -295,7 +295,7 @@ public class EMFStoreController implements IApplication, Runnable {
 
 	}
 
-	private Set<ConnectionHandler<? extends EMFStoreInterface>> initConnectionHandlers() throws FatalEmfStoreException {
+	private Set<ConnectionHandler<? extends EMFStoreInterface>> initConnectionHandlers() throws FatalESException {
 		Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers = new LinkedHashSet<ConnectionHandler<? extends EMFStoreInterface>>();
 
 		// crate XML RPC connection handlers
@@ -310,7 +310,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		return connectionHandlers;
 	}
 
-	private ServerSpace initServerSpace() throws FatalEmfStoreException {
+	private ServerSpace initServerSpace() throws FatalESException {
 		ResourceStorage storage = initStorage();
 		URI resourceUri = storage.init(properties);
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -326,7 +326,7 @@ public class EMFStoreController implements IApplication, Runnable {
 				ModelUtil.logInfo("Validation complete.");
 			}
 		} catch (IOException e) {
-			throw new FatalEmfStoreException(StorageException.NOLOAD, e);
+			throw new FatalESException(StorageException.NOLOAD, e);
 		}
 
 		ServerSpace result = null;
@@ -351,14 +351,14 @@ public class EMFStoreController implements IApplication, Runnable {
 			try {
 				result.save();
 			} catch (IOException e) {
-				throw new FatalEmfStoreException(StorageException.NOSAVE, e);
+				throw new FatalESException(StorageException.NOSAVE, e);
 			}
 		}
 
 		return result;
 	}
 
-	private void validateServerSpace(Resource resource) throws FatalEmfStoreException {
+	private void validateServerSpace(Resource resource) throws FatalESException {
 		EList<EObject> contents = resource.getContents();
 		for (EObject object : contents) {
 			if (object instanceof ServerSpace) {
@@ -387,7 +387,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		return instance;
 	}
 
-	private ResourceStorage initStorage() throws FatalEmfStoreException {
+	private ResourceStorage initStorage() throws FatalESException {
 		String className = properties.getProperty(ServerConfiguration.RESOURCE_STORAGE,
 			ServerConfiguration.RESOURCE_STORAGE_DEFAULT);
 
@@ -399,34 +399,34 @@ public class EMFStoreController implements IApplication, Runnable {
 			return resourceStorage;
 		} catch (IllegalArgumentException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (SecurityException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (InstantiationException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (IllegalAccessException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (InvocationTargetException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (NoSuchMethodException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		} catch (ClassNotFoundException e) {
 			ModelUtil.logException(failMessage, e);
-			throw new FatalEmfStoreException(failMessage, e);
+			throw new FatalESException(failMessage, e);
 		}
 	}
 
-	private AccessControlImpl initAccessControl(ServerSpace serverSpace) throws FatalEmfStoreException {
+	private AccessControlImpl initAccessControl(ServerSpace serverSpace) throws FatalESException {
 		setSuperUser(serverSpace);
 		return new AccessControlImpl(serverSpace);
 	}
 
-	private void setSuperUser(ServerSpace serverSpace) throws FatalEmfStoreException {
+	private void setSuperUser(ServerSpace serverSpace) throws FatalESException {
 		String superuser = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
 			ServerConfiguration.SUPER_USER_DEFAULT);
 		for (ACUser user : serverSpace.getUsers()) {
@@ -444,7 +444,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			serverSpace.save();
 		} catch (IOException e) {
-			throw new FatalEmfStoreException(StorageException.NOSAVE, e);
+			throw new FatalESException(StorageException.NOSAVE, e);
 		}
 		ModelUtil.logInfo("added superuser " + superuser);
 	}
@@ -495,7 +495,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	 *            the fatal exception that triggered the shutdown
 	 * @generated NOT
 	 */
-	public void shutdown(FatalEmfStoreException exception) {
+	public void shutdown(FatalESException exception) {
 		ModelUtil.logWarning("Stopping all connection handlers...");
 		for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
 			ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
@@ -547,7 +547,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	public void run() {
 		try {
 			run(false);
-		} catch (FatalEmfStoreException e) {
+		} catch (FatalESException e) {
 			e.printStackTrace();
 		}
 	}
@@ -555,10 +555,10 @@ public class EMFStoreController implements IApplication, Runnable {
 	/**
 	 * starts the server a new thread.
 	 * 
-	 * @throws FatalEmfStoreException
+	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public static void runAsNewThread() throws FatalEmfStoreException {
+	public static void runAsNewThread() throws FatalESException {
 		Thread thread = new Thread(new EMFStoreController());
 		thread.start();
 		try {

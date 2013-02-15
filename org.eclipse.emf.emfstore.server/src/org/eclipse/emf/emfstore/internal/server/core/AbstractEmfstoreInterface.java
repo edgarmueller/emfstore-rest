@@ -17,7 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
@@ -44,13 +44,13 @@ public abstract class AbstractEmfstoreInterface {
 	 * 
 	 * @param serverSpace the serverspace
 	 * @param authorizationControl accesscontrol
-	 * @throws FatalEmfStoreException if initialization fails
+	 * @throws FatalESException if initialization fails
 	 */
 	public AbstractEmfstoreInterface(ServerSpace serverSpace, AuthorizationControl authorizationControl)
-		throws FatalEmfStoreException {
+		throws FatalESException {
 		this.serverSpace = serverSpace;
 		if (serverSpace == null || authorizationControl == null) {
-			throw new FatalEmfStoreException();
+			throw new FatalESException();
 		}
 		this.authorizationControl = authorizationControl;
 		accessControlDisabled = false;
@@ -65,9 +65,9 @@ public abstract class AbstractEmfstoreInterface {
 	 * Implement this method in order to add subinterfaces. Therefor use the
 	 * {@link #addSubInterface(AbstractSubEmfstoreInterface)} method.
 	 * 
-	 * @throws FatalEmfStoreException in case of failure
+	 * @throws FatalESException in case of failure
 	 */
-	protected abstract void initSubInterfaces() throws FatalEmfStoreException;
+	protected abstract void initSubInterfaces() throws FatalESException;
 
 	/**
 	 * Adds a subinterface to the parent interface. If the subinterface exists already, the present instance is

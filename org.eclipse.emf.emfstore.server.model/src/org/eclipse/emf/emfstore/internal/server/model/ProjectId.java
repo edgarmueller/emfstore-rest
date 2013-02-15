@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.internal.server.model;
 
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
-import org.eclipse.emf.emfstore.server.model.ESProjectId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Id</b></em>'.

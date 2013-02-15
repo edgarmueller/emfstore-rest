@@ -81,7 +81,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		dialog.setBlockOnOpen(true);
 
 		if (dialog.open() != Dialog.OK || dialog.getResult() == null) {
-			// throw new EmfStoreException("No Branch specified");
+			// throw new ESException("No Branch specified");
 			return null;
 		}
 		return dialog.getResult().getHead();

@@ -91,7 +91,7 @@ public abstract class IntegrationTest {
 	 * changes.
 	 * 
 	 * @return project lying on the server
-	 * @throws ESException EmfStoreException
+	 * @throws ESException ESException
 	 */
 	public Project getCompareProject() throws ESException {
 		return setupHelper.getCompareProject();

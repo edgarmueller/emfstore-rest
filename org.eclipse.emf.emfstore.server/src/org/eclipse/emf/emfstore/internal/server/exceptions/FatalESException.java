@@ -18,7 +18,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  * @generated NOT
  */
 @SuppressWarnings("serial")
-public class FatalEmfStoreException extends Exception {
+public class FatalESException extends Exception {
 
 	/**
 	 * Default constructor.
@@ -26,7 +26,7 @@ public class FatalEmfStoreException extends Exception {
 	 * @param message the message
 	 * @param cause underlying exception
 	 */
-	public FatalEmfStoreException(String message, Throwable cause) {
+	public FatalESException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -35,7 +35,7 @@ public class FatalEmfStoreException extends Exception {
 	 * 
 	 * @param message the message
 	 */
-	public FatalEmfStoreException(String message) {
+	public FatalESException(String message) {
 		super(message);
 	}
 
@@ -44,14 +44,14 @@ public class FatalEmfStoreException extends Exception {
 	 * 
 	 * @param cause the cause
 	 */
-	public FatalEmfStoreException(Throwable cause) {
+	public FatalESException(Throwable cause) {
 		super(cause);
 	}
 
 	/**
 	 * Default constructor.
 	 */
-	public FatalEmfStoreException() {
+	public FatalESException() {
 		this("Fatal exception");
 	}
 
