@@ -437,7 +437,6 @@ public class RemoteProject implements ESRemoteProject {
 					}
 				}.execute();
 
-				getServer().getRemoteProjects().remove(this);
 				return null;
 			}
 		};
