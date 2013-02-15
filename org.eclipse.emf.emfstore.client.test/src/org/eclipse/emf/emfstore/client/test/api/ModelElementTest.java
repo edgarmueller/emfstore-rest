@@ -519,4 +519,113 @@ public class ModelElementTest {
 
 		assertEquals(0, tournament.getReceivesTrophy().size());
 	}
+
+	@Test
+	public void testUndoAddOperation() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournamentA = ProjectChangeUtil.createTournament(true);
+		final Tournament tournamentB = ProjectChangeUtil.createTournament(true);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournamentA);
+				localProject.getModelElements().add(tournamentB);
+			}
+		}.run(false);
+
+		final Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournamentA.getMatchups().add(matchupA);
+			}
+		}.run(false);
+
+		assertEquals(1, tournamentA.getMatchups().size());
+		assertTrue(tournamentA.getMatchups().contains(matchupA));
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournamentB.getMatchups().add(matchupA);
+			}
+		}.run(false);
+
+		assertEquals(1, tournamentB.getMatchups().size());
+		assertTrue(tournamentB.getMatchups().contains(matchupA));
+		assertEquals(0, tournamentA.getMatchups().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.undoLastOperation();
+			}
+		}.run(false);
+
+		assertEquals(0, tournamentB.getMatchups().size());
+
+		assertEquals(1, tournamentA.getMatchups().size());
+		assertTrue(tournamentA.getMatchups().contains(matchupA));
+	}
+
+	@Test
+	public void testUndoMoveOperation() {
+		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final Tournament tournamentA = ProjectChangeUtil.createTournament(true);
+		final Tournament tournamentB = ProjectChangeUtil.createTournament(true);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournamentA);
+				localProject.getModelElements().add(tournamentB);
+			}
+		}.run(false);
+
+		final Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournamentA.getMatchups().add(matchupA);
+			}
+		}.run(false);
+
+		assertEquals(1, tournamentA.getMatchups().size());
+		assertTrue(tournamentA.getMatchups().contains(matchupA));
+
+		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(tournamentA);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournamentA.getMatchups().remove(matchupA);
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				tournamentB.getMatchups().add(matchupA);
+			}
+		}.run(false);
+
+		assertEquals(1, tournamentB.getMatchups().size());
+		assertTrue(tournamentB.getMatchups().contains(matchupA));
+		assertEquals(0, tournamentA.getMatchups().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.undoLastOperation();
+			}
+		}.run(false);
+
+		assertEquals(0, tournamentB.getMatchups().size());
+
+		assertEquals(1, tournamentA.getMatchups().size());
+		assertTrue(tournamentA.getMatchups().contains(matchupA));
+	}
 }
