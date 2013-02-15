@@ -623,8 +623,16 @@ public class ModelElementTest {
 		}.run(false);
 
 		assertEquals(0, tournamentB.getMatchups().size());
+		assertEquals(0, tournamentA.getMatchups().size());
 
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.undoLastOperation();
+			}
+		}.run(false);
+
+		// assertTrue(tournamentA.getMatchups().contains(matchupA));
 		assertEquals(1, tournamentA.getMatchups().size());
-		assertTrue(tournamentA.getMatchups().contains(matchupA));
 	}
 }
