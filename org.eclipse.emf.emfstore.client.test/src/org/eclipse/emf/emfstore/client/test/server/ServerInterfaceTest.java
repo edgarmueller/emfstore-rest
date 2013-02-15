@@ -111,7 +111,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected void doRun() {
 				ProjectSpace projectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
+					.createLocalProject("createEmptyProjectAndDelete");
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 				} catch (ESException e) {
@@ -146,7 +146,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				ProjectSpace projectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
+					.createLocalProject("createEmptyProjectAndDelete");
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 					return projectSpace;

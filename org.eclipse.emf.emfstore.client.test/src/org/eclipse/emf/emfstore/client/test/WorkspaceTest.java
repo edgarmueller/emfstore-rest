@@ -70,16 +70,14 @@ public abstract class WorkspaceTest {
 			@Override
 			protected void doRun() {
 				ProjectSpace localProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-					.createLocalProject("testProject",
-						"test Project");
+					.createLocalProject("testProject");
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
 				if (isCompareAtEnd()) {
 					Project clonedProject = ModelUtil.clone(getProject());
 					clonedProjectSpace = (ProjectSpaceBase) ((WorkspaceBase) WorkspaceProvider.getInstance()
-						.getWorkspace()).createLocalProject("clonedProject",
-						"Cloned test Project");
+						.getWorkspace()).createLocalProject("clonedProject");
 					clonedProjectSpace.setProject(clonedProject);
 					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
 				}

@@ -27,7 +27,7 @@ public class WorkspaceTest {
 	@Before
 	public void setUp() throws Exception {
 		assertEquals(0, workspace.getLocalProjects().size());
-		localProject = workspace.createLocalProject("TestProject", "My Test Project");
+		localProject = workspace.createLocalProject("TestProject");
 	}
 
 	@After
@@ -40,7 +40,7 @@ public class WorkspaceTest {
 	public void testCreateLocalProject() {
 		assertNotNull(localProject);
 		assertEquals(1, workspace.getLocalProjects().size());
-		workspace.createLocalProject("TestProject2", "My Test Project");
+		workspace.createLocalProject("TestProject2");
 		assertEquals(2, workspace.getLocalProjects().size());
 	}
 

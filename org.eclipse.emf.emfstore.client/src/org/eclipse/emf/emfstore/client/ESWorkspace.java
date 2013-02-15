@@ -34,11 +34,9 @@ public interface ESWorkspace {
 	 * 
 	 * @param projectName
 	 *            the project name
-	 * @param projectDescription
-	 *            the project description
 	 * @return the project space that the new project resides in
 	 */
-	ESLocalProject createLocalProject(String projectName, String projectDescription);
+	ESLocalProject createLocalProject(String projectName);
 
 	/**
 	 * Returns all available servers.

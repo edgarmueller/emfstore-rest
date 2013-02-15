@@ -48,8 +48,7 @@ public class ModelElementTest {
 	 */
 	@Test
 	public void testAddModelElementsWithoutCommands() {
-		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
-			"Testprojekt", "");
+		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject("Testprojekt");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");
 		League leagueB = ProjectChangeUtil.createLeague("Europe");
@@ -107,7 +106,7 @@ public class ModelElementTest {
 	@Test
 	public void testAddModelElementsWithCommands() {
 		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
-			"Testprojekt", "");
+			"Testprojekt");
 
 		final League leagueA = ProjectChangeUtil.createLeague("America");
 		final League leagueB = ProjectChangeUtil.createLeague("Europe");

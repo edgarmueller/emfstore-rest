@@ -142,15 +142,13 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#createLocalProject(java.lang.String,
-	 *      java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#createLocalProject(java.lang.String)
 	 */
-	public ProjectSpace createLocalProject(String projectName, String projectDescription) {
+	public ProjectSpace createLocalProject(String projectName) {
 
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 		projectSpace.setProjectName(projectName);
-		projectSpace.setProjectDescription(projectDescription);
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 		projectSpace.initResources(getResourceSet());

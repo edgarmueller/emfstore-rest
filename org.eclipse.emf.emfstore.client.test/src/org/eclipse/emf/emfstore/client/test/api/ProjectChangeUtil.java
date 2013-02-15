@@ -64,7 +64,7 @@ public final class ProjectChangeUtil {
 
 	public static ESLocalProject createBasicBowlingProject() {
 		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
-			"BasicBowlingProject", "");
+			"BasicBowlingProject");
 
 		League leagueA = ProjectChangeUtil.createLeague("America");
 		League leagueB = ProjectChangeUtil.createLeague("Europe");

@@ -41,7 +41,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		localProject = workspace.createLocalProject("TestProject", "My Test Project");
+		localProject = workspace.createLocalProject("TestProject");
 	}
 
 	@Override
